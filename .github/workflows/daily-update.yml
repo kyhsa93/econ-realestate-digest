@@ -1,0 +1,55 @@
+name: Daily digest update
+
+on:
+  schedule:
+    - cron: "0 23 * * *" # 매일 08:00 KST
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - run: npm ci
+
+      - name: 뉴스/시장 지표 수집
+        run: |
+          node scripts/fetch-news.mjs
+          node scripts/fetch-market.mjs
+
+      - name: Ollama 설치 및 모델 준비
+        run: |
+          curl -fsSL https://ollama.com/install.sh | sh
+          ollama serve &
+          for i in $(seq 1 30); do
+            curl -sf http://127.0.0.1:11434/api/version > /dev/null && break
+            sleep 1
+          done
+          ollama pull qwen2.5:1.5b
+
+      - name: AI 요약 생성
+        run: node scripts/summarize-digest.mjs
+
+      - name: 변경사항 커밋 및 푸시
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- docs/data; then
+            echo "변경사항 없음, 커밋 생략"
+            exit 0
+          fi
+          git add docs/data
+          git commit -m "chore: 데일리 데이터 갱신 $(date -u +%Y-%m-%d)"
+          git push

@@ -112,6 +112,17 @@
     border-radius: 10px;
     padding: 16px;
   }
+  #summary-box {
+    color: var(--fg);
+    font-size: 0.95rem;
+    white-space: pre-wrap;
+  }
+  .summary-meta {
+    display: block;
+    color: var(--muted);
+    font-size: 0.75rem;
+    margin-top: 10px;
+  }
   .error {
     color: var(--muted);
     font-size: 0.9rem;
@@ -124,6 +135,11 @@
     <h1>경제·부동산 데일리 다이제스트</h1>
     <div class="updated" id="updated">불러오는 중...</div>
   </header>
+
+  <section id="summary-section">
+    <h2>오늘의 AI 요약</h2>
+    <div class="placeholder" id="summary-box">불러오는 중...</div>
+  </section>
 
   <section id="market-section">
     <h2>자산 시장 지표</h2>
@@ -219,13 +235,33 @@
       .join("");
   }
 
+  function renderSummary(summary) {
+    const box = document.getElementById("summary-box");
+    if (!summary?.summary) {
+      box.classList.add("placeholder");
+      box.textContent = "아직 생성된 요약이 없습니다.";
+      return;
+    }
+    box.classList.remove("placeholder");
+    box.textContent = summary.summary;
+    const meta = document.createElement("span");
+    meta.className = "summary-meta";
+    meta.textContent = `${summary.model ?? "AI"} 생성 · ${fmtUpdated(summary.updatedAt)}`;
+    box.appendChild(meta);
+  }
+
   async function main() {
-    const [market, news] = await Promise.allSettled([loadJson("market"), loadJson("news")]);
+    const [market, news, summary] = await Promise.allSettled([
+      loadJson("market"),
+      loadJson("news"),
+      loadJson("summary"),
+    ]);
 
     renderMarket(market.status === "fulfilled" ? market.value : null);
     renderNews(news.status === "fulfilled" ? news.value : null);
+    renderSummary(summary.status === "fulfilled" ? summary.value : null);
 
-    const latest = [market, news]
+    const latest = [market, news, summary]
       .filter((r) => r.status === "fulfilled")
       .map((r) => r.value.updatedAt)
       .filter(Boolean)
