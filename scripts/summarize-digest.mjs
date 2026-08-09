@@ -17,7 +17,7 @@ const CATEGORIES = [
   { name: "증시·환율", keywords: ["코스피", "코스닥", "증시", "주가", "환율", "달러", "원화"] },
 ];
 const FALLBACK_CATEGORY = "기타 경제 소식";
-const MAX_ITEMS_PER_CATEGORY = 8;
+const MAX_ITEMS_PER_CATEGORY = 5;
 
 async function readJson(name) {
   try {
@@ -49,6 +49,20 @@ function containsUnverifiedNumber(sentence, sourceText) {
   return numbers.some((n) => !sourceText.includes(n));
 }
 
+// 모델이 "한 문장만"을 지키지 않고 여러 문장을 이어 쓰면서
+// 서로 다른 제목을 하나의 인과관계로 엮어 지어내는 경우가 있어,
+// 첫 문장 하나만 잘라서 사용한다.
+function firstSentence(text) {
+  const idx = text.search(/[.!?](?!\d)/);
+  return idx === -1 ? text : text.slice(0, idx + 1);
+}
+
+function listCategory(category, titles) {
+  const shown = titles.slice(0, 3).join(", ");
+  const more = titles.length > 3 ? ` 외 ${titles.length - 3}건` : "";
+  return `- ${category}: ${shown}${more}`;
+}
+
 function buildBucketPrompt(category, titles) {
   const list = titles.slice(0, MAX_ITEMS_PER_CATEGORY).map((t, i) => `${i + 1}. ${t}`).join("\n");
   return `다음은 "${category}" 주제의 오늘자 한국 경제 뉴스 제목들이야.
@@ -57,8 +71,9 @@ ${list}
 
 이 제목들을 종합해서 한국어 한 문장으로 요약해줘.
 규칙:
-- 딱 한 문장만 출력해. 번호나 목록 형식 쓰지 마.
+- 딱 한 문장만 출력해. 번호나 목록 형식 쓰지 마. 문장을 두 개 이상 잇지 마.
 - 제목에 나온 단어와 사실만 사용하고, 제목에 없는 숫자·수치·전망·원인은 절대 지어내지 마.
+- 서로 다른 제목을 인과관계("~때문에", "~해서")로 엮지 마. 각 제목은 독립된 별개의 사실이야.
 - 투자 조언이나 예측은 하지 마.
 - 한국어(한글)로만 작성해. 한자, 중국어, 영어 단어를 섞지 마.
 
@@ -73,16 +88,24 @@ async function generate(prompt) {
       model: MODEL,
       prompt,
       stream: false,
-      options: { temperature: 0.1, top_p: 0.7, num_predict: 120 },
+      options: { temperature: 0.1, top_p: 0.7, num_predict: 80 },
     }),
   });
   if (!res.ok) throw new Error(`ollama http ${res.status}`);
   const json = await res.json();
   if (!json.response) throw new Error("ollama 응답에 response 필드 없음");
-  return stripHanzi(json.response).trim().split("\n")[0].trim();
+  const firstLine = stripHanzi(json.response).trim().split("\n")[0].trim();
+  return firstSentence(firstLine);
 }
 
 async function summarizeBucket(category, titles) {
+  // "기타" 묶음은 애초에 주제가 하나로 안 묶이는 제목들이라, LLM에게 하나의
+  // 문장으로 합성시키면 서로 무관한 사건을 억지로 엮어 지어내기 쉽다.
+  // 그래서 합성 없이 결정론적으로 나열만 한다.
+  if (category === FALLBACK_CATEGORY) {
+    return listCategory(category, titles);
+  }
+
   const sourceText = titles.join(" ");
   const prompt = buildBucketPrompt(category, titles);
 
