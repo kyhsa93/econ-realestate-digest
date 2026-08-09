@@ -3,6 +3,8 @@ import path from "node:path";
 
 const dataDir = path.resolve(import.meta.dirname, "../docs/data");
 const outFile = path.join(dataDir, "summary.json");
+const historyFile = path.join(dataDir, "summary-history.json");
+const HISTORY_MAX_DAYS = 180;
 
 const OLLAMA_URL = process.env.OLLAMA_URL ?? "http://127.0.0.1:11434";
 const MODEL = process.env.OLLAMA_MODEL ?? "qwen2.5:1.5b";
@@ -18,6 +20,10 @@ const CATEGORIES = [
 ];
 const FALLBACK_CATEGORY = "기타 경제 소식";
 const MAX_ITEMS_PER_CATEGORY = 5;
+
+function kstDateString(date) {
+  return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(date);
+}
 
 async function readJson(name) {
   try {
@@ -127,6 +133,32 @@ async function summarizeBucket(category, titles) {
   return `- ${sentence}`;
 }
 
+async function appendHistory(now, entry) {
+  let history = [];
+  try {
+    history = JSON.parse(await readFile(historyFile, "utf-8"));
+  } catch {
+    // 최초 실행이면 이전 기록 없음
+  }
+
+  const today = kstDateString(now);
+  const record = { date: today, ...entry };
+
+  const idx = history.findIndex((h) => h.date === today);
+  if (idx >= 0) {
+    history[idx] = record; // 같은 날 재실행 시 덮어쓰기 (중복 방지)
+  } else {
+    history.push(record);
+  }
+
+  history.sort((a, b) => a.date.localeCompare(b.date));
+  if (history.length > HISTORY_MAX_DAYS) {
+    history = history.slice(history.length - HISTORY_MAX_DAYS);
+  }
+
+  await writeFile(historyFile, JSON.stringify(history, null, 2));
+}
+
 async function main() {
   const news = await readJson("news");
 
@@ -146,11 +178,15 @@ async function main() {
     return;
   }
 
+  const now = new Date();
+  const summary = lines.join("\n");
+
   await mkdir(dataDir, { recursive: true });
   await writeFile(
     outFile,
-    JSON.stringify({ updatedAt: new Date().toISOString(), model: MODEL, summary: lines.join("\n") }, null, 2)
+    JSON.stringify({ updatedAt: now.toISOString(), model: MODEL, summary }, null, 2)
   );
+  await appendHistory(now, { model: MODEL, summary });
 
   console.log("[summarize-digest] 저장 완료");
 }
