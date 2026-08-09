@@ -127,6 +127,35 @@
     color: var(--muted);
     font-size: 0.9rem;
   }
+  .history-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .history-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .history-card .label {
+    color: var(--muted);
+    font-size: 0.78rem;
+    margin-bottom: 6px;
+  }
+  .history-card svg {
+    display: block;
+    width: 100%;
+    height: 56px;
+  }
+  .history-card .range {
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted);
+    font-size: 0.72rem;
+    margin-top: 4px;
+  }
 </style>
 </head>
 <body>
@@ -146,6 +175,7 @@
     <div class="market-grid" id="market-grid">
       <div class="error">불러오는 중...</div>
     </div>
+    <div class="history-grid" id="history-grid"></div>
   </section>
 
   <section id="realestate-section">
@@ -215,6 +245,64 @@
     grid.innerHTML = cards.join("") || '<div class="error">데이터 없음</div>';
   }
 
+  function sparklineSvg(values) {
+    const w = 280, h = 56, pad = 4;
+    const min = Math.min(...values);
+    const max = Math.max(...values);
+    const range = max - min || 1;
+    const step = values.length > 1 ? (w - pad * 2) / (values.length - 1) : 0;
+    const points = values
+      .map((v, i) => {
+        const x = pad + i * step;
+        const y = h - pad - ((v - min) / range) * (h - pad * 2);
+        return `${x.toFixed(1)},${y.toFixed(1)}`;
+      })
+      .join(" ");
+    const last = values[values.length - 1];
+    const lastX = pad + (values.length - 1) * step;
+    const lastY = h - pad - ((last - min) / range) * (h - pad * 2);
+    const rising = values.length > 1 && last >= values[0];
+    const color = rising ? "var(--up)" : "var(--down)";
+    return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">
+      <polyline points="${points}" fill="none" stroke="${color}" stroke-width="2" vector-effect="non-scaling-stroke" />
+      <circle cx="${lastX.toFixed(1)}" cy="${lastY.toFixed(1)}" r="2.5" fill="${color}" />
+    </svg>`;
+  }
+
+  function parseNumeric(v) {
+    if (typeof v === "number") return v;
+    if (typeof v === "string") return parseFloat(v.replace(/,/g, ""));
+    return NaN;
+  }
+
+  function renderHistory(history) {
+    const grid = document.getElementById("history-grid");
+    if (!Array.isArray(history) || history.length < 2) {
+      grid.innerHTML = "";
+      return;
+    }
+    const recent = history.slice(-30);
+    const series = [
+      { key: "kospi", label: "코스피 (최근 추이)", get: (h) => parseNumeric(h.kospi?.value) },
+      { key: "usdKrw", label: "원/달러 환율 (최근 추이)", get: (h) => parseNumeric(h.usdKrw?.value) },
+    ];
+
+    grid.innerHTML = series
+      .map(({ label, get }) => {
+        const values = recent.map(get).filter((v) => !Number.isNaN(v));
+        if (values.length < 2) return "";
+        const first = recent.find((h) => !Number.isNaN(get(h)));
+        const last = recent.slice().reverse().find((h) => !Number.isNaN(get(h)));
+        return `
+          <div class="history-card">
+            <div class="label">${label}</div>
+            ${sparklineSvg(values)}
+            <div class="range"><span>${first?.date ?? ""}</span><span>${last?.date ?? ""}</span></div>
+          </div>`;
+      })
+      .join("");
+  }
+
   function renderNews(news) {
     const list = document.getElementById("news-list");
     if (!news || !news.items?.length) {
@@ -251,15 +339,17 @@
   }
 
   async function main() {
-    const [market, news, summary] = await Promise.allSettled([
+    const [market, news, summary, history] = await Promise.allSettled([
       loadJson("market"),
       loadJson("news"),
       loadJson("summary"),
+      loadJson("market-history"),
     ]);
 
     renderMarket(market.status === "fulfilled" ? market.value : null);
     renderNews(news.status === "fulfilled" ? news.value : null);
     renderSummary(summary.status === "fulfilled" ? summary.value : null);
+    renderHistory(history.status === "fulfilled" ? history.value : null);
 
     const latest = [market, news, summary]
       .filter((r) => r.status === "fulfilled")

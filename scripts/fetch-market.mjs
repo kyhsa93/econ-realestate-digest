@@ -3,6 +3,12 @@ import path from "node:path";
 
 const dataDir = path.resolve(import.meta.dirname, "../docs/data");
 const outFile = path.join(dataDir, "market.json");
+const historyFile = path.join(dataDir, "market-history.json");
+const HISTORY_MAX_DAYS = 180;
+
+function kstDateString(date) {
+  return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(date);
+}
 
 async function fetchKospi() {
   const res = await fetch("https://polling.finance.naver.com/api/realtime/domestic/index/KOSPI", {
@@ -65,13 +71,42 @@ async function main() {
     fetchWithFallback("기준금리", fetchBaseRate, previous.baseRate),
   ]);
 
+  const now = new Date();
   await mkdir(dataDir, { recursive: true });
   await writeFile(
     outFile,
-    JSON.stringify({ updatedAt: new Date().toISOString(), kospi, usdKrw, baseRate }, null, 2)
+    JSON.stringify({ updatedAt: now.toISOString(), kospi, usdKrw, baseRate }, null, 2)
   );
 
+  await appendHistory(now, { kospi, usdKrw, baseRate });
+
   console.log("[fetch-market] 저장 완료");
+}
+
+async function appendHistory(now, snapshot) {
+  let history = [];
+  try {
+    history = JSON.parse(await readFile(historyFile, "utf-8"));
+  } catch {
+    // 최초 실행이면 이전 히스토리 없음
+  }
+
+  const today = kstDateString(now);
+  const entry = { date: today, ...snapshot };
+
+  const idx = history.findIndex((h) => h.date === today);
+  if (idx >= 0) {
+    history[idx] = entry; // 같은 날 재실행 시 덮어쓰기 (중복 방지)
+  } else {
+    history.push(entry);
+  }
+
+  history.sort((a, b) => a.date.localeCompare(b.date));
+  if (history.length > HISTORY_MAX_DAYS) {
+    history = history.slice(history.length - HISTORY_MAX_DAYS);
+  }
+
+  await writeFile(historyFile, JSON.stringify(history, null, 2));
 }
 
 main();
