@@ -34,6 +34,7 @@ ${newsLines || "정보 없음"}
 - 각 줄은 "- "로 시작하고, 여러 제목을 하나의 문장으로 압축해서 요약해.
 - 제목에 나온 단어와 사실만 사용하고, 제목에 없는 숫자·수치·전망·원인은 절대 지어내지 마.
 - 투자 조언이나 예측은 하지 마.
+- 반드시 한국어(한글)로만 작성해. 한자, 중국어, 영어 단어를 섞지 마.
 - 다른 설명 없이 3줄만 출력해.
 
 예시 출력 형식 (내용은 예시일 뿐, 실제 제목 기반으로 새로 작성할 것):
@@ -58,7 +59,8 @@ async function generate(prompt) {
   if (!res.ok) throw new Error(`ollama http ${res.status}`);
   const json = await res.json();
   if (!json.response) throw new Error("ollama 응답에 response 필드 없음");
-  return json.response.trim();
+  // 소형 모델이 가끔 한자를 섞어 출력하는 경우가 있어 방어적으로 제거
+  return json.response.replace(/[一-鿿]/g, "").trim();
 }
 
 async function main() {
