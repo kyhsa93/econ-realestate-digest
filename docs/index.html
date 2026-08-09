@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>경제·부동산 데일리 다이제스트</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #666;
+    --card: #f5f5f7;
+    --border: #e2e2e5;
+    --up: #d64545;
+    --down: #2f6fed;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1115;
+      --fg: #eaeaea;
+      --muted: #9a9a9a;
+      --card: #1a1d24;
+      --border: #2a2d35;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.5;
+  }
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 24px 16px 64px;
+  }
+  header {
+    margin-bottom: 24px;
+  }
+  h1 {
+    font-size: 1.4rem;
+    margin: 0 0 4px;
+  }
+  .updated {
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  section {
+    margin-bottom: 32px;
+  }
+  h2 {
+    font-size: 1.05rem;
+    margin: 0 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .market-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+  }
+  .market-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .market-card .label {
+    color: var(--muted);
+    font-size: 0.8rem;
+    margin-bottom: 4px;
+  }
+  .market-card .value {
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+  .market-card .change {
+    font-size: 0.85rem;
+    margin-top: 2px;
+  }
+  .change.up { color: var(--up); }
+  .change.down { color: var(--down); }
+  ul.news-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .news-item {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .news-item:last-child { border-bottom: none; }
+  .news-item a {
+    color: var(--fg);
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+  .news-item a:hover { text-decoration: underline; }
+  .news-meta {
+    color: var(--muted);
+    font-size: 0.78rem;
+    margin-top: 2px;
+  }
+  .placeholder {
+    color: var(--muted);
+    font-size: 0.9rem;
+    background: var(--card);
+    border: 1px dashed var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .error {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>경제·부동산 데일리 다이제스트</h1>
+    <div class="updated" id="updated">불러오는 중...</div>
+  </header>
+
+  <section id="market-section">
+    <h2>자산 시장 지표</h2>
+    <div class="market-grid" id="market-grid">
+      <div class="error">불러오는 중...</div>
+    </div>
+  </section>
+
+  <section id="realestate-section">
+    <h2>한국 부동산 가격 추이</h2>
+    <div class="placeholder">
+      공식 데이터 API 연동 준비 중입니다. (공공데이터포털 인증키 발급 후 추가 예정)
+    </div>
+  </section>
+
+  <section id="news-section">
+    <h2>오늘의 경제·부동산 뉴스</h2>
+    <ul class="news-list" id="news-list">
+      <li class="error">불러오는 중...</li>
+    </ul>
+  </section>
+</main>
+
+<script>
+  function fmtUpdated(iso) {
+    if (!iso) return "-";
+    const d = new Date(iso);
+    return d.toLocaleString("ko-KR", { timeZone: "Asia/Seoul", dateStyle: "medium", timeStyle: "short" }) + " KST";
+  }
+
+  async function loadJson(name) {
+    const res = await fetch(`./data/${name}.json?_=${Date.now()}`);
+    if (!res.ok) throw new Error(`${name} 로드 실패`);
+    return res.json();
+  }
+
+  function directionClass(direction) {
+    if (direction === "RISING") return "up";
+    if (direction === "FALLING") return "down";
+    return "";
+  }
+
+  function renderMarket(market) {
+    const grid = document.getElementById("market-grid");
+    if (!market) {
+      grid.innerHTML = '<div class="error">데이터를 불러오지 못했습니다.</div>';
+      return;
+    }
+    const cards = [];
+    if (market.kospi) {
+      cards.push(`
+        <div class="market-card">
+          <div class="label">코스피</div>
+          <div class="value">${market.kospi.value}</div>
+          <div class="change ${directionClass(market.kospi.direction)}">${market.kospi.change ?? ""}</div>
+        </div>`);
+    }
+    if (market.usdKrw) {
+      cards.push(`
+        <div class="market-card">
+          <div class="label">원/달러 환율</div>
+          <div class="value">${Number(market.usdKrw.value).toFixed(2)}</div>
+        </div>`);
+    }
+    if (market.baseRate) {
+      cards.push(`
+        <div class="market-card">
+          <div class="label">한국은행 기준금리</div>
+          <div class="value">${market.baseRate.value}%</div>
+          <div class="change">${market.baseRate.effectiveFrom} 부터</div>
+        </div>`);
+    }
+    grid.innerHTML = cards.join("") || '<div class="error">데이터 없음</div>';
+  }
+
+  function renderNews(news) {
+    const list = document.getElementById("news-list");
+    if (!news || !news.items?.length) {
+      list.innerHTML = '<li class="error">데이터를 불러오지 못했습니다.</li>';
+      return;
+    }
+    list.innerHTML = news.items
+      .map((item) => {
+        const date = item.publishedAt
+          ? new Date(item.publishedAt).toLocaleString("ko-KR", { timeZone: "Asia/Seoul", dateStyle: "short", timeStyle: "short" })
+          : "";
+        return `
+          <li class="news-item">
+            <a href="${item.link}" target="_blank" rel="noopener">${item.title}</a>
+            <div class="news-meta">${item.source} · ${date}</div>
+          </li>`;
+      })
+      .join("");
+  }
+
+  async function main() {
+    const [market, news] = await Promise.allSettled([loadJson("market"), loadJson("news")]);
+
+    renderMarket(market.status === "fulfilled" ? market.value : null);
+    renderNews(news.status === "fulfilled" ? news.value : null);
+
+    const latest = [market, news]
+      .filter((r) => r.status === "fulfilled")
+      .map((r) => r.value.updatedAt)
+      .filter(Boolean)
+      .sort()
+      .pop();
+    document.getElementById("updated").textContent = latest
+      ? `마지막 갱신: ${fmtUpdated(latest)}`
+      : "갱신 정보를 불러오지 못했습니다.";
+  }
+
+  main();
+</script>
+</body>
+</html>
