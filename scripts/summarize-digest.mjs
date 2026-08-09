@@ -15,39 +15,39 @@ async function readJson(name) {
   }
 }
 
-function buildPrompt(news, market) {
+// 시장 지표(코스피/환율/기준금리)는 이미 화면에 숫자로 정확히 표시되므로
+// AI에게는 넘기지 않는다 — 작은 모델이 숫자를 섞어 지어내는 걸 방지하기 위함.
+function buildPrompt(news) {
   const newsLines = (news?.items ?? [])
     .slice(0, 15)
-    .map((item) => `- [${item.source}] ${item.title}`)
+    .map((item, i) => `${i + 1}. ${item.title}`)
     .join("\n");
 
-  const marketLines = [
-    market?.kospi ? `코스피 ${market.kospi.value} (${market.kospi.change})` : null,
-    market?.usdKrw ? `원/달러 환율 ${Number(market.usdKrw.value).toFixed(2)}원` : null,
-    market?.baseRate ? `한국은행 기준금리 ${market.baseRate.value}% (${market.baseRate.effectiveFrom} 부터)` : null,
-  ]
-    .filter(Boolean)
-    .join(", ");
+  return `너는 한국 경제 뉴스 편집 보조야. 아래는 오늘 수집된 뉴스 제목 목록이야.
 
-  return `아래는 오늘 수집된 한국 경제/부동산 뉴스 제목 목록과 자산 시장 지표야.
-이 내용을 바탕으로 한국어로 4~6문장짜리 오늘의 요약을 작성해줘.
-뉴스에 없는 내용을 지어내지 말고, 실제 제목에 언급된 내용만 요약해.
-과장된 전망이나 투자 조언은 하지 말고 사실 전달 위주로 작성해.
-
-[시장 지표]
-${marketLines || "정보 없음"}
-
-[오늘의 뉴스 제목]
+[뉴스 제목]
 ${newsLines || "정보 없음"}
 
-요약:`;
+규칙:
+- 제목들을 의미가 비슷한 것끼리 묶어서 2~4개 주제로 정리해.
+- 각 주제마다 "- " 로 시작하는 한 줄로, 어떤 제목들이 묶였는지 짧게 설명해.
+- 제목에 나온 단어와 사실만 사용하고, 제목에 없는 숫자·수치·전망·원인은 절대 지어내지 마.
+- 투자 조언이나 예측은 하지 마.
+- 다른 설명 없이 목록만 출력해.
+
+출력:`;
 }
 
 async function generate(prompt) {
   const res = await fetch(`${OLLAMA_URL}/api/generate`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ model: MODEL, prompt, stream: false }),
+    body: JSON.stringify({
+      model: MODEL,
+      prompt,
+      stream: false,
+      options: { temperature: 0.1, top_p: 0.7, num_predict: 400 },
+    }),
   });
   if (!res.ok) throw new Error(`ollama http ${res.status}`);
   const json = await res.json();
@@ -56,14 +56,14 @@ async function generate(prompt) {
 }
 
 async function main() {
-  const [news, market] = await Promise.all([readJson("news"), readJson("market")]);
+  const news = await readJson("news");
 
-  if (!news && !market) {
-    console.error("[summarize-digest] news/market 데이터 없음, 요약 생략");
+  if (!news?.items?.length) {
+    console.error("[summarize-digest] news 데이터 없음, 요약 생략");
     return;
   }
 
-  const prompt = buildPrompt(news, market);
+  const prompt = buildPrompt(news);
 
   let summary;
   try {
