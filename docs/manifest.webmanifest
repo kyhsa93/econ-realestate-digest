@@ -1,0 +1,15 @@
+{
+  "name": "경제·부동산 데일리 다이제스트",
+  "short_name": "경제다이제스트",
+  "description": "매일 아침 한국 경제/부동산 뉴스, 자산 시장 지표, AI 요약을 자동으로 갱신하는 다이제스트",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0f1115",
+  "theme_color": "#253e81",
+  "lang": "ko",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
