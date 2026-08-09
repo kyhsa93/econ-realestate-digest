@@ -13,12 +13,25 @@ const MODEL = process.env.OLLAMA_MODEL ?? "qwen2.5:1.5b";
 // 그룹핑을 안 하거나(전부 나열) 숫자를 지어내는 문제가 있었음.
 // 그래서 그룹핑은 키워드로 결정론적으로 먼저 하고, LLM은 카테고리 하나당
 // "이미 비슷한 제목들"만 보고 한 문장으로 압축하는 훨씬 쉬운 일만 시킨다.
+// 한국어/영어 요약을 각각 별도로 생성한다 (번역이 아니라 언어별로 따로 생성).
 const CATEGORIES = [
-  { name: "금리·예금·투자상품", keywords: ["금리", "예금", "저축", "IMA", "발행어음", "펀드", "채권", "증권사"] },
-  { name: "부동산", keywords: ["아파트", "부동산", "전세", "월세", "매물", "분양", "세제", "주택", "재건축", "청약"] },
-  { name: "증시·환율", keywords: ["코스피", "코스닥", "증시", "주가", "환율", "달러", "원화"] },
+  {
+    name: "금리·예금·투자상품",
+    nameEn: "Rates, Deposits & Investment Products",
+    keywords: ["금리", "예금", "저축", "IMA", "발행어음", "펀드", "채권", "증권사"],
+  },
+  {
+    name: "부동산",
+    nameEn: "Real Estate",
+    keywords: ["아파트", "부동산", "전세", "월세", "매물", "분양", "세제", "주택", "재건축", "청약"],
+  },
+  {
+    name: "증시·환율",
+    nameEn: "Stocks & FX",
+    keywords: ["코스피", "코스닥", "증시", "주가", "환율", "달러", "원화"],
+  },
 ];
-const FALLBACK_CATEGORY = "기타 경제 소식";
+const FALLBACK_CATEGORY = { name: "기타 경제 소식", nameEn: "Other Economic News", keywords: [] };
 const MAX_ITEMS_PER_CATEGORY = 5;
 
 function kstDateString(date) {
@@ -34,20 +47,24 @@ async function readJson(name) {
 }
 
 function categorize(items) {
-  const buckets = new Map();
+  const buckets = new Map(); // category object -> titles[]
   for (const item of items) {
     const title = item.title ?? "";
-    const matched = CATEGORIES.find((c) => c.keywords.some((k) => title.includes(k)));
-    const name = matched?.name ?? FALLBACK_CATEGORY;
-    if (!buckets.has(name)) buckets.set(name, []);
-    buckets.get(name).push(title);
+    const matched = CATEGORIES.find((c) => c.keywords.some((k) => title.includes(k))) ?? FALLBACK_CATEGORY;
+    if (!buckets.has(matched)) buckets.set(matched, []);
+    buckets.get(matched).push(title);
   }
-  return buckets;
+  return [...buckets.entries()].map(([category, titles]) => ({ category, titles }));
 }
 
 function stripHanzi(text) {
   // 소형 모델이 가끔 한자를 섞어 출력하는 경우가 있어 방어적으로 제거
   return text.replace(/[一-鿿]/g, "");
+}
+
+function stripHangul(text) {
+  // 영어 요약에 한글이 그대로 섞여 나오는 경우가 있어 방어적으로 제거
+  return text.replace(/[가-힣ᄀ-ᇿ㄰-㆏]/g, "");
 }
 
 function containsUnverifiedNumber(sentence, sourceText) {
@@ -63,15 +80,17 @@ function firstSentence(text) {
   return idx === -1 ? text : text.slice(0, idx + 1);
 }
 
-function listCategory(category, titles) {
+function listCategory(label, titles) {
   const shown = titles.slice(0, 3).join(", ");
-  const more = titles.length > 3 ? ` 외 ${titles.length - 3}건` : "";
-  return `- ${category}: ${shown}${more}`;
+  const more = titles.length > 3 ? ` +${titles.length - 3}` : "";
+  return `- ${label}: ${shown}${more}`;
 }
 
-function buildBucketPrompt(category, titles) {
+function buildBucketPrompt(label, titles, lang) {
   const list = titles.slice(0, MAX_ITEMS_PER_CATEGORY).map((t, i) => `${i + 1}. ${t}`).join("\n");
-  return `다음은 "${category}" 주제의 오늘자 한국 경제 뉴스 제목들이야.
+
+  if (lang === "ko") {
+    return `다음은 "${label}" 주제의 오늘자 한국 경제 뉴스 제목들이야.
 
 ${list}
 
@@ -84,9 +103,24 @@ ${list}
 - 한국어(한글)로만 작성해. 한자, 중국어, 영어 단어를 섞지 마.
 
 한 문장 요약:`;
+  }
+
+  return `The following are today's Korean economic news headlines (originally written in Korean) under the topic "${label}":
+
+${list}
+
+Summarize these into exactly ONE English sentence.
+Rules:
+- Output exactly one sentence. No lists or numbering. Do not chain two or more sentences together.
+- Only use facts and words actually present in the headlines above; never invent numbers, figures, forecasts, or causes that aren't stated.
+- Do not connect different headlines with causal language ("because", "as a result", "due to") — each headline is an independent, unrelated fact.
+- Do not give investment advice or predictions.
+- Write only in English. Do not leave any Korean or Chinese words untranslated.
+
+One-sentence summary:`;
 }
 
-async function generate(prompt) {
+async function generate(prompt, lang) {
   const res = await fetch(`${OLLAMA_URL}/api/generate`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -100,34 +134,38 @@ async function generate(prompt) {
   if (!res.ok) throw new Error(`ollama http ${res.status}`);
   const json = await res.json();
   if (!json.response) throw new Error("ollama 응답에 response 필드 없음");
-  const firstLine = stripHanzi(json.response).trim().split("\n")[0].trim();
+  let text = stripHanzi(json.response);
+  if (lang === "en") text = stripHangul(text);
+  const firstLine = text.trim().split("\n")[0].trim();
   return firstSentence(firstLine);
 }
 
-async function summarizeBucket(category, titles) {
+async function summarizeBucketLine(bucket, lang) {
+  const label = lang === "ko" ? bucket.category.name : bucket.category.nameEn;
+
   // "기타" 묶음은 애초에 주제가 하나로 안 묶이는 제목들이라, LLM에게 하나의
   // 문장으로 합성시키면 서로 무관한 사건을 억지로 엮어 지어내기 쉽다.
-  // 그래서 합성 없이 결정론적으로 나열만 한다.
-  if (category === FALLBACK_CATEGORY) {
-    return listCategory(category, titles);
+  // 그래서 합성 없이 결정론적으로 나열만 한다 (제목 자체는 언어와 무관하게 원문 그대로).
+  if (bucket.category === FALLBACK_CATEGORY) {
+    return listCategory(label, bucket.titles);
   }
 
-  const sourceText = titles.join(" ");
-  const prompt = buildBucketPrompt(category, titles);
+  const sourceText = bucket.titles.join(" ");
+  const prompt = buildBucketPrompt(label, bucket.titles, lang);
 
   let sentence;
   try {
-    sentence = await generate(prompt);
+    sentence = await generate(prompt, lang);
   } catch (err) {
-    console.error(`[summarize-digest] "${category}" 요약 실패: ${err.message}`);
+    console.error(`[summarize-digest] "${label}" (${lang}) 요약 실패: ${err.message}`);
     sentence = null;
   }
 
   if (!sentence || containsUnverifiedNumber(sentence, sourceText)) {
     if (sentence) {
-      console.error(`[summarize-digest] "${category}" 요약에 검증 안 된 숫자 포함, 대체 문구 사용: ${sentence}`);
+      console.error(`[summarize-digest] "${label}" (${lang}) 요약에 검증 안 된 숫자 포함, 대체 문구 사용: ${sentence}`);
     }
-    sentence = `${category} 관련 뉴스 ${titles.length}건`;
+    sentence = lang === "ko" ? `${label} 관련 뉴스 ${bucket.titles.length}건` : `${bucket.titles.length} news items about ${label}`;
   }
 
   return `- ${sentence}`;
@@ -168,18 +206,20 @@ async function main() {
   }
 
   const buckets = categorize(news.items);
-  const lines = [];
-  for (const [category, titles] of buckets) {
-    lines.push(await summarizeBucket(category, titles));
+  const koLines = [];
+  const enLines = [];
+  for (const bucket of buckets) {
+    koLines.push(await summarizeBucketLine(bucket, "ko"));
+    enLines.push(await summarizeBucketLine(bucket, "en"));
   }
 
-  if (lines.length === 0) {
+  if (koLines.length === 0) {
     console.error("[summarize-digest] 요약할 카테고리 없음");
     return;
   }
 
   const now = new Date();
-  const summary = lines.join("\n");
+  const summary = { ko: koLines.join("\n"), en: enLines.join("\n") };
 
   await mkdir(dataDir, { recursive: true });
   await writeFile(
