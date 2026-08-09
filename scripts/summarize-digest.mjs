@@ -67,9 +67,14 @@ function stripHangul(text) {
   return text.replace(/[가-힣ᄀ-ᇿ㄰-㆏]/g, "");
 }
 
-function containsUnverifiedNumber(sentence, sourceText) {
-  const numbers = sentence.match(/\d[\d,.]*/g) ?? [];
-  return numbers.some((n) => !sourceText.includes(n));
+// "생성된 숫자가 원문 어딘가에 있는지"만 substring으로 검증했더니, 원문의
+// 다른(무관한) 숫자와 우연히 겹치기만 해도 통과되면서 실제로는 지어낸 금액
+// ("200억 원", "824억 원" 등)이 그대로 노출되는 사례가 나왔다. 숫자가 어떤
+// 맥락에서 왜 등장했는지까지 검증할 방법이 없으니, 아예 LLM이 합성한 문장에는
+// 숫자를 하나도 허용하지 않는다 (실제 정확한 수치는 시장 지표 카드에 이미
+// 별도로 정확하게 표시되고 있으므로, 요약 문장에서는 없어도 정보 손실이 적다).
+function containsAnyNumber(sentence) {
+  return /\d/.test(sentence);
 }
 
 // 모델이 "한 문장만"을 지키지 않고 여러 문장을 이어 쓰면서
@@ -98,6 +103,7 @@ ${list}
 규칙:
 - 딱 한 문장만 출력해. 번호나 목록 형식 쓰지 마. 문장을 두 개 이상 잇지 마.
 - 제목에 나온 단어와 사실만 사용하고, 제목에 없는 숫자·수치·전망·원인은 절대 지어내지 마.
+- 숫자나 %, 금액을 문장에 절대 쓰지 마. 정확한 수치는 이미 다른 곳에 표로 나와 있으니, 여기서는 "상승", "증가", "발표" 같은 서술적 표현만 써.
 - 서로 다른 제목을 인과관계("~때문에", "~해서")로 엮지 마. 각 제목은 독립된 별개의 사실이야.
 - 투자 조언이나 예측은 하지 마.
 - 한국어(한글)로만 작성해. 한자, 중국어, 영어 단어를 섞지 마.
@@ -113,6 +119,7 @@ Summarize these into exactly ONE English sentence.
 Rules:
 - Output exactly one sentence. No lists or numbering. Do not chain two or more sentences together.
 - Only use facts and words actually present in the headlines above; never invent numbers, figures, forecasts, or causes that aren't stated.
+- Never include any numbers, percentages, or amounts in the sentence. Exact figures are already shown elsewhere on the page — describe qualitatively instead (e.g. "rose", "increased", "announced").
 - Do not connect different headlines with causal language ("because", "as a result", "due to") — each headline is an independent, unrelated fact.
 - Do not give investment advice or predictions.
 - Write only in English. Do not leave any Korean or Chinese words untranslated.
@@ -150,7 +157,6 @@ async function summarizeBucketLine(bucket, lang) {
     return listCategory(label, bucket.titles);
   }
 
-  const sourceText = bucket.titles.join(" ");
   const prompt = buildBucketPrompt(label, bucket.titles, lang);
 
   let sentence;
@@ -161,9 +167,9 @@ async function summarizeBucketLine(bucket, lang) {
     sentence = null;
   }
 
-  if (!sentence || containsUnverifiedNumber(sentence, sourceText)) {
+  if (!sentence || containsAnyNumber(sentence)) {
     if (sentence) {
-      console.error(`[summarize-digest] "${label}" (${lang}) 요약에 검증 안 된 숫자 포함, 대체 문구 사용: ${sentence}`);
+      console.error(`[summarize-digest] "${label}" (${lang}) 요약에 숫자 포함, 대체 문구 사용: ${sentence}`);
     }
     sentence = lang === "ko" ? `${label} 관련 뉴스 ${bucket.titles.length}건` : `${bucket.titles.length} news items about ${label}`;
   }
