@@ -143,7 +143,8 @@ function summarizeSale(items) {
   for (const item of items) {
     const amount10k = parseWon10k(item.dealAmount);
     const area = Number(item.excluUseAr);
-    if (amount10k == null || !Number.isFinite(area) || area <= 0) continue;
+    // Number("")는 0이라 값이 비어있는 행이 "0원 거래"로 잘못 집계되는 걸 방지
+    if (amount10k == null || amount10k <= 0 || !Number.isFinite(area) || area <= 0) continue;
     totalAmountWon += amount10k * 10_000;
     totalArea += area;
     count += 1;
@@ -170,7 +171,8 @@ function summarizeRent(items) {
     const deposit10k = parseWon10k(item.deposit);
     const monthlyRent10k = parseWon10k(item.monthlyRent);
     const area = Number(item.excluUseAr);
-    if (deposit10k == null || !Number.isFinite(area) || area <= 0) continue;
+    // Number("")는 0이라 보증금이 비어있는 행이 "0원 보증금"으로 잘못 집계되는 걸 방지
+    if (deposit10k == null || deposit10k <= 0 || !Number.isFinite(area) || area <= 0) continue;
 
     if (monthlyRent10k && monthlyRent10k > 0) {
       wolseRows.push({ deposit10k, monthlyRent10k });
