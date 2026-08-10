@@ -42,6 +42,9 @@ jobs:
       - name: AI 요약 생성
         run: node scripts/summarize-digest.mjs
 
+      - name: 뉴스 제목 영어 번역
+        run: node scripts/translate-news.mjs
+
       - name: 변경사항 커밋 및 푸시
         run: |
           git config user.name "github-actions[bot]"
