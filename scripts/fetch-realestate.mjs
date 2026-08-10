@@ -108,14 +108,47 @@ async function fetchDistrict(districtCode, name, yearMonths) {
   return { code: districtCode, name, ...summary };
 }
 
-async function appendHistory(now, entry) {
-  let history = [];
+async function readHistory() {
   try {
-    history = JSON.parse(await readFile(historyFile, "utf-8"));
+    return JSON.parse(await readFile(historyFile, "utf-8"));
   } catch {
-    // 최초 실행이면 이전 기록 없음
+    return [];
   }
+}
 
+// 30일 전에 가장 가까운(그 이전) 기록을 기준값으로 삼는다. 부동산 가격은
+// 하루 단위로 의미 있게 움직이는 지표가 아니라서, 어제 대비가 아니라
+// 한 달 전 대비로 비교해야 노이즈가 아닌 실제 추이에 가깝다. 아직 30일치가
+// 없으면(도입 초기) 가장 오래된 기록을 기준값으로 쓴다.
+function findBaseline(history, now) {
+  if (!history.length) return null;
+  const target = new Date(now);
+  target.setDate(target.getDate() - 30);
+  const targetDate = kstDateString(target);
+  const older = history.filter((h) => h.date <= targetDate);
+  return older.length ? older[older.length - 1] : history[0];
+}
+
+function withChange(current, baselineValue) {
+  if (baselineValue == null) return current;
+  const value10kDiff = current.avgPricePerPyeong10k - baselineValue;
+  const percent = baselineValue !== 0 ? (value10kDiff / baselineValue) * 100 : null;
+  return { ...current, change: { value10k: value10kDiff, percent } };
+}
+
+function attachChanges(overall, districts, baseline) {
+  if (!baseline) return { overall, districts };
+  const baselineDistrict = (code) => baseline.districts?.find((d) => d.code === code)?.avgPricePerPyeong10k;
+  return {
+    overall: { ...withChange(overall, baseline.overall?.avgPricePerPyeong10k), baselineDate: baseline.date },
+    districts: districts.map((d) => ({
+      ...withChange(d, baselineDistrict(d.code)),
+      baselineDate: baseline.date,
+    })),
+  };
+}
+
+async function appendHistory(history, now, entry) {
   const today = kstDateString(now);
   const record = { date: today, ...entry };
 
@@ -171,11 +204,18 @@ async function main() {
   };
 
   const period = `${yearMonths[1]}~${yearMonths[0]}`;
-  const payload = { updatedAt: now.toISOString(), period, overall, districts };
+
+  // 히스토리는 변화율 계산 없이 원값만 저장(나중에 다른 기준일로도 재계산
+  // 가능하게), 화면에 보여줄 오늘자 realestate.json에만 30일 전 대비 증감을 붙인다.
+  const history = await readHistory();
+  const baseline = findBaseline(history, now);
+  const withChanges = attachChanges(overall, districts, baseline);
+
+  const payload = { updatedAt: now.toISOString(), period, ...withChanges };
 
   await mkdir(dataDir, { recursive: true });
   await writeFile(outFile, JSON.stringify(payload, null, 2));
-  await appendHistory(now, { period, overall, districts });
+  await appendHistory(history, now, { period, overall, districts });
 
   console.log(`[fetch-realestate] 저장 완료 (${districts.length}개 지역, ${totalCount}건)`);
 }

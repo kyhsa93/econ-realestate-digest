@@ -239,6 +239,7 @@
 
   <section id="realestate-section">
     <h2 id="realestate-heading">한국 부동산 가격 추이</h2>
+    <div class="content-notice" id="realestate-unit-caption" style="margin-top: -8px;"></div>
     <div class="market-grid" id="realestate-grid">
       <div class="error">불러오는 중...</div>
     </div>
@@ -287,8 +288,10 @@
       realestateHeading: "한국 부동산 가격 추이",
       realestateError: "데이터를 불러오지 못했습니다.",
       realestateOverallLabel: "서울 5개구 평균",
+      realestateUnitCaption: "평당가(3.3㎡) 기준, 국토교통부 아파트매매 실거래가",
       realestateCountLabel: (n) => `최근 2개월 거래 ${n}건`,
-      realestatePeriodLabel: (period) => `국토교통부 실거래가 기준 (${period})`,
+      realestatePeriodLabel: (period) => `실거래 신고 기준 (${period})`,
+      realestateChangeVs: (dateStr) => `${dateStr} 대비`,
       realestateHistoryLabel: "서울 평균 평당가 추이 (최근)",
       newsHeading: "오늘의 경제·부동산 뉴스",
       newsError: "데이터를 불러오지 못했습니다.",
@@ -317,8 +320,10 @@
       realestateHeading: "Korean Real Estate Price Trend",
       realestateError: "Failed to load data.",
       realestateOverallLabel: "Seoul 5-district average",
+      realestateUnitCaption: "Price per pyeong (3.3㎡), based on MOLIT apartment sale transactions",
       realestateCountLabel: (n) => `${n} transactions in last 2 months`,
-      realestatePeriodLabel: (period) => `Based on MOLIT transaction data (${period})`,
+      realestatePeriodLabel: (period) => `Based on filed transactions (${period})`,
+      realestateChangeVs: (dateStr) => `vs ${dateStr}`,
       realestateHistoryLabel: "Seoul avg. price/pyeong trend (recent)",
       newsHeading: "Today's Economy & Real Estate News",
       newsError: "Failed to load data.",
@@ -468,6 +473,20 @@
     return `₩${(value10k / 100).toLocaleString("en-US", { maximumFractionDigits: 1 })}M`;
   }
 
+  function formatPyeongPriceDelta(value10k) {
+    const sign = value10k > 0 ? "+" : value10k < 0 ? "-" : "";
+    return sign + formatPyeongPrice(Math.abs(value10k));
+  }
+
+  function realestateChangeHtml(entry) {
+    if (!entry.change) return "";
+    const { value10k, percent } = entry.change;
+    const dir = value10k > 0 ? "up" : value10k < 0 ? "down" : "";
+    const arrow = value10k > 0 ? "▲ " : value10k < 0 ? "▼ " : "";
+    const percentText = percent != null ? ` (${percent >= 0 ? "+" : ""}${percent.toFixed(1)}%)` : "";
+    return `<div class="change ${dir}">${arrow}${formatPyeongPriceDelta(value10k)}${percentText} · ${t("realestateChangeVs")(entry.baselineDate)}</div>`;
+  }
+
   function renderRealestate(realestate) {
     const grid = document.getElementById("realestate-grid");
     const meta = document.getElementById("realestate-meta");
@@ -481,14 +500,16 @@
       `<div class="market-card">
          <div class="label">${t("realestateOverallLabel")}</div>
          <div class="value">${formatPyeongPrice(realestate.overall.avgPricePerPyeong10k)}</div>
-         <div class="change">${t("realestateCountLabel")(realestate.overall.transactionCount)}</div>
+         ${realestateChangeHtml(realestate.overall)}
+         <div class="news-meta">${t("realestateCountLabel")(realestate.overall.transactionCount)}</div>
        </div>`,
       ...(realestate.districts ?? []).map(
         (d) => `
         <div class="market-card">
           <div class="label">${d.name}</div>
           <div class="value">${formatPyeongPrice(d.avgPricePerPyeong10k)}</div>
-          <div class="change">${t("realestateCountLabel")(d.transactionCount)}</div>
+          ${realestateChangeHtml(d)}
+          <div class="news-meta">${t("realestateCountLabel")(d.transactionCount)}</div>
         </div>`
       ),
     ];
@@ -670,6 +691,7 @@
     document.getElementById("summary-heading").textContent = t("summaryHeading");
     document.getElementById("market-heading").textContent = t("marketHeading");
     document.getElementById("realestate-heading").textContent = t("realestateHeading");
+    document.getElementById("realestate-unit-caption").textContent = t("realestateUnitCaption");
     document.getElementById("news-heading").textContent = t("newsHeading");
     document.getElementById("archive-heading").textContent = t("archiveHeading");
 
