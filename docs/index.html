@@ -518,11 +518,14 @@
   function renderArchive(summaryHistory, newsHistory) {
     const list = document.getElementById("archive-list");
     const today = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(new Date());
+
+    const summaryByDate = new Map((Array.isArray(summaryHistory) ? summaryHistory : []).map((h) => [h.date, h.summary]));
     const newsByDate = new Map((Array.isArray(newsHistory) ? newsHistory : []).map((h) => [h.date, h.items]));
 
-    const past = (Array.isArray(summaryHistory) ? summaryHistory : [])
-      .filter((h) => h.date !== today && h.summary)
-      .sort((a, b) => b.date.localeCompare(a.date));
+    // 요약과 뉴스 히스토리는 별도 파일이라 한쪽만 있는 날짜도 있을 수 있음
+    // (예: 이 기능 추가 전 날짜를 소급 반영한 경우) -> 날짜 합집합 기준으로 보여준다.
+    const dates = new Set([...summaryByDate.keys(), ...newsByDate.keys()]);
+    const past = [...dates].filter((d) => d !== today).sort((a, b) => b.localeCompare(a));
 
     if (!past.length) {
       list.innerHTML = `<div class="error">${t("archiveEmpty")}</div>`;
@@ -531,16 +534,21 @@
 
     const shown = past.slice(0, ARCHIVE_DISPLAY_LIMIT);
     list.innerHTML = "";
-    for (const h of shown) {
+    for (const date of shown) {
       const details = document.createElement("details");
       const summaryEl = document.createElement("summary");
-      summaryEl.textContent = h.date;
-      const content = document.createElement("div");
-      content.className = "archive-content";
-      content.textContent = pickSummaryText(h.summary);
-      details.append(summaryEl, content);
+      summaryEl.textContent = date;
+      details.appendChild(summaryEl);
 
-      const newsItems = newsByDate.get(h.date);
+      const summaryText = pickSummaryText(summaryByDate.get(date));
+      if (summaryText) {
+        const content = document.createElement("div");
+        content.className = "archive-content";
+        content.textContent = summaryText;
+        details.appendChild(content);
+      }
+
+      const newsItems = newsByDate.get(date);
       if (newsItems?.length) {
         details.appendChild(buildArchiveNewsList(newsItems));
       }
