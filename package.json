@@ -9,6 +9,7 @@
     "update": "node scripts/update-all.mjs"
   },
   "dependencies": {
+    "fast-xml-parser": "^5.0.0",
     "rss-parser": "^3.13.0"
   }
 }

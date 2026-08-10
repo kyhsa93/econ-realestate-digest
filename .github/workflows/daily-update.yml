@@ -28,6 +28,9 @@ jobs:
         run: |
           node scripts/fetch-news.mjs
           node scripts/fetch-market.mjs
+          node scripts/fetch-realestate.mjs
+        env:
+          MOLIT_API_KEY: ${{ secrets.MOLIT_API_KEY }}
 
       - name: Ollama 설치 및 모델 준비
         run: |

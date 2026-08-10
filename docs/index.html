@@ -239,9 +239,11 @@
 
   <section id="realestate-section">
     <h2 id="realestate-heading">한국 부동산 가격 추이</h2>
-    <div class="placeholder" id="realestate-placeholder">
-      공식 데이터 API 연동 준비 중입니다. (공공데이터포털 인증키 발급 후 추가 예정)
+    <div class="market-grid" id="realestate-grid">
+      <div class="error">불러오는 중...</div>
     </div>
+    <div class="history-grid" id="realestate-history-grid"></div>
+    <div class="summary-meta" id="realestate-meta"></div>
   </section>
 
   <section id="news-section">
@@ -283,7 +285,11 @@
       historyKospiLabel: "코스피 (최근 추이)",
       historyUsdKrwLabel: "원/달러 환율 (최근 추이)",
       realestateHeading: "한국 부동산 가격 추이",
-      realestatePlaceholder: "공식 데이터 API 연동 준비 중입니다. (공공데이터포털 인증키 발급 후 추가 예정)",
+      realestateError: "데이터를 불러오지 못했습니다.",
+      realestateOverallLabel: "서울 5개구 평균",
+      realestateCountLabel: (n) => `최근 2개월 거래 ${n}건`,
+      realestatePeriodLabel: (period) => `국토교통부 실거래가 기준 (${period})`,
+      realestateHistoryLabel: "서울 평균 평당가 추이 (최근)",
       newsHeading: "오늘의 경제·부동산 뉴스",
       newsError: "데이터를 불러오지 못했습니다.",
       archiveHeading: "지난 요약 기록",
@@ -309,7 +315,11 @@
       historyKospiLabel: "KOSPI (recent trend)",
       historyUsdKrwLabel: "USD/KRW (recent trend)",
       realestateHeading: "Korean Real Estate Price Trend",
-      realestatePlaceholder: "Official data API integration is pending (planned once a public-data-portal API key is issued).",
+      realestateError: "Failed to load data.",
+      realestateOverallLabel: "Seoul 5-district average",
+      realestateCountLabel: (n) => `${n} transactions in last 2 months`,
+      realestatePeriodLabel: (period) => `Based on MOLIT transaction data (${period})`,
+      realestateHistoryLabel: "Seoul avg. price/pyeong trend (recent)",
       newsHeading: "Today's Economy & Real Estate News",
       newsError: "Failed to load data.",
       archiveHeading: "Past Summary Archive",
@@ -329,7 +339,16 @@
   }
 
   // ---- data cache (재조회 없이 언어 전환 시 재렌더링하기 위함) ----------
-  const cache = { market: null, news: null, summary: null, history: null, summaryHistory: null, newsHistory: null };
+  const cache = {
+    market: null,
+    news: null,
+    summary: null,
+    history: null,
+    summaryHistory: null,
+    newsHistory: null,
+    realestate: null,
+    realestateHistory: null,
+  };
 
   function fmtUpdated(iso) {
     if (!iso) return "-";
@@ -442,6 +461,61 @@
           </div>`;
       })
       .join("");
+  }
+
+  function formatPyeongPrice(value10k) {
+    if (locale === "ko") return `${value10k.toLocaleString("ko-KR")}만원`;
+    return `₩${(value10k / 100).toLocaleString("en-US", { maximumFractionDigits: 1 })}M`;
+  }
+
+  function renderRealestate(realestate) {
+    const grid = document.getElementById("realestate-grid");
+    const meta = document.getElementById("realestate-meta");
+    if (!realestate?.overall) {
+      grid.innerHTML = `<div class="error">${t("realestateError")}</div>`;
+      meta.textContent = "";
+      return;
+    }
+
+    const cards = [
+      `<div class="market-card">
+         <div class="label">${t("realestateOverallLabel")}</div>
+         <div class="value">${formatPyeongPrice(realestate.overall.avgPricePerPyeong10k)}</div>
+         <div class="change">${t("realestateCountLabel")(realestate.overall.transactionCount)}</div>
+       </div>`,
+      ...(realestate.districts ?? []).map(
+        (d) => `
+        <div class="market-card">
+          <div class="label">${d.name}</div>
+          <div class="value">${formatPyeongPrice(d.avgPricePerPyeong10k)}</div>
+          <div class="change">${t("realestateCountLabel")(d.transactionCount)}</div>
+        </div>`
+      ),
+    ];
+    grid.innerHTML = cards.join("");
+    meta.textContent = t("realestatePeriodLabel")(realestate.period ?? "");
+  }
+
+  function renderRealestateHistory(history) {
+    const grid = document.getElementById("realestate-history-grid");
+    if (!Array.isArray(history) || history.length < 2) {
+      grid.innerHTML = "";
+      return;
+    }
+    const recent = history.slice(-30);
+    const values = recent.map((h) => h.overall?.avgPricePerPyeong10k).filter((v) => typeof v === "number");
+    if (values.length < 2) {
+      grid.innerHTML = "";
+      return;
+    }
+    const first = recent.find((h) => typeof h.overall?.avgPricePerPyeong10k === "number");
+    const last = recent.slice().reverse().find((h) => typeof h.overall?.avgPricePerPyeong10k === "number");
+    grid.innerHTML = `
+      <div class="history-card">
+        <div class="label">${t("realestateHistoryLabel")}</div>
+        ${sparklineSvg(values)}
+        <div class="range"><span>${first?.date ?? ""}</span><span>${last?.date ?? ""}</span></div>
+      </div>`;
   }
 
   // 뉴스 제목은 AI가 별도로 영어 번역(titleEn)을 만들어두면 그걸 쓰고,
@@ -576,6 +650,8 @@
     renderNews(cache.news);
     renderSummary(cache.summary);
     renderHistory(cache.history);
+    renderRealestate(cache.realestate);
+    renderRealestateHistory(cache.realestateHistory);
     renderArchive(cache.summaryHistory, cache.newsHistory);
 
     const latestSources = [cache.market, cache.news, cache.summary].filter(Boolean);
@@ -594,7 +670,6 @@
     document.getElementById("summary-heading").textContent = t("summaryHeading");
     document.getElementById("market-heading").textContent = t("marketHeading");
     document.getElementById("realestate-heading").textContent = t("realestateHeading");
-    document.getElementById("realestate-placeholder").textContent = t("realestatePlaceholder");
     document.getElementById("news-heading").textContent = t("newsHeading");
     document.getElementById("archive-heading").textContent = t("archiveHeading");
 
@@ -613,14 +688,17 @@
   async function main() {
     locale = getInitialLocale();
 
-    const [market, news, summary, history, summaryHistory, newsHistory] = await Promise.allSettled([
-      loadJson("market"),
-      loadJson("news"),
-      loadJson("summary"),
-      loadJson("market-history"),
-      loadJson("summary-history"),
-      loadJson("news-history"),
-    ]);
+    const [market, news, summary, history, summaryHistory, newsHistory, realestate, realestateHistory] =
+      await Promise.allSettled([
+        loadJson("market"),
+        loadJson("news"),
+        loadJson("summary"),
+        loadJson("market-history"),
+        loadJson("summary-history"),
+        loadJson("news-history"),
+        loadJson("realestate"),
+        loadJson("realestate-history"),
+      ]);
 
     cache.market = market.status === "fulfilled" ? market.value : null;
     cache.news = news.status === "fulfilled" ? news.value : null;
@@ -628,6 +706,8 @@
     cache.history = history.status === "fulfilled" ? history.value : null;
     cache.summaryHistory = summaryHistory.status === "fulfilled" ? summaryHistory.value : null;
     cache.newsHistory = newsHistory.status === "fulfilled" ? newsHistory.value : null;
+    cache.realestate = realestate.status === "fulfilled" ? realestate.value : null;
+    cache.realestateHistory = realestateHistory.status === "fulfilled" ? realestateHistory.value : null;
 
     applyLocale(locale);
   }
