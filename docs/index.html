@@ -108,31 +108,35 @@
   }
   .change.up { color: var(--up); }
   .change.down { color: var(--down); }
-  .re-row {
-    display: flex;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: 4px 6px;
-    margin-top: 6px;
+  .table-wrap {
+    overflow-x: auto;
+    margin-top: 4px;
+  }
+  .re-table {
+    width: 100%;
+    border-collapse: collapse;
     font-size: 0.85rem;
+    white-space: nowrap;
   }
-  .re-row:first-of-type { margin-top: 8px; }
-  .re-tag {
+  .re-table th,
+  .re-table td {
+    padding: 7px 12px 7px 0;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .re-table th {
     color: var(--muted);
-    font-size: 0.75rem;
-    min-width: 2.6em;
-  }
-  .re-row .value {
-    font-size: 0.95rem;
     font-weight: 600;
+    font-size: 0.75rem;
   }
-  .re-row .change {
+  .re-table tbody tr:hover { background: var(--card); }
+  .re-table .re-overall-row {
+    font-weight: 600;
+    background: var(--card);
+  }
+  .re-table .change {
     font-size: 0.78rem;
-    margin-top: 0;
-  }
-  .re-row .news-meta {
-    margin-top: 0;
-    font-size: 0.72rem;
+    margin-left: 4px;
   }
   ul.news-list {
     list-style: none;
@@ -266,8 +270,20 @@
   <section id="realestate-section">
     <h2 id="realestate-heading">한국 부동산 가격 추이</h2>
     <div class="content-notice" id="realestate-unit-caption" style="margin-top: -8px;"></div>
-    <div class="market-grid" id="realestate-grid">
-      <div class="error">불러오는 중...</div>
+    <div class="table-wrap">
+      <table class="re-table">
+        <thead>
+          <tr>
+            <th id="re-th-district">지역</th>
+            <th id="re-th-sale">매매</th>
+            <th id="re-th-jeonse">전세</th>
+            <th id="re-th-wolse">월세</th>
+          </tr>
+        </thead>
+        <tbody id="realestate-grid">
+          <tr><td colspan="4" class="error">불러오는 중...</td></tr>
+        </tbody>
+      </table>
     </div>
     <div class="history-grid" id="realestate-history-grid"></div>
     <div class="summary-meta" id="realestate-meta"></div>
@@ -318,6 +334,7 @@
       realestateCountSuffix: (n) => `${n}건`,
       realestatePeriodLabel: (period) => `실거래 신고 기준 (${period})`,
       realestateChangeVs: (dateStr) => `${dateStr} 대비`,
+      realestateTagDistrict: "지역",
       realestateTagSale: "매매",
       realestateTagJeonse: "전세",
       realestateTagWolse: "월세",
@@ -354,6 +371,7 @@
       realestateCountSuffix: (n) => `${n} txns`,
       realestatePeriodLabel: (period) => `Based on filed transactions (${period})`,
       realestateChangeVs: (dateStr) => `vs ${dateStr}`,
+      realestateTagDistrict: "District",
       realestateTagSale: "Sale",
       realestateTagJeonse: "Jeonse",
       realestateTagWolse: "Monthly rent",
@@ -507,25 +525,20 @@
     return `₩${(value10k / 100).toLocaleString("en-US", { maximumFractionDigits: 1 })}M`;
   }
 
-  function formatPyeongPriceDelta(value10k) {
-    const sign = value10k > 0 ? "+" : value10k < 0 ? "-" : "";
-    return sign + formatPyeongPrice(Math.abs(value10k));
-  }
-
-  function realestateChangeHtml(change, baselineDate) {
+  function realestateChangeHtml(change) {
     if (!change) return "";
     const { value10k, percent } = change;
     const dir = value10k > 0 ? "up" : value10k < 0 ? "down" : "";
-    const arrow = value10k > 0 ? "▲ " : value10k < 0 ? "▼ " : "";
-    const percentText = percent != null ? ` (${percent >= 0 ? "+" : ""}${percent.toFixed(1)}%)` : "";
-    return ` <span class="change ${dir}">${arrow}${formatPyeongPriceDelta(value10k)}${percentText} · ${t("realestateChangeVs")(baselineDate)}</span>`;
+    const arrow = value10k > 0 ? "▲" : value10k < 0 ? "▼" : "";
+    const percentText = percent != null ? `${percent >= 0 ? "+" : ""}${percent.toFixed(1)}%` : "";
+    return `<span class="change ${dir}">${arrow}${percentText}</span>`;
   }
 
   // 전월세 기능 추가 전에는 sale/jeonse/wolse로 감싸지 않고 매매 값을
   // overall/district 객체에 바로 두는 평평한 포맷이었다. 그 시절 마지막으로
-  // 성공한 데이터가 배포된 상태에서 이 화면 코드만 먼저 갱신되면(오늘처럼
-  // API 호출 한도로 새 포맷 데이터가 아직 안 만들어진 경우) 카드가 통째로
-  // 비어 보이므로, 옛 포맷도 sale로 감싸서 인식하게 한다.
+  // 성공한 데이터가 배포된 상태에서 이 화면 코드만 먼저 갱신되면(예: API 호출
+  // 한도로 새 포맷 데이터가 아직 안 만들어진 경우) 행이 통째로 비어 보이므로,
+  // 옛 포맷도 sale로 감싸서 인식하게 한다.
   function normalizeRealestateEntry(entry) {
     if (!entry) return entry;
     if (entry.sale || entry.jeonse || entry.wolse) return entry; // 이미 새 포맷
@@ -542,36 +555,42 @@
     };
   }
 
+  function realestateCellTitle(metric, extra) {
+    if (!metric) return "";
+    const parts = [t("realestateCountSuffix")(metric.transactionCount)];
+    if (metric.change && metric.baselineDate) parts.push(t("realestateChangeVs")(metric.baselineDate));
+    if (extra) parts.push(extra);
+    return parts.join(" · ");
+  }
+
   // 매매/전세는 "평당 가격" 성격이라 증감(change)까지 표시하고, 월세는
-  // 보증금+월세 두 축이라 증감 추적 없이 현재값만 보여준다.
-  function realestateRowsHtml(rawEntry) {
+  // 보증금+월세 두 축이라 증감 추적 없이 현재값만 보여준다. 거래건수/기준일은
+  // 칸을 넓게 안 차지하게 title(hover) 속성으로 넣는다.
+  function realestateSaleCellHtml(sale) {
+    if (!sale) return "-";
+    return `<span title="${realestateCellTitle(sale)}">${formatPyeongPrice(sale.avgPricePerPyeong10k)}</span> ${realestateChangeHtml(sale.change)}`;
+  }
+
+  function realestateJeonseCellHtml(jeonse) {
+    if (!jeonse) return "-";
+    return `<span title="${realestateCellTitle(jeonse)}">${formatPyeongPrice(jeonse.avgDepositPerPyeong10k)}</span> ${realestateChangeHtml(jeonse.change)}`;
+  }
+
+  function realestateWolseCellHtml(wolse) {
+    if (!wolse) return "-";
+    const text = `${formatPyeongPrice(wolse.avgDeposit10k)} / ${t("realestateMonthlyPrefix")}${formatPyeongPrice(wolse.avgMonthlyRent10k)}`;
+    return `<span title="${realestateCellTitle(wolse)}">${text}</span>`;
+  }
+
+  function realestateRowHtml(rawEntry, label, isOverall) {
     const entry = normalizeRealestateEntry(rawEntry);
-    const rows = [];
-    if (entry.sale) {
-      rows.push(`
-        <div class="re-row">
-          <span class="re-tag">${t("realestateTagSale")}</span>
-          <span class="value">${formatPyeongPrice(entry.sale.avgPricePerPyeong10k)}</span>${realestateChangeHtml(entry.sale.change, entry.sale.baselineDate)}
-          <span class="news-meta">${t("realestateCountSuffix")(entry.sale.transactionCount)}</span>
-        </div>`);
-    }
-    if (entry.jeonse) {
-      rows.push(`
-        <div class="re-row">
-          <span class="re-tag">${t("realestateTagJeonse")}</span>
-          <span class="value">${formatPyeongPrice(entry.jeonse.avgDepositPerPyeong10k)}</span>${realestateChangeHtml(entry.jeonse.change, entry.jeonse.baselineDate)}
-          <span class="news-meta">${t("realestateCountSuffix")(entry.jeonse.transactionCount)}</span>
-        </div>`);
-    }
-    if (entry.wolse) {
-      rows.push(`
-        <div class="re-row">
-          <span class="re-tag">${t("realestateTagWolse")}</span>
-          <span class="value">${formatPyeongPrice(entry.wolse.avgDeposit10k)} / ${t("realestateMonthlyPrefix")}${formatPyeongPrice(entry.wolse.avgMonthlyRent10k)}</span>
-          <span class="news-meta">${t("realestateCountSuffix")(entry.wolse.transactionCount)}</span>
-        </div>`);
-    }
-    return rows.join("");
+    return `
+      <tr class="${isOverall ? "re-overall-row" : ""}">
+        <td>${label}</td>
+        <td>${realestateSaleCellHtml(entry.sale)}</td>
+        <td>${realestateJeonseCellHtml(entry.jeonse)}</td>
+        <td>${realestateWolseCellHtml(entry.wolse)}</td>
+      </tr>`;
   }
 
   function realestateSortValue(rawEntry) {
@@ -580,31 +599,22 @@
   }
 
   function renderRealestate(realestate) {
-    const grid = document.getElementById("realestate-grid");
+    const tbody = document.getElementById("realestate-grid");
     const meta = document.getElementById("realestate-meta");
     if (!realestate?.overall) {
-      grid.innerHTML = `<div class="error">${t("realestateError")}</div>`;
+      tbody.innerHTML = `<tr><td colspan="4" class="error">${t("realestateError")}</td></tr>`;
       meta.textContent = "";
       return;
     }
 
-    const cards = [
-      `<div class="market-card">
-         <div class="label">${t("realestateOverallLabel")}</div>
-         ${realestateRowsHtml(realestate.overall)}
-       </div>`,
+    const rows = [
+      realestateRowHtml(realestate.overall, t("realestateOverallLabel"), true),
       ...(realestate.districts ?? [])
         .slice()
         .sort((a, b) => realestateSortValue(b) - realestateSortValue(a))
-        .map(
-          (d) => `
-        <div class="market-card">
-          <div class="label">${d.name}</div>
-          ${realestateRowsHtml(d)}
-        </div>`
-      ),
+        .map((d) => realestateRowHtml(d, d.name, false)),
     ];
-    grid.innerHTML = cards.join("");
+    tbody.innerHTML = rows.join("");
     meta.textContent = t("realestatePeriodLabel")(realestate.period ?? "");
   }
 
@@ -784,6 +794,10 @@
     document.getElementById("market-heading").textContent = t("marketHeading");
     document.getElementById("realestate-heading").textContent = t("realestateHeading");
     document.getElementById("realestate-unit-caption").textContent = t("realestateUnitCaption");
+    document.getElementById("re-th-district").textContent = t("realestateTagDistrict");
+    document.getElementById("re-th-sale").textContent = t("realestateTagSale");
+    document.getElementById("re-th-jeonse").textContent = t("realestateTagJeonse");
+    document.getElementById("re-th-wolse").textContent = t("realestateTagWolse");
     document.getElementById("news-heading").textContent = t("newsHeading");
     document.getElementById("archive-heading").textContent = t("archiveHeading");
 
