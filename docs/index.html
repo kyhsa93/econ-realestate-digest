@@ -463,7 +463,12 @@
 
   function getInitialLocale() {
     const saved = window.localStorage.getItem("lang");
-    return saved === "en" || saved === "ko" ? saved : "en";
+    // 대상 독자가 한국어권이라 static meta(description/OG/JSON-LD 등)도
+    // 전부 한국어로 작성돼 있음 - 기본값을 en으로 두면 첫 방문자에게
+    // 하이드레이션 후 렌더링되는 title/meta가 영어로 덮어써져 static
+    // 태그와 어긋나므로(=검색엔진이 실제로 색인하는 언어가 영어가 됨)
+    // ko를 기본값으로 함.
+    return saved === "en" || saved === "ko" ? saved : "ko";
   }
 
   // ---- data cache (재조회 없이 언어 전환 시 재렌더링하기 위함) ----------
