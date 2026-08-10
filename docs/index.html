@@ -147,6 +147,14 @@
     font-size: 0.78rem;
     margin-top: 2px;
   }
+  .archive-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    text-decoration: none;
+  }
+  .archive-link:hover { text-decoration: underline; }
   .placeholder {
     color: var(--muted);
     font-size: 0.9rem;
@@ -216,16 +224,6 @@
     font-size: 0.88rem;
     white-space: pre-wrap;
   }
-  .archive-news-list {
-    margin-top: 10px;
-    padding-left: 4px;
-  }
-  .archive-news-list .news-item {
-    padding: 6px 0;
-  }
-  .archive-news-list .news-item a {
-    font-size: 0.85rem;
-  }
 </style>
 </head>
 <body>
@@ -293,6 +291,7 @@
     <ul class="news-list" id="news-list">
       <li class="error">불러오는 중...</li>
     </ul>
+    <a class="archive-link" id="news-archive-link" href="./news.html">지난 뉴스 더보기 →</a>
   </section>
 
   <section id="archive-section">
@@ -346,9 +345,11 @@
       realestateHistoryLabel: "서울 평균 평당가 추이 (최근)",
       newsHeading: "오늘의 경제·부동산 뉴스",
       newsError: "데이터를 불러오지 못했습니다.",
+      newsArchiveLink: "지난 뉴스 더보기 →",
       archiveHeading: "지난 요약 기록",
       archiveEmpty: "아직 지난 기록이 없습니다.",
       archiveMore: (n) => `이전 기록 ${n}건 더 있음`,
+      archiveNewsLink: (n) => `해당 날짜 뉴스 보기 (${n}건) →`,
     },
     en: {
       title: "Econ & Real Estate Digest",
@@ -388,9 +389,11 @@
       realestateHistoryLabel: "Seoul avg. price/pyeong trend (recent)",
       newsHeading: "Today's Economy & Real Estate News",
       newsError: "Failed to load data.",
+      newsArchiveLink: "More past news →",
       archiveHeading: "Past Summary Archive",
       archiveEmpty: "No past records yet.",
       archiveMore: (n) => `${n} more past entries`,
+      archiveNewsLink: (n) => `View news for this date (${n}) →`,
     },
   };
 
@@ -731,27 +734,6 @@
   }
 
   const ARCHIVE_DISPLAY_LIMIT = 30;
-  const ARCHIVE_NEWS_LIMIT = 20;
-
-  function buildArchiveNewsList(items) {
-    const ul = document.createElement("ul");
-    ul.className = "news-list archive-news-list";
-    for (const item of (items ?? []).slice(0, ARCHIVE_NEWS_LIMIT)) {
-      const li = document.createElement("li");
-      li.className = "news-item";
-      const a = document.createElement("a");
-      a.href = item.link;
-      a.target = "_blank";
-      a.rel = "noopener";
-      a.textContent = pickTitle(item);
-      const meta = document.createElement("div");
-      meta.className = "news-meta";
-      meta.textContent = item.source ?? "";
-      li.append(a, meta);
-      ul.appendChild(li);
-    }
-    return ul;
-  }
 
   function renderArchive(summaryHistory, newsHistory) {
     const list = document.getElementById("archive-list");
@@ -788,7 +770,11 @@
 
       const newsItems = newsByDate.get(date);
       if (newsItems?.length) {
-        details.appendChild(buildArchiveNewsList(newsItems));
+        const link = document.createElement("a");
+        link.className = "archive-link";
+        link.href = `./news.html?date=${date}`;
+        link.textContent = t("archiveNewsLink")(newsItems.length);
+        details.appendChild(link);
       }
 
       list.appendChild(details);
@@ -837,6 +823,7 @@
     document.getElementById("re-th-jeonse").textContent = t("realestateTagJeonse");
     document.getElementById("re-th-wolse").textContent = t("realestateTagWolse");
     document.getElementById("news-heading").textContent = t("newsHeading");
+    document.getElementById("news-archive-link").textContent = t("newsArchiveLink");
     document.getElementById("archive-heading").textContent = t("archiveHeading");
 
     const notice = document.getElementById("content-notice");

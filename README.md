@@ -20,6 +20,8 @@
 - `scripts/translate-news.mjs` — 뉴스 제목을 영어로 번역(`titleEn`) → `docs/data/news.json`
 - `scripts/update-all.mjs` — 로컬에서 수동으로 fetch + git commit/push까지 한 번에 실행할 때 사용 (CI에서는 사용 안 함)
 - `docs/index.html` — 정적 페이지, 클라이언트에서 `data/*.json`을 fetch해 렌더링, 한/영 언어 전환 지원
+- `docs/news.html` — 뉴스를 날짜별로 보여주는 하위 페이지(`?date=YYYY-MM-DD`). `news-history.json`의
+  모든 날짜를 상단 네비게이션으로 보여주고, index.html의 "지난 뉴스 더보기"/지난 기록 링크에서 연결됨
 - `.github/workflows/daily-update.yml` — 매일 08:00 KST(23:00 UTC)에 뉴스/시장/부동산 지표 수집 → Ollama 설치 후 AI 요약·번역 생성 → 변경사항 커밋/푸시
 
 ## 로컬 실행
