@@ -8,8 +8,8 @@
     "date": "2026-08-10",
     "model": "qwen2.5:1.5b",
     "summary": {
-      "ko": "- 증시·환율 관련 뉴스 3건\n- 부동산 관련 뉴스 12건\n- 금리·예금·투자상품 관련 뉴스 5건",
-      "en": "- 3 news items about Stocks & FX\n- 12 news items about Real Estate\n- 5 news items about Rates, Deposits & Investment Products"
+      "ko": "- 코스피와 코스닥이 상승세를 나타내며 증시가 개선되고 있는 것으로 보여지고 있습니다.\n- 부동산 관련 뉴스 12건\n- 금리·예금·투자상품 관련 뉴스 5건",
+      "en": "- 3 news items about Stocks & FX\n- 12 news items about Real Estate\n- The Bank of Korea's \"Goldilocks\" strategy involves maintaining interest rates at a moderate level to prevent inflation while encouraging economic growth, as evidenced by the increase in deposits and investment products despite rising US Treasury yields."
     }
   }
 ]
