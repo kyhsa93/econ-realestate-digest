@@ -287,8 +287,8 @@
       historyUsdKrwLabel: "원/달러 환율 (최근 추이)",
       realestateHeading: "한국 부동산 가격 추이",
       realestateError: "데이터를 불러오지 못했습니다.",
-      realestateOverallLabel: "서울 5개구 평균",
-      realestateUnitCaption: "평당가(3.3㎡) 기준, 국토교통부 아파트매매 실거래가",
+      realestateOverallLabel: "서울 25개구 평균",
+      realestateUnitCaption: "평당가(3.3㎡) 기준, 국토교통부 아파트매매 실거래가 (서울 25개 자치구 전체)",
       realestateCountLabel: (n) => `최근 2개월 거래 ${n}건`,
       realestatePeriodLabel: (period) => `실거래 신고 기준 (${period})`,
       realestateChangeVs: (dateStr) => `${dateStr} 대비`,
@@ -319,8 +319,8 @@
       historyUsdKrwLabel: "USD/KRW (recent trend)",
       realestateHeading: "Korean Real Estate Price Trend",
       realestateError: "Failed to load data.",
-      realestateOverallLabel: "Seoul 5-district average",
-      realestateUnitCaption: "Price per pyeong (3.3㎡), based on MOLIT apartment sale transactions",
+      realestateOverallLabel: "Seoul 25-district average",
+      realestateUnitCaption: "Price per pyeong (3.3㎡), based on MOLIT apartment sale transactions (all 25 Seoul districts)",
       realestateCountLabel: (n) => `${n} transactions in last 2 months`,
       realestatePeriodLabel: (period) => `Based on filed transactions (${period})`,
       realestateChangeVs: (dateStr) => `vs ${dateStr}`,
@@ -503,8 +503,11 @@
          ${realestateChangeHtml(realestate.overall)}
          <div class="news-meta">${t("realestateCountLabel")(realestate.overall.transactionCount)}</div>
        </div>`,
-      ...(realestate.districts ?? []).map(
-        (d) => `
+      ...(realestate.districts ?? [])
+        .slice()
+        .sort((a, b) => b.avgPricePerPyeong10k - a.avgPricePerPyeong10k)
+        .map(
+          (d) => `
         <div class="market-card">
           <div class="label">${d.name}</div>
           <div class="value">${formatPyeongPrice(d.avgPricePerPyeong10k)}</div>

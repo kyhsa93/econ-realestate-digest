@@ -10,15 +10,56 @@ const HISTORY_MAX_DAYS = 180;
 const API_URL = process.env.MOLIT_API_ENDPOINT;
 const SERVICE_KEY = process.env.MOLIT_API_KEY;
 
-// 강남/서초/송파(고가권) + 마포/노원(중저가권)을 섞어서 서울 아파트값의
-// 대략적인 흐름을 보려는 것이지, 전국을 대표하는 표본은 아니다.
+// 서울 25개 자치구 전체. 전국이 아니라 "서울" 기준 평균/구별 값이다.
 const DISTRICTS = [
-  { code: "11680", name: "강남구" },
-  { code: "11650", name: "서초구" },
-  { code: "11710", name: "송파구" },
-  { code: "11440", name: "마포구" },
+  { code: "11110", name: "종로구" },
+  { code: "11140", name: "중구" },
+  { code: "11170", name: "용산구" },
+  { code: "11200", name: "성동구" },
+  { code: "11215", name: "광진구" },
+  { code: "11230", name: "동대문구" },
+  { code: "11260", name: "중랑구" },
+  { code: "11290", name: "성북구" },
+  { code: "11305", name: "강북구" },
+  { code: "11320", name: "도봉구" },
   { code: "11350", name: "노원구" },
+  { code: "11380", name: "은평구" },
+  { code: "11410", name: "서대문구" },
+  { code: "11440", name: "마포구" },
+  { code: "11470", name: "양천구" },
+  { code: "11500", name: "강서구" },
+  { code: "11530", name: "구로구" },
+  { code: "11545", name: "금천구" },
+  { code: "11560", name: "영등포구" },
+  { code: "11590", name: "동작구" },
+  { code: "11620", name: "관악구" },
+  { code: "11650", name: "서초구" },
+  { code: "11680", name: "강남구" },
+  { code: "11710", name: "송파구" },
+  { code: "11740", name: "강동구" },
 ];
+
+// 데이터포털이 짧은 시간에 몰리는 요청에 종종 "fetch failed"(네트워크
+// 레벨)로 실패하는 걸 확인해서, 재시도와 동시 요청 수 제한을 둔다.
+const CONCURRENCY = 5;
+const MAX_RETRIES = 3;
+
+async function mapWithConcurrency(items, limit, fn) {
+  const results = new Array(items.length);
+  let next = 0;
+  async function worker() {
+    while (next < items.length) {
+      const i = next++;
+      results[i] = await fn(items[i], i);
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(limit, items.length) }, worker));
+  return results;
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 const PYEONG_M2 = 3.3058;
 
@@ -34,7 +75,7 @@ function kstYearMonth(date, monthsAgo = 0) {
   return `${y}${m}`;
 }
 
-async function fetchDistrictMonth(districtCode, yearMonth) {
+async function fetchDistrictMonthOnce(districtCode, yearMonth) {
   // serviceKey는 URLSearchParams로 넣으면 안 됨: 공공데이터포털에서 발급되는
   // "Encoding" 인증키는 이미 퍼센트 인코딩된 문자열이라, searchParams.set()이
   // 한 번 더 인코딩해버리면(%가 %25로 바뀌는 식) 키가 깨져서 403이 난다.
@@ -69,6 +110,19 @@ async function fetchDistrictMonth(districtCode, yearMonth) {
   const items = parsed?.response?.body?.items?.item;
   if (!items) return [];
   return Array.isArray(items) ? items : [items];
+}
+
+async function fetchDistrictMonth(districtCode, yearMonth) {
+  let lastErr;
+  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+    try {
+      return await fetchDistrictMonthOnce(districtCode, yearMonth);
+    } catch (err) {
+      lastErr = err;
+      if (attempt < MAX_RETRIES) await sleep(attempt * 1000);
+    }
+  }
+  throw lastErr;
 }
 
 function parseAmount(dealAmount) {
@@ -116,14 +170,12 @@ async function readHistory() {
   }
 }
 
-// 30일 전에 가장 가까운(그 이전) 기록을 기준값으로 삼는다. 부동산 가격은
-// 하루 단위로 의미 있게 움직이는 지표가 아니라서, 어제 대비가 아니라
-// 한 달 전 대비로 비교해야 노이즈가 아닌 실제 추이에 가깝다. 아직 30일치가
+// 1주일 전에 가장 가까운(그 이전) 기록을 기준값으로 삼는다. 아직 7일치가
 // 없으면(도입 초기) 가장 오래된 기록을 기준값으로 쓴다.
 function findBaseline(history, now) {
   if (!history.length) return null;
   const target = new Date(now);
-  target.setDate(target.getDate() - 30);
+  target.setDate(target.getDate() - 7);
   const targetDate = kstDateString(target);
   const older = history.filter((h) => h.date <= targetDate);
   const baseline = older.length ? older[older.length - 1] : history[0];
@@ -181,16 +233,17 @@ async function main() {
   // 합쳐서 봐야 월초에 표본이 너무 적어지는 걸 피할 수 있다.
   const yearMonths = [kstYearMonth(now, 0), kstYearMonth(now, 1)];
 
-  const districts = [];
-  for (const { code, name } of DISTRICTS) {
+  const results = await mapWithConcurrency(DISTRICTS, CONCURRENCY, async ({ code, name }) => {
     try {
       const result = await fetchDistrict(code, name, yearMonths);
-      if (result) districts.push(result);
-      else console.error(`[fetch-realestate] ${name}: 최근 2개월 거래 없음`);
+      if (!result) console.error(`[fetch-realestate] ${name}: 최근 2개월 거래 없음`);
+      return result;
     } catch (err) {
       console.error(`[fetch-realestate] ${name} 조회 실패: ${err.message}`);
+      return null;
     }
-  }
+  });
+  const districts = results.filter(Boolean);
 
   if (districts.length === 0) {
     console.error("[fetch-realestate] 모든 지역 조회 실패, 기존 데이터 유지");
@@ -209,7 +262,7 @@ async function main() {
   const period = `${yearMonths[1]}~${yearMonths[0]}`;
 
   // 히스토리는 변화율 계산 없이 원값만 저장(나중에 다른 기준일로도 재계산
-  // 가능하게), 화면에 보여줄 오늘자 realestate.json에만 30일 전 대비 증감을 붙인다.
+  // 가능하게), 화면에 보여줄 오늘자 realestate.json에만 1주일 전 대비 증감을 붙인다.
   const history = await readHistory();
   const baseline = findBaseline(history, now);
   const withChanges = attachChanges(overall, districts, baseline);

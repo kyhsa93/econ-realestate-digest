@@ -9,8 +9,9 @@
 
 - `scripts/fetch-news.mjs` — 경제지 RSS 파싱 → `docs/data/news.json`
 - `scripts/fetch-market.mjs` — 코스피/환율/기준금리 조회 → `docs/data/market.json`
-- `scripts/fetch-realestate.mjs` — 국토교통부 아파트매매 실거래가 API(서울 5개구: 강남·서초·송파·마포·노원, 최근 2개월)로
-  평당가 조회 → `docs/data/realestate.json` (`MOLIT_API_KEY` 필요, 없으면 조용히 생략)
+- `scripts/fetch-realestate.mjs` — 국토교통부 아파트매매 실거래가 API(서울 25개 자치구 전체, 최근 2개월)로
+  구별 평당가 + 서울 전체 평균, 1주일 전 대비 증감까지 조회 → `docs/data/realestate.json`
+  (`MOLIT_API_KEY`, `MOLIT_API_ENDPOINT` 필요, 없으면 조용히 생략)
 - `scripts/summarize-digest.mjs` — 로컬 Ollama(qwen2.5:1.5b)로 오늘의 뉴스를 카테고리별로 한국어/영어 요약 → `docs/data/summary.json`
 - `scripts/translate-news.mjs` — 뉴스 제목을 영어로 번역(`titleEn`) → `docs/data/news.json`
 - `scripts/update-all.mjs` — 로컬에서 수동으로 fetch + git commit/push까지 한 번에 실행할 때 사용 (CI에서는 사용 안 함)
@@ -51,4 +52,6 @@ MOLIT_API_ENDPOINT=http://apis.data.go.kr/1613000/RTMSDataSvcAptTradeDev/getRTMS
 node scripts/fetch-realestate.mjs
 ```
 
-서울 5개구(강남·서초·송파·마포·노원)만 추적하는 표본이라 전국 대표값은 아님.
+서울 25개 자치구 전체를 추적하며, 서울 기준 값이지 전국 대표값은 아님.
+가격 증감은 히스토리에서 1주일 전에 가장 가까운 기록을 기준값으로 비교함
+(도입 초기라 7일치가 없으면 가장 오래된 기록을 대신 사용).
