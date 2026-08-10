@@ -148,11 +148,46 @@
     "date": "2026-08-10",
     "items": [
       {
+        "title": "[외환] 원/달러 환율 2.3원 오른 1,418.4원(15:30 기준가)",
+        "link": "https://www.yna.co.kr/view/AKR20260810106100002",
+        "publishedAt": "2026-08-10T06:39:38.000Z",
+        "source": "연합뉴스 경제",
+        "titleEn": "Foreign Exchange: Won per Dollar Rate Up 2.3 Won to 1,418.4 Won (as of 15:30)"
+      },
+      {
+        "title": "코스닥, 6.97%↑…코스피는 찔끔 상승, 3거래일만에 반등",
+        "link": "https://www.yna.co.kr/view/AKR20260810108000008",
+        "publishedAt": "2026-08-10T06:38:10.000Z",
+        "source": "연합뉴스 경제",
+        "titleEn": "KOSPI gains 0.97%, KOSDAQ surges after brief dip, rebounds in just three days"
+      },
+      {
+        "title": "[속보] 코스닥, 7% 급등해 854 마감…코스피는 0.65%↑",
+        "link": "https://www.yna.co.kr/view/AKR20260810107100008",
+        "publishedAt": "2026-08-10T06:34:02.000Z",
+        "source": "연합뉴스 경제",
+        "titleEn": "Breaking news: KOSPI surges by 7%, closes at 854; KOSPIK rises 0.65%"
+      },
+      {
+        "title": "중고가 아파트 신고가 쏟아진 수도권…12억~15억 구간 비중 2배 급증",
+        "link": "https://www.mk.co.kr/news/realestate/12122895",
+        "publishedAt": "2026-08-10T06:29:25.000Z",
+        "source": "매일경제 부동산",
+        "titleEn": "중고가 아파트 신고가 쏟아진 수도권…12억~15억 구간 비중 2배 급증"
+      },
+      {
+        "title": "[부산소식] 동아대, 13일 부동산 시장 양극화 주제 세미나",
+        "link": "https://www.yna.co.kr/view/AKR20260810094000051",
+        "publishedAt": "2026-08-10T05:35:11.000Z",
+        "source": "연합뉴스 경제",
+        "titleEn": "Daegu University Discusses Market Polarization Theme on Friday"
+      },
+      {
         "title": "\"안전하다더니 전액 날렸다\"…해외 부동산 펀드 투자 주의보",
         "link": "https://www.yna.co.kr/view/AKR20260810063700002",
         "publishedAt": "2026-08-10T03:00:04.000Z",
         "source": "연합뉴스 경제",
-        "titleEn": "Safe but all lost\"... Overseas real estate fund investment caution required"
+        "titleEn": "Safe but all lost... Caution on overseas real estate fund investment."
       },
       {
         "title": "국고채 금리 일제히 상승…3년물 장중 연 3.773%",
@@ -166,7 +201,7 @@
         "link": "https://www.yna.co.kr/view/AKR20260810064000008",
         "publishedAt": "2026-08-10T02:27:44.000Z",
         "source": "연합뉴스 경제",
-        "titleEn": "Kospi rises 1%, KOSDAQ briefly climbs by 6.78%"
+        "titleEn": "Kospi rises 1%, KOSDAQ briefly climbs 6.78% for buying sidekick"
       },
       {
         "title": "15억~20억원 수도권 아파트, 7월 거래 절반 이상이 ‘신고가’",
@@ -187,7 +222,7 @@
         "link": "https://www.yna.co.kr/view/AKR20260810056800008",
         "publishedAt": "2026-08-10T01:48:21.000Z",
         "source": "연합뉴스 경제",
-        "titleEn": "July government bond rates rise due to appreciation of the won and foreign investor selling"
+        "titleEn": "July government bond rates rise on appreciation of currency and foreign investor selling"
       },
       {
         "title": "“골프연습장 없으면 난리납니다”…신축 아파트 커뮤니티 살펴봤더니",
@@ -215,7 +250,7 @@
         "link": "https://www.yna.co.kr/view/AKR20260810043500008",
         "publishedAt": "2026-08-10T01:00:34.000Z",
         "source": "연합뉴스 경제",
-        "titleEn": "Summer economic camp for elementary school students and parents to be held by the Tuijiakoo cooperation"
+        "titleEn": "Summer Economics Camp for Elementary and Middle School Students Hosted by TEOC"
       },
       {
         "title": "전매제한 기간에 8천만원 웃돈 주고 아파트 거래 2명 덜미",
@@ -236,7 +271,7 @@
         "link": "https://www.yna.co.kr/view/AKR20260810030000003",
         "publishedAt": "2026-08-10T00:49:31.000Z",
         "source": "연합뉴스 경제",
-        "titleEn": "Hyundai Group deploys robots to solve apartment parking crisis... \"up to 50%\" more."
+        "titleEn": "Hyundai Group deploys robots to address parking shortage in apartment complexes... \"up to 50%"
       },
       {
         "title": "이지스운용 \"상업용 부동산 양극화 고착…대형·우량자산 선호\"",
@@ -250,42 +285,7 @@
         "link": "https://www.yna.co.kr/view/AKR20260810035500008",
         "publishedAt": "2026-08-10T00:40:53.000Z",
         "source": "연합뉴스 경제",
-        "titleEn": "Stock market rises start... Kospi up 1%·Kosdaq surges to over 4% (consolidation)"
-      },
-      {
-        "title": "7월 수도권 15억∼20억원대 아파트 거래 과반이 신고가",
-        "link": "https://www.yna.co.kr/view/AKR20260810031200003",
-        "publishedAt": "2026-08-10T00:21:17.000Z",
-        "source": "연합뉴스 경제",
-        "titleEn": "7월 수도권 15억∼20억원대 아파트 거래 과반이 신고가"
-      },
-      {
-        "title": "코스피, 상승 출발 후 강보합권…코스닥 2% 상승",
-        "link": "https://www.yna.co.kr/view/AKR20260810027900008",
-        "publishedAt": "2026-08-10T00:06:44.000Z",
-        "source": "연합뉴스 경제",
-        "titleEn": "Kospi gains after start of rise... Kosdaq up 2%"
-      },
-      {
-        "title": "“여름철 생활 수리도 정찰제로”…아파트아이 ‘아파트케어’ 주목",
-        "link": "https://www.mk.co.kr/news/realestate/12122468",
-        "publishedAt": "2026-08-10T00:02:09.000Z",
-        "source": "매일경제 부동산",
-        "titleEn": "Summer Maintenance is Now a Scout System for Apartments... Attention to Apartment Care!"
-      },
-      {
-        "title": "[머니톡스] ② 공급·금융·세제의 삼박자…한국 부동산 '혼합 패키지' 기대",
-        "link": "https://www.yna.co.kr/view/AKR20260806051500546",
-        "publishedAt": "2026-08-10T00:01:33.000Z",
-        "source": "연합뉴스 경제",
-        "titleEn": "Hybrid Package for Korean Real Estate: Supply, Finance, and Taxation Strategy"
-      },
-      {
-        "title": "“은행 뺑뺑이 돌아도 잔금 마련 막막”…대출 규제에 아파트 입주 예정자 ‘비상’",
-        "link": "https://www.mk.co.kr/news/realestate/12122446",
-        "publishedAt": "2026-08-09T23:38:06.000Z",
-        "source": "매일경제 부동산",
-        "titleEn": "Bank's mess persists despite loan regulations for apartment buyers' emergency"
+        "titleEn": "Stock market rises start... Kospi up 1% · Kosdaq surges to 4%+ (Summary)"
       }
     ]
   }
