@@ -326,16 +326,29 @@ async function main() {
   const now = new Date();
 
   // 워크플로가 수동으로 여러 번 트리거돼도(오늘 테스트하면서 실제로 겪음)
-  // 하루에 한 번만 실제 API를 호출한다. 25개구 x 매매/전월세라 요청량이
-  // 많아서, 반복 실행이 겹치면 데이터포털 일일 호출 한도를 금방 소진한다.
+  // 하루에 한 번만 25개구 전체를 다시 조회하진 않아 데이터포털 일일 호출
+  // 한도를 아낀다. 다만 하루 1회 제한보다 "최소 한 번은 전 구 데이터를
+  // 성공시키는 것"이 우선이라, 오늘 이미 조회했더라도 초반 네트워크
+  // 이슈 등으로 일부 구가 통째로 빠진 채 저장돼 있으면 그 누락분만
+  // 다시 조회해서 채운다.
+  let existing = null;
   try {
-    const existing = JSON.parse(await readFile(outFile, "utf-8"));
-    if (existing.updatedAt && kstDateString(new Date(existing.updatedAt)) === kstDateString(now)) {
-      console.log(`[fetch-realestate] 오늘(${kstDateString(now)}) 이미 조회함, 생략`);
-      return;
-    }
+    existing = JSON.parse(await readFile(outFile, "utf-8"));
   } catch {
-    // 기존 파일 없으면 그냥 진행
+    existing = null; // 기존 파일 없으면 그냥 진행
+  }
+
+  const existingIsToday =
+    Boolean(existing?.updatedAt) && kstDateString(new Date(existing.updatedAt)) === kstDateString(now);
+  const existingDistrictCodes = new Set((existing?.districts ?? []).map((d) => d.code));
+  const targetDistricts = existingIsToday ? DISTRICTS.filter((d) => !existingDistrictCodes.has(d.code)) : DISTRICTS;
+
+  if (existingIsToday && targetDistricts.length === 0) {
+    console.log(`[fetch-realestate] 오늘(${kstDateString(now)}) 25개구 전부 이미 조회 완료, 생략`);
+    return;
+  }
+  if (existingIsToday) {
+    console.log(`[fetch-realestate] 오늘 이미 조회했지만 ${targetDistricts.length}개구 누락, 누락분만 재조회`);
   }
 
   // 이번 달치만 조회 (예전엔 월초 표본 부족을 피하려고 지난달까지 2개월을
@@ -367,7 +380,7 @@ async function main() {
     return entry.sale || entry.jeonse || entry.wolse ? entry : null;
   }
 
-  const results = await mapWithConcurrency(DISTRICTS, CONCURRENCY, fetchDistrictEntry);
+  const results = await mapWithConcurrency(targetDistricts, CONCURRENCY, fetchDistrictEntry);
 
   // 데이터포털 요청이 실행 초반 잠깐(수십 초) 네트워크 레벨로 통째로 실패하는
   // 경우를 실제로 겪었다(첫 두 동시 요청 웨이브가 fetch failed로 재시도까지
@@ -377,14 +390,14 @@ async function main() {
   if (failedIndexes.length > 0) {
     console.log(`[fetch-realestate] ${failedIndexes.length}개구 실패, 재시도 스윕 시작`);
     const retried = await mapWithConcurrency(
-      failedIndexes.map((i) => DISTRICTS[i]),
+      failedIndexes.map((i) => targetDistricts[i]),
       CONCURRENCY,
       fetchDistrictEntry
     );
     failedIndexes.forEach((i, j) => {
       if (retried[j]) results[i] = retried[j];
     });
-    const stillFailed = failedIndexes.filter((i) => !results[i]).map((i) => DISTRICTS[i].name);
+    const stillFailed = failedIndexes.filter((i) => !results[i]).map((i) => targetDistricts[i].name);
     if (stillFailed.length > 0) {
       console.error(`[fetch-realestate] 재시도 후에도 실패: ${stillFailed.join(", ")}`);
     } else {
@@ -392,7 +405,13 @@ async function main() {
     }
   }
 
-  const districts = results.filter(Boolean);
+  // 오늘 이미 저장돼 있던 구 데이터(있다면)와 이번에 새로 채운 구 데이터를
+  // 합쳐서 이번 실행에서도 여전히 실패한 구가 있어도 기존 성공분은 보존한다.
+  const newlyFetched = results.filter(Boolean);
+  const districtsMap = new Map(existingIsToday ? (existing.districts ?? []).map((d) => [d.code, d]) : []);
+  for (const d of newlyFetched) districtsMap.set(d.code, d);
+  const districts = [...districtsMap.values()];
+
   if (districts.length === 0) {
     console.error("[fetch-realestate] 모든 지역 조회 실패, 기존 데이터 유지");
     return;
