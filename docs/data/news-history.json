@@ -148,144 +148,124 @@
     "date": "2026-08-10",
     "items": [
       {
+        "title": "수도권 15~20억 아파트 신고가 행진",
+        "link": "https://www.mk.co.kr/news/realestate/12123006",
+        "publishedAt": "2026-08-10T08:09:50.000Z",
+        "source": "매일경제 부동산"
+      },
+      {
+        "title": "국고채 금리 일제히 상승…3년물 연 3.778%",
+        "link": "https://www.yna.co.kr/view/AKR20260810124100008",
+        "publishedAt": "2026-08-10T07:45:51.000Z",
+        "source": "연합뉴스 경제"
+      },
+      {
+        "title": "코스피 주춤, 코스닥만 날았다…레버리지 규제 이후 수급 개선",
+        "link": "https://www.yna.co.kr/view/AKR20260810082800008",
+        "publishedAt": "2026-08-10T07:36:08.000Z",
+        "source": "연합뉴스 경제"
+      },
+      {
+        "title": "환율, 이틀째 1,410원대…외국인 순매도·저가 매수에 반등",
+        "link": "https://www.yna.co.kr/view/AKR20260810114300002",
+        "publishedAt": "2026-08-10T07:26:15.000Z",
+        "source": "연합뉴스 경제"
+      },
+      {
         "title": "코스닥, 6.97%↑…코스피는 찔끔 상승, 3거래일 만에 반등(종합)",
         "link": "https://www.yna.co.kr/view/AKR20260810114400008",
         "publishedAt": "2026-08-10T07:10:21.000Z",
-        "source": "연합뉴스 경제",
-        "titleEn": "KOSDAQ up by 6.97%... KOSPI barely rallies, rebounds after three trading days"
+        "source": "연합뉴스 경제"
       },
       {
         "title": "美日 엔 매수 공동개입에…\"내년 봄 日기준금리 1.5% 도달\" 전망",
         "link": "https://www.yna.co.kr/view/AKR20260810109000073",
         "publishedAt": "2026-08-10T07:04:37.000Z",
-        "source": "연합뉴스 경제",
-        "titleEn": "Expect JGB Rate to Hit 1.5% by Spring Next Year amid US-Japan Joint Intervention"
+        "source": "연합뉴스 경제"
+      },
+      {
+        "title": "무신사·구다이…코스피 대어 몰려온다",
+        "link": "https://www.hankyung.com/article/2026081035711",
+        "publishedAt": "2026-08-10T06:59:27.000Z",
+        "source": "한국경제 경제"
       },
       {
         "title": "[외환] 원/달러 환율 2.3원 오른 1,418.4원(15:30 기준가)",
         "link": "https://www.yna.co.kr/view/AKR20260810106100002",
         "publishedAt": "2026-08-10T06:39:38.000Z",
-        "source": "연합뉴스 경제",
-        "titleEn": "Foreign Exchange: USD/KRW Rate Rises to 1,418.4 Won (as of 15:30)"
-      },
-      {
-        "title": "코스닥, 6.97%↑…코스피는 찔끔 상승, 3거래일만에 반등",
-        "link": "https://www.yna.co.kr/view/AKR20260810108000008",
-        "publishedAt": "2026-08-10T06:38:10.000Z",
-        "source": "연합뉴스 경제",
-        "titleEn": "KOSDAQ up by 6.97%... KOSPI barely rallies, rebounds after three days of decline"
+        "source": "연합뉴스 경제"
       },
       {
         "title": "[속보] 코스닥, 7% 급등해 854 마감…코스피는 0.65%↑",
         "link": "https://www.yna.co.kr/view/AKR20260810107100008",
         "publishedAt": "2026-08-10T06:34:02.000Z",
-        "source": "연합뉴스 경제",
-        "titleEn": "Sudden Update: KOSDAQ Surges 7% to Close at 854, KOSPI Up 0.65%"
+        "source": "연합뉴스 경제"
       },
       {
         "title": "중고가 아파트 신고가 쏟아진 수도권…12억~15억 구간 비중 2배 급증",
         "link": "https://www.mk.co.kr/news/realestate/12122895",
         "publishedAt": "2026-08-10T06:29:25.000Z",
-        "source": "매일경제 부동산",
-        "titleEn": "중고가 아파트 신고가 쏟아진 수도권…12억~15억 구간 비중 2배 급증"
+        "source": "매일경제 부동산"
       },
       {
         "title": "[부산소식] 동아대, 13일 부동산 시장 양극화 주제 세미나",
         "link": "https://www.yna.co.kr/view/AKR20260810094000051",
         "publishedAt": "2026-08-10T05:35:11.000Z",
-        "source": "연합뉴스 경제",
-        "titleEn": "Busan News: Donga University Seminars on the Polarization of the Real Estate Market on June 13rd"
+        "source": "연합뉴스 경제"
       },
       {
         "title": "\"안전하다더니 전액 날렸다\"…해외 부동산 펀드 투자 주의보",
         "link": "https://www.yna.co.kr/view/AKR20260810063700002",
         "publishedAt": "2026-08-10T03:00:04.000Z",
-        "source": "연합뉴스 경제",
-        "titleEn": "Unsafe Claims: Full Investment Lost... Caution Advised for Overseas Real Estate Funds"
-      },
-      {
-        "title": "국고채 금리 일제히 상승…3년물 장중 연 3.773%",
-        "link": "https://www.yna.co.kr/view/AKR20260810072200008",
-        "publishedAt": "2026-08-10T02:42:10.000Z",
-        "source": "연합뉴스 경제",
-        "titleEn": "Treasury Bond Rates Rise Across Board - 3-Year Note Near 3.773%"
+        "source": "연합뉴스 경제"
       },
       {
         "title": "코스피, 1% 상승…코스닥은 한때 6.78% 오르며 매수 사이드카",
         "link": "https://www.yna.co.kr/view/AKR20260810064000008",
         "publishedAt": "2026-08-10T02:27:44.000Z",
-        "source": "연합뉴스 경제",
-        "titleEn": "KOSPI up by 1%, KOSDAQ surges to as high as 6.78% before pulling back to buy side"
+        "source": "연합뉴스 경제"
       },
       {
         "title": "15억~20억원 수도권 아파트, 7월 거래 절반 이상이 ‘신고가’",
         "link": "https://www.mk.co.kr/news/realestate/12122609",
         "publishedAt": "2026-08-10T01:55:08.000Z",
-        "source": "매일경제 부동산",
-        "titleEn": "15억~20억원 수도권 아파트, 7월 거래 절반 이상이 ‘신고가’"
+        "source": "매일경제 부동산"
       },
       {
         "title": "7월 서울 민간아파트 3.3㎡당 분양가 8000만원 돌파",
         "link": "https://www.mk.co.kr/news/realestate/12122608",
         "publishedAt": "2026-08-10T01:54:52.000Z",
-        "source": "매일경제 부동산",
-        "titleEn": "7월 서울 민간아파트 3.3㎡당 분양가 8000만원 돌파"
+        "source": "매일경제 부동산"
       },
       {
         "title": "7월 국고채 금리, 환율 상승·외국인 매도에 전반적 상승",
         "link": "https://www.yna.co.kr/view/AKR20260810056800008",
         "publishedAt": "2026-08-10T01:48:21.000Z",
-        "source": "연합뉴스 경제",
-        "titleEn": "July Treasury Rate Rises Due to Currency Upward Movement and Foreign Selling Across the Board"
+        "source": "연합뉴스 경제"
       },
       {
         "title": "“골프연습장 없으면 난리납니다”…신축 아파트 커뮤니티 살펴봤더니",
         "link": "https://www.mk.co.kr/news/realestate/12122584",
         "publishedAt": "2026-08-10T01:33:01.000Z",
-        "source": "매일경제 부동산",
-        "titleEn": "Without a golf practice facility, it's a frenzy... Visited an upscale apartment complex and found calm"
+        "source": "매일경제 부동산"
       },
       {
         "title": "서울 전용 59㎡ 민간아파트 분양가 15.6억원…전국의 3배",
         "link": "https://www.yna.co.kr/view/AKR20260810047900003",
         "publishedAt": "2026-08-10T01:13:05.000Z",
-        "source": "연합뉴스 경제",
-        "titleEn": "Seoul-Specific 59㎡ Private Apartment Sale Price at 1,560,000,000 Won... Three Times National Average"
+        "source": "연합뉴스 경제"
       },
       {
         "title": "신한카드-홈앤쇼핑, 지역 경제 활성화 맞손",
         "link": "https://www.yna.co.kr/view/AKR20260810044900002",
         "publishedAt": "2026-08-10T01:11:58.000Z",
-        "source": "연합뉴스 경제",
-        "titleEn": "Samsung Card and Home & Shop Hand in Hand to Boost Local Economy"
+        "source": "연합뉴스 경제"
       },
       {
         "title": "[게시판] 투교협, 초등학생·학부모 대상 여름 경제캠프 개최",
         "link": "https://www.yna.co.kr/view/AKR20260810043500008",
         "publishedAt": "2026-08-10T01:00:34.000Z",
-        "source": "연합뉴스 경제",
-        "titleEn": "[Board Posting] KETEA Hosts Summer Economic Camp for Elementary Students and Parents"
-      },
-      {
-        "title": "전매제한 기간에 8천만원 웃돈 주고 아파트 거래 2명 덜미",
-        "link": "https://www.yna.co.kr/view/AKR20260810026900060",
-        "publishedAt": "2026-08-10T01:00:01.000Z",
-        "source": "연합뉴스 경제",
-        "titleEn": "전매제한 기간에 8천만원 웃돈 주고 아파트 거래 2명 덜미"
-      },
-      {
-        "title": "[게시판] LS증권, 22일 증시 전망·투자 정보 공유 세미나",
-        "link": "https://www.yna.co.kr/view/AKR20260810043700008",
-        "publishedAt": "2026-08-10T00:58:33.000Z",
-        "source": "연합뉴스 경제",
-        "titleEn": "LS Securities to Host Seminar on Market Outlook and Investment Information for Investors on June 22nd"
-      },
-      {
-        "title": "현대차그룹, 아파트 주차난에 로봇 투입…\"최대 50% 더 댄다\"",
-        "link": "https://www.yna.co.kr/view/AKR20260810030000003",
-        "publishedAt": "2026-08-10T00:49:31.000Z",
-        "source": "연합뉴스 경제",
-        "titleEn": "Hyundai Group Introduces Robots to Address Apartment Parking Shortages – Can Handle Up to 50% More Cars"
+        "source": "연합뉴스 경제"
       }
     ]
   }

@@ -21,6 +21,52 @@ function matchesKeyword(title) {
   return KEYWORDS.some((k) => title.includes(k));
 }
 
+// 여러 언론사가 같은 통신사 기사를 살짝 다르게(예: "(종합)" 태그, 띄어쓰기
+// 차이) 재게시하는 경우가 많아서, 제목이 정확히 똑같을 때만 걸러내는
+// 것으로는 부족하다. [속보]/(종합) 같은 태그와 공백/문장부호를 지운 뒤
+// 문자 bigram 유사도로 비교해서 사실상 같은 기사를 하나만 남긴다.
+function normalizeForDedup(title) {
+  return title
+    .replace(/\[[^\]]*\]/g, "")
+    .replace(/\([^)]*\)/g, "")
+    .replace(/[^\p{L}\p{N}]/gu, "")
+    .toLowerCase();
+}
+
+function bigrams(str) {
+  const set = new Set();
+  for (let i = 0; i < str.length - 1; i++) set.add(str.slice(i, i + 2));
+  return set;
+}
+
+function diceSimilarity(a, b) {
+  if (a === b) return 1;
+  const setA = bigrams(a);
+  const setB = bigrams(b);
+  if (setA.size === 0 || setB.size === 0) return 0;
+  let overlap = 0;
+  for (const bg of setA) if (setB.has(bg)) overlap++;
+  return (2 * overlap) / (setA.size + setB.size);
+}
+
+const DEDUP_SIMILARITY_THRESHOLD = 0.75;
+
+function dedupeSimilarTitles(items) {
+  const kept = [];
+  const normalizedKept = [];
+  for (const item of items) {
+    const normalized = normalizeForDedup(item.title);
+    const isDuplicate = normalizedKept.some(
+      (existing) => diceSimilarity(normalized, existing) >= DEDUP_SIMILARITY_THRESHOLD
+    );
+    if (!isDuplicate) {
+      kept.push(item);
+      normalizedKept.push(normalized);
+    }
+  }
+  return kept;
+}
+
 function kstDateString(date) {
   return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(date);
 }
@@ -73,13 +119,7 @@ async function main() {
 
   items.sort((a, b) => new Date(b.publishedAt ?? 0) - new Date(a.publishedAt ?? 0));
 
-  const seen = new Set();
-  items = items.filter((item) => {
-    if (seen.has(item.title)) return false;
-    seen.add(item.title);
-    return true;
-  });
-
+  items = dedupeSimilarTitles(items);
   items = items.slice(0, MAX_ITEMS);
 
   if (items.length === 0) {
