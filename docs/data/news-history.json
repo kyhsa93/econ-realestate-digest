@@ -148,11 +148,18 @@
     "date": "2026-08-10",
     "items": [
       {
+        "title": "국고채 금리 일제히 상승…3년물 장중 연 3.773%",
+        "link": "https://www.yna.co.kr/view/AKR20260810072200008",
+        "publishedAt": "2026-08-10T02:42:10.000Z",
+        "source": "연합뉴스 경제",
+        "titleEn": "Government Bonds' Interest Rates Rise Simultaneously... Three-Year Bond Hits Record High at 3.773%"
+      },
+      {
         "title": "코스피, 1% 상승…코스닥은 한때 6.78% 오르며 매수 사이드카",
         "link": "https://www.yna.co.kr/view/AKR20260810064000008",
         "publishedAt": "2026-08-10T02:27:44.000Z",
         "source": "연합뉴스 경제",
-        "titleEn": "Kospi rises 1%, KOSDAQ briefly climbs 6.78% to buy-side sidecar"
+        "titleEn": "Kospi rises by 1%, KOSDAQ surges briefly to 6.78% rise, attracting buying side orders"
       },
       {
         "title": "15억~20억원 수도권 아파트, 7월 거래 절반 이상이 ‘신고가’",
@@ -173,14 +180,14 @@
         "link": "https://www.yna.co.kr/view/AKR20260810056800008",
         "publishedAt": "2026-08-10T01:48:21.000Z",
         "source": "연합뉴스 경제",
-        "titleEn": "July government bond rates rise due to appreciation of currency and foreign investor selling"
+        "titleEn": "July government bond interest rates rise due to appreciation of the won and foreign investor selling"
       },
       {
         "title": "“골프연습장 없으면 난리납니다”…신축 아파트 커뮤니티 살펴봤더니",
         "link": "https://www.mk.co.kr/news/realestate/12122584",
         "publishedAt": "2026-08-10T01:33:01.000Z",
         "source": "매일경제 부동산",
-        "titleEn": "Without a golf practice facility, it's like a thunderclap... I checked out the newly built apartment community."
+        "titleEn": "Practice Golf Course Lack = Chaos!\"... Visited New Community's Construction Apartments and Saw It."
       },
       {
         "title": "서울 전용 59㎡ 민간아파트 분양가 15.6억원…전국의 3배",
@@ -194,14 +201,14 @@
         "link": "https://www.yna.co.kr/view/AKR20260810044900002",
         "publishedAt": "2026-08-10T01:11:58.000Z",
         "source": "연합뉴스 경제",
-        "titleEn": "HSBC-HANSAKE, Local Economy Stimulation Pact"
+        "titleEn": "신한카드-홈앤쇼핑, 지역 경제 활성화 맞손"
       },
       {
         "title": "[게시판] 투교협, 초등학생·학부모 대상 여름 경제캠프 개최",
         "link": "https://www.yna.co.kr/view/AKR20260810043500008",
         "publishedAt": "2026-08-10T01:00:34.000Z",
         "source": "연합뉴스 경제",
-        "titleEn": "[게시판] 투교협, 초등학생·학부모 대상 여름 경제캠프 개최"
+        "titleEn": "Summer Economics Camp for Elementary and Middle School Students & Parents Hosted by TUIKO Association"
       },
       {
         "title": "전매제한 기간에 8천만원 웃돈 주고 아파트 거래 2명 덜미",
@@ -222,14 +229,14 @@
         "link": "https://www.yna.co.kr/view/AKR20260810030000003",
         "publishedAt": "2026-08-10T00:49:31.000Z",
         "source": "연합뉴스 경제",
-        "titleEn": "Hyundai Group deploys robots to solve apartment parking crisis... \"up to 50% more"
+        "titleEn": "Hyundai Group deploys robots to solve apartment parking problem... \"up to 50%"
       },
       {
         "title": "이지스운용 \"상업용 부동산 양극화 고착…대형·우량자산 선호\"",
         "link": "https://www.yna.co.kr/view/AKR20260810039300008",
         "publishedAt": "2026-08-10T00:48:39.000Z",
         "source": "연합뉴스 경제",
-        "titleEn": "ISG Management \"Commercial Real Estate Polarization Stagnation... Prefers Large and High-Quality Assets"
+        "titleEn": "Real estate polarization persists among commercial use... preference for large and excellent assets."
       },
       {
         "title": "증시 상승 출발…코스피 1%·코스닥 4%대 상승세(종합)",
@@ -250,28 +257,28 @@
         "link": "https://www.yna.co.kr/view/AKR20260810027900008",
         "publishedAt": "2026-08-10T00:06:44.000Z",
         "source": "연합뉴스 경제",
-        "titleEn": "Kospi gains momentum after start of upward trend... Kosdaq rises 2%"
+        "titleEn": "Kospi Starts Strong Rally... Kosdaq Gains 2%"
       },
       {
         "title": "“여름철 생활 수리도 정찰제로”…아파트아이 ‘아파트케어’ 주목",
         "link": "https://www.mk.co.kr/news/realestate/12122468",
         "publishedAt": "2026-08-10T00:02:09.000Z",
         "source": "매일경제 부동산",
-        "titleEn": "Summer Maintenance Is Now a Scout System... Attention Arirang Apartments' 'Apartment Care"
+        "titleEn": "Summer Maintenance Is Now Under Surveillance... Attention to Apartment Care"
       },
       {
         "title": "[머니톡스] ② 공급·금융·세제의 삼박자…한국 부동산 '혼합 패키지' 기대",
         "link": "https://www.yna.co.kr/view/AKR20260806051500546",
         "publishedAt": "2026-08-10T00:01:33.000Z",
         "source": "연합뉴스 경제",
-        "titleEn": "Hybrid Package for Korean Real Estate: Supply, Finance, and Taxation Strategy"
+        "titleEn": "Expect mixed package of supply, finance, and tax policies for Korean real estate"
       },
       {
         "title": "“은행 뺑뺑이 돌아도 잔금 마련 막막”…대출 규제에 아파트 입주 예정자 ‘비상’",
         "link": "https://www.mk.co.kr/news/realestate/12122446",
         "publishedAt": "2026-08-09T23:38:06.000Z",
         "source": "매일경제 부동산",
-        "titleEn": "Bank run continues despite loan regulations for apartment buyers' emergency"
+        "titleEn": "Bank Run Despite Loans; Home Buyers' Mortgage Secured Impossible Due to Loan Regulations"
       },
       {
         "title": "30억 넘는 집은 '주춤'…'이 가격대' 아파트는 과반이 신고가",
@@ -279,13 +286,6 @@
         "publishedAt": "2026-08-09T23:25:40.000Z",
         "source": "한국경제 부동산",
         "titleEn": "30억 넘는 집은 '주춤'…'이 가격대' 아파트는 과반이 신고가"
-      },
-      {
-        "title": "\"美 장기금리 더 오르면 안 된다\"…베선트의 '금리 방어전'",
-        "link": "https://www.hankyung.com/article/2026081032617",
-        "publishedAt": "2026-08-09T23:21:38.000Z",
-        "source": "한국경제 경제",
-        "titleEn": "Don't Let US Treasury's 'Interest Rate Defense War' End Early"
       }
     ]
   }

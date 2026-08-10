@@ -8,8 +8,8 @@
     "date": "2026-08-10",
     "model": "qwen2.5:1.5b",
     "summary": {
-      "ko": "- 증시·환율 관련 뉴스 4건\n- 부동산 관련 뉴스 12건\n- 금리·예금·투자상품 관련 뉴스 2건\n- 기타 경제 소식: 신한카드-홈앤쇼핑, 지역 경제 활성화 맞손, [게시판] 투교협, 초등학생·학부모 대상 여름 경제캠프 개최",
-      "en": "- 4 news items about Stocks & FX\n- 12 news items about Real Estate\n- 2 news items about Rates, Deposits & Investment Products\n- Other Economic News: 신한카드-홈앤쇼핑, 지역 경제 활성화 맞손, [게시판] 투교협, 초등학생·학부모 대상 여름 경제캠프 개최"
+      "ko": "- 금리·예금·투자상품 관련 뉴스 2건\n- 증시·환율 관련 뉴스 4건\n- 서울 아파트 분양가 상승률이 수도권 전체 거래량의 절반을 초과했으며, 신축 아파트 커뮤니티에서는 골프연습장 부족으로 인해 난리난 것으로 나타났습니다.\n- 기타 경제 소식: 신한카드-홈앤쇼핑, 지역 경제 활성화 맞손, [게시판] 투교협, 초등학생·학부모 대상 여름 경제캠프 개최",
+      "en": "- 2 news items about Rates, Deposits & Investment Products\n- 4 news items about Stocks & FX\n- 12 news items about Real Estate\n- Other Economic News: 신한카드-홈앤쇼핑, 지역 경제 활성화 맞손, [게시판] 투교협, 초등학생·학부모 대상 여름 경제캠프 개최"
     }
   }
 ]
