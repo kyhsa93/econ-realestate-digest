@@ -1,32 +1,102 @@
 {
-  "updatedAt": "2026-08-10T02:52:29.332Z",
+  "updatedAt": "2026-08-10T03:08:19.347Z",
   "period": "202607~202608",
   "overall": {
-    "avgPricePerM2": 19263812.957553487,
-    "avgPricePerPyeong10k": 6368,
-    "transactionCount": 1006
+    "avgPricePerM2": 14872769.384013256,
+    "avgPricePerPyeong10k": 4917,
+    "transactionCount": 4710
   },
   "districts": [
     {
-      "code": "11680",
-      "name": "강남구",
-      "avgPricePerM2": 35664565.655662514,
-      "avgPricePerPyeong10k": 11790,
-      "transactionCount": 127
+      "code": "11110",
+      "name": "종로구",
+      "avgPricePerM2": 14151957.901914952,
+      "avgPricePerPyeong10k": 4678,
+      "transactionCount": 28
     },
     {
-      "code": "11650",
-      "name": "서초구",
-      "avgPricePerM2": 29564596.775175758,
-      "avgPricePerPyeong10k": 9773,
-      "transactionCount": 81
+      "code": "11140",
+      "name": "중구",
+      "avgPricePerM2": 16285247.036264189,
+      "avgPricePerPyeong10k": 5384,
+      "transactionCount": 64
     },
     {
-      "code": "11710",
-      "name": "송파구",
-      "avgPricePerM2": 26396581.740495164,
-      "avgPricePerPyeong10k": 8726,
-      "transactionCount": 192
+      "code": "11170",
+      "name": "용산구",
+      "avgPricePerM2": 24853323.320223596,
+      "avgPricePerPyeong10k": 8216,
+      "transactionCount": 49
+    },
+    {
+      "code": "11200",
+      "name": "성동구",
+      "avgPricePerM2": 23871997.611542493,
+      "avgPricePerPyeong10k": 7892,
+      "transactionCount": 63
+    },
+    {
+      "code": "11215",
+      "name": "광진구",
+      "avgPricePerM2": 19659211.143959846,
+      "avgPricePerPyeong10k": 6499,
+      "transactionCount": 68
+    },
+    {
+      "code": "11230",
+      "name": "동대문구",
+      "avgPricePerM2": 14661301.600901438,
+      "avgPricePerPyeong10k": 4847,
+      "transactionCount": 198
+    },
+    {
+      "code": "11260",
+      "name": "중랑구",
+      "avgPricePerM2": 11408393.925736452,
+      "avgPricePerPyeong10k": 3771,
+      "transactionCount": 496
+    },
+    {
+      "code": "11290",
+      "name": "성북구",
+      "avgPricePerM2": 12828190.276360493,
+      "avgPricePerPyeong10k": 4241,
+      "transactionCount": 277
+    },
+    {
+      "code": "11305",
+      "name": "강북구",
+      "avgPricePerM2": 9563673.320623035,
+      "avgPricePerPyeong10k": 3162,
+      "transactionCount": 115
+    },
+    {
+      "code": "11320",
+      "name": "도봉구",
+      "avgPricePerM2": 8118653.333981357,
+      "avgPricePerPyeong10k": 2684,
+      "transactionCount": 237
+    },
+    {
+      "code": "11350",
+      "name": "노원구",
+      "avgPricePerM2": 10943735.700525055,
+      "avgPricePerPyeong10k": 3618,
+      "transactionCount": 515
+    },
+    {
+      "code": "11380",
+      "name": "은평구",
+      "avgPricePerM2": 11571016.427874971,
+      "avgPricePerPyeong10k": 3825,
+      "transactionCount": 261
+    },
+    {
+      "code": "11410",
+      "name": "서대문구",
+      "avgPricePerM2": 14289884.91471254,
+      "avgPricePerPyeong10k": 4724,
+      "transactionCount": 197
     },
     {
       "code": "11440",
@@ -36,11 +106,81 @@
       "transactionCount": 91
     },
     {
-      "code": "11350",
-      "name": "노원구",
-      "avgPricePerM2": 10943735.700525055,
-      "avgPricePerPyeong10k": 3618,
-      "transactionCount": 515
+      "code": "11470",
+      "name": "양천구",
+      "avgPricePerM2": 16791916.994538445,
+      "avgPricePerPyeong10k": 5551,
+      "transactionCount": 215
+    },
+    {
+      "code": "11500",
+      "name": "강서구",
+      "avgPricePerM2": 13575405.852319034,
+      "avgPricePerPyeong10k": 4488,
+      "transactionCount": 303
+    },
+    {
+      "code": "11530",
+      "name": "구로구",
+      "avgPricePerM2": 11033316.212093968,
+      "avgPricePerPyeong10k": 3647,
+      "transactionCount": 314
+    },
+    {
+      "code": "11545",
+      "name": "금천구",
+      "avgPricePerM2": 9751652.905884774,
+      "avgPricePerPyeong10k": 3224,
+      "transactionCount": 102
+    },
+    {
+      "code": "11560",
+      "name": "영등포구",
+      "avgPricePerM2": 18288694.692013346,
+      "avgPricePerPyeong10k": 6046,
+      "transactionCount": 198
+    },
+    {
+      "code": "11590",
+      "name": "동작구",
+      "avgPricePerM2": 18373652.41300102,
+      "avgPricePerPyeong10k": 6074,
+      "transactionCount": 192
+    },
+    {
+      "code": "11620",
+      "name": "관악구",
+      "avgPricePerM2": 12428128.32110607,
+      "avgPricePerPyeong10k": 4108,
+      "transactionCount": 180
+    },
+    {
+      "code": "11650",
+      "name": "서초구",
+      "avgPricePerM2": 29564596.775175758,
+      "avgPricePerPyeong10k": 9773,
+      "transactionCount": 81
+    },
+    {
+      "code": "11680",
+      "name": "강남구",
+      "avgPricePerM2": 35664565.655662514,
+      "avgPricePerPyeong10k": 11790,
+      "transactionCount": 127
+    },
+    {
+      "code": "11710",
+      "name": "송파구",
+      "avgPricePerM2": 26396581.740495164,
+      "avgPricePerPyeong10k": 8726,
+      "transactionCount": 192
+    },
+    {
+      "code": "11740",
+      "name": "강동구",
+      "avgPricePerM2": 17901773.19072772,
+      "avgPricePerPyeong10k": 5918,
+      "transactionCount": 147
     }
   ]
 }

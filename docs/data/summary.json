@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-08-10T02:53:16.116Z",
+  "updatedAt": "2026-08-10T03:09:15.754Z",
   "model": "qwen2.5:1.5b",
   "summary": {
-    "ko": "- 금리·예금·투자상품 관련 뉴스 2건\n- 증시·환율 관련 뉴스 4건\n- 부동산 관련 뉴스 12건\n- 기타 경제 소식: 신한카드-홈앤쇼핑, 지역 경제 활성화 맞손, [게시판] 투교협, 초등학생·학부모 대상 여름 경제캠프 개최",
-    "en": "- 2 news items about Rates, Deposits & Investment Products\n- 4 news items about Stocks & FX\n- 12 news items about Real Estate\n- Other Economic News: 신한카드-홈앤쇼핑, 지역 경제 활성화 맞손, [게시판] 투교협, 초등학생·학부모 대상 여름 경제캠프 개최"
+    "ko": "- 금리·예금·투자상품 관련 뉴스 3건\n- 증시·환율 관련 뉴스 4건\n- 부동산 관련 뉴스 11건\n- 기타 경제 소식: 신한카드-홈앤쇼핑, 지역 경제 활성화 맞손, [게시판] 투교협, 초등학생·학부모 대상 여름 경제캠프 개최",
+    "en": "- The interest rates on government bonds have risen across the board due to a simultaneous increase in foreign exchange rates and selling by foreign investors, leading to an overall rise in bond yields.\n- 4 news items about Stocks & FX\n- 11 news items about Real Estate\n- Other Economic News: 신한카드-홈앤쇼핑, 지역 경제 활성화 맞손, [게시판] 투교협, 초등학생·학부모 대상 여름 경제캠프 개최"
   }
 }
