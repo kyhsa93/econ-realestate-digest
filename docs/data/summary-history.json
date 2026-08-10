@@ -8,8 +8,8 @@
     "date": "2026-08-10",
     "model": "qwen2.5:1.5b",
     "summary": {
-      "ko": "- 부동산 관련 뉴스 13건\n- 코스피 지수 상승과 화폐 변동성 증가로 인해 한국 경제 시장에 변수가 생겼다.\n- 코스피 상승세가 지속되며, 증권사 발행어음과 IMA에 관심이 높아짐으로써 중금리로 활로 개척하고 있는 금융기관들이 급증하는 모습이다.\n- 기타 경제 소식: 한국경제인협회, 대국민 창업 프로젝트…12주간 100개팀 육성",
-      "en": "- 13 news items about Real Estate\n- Apple's planned use of Chinese semiconductor testing affects the South Korean stock market and highlights extreme currency volatility following a financial crisis.\n- 4 news items about Rates, Deposits & Investment Products\n- Other Economic News: 한국경제인협회, 대국민 창업 프로젝트…12주간 100개팀 육성"
+      "ko": "- 증시·환율 관련 뉴스 3건\n- 부동산 관련 뉴스 12건\n- 금리·예금·투자상품 관련 뉴스 5건",
+      "en": "- 3 news items about Stocks & FX\n- 12 news items about Real Estate\n- 5 news items about Rates, Deposits & Investment Products"
     }
   }
 ]

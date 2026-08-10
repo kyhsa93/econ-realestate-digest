@@ -211,6 +211,19 @@ async function main() {
     return;
   }
 
+  const now = new Date();
+  const today = kstDateString(now);
+  // news.json의 date(KST)는 fetch-news.mjs에서 매겨진다. RSS가 그날 전부
+  // 실패하면 fetch-news.mjs는 news.json을 갱신하지 않고 조용히 넘어가므로,
+  // 디스크에 남아있는 news.json이 실제로 "오늘" 것인지 확인하지 않으면 어제
+  // 뉴스로 오늘 날짜 요약을 만들어버릴 수 있다. date 필드가 없는 과거
+  // news.json(이 검증을 추가하기 전에 저장된 것)은 updatedAt으로 대체 판단.
+  const newsDate = news.date ?? kstDateString(new Date(news.updatedAt ?? now));
+  if (newsDate !== today) {
+    console.error(`[summarize-digest] news.json이 오늘(${today}) 것이 아님(${newsDate}), 요약 생략`);
+    return;
+  }
+
   const buckets = categorize(news.items);
   const koLines = [];
   const enLines = [];
@@ -224,7 +237,6 @@ async function main() {
     return;
   }
 
-  const now = new Date();
   const summary = { ko: koLines.join("\n"), en: enLines.join("\n") };
 
   await mkdir(dataDir, { recursive: true });

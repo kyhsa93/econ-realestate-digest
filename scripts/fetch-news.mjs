@@ -91,7 +91,10 @@ async function main() {
   await mkdir(dataDir, { recursive: true });
   await writeFile(
     outFile,
-    JSON.stringify({ updatedAt: now.toISOString(), items }, null, 2)
+    // date(KST)는 summarize-digest.mjs가 "오늘 뉴스로 오늘 요약을 만드는지"
+    // 검증하는 데 쓴다 (RSS 전체 실패로 news.json이 갱신 안 된 날, 어제
+    // 뉴스로 오늘 날짜 요약을 만들어버리는 걸 막기 위함).
+    JSON.stringify({ updatedAt: now.toISOString(), date: kstDateString(now), items }, null, 2)
   );
   await appendHistory(now, items);
 
