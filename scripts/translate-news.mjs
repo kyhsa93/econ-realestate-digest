@@ -8,11 +8,57 @@ const historyFile = path.join(dataDir, "news-history.json");
 const OLLAMA_URL = process.env.OLLAMA_URL ?? "http://127.0.0.1:11434";
 const MODEL = process.env.OLLAMA_MODEL ?? "qwen2.5:1.5b";
 
+// 한국어는 만/억/조 단위로 4자리씩 묶어 읽어서(영어의 천 단위 그룹과 다름),
+// 작은 모델이 "8천만원"을 "$8 million"으로, "15억원"을 "15 million won"으로
+// 자릿수/통화를 통째로 잘못 바꾸는 사례가 실제로 나왔다. 모델에게 단위 환산을
+// 맡기지 않고, 코드에서 먼저 아라비아 숫자로 바꿔준 뒤 번역을 시킨다.
+const MAJOR_UNITS = { 조: 1_000_000_000_000, 억: 100_000_000, 만: 10_000 };
+const MINOR_UNITS = { 천: 1_000, 백: 100, 십: 10 };
+
+function parseCoefficient(str) {
+  let value = 0;
+  let rest = str;
+  for (const unit of Object.keys(MINOR_UNITS)) {
+    const idx = rest.indexOf(unit);
+    if (idx !== -1) {
+      const numPart = rest.slice(0, idx);
+      value += (numPart === "" ? 1 : Number(numPart)) * MINOR_UNITS[unit];
+      rest = rest.slice(idx + unit.length);
+    }
+  }
+  if (rest !== "") value += Number(rest);
+  return value;
+}
+
+function normalizeKoreanAmounts(text) {
+  const numTokenRe = "\\d+(?:천|백|십)?";
+  // 복합 표현 먼저 처리: "1억5천만" 형태
+  let result = text.replace(
+    new RegExp(`(${numTokenRe})(억|조)\\s*(${numTokenRe})(만)`, "g"),
+    (_match, c1, u1, c2, u2) => (parseCoefficient(c1) * MAJOR_UNITS[u1] + parseCoefficient(c2) * MAJOR_UNITS[u2]).toLocaleString("en-US")
+  );
+  // 단일 단위 표현: "8천만", "15억", "20조"
+  result = result.replace(
+    new RegExp(`(${numTokenRe})(조|억|만)`, "g"),
+    (_match, c, u) => (parseCoefficient(c) * MAJOR_UNITS[u]).toLocaleString("en-US")
+  );
+  return result;
+}
+
+// normalizeKoreanAmounts가 실제로 변환한 큰 숫자들 (자릿수 검증용)
+function extractNormalizedNumbers(original, normalized) {
+  if (original === normalized) return [];
+  const numbers = normalized.match(/\d{1,3}(?:,\d{3})+/g) ?? [];
+  return numbers.map((n) => n.replace(/,/g, ""));
+}
+
 async function translateTitle(title) {
+  const normalizedTitle = normalizeKoreanAmounts(title);
   const prompt = `Translate the following Korean news headline into natural, concise English.
+The headline may already contain plain Arabic numerals (e.g. "80,000,000") - if so, keep those numbers exactly as they are, do not round or rewrite them, just translate the surrounding Korean words (e.g. "원" -> "won").
 Output ONLY the translated headline. No quotes, no explanation, no extra commentary, no notes.
 
-Korean headline: ${title}
+Korean headline: ${normalizedTitle}
 
 English headline:`;
 
@@ -38,11 +84,15 @@ English headline:`;
 }
 
 // 번역이 아니라 원문을 그대로 남기거나(한글이 그대로 섞여 있음), 모델이
-// 딴소리를 늘어놓은 경우(비정상적으로 길어짐)를 걸러내 원문 한국어로 폴백한다.
-function isBadTranslation(text, original) {
+// 딴소리를 늘어놓은 경우(비정상적으로 길어짐), 혹은 코드로 미리 정규화해 넘긴
+// 큰 숫자를 모델이 누락/변형한 경우(단위 환산 오류의 잔여 위험)를 걸러내
+// 원문 한국어로 폴백한다.
+function isBadTranslation(text, original, requiredNumbers) {
   if (!text) return true;
   if (/[가-힣]/.test(text)) return true; // 한글이 그대로 남아있으면 번역 실패로 간주
   if (text.length > Math.max(120, original.length * 3)) return true; // 비정상적으로 길면 딴소리
+  const textDigits = text.replace(/,/g, "");
+  if (requiredNumbers.some((n) => !textDigits.includes(n))) return true;
   return false;
 }
 
@@ -51,9 +101,10 @@ async function translateItems(items) {
     // titleEn이 원문과 똑같으면 "실패해서 원문으로 폴백해둔 것"이므로
     // 번역된 것으로 치지 않고 다음 실행에서 다시 시도한다.
     if (item.titleEn && item.titleEn !== item.title) continue;
+    const requiredNumbers = extractNormalizedNumbers(item.title, normalizeKoreanAmounts(item.title));
     try {
       const translated = await translateTitle(item.title);
-      if (isBadTranslation(translated, item.title)) {
+      if (isBadTranslation(translated, item.title, requiredNumbers)) {
         console.error(`[translate-news] 번역 실패로 원문 유지: ${item.title}`);
         item.titleEn = item.title;
       } else {
