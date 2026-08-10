@@ -35,11 +35,17 @@ function kstYearMonth(date, monthsAgo = 0) {
 }
 
 async function fetchDistrictMonth(districtCode, yearMonth) {
-  const url = new URL(API_URL);
-  url.searchParams.set("serviceKey", SERVICE_KEY);
-  url.searchParams.set("LAWD_CD", districtCode);
-  url.searchParams.set("DEAL_YMD", yearMonth);
-  url.searchParams.set("numOfRows", "9999");
+  // serviceKey는 URLSearchParams로 넣으면 안 됨: 공공데이터포털에서 발급되는
+  // "Encoding" 인증키는 이미 퍼센트 인코딩된 문자열이라, searchParams.set()이
+  // 한 번 더 인코딩해버리면(%가 %25로 바뀌는 식) 키가 깨져서 403이 난다.
+  // 그래서 serviceKey만 raw 그대로 쿼리스트링에 붙이고, 나머지 파라미터만
+  // URLSearchParams로 인코딩한다.
+  const otherParams = new URLSearchParams({
+    LAWD_CD: districtCode,
+    DEAL_YMD: yearMonth,
+    numOfRows: "9999",
+  });
+  const url = `${API_URL}?serviceKey=${SERVICE_KEY}&${otherParams.toString()}`;
 
   const res = await fetch(url);
   if (!res.ok) throw new Error(`http ${res.status}`);
