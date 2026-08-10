@@ -521,9 +521,31 @@
     return ` <span class="change ${dir}">${arrow}${formatPyeongPriceDelta(value10k)}${percentText} · ${t("realestateChangeVs")(baselineDate)}</span>`;
   }
 
+  // 전월세 기능 추가 전에는 sale/jeonse/wolse로 감싸지 않고 매매 값을
+  // overall/district 객체에 바로 두는 평평한 포맷이었다. 그 시절 마지막으로
+  // 성공한 데이터가 배포된 상태에서 이 화면 코드만 먼저 갱신되면(오늘처럼
+  // API 호출 한도로 새 포맷 데이터가 아직 안 만들어진 경우) 카드가 통째로
+  // 비어 보이므로, 옛 포맷도 sale로 감싸서 인식하게 한다.
+  function normalizeRealestateEntry(entry) {
+    if (!entry) return entry;
+    if (entry.sale || entry.jeonse || entry.wolse) return entry; // 이미 새 포맷
+    if (typeof entry.avgPricePerPyeong10k !== "number") return entry;
+    return {
+      ...entry,
+      sale: {
+        avgPricePerM2: entry.avgPricePerM2,
+        avgPricePerPyeong10k: entry.avgPricePerPyeong10k,
+        transactionCount: entry.transactionCount,
+        change: entry.change,
+        baselineDate: entry.baselineDate,
+      },
+    };
+  }
+
   // 매매/전세는 "평당 가격" 성격이라 증감(change)까지 표시하고, 월세는
   // 보증금+월세 두 축이라 증감 추적 없이 현재값만 보여준다.
-  function realestateRowsHtml(entry) {
+  function realestateRowsHtml(rawEntry) {
+    const entry = normalizeRealestateEntry(rawEntry);
     const rows = [];
     if (entry.sale) {
       rows.push(`
@@ -552,8 +574,9 @@
     return rows.join("");
   }
 
-  function realestateSortValue(entry) {
-    return entry.sale?.avgPricePerPyeong10k ?? entry.jeonse?.avgDepositPerPyeong10k ?? 0;
+  function realestateSortValue(rawEntry) {
+    const entry = normalizeRealestateEntry(rawEntry);
+    return entry.sale?.avgPricePerPyeong10k ?? entry.jeonse?.avgDepositPerPyeong10k ?? entry.avgPricePerPyeong10k ?? 0;
   }
 
   function renderRealestate(realestate) {
