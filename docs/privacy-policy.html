@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#253e81">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<meta name="google-adsense-account" content="ca-pub-1195159445218373">
+<title>개인정보처리방침</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #666;
+    --border: #e2e2e5;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1115;
+      --fg: #eaeaea;
+      --muted: #9a9a9a;
+      --border: #2a2d35;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.6;
+  }
+  main {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 24px 16px 64px;
+  }
+  header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  h1 { font-size: 1.3rem; margin: 0; }
+  h2 { font-size: 1rem; margin: 28px 0 8px; }
+  p { font-size: 0.92rem; margin: 0 0 8px; }
+  a { color: inherit; }
+  .back-link {
+    display: inline-block;
+    margin-bottom: 4px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    text-decoration: none;
+  }
+  .back-link:hover { text-decoration: underline; }
+  .lang-toggle {
+    flex-shrink: 0;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--fg);
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div>
+      <a class="back-link" id="back-link" href="./index.html">← 홈으로</a>
+      <h1 id="page-title">개인정보처리방침</h1>
+    </div>
+    <button class="lang-toggle" type="button" id="lang-toggle" aria-label="Switch language">
+      <span aria-hidden="true">🌐</span>
+    </button>
+  </header>
+
+  <section id="content"></section>
+</main>
+
+<script>
+  const T = {
+    ko: {
+      title: "개인정보처리방침",
+      backLink: "← 홈으로",
+      intro:
+        "이 사이트는 계정이나 폼을 통해 개인정보를 수집하지 않는 자동화된 정적 사이트입니다. 브라우저 로컬 스토리지에는 언어 설정과 아래에서 설명하는 광고/쿠키 동의 여부, 이 두 가지만 저장됩니다.",
+      analyticsHeading: "분석 (Google Analytics)",
+      analyticsBody:
+        "방문 통계를 위해 Google Analytics(GA4)를 사용합니다. Google은 이를 위해 쿠키를 사용할 수 있습니다.",
+      adsHeading: "광고 (Google AdSense)",
+      adsBody1:
+        "이 사이트는 Google 애드센스로 광고를 표시할 수 있습니다. Google과 파트너사는 이 사이트나 다른 사이트 방문 기록을 바탕으로 쿠키 및 유사 기술을 사용해 광고를 제공할 수 있습니다. 맞춤 광고는",
+      adSettingsLink: "Google 광고 설정",
+      adsBody2: "에서 거부할 수 있습니다.",
+      cookiesHeading: "쿠키 동의",
+      cookiesBody:
+        "사이트 하단 배너에서 동의를 거부하면 이번 방문 동안 Google Analytics와 애드센스 스크립트 자체가 로드되지 않습니다. 동의 여부는 브라우저 로컬 스토리지에 저장되며, kyhsa93.github.io 도메인의 다른 페이지(블로그 포함)와 저장 위치를 공유합니다 — 같은 Google 계정에 대한 동의이기 때문입니다. 브라우저 데이터를 지우면 초기화됩니다.",
+      thirdPartiesHeading: "제3자 서비스",
+      thirdPartiesBody:
+        "이 사이트는 GitHub Pages에서 호스팅되며, 뉴스·시장 지표·부동산 실거래가 표시를 위해 각 언론사 RSS, 한국은행, 공공데이터포털, exchangerate.fun 등 공개 데이터를 조회합니다 — 방문자의 개인정보를 이 목적으로 수집하거나 제3자에 전달하지 않습니다. 광고/분석 관련 정책은",
+      googlePolicyLink: "Google의 광고 정책",
+      thirdPartiesBody2: "을 따릅니다.",
+      contactHeading: "문의",
+      contactBody: "이 방침에 대한 문의는",
+      contactLinkLabel: "github.com/kyhsa93",
+    },
+    en: {
+      title: "Privacy Policy",
+      backLink: "← Home",
+      intro:
+        "This site is an automated static site that collects no personal information through accounts or forms. Your browser's local storage holds only two things: your language preference and your response to the ad/cookie consent banner described below.",
+      analyticsHeading: "Analytics (Google Analytics)",
+      analyticsBody:
+        "This site uses Google Analytics (GA4) to measure visits. Google may use cookies for this purpose.",
+      adsHeading: "Advertising (Google AdSense)",
+      adsBody1:
+        "This site may show ads served by Google AdSense. Google and its partners may use cookies and similar technologies to serve ads based on your prior visits to this or other sites. You can opt out of personalized advertising via",
+      adSettingsLink: "Google's Ad Settings",
+      adsBody2: ".",
+      cookiesHeading: "Cookie Consent",
+      cookiesBody:
+        "Declining the banner shown on this site prevents the Google Analytics and AdSense scripts from loading at all for the rest of your visit. Your choice is stored in your browser's local storage, which is shared with other pages on the kyhsa93.github.io domain (including the blog) since it's consent for the same Google account. Clearing your browser data resets it.",
+      thirdPartiesHeading: "Third Parties",
+      thirdPartiesBody:
+        "This site is hosted on GitHub Pages and fetches public data (news RSS feeds, the Bank of Korea, Korea's public data portal, exchangerate.fun) to display news, market indicators, and real estate prices — no visitor personal data is collected or shared for this purpose. Advertising/analytics are subject to",
+      googlePolicyLink: "Google's advertising policy",
+      thirdPartiesBody2: ".",
+      contactHeading: "Contact",
+      contactBody: "Questions about this policy can be raised via",
+      contactLinkLabel: "github.com/kyhsa93",
+    },
+  };
+
+  let locale = "en";
+  function t(key) {
+    return T[locale][key];
+  }
+
+  function getInitialLocale() {
+    const saved = window.localStorage.getItem("lang");
+    return saved === "en" || saved === "ko" ? saved : "en";
+  }
+
+  function render() {
+    document.getElementById("content").innerHTML = `
+      <p>${t("intro")}</p>
+
+      <h2>${t("analyticsHeading")}</h2>
+      <p>${t("analyticsBody")}</p>
+
+      <h2>${t("adsHeading")}</h2>
+      <p>${t("adsBody1")} <a href="https://adssettings.google.com/authenticated" target="_blank" rel="noreferrer">${t("adSettingsLink")}</a>${t("adsBody2")}</p>
+
+      <h2>${t("cookiesHeading")}</h2>
+      <p>${t("cookiesBody")}</p>
+
+      <h2>${t("thirdPartiesHeading")}</h2>
+      <p>${t("thirdPartiesBody")} <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noreferrer">${t("googlePolicyLink")}</a>${t("thirdPartiesBody2")}</p>
+
+      <h2>${t("contactHeading")}</h2>
+      <p>${t("contactBody")} <a href="https://github.com/kyhsa93" target="_blank" rel="noreferrer">${t("contactLinkLabel")}</a>.</p>
+    `;
+  }
+
+  function applyLocale(next) {
+    locale = next;
+    window.localStorage.setItem("lang", locale);
+    document.documentElement.setAttribute("lang", locale);
+    document.title = t("title");
+    document.getElementById("page-title").textContent = t("title");
+    document.getElementById("back-link").textContent = t("backLink");
+    render();
+  }
+
+  document.getElementById("lang-toggle").addEventListener("click", () => {
+    applyLocale(locale === "en" ? "ko" : "en");
+  });
+
+  applyLocale(getInitialLocale());
+
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("./sw.js").catch(() => {});
+    });
+  }
+</script>
+</body>
+</html>

@@ -23,6 +23,7 @@
   `?date=YYYY-MM-DD` 쿼리를 붙이면 별도 아카이브 페이지 없이 이 페이지 자체가 각 `*-history.json`에서
   그 날짜 기록을 찾아 오늘과 똑같은 섹션 구성(요약/시장지표/부동산/뉴스)으로 다시 렌더링함(실시간 환율만
   예외 — 그 날짜의 배치 값을 그대로 보여줌). 페이지 하단 "지난 기록" 목록에서 날짜별로 이동 가능
+- `docs/privacy-policy.html` — GA/애드센스 관련 개인정보처리방침 (한/영)
 - `.github/workflows/daily-update.yml` — 매일 08:00 KST(23:00 UTC)에 뉴스/시장/부동산 지표 수집 → Ollama 설치 후 AI 요약·번역 생성 → 변경사항 커밋/푸시
 
 ## 로컬 실행
@@ -45,6 +46,25 @@ GitHub Actions(`daily-update.yml`)가 매일 자동 실행. 수동 실행은 Act
 "Daily digest update" 워크플로를 `workflow_dispatch`로 트리거.
 
 (참고: 이전에 Claude 클라우드 루틴으로 자동화를 시도했으나 GitHub Actions로 전환하며 비활성화함)
+
+## GA / 애드센스
+
+`kyhsa93.github.io` 블로그와 동일한 GA4 속성(`G-Z1LH7S1ZE5`)·애드센스 게시자(`ca-pub-1195159445218373`)를
+그대로 재사용함. 두 값 다 방문자 브라우저에 그대로 노출되는 공개 값이라 시크릿으로 다루지 않고
+`docs/index.html`에 직접 하드코딩함.
+
+쿠키 동의 배너(하단 고정)에서 동의해야만 GA/애드센스 스크립트가 로드됨. 동의 여부는
+`localStorage`(키: `blog_ad_consent`)에 저장하는데, 이 키는 블로그와 값을 맞춰서 origin이 같은
+`kyhsa93.github.io` 도메인의 다른 페이지(블로그 포함)와 동의 상태를 공유함 — 같은 Google 계정에
+대한 동의라 의미상 그게 맞고, 방문자가 두 사이트에서 배너를 두 번 볼 필요가 없어짐.
+
+`ads.txt`는 도메인 루트(`kyhsa93.github.io/ads.txt`)에서 서빙돼야 하는데, 이 저장소는 프로젝트
+페이지(`kyhsa93.github.io/econ-realestate-digest/`)라 이 저장소만으로는 둘 수 없음 — 이미 블로그
+저장소(`kyhsa93.github.io`)의 `public/ads.txt`가 같은 게시자 ID로 도메인 루트를 커버하고 있어서
+별도 조치가 필요 없었음(확인 완료).
+
+애드센스 자동 광고(Auto ads) 설정만 돼 있고 이 페이지에 명시적 광고 슬롯(`<ins>`)은 아직 없음 —
+광고 배치는 별도 요청 시 진행.
 
 ## 한국 부동산 가격 추이
 
