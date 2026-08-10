@@ -8,8 +8,8 @@
     "date": "2026-08-10",
     "model": "qwen2.5:1.5b",
     "summary": {
-      "ko": "- 기타 경제 소식: [게시판] 투교협, 초등학생·학부모 대상 여름 경제캠프 개최\n- 부동산 관련 뉴스 11건\n- 증시·환율 관련 뉴스 4건\n- 미국 장기금리 상승이 베선트의 금리 방어 전략에 악영향을 미치면 안 된다고 경제학자들이 우려하고 있다.",
-      "en": "- Other Economic News: [게시판] 투교협, 초등학생·학부모 대상 여름 경제캠프 개최\n- 11 news items about Real Estate\n- 4 news items about Stocks & FX\n- 4 news items about Rates, Deposits & Investment Products"
+      "ko": "- 부동산 관련 뉴스 11건\n- 기타 경제 소식: 신한카드-홈앤쇼핑, 지역 경제 활성화 맞손, [게시판] 투교협, 초등학생·학부모 대상 여름 경제캠프 개최\n- 증시·환율 관련 뉴스 4건\n- 미국 장기금리 상승이 베선트의 금리 방어 전략에 악영향을 미치면 안 된다고 경제학자 빌레반트는 제언했다.",
+      "en": "- 11 news items about Real Estate\n- Other Economic News: 신한카드-홈앤쇼핑, 지역 경제 활성화 맞손, [게시판] 투교협, 초등학생·학부모 대상 여름 경제캠프 개최\n- 4 news items about Stocks & FX\n- The Bank of Korea has announced that it will use its US Treasury holdings as collateral for short-term deposits to prevent the increase in long-term interest rates, which could negatively impact the country's economic growth and stability."
     }
   }
 ]
