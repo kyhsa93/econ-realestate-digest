@@ -324,6 +324,20 @@ async function main() {
   }
 
   const now = new Date();
+
+  // 워크플로가 수동으로 여러 번 트리거돼도(오늘 테스트하면서 실제로 겪음)
+  // 하루에 한 번만 실제 API를 호출한다. 25개구 x 매매/전월세라 요청량이
+  // 많아서, 반복 실행이 겹치면 데이터포털 일일 호출 한도를 금방 소진한다.
+  try {
+    const existing = JSON.parse(await readFile(outFile, "utf-8"));
+    if (existing.updatedAt && kstDateString(new Date(existing.updatedAt)) === kstDateString(now)) {
+      console.log(`[fetch-realestate] 오늘(${kstDateString(now)}) 이미 조회함, 생략`);
+      return;
+    }
+  } catch {
+    // 기존 파일 없으면 그냥 진행
+  }
+
   // 이번 달치만 조회 (예전엔 월초 표본 부족을 피하려고 지난달까지 2개월을
   // 합쳤는데, 요청량이 2배가 돼서 25개구 조회 시 데이터포털 일일 한도에
   // 걸리는 걸 겪었음 - 이번 달만 봐도 대체로 충분한 표본이 쌓이는 편이라
