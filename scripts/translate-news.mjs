@@ -56,6 +56,7 @@ async function translateTitle(title) {
   const normalizedTitle = normalizeKoreanAmounts(title);
   const prompt = `Translate the following Korean news headline into natural, concise English.
 The headline may already contain plain Arabic numerals (e.g. "80,000,000") - if so, keep those numbers exactly as they are, do not round or rewrite them, just translate the surrounding Korean words (e.g. "원" -> "won").
+Write the translation in English only - do not use Chinese characters or any other language.
 Output ONLY the translated headline. No quotes, no explanation, no extra commentary, no notes.
 
 Korean headline: ${normalizedTitle}
@@ -90,6 +91,7 @@ English headline:`;
 function isBadTranslation(text, original, requiredNumbers) {
   if (!text) return true;
   if (/[가-힣]/.test(text)) return true; // 한글이 그대로 남아있으면 번역 실패로 간주
+  if (/[一-鿿]/.test(text)) return true; // 영어 대신 중국어로 번역해버리는 경우가 있어 방어
   if (text.length > Math.max(120, original.length * 3)) return true; // 비정상적으로 길면 딴소리
   const textDigits = text.replace(/,/g, "");
   if (requiredNumbers.some((n) => !textDigits.includes(n))) return true;
@@ -98,10 +100,12 @@ function isBadTranslation(text, original, requiredNumbers) {
 
 async function translateItems(items) {
   for (const item of items) {
-    // titleEn이 원문과 똑같으면 "실패해서 원문으로 폴백해둔 것"이므로
-    // 번역된 것으로 치지 않고 다음 실행에서 다시 시도한다.
-    if (item.titleEn && item.titleEn !== item.title) continue;
     const requiredNumbers = extractNormalizedNumbers(item.title, normalizeKoreanAmounts(item.title));
+    // 이미 붙어있는 titleEn이 지금 기준으로도 "정상 번역"이면 스킵하고,
+    // 원문 폴백이었거나(이전 실패) 지금 기준으로 불량 판정되면(예: 이전에는
+    // 못 걸러냈던 중국어 오역) 다시 시도한다. isBadTranslation 판정 기준을
+    // 강화할 때마다 과거에 통과했던 나쁜 번역도 자동으로 재시도 대상이 된다.
+    if (item.titleEn && !isBadTranslation(item.titleEn, item.title, requiredNumbers)) continue;
     try {
       const translated = await translateTitle(item.title);
       if (isBadTranslation(translated, item.title, requiredNumbers)) {
