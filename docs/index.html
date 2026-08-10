@@ -79,6 +79,11 @@
     text-decoration: none;
   }
   .back-link:hover { text-decoration: underline; }
+  .header-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+  }
   .lang-toggle {
     flex-shrink: 0;
     background: var(--card);
@@ -272,9 +277,14 @@
       <div class="updated" id="updated">불러오는 중...</div>
       <a class="back-link" id="archive-back-link" href="./index.html" hidden></a>
     </div>
-    <button class="lang-toggle" type="button" id="lang-toggle" aria-label="Switch language">
-      <span aria-hidden="true">🌐</span>
-    </button>
+    <div class="header-actions">
+      <button class="lang-toggle" type="button" id="share-button" aria-label="Share">
+        <span aria-hidden="true">📤</span>
+      </button>
+      <button class="lang-toggle" type="button" id="lang-toggle" aria-label="Switch language">
+        <span aria-hidden="true">🌐</span>
+      </button>
+    </div>
   </header>
 
   <div class="content-notice" id="content-notice" hidden></div>
@@ -341,7 +351,7 @@
   </section>
 
   <footer class="site-footer">
-    <a href="./privacy-policy.html" id="footer-privacy-link">개인정보처리방침</a>
+    <a href="https://kyhsa93.github.io/privacy-policy" id="footer-privacy-link" target="_blank" rel="noopener">개인정보처리방침</a>
   </footer>
 </main>
 
@@ -930,6 +940,44 @@
   document.getElementById("lang-toggle").addEventListener("click", () => {
     applyLocale(locale === "en" ? "ko" : "en");
   });
+
+  // ---- 공유하기 -----------------------------------------------------------
+  // 모바일 등 Web Share API 지원 브라우저는 네이티브 공유 시트를 띄우고,
+  // 미지원 환경(대부분의 데스크톱 브라우저)은 현재 URL(아카이브의 ?date=
+  // 포함)을 클립보드로 복사한다. 두 방식 다 실패하면 prompt로 링크를 보여줘
+  // 수동 복사라도 가능하게 한다.
+  const shareButton = document.getElementById("share-button");
+  const shareIcon = shareButton.querySelector("span");
+
+  function showShareFeedback() {
+    shareIcon.textContent = "✅";
+    setTimeout(() => {
+      shareIcon.textContent = "📤";
+    }, 1500);
+  }
+
+  async function shareCurrentPage() {
+    const shareData = { title: document.title, url: location.href };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+        return;
+      } catch (err) {
+        if (err && err.name === "AbortError") return; // 사용자가 공유 시트를 취소함
+        // 공유 시트 자체가 실패하면 클립보드 복사로 폴백
+      }
+    }
+
+    try {
+      await navigator.clipboard.writeText(location.href);
+      showShareFeedback();
+    } catch {
+      window.prompt("Copy this link:", location.href);
+    }
+  }
+
+  shareButton.addEventListener("click", shareCurrentPage);
 
   async function main() {
     locale = getInitialLocale();
