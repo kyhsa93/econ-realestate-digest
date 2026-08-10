@@ -84,6 +84,18 @@
   }
   .change.up { color: var(--up); }
   .change.down { color: var(--down); }
+  .live-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--up);
+    border: 1px solid currentColor;
+    border-radius: 4px;
+    padding: 1px 4px;
+    margin-left: 4px;
+    vertical-align: middle;
+    cursor: default;
+  }
   .table-wrap {
     overflow-x: auto;
     margin-top: 4px;
@@ -313,6 +325,8 @@
       marketThChange: "증감",
       kospiLabel: "코스피",
       usdKrwLabel: "원/달러 환율",
+      liveFxBadge: "실시간",
+      liveFxTitle: (s) => `${s} 기준 (exchangerate.fun)`,
       baseRateLabel: "한국은행 기준금리",
       baseRateSince: (s) => `${s} 부터`,
       historyKospiLabel: "코스피 (최근 추이)",
@@ -353,6 +367,8 @@
       marketThChange: "Change",
       kospiLabel: "KOSPI",
       usdKrwLabel: "USD/KRW",
+      liveFxBadge: "live",
+      liveFxTitle: (s) => `as of ${s} (exchangerate.fun)`,
       baseRateLabel: "BOK Base Rate",
       baseRateSince: (s) => `since ${s}`,
       historyKospiLabel: "KOSPI (recent trend)",
@@ -400,6 +416,27 @@
     realestateHistory: null,
   };
 
+  // 원/달러 환율은 브라우저에서 직접 exchangerate.fun(무료, 키 불필요,
+  // CORS 개방, 대략 1시간 이내로 갱신)을 호출해서 일자별 배치 값보다 훨씬
+  // 신선한 값을 보여준다. 코스피는 쓰던 소스가 다른 도메인의 요청을
+  // 403으로 막아서(자체 CORS 없음) 브라우저에서 직접 못 가져오고, 기존
+  // 배치 값(하루 1회)을 그대로 쓴다. 실패해도 배치 값으로 조용히 폴백.
+  let liveUsdKrw = null;
+
+  async function fetchLiveUsdKrw() {
+    try {
+      const res = await fetch("https://api.exchangerate.fun/latest?base=USD");
+      if (!res.ok) throw new Error(`http ${res.status}`);
+      const data = await res.json();
+      const value = Number(data?.rates?.KRW);
+      if (!Number.isFinite(value)) throw new Error("KRW 필드 없음");
+      liveUsdKrw = { value, timestamp: data.timestamp };
+      renderMarket(cache.market);
+    } catch (err) {
+      console.error("[market] 실시간 환율 조회 실패, 배치 값 유지:", err.message);
+    }
+  }
+
   function fmtUpdated(iso) {
     if (!iso) return "-";
     const d = new Date(iso);
@@ -437,11 +474,15 @@
           <td class="change ${directionClass(market.kospi.direction)}">${market.kospi.change ?? ""}</td>
         </tr>`);
     }
-    if (market.usdKrw) {
+    if (market.usdKrw || liveUsdKrw) {
+      const displayValue = liveUsdKrw ? liveUsdKrw.value : Number(market.usdKrw.value);
+      const liveBadge = liveUsdKrw
+        ? ` <span class="live-badge" title="${t("liveFxTitle")(fmtUpdated(new Date(liveUsdKrw.timestamp * 1000).toISOString()))}">${t("liveFxBadge")}</span>`
+        : "";
       rows.push(`
         <tr>
           <td>${t("usdKrwLabel")}</td>
-          <td>${Number(market.usdKrw.value).toFixed(2)}</td>
+          <td>${displayValue.toFixed(2)}${liveBadge}</td>
           <td></td>
         </tr>`);
     }
@@ -838,6 +879,9 @@
   }
 
   main();
+
+  fetchLiveUsdKrw();
+  setInterval(fetchLiveUsdKrw, 5 * 60 * 1000); // 소스 자체가 대략 1시간마다 갱신되므로 5분이면 충분
 
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
