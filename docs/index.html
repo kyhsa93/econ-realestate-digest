@@ -56,6 +56,14 @@
     color: var(--muted);
     font-size: 0.85rem;
   }
+  .back-link {
+    display: inline-block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    text-decoration: none;
+  }
+  .back-link:hover { text-decoration: underline; }
   .lang-toggle {
     flex-shrink: 0;
     background: var(--card);
@@ -207,23 +215,22 @@
     font-size: 0.72rem;
     margin-top: 4px;
   }
-  .archive-list details {
-    border-bottom: 1px solid var(--border);
-    padding: 8px 0;
+  .archive-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
   }
-  .archive-list details:last-child { border-bottom: none; }
-  .archive-list summary {
-    cursor: pointer;
-    font-size: 0.9rem;
+  .date-chip {
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    font-size: 0.78rem;
     color: var(--fg);
+    text-decoration: none;
+    white-space: nowrap;
   }
-  .archive-content {
-    margin-top: 8px;
-    padding-left: 4px;
-    color: var(--fg);
-    font-size: 0.88rem;
-    white-space: pre-wrap;
-  }
+  .date-chip:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -232,6 +239,7 @@
     <div>
       <h1 id="page-title">경제·부동산 데일리 다이제스트</h1>
       <div class="updated" id="updated">불러오는 중...</div>
+      <a class="back-link" id="archive-back-link" href="./index.html" hidden></a>
     </div>
     <button class="lang-toggle" type="button" id="lang-toggle" aria-label="Switch language">
       <span aria-hidden="true">🌐</span>
@@ -291,7 +299,7 @@
     <ul class="news-list" id="news-list">
       <li class="error">불러오는 중...</li>
     </ul>
-    <a class="archive-link" id="news-archive-link" href="./news.html">지난 뉴스 더보기 →</a>
+    <a class="archive-link" id="news-archive-link" href="#archive-section">지난 기록 보기 ↓</a>
   </section>
 
   <section id="archive-section">
@@ -345,11 +353,12 @@
       realestateHistoryLabel: "서울 평균 평당가 추이 (최근)",
       newsHeading: "오늘의 경제·부동산 뉴스",
       newsError: "데이터를 불러오지 못했습니다.",
-      newsArchiveLink: "지난 뉴스 더보기 →",
-      archiveHeading: "지난 요약 기록",
+      newsArchiveLink: "지난 기록 보기 ↓",
+      archiveHeading: "지난 기록",
       archiveEmpty: "아직 지난 기록이 없습니다.",
       archiveMore: (n) => `이전 기록 ${n}건 더 있음`,
-      archiveNewsLink: (n) => `해당 날짜 뉴스 보기 (${n}건) →`,
+      archiveBackLink: "오늘 기록으로 돌아가기 →",
+      archiveViewing: (d) => `지난 기록 보는 중: ${d}`,
     },
     en: {
       title: "Econ & Real Estate Digest",
@@ -389,11 +398,12 @@
       realestateHistoryLabel: "Seoul avg. price/pyeong trend (recent)",
       newsHeading: "Today's Economy & Real Estate News",
       newsError: "Failed to load data.",
-      newsArchiveLink: "More past news →",
-      archiveHeading: "Past Summary Archive",
+      newsArchiveLink: "Browse past days ↓",
+      archiveHeading: "Past Archive",
       archiveEmpty: "No past records yet.",
       archiveMore: (n) => `${n} more past entries`,
-      archiveNewsLink: (n) => `View news for this date (${n}) →`,
+      archiveBackLink: "Back to today →",
+      archiveViewing: (d) => `Viewing archive: ${d}`,
     },
   };
 
@@ -418,6 +428,20 @@
     realestate: null,
     realestateHistory: null,
   };
+
+  // 뉴스/시장지표/부동산/요약을 각각 별도 "아카이브 페이지"로 만드는 대신,
+  // 메인 페이지 자체가 ?date=YYYY-MM-DD 쿼리를 받으면 그 날짜의 히스토리
+  // 데이터로 똑같은 섹션 구성을 그대로 렌더링한다 (실시간 환율만 예외).
+  const viewDate = new URLSearchParams(location.search).get("date");
+  const isArchiveView = !!viewDate;
+
+  function kstToday() {
+    return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(new Date());
+  }
+
+  function findByDate(history, date) {
+    return (Array.isArray(history) ? history : []).find((h) => h.date === date) ?? null;
+  }
 
   // 원/달러 환율은 브라우저에서 직접 exchangerate.fun(무료, 키 불필요,
   // CORS 개방, 대략 1시간 이내로 갱신)을 호출해서 일자별 배치 값보다 훨씬
@@ -735,17 +759,20 @@
 
   const ARCHIVE_DISPLAY_LIMIT = 30;
 
-  function renderArchive(summaryHistory, newsHistory) {
+  // 요약/뉴스/시장지표/부동산 히스토리는 각각 별도 파일이라 한쪽만 있는
+  // 날짜도 있을 수 있음(예: 이 기능 추가 전 날짜를 소급 반영한 경우) ->
+  // 날짜 합집합 기준으로 보여준다. 각 링크는 index.html?date=X로, 그 날짜의
+  // 히스토리 기록을 이 페이지 그대로(같은 섹션 구성으)로 다시 렌더링한다.
+  function renderArchive(summaryHistory, newsHistory, marketHistory, realestateHistory) {
     const list = document.getElementById("archive-list");
-    const today = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(new Date());
+    const today = kstToday();
 
-    const summaryByDate = new Map((Array.isArray(summaryHistory) ? summaryHistory : []).map((h) => [h.date, h.summary]));
-    const newsByDate = new Map((Array.isArray(newsHistory) ? newsHistory : []).map((h) => [h.date, h.items]));
-
-    // 요약과 뉴스 히스토리는 별도 파일이라 한쪽만 있는 날짜도 있을 수 있음
-    // (예: 이 기능 추가 전 날짜를 소급 반영한 경우) -> 날짜 합집합 기준으로 보여준다.
-    const dates = new Set([...summaryByDate.keys(), ...newsByDate.keys()]);
-    const past = [...dates].filter((d) => d !== today).sort((a, b) => b.localeCompare(a));
+    const dates = new Set(
+      [summaryHistory, newsHistory, marketHistory, realestateHistory]
+        .flatMap((h) => (Array.isArray(h) ? h : []))
+        .map((h) => h.date)
+    );
+    const past = [...dates].filter((d) => d !== today && d !== viewDate).sort((a, b) => b.localeCompare(a));
 
     if (!past.length) {
       list.innerHTML = `<div class="error">${t("archiveEmpty")}</div>`;
@@ -753,52 +780,66 @@
     }
 
     const shown = past.slice(0, ARCHIVE_DISPLAY_LIMIT);
-    list.innerHTML = "";
-    for (const date of shown) {
-      const details = document.createElement("details");
-      const summaryEl = document.createElement("summary");
-      summaryEl.textContent = date;
-      details.appendChild(summaryEl);
-
-      const summaryText = pickSummaryText(summaryByDate.get(date));
-      if (summaryText) {
-        const content = document.createElement("div");
-        content.className = "archive-content";
-        content.textContent = summaryText;
-        details.appendChild(content);
-      }
-
-      const newsItems = newsByDate.get(date);
-      if (newsItems?.length) {
-        const link = document.createElement("a");
-        link.className = "archive-link";
-        link.href = `./news.html?date=${date}`;
-        link.textContent = t("archiveNewsLink")(newsItems.length);
-        details.appendChild(link);
-      }
-
-      list.appendChild(details);
-    }
+    list.innerHTML = shown.map((date) => `<a class="date-chip" href="./index.html?date=${date}">${date}</a>`).join("");
 
     if (past.length > shown.length) {
       const note = document.createElement("div");
       note.className = "error";
       note.style.marginTop = "8px";
+      note.style.width = "100%";
       note.textContent = t("archiveMore")(past.length - shown.length);
       list.appendChild(note);
     }
   }
 
-  function renderAll() {
-    renderMarket(cache.market);
-    renderNews(cache.news);
-    renderSummary(cache.summary);
-    renderHistory(cache.history);
-    renderRealestate(cache.realestate);
-    renderRealestateHistory(cache.realestateHistory);
-    renderArchive(cache.summaryHistory, cache.newsHistory);
+  // 아카이브(?date=) 조회 시에는 실시간 데이터 대신 각 히스토리 파일에서
+  // 해당 날짜 기록을 찾아 그대로 같은 렌더 함수에 넘긴다. 히스토리 항목은
+  // updatedAt만 없을 뿐 나머지 필드 구조는 실시간 파일과 동일하다.
+  function effectiveNews() {
+    if (!isArchiveView) return cache.news;
+    const entry = findByDate(cache.newsHistory, viewDate);
+    return entry ? { items: entry.items } : null;
+  }
+  function effectiveSummary() {
+    if (!isArchiveView) return cache.summary;
+    const entry = findByDate(cache.summaryHistory, viewDate);
+    // 히스토리 기록에는 updatedAt이 없어서 summaryMeta 표시용으로 날짜
+    // 자정(KST) 기준 값을 대신 채워 넣는다.
+    return entry ? { ...entry, updatedAt: entry.updatedAt ?? `${entry.date}T00:00:00+09:00` } : null;
+  }
+  function effectiveMarket() {
+    if (!isArchiveView) return cache.market;
+    return findByDate(cache.history, viewDate);
+  }
+  function effectiveRealestate() {
+    if (!isArchiveView) return cache.realestate;
+    return findByDate(cache.realestateHistory, viewDate);
+  }
 
-    const latestSources = [cache.market, cache.news, cache.summary].filter(Boolean);
+  function renderAll() {
+    const news = effectiveNews();
+    const summary = effectiveSummary();
+    const market = effectiveMarket();
+    const realestate = effectiveRealestate();
+
+    renderMarket(market);
+    renderNews(news);
+    renderSummary(summary);
+    renderHistory(cache.history);
+    renderRealestate(realestate);
+    renderRealestateHistory(cache.realestateHistory);
+    renderArchive(cache.summaryHistory, cache.newsHistory, cache.history, cache.realestateHistory);
+
+    const backLink = document.getElementById("archive-back-link");
+    if (isArchiveView) {
+      backLink.hidden = false;
+      backLink.textContent = t("archiveBackLink");
+      document.getElementById("updated").textContent = t("archiveViewing")(viewDate);
+      return;
+    }
+    backLink.hidden = true;
+
+    const latestSources = [market, news, summary].filter(Boolean);
     const latest = latestSources.map((v) => v.updatedAt).filter(Boolean).sort().pop();
     document.getElementById("updated").textContent = latest
       ? t("lastUpdated")(fmtUpdated(latest))
@@ -867,8 +908,12 @@
 
   main();
 
-  fetchLiveUsdKrw();
-  setInterval(fetchLiveUsdKrw, 5 * 60 * 1000); // 소스 자체가 대략 1시간마다 갱신되므로 5분이면 충분
+  // 아카이브(?date=) 조회 중에는 과거 환율 값을 보여줘야 하므로 실시간
+  // 환율로 덮어쓰지 않는다.
+  if (!isArchiveView) {
+    fetchLiveUsdKrw();
+    setInterval(fetchLiveUsdKrw, 5 * 60 * 1000); // 소스 자체가 대략 1시간마다 갱신되므로 5분이면 충분
+  }
 
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
