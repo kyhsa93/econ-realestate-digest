@@ -8,8 +8,8 @@
     "date": "2026-08-10",
     "model": "qwen2.5:1.5b",
     "summary": {
-      "ko": "- 코스피와 코스닥이 상승세를 나타내며 증시가 개선되고 있는 것으로 보여지고 있습니다.\n- 부동산 관련 뉴스 12건\n- 금리·예금·투자상품 관련 뉴스 5건",
-      "en": "- 3 news items about Stocks & FX\n- 12 news items about Real Estate\n- The Bank of Korea's \"Goldilocks\" strategy involves maintaining interest rates at a moderate level to prevent inflation while encouraging economic growth, as evidenced by the increase in deposits and investment products despite rising US Treasury yields."
+      "ko": "- 현대차그룹이 로봇을 활용해 아파트 주차난을 해결하고 있으며, 이에 따라 상업용 부동산의 양극화 현상이 더욱 심화되고 있다.\n- 증시·환율 관련 뉴스 4건\n- 미국 장기금리 상승 위험에 대한 경계감이 한국 금융 시장에서 나타나고 있으며, 이는 코스피 지수가 상승하고 정기예금가 증가하는 것을 의미한다.",
+      "en": "- 11 news items about Real Estate\n- 4 news items about Stocks & FX\n- The Bank of Korea has announced that it will increase the yield on government bonds and other fixed-income products to prevent interest rates from rising too high, as indicated by a recent rise in bond yields."
     }
   }
 ]
