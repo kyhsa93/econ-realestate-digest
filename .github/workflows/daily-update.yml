@@ -37,6 +37,8 @@ jobs:
         env:
           MOLIT_API_KEY: ${{ secrets.MOLIT_API_KEY }}
           MOLIT_API_ENDPOINT: ${{ secrets.MOLIT_API_ENDPOINT }}
+          MOLIT_RENT_API_KEY: ${{ secrets.MOLIT_RENT_API_KEY }}
+          MOLIT_RENT_API_ENDPOINT: ${{ secrets.MOLIT_RENT_API_ENDPOINT }}
 
       - name: Ollama 설치 및 모델 준비
         run: |

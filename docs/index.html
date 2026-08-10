@@ -108,6 +108,32 @@
   }
   .change.up { color: var(--up); }
   .change.down { color: var(--down); }
+  .re-row {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 6px;
+    margin-top: 6px;
+    font-size: 0.85rem;
+  }
+  .re-row:first-of-type { margin-top: 8px; }
+  .re-tag {
+    color: var(--muted);
+    font-size: 0.75rem;
+    min-width: 2.6em;
+  }
+  .re-row .value {
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+  .re-row .change {
+    font-size: 0.78rem;
+    margin-top: 0;
+  }
+  .re-row .news-meta {
+    margin-top: 0;
+    font-size: 0.72rem;
+  }
   ul.news-list {
     list-style: none;
     margin: 0;
@@ -288,10 +314,14 @@
       realestateHeading: "한국 부동산 가격 추이",
       realestateError: "데이터를 불러오지 못했습니다.",
       realestateOverallLabel: "서울 25개구 평균",
-      realestateUnitCaption: "평당가(3.3㎡) 기준, 국토교통부 아파트매매 실거래가 (서울 25개 자치구 전체)",
-      realestateCountLabel: (n) => `최근 2개월 거래 ${n}건`,
+      realestateUnitCaption: "평당가(3.3㎡) 기준, 국토교통부 아파트매매·전월세 실거래가 (서울 25개 자치구 전체)",
+      realestateCountSuffix: (n) => `${n}건`,
       realestatePeriodLabel: (period) => `실거래 신고 기준 (${period})`,
       realestateChangeVs: (dateStr) => `${dateStr} 대비`,
+      realestateTagSale: "매매",
+      realestateTagJeonse: "전세",
+      realestateTagWolse: "월세",
+      realestateMonthlyPrefix: "월 ",
       realestateHistoryLabel: "서울 평균 평당가 추이 (최근)",
       newsHeading: "오늘의 경제·부동산 뉴스",
       newsError: "데이터를 불러오지 못했습니다.",
@@ -320,10 +350,14 @@
       realestateHeading: "Korean Real Estate Price Trend",
       realestateError: "Failed to load data.",
       realestateOverallLabel: "Seoul 25-district average",
-      realestateUnitCaption: "Price per pyeong (3.3㎡), based on MOLIT apartment sale transactions (all 25 Seoul districts)",
-      realestateCountLabel: (n) => `${n} transactions in last 2 months`,
+      realestateUnitCaption: "Price per pyeong (3.3㎡), based on MOLIT apartment sale & lease transactions (all 25 Seoul districts)",
+      realestateCountSuffix: (n) => `${n} txns`,
       realestatePeriodLabel: (period) => `Based on filed transactions (${period})`,
       realestateChangeVs: (dateStr) => `vs ${dateStr}`,
+      realestateTagSale: "Sale",
+      realestateTagJeonse: "Jeonse",
+      realestateTagWolse: "Monthly rent",
+      realestateMonthlyPrefix: "mo. ",
       realestateHistoryLabel: "Seoul avg. price/pyeong trend (recent)",
       newsHeading: "Today's Economy & Real Estate News",
       newsError: "Failed to load data.",
@@ -478,13 +512,48 @@
     return sign + formatPyeongPrice(Math.abs(value10k));
   }
 
-  function realestateChangeHtml(entry) {
-    if (!entry.change) return "";
-    const { value10k, percent } = entry.change;
+  function realestateChangeHtml(change, baselineDate) {
+    if (!change) return "";
+    const { value10k, percent } = change;
     const dir = value10k > 0 ? "up" : value10k < 0 ? "down" : "";
     const arrow = value10k > 0 ? "▲ " : value10k < 0 ? "▼ " : "";
     const percentText = percent != null ? ` (${percent >= 0 ? "+" : ""}${percent.toFixed(1)}%)` : "";
-    return `<div class="change ${dir}">${arrow}${formatPyeongPriceDelta(value10k)}${percentText} · ${t("realestateChangeVs")(entry.baselineDate)}</div>`;
+    return ` <span class="change ${dir}">${arrow}${formatPyeongPriceDelta(value10k)}${percentText} · ${t("realestateChangeVs")(baselineDate)}</span>`;
+  }
+
+  // 매매/전세는 "평당 가격" 성격이라 증감(change)까지 표시하고, 월세는
+  // 보증금+월세 두 축이라 증감 추적 없이 현재값만 보여준다.
+  function realestateRowsHtml(entry) {
+    const rows = [];
+    if (entry.sale) {
+      rows.push(`
+        <div class="re-row">
+          <span class="re-tag">${t("realestateTagSale")}</span>
+          <span class="value">${formatPyeongPrice(entry.sale.avgPricePerPyeong10k)}</span>${realestateChangeHtml(entry.sale.change, entry.sale.baselineDate)}
+          <span class="news-meta">${t("realestateCountSuffix")(entry.sale.transactionCount)}</span>
+        </div>`);
+    }
+    if (entry.jeonse) {
+      rows.push(`
+        <div class="re-row">
+          <span class="re-tag">${t("realestateTagJeonse")}</span>
+          <span class="value">${formatPyeongPrice(entry.jeonse.avgDepositPerPyeong10k)}</span>${realestateChangeHtml(entry.jeonse.change, entry.jeonse.baselineDate)}
+          <span class="news-meta">${t("realestateCountSuffix")(entry.jeonse.transactionCount)}</span>
+        </div>`);
+    }
+    if (entry.wolse) {
+      rows.push(`
+        <div class="re-row">
+          <span class="re-tag">${t("realestateTagWolse")}</span>
+          <span class="value">${formatPyeongPrice(entry.wolse.avgDeposit10k)} / ${t("realestateMonthlyPrefix")}${formatPyeongPrice(entry.wolse.avgMonthlyRent10k)}</span>
+          <span class="news-meta">${t("realestateCountSuffix")(entry.wolse.transactionCount)}</span>
+        </div>`);
+    }
+    return rows.join("");
+  }
+
+  function realestateSortValue(entry) {
+    return entry.sale?.avgPricePerPyeong10k ?? entry.jeonse?.avgDepositPerPyeong10k ?? 0;
   }
 
   function renderRealestate(realestate) {
@@ -499,20 +568,16 @@
     const cards = [
       `<div class="market-card">
          <div class="label">${t("realestateOverallLabel")}</div>
-         <div class="value">${formatPyeongPrice(realestate.overall.avgPricePerPyeong10k)}</div>
-         ${realestateChangeHtml(realestate.overall)}
-         <div class="news-meta">${t("realestateCountLabel")(realestate.overall.transactionCount)}</div>
+         ${realestateRowsHtml(realestate.overall)}
        </div>`,
       ...(realestate.districts ?? [])
         .slice()
-        .sort((a, b) => b.avgPricePerPyeong10k - a.avgPricePerPyeong10k)
+        .sort((a, b) => realestateSortValue(b) - realestateSortValue(a))
         .map(
           (d) => `
         <div class="market-card">
           <div class="label">${d.name}</div>
-          <div class="value">${formatPyeongPrice(d.avgPricePerPyeong10k)}</div>
-          ${realestateChangeHtml(d)}
-          <div class="news-meta">${t("realestateCountLabel")(d.transactionCount)}</div>
+          ${realestateRowsHtml(d)}
         </div>`
       ),
     ];
@@ -527,13 +592,14 @@
       return;
     }
     const recent = history.slice(-30);
-    const values = recent.map((h) => h.overall?.avgPricePerPyeong10k).filter((v) => typeof v === "number");
+    const getSale = (h) => h.overall?.sale?.avgPricePerPyeong10k;
+    const values = recent.map(getSale).filter((v) => typeof v === "number");
     if (values.length < 2) {
       grid.innerHTML = "";
       return;
     }
-    const first = recent.find((h) => typeof h.overall?.avgPricePerPyeong10k === "number");
-    const last = recent.slice().reverse().find((h) => typeof h.overall?.avgPricePerPyeong10k === "number");
+    const first = recent.find((h) => typeof getSale(h) === "number");
+    const last = recent.slice().reverse().find((h) => typeof getSale(h) === "number");
     grid.innerHTML = `
       <div class="history-card">
         <div class="label">${t("realestateHistoryLabel")}</div>

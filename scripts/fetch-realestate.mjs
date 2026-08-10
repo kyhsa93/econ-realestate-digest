@@ -7,8 +7,10 @@ const outFile = path.join(dataDir, "realestate.json");
 const historyFile = path.join(dataDir, "realestate-history.json");
 const HISTORY_MAX_DAYS = 180;
 
-const API_URL = process.env.MOLIT_API_ENDPOINT;
-const SERVICE_KEY = process.env.MOLIT_API_KEY;
+const SALE_API_URL = process.env.MOLIT_API_ENDPOINT;
+const SALE_SERVICE_KEY = process.env.MOLIT_API_KEY;
+const RENT_API_URL = process.env.MOLIT_RENT_API_ENDPOINT;
+const RENT_SERVICE_KEY = process.env.MOLIT_RENT_API_KEY;
 
 // 서울 25개 자치구 전체. 전국이 아니라 "서울" 기준 평균/구별 값이다.
 const DISTRICTS = [
@@ -39,8 +41,11 @@ const DISTRICTS = [
   { code: "11740", name: "강동구" },
 ];
 
+const PYEONG_M2 = 3.3058;
+
 // 데이터포털이 짧은 시간에 몰리는 요청에 종종 "fetch failed"(네트워크
 // 레벨)로 실패하는 걸 확인해서, 재시도와 동시 요청 수 제한을 둔다.
+// 매매+전월세를 같이 조회하면서 요청량이 다시 2배가 되는 만큼 유지한다.
 const CONCURRENCY = 5;
 const MAX_RETRIES = 3;
 
@@ -61,8 +66,6 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-const PYEONG_M2 = 3.3058;
-
 function kstDateString(date) {
   return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(date);
 }
@@ -75,7 +78,7 @@ function kstYearMonth(date, monthsAgo = 0) {
   return `${y}${m}`;
 }
 
-async function fetchDistrictMonthOnce(districtCode, yearMonth) {
+async function fetchApiOnce(apiUrl, serviceKey, districtCode, yearMonth) {
   // serviceKey는 URLSearchParams로 넣으면 안 됨: 공공데이터포털에서 발급되는
   // "Encoding" 인증키는 이미 퍼센트 인코딩된 문자열이라, searchParams.set()이
   // 한 번 더 인코딩해버리면(%가 %25로 바뀌는 식) 키가 깨져서 403이 난다.
@@ -86,7 +89,7 @@ async function fetchDistrictMonthOnce(districtCode, yearMonth) {
     DEAL_YMD: yearMonth,
     numOfRows: "9999",
   });
-  const url = `${API_URL}?serviceKey=${SERVICE_KEY}&${otherParams.toString()}`;
+  const url = `${apiUrl}?serviceKey=${serviceKey}&${otherParams.toString()}`;
 
   const res = await fetch(url);
   if (!res.ok) throw new Error(`http ${res.status}`);
@@ -112,11 +115,11 @@ async function fetchDistrictMonthOnce(districtCode, yearMonth) {
   return Array.isArray(items) ? items : [items];
 }
 
-async function fetchDistrictMonth(districtCode, yearMonth) {
+async function fetchApi(apiUrl, serviceKey, districtCode, yearMonth) {
   let lastErr;
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
-      return await fetchDistrictMonthOnce(districtCode, yearMonth);
+      return await fetchApiOnce(apiUrl, serviceKey, districtCode, yearMonth);
     } catch (err) {
       lastErr = err;
       if (attempt < MAX_RETRIES) await sleep(attempt * 1000);
@@ -125,41 +128,89 @@ async function fetchDistrictMonth(districtCode, yearMonth) {
   throw lastErr;
 }
 
-function parseAmount(dealAmount) {
-  // "120,000" (만원 단위, 쉼표 포함 문자열) -> 1,200,000,000원
-  const cleaned = String(dealAmount ?? "").replace(/,/g, "").trim();
-  const value = Number(cleaned);
-  return Number.isFinite(value) ? value * 10_000 : null;
+function parseWon10k(value) {
+  // "120,000" (만원 단위, 쉼표 포함 문자열) -> 120000 (만원)
+  const cleaned = String(value ?? "").replace(/,/g, "").trim();
+  const num = Number(cleaned);
+  return Number.isFinite(num) ? num : null;
 }
 
-function summarizeTransactions(items) {
-  let totalAmount = 0; // 원
-  let totalArea = 0; // ㎡
+function summarizeSale(items) {
+  let totalAmountWon = 0;
+  let totalArea = 0;
   let count = 0;
 
   for (const item of items) {
-    const amount = parseAmount(item.dealAmount);
+    const amount10k = parseWon10k(item.dealAmount);
     const area = Number(item.excluUseAr);
-    if (amount == null || !Number.isFinite(area) || area <= 0) continue;
-    totalAmount += amount;
+    if (amount10k == null || !Number.isFinite(area) || area <= 0) continue;
+    totalAmountWon += amount10k * 10_000;
     totalArea += area;
     count += 1;
   }
 
   if (count === 0 || totalArea === 0) return null;
 
-  const avgPricePerM2 = totalAmount / totalArea;
-  const avgPricePerPyeong10k = Math.round((avgPricePerM2 * PYEONG_M2) / 10_000); // 만원 단위
-
-  return { avgPricePerM2, avgPricePerPyeong10k, transactionCount: count };
+  const avgPricePerM2 = totalAmountWon / totalArea;
+  return {
+    avgPricePerM2,
+    avgPricePerPyeong10k: Math.round((avgPricePerM2 * PYEONG_M2) / 10_000),
+    transactionCount: count,
+  };
 }
 
-async function fetchDistrict(districtCode, name, yearMonths) {
-  const results = await Promise.all(yearMonths.map((ym) => fetchDistrictMonth(districtCode, ym)));
-  const items = results.flat();
-  const summary = summarizeTransactions(items);
-  if (!summary) return null;
-  return { code: districtCode, name, ...summary };
+// 전월세 API는 전세(월세 0원)와 월세(보증금+월세) 거래가 섞여서 온다.
+// 성격이 달라서 하나로 합치지 않고 따로 집계한다: 전세는 매매처럼
+// 평당 보증금으로, 월세는 면적 정규화 없이 평균 보증금/월세 그대로 보여준다.
+function summarizeRent(items) {
+  const jeonseRows = [];
+  const wolseRows = [];
+
+  for (const item of items) {
+    const deposit10k = parseWon10k(item.deposit);
+    const monthlyRent10k = parseWon10k(item.monthlyRent);
+    const area = Number(item.excluUseAr);
+    if (deposit10k == null || !Number.isFinite(area) || area <= 0) continue;
+
+    if (monthlyRent10k && monthlyRent10k > 0) {
+      wolseRows.push({ deposit10k, monthlyRent10k });
+    } else {
+      jeonseRows.push({ deposit10k, area });
+    }
+  }
+
+  let jeonse = null;
+  if (jeonseRows.length > 0) {
+    const totalDepositWon = jeonseRows.reduce((sum, r) => sum + r.deposit10k * 10_000, 0);
+    const totalArea = jeonseRows.reduce((sum, r) => sum + r.area, 0);
+    const avgDepositPerM2 = totalDepositWon / totalArea;
+    jeonse = {
+      avgDepositPerM2,
+      avgDepositPerPyeong10k: Math.round((avgDepositPerM2 * PYEONG_M2) / 10_000),
+      transactionCount: jeonseRows.length,
+    };
+  }
+
+  let wolse = null;
+  if (wolseRows.length > 0) {
+    wolse = {
+      avgDeposit10k: Math.round(wolseRows.reduce((sum, r) => sum + r.deposit10k, 0) / wolseRows.length),
+      avgMonthlyRent10k: Math.round(wolseRows.reduce((sum, r) => sum + r.monthlyRent10k, 0) / wolseRows.length),
+      transactionCount: wolseRows.length,
+    };
+  }
+
+  return { jeonse, wolse };
+}
+
+async function fetchDistrictSale(districtCode, yearMonths) {
+  const results = await Promise.all(yearMonths.map((ym) => fetchApi(SALE_API_URL, SALE_SERVICE_KEY, districtCode, ym)));
+  return summarizeSale(results.flat());
+}
+
+async function fetchDistrictRent(districtCode, yearMonths) {
+  const results = await Promise.all(yearMonths.map((ym) => fetchApi(RENT_API_URL, RENT_SERVICE_KEY, districtCode, ym)));
+  return summarizeRent(results.flat());
 }
 
 async function readHistory() {
@@ -184,22 +235,45 @@ function findBaseline(history, now) {
   return baseline.date === kstDateString(now) ? null : baseline;
 }
 
-function withChange(current, baselineValue) {
-  if (baselineValue == null) return current;
-  const value10kDiff = current.avgPricePerPyeong10k - baselineValue;
+function computeChange(currentValue, baselineValue) {
+  if (currentValue == null || baselineValue == null) return null;
+  const value10kDiff = currentValue - baselineValue;
   const percent = baselineValue !== 0 ? (value10kDiff / baselineValue) * 100 : null;
-  return { ...current, change: { value10k: value10kDiff, percent } };
+  return { value10k: value10kDiff, percent };
+}
+
+// 월세는 보증금/월세 두 축이라 하나의 증감 지표로 압축하기 애매해서
+// 증감 추적은 매매·전세(둘 다 "평당 가격" 성격)에만 붙인다.
+function withSaleChange(sale, baselineSale, baselineDate) {
+  if (!sale) return sale;
+  const change = computeChange(sale.avgPricePerPyeong10k, baselineSale?.avgPricePerPyeong10k);
+  return change ? { ...sale, change, baselineDate } : sale;
+}
+
+function withJeonseChange(jeonse, baselineJeonse, baselineDate) {
+  if (!jeonse) return jeonse;
+  const change = computeChange(jeonse.avgDepositPerPyeong10k, baselineJeonse?.avgDepositPerPyeong10k);
+  return change ? { ...jeonse, change, baselineDate } : jeonse;
 }
 
 function attachChanges(overall, districts, baseline) {
-  if (!baseline) return { overall, districts };
-  const baselineDistrict = (code) => baseline.districts?.find((d) => d.code === code)?.avgPricePerPyeong10k;
+  const baselineDate = baseline?.date;
+  const findBaselineDistrict = (code) => baseline?.districts?.find((d) => d.code === code);
+
   return {
-    overall: { ...withChange(overall, baseline.overall?.avgPricePerPyeong10k), baselineDate: baseline.date },
-    districts: districts.map((d) => ({
-      ...withChange(d, baselineDistrict(d.code)),
-      baselineDate: baseline.date,
-    })),
+    overall: {
+      sale: withSaleChange(overall.sale, baseline?.overall?.sale, baselineDate),
+      jeonse: withJeonseChange(overall.jeonse, baseline?.overall?.jeonse, baselineDate),
+      wolse: overall.wolse,
+    },
+    districts: districts.map((d) => {
+      const b = findBaselineDistrict(d.code);
+      return {
+        ...d,
+        sale: withSaleChange(d.sale, b?.sale, baselineDate),
+        jeonse: withJeonseChange(d.jeonse, b?.jeonse, baselineDate),
+      };
+    }),
   };
 }
 
@@ -209,7 +283,7 @@ async function appendHistory(history, now, entry) {
 
   const idx = history.findIndex((h) => h.date === today);
   if (idx >= 0) {
-    history[idx] = record;
+    history[idx] = record; // 같은 날 재실행 시 덮어쓰기 (중복 방지)
   } else {
     history.push(record);
   }
@@ -222,9 +296,24 @@ async function appendHistory(history, now, entry) {
   await writeFile(historyFile, JSON.stringify(history, null, 2));
 }
 
+function weightedAverage(list, getValue, getWeight) {
+  let totalWeighted = 0;
+  let totalWeight = 0;
+  for (const item of list) {
+    const v = getValue(item);
+    const w = getWeight(item);
+    if (v == null || !w) continue;
+    totalWeighted += v * w;
+    totalWeight += w;
+  }
+  return totalWeight ? totalWeighted / totalWeight : null;
+}
+
 async function main() {
-  if (!SERVICE_KEY || !API_URL) {
-    console.error("[fetch-realestate] MOLIT_API_KEY 또는 MOLIT_API_ENDPOINT 없음, 생략");
+  const hasSale = Boolean(SALE_SERVICE_KEY && SALE_API_URL);
+  const hasRent = Boolean(RENT_SERVICE_KEY && RENT_API_URL);
+  if (!hasSale && !hasRent) {
+    console.error("[fetch-realestate] MOLIT_API_KEY/MOLIT_RENT_API_KEY 둘 다 없음, 생략");
     return;
   }
 
@@ -234,31 +323,75 @@ async function main() {
   const yearMonths = [kstYearMonth(now, 0), kstYearMonth(now, 1)];
 
   const results = await mapWithConcurrency(DISTRICTS, CONCURRENCY, async ({ code, name }) => {
-    try {
-      const result = await fetchDistrict(code, name, yearMonths);
-      if (!result) console.error(`[fetch-realestate] ${name}: 최근 2개월 거래 없음`);
-      return result;
-    } catch (err) {
-      console.error(`[fetch-realestate] ${name} 조회 실패: ${err.message}`);
-      return null;
-    }
-  });
-  const districts = results.filter(Boolean);
+    const entry = { code, name, sale: null, jeonse: null, wolse: null };
 
+    if (hasSale) {
+      try {
+        entry.sale = await fetchDistrictSale(code, yearMonths);
+      } catch (err) {
+        console.error(`[fetch-realestate] ${name} 매매 조회 실패: ${err.message}`);
+      }
+    }
+    if (hasRent) {
+      try {
+        const rent = await fetchDistrictRent(code, yearMonths);
+        entry.jeonse = rent.jeonse;
+        entry.wolse = rent.wolse;
+      } catch (err) {
+        console.error(`[fetch-realestate] ${name} 전월세 조회 실패: ${err.message}`);
+      }
+    }
+
+    return entry.sale || entry.jeonse || entry.wolse ? entry : null;
+  });
+
+  const districts = results.filter(Boolean);
   if (districts.length === 0) {
     console.error("[fetch-realestate] 모든 지역 조회 실패, 기존 데이터 유지");
     return;
   }
 
-  const totalAmountWeighted = districts.reduce((sum, d) => sum + d.avgPricePerM2 * d.transactionCount, 0);
-  const totalCount = districts.reduce((sum, d) => sum + d.transactionCount, 0);
-  const overallAvgPricePerM2 = totalAmountWeighted / totalCount;
-  const overall = {
-    avgPricePerM2: overallAvgPricePerM2,
-    avgPricePerPyeong10k: Math.round((overallAvgPricePerM2 * PYEONG_M2) / 10_000),
-    transactionCount: totalCount,
-  };
+  const saleDistricts = districts.filter((d) => d.sale);
+  const overallSaleAvgM2 = weightedAverage(saleDistricts, (d) => d.sale.avgPricePerM2, (d) => d.sale.transactionCount);
+  const overallSale =
+    overallSaleAvgM2 == null
+      ? null
+      : {
+          avgPricePerM2: overallSaleAvgM2,
+          avgPricePerPyeong10k: Math.round((overallSaleAvgM2 * PYEONG_M2) / 10_000),
+          transactionCount: saleDistricts.reduce((sum, d) => sum + d.sale.transactionCount, 0),
+        };
 
+  const jeonseDistricts = districts.filter((d) => d.jeonse);
+  const overallJeonseAvgM2 = weightedAverage(
+    jeonseDistricts,
+    (d) => d.jeonse.avgDepositPerM2,
+    (d) => d.jeonse.transactionCount
+  );
+  const overallJeonse =
+    overallJeonseAvgM2 == null
+      ? null
+      : {
+          avgDepositPerM2: overallJeonseAvgM2,
+          avgDepositPerPyeong10k: Math.round((overallJeonseAvgM2 * PYEONG_M2) / 10_000),
+          transactionCount: jeonseDistricts.reduce((sum, d) => sum + d.jeonse.transactionCount, 0),
+        };
+
+  const wolseDistricts = districts.filter((d) => d.wolse);
+  const overallWolse =
+    wolseDistricts.length === 0
+      ? null
+      : {
+          avgDeposit10k: Math.round(
+            weightedAverage(wolseDistricts, (d) => d.wolse.avgDeposit10k, (d) => d.wolse.transactionCount)
+          ),
+          avgMonthlyRent10k: Math.round(
+            weightedAverage(wolseDistricts, (d) => d.wolse.avgMonthlyRent10k, (d) => d.wolse.transactionCount)
+          ),
+          transactionCount: wolseDistricts.reduce((sum, d) => sum + d.wolse.transactionCount, 0),
+        };
+
+  const overall = { sale: overallSale, jeonse: overallJeonse, wolse: overallWolse };
   const period = `${yearMonths[1]}~${yearMonths[0]}`;
 
   // 히스토리는 변화율 계산 없이 원값만 저장(나중에 다른 기준일로도 재계산
@@ -273,7 +406,9 @@ async function main() {
   await writeFile(outFile, JSON.stringify(payload, null, 2));
   await appendHistory(history, now, { period, overall, districts });
 
-  console.log(`[fetch-realestate] 저장 완료 (${districts.length}개 지역, ${totalCount}건)`);
+  console.log(
+    `[fetch-realestate] 저장 완료 (매매 ${saleDistricts.length}개구, 전세 ${jeonseDistricts.length}개구, 월세 ${wolseDistricts.length}개구)`
+  );
 }
 
 main();
