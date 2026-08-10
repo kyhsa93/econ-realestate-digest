@@ -48,7 +48,9 @@ function isBadTranslation(text, original) {
 
 async function translateItems(items) {
   for (const item of items) {
-    if (item.titleEn) continue; // 이미 번역됨, 재번역 안 함
+    // titleEn이 원문과 똑같으면 "실패해서 원문으로 폴백해둔 것"이므로
+    // 번역된 것으로 치지 않고 다음 실행에서 다시 시도한다.
+    if (item.titleEn && item.titleEn !== item.title) continue;
     try {
       const translated = await translateTitle(item.title);
       if (isBadTranslation(translated, item.title)) {
