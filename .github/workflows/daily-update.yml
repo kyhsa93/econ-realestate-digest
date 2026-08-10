@@ -21,9 +21,9 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: "20"
 
@@ -41,8 +41,20 @@ jobs:
           MOLIT_RENT_API_ENDPOINT: ${{ secrets.MOLIT_RENT_API_ENDPOINT }}
 
       - name: Ollama 설치 및 모델 준비
+        env:
+          OLLAMA_VERSION: v0.32.6
+          OLLAMA_SHA256: dec2fa50d24e6868ca3c4c977d69d059399372105f951a9acc320a5a79aadcfc
         run: |
-          curl -fsSL https://ollama.com/install.sh | sh
+          # 공식 install.sh를 curl | sh로 그대로 실행하는 대신, 버전을 고정하고
+          # GitHub 릴리스가 게시한 sha256sum.txt와 대조해 무결성을 검증한다.
+          command -v zstd >/dev/null || (sudo apt-get update -y && sudo apt-get install -y zstd)
+          curl -fsSL -o ollama.tar.zst \
+            "https://github.com/ollama/ollama/releases/download/${OLLAMA_VERSION}/ollama-linux-amd64.tar.zst"
+          echo "${OLLAMA_SHA256}  ollama.tar.zst" | sha256sum -c -
+          zstd -d ollama.tar.zst -o ollama.tar
+          sudo tar -xf ollama.tar -C /usr/local
+          rm -f ollama.tar.zst ollama.tar
+
           ollama serve &
           for i in $(seq 1 30); do
             curl -sf http://127.0.0.1:11434/api/version > /dev/null && break
@@ -78,13 +90,13 @@ jobs:
           exit 1
 
       - name: Pages 배포
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
 
       - name: Pages 아티팩트 업로드
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
         with:
           path: "./docs"
 
       - name: Pages에 배포
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
