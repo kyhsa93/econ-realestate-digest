@@ -7,7 +7,7 @@ const historyFile = path.join(dataDir, "summary-history.json");
 const HISTORY_MAX_DAYS = 180;
 
 const OLLAMA_URL = process.env.OLLAMA_URL ?? "http://127.0.0.1:11434";
-const MODEL = process.env.OLLAMA_MODEL ?? "qwen2.5:1.5b";
+const MODEL = process.env.OLLAMA_MODEL ?? "qwen2.5:3b";
 
 // 소형 모델(1.5B)에게 "15개 제목을 통째로 보고 알아서 그룹핑"을 시키면
 // 그룹핑을 안 하거나(전부 나열) 숫자를 지어내는 문제가 있었음.

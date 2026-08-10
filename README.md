@@ -16,7 +16,7 @@
   이번 달만 조회하도록 변경)
   (`MOLIT_API_KEY`+`MOLIT_API_ENDPOINT`는 매매, `MOLIT_RENT_API_KEY`+`MOLIT_RENT_API_ENDPOINT`는
   전월세 — 둘은 독립적으로 동작해서 한쪽만 등록돼 있어도 그쪽만 조회함)
-- `scripts/summarize-digest.mjs` — 로컬 Ollama(qwen2.5:1.5b)로 오늘의 뉴스를 카테고리별로 한국어/영어 요약 → `docs/data/summary.json`
+- `scripts/summarize-digest.mjs` — 로컬 Ollama(qwen2.5:3b)로 오늘의 뉴스를 카테고리별로 한국어/영어 요약 → `docs/data/summary.json`
 - `scripts/translate-news.mjs` — 뉴스 제목을 영어로 번역(`titleEn`) → `docs/data/news.json`
 - `scripts/update-all.mjs` — 로컬에서 수동으로 fetch + git commit/push까지 한 번에 실행할 때 사용 (CI에서는 사용 안 함)
 - `docs/index.html` — 정적 페이지, 클라이언트에서 `data/*.json`을 fetch해 렌더링, 한/영 언어 전환 지원
@@ -32,7 +32,7 @@ npm run update   # 뉴스+시장지표 수집 후 커밋/푸시까지
 AI 요약은 로컬에 Ollama가 설치돼 있어야 테스트 가능:
 
 ```
-ollama pull qwen2.5:1.5b
+ollama pull qwen2.5:3b
 node scripts/summarize-digest.mjs
 ```
 

@@ -48,7 +48,7 @@ jobs:
             curl -sf http://127.0.0.1:11434/api/version > /dev/null && break
             sleep 1
           done
-          ollama pull qwen2.5:1.5b
+          ollama pull qwen2.5:3b
 
       - name: AI 요약 생성
         run: node scripts/summarize-digest.mjs
