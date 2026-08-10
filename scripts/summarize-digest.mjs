@@ -13,7 +13,11 @@ const MODEL = process.env.OLLAMA_MODEL ?? "qwen2.5:1.5b";
 // 그룹핑을 안 하거나(전부 나열) 숫자를 지어내는 문제가 있었음.
 // 그래서 그룹핑은 키워드로 결정론적으로 먼저 하고, LLM은 카테고리 하나당
 // "이미 비슷한 제목들"만 보고 한 문장으로 압축하는 훨씬 쉬운 일만 시킨다.
-// 한국어/영어 요약을 각각 별도로 생성한다 (번역이 아니라 언어별로 따로 생성).
+//
+// 파이프라인: 한국어 요약 생성 -> (숫자 검증 + YES/NO 검수) -> 통과한 것만
+// 영어로 번역 -> 번역도 검증. 예전엔 한국어/영어를 각각 헤드라인에서 독립
+// 생성했는데, "요약과 번역을 동시에" 시키는 게 오류가 더 많아서(예: 영어
+// 버전에서 "15억원"을 "yuan"으로 오역 + 없는 통계까지 지어냄) 순서를 바꿈.
 const CATEGORIES = [
   {
     name: "금리·예금·투자상품",
@@ -33,6 +37,49 @@ const CATEGORIES = [
 ];
 const FALLBACK_CATEGORY = { name: "기타 경제 소식", nameEn: "Other Economic News", keywords: [] };
 const MAX_ITEMS_PER_CATEGORY = 5;
+
+// 한국어는 만/억/조 단위로 4자리씩 묶어 읽어서(영어의 천 단위 그룹과 다름),
+// 작은 모델이 "8천만원"을 "$8 million"으로, "15억원"을 "15 million won"으로
+// 자릿수/통화를 통째로 잘못 바꾸는 사례가 실제로 나왔다. 모델에게 단위 환산을
+// 맡기지 않고, 코드에서 먼저 아라비아 숫자로 바꿔준 뒤 번역을 시킨다.
+// ("기타" 카테고리의 헤드라인 나열 줄을 번역할 때 실제로 쓰인다 - 생성된
+// 요약 문장은 애초에 숫자를 안 쓰도록 지시하므로 대부분 no-op.)
+const MAJOR_UNITS = { 조: 1_000_000_000_000, 억: 100_000_000, 만: 10_000 };
+const MINOR_UNITS = { 천: 1_000, 백: 100, 십: 10 };
+
+function parseCoefficient(str) {
+  let value = 0;
+  let rest = str;
+  for (const unit of Object.keys(MINOR_UNITS)) {
+    const idx = rest.indexOf(unit);
+    if (idx !== -1) {
+      const numPart = rest.slice(0, idx);
+      value += (numPart === "" ? 1 : Number(numPart)) * MINOR_UNITS[unit];
+      rest = rest.slice(idx + unit.length);
+    }
+  }
+  if (rest !== "") value += Number(rest);
+  return value;
+}
+
+function normalizeKoreanAmounts(text) {
+  const numTokenRe = "\\d+(?:\\.\\d+)?(?:천|백|십)?";
+  let result = text.replace(
+    new RegExp(`(${numTokenRe})(억|조)\\s*(${numTokenRe})(만)`, "g"),
+    (_m, c1, u1, c2, u2) => (parseCoefficient(c1) * MAJOR_UNITS[u1] + parseCoefficient(c2) * MAJOR_UNITS[u2]).toLocaleString("en-US")
+  );
+  result = result.replace(
+    new RegExp(`(${numTokenRe})(조|억|만)`, "g"),
+    (_m, c, u) => (parseCoefficient(c) * MAJOR_UNITS[u]).toLocaleString("en-US")
+  );
+  return result;
+}
+
+function extractNormalizedNumbers(original, normalized) {
+  if (original === normalized) return [];
+  const numbers = normalized.match(/\d{1,3}(?:,\d{3})+/g) ?? [];
+  return numbers.map((n) => n.replace(/,/g, ""));
+}
 
 function kstDateString(date) {
   return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(date);
@@ -62,24 +109,6 @@ function stripHanzi(text) {
   return text.replace(/[一-鿿]/g, "");
 }
 
-function stripHangul(text) {
-  // 영어 요약에 한글이 그대로 섞여 나오는 경우가 있어 방어적으로 제거
-  return text.replace(/[가-힣ᄀ-ᇿ㄰-㆏]/g, "");
-}
-
-// 처음엔 "숫자가 하나라도 있으면 무조건 폐기"였는데, 실제 경제 뉴스는
-// 숫자·퍼센트가 거의 항상 등장해서 대부분의 요약이 "OO 관련 뉴스 N건" 같은
-// 의미 없는 대체 문구로 빠져버렸다(사용자 피드백으로 확인). 번역과 달리
-// 이건 같은 언어로 같은 카테고리 안에서만 요약하는 거라 단위 환산 오류
-// (예: "8천만원"->"$8 million") 위험이 없으므로, 생성된 숫자가 그 카테고리
-// 원문 어딘가에 실제로 등장하는지만 검증하는 걸로 되돌린다. 서로 다른
-// 제목의 숫자를 엮어 그럴듯한 조합을 만들 잔여 위험은 있지만, 완전히
-// 지어낸 숫자보다는 훨씬 낮은 위험이고, 정보 손실이 너무 크다는 문제가 더 컸다.
-function containsUnverifiedNumber(sentence, sourceText) {
-  const numbers = sentence.match(/\d[\d,.]*/g) ?? [];
-  return numbers.some((n) => !sourceText.includes(n));
-}
-
 // 모델이 "한 문장만"을 지키지 않고 여러 문장을 이어 쓰면서
 // 서로 다른 제목을 하나의 인과관계로 엮어 지어내는 경우가 있어,
 // 첫 문장 하나만 잘라서 사용한다.
@@ -94,11 +123,10 @@ function listCategory(label, titles) {
   return `- ${label}: ${shown}${more}`;
 }
 
-function buildBucketPrompt(label, titles, lang) {
+function buildBucketPrompt(label, titles) {
   const list = titles.slice(0, MAX_ITEMS_PER_CATEGORY).map((t, i) => `${i + 1}. ${t}`).join("\n");
 
-  if (lang === "ko") {
-    return `다음은 "${label}" 주제의 오늘자 한국 경제 뉴스 제목들이야.
+  return `다음은 "${label}" 주제의 오늘자 한국 경제 뉴스 제목들이야.
 
 ${list}
 
@@ -112,75 +140,153 @@ ${list}
 - 한국어(한글)로만 작성해. 한자, 중국어, 영어 단어를 섞지 마.
 
 한 문장 요약:`;
-  }
-
-  return `The following are today's Korean economic news headlines (originally written in Korean) under the topic "${label}":
-
-${list}
-
-Summarize these into exactly ONE English sentence.
-Rules:
-- Output exactly one sentence. No lists or numbering. Do not chain two or more sentences together.
-- Only use facts and words actually present in the headlines above; never invent numbers, figures, forecasts, or causes that aren't stated.
-- Never include any numbers, percentages, or amounts in the sentence. Exact figures are already shown elsewhere on the page — describe qualitatively instead (e.g. "rose", "increased", "announced").
-- Do not connect different headlines with causal language ("because", "as a result", "due to") — each headline is an independent, unrelated fact.
-- Do not give investment advice or predictions.
-- Write only in English. Do not leave any Korean or Chinese words untranslated.
-
-One-sentence summary:`;
 }
 
-async function generate(prompt, lang) {
+async function callOllama(prompt, options) {
   const res = await fetch(`${OLLAMA_URL}/api/generate`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model: MODEL,
-      prompt,
-      stream: false,
-      options: { temperature: 0.1, top_p: 0.7, num_predict: 80 },
-    }),
+    body: JSON.stringify({ model: MODEL, prompt, stream: false, options }),
   });
   if (!res.ok) throw new Error(`ollama http ${res.status}`);
   const json = await res.json();
   if (!json.response) throw new Error("ollama 응답에 response 필드 없음");
-  let text = stripHanzi(json.response);
-  if (lang === "en") text = stripHangul(text);
-  const firstLine = text.trim().split("\n")[0].trim();
+  return json.response;
+}
+
+async function generateKoSentence(prompt) {
+  const raw = await callOllama(prompt, { temperature: 0.1, top_p: 0.7, num_predict: 80 });
+  const firstLine = stripHanzi(raw).trim().split("\n")[0].trim();
   return firstSentence(firstLine);
 }
 
-async function summarizeBucketLine(bucket, lang) {
-  const label = lang === "ko" ? bucket.category.name : bucket.category.nameEn;
+// "생성된 숫자가 원문 어딘가에 있는지"만 substring으로 검증했더니, 원문의
+// 다른(무관한) 숫자와 우연히 겹치기만 해도 통과되면서 실제로는 지어낸 금액이
+// 그대로 노출되는 사례가 나왔었다("200억 원" 등). 반대로 숫자를 아예 전부
+// 금지했더니 이번엔 대부분의 요약이 검증 실패로 "OO 관련 뉴스 N건" 같은
+// 정보 없는 대체 문구로 빠져버렸다(사용자 피드백). 번역과 달리 이건 같은
+// 언어·같은 카테고리 안에서만 요약하는 거라 단위 환산 오류 위험은 없으므로,
+// 다시 substring 검증으로 되돌리되 실패 시 폴백을 "N건"이 아니라 실제
+// 헤드라인 나열로 바꿔서, 어느 쪽이든 최소한 실질적인 내용은 보이게 한다.
+function containsUnverifiedNumber(sentence, sourceText) {
+  const numbers = sentence.match(/\d[\d,.]*/g) ?? [];
+  return numbers.some((n) => !sourceText.includes(n));
+}
+
+// 숫자 검증을 통과해도 "서로 다른 제목을 그럴듯하게 엮어 없는 인과관계를
+// 만드는" 잔여 위험이 있어, 별도로 한 번 더 확인한다. 작은 모델에게 "틀린
+// 부분을 알아서 고쳐 써라"는 못 믿을 일이라(잘못 고치다가 새로운 오류를
+// 만들 수 있음), 여기서는 YES/NO 판정만 시키고 NO가 나오면 고쳐 쓰게 하지
+// 않고 곧장 안전한 헤드라인 나열로 대체한다.
+async function reviewKoSentence(sentence, titles) {
+  const list = titles.slice(0, MAX_ITEMS_PER_CATEGORY).map((t, i) => `${i + 1}. ${t}`).join("\n");
+  const prompt = `다음은 원문 뉴스 제목들과, 그걸 요약했다는 문장이야.
+
+[원문 제목]
+${list}
+
+[요약 문장]
+${sentence}
+
+요약 문장에 원문 제목에 없는 숫자·통계·인과관계·사실이 하나라도 섞여 있으면 "NO",
+전부 원문 제목에 실제로 있는 내용만 담고 있으면 "YES"라고만 답해. 다른 말은 하지 마.`;
+
+  try {
+    const raw = await callOllama(prompt, { temperature: 0, top_p: 0.5, num_predict: 8 });
+    const text = raw.trim().toLowerCase();
+    if (text.startsWith("no")) return false;
+    if (text.startsWith("yes")) return true;
+    return true; // 판정이 애매하면 통과시킴 (검수 실패로 과도하게 폐기하지 않기 위함)
+  } catch (err) {
+    console.error(`[summarize-digest] 검수 실패, 통과 처리: ${err.message}`);
+    return true;
+  }
+}
+
+// isFallback도 함께 반환한다: 폴백(헤드라인 나열)이면 main()에서 영어
+// 버전도 문장 번역 없이 nameEn으로 결정론적으로 만들어서, 번역까지 실패했을
+// 때 영어 요약에 한국어 카테고리 라벨이 섞여 남는 걸 방지한다.
+async function summarizeBucketKo(bucket) {
+  const label = bucket.category.name;
 
   // "기타" 묶음은 애초에 주제가 하나로 안 묶이는 제목들이라, LLM에게 하나의
   // 문장으로 합성시키면 서로 무관한 사건을 억지로 엮어 지어내기 쉽다.
-  // 그래서 합성 없이 결정론적으로 나열만 한다 (제목 자체는 언어와 무관하게 원문 그대로).
+  // 그래서 합성 없이 결정론적으로 나열만 한다.
   if (bucket.category === FALLBACK_CATEGORY) {
-    return listCategory(label, bucket.titles);
+    return { line: listCategory(label, bucket.titles), isFallback: true };
   }
 
   const sourceText = bucket.titles.join(" ");
-  const prompt = buildBucketPrompt(label, bucket.titles, lang);
+  const prompt = buildBucketPrompt(label, bucket.titles);
 
   let sentence;
   try {
-    sentence = await generate(prompt, lang);
+    sentence = await generateKoSentence(prompt);
   } catch (err) {
-    console.error(`[summarize-digest] "${label}" (${lang}) 요약 실패: ${err.message}`);
+    console.error(`[summarize-digest] "${label}" 요약 실패: ${err.message}`);
     sentence = null;
   }
 
-  if (!sentence || containsUnverifiedNumber(sentence, sourceText)) {
-    if (sentence) {
-      console.error(`[summarize-digest] "${label}" (${lang}) 요약에 검증 안 된 숫자 포함, 헤드라인 나열로 대체: ${sentence}`);
-    }
-    // "OO 관련 뉴스 N건"은 정보가 하나도 없어서(사용자 피드백), 실패해도
-    // 최소한 실제 제목은 보이도록 "기타" 카테고리와 동일하게 나열로 대체.
-    return listCategory(label, bucket.titles);
+  if (sentence && containsUnverifiedNumber(sentence, sourceText)) {
+    console.error(`[summarize-digest] "${label}" 요약에 검증 안 된 숫자 포함: ${sentence}`);
+    sentence = null;
   }
 
-  return `- ${sentence}`;
+  if (sentence && !(await reviewKoSentence(sentence, bucket.titles))) {
+    console.error(`[summarize-digest] "${label}" 요약이 검수 실패(NO): ${sentence}`);
+    sentence = null;
+  }
+
+  if (!sentence) {
+    return { line: listCategory(label, bucket.titles), isFallback: true };
+  }
+
+  return { line: `- ${sentence}`, isFallback: false };
+}
+
+// 번역이 아니라 원문을 그대로 남기거나(한글이 그대로 섞여 있음), 모델이
+// 딴소리를 늘어놓은 경우(비정상적으로 길어짐), 혹은 코드로 미리 정규화해 넘긴
+// 큰 숫자를 모델이 누락/변형한 경우(단위 환산 오류의 잔여 위험)를 걸러내
+// 원문 한국어로 폴백한다. (translate-news.mjs와 동일한 검증 로직)
+function isBadTranslation(text, original, requiredNumbers) {
+  if (!text) return true;
+  if (/[가-힣]/.test(text)) return true;
+  if (/[一-鿿]/.test(text)) return true;
+  if (text.length > Math.max(160, original.length * 3)) return true;
+  const textDigits = text.replace(/,/g, "");
+  if (requiredNumbers.some((n) => !textDigits.includes(n))) return true;
+  return false;
+}
+
+async function translateKoLine(koLine) {
+  const text = koLine.replace(/^-\s*/, "");
+  const normalized = normalizeKoreanAmounts(text);
+  const requiredNumbers = extractNormalizedNumbers(text, normalized);
+
+  const prompt = `Translate the following Korean sentence into natural, concise English.
+The sentence may already contain plain Arabic numerals (e.g. "80,000,000") - if so, keep those numbers exactly as they are, do not round or rewrite them, just translate the surrounding Korean words (e.g. "원" -> "won").
+Write the translation in English only - do not use Chinese characters or any other language.
+Output ONLY the translated sentence. No quotes, no explanation.
+
+Korean: ${normalized}
+
+English:`;
+
+  let translated;
+  try {
+    const raw = await callOllama(prompt, { temperature: 0.2, top_p: 0.8, num_predict: 120 });
+    translated = raw.trim().split("\n")[0].trim().replace(/^["'“‘]+|["'”’]+$/g, "");
+  } catch (err) {
+    console.error(`[summarize-digest] 번역 실패, 한국어 유지: ${err.message}`);
+    return koLine;
+  }
+
+  if (isBadTranslation(translated, text, requiredNumbers)) {
+    console.error(`[summarize-digest] 번역 검증 실패, 한국어 유지: ${translated}`);
+    return koLine;
+  }
+
+  return `- ${translated}`;
 }
 
 async function appendHistory(now, entry) {
@@ -233,9 +339,20 @@ async function main() {
   const buckets = categorize(news.items);
   const koLines = [];
   const enLines = [];
+
   for (const bucket of buckets) {
-    koLines.push(await summarizeBucketLine(bucket, "ko"));
-    enLines.push(await summarizeBucketLine(bucket, "en"));
+    const { line: koLine, isFallback } = await summarizeBucketKo(bucket);
+    koLines.push(koLine);
+
+    if (isFallback) {
+      // 헤드라인을 그대로 나열한 줄(원래 "기타"거나, 다른 카테고리가 생성/검증/
+      // 검수에 실패해 나열로 대체된 경우)은 문장 번역이 아니라 카테고리 레이블만
+      // nameEn으로 바꾸면 되고, 원문 헤드라인 자체는 한/영 모두 한국어 그대로
+      // 유지한다. 번역까지 실패했을 때 영어 요약에 한국어 라벨이 남는 걸 방지.
+      enLines.push(listCategory(bucket.category.nameEn, bucket.titles));
+    } else {
+      enLines.push(await translateKoLine(koLine));
+    }
   }
 
   if (koLines.length === 0) {
