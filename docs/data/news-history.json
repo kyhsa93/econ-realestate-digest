@@ -148,11 +148,32 @@
     "date": "2026-08-10",
     "items": [
       {
+        "title": "15억~20억원 수도권 아파트, 7월 거래 절반 이상이 ‘신고가’",
+        "link": "https://www.mk.co.kr/news/realestate/12122609",
+        "publishedAt": "2026-08-10T01:55:08.000Z",
+        "source": "매일경제 부동산",
+        "titleEn": "15억~20억원 수도권 아파트, 7월 거래 절반 이상이 ‘신고가’"
+      },
+      {
+        "title": "7월 서울 민간아파트 3.3㎡당 분양가 8000만원 돌파",
+        "link": "https://www.mk.co.kr/news/realestate/12122608",
+        "publishedAt": "2026-08-10T01:54:52.000Z",
+        "source": "매일경제 부동산",
+        "titleEn": "July Seoul Private Apartment Per Square Meter Sales Price Reaches 80,000,000 Won"
+      },
+      {
+        "title": "7월 국고채 금리, 환율 상승·외국인 매도에 전반적 상승",
+        "link": "https://www.yna.co.kr/view/AKR20260810056800008",
+        "publishedAt": "2026-08-10T01:48:21.000Z",
+        "source": "연합뉴스 경제",
+        "titleEn": "July Government Bond Rates Rise, Currency Strengthens, Foreigners Sell Sectors"
+      },
+      {
         "title": "“골프연습장 없으면 난리납니다”…신축 아파트 커뮤니티 살펴봤더니",
         "link": "https://www.mk.co.kr/news/realestate/12122584",
         "publishedAt": "2026-08-10T01:33:01.000Z",
         "source": "매일경제 부동산",
-        "titleEn": "Without Golf Practice Ground, There's a Ruckus!\"... Visited New Community's Fresh Apartments and Saw Chaos"
+        "titleEn": "Without a golf practice facility, it's like a thunderclap... I checked out the new apartment community."
       },
       {
         "title": "서울 전용 59㎡ 민간아파트 분양가 15.6억원…전국의 3배",
@@ -166,7 +187,7 @@
         "link": "https://www.yna.co.kr/view/AKR20260810044900002",
         "publishedAt": "2026-08-10T01:11:58.000Z",
         "source": "연합뉴스 경제",
-        "titleEn": "신한카드-홈앤쇼핑, 지역 경제 활성화 맞손"
+        "titleEn": "HSBC-HANSAKE, Local Economy Stimulation Handshake"
       },
       {
         "title": "[게시판] 투교협, 초등학생·학부모 대상 여름 경제캠프 개최",
@@ -194,21 +215,21 @@
         "link": "https://www.yna.co.kr/view/AKR20260810030000003",
         "publishedAt": "2026-08-10T00:49:31.000Z",
         "source": "연합뉴스 경제",
-        "titleEn": "Hyundai Group deploys robots to solve apartment parking crisis... \"up to 50%\" more."
+        "titleEn": "Hyundai Group deploys robots to address car park shortage... \"up to 50% more"
       },
       {
         "title": "이지스운용 \"상업용 부동산 양극화 고착…대형·우량자산 선호\"",
         "link": "https://www.yna.co.kr/view/AKR20260810039300008",
         "publishedAt": "2026-08-10T00:48:39.000Z",
         "source": "연합뉴스 경제",
-        "titleEn": "Private equity firm \"high-end real estate polarization entrenched"
+        "titleEn": "ISG Management \"Commercial Real Estate Polarization Stagnation... Prefers Large and High-Quality Assets"
       },
       {
         "title": "증시 상승 출발…코스피 1%·코스닥 4%대 상승세(종합)",
         "link": "https://www.yna.co.kr/view/AKR20260810035500008",
         "publishedAt": "2026-08-10T00:40:53.000Z",
         "source": "연합뉴스 경제",
-        "titleEn": "Stock market rises start... Kospi up 1% · Kosdaq surges to over 4% (composite)"
+        "titleEn": "Stock market rises start... Kospi up 1% · Kosdaq surges to 4%+ (Summary)"
       },
       {
         "title": "7월 수도권 15억∼20억원대 아파트 거래 과반이 신고가",
@@ -222,21 +243,21 @@
         "link": "https://www.yna.co.kr/view/AKR20260810027900008",
         "publishedAt": "2026-08-10T00:06:44.000Z",
         "source": "연합뉴스 경제",
-        "titleEn": "Kospi gains momentum after start of rise... Kosdaq rises 2%"
+        "titleEn": "Kospi gains after start of upward trend... Kosdaq rises 2%"
       },
       {
         "title": "“여름철 생활 수리도 정찰제로”…아파트아이 ‘아파트케어’ 주목",
         "link": "https://www.mk.co.kr/news/realestate/12122468",
         "publishedAt": "2026-08-10T00:02:09.000Z",
         "source": "매일경제 부동산",
-        "titleEn": "Summer Maintenance Is Now a Surveillance System... Attention Arirang Apartments \"Apartment Care"
+        "titleEn": "Summer Maintenance Is Now a Scout System for Apartment Kids 'Apartment Care' Attention"
       },
       {
         "title": "[머니톡스] ② 공급·금융·세제의 삼박자…한국 부동산 '혼합 패키지' 기대",
         "link": "https://www.yna.co.kr/view/AKR20260806051500546",
         "publishedAt": "2026-08-10T00:01:33.000Z",
         "source": "연합뉴스 경제",
-        "titleEn": "Two Strikes: Supply, Finance, and Taxation Trio... Expect Mixed Package for Korean Real Estate"
+        "titleEn": "Hybrid Package for Korean Real Estate: Supply, Finance, and Taxation Strategy"
       },
       {
         "title": "“은행 뺑뺑이 돌아도 잔금 마련 막막”…대출 규제에 아파트 입주 예정자 ‘비상’",
@@ -257,7 +278,7 @@
         "link": "https://www.hankyung.com/article/2026081032617",
         "publishedAt": "2026-08-09T23:21:38.000Z",
         "source": "한국경제 경제",
-        "titleEn": "Don't Let US Treasury's 'Interest Rate Defense' Fail If U.S. Rates Stay High"
+        "titleEn": "Don't Let US Interest Rates Stay Elevated for Too Long, Says Bertelsmann"
       },
       {
         "title": "[마켓뷰] 애플 中반도체 시험적용…코스피 변수되나",
@@ -265,27 +286,6 @@
         "publishedAt": "2026-08-09T23:17:20.000Z",
         "source": "연합뉴스 경제",
         "titleEn": "Apple's test application of Chinese semiconductor technology could affect KOSPI."
-      },
-      {
-        "title": "주담대 막혀도 '25억 아파트' 척척…결국 살 사람은 샀다 [시장톡]",
-        "link": "https://www.hankyung.com/article/2026080701416",
-        "publishedAt": "2026-08-09T21:30:01.000Z",
-        "source": "한국경제 부동산",
-        "titleEn": "주담대 막혀도 '25억 아파트' 척척…결국 살 사람은 샀다 [시장톡]"
-      },
-      {
-        "title": "HUG 부동산 PF 보증잔액 20조원 돌파…1년 반만에 2배로↑",
-        "link": "https://www.yna.co.kr/view/AKR20260810003500003",
-        "publishedAt": "2026-08-09T21:08:50.000Z",
-        "source": "연합뉴스 경제",
-        "titleEn": "HUG 부동산 PF 보증잔액 20조원 돌파…1년 반만에 2배로↑"
-      },
-      {
-        "title": "주담대·스탁론 막힌 온투업, 중금리로 활로…한 달 새 824억↑",
-        "link": "https://www.yna.co.kr/view/AKR20260809035000002",
-        "publishedAt": "2026-08-09T20:57:00.000Z",
-        "source": "연합뉴스 경제",
-        "titleEn": "주담대·스탁론 막힌 온투업, 중금리로 활로…한 달 새 824억↑"
       }
     ]
   }
