@@ -82,59 +82,35 @@
     padding-bottom: 6px;
     border-bottom: 1px solid var(--border);
   }
-  .market-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 12px;
-  }
-  .market-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 14px 16px;
-  }
-  .market-card .label {
-    color: var(--muted);
-    font-size: 0.8rem;
-    margin-bottom: 4px;
-  }
-  .market-card .value {
-    font-size: 1.3rem;
-    font-weight: 600;
-  }
-  .market-card .change {
-    font-size: 0.85rem;
-    margin-top: 2px;
-  }
   .change.up { color: var(--up); }
   .change.down { color: var(--down); }
   .table-wrap {
     overflow-x: auto;
     margin-top: 4px;
   }
-  .re-table {
+  .data-table {
     width: 100%;
     border-collapse: collapse;
     font-size: 0.85rem;
     white-space: nowrap;
   }
-  .re-table th,
-  .re-table td {
+  .data-table th,
+  .data-table td {
     padding: 7px 12px 7px 0;
     text-align: left;
     border-bottom: 1px solid var(--border);
   }
-  .re-table th {
+  .data-table th {
     color: var(--muted);
     font-weight: 600;
     font-size: 0.75rem;
   }
-  .re-table tbody tr:hover { background: var(--card); }
-  .re-table .re-overall-row {
+  .data-table tbody tr:hover { background: var(--card); }
+  .data-table .overall-row {
     font-weight: 600;
     background: var(--card);
   }
-  .re-table .change {
+  .data-table .change {
     font-size: 0.78rem;
     margin-left: 4px;
   }
@@ -261,8 +237,19 @@
 
   <section id="market-section">
     <h2 id="market-heading">자산 시장 지표</h2>
-    <div class="market-grid" id="market-grid">
-      <div class="error">불러오는 중...</div>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th id="market-th-indicator">지표</th>
+            <th id="market-th-value">값</th>
+            <th id="market-th-change">증감</th>
+          </tr>
+        </thead>
+        <tbody id="market-grid">
+          <tr><td colspan="3" class="error">불러오는 중...</td></tr>
+        </tbody>
+      </table>
     </div>
     <div class="history-grid" id="history-grid"></div>
   </section>
@@ -271,7 +258,7 @@
     <h2 id="realestate-heading">한국 부동산 가격 추이</h2>
     <div class="content-notice" id="realestate-unit-caption" style="margin-top: -8px;"></div>
     <div class="table-wrap">
-      <table class="re-table">
+      <table class="data-table">
         <thead>
           <tr>
             <th id="re-th-district">지역</th>
@@ -321,6 +308,9 @@
       marketHeading: "자산 시장 지표",
       marketError: "데이터를 불러오지 못했습니다.",
       marketEmpty: "데이터 없음",
+      marketThIndicator: "지표",
+      marketThValue: "값",
+      marketThChange: "증감",
       kospiLabel: "코스피",
       usdKrwLabel: "원/달러 환율",
       baseRateLabel: "한국은행 기준금리",
@@ -358,6 +348,9 @@
       marketHeading: "Market Indicators",
       marketError: "Failed to load data.",
       marketEmpty: "No data",
+      marketThIndicator: "Indicator",
+      marketThValue: "Value",
+      marketThChange: "Change",
       kospiLabel: "KOSPI",
       usdKrwLabel: "USD/KRW",
       baseRateLabel: "BOK Base Rate",
@@ -430,36 +423,37 @@
   }
 
   function renderMarket(market) {
-    const grid = document.getElementById("market-grid");
+    const tbody = document.getElementById("market-grid");
     if (!market) {
-      grid.innerHTML = `<div class="error">${t("marketError")}</div>`;
+      tbody.innerHTML = `<tr><td colspan="3" class="error">${t("marketError")}</td></tr>`;
       return;
     }
-    const cards = [];
+    const rows = [];
     if (market.kospi) {
-      cards.push(`
-        <div class="market-card">
-          <div class="label">${t("kospiLabel")}</div>
-          <div class="value">${market.kospi.value}</div>
-          <div class="change ${directionClass(market.kospi.direction)}">${market.kospi.change ?? ""}</div>
-        </div>`);
+      rows.push(`
+        <tr>
+          <td>${t("kospiLabel")}</td>
+          <td>${market.kospi.value}</td>
+          <td class="change ${directionClass(market.kospi.direction)}">${market.kospi.change ?? ""}</td>
+        </tr>`);
     }
     if (market.usdKrw) {
-      cards.push(`
-        <div class="market-card">
-          <div class="label">${t("usdKrwLabel")}</div>
-          <div class="value">${Number(market.usdKrw.value).toFixed(2)}</div>
-        </div>`);
+      rows.push(`
+        <tr>
+          <td>${t("usdKrwLabel")}</td>
+          <td>${Number(market.usdKrw.value).toFixed(2)}</td>
+          <td></td>
+        </tr>`);
     }
     if (market.baseRate) {
-      cards.push(`
-        <div class="market-card">
-          <div class="label">${t("baseRateLabel")}</div>
-          <div class="value">${market.baseRate.value}%</div>
-          <div class="change">${t("baseRateSince")(market.baseRate.effectiveFrom)}</div>
-        </div>`);
+      rows.push(`
+        <tr>
+          <td>${t("baseRateLabel")}</td>
+          <td>${market.baseRate.value}%</td>
+          <td class="change">${t("baseRateSince")(market.baseRate.effectiveFrom)}</td>
+        </tr>`);
     }
-    grid.innerHTML = cards.join("") || `<div class="error">${t("marketEmpty")}</div>`;
+    tbody.innerHTML = rows.join("") || `<tr><td colspan="3" class="error">${t("marketEmpty")}</td></tr>`;
   }
 
   function sparklineSvg(values) {
@@ -585,7 +579,7 @@
   function realestateRowHtml(rawEntry, label, isOverall) {
     const entry = normalizeRealestateEntry(rawEntry);
     return `
-      <tr class="${isOverall ? "re-overall-row" : ""}">
+      <tr class="${isOverall ? "overall-row" : ""}">
         <td>${label}</td>
         <td>${realestateSaleCellHtml(entry.sale)}</td>
         <td>${realestateJeonseCellHtml(entry.jeonse)}</td>
@@ -792,6 +786,9 @@
     document.getElementById("page-title").textContent = t("title");
     document.getElementById("summary-heading").textContent = t("summaryHeading");
     document.getElementById("market-heading").textContent = t("marketHeading");
+    document.getElementById("market-th-indicator").textContent = t("marketThIndicator");
+    document.getElementById("market-th-value").textContent = t("marketThValue");
+    document.getElementById("market-th-change").textContent = t("marketThChange");
     document.getElementById("realestate-heading").textContent = t("realestateHeading");
     document.getElementById("realestate-unit-caption").textContent = t("realestateUnitCaption");
     document.getElementById("re-th-district").textContent = t("realestateTagDistrict");
