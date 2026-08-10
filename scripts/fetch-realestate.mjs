@@ -223,6 +223,10 @@ async function readHistory() {
   }
 }
 
+// "이번 주 거래"만 따로 집계하지 않고, 매일 갱신되는 이번 달 누적 평균의
+// 스냅샷을 1주일 간격으로 비교한다. 실거래 신고가 계약 후 최대 30일까지
+// 늦게 들어오기 때문에, 계약일 기준으로 진짜 주간 집계를 하면 최근 1~2주는
+// 신고가 덜 끝나서 표본이 인위적으로 적어 보이는 문제가 있어 이 방식을 택함.
 // 1주일 전에 가장 가까운(그 이전) 기록을 기준값으로 삼는다. 아직 7일치가
 // 없으면(도입 초기) 가장 오래된 기록을 기준값으로 쓴다.
 function findBaseline(history, now) {
@@ -320,9 +324,11 @@ async function main() {
   }
 
   const now = new Date();
-  // 최근 신고분은 그 달 안에도 계속 들어오므로, 이번 달+지난달 2개월치를
-  // 합쳐서 봐야 월초에 표본이 너무 적어지는 걸 피할 수 있다.
-  const yearMonths = [kstYearMonth(now, 0), kstYearMonth(now, 1)];
+  // 이번 달치만 조회 (예전엔 월초 표본 부족을 피하려고 지난달까지 2개월을
+  // 합쳤는데, 요청량이 2배가 돼서 25개구 조회 시 데이터포털 일일 한도에
+  // 걸리는 걸 겪었음 - 이번 달만 봐도 대체로 충분한 표본이 쌓이는 편이라
+  // 요청량을 줄이는 쪽을 택함).
+  const yearMonths = [kstYearMonth(now, 0)];
 
   const results = await mapWithConcurrency(DISTRICTS, CONCURRENCY, async ({ code, name }) => {
     const entry = { code, name, sale: null, jeonse: null, wolse: null };
@@ -394,7 +400,7 @@ async function main() {
         };
 
   const overall = { sale: overallSale, jeonse: overallJeonse, wolse: overallWolse };
-  const period = `${yearMonths[1]}~${yearMonths[0]}`;
+  const period = yearMonths[0];
 
   // 히스토리는 변화율 계산 없이 원값만 저장(나중에 다른 기준일로도 재계산
   // 가능하게), 화면에 보여줄 오늘자 realestate.json에만 1주일 전 대비 증감을 붙인다.

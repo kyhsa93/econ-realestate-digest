@@ -10,8 +10,10 @@
 - `scripts/fetch-news.mjs` — 경제지 RSS 파싱 → `docs/data/news.json`
 - `scripts/fetch-market.mjs` — 코스피/환율/기준금리 조회 → `docs/data/market.json`
 - `scripts/fetch-realestate.mjs` — 국토교통부 아파트매매·전월세 실거래가 API(서울 25개 자치구 전체,
-  최근 2개월)로 구별 매매/전세 평당가 + 월세(보증금·월세 평균) + 서울 전체 평균, 1주일 전 대비
-  증감(매매·전세만)까지 조회 → `docs/data/realestate.json`
+  이번 달)로 구별 매매/전세 평당가 + 월세(보증금·월세 평균) + 서울 전체 평균, 1주일 전 대비
+  증감(매매·전세만)까지 조회 → `docs/data/realestate.json` (예전엔 월초 표본 부족을 피하려고
+  지난달까지 2개월을 합쳤는데, 요청량이 2배가 돼서 25개구 조회 시 일일 호출 한도에 걸려서
+  이번 달만 조회하도록 변경)
   (`MOLIT_API_KEY`+`MOLIT_API_ENDPOINT`는 매매, `MOLIT_RENT_API_KEY`+`MOLIT_RENT_API_ENDPOINT`는
   전월세 — 둘은 독립적으로 동작해서 한쪽만 등록돼 있어도 그쪽만 조회함)
 - `scripts/summarize-digest.mjs` — 로컬 Ollama(qwen2.5:1.5b)로 오늘의 뉴스를 카테고리별로 한국어/영어 요약 → `docs/data/summary.json`
