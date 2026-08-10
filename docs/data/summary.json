@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-08-10T07:21:13.643Z",
-  "model": "qwen2.5:1.5b",
+  "updatedAt": "2026-08-10T07:30:57.440Z",
+  "model": "qwen2.5:3b",
   "summary": {
-    "ko": "- 코스닥과 코스피가 상승하며 주식 시장이 반등하고, 원/달러 환율도 오르면서 경제 상황이 개선되고 있다.\n- 미국과 일본의 금리 상승에 따라 3년물 국고채 금리는 장중 연 3.773%로 상승했으며, 이는 해외 부동산 펀드 투자에 대한 주의보가 나왔습니다.\n- 서울과 부산 지역의 아파트 거래량이 급증하고 있으며, 특히 15억~20억원 구간의 신고가 아파트는 거래 비중이 크게 증가했습니다.\n- 기타 경제 소식: 신한카드-홈앤쇼핑, 지역 경제 활성화 맞손, [게시판] 투교협, 초등학생·학부모 대상 여름 경제캠프 개최",
-    "en": "- The stock market is recovering as the Kospi and Kosdaq rise along with the strengthening won/dollar exchange rate, indicating an improvement in economic conditions.\n- Following the rise in interest rates between the US and Japan, the three-year government bond yield has increased to 3.773% on the day, which is a warning for foreign real estate fund investors.\n- 서울과 부산 지역의 아파트 거래량이 급증하고 있으며, 특히 15억~20억원 구간의 신고가 아파트는 거래 비중이 크게 증가했습니다.\n- Other Economic News: 신한카드-홈앤쇼핑, 지역 경제 활성화 맞손, [게시판] 투교협, 초등학생·학부모 대상 여름 경제캠프 개최"
+    "ko": "- 증시·환율: 코스닥, 6.97%↑…코스피는 찔끔 상승, 3거래일 만에 반등(종합), [외환] 원/달러 환율 2.3원 오른 1,418.4원(15:30 기준가), 코스닥, 6.97%↑…코스피는 찔끔 상승, 3거래일만에 반등 +3\n- 국고채 금리가 상승했으며, 이는 환율 상승과 외국인 매도에 따른 결과다.\n- 부동산: 중고가 아파트 신고가 쏟아진 수도권…12억~15억 구간 비중 2배 급증, [부산소식] 동아대, 13일 부동산 시장 양극화 주제 세미나, 15억~20억원 수도권 아파트, 7월 거래 절반 이상이 ‘신고가’ +5\n- 기타 경제 소식: 신한카드-홈앤쇼핑, 지역 경제 활성화 맞손, [게시판] 투교협, 초등학생·학부모 대상 여름 경제캠프 개최",
+    "en": "- Stocks & FX: 코스닥, 6.97%↑…코스피는 찔끔 상승, 3거래일 만에 반등(종합), [외환] 원/달러 환율 2.3원 오른 1,418.4원(15:30 기준가), 코스닥, 6.97%↑…코스피는 찔끔 상승, 3거래일만에 반등 +3\n- The treasury bond rate has risen, and this is a result of both the currency appreciation and foreign selling.\n- Real Estate: 중고가 아파트 신고가 쏟아진 수도권…12억~15억 구간 비중 2배 급증, [부산소식] 동아대, 13일 부동산 시장 양극화 주제 세미나, 15억~20억원 수도권 아파트, 7월 거래 절반 이상이 ‘신고가’ +5\n- Other Economic News: 신한카드-홈앤쇼핑, 지역 경제 활성화 맞손, [게시판] 투교협, 초등학생·학부모 대상 여름 경제캠프 개최"
   }
 }
