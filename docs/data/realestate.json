@@ -1,0 +1,46 @@
+{
+  "updatedAt": "2026-08-10T02:25:51.843Z",
+  "period": "202607~202608",
+  "overall": {
+    "avgPricePerM2": 19263812.957553487,
+    "avgPricePerPyeong10k": 6368,
+    "transactionCount": 1006
+  },
+  "districts": [
+    {
+      "code": "11680",
+      "name": "강남구",
+      "avgPricePerM2": 35664565.655662514,
+      "avgPricePerPyeong10k": 11790,
+      "transactionCount": 127
+    },
+    {
+      "code": "11650",
+      "name": "서초구",
+      "avgPricePerM2": 29564596.775175758,
+      "avgPricePerPyeong10k": 9773,
+      "transactionCount": 81
+    },
+    {
+      "code": "11710",
+      "name": "송파구",
+      "avgPricePerM2": 26396581.740495164,
+      "avgPricePerPyeong10k": 8726,
+      "transactionCount": 192
+    },
+    {
+      "code": "11440",
+      "name": "마포구",
+      "avgPricePerM2": 19242814.04719735,
+      "avgPricePerPyeong10k": 6361,
+      "transactionCount": 91
+    },
+    {
+      "code": "11350",
+      "name": "노원구",
+      "avgPricePerM2": 10943735.700525055,
+      "avgPricePerPyeong10k": 3618,
+      "transactionCount": 515
+    }
+  ]
+}
