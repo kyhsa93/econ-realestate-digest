@@ -67,14 +67,17 @@ function stripHangul(text) {
   return text.replace(/[가-힣ᄀ-ᇿ㄰-㆏]/g, "");
 }
 
-// "생성된 숫자가 원문 어딘가에 있는지"만 substring으로 검증했더니, 원문의
-// 다른(무관한) 숫자와 우연히 겹치기만 해도 통과되면서 실제로는 지어낸 금액
-// ("200억 원", "824억 원" 등)이 그대로 노출되는 사례가 나왔다. 숫자가 어떤
-// 맥락에서 왜 등장했는지까지 검증할 방법이 없으니, 아예 LLM이 합성한 문장에는
-// 숫자를 하나도 허용하지 않는다 (실제 정확한 수치는 시장 지표 카드에 이미
-// 별도로 정확하게 표시되고 있으므로, 요약 문장에서는 없어도 정보 손실이 적다).
-function containsAnyNumber(sentence) {
-  return /\d/.test(sentence);
+// 처음엔 "숫자가 하나라도 있으면 무조건 폐기"였는데, 실제 경제 뉴스는
+// 숫자·퍼센트가 거의 항상 등장해서 대부분의 요약이 "OO 관련 뉴스 N건" 같은
+// 의미 없는 대체 문구로 빠져버렸다(사용자 피드백으로 확인). 번역과 달리
+// 이건 같은 언어로 같은 카테고리 안에서만 요약하는 거라 단위 환산 오류
+// (예: "8천만원"->"$8 million") 위험이 없으므로, 생성된 숫자가 그 카테고리
+// 원문 어딘가에 실제로 등장하는지만 검증하는 걸로 되돌린다. 서로 다른
+// 제목의 숫자를 엮어 그럴듯한 조합을 만들 잔여 위험은 있지만, 완전히
+// 지어낸 숫자보다는 훨씬 낮은 위험이고, 정보 손실이 너무 크다는 문제가 더 컸다.
+function containsUnverifiedNumber(sentence, sourceText) {
+  const numbers = sentence.match(/\d[\d,.]*/g) ?? [];
+  return numbers.some((n) => !sourceText.includes(n));
 }
 
 // 모델이 "한 문장만"을 지키지 않고 여러 문장을 이어 쓰면서
@@ -157,6 +160,7 @@ async function summarizeBucketLine(bucket, lang) {
     return listCategory(label, bucket.titles);
   }
 
+  const sourceText = bucket.titles.join(" ");
   const prompt = buildBucketPrompt(label, bucket.titles, lang);
 
   let sentence;
@@ -167,11 +171,13 @@ async function summarizeBucketLine(bucket, lang) {
     sentence = null;
   }
 
-  if (!sentence || containsAnyNumber(sentence)) {
+  if (!sentence || containsUnverifiedNumber(sentence, sourceText)) {
     if (sentence) {
-      console.error(`[summarize-digest] "${label}" (${lang}) 요약에 숫자 포함, 대체 문구 사용: ${sentence}`);
+      console.error(`[summarize-digest] "${label}" (${lang}) 요약에 검증 안 된 숫자 포함, 헤드라인 나열로 대체: ${sentence}`);
     }
-    sentence = lang === "ko" ? `${label} 관련 뉴스 ${bucket.titles.length}건` : `${bucket.titles.length} news items about ${label}`;
+    // "OO 관련 뉴스 N건"은 정보가 하나도 없어서(사용자 피드백), 실패해도
+    // 최소한 실제 제목은 보이도록 "기타" 카테고리와 동일하게 나열로 대체.
+    return listCategory(label, bucket.titles);
   }
 
   return `- ${sentence}`;
