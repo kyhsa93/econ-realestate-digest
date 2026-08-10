@@ -134,6 +134,11 @@
     font-size: 0.78rem;
     margin-left: 4px;
   }
+  .data-table .tx-count {
+    color: var(--muted);
+    font-size: 0.78rem;
+    margin-left: 4px;
+  }
   ul.news-list {
     list-style: none;
     margin: 0;
@@ -617,31 +622,33 @@
     };
   }
 
-  function realestateCellTitle(metric, extra) {
-    if (!metric) return "";
-    const parts = [t("realestateCountSuffix")(metric.transactionCount)];
-    if (metric.change && metric.baselineDate) parts.push(t("realestateChangeVs")(metric.baselineDate));
-    if (extra) parts.push(extra);
-    return parts.join(" · ");
+  function realestateCountHtml(metric) {
+    if (!metric || metric.transactionCount == null) return "";
+    return `<span class="tx-count">${t("realestateCountSuffix")(metric.transactionCount)}</span>`;
+  }
+
+  function realestateDateHintAttr(metric) {
+    if (!metric?.change || !metric.baselineDate) return "";
+    return ` title="${t("realestateChangeVs")(metric.baselineDate)}"`;
   }
 
   // 매매/전세는 "평당 가격" 성격이라 증감(change)까지 표시하고, 월세는
-  // 보증금+월세 두 축이라 증감 추적 없이 현재값만 보여준다. 거래건수/기준일은
-  // 칸을 넓게 안 차지하게 title(hover) 속성으로 넣는다.
+  // 보증금+월세 두 축이라 증감 추적 없이 현재값만 보여준다. 거래건수는
+  // 자치구·서울 전체(overall) 행 모두 같은 셀 렌더러를 쓰므로 자동으로 같이 보임.
   function realestateSaleCellHtml(sale) {
     if (!sale) return "-";
-    return `<span title="${realestateCellTitle(sale)}">${formatPyeongPrice(sale.avgPricePerPyeong10k)}</span> ${realestateChangeHtml(sale.change)}`;
+    return `<span${realestateDateHintAttr(sale)}>${formatPyeongPrice(sale.avgPricePerPyeong10k)}</span> ${realestateChangeHtml(sale.change)} ${realestateCountHtml(sale)}`;
   }
 
   function realestateJeonseCellHtml(jeonse) {
     if (!jeonse) return "-";
-    return `<span title="${realestateCellTitle(jeonse)}">${formatPyeongPrice(jeonse.avgDepositPerPyeong10k)}</span> ${realestateChangeHtml(jeonse.change)}`;
+    return `<span${realestateDateHintAttr(jeonse)}>${formatPyeongPrice(jeonse.avgDepositPerPyeong10k)}</span> ${realestateChangeHtml(jeonse.change)} ${realestateCountHtml(jeonse)}`;
   }
 
   function realestateWolseCellHtml(wolse) {
     if (!wolse) return "-";
     const text = `${formatPyeongPrice(wolse.avgDeposit10k)} / ${t("realestateMonthlyPrefix")}${formatPyeongPrice(wolse.avgMonthlyRent10k)}`;
-    return `<span title="${realestateCellTitle(wolse)}">${text}</span>`;
+    return `<span>${text}</span> ${realestateCountHtml(wolse)}`;
   }
 
   function realestateRowHtml(rawEntry, label, isOverall) {
