@@ -41,11 +41,14 @@ GitHub Actions(`daily-update.yml`)가 매일 자동 실행. 수동 실행은 Act
 ## 한국 부동산 가격 추이
 
 공공데이터포털 "국토교통부_아파트매매 실거래자료" API 사용 (KB부동산 데이터허브는 비공식
-API + 봇 차단으로 접근 불가함을 먼저 확인함). GitHub 저장소 Secret `MOLIT_API_KEY`로
-서비스키를 주입하며, 로컬 실행 시에는 환경변수로 넘기면 됨:
+API + 봇 차단으로 접근 불가함을 먼저 확인함). 서비스키뿐 아니라 API 엔드포인트 URL도
+GitHub 저장소 Secret으로 주입함(`MOLIT_API_KEY`, `MOLIT_API_ENDPOINT`). 로컬 실행 시에는
+환경변수로 넘기면 됨:
 
 ```
-MOLIT_API_KEY=발급받은키 node scripts/fetch-realestate.mjs
+MOLIT_API_KEY=발급받은키 \
+MOLIT_API_ENDPOINT=http://apis.data.go.kr/1613000/RTMSDataSvcAptTradeDev/getRTMSDataSvcAptTradeDev \
+node scripts/fetch-realestate.mjs
 ```
 
 서울 5개구(강남·서초·송파·마포·노원)만 추적하는 표본이라 전국 대표값은 아님.

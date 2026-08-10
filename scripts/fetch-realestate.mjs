@@ -7,7 +7,7 @@ const outFile = path.join(dataDir, "realestate.json");
 const historyFile = path.join(dataDir, "realestate-history.json");
 const HISTORY_MAX_DAYS = 180;
 
-const API_URL = "http://apis.data.go.kr/1613000/RTMSDataSvcAptTradeDev/getRTMSDataSvcAptTradeDev";
+const API_URL = process.env.MOLIT_API_ENDPOINT;
 const SERVICE_KEY = process.env.MOLIT_API_KEY;
 
 // 강남/서초/송파(고가권) + 마포/노원(중저가권)을 섞어서 서울 아파트값의
@@ -129,8 +129,8 @@ async function appendHistory(now, entry) {
 }
 
 async function main() {
-  if (!SERVICE_KEY) {
-    console.error("[fetch-realestate] MOLIT_API_KEY 없음, 생략");
+  if (!SERVICE_KEY || !API_URL) {
+    console.error("[fetch-realestate] MOLIT_API_KEY 또는 MOLIT_API_ENDPOINT 없음, 생략");
     return;
   }
 
