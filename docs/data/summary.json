@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-08-10T00:00:21.851Z",
+  "updatedAt": "2026-08-10T00:11:55.485Z",
   "model": "qwen2.5:1.5b",
   "summary": {
-    "ko": "- 대출 규제에 따른 아파트 입주 예정자의 불안감이 증가하고, 이는 주택담보 대출의 어려움으로 인해 일부 가격 상승을 초래했습니다.\n- 코스피 지수 상승과 화폐 가치 변동성이 금융위기 이후 최대치를 기록하며 한국 경제에 변수가 생겼다.\n- 코스피 상승세가 지속되며, 증권사 발행어음과 IMA에 관심이 높아진다.\n- 기타 경제 소식: 한국경제인협회, 대국민 창업 프로젝트…12주간 100개팀 육성, 파도에 호텔·카페·상점까지…하이난의 '서핑 경제학' [차이나 워치]",
-    "en": "- 12 news items about Real Estate\n- Apple's planned use of Chinese semiconductor testing has sparked uncertainty for South Korea's stock market, with the currency exchange rate experiencing its largest volatility since the financial crisis.\n- 4 news items about Rates, Deposits & Investment Products\n- Other Economic News: 한국경제인협회, 대국민 창업 프로젝트…12주간 100개팀 육성, 파도에 호텔·카페·상점까지…하이난의 '서핑 경제학' [차이나 워치]"
+    "ko": "- 부동산 관련 뉴스 13건\n- 코스피 지수 상승과 화폐 변동성 증가로 인해 한국 경제 시장에 변수가 생겼다.\n- 코스피 상승세가 지속되며, 증권사 발행어음과 IMA에 관심이 높아짐으로써 중금리로 활로 개척하고 있는 금융기관들이 급증하는 모습이다.\n- 기타 경제 소식: 한국경제인협회, 대국민 창업 프로젝트…12주간 100개팀 육성",
+    "en": "- 13 news items about Real Estate\n- Apple's planned use of Chinese semiconductor testing affects the South Korean stock market and highlights extreme currency volatility following a financial crisis.\n- 4 news items about Rates, Deposits & Investment Products\n- Other Economic News: 한국경제인협회, 대국민 창업 프로젝트…12주간 100개팀 육성"
   }
 }
