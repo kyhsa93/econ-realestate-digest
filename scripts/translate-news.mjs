@@ -31,7 +31,7 @@ function parseCoefficient(str) {
 }
 
 function normalizeKoreanAmounts(text) {
-  const numTokenRe = "\\d+(?:천|백|십)?";
+  const numTokenRe = "\\d+(?:\\.\\d+)?(?:천|백|십)?"; // "15.6억"처럼 소수점 있는 계수도 지원
   // 복합 표현 먼저 처리: "1억5천만" 형태
   let result = text.replace(
     new RegExp(`(${numTokenRe})(억|조)\\s*(${numTokenRe})(만)`, "g"),
