@@ -1,7 +1,21 @@
 {
-  "updatedAt": "2026-08-10T08:11:37.538Z",
+  "updatedAt": "2026-08-10T09:01:45.315Z",
   "date": "2026-08-10",
   "items": [
+    {
+      "title": "40억 아파트 종부세 … 부부 각자 내야 '1주택 특례'보다 덜 낸다",
+      "link": "https://www.mk.co.kr/news/realestate/12123103",
+      "publishedAt": "2026-08-10T08:50:19.000Z",
+      "source": "매일경제 부동산",
+      "titleEn": "40억 아파트 종부세 … 부부 각자 내야 '1주택 특례'보다 덜 낸다"
+    },
+    {
+      "title": "바짝 마른 '전세 가뭄' … 서울 아파트 월세 비중 처음으로 55% 넘어",
+      "link": "https://www.mk.co.kr/news/realestate/12123102",
+      "publishedAt": "2026-08-10T08:50:18.000Z",
+      "source": "매일경제 부동산",
+      "titleEn": "Seoul apartment rent makes up first time over 55% of total market, tight rental market intensifies"
+    },
     {
       "title": "수도권 15~20억 아파트 신고가 행진",
       "link": "https://www.mk.co.kr/news/realestate/12123006",
@@ -14,21 +28,21 @@
       "link": "https://www.yna.co.kr/view/AKR20260810124151008",
       "publishedAt": "2026-08-10T08:08:38.000Z",
       "source": "연합뉴스 경제",
-      "titleEn": "Did the Slide End? Treasury Rates Continue to Rise for Third Day Consecutive (Overview)"
+      "titleEn": "Did the Slide End? Treasury Rates Continue to Rise for Third Day in a Row (Overview)"
     },
     {
       "title": "국고채 금리 일제히 상승…3년물 연 3.778%",
       "link": "https://www.yna.co.kr/view/AKR20260810124100008",
       "publishedAt": "2026-08-10T07:45:51.000Z",
       "source": "연합뉴스 경제",
-      "titleEn": "Treasury Rates Rise Across the Board—3-Year Note at 3.778%"
+      "titleEn": "Government Bond Rates Rise Across the Board – 3-Year Note at 3.778%"
     },
     {
       "title": "코스피 주춤, 코스닥만 날았다…레버리지 규제 이후 수급 개선",
       "link": "https://www.yna.co.kr/view/AKR20260810082800008",
       "publishedAt": "2026-08-10T07:36:08.000Z",
       "source": "연합뉴스 경제",
-      "titleEn": "Kospi Stalled While Kosdaq Soared... Following Leverage Regulation, Supply/Demand Improved"
+      "titleEn": "KOSPI Slips While KOSDAQ Soars Post-Leverage Regulation Measures"
     },
     {
       "title": "환율, 이틀째 1,410원대…외국인 순매도·저가 매수에 반등",
@@ -42,35 +56,35 @@
       "link": "https://www.yna.co.kr/view/AKR20260810114400008",
       "publishedAt": "2026-08-10T07:10:21.000Z",
       "source": "연합뉴스 경제",
-      "titleEn": "KOSDAQ rose 6.97%... KOSPI barely climbed, rebounding after three trading days"
+      "titleEn": "KOSDAQ up 6.97%... KOSPI barely recovers, rebounds after three trading days"
     },
     {
       "title": "美日 엔 매수 공동개입에…\"내년 봄 日기준금리 1.5% 도달\" 전망",
       "link": "https://www.yna.co.kr/view/AKR20260810109000073",
       "publishedAt": "2026-08-10T07:04:37.000Z",
       "source": "연합뉴스 경제",
-      "titleEn": "Expect JGB Rate to Hit 1.5% by Spring Next Year amid US-Japan Joint Intervention"
+      "titleEn": "Expect Japanese interest rate to reach 1.5% by spring next year amid US-Japan joint intervention"
     },
     {
       "title": "무신사·구다이…코스피 대어 몰려온다",
       "link": "https://www.hankyung.com/article/2026081035711",
       "publishedAt": "2026-08-10T06:59:27.000Z",
       "source": "한국경제 경제",
-      "titleEn": "Wisesa and Gudai... Flocking to Kospi"
+      "titleEn": "MWS & Gaddi... Come to Kospi as FOMO Sets In"
     },
     {
       "title": "[외환] 원/달러 환율 2.3원 오른 1,418.4원(15:30 기준가)",
       "link": "https://www.yna.co.kr/view/AKR20260810106100002",
       "publishedAt": "2026-08-10T06:39:38.000Z",
       "source": "연합뉴스 경제",
-      "titleEn": "[외환] 원/달러 환율 2.3원 오른 1,418.4원(15:30 기준가)"
+      "titleEn": "Foreign Exchange: USD/KRW Rate Rises to 1,418.4 Won (as of 15:30)"
     },
     {
       "title": "[속보] 코스닥, 7% 급등해 854 마감…코스피는 0.65%↑",
       "link": "https://www.yna.co.kr/view/AKR20260810107100008",
       "publishedAt": "2026-08-10T06:34:02.000Z",
       "source": "연합뉴스 경제",
-      "titleEn": "Sudden Move: KOSDAQ Surges 7% to Close at 854, KOSPI Up 0.65%"
+      "titleEn": "Sudden Update: KOSDAQ Surges 7% to Close at 854, KOSPI Up 0.65%"
     },
     {
       "title": "중고가 아파트 신고가 쏟아진 수도권…12억~15억 구간 비중 2배 급증",
@@ -84,21 +98,21 @@
       "link": "https://www.yna.co.kr/view/AKR20260810094000051",
       "publishedAt": "2026-08-10T05:35:11.000Z",
       "source": "연합뉴스 경제",
-      "titleEn": "Busan News: Donga University Seminar on Housing Market Polarization Scheduled for June 13rd"
+      "titleEn": "Busan News: Donga University Seminars on the Polarization of the Real Estate Market on June 13rd"
     },
     {
       "title": "\"안전하다더니 전액 날렸다\"…해외 부동산 펀드 투자 주의보",
       "link": "https://www.yna.co.kr/view/AKR20260810063700002",
       "publishedAt": "2026-08-10T03:00:04.000Z",
       "source": "연합뉴스 경제",
-      "titleEn": "Unsafe Claims: Full Investment Scandal... Caution on Overseas Real Estate Fund Investments"
+      "titleEn": "Unsafe Claims: Full Investment Lost... Caution Advised for Overseas Real Estate Funds"
     },
     {
       "title": "코스피, 1% 상승…코스닥은 한때 6.78% 오르며 매수 사이드카",
       "link": "https://www.yna.co.kr/view/AKR20260810064000008",
       "publishedAt": "2026-08-10T02:27:44.000Z",
       "source": "연합뉴스 경제",
-      "titleEn": "KOSPI up by 1%, KOSDAQ surges to as high as 6.78%, sparking buying interest"
+      "titleEn": "KOSPI up by 1%, KOSDAQ surges to as high as 6.78% before retreating to buy side"
     },
     {
       "title": "15억~20억원 수도권 아파트, 7월 거래 절반 이상이 ‘신고가’",
@@ -119,28 +133,14 @@
       "link": "https://www.yna.co.kr/view/AKR20260810056800008",
       "publishedAt": "2026-08-10T01:48:21.000Z",
       "source": "연합뉴스 경제",
-      "titleEn": "July Treasury Rate Rises on Currency Strength and Foreign Selling Across the Board"
+      "titleEn": "July Treasury Rate Rises Due to Currency Upward Movement and Foreign Selling Across the Board"
     },
     {
       "title": "“골프연습장 없으면 난리납니다”…신축 아파트 커뮤니티 살펴봤더니",
       "link": "https://www.mk.co.kr/news/realestate/12122584",
       "publishedAt": "2026-08-10T01:33:01.000Z",
       "source": "매일경제 부동산",
-      "titleEn": "Golf Practice Course Is a Must-Have... Upon Visiting Recently Constructed Apartment Complex"
-    },
-    {
-      "title": "서울 전용 59㎡ 민간아파트 분양가 15.6억원…전국의 3배",
-      "link": "https://www.yna.co.kr/view/AKR20260810047900003",
-      "publishedAt": "2026-08-10T01:13:05.000Z",
-      "source": "연합뉴스 경제",
-      "titleEn": "서울 전용 59㎡ 민간아파트 분양가 15.6억원…전국의 3배"
-    },
-    {
-      "title": "신한카드-홈앤쇼핑, 지역 경제 활성화 맞손",
-      "link": "https://www.yna.co.kr/view/AKR20260810044900002",
-      "publishedAt": "2026-08-10T01:11:58.000Z",
-      "source": "연합뉴스 경제",
-      "titleEn": "Samsung Card and Home & Shop Hand in Hand to Boost Local Economy"
+      "titleEn": "Without Golf Practice Fields, There’s Chaos... Visited a New Construction Apartment Complex"
     }
   ]
 }
