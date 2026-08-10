@@ -9,6 +9,20 @@
 <link rel="apple-touch-icon" href="./icons/icon-192.png">
 <meta name="google-adsense-account" content="ca-pub-1195159445218373">
 <title>경제·부동산 데일리 다이제스트</title>
+<meta name="description" content="매일 아침 경제·부동산 뉴스, 코스피·환율·기준금리, 서울 25개구 아파트 실거래가, AI 요약을 자동으로 갱신해 보여주는 무료 데일리 다이제스트.">
+<link rel="canonical" href="https://kyhsa93.github.io/econ-realestate-digest/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="경제·부동산 데일리 다이제스트">
+<meta property="og:url" content="https://kyhsa93.github.io/econ-realestate-digest/">
+<meta property="og:title" content="경제·부동산 데일리 다이제스트">
+<meta property="og:description" content="매일 아침 경제·부동산 뉴스, 코스피·환율·기준금리, 서울 25개구 아파트 실거래가, AI 요약을 자동으로 갱신해 보여주는 무료 데일리 다이제스트.">
+<meta property="og:image" content="https://kyhsa93.github.io/econ-realestate-digest/icons/icon-512.png">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="경제·부동산 데일리 다이제스트">
+<meta name="twitter:description" content="매일 아침 경제·부동산 뉴스, 코스피·환율·기준금리, 서울 25개구 아파트 실거래가, AI 요약을 자동으로 갱신해 보여주는 무료 데일리 다이제스트.">
+<meta name="twitter:image" content="https://kyhsa93.github.io/econ-realestate-digest/icons/icon-512.png">
 <style>
   :root {
     color-scheme: light dark;
@@ -338,6 +352,7 @@
   const T = {
     ko: {
       title: "경제·부동산 데일리 다이제스트",
+      description: "매일 아침 경제·부동산 뉴스, 코스피·환율·기준금리, 서울 25개구 아파트 실거래가, AI 요약을 자동으로 갱신해 보여주는 무료 데일리 다이제스트.",
       lastUpdated: (s) => `마지막 갱신: ${s}`,
       lastUpdatedUnknown: "갱신 정보를 불러오지 못했습니다.",
       loading: "불러오는 중...",
@@ -384,6 +399,7 @@
     },
     en: {
       title: "Econ & Real Estate Digest",
+      description: "A free daily digest of Korean economy & real estate news, KOSPI/USD-KRW/BOK rate, Seoul apartment transaction prices, and AI-generated summaries — auto-updated every morning.",
       lastUpdated: (s) => `Last updated: ${s}`,
       lastUpdatedUnknown: "Could not load update info.",
       loading: "Loading...",
@@ -871,11 +887,21 @@
       : t("lastUpdatedUnknown");
   }
 
+  function setMetaContent(selector, content) {
+    const el = document.querySelector(selector);
+    if (el) el.setAttribute("content", content);
+  }
+
   function applyLocale(next) {
     locale = next;
     window.localStorage.setItem("lang", locale);
     document.documentElement.setAttribute("lang", locale);
     document.title = t("title");
+    setMetaContent('meta[name="description"]', t("description"));
+    setMetaContent('meta[property="og:title"]', t("title"));
+    setMetaContent('meta[property="og:description"]', t("description"));
+    setMetaContent('meta[name="twitter:title"]', t("title"));
+    setMetaContent('meta[name="twitter:description"]', t("description"));
     document.getElementById("page-title").textContent = t("title");
     document.getElementById("summary-heading").textContent = t("summaryHeading");
     document.getElementById("market-heading").textContent = t("marketHeading");
