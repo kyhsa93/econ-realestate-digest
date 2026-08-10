@@ -1,5 +1,5 @@
 import Parser from "rss-parser";
-import { writeFile, mkdir } from "node:fs/promises";
+import { writeFile, mkdir, readFile } from "node:fs/promises";
 import path from "node:path";
 
 const FEEDS = [
@@ -14,9 +14,41 @@ const MAX_ITEMS = 20;
 
 const dataDir = path.resolve(import.meta.dirname, "../docs/data");
 const outFile = path.join(dataDir, "news.json");
+const historyFile = path.join(dataDir, "news-history.json");
+const HISTORY_MAX_DAYS = 180;
 
 function matchesKeyword(title) {
   return KEYWORDS.some((k) => title.includes(k));
+}
+
+function kstDateString(date) {
+  return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(date);
+}
+
+async function appendHistory(now, items) {
+  let history = [];
+  try {
+    history = JSON.parse(await readFile(historyFile, "utf-8"));
+  } catch {
+    // 최초 실행이면 이전 기록 없음
+  }
+
+  const today = kstDateString(now);
+  const record = { date: today, items };
+
+  const idx = history.findIndex((h) => h.date === today);
+  if (idx >= 0) {
+    history[idx] = record; // 같은 날 재실행 시 덮어쓰기 (중복 방지)
+  } else {
+    history.push(record);
+  }
+
+  history.sort((a, b) => a.date.localeCompare(b.date));
+  if (history.length > HISTORY_MAX_DAYS) {
+    history = history.slice(history.length - HISTORY_MAX_DAYS);
+  }
+
+  await writeFile(historyFile, JSON.stringify(history, null, 2));
 }
 
 async function fetchFeed(parser, feed) {
@@ -55,11 +87,13 @@ async function main() {
     return;
   }
 
+  const now = new Date();
   await mkdir(dataDir, { recursive: true });
   await writeFile(
     outFile,
-    JSON.stringify({ updatedAt: new Date().toISOString(), items }, null, 2)
+    JSON.stringify({ updatedAt: now.toISOString(), items }, null, 2)
   );
+  await appendHistory(now, items);
 
   console.log(`[fetch-news] ${items.length}건 저장 완료`);
 }

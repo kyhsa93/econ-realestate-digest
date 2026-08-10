@@ -198,6 +198,16 @@
     font-size: 0.88rem;
     white-space: pre-wrap;
   }
+  .archive-news-list {
+    margin-top: 10px;
+    padding-left: 4px;
+  }
+  .archive-news-list .news-item {
+    padding: 6px 0;
+  }
+  .archive-news-list .news-item a {
+    font-size: 0.85rem;
+  }
 </style>
 </head>
 <body>
@@ -319,7 +329,7 @@
   }
 
   // ---- data cache (재조회 없이 언어 전환 시 재렌더링하기 위함) ----------
-  const cache = { market: null, news: null, summary: null, history: null, summaryHistory: null };
+  const cache = { market: null, news: null, summary: null, history: null, summaryHistory: null, newsHistory: null };
 
   function fmtUpdated(iso) {
     if (!iso) return "-";
@@ -483,10 +493,33 @@
   }
 
   const ARCHIVE_DISPLAY_LIMIT = 30;
+  const ARCHIVE_NEWS_LIMIT = 20;
 
-  function renderArchive(summaryHistory) {
+  function buildArchiveNewsList(items) {
+    const ul = document.createElement("ul");
+    ul.className = "news-list archive-news-list";
+    for (const item of (items ?? []).slice(0, ARCHIVE_NEWS_LIMIT)) {
+      const li = document.createElement("li");
+      li.className = "news-item";
+      const a = document.createElement("a");
+      a.href = item.link;
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.textContent = item.title;
+      const meta = document.createElement("div");
+      meta.className = "news-meta";
+      meta.textContent = item.source ?? "";
+      li.append(a, meta);
+      ul.appendChild(li);
+    }
+    return ul;
+  }
+
+  function renderArchive(summaryHistory, newsHistory) {
     const list = document.getElementById("archive-list");
     const today = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(new Date());
+    const newsByDate = new Map((Array.isArray(newsHistory) ? newsHistory : []).map((h) => [h.date, h.items]));
+
     const past = (Array.isArray(summaryHistory) ? summaryHistory : [])
       .filter((h) => h.date !== today && h.summary)
       .sort((a, b) => b.date.localeCompare(a.date));
@@ -506,6 +539,12 @@
       content.className = "archive-content";
       content.textContent = pickSummaryText(h.summary);
       details.append(summaryEl, content);
+
+      const newsItems = newsByDate.get(h.date);
+      if (newsItems?.length) {
+        details.appendChild(buildArchiveNewsList(newsItems));
+      }
+
       list.appendChild(details);
     }
 
@@ -523,7 +562,7 @@
     renderNews(cache.news);
     renderSummary(cache.summary);
     renderHistory(cache.history);
-    renderArchive(cache.summaryHistory);
+    renderArchive(cache.summaryHistory, cache.newsHistory);
 
     const latestSources = [cache.market, cache.news, cache.summary].filter(Boolean);
     const latest = latestSources.map((v) => v.updatedAt).filter(Boolean).sort().pop();
@@ -560,12 +599,13 @@
   async function main() {
     locale = getInitialLocale();
 
-    const [market, news, summary, history, summaryHistory] = await Promise.allSettled([
+    const [market, news, summary, history, summaryHistory, newsHistory] = await Promise.allSettled([
       loadJson("market"),
       loadJson("news"),
       loadJson("summary"),
       loadJson("market-history"),
       loadJson("summary-history"),
+      loadJson("news-history"),
     ]);
 
     cache.market = market.status === "fulfilled" ? market.value : null;
@@ -573,6 +613,7 @@
     cache.summary = summary.status === "fulfilled" ? summary.value : null;
     cache.history = history.status === "fulfilled" ? history.value : null;
     cache.summaryHistory = summaryHistory.status === "fulfilled" ? summaryHistory.value : null;
+    cache.newsHistory = newsHistory.status === "fulfilled" ? newsHistory.value : null;
 
     applyLocale(locale);
   }
