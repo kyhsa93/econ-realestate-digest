@@ -344,7 +344,7 @@ async function main() {
   // 요청량을 줄이는 쪽을 택함).
   const yearMonths = [kstYearMonth(now, 0)];
 
-  const results = await mapWithConcurrency(DISTRICTS, CONCURRENCY, async ({ code, name }) => {
+  async function fetchDistrictEntry({ code, name }) {
     const entry = { code, name, sale: null, jeonse: null, wolse: null };
 
     if (hasSale) {
@@ -365,7 +365,32 @@ async function main() {
     }
 
     return entry.sale || entry.jeonse || entry.wolse ? entry : null;
-  });
+  }
+
+  const results = await mapWithConcurrency(DISTRICTS, CONCURRENCY, fetchDistrictEntry);
+
+  // 데이터포털 요청이 실행 초반 잠깐(수십 초) 네트워크 레벨로 통째로 실패하는
+  // 경우를 실제로 겪었다(첫 두 동시 요청 웨이브가 fetch failed로 재시도까지
+  // 다 소진). 개별 재시도 백오프만으로는 그 구간을 못 버티므로, 1차 조회가
+  // 전부 끝난 뒤(=네트워크가 안정됐을 시점) 실패한 구만 모아 한 번 더 훑는다.
+  const failedIndexes = results.map((r, i) => (r ? -1 : i)).filter((i) => i >= 0);
+  if (failedIndexes.length > 0) {
+    console.log(`[fetch-realestate] ${failedIndexes.length}개구 실패, 재시도 스윕 시작`);
+    const retried = await mapWithConcurrency(
+      failedIndexes.map((i) => DISTRICTS[i]),
+      CONCURRENCY,
+      fetchDistrictEntry
+    );
+    failedIndexes.forEach((i, j) => {
+      if (retried[j]) results[i] = retried[j];
+    });
+    const stillFailed = failedIndexes.filter((i) => !results[i]).map((i) => DISTRICTS[i].name);
+    if (stillFailed.length > 0) {
+      console.error(`[fetch-realestate] 재시도 후에도 실패: ${stillFailed.join(", ")}`);
+    } else {
+      console.log("[fetch-realestate] 재시도 스윕으로 전부 복구됨");
+    }
+  }
 
   const districts = results.filter(Boolean);
   if (districts.length === 0) {
