@@ -1,27 +1,41 @@
 {
-  "updatedAt": "2026-08-10T07:00:41.558Z",
+  "updatedAt": "2026-08-10T07:20:22.563Z",
   "date": "2026-08-10",
   "items": [
+    {
+      "title": "코스닥, 6.97%↑…코스피는 찔끔 상승, 3거래일 만에 반등(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20260810114400008",
+      "publishedAt": "2026-08-10T07:10:21.000Z",
+      "source": "연합뉴스 경제",
+      "titleEn": "KOSDAQ rises 6.97%, KOSPI slightly gains, rebounds after three days (composite)"
+    },
+    {
+      "title": "美日 엔 매수 공동개입에…\"내년 봄 日기준금리 1.5% 도달\" 전망",
+      "link": "https://www.yna.co.kr/view/AKR20260810109000073",
+      "publishedAt": "2026-08-10T07:04:37.000Z",
+      "source": "연합뉴스 경제",
+      "titleEn": "US-Japan Central Bank Rate Target of 1.5% in Next Spring"
+    },
     {
       "title": "[외환] 원/달러 환율 2.3원 오른 1,418.4원(15:30 기준가)",
       "link": "https://www.yna.co.kr/view/AKR20260810106100002",
       "publishedAt": "2026-08-10T06:39:38.000Z",
       "source": "연합뉴스 경제",
-      "titleEn": "Foreign Exchange: Won per Dollar Rate Up 2.3 Won to 1,418.4 Won (as of 15:30)"
+      "titleEn": "Foreign Exchange Rate: USD to Won up 2.3 won to 1,418.4 won (as of 15:30)"
     },
     {
       "title": "코스닥, 6.97%↑…코스피는 찔끔 상승, 3거래일만에 반등",
       "link": "https://www.yna.co.kr/view/AKR20260810108000008",
       "publishedAt": "2026-08-10T06:38:10.000Z",
       "source": "연합뉴스 경제",
-      "titleEn": "KOSPI gains 0.97%, KOSDAQ surges after brief dip, rebounds in just three days"
+      "titleEn": "Kosdaq rises 6.97%, KOSPI gains slightly, rebounds in just three days"
     },
     {
       "title": "[속보] 코스닥, 7% 급등해 854 마감…코스피는 0.65%↑",
       "link": "https://www.yna.co.kr/view/AKR20260810107100008",
       "publishedAt": "2026-08-10T06:34:02.000Z",
       "source": "연합뉴스 경제",
-      "titleEn": "Breaking news: KOSPI surges by 7%, closes at 854; KOSPIK rises 0.65%"
+      "titleEn": "Breaking News: KOSPI surges by 7%, closes at 854; KOSPI-INDEX rises by 0.65%"
     },
     {
       "title": "중고가 아파트 신고가 쏟아진 수도권…12억~15억 구간 비중 2배 급증",
@@ -35,7 +49,7 @@
       "link": "https://www.yna.co.kr/view/AKR20260810094000051",
       "publishedAt": "2026-08-10T05:35:11.000Z",
       "source": "연합뉴스 경제",
-      "titleEn": "Daegu University Discusses Market Polarization Theme on Friday"
+      "titleEn": "Daegu University Discusses Market Polarization on 13th"
     },
     {
       "title": "\"안전하다더니 전액 날렸다\"…해외 부동산 펀드 투자 주의보",
@@ -49,14 +63,14 @@
       "link": "https://www.yna.co.kr/view/AKR20260810072200008",
       "publishedAt": "2026-08-10T02:42:10.000Z",
       "source": "연합뉴스 경제",
-      "titleEn": "Government Bonds Yield Rise Simultaneously... Three-Year Bond Hits 3.773%"
+      "titleEn": "Government Bonds Yield Rise Simultaneously... Three-Year Bond Hits Record High"
     },
     {
       "title": "코스피, 1% 상승…코스닥은 한때 6.78% 오르며 매수 사이드카",
       "link": "https://www.yna.co.kr/view/AKR20260810064000008",
       "publishedAt": "2026-08-10T02:27:44.000Z",
       "source": "연합뉴스 경제",
-      "titleEn": "Kospi rises 1%, KOSDAQ briefly climbs 6.78% for buying sidekick"
+      "titleEn": "Kospi rises 1%, KOSDAQ briefly climbs 6.78% as buying side enters market"
     },
     {
       "title": "15억~20억원 수도권 아파트, 7월 거래 절반 이상이 ‘신고가’",
@@ -70,7 +84,7 @@
       "link": "https://www.mk.co.kr/news/realestate/12122608",
       "publishedAt": "2026-08-10T01:54:52.000Z",
       "source": "매일경제 부동산",
-      "titleEn": "July Seoul Private Apartment Per Unit Floor Price Reaches 80,000,000 Won"
+      "titleEn": "July Seoul Private Apartment Per Square Meter Selling Price Reaches 80,000,000 Won"
     },
     {
       "title": "7월 국고채 금리, 환율 상승·외국인 매도에 전반적 상승",
@@ -84,7 +98,7 @@
       "link": "https://www.mk.co.kr/news/realestate/12122584",
       "publishedAt": "2026-08-10T01:33:01.000Z",
       "source": "매일경제 부동산",
-      "titleEn": "“골프연습장 없으면 난리납니다”…신축 아파트 커뮤니티 살펴봤더니"
+      "titleEn": "Without a golf practice facility, there's a 'whoopie'!\"... Visited new apartment community and found it lacking."
     },
     {
       "title": "서울 전용 59㎡ 민간아파트 분양가 15.6억원…전국의 3배",
@@ -105,7 +119,7 @@
       "link": "https://www.yna.co.kr/view/AKR20260810043500008",
       "publishedAt": "2026-08-10T01:00:34.000Z",
       "source": "연합뉴스 경제",
-      "titleEn": "Summer Economics Camp for Elementary and Middle School Students Hosted by TEOC"
+      "titleEn": "Summer Economics Camp for Elementary and Middle School Students to be Hosted by TUIO Alliance"
     },
     {
       "title": "전매제한 기간에 8천만원 웃돈 주고 아파트 거래 2명 덜미",
@@ -126,21 +140,7 @@
       "link": "https://www.yna.co.kr/view/AKR20260810030000003",
       "publishedAt": "2026-08-10T00:49:31.000Z",
       "source": "연합뉴스 경제",
-      "titleEn": "Hyundai Group deploys robots to address parking shortage in apartment complexes... \"up to 50%"
-    },
-    {
-      "title": "이지스운용 \"상업용 부동산 양극화 고착…대형·우량자산 선호\"",
-      "link": "https://www.yna.co.kr/view/AKR20260810039300008",
-      "publishedAt": "2026-08-10T00:48:39.000Z",
-      "source": "연합뉴스 경제",
-      "titleEn": "ISG Management \"Commercial Real Estate Polarization Stagnation... Prefers Large and High-Quality Assets"
-    },
-    {
-      "title": "증시 상승 출발…코스피 1%·코스닥 4%대 상승세(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260810035500008",
-      "publishedAt": "2026-08-10T00:40:53.000Z",
-      "source": "연합뉴스 경제",
-      "titleEn": "Stock market rises start... Kospi up 1% · Kosdaq surges to 4%+ (Summary)"
+      "titleEn": "Hyundai Group deploys robots to solve apartment parking crisis... \"up to 50% more"
     }
   ]
 }
