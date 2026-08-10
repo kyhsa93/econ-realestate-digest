@@ -53,10 +53,7 @@ GitHub Actions(`daily-update.yml`)가 매일 자동 실행. 수동 실행은 Act
 그대로 재사용함. 두 값 다 방문자 브라우저에 그대로 노출되는 공개 값이라 시크릿으로 다루지 않고
 `docs/index.html`에 직접 하드코딩함.
 
-쿠키 동의 배너(하단 고정)에서 동의해야만 GA/애드센스 스크립트가 로드됨. 동의 여부는
-`localStorage`(키: `blog_ad_consent`)에 저장하는데, 이 키는 블로그와 값을 맞춰서 origin이 같은
-`kyhsa93.github.io` 도메인의 다른 페이지(블로그 포함)와 동의 상태를 공유함 — 같은 Google 계정에
-대한 동의라 의미상 그게 맞고, 방문자가 두 사이트에서 배너를 두 번 볼 필요가 없어짐.
+별도 쿠키 동의 배너 없이 페이지 로드 시 GA/애드센스 스크립트를 바로 불러옴(요청에 따라 배너 제거).
 
 `ads.txt`는 도메인 루트(`kyhsa93.github.io/ads.txt`)에서 서빙돼야 하는데, 이 저장소는 프로젝트
 페이지(`kyhsa93.github.io/econ-realestate-digest/`)라 이 저장소만으로는 둘 수 없음 — 이미 블로그
