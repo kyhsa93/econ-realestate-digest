@@ -126,7 +126,10 @@ function findBaseline(history, now) {
   target.setDate(target.getDate() - 30);
   const targetDate = kstDateString(target);
   const older = history.filter((h) => h.date <= targetDate);
-  return older.length ? older[older.length - 1] : history[0];
+  const baseline = older.length ? older[older.length - 1] : history[0];
+  // 오늘 처음 쌓인 기록만 있으면 기준값이 오늘 자신이 되어버려 "오늘 대비
+  // 0%"라는 의미 없는 비교가 나온다. 그럴 땐 아직 비교할 과거가 없는 것으로 취급.
+  return baseline.date === kstDateString(now) ? null : baseline;
 }
 
 function withChange(current, baselineValue) {
