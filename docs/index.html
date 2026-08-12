@@ -260,6 +260,9 @@
   .summary-link-source {
     color: var(--muted);
   }
+  .summary-plain-label {
+    font-weight: 600;
+  }
   .summary-meta {
     display: block;
     color: var(--muted);
@@ -1054,6 +1057,25 @@
     return findNewsItemByLink(item.link)?.titleEn ?? item.title;
   }
 
+  function escapeHtml(s) {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  // categories 필드가 없는 과거 형식(줄바꿈으로 구분된 통짜 텍스트)도, "- 라벨: 내용"
+  // 형태인 줄(주로 폴백 시 헤드라인 나열 줄)은 라벨만이라도 굵게 표시한다.
+  // LLM이 생성한 성공 문장 줄은 애초에 라벨이 안 붙어 있어 이 처리로도 못 살린다.
+  function plainSummaryHtml(text) {
+    return text
+      .split("\n")
+      .map((line) => {
+        const m = line.match(/^-\s*([^:]+):\s*(.*)$/);
+        if (!m) return escapeHtml(line);
+        const [, label, rest] = m;
+        return `<strong class="summary-plain-label">${escapeHtml(label)}:</strong> ${escapeHtml(rest)}`;
+      })
+      .join("<br>");
+  }
+
   function summaryCategoryHtml(cat) {
     const label = locale === "en" ? cat.nameEn : cat.name;
     const line = locale === "en" ? cat.lineEn : cat.lineKo;
@@ -1087,8 +1109,9 @@
     if (hasCategories) {
       box.innerHTML = categories.map(summaryCategoryHtml).join("");
     } else {
-      // 카테고리 링크 정보가 없는 과거 아카이브 기록은 예전처럼 통짜 텍스트로 표시
-      box.textContent = text;
+      // 카테고리 링크 정보가 없는 과거 아카이브 기록은 통짜 텍스트로 표시하되,
+      // "- 라벨: 내용" 형태인 줄만이라도 라벨을 굵게 강조한다.
+      box.innerHTML = plainSummaryHtml(text);
     }
 
     const meta = document.createElement("span");
