@@ -43,6 +43,24 @@
       --border: #2a2d35;
     }
   }
+  /* data-theme는 사용자가 수동으로 고른 테마. [data-theme=...]가 :root보다
+     구체적이라 OS 설정(prefers-color-scheme)보다 항상 우선한다. */
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #0f1115;
+    --fg: #eaeaea;
+    --muted: #9a9a9a;
+    --card: #1a1d24;
+    --border: #2a2d35;
+  }
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #666;
+    --card: #f5f5f7;
+    --border: #e2e2e5;
+  }
   * { box-sizing: border-box; }
   body {
     margin: 0;
@@ -410,6 +428,9 @@
       <button class="lang-toggle" type="button" id="share-button" aria-label="Share">
         <span aria-hidden="true">📤</span>
       </button>
+      <button class="lang-toggle" type="button" id="theme-toggle" aria-label="Toggle theme">
+        <span aria-hidden="true">🌓</span>
+      </button>
       <button class="lang-toggle" type="button" id="lang-toggle" aria-label="Switch language">
         <span aria-hidden="true">🌐</span>
       </button>
@@ -626,6 +647,33 @@
     // ko를 기본값으로 함.
     return saved === "en" || saved === "ko" ? saved : "ko";
   }
+
+  // ---- 테마(라이트/다크/자동) --------------------------------------------
+  // "자동"(기본값)은 OS의 prefers-color-scheme을 그대로 따르고, data-theme
+  // 속성이 붙으면(사용자가 직접 고르면) CSS 쪽 [data-theme=...] 규칙이
+  // 미디어쿼리보다 우선해서 덮어쓴다.
+  const THEME_ICONS = { auto: "🌓", light: "☀️", dark: "🌙" };
+  let theme = "auto";
+
+  function getInitialTheme() {
+    const saved = window.localStorage.getItem("theme");
+    return saved === "light" || saved === "dark" ? saved : "auto";
+  }
+
+  function applyTheme(next) {
+    theme = next;
+    window.localStorage.setItem("theme", theme);
+    if (theme === "auto") {
+      document.documentElement.removeAttribute("data-theme");
+    } else {
+      document.documentElement.setAttribute("data-theme", theme);
+    }
+    const icon = document.querySelector("#theme-toggle span");
+    if (icon) icon.textContent = THEME_ICONS[theme];
+  }
+
+  // main()의 데이터 로딩(fetch)을 기다리지 않고 즉시 적용해 테마 깜빡임을 피한다.
+  applyTheme(getInitialTheme());
 
   // ---- data cache (재조회 없이 언어 전환 시 재렌더링하기 위함) ----------
   const cache = {
@@ -1277,6 +1325,11 @@
 
   document.getElementById("lang-toggle").addEventListener("click", () => {
     applyLocale(locale === "en" ? "ko" : "en");
+  });
+
+  document.getElementById("theme-toggle").addEventListener("click", () => {
+    const order = ["auto", "light", "dark"];
+    applyTheme(order[(order.indexOf(theme) + 1) % order.length]);
   });
 
   document.getElementById("realestate-district-select").addEventListener("change", (e) => {
