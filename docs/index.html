@@ -394,34 +394,6 @@
   .archive-date-jump button {
     cursor: pointer;
   }
-  .archive-month-group {
-    margin-bottom: 14px;
-  }
-  .archive-month-group:last-child {
-    margin-bottom: 0;
-  }
-  .archive-month-label {
-    color: var(--muted);
-    font-size: 0.8rem;
-    font-weight: 600;
-    margin-bottom: 6px;
-  }
-  .archive-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-  .date-chip {
-    padding: 5px 10px;
-    border-radius: 999px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    font-size: 0.78rem;
-    color: var(--fg);
-    text-decoration: none;
-    white-space: nowrap;
-  }
-  .date-chip:hover { text-decoration: underline; }
   .site-footer {
     margin-top: 40px;
     padding-top: 16px;
@@ -527,9 +499,6 @@
       <input type="date" id="archive-date-input">
       <button type="submit" id="archive-date-go">이동</button>
     </form>
-    <div id="archive-list">
-      <div class="error">불러오는 중...</div>
-    </div>
   </section>
 
   <footer class="site-footer">
@@ -596,7 +565,6 @@
       archiveHeading: "지난 기록",
       archiveDateJumpLabel: "날짜로 바로가기",
       archiveDateGo: "이동",
-      archiveEmpty: "아직 지난 기록이 없습니다.",
       archiveBackLink: "오늘 기록으로 돌아가기 →",
       archiveViewing: (d) => `지난 기록 보는 중: ${d}`,
       footerPrivacyLink: "개인정보처리방침",
@@ -655,7 +623,6 @@
       archiveHeading: "Past Archive",
       archiveDateJumpLabel: "Jump to date",
       archiveDateGo: "Go",
-      archiveEmpty: "No past records yet.",
       archiveBackLink: "Back to today →",
       archiveViewing: (d) => `Viewing archive: ${d}`,
       footerPrivacyLink: "Privacy Policy",
@@ -1207,51 +1174,6 @@
     box.appendChild(meta);
   }
 
-  // "YYYY-MM" -> 그 달의 날짜[] (내림차순), 월 자체도 최신순.
-  function groupArchiveByMonth(dates) {
-    const groups = new Map();
-    for (const date of dates) {
-      const month = date.slice(0, 7);
-      if (!groups.has(month)) groups.set(month, []);
-      groups.get(month).push(date);
-    }
-    return [...groups.entries()].sort((a, b) => b[0].localeCompare(a[0]));
-  }
-
-  // 요약/뉴스/시장지표/부동산 히스토리는 각각 별도 파일이라 한쪽만 있는
-  // 날짜도 있을 수 있음(예: 이 기능 추가 전 날짜를 소급 반영한 경우) ->
-  // 날짜 합집합 기준으로 보여준다. 각 링크는 index.html?date=X로, 그 날짜의
-  // 히스토리 기록을 이 페이지 그대로(같은 섹션 구성으)로 다시 렌더링한다.
-  // 최대 180일치라 평평하게 나열하면 원하는 날짜를 찾기 어려워서 월별로 묶는다.
-  function renderArchive(summaryHistory, newsHistory, marketHistory, realestateHistory) {
-    const list = document.getElementById("archive-list");
-    const today = kstToday();
-
-    const dates = new Set(
-      [summaryHistory, newsHistory, marketHistory, realestateHistory]
-        .flatMap((h) => (Array.isArray(h) ? h : []))
-        .map((h) => h.date)
-    );
-    const past = [...dates].filter((d) => d !== today && d !== viewDate).sort((a, b) => b.localeCompare(a));
-
-    if (!past.length) {
-      list.innerHTML = `<div class="error">${t("archiveEmpty")}</div>`;
-      return;
-    }
-
-    list.innerHTML = groupArchiveByMonth(past)
-      .map(
-        ([month, monthDates]) => `
-          <div class="archive-month-group">
-            <div class="archive-month-label">${month}</div>
-            <div class="archive-chips">
-              ${monthDates.map((date) => `<a class="date-chip" href="./index.html?date=${date}">${date}</a>`).join("")}
-            </div>
-          </div>`
-      )
-      .join("");
-  }
-
   // 아카이브(?date=) 조회 시에는 실시간 데이터 대신 각 히스토리 파일에서
   // 해당 날짜 기록을 찾아 그대로 같은 렌더 함수에 넘긴다. 히스토리 항목은
   // updatedAt만 없을 뿐 나머지 필드 구조는 실시간 파일과 동일하다.
@@ -1288,7 +1210,6 @@
     renderHistory(cache.history);
     renderRealestate(realestate);
     renderRealestateHistory(cache.realestateHistory);
-    renderArchive(cache.summaryHistory, cache.newsHistory, cache.history, cache.realestateHistory);
 
     const backLink = document.getElementById("archive-back-link");
     const updateSchedule = document.getElementById("update-schedule");
