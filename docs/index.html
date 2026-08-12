@@ -453,6 +453,7 @@
       baseRateSince: (s) => `${s} 부터`,
       historyKospiLabel: "코스피 (최근 추이)",
       historyUsdKrwLabel: "원/달러 환율 (최근 추이)",
+      historyBaseRateLabel: "기준금리 (최근 추이)",
       historyMinMax: (max, min) => `최고 ${max} · 최저 ${min}`,
       realestateHeading: "한국 부동산 가격 추이",
       realestateError: "데이터를 불러오지 못했습니다.",
@@ -506,6 +507,7 @@
       baseRateSince: (s) => `since ${s}`,
       historyKospiLabel: "KOSPI (recent trend)",
       historyUsdKrwLabel: "USD/KRW (recent trend)",
+      historyBaseRateLabel: "BOK Base Rate (recent trend)",
       historyMinMax: (max, min) => `High ${max} · Low ${min}`,
       realestateHeading: "Korean Real Estate Price Trend",
       realestateError: "Failed to load data.",
@@ -726,6 +728,14 @@
         label: t("historyUsdKrwLabel"),
         get: (h) => parseNumeric(h.usdKrw?.value),
         format: (v) => v.toFixed(2),
+      },
+      {
+        // 기준금리는 금통위 회의(대략 1~2개월 간격) 때만 바뀌어서 대부분
+        // 평평한 선으로 보이지만, 실제로 바뀌는 시점을 한눈에 보여주는
+        // 용도로는 여전히 유효하다.
+        label: t("historyBaseRateLabel"),
+        get: (h) => parseNumeric(h.baseRate?.value),
+        format: (v) => `${v.toFixed(2)}%`,
       },
     ];
 
