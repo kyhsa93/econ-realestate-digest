@@ -356,7 +356,19 @@
     font-size: 0.72rem;
     margin-top: 4px;
   }
-  .archive-list {
+  .archive-month-group {
+    margin-bottom: 14px;
+  }
+  .archive-month-group:last-child {
+    margin-bottom: 0;
+  }
+  .archive-month-label {
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .archive-chips {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
@@ -469,7 +481,7 @@
 
   <section id="archive-section">
     <h2 id="archive-heading">지난 요약 기록</h2>
-    <div class="archive-list" id="archive-list">
+    <div id="archive-list">
       <div class="error">불러오는 중...</div>
     </div>
   </section>
@@ -537,7 +549,6 @@
       newsArchiveLink: "지난 기록 보기 ↓",
       archiveHeading: "지난 기록",
       archiveEmpty: "아직 지난 기록이 없습니다.",
-      archiveMore: (n) => `이전 기록 ${n}건 더 있음`,
       archiveBackLink: "오늘 기록으로 돌아가기 →",
       archiveViewing: (d) => `지난 기록 보는 중: ${d}`,
       footerPrivacyLink: "개인정보처리방침",
@@ -595,7 +606,6 @@
       newsArchiveLink: "Browse past days ↓",
       archiveHeading: "Past Archive",
       archiveEmpty: "No past records yet.",
-      archiveMore: (n) => `${n} more past entries`,
       archiveBackLink: "Back to today →",
       archiveViewing: (d) => `Viewing archive: ${d}`,
       footerPrivacyLink: "Privacy Policy",
@@ -1120,12 +1130,22 @@
     box.appendChild(meta);
   }
 
-  const ARCHIVE_DISPLAY_LIMIT = 30;
+  // "YYYY-MM" -> 그 달의 날짜[] (내림차순), 월 자체도 최신순.
+  function groupArchiveByMonth(dates) {
+    const groups = new Map();
+    for (const date of dates) {
+      const month = date.slice(0, 7);
+      if (!groups.has(month)) groups.set(month, []);
+      groups.get(month).push(date);
+    }
+    return [...groups.entries()].sort((a, b) => b[0].localeCompare(a[0]));
+  }
 
   // 요약/뉴스/시장지표/부동산 히스토리는 각각 별도 파일이라 한쪽만 있는
   // 날짜도 있을 수 있음(예: 이 기능 추가 전 날짜를 소급 반영한 경우) ->
   // 날짜 합집합 기준으로 보여준다. 각 링크는 index.html?date=X로, 그 날짜의
   // 히스토리 기록을 이 페이지 그대로(같은 섹션 구성으)로 다시 렌더링한다.
+  // 최대 180일치라 평평하게 나열하면 원하는 날짜를 찾기 어려워서 월별로 묶는다.
   function renderArchive(summaryHistory, newsHistory, marketHistory, realestateHistory) {
     const list = document.getElementById("archive-list");
     const today = kstToday();
@@ -1142,17 +1162,17 @@
       return;
     }
 
-    const shown = past.slice(0, ARCHIVE_DISPLAY_LIMIT);
-    list.innerHTML = shown.map((date) => `<a class="date-chip" href="./index.html?date=${date}">${date}</a>`).join("");
-
-    if (past.length > shown.length) {
-      const note = document.createElement("div");
-      note.className = "error";
-      note.style.marginTop = "8px";
-      note.style.width = "100%";
-      note.textContent = t("archiveMore")(past.length - shown.length);
-      list.appendChild(note);
-    }
+    list.innerHTML = groupArchiveByMonth(past)
+      .map(
+        ([month, monthDates]) => `
+          <div class="archive-month-group">
+            <div class="archive-month-label">${month}</div>
+            <div class="archive-chips">
+              ${monthDates.map((date) => `<a class="date-chip" href="./index.html?date=${date}">${date}</a>`).join("")}
+            </div>
+          </div>`
+      )
+      .join("");
   }
 
   // 아카이브(?date=) 조회 시에는 실시간 데이터 대신 각 히스토리 파일에서
