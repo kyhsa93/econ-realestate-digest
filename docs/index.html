@@ -250,6 +250,22 @@
     gap: 12px;
     margin-top: 12px;
   }
+  .realestate-history-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+  .realestate-history-controls select {
+    background: var(--card);
+    color: var(--fg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 8px;
+    font-size: 0.85rem;
+  }
   .history-card {
     background: var(--card);
     border: 1px solid var(--border);
@@ -380,6 +396,10 @@
         </tbody>
       </table>
     </div>
+    <div class="realestate-history-controls">
+      <label for="realestate-district-select" id="realestate-district-select-label">지역 선택</label>
+      <select id="realestate-district-select"></select>
+    </div>
     <div class="history-grid" id="realestate-history-grid"></div>
     <div class="summary-meta" id="realestate-meta"></div>
   </section>
@@ -446,10 +466,12 @@
       realestateTagJeonse: "전세",
       realestateTagWolse: "월세",
       realestateMonthlyPrefix: "월 ",
-      realestateHistoryLabel: "서울 평균 평당가 추이 (최근)",
-      realestateVolumeHistoryLabel: "매매 거래량 추이 (이번 달 누적, 최근)",
-      realestateJeonseVolumeHistoryLabel: "전세 거래량 추이 (이번 달 누적, 최근)",
-      realestateWolseVolumeHistoryLabel: "월세 거래량 추이 (이번 달 누적, 최근)",
+      realestateHistoryLabel: (name) => `${name} 평당가 추이 (최근)`,
+      realestateVolumeHistoryLabel: (name) => `${name} 매매 거래량 추이 (이번 달 누적, 최근)`,
+      realestateJeonseVolumeHistoryLabel: (name) => `${name} 전세 거래량 추이 (이번 달 누적, 최근)`,
+      realestateWolseVolumeHistoryLabel: (name) => `${name} 월세 거래량 추이 (이번 달 누적, 최근)`,
+      realestateDistrictSelectLabel: "지역 선택",
+      realestateOverallOption: "서울 전체",
       newsHeading: "오늘의 경제·부동산 뉴스",
       newsError: "데이터를 불러오지 못했습니다.",
       newsArchiveLink: "지난 기록 보기 ↓",
@@ -497,10 +519,12 @@
       realestateTagJeonse: "Jeonse",
       realestateTagWolse: "Monthly rent",
       realestateMonthlyPrefix: "mo. ",
-      realestateHistoryLabel: "Seoul avg. price/pyeong trend (recent)",
-      realestateVolumeHistoryLabel: "Sale transaction volume trend (month-to-date, recent)",
-      realestateJeonseVolumeHistoryLabel: "Jeonse transaction volume trend (month-to-date, recent)",
-      realestateWolseVolumeHistoryLabel: "Monthly rent transaction volume trend (month-to-date, recent)",
+      realestateHistoryLabel: (name) => `${name} price/pyeong trend (recent)`,
+      realestateVolumeHistoryLabel: (name) => `${name} sale transaction volume trend (month-to-date, recent)`,
+      realestateJeonseVolumeHistoryLabel: (name) => `${name} jeonse transaction volume trend (month-to-date, recent)`,
+      realestateWolseVolumeHistoryLabel: (name) => `${name} monthly rent transaction volume trend (month-to-date, recent)`,
+      realestateDistrictSelectLabel: "District",
+      realestateOverallOption: "Seoul overall",
       newsHeading: "Today's Economy & Real Estate News",
       newsError: "Failed to load data.",
       newsArchiveLink: "Browse past days ↓",
@@ -825,19 +849,43 @@
   // 스냅샷이라, 월중에는 대체로 우상향하다가 월이 바뀌는 시점에 다시 작은
   // 값으로 꺾이는 톱니 모양으로 나타난다(overall.sale 집계와 동일한 특성,
   // withSaleChange 주변 주석 참고).
+  // "" = 서울 전체(overall). 구를 선택하면 history 각 날짜 스냅샷의
+  // districts 배열에서 같은 code를 찾아 그 구만의 추이를 보여준다 -
+  // 서버 쪽 realestate-history.json에 이미 구별 원값이 통째로 저장돼
+  // 있어서(appendHistory가 overall/districts를 그대로 남김) 백엔드
+  // 변경 없이 프론트에서만 필터링하면 된다.
+  let selectedDistrictCode = "";
+
+  function populateDistrictSelect() {
+    const select = document.getElementById("realestate-district-select");
+    if (!select) return;
+    const districts = cache.realestate?.districts ?? [];
+    select.innerHTML = [
+      `<option value="">${t("realestateOverallOption")}</option>`,
+      ...districts.map((d) => `<option value="${d.code}">${d.name}</option>`),
+    ].join("");
+    select.value = selectedDistrictCode;
+  }
+
   function renderRealestateHistory(history) {
+    populateDistrictSelect();
     const grid = document.getElementById("realestate-history-grid");
     if (!Array.isArray(history) || history.length < 2) {
       grid.innerHTML = "";
       return;
     }
     const recent = history.slice(-30);
+    const getScoped = (h) =>
+      selectedDistrictCode ? h.districts?.find((d) => d.code === selectedDistrictCode) : h.overall;
+    const scopeName = selectedDistrictCode
+      ? (cache.realestate?.districts ?? []).find((d) => d.code === selectedDistrictCode)?.name ?? ""
+      : t("realestateOverallOption");
     const countFormat = (v) => t("realestateCountSuffix")(Math.round(v));
     const series = [
-      { label: t("realestateHistoryLabel"), get: (h) => h.overall?.sale?.avgPricePerPyeong10k, format: formatPyeongPrice },
-      { label: t("realestateVolumeHistoryLabel"), get: (h) => h.overall?.sale?.transactionCount, format: countFormat },
-      { label: t("realestateJeonseVolumeHistoryLabel"), get: (h) => h.overall?.jeonse?.transactionCount, format: countFormat },
-      { label: t("realestateWolseVolumeHistoryLabel"), get: (h) => h.overall?.wolse?.transactionCount, format: countFormat },
+      { label: t("realestateHistoryLabel")(scopeName), get: (h) => getScoped(h)?.sale?.avgPricePerPyeong10k, format: formatPyeongPrice },
+      { label: t("realestateVolumeHistoryLabel")(scopeName), get: (h) => getScoped(h)?.sale?.transactionCount, format: countFormat },
+      { label: t("realestateJeonseVolumeHistoryLabel")(scopeName), get: (h) => getScoped(h)?.jeonse?.transactionCount, format: countFormat },
+      { label: t("realestateWolseVolumeHistoryLabel")(scopeName), get: (h) => getScoped(h)?.wolse?.transactionCount, format: countFormat },
     ];
 
     grid.innerHTML = series
@@ -1065,6 +1113,7 @@
     document.getElementById("re-th-sale").textContent = t("realestateTagSale");
     document.getElementById("re-th-jeonse").textContent = t("realestateTagJeonse");
     document.getElementById("re-th-wolse").textContent = t("realestateTagWolse");
+    document.getElementById("realestate-district-select-label").textContent = t("realestateDistrictSelectLabel");
     document.getElementById("news-heading").textContent = t("newsHeading");
     document.getElementById("news-archive-link").textContent = t("newsArchiveLink");
     document.getElementById("archive-heading").textContent = t("archiveHeading");
@@ -1080,6 +1129,11 @@
 
   document.getElementById("lang-toggle").addEventListener("click", () => {
     applyLocale(locale === "en" ? "ko" : "en");
+  });
+
+  document.getElementById("realestate-district-select").addEventListener("change", (e) => {
+    selectedDistrictCode = e.target.value;
+    renderRealestateHistory(cache.realestateHistory);
   });
 
   // ---- 공유하기 -----------------------------------------------------------
