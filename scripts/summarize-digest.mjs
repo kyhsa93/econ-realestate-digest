@@ -94,14 +94,20 @@ async function readJson(name) {
 }
 
 function categorize(items) {
-  const buckets = new Map(); // category object -> titles[]
+  const buckets = new Map(); // category object -> news item[]
   for (const item of items) {
     const title = item.title ?? "";
     const matched = CATEGORIES.find((c) => c.keywords.some((k) => title.includes(k))) ?? FALLBACK_CATEGORY;
     if (!buckets.has(matched)) buckets.set(matched, []);
-    buckets.get(matched).push(title);
+    buckets.get(matched).push(item);
   }
-  return [...buckets.entries()].map(([category, titles]) => ({ category, titles }));
+  // titles는 요약 생성/검증 코드가 계속 문자열 배열로 쓰므로 그대로 유지하고,
+  // items(원문 title/link/source)는 요약의 근거가 된 기사 링크를 노출하는 데 쓴다.
+  return [...buckets.entries()].map(([category, items]) => ({
+    category,
+    items,
+    titles: items.map((i) => i.title ?? ""),
+  }));
 }
 
 function stripHanzi(text) {
@@ -339,20 +345,36 @@ async function main() {
   const buckets = categorize(news.items);
   const koLines = [];
   const enLines = [];
+  // 요약 문장이 어떤 기사를 근거로 했는지 화면에서 바로 확인할 수 있도록,
+  // 실제로 프롬프트에 넣은 만큼(MAX_ITEMS_PER_CATEGORY)만 링크로 남긴다.
+  const categoryEntries = [];
 
   for (const bucket of buckets) {
     const { line: koLine, isFallback } = await summarizeBucketKo(bucket);
     koLines.push(koLine);
 
+    let enLine;
     if (isFallback) {
       // 헤드라인을 그대로 나열한 줄(원래 "기타"거나, 다른 카테고리가 생성/검증/
       // 검수에 실패해 나열로 대체된 경우)은 문장 번역이 아니라 카테고리 레이블만
       // nameEn으로 바꾸면 되고, 원문 헤드라인 자체는 한/영 모두 한국어 그대로
       // 유지한다. 번역까지 실패했을 때 영어 요약에 한국어 라벨이 남는 걸 방지.
-      enLines.push(listCategory(bucket.category.nameEn, bucket.titles));
+      enLine = listCategory(bucket.category.nameEn, bucket.titles);
     } else {
-      enLines.push(await translateKoLine(koLine));
+      enLine = await translateKoLine(koLine);
     }
+    enLines.push(enLine);
+
+    categoryEntries.push({
+      name: bucket.category.name,
+      nameEn: bucket.category.nameEn,
+      lineKo: koLine.replace(/^-\s*/, ""),
+      lineEn: enLine.replace(/^-\s*/, ""),
+      isFallback,
+      items: bucket.items
+        .slice(0, MAX_ITEMS_PER_CATEGORY)
+        .map((i) => ({ title: i.title, link: i.link, source: i.source })),
+    });
   }
 
   if (koLines.length === 0) {
@@ -365,9 +387,9 @@ async function main() {
   await mkdir(dataDir, { recursive: true });
   await writeFile(
     outFile,
-    JSON.stringify({ updatedAt: now.toISOString(), model: MODEL, summary }, null, 2)
+    JSON.stringify({ updatedAt: now.toISOString(), model: MODEL, summary, categories: categoryEntries }, null, 2)
   );
-  await appendHistory(now, { model: MODEL, summary });
+  await appendHistory(now, { model: MODEL, summary, categories: categoryEntries });
 
   console.log("[summarize-digest] 저장 완료");
 }

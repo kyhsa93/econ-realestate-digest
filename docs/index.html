@@ -201,6 +201,39 @@
     font-size: 0.95rem;
     white-space: pre-wrap;
   }
+  .summary-category {
+    margin-bottom: 14px;
+  }
+  .summary-category:last-child {
+    margin-bottom: 0;
+  }
+  .summary-category-label {
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-bottom: 2px;
+  }
+  .summary-category-line {
+    font-size: 0.95rem;
+  }
+  .summary-links {
+    list-style: none;
+    margin: 6px 0 0;
+    padding: 0;
+  }
+  .summary-links li {
+    font-size: 0.82rem;
+    margin-top: 4px;
+  }
+  .summary-links a {
+    color: var(--fg);
+    text-decoration: none;
+  }
+  .summary-links a:hover {
+    text-decoration: underline;
+  }
+  .summary-link-source {
+    color: var(--muted);
+  }
   .summary-meta {
     display: block;
     color: var(--muted);
@@ -819,16 +852,60 @@
     return summaryField[locale] ?? summaryField.ko ?? null;
   }
 
+  // 요약 카테고리에 딸린 기사(items)는 link만 기준으로 저장돼 있고 제목은
+  // 한국어 원문뿐이라, 영어 로케일에서는 오늘자/히스토리 뉴스 캐시에서 같은
+  // link를 찾아 translate-news.mjs가 만들어둔 titleEn을 재사용한다.
+  function findNewsItemByLink(link) {
+    const pools = [cache.news?.items, ...(cache.newsHistory ?? []).map((h) => h.items)].filter(Boolean);
+    for (const items of pools) {
+      const found = items.find((i) => i.link === link);
+      if (found) return found;
+    }
+    return null;
+  }
+
+  function pickCategoryItemTitle(item) {
+    if (locale !== "en") return item.title;
+    return findNewsItemByLink(item.link)?.titleEn ?? item.title;
+  }
+
+  function summaryCategoryHtml(cat) {
+    const label = locale === "en" ? cat.nameEn : cat.name;
+    const line = locale === "en" ? cat.lineEn : cat.lineKo;
+    const linksHtml = (cat.items ?? [])
+      .map(
+        (item) =>
+          `<li><a href="${item.link}" target="_blank" rel="noopener">${pickCategoryItemTitle(item)}</a><span class="summary-link-source"> · ${item.source}</span></li>`
+      )
+      .join("");
+    return `
+      <div class="summary-category">
+        <div class="summary-category-label">${label}</div>
+        <div class="summary-category-line">${line}</div>
+        ${linksHtml ? `<ul class="summary-links">${linksHtml}</ul>` : ""}
+      </div>`;
+  }
+
   function renderSummary(summary) {
     const box = document.getElementById("summary-box");
+    const categories = summary?.categories;
+    const hasCategories = Array.isArray(categories) && categories.length > 0;
     const text = pickSummaryText(summary?.summary);
-    if (!text) {
+
+    if (!hasCategories && !text) {
       box.classList.add("placeholder");
       box.textContent = t("summaryEmpty");
       return;
     }
+
     box.classList.remove("placeholder");
-    box.textContent = text;
+    if (hasCategories) {
+      box.innerHTML = categories.map(summaryCategoryHtml).join("");
+    } else {
+      // 카테고리 링크 정보가 없는 과거 아카이브 기록은 예전처럼 통짜 텍스트로 표시
+      box.textContent = text;
+    }
+
     const meta = document.createElement("span");
     meta.className = "summary-meta";
     meta.textContent = t("summaryMeta")(summary.model ?? "AI", fmtUpdated(summary.updatedAt));
