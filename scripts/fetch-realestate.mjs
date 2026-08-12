@@ -248,8 +248,7 @@ function computeChange(currentValue, baselineValue) {
   return { value10k: value10kDiff, percent };
 }
 
-// 월세는 보증금/월세 두 축이라 하나의 증감 지표로 압축하기 애매해서
-// 증감 추적은 매매·전세(둘 다 "평당 가격" 성격)에만 붙인다.
+// 매매·전세는 "평당 가격" 성격이라 값 하나에 증감을 바로 붙인다.
 function withSaleChange(sale, baselineSale, baselineDate) {
   if (!sale) return sale;
   const change = computeChange(sale.avgPricePerPyeong10k, baselineSale?.avgPricePerPyeong10k);
@@ -262,6 +261,15 @@ function withJeonseChange(jeonse, baselineJeonse, baselineDate) {
   return change ? { ...jeonse, change, baselineDate } : jeonse;
 }
 
+// 월세는 보증금과 월세가 성격이 달라 하나로 압축하지 않고, 각각 따로 증감을 계산한다.
+function withWolseChange(wolse, baselineWolse, baselineDate) {
+  if (!wolse) return wolse;
+  const depositChange = computeChange(wolse.avgDeposit10k, baselineWolse?.avgDeposit10k);
+  const monthlyRentChange = computeChange(wolse.avgMonthlyRent10k, baselineWolse?.avgMonthlyRent10k);
+  if (!depositChange && !monthlyRentChange) return wolse;
+  return { ...wolse, depositChange, monthlyRentChange, baselineDate };
+}
+
 function attachChanges(overall, districts, baseline) {
   const baselineDate = baseline?.date;
   const findBaselineDistrict = (code) => baseline?.districts?.find((d) => d.code === code);
@@ -270,7 +278,7 @@ function attachChanges(overall, districts, baseline) {
     overall: {
       sale: withSaleChange(overall.sale, baseline?.overall?.sale, baselineDate),
       jeonse: withJeonseChange(overall.jeonse, baseline?.overall?.jeonse, baselineDate),
-      wolse: overall.wolse,
+      wolse: withWolseChange(overall.wolse, baseline?.overall?.wolse, baselineDate),
     },
     districts: districts.map((d) => {
       const b = findBaselineDistrict(d.code);
@@ -278,6 +286,7 @@ function attachChanges(overall, districts, baseline) {
         ...d,
         sale: withSaleChange(d.sale, b?.sale, baselineDate),
         jeonse: withJeonseChange(d.jeonse, b?.jeonse, baselineDate),
+        wolse: withWolseChange(d.wolse, b?.wolse, baselineDate),
       };
     }),
   };

@@ -397,6 +397,7 @@
       realestateTagWolse: "월세",
       realestateMonthlyPrefix: "월 ",
       realestateHistoryLabel: "서울 평균 평당가 추이 (최근)",
+      realestateVolumeHistoryLabel: "매매 거래량 추이 (이번 달 누적, 최근)",
       newsHeading: "오늘의 경제·부동산 뉴스",
       newsError: "데이터를 불러오지 못했습니다.",
       newsArchiveLink: "지난 기록 보기 ↓",
@@ -444,6 +445,7 @@
       realestateTagWolse: "Monthly rent",
       realestateMonthlyPrefix: "mo. ",
       realestateHistoryLabel: "Seoul avg. price/pyeong trend (recent)",
+      realestateVolumeHistoryLabel: "Sale transaction volume trend (month-to-date, recent)",
       newsHeading: "Today's Economy & Real Estate News",
       newsError: "Failed to load data.",
       newsArchiveLink: "Browse past days ↓",
@@ -681,8 +683,8 @@
     return ` title="${t("realestateChangeVs")(metric.baselineDate)}"`;
   }
 
-  // 매매/전세는 "평당 가격" 성격이라 증감(change)까지 표시하고, 월세는
-  // 보증금+월세 두 축이라 증감 추적 없이 현재값만 보여준다. 거래건수는
+  // 매매/전세는 값 하나에 증감(change)을 바로 붙이고, 월세는 보증금/월세를
+  // 각각 따로 증감(depositChange/monthlyRentChange)으로 표시한다. 거래건수는
   // 자치구·서울 전체(overall) 행 모두 같은 셀 렌더러를 쓰므로 자동으로 같이 보임.
   function realestateSaleCellHtml(sale) {
     if (!sale) return "-";
@@ -696,8 +698,13 @@
 
   function realestateWolseCellHtml(wolse) {
     if (!wolse) return "-";
-    const text = `${formatPyeongPrice(wolse.avgDeposit10k)} / ${t("realestateMonthlyPrefix")}${formatPyeongPrice(wolse.avgMonthlyRent10k)}`;
-    return `<span>${text}</span> ${realestateCountHtml(wolse)}`;
+    const hintAttr = realestateDateHintAttr({
+      change: wolse.depositChange ?? wolse.monthlyRentChange,
+      baselineDate: wolse.baselineDate,
+    });
+    const depositText = `${formatPyeongPrice(wolse.avgDeposit10k)} ${realestateChangeHtml(wolse.depositChange)}`;
+    const rentText = `${t("realestateMonthlyPrefix")}${formatPyeongPrice(wolse.avgMonthlyRent10k)} ${realestateChangeHtml(wolse.monthlyRentChange)}`;
+    return `<span${hintAttr}>${depositText} / ${rentText}</span> ${realestateCountHtml(wolse)}`;
   }
 
   function realestateRowHtml(rawEntry, label, isOverall) {
@@ -736,6 +743,10 @@
     meta.textContent = t("realestatePeriodLabel")(realestate.period ?? "");
   }
 
+  // 거래량(transactionCount)은 계약일이 아니라 "이번 달 누적 신고 건수"의
+  // 스냅샷이라, 월중에는 대체로 우상향하다가 월이 바뀌는 시점에 다시 작은
+  // 값으로 꺾이는 톱니 모양으로 나타난다(overall.sale 집계와 동일한 특성,
+  // withSaleChange 주변 주석 참고).
   function renderRealestateHistory(history) {
     const grid = document.getElementById("realestate-history-grid");
     if (!Array.isArray(history) || history.length < 2) {
@@ -743,20 +754,25 @@
       return;
     }
     const recent = history.slice(-30);
-    const getSale = (h) => h.overall?.sale?.avgPricePerPyeong10k;
-    const values = recent.map(getSale).filter((v) => typeof v === "number");
-    if (values.length < 2) {
-      grid.innerHTML = "";
-      return;
-    }
-    const first = recent.find((h) => typeof getSale(h) === "number");
-    const last = recent.slice().reverse().find((h) => typeof getSale(h) === "number");
-    grid.innerHTML = `
-      <div class="history-card">
-        <div class="label">${t("realestateHistoryLabel")}</div>
-        ${sparklineSvg(values)}
-        <div class="range"><span>${first?.date ?? ""}</span><span>${last?.date ?? ""}</span></div>
-      </div>`;
+    const series = [
+      { label: t("realestateHistoryLabel"), get: (h) => h.overall?.sale?.avgPricePerPyeong10k },
+      { label: t("realestateVolumeHistoryLabel"), get: (h) => h.overall?.sale?.transactionCount },
+    ];
+
+    grid.innerHTML = series
+      .map(({ label, get }) => {
+        const values = recent.map(get).filter((v) => typeof v === "number");
+        if (values.length < 2) return "";
+        const first = recent.find((h) => typeof get(h) === "number");
+        const last = recent.slice().reverse().find((h) => typeof get(h) === "number");
+        return `
+          <div class="history-card">
+            <div class="label">${label}</div>
+            ${sparklineSvg(values)}
+            <div class="range"><span>${first?.date ?? ""}</span><span>${last?.date ?? ""}</span></div>
+          </div>`;
+      })
+      .join("");
   }
 
   // 뉴스 제목은 AI가 별도로 영어 번역(titleEn)을 만들어두면 그걸 쓰고,
