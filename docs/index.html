@@ -71,6 +71,11 @@
     color: var(--muted);
     font-size: 0.85rem;
   }
+  .update-schedule {
+    color: var(--muted);
+    font-size: 0.78rem;
+    margin-top: 2px;
+  }
   .back-link {
     display: inline-block;
     margin-top: 4px;
@@ -340,6 +345,7 @@
     <div>
       <h1 id="page-title">경제·부동산 데일리 다이제스트</h1>
       <div class="updated" id="updated">불러오는 중...</div>
+      <div class="update-schedule" id="update-schedule"></div>
       <a class="back-link" id="archive-back-link" href="./index.html" hidden></a>
     </div>
     <div class="header-actions">
@@ -434,6 +440,7 @@
       description: "매일 아침 경제·부동산 뉴스, 코스피·환율·기준금리, 서울 25개구 아파트 실거래가, AI 요약을 자동으로 갱신해 보여주는 무료 데일리 다이제스트.",
       lastUpdated: (s) => `마지막 갱신: ${s}`,
       lastUpdatedUnknown: "갱신 정보를 불러오지 못했습니다.",
+      updateSchedule: "매일 아침 08시경 자동 갱신됩니다.",
       loading: "불러오는 중...",
       contentNotice: null,
       summaryHeading: "오늘의 AI 요약",
@@ -488,6 +495,7 @@
       description: "A free daily digest of Korean economy & real estate news, KOSPI/USD-KRW/BOK rate, Seoul apartment transaction prices, and AI-generated summaries — auto-updated every morning.",
       lastUpdated: (s) => `Last updated: ${s}`,
       lastUpdatedUnknown: "Could not load update info.",
+      updateSchedule: "Auto-updated daily around 8am KST.",
       loading: "Loading...",
       contentNotice: "News headlines are machine-translated from Korean by a small local AI model. Company and person names in particular may be mistranslated as unrelated real entities - each headline links to the original Korean article for verification.",
       summaryHeading: "Today's AI Summary",
@@ -1081,13 +1089,17 @@
     renderArchive(cache.summaryHistory, cache.newsHistory, cache.history, cache.realestateHistory);
 
     const backLink = document.getElementById("archive-back-link");
+    const updateSchedule = document.getElementById("update-schedule");
     if (isArchiveView) {
       backLink.hidden = false;
       backLink.textContent = t("archiveBackLink");
       document.getElementById("updated").textContent = t("archiveViewing")(viewDate);
+      updateSchedule.hidden = true; // 지난 기록을 보는 중에는 "매일 갱신" 안내가 혼란스러움
       return;
     }
     backLink.hidden = true;
+    updateSchedule.hidden = false;
+    updateSchedule.textContent = t("updateSchedule");
 
     const latestSources = [market, news, summary].filter(Boolean);
     const latest = latestSources.map((v) => v.updatedAt).filter(Boolean).sort().pop();
