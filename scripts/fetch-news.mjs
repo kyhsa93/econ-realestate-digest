@@ -7,10 +7,18 @@ const FEEDS = [
   { source: "한국경제 경제", url: "https://www.hankyung.com/feed/economy" },
   { source: "한국경제 부동산", url: "https://www.hankyung.com/feed/realestate" },
   { source: "연합뉴스 경제", url: "https://www.yna.co.kr/rss/economy.xml" },
+  { source: "조선비즈 부동산", url: "https://biz.chosun.com/arc/outboundfeeds/rss/category/real_estate/?outputType=xml" },
+  { source: "뉴시스 경제", url: "https://www.newsis.com/RSS/economy.xml" },
 ];
 
-const KEYWORDS = ["부동산", "집값", "아파트", "전세", "월세", "금리", "경제", "환율", "코스피", "증시"];
-const MAX_ITEMS = 20;
+const KEYWORDS = [
+  "부동산", "집값", "아파트", "전세", "월세", "금리", "경제", "환율", "코스피", "증시",
+  "주택", "재건축", "대출",
+];
+const MAX_ITEMS = 24;
+// 뉴시스처럼 게시량이 많은 매체 하나가 "최신순 정렬 후 상위 N개" 로직에서
+// 다른 소스를 다 밀어내는 걸 막기 위한 소스별 상한. 소스를 늘리면서 같이 도입.
+const MAX_ITEMS_PER_SOURCE = 8;
 
 const dataDir = path.resolve(import.meta.dirname, "../docs/data");
 const outFile = path.join(dataDir, "news.json");
@@ -67,6 +75,19 @@ function dedupeSimilarTitles(items) {
   return kept;
 }
 
+// 최신순 정렬 상태를 유지하면서, 소스별로 maxPerSource개까지만 남긴다.
+function capPerSource(items, maxPerSource) {
+  const counts = new Map();
+  const kept = [];
+  for (const item of items) {
+    const count = counts.get(item.source) ?? 0;
+    if (count >= maxPerSource) continue;
+    counts.set(item.source, count + 1);
+    kept.push(item);
+  }
+  return kept;
+}
+
 function kstDateString(date) {
   return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(date);
 }
@@ -119,6 +140,7 @@ async function main() {
 
   items.sort((a, b) => new Date(b.publishedAt ?? 0) - new Date(a.publishedAt ?? 0));
 
+  items = capPerSource(items, MAX_ITEMS_PER_SOURCE);
   items = dedupeSimilarTitles(items);
   items = items.slice(0, MAX_ITEMS);
 
