@@ -2,7 +2,7 @@ name: Daily digest update
 
 on:
   schedule:
-    - cron: "0 23 * * *" # 매일 08:00 KST
+    - cron: "7 23 * * *" # 매일 08:07 KST경 (정각은 GitHub Actions 스케줄 트리거가 몰려 지연이 커서 회피)
   workflow_dispatch: {}
 
 permissions:
