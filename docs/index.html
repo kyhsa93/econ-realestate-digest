@@ -164,6 +164,27 @@
     font-size: 0.78rem;
     margin-left: 4px;
   }
+  /* 부동산 테이블은 셀 하나에 값+증감+거래건수가 다 들어가서 nowrap이면
+     가로 스크롤이 지나치게 길어진다. 이 테이블만 줄바꿈을 허용해서
+     셀 안에서 알아서 두 줄로 접히게 한다. */
+  .realestate-table {
+    white-space: normal;
+  }
+  .realestate-table td {
+    vertical-align: top;
+  }
+  .realestate-search {
+    margin: 10px 0 4px;
+  }
+  .realestate-search input {
+    width: 100%;
+    background: var(--card);
+    color: var(--fg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 0.9rem;
+  }
   ul.news-list {
     list-style: none;
     margin: 0;
@@ -387,8 +408,11 @@
   <section id="realestate-section">
     <h2 id="realestate-heading">한국 부동산 가격 추이</h2>
     <div class="content-notice" id="realestate-unit-caption" style="margin-top: -8px;"></div>
+    <div class="realestate-search">
+      <input type="search" id="realestate-search-input" placeholder="지역 검색 (예: 강남)">
+    </div>
     <div class="table-wrap">
-      <table class="data-table">
+      <table class="data-table realestate-table">
         <thead>
           <tr>
             <th id="re-th-district">지역</th>
@@ -481,6 +505,7 @@
       realestateWolseVolumeHistoryLabel: (name) => `${name} 월세 거래량 추이 (이번 달 누적, 최근)`,
       realestateDistrictSelectLabel: "지역 선택",
       realestateOverallOption: "서울 전체",
+      realestateSearchPlaceholder: "지역 검색 (예: 강남)",
       newsHeading: "오늘의 경제·부동산 뉴스",
       newsError: "데이터를 불러오지 못했습니다.",
       newsArchiveLink: "지난 기록 보기 ↓",
@@ -537,6 +562,7 @@
       realestateWolseVolumeHistoryLabel: (name) => `${name} monthly rent transaction volume trend (month-to-date, recent)`,
       realestateDistrictSelectLabel: "District",
       realestateOverallOption: "Seoul overall",
+      realestateSearchPlaceholder: "Search district (Korean name, e.g. 강남)",
       newsHeading: "Today's Economy & Real Estate News",
       newsError: "Failed to load data.",
       newsArchiveLink: "Browse past days ↓",
@@ -831,13 +857,25 @@
 
   function realestateRowHtml(rawEntry, label, isOverall) {
     const entry = normalizeRealestateEntry(rawEntry);
+    // 서울 전체(overall) 행은 검색 필터로 걸러지지 않게 data-district-name을 안 붙인다.
+    const searchAttr = isOverall ? "" : ` data-district-name="${label}"`;
     return `
-      <tr class="${isOverall ? "overall-row" : ""}">
+      <tr class="${isOverall ? "overall-row" : ""}"${searchAttr}>
         <td>${label}</td>
         <td>${realestateSaleCellHtml(entry.sale)}</td>
         <td>${realestateJeonseCellHtml(entry.jeonse)}</td>
         <td>${realestateWolseCellHtml(entry.wolse)}</td>
       </tr>`;
+  }
+
+  function applyRealestateSearch() {
+    const input = document.getElementById("realestate-search-input");
+    if (!input) return;
+    const query = input.value.trim().toLowerCase();
+    document.querySelectorAll("#realestate-grid tr[data-district-name]").forEach((tr) => {
+      const name = (tr.getAttribute("data-district-name") || "").toLowerCase();
+      tr.hidden = query.length > 0 && !name.includes(query);
+    });
   }
 
   function realestateSortValue(rawEntry) {
@@ -863,6 +901,7 @@
     ];
     tbody.innerHTML = rows.join("");
     meta.textContent = t("realestatePeriodLabel")(realestate.period ?? "");
+    applyRealestateSearch(); // 테이블이 새로 그려지면 입력값 기준으로 다시 필터링
   }
 
   // 거래량(transactionCount)은 계약일이 아니라 "이번 달 누적 신고 건수"의
@@ -1139,6 +1178,7 @@
     document.getElementById("re-th-jeonse").textContent = t("realestateTagJeonse");
     document.getElementById("re-th-wolse").textContent = t("realestateTagWolse");
     document.getElementById("realestate-district-select-label").textContent = t("realestateDistrictSelectLabel");
+    document.getElementById("realestate-search-input").placeholder = t("realestateSearchPlaceholder");
     document.getElementById("news-heading").textContent = t("newsHeading");
     document.getElementById("news-archive-link").textContent = t("newsArchiveLink");
     document.getElementById("archive-heading").textContent = t("archiveHeading");
@@ -1160,6 +1200,8 @@
     selectedDistrictCode = e.target.value;
     renderRealestateHistory(cache.realestateHistory);
   });
+
+  document.getElementById("realestate-search-input").addEventListener("input", applyRealestateSearch);
 
   // ---- 공유하기 -----------------------------------------------------------
   // 모바일 등 Web Share API 지원 브라우저는 네이티브 공유 시트를 띄우고,
