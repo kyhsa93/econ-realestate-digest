@@ -261,6 +261,22 @@
     font-size: 0.78rem;
     margin-bottom: 6px;
   }
+  .history-stats {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  .history-current {
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+  .history-minmax {
+    color: var(--muted);
+    font-size: 0.72rem;
+    white-space: nowrap;
+  }
   .history-card svg {
     display: block;
     width: 100%;
@@ -417,6 +433,7 @@
       baseRateSince: (s) => `${s} 부터`,
       historyKospiLabel: "코스피 (최근 추이)",
       historyUsdKrwLabel: "원/달러 환율 (최근 추이)",
+      historyMinMax: (max, min) => `최고 ${max} · 최저 ${min}`,
       realestateHeading: "한국 부동산 가격 추이",
       realestateError: "데이터를 불러오지 못했습니다.",
       realestateOverallLabel: "서울 25개구 평균",
@@ -467,6 +484,7 @@
       baseRateSince: (s) => `since ${s}`,
       historyKospiLabel: "KOSPI (recent trend)",
       historyUsdKrwLabel: "USD/KRW (recent trend)",
+      historyMinMax: (max, min) => `High ${max} · Low ${min}`,
       realestateHeading: "Korean Real Estate Price Trend",
       realestateError: "Failed to load data.",
       realestateOverallLabel: "Seoul 25-district average",
@@ -647,6 +665,26 @@
     return NaN;
   }
 
+  // renderHistory/renderRealestateHistory가 공통으로 쓰는 카드 마크업.
+  // 스파크라인은 상대적인 등락 "모양"만 보여줘서 지금 값이 최근 30일 중
+  // 어느 위치인지 감이 안 온다는 피드백을 반영해, 현재값과 최고/최저를
+  // 텍스트로 같이 보여준다.
+  function historyCardHtml({ label, values, format, firstDate, lastDate }) {
+    const current = values[values.length - 1];
+    const min = Math.min(...values);
+    const max = Math.max(...values);
+    return `
+      <div class="history-card">
+        <div class="label">${label}</div>
+        <div class="history-stats">
+          <span class="history-current">${format(current)}</span>
+          <span class="history-minmax">${t("historyMinMax")(format(max), format(min))}</span>
+        </div>
+        ${sparklineSvg(values)}
+        <div class="range"><span>${firstDate ?? ""}</span><span>${lastDate ?? ""}</span></div>
+      </div>`;
+  }
+
   function renderHistory(history) {
     const grid = document.getElementById("history-grid");
     if (!Array.isArray(history) || history.length < 2) {
@@ -655,22 +693,25 @@
     }
     const recent = history.slice(-30);
     const series = [
-      { label: t("historyKospiLabel"), get: (h) => parseNumeric(h.kospi?.value) },
-      { label: t("historyUsdKrwLabel"), get: (h) => parseNumeric(h.usdKrw?.value) },
+      {
+        label: t("historyKospiLabel"),
+        get: (h) => parseNumeric(h.kospi?.value),
+        format: (v) => v.toLocaleString(locale === "ko" ? "ko-KR" : "en-US", { maximumFractionDigits: 2 }),
+      },
+      {
+        label: t("historyUsdKrwLabel"),
+        get: (h) => parseNumeric(h.usdKrw?.value),
+        format: (v) => v.toFixed(2),
+      },
     ];
 
     grid.innerHTML = series
-      .map(({ label, get }) => {
+      .map(({ label, get, format }) => {
         const values = recent.map(get).filter((v) => !Number.isNaN(v));
         if (values.length < 2) return "";
         const first = recent.find((h) => !Number.isNaN(get(h)));
         const last = recent.slice().reverse().find((h) => !Number.isNaN(get(h)));
-        return `
-          <div class="history-card">
-            <div class="label">${label}</div>
-            ${sparklineSvg(values)}
-            <div class="range"><span>${first?.date ?? ""}</span><span>${last?.date ?? ""}</span></div>
-          </div>`;
+        return historyCardHtml({ label, values, format, firstDate: first?.date, lastDate: last?.date });
       })
       .join("");
   }
@@ -791,25 +832,21 @@
       return;
     }
     const recent = history.slice(-30);
+    const countFormat = (v) => t("realestateCountSuffix")(Math.round(v));
     const series = [
-      { label: t("realestateHistoryLabel"), get: (h) => h.overall?.sale?.avgPricePerPyeong10k },
-      { label: t("realestateVolumeHistoryLabel"), get: (h) => h.overall?.sale?.transactionCount },
-      { label: t("realestateJeonseVolumeHistoryLabel"), get: (h) => h.overall?.jeonse?.transactionCount },
-      { label: t("realestateWolseVolumeHistoryLabel"), get: (h) => h.overall?.wolse?.transactionCount },
+      { label: t("realestateHistoryLabel"), get: (h) => h.overall?.sale?.avgPricePerPyeong10k, format: formatPyeongPrice },
+      { label: t("realestateVolumeHistoryLabel"), get: (h) => h.overall?.sale?.transactionCount, format: countFormat },
+      { label: t("realestateJeonseVolumeHistoryLabel"), get: (h) => h.overall?.jeonse?.transactionCount, format: countFormat },
+      { label: t("realestateWolseVolumeHistoryLabel"), get: (h) => h.overall?.wolse?.transactionCount, format: countFormat },
     ];
 
     grid.innerHTML = series
-      .map(({ label, get }) => {
+      .map(({ label, get, format }) => {
         const values = recent.map(get).filter((v) => typeof v === "number");
         if (values.length < 2) return "";
         const first = recent.find((h) => typeof get(h) === "number");
         const last = recent.slice().reverse().find((h) => typeof get(h) === "number");
-        return `
-          <div class="history-card">
-            <div class="label">${label}</div>
-            ${sparklineSvg(values)}
-            <div class="range"><span>${first?.date ?? ""}</span><span>${last?.date ?? ""}</span></div>
-          </div>`;
+        return historyCardHtml({ label, values, format, firstDate: first?.date, lastDate: last?.date });
       })
       .join("");
   }
