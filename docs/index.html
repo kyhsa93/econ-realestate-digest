@@ -374,6 +374,26 @@
     font-size: 0.72rem;
     margin-top: 4px;
   }
+  .archive-date-jump {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 4px 0 16px;
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+  .archive-date-jump input,
+  .archive-date-jump button {
+    background: var(--card);
+    color: var(--fg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 0.85rem;
+  }
+  .archive-date-jump button {
+    cursor: pointer;
+  }
   .archive-month-group {
     margin-bottom: 14px;
   }
@@ -502,6 +522,11 @@
 
   <section id="archive-section">
     <h2 id="archive-heading">지난 요약 기록</h2>
+    <form class="archive-date-jump" id="archive-date-jump">
+      <label for="archive-date-input" id="archive-date-jump-label">날짜로 바로가기</label>
+      <input type="date" id="archive-date-input">
+      <button type="submit" id="archive-date-go">이동</button>
+    </form>
     <div id="archive-list">
       <div class="error">불러오는 중...</div>
     </div>
@@ -569,6 +594,8 @@
       newsError: "데이터를 불러오지 못했습니다.",
       newsArchiveLink: "지난 기록 보기 ↓",
       archiveHeading: "지난 기록",
+      archiveDateJumpLabel: "날짜로 바로가기",
+      archiveDateGo: "이동",
       archiveEmpty: "아직 지난 기록이 없습니다.",
       archiveBackLink: "오늘 기록으로 돌아가기 →",
       archiveViewing: (d) => `지난 기록 보는 중: ${d}`,
@@ -626,6 +653,8 @@
       newsError: "Failed to load data.",
       newsArchiveLink: "Browse past days ↓",
       archiveHeading: "Past Archive",
+      archiveDateJumpLabel: "Jump to date",
+      archiveDateGo: "Go",
       archiveEmpty: "No past records yet.",
       archiveBackLink: "Back to today →",
       archiveViewing: (d) => `Viewing archive: ${d}`,
@@ -1313,6 +1342,8 @@
     document.getElementById("news-heading").textContent = t("newsHeading");
     document.getElementById("news-archive-link").textContent = t("newsArchiveLink");
     document.getElementById("archive-heading").textContent = t("archiveHeading");
+    document.getElementById("archive-date-jump-label").textContent = t("archiveDateJumpLabel");
+    document.getElementById("archive-date-go").textContent = t("archiveDateGo");
     document.getElementById("footer-privacy-link").textContent = t("footerPrivacyLink");
 
     const notice = document.getElementById("content-notice");
@@ -1330,6 +1361,16 @@
   document.getElementById("theme-toggle").addEventListener("click", () => {
     const order = ["auto", "light", "dark"];
     applyTheme(order[(order.indexOf(theme) + 1) % order.length]);
+  });
+
+  // 오늘보다 미래 날짜는 애초에 데이터가 없으니 날짜 선택기에서 막아둔다.
+  document.getElementById("archive-date-input").max = kstToday();
+
+  document.getElementById("archive-date-jump").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const value = document.getElementById("archive-date-input").value;
+    if (!value) return;
+    location.href = `./index.html?date=${value}`;
   });
 
   document.getElementById("realestate-district-select").addEventListener("change", (e) => {
