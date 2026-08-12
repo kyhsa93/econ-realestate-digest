@@ -475,6 +475,7 @@
       realestateTagWolse: "월세",
       realestateMonthlyPrefix: "월 ",
       realestateHistoryLabel: (name) => `${name} 평당가 추이 (최근)`,
+      realestateNational84HistoryLabel: (name) => `${name} 국민평형(전용 84㎡ 안팎) 매매가 추이 (최근)`,
       realestateVolumeHistoryLabel: (name) => `${name} 매매 거래량 추이 (이번 달 누적, 최근)`,
       realestateJeonseVolumeHistoryLabel: (name) => `${name} 전세 거래량 추이 (이번 달 누적, 최근)`,
       realestateWolseVolumeHistoryLabel: (name) => `${name} 월세 거래량 추이 (이번 달 누적, 최근)`,
@@ -530,6 +531,7 @@
       realestateTagWolse: "Monthly rent",
       realestateMonthlyPrefix: "mo. ",
       realestateHistoryLabel: (name) => `${name} price/pyeong trend (recent)`,
+      realestateNational84HistoryLabel: (name) => `${name} 84㎡-ish ("national size") sale price trend (recent)`,
       realestateVolumeHistoryLabel: (name) => `${name} sale transaction volume trend (month-to-date, recent)`,
       realestateJeonseVolumeHistoryLabel: (name) => `${name} jeonse transaction volume trend (month-to-date, recent)`,
       realestateWolseVolumeHistoryLabel: (name) => `${name} monthly rent transaction volume trend (month-to-date, recent)`,
@@ -901,6 +903,7 @@
     const countFormat = (v) => t("realestateCountSuffix")(Math.round(v));
     const series = [
       { label: t("realestateHistoryLabel")(scopeName), get: (h) => getScoped(h)?.sale?.avgPricePerPyeong10k, format: formatPyeongPrice },
+      { label: t("realestateNational84HistoryLabel")(scopeName), get: (h) => getScoped(h)?.saleNational84?.avgPricePerPyeong10k, format: formatPyeongPrice },
       { label: t("realestateVolumeHistoryLabel")(scopeName), get: (h) => getScoped(h)?.sale?.transactionCount, format: countFormat },
       { label: t("realestateJeonseVolumeHistoryLabel")(scopeName), get: (h) => getScoped(h)?.jeonse?.transactionCount, format: countFormat },
       { label: t("realestateWolseVolumeHistoryLabel")(scopeName), get: (h) => getScoped(h)?.wolse?.transactionCount, format: countFormat },

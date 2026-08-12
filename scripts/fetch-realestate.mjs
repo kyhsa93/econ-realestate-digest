@@ -135,6 +135,19 @@ function parseWon10k(value) {
   return Number.isFinite(num) ? num : null;
 }
 
+// "국민평형"(흔히 "34평형")은 공급면적 기준 표현이라 전용면적으로는 딱 떨어지지
+// 않고, 실제 매물은 84.3~84.99㎡ 사이에 몰려 있지만 82~83㎡대 변형도 존재한다.
+// 정확한 평형 코드가 실거래 API에 없어서, 이 범위를 근사치로 삼는다.
+const NATIONAL_PYEONG_MIN_M2 = 82;
+const NATIONAL_PYEONG_MAX_M2 = 86;
+
+function filterByArea(items, minArea, maxArea) {
+  return items.filter((item) => {
+    const area = Number(item.excluUseAr);
+    return Number.isFinite(area) && area >= minArea && area <= maxArea;
+  });
+}
+
 function summarizeSale(items) {
   let totalAmountWon = 0;
   let totalArea = 0;
@@ -207,7 +220,11 @@ function summarizeRent(items) {
 
 async function fetchDistrictSale(districtCode, yearMonths) {
   const results = await Promise.all(yearMonths.map((ym) => fetchApi(SALE_API_URL, SALE_SERVICE_KEY, districtCode, ym)));
-  return summarizeSale(results.flat());
+  const items = results.flat();
+  return {
+    sale: summarizeSale(items),
+    saleNational84: summarizeSale(filterByArea(items, NATIONAL_PYEONG_MIN_M2, NATIONAL_PYEONG_MAX_M2)),
+  };
 }
 
 async function fetchDistrictRent(districtCode, yearMonths) {
@@ -277,6 +294,7 @@ function attachChanges(overall, districts, baseline) {
   return {
     overall: {
       sale: withSaleChange(overall.sale, baseline?.overall?.sale, baselineDate),
+      saleNational84: withSaleChange(overall.saleNational84, baseline?.overall?.saleNational84, baselineDate),
       jeonse: withJeonseChange(overall.jeonse, baseline?.overall?.jeonse, baselineDate),
       wolse: withWolseChange(overall.wolse, baseline?.overall?.wolse, baselineDate),
     },
@@ -285,6 +303,7 @@ function attachChanges(overall, districts, baseline) {
       return {
         ...d,
         sale: withSaleChange(d.sale, b?.sale, baselineDate),
+        saleNational84: withSaleChange(d.saleNational84, b?.saleNational84, baselineDate),
         jeonse: withJeonseChange(d.jeonse, b?.jeonse, baselineDate),
         wolse: withWolseChange(d.wolse, b?.wolse, baselineDate),
       };
@@ -367,11 +386,13 @@ async function main() {
   const yearMonths = [kstYearMonth(now, 0)];
 
   async function fetchDistrictEntry({ code, name }) {
-    const entry = { code, name, sale: null, jeonse: null, wolse: null };
+    const entry = { code, name, sale: null, saleNational84: null, jeonse: null, wolse: null };
 
     if (hasSale) {
       try {
-        entry.sale = await fetchDistrictSale(code, yearMonths);
+        const saleResult = await fetchDistrictSale(code, yearMonths);
+        entry.sale = saleResult.sale;
+        entry.saleNational84 = saleResult.saleNational84;
       } catch (err) {
         console.error(`[fetch-realestate] ${name} 매매 조회 실패: ${err.message}`);
       }
@@ -437,6 +458,21 @@ async function main() {
           transactionCount: saleDistricts.reduce((sum, d) => sum + d.sale.transactionCount, 0),
         };
 
+  const saleNational84Districts = districts.filter((d) => d.saleNational84);
+  const overallSaleNational84AvgM2 = weightedAverage(
+    saleNational84Districts,
+    (d) => d.saleNational84.avgPricePerM2,
+    (d) => d.saleNational84.transactionCount
+  );
+  const overallSaleNational84 =
+    overallSaleNational84AvgM2 == null
+      ? null
+      : {
+          avgPricePerM2: overallSaleNational84AvgM2,
+          avgPricePerPyeong10k: Math.round((overallSaleNational84AvgM2 * PYEONG_M2) / 10_000),
+          transactionCount: saleNational84Districts.reduce((sum, d) => sum + d.saleNational84.transactionCount, 0),
+        };
+
   const jeonseDistricts = districts.filter((d) => d.jeonse);
   const overallJeonseAvgM2 = weightedAverage(
     jeonseDistricts,
@@ -466,7 +502,7 @@ async function main() {
           transactionCount: wolseDistricts.reduce((sum, d) => sum + d.wolse.transactionCount, 0),
         };
 
-  const overall = { sale: overallSale, jeonse: overallJeonse, wolse: overallWolse };
+  const overall = { sale: overallSale, saleNational84: overallSaleNational84, jeonse: overallJeonse, wolse: overallWolse };
   const period = yearMonths[0];
 
   // 히스토리는 변화율 계산 없이 원값만 저장(나중에 다른 기준일로도 재계산
