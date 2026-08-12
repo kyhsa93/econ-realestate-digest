@@ -398,6 +398,8 @@
       realestateMonthlyPrefix: "월 ",
       realestateHistoryLabel: "서울 평균 평당가 추이 (최근)",
       realestateVolumeHistoryLabel: "매매 거래량 추이 (이번 달 누적, 최근)",
+      realestateJeonseVolumeHistoryLabel: "전세 거래량 추이 (이번 달 누적, 최근)",
+      realestateWolseVolumeHistoryLabel: "월세 거래량 추이 (이번 달 누적, 최근)",
       newsHeading: "오늘의 경제·부동산 뉴스",
       newsError: "데이터를 불러오지 못했습니다.",
       newsArchiveLink: "지난 기록 보기 ↓",
@@ -446,6 +448,8 @@
       realestateMonthlyPrefix: "mo. ",
       realestateHistoryLabel: "Seoul avg. price/pyeong trend (recent)",
       realestateVolumeHistoryLabel: "Sale transaction volume trend (month-to-date, recent)",
+      realestateJeonseVolumeHistoryLabel: "Jeonse transaction volume trend (month-to-date, recent)",
+      realestateWolseVolumeHistoryLabel: "Monthly rent transaction volume trend (month-to-date, recent)",
       newsHeading: "Today's Economy & Real Estate News",
       newsError: "Failed to load data.",
       newsArchiveLink: "Browse past days ↓",
@@ -757,6 +761,8 @@
     const series = [
       { label: t("realestateHistoryLabel"), get: (h) => h.overall?.sale?.avgPricePerPyeong10k },
       { label: t("realestateVolumeHistoryLabel"), get: (h) => h.overall?.sale?.transactionCount },
+      { label: t("realestateJeonseVolumeHistoryLabel"), get: (h) => h.overall?.jeonse?.transactionCount },
+      { label: t("realestateWolseVolumeHistoryLabel"), get: (h) => h.overall?.wolse?.transactionCount },
     ];
 
     grid.innerHTML = series
