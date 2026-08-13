@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-08-13T14:59:09.861Z",
-  "date": "2026-08-13",
+  "updatedAt": "2026-08-13T15:14:40.535Z",
+  "date": "2026-08-14",
   "items": [
     {
       "title": "뉴욕증시, 7월 물가 안정세에 상승출발…다우 0.3% S&amp;P 0.2%↑",
@@ -10,7 +10,7 @@
       "category": "stocks",
       "preview": "[서울=뉴시스] 김승민 기자 = 미국 7월 물가 지표가 안정세로 나타나면서 뉴욕증시가 상승 출발했다. 뉴욕증권거래소(NYSE)에 따르면 13일(현지 시간) 오전 9시31분 기준 다우존스산업평균지수는 전장 대비 160…",
       "dupes": [],
-      "titleEn": "New York Stock Market Rises on Stable July Inflation... Dow Up 0.3%, S&P Up 0.2%"
+      "titleEn": "New York markets rise on stable July inflation... Dow up 0.3%, S&P up 0.2%"
     },
     {
       "title": "靑경제수석 \"임기내 150만호 착공…용산공원 주택공급 논의해야\"",
@@ -20,7 +20,7 @@
       "category": "realestate",
       "preview": "(서울=연합뉴스) 고동욱 기자 = 하준경 청와대 경제성장수석은 13일 정부가 발표한 주택공급 대책과 관련해 \"(앞서 발표했던 물량을) 다 합치면...",
       "dupes": [],
-      "titleEn": "Blue House Economic Chief: \"Launch 1,500,000 units during term... Need to discuss housing supply at Yongsan Park"
+      "titleEn": "Blue House Economic Chief: \"Launch 1,500,000 units during term... must discuss housing supply at Yongsan Park"
     },
     {
       "title": "靑 하준경 \"150만호 임기 내 착공…용산어린이공원 주택공급도 필요한 일\"",
@@ -30,7 +30,7 @@
       "category": "realestate",
       "preview": "[서울=뉴시스]조재완 기자 = 하준경 청와대 경제성장수석은 13일 \"150만호 정도를 정부 임기 내 착공할 수 있을 것\"이라고 밝혔다. 하 수석은 이날 오후 CBS라디오 '박재홍의 한판승부'에 출연해 \"관계기관들과…",
       "dupes": [],
-      "titleEn": "Blue House Ha Jun-kyung \"1,500,000 units to be started during term... housing supply at Yongsan Children's Park also needed"
+      "titleEn": "Blue House Ha Jun-kyung \"1,500,000 units to start construction during term... housing supply at Yongsan Children's Park also needed"
     },
     {
       "title": "[올댓차이나] 대만 증시, 美 반도체주 강세에 4일째 상승 마감…1.11%↑",
@@ -40,7 +40,7 @@
       "category": "stocks",
       "preview": "[서울=뉴시스]이재준 기자 = 대만 타이베이 증시는 13일 전날 뉴욕 증시에서 반도체를 중심으로 기술주가 강세를 보인데 힘입어 주력 기술주에 매수가 선행, 4거래일 연속 상승 마감했다. 자취안(加權) 지수는 전일 대…",
       "dupes": [],
-      "titleEn": "[TechChina] Taiwan's stock market closes up for 4th straight day amid strong U.S. semiconductor stocks, +1.11%"
+      "titleEn": "[Taiwan's stock market closes up for fourth consecutive day on strong U.S. semiconductor stocks, rising 1.11%]"
     },
     {
       "title": "\"비거주 1주택 불이익 과도\"…전문가들 \"실거주 특례 넓혀야\"",
@@ -50,7 +50,7 @@
       "category": "realestate",
       "preview": "[세종=뉴시스]박광온 기자 = \"비거주 기간을 거주 기간으로 인정하는 특례에 '1년 이상 거주' 요건이 붙어 있는데, 이건 없애거나 최소한으로 줄여야 한다.\" \"부득이한 사유로 인한 거주 인정 기간을 지금 3년으로…",
       "dupes": [],
-      "titleEn": "Non-resident single-home disadvantages excessive\"...Experts say \"expand actual residence special cases"
+      "titleEn": "Non-resident single-home disadvantages excessive\"...Experts say \"expand actual residence exceptions"
     },
     {
       "title": "[올댓차이나] 홍콩 증시, 中 경기불안에 사흘째 하락 마감… H주 0.23%↓",
@@ -90,7 +90,7 @@
       "category": "other",
       "preview": null,
       "dupes": [],
-      "titleEn": "Double the 'total loan' limit... Prioritize supply to youth and genuine demanders"
+      "titleEn": "Double the 'total loan' limit... prioritize supply to youth and genuine demanders"
     },
     {
       "title": "실거주 이력 없으면 전세대출 연장 못한다",
@@ -110,7 +110,7 @@
       "category": "rates",
       "preview": null,
       "dupes": [],
-      "titleEn": "NH Bank Provides Low-Interest Loan of 150,000,000,000 Won to 'Village Enterprises"
+      "titleEn": "Nonghyup Bank Provides 150,000,000,000 Won in Low-Interest Loans to 'Village Enterprises"
     },
     {
       "title": "한강 품고 강남 가까운 성동구…성수 이어 금호·옥수도 새 아파트촌 변신",
@@ -120,7 +120,7 @@
       "category": "realestate",
       "preview": null,
       "dupes": [],
-      "titleEn": "Seongdong-gu, with the Han River and close to Gangnam... Seongsu followed by Geumho and Okso also transform into new apartment villages"
+      "titleEn": "Seongdong-gu, with the Han River and close to Gangnam... Seongsu followed by Geumho and Okso transform into new apartment villages"
     },
     {
       "title": "비아파트 공급 '영끌'…전세시장 안정은 '수요 회복'이 관건",
@@ -130,7 +130,7 @@
       "category": "realestate",
       "preview": "[서울=뉴시스]이종성 기자 = 정부가 전세사기 이후 공급이 크게 위축된 다세대·다가구주택과 오피스텔 등 비아파트 시장을 되살리기 위해 건축·금융 규제를 대폭 완화한다. 아파트보다 상대적으로 빠르게 공급할 수 있는 비…",
       "dupes": [],
-      "titleEn": "Non-apartment supply 'pulls down' prices... stability in rental market hinges on demand recovery"
+      "titleEn": "Non-apartment supply 'pulls down' prices... stabilizing the rental market hinges on demand recovery"
     },
     {
       "title": "조기 착공땐 재건축 기부채납 부담 절반으로",
@@ -210,7 +210,7 @@
       "category": "realestate",
       "preview": null,
       "dupes": [],
-      "titleEn": "General Housing Type Mirinae House\" to Supply 128 Units"
+      "titleEn": "General residential type Mirinae House\" to supply 128 units"
     },
     {
       "title": "\"전월세난 지속…무주택자, 세 낀 매물 눈여겨봐야\"",
@@ -220,7 +220,7 @@
       "category": "realestate",
       "preview": null,
       "dupes": [],
-      "titleEn": "Rental and lease difficulties continue... Homeless people should keep an eye on properties with low taxes"
+      "titleEn": "Rental and lease difficulties continue... Homeless people should keep an eye on tax-exempt listings"
     },
     {
       "title": "국힘 “이성훈, 다주택 상태서 LH 사장 취임”…사측 “靑 재직때 2채 처분”",
@@ -230,7 +230,7 @@
       "category": "realestate",
       "preview": "한국토지주택공사(LH)가 13일 이성훈 사장이 청와대 재직 당시 보유하고 있던 주택 3채 가운데 2채를 처분했다고 밝혔다. LH는 이날 “이성훈 사장은 청와대 재직 당시 기존 3주..",
       "dupes": [],
-      "titleEn": "KDP says \"Lee Seung-hoon took up LH president post while owning multiple homes\"...LH says \"he disposed of two properties during his time at the Blue House"
+      "titleEn": "KDP says \"Lee Seung-hoon took up LH president post while owning multiple homes\"...LH says \"He disposed of two properties during his time at the Blue House"
     },
     {
       "title": "국고채 금리 대체로 하락…50년물 최고치 경신(종합)",

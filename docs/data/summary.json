@@ -1,20 +1,25 @@
 {
-  "updatedAt": "2026-08-13T11:55:29.327Z",
+  "updatedAt": "2026-08-13T15:17:10.881Z",
   "model": "qwen3:14b",
   "summary": {
-    "ko": "- 대만 증시가 미국 반도체주 강세로 상승 마감했고, 홍콩 증시는 중국 경기 불안으로 하락 마감했으며, 아시아나항공은 유가와 환율 영향으로 2분기 영업손실을 기록했다.\n- 부동산 관련 뉴스에서는 실거주 특례 확대 필요성, 전세대출 조건 강화, 성동구 등 신규 아파트 개발, 비아파트 공급 증가와 전세시장 안정, 재건축 착공 시 기부채납 부담 감소 등 다양한 이슈가 다뤄졌다.\n- 오늘 경제 뉴스에서는 수도권 주택 공급 확대와 대출 규제 완화, 일부 지역에서 집값 하락세가 나타나고 있으며, 관련 정책에 대해 정치적 비판이 제기되는 등 다양한 소식들이 보도되었다.\n- 농협은행이 마을기업에 저금리 대출을 지원하고, 국고채 금리가 하락하며 50년물 최고치를 경신하는 등 금리·예금·투자상품 관련 주요 경제 뉴스가 발표됐다.",
-    "en": "- Taiwan's stock market closed higher due to strong performance in U.S. semiconductor stocks, Hong Kong's stock market closed lower due to concerns over China's economic conditions, and Asiana Airlines recorded an operating loss in the second quarter due to the impact of oil prices and exchange rates.\n- Real estate-related news covered various issues, including the need to expand the real residence special case, tightening conditions for rental loans, new apartment developments in areas such as Seongdong-gu, increased supply of non-apartment housing and stabilization of the rental market, and reduced burden of donation payments upon the start of reconstruction projects.\n- Today's economic news reported various developments, including expanded housing supply in the capital area, relaxed loan regulations, falling home prices in some regions, and political criticism of related policies.\n- Agricultural Cooperative Bank provided low-interest loans to village enterprises, and the government bond rate fell, setting a new 50-year high, among other major economic news related to interest rates, deposits, and investment products."
+    "ko": "- 뉴욕증시가 7월 물가 안정세에 상승출발했고, 대만 증시는 미국 반도체주 강세로 상승 마감했으며, 홍콩 증시는 중국 경기 불안으로 하락 마감했고, 아시아나항공은 유가와 환율 영향으로 2분기 영업손실을 기록했다.\n- 부동산: 靑경제수석 \"임기내 150만호 착공…용산공원 주택공급 논의해야\", 靑 하준경 \"150만호 임기 내 착공…용산어린이공원 주택공급도 필요한 일\", \"비거주 1주택 불이익 과도\"…전문가들 \"실거주 특례 넓혀야\" +12\n- 수도권 주택 공급 확대와 대출 총량 한도 상승, 청년 및 실수요자에 대한 우선 공급 조치가 발표되었으며, 서초와 강남 지역의 집값이 하락세로 전환되었다.\n- 농협은행이 마을기업에 저금리 대출을 지원하고, 국고채 금리가 하락하며 50년물이 최고치를 경신하는 등 금리·예금·투자상품 관련 주요 경제 뉴스가 발표됐다.",
+    "en": "- The New York stock market rose at the open amid stable July inflation, while the Taiwan stock market closed higher due to strong performance in U.S. semiconductor stocks. The Hong Kong stock market closed lower due to concerns over China's economic conditions, and Asiana Airlines recorded a second-quarter operating loss due to the impact of oil prices and exchange rates.\n- Real Estate: 靑경제수석 \"임기내 150만호 착공…용산공원 주택공급 논의해야\", 靑 하준경 \"150만호 임기 내 착공…용산어린이공원 주택공급도 필요한 일\", \"비거주 1주택 불이익 과도\"…전문가들 \"실거주 특례 넓혀야\" +12\n- Expansion of housing supply in the Seoul metropolitan area, an increase in the total loan limit, and priority supply measures for young people and first-time homebuyers have been announced, and housing prices in Seocho and Gangnam areas have turned downward.\n- Nonghyup Bank provided low-interest loans to village enterprises, and with the decline in government bond rates, the 50-year bond reached a new high, among other major economic news related to interest rates, deposits, and investment products."
   },
   "categories": [
     {
       "key": "stocks",
       "name": "증시·환율",
       "nameEn": "Stocks & FX",
-      "lineKo": "대만 증시가 미국 반도체주 강세로 상승 마감했고, 홍콩 증시는 중국 경기 불안으로 하락 마감했으며, 아시아나항공은 유가와 환율 영향으로 2분기 영업손실을 기록했다.",
-      "lineEn": "Taiwan's stock market closed higher due to strong performance in U.S. semiconductor stocks, Hong Kong's stock market closed lower due to concerns over China's economic conditions, and Asiana Airlines recorded an operating loss in the second quarter due to the impact of oil prices and exchange rates.",
+      "lineKo": "뉴욕증시가 7월 물가 안정세에 상승출발했고, 대만 증시는 미국 반도체주 강세로 상승 마감했으며, 홍콩 증시는 중국 경기 불안으로 하락 마감했고, 아시아나항공은 유가와 환율 영향으로 2분기 영업손실을 기록했다.",
+      "lineEn": "The New York stock market rose at the open amid stable July inflation, while the Taiwan stock market closed higher due to strong performance in U.S. semiconductor stocks. The Hong Kong stock market closed lower due to concerns over China's economic conditions, and Asiana Airlines recorded a second-quarter operating loss due to the impact of oil prices and exchange rates.",
       "isFallback": false,
       "fallbackReason": null,
       "items": [
+        {
+          "title": "뉴욕증시, 7월 물가 안정세에 상승출발…다우 0.3% S&amp;P 0.2%↑",
+          "link": "https://www.newsis.com/view/NISX20260813_0003748607",
+          "source": "뉴시스 경제"
+        },
         {
           "title": "[올댓차이나] 대만 증시, 美 반도체주 강세에 4일째 상승 마감…1.11%↑",
           "link": "https://www.newsis.com/view/NISX20260813_0003748550",
@@ -36,11 +41,21 @@
       "key": "realestate",
       "name": "부동산",
       "nameEn": "Real Estate",
-      "lineKo": "부동산 관련 뉴스에서는 실거주 특례 확대 필요성, 전세대출 조건 강화, 성동구 등 신규 아파트 개발, 비아파트 공급 증가와 전세시장 안정, 재건축 착공 시 기부채납 부담 감소 등 다양한 이슈가 다뤄졌다.",
-      "lineEn": "Real estate-related news covered various issues, including the need to expand the real residence special case, tightening conditions for rental loans, new apartment developments in areas such as Seongdong-gu, increased supply of non-apartment housing and stabilization of the rental market, and reduced burden of donation payments upon the start of reconstruction projects.",
-      "isFallback": false,
-      "fallbackReason": null,
+      "lineKo": "부동산: 靑경제수석 \"임기내 150만호 착공…용산공원 주택공급 논의해야\", 靑 하준경 \"150만호 임기 내 착공…용산어린이공원 주택공급도 필요한 일\", \"비거주 1주택 불이익 과도\"…전문가들 \"실거주 특례 넓혀야\" +12",
+      "lineEn": "Real Estate: 靑경제수석 \"임기내 150만호 착공…용산공원 주택공급 논의해야\", 靑 하준경 \"150만호 임기 내 착공…용산어린이공원 주택공급도 필요한 일\", \"비거주 1주택 불이익 과도\"…전문가들 \"실거주 특례 넓혀야\" +12",
+      "isFallback": true,
+      "fallbackReason": "unverified-entity",
       "items": [
+        {
+          "title": "靑경제수석 \"임기내 150만호 착공…용산공원 주택공급 논의해야\"",
+          "link": "https://www.yna.co.kr/view/AKR20260813168400001",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "靑 하준경 \"150만호 임기 내 착공…용산어린이공원 주택공급도 필요한 일\"",
+          "link": "https://www.newsis.com/view/NISX20260813_0003748581",
+          "source": "뉴시스 경제"
+        },
         {
           "title": "\"비거주 1주택 불이익 과도\"…전문가들 \"실거주 특례 넓혀야\"",
           "link": "https://www.newsis.com/view/NISX20260813_0003748548",
@@ -55,16 +70,6 @@
           "title": "한강 품고 강남 가까운 성동구…성수 이어 금호·옥수도 새 아파트촌 변신",
           "link": "https://www.hankyung.com/article/202608104545i",
           "source": "한국경제 부동산"
-        },
-        {
-          "title": "비아파트 공급 '영끌'…전세시장 안정은 '수요 회복'이 관건",
-          "link": "https://www.newsis.com/view/NISX20260813_0003748468",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "조기 착공땐 재건축 기부채납 부담 절반으로",
-          "link": "https://www.hankyung.com/article/2026081301051",
-          "source": "한국경제 부동산"
         }
       ]
     },
@@ -72,8 +77,8 @@
       "key": "other",
       "name": "기타 경제 소식",
       "nameEn": "Other Economic News",
-      "lineKo": "오늘 경제 뉴스에서는 수도권 주택 공급 확대와 대출 규제 완화, 일부 지역에서 집값 하락세가 나타나고 있으며, 관련 정책에 대해 정치적 비판이 제기되는 등 다양한 소식들이 보도되었다.",
-      "lineEn": "Today's economic news reported various developments, including expanded housing supply in the capital area, relaxed loan regulations, falling home prices in some regions, and political criticism of related policies.",
+      "lineKo": "수도권 주택 공급 확대와 대출 총량 한도 상승, 청년 및 실수요자에 대한 우선 공급 조치가 발표되었으며, 서초와 강남 지역의 집값이 하락세로 전환되었다.",
+      "lineEn": "Expansion of housing supply in the Seoul metropolitan area, an increase in the total loan limit, and priority supply measures for young people and first-time homebuyers have been announced, and housing prices in Seocho and Gangnam areas have turned downward.",
       "isFallback": false,
       "fallbackReason": null,
       "items": [
@@ -91,11 +96,6 @@
           "title": "세 부담 커지자…서초·강남 집값 3개월만에 하락세",
           "link": "https://www.hankyung.com/article/2026081301271",
           "source": "한국경제 부동산"
-        },
-        {
-          "title": "국힘, 수도권 공급대책에 \"본질은 대출…국민 빚더미로 떠밀어\"",
-          "link": "https://www.yna.co.kr/view/AKR20260813140400001",
-          "source": "연합뉴스 경제"
         }
       ]
     },
@@ -103,8 +103,8 @@
       "key": "rates",
       "name": "금리·예금·투자상품",
       "nameEn": "Rates, Deposits & Investment Products",
-      "lineKo": "농협은행이 마을기업에 저금리 대출을 지원하고, 국고채 금리가 하락하며 50년물 최고치를 경신하는 등 금리·예금·투자상품 관련 주요 경제 뉴스가 발표됐다.",
-      "lineEn": "Agricultural Cooperative Bank provided low-interest loans to village enterprises, and the government bond rate fell, setting a new 50-year high, among other major economic news related to interest rates, deposits, and investment products.",
+      "lineKo": "농협은행이 마을기업에 저금리 대출을 지원하고, 국고채 금리가 하락하며 50년물이 최고치를 경신하는 등 금리·예금·투자상품 관련 주요 경제 뉴스가 발표됐다.",
+      "lineEn": "Nonghyup Bank provided low-interest loans to village enterprises, and with the decline in government bond rates, the 50-year bond reached a new high, among other major economic news related to interest rates, deposits, and investment products.",
       "isFallback": false,
       "fallbackReason": null,
       "items": [
