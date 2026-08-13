@@ -1,5 +1,6 @@
 import { writeFile, mkdir, readFile } from "node:fs/promises";
 import path from "node:path";
+import { FALLBACK_CATEGORY, categoryOf } from "./categories.mjs";
 
 const dataDir = path.resolve(import.meta.dirname, "../docs/data");
 const outFile = path.join(dataDir, "summary.json");
@@ -18,24 +19,6 @@ const MODEL = process.env.OLLAMA_MODEL ?? "qwen2.5:3b";
 // 영어로 번역 -> 번역도 검증. 예전엔 한국어/영어를 각각 헤드라인에서 독립
 // 생성했는데, "요약과 번역을 동시에" 시키는 게 오류가 더 많아서(예: 영어
 // 버전에서 "15억원"을 "yuan"으로 오역 + 없는 통계까지 지어냄) 순서를 바꿈.
-const CATEGORIES = [
-  {
-    name: "금리·예금·투자상품",
-    nameEn: "Rates, Deposits & Investment Products",
-    keywords: ["금리", "예금", "저축", "IMA", "발행어음", "펀드", "채권", "증권사"],
-  },
-  {
-    name: "부동산",
-    nameEn: "Real Estate",
-    keywords: ["아파트", "부동산", "전세", "월세", "매물", "분양", "세제", "주택", "재건축", "청약"],
-  },
-  {
-    name: "증시·환율",
-    nameEn: "Stocks & FX",
-    keywords: ["코스피", "코스닥", "증시", "주가", "환율", "달러", "원화"],
-  },
-];
-const FALLBACK_CATEGORY = { name: "기타 경제 소식", nameEn: "Other Economic News", keywords: [] };
 const MAX_ITEMS_PER_CATEGORY = 5;
 
 // 한국어는 만/억/조 단위로 4자리씩 묶어 읽어서(영어의 천 단위 그룹과 다름),
@@ -96,8 +79,9 @@ async function readJson(name) {
 function categorize(items) {
   const buckets = new Map(); // category object -> news item[]
   for (const item of items) {
-    const title = item.title ?? "";
-    const matched = CATEGORIES.find((c) => c.keywords.some((k) => title.includes(k))) ?? FALLBACK_CATEGORY;
+    // fetch-news.mjs가 수집 시점에 붙여둔 category를 그대로 쓴다. 화면의 뉴스
+    // 목록 필터와 요약 묶음이 어긋나지 않게 하기 위함.
+    const matched = categoryOf(item);
     if (!buckets.has(matched)) buckets.set(matched, []);
     buckets.get(matched).push(item);
   }
@@ -180,43 +164,71 @@ function containsUnverifiedNumber(sentence, sourceText) {
 }
 
 // 숫자 검증을 통과해도 "원문에 없는 기관·기업·인물·지역을 끌어다 붙이는"
-// 잔여 위험이 있어, 별도로 한 번 더 확인한다. 작은 모델에게 "틀린 부분을
-// 알아서 고쳐 써라"는 못 믿을 일이라(잘못 고치다가 새로운 오류를 만들 수
-// 있음), 여기서는 YES/NO 판정만 시키고 NO가 나오면 고쳐 쓰게 하지 않고
-// 곧장 안전한 헤드라인 나열로 대체한다.
+// 잔여 위험이 있어, 별도로 한 번 더 확인한다.
 //
-// 예전 프롬프트는 "원문에 없는 숫자·통계·인과관계·사실이 하나라도 섞여
-// 있으면 NO"였는데, 이 기준이 요약이라면 당연히 하게 되는 압축·재서술까지
-// 걸러내면서 3b 모델이 사실상 전부 NO를 뱉었다(실제로 CI에서 3일 연속
-// 모든 카테고리가 폴백 처리돼 "AI 요약"이 헤드라인 나열만 남았음 - 원문
-// 제목을 거의 그대로 옮긴 문장까지 NO 판정). 검증 대상을 "원문에 없는
-// 숫자·고유명사"로 좁히고, 압축/재서술은 명시적으로 허용한다.
-async function reviewKoSentence(sentence, titles) {
-  const list = titles.slice(0, MAX_ITEMS_PER_CATEGORY).map((t, i) => `${i + 1}. ${t}`).join("\n");
-  const prompt = `다음은 원문 뉴스 제목들과, 그걸 요약했다는 문장이야.
+// 예전에는 이 단계도 LLM에게 "요약이 원문에 충실한가"를 YES/NO로 물었는데,
+// 3b 모델이 이 판단 자체를 못 해서 사실상 항상 NO를 뱉었다(CI에서 며칠 연속
+// 모든 카테고리가 폴백 처리 - 원문 제목의 단어만 쓴 문장까지 NO). 기준을
+// "원문에 없는 고유명사"로 좁혀도 여전히 전부 NO였다.
+//
+// 그래서 판단을 모델에게 맡기지 않는다. 모델에게는 "문장에서 고유명사를
+// 뽑아라"는 추출 작업만 시키고(작은 모델도 하는 일), 원문에 있는지 없는지
+// 대조는 숫자 검증과 똑같이 코드가 substring으로 한다.
+const MAX_EXTRACTED_ENTITIES = 10;
+const MAX_ENTITY_LENGTH = 20;
+// 모델이 고유명사가 아닌 일반 명사를 섞어 내놓는 경우가 있어, 이런 단어는
+// 원문에 없더라도 폐기 사유로 삼지 않는다.
+const ENTITY_STOPWORDS = new Set([
+  "정부", "시장", "경제", "금리", "주택", "부동산", "증시", "환율", "은행", "대출", "가격", "물가",
+]);
+// "코스피지수"처럼 모델이 접미어를 붙여 내놓는 경우를 대비해 이 꼬리표는 떼고 한 번 더 대조한다.
+const ENTITY_SUFFIXES = ["지수", "증시", "시장", "정부", "당국", "은행", "그룹"];
 
-[원문 제목]
-${list}
+function normalizeForEntityMatch(text) {
+  return text.replace(/[^\p{L}\p{N}]/gu, "");
+}
 
-[요약 문장]
-${sentence}
+async function extractProperNouns(sentence) {
+  const prompt = `다음 문장에서 고유명사(기관·기업·인물·지역·지수 이름)만 골라 쉼표로 구분해 나열해.
+고유명사가 없으면 "없음"이라고만 답해. 설명이나 다른 말은 절대 하지 마.
 
-요약 문장에 원문 제목에 없는 숫자나 고유명사(기관·기업·인물·지역 이름)가 들어 있으면 "NO",
-그렇지 않으면 "YES"라고만 답해.
-여러 제목을 한 문장으로 압축하거나, 표현을 바꿔 쓰거나, "상승세"·"우려" 같은 일반적인
-서술을 쓴 것은 문제가 아니야. 그런 경우엔 "YES"라고 답해.
-다른 말은 하지 마.`;
+문장: ${sentence}
 
+고유명사:`;
+
+  const raw = await callOllama(prompt, { temperature: 0, top_p: 0.5, num_predict: 60 });
+  return raw
+    .trim()
+    .split("\n")[0]
+    .split(/[,、]/)
+    .map((token) => token.trim().replace(/^[-*\d.\s]+/, ""))
+    // 모델이 목록 대신 문장을 뱉으면 토큰이 비정상적으로 길어진다 -> 버린다
+    .filter((token) => token.length >= 2 && token.length <= MAX_ENTITY_LENGTH && !/없음|none/i.test(token))
+    .slice(0, MAX_EXTRACTED_ENTITIES);
+}
+
+// 반환값: 원문에서 근거를 못 찾은 고유명사 목록(비어 있으면 통과).
+async function unverifiedEntities(sentence, sourceText) {
+  let entities;
   try {
-    const raw = await callOllama(prompt, { temperature: 0, top_p: 0.5, num_predict: 8 });
-    const text = raw.trim().toLowerCase();
-    if (text.startsWith("no")) return false;
-    if (text.startsWith("yes")) return true;
-    return true; // 판정이 애매하면 통과시킴 (검수 실패로 과도하게 폐기하지 않기 위함)
+    entities = await extractProperNouns(sentence);
   } catch (err) {
-    console.error(`[summarize-digest] 검수 실패, 통과 처리: ${err.message}`);
-    return true;
+    // 추출 자체가 실패하면 근거 없이 폐기하지 않고 통과시킨다(숫자 검증은 이미 통과한 상태).
+    console.error(`[summarize-digest] 고유명사 추출 실패, 통과 처리: ${err.message}`);
+    return [];
   }
+
+  const haystack = normalizeForEntityMatch(sourceText);
+  return entities.filter((entity) => {
+    if (ENTITY_STOPWORDS.has(entity)) return false;
+    const normalized = normalizeForEntityMatch(entity);
+    if (!normalized || haystack.includes(normalized)) return false;
+    const stripped = ENTITY_SUFFIXES.reduce(
+      (acc, suffix) => (acc.endsWith(suffix) && acc.length > suffix.length ? acc.slice(0, -suffix.length) : acc),
+      normalized
+    );
+    return !(stripped.length >= 2 && haystack.includes(stripped));
+  });
 }
 
 // isFallback도 함께 반환한다: 폴백(헤드라인 나열)이면 main()에서 영어
@@ -230,7 +242,7 @@ const FALLBACK_REASONS = {
   UNGROUPABLE: "ungroupable-category", // "기타" 묶음 - 설계상 항상 폴백
   GENERATION_FAILED: "generation-failed",
   UNVERIFIED_NUMBER: "unverified-number",
-  REVIEW_REJECTED: "review-rejected",
+  UNVERIFIED_ENTITY: "unverified-entity",
 };
 
 async function summarizeBucketKo(bucket) {
@@ -262,10 +274,15 @@ async function summarizeBucketKo(bucket) {
     reason = FALLBACK_REASONS.UNVERIFIED_NUMBER;
   }
 
-  if (sentence && !(await reviewKoSentence(sentence, bucket.titles))) {
-    console.error(`[summarize-digest] "${label}" 요약이 검수 실패(NO): ${sentence}`);
-    sentence = null;
-    reason = FALLBACK_REASONS.REVIEW_REJECTED;
+  if (sentence) {
+    const unverified = await unverifiedEntities(sentence, sourceText);
+    if (unverified.length > 0) {
+      console.error(
+        `[summarize-digest] "${label}" 요약에 원문에 없는 고유명사(${unverified.join(", ")}) 포함: ${sentence}`
+      );
+      sentence = null;
+      reason = FALLBACK_REASONS.UNVERIFIED_ENTITY;
+    }
   }
 
   if (!sentence) {
@@ -392,6 +409,7 @@ async function main() {
     enLines.push(enLine);
 
     categoryEntries.push({
+      key: bucket.category.key,
       name: bucket.category.name,
       nameEn: bucket.category.nameEn,
       lineKo: koLine.replace(/^-\s*/, ""),
