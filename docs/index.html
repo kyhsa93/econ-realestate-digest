@@ -1594,31 +1594,47 @@
 
   shareButton.addEventListener("click", shareCurrentPage);
 
+  // cache 키 -> 히스토리 파일 이름
+  const HISTORY_FILES = {
+    history: "market-history",
+    summaryHistory: "summary-history",
+    newsHistory: "news-history",
+    realestateHistory: "realestate-history",
+  };
+
+  async function loadHistoryInto(cacheKey) {
+    try {
+      cache[cacheKey] = await loadJson(HISTORY_FILES[cacheKey]);
+    } catch {
+      cache[cacheKey] = null; // 추이 카드만 비고 오늘 데이터 화면은 그대로 동작
+    }
+  }
+
   async function main() {
     locale = getInitialLocale();
 
-    const [market, news, summary, history, summaryHistory, newsHistory, realestate, realestateHistory] =
-      await Promise.allSettled([
-        loadJson("market"),
-        loadJson("news"),
-        loadJson("summary"),
-        loadJson("market-history"),
-        loadJson("summary-history"),
-        loadJson("news-history"),
-        loadJson("realestate"),
-        loadJson("realestate-history"),
-      ]);
+    // 히스토리 파일은 4개 합쳐 100KB가 넘는데, 오늘 화면의 첫 렌더(요약/시장/
+    // 부동산/뉴스)에는 필요 없다. 오늘 데이터부터 그리고 추이 카드는 뒤따라 채운다.
+    const todayKeys = ["market", "news", "summary", "realestate"];
+    const results = await Promise.allSettled(todayKeys.map((key) => loadJson(key)));
+    todayKeys.forEach((key, i) => {
+      cache[key] = results[i].status === "fulfilled" ? results[i].value : null;
+    });
 
-    cache.market = market.status === "fulfilled" ? market.value : null;
-    cache.news = news.status === "fulfilled" ? news.value : null;
-    cache.summary = summary.status === "fulfilled" ? summary.value : null;
-    cache.history = history.status === "fulfilled" ? history.value : null;
-    cache.summaryHistory = summaryHistory.status === "fulfilled" ? summaryHistory.value : null;
-    cache.newsHistory = newsHistory.status === "fulfilled" ? newsHistory.value : null;
-    cache.realestate = realestate.status === "fulfilled" ? realestate.value : null;
-    cache.realestateHistory = realestateHistory.status === "fulfilled" ? realestateHistory.value : null;
+    // 아카이브(?date=) 조회는 히스토리가 곧 본문이라 먼저 다 받고 한 번에 그린다.
+    if (isArchiveView) {
+      await Promise.all(Object.keys(HISTORY_FILES).map(loadHistoryInto));
+      applyLocale(locale);
+      return;
+    }
 
     applyLocale(locale);
+
+    // 오늘 화면에서 히스토리가 쓰이는 곳은 추이 스파크라인뿐이다
+    // (뉴스/요약 히스토리는 아카이브 조회에서만 필요해서 아예 받지 않는다).
+    await Promise.all([loadHistoryInto("history"), loadHistoryInto("realestateHistory")]);
+    renderHistory(cache.history);
+    renderRealestateHistory(cache.realestateHistory);
   }
 
   main();
