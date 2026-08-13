@@ -102,6 +102,30 @@
     text-decoration: none;
   }
   .back-link:hover { text-decoration: underline; }
+  /* index.html과 같은 페이지 네비게이션. 두 페이지를 오갈 수 있다는 걸
+     본문을 읽기 전에 알 수 있어야 한다. */
+  .page-nav {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    margin-bottom: 20px;
+  }
+  .page-nav a {
+    flex-shrink: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    color: var(--fg);
+    text-decoration: none;
+  }
+  .page-nav a[aria-current="page"] {
+    background: var(--fg);
+    color: var(--bg);
+    border-color: var(--fg);
+    font-weight: 600;
+  }
   .header-actions {
     display: flex;
     gap: 8px;
@@ -322,7 +346,6 @@
       <h1 id="page-title">예금·적금·대출 금리 비교</h1>
       <div class="updated" id="updated">불러오는 중...</div>
       <div class="update-schedule" id="update-schedule"></div>
-      <a class="back-link" id="home-link" href="./index.html">← 데일리 다이제스트로</a>
     </div>
     <div class="header-actions">
       <button class="lang-toggle" type="button" id="share-button" aria-label="Share">
@@ -336,6 +359,11 @@
       </button>
     </div>
   </header>
+
+  <nav class="page-nav">
+    <a id="nav-digest" href="./index.html">데일리 다이제스트</a>
+    <a id="nav-rates" href="./rates.html" aria-current="page">금리 비교</a>
+  </nav>
 
   <div class="content-notice" id="content-notice"></div>
 
@@ -380,7 +408,8 @@
     ko: {
       title: "예금·적금·대출 금리 비교",
       description: "금융감독원 금융상품통합비교공시 데이터를 매일 갱신해 은행·저축은행 정기예금과 적금 금리, 주택담보대출·전세자금대출 금리를 한 표에서 비교합니다.",
-      homeLink: "← 데일리 다이제스트로",
+      navDigest: "데일리 다이제스트",
+      navRates: "금리 비교",
       historyHeading: "금리 추이",
       productsHeading: "상품별 금리",
       updatedPrefix: "갱신",
@@ -435,7 +464,8 @@
     en: {
       title: "Deposit, Savings & Loan Rates",
       description: "Daily-updated Korean bank and savings bank deposit, installment savings, mortgage and jeonse loan rates, from the FSS financial product disclosure data.",
-      homeLink: "← Back to the daily digest",
+      navDigest: "Daily digest",
+      navRates: "Rates",
       historyHeading: "Rate trend",
       productsHeading: "Rates by product",
       updatedPrefix: "Updated",
@@ -958,7 +988,8 @@
     document.title = t("title");
     document.querySelector('meta[name="description"]').setAttribute("content", t("description"));
     document.getElementById("page-title").textContent = t("title");
-    document.getElementById("home-link").textContent = t("homeLink");
+    document.getElementById("nav-digest").textContent = t("navDigest");
+    document.getElementById("nav-rates").textContent = t("navRates");
     document.getElementById("history-heading").textContent = t("historyHeading");
     document.getElementById("products-heading").textContent = t("productsHeading");
     document.getElementById("update-schedule").textContent = t("updateSchedule");

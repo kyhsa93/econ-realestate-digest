@@ -102,6 +102,31 @@
     text-decoration: none;
   }
   .back-link:hover { text-decoration: underline; }
+  /* 페이지가 둘 이상이 되면서(다이제스트/금리 비교) 서로 오갈 수 있는 진입점을
+     헤더 바로 아래 둔다. 본문 중간의 작은 링크만으로는 다른 페이지가 있다는
+     사실 자체를 알아채기 어렵다. */
+  .page-nav {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    margin-bottom: 20px;
+  }
+  .page-nav a {
+    flex-shrink: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    color: var(--fg);
+    text-decoration: none;
+  }
+  .page-nav a[aria-current="page"] {
+    background: var(--fg);
+    color: var(--bg);
+    border-color: var(--fg);
+    font-weight: 600;
+  }
   .header-actions {
     display: flex;
     gap: 8px;
@@ -507,6 +532,11 @@
     </div>
   </header>
 
+  <nav class="page-nav">
+    <a id="nav-digest" href="./index.html" aria-current="page">데일리 다이제스트</a>
+    <a id="nav-rates" href="./rates.html">금리 비교</a>
+  </nav>
+
   <div class="content-notice" id="content-notice" hidden></div>
 
   <section id="summary-section">
@@ -620,6 +650,8 @@
       baseRateLabel: "한국은행 기준금리",
       baseRateSince: (s) => `${s} 부터`,
       ratesLink: "예금·적금·대출 금리 비교 →",
+      navDigest: "데일리 다이제스트",
+      navRates: "금리 비교",
       historyKospiLabel: "코스피 (최근 추이)",
       historyUsdKrwLabel: "원/달러 환율 (최근 추이)",
       historyBaseRateLabel: "기준금리 (최근 추이)",
@@ -686,6 +718,8 @@
       baseRateLabel: "BOK Base Rate",
       baseRateSince: (s) => `since ${s}`,
       ratesLink: "Compare deposit, savings & loan rates →",
+      navDigest: "Daily digest",
+      navRates: "Rates",
       historyKospiLabel: "KOSPI (recent trend)",
       historyUsdKrwLabel: "USD/KRW (recent trend)",
       historyBaseRateLabel: "BOK Base Rate (recent trend)",
@@ -1488,6 +1522,8 @@
     document.getElementById("market-th-value").textContent = t("marketThValue");
     document.getElementById("market-th-change").textContent = t("marketThChange");
     document.getElementById("rates-link").textContent = t("ratesLink");
+    document.getElementById("nav-digest").textContent = t("navDigest");
+    document.getElementById("nav-rates").textContent = t("navRates");
     document.getElementById("realestate-heading").textContent = t("realestateHeading");
     document.getElementById("realestate-unit-caption").textContent = t("realestateUnitCaption");
     document.getElementById("re-th-district").textContent = t("realestateTagDistrict");
