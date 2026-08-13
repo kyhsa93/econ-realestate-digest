@@ -110,6 +110,11 @@ function joinProducts({ baseList, optionList, sectorByProduct }, kind) {
     if (!optionsByProduct.has(id)) optionsByProduct.set(id, []);
     optionsByProduct.get(id).push(kind === "saving" ? savingOption(opt) : loanOption(opt));
   }
+  if (kind === "saving") {
+    for (const [id, options] of optionsByProduct) {
+      optionsByProduct.set(id, dedupeSavingOptions(options));
+    }
+  }
 
   const products = [];
   for (const base of baseList) {
@@ -141,6 +146,24 @@ function joinProducts({ baseList, optionList, sectorByProduct }, kind) {
     });
   }
   return products;
+}
+
+/**
+ * 같은 저축 기간에 단리와 복리가 따로 공시되는 상품이 많다. 화면에서는 어차피
+ * 기간별로 가장 높은 금리 하나만 보여주므로, 수집 시점에 기간별 1개로 줄인다
+ * (전체 옵션 4,300여 개 → 절반 수준). 어느 쪽이 뽑혔는지는 rateTypeName으로 남는다.
+ */
+function dedupeSavingOptions(options) {
+  const bestByTerm = new Map();
+  for (const opt of options) {
+    if (!opt) continue;
+    const key = opt.term;
+    const current = bestByTerm.get(key);
+    const rate = opt.maxRate ?? opt.rate ?? -Infinity;
+    const currentRate = current ? current.maxRate ?? current.rate ?? -Infinity : -Infinity;
+    if (!current || rate > currentRate) bestByTerm.set(key, opt);
+  }
+  return [...bestByTerm.values()].sort((a, b) => (a.term ?? 0) - (b.term ?? 0));
 }
 
 function savingOption(opt) {
@@ -257,19 +280,42 @@ async function main() {
   }
 
   const now = new Date();
+  const payload = {
+    updatedAt: now.toISOString(),
+    disclosureMonth: disclosureMonth ?? previous.disclosureMonth ?? null,
+    ...result,
+  };
+
   await mkdir(dataDir, { recursive: true });
-  await writeFile(
-    outFile,
-    JSON.stringify(
-      { updatedAt: now.toISOString(), disclosureMonth: disclosureMonth ?? previous.disclosureMonth ?? null, ...result },
-      null,
-      2
-    )
-  );
+
+  // 다른 데이터 파일과 달리 들여쓰기 없이 쓴다. 상품이 800건이 넘어서 두 칸
+  // 들여쓰기만으로 파일이 두 배가 된다(1MB 대 0.5MB).
+  //
+  // 그리고 금감원 공시는 월 단위로 갱신되기 때문에 대부분의 날은 내용이 완전히
+  // 같다. updatedAt만 새로 찍어서 다시 쓰면 매일 파일 전체가 커밋돼 저장소만
+  // 불어나므로, 실제 내용이 달라졌을 때만 쓴다(언제 기준 값인지는 화면에
+  // disclosureMonth로 표시된다).
+  if (sameContent(previous, payload)) {
+    console.log("[fetch-rates] 공시 내용 변화 없음 - rates.json 그대로 둠");
+  } else {
+    await writeFile(outFile, JSON.stringify(payload));
+  }
 
   await appendHistory(now, result);
 
   console.log(`[fetch-rates] 저장 완료 (실패 ${failed}/${CATEGORIES.length})`);
+}
+
+/** 날짜를 뺀 대표값이 같은지 본다. */
+function sameHistoryValue(a, b) {
+  const withoutDate = ({ date, ...rest }) => JSON.stringify(rest);
+  return withoutDate(a) === withoutDate(b);
+}
+
+/** 갱신 시각을 뺀 내용이 같은지 본다(매일 같은 파일을 다시 커밋하지 않기 위함). */
+function sameContent(a, b) {
+  const withoutTimestamp = ({ updatedAt, ...rest }) => JSON.stringify(rest);
+  return withoutTimestamp(a) === withoutTimestamp(b);
 }
 
 async function appendHistory(now, result) {
@@ -302,6 +348,13 @@ async function appendHistory(now, result) {
   if (idx >= 0) {
     history[idx] = entry; // 같은 날 재실행 시 덮어쓰기 (중복 방지)
   } else {
+    // 공시가 그대로면 대표값도 그대로다. 같은 값을 매일 새 점으로 찍으면
+    // 히스토리 파일만 길어지고 그래프는 어차피 평평하다(계단식이라 정보 손실 없음).
+    const last = history[history.length - 1];
+    if (last && sameHistoryValue(last, entry)) {
+      console.log("[fetch-rates] 대표 금리 변화 없음 - 히스토리 추가 생략");
+      return;
+    }
     history.push(entry);
   }
 

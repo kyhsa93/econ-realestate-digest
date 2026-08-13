@@ -60,7 +60,7 @@ function savingResponse({ products, maxPageNo = 1 }) {
         (p.options ?? []).map((o) => ({
           fin_co_no: p.co,
           fin_prdt_cd: p.cd,
-          intr_rate_type_nm: "단리",
+          intr_rate_type_nm: o.rateTypeName ?? "단리",
           save_trm: String(o.term),
           intr_rate: o.rate,
           intr_rate2: o.maxRate,
@@ -332,6 +332,111 @@ test("인증키가 없으면 즉시 실패한다", async () => {
   const outDir = await tempDir();
   try {
     await assert.rejects(() => run(stub.base, outDir, { key: "" }));
+  } finally {
+    await stub.close();
+  }
+});
+
+test("같은 기간에 단리·복리가 함께 공시되면 금리가 높은 쪽만 남긴다", async () => {
+  const stub = await startStub(({ endpoint, topFinGrpNo }) => {
+    if (endpoint !== "depositProductsSearch") return { json: savingResponse({ products: [] }) };
+    return {
+      json: savingResponse({
+        products: [
+          {
+            co: topFinGrpNo,
+            cd: "P1",
+            company: "테스트은행",
+            name: "이자율선택예금",
+            options: [
+              { term: 12, rate: 3.0, maxRate: 3.1, rateTypeName: "단리" },
+              { term: 12, rate: 3.2, maxRate: 3.4, rateTypeName: "복리" },
+              { term: 24, rate: 3.0, maxRate: 3.0, rateTypeName: "단리" },
+            ],
+          },
+        ],
+      }),
+    };
+  });
+  const outDir = await tempDir();
+
+  try {
+    await run(stub.base, outDir);
+    const rates = await readJson(outDir, "rates.json");
+    const product = rates.deposit[0];
+    assert.deepEqual(product.options.map((o) => o.term), [12, 24]);
+    const twelve = product.options.find((o) => o.term === 12);
+    assert.equal(twelve.maxRate, 3.4);
+    assert.equal(twelve.rateTypeName, "복리");
+  } finally {
+    await stub.close();
+  }
+});
+
+test("공시 내용이 그대로면 rates.json을 다시 쓰지 않는다", async () => {
+  // 공시는 월 단위로 갱신돼서 대부분의 날은 내용이 같다. updatedAt만 새로 찍어
+  // 다시 쓰면 1MB짜리 파일이 매일 커밋된다.
+  const stub = await startStub(({ endpoint, topFinGrpNo }) => {
+    if (endpoint !== "depositProductsSearch") return { json: savingResponse({ products: [] }) };
+    return {
+      json: savingResponse({
+        products: [
+          {
+            co: topFinGrpNo,
+            cd: "P1",
+            company: "테스트은행",
+            name: "그대로예금",
+            options: [{ term: 12, rate: 3.0, maxRate: 3.1 }],
+          },
+        ],
+      }),
+    };
+  });
+  const outDir = await tempDir();
+
+  try {
+    await run(stub.base, outDir);
+    const first = await readJson(outDir, "rates.json");
+    await run(stub.base, outDir);
+    const second = await readJson(outDir, "rates.json");
+    assert.equal(second.updatedAt, first.updatedAt, "내용이 같은데 updatedAt이 갱신됨");
+  } finally {
+    await stub.close();
+  }
+});
+
+test("대표 금리가 그대로면 히스토리에 새 점을 찍지 않는다", async () => {
+  const stub = await startStub(({ endpoint, topFinGrpNo }) => {
+    if (endpoint !== "depositProductsSearch") return { json: savingResponse({ products: [] }) };
+    return {
+      json: savingResponse({
+        products: [
+          {
+            co: topFinGrpNo,
+            cd: "P1",
+            company: "테스트은행",
+            name: "그대로예금",
+            options: [{ term: 12, rate: 3.0, maxRate: 3.1 }],
+          },
+        ],
+      }),
+    };
+  });
+  const outDir = await tempDir();
+
+  try {
+    await run(stub.base, outDir);
+    const first = await readJson(outDir, "rates-history.json");
+    assert.equal(first.length, 1);
+
+    // 어제 기록으로 바꿔둔 뒤 다시 돌리면, 값이 같으니 새 점이 붙지 않아야 한다.
+    first[0].date = "2000-01-01";
+    await writeFile(path.join(outDir, "rates-history.json"), JSON.stringify(first));
+    await run(stub.base, outDir);
+
+    const second = await readJson(outDir, "rates-history.json");
+    assert.equal(second.length, 1);
+    assert.equal(second[0].date, "2000-01-01");
   } finally {
     await stub.close();
   }

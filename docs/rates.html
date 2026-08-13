@@ -404,9 +404,9 @@
       thProduct: "상품",
       thBaseRate: "기본금리",
       thMaxRate: "최고금리",
-      thMinRate: "최저",
-      thMaxLoanRate: "최고",
+      thRateRange: "금리(최저~최고)",
       thAvgRate: "평균",
+      historyBase: "기본",
       thRateType: "금리 유형",
       thJoinWay: "가입 방법",
       detailToggle: "상세",
@@ -459,9 +459,9 @@
       thProduct: "Product",
       thBaseRate: "Base",
       thMaxRate: "Max",
-      thMinRate: "Min",
-      thMaxLoanRate: "Max",
+      thRateRange: "Rate (min–max)",
       thAvgRate: "Avg",
+      historyBase: "Base",
       thRateType: "Rate type",
       thJoinWay: "How to apply",
       detailToggle: "Details",
@@ -561,6 +561,16 @@
     return typeof v === "number" && Number.isFinite(v) ? `${v.toFixed(2)}%` : "-";
   }
 
+  /** 대출은 최저~최고로 공시되는 상품이 많아서 범위를 그대로 보여준다. */
+  function fmtRateRange(min, max) {
+    const hasMin = typeof min === "number" && Number.isFinite(min);
+    const hasMax = typeof max === "number" && Number.isFinite(max);
+    if (hasMin && hasMax && min !== max) return `${min.toFixed(2)}~${max.toFixed(2)}%`;
+    if (hasMin) return fmtRate(min);
+    if (hasMax) return fmtRate(max);
+    return "-";
+  }
+
   function fmtUpdated(iso) {
     if (!iso) return "-";
     const d = new Date(iso);
@@ -644,7 +654,16 @@
     const latest = latestEntry ? historyEntryRate(latestEntry, key) : null;
     const top = latestEntry ? historyEntryTop(latestEntry, key) : null;
     if (latest === null) return "";
-    const sub = top ? `${escapeHtml(top.company ?? "")} ${escapeHtml(top.name ?? "")}`.trim() : "";
+    // 적금 최고금리는 14%처럼 튀는 값이 나오는데 기본금리는 2%인 식이라(매일 출석
+    // 같은 우대조건을 다 채웠을 때의 금리다), 기본금리를 같이 적어두지 않으면
+    // 카드 숫자만 보고 오해하게 된다.
+    const parts = [];
+    if (typeof top?.baseRate === "number" && top.baseRate !== top.rate) {
+      parts.push(`${t("historyBase")} ${fmtRate(top.baseRate)}`);
+    }
+    const productLabel = `${top?.company ?? ""} ${top?.name ?? ""}`.trim();
+    if (productLabel) parts.push(productLabel);
+    const sub = parts.map(escapeHtml).join(" · ");
     return `<div class="history-card">
       <div class="label">${escapeHtml(label)}</div>
       <div class="value">${fmtRate(latest)}</div>
@@ -882,7 +901,7 @@
     return `<tr>
       ${productCellHtml(product)}
       <td>${escapeHtml(option.rateType ?? "-")}</td>
-      <td>${fmtRate(option.min)}</td>
+      <td>${fmtRateRange(option.min, option.max)}</td>
       <td class="rate-low">${fmtRate(option.avg)}</td>
     </tr>${detailRowHtml(product, 4)}`;
   }
@@ -898,7 +917,7 @@
       : `<tr>
           <th>${escapeHtml(t("thProduct"))}</th>
           <th>${escapeHtml(t("thRateType"))}</th>
-          <th>${escapeHtml(t("thMinRate"))}</th>
+          <th>${escapeHtml(t("thRateRange"))}</th>
           <th>${escapeHtml(t("thAvgRate"))}</th>
         </tr>`;
   }
