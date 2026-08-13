@@ -382,6 +382,7 @@ async function translateKoLine(koLine) {
   const prompt = `Translate the following Korean sentence into natural, concise English.
 The sentence may already contain plain Arabic numerals (e.g. "80,000,000") - if so, keep those numbers exactly as they are, do not round or rewrite them, just translate the surrounding Korean words (e.g. "원" -> "won").
 Write the translation in English only - do not use Chinese characters or any other language.
+Translate names of parties, institutions and people literally. Do NOT add roles or descriptions that are not in the Korean sentence (for example, never label a party as "ruling" or "opposition").
 Output ONLY the translated sentence. No quotes, no explanation.
 
 Korean: ${normalized}
@@ -390,7 +391,9 @@ English:`;
 
   let translated;
   try {
-    const raw = await callOllama(prompt, { temperature: 0.2, top_p: 0.8, num_predict: 120 });
+    // 요약 문장은 한 문장이라도 카테고리 나열형이면 꽤 길어서, 번역이 중간에
+    // 잘리지 않도록 생성 쪽(num_predict 220)에 맞춰 예산을 늘려둔다.
+    const raw = await callOllama(prompt, { temperature: 0.2, top_p: 0.8, num_predict: 300 });
     translated = raw.trim().split("\n")[0].trim().replace(/^["'“‘]+|["'”’]+$/g, "");
   } catch (err) {
     console.error(`[summarize-digest] 번역 실패, 한국어 유지: ${err.message}`);
