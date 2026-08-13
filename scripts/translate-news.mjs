@@ -6,7 +6,12 @@ const newsFile = path.join(dataDir, "news.json");
 const historyFile = path.join(dataDir, "news-history.json");
 
 const OLLAMA_URL = process.env.OLLAMA_URL ?? "http://127.0.0.1:11434";
-const MODEL = process.env.OLLAMA_MODEL ?? "qwen2.5:3b";
+const MODEL = process.env.OLLAMA_MODEL ?? "qwen3:14b";
+// qwen3 계열은 추론(thinking) 모드가 기본으로 켜져 있어서, 끄지 않으면 응답
+// 앞머리에 <think> 블록이 붙어 번역문이 통째로 검증에 걸린다. 반대로 thinking을
+// 지원하지 않는 모델에 이 필드를 보내면 오류가 나므로 필요한 모델에서만 켠다.
+// (summarize-digest.mjs와 동일한 처리)
+const DISABLE_THINKING = process.env.OLLAMA_THINK === "false";
 
 // 한국어는 만/억/조 단위로 4자리씩 묶어 읽어서(영어의 천 단위 그룹과 다름),
 // 작은 모델이 "8천만원"을 "$8 million"으로, "15억원"을 "15 million won"으로
@@ -71,6 +76,7 @@ English headline:`;
       prompt,
       stream: false,
       options: { temperature: 0.2, top_p: 0.8, num_predict: 80 },
+      ...(DISABLE_THINKING ? { think: false } : {}),
     }),
   });
   if (!res.ok) throw new Error(`ollama http ${res.status}`);

@@ -8,7 +8,7 @@ const historyFile = path.join(dataDir, "summary-history.json");
 const HISTORY_MAX_DAYS = 180;
 
 const OLLAMA_URL = process.env.OLLAMA_URL ?? "http://127.0.0.1:11434";
-const MODEL = process.env.OLLAMA_MODEL ?? "qwen2.5:3b";
+const MODEL = process.env.OLLAMA_MODEL ?? "qwen3:14b";
 // qwen3 계열은 추론(thinking) 모드가 기본으로 켜져 있어서, 끄지 않으면 응답
 // 앞머리에 <think> 블록이 붙고 num_predict 예산을 추론이 다 써버린다(요약이
 // 통째로 폐기됨). 반대로 thinking을 지원하지 않는 모델에 이 필드를 보내면

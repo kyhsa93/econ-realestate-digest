@@ -33,6 +33,12 @@ jobs:
     env:
       # 수동 실행은 입력값을 그대로 쓰고, 스케줄 실행은 아침 크론만 full로 본다.
       MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.mode || (github.event.schedule == '7 23 * * *' && 'full' || 'news') }}
+      # 요약/번역 모두 같은 모델을 쓴다. 러너가 4코어 CPU(GPU 없음)/16GB RAM이라
+      # RAM에 들어가는 상한이 14b급(Q4 약 9GB)이고, 실제로 같은 뉴스로 비교 실행해
+      # 고른 값이다. qwen3는 thinking이 기본이라 반드시 꺼야 한다(안 끄면 응답에
+      # <think> 블록이 붙어 요약/번역이 통째로 폐기됨).
+      OLLAMA_MODEL: qwen3:14b
+      OLLAMA_THINK: "false"
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -60,7 +66,7 @@ jobs:
           MOLIT_RENT_API_ENDPOINT: ${{ secrets.MOLIT_RENT_API_ENDPOINT }}
 
       # 뉴스만 갱신하는 실행에서도 새로 들어온 제목을 영어로 번역해야 해서
-      # 모델은 매번 준비한다(설치+pull이 1분 미만이라 부담이 크지 않음).
+      # 모델은 매번 준비한다(설치 + 9GB pull이 1분 남짓).
       - name: Ollama 설치 및 모델 준비
         env:
           OLLAMA_VERSION: v0.32.6
@@ -81,7 +87,7 @@ jobs:
             curl -sf http://127.0.0.1:11434/api/version > /dev/null && break
             sleep 1
           done
-          ollama pull qwen2.5:3b
+          ollama pull "$OLLAMA_MODEL"
 
       - name: AI 요약 생성
         if: env.MODE == 'full'

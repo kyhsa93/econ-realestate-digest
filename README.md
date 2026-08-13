@@ -19,7 +19,10 @@
   이번 달만 조회하도록 변경)
   (`MOLIT_API_KEY`+`MOLIT_API_ENDPOINT`는 매매, `MOLIT_RENT_API_KEY`+`MOLIT_RENT_API_ENDPOINT`는
   전월세 — 둘은 독립적으로 동작해서 한쪽만 등록돼 있어도 그쪽만 조회함)
-- `scripts/summarize-digest.mjs` — 로컬 Ollama(qwen2.5:3b)로 오늘의 뉴스를 카테고리별로 한국어/영어 요약 → `docs/data/summary.json`
+- `scripts/summarize-digest.mjs` — 로컬 Ollama(qwen3:14b)로 오늘의 뉴스를 카테고리별로 한국어/영어 요약 →
+  `docs/data/summary.json`. 생성한 문장은 코드로 검증한다: 원문에 없는 숫자(substring 대조)와
+  원문에 없는 고유명사(모델에겐 추출만 시키고 대조는 코드가 함)가 있으면 폐기하고 헤드라인
+  나열로 대체하며, 그 사유를 `categories[].fallbackReason`에 남긴다
 - `scripts/translate-news.mjs` — 뉴스 제목을 영어로 번역(`titleEn`) → `docs/data/news.json`
 - `scripts/update-all.mjs` — 로컬에서 수동으로 fetch + git commit/push까지 한 번에 실행할 때 사용 (CI에서는 사용 안 함)
 - `docs/index.html` — 정적 페이지, 클라이언트에서 `data/*.json`을 fetch해 렌더링, 한/영 언어 전환 지원.
@@ -34,7 +37,10 @@
 - `.github/workflows/daily-update.yml` — 하루 4회(08·12·16·20시 KST) 실행. 아침 실행(`MODE=full`)만
   뉴스/시장/부동산 수집 + AI 요약까지 하고, 나머지 3회(`MODE=news`)는 뉴스 수집과 제목 영어 번역만
   한다(부동산 실거래가 API의 일일 호출 한도 때문에 시장/부동산은 아침 1회로 고정). 이후 변경사항
-  커밋/푸시 → Pages 배포
+  커밋/푸시 → Pages 배포.
+  요약/번역 모델은 `OLLAMA_MODEL`(현재 `qwen3:14b`) + `OLLAMA_THINK=false`를 job 레벨 env로 주입한다.
+  러너가 4코어 CPU(GPU 없음)/16GB RAM이라 RAM에 들어가는 상한이 14b급(Q4 약 9GB)이고, 같은 뉴스로
+  qwen2.5:14b와 비교 실행해서 고른 값이다. 그만큼 느려서 full 실행은 15분 안팎 걸린다
 
 ## 로컬 실행
 
@@ -43,11 +49,12 @@ npm install
 npm run update   # 뉴스+시장지표 수집 후 커밋/푸시까지
 ```
 
-AI 요약은 로컬에 Ollama가 설치돼 있어야 테스트 가능:
+AI 요약은 로컬에 Ollama가 설치돼 있어야 테스트 가능(qwen3 계열은 thinking을 꺼야 하므로
+`OLLAMA_THINK=false`가 필요하다 — 안 끄면 응답에 `<think>` 블록이 붙어 전부 폐기된다):
 
 ```
-ollama pull qwen2.5:3b
-node scripts/summarize-digest.mjs
+ollama pull qwen3:14b
+OLLAMA_THINK=false node scripts/summarize-digest.mjs
 ```
 
 ## 자동화

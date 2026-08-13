@@ -9,11 +9,11 @@ on:
       model:
         description: "요약에 사용할 Ollama 모델"
         type: string
-        default: qwen2.5:14b
+        default: qwen3:14b
       disable_thinking:
         description: "thinking 끄기 (qwen3 계열은 true 필요)"
         type: boolean
-        default: false
+        default: true
 
 permissions:
   contents: read
