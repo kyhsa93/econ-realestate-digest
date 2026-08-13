@@ -295,12 +295,17 @@ async function summarizeBucketKo(bucket) {
 // 번역이 아니라 원문을 그대로 남기거나(한글이 그대로 섞여 있음), 모델이
 // 딴소리를 늘어놓은 경우(비정상적으로 길어짐), 혹은 코드로 미리 정규화해 넘긴
 // 큰 숫자를 모델이 누락/변형한 경우(단위 환산 오류의 잔여 위험)를 걸러내
-// 원문 한국어로 폴백한다. (translate-news.mjs와 동일한 검증 로직)
+// 원문 한국어로 폴백한다. (translate-news.mjs의 검증 로직과 같되 길이 상한만 다름)
+//
+// 길이 상한은 원래 뉴스 "제목"(짧음)에 맞춰 잡힌 값이라, 요약 "문장"에는 너무
+// 빡빡했다. 한국어는 영어보다 압축적이라 번역하면 3배 안팎으로 길어지는데
+// 상한이 딱 3배여서 멀쩡한 번역이 반려되고 영어 요약에 한국어 문장이 그대로
+// 남는 일이 있었다(실제 발생). 문장 기준으로 여유를 준다.
 function isBadTranslation(text, original, requiredNumbers) {
   if (!text) return true;
   if (/[가-힣]/.test(text)) return true;
   if (/[一-鿿]/.test(text)) return true;
-  if (text.length > Math.max(160, original.length * 3)) return true;
+  if (text.length > Math.max(240, original.length * 4)) return true;
   const textDigits = text.replace(/,/g, "");
   if (requiredNumbers.some((n) => !textDigits.includes(n))) return true;
   return false;
