@@ -470,7 +470,7 @@
         "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/12/3JSHFR5TANC6JNSKU7TZYDYDGE/",
         "publishedAt": "2026-08-12T00:42:54.000Z",
         "source": "조선비즈 부동산",
-        "titleEn": "“주민센터 안 가도 돼요”… 안심전세 앱에서 우선변제권 효력·확정일자 실시간 확인"
+        "titleEn": "Residents don't have to go to the community center\"… Check priority repayment rights effect and confirmation date in real time via Ansimjeonse app"
       },
       {
         "title": "코스피, 반도체 강세에 2% 안팎 상승…코스닥은 하락(종합)",
@@ -611,6 +611,36 @@
     "date": "2026-08-13",
     "items": [
       {
+        "title": "국힘 “이성훈, 다주택 상태서 LH 사장 취임”…사측 “靑 재직때 2채 처분”",
+        "link": "https://www.mk.co.kr/news/realestate/12126784",
+        "publishedAt": "2026-08-13T08:27:21.000Z",
+        "source": "매일경제 부동산",
+        "category": "realestate",
+        "preview": "한국토지주택공사(LH)가 13일 이성훈 사장이 청와대 재직 당시 보유하고 있던 주택 3채 가운데 2채를 처분했다고 밝혔다. LH는 이날 “이성훈 사장은 청와대 재직 당시 기존 3주..",
+        "dupes": [],
+        "titleEn": "KDP says \"Lee Seung-hoon took up LH president post while owning multiple homes\"...LH says \"he disposed of two properties during his time at the Blue House"
+      },
+      {
+        "title": "국고채 금리 대체로 하락…50년물 최고치 경신(종합)",
+        "link": "https://www.yna.co.kr/view/AKR20260813145251008",
+        "publishedAt": "2026-08-13T08:25:07.000Z",
+        "source": "연합뉴스 경제",
+        "category": "rates",
+        "preview": "(서울=연합뉴스) 강수지 기자 = 13일 국고채 금리가 대체로 하락했다.",
+        "dupes": [],
+        "titleEn": "Government bond rates mostly fall... 50-year bond hits new high (comprehensive)"
+      },
+      {
+        "title": "[8·13 대책] 주택·부동산 업계 “주택 신속공급 방안 환영”",
+        "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/13/73JBHAEMIBHAPAS7PE6LCWW7IU/",
+        "publishedAt": "2026-08-13T08:19:49.000Z",
+        "source": "조선비즈 부동산",
+        "category": "realestate",
+        "preview": null,
+        "dupes": [],
+        "titleEn": "[8·13 Measures] Housing and Real Estate Industry Welcomes Rapid Housing Supply Plans"
+      },
+      {
         "title": "국힘, 수도권 공급대책에 \"본질은 대출…국민 빚더미로 떠밀어\"",
         "link": "https://www.yna.co.kr/view/AKR20260813140400001",
         "publishedAt": "2026-08-13T07:51:42.000Z",
@@ -628,7 +658,7 @@
         "category": "realestate",
         "preview": "(세종=연합뉴스) 오진송 기자 = 한국토지주택공사(LH)는 13일 이성훈 사장이 청와대 재직 당시 보유하고 있던 주택 3채 가운데 2채를 처분했...",
         "dupes": [],
-        "titleEn": "LH \"CEO Lee Sung-hoon disposed of 2 out of 3 homes owned during his time at the Blue House"
+        "titleEn": "LH \"President Lee Sung-hoon disposed of 2 out of 3 homes owned during his tenure at the Blue House"
       },
       {
         "title": "국고채 금리 대체로 하락…3년물 연 3.781%",
@@ -638,7 +668,7 @@
         "category": "rates",
         "preview": "(서울=연합뉴스) 13일 국고채 금리가 대체로 하락했다.",
         "dupes": [],
-        "titleEn": "Government bond rates mostly fall... 3-year rate at annual 3.781%"
+        "titleEn": "Government bond rates mostly fall... 3-year bonds at 3.781% annually"
       },
       {
         "title": "강릉시, 100일간 경제 살리기 총력전…민관 공동 실천 '박차'",
@@ -648,7 +678,7 @@
         "category": "other",
         "preview": "(강릉=연합뉴스) 유형재 기자 = 강원 강릉시경제살리기협의회가 지역경제 회복과 민생경제 활력 제고를 위한 '강릉 경제 살리기 100일 프로젝트'...",
         "dupes": [],
-        "titleEn": "Gangneung City Launches Full-Throttle 100-Day Economic Revival Campaign… Private and Public Sectors Step Up Joint Efforts"
+        "titleEn": "Gangneung City Launches Full-Throttle 100-Day Economic Revitalization Drive with Public-Private Collaboration Push"
       },
       {
         "title": "\"비거주 요건 완화\"·\"고가 주택 기준 상향\"…전문가들 쓴소리",
@@ -668,7 +698,7 @@
         "category": "other",
         "preview": "(서울=연합뉴스) 홍준석 기자 = 성평등가족부는 13일 오후 정부서울청사에서 주요 경제단체와 간담회를 열고 고용평등공시제 도입과 안착을 위한 제...",
         "dupes": [],
-        "titleEn": "Corporate Gender Pay Gap Revealed... Gender Equality Ministry to Discuss Operational Plans with Economic Organizations"
+        "titleEn": "Corporate Gender Pay Gap Revealed... Ministry of Gender Equality to Discuss Operational Plans with Economic Organizations"
       },
       {
         "title": "日증시, 美금리인상 전망 후퇴에 상승 마감…닛케이 1.16%↑",
@@ -678,7 +708,7 @@
         "category": "rates",
         "preview": "[서울=뉴시스] 신효령 기자 = 13일 일본 도쿄증시에서 닛케이225지수(닛케이평균주가)가 상승 마감했다. 인공지능(AI)과 반도체 관련주로 매수세가 몰린 영향이다. 니혼게이자이신문에 따르면 이날 닛케이지수는 전 거…",
         "dupes": [],
-        "titleEn": "Tokyo Stock Exchange Rises on Retreat of U.S. Interest Rate Hike Outlook... Nikkei Up 1.16%"
+        "titleEn": "Tokyo Stock Exchange Rises on Retreat of U.S. Rate Hike Outlook... Nikkei Up 1.16%"
       },
       {
         "title": "청년 4억 이하 비아파트 매수 지원…신혼부부 소득 합산 안한다(종합)",
@@ -694,17 +724,7 @@
             "source": "매일경제 부동산"
           }
         ],
-        "titleEn": "Support for Young People to Buy Non-Apartment Units Under 400,000,000 Won... Newlywed Couples' Income Not Combined (Comprehensive)"
-      },
-      {
-        "title": "[8·13대책] 가계부채 총량 증가율 목표 2배로…\"대출오픈런 해소 기대\"(종합)",
-        "link": "https://www.yna.co.kr/view/AKR20260812170651002",
-        "publishedAt": "2026-08-13T07:24:24.000Z",
-        "source": "연합뉴스 경제",
-        "category": "other",
-        "preview": "(서울=연합뉴스) 배영경 김지연 강류나 기자 = 금융당국이 주택공급과 청년·실수요자를 지원할 대출여력 확보를 위해 올해 가계부채 총량 증가율 목...",
-        "dupes": [],
-        "titleEn": "[8·13 Measures] Household Debt Growth Target Doubled to 200%...\"Expectation of Resolving Loan Open Run\"(Comprehensive)"
+        "titleEn": "Support for Young People to Buy Non-Apartment Properties Under 400,000,000 Won... Newlywed Couples' Income Not Combined (Comprehensive)"
       },
       {
         "title": "국힘, '8·13 부동산 대책'에 \"앙꼬 빠진 '3무 맹탕 대책'…임대주택 무한 루프\"",
@@ -714,7 +734,7 @@
         "category": "realestate",
         "preview": "[서울=뉴시스] 전상우 기자 = 국민의힘은 13일 정부가 발표한 이른바 '8·13 부동산 대책'에 대해 \"깊은 실망과 허탈감만을 안겨준 '맹탕 대책'\"이라고 밝혔다. 최보윤 수석대변인은 이날 오후 논평을 내고 \"수도…",
         "dupes": [],
-        "titleEn": "KDP Criticizes '8·13 Real Estate Measures' as \"Empty '3-Mu Policy' with No Substance... Infinite Loop for Rental Housing"
+        "titleEn": "KDP Criticizes '8·13 Real Estate Policy' as \"A '3-Minute Boiling Policy' with No Porridge, Causing Infinite Loop in Rental Housing"
       },
       {
         "title": "임기근 국조실장 \"부동산 대책 성패, 공급에 달려있어\"",
@@ -764,7 +784,7 @@
         "category": "realestate",
         "preview": "“반드시 이 번호로만 문자 예약이 가능합니다. 한도가 소진된 경우 그 이후 분들에게는 따로 연락이 가지 않습니다.” 최근 서울 서초구 디에이치방배 입주민들이 받은 문자 내용이다. ..",
         "dupes": [],
-        "titleEn": "Buyers Also Face First-Come, First-Served for Down Payment Loans\"... 2,000,000,000 Won Price for DIHC Bangbae Sends Market Reeling"
+        "titleEn": "Even buyers who have already signed contracts must pay the remaining balance on a first-come, first-served basis\"... 2,000,000,000 won price for DIHC Bangbae turns the market upside down"
       },
       {
         "title": "‘세제 개편 직격탄’ 강남·서초 아파트값 3개월 만에 하락 전환",
@@ -790,7 +810,7 @@
         "category": "realestate",
         "preview": "[서울=뉴시스]이연희 기자 = 정부가 개발제한구역(그린벨트) 해제 등을 통해 수도권에 최소 23만호의 주택을 추가 공급한다. 서울 강서구 염창공원과 경기 남양주 와부, 경기광주역세권 등 3곳에서 2만7000호를 우선…",
         "dupes": [],
-        "titleEn": "Supply of 230,000+α units and youth financial support mobilized to find housing market solution (comprehensive)"
+        "titleEn": "Supplying 230,000+ units and youth financial support... Comprehensive solutions mobilized for housing market"
       },
       {
         "title": "재건축·재개발 빗장 푼다…공급 기대 커지나 집값 자극 우려도",
@@ -800,7 +820,7 @@
         "category": "realestate",
         "preview": "[서울=뉴시스]정진형 기자 = 정부가 도심 주택 공급을 늘리기 위해 재건축·재개발 등 민간 정비사업 활성화에 나섰다. 전문가들은 이주비 대출 등 사업 속도를 늦추던 문제가 해소된 것은 긍정적으로 평가했지만, 자칫 임…",
         "dupes": [],
-        "titleEn": "Lifting Restrictions on Reconstruction and Redevelopment... Rising Supply Expectations, But Concerns Over Housing Price Stimulation"
+        "titleEn": "Lifting Restrictions on Reconstruction and Redevelopment... Rising Supply Expectations, But Concerns Over Housing Price Hikes"
       },
       {
         "title": "\"강남 집 사자마자 지방 발령…'투기성 비거주 1주택자'인가요\"",
@@ -810,7 +830,7 @@
         "category": "realestate",
         "preview": null,
         "dupes": [],
-        "titleEn": "Buying a home in Gangnam immediately leads to a transfer to a provincial post... Are you a \"speculative non-resident single-homeowner\"?"
+        "titleEn": "Buying a home in Gangnam immediately leads to a transfer to a remote area… Are you a \"speculative non-resident single-homeowner\"?"
       },
       {
         "title": "농협은행, '마을기업'에 1500억원 저금리 대출 지원 나서",
@@ -840,27 +860,7 @@
         "category": "realestate",
         "preview": "[서울=뉴시스] 강세훈 기자 = 정부가 다세대·다가구주택의 층수와 면적 규제를 완화하고 건설자금 지원을 확대하는 등 위축된 비아파트 주택 공급 정상화에 나선다. 또 지식산업센터 등 비주거시설의 주거 전환을 유도하고,…",
         "dupes": [],
-        "titleEn": "Multi-family housing 3rd floor→4th floor, modular homes expansion... full effort to increase non-apartment supply [8·13 measures]"
-      },
-      {
-        "title": "李 대통령 “부동산 거품 더 방치못해…특단 각오로 공급 총력전”",
-        "link": "https://www.mk.co.kr/news/realestate/12126460",
-        "publishedAt": "2026-08-13T05:12:12.000Z",
-        "source": "매일경제 부동산",
-        "category": "realestate",
-        "preview": "이재명 대통령이 부동산 시장을 둘러싼 거품과 공급 부족 문제에 대해 강도 높은 경고를 내놨다. 부동산 문제를 방치할 경우 특정 국가에서 나타났던 ‘잃어버린 20년, 30년’과 같은..",
-        "dupes": [],
-        "titleEn": "Lee President Vows to Launch Full-Scale Effort to Address Real Estate Bubble"
-      },
-      {
-        "title": "[속보]이 대통령 \"부동산 문제 시한폭탄 같아…가용가능한 수단·역량 집중투입\"",
-        "link": "https://www.newsis.com/view/NISX20260813_0003747873",
-        "publishedAt": "2026-08-13T05:06:10.000Z",
-        "source": "뉴시스 경제",
-        "category": "realestate",
-        "preview": null,
-        "dupes": [],
-        "titleEn": "[Breaking News] President Lee Says Real Estate Issue Is Like a Time Bomb... Focus on Concentrating Available Means and Capabilities"
+        "titleEn": "Multi-family housing 3rd floor→4th floor, modular homes expansion...full effort to increase non-apartment supply [8·13 measures]"
       }
     ]
   }

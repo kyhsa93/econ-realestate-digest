@@ -1,17 +1,84 @@
 {
-  "updatedAt": "2026-08-13T08:22:59.448Z",
+  "updatedAt": "2026-08-13T08:39:19.815Z",
   "model": "qwen3:14b",
   "summary": {
-    "ko": "- 기타 경제 소식: 국힘, 수도권 공급대책에 \"본질은 대출…국민 빚더미로 떠밀어\", 강릉시, 100일간 경제 살리기 총력전…민관 공동 실천 '박차', 기업 남녀 임금격차 공개…성평등부, 경제단체와 운영방안 논의 +3\n- 부동산: LH \"이성훈 사장, 청와대 재직 당시 3주택 중 2주택 처분\", \"비거주 요건 완화\"·\"고가 주택 기준 상향\"…전문가들 쓴소리, 청년 4억 이하 비아파트 매수 지원…신혼부부 소득 합산 안한다(종합) +12\n- 금리·예금·투자상품: 국고채 금리 대체로 하락…3년물 연 3.781%, 日증시, 美금리인상 전망 후퇴에 상승 마감…닛케이 1.16%↑, 농협은행, '마을기업'에 1500억원 저금리 대출 지원 나서",
-    "en": "- Other Economic News: 국힘, 수도권 공급대책에 \"본질은 대출…국민 빚더미로 떠밀어\", 강릉시, 100일간 경제 살리기 총력전…민관 공동 실천 '박차', 기업 남녀 임금격차 공개…성평등부, 경제단체와 운영방안 논의 +3\n- Real Estate: LH \"이성훈 사장, 청와대 재직 당시 3주택 중 2주택 처분\", \"비거주 요건 완화\"·\"고가 주택 기준 상향\"…전문가들 쓴소리, 청년 4억 이하 비아파트 매수 지원…신혼부부 소득 합산 안한다(종합) +12\n- Rates, Deposits & Investment Products: 국고채 금리 대체로 하락…3년물 연 3.781%, 日증시, 美금리인상 전망 후퇴에 상승 마감…닛케이 1.16%↑, 농협은행, '마을기업'에 1500억원 저금리 대출 지원 나서"
+    "ko": "- 국힘은 이성훈 LH 사장의 다주택 상태에 대해 지적했고, LH는 청와대 재직 당시 3주택 중 2주택을 처분했다고 밝혔으며, 주택 신속공급 방안에 업계가 환영의 자세를 보였고, 비거주 요건 완화와 고가 주택 기준 상향에 대해 전문가들이 비판적인 의견을 나타냈으며, 청년과 신혼부부를 위한 주택 매수 지원 정책이 발표되었다.\n- 금리·예금·투자상품: 국고채 금리 대체로 하락…50년물 최고치 경신(종합), 국고채 금리 대체로 하락…3년물 연 3.781%, 日증시, 美금리인상 전망 후퇴에 상승 마감…닛케이 1.16%↑ +1\n- 기타 경제 소식: 국힘, 수도권 공급대책에 \"본질은 대출…국민 빚더미로 떠밀어\", 강릉시, 100일간 경제 살리기 총력전…민관 공동 실천 '박차', 기업 남녀 임금격차 공개…성평등부, 경제단체와 운영방안 논의 +2",
+    "en": "- Korea's People Power Party pointed out that Lee Sung-hoon, the president of LH, owns multiple homes, and LH stated that during his time at the Blue House, he disposed of two out of three homes. The industry showed a welcoming attitude toward the rapid housing supply plan, but experts expressed critical opinions regarding the relaxation of non-residency requirements and the upward adjustment of high-cost housing criteria. A policy to support the purchase of homes for young people and newlywed couples was announced.\n- Rates, Deposits & Investment Products: 국고채 금리 대체로 하락…50년물 최고치 경신(종합), 국고채 금리 대체로 하락…3년물 연 3.781%, 日증시, 美금리인상 전망 후퇴에 상승 마감…닛케이 1.16%↑ +1\n- Other Economic News: 국힘, 수도권 공급대책에 \"본질은 대출…국민 빚더미로 떠밀어\", 강릉시, 100일간 경제 살리기 총력전…민관 공동 실천 '박차', 기업 남녀 임금격차 공개…성평등부, 경제단체와 운영방안 논의 +2"
   },
   "categories": [
+    {
+      "key": "realestate",
+      "name": "부동산",
+      "nameEn": "Real Estate",
+      "lineKo": "국힘은 이성훈 LH 사장의 다주택 상태에 대해 지적했고, LH는 청와대 재직 당시 3주택 중 2주택을 처분했다고 밝혔으며, 주택 신속공급 방안에 업계가 환영의 자세를 보였고, 비거주 요건 완화와 고가 주택 기준 상향에 대해 전문가들이 비판적인 의견을 나타냈으며, 청년과 신혼부부를 위한 주택 매수 지원 정책이 발표되었다.",
+      "lineEn": "Korea's People Power Party pointed out that Lee Sung-hoon, the president of LH, owns multiple homes, and LH stated that during his time at the Blue House, he disposed of two out of three homes. The industry showed a welcoming attitude toward the rapid housing supply plan, but experts expressed critical opinions regarding the relaxation of non-residency requirements and the upward adjustment of high-cost housing criteria. A policy to support the purchase of homes for young people and newlywed couples was announced.",
+      "isFallback": false,
+      "fallbackReason": null,
+      "items": [
+        {
+          "title": "국힘 “이성훈, 다주택 상태서 LH 사장 취임”…사측 “靑 재직때 2채 처분”",
+          "link": "https://www.mk.co.kr/news/realestate/12126784",
+          "source": "매일경제 부동산"
+        },
+        {
+          "title": "[8·13 대책] 주택·부동산 업계 “주택 신속공급 방안 환영”",
+          "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/13/73JBHAEMIBHAPAS7PE6LCWW7IU/",
+          "source": "조선비즈 부동산"
+        },
+        {
+          "title": "LH \"이성훈 사장, 청와대 재직 당시 3주택 중 2주택 처분\"",
+          "link": "https://www.yna.co.kr/view/AKR20260813145300003",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "\"비거주 요건 완화\"·\"고가 주택 기준 상향\"…전문가들 쓴소리",
+          "link": "https://www.yna.co.kr/view/AKR20260813141300002",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "청년 4억 이하 비아파트 매수 지원…신혼부부 소득 합산 안한다(종합)",
+          "link": "https://www.yna.co.kr/view/AKR20260812168051002",
+          "source": "연합뉴스 경제"
+        }
+      ]
+    },
+    {
+      "key": "rates",
+      "name": "금리·예금·투자상품",
+      "nameEn": "Rates, Deposits & Investment Products",
+      "lineKo": "금리·예금·투자상품: 국고채 금리 대체로 하락…50년물 최고치 경신(종합), 국고채 금리 대체로 하락…3년물 연 3.781%, 日증시, 美금리인상 전망 후퇴에 상승 마감…닛케이 1.16%↑ +1",
+      "lineEn": "Rates, Deposits & Investment Products: 국고채 금리 대체로 하락…50년물 최고치 경신(종합), 국고채 금리 대체로 하락…3년물 연 3.781%, 日증시, 美금리인상 전망 후퇴에 상승 마감…닛케이 1.16%↑ +1",
+      "isFallback": true,
+      "fallbackReason": "unverified-entity",
+      "items": [
+        {
+          "title": "국고채 금리 대체로 하락…50년물 최고치 경신(종합)",
+          "link": "https://www.yna.co.kr/view/AKR20260813145251008",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "국고채 금리 대체로 하락…3년물 연 3.781%",
+          "link": "https://www.yna.co.kr/view/AKR20260813145200008",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "日증시, 美금리인상 전망 후퇴에 상승 마감…닛케이 1.16%↑",
+          "link": "https://www.newsis.com/view/NISX20260813_0003748159",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "농협은행, '마을기업'에 1500억원 저금리 대출 지원 나서",
+          "link": "https://www.hankyung.com/article/202608139300i",
+          "source": "한국경제 경제"
+        }
+      ]
+    },
     {
       "key": "other",
       "name": "기타 경제 소식",
       "nameEn": "Other Economic News",
-      "lineKo": "기타 경제 소식: 국힘, 수도권 공급대책에 \"본질은 대출…국민 빚더미로 떠밀어\", 강릉시, 100일간 경제 살리기 총력전…민관 공동 실천 '박차', 기업 남녀 임금격차 공개…성평등부, 경제단체와 운영방안 논의 +3",
-      "lineEn": "Other Economic News: 국힘, 수도권 공급대책에 \"본질은 대출…국민 빚더미로 떠밀어\", 강릉시, 100일간 경제 살리기 총력전…민관 공동 실천 '박차', 기업 남녀 임금격차 공개…성평등부, 경제단체와 운영방안 논의 +3",
+      "lineKo": "기타 경제 소식: 국힘, 수도권 공급대책에 \"본질은 대출…국민 빚더미로 떠밀어\", 강릉시, 100일간 경제 살리기 총력전…민관 공동 실천 '박차', 기업 남녀 임금격차 공개…성평등부, 경제단체와 운영방안 논의 +2",
+      "lineEn": "Other Economic News: 국힘, 수도권 공급대책에 \"본질은 대출…국민 빚더미로 떠밀어\", 강릉시, 100일간 경제 살리기 총력전…민관 공동 실천 '박차', 기업 남녀 임금격차 공개…성평등부, 경제단체와 운영방안 논의 +2",
       "isFallback": true,
       "fallbackReason": "unverified-entity",
       "items": [
@@ -31,75 +98,13 @@
           "source": "연합뉴스 경제"
         },
         {
-          "title": "[8·13대책] 가계부채 총량 증가율 목표 2배로…\"대출오픈런 해소 기대\"(종합)",
-          "link": "https://www.yna.co.kr/view/AKR20260812170651002",
-          "source": "연합뉴스 경제"
-        },
-        {
           "title": "韓, 내달 서울서 아프리카 54개국 '장관급 경제협력회의'",
           "link": "https://www.newsis.com/view/NISX20260813_0003747882",
           "source": "뉴시스 경제"
-        }
-      ]
-    },
-    {
-      "key": "realestate",
-      "name": "부동산",
-      "nameEn": "Real Estate",
-      "lineKo": "부동산: LH \"이성훈 사장, 청와대 재직 당시 3주택 중 2주택 처분\", \"비거주 요건 완화\"·\"고가 주택 기준 상향\"…전문가들 쓴소리, 청년 4억 이하 비아파트 매수 지원…신혼부부 소득 합산 안한다(종합) +12",
-      "lineEn": "Real Estate: LH \"이성훈 사장, 청와대 재직 당시 3주택 중 2주택 처분\", \"비거주 요건 완화\"·\"고가 주택 기준 상향\"…전문가들 쓴소리, 청년 4억 이하 비아파트 매수 지원…신혼부부 소득 합산 안한다(종합) +12",
-      "isFallback": true,
-      "fallbackReason": "unverified-entity",
-      "items": [
-        {
-          "title": "LH \"이성훈 사장, 청와대 재직 당시 3주택 중 2주택 처분\"",
-          "link": "https://www.yna.co.kr/view/AKR20260813145300003",
-          "source": "연합뉴스 경제"
         },
         {
-          "title": "\"비거주 요건 완화\"·\"고가 주택 기준 상향\"…전문가들 쓴소리",
-          "link": "https://www.yna.co.kr/view/AKR20260813141300002",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "청년 4억 이하 비아파트 매수 지원…신혼부부 소득 합산 안한다(종합)",
-          "link": "https://www.yna.co.kr/view/AKR20260812168051002",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "국힘, '8·13 부동산 대책'에 \"앙꼬 빠진 '3무 맹탕 대책'…임대주택 무한 루프\"",
-          "link": "https://www.newsis.com/view/NISX20260813_0003748162",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "임기근 국조실장 \"부동산 대책 성패, 공급에 달려있어\"",
-          "link": "https://www.hankyung.com/article/202608139654i",
-          "source": "한국경제 경제"
-        }
-      ]
-    },
-    {
-      "key": "rates",
-      "name": "금리·예금·투자상품",
-      "nameEn": "Rates, Deposits & Investment Products",
-      "lineKo": "금리·예금·투자상품: 국고채 금리 대체로 하락…3년물 연 3.781%, 日증시, 美금리인상 전망 후퇴에 상승 마감…닛케이 1.16%↑, 농협은행, '마을기업'에 1500억원 저금리 대출 지원 나서",
-      "lineEn": "Rates, Deposits & Investment Products: 국고채 금리 대체로 하락…3년물 연 3.781%, 日증시, 美금리인상 전망 후퇴에 상승 마감…닛케이 1.16%↑, 농협은행, '마을기업'에 1500억원 저금리 대출 지원 나서",
-      "isFallback": true,
-      "fallbackReason": "unverified-entity",
-      "items": [
-        {
-          "title": "국고채 금리 대체로 하락…3년물 연 3.781%",
-          "link": "https://www.yna.co.kr/view/AKR20260813145200008",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "日증시, 美금리인상 전망 후퇴에 상승 마감…닛케이 1.16%↑",
-          "link": "https://www.newsis.com/view/NISX20260813_0003748159",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "농협은행, '마을기업'에 1500억원 저금리 대출 지원 나서",
-          "link": "https://www.hankyung.com/article/202608139300i",
+          "title": "한전, 보이지 않는 땅 속에서 '대한민국 경제 동맥'을 잇다",
+          "link": "https://www.hankyung.com/article/2026081384531",
           "source": "한국경제 경제"
         }
       ]
