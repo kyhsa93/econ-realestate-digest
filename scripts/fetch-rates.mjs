@@ -7,6 +7,10 @@ const dataDir = process.env.RATES_OUT_DIR
   : path.resolve(import.meta.dirname, "../docs/data");
 const outFile = path.join(dataDir, "rates.json");
 const historyFile = path.join(dataDir, "rates-history.json");
+// 마지막으로 API를 호출한 날짜만 담는 작은 파일. rates.json은 공시 내용이
+// 달라졌을 때만 쓰기 때문에 그 파일의 updatedAt으로는 "오늘 이미 조회했는지"를
+// 알 수 없어서 따로 둔다(수십 바이트라 매일 커밋돼도 부담이 없다).
+const metaFile = path.join(dataDir, "rates-meta.json");
 const HISTORY_MAX_DAYS = 180;
 
 const API_KEY = process.env.FSS_FINLIFE_API_KEY;
@@ -249,6 +253,18 @@ async function fetchCategory(category) {
 async function main() {
   if (!API_KEY) throw new Error("FSS_FINLIFE_API_KEY 환경변수가 필요합니다");
 
+  const now = new Date();
+  const today = kstDateString(now);
+
+  // 하루 한 번만 조회한다. 스케줄은 이미 아침 1회지만 수동 실행(workflow_dispatch)이
+  // 겹치면 같은 날 여러 번 호출되고, 공시가 월 단위로 갱신되는 데이터라 그럴
+  // 이유가 없다. 일부러 다시 받아야 할 때는 RATES_FORCE=1로 넘긴다.
+  const meta = await readMeta();
+  if (process.env.RATES_FORCE !== "1" && meta.lastFetchedDate === today) {
+    console.log(`[fetch-rates] 오늘(${today}) 이미 조회함 - 건너뜀 (다시 받으려면 RATES_FORCE=1)`);
+    return;
+  }
+
   let previous = {};
   try {
     previous = JSON.parse(await readFile(outFile, "utf-8"));
@@ -279,7 +295,6 @@ async function main() {
     throw new Error("모든 상품군 수집 실패 - 기존 데이터를 덮어쓰지 않고 중단합니다");
   }
 
-  const now = new Date();
   const payload = {
     updatedAt: now.toISOString(),
     disclosureMonth: disclosureMonth ?? previous.disclosureMonth ?? null,
@@ -303,7 +318,19 @@ async function main() {
 
   await appendHistory(now, result);
 
+  // 한 상품군이라도 성공했을 때만 "오늘 조회함"으로 기록한다. 전부 실패하면
+  // 위에서 예외로 빠지므로 여기까지 오지 않는다.
+  await writeFile(metaFile, JSON.stringify({ lastFetchedDate: today, lastFetchedAt: now.toISOString() }));
+
   console.log(`[fetch-rates] 저장 완료 (실패 ${failed}/${CATEGORIES.length})`);
+}
+
+async function readMeta() {
+  try {
+    return JSON.parse(await readFile(metaFile, "utf-8"));
+  } catch {
+    return {}; // 최초 실행
+  }
 }
 
 /** 날짜를 뺀 대표값이 같은지 본다. */

@@ -21,7 +21,11 @@
   전월세 — 둘은 독립적으로 동작해서 한쪽만 등록돼 있어도 그쪽만 조회함)
 - `scripts/fetch-rates.mjs` — 금융감독원 금융상품통합비교공시("금융상품 한눈에") API로 정기예금·적금
   (은행 + 저축은행)과 주택담보대출·전세자금대출(은행) 금리 조회 → `docs/data/rates.json`,
-  그날의 대표값만 추린 `docs/data/rates-history.json`. 인증키는 공공데이터포털이 아니라
+  그날의 대표값만 추린 `docs/data/rates-history.json`. **하루에 한 번만 조회한다** —
+  스케줄이 이미 아침 1회지만 수동 실행이 겹치면 같은 날 여러 번 호출되므로,
+  마지막 조회 날짜를 `docs/data/rates-meta.json`에 남겨두고 같은 날이면 건너뛴다
+  (일부러 다시 받으려면 `RATES_FORCE=1`). 공시 자체가 월 단위로 갱신돼서
+  `rates.json`은 내용이 실제로 달라졌을 때만 다시 쓴다. 인증키는 공공데이터포털이 아니라
   finlife.fss.or.kr에서 직접 발급받는 32자리 키이고(`FSS_FINLIFE_API_KEY`), 파라미터명도
   `serviceKey`가 아니라 `auth`다. **요청에 User-Agent를 안 실으면 서버가 TLS 핸드셰이크 직후
   연결을 끊어서 에러 응답조차 오지 않는다** — 헤더를 지우지 말 것

@@ -104,9 +104,15 @@ function loanResponse({ products }) {
   };
 }
 
-async function run(base, outDir, { key = "TESTKEY" } = {}) {
+async function run(base, outDir, { key = "TESTKEY", force = false } = {}) {
   return execFileAsync("node", [scriptPath], {
-    env: { ...process.env, FSS_API_BASE: base, RATES_OUT_DIR: outDir, FSS_FINLIFE_API_KEY: key },
+    env: {
+      ...process.env,
+      FSS_API_BASE: base,
+      RATES_OUT_DIR: outDir,
+      FSS_FINLIFE_API_KEY: key,
+      ...(force ? { RATES_FORCE: "1" } : {}),
+    },
   });
 }
 
@@ -397,7 +403,7 @@ test("공시 내용이 그대로면 rates.json을 다시 쓰지 않는다", asyn
   try {
     await run(stub.base, outDir);
     const first = await readJson(outDir, "rates.json");
-    await run(stub.base, outDir);
+    await run(stub.base, outDir, { force: true }); // 하루 1회 가드를 넘겨 재조회
     const second = await readJson(outDir, "rates.json");
     assert.equal(second.updatedAt, first.updatedAt, "내용이 같은데 updatedAt이 갱신됨");
   } finally {
@@ -432,11 +438,48 @@ test("대표 금리가 그대로면 히스토리에 새 점을 찍지 않는다"
     // 어제 기록으로 바꿔둔 뒤 다시 돌리면, 값이 같으니 새 점이 붙지 않아야 한다.
     first[0].date = "2000-01-01";
     await writeFile(path.join(outDir, "rates-history.json"), JSON.stringify(first));
-    await run(stub.base, outDir);
+    await run(stub.base, outDir, { force: true }); // 하루 1회 가드를 넘겨 재조회
 
     const second = await readJson(outDir, "rates-history.json");
     assert.equal(second.length, 1);
     assert.equal(second[0].date, "2000-01-01");
+  } finally {
+    await stub.close();
+  }
+});
+
+test("같은 날 다시 실행하면 API를 아예 호출하지 않는다", async () => {
+  let calls = 0;
+  const stub = await startStub(({ topFinGrpNo }) => {
+    calls += 1;
+    return {
+      json: savingResponse({
+        products: [
+          {
+            co: topFinGrpNo,
+            cd: "P1",
+            company: "테스트은행",
+            name: "예금",
+            options: [{ term: 12, rate: 3.0, maxRate: 3.1 }],
+          },
+        ],
+      }),
+    };
+  });
+  const outDir = await tempDir();
+
+  try {
+    await run(stub.base, outDir);
+    const afterFirst = calls;
+    assert.ok(afterFirst > 0, "첫 실행에서 호출이 있어야 한다");
+
+    const { stdout } = await run(stub.base, outDir);
+    assert.equal(calls, afterFirst, "같은 날인데 API를 다시 호출했다");
+    assert.match(stdout, /이미 조회함/);
+
+    // 강제 옵션을 주면 다시 받는다.
+    await run(stub.base, outDir, { force: true });
+    assert.ok(calls > afterFirst, "RATES_FORCE=1인데도 호출하지 않았다");
   } finally {
     await stub.close();
   }
