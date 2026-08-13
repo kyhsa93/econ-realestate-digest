@@ -142,6 +142,7 @@ ${list}
 - 제목에 나온 단어와 사실만 사용하고, 제목에 없는 숫자·수치·전망·원인은 절대 지어내지 마.
 - 숫자나 %, 금액을 문장에 절대 쓰지 마. 정확한 수치는 이미 다른 곳에 표로 나와 있으니, 여기서는 "상승", "증가", "발표" 같은 서술적 표현만 써.
 - 서로 다른 제목을 인과관계("~때문에", "~해서")로 엮지 마. 각 제목은 독립된 별개의 사실이야.
+- 단체·정당·기관·인물 이름은 제목에 적힌 표기를 그대로 써. 줄임말을 임의로 풀어쓰거나 다른 이름으로 바꾸지 마.
 - 투자 조언이나 예측은 하지 마.
 - 한국어(한글)로만 작성해. 한자, 중국어, 영어 단어를 섞지 마.
 
@@ -213,6 +214,19 @@ const ENTITY_STOPWORDS = new Set([
 // "코스피지수"처럼 모델이 접미어를 붙여 내놓는 경우를 대비해 이 꼬리표는 떼고 한 번 더 대조한다.
 const ENTITY_SUFFIXES = ["지수", "증시", "시장", "정부", "당국", "은행", "그룹"];
 
+// 한국 뉴스 제목은 국가명을 한자 한 글자로 줄여 쓴다("日증시", "美금리", "韓").
+// 요약 문장은 당연히 "일본 증시"처럼 풀어 쓰므로, 원문 대조를 그대로 하면
+// 멀쩡한 표현이 "원문에 없는 고유명사"로 걸린다(실제로 발생). 대조용 원문에
+// 풀어쓴 형태를 같이 넣어둔다.
+const HANJA_COUNTRY_ABBREV = {
+  韓: "한국", 日: "일본", 美: "미국", 中: "중국", 北: "북한", 英: "영국",
+  獨: "독일", 佛: "프랑스", 露: "러시아", 伊: "이탈리아", 濠: "호주", 印: "인도", 加: "캐나다",
+};
+
+function expandHanjaAbbrev(text) {
+  return text.replace(/[韓日美中北英獨佛露伊濠印加]/g, (c) => HANJA_COUNTRY_ABBREV[c] ?? c);
+}
+
 function normalizeForEntityMatch(text) {
   return text.replace(/[^\p{L}\p{N}]/gu, "");
 }
@@ -247,7 +261,7 @@ async function unverifiedEntities(sentence, sourceText) {
     return [];
   }
 
-  const haystack = normalizeForEntityMatch(sourceText);
+  const haystack = normalizeForEntityMatch(`${sourceText} ${expandHanjaAbbrev(sourceText)}`);
   return entities.filter((entity) => {
     if (ENTITY_STOPWORDS.has(entity)) return false;
     const normalized = normalizeForEntityMatch(entity);
