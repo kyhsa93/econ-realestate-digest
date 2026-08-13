@@ -194,7 +194,7 @@
         "link": "https://www.hankyung.com/article/202608104964i",
         "publishedAt": "2026-08-10T08:26:49.000Z",
         "source": "한국경제 부동산",
-        "titleEn": "헬스장은 기본, 골프연습장에 수영장까지…요즘 대세는 '운동하는 아파트'"
+        "titleEn": "Gyms are standard, even golf practice facilities with swimming pools... these days, the trend is 'exercise apartments"
       },
       {
         "title": "수도권 15~20억 아파트 신고가 행진",
@@ -264,7 +264,7 @@
         "link": "https://www.mk.co.kr/news/realestate/12122895",
         "publishedAt": "2026-08-10T06:29:25.000Z",
         "source": "매일경제 부동산",
-        "titleEn": "중고가 아파트 신고가 쏟아진 수도권…12억~15억 구간 비중 2배 급증"
+        "titleEn": "Used apartments in the Seoul area hit record highs... share of 1,200,000,000~1,500,000,000 range doubled rapidly"
       },
       {
         "title": "[부산소식] 동아대, 13일 부동산 시장 양극화 주제 세미나",
@@ -611,6 +611,36 @@
     "date": "2026-08-13",
     "items": [
       {
+        "title": "'8·13대책' 신규 공공주택지구는 어디? [뉴시스Pic]",
+        "link": "https://www.newsis.com/view/NISX20260813_0003748120",
+        "publishedAt": "2026-08-13T06:42:52.000Z",
+        "source": "뉴시스 경제",
+        "category": "realestate",
+        "preview": "[서울·남양주·광주(경기)=뉴시스] 류현주 김종택 김금보 김명년 이연희 기자 = 정부가 13일 '주택 신속공급 방안'을 발표하고 서울 강서구 염창공원과 경기 남양주 와부읍, 경기광주역 인근 부지를 신규 공공주택지구로…",
+        "dupes": [],
+        "titleEn": "Where Are the New Public Housing Areas Under the '8·13 Measures'? [Yonhap Pic]"
+      },
+      {
+        "title": "코스피 3.56% 급등, 나흘연속 상승…코스닥 0.29%↑",
+        "link": "https://www.yna.co.kr/view/AKR20260813127800008",
+        "publishedAt": "2026-08-13T06:36:39.000Z",
+        "source": "연합뉴스 경제",
+        "category": "stocks",
+        "preview": "(서울=연합뉴스) 김유아 기자 = 13일 코스피와 코스닥이 나흘째 나란히 상승 마감했다.",
+        "dupes": [],
+        "titleEn": "Kospi surges 3.56%, four-day rising streak…Kosdaq up 0.29%"
+      },
+      {
+        "title": "[외환] 원/달러 환율 3.7원 오른 1,419.4원(15:30 기준가)",
+        "link": "https://www.yna.co.kr/view/AKR20260813126200002",
+        "publishedAt": "2026-08-13T06:30:43.000Z",
+        "source": "연합뉴스 경제",
+        "category": "stocks",
+        "preview": null,
+        "dupes": [],
+        "titleEn": "[Yen/USD Exchange Rate Rises 3.7 Won to 1,419.4 Won (As of 15:30)]"
+      },
+      {
         "title": "서울시, 주택대책에 그린벨트 활용 반대…\"사전협의 부족 유감\"(종합)",
         "link": "https://www.yna.co.kr/view/AKR20260813107951004",
         "publishedAt": "2026-08-13T06:25:27.000Z",
@@ -628,7 +658,7 @@
         "category": "other",
         "preview": "(서울=연합뉴스) 한지훈 임지우 기자 = 금융당국이 가계대출 총량 관리의 고삐를 일부 늦추면서 은행권 대출 공급 여력도 확대될 전망이다.",
         "dupes": [],
-        "titleEn": "[8·13 Measures] Will household loan restrictions ease? Banks hopeful, but temporary fix criticized"
+        "titleEn": "[8·13 Measures] Will Household Loans Get Easier? Banks Hope, But 'Stopgap' Measures Also Pointed Out"
       },
       {
         "title": "“수분양자들도 잔금대출은 선착순”…20억대 분양가 디에이치 방배 ‘발칵’",
@@ -638,7 +668,7 @@
         "category": "realestate",
         "preview": "“반드시 이 번호로만 문자 예약이 가능합니다. 한도가 소진된 경우 그 이후 분들에게는 따로 연락이 가지 않습니다.” 최근 서울 서초구 디에이치방배 입주민들이 받은 문자 내용이다. ..",
         "dupes": [],
-        "titleEn": "“수분양자들도 잔금대출은 선착순”…20억대 분양가 디에이치 방배 ‘발칵’"
+        "titleEn": "Buyers Also Face First-Come, First-Served for Down Payment Loans\"... 2,000,000,000 Won Price for DIHC Bangbae Sparks Outcry"
       },
       {
         "title": "‘세제 개편 직격탄’ 강남·서초 아파트값 3개월 만에 하락 전환",
@@ -664,7 +694,7 @@
         "category": "realestate",
         "preview": "[서울=뉴시스]이연희 기자 = 정부가 개발제한구역(그린벨트) 해제 등을 통해 수도권에 최소 23만호의 주택을 추가 공급한다. 서울 강서구 염창공원과 경기 남양주 와부, 경기광주역세권 등 3곳에서 2만7000호를 우선…",
         "dupes": [],
-        "titleEn": "Supply of 230,000+α units plus youth financial support... Comprehensive measures to tackle housing market issues"
+        "titleEn": "Supply of 230,000+α units and youth financial support mobilized for housing market solutions (Comprehensive)"
       },
       {
         "title": "서울 아파트 매매가격 상승폭 둔화…서초·강남은 하락 전환(종합)",
@@ -694,17 +724,17 @@
         "category": "realestate",
         "preview": "[서울=뉴시스]정진형 기자 = 정부가 도심 주택 공급을 늘리기 위해 재건축·재개발 등 민간 정비사업 활성화에 나섰다. 전문가들은 이주비 대출 등 사업 속도를 늦추던 문제가 해소된 것은 긍정적으로 평가했지만, 자칫 임…",
         "dupes": [],
-        "titleEn": "재건축·재개발 빗장 푼다…공급 기대 커지나 집값 자극 우려도"
+        "titleEn": "Lifting Restrictions on Reconstruction and Redevelopment... Rising Supply Expectations, But Concerns Over Housing Price Stimulation"
       },
       {
-        "title": "\"강남 집 사자마자 지방 발령\"…나는 '투기성 비거주 1주택자'일까",
+        "title": "\"강남 집 사자마자 지방 발령…'투기성 비거주 1주택자'인가요\"",
         "link": "https://www.hankyung.com/article/202608139279i",
         "publishedAt": "2026-08-13T05:30:10.000Z",
         "source": "한국경제 경제",
         "category": "realestate",
         "preview": null,
         "dupes": [],
-        "titleEn": "\"강남 집 사자마자 지방 발령\"…나는 '투기성 비거주 1주택자'일까"
+        "titleEn": "Buying a house in Gangnam immediately leads to transfer to a remote area… Are you a \"speculative non-resident single homeowner\"?"
       },
       {
         "title": "농협은행, '마을기업'에 1500억원 저금리 대출 지원 나서",
@@ -734,7 +764,7 @@
         "category": "realestate",
         "preview": "[서울=뉴시스] 강세훈 기자 = 정부가 다세대·다가구주택의 층수와 면적 규제를 완화하고 건설자금 지원을 확대하는 등 위축된 비아파트 주택 공급 정상화에 나선다. 또 지식산업센터 등 비주거시설의 주거 전환을 유도하고,…",
         "dupes": [],
-        "titleEn": "다가구 3층→4층·모듈러 주택 확대…비아파트 공급 총력[8·13대책]"
+        "titleEn": "Multi-family housing 3rd floor→4th floor, modular homes expansion...full effort to increase non-apartment supply [8·13 measures]"
       },
       {
         "title": "[속보] 李 대통령 “부동산 거품 더 방치못해…특단 각오로 공급 총력전”",
@@ -744,7 +774,7 @@
         "category": "realestate",
         "preview": "이재명 대통령이 부동산 시장을 둘러싼 거품과 공급 부족 문제에 대해 강도 높은 경고를 내놨다. 부동산 문제를 방치할 경우 특정 국가에서 나타났던 ‘잃어버린 20년, 30년’과 같은..",
         "dupes": [],
-        "titleEn": "[속보] 李 대통령 “부동산 거품 더 방치못해…특단 각오로 공급 총력전”"
+        "titleEn": "[Breaking News] President Lee Says \"Can't Leave Real Estate Bubble Unchecked... Ready for Special Measures to Boost Supply"
       },
       {
         "title": "[속보] 李대통령 \"부동산 거품 더 방치못해…잃어버린 20년 도래할수도\"",
@@ -764,7 +794,7 @@
         "category": "realestate",
         "preview": null,
         "dupes": [],
-        "titleEn": "[속보]이 대통령 \"부동산 문제 시한폭탄 같아…가용가능한 수단·역량 집중투입\""
+        "titleEn": "[Breaking News] President Lee Says Real Estate Issue Is Like a Time Bomb... Focus on Concentrating Available Means and Capabilities"
       },
       {
         "title": "“이젠 대출받기 좀 쉬워진다”…이주·중도금·잔금대출 ‘별도 관리’",
@@ -774,7 +804,7 @@
         "category": "other",
         "preview": "대출 총량규제 목표치 수정 가계대출 총량 1.5%→3% 실수요자엔 핀셋 지원 확대금융당국이 올해 가계대출 총량 목표를 1.5%에서 3.0%로 상향한다. 특히 이주비·중도금·잔금대출..",
         "dupes": [],
-        "titleEn": "Now it's a bit easier to get loans\"... Special management for housing loans, down payment, and final payment loans"
+        "titleEn": "Now borrowing is a bit easier\"... Special management for housing loans, down payment, and closing balance loans"
       },
       {
         "title": "'증세 타깃' 강남·서초 아파트 가격 하락 전환…서울 외곽은 상승 지속",
@@ -784,7 +814,7 @@
         "category": "realestate",
         "preview": null,
         "dupes": [],
-        "titleEn": "Taxation Targets: Gangnam and Seocho Apartments Shift to Price Decline... Outlying Areas of Seoul Continue to Rise"
+        "titleEn": "Taxation Target Areas in Gangnam and Seocho See Apartment Prices Turn Downward... Outlying Areas of Seoul Continue to Rise"
       },
       {
         "title": "“요즘 분위기 심상치 않아요”…강남 아파트 5주 연속 상승폭 꺾여",
@@ -807,16 +837,6 @@
         "titleEn": "'소상공인 부담 덜고 골목 살린다'…전주시, 민생경제 대책 추진"
       },
       {
-        "title": "부산 6월 제조업 생산 12.3% 증가…수출 중심 실물경제 개선",
-        "link": "https://www.yna.co.kr/view/AKR20260813097500051",
-        "publishedAt": "2026-08-13T04:48:37.000Z",
-        "source": "연합뉴스 경제",
-        "category": "other",
-        "preview": "(부산=연합뉴스) 오수희 기자 = 부산 실물경제가 제조업 생산과 수출을 중심으로 개선 흐름을 보였다.",
-        "dupes": [],
-        "titleEn": "Busan manufacturing production rises 12.3% in June... export-driven real economy improves"
-      },
-      {
         "title": "23만호 쏟아낸다…전문가들 \"집값 안정은 실행력이 관건\"",
         "link": "https://www.newsis.com/view/NISX20260813_0003747830",
         "publishedAt": "2026-08-13T04:48:15.000Z",
@@ -824,7 +844,7 @@
         "category": "other",
         "preview": "[서울=뉴시스] 박성환 기자 = 부동산 전문가들은 정부가 13일 발표한 수도권 23만호+α 규모의 주택 공급 대책에 대해 공급 부족을 해소하기 위한 정책 방향은 긍정적으로 평가했다. 특히 신규 물량을 확보하는 데 그…",
         "dupes": [],
-        "titleEn": "230,000 Units to be Released... Experts Say \"Stabilizing Housing Prices Depends on Execution"
+        "titleEn": "230,000 Units to Be Released... Experts Say \"Stabilizing Housing Prices Depends on Execution"
       },
       {
         "title": "지식산업센터 주거 활용 촉진 나선다…비아파트 공급 확대키로",
@@ -835,26 +855,6 @@
         "preview": "정부가 다세대·다가구주택의 건축면적과 층수 제한을 완화하고 지식산업센터의 주거용 활용을 촉진하는 등 비아파트 공급 확대를 위한 규제 완화에 나선다. 모듈러 공공주택 발주 물량도 2..",
         "dupes": [],
         "titleEn": "Promoting residential use of knowledge industrial complexes... to expand non-apartment supply"
-      },
-      {
-        "title": "부동산원, 주택 거래가격 거짓신고 집중 신고기간 운영",
-        "link": "https://www.newsis.com/view/NISX20260813_0003747778",
-        "publishedAt": "2026-08-13T04:03:25.000Z",
-        "source": "뉴시스 경제",
-        "category": "realestate",
-        "preview": "[서울=뉴시스] 변해정 기자 = 한국부동산원은 다음달 18일까지 약 6주간을 '부동산 거래가격 거짓신고 집중 신고기간'으로 정해 신고 접수받는다고 13일 밝혔다. 이번 집중 신고기간 운영은 부동산 거래가격 거짓신고…",
-        "dupes": [],
-        "titleEn": "Real Estate Agency to Operate Intensive Reporting Period for False Housing Transaction Price Reports"
-      },
-      {
-        "title": "[포토] 전월세 및 매매시장 안정 위한 주택 신속공급 방안 브리핑",
-        "link": "https://www.hankyung.com/article/202608139164i",
-        "publishedAt": "2026-08-13T03:58:53.000Z",
-        "source": "한국경제 경제",
-        "category": "realestate",
-        "preview": null,
-        "dupes": [],
-        "titleEn": "[Photo] Briefing on Rapid Housing Supply Measures to Stabilize Rental and Sales Markets"
       }
     ]
   }
