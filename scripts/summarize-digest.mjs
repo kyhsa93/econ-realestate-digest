@@ -169,10 +169,11 @@ async function callOllama(prompt, options) {
 
 // num_predict가 80이던 시절엔 3b가 짧게 끊어 써서 문제가 없었는데, 14b급
 // 모델은 문장을 길게 이어 쓰다가 예산에 걸려 문장이 중간에 잘렸다(실험에서
-// "...강화되고," 로 끝나는 요약이 나옴). firstSentence()가 어차피 첫 문장만
+// "...강화되고," 로 끝나는 요약이 나옴). 특히 "기타" 묶음은 서로 다른 소식을
+// 나열하느라 훨씬 길어져서 150으로도 잘렸다. firstSentence()가 어차피 첫 문장만
 // 남기므로 예산은 넉넉히 준다.
 async function generateKoSentence(prompt) {
-  const raw = await callOllama(prompt, { temperature: 0.1, top_p: 0.7, num_predict: 150 });
+  const raw = await callOllama(prompt, { temperature: 0.1, top_p: 0.7, num_predict: 220 });
   const firstLine = stripHanzi(raw).trim().split("\n")[0].trim();
   return firstSentence(firstLine);
 }
@@ -227,6 +228,26 @@ function expandHanjaAbbrev(text) {
   return text.replace(/[韓日美中北英獨佛露伊濠印加]/g, (c) => HANJA_COUNTRY_ABBREV[c] ?? c);
 }
 
+// 한자 약어와 같은 이유. 제목은 "국힘"이라 쓰고 요약은 "국민의힘"이라 쓰면
+// 같은 대상인데도 원문에 없는 고유명사로 걸린다(실제로 발생). 어느 쪽 표기가
+// 원문에 있든 반대쪽 표기도 대조 대상에 넣어둔다.
+const KOREAN_ABBREV_PAIRS = [
+  ["국힘", "국민의힘"], ["한은", "한국은행"], ["국토부", "국토교통부"], ["기재부", "기획재정부"],
+  ["금감원", "금융감독원"], ["금융위", "금융위원회"], ["공정위", "공정거래위원회"],
+  ["산업부", "산업통상자원부"], ["복지부", "보건복지부"], ["노동부", "고용노동부"],
+  ["중기부", "중소벤처기업부"], ["해수부", "해양수산부"], ["행안부", "행정안전부"],
+  ["부동산원", "한국부동산원"], ["주금공", "한국주택금융공사"], ["산은", "산업은행"],
+  ["기은", "기업은행"], ["국조실", "국무조정실"],
+];
+
+function alternateAbbrevForms(text) {
+  return KOREAN_ABBREV_PAIRS.flatMap(([short, full]) => {
+    if (text.includes(short)) return [full];
+    if (text.includes(full)) return [short];
+    return [];
+  }).join(" ");
+}
+
 function normalizeForEntityMatch(text) {
   return text.replace(/[^\p{L}\p{N}]/gu, "");
 }
@@ -261,7 +282,9 @@ async function unverifiedEntities(sentence, sourceText) {
     return [];
   }
 
-  const haystack = normalizeForEntityMatch(`${sourceText} ${expandHanjaAbbrev(sourceText)}`);
+  const haystack = normalizeForEntityMatch(
+    `${sourceText} ${expandHanjaAbbrev(sourceText)} ${alternateAbbrevForms(sourceText)}`
+  );
   return entities.filter((entity) => {
     if (ENTITY_STOPWORDS.has(entity)) return false;
     const normalized = normalizeForEntityMatch(entity);
