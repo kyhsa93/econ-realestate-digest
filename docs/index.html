@@ -191,10 +191,12 @@
   .realestate-table td {
     vertical-align: top;
   }
-  .realestate-search {
+  .realestate-search,
+  .news-search {
     margin: 10px 0 4px;
   }
-  .realestate-search input {
+  .realestate-search input,
+  .news-search input {
     width: 100%;
     background: var(--card);
     color: var(--fg);
@@ -223,6 +225,80 @@
     color: var(--muted);
     font-size: 0.78rem;
     margin-top: 2px;
+  }
+  .news-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+  }
+  .news-chip {
+    background: var(--card);
+    color: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 0.78rem;
+    font-family: inherit;
+    cursor: pointer;
+  }
+  .news-chip[aria-pressed="true"] {
+    background: var(--fg);
+    border-color: var(--fg);
+    color: var(--bg);
+  }
+  .news-chip-count {
+    opacity: 0.7;
+    margin-left: 4px;
+  }
+  .news-preview {
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.45;
+    margin-top: 3px;
+  }
+  /* 이미 눌러본 기사는 흐리게 - 매일 여러 번 들르는 사용자가 새 기사만
+     빠르게 훑을 수 있게 한다(방문 기록은 localStorage에만 남는다). */
+  .news-item.read > a {
+    color: var(--muted);
+  }
+  .news-dupes {
+    margin-top: 4px;
+    font-size: 0.78rem;
+  }
+  .news-dupes summary {
+    cursor: pointer;
+    color: var(--muted);
+    list-style: none;
+  }
+  .news-dupes summary::-webkit-details-marker {
+    display: none;
+  }
+  .news-dupes summary::before {
+    content: "▸ ";
+  }
+  .news-dupes[open] summary::before {
+    content: "▾ ";
+  }
+  .news-dupes ul {
+    list-style: none;
+    margin: 4px 0 0;
+    padding: 0;
+  }
+  .news-dupes li {
+    margin-top: 3px;
+  }
+  .news-dupes a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .news-dupes a:hover {
+    text-decoration: underline;
+  }
+  .news-empty {
+    color: var(--muted);
+    font-size: 0.85rem;
+    padding: 10px 0;
   }
   .archive-link {
     display: inline-block;
@@ -488,6 +564,12 @@
 
   <section id="news-section">
     <h2 id="news-heading">오늘의 경제·부동산 뉴스</h2>
+    <div id="news-controls" hidden>
+      <div class="news-filters" id="news-filters" role="group" aria-label="카테고리 필터"></div>
+      <div class="news-search">
+        <input type="search" id="news-search-input" placeholder="뉴스 검색 (예: 금리)">
+      </div>
+    </div>
     <ul class="news-list" id="news-list">
       <li class="error">불러오는 중...</li>
     </ul>
@@ -564,6 +646,13 @@
       newsHeading: "오늘의 경제·부동산 뉴스",
       newsError: "데이터를 불러오지 못했습니다.",
       newsArchiveLink: "지난 기록 보기 ↓",
+      newsFilterAll: "전체",
+      newsSearchPlaceholder: "뉴스 검색 (예: 금리)",
+      newsNoMatch: "조건에 맞는 뉴스가 없습니다.",
+      newsDupes: (n) => `같은 사건을 다룬 다른 매체 ${n}곳`,
+      newsJustNow: "방금 전",
+      newsMinutesAgo: (n) => `${n}분 전`,
+      newsHoursAgo: (n) => `${n}시간 전`,
       archiveHeading: "지난 기록",
       archiveDateJumpLabel: "날짜로 바로가기",
       archiveDateGo: "이동",
@@ -622,6 +711,13 @@
       newsHeading: "Today's Economy & Real Estate News",
       newsError: "Failed to load data.",
       newsArchiveLink: "Browse past days ↓",
+      newsFilterAll: "All",
+      newsSearchPlaceholder: "Search news (Korean keyword, e.g. 금리)",
+      newsNoMatch: "No news matches this filter.",
+      newsDupes: (n) => `${n} other outlet${n === 1 ? "" : "s"} covering this`,
+      newsJustNow: "just now",
+      newsMinutesAgo: (n) => `${n}m ago`,
+      newsHoursAgo: (n) => `${n}h ago`,
       archiveHeading: "Past Archive",
       archiveDateJumpLabel: "Jump to date",
       archiveDateGo: "Go",
@@ -1064,28 +1160,159 @@
     return locale === "en" ? item.titleEn ?? item.title : item.title;
   }
 
+  // 카테고리 라벨. 실제 분류(어떤 기사가 어느 카테고리인지)는 수집 단계의
+  // scripts/categories.mjs가 정하고, 기사에는 그 key만 저장된다. 여기 있는 건
+  // key -> 화면 라벨 대응표뿐이라, categories.mjs에서 key를 추가할 때만 같이
+  // 손보면 된다. (모르는 key는 아래에서 "기타"로 떨어진다.)
+  const NEWS_CATEGORY_LABELS = {
+    rates: { ko: "금리·예금·투자상품", en: "Rates & Deposits" },
+    realestate: { ko: "부동산", en: "Real Estate" },
+    stocks: { ko: "증시·환율", en: "Stocks & FX" },
+    other: { ko: "기타", en: "Other" },
+  };
+
+  function newsCategoryLabel(key) {
+    return (NEWS_CATEGORY_LABELS[key] ?? NEWS_CATEGORY_LABELS.other)[locale];
+  }
+
+  let newsCategoryFilter = "all";
+  let newsQuery = "";
+
+  // 읽은 기사 표시는 localStorage에만 저장한다(서버로 안 보냄). 무한정 쌓이지
+  // 않게 최근 것만 남긴다.
+  const READ_NEWS_KEY = "readNews";
+  const READ_NEWS_MAX = 300;
+
+  function loadReadNewsLinks() {
+    try {
+      const raw = JSON.parse(window.localStorage.getItem(READ_NEWS_KEY));
+      return new Set(Array.isArray(raw) ? raw : []);
+    } catch {
+      return new Set();
+    }
+  }
+
+  let readNewsLinks = loadReadNewsLinks();
+
+  function markNewsRead(link) {
+    if (!link || readNewsLinks.has(link)) return;
+    readNewsLinks.add(link);
+    const trimmed = [...readNewsLinks].slice(-READ_NEWS_MAX);
+    readNewsLinks = new Set(trimmed);
+    try {
+      window.localStorage.setItem(READ_NEWS_KEY, JSON.stringify(trimmed));
+    } catch {
+      // 사생활 보호 모드 등 저장이 막힌 환경 - 표시만 못 할 뿐 기능엔 지장 없음
+    }
+  }
+
+  function absoluteNewsTime(iso) {
+    return new Date(iso).toLocaleString(locale === "ko" ? "ko-KR" : "en-US", {
+      timeZone: "Asia/Seoul",
+      dateStyle: "short",
+      timeStyle: "short",
+    });
+  }
+
+  // 하루 여러 번 갱신되다 보니 "몇 시 몇 분"보다 "몇 시간 전"이 신선도를 훨씬
+  // 빨리 알려준다. 하루가 넘어가면 상대 표기가 오히려 헷갈려서 날짜로 돌아간다.
+  function newsTimeLabel(iso) {
+    if (!iso) return "";
+    const then = new Date(iso).getTime();
+    if (!Number.isFinite(then)) return "";
+    const diffMin = Math.round((Date.now() - then) / 60000);
+    if (diffMin < 1) return t("newsJustNow");
+    if (diffMin < 60) return t("newsMinutesAgo")(diffMin);
+    if (diffMin < 60 * 24) return t("newsHoursAgo")(Math.floor(diffMin / 60));
+    return absoluteNewsTime(iso);
+  }
+
+  function newsItemMatches(item) {
+    if (newsCategoryFilter !== "all" && (item.category ?? "other") !== newsCategoryFilter) return false;
+    const query = newsQuery.trim().toLowerCase();
+    if (!query) return true;
+    return [item.title, item.titleEn, item.preview, item.source]
+      .filter(Boolean)
+      .join(" ")
+      .toLowerCase()
+      .includes(query);
+  }
+
+  function renderNewsFilters(items) {
+    const box = document.getElementById("news-filters");
+    // category 필드가 없던 시절에 저장된 지난 기록은 전부 "기타"로 몰려서
+    // 필터가 의미가 없다. 그런 날짜에는 칩 자체를 숨긴다.
+    if (!items.some((item) => item.category)) {
+      box.hidden = true;
+      return;
+    }
+    box.hidden = false;
+
+    const counts = new Map();
+    for (const item of items) {
+      const key = item.category ?? "other";
+      counts.set(key, (counts.get(key) ?? 0) + 1);
+    }
+    const chips = [{ key: "all", label: t("newsFilterAll"), count: items.length }];
+    for (const key of Object.keys(NEWS_CATEGORY_LABELS)) {
+      if (counts.has(key)) chips.push({ key, label: newsCategoryLabel(key), count: counts.get(key) });
+    }
+
+    box.innerHTML = chips
+      .map(
+        (chip) =>
+          `<button type="button" class="news-chip" data-category="${chip.key}" aria-pressed="${
+            chip.key === newsCategoryFilter
+          }">${chip.label}<span class="news-chip-count">${chip.count}</span></button>`
+      )
+      .join("");
+  }
+
+  function newsItemHtml(item) {
+    const timeLabel = newsTimeLabel(item.publishedAt);
+    const timeTitle = item.publishedAt ? ` title="${absoluteNewsTime(item.publishedAt)}"` : "";
+    // 미리보기는 원문 그대로의 한국어라, 영어 화면에서는 제목만 보여준다
+    // (제목은 titleEn으로 번역본이 따로 있음).
+    const preview =
+      locale === "ko" && item.preview ? `<div class="news-preview">${escapeHtml(item.preview)}</div>` : "";
+    const dupes = item.dupes?.length
+      ? `<details class="news-dupes">
+           <summary>${t("newsDupes")(item.dupes.length)}</summary>
+           <ul>${item.dupes
+             .map(
+               (d) =>
+                 `<li><a href="${d.link}" target="_blank" rel="noopener">${escapeHtml(d.source)}</a> · ${escapeHtml(
+                   d.title
+                 )}</li>`
+             )
+             .join("")}</ul>
+         </details>`
+      : "";
+    const readClass = readNewsLinks.has(item.link) ? " read" : "";
+    return `<li class="news-item${readClass}">
+      <a href="${item.link}" target="_blank" rel="noopener">${pickTitle(item)}</a>
+      <div class="news-meta"${timeTitle}>${item.source} · ${timeLabel}</div>
+      ${preview}
+      ${dupes}
+    </li>`;
+  }
+
   function renderNews(news) {
     const list = document.getElementById("news-list");
+    const controls = document.getElementById("news-controls");
     if (!news || !news.items?.length) {
+      controls.hidden = true;
       list.innerHTML = `<li class="error">${t("newsError")}</li>`;
       return;
     }
-    list.innerHTML = news.items
-      .map((item) => {
-        const date = item.publishedAt
-          ? new Date(item.publishedAt).toLocaleString(locale === "ko" ? "ko-KR" : "en-US", {
-              timeZone: "Asia/Seoul",
-              dateStyle: "short",
-              timeStyle: "short",
-            })
-          : "";
-        return `
-          <li class="news-item">
-            <a href="${item.link}" target="_blank" rel="noopener">${pickTitle(item)}</a>
-            <div class="news-meta">${item.source} · ${date}</div>
-          </li>`;
-      })
-      .join("");
+
+    controls.hidden = false;
+    renderNewsFilters(news.items);
+
+    const items = news.items.filter(newsItemMatches);
+    list.innerHTML = items.length
+      ? items.map(newsItemHtml).join("")
+      : `<li class="news-empty">${t("newsNoMatch")}</li>`;
   }
 
   // summary 필드는 { ko, en } 객체(현재 포맷)이거나, 그 이전에 저장된
@@ -1266,6 +1493,7 @@
     document.getElementById("realestate-district-select-label").textContent = t("realestateDistrictSelectLabel");
     document.getElementById("realestate-search-input").placeholder = t("realestateSearchPlaceholder");
     document.getElementById("news-heading").textContent = t("newsHeading");
+    document.getElementById("news-search-input").placeholder = t("newsSearchPlaceholder");
     document.getElementById("news-archive-link").textContent = t("newsArchiveLink");
     document.getElementById("archive-heading").textContent = t("archiveHeading");
     document.getElementById("archive-date-jump-label").textContent = t("archiveDateJumpLabel");
@@ -1305,6 +1533,28 @@
   });
 
   document.getElementById("realestate-search-input").addEventListener("input", applyRealestateSearch);
+
+  document.getElementById("news-filters").addEventListener("click", (e) => {
+    const chip = e.target.closest(".news-chip");
+    if (!chip) return;
+    newsCategoryFilter = chip.dataset.category;
+    renderNews(effectiveNews());
+  });
+
+  document.getElementById("news-search-input").addEventListener("input", (e) => {
+    newsQuery = e.target.value;
+    renderNews(effectiveNews());
+  });
+
+  // 기사 링크는 새 탭으로 열려서 페이지가 그대로 남는다. 클릭 즉시 읽음 표시를
+  // 반영하되, 목록 전체를 다시 그리면 펼쳐둔 "다른 매체" 등이 닫히므로 해당
+  // 항목에만 클래스를 붙인다.
+  document.getElementById("news-list").addEventListener("click", (e) => {
+    const link = e.target.closest(".news-item > a");
+    if (!link) return;
+    markNewsRead(link.getAttribute("href"));
+    link.parentElement.classList.add("read");
+  });
 
   // ---- 공유하기 -----------------------------------------------------------
   // 모바일 등 Web Share API 지원 브라우저는 네이티브 공유 시트를 띄우고,

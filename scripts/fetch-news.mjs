@@ -1,6 +1,7 @@
 import Parser from "rss-parser";
 import { writeFile, mkdir, readFile } from "node:fs/promises";
 import path from "node:path";
+import { categorizeTitle } from "./categories.mjs";
 
 const FEEDS = [
   { source: "매일경제 부동산", url: "https://www.mk.co.kr/rss/50300009/" },
@@ -16,6 +17,12 @@ const KEYWORDS = [
   "주택", "재건축", "대출",
 ];
 const MAX_ITEMS = 24;
+// 목록에 곁들이는 한두 줄 미리보기 길이. 기사 본문을 그대로 싣지 않도록
+// 짧게 자르고, 원문 링크는 항상 같이 노출한다.
+const MAX_PREVIEW_LENGTH = 120;
+// 같은 사건을 여러 매체가 보도한 경우 대표 기사 하나만 남기는데(dedupe),
+// 버리는 대신 "다른 매체 N곳" 링크로 남겨둘 최대 개수.
+const MAX_DUPES = 3;
 // 뉴시스처럼 게시량이 많은 매체 하나가 "최신순 정렬 후 상위 N개" 로직에서
 // 다른 소스를 다 밀어내는 걸 막기 위한 소스별 상한. 소스를 늘리면서 같이 도입.
 const MAX_ITEMS_PER_SOURCE = 8;
@@ -59,17 +66,25 @@ function diceSimilarity(a, b) {
 
 const DEDUP_SIMILARITY_THRESHOLD = 0.75;
 
+// 중복으로 판정된 기사를 그냥 버리면 "몇 개 매체가 같이 다룬 사건인지"라는
+// 정보까지 같이 사라진다. 대표 기사 하나만 목록에 남기되, 나머지는 dupes로
+// 붙여서 화면에서 "다른 매체 N곳"으로 펼쳐볼 수 있게 한다.
 function dedupeSimilarTitles(items) {
   const kept = [];
   const normalizedKept = [];
   for (const item of items) {
     const normalized = normalizeForDedup(item.title);
-    const isDuplicate = normalizedKept.some(
+    const duplicateIndex = normalizedKept.findIndex(
       (existing) => diceSimilarity(normalized, existing) >= DEDUP_SIMILARITY_THRESHOLD
     );
-    if (!isDuplicate) {
-      kept.push(item);
+    if (duplicateIndex === -1) {
+      kept.push({ ...item, dupes: [] });
       normalizedKept.push(normalized);
+      continue;
+    }
+    const canonical = kept[duplicateIndex];
+    if (canonical.dupes.length < MAX_DUPES && canonical.source !== item.source) {
+      canonical.dupes.push({ title: item.title, link: item.link, source: item.source });
     }
   }
   return kept;
@@ -118,15 +133,34 @@ async function appendHistory(now, items) {
   await writeFile(historyFile, JSON.stringify(history, null, 2));
 }
 
+// RSS 요약문에는 매체에 따라 HTML 태그, 기자 이메일 서명, 사진 캡션 같은 게
+// 섞여 들어온다. 태그/공백을 정리하고 짧게 잘라서 제목 아래 한두 줄 미리보기로만 쓴다.
+function buildPreview(item, title) {
+  const raw = item.contentSnippet ?? item.summary ?? item.content ?? "";
+  const text = raw
+    .replace(/<[^>]*>/g, " ")
+    .replace(/&[a-z]+;|&#\d+;/gi, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  // 매체에 따라 요약문이 제목과 사실상 같은 경우가 있어, 그럴 땐 표시하지 않는다.
+  if (!text || text.length < 20 || text.startsWith(title)) return null;
+  return text.length > MAX_PREVIEW_LENGTH ? `${text.slice(0, MAX_PREVIEW_LENGTH).trimEnd()}…` : text;
+}
+
 async function fetchFeed(parser, feed) {
   try {
     const parsed = await parser.parseURL(feed.url);
-    return (parsed.items ?? []).map((item) => ({
-      title: item.title?.trim() ?? "",
-      link: item.link ?? "",
-      publishedAt: item.isoDate ?? item.pubDate ?? null,
-      source: feed.source,
-    }));
+    return (parsed.items ?? []).map((item) => {
+      const title = item.title?.trim() ?? "";
+      return {
+        title,
+        link: item.link ?? "",
+        publishedAt: item.isoDate ?? item.pubDate ?? null,
+        source: feed.source,
+        category: categorizeTitle(title).key,
+        preview: buildPreview(item, title),
+      };
+    });
   } catch (err) {
     console.error(`[fetch-news] ${feed.source} 실패: ${err.message}`);
     return [];
@@ -140,8 +174,11 @@ async function main() {
 
   items.sort((a, b) => new Date(b.publishedAt ?? 0) - new Date(a.publishedAt ?? 0));
 
-  items = capPerSource(items, MAX_ITEMS_PER_SOURCE);
+  // 중복 제거를 소스별 상한보다 먼저 한다: 상한에 걸려 미리 잘려나간 기사는
+  // 어느 매체가 같은 사건을 함께 다뤘는지(dupes) 세는 데도 못 쓰이기 때문.
+  // 상한은 중복 제거 후 남은 "고유 기사" 기준으로 적용되는 게 원래 의도에도 맞다.
   items = dedupeSimilarTitles(items);
+  items = capPerSource(items, MAX_ITEMS_PER_SOURCE);
   items = items.slice(0, MAX_ITEMS);
 
   if (items.length === 0) {

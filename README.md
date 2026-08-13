@@ -7,7 +7,10 @@
 
 ## 구조
 
-- `scripts/fetch-news.mjs` — 경제지 RSS 파싱 → `docs/data/news.json`
+- `scripts/fetch-news.mjs` — 경제지 RSS 파싱 → `docs/data/news.json`. 기사마다 카테고리(`category`),
+  한두 줄 미리보기(`preview`), 같은 사건을 다룬 다른 매체(`dupes`)를 함께 저장한다
+- `scripts/categories.mjs` — 뉴스 카테고리(키워드) 정의. 수집(`fetch-news`)과 요약(`summarize-digest`)이
+  같은 기준으로 묶이도록 공유하는 모듈
 - `scripts/fetch-market.mjs` — 코스피/환율/기준금리 조회 → `docs/data/market.json`
 - `scripts/fetch-realestate.mjs` — 국토교통부 아파트매매·전월세 실거래가 API(서울 25개 자치구 전체,
   이번 달)로 구별 매매/전세 평당가 + 월세(보증금·월세 평균) + 서울 전체 평균, 1주일 전 대비
@@ -20,6 +23,7 @@
 - `scripts/translate-news.mjs` — 뉴스 제목을 영어로 번역(`titleEn`) → `docs/data/news.json`
 - `scripts/update-all.mjs` — 로컬에서 수동으로 fetch + git commit/push까지 한 번에 실행할 때 사용 (CI에서는 사용 안 함)
 - `docs/index.html` — 정적 페이지, 클라이언트에서 `data/*.json`을 fetch해 렌더링, 한/영 언어 전환 지원.
+  뉴스 섹션은 카테고리 필터·검색·상대 시간("3시간 전")·읽은 기사 흐리게(로컬 저장) 지원.
   `?date=YYYY-MM-DD` 쿼리를 붙이면 별도 아카이브 페이지 없이 이 페이지 자체가 각 `*-history.json`에서
   그 날짜 기록을 찾아 오늘과 똑같은 섹션 구성(요약/시장지표/부동산/뉴스)으로 다시 렌더링함(실시간 환율만
   예외 — 그 날짜의 배치 값을 그대로 보여줌). 페이지 하단 "지난 기록" 목록에서 날짜별로 이동 가능
