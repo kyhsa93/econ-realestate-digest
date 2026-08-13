@@ -1,6 +1,6 @@
 # 경제·부동산 데일리 다이제스트
 
-매일 아침 경제/부동산 뉴스, 자산 시장 지표(코스피·환율·기준금리), 한국 부동산 실거래가,
+경제/부동산 뉴스(하루 4회), 자산 시장 지표(코스피·환율·기준금리), 한국 부동산 실거래가,
 오픈소스 AI 요약(한/영)을 GitHub Actions로 자동 갱신해 보여주는 GitHub Pages 사이트.
 
 사이트: https://kyhsa93.github.io/econ-realestate-digest/
@@ -27,7 +27,10 @@
   `?date=YYYY-MM-DD` 쿼리를 붙이면 별도 아카이브 페이지 없이 이 페이지 자체가 각 `*-history.json`에서
   그 날짜 기록을 찾아 오늘과 똑같은 섹션 구성(요약/시장지표/부동산/뉴스)으로 다시 렌더링함(실시간 환율만
   예외 — 그 날짜의 배치 값을 그대로 보여줌). 페이지 하단 "지난 기록" 목록에서 날짜별로 이동 가능
-- `.github/workflows/daily-update.yml` — 매일 08:00 KST(23:00 UTC)에 뉴스/시장/부동산 지표 수집 → Ollama 설치 후 AI 요약·번역 생성 → 변경사항 커밋/푸시
+- `.github/workflows/daily-update.yml` — 하루 4회(08·12·16·20시 KST) 실행. 아침 실행(`MODE=full`)만
+  뉴스/시장/부동산 수집 + AI 요약까지 하고, 나머지 3회(`MODE=news`)는 뉴스 수집과 제목 영어 번역만
+  한다(부동산 실거래가 API의 일일 호출 한도 때문에 시장/부동산은 아침 1회로 고정). 이후 변경사항
+  커밋/푸시 → Pages 배포
 
 ## 로컬 실행
 
@@ -45,8 +48,9 @@ node scripts/summarize-digest.mjs
 
 ## 자동화
 
-GitHub Actions(`daily-update.yml`)가 매일 자동 실행. 수동 실행은 Actions 탭에서
-"Daily digest update" 워크플로를 `workflow_dispatch`로 트리거.
+GitHub Actions(`daily-update.yml`)가 하루 4회 자동 실행. 수동 실행은 Actions 탭에서
+"Digest update" 워크플로를 `workflow_dispatch`로 트리거하며, 이때 `mode`(full/news)를 골라
+전체 갱신인지 뉴스만 갱신인지 정할 수 있다.
 
 (참고: 이전에 Claude 클라우드 루틴으로 자동화를 시도했으나 GitHub Actions로 전환하며 비활성화함)
 
