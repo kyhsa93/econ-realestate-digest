@@ -240,10 +240,12 @@
     border-radius: 10px;
     padding: 16px;
   }
+  /* white-space: pre-wrap을 쓰면 아래 렌더 코드가 만든 HTML의 들여쓰기/줄바꿈
+     (블록 요소 사이의 공백 텍스트 노드)까지 그대로 살아나서 카테고리마다 빈 줄이
+     여러 개 생긴다. 줄바꿈은 카테고리 블록과 <br>로 이미 표현하므로 쓰지 않는다. */
   #summary-box {
     color: var(--fg);
     font-size: 0.95rem;
-    white-space: pre-wrap;
   }
   .summary-category {
     margin-bottom: 14px;
@@ -1120,6 +1122,8 @@
   // LLM이 생성한 성공 문장 줄은 애초에 라벨이 안 붙어 있어 이 처리로도 못 살린다.
   function plainSummaryHtml(text) {
     return text
+      .replace(/\n{4,}/g, "\n\n\n") // 빈 줄이 연속 두 줄을 넘지 않도록
+      .trim()
       .split("\n")
       .map((line) => {
         const m = line.match(/^-\s*([^:]+):\s*(.*)$/);
@@ -1139,12 +1143,13 @@
           `<li><a href="${item.link}" target="_blank" rel="noopener">${pickCategoryItemTitle(item)}</a><span class="summary-link-source"> · ${item.source}</span></li>`
       )
       .join("");
-    return `
-      <div class="summary-category">
-        <div class="summary-category-label">${label}</div>
-        <div class="summary-category-line">${line}</div>
-        ${linksHtml ? `<ul class="summary-links">${linksHtml}</ul>` : ""}
-      </div>`;
+    return (
+      `<div class="summary-category">` +
+      `<div class="summary-category-label">${label}</div>` +
+      `<div class="summary-category-line">${line}</div>` +
+      (linksHtml ? `<ul class="summary-links">${linksHtml}</ul>` : "") +
+      `</div>`
+    );
   }
 
   function renderSummary(summary) {
