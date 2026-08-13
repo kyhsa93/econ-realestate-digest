@@ -1,0 +1,79 @@
+name: Summary model experiment
+
+# 요약 모델을 바꾸기 전에 "같은 날 같은 뉴스"로 모델을 비교해보기 위한 수동 전용
+# 워크플로. 저장소에 커밋된 docs/data/news.json을 그대로 입력으로 쓰고(뉴스를 다시
+# 받지 않아야 모델 간 비교가 공정하다), 결과는 로그에만 출력하고 커밋/배포하지 않는다.
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: "요약에 사용할 Ollama 모델"
+        type: string
+        default: qwen2.5:14b
+      disable_thinking:
+        description: "thinking 끄기 (qwen3 계열은 true 필요)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  experiment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "20"
+
+      - name: 러너 사양 기록
+        run: |
+          echo "CPU: $(nproc) core"
+          free -h | sed -n '1,2p'
+          df -h / | sed -n '1,2p'
+
+      - name: Ollama 설치
+        env:
+          OLLAMA_VERSION: v0.32.6
+          OLLAMA_SHA256: dec2fa50d24e6868ca3c4c977d69d059399372105f951a9acc320a5a79aadcfc
+        run: |
+          command -v zstd >/dev/null || (sudo apt-get update -y && sudo apt-get install -y zstd)
+          curl -fsSL -o ollama.tar.zst \
+            "https://github.com/ollama/ollama/releases/download/${OLLAMA_VERSION}/ollama-linux-amd64.tar.zst"
+          echo "${OLLAMA_SHA256}  ollama.tar.zst" | sha256sum -c -
+          zstd -d ollama.tar.zst -o ollama.tar
+          sudo tar -xf ollama.tar -C /usr/local
+          rm -f ollama.tar.zst ollama.tar
+
+          ollama serve &
+          for i in $(seq 1 30); do
+            curl -sf http://127.0.0.1:11434/api/version > /dev/null && break
+            sleep 1
+          done
+
+      - name: 모델 준비
+        run: ollama pull "${{ inputs.model }}"
+
+      - name: 요약 생성
+        env:
+          OLLAMA_MODEL: ${{ inputs.model }}
+          OLLAMA_THINK: ${{ inputs.disable_thinking && 'false' || '' }}
+        run: |
+          start=$(date +%s)
+          node scripts/summarize-digest.mjs
+          echo "소요 시간: $(( $(date +%s) - start ))초"
+
+      - name: 결과 출력
+        run: |
+          node -e '
+            const s = require("./docs/data/summary.json");
+            console.log("모델:", s.model);
+            console.log("\n[KO]\n" + s.summary.ko);
+            console.log("\n[EN]\n" + s.summary.en);
+            console.log("\n[카테고리별 폴백]");
+            for (const c of s.categories) {
+              console.log(` - ${c.name}: ${c.fallbackReason ?? "통과"} (기사 ${c.items.length}건)`);
+            }
+          '

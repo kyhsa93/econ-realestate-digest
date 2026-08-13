@@ -9,6 +9,11 @@ const HISTORY_MAX_DAYS = 180;
 
 const OLLAMA_URL = process.env.OLLAMA_URL ?? "http://127.0.0.1:11434";
 const MODEL = process.env.OLLAMA_MODEL ?? "qwen2.5:3b";
+// qwen3 계열은 추론(thinking) 모드가 기본으로 켜져 있어서, 끄지 않으면 응답
+// 앞머리에 <think> 블록이 붙고 num_predict 예산을 추론이 다 써버린다(요약이
+// 통째로 폐기됨). 반대로 thinking을 지원하지 않는 모델에 이 필드를 보내면
+// 오류가 나므로, 필요한 모델에서만 OLLAMA_THINK=false로 켠다.
+const DISABLE_THINKING = process.env.OLLAMA_THINK === "false";
 
 // 소형 모델(1.5B)에게 "15개 제목을 통째로 보고 알아서 그룹핑"을 시키면
 // 그룹핑을 안 하거나(전부 나열) 숫자를 지어내는 문제가 있었음.
@@ -136,7 +141,13 @@ async function callOllama(prompt, options) {
   const res = await fetch(`${OLLAMA_URL}/api/generate`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ model: MODEL, prompt, stream: false, options }),
+    body: JSON.stringify({
+      model: MODEL,
+      prompt,
+      stream: false,
+      options,
+      ...(DISABLE_THINKING ? { think: false } : {}),
+    }),
   });
   if (!res.ok) throw new Error(`ollama http ${res.status}`);
   const json = await res.json();
