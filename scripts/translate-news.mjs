@@ -12,6 +12,7 @@ const MODEL = process.env.OLLAMA_MODEL ?? "qwen3:14b";
 // 지원하지 않는 모델에 이 필드를 보내면 오류가 나므로 필요한 모델에서만 켠다.
 // (summarize-digest.mjs와 동일한 처리)
 const DISABLE_THINKING = process.env.OLLAMA_THINK === "false";
+const MAX_TRANSLATE_ATTEMPTS = 2;
 
 // 한국어는 만/억/조 단위로 4자리씩 묶어 읽어서(영어의 천 단위 그룹과 다름),
 // 작은 모델이 "8천만원"을 "$8 million"으로, "15억원"을 "15 million won"으로
@@ -57,7 +58,9 @@ function extractNormalizedNumbers(original, normalized) {
   return numbers.map((n) => n.replace(/,/g, ""));
 }
 
-async function translateTitle(title) {
+// attempt가 2 이상이면(= 1차 번역이 검증에 걸린 경우) 온도를 올려 다른 표현을
+// 시도한다. 같은 온도로 다시 물으면 대개 같은 답이 나와서 재시도 의미가 없다.
+async function translateTitle(title, attempt = 1) {
   const normalizedTitle = normalizeKoreanAmounts(title);
   const prompt = `Translate the following Korean news headline into natural, concise English.
 The headline may already contain plain Arabic numerals (e.g. "80,000,000") - if so, keep those numbers exactly as they are, do not round or rewrite them, just translate the surrounding Korean words (e.g. "원" -> "won").
@@ -75,7 +78,7 @@ English headline:`;
       model: MODEL,
       prompt,
       stream: false,
-      options: { temperature: 0.2, top_p: 0.8, num_predict: 80 },
+      options: { temperature: attempt > 1 ? 0.6 : 0.2, top_p: 0.8, num_predict: 80 },
       ...(DISABLE_THINKING ? { think: false } : {}),
     }),
   });
@@ -98,7 +101,12 @@ function isBadTranslation(text, original, requiredNumbers) {
   if (!text) return true;
   if (/[가-힣]/.test(text)) return true; // 한글이 그대로 남아있으면 번역 실패로 간주
   if (/[一-鿿]/.test(text)) return true; // 영어 대신 중국어로 번역해버리는 경우가 있어 방어
-  if (text.length > Math.max(120, original.length * 3)) return true; // 비정상적으로 길면 딴소리
+  // 한국어 제목은 영어로 옮기면 3~4배로 길어지는데 상한이 3배(최소 120자)라
+  // 멀쩡한 번역이 대거 반려됐다(qwen3:14b 전환 후 24건 중 8건이 이 조건에만
+  // 걸려 원문 유지로 떨어짐 - 예: 33자 제목 -> 131자 번역, 한도 120).
+  // num_predict가 80이라 응답 자체가 300자 안팎으로 잘리므로, 상한을 올려도
+  // "모델이 딴소리를 늘어놓는" 경우를 걸러내는 목적은 유지된다.
+  if (text.length > Math.max(200, original.length * 4)) return true; // 비정상적으로 길면 딴소리
   const textDigits = text.replace(/,/g, "");
   if (requiredNumbers.some((n) => !textDigits.includes(n))) return true;
   return false;
@@ -113,15 +121,22 @@ async function translateItems(items) {
     // 강화할 때마다 과거에 통과했던 나쁜 번역도 자동으로 재시도 대상이 된다.
     if (item.titleEn && !isBadTranslation(item.titleEn, item.title, requiredNumbers)) continue;
     try {
-      const translated = await translateTitle(item.title);
-      if (isBadTranslation(translated, item.title, requiredNumbers)) {
+      // 모델이 가끔 한자("民生")나 한글을 섞어 내놓는데, 온도를 바꿔 한 번 더
+      // 물으면 멀쩡한 번역이 나오는 경우가 많아 한 번은 재시도한다.
+      let accepted = null;
+      for (let attempt = 1; attempt <= MAX_TRANSLATE_ATTEMPTS; attempt++) {
+        const translated = await translateTitle(item.title, attempt);
+        if (!isBadTranslation(translated, item.title, requiredNumbers)) {
+          accepted = translated;
+          break;
+        }
         // 반려된 번역문 자체를 같이 남긴다. 원문 제목만 찍으면 왜 걸렸는지
         // (한글 잔존/길이 초과/숫자 누락) 로그만 보고는 알 수가 없었다.
-        console.error(`[translate-news] 번역 실패로 원문 유지: ${item.title}\n  -> 반려된 번역: ${translated}`);
-        item.titleEn = item.title;
-      } else {
-        item.titleEn = translated;
+        console.error(
+          `[translate-news] 번역 반려(${attempt}/${MAX_TRANSLATE_ATTEMPTS}): ${item.title}\n  -> ${translated}`
+        );
       }
+      item.titleEn = accepted ?? item.title;
     } catch (err) {
       console.error(`[translate-news] "${item.title}" 번역 실패: ${err.message}`);
       item.titleEn = item.title;
