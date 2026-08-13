@@ -30,66 +30,61 @@
   },
   {
     "date": "2026-08-13",
-    "model": "qwen2.5:3b",
+    "model": "qwen3:14b",
     "summary": {
-      "ko": "- 코스피가 기술적 강세장을 진입했고, 홍콩 증시는 중앙 경제 불안에 따른 하락을 이어갔다.\n- 국토교통부가 유휴 부지를 활용하고 허용 높이기 등 다양한 정책을 통해 수도권 주택 공급을 늘리고 있다.\n- 기타 경제 소식: \"내일부터 대출 오픈런 그만\"…가계대출 30조 더 풀린다, [8·13대책] 가계부채 총량 증가율 목표 2배로…\"대출오픈런 해소 기대\", 대출절벽 숨통 트인다…금융당국, 가계대출 한도 28조원 증액",
-      "en": "- The KOSPI entered a period of technical bullishness, while the Hong Kong market continued its decline due to central economic instability.\n- 국토교통부가 유휴 부지를 활용하고 허용 높이기 등 다양한 정책을 통해 수도권 주택 공급을 늘리고 있다.\n- Other Economic News: \"내일부터 대출 오픈런 그만\"…가계대출 30조 더 풀린다, [8·13대책] 가계부채 총량 증가율 목표 2배로…\"대출오픈런 해소 기대\", 대출절벽 숨통 트인다…금융당국, 가계대출 한도 28조원 증액"
+      "ko": "- 주택시장 해법 마련, 서울 아파트 매매가격 상승폭 둔화, 재건축·재개발 활성화, 강남 집값에 대한 관심 증가, 주택공급 확대에 대한 반응 등 다양한 주택 관련 소식이 발표되었다.\n- 농협은행이 마을기업에 저금리 대출을 지원하는 등 금리·예금·투자상품 관련 다양한 소식들이 발표되고 있다.\n- 기타 경제 소식: “이젠 대출받기 좀 쉬워진다”…이주·중도금·잔금대출 ‘별도 관리’, '소상공인 부담 덜고 골목 살린다'…전주시, 민생경제 대책 추진, 부산 6월 제조업 생산 12.3% 증가…수출 중심 실물경제 개선 +1\n- 미디어가 코스피가 기술적 강세장에 진입했다고 보도하며 추가 상승 가능성에 주목하고 있다.",
+      "en": "- Various housing-related news, including measures to address the housing market, a slowdown in the rate of increase in Seoul apartment sales prices, revitalization of reconstruction and redevelopment projects, increased interest in Gangnam housing prices, and reactions to expanded housing supply, were announced.\n- NH Bank is supporting village businesses with low-interest loans, and various news related to interest rates, deposits, and investment products are being announced.\n- Other Economic News: “이젠 대출받기 좀 쉬워진다”…이주·중도금·잔금대출 ‘별도 관리’, '소상공인 부담 덜고 골목 살린다'…전주시, 민생경제 대책 추진, 부산 6월 제조업 생산 12.3% 증가…수출 중심 실물경제 개선 +1\n- Media are reporting that the KOSPI has entered a technical bullish phase and are paying attention to the possibility of further gains."
     },
     "categories": [
-      {
-        "key": "stocks",
-        "name": "증시·환율",
-        "nameEn": "Stocks & FX",
-        "lineKo": "코스피가 기술적 강세장을 진입했고, 홍콩 증시는 중앙 경제 불안에 따른 하락을 이어갔다.",
-        "lineEn": "The KOSPI entered a period of technical bullishness, while the Hong Kong market continued its decline due to central economic instability.",
-        "isFallback": false,
-        "fallbackReason": null,
-        "items": [
-          {
-            "title": "美 CNBC \"코스피, 기술적 강세장 진입…추가 상승 가능성\"",
-            "link": "https://www.newsis.com/view/NISX20260813_0003747684",
-            "source": "뉴시스 경제"
-          },
-          {
-            "title": "[올댓차이나] 홍콩 증시, 中 경기불안에 사흘째 하락 개장… H주 0.19%↓",
-            "link": "https://www.newsis.com/view/NISX20260813_0003747637",
-            "source": "뉴시스 경제"
-          }
-        ]
-      },
       {
         "key": "realestate",
         "name": "부동산",
         "nameEn": "Real Estate",
-        "lineKo": "국토교통부가 유휴 부지를 활용하고 허용 높이기 등 다양한 정책을 통해 수도권 주택 공급을 늘리고 있다.",
-        "lineEn": "국토교통부가 유휴 부지를 활용하고 허용 높이기 등 다양한 정책을 통해 수도권 주택 공급을 늘리고 있다.",
+        "lineKo": "주택시장 해법 마련, 서울 아파트 매매가격 상승폭 둔화, 재건축·재개발 활성화, 강남 집값에 대한 관심 증가, 주택공급 확대에 대한 반응 등 다양한 주택 관련 소식이 발표되었다.",
+        "lineEn": "Various housing-related news, including measures to address the housing market, a slowdown in the rate of increase in Seoul apartment sales prices, revitalization of reconstruction and redevelopment projects, increased interest in Gangnam housing prices, and reactions to expanded housing supply, were announced.",
         "isFallback": false,
         "fallbackReason": null,
         "items": [
           {
-            "title": "공항고·수오고·흥이중 부지에 공공주택…유휴 청사도 주택 개발[8·13대책]",
-            "link": "https://www.newsis.com/view/NISX20260813_0003747758",
+            "title": "공급 23만호+α에 청년 금융지원까지…주택시장 해법 총동원(종합)",
+            "link": "https://www.newsis.com/view/NISX20260813_0003747958",
             "source": "뉴시스 경제"
           },
           {
-            "title": "“신혼부부 소득 합산 안한다”…청년 4억 이하 비아파트 매수 지원",
-            "link": "https://www.mk.co.kr/news/realestate/12126416",
-            "source": "매일경제 부동산"
-          },
-          {
-            "title": "[일문일답] 국토장관 \"훼손된 그린벨트 적극 활용해 수도권 주택 공급\"",
-            "link": "https://www.yna.co.kr/view/AKR20260813090000003",
+            "title": "서울 아파트 매매가격 상승폭 둔화…서초·강남은 하락 전환(종합)",
+            "link": "https://www.yna.co.kr/view/AKR20260813088751003",
             "source": "연합뉴스 경제"
           },
           {
-            "title": "과천 경마장에 '주택 건설' 속도전…마사회 \"현실성 따져야\"",
-            "link": "https://www.newsis.com/view/NISX20260813_0003747051",
+            "title": "[8·13대책] 서울 강서구 \"20년 숙원 해결…염창공원 훼손지 주택공급 환영\"",
+            "link": "https://www.yna.co.kr/view/AKR20260813117900004",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "재건축·재개발 빗장 푼다…공급 기대 커지나 집값 자극 우려도",
+            "link": "https://www.newsis.com/view/NISX20260813_0003747956",
             "source": "뉴시스 경제"
           },
           {
-            "title": "[속보] 재개발 동의율 75→70%…다가구주택 4층까지 허용",
-            "link": "https://www.hankyung.com/article/2026081391337",
-            "source": "한국경제 부동산"
+            "title": "\"강남 집 사자마자 지방 발령\"…나는 '투기성 비거주 1주택자'일까",
+            "link": "https://www.hankyung.com/article/202608139279i",
+            "source": "한국경제 경제"
+          }
+        ]
+      },
+      {
+        "key": "rates",
+        "name": "금리·예금·투자상품",
+        "nameEn": "Rates, Deposits & Investment Products",
+        "lineKo": "농협은행이 마을기업에 저금리 대출을 지원하는 등 금리·예금·투자상품 관련 다양한 소식들이 발표되고 있다.",
+        "lineEn": "NH Bank is supporting village businesses with low-interest loans, and various news related to interest rates, deposits, and investment products are being announced.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "items": [
+          {
+            "title": "농협은행, '마을기업'에 1500억원 저금리 대출 지원 나서",
+            "link": "https://www.hankyung.com/article/202608139300i",
+            "source": "한국경제 경제"
           }
         ]
       },
@@ -97,25 +92,46 @@
         "key": "other",
         "name": "기타 경제 소식",
         "nameEn": "Other Economic News",
-        "lineKo": "기타 경제 소식: \"내일부터 대출 오픈런 그만\"…가계대출 30조 더 풀린다, [8·13대책] 가계부채 총량 증가율 목표 2배로…\"대출오픈런 해소 기대\", 대출절벽 숨통 트인다…금융당국, 가계대출 한도 28조원 증액",
-        "lineEn": "Other Economic News: \"내일부터 대출 오픈런 그만\"…가계대출 30조 더 풀린다, [8·13대책] 가계부채 총량 증가율 목표 2배로…\"대출오픈런 해소 기대\", 대출절벽 숨통 트인다…금융당국, 가계대출 한도 28조원 증액",
+        "lineKo": "기타 경제 소식: “이젠 대출받기 좀 쉬워진다”…이주·중도금·잔금대출 ‘별도 관리’, '소상공인 부담 덜고 골목 살린다'…전주시, 민생경제 대책 추진, 부산 6월 제조업 생산 12.3% 증가…수출 중심 실물경제 개선 +1",
+        "lineEn": "Other Economic News: “이젠 대출받기 좀 쉬워진다”…이주·중도금·잔금대출 ‘별도 관리’, '소상공인 부담 덜고 골목 살린다'…전주시, 민생경제 대책 추진, 부산 6월 제조업 생산 12.3% 증가…수출 중심 실물경제 개선 +1",
         "isFallback": true,
         "fallbackReason": "ungroupable-category",
         "items": [
           {
-            "title": "\"내일부터 대출 오픈런 그만\"…가계대출 30조 더 풀린다",
-            "link": "https://www.hankyung.com/article/202608138527i",
-            "source": "한국경제 경제"
+            "title": "“이젠 대출받기 좀 쉬워진다”…이주·중도금·잔금대출 ‘별도 관리’",
+            "link": "https://www.mk.co.kr/news/economy/12126449",
+            "source": "매일경제 부동산"
           },
           {
-            "title": "[8·13대책] 가계부채 총량 증가율 목표 2배로…\"대출오픈런 해소 기대\"",
-            "link": "https://www.yna.co.kr/view/AKR20260812170600002",
+            "title": "'소상공인 부담 덜고 골목 살린다'…전주시, 민생경제 대책 추진",
+            "link": "https://www.yna.co.kr/view/AKR20260813096700055",
             "source": "연합뉴스 경제"
           },
           {
-            "title": "대출절벽 숨통 트인다…금융당국, 가계대출 한도 28조원 증액",
-            "link": "https://www.mk.co.kr/news/economy/12126386",
-            "source": "매일경제 부동산"
+            "title": "부산 6월 제조업 생산 12.3% 증가…수출 중심 실물경제 개선",
+            "link": "https://www.yna.co.kr/view/AKR20260813097500051",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "23만호 쏟아낸다…전문가들 \"집값 안정은 실행력이 관건\"",
+            "link": "https://www.newsis.com/view/NISX20260813_0003747830",
+            "source": "뉴시스 경제"
+          }
+        ]
+      },
+      {
+        "key": "stocks",
+        "name": "증시·환율",
+        "nameEn": "Stocks & FX",
+        "lineKo": "미디어가 코스피가 기술적 강세장에 진입했다고 보도하며 추가 상승 가능성에 주목하고 있다.",
+        "lineEn": "Media are reporting that the KOSPI has entered a technical bullish phase and are paying attention to the possibility of further gains.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "items": [
+          {
+            "title": "美 CNBC \"코스피, 기술적 강세장 진입…추가 상승 가능성\"",
+            "link": "https://www.newsis.com/view/NISX20260813_0003747684",
+            "source": "뉴시스 경제"
           }
         ]
       }
