@@ -155,8 +155,12 @@ async function callOllama(prompt, options) {
   return json.response;
 }
 
+// num_predict가 80이던 시절엔 3b가 짧게 끊어 써서 문제가 없었는데, 14b급
+// 모델은 문장을 길게 이어 쓰다가 예산에 걸려 문장이 중간에 잘렸다(실험에서
+// "...강화되고," 로 끝나는 요약이 나옴). firstSentence()가 어차피 첫 문장만
+// 남기므로 예산은 넉넉히 준다.
 async function generateKoSentence(prompt) {
-  const raw = await callOllama(prompt, { temperature: 0.1, top_p: 0.7, num_predict: 80 });
+  const raw = await callOllama(prompt, { temperature: 0.1, top_p: 0.7, num_predict: 150 });
   const firstLine = stripHanzi(raw).trim().split("\n")[0].trim();
   return firstSentence(firstLine);
 }
@@ -191,6 +195,9 @@ const MAX_ENTITY_LENGTH = 20;
 // 원문에 없더라도 폐기 사유로 삼지 않는다.
 const ENTITY_STOPWORDS = new Set([
   "정부", "시장", "경제", "금리", "주택", "부동산", "증시", "환율", "은행", "대출", "가격", "물가",
+  // 14b 모델 비교 실험에서 실제로 걸린 것들: 원문의 "美 CNBC"를 "미디어"로 뭉뚱그린
+  // 요약이 고유명사 미검증으로 폐기됐다.
+  "미디어", "언론", "당국", "업계", "기업", "정책", "지역", "소비자", "투자자", "국내", "해외",
 ]);
 // "코스피지수"처럼 모델이 접미어를 붙여 내놓는 경우를 대비해 이 꼬리표는 떼고 한 번 더 대조한다.
 const ENTITY_SUFFIXES = ["지수", "증시", "시장", "정부", "당국", "은행", "그룹"];
