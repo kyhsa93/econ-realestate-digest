@@ -118,14 +118,25 @@ function listCategory(label, titles) {
   return `- ${label}: ${shown}${more}`;
 }
 
-function buildBucketPrompt(label, titles) {
+function buildBucketPrompt(label, titles, isUngroupable) {
   const list = titles.slice(0, MAX_ITEMS_PER_CATEGORY).map((t, i) => `${i + 1}. ${t}`).join("\n");
 
-  return `다음은 "${label}" 주제의 오늘자 한국 경제 뉴스 제목들이야.
+  // "기타" 묶음은 주제가 하나로 안 묶이는 제목들이라, 다른 카테고리와 같은
+  // "종합해서 한 문장" 지시를 그대로 주면 서로 무관한 사건을 억지로 엮기 쉽다.
+  // 엮지 말고 나열하듯 요약하라고 따로 못박는다.
+  const intro = isUngroupable
+    ? `다음은 오늘자 한국 경제 뉴스 제목들이야. 서로 주제가 다른 소식들이야.
 
 ${list}
 
-이 제목들을 종합해서 한국어 한 문장으로 요약해줘.
+이 제목들을 하나로 엮지 말고, 오늘 어떤 소식들이 있었는지 나열하듯 한국어 한 문장으로 요약해줘.`
+    : `다음은 "${label}" 주제의 오늘자 한국 경제 뉴스 제목들이야.
+
+${list}
+
+이 제목들을 종합해서 한국어 한 문장으로 요약해줘.`;
+
+  return `${intro}
 규칙:
 - 딱 한 문장만 출력해. 번호나 목록 형식 쓰지 마. 문장을 두 개 이상 잇지 마.
 - 제목에 나온 단어와 사실만 사용하고, 제목에 없는 숫자·수치·전망·원인은 절대 지어내지 마.
@@ -257,24 +268,21 @@ async function unverifiedEntities(sentence, sourceText) {
 // 폴백은 화면상 "라벨: 제목 나열"이라 정상 요약과 구분이 잘 안 가서, 검수가
 // 과하게 빡빡해져 전 카테고리가 조용히 폴백으로 떨어져도 눈치채기 어려웠다.
 const FALLBACK_REASONS = {
-  UNGROUPABLE: "ungroupable-category", // "기타" 묶음 - 설계상 항상 폴백
   GENERATION_FAILED: "generation-failed",
   UNVERIFIED_NUMBER: "unverified-number",
   UNVERIFIED_ENTITY: "unverified-entity",
 };
 
+// "기타" 묶음은 예전엔 아예 요약을 시도하지 않고(3b가 서로 무관한 사건을 억지로
+// 엮어 지어내서) 제목 나열로만 뒀는데, 모델을 14b로 올리면서 다른 카테고리와
+// 똑같이 요약을 시도한다. 대신 프롬프트에서 "엮지 말고 나열하듯"을 못박고,
+// 지어내면 어차피 아래 숫자/고유명사 검증에 걸려 나열로 되돌아간다.
 async function summarizeBucketKo(bucket) {
   const label = bucket.category.name;
-
-  // "기타" 묶음은 애초에 주제가 하나로 안 묶이는 제목들이라, LLM에게 하나의
-  // 문장으로 합성시키면 서로 무관한 사건을 억지로 엮어 지어내기 쉽다.
-  // 그래서 합성 없이 결정론적으로 나열만 한다.
-  if (bucket.category === FALLBACK_CATEGORY) {
-    return { line: listCategory(label, bucket.titles), fallbackReason: FALLBACK_REASONS.UNGROUPABLE };
-  }
+  const isUngroupable = bucket.category === FALLBACK_CATEGORY;
 
   const sourceText = bucket.titles.join(" ");
-  const prompt = buildBucketPrompt(label, bucket.titles);
+  const prompt = buildBucketPrompt(label, bucket.titles, isUngroupable);
 
   let sentence;
   let reason = null;
@@ -461,14 +469,12 @@ async function main() {
 
   // 카테고리별 실패는 이미 위에서 개별로 로그를 남기지만, "오늘 몇 개가
   // 폴백이었나"는 로그를 다 훑어야 알 수 있었다. 한 줄로 집계해서 남긴다.
-  // ("기타" 묶음은 설계상 항상 폴백이라 분모에서 제외한다.)
-  const summarizable = categoryEntries.filter((c) => c.fallbackReason !== FALLBACK_REASONS.UNGROUPABLE);
-  const fallen = summarizable.filter((c) => c.isFallback);
+  const fallen = categoryEntries.filter((c) => c.isFallback);
   const breakdown = [...new Set(fallen.map((c) => c.fallbackReason))]
     .map((r) => `${r} x${fallen.filter((c) => c.fallbackReason === r).length}`)
     .join(", ");
   console.log(
-    `[summarize-digest] 저장 완료 (폴백 ${fallen.length}/${summarizable.length}${breakdown ? `: ${breakdown}` : ""})`
+    `[summarize-digest] 저장 완료 (폴백 ${fallen.length}/${categoryEntries.length}${breakdown ? `: ${breakdown}` : ""})`
   );
 }
 
