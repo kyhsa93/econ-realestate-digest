@@ -115,7 +115,9 @@ async function translateItems(items) {
     try {
       const translated = await translateTitle(item.title);
       if (isBadTranslation(translated, item.title, requiredNumbers)) {
-        console.error(`[translate-news] 번역 실패로 원문 유지: ${item.title}`);
+        // 반려된 번역문 자체를 같이 남긴다. 원문 제목만 찍으면 왜 걸렸는지
+        // (한글 잔존/길이 초과/숫자 누락) 로그만 보고는 알 수가 없었다.
+        console.error(`[translate-news] 번역 실패로 원문 유지: ${item.title}\n  -> 반려된 번역: ${translated}`);
         item.titleEn = item.title;
       } else {
         item.titleEn = translated;
