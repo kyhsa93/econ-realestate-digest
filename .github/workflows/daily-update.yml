@@ -65,6 +65,14 @@ jobs:
           MOLIT_RENT_API_KEY: ${{ secrets.MOLIT_RENT_API_KEY }}
           MOLIT_RENT_API_ENDPOINT: ${{ secrets.MOLIT_RENT_API_ENDPOINT }}
 
+      # 금감원 공시는 월 단위(dcls_month)로 갱신돼서 하루 4번 부를 이유가 없다.
+      # 뉴스만 갱신하는 실행에서는 건너뛴다.
+      - name: 예·적금·대출 금리 수집
+        if: env.MODE == 'full'
+        run: node scripts/fetch-rates.mjs
+        env:
+          FSS_FINLIFE_API_KEY: ${{ secrets.FSS_FINLIFE_API_KEY }}
+
       # 뉴스만 갱신하는 실행에서도 새로 들어온 제목을 영어로 번역해야 해서
       # 모델은 매번 준비한다(설치 + 9GB pull이 1분 남짓).
       - name: Ollama 설치 및 모델 준비

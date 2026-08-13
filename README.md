@@ -19,6 +19,12 @@
   이번 달만 조회하도록 변경)
   (`MOLIT_API_KEY`+`MOLIT_API_ENDPOINT`는 매매, `MOLIT_RENT_API_KEY`+`MOLIT_RENT_API_ENDPOINT`는
   전월세 — 둘은 독립적으로 동작해서 한쪽만 등록돼 있어도 그쪽만 조회함)
+- `scripts/fetch-rates.mjs` — 금융감독원 금융상품통합비교공시("금융상품 한눈에") API로 정기예금·적금
+  (은행 + 저축은행)과 주택담보대출·전세자금대출(은행) 금리 조회 → `docs/data/rates.json`,
+  그날의 대표값만 추린 `docs/data/rates-history.json`. 인증키는 공공데이터포털이 아니라
+  finlife.fss.or.kr에서 직접 발급받는 32자리 키이고(`FSS_FINLIFE_API_KEY`), 파라미터명도
+  `serviceKey`가 아니라 `auth`다. **요청에 User-Agent를 안 실으면 서버가 TLS 핸드셰이크 직후
+  연결을 끊어서 에러 응답조차 오지 않는다** — 헤더를 지우지 말 것
 - `scripts/summarize-digest.mjs` — 로컬 Ollama(qwen3:14b)로 오늘의 뉴스를 카테고리별로 한국어/영어 요약 →
   `docs/data/summary.json`. 생성한 문장은 코드로 검증한다: 원문에 없는 숫자(substring 대조)와
   원문에 없는 고유명사(모델에겐 추출만 시키고 대조는 코드가 함)가 있으면 폐기하고 헤드라인
@@ -30,13 +36,17 @@
   `?date=YYYY-MM-DD` 쿼리를 붙이면 별도 아카이브 페이지 없이 이 페이지 자체가 각 `*-history.json`에서
   그 날짜 기록을 찾아 오늘과 똑같은 섹션 구성(요약/시장지표/부동산/뉴스)으로 다시 렌더링함(실시간 환율만
   예외 — 그 날짜의 배치 값을 그대로 보여줌). 페이지 하단 "지난 기록" 목록에서 날짜별로 이동 가능
+- `docs/rates.html` — 금리 비교 페이지(`data/rates.json`). 정기예금/적금/주택담보대출/전세자금대출
+  탭, 저축 기간·금융권(은행/저축은행)·금리 유형 필터, 상품별 우대조건 펼치기, 12개월 최고금리
+  추이 스파크라인. 뉴스는 "매일 훑는" 흐름이고 금리 비교는 "갈아탈까?" 하는 목적형 방문이라
+  index.html에 섹션으로 넣지 않고 별도 URL로 뒀다
 - `.github/workflows/summary-experiment.yml` — 수동 전용. 요약 모델을 바꾸기 전에 저장소에 이미
   커밋된 그날 뉴스로 모델을 비교해보는 용도(뉴스를 다시 받지 않아 모델 간 조건이 같음).
   결과는 로그로만 출력하고 커밋/배포하지 않음. qwen3 계열은 `disable_thinking`을 켜야 함
   (`OLLAMA_THINK=false` → 요청에 `think: false` 추가)
 - `.github/workflows/daily-update.yml` — 하루 4회(08·12·16·20시 KST) 실행. 매 실행마다 뉴스 수집 +
-  AI 요약 + 제목 영어 번역을 하고, 아침 실행(`MODE=full`)만 시장지표/부동산까지 추가로 수집한다
-  (부동산 실거래가 API의 일일 호출 한도 때문에 그쪽만 아침 1회로 고정). 이후 변경사항
+  AI 요약 + 제목 영어 번역을 하고, 아침 실행(`MODE=full`)만 시장지표/부동산/금리까지 추가로 수집한다
+  (부동산 실거래가 API는 일일 호출 한도 때문에, 금리는 공시 자체가 월 단위로 갱신돼서 아침 1회로 고정). 이후 변경사항
   커밋/푸시 → Pages 배포.
   요약/번역 모델은 `OLLAMA_MODEL`(현재 `qwen3:14b`) + `OLLAMA_THINK=false`를 job 레벨 env로 주입한다.
   러너가 4코어 CPU(GPU 없음)/16GB RAM이라 RAM에 들어가는 상한이 14b급(Q4 약 9GB)이고, 같은 뉴스로
@@ -56,6 +66,22 @@ AI 요약은 로컬에 Ollama가 설치돼 있어야 테스트 가능(qwen3 계�
 ollama pull qwen3:14b
 OLLAMA_THINK=false node scripts/summarize-digest.mjs
 ```
+
+금리 수집만 따로 돌려보려면 인증키가 필요하다(`.env`는 커밋되지 않는다):
+
+```
+echo 'FSS_FINLIFE_API_KEY=발급받은_32자리_키' > .env
+node --env-file=.env scripts/fetch-rates.mjs
+```
+
+## 테스트
+
+```
+npm test
+```
+
+금리 수집은 실제 API 대신 스텁 서버(`FSS_API_BASE`)와 임시 출력 경로(`RATES_OUT_DIR`)로
+페이지네이션·권역 병합·상품군별 실패 폴백을 검증한다. 인증키 없이 돌아간다.
 
 ## 자동화
 

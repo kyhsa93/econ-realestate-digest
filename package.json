@@ -6,7 +6,9 @@
     "fetch:news": "node scripts/fetch-news.mjs",
     "fetch:realestate": "node scripts/fetch-realestate.mjs",
     "fetch:market": "node scripts/fetch-market.mjs",
-    "update": "node scripts/update-all.mjs"
+    "fetch:rates": "node scripts/fetch-rates.mjs",
+    "update": "node scripts/update-all.mjs",
+    "test": "node --test \"test/*.test.mjs\""
   },
   "dependencies": {
     "fast-xml-parser": "^5.0.0",

@@ -1,0 +1,1029 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#253e81">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<meta name="google-adsense-account" content="ca-pub-1195159445218373">
+<title>예금·적금·대출 금리 비교</title>
+<meta name="description" content="금융감독원 금융상품통합비교공시 데이터를 매일 갱신해 은행·저축은행 정기예금과 적금 금리, 주택담보대출·전세자금대출 금리를 한 표에서 비교합니다.">
+<link rel="canonical" href="https://kyhsa93.github.io/econ-realestate-digest/rates.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="경제·부동산 데일리 다이제스트">
+<meta property="og:url" content="https://kyhsa93.github.io/econ-realestate-digest/rates.html">
+<meta property="og:title" content="예금·적금·대출 금리 비교">
+<meta property="og:description" content="금융감독원 금융상품통합비교공시 데이터를 매일 갱신해 은행·저축은행 정기예금과 적금 금리, 주택담보대출·전세자금대출 금리를 한 표에서 비교합니다.">
+<meta property="og:image" content="https://kyhsa93.github.io/econ-realestate-digest/icons/icon-512.png">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="예금·적금·대출 금리 비교">
+<meta name="twitter:description" content="금융감독원 금융상품통합비교공시 데이터를 매일 갱신해 은행·저축은행 정기예금과 적금 금리, 주택담보대출·전세자금대출 금리를 한 표에서 비교합니다.">
+<meta name="twitter:image" content="https://kyhsa93.github.io/econ-realestate-digest/icons/icon-512.png">
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #666;
+    --card: #f5f5f7;
+    --border: #e2e2e5;
+    --up: #d64545;
+    --down: #2f6fed;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1115;
+      --fg: #eaeaea;
+      --muted: #9a9a9a;
+      --card: #1a1d24;
+      --border: #2a2d35;
+    }
+  }
+  /* data-theme는 사용자가 수동으로 고른 테마. [data-theme=...]가 :root보다
+     구체적이라 OS 설정(prefers-color-scheme)보다 항상 우선한다. */
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #0f1115;
+    --fg: #eaeaea;
+    --muted: #9a9a9a;
+    --card: #1a1d24;
+    --border: #2a2d35;
+  }
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #666;
+    --card: #f5f5f7;
+    --border: #e2e2e5;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.5;
+  }
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 24px 16px 64px;
+  }
+  header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  h1 {
+    font-size: 1.4rem;
+    margin: 0 0 4px;
+  }
+  .updated {
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  .update-schedule {
+    color: var(--muted);
+    font-size: 0.78rem;
+    margin-top: 2px;
+  }
+  .back-link {
+    display: inline-block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    text-decoration: none;
+  }
+  .back-link:hover { text-decoration: underline; }
+  .header-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  .lang-toggle {
+    flex-shrink: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--fg);
+  }
+  .content-notice {
+    color: var(--muted);
+    font-size: 0.8rem;
+    margin: -12px 0 20px;
+  }
+  section { margin-bottom: 32px; }
+  h2 {
+    font-size: 1.05rem;
+    margin: 0 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .tabs {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    margin-bottom: 16px;
+    padding-bottom: 2px;
+  }
+  .tab {
+    flex-shrink: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    color: var(--fg);
+  }
+  .tab[aria-selected="true"] {
+    background: var(--fg);
+    color: var(--bg);
+    border-color: var(--fg);
+    font-weight: 600;
+  }
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .controls label {
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+  .controls select,
+  .controls input[type="search"] {
+    background: var(--bg);
+    color: var(--fg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    font-family: inherit;
+  }
+  .controls input[type="search"] { flex: 1; min-width: 140px; }
+  .sector-filter {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .sector-filter label {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+  }
+  .table-wrap {
+    overflow-x: auto;
+    margin-top: 4px;
+  }
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+  .data-table th,
+  .data-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+    text-align: right;
+  }
+  .data-table th {
+    color: var(--muted);
+    font-weight: 500;
+    font-size: 0.78rem;
+    text-align: right;
+  }
+  .data-table th:first-child,
+  .data-table td:first-child { text-align: left; }
+  .data-table tbody tr:hover { background: var(--card); }
+  .rate-strong {
+    font-weight: 600;
+    color: var(--up);
+  }
+  .rate-low {
+    font-weight: 600;
+    color: var(--down);
+  }
+  .product-name {
+    white-space: normal;
+    word-break: keep-all;
+  }
+  .product-company {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+  .sector-tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0 4px;
+    margin-left: 4px;
+    color: var(--muted);
+    vertical-align: middle;
+  }
+  .detail-toggle {
+    background: none;
+    border: none;
+    padding: 0;
+    margin-top: 2px;
+    color: var(--muted);
+    font-size: 0.72rem;
+    cursor: pointer;
+    text-decoration: underline;
+    font-family: inherit;
+  }
+  .detail-row td {
+    white-space: normal;
+    text-align: left;
+    background: var(--card);
+    font-size: 0.78rem;
+    color: var(--muted);
+    word-break: keep-all;
+  }
+  .detail-row dt {
+    font-weight: 600;
+    margin-top: 6px;
+  }
+  .detail-row dd { margin: 0; }
+  .detail-row dl { margin: 0; }
+  .history-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .history-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px;
+  }
+  .history-card .label {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+  .history-card .value {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-top: 2px;
+  }
+  .history-card .sub {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-top: 2px;
+    white-space: normal;
+    word-break: keep-all;
+  }
+  .history-card svg { display: block; margin-top: 6px; }
+  .placeholder, .error {
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  .empty-row td {
+    text-align: center;
+    color: var(--muted);
+  }
+  .site-footer {
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    padding-top: 16px;
+    color: var(--muted);
+    font-size: 0.78rem;
+  }
+  .site-footer a {
+    color: var(--muted);
+    font-size: 0.8rem;
+    text-decoration: none;
+  }
+  .site-footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div>
+      <h1 id="page-title">예금·적금·대출 금리 비교</h1>
+      <div class="updated" id="updated">불러오는 중...</div>
+      <div class="update-schedule" id="update-schedule"></div>
+      <a class="back-link" id="home-link" href="./index.html">← 데일리 다이제스트로</a>
+    </div>
+    <div class="header-actions">
+      <button class="lang-toggle" type="button" id="share-button" aria-label="Share">
+        <span aria-hidden="true">📤</span>
+      </button>
+      <button class="lang-toggle" type="button" id="theme-toggle" aria-label="Toggle theme">
+        <span aria-hidden="true">🌓</span>
+      </button>
+      <button class="lang-toggle" type="button" id="lang-toggle" aria-label="Switch language">
+        <span aria-hidden="true">🌐</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="content-notice" id="content-notice"></div>
+
+  <section id="history-section">
+    <h2 id="history-heading">금리 추이</h2>
+    <div class="history-grid" id="history-grid">
+      <div class="placeholder" id="history-placeholder">불러오는 중...</div>
+    </div>
+  </section>
+
+  <section id="products-section">
+    <h2 id="products-heading">상품별 금리</h2>
+
+    <div class="tabs" id="tabs" role="tablist"></div>
+
+    <div class="controls" id="controls"></div>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead id="products-head"></thead>
+        <tbody id="products-body">
+          <tr><td class="error">불러오는 중...</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="content-notice" id="products-note" style="margin-top: 10px;"></div>
+  </section>
+
+  <footer class="site-footer">
+    <div id="footer-source"></div>
+    <div style="margin-top: 6px;">
+      <a href="./index.html" id="footer-home">데일리 다이제스트</a>
+    </div>
+  </footer>
+</main>
+
+<script>
+  // ---- i18n -----------------------------------------------------------
+  // 금융사명·상품명은 공시 원문(한국어) 그대로 둔다. 번역하면 실제로 검색해서
+  // 찾아가야 하는 상품 이름이 달라져 오히려 쓸모가 없어진다.
+  const T = {
+    ko: {
+      title: "예금·적금·대출 금리 비교",
+      description: "금융감독원 금융상품통합비교공시 데이터를 매일 갱신해 은행·저축은행 정기예금과 적금 금리, 주택담보대출·전세자금대출 금리를 한 표에서 비교합니다.",
+      homeLink: "← 데일리 다이제스트로",
+      historyHeading: "금리 추이",
+      productsHeading: "상품별 금리",
+      updatedPrefix: "갱신",
+      updateSchedule: "매일 오전 8시(KST) 갱신",
+      disclosure: (month) => `${month} 공시 기준`,
+      notice: "금융감독원 '금융상품 한눈에' 공시 데이터입니다. 실제 적용 금리와 가입 가능 여부는 각 금융회사에서 확인하세요.",
+      tabs: {
+        deposit: "정기예금",
+        saving: "적금",
+        mortgage: "주택담보대출",
+        rentLoan: "전세자금대출",
+      },
+      termLabel: "저축 기간",
+      termMonths: (n) => `${n}개월`,
+      sectorLabel: "금융권",
+      sectorBank: "은행",
+      sectorSavingsBank: "저축은행",
+      searchPlaceholder: "은행·상품명 검색",
+      rateTypeLabel: "금리 유형",
+      allOption: "전체",
+      thProduct: "상품",
+      thBaseRate: "기본금리",
+      thMaxRate: "최고금리",
+      thMinRate: "최저",
+      thMaxLoanRate: "최고",
+      thAvgRate: "평균",
+      thRateType: "금리 유형",
+      thJoinWay: "가입 방법",
+      detailToggle: "상세",
+      detailSpclCnd: "우대조건",
+      detailMtrtInt: "만기 후 금리",
+      detailJoinMember: "가입 대상",
+      detailMaxLimit: "최고 한도",
+      detailLoanLmt: "대출 한도",
+      detailErlyRpayFee: "중도상환수수료",
+      detailDlyRate: "연체 이자율",
+      detailLoanInciExpn: "부대비용",
+      detailJoinWay: "가입 방법",
+      emptyRow: "조건에 맞는 상품이 없습니다.",
+      loadError: "금리 데이터를 불러오지 못했습니다.",
+      historyDeposit: "정기예금 12개월 최고",
+      historySaving: "적금 12개월 최고",
+      historyMortgage: "주택담보대출 최저",
+      historyRentLoan: "전세자금대출 최저",
+      historyEmpty: "추이는 데이터가 하루 이상 쌓이면 표시됩니다.",
+      savingNote: "최고금리는 우대조건을 모두 충족했을 때의 금리입니다. 조건 없이 받는 금리는 기본금리 쪽을 보세요. 저축은행은 예금자보호 한도(1인당 5천만원)를 감안해 비교하세요.",
+      loanNote: "공시 금리는 취급 실적 기준 평균이라 실제 승인 금리와 다를 수 있습니다. 신용점수·담보·상환방식에 따라 달라집니다.",
+      source: "출처: 금융감독원 금융상품통합비교공시(금융상품 한눈에)",
+      footerHome: "데일리 다이제스트",
+      shareTitle: "예금·적금·대출 금리 비교",
+    },
+    en: {
+      title: "Deposit, Savings & Loan Rates",
+      description: "Daily-updated Korean bank and savings bank deposit, installment savings, mortgage and jeonse loan rates, from the FSS financial product disclosure data.",
+      homeLink: "← Back to the daily digest",
+      historyHeading: "Rate trend",
+      productsHeading: "Rates by product",
+      updatedPrefix: "Updated",
+      updateSchedule: "Updated daily at 8 AM KST",
+      disclosure: (month) => `As disclosed for ${month}`,
+      notice: "Sourced from the FSS financial product comparison disclosure. Confirm the actual rate and eligibility with each institution.",
+      tabs: {
+        deposit: "Term deposit",
+        saving: "Installment savings",
+        mortgage: "Mortgage loan",
+        rentLoan: "Jeonse loan",
+      },
+      termLabel: "Term",
+      termMonths: (n) => `${n} months`,
+      sectorLabel: "Sector",
+      sectorBank: "Banks",
+      sectorSavingsBank: "Savings banks",
+      searchPlaceholder: "Search bank or product",
+      rateTypeLabel: "Rate type",
+      allOption: "All",
+      thProduct: "Product",
+      thBaseRate: "Base",
+      thMaxRate: "Max",
+      thMinRate: "Min",
+      thMaxLoanRate: "Max",
+      thAvgRate: "Avg",
+      thRateType: "Rate type",
+      thJoinWay: "How to apply",
+      detailToggle: "Details",
+      detailSpclCnd: "Preferential terms",
+      detailMtrtInt: "Post-maturity rate",
+      detailJoinMember: "Eligibility",
+      detailMaxLimit: "Maximum amount",
+      detailLoanLmt: "Loan limit",
+      detailErlyRpayFee: "Early repayment fee",
+      detailDlyRate: "Late payment rate",
+      detailLoanInciExpn: "Incidental costs",
+      detailJoinWay: "How to apply",
+      emptyRow: "No products match these filters.",
+      loadError: "Could not load the rate data.",
+      historyDeposit: "Best 12-month deposit",
+      historySaving: "Best 12-month savings",
+      historyMortgage: "Lowest mortgage rate",
+      historyRentLoan: "Lowest jeonse loan rate",
+      historyEmpty: "The trend appears once more than one day of data is collected.",
+      savingNote: "The max rate assumes every preferential condition is met; the base rate is what you get without them. For savings banks, keep the KRW 50M per-person deposit protection limit in mind.",
+      loanNote: "Disclosed loan rates are averages over actual lending, so your approved rate may differ depending on credit score, collateral and repayment type.",
+      source: "Source: FSS Financial Product Comparison Disclosure",
+      footerHome: "Daily digest",
+      shareTitle: "Deposit, Savings & Loan Rates",
+    },
+  };
+
+  let locale = getInitialLocale();
+
+  function t(key) {
+    return T[locale][key];
+  }
+
+  function getInitialLocale() {
+    const saved = window.localStorage.getItem("lang");
+    // index.html과 같은 이유로 ko가 기본값이다(static meta가 전부 한국어).
+    return saved === "en" || saved === "ko" ? saved : "ko";
+  }
+
+  // ---- 테마(라이트/다크/자동) --------------------------------------------
+  const THEME_ICONS = { auto: "🌓", light: "☀️", dark: "🌙" };
+  let theme = "auto";
+
+  function getInitialTheme() {
+    const saved = window.localStorage.getItem("theme");
+    return saved === "light" || saved === "dark" ? saved : "auto";
+  }
+
+  function applyTheme(next) {
+    theme = next;
+    window.localStorage.setItem("theme", theme);
+    if (theme === "auto") {
+      document.documentElement.removeAttribute("data-theme");
+    } else {
+      document.documentElement.setAttribute("data-theme", theme);
+    }
+    const icon = document.querySelector("#theme-toggle span");
+    if (icon) icon.textContent = THEME_ICONS[theme];
+  }
+
+  applyTheme(getInitialTheme());
+
+  // ---- 상태 -------------------------------------------------------------
+  const cache = { rates: null, history: null };
+
+  const CATEGORY_KEYS = ["deposit", "saving", "mortgage", "rentLoan"];
+  const SAVING_CATEGORIES = new Set(["deposit", "saving"]);
+
+  const state = {
+    category: "deposit",
+    term: 12,
+    sectors: { bank: true, savingsBank: true },
+    rateType: "",
+    query: "",
+    expanded: new Set(),
+  };
+
+  function isSavingCategory(key) {
+    return SAVING_CATEGORIES.has(key);
+  }
+
+  function products(category = state.category) {
+    const list = cache.rates?.[category];
+    return Array.isArray(list) ? list : [];
+  }
+
+  // ---- 유틸 -------------------------------------------------------------
+  function escapeHtml(s) {
+    return String(s ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function fmtRate(v) {
+    return typeof v === "number" && Number.isFinite(v) ? `${v.toFixed(2)}%` : "-";
+  }
+
+  function fmtUpdated(iso) {
+    if (!iso) return "-";
+    const d = new Date(iso);
+    return d.toLocaleString(locale === "ko" ? "ko-KR" : "en-US", {
+      timeZone: "Asia/Seoul",
+      dateStyle: "medium",
+      timeStyle: "short",
+    }) + " KST";
+  }
+
+  function fmtDisclosureMonth(month) {
+    if (!month || month.length !== 6) return null;
+    const year = month.slice(0, 4);
+    const mon = month.slice(4, 6);
+    return locale === "ko" ? `${year}년 ${Number(mon)}월` : `${mon}/${year}`;
+  }
+
+  /** 최고한도(원)를 억/만원 단위로 줄여 쓴다. 공시 값이 그대로면 자릿수가 너무 길다. */
+  function fmtAmount(won) {
+    if (typeof won !== "number" || !Number.isFinite(won)) return null;
+    if (locale !== "ko") return won.toLocaleString("en-US") + " KRW";
+    if (won >= 100000000) {
+      const eok = won / 100000000;
+      return `${Number.isInteger(eok) ? eok : eok.toFixed(1)}억원`;
+    }
+    if (won >= 10000) {
+      const man = won / 10000;
+      return `${Number.isInteger(man) ? man.toLocaleString("ko-KR") : man.toFixed(1)}만원`;
+    }
+    return `${won.toLocaleString("ko-KR")}원`;
+  }
+
+  async function loadJson(name) {
+    const res = await fetch(`./data/${name}.json?_=${Date.now()}`);
+    if (!res.ok) throw new Error(`${name} load failed`);
+    return res.json();
+  }
+
+  // ---- 스파크라인 -------------------------------------------------------
+  function sparklineSvg(values) {
+    const points = values.filter((v) => typeof v === "number" && Number.isFinite(v));
+    if (points.length < 2) return "";
+    const width = 200;
+    const height = 36;
+    const min = Math.min(...points);
+    const max = Math.max(...points);
+    const span = max - min || 1;
+    const step = width / (points.length - 1);
+    const path = points
+      .map((v, i) => `${i === 0 ? "M" : "L"}${(i * step).toFixed(1)},${(height - ((v - min) / span) * height).toFixed(1)}`)
+      .join(" ");
+    return `<svg viewBox="0 0 ${width} ${height}" width="100%" height="${height}" preserveAspectRatio="none" aria-hidden="true">
+      <path d="${path}" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.7" />
+    </svg>`;
+  }
+
+  // ---- 추이 카드 --------------------------------------------------------
+  function historyEntryRate(entry, key) {
+    const value = entry?.[key];
+    if (!value) return null;
+    // 예·적금은 권역별로 나눠 저장하므로 은행 → 저축은행 순으로 있는 쪽을 쓴다.
+    if (key === "deposit12" || key === "saving12") {
+      return value.savingsBank?.rate ?? value.bank?.rate ?? null;
+    }
+    return value.rate ?? null;
+  }
+
+  function historyEntryTop(entry, key) {
+    const value = entry?.[key];
+    if (!value) return null;
+    if (key === "deposit12" || key === "saving12") {
+      return value.savingsBank ?? value.bank ?? null;
+    }
+    return value;
+  }
+
+  function historyCardHtml({ label, key }) {
+    const history = Array.isArray(cache.history) ? cache.history : [];
+    const values = history.map((h) => historyEntryRate(h, key));
+    const latestEntry = [...history].reverse().find((h) => historyEntryRate(h, key) !== null);
+    const latest = latestEntry ? historyEntryRate(latestEntry, key) : null;
+    const top = latestEntry ? historyEntryTop(latestEntry, key) : null;
+    if (latest === null) return "";
+    const sub = top ? `${escapeHtml(top.company ?? "")} ${escapeHtml(top.name ?? "")}`.trim() : "";
+    return `<div class="history-card">
+      <div class="label">${escapeHtml(label)}</div>
+      <div class="value">${fmtRate(latest)}</div>
+      ${sub ? `<div class="sub">${sub}</div>` : ""}
+      ${sparklineSvg(values)}
+    </div>`;
+  }
+
+  function renderHistory() {
+    const grid = document.getElementById("history-grid");
+    const cards = [
+      { label: t("historyDeposit"), key: "deposit12" },
+      { label: t("historySaving"), key: "saving12" },
+      { label: t("historyMortgage"), key: "mortgage" },
+      { label: t("historyRentLoan"), key: "rentLoan" },
+    ]
+      .map(historyCardHtml)
+      .filter(Boolean)
+      .join("");
+    grid.innerHTML = cards || `<div class="placeholder">${escapeHtml(t("historyEmpty"))}</div>`;
+  }
+
+  // ---- 탭/필터 ----------------------------------------------------------
+  function renderTabs() {
+    const tabs = document.getElementById("tabs");
+    tabs.innerHTML = CATEGORY_KEYS.map(
+      (key) =>
+        `<button class="tab" type="button" role="tab" data-category="${key}" aria-selected="${
+          key === state.category
+        }">${escapeHtml(T[locale].tabs[key])}</button>`
+    ).join("");
+  }
+
+  /** 현재 카테고리 데이터에 실제로 존재하는 저축 기간만 고른다. */
+  function availableTerms() {
+    const terms = new Set();
+    for (const product of products()) {
+      for (const opt of product.options ?? []) {
+        if (typeof opt.term === "number") terms.add(opt.term);
+      }
+    }
+    return [...terms].sort((a, b) => a - b);
+  }
+
+  /** 대출 카테고리에서 고를 수 있는 금리 유형(고정/변동 등)을 모은다. */
+  function availableRateTypes() {
+    const types = new Set();
+    for (const product of products()) {
+      for (const opt of product.options ?? []) {
+        if (opt.rateType) types.add(opt.rateType);
+      }
+    }
+    return [...types].sort((a, b) => a.localeCompare(b, "ko"));
+  }
+
+  function renderControls() {
+    const controls = document.getElementById("controls");
+    const searchHtml = `<input type="search" id="search-input" placeholder="${escapeHtml(
+      t("searchPlaceholder")
+    )}" value="${escapeHtml(state.query)}">`;
+
+    if (isSavingCategory(state.category)) {
+      const terms = availableTerms();
+      // 12개월이 없는 데이터면 가장 가까운 기간으로 자동 보정한다.
+      if (terms.length && !terms.includes(state.term)) {
+        state.term = terms.reduce((a, b) => (Math.abs(b - 12) < Math.abs(a - 12) ? b : a), terms[0]);
+      }
+      controls.innerHTML = `
+        <label for="term-select">${escapeHtml(t("termLabel"))}</label>
+        <select id="term-select">
+          ${terms
+            .map(
+              (term) =>
+                `<option value="${term}" ${term === state.term ? "selected" : ""}>${escapeHtml(
+                  T[locale].termMonths(term)
+                )}</option>`
+            )
+            .join("")}
+        </select>
+        <span class="sector-filter">
+          <label><input type="checkbox" data-sector="bank" ${
+            state.sectors.bank ? "checked" : ""
+          }> ${escapeHtml(t("sectorBank"))}</label>
+          <label><input type="checkbox" data-sector="savingsBank" ${
+            state.sectors.savingsBank ? "checked" : ""
+          }> ${escapeHtml(t("sectorSavingsBank"))}</label>
+        </span>
+        ${searchHtml}`;
+    } else {
+      const types = availableRateTypes();
+      if (state.rateType && !types.includes(state.rateType)) state.rateType = "";
+      controls.innerHTML = `
+        <label for="rate-type-select">${escapeHtml(t("rateTypeLabel"))}</label>
+        <select id="rate-type-select">
+          <option value="">${escapeHtml(t("allOption"))}</option>
+          ${types
+            .map(
+              (type) =>
+                `<option value="${escapeHtml(type)}" ${
+                  type === state.rateType ? "selected" : ""
+                }>${escapeHtml(type)}</option>`
+            )
+            .join("")}
+        </select>
+        ${searchHtml}`;
+    }
+
+    bindControlEvents();
+  }
+
+  function bindControlEvents() {
+    const termSelect = document.getElementById("term-select");
+    if (termSelect) {
+      termSelect.addEventListener("change", (e) => {
+        state.term = Number(e.target.value);
+        renderProducts();
+      });
+    }
+
+    const rateTypeSelect = document.getElementById("rate-type-select");
+    if (rateTypeSelect) {
+      rateTypeSelect.addEventListener("change", (e) => {
+        state.rateType = e.target.value;
+        renderProducts();
+      });
+    }
+
+    for (const box of document.querySelectorAll("[data-sector]")) {
+      box.addEventListener("change", (e) => {
+        state.sectors[e.target.dataset.sector] = e.target.checked;
+        renderProducts();
+      });
+    }
+
+    const search = document.getElementById("search-input");
+    if (search) {
+      search.addEventListener("input", (e) => {
+        state.query = e.target.value;
+        renderProducts();
+      });
+    }
+  }
+
+  // ---- 상품 표 ----------------------------------------------------------
+  function matchesQuery(product) {
+    const q = state.query.trim().toLowerCase();
+    if (!q) return true;
+    return `${product.company ?? ""} ${product.name ?? ""}`.toLowerCase().includes(q);
+  }
+
+  /** 화면에 그릴 행 목록을 만든다. 상품 하나에서 현재 조건에 맞는 옵션 하나를 골라 붙인다. */
+  function visibleRows() {
+    const rows = [];
+    for (const product of products()) {
+      if (!matchesQuery(product)) continue;
+
+      if (isSavingCategory(state.category)) {
+        if (!state.sectors[product.sector ?? "bank"]) continue;
+        // 같은 기간에 단리/복리가 따로 공시되기도 해서, 최고금리가 높은 쪽을 대표로 쓴다.
+        let best = null;
+        for (const opt of product.options ?? []) {
+          if (opt.term !== state.term) continue;
+          const rate = opt.maxRate ?? opt.rate;
+          if (rate === null || rate === undefined) continue;
+          if (!best || rate > (best.maxRate ?? best.rate)) best = opt;
+        }
+        if (best) rows.push({ product, option: best, sort: best.maxRate ?? best.rate });
+      } else {
+        let best = null;
+        for (const opt of product.options ?? []) {
+          if (state.rateType && opt.rateType !== state.rateType) continue;
+          const rate = opt.avg ?? opt.min;
+          if (rate === null || rate === undefined) continue;
+          if (!best || rate < (best.avg ?? best.min)) best = opt;
+        }
+        if (best) rows.push({ product, option: best, sort: best.avg ?? best.min });
+      }
+    }
+
+    // 예·적금은 높은 금리가, 대출은 낮은 금리가 위로 온다.
+    rows.sort((a, b) => (isSavingCategory(state.category) ? b.sort - a.sort : a.sort - b.sort));
+    return rows;
+  }
+
+  function sectorTagHtml(product) {
+    if (!isSavingCategory(state.category)) return "";
+    if (product.sector !== "savingsBank") return "";
+    return `<span class="sector-tag">${escapeHtml(t("sectorSavingsBank"))}</span>`;
+  }
+
+  function productCellHtml(product) {
+    return `<td>
+      <div class="product-name">${escapeHtml(product.name ?? "-")}${sectorTagHtml(product)}</div>
+      <div class="product-company">${escapeHtml(product.company ?? "")}</div>
+      <button class="detail-toggle" type="button" data-detail="${escapeHtml(product.id)}">${escapeHtml(
+      t("detailToggle")
+    )}</button>
+    </td>`;
+  }
+
+  function detailRowHtml(product, columnCount) {
+    if (!state.expanded.has(product.id)) return "";
+    const items = isSavingCategory(state.category)
+      ? [
+          [t("detailSpclCnd"), product.spclCnd],
+          [t("detailJoinMember"), product.joinMember],
+          [t("detailMaxLimit"), fmtAmount(product.maxLimit)],
+          [t("detailMtrtInt"), product.mtrtInt],
+          [t("detailJoinWay"), product.joinWay],
+        ]
+      : [
+          [t("detailLoanLmt"), product.loanLmt],
+          [t("detailErlyRpayFee"), product.erlyRpayFee],
+          [t("detailDlyRate"), product.dlyRate],
+          [t("detailLoanInciExpn"), product.loanInciExpn],
+          [t("detailJoinWay"), product.joinWay],
+        ];
+    const body = items
+      .filter(([, value]) => value)
+      .map(([label, value]) => `<dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd>`)
+      .join("");
+    if (!body) return "";
+    return `<tr class="detail-row"><td colspan="${columnCount}"><dl>${body}</dl></td></tr>`;
+  }
+
+  function savingRowHtml({ product, option }) {
+    return `<tr>
+      ${productCellHtml(product)}
+      <td>${fmtRate(option.rate)}</td>
+      <td class="rate-strong">${fmtRate(option.maxRate ?? option.rate)}</td>
+    </tr>${detailRowHtml(product, 3)}`;
+  }
+
+  function loanRowHtml({ product, option }) {
+    return `<tr>
+      ${productCellHtml(product)}
+      <td>${escapeHtml(option.rateType ?? "-")}</td>
+      <td>${fmtRate(option.min)}</td>
+      <td class="rate-low">${fmtRate(option.avg)}</td>
+    </tr>${detailRowHtml(product, 4)}`;
+  }
+
+  function renderProductsHead() {
+    const head = document.getElementById("products-head");
+    head.innerHTML = isSavingCategory(state.category)
+      ? `<tr>
+          <th>${escapeHtml(t("thProduct"))}</th>
+          <th>${escapeHtml(t("thBaseRate"))}</th>
+          <th>${escapeHtml(t("thMaxRate"))}</th>
+        </tr>`
+      : `<tr>
+          <th>${escapeHtml(t("thProduct"))}</th>
+          <th>${escapeHtml(t("thRateType"))}</th>
+          <th>${escapeHtml(t("thMinRate"))}</th>
+          <th>${escapeHtml(t("thAvgRate"))}</th>
+        </tr>`;
+  }
+
+  function renderProducts() {
+    renderProductsHead();
+    const body = document.getElementById("products-body");
+    const columnCount = isSavingCategory(state.category) ? 3 : 4;
+    const rows = visibleRows();
+
+    if (!rows.length) {
+      body.innerHTML = `<tr class="empty-row"><td colspan="${columnCount}">${escapeHtml(
+        t("emptyRow")
+      )}</td></tr>`;
+    } else {
+      body.innerHTML = rows
+        .map(isSavingCategory(state.category) ? savingRowHtml : loanRowHtml)
+        .join("");
+    }
+
+    document.getElementById("products-note").textContent = isSavingCategory(state.category)
+      ? t("savingNote")
+      : t("loanNote");
+
+    for (const button of body.querySelectorAll("[data-detail]")) {
+      button.addEventListener("click", () => {
+        const id = button.dataset.detail;
+        if (state.expanded.has(id)) state.expanded.delete(id);
+        else state.expanded.add(id);
+        renderProducts();
+      });
+    }
+  }
+
+  // ---- 전체 렌더 --------------------------------------------------------
+  function renderMeta() {
+    document.documentElement.lang = locale;
+    document.title = t("title");
+    document.querySelector('meta[name="description"]').setAttribute("content", t("description"));
+    document.getElementById("page-title").textContent = t("title");
+    document.getElementById("home-link").textContent = t("homeLink");
+    document.getElementById("history-heading").textContent = t("historyHeading");
+    document.getElementById("products-heading").textContent = t("productsHeading");
+    document.getElementById("update-schedule").textContent = t("updateSchedule");
+    document.getElementById("footer-source").textContent = t("source");
+    document.getElementById("footer-home").textContent = t("footerHome");
+
+    const month = fmtDisclosureMonth(cache.rates?.disclosureMonth);
+    document.getElementById("content-notice").textContent = month
+      ? `${T[locale].disclosure(month)} · ${t("notice")}`
+      : t("notice");
+
+    document.getElementById("updated").textContent = cache.rates?.updatedAt
+      ? `${t("updatedPrefix")}: ${fmtUpdated(cache.rates.updatedAt)}`
+      : "-";
+  }
+
+  function renderAll() {
+    renderMeta();
+    renderTabs();
+    renderControls();
+    renderProducts();
+    renderHistory();
+    bindTabEvents();
+  }
+
+  function bindTabEvents() {
+    for (const tab of document.querySelectorAll("[data-category]")) {
+      tab.addEventListener("click", () => {
+        state.category = tab.dataset.category;
+        state.expanded.clear();
+        state.rateType = "";
+        renderTabs();
+        renderControls();
+        renderProducts();
+      });
+    }
+  }
+
+  // ---- 헤더 버튼 --------------------------------------------------------
+  document.getElementById("lang-toggle").addEventListener("click", () => {
+    locale = locale === "ko" ? "en" : "ko";
+    window.localStorage.setItem("lang", locale);
+    renderAll();
+  });
+
+  document.getElementById("theme-toggle").addEventListener("click", () => {
+    const order = ["auto", "light", "dark"];
+    applyTheme(order[(order.indexOf(theme) + 1) % order.length]);
+  });
+
+  document.getElementById("share-button").addEventListener("click", async () => {
+    const shareData = { title: t("shareTitle"), text: t("description"), url: location.href };
+    try {
+      if (navigator.share) await navigator.share(shareData);
+      else await navigator.clipboard.writeText(location.href);
+    } catch {
+      // 사용자가 공유를 취소한 경우 - 아무것도 하지 않는다.
+    }
+  });
+
+  // ---- 부트스트랩 -------------------------------------------------------
+  async function main() {
+    try {
+      cache.rates = await loadJson("rates");
+    } catch (err) {
+      console.error("[rates] 로드 실패:", err.message);
+      document.getElementById("products-body").innerHTML = `<tr class="empty-row"><td>${escapeHtml(
+        t("loadError")
+      )}</td></tr>`;
+      renderMeta();
+      return;
+    }
+
+    try {
+      cache.history = await loadJson("rates-history");
+    } catch {
+      // 추이는 없어도 본문은 보여준다.
+      cache.history = [];
+    }
+
+    renderAll();
+  }
+
+  main();
+</script>
+</body>
+</html>

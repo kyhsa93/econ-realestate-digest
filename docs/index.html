@@ -531,6 +531,7 @@
       </table>
     </div>
     <div class="history-grid" id="history-grid"></div>
+    <a class="back-link" id="rates-link" href="./rates.html">예금·적금·대출 금리 비교 →</a>
   </section>
 
   <section id="realestate-section">
@@ -618,6 +619,7 @@
       liveFxTitle: (s) => `${s} 기준 (exchangerate.fun)`,
       baseRateLabel: "한국은행 기준금리",
       baseRateSince: (s) => `${s} 부터`,
+      ratesLink: "예금·적금·대출 금리 비교 →",
       historyKospiLabel: "코스피 (최근 추이)",
       historyUsdKrwLabel: "원/달러 환율 (최근 추이)",
       historyBaseRateLabel: "기준금리 (최근 추이)",
@@ -683,6 +685,7 @@
       liveFxTitle: (s) => `as of ${s} (exchangerate.fun)`,
       baseRateLabel: "BOK Base Rate",
       baseRateSince: (s) => `since ${s}`,
+      ratesLink: "Compare deposit, savings & loan rates →",
       historyKospiLabel: "KOSPI (recent trend)",
       historyUsdKrwLabel: "USD/KRW (recent trend)",
       historyBaseRateLabel: "BOK Base Rate (recent trend)",
@@ -1484,6 +1487,7 @@
     document.getElementById("market-th-indicator").textContent = t("marketThIndicator");
     document.getElementById("market-th-value").textContent = t("marketThValue");
     document.getElementById("market-th-change").textContent = t("marketThChange");
+    document.getElementById("rates-link").textContent = t("ratesLink");
     document.getElementById("realestate-heading").textContent = t("realestateHeading");
     document.getElementById("realestate-unit-caption").textContent = t("realestateUnitCaption");
     document.getElementById("re-th-district").textContent = t("realestateTagDistrict");

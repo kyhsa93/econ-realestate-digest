@@ -1,7 +1,8 @@
-const CACHE_NAME = "econ-digest-v5";
+const CACHE_NAME = "econ-digest-v6";
 const SHELL_ASSETS = [
   "./",
   "./index.html",
+  "./rates.html",
   "./manifest.webmanifest",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
