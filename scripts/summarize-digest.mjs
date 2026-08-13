@@ -179,11 +179,18 @@ function containsUnverifiedNumber(sentence, sourceText) {
   return numbers.some((n) => !sourceText.includes(n));
 }
 
-// 숫자 검증을 통과해도 "서로 다른 제목을 그럴듯하게 엮어 없는 인과관계를
-// 만드는" 잔여 위험이 있어, 별도로 한 번 더 확인한다. 작은 모델에게 "틀린
-// 부분을 알아서 고쳐 써라"는 못 믿을 일이라(잘못 고치다가 새로운 오류를
-// 만들 수 있음), 여기서는 YES/NO 판정만 시키고 NO가 나오면 고쳐 쓰게 하지
-// 않고 곧장 안전한 헤드라인 나열로 대체한다.
+// 숫자 검증을 통과해도 "원문에 없는 기관·기업·인물·지역을 끌어다 붙이는"
+// 잔여 위험이 있어, 별도로 한 번 더 확인한다. 작은 모델에게 "틀린 부분을
+// 알아서 고쳐 써라"는 못 믿을 일이라(잘못 고치다가 새로운 오류를 만들 수
+// 있음), 여기서는 YES/NO 판정만 시키고 NO가 나오면 고쳐 쓰게 하지 않고
+// 곧장 안전한 헤드라인 나열로 대체한다.
+//
+// 예전 프롬프트는 "원문에 없는 숫자·통계·인과관계·사실이 하나라도 섞여
+// 있으면 NO"였는데, 이 기준이 요약이라면 당연히 하게 되는 압축·재서술까지
+// 걸러내면서 3b 모델이 사실상 전부 NO를 뱉었다(실제로 CI에서 3일 연속
+// 모든 카테고리가 폴백 처리돼 "AI 요약"이 헤드라인 나열만 남았음 - 원문
+// 제목을 거의 그대로 옮긴 문장까지 NO 판정). 검증 대상을 "원문에 없는
+// 숫자·고유명사"로 좁히고, 압축/재서술은 명시적으로 허용한다.
 async function reviewKoSentence(sentence, titles) {
   const list = titles.slice(0, MAX_ITEMS_PER_CATEGORY).map((t, i) => `${i + 1}. ${t}`).join("\n");
   const prompt = `다음은 원문 뉴스 제목들과, 그걸 요약했다는 문장이야.
@@ -194,8 +201,11 @@ ${list}
 [요약 문장]
 ${sentence}
 
-요약 문장에 원문 제목에 없는 숫자·통계·인과관계·사실이 하나라도 섞여 있으면 "NO",
-전부 원문 제목에 실제로 있는 내용만 담고 있으면 "YES"라고만 답해. 다른 말은 하지 마.`;
+요약 문장에 원문 제목에 없는 숫자나 고유명사(기관·기업·인물·지역 이름)가 들어 있으면 "NO",
+그렇지 않으면 "YES"라고만 답해.
+여러 제목을 한 문장으로 압축하거나, 표현을 바꿔 쓰거나, "상승세"·"우려" 같은 일반적인
+서술을 쓴 것은 문제가 아니야. 그런 경우엔 "YES"라고 답해.
+다른 말은 하지 마.`;
 
   try {
     const raw = await callOllama(prompt, { temperature: 0, top_p: 0.5, num_predict: 8 });
@@ -212,6 +222,17 @@ ${sentence}
 // isFallback도 함께 반환한다: 폴백(헤드라인 나열)이면 main()에서 영어
 // 버전도 문장 번역 없이 nameEn으로 결정론적으로 만들어서, 번역까지 실패했을
 // 때 영어 요약에 한국어 카테고리 라벨이 섞여 남는 걸 방지한다.
+//
+// fallbackReason은 어느 단계에서 걸러졌는지를 summary.json에 남기기 위한 것.
+// 폴백은 화면상 "라벨: 제목 나열"이라 정상 요약과 구분이 잘 안 가서, 검수가
+// 과하게 빡빡해져 전 카테고리가 조용히 폴백으로 떨어져도 눈치채기 어려웠다.
+const FALLBACK_REASONS = {
+  UNGROUPABLE: "ungroupable-category", // "기타" 묶음 - 설계상 항상 폴백
+  GENERATION_FAILED: "generation-failed",
+  UNVERIFIED_NUMBER: "unverified-number",
+  REVIEW_REJECTED: "review-rejected",
+};
+
 async function summarizeBucketKo(bucket) {
   const label = bucket.category.name;
 
@@ -219,35 +240,39 @@ async function summarizeBucketKo(bucket) {
   // 문장으로 합성시키면 서로 무관한 사건을 억지로 엮어 지어내기 쉽다.
   // 그래서 합성 없이 결정론적으로 나열만 한다.
   if (bucket.category === FALLBACK_CATEGORY) {
-    return { line: listCategory(label, bucket.titles), isFallback: true };
+    return { line: listCategory(label, bucket.titles), fallbackReason: FALLBACK_REASONS.UNGROUPABLE };
   }
 
   const sourceText = bucket.titles.join(" ");
   const prompt = buildBucketPrompt(label, bucket.titles);
 
   let sentence;
+  let reason = null;
   try {
     sentence = await generateKoSentence(prompt);
   } catch (err) {
     console.error(`[summarize-digest] "${label}" 요약 실패: ${err.message}`);
     sentence = null;
+    reason = FALLBACK_REASONS.GENERATION_FAILED;
   }
 
   if (sentence && containsUnverifiedNumber(sentence, sourceText)) {
     console.error(`[summarize-digest] "${label}" 요약에 검증 안 된 숫자 포함: ${sentence}`);
     sentence = null;
+    reason = FALLBACK_REASONS.UNVERIFIED_NUMBER;
   }
 
   if (sentence && !(await reviewKoSentence(sentence, bucket.titles))) {
     console.error(`[summarize-digest] "${label}" 요약이 검수 실패(NO): ${sentence}`);
     sentence = null;
+    reason = FALLBACK_REASONS.REVIEW_REJECTED;
   }
 
   if (!sentence) {
-    return { line: listCategory(label, bucket.titles), isFallback: true };
+    return { line: listCategory(label, bucket.titles), fallbackReason: reason ?? FALLBACK_REASONS.GENERATION_FAILED };
   }
 
-  return { line: `- ${sentence}`, isFallback: false };
+  return { line: `- ${sentence}`, fallbackReason: null };
 }
 
 // 번역이 아니라 원문을 그대로 남기거나(한글이 그대로 섞여 있음), 모델이
@@ -350,7 +375,8 @@ async function main() {
   const categoryEntries = [];
 
   for (const bucket of buckets) {
-    const { line: koLine, isFallback } = await summarizeBucketKo(bucket);
+    const { line: koLine, fallbackReason } = await summarizeBucketKo(bucket);
+    const isFallback = fallbackReason !== null;
     koLines.push(koLine);
 
     let enLine;
@@ -371,6 +397,7 @@ async function main() {
       lineKo: koLine.replace(/^-\s*/, ""),
       lineEn: enLine.replace(/^-\s*/, ""),
       isFallback,
+      fallbackReason,
       items: bucket.items
         .slice(0, MAX_ITEMS_PER_CATEGORY)
         .map((i) => ({ title: i.title, link: i.link, source: i.source })),
@@ -391,7 +418,17 @@ async function main() {
   );
   await appendHistory(now, { model: MODEL, summary, categories: categoryEntries });
 
-  console.log("[summarize-digest] 저장 완료");
+  // 카테고리별 실패는 이미 위에서 개별로 로그를 남기지만, "오늘 몇 개가
+  // 폴백이었나"는 로그를 다 훑어야 알 수 있었다. 한 줄로 집계해서 남긴다.
+  // ("기타" 묶음은 설계상 항상 폴백이라 분모에서 제외한다.)
+  const summarizable = categoryEntries.filter((c) => c.fallbackReason !== FALLBACK_REASONS.UNGROUPABLE);
+  const fallen = summarizable.filter((c) => c.isFallback);
+  const breakdown = [...new Set(fallen.map((c) => c.fallbackReason))]
+    .map((r) => `${r} x${fallen.filter((c) => c.fallbackReason === r).length}`)
+    .join(", ");
+  console.log(
+    `[summarize-digest] 저장 완료 (폴백 ${fallen.length}/${summarizable.length}${breakdown ? `: ${breakdown}` : ""})`
+  );
 }
 
 main();
