@@ -1,56 +1,30 @@
 {
-  "updatedAt": "2026-08-14T06:08:11.853Z",
+  "updatedAt": "2026-08-14T08:24:50.499Z",
   "model": "qwen3:14b",
   "summary": {
-    "ko": "- 부동산 관련 세제 개편안에 대한 국민의 부정적 인식, 오래된 아파트의 재개발 계획, 공공주택 사업에 대한 특강 개최, 정당의 부동산 대책에 대한 비판, 그리고 홍콩 증시의 하락이 오늘의 주요 경제 뉴스로 보도되었다.\n- 미국 30년물 국채금리가 상승했고, 브라질 소매판매가 증가했으며, 국고채 금리가 하락했고, 엔화 가치가 하락한 것으로 나타났다.\n- 이억원이 가계대출 총량목표와 관련해 실수요 지원을 위한 조치라고 밝히고, 7월 금융권 가계대출 증가 상황이 발표되었다.\n- 한국 증시와 환율 관련 뉴스에서 코스피와 코스닥의 상승·하락, 중국 증시의 상승, 외신이 전한 개미 투자자의 상황 등 다양한 동향이 보도되었다.",
-    "en": "- Negative public perception of the proposed real estate tax reform, redevelopment plans for old apartment complexes, a special lecture on public housing projects, criticism of political parties' real estate policies, and the decline in the Hong Kong stock market were reported as today's major economic news.\n- The 30-year U.S. Treasury bond yield rose, Brazilian retail sales increased, the government bond yield fell, and the yen's value declined.\n- The 200 million won was stated as a measure to support genuine demand in relation to the overall household loan target, and the increase in household loan amounts in the financial sector in July was announced.\n- Various trends, including the rise and fall of the KOSPI and KOSDAQ, the rise of the Chinese stock market, and the situation of retail investors as reported by foreign media, were covered in news related to the Korean stock market and exchange rate."
+    "ko": "- 연휴 앞두고 국고채 금리가 혼조세를 보였고, 미국 30년물 국채금리가 상승했으며, 브라질의 소매판매도 증가했다.\n- 부동산: 50년 된 용산 산호아파트, 35층 679가구로 탈바꿈, 전·월세 안정화 카드?…'안심신탁'이 뭐길래, 금융위 \"청년에 비아파트 구입할 추가기회 제공…틈새시장 배려\" +12\n- 중국 증시가 상승 마감되고 코스피도 상승한 가운데, 미국 인플레 우려 완화로 달러가 약세를 보이며 환율이 1,410원대를 유지하고 있으며, 한국 증시에 대한 외신의 평가가 분화되고 있다.\n- 이억원이 가계대출 총량목표가 실수요 지원을 위한 것이라며 투기수요 자극 신호가 아니라고 밝혔다.",
+    "en": "- Ahead of the holiday, government bond yields showed mixed performance, U.S. 30-year Treasury yields rose, and Brazil's retail sales also increased.\n- Real Estate: 50년 된 용산 산호아파트, 35층 679가구로 탈바꿈, 전·월세 안정화 카드?…'안심신탁'이 뭐길래, 금융위 \"청년에 비아파트 구입할 추가기회 제공…틈새시장 배려\" +12\n- As China's stock market closed higher and the Kospi also rose, the dollar weakened due to eased concerns over U.S. inflation, keeping the exchange rate in the 1,410 won range, while foreign media evaluations of the Korean stock market are divided.\n- Lee Eok-won stated that the household loan aggregate target is intended to support genuine demand and is not a signal that would stimulate speculative demand."
   },
   "categories": [
-    {
-      "key": "realestate",
-      "name": "부동산",
-      "nameEn": "Real Estate",
-      "lineKo": "부동산 관련 세제 개편안에 대한 국민의 부정적 인식, 오래된 아파트의 재개발 계획, 공공주택 사업에 대한 특강 개최, 정당의 부동산 대책에 대한 비판, 그리고 홍콩 증시의 하락이 오늘의 주요 경제 뉴스로 보도되었다.",
-      "lineEn": "Negative public perception of the proposed real estate tax reform, redevelopment plans for old apartment complexes, a special lecture on public housing projects, criticism of political parties' real estate policies, and the decline in the Hong Kong stock market were reported as today's major economic news.",
-      "isFallback": false,
-      "fallbackReason": null,
-      "items": [
-        {
-          "title": "“집 가진 사람도 불안”…세제개편안에 국민 45% “부동산 부정적 영향” [한국갤럽]",
-          "link": "https://www.mk.co.kr/news/realestate/12127953",
-          "source": "매일경제 부동산"
-        },
-        {
-          "title": "50년 된 산호아파트, 최고 35층 단지로 탈바꿈",
-          "link": "https://www.hankyung.com/article/202608141787i",
-          "source": "한국경제 부동산"
-        },
-        {
-          "title": "세종대, ‘도심 공공주택 복합사업의 현황과 미래’ 특강 개최",
-          "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/14/BPZ2HHBU7JC6DFKW62PU2AJNIY/",
-          "source": "조선비즈 부동산"
-        },
-        {
-          "title": "국힘, '정부 세제개편안·공급 대책'에 쌍끌이 부동산 공세",
-          "link": "https://www.yna.co.kr/view/AKR20260814076000001",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "[올댓차이나] 홍콩 증시, 기술주에 이익매물로 나흘째 하락 출발… H주 0.62%↓",
-          "link": "https://www.newsis.com/view/NISX20260814_0003749389",
-          "source": "뉴시스 경제"
-        }
-      ]
-    },
     {
       "key": "rates",
       "name": "금리·예금·투자상품",
       "nameEn": "Rates, Deposits & Investment Products",
-      "lineKo": "미국 30년물 국채금리가 상승했고, 브라질 소매판매가 증가했으며, 국고채 금리가 하락했고, 엔화 가치가 하락한 것으로 나타났다.",
-      "lineEn": "The 30-year U.S. Treasury bond yield rose, Brazilian retail sales increased, the government bond yield fell, and the yen's value declined.",
+      "lineKo": "연휴 앞두고 국고채 금리가 혼조세를 보였고, 미국 30년물 국채금리가 상승했으며, 브라질의 소매판매도 증가했다.",
+      "lineEn": "Ahead of the holiday, government bond yields showed mixed performance, U.S. 30-year Treasury yields rose, and Brazil's retail sales also increased.",
       "isFallback": false,
       "fallbackReason": null,
       "items": [
+        {
+          "title": "연휴 앞두고 국고채 금리 혼조세…초장기물 하락(종합)",
+          "link": "https://www.yna.co.kr/view/AKR20260814141251008",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "국고채 금리 혼조세…3년물 연 3.796%",
+          "link": "https://www.yna.co.kr/view/AKR20260814141200008",
+          "source": "연합뉴스 경제"
+        },
         {
           "title": "美 30년물 국채금리 5.22%…2001년 이후 최고",
           "link": "https://www.newsis.com/view/NISX20260814_0003749333",
@@ -60,41 +34,41 @@
           "title": "6월 브라질 소매판매 0.5%↑…\"고금리에도 소비 견조\"",
           "link": "https://www.newsis.com/view/NISX20260814_0003749426",
           "source": "뉴시스 경제"
-        },
-        {
-          "title": "국고채 금리 대체로 하락…3년물 장중 연 3.773%",
-          "link": "https://www.yna.co.kr/view/AKR20260814075400008",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "엔화, 미일 금리차 축소 난망에 1달러=159엔대 중반 하락 출발",
-          "link": "https://www.newsis.com/view/NISX20260814_0003749046",
-          "source": "뉴시스 경제"
         }
       ]
     },
     {
-      "key": "other",
-      "name": "기타 경제 소식",
-      "nameEn": "Other Economic News",
-      "lineKo": "이억원이 가계대출 총량목표와 관련해 실수요 지원을 위한 조치라고 밝히고, 7월 금융권 가계대출 증가 상황이 발표되었다.",
-      "lineEn": "The 200 million won was stated as a measure to support genuine demand in relation to the overall household loan target, and the increase in household loan amounts in the financial sector in July was announced.",
-      "isFallback": false,
-      "fallbackReason": null,
+      "key": "realestate",
+      "name": "부동산",
+      "nameEn": "Real Estate",
+      "lineKo": "부동산: 50년 된 용산 산호아파트, 35층 679가구로 탈바꿈, 전·월세 안정화 카드?…'안심신탁'이 뭐길래, 금융위 \"청년에 비아파트 구입할 추가기회 제공…틈새시장 배려\" +12",
+      "lineEn": "Real Estate: 50년 된 용산 산호아파트, 35층 679가구로 탈바꿈, 전·월세 안정화 카드?…'안심신탁'이 뭐길래, 금융위 \"청년에 비아파트 구입할 추가기회 제공…틈새시장 배려\" +12",
+      "isFallback": true,
+      "fallbackReason": "unverified-entity",
       "items": [
         {
-          "title": "이억원 “가계대출 총량목표, 실수요 지원 위한 것…투기수요 자극 신호 아냐”",
-          "link": "https://www.mk.co.kr/news/economy/12127835",
-          "source": "매일경제 부동산"
+          "title": "50년 된 용산 산호아파트, 35층 679가구로 탈바꿈",
+          "link": "https://www.hankyung.com/article/2026081423891",
+          "source": "한국경제 부동산"
         },
         {
-          "title": "이억원 \"가계대출 총량 조정, 실수요 위한 것…투기 신호돼선 안돼\"",
-          "link": "https://www.hankyung.com/article/2026081413716",
-          "source": "한국경제 경제"
+          "title": "전·월세 안정화 카드?…'안심신탁'이 뭐길래",
+          "link": "https://www.hankyung.com/article/2026081423931",
+          "source": "한국경제 부동산"
         },
         {
-          "title": "7월 금융권 가계대출 6.2조↑…'빚투' 진정 등에 증가폭 축소",
-          "link": "https://www.yna.co.kr/view/AKR20260814053200002",
+          "title": "금융위 \"청년에 비아파트 구입할 추가기회 제공…틈새시장 배려\"",
+          "link": "https://www.yna.co.kr/view/AKR20260814136400002",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "與 \"국민의힘, 정부 부동산대책 왜곡…청년 주거불안 조장\"",
+          "link": "https://www.newsis.com/view/NISX20260814_0003749988",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "국토장관 \"용산공원 전체 주택공급 고민\"…오세훈과 대립각(종합)",
+          "link": "https://www.yna.co.kr/view/AKR20260814050551003",
           "source": "연합뉴스 경제"
         }
       ]
@@ -103,30 +77,46 @@
       "key": "stocks",
       "name": "증시·환율",
       "nameEn": "Stocks & FX",
-      "lineKo": "한국 증시와 환율 관련 뉴스에서 코스피와 코스닥의 상승·하락, 중국 증시의 상승, 외신이 전한 개미 투자자의 상황 등 다양한 동향이 보도되었다.",
-      "lineEn": "Various trends, including the rise and fall of the KOSPI and KOSDAQ, the rise of the Chinese stock market, and the situation of retail investors as reported by foreign media, were covered in news related to the Korean stock market and exchange rate.",
+      "lineKo": "중국 증시가 상승 마감되고 코스피도 상승한 가운데, 미국 인플레 우려 완화로 달러가 약세를 보이며 환율이 1,410원대를 유지하고 있으며, 한국 증시에 대한 외신의 평가가 분화되고 있다.",
+      "lineEn": "As China's stock market closed higher and the Kospi also rose, the dollar weakened due to eased concerns over U.S. inflation, keeping the exchange rate in the 1,410 won range, while foreign media evaluations of the Korean stock market are divided.",
       "isFallback": false,
       "fallbackReason": null,
       "items": [
         {
+          "title": "[올댓차이나] 중국 증시 상승 마감…상하이지수 0.01%↑",
+          "link": "https://www.newsis.com/view/NISX20260814_0003750001",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "코스피 2.4%↑, 7천피 턱밑까지…이번주 내내 올랐다(종합)",
+          "link": "https://www.yna.co.kr/view/AKR20260814132200008",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "미국 인플레 우려 완화에 달러 약세…환율 6거래일째 1,410원대",
+          "link": "https://www.yna.co.kr/view/AKR20260814123400002",
+          "source": "연합뉴스 경제"
+        },
+        {
           "title": "\"한국 증시 믿은 내가 바보\"…외신이 전한 코스피 개미들의 눈물",
           "link": "https://www.newsis.com/view/NISX20260814_0003748998",
           "source": "뉴시스 경제"
-        },
+        }
+      ]
+    },
+    {
+      "key": "other",
+      "name": "기타 경제 소식",
+      "nameEn": "Other Economic News",
+      "lineKo": "이억원이 가계대출 총량목표가 실수요 지원을 위한 것이라며 투기수요 자극 신호가 아니라고 밝혔다.",
+      "lineEn": "Lee Eok-won stated that the household loan aggregate target is intended to support genuine demand and is not a signal that would stimulate speculative demand.",
+      "isFallback": false,
+      "fallbackReason": null,
+      "items": [
         {
-          "title": "코스피 1%대↑, 상승률 다소 둔화…코스닥은 하락전환",
-          "link": "https://www.yna.co.kr/view/AKR20260814068400008",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "[올댓차이나] 중국 증시 상승 출발…상하이지수 0.08%↑",
-          "link": "https://www.newsis.com/view/NISX20260814_0003749245",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "코스피 2%대↑, 닷새째 상승…장중 '7천피' 회복(종합)",
-          "link": "https://www.yna.co.kr/view/AKR20260814040800008",
-          "source": "연합뉴스 경제"
+          "title": "이억원 “가계대출 총량목표, 실수요 지원 위한 것…투기수요 자극 신호 아냐”",
+          "link": "https://www.mk.co.kr/news/economy/12127835",
+          "source": "매일경제 부동산"
         }
       ]
     }
