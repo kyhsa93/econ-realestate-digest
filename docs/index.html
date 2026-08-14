@@ -207,6 +207,13 @@
     font-size: 0.78rem;
     margin-left: 4px;
   }
+  /* 값 자리를 대신하는 표시라 tx-count보다는 눈에 들어와야 하지만,
+     실제 수치와 같은 무게로 읽히면 안 된다. */
+  .data-table .low-sample {
+    color: var(--muted);
+    font-size: 0.82rem;
+    font-style: italic;
+  }
   /* 부동산 테이블은 셀 하나에 값+증감+거래건수가 다 들어가서 nowrap이면
      가로 스크롤이 지나치게 길어진다. 이 테이블만 줄바꿈을 허용해서
      셀 안에서 알아서 두 줄로 접히게 한다. */
@@ -660,8 +667,10 @@
       realestateHeading: "한국 부동산 가격 추이",
       realestateError: "데이터를 불러오지 못했습니다.",
       realestateOverallLabel: "서울 25개구 평균",
-      realestateUnitCaption: "전용면적 기준 평당가(3.3㎡) · 국토교통부 아파트매매·전월세 실거래가 (서울 25개 자치구 전체). 공급면적(공용면적 포함) 기준 시세보다 높게 나올 수 있습니다.",
+      realestateUnitCaption: "전용면적 기준 평당가(3.3㎡) · 국토교통부 아파트매매·전월세 실거래가 (서울 25개 자치구 전체). 공급면적(공용면적 포함) 기준 시세보다 높게 나올 수 있습니다. 신고 건수가 5건 미만인 구는 평균이 거래 한두 건에 좌우돼서 값을 보여주지 않습니다(월초에 특히 잦습니다).",
       realestateCountSuffix: (n) => `${n}건`,
+      realestateLowSample: (n) => `표본 ${n}건`,
+      realestateLowSampleTitle: (n) => `신고 ${n}건이라 평균을 내기엔 표본이 부족합니다`,
       realestatePeriodLabel: (period) => `실거래 신고 기준 (${period})`,
       realestateChangeVs: (dateStr) => `${dateStr} 대비`,
       realestateTagDistrict: "지역",
@@ -728,8 +737,10 @@
       realestateHeading: "Korean Real Estate Price Trend",
       realestateError: "Failed to load data.",
       realestateOverallLabel: "Seoul 25-district average",
-      realestateUnitCaption: "Price per pyeong of exclusive area (3.3㎡) · based on MOLIT apartment sale & lease transactions (all 25 Seoul districts). May read higher than prices quoted by supply area (which includes shared space).",
+      realestateUnitCaption: "Price per pyeong of exclusive area (3.3㎡) · based on MOLIT apartment sale & lease transactions (all 25 Seoul districts). May read higher than prices quoted by supply area (which includes shared space). Districts with fewer than 5 reported transactions are left blank, since one or two sales would decide the average (common early in the month).",
       realestateCountSuffix: (n) => `${n} txns`,
+      realestateLowSample: (n) => `${n} txns only`,
+      realestateLowSampleTitle: (n) => `${n} reported transaction(s) — too few to average`,
       realestatePeriodLabel: (period) => `Based on filed transactions (${period})`,
       realestateChangeVs: (dateStr) => `vs ${dateStr}`,
       realestateTagDistrict: "District",
@@ -1042,6 +1053,25 @@
     return `<span class="tx-count">${t("realestateCountSuffix")(metric.transactionCount)}</span>`;
   }
 
+  // 자치구 평균은 그 달에 신고된 거래만으로 낸다. 월초에는 구 하나에 신고가
+  // 한두 건뿐인 경우가 흔해서, 그 값은 "그 구의 시세"가 아니라 "그 아파트
+  // 한 채의 가격"에 가깝다. 그런데 표가 평당가 내림차순이라 비싼 한 건이
+  // 잡힌 구가 순위 맨 위로 올라와 버린다 - 건수를 옆에 적어두는 것만으로는
+  // 그 오해를 못 막아서, 아예 값을 내지 않고 순위에서도 뺀다.
+  const MIN_REPORTED_TRANSACTIONS = 5;
+
+  // transactionCount가 아예 없는 건 과거 기록 포맷이라 판단할 근거가 없다.
+  // 모르는 걸 부족하다고 단정하지는 않는다.
+  function hasEnoughSample(metric) {
+    if (!metric || metric.transactionCount == null) return true;
+    return metric.transactionCount >= MIN_REPORTED_TRANSACTIONS;
+  }
+
+  function realestateLowSampleHtml(metric) {
+    const n = metric.transactionCount;
+    return `<span class="low-sample" title="${t("realestateLowSampleTitle")(n)}">${t("realestateLowSample")(n)}</span>`;
+  }
+
   function realestateDateHintAttr(metric) {
     if (!metric?.change || !metric.baselineDate) return "";
     return ` title="${t("realestateChangeVs")(metric.baselineDate)}"`;
@@ -1052,16 +1082,19 @@
   // 자치구·서울 전체(overall) 행 모두 같은 셀 렌더러를 쓰므로 자동으로 같이 보임.
   function realestateSaleCellHtml(sale) {
     if (!sale) return "-";
+    if (!hasEnoughSample(sale)) return realestateLowSampleHtml(sale);
     return `<span${realestateDateHintAttr(sale)}>${formatPyeongPrice(sale.avgPricePerPyeong10k)}</span> ${realestateChangeHtml(sale.change)} ${realestateCountHtml(sale)}`;
   }
 
   function realestateJeonseCellHtml(jeonse) {
     if (!jeonse) return "-";
+    if (!hasEnoughSample(jeonse)) return realestateLowSampleHtml(jeonse);
     return `<span${realestateDateHintAttr(jeonse)}>${formatPyeongPrice(jeonse.avgDepositPerPyeong10k)}</span> ${realestateChangeHtml(jeonse.change)} ${realestateCountHtml(jeonse)}`;
   }
 
   function realestateWolseCellHtml(wolse) {
     if (!wolse) return "-";
+    if (!hasEnoughSample(wolse)) return realestateLowSampleHtml(wolse);
     const hintAttr = realestateDateHintAttr({
       change: wolse.depositChange ?? wolse.monthlyRentChange,
       baselineDate: wolse.baselineDate,
@@ -1094,9 +1127,18 @@
     });
   }
 
+  // 값을 감춘 구는 순위 근거도 없으므로 정렬에서 0으로 떨어뜨려 표 아래로 보낸다.
+  // 감춘 값으로 계속 줄을 세우면 화면에서만 안 보일 뿐 순위는 그대로 왜곡된다.
   function realestateSortValue(rawEntry) {
     const entry = normalizeRealestateEntry(rawEntry);
-    return entry.sale?.avgPricePerPyeong10k ?? entry.jeonse?.avgDepositPerPyeong10k ?? entry.avgPricePerPyeong10k ?? 0;
+    if (hasEnoughSample(entry.sale)) {
+      const sale = entry.sale?.avgPricePerPyeong10k ?? entry.avgPricePerPyeong10k;
+      if (sale != null) return sale;
+    }
+    if (hasEnoughSample(entry.jeonse) && entry.jeonse?.avgDepositPerPyeong10k != null) {
+      return entry.jeonse.avgDepositPerPyeong10k;
+    }
+    return 0;
   }
 
   function renderRealestate(realestate) {
@@ -1158,10 +1200,13 @@
     const countFormat = (v) => t("realestateCountSuffix")(Math.round(v));
     // 가장 자주 찾는 두 지표(평당가/매매 거래량)를 앞에 두고 나머지는
     // <details>로 접어서, 카드가 계속 늘어나도 기본 화면은 짧게 유지한다.
+    // 표에서 가린 값이 추이 그래프에서는 그대로 찍히면 같은 오해가 그대로 남는다.
+    // 표본이 부족한 날짜는 점 자체를 빼고 그린다(거래량 자체는 평균이 아니라 그대로 쓴다).
+    const pricePoint = (metric, value) => (hasEnoughSample(metric) ? value : undefined);
     const series = [
-      { label: t("realestateHistoryLabel")(scopeName), get: (h) => getScoped(h)?.sale?.avgPricePerPyeong10k, format: formatPyeongPrice },
+      { label: t("realestateHistoryLabel")(scopeName), get: (h) => pricePoint(getScoped(h)?.sale, getScoped(h)?.sale?.avgPricePerPyeong10k), format: formatPyeongPrice },
       { label: t("realestateVolumeHistoryLabel")(scopeName), get: (h) => getScoped(h)?.sale?.transactionCount, format: countFormat },
-      { label: t("realestateNational84HistoryLabel")(scopeName), get: (h) => getScoped(h)?.saleNational84?.avgPricePerPyeong10k, format: formatPyeongPrice },
+      { label: t("realestateNational84HistoryLabel")(scopeName), get: (h) => pricePoint(getScoped(h)?.saleNational84, getScoped(h)?.saleNational84?.avgPricePerPyeong10k), format: formatPyeongPrice },
       { label: t("realestateJeonseVolumeHistoryLabel")(scopeName), get: (h) => getScoped(h)?.jeonse?.transactionCount, format: countFormat },
       { label: t("realestateWolseVolumeHistoryLabel")(scopeName), get: (h) => getScoped(h)?.wolse?.transactionCount, format: countFormat },
     ];
