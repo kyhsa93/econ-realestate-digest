@@ -12,7 +12,6 @@ const SALE_SERVICE_KEY = process.env.MOLIT_API_KEY;
 const RENT_API_URL = process.env.MOLIT_RENT_API_ENDPOINT;
 const RENT_SERVICE_KEY = process.env.MOLIT_RENT_API_KEY;
 
-// 서울 25개 자치구 전체. 전국이 아니라 "서울" 기준 평균/구별 값이다.
 const DISTRICTS = [
   { code: "11110", name: "종로구" },
   { code: "11140", name: "중구" },
@@ -43,9 +42,6 @@ const DISTRICTS = [
 
 const PYEONG_M2 = 3.3058;
 
-// 데이터포털이 짧은 시간에 몰리는 요청에 종종 "fetch failed"(네트워크
-// 레벨)로 실패하는 걸 확인해서, 재시도와 동시 요청 수 제한을 둔다.
-// 매매+전월세를 같이 조회하면서 요청량이 다시 2배가 되는 만큼 유지한다.
 const CONCURRENCY = 5;
 const MAX_RETRIES = 3;
 
@@ -79,11 +75,6 @@ function kstYearMonth(date, monthsAgo = 0) {
 }
 
 async function fetchApiOnce(apiUrl, serviceKey, districtCode, yearMonth) {
-  // serviceKey는 URLSearchParams로 넣으면 안 됨: 공공데이터포털에서 발급되는
-  // "Encoding" 인증키는 이미 퍼센트 인코딩된 문자열이라, searchParams.set()이
-  // 한 번 더 인코딩해버리면(%가 %25로 바뀌는 식) 키가 깨져서 403이 난다.
-  // 그래서 serviceKey만 raw 그대로 쿼리스트링에 붙이고, 나머지 파라미터만
-  // URLSearchParams로 인코딩한다.
   const otherParams = new URLSearchParams({
     LAWD_CD: districtCode,
     DEAL_YMD: yearMonth,
@@ -100,12 +91,9 @@ async function fetchApiOnce(apiUrl, serviceKey, districtCode, yearMonth) {
 
   const header = parsed?.response?.header;
   if (!header) {
-    // 서비스키 오류 등은 OpenAPI_ServiceResponse 포맷으로 옴
     const errMsg = parsed?.OpenAPI_ServiceResponse?.cmmMsgHeader?.errMsg ?? "알 수 없는 응답 형식";
     throw new Error(errMsg);
   }
-  // fast-xml-parser가 "00"/"000" 같은 숫자로만 된 문자열을 자동으로 숫자
-  // 0으로 바꿔버려서, 문자열로 비교하면 정상 응답도 에러로 오판된다.
   if (Number(header.resultCode) !== 0) {
     throw new Error(header.resultMsg ?? `resultCode ${header.resultCode}`);
   }
@@ -129,15 +117,11 @@ async function fetchApi(apiUrl, serviceKey, districtCode, yearMonth) {
 }
 
 function parseWon10k(value) {
-  // "120,000" (만원 단위, 쉼표 포함 문자열) -> 120000 (만원)
   const cleaned = String(value ?? "").replace(/,/g, "").trim();
   const num = Number(cleaned);
   return Number.isFinite(num) ? num : null;
 }
 
-// "국민평형"(흔히 "34평형")은 공급면적 기준 표현이라 전용면적으로는 딱 떨어지지
-// 않고, 실제 매물은 84.3~84.99㎡ 사이에 몰려 있지만 82~83㎡대 변형도 존재한다.
-// 정확한 평형 코드가 실거래 API에 없어서, 이 범위를 근사치로 삼는다.
 const NATIONAL_PYEONG_MIN_M2 = 82;
 const NATIONAL_PYEONG_MAX_M2 = 86;
 
@@ -156,7 +140,6 @@ function summarizeSale(items) {
   for (const item of items) {
     const amount10k = parseWon10k(item.dealAmount);
     const area = Number(item.excluUseAr);
-    // Number("")는 0이라 값이 비어있는 행이 "0원 거래"로 잘못 집계되는 걸 방지
     if (amount10k == null || amount10k <= 0 || !Number.isFinite(area) || area <= 0) continue;
     totalAmountWon += amount10k * 10_000;
     totalArea += area;
@@ -173,9 +156,6 @@ function summarizeSale(items) {
   };
 }
 
-// 전월세 API는 전세(월세 0원)와 월세(보증금+월세) 거래가 섞여서 온다.
-// 성격이 달라서 하나로 합치지 않고 따로 집계한다: 전세는 매매처럼
-// 평당 보증금으로, 월세는 면적 정규화 없이 평균 보증금/월세 그대로 보여준다.
 function summarizeRent(items) {
   const jeonseRows = [];
   const wolseRows = [];
@@ -184,7 +164,6 @@ function summarizeRent(items) {
     const deposit10k = parseWon10k(item.deposit);
     const monthlyRent10k = parseWon10k(item.monthlyRent);
     const area = Number(item.excluUseAr);
-    // Number("")는 0이라 보증금이 비어있는 행이 "0원 보증금"으로 잘못 집계되는 걸 방지
     if (deposit10k == null || deposit10k <= 0 || !Number.isFinite(area) || area <= 0) continue;
 
     if (monthlyRent10k && monthlyRent10k > 0) {
@@ -240,12 +219,6 @@ async function readHistory() {
   }
 }
 
-// "이번 주 거래"만 따로 집계하지 않고, 매일 갱신되는 이번 달 누적 평균의
-// 스냅샷을 1주일 간격으로 비교한다. 실거래 신고가 계약 후 최대 30일까지
-// 늦게 들어오기 때문에, 계약일 기준으로 진짜 주간 집계를 하면 최근 1~2주는
-// 신고가 덜 끝나서 표본이 인위적으로 적어 보이는 문제가 있어 이 방식을 택함.
-// 1주일 전에 가장 가까운(그 이전) 기록을 기준값으로 삼는다. 아직 7일치가
-// 없으면(도입 초기) 가장 오래된 기록을 기준값으로 쓴다.
 function findBaseline(history, now) {
   if (!history.length) return null;
   const target = new Date(now);
@@ -253,8 +226,6 @@ function findBaseline(history, now) {
   const targetDate = kstDateString(target);
   const older = history.filter((h) => h.date <= targetDate);
   const baseline = older.length ? older[older.length - 1] : history[0];
-  // 오늘 처음 쌓인 기록만 있으면 기준값이 오늘 자신이 되어버려 "오늘 대비
-  // 0%"라는 의미 없는 비교가 나온다. 그럴 땐 아직 비교할 과거가 없는 것으로 취급.
   return baseline.date === kstDateString(now) ? null : baseline;
 }
 
@@ -265,7 +236,6 @@ function computeChange(currentValue, baselineValue) {
   return { value10k: value10kDiff, percent };
 }
 
-// 매매·전세는 "평당 가격" 성격이라 값 하나에 증감을 바로 붙인다.
 function withSaleChange(sale, baselineSale, baselineDate) {
   if (!sale) return sale;
   const change = computeChange(sale.avgPricePerPyeong10k, baselineSale?.avgPricePerPyeong10k);
@@ -278,7 +248,6 @@ function withJeonseChange(jeonse, baselineJeonse, baselineDate) {
   return change ? { ...jeonse, change, baselineDate } : jeonse;
 }
 
-// 월세는 보증금과 월세가 성격이 달라 하나로 압축하지 않고, 각각 따로 증감을 계산한다.
 function withWolseChange(wolse, baselineWolse, baselineDate) {
   if (!wolse) return wolse;
   const depositChange = computeChange(wolse.avgDeposit10k, baselineWolse?.avgDeposit10k);
@@ -317,7 +286,7 @@ async function appendHistory(history, now, entry) {
 
   const idx = history.findIndex((h) => h.date === today);
   if (idx >= 0) {
-    history[idx] = record; // 같은 날 재실행 시 덮어쓰기 (중복 방지)
+    history[idx] = record;
   } else {
     history.push(record);
   }
@@ -353,17 +322,11 @@ async function main() {
 
   const now = new Date();
 
-  // 워크플로가 수동으로 여러 번 트리거돼도(오늘 테스트하면서 실제로 겪음)
-  // 하루에 한 번만 25개구 전체를 다시 조회하진 않아 데이터포털 일일 호출
-  // 한도를 아낀다. 다만 하루 1회 제한보다 "최소 한 번은 전 구 데이터를
-  // 성공시키는 것"이 우선이라, 오늘 이미 조회했더라도 초반 네트워크
-  // 이슈 등으로 일부 구가 통째로 빠진 채 저장돼 있으면 그 누락분만
-  // 다시 조회해서 채운다.
   let existing = null;
   try {
     existing = JSON.parse(await readFile(outFile, "utf-8"));
   } catch {
-    existing = null; // 기존 파일 없으면 그냥 진행
+    existing = null;
   }
 
   const existingIsToday =
@@ -379,10 +342,6 @@ async function main() {
     console.log(`[fetch-realestate] 오늘 이미 조회했지만 ${targetDistricts.length}개구 누락, 누락분만 재조회`);
   }
 
-  // 이번 달치만 조회 (예전엔 월초 표본 부족을 피하려고 지난달까지 2개월을
-  // 합쳤는데, 요청량이 2배가 돼서 25개구 조회 시 데이터포털 일일 한도에
-  // 걸리는 걸 겪었음 - 이번 달만 봐도 대체로 충분한 표본이 쌓이는 편이라
-  // 요청량을 줄이는 쪽을 택함).
   const yearMonths = [kstYearMonth(now, 0)];
 
   async function fetchDistrictEntry({ code, name }) {
@@ -412,10 +371,6 @@ async function main() {
 
   const results = await mapWithConcurrency(targetDistricts, CONCURRENCY, fetchDistrictEntry);
 
-  // 데이터포털 요청이 실행 초반 잠깐(수십 초) 네트워크 레벨로 통째로 실패하는
-  // 경우를 실제로 겪었다(첫 두 동시 요청 웨이브가 fetch failed로 재시도까지
-  // 다 소진). 개별 재시도 백오프만으로는 그 구간을 못 버티므로, 1차 조회가
-  // 전부 끝난 뒤(=네트워크가 안정됐을 시점) 실패한 구만 모아 한 번 더 훑는다.
   const failedIndexes = results.map((r, i) => (r ? -1 : i)).filter((i) => i >= 0);
   if (failedIndexes.length > 0) {
     console.log(`[fetch-realestate] ${failedIndexes.length}개구 실패, 재시도 스윕 시작`);
@@ -435,8 +390,6 @@ async function main() {
     }
   }
 
-  // 오늘 이미 저장돼 있던 구 데이터(있다면)와 이번에 새로 채운 구 데이터를
-  // 합쳐서 이번 실행에서도 여전히 실패한 구가 있어도 기존 성공분은 보존한다.
   const newlyFetched = results.filter(Boolean);
   const districtsMap = new Map(existingIsToday ? (existing.districts ?? []).map((d) => [d.code, d]) : []);
   for (const d of newlyFetched) districtsMap.set(d.code, d);
@@ -505,8 +458,6 @@ async function main() {
   const overall = { sale: overallSale, saleNational84: overallSaleNational84, jeonse: overallJeonse, wolse: overallWolse };
   const period = yearMonths[0];
 
-  // 히스토리는 변화율 계산 없이 원값만 저장(나중에 다른 기준일로도 재계산
-  // 가능하게), 화면에 보여줄 오늘자 realestate.json에만 1주일 전 대비 증감을 붙인다.
   const history = await readHistory();
   const baseline = findBaseline(history, now);
   const withChanges = attachChanges(overall, districts, baseline);

@@ -62,7 +62,6 @@ async function main() {
   try {
     previous = JSON.parse(await readFile(outFile, "utf-8"));
   } catch {
-    // 최초 실행이면 이전 데이터 없음
   }
 
   const [kospi, usdKrw, baseRate] = await Promise.all([
@@ -88,7 +87,6 @@ async function appendHistory(now, snapshot) {
   try {
     history = JSON.parse(await readFile(historyFile, "utf-8"));
   } catch {
-    // 최초 실행이면 이전 히스토리 없음
   }
 
   const today = kstDateString(now);
@@ -96,7 +94,7 @@ async function appendHistory(now, snapshot) {
 
   const idx = history.findIndex((h) => h.date === today);
   if (idx >= 0) {
-    history[idx] = entry; // 같은 날 재실행 시 덮어쓰기 (중복 방지)
+    history[idx] = entry;
   } else {
     history.push(entry);
   }

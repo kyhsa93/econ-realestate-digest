@@ -43,8 +43,6 @@
       --border: #2a2d35;
     }
   }
-  /* data-theme는 사용자가 수동으로 고른 테마. [data-theme=...]가 :root보다
-     구체적이라 OS 설정(prefers-color-scheme)보다 항상 우선한다. */
   :root[data-theme="dark"] {
     color-scheme: dark;
     --bg: #0f1115;
@@ -102,9 +100,6 @@
     text-decoration: none;
   }
   .back-link:hover { text-decoration: underline; }
-  /* 페이지가 둘 이상이 되면서(다이제스트/금리 비교) 서로 오갈 수 있는 진입점을
-     헤더 바로 아래 둔다. 본문 중간의 작은 링크만으로는 다른 페이지가 있다는
-     사실 자체를 알아채기 어렵다. */
   .page-nav {
     display: flex;
     gap: 6px;
@@ -207,16 +202,11 @@
     font-size: 0.78rem;
     margin-left: 4px;
   }
-  /* 값 자리를 대신하는 표시라 tx-count보다는 눈에 들어와야 하지만,
-     실제 수치와 같은 무게로 읽히면 안 된다. */
   .data-table .low-sample {
     color: var(--muted);
     font-size: 0.82rem;
     font-style: italic;
   }
-  /* 부동산 테이블은 셀 하나에 값+증감+거래건수가 다 들어가서 nowrap이면
-     가로 스크롤이 지나치게 길어진다. 이 테이블만 줄바꿈을 허용해서
-     셀 안에서 알아서 두 줄로 접히게 한다. */
   .realestate-table {
     white-space: normal;
   }
@@ -289,8 +279,6 @@
     line-height: 1.45;
     margin-top: 3px;
   }
-  /* 이미 눌러본 기사는 흐리게 - 매일 여러 번 들르는 사용자가 새 기사만
-     빠르게 훑을 수 있게 한다(방문 기록은 localStorage에만 남는다). */
   .news-item.read > a {
     color: var(--muted);
   }
@@ -348,9 +336,6 @@
     border-radius: 10px;
     padding: 16px;
   }
-  /* white-space: pre-wrap을 쓰면 아래 렌더 코드가 만든 HTML의 들여쓰기/줄바꿈
-     (블록 요소 사이의 공백 텍스트 노드)까지 그대로 살아나서 카테고리마다 빈 줄이
-     여러 개 생긴다. 줄바꿈은 카테고리 블록과 <br>로 이미 표현하므로 쓰지 않는다. */
   #summary-box {
     color: var(--fg);
     font-size: 0.95rem;
@@ -629,9 +614,6 @@
 </main>
 
 <script>
-  // ---- i18n -----------------------------------------------------------
-  // 이 사이트의 실제 콘텐츠(뉴스 제목, AI 요약)는 한국어 소스 그대로이며
-  // 번역하지 않는다. 언어 전환은 UI 레이블/문구에만 적용된다.
   const T = {
     ko: {
       title: "경제·부동산 데일리 다이제스트",
@@ -782,18 +764,9 @@
 
   function getInitialLocale() {
     const saved = window.localStorage.getItem("lang");
-    // 대상 독자가 한국어권이라 static meta(description/OG/JSON-LD 등)도
-    // 전부 한국어로 작성돼 있음 - 기본값을 en으로 두면 첫 방문자에게
-    // 하이드레이션 후 렌더링되는 title/meta가 영어로 덮어써져 static
-    // 태그와 어긋나므로(=검색엔진이 실제로 색인하는 언어가 영어가 됨)
-    // ko를 기본값으로 함.
     return saved === "en" || saved === "ko" ? saved : "ko";
   }
 
-  // ---- 테마(라이트/다크/자동) --------------------------------------------
-  // "자동"(기본값)은 OS의 prefers-color-scheme을 그대로 따르고, data-theme
-  // 속성이 붙으면(사용자가 직접 고르면) CSS 쪽 [data-theme=...] 규칙이
-  // 미디어쿼리보다 우선해서 덮어쓴다.
   const THEME_ICONS = { auto: "🌓", light: "☀️", dark: "🌙" };
   let theme = "auto";
 
@@ -814,10 +787,8 @@
     if (icon) icon.textContent = THEME_ICONS[theme];
   }
 
-  // main()의 데이터 로딩(fetch)을 기다리지 않고 즉시 적용해 테마 깜빡임을 피한다.
   applyTheme(getInitialTheme());
 
-  // ---- data cache (재조회 없이 언어 전환 시 재렌더링하기 위함) ----------
   const cache = {
     market: null,
     news: null,
@@ -829,9 +800,6 @@
     realestateHistory: null,
   };
 
-  // 뉴스/시장지표/부동산/요약을 각각 별도 "아카이브 페이지"로 만드는 대신,
-  // 메인 페이지 자체가 ?date=YYYY-MM-DD 쿼리를 받으면 그 날짜의 히스토리
-  // 데이터로 똑같은 섹션 구성을 그대로 렌더링한다 (실시간 환율만 예외).
   const viewDate = new URLSearchParams(location.search).get("date");
   const isArchiveView = !!viewDate;
 
@@ -843,11 +811,6 @@
     return (Array.isArray(history) ? history : []).find((h) => h.date === date) ?? null;
   }
 
-  // 원/달러 환율은 브라우저에서 직접 exchangerate.fun(무료, 키 불필요,
-  // CORS 개방, 대략 1시간 이내로 갱신)을 호출해서 일자별 배치 값보다 훨씬
-  // 신선한 값을 보여준다. 코스피는 쓰던 소스가 다른 도메인의 요청을
-  // 403으로 막아서(자체 CORS 없음) 브라우저에서 직접 못 가져오고, 기존
-  // 배치 값(하루 1회)을 그대로 쓴다. 실패해도 배치 값으로 조용히 폴백.
   let liveUsdKrw = null;
 
   async function fetchLiveUsdKrw() {
@@ -954,10 +917,6 @@
     return NaN;
   }
 
-  // renderHistory/renderRealestateHistory가 공통으로 쓰는 카드 마크업.
-  // 스파크라인은 상대적인 등락 "모양"만 보여줘서 지금 값이 최근 30일 중
-  // 어느 위치인지 감이 안 온다는 피드백을 반영해, 현재값과 최고/최저를
-  // 텍스트로 같이 보여준다.
   function historyCardHtml({ label, values, format, firstDate, lastDate }) {
     const current = values[values.length - 1];
     const min = Math.min(...values);
@@ -993,9 +952,6 @@
         format: (v) => v.toFixed(2),
       },
       {
-        // 기준금리는 금통위 회의(대략 1~2개월 간격) 때만 바뀌어서 대부분
-        // 평평한 선으로 보이지만, 실제로 바뀌는 시점을 한눈에 보여주는
-        // 용도로는 여전히 유효하다.
         label: t("historyBaseRateLabel"),
         get: (h) => parseNumeric(h.baseRate?.value),
         format: (v) => `${v.toFixed(2)}%`,
@@ -1027,14 +983,9 @@
     return `<span class="change ${dir}">${arrow}${percentText}</span>`;
   }
 
-  // 전월세 기능 추가 전에는 sale/jeonse/wolse로 감싸지 않고 매매 값을
-  // overall/district 객체에 바로 두는 평평한 포맷이었다. 그 시절 마지막으로
-  // 성공한 데이터가 배포된 상태에서 이 화면 코드만 먼저 갱신되면(예: API 호출
-  // 한도로 새 포맷 데이터가 아직 안 만들어진 경우) 행이 통째로 비어 보이므로,
-  // 옛 포맷도 sale로 감싸서 인식하게 한다.
   function normalizeRealestateEntry(entry) {
     if (!entry) return entry;
-    if (entry.sale || entry.jeonse || entry.wolse) return entry; // 이미 새 포맷
+    if (entry.sale || entry.jeonse || entry.wolse) return entry;
     if (typeof entry.avgPricePerPyeong10k !== "number") return entry;
     return {
       ...entry,
@@ -1053,15 +1004,8 @@
     return `<span class="tx-count">${t("realestateCountSuffix")(metric.transactionCount)}</span>`;
   }
 
-  // 자치구 평균은 그 달에 신고된 거래만으로 낸다. 월초에는 구 하나에 신고가
-  // 한두 건뿐인 경우가 흔해서, 그 값은 "그 구의 시세"가 아니라 "그 아파트
-  // 한 채의 가격"에 가깝다. 그런데 표가 평당가 내림차순이라 비싼 한 건이
-  // 잡힌 구가 순위 맨 위로 올라와 버린다 - 건수를 옆에 적어두는 것만으로는
-  // 그 오해를 못 막아서, 아예 값을 내지 않고 순위에서도 뺀다.
   const MIN_REPORTED_TRANSACTIONS = 5;
 
-  // transactionCount가 아예 없는 건 과거 기록 포맷이라 판단할 근거가 없다.
-  // 모르는 걸 부족하다고 단정하지는 않는다.
   function hasEnoughSample(metric) {
     if (!metric || metric.transactionCount == null) return true;
     return metric.transactionCount >= MIN_REPORTED_TRANSACTIONS;
@@ -1077,9 +1021,6 @@
     return ` title="${t("realestateChangeVs")(metric.baselineDate)}"`;
   }
 
-  // 매매/전세는 값 하나에 증감(change)을 바로 붙이고, 월세는 보증금/월세를
-  // 각각 따로 증감(depositChange/monthlyRentChange)으로 표시한다. 거래건수는
-  // 자치구·서울 전체(overall) 행 모두 같은 셀 렌더러를 쓰므로 자동으로 같이 보임.
   function realestateSaleCellHtml(sale) {
     if (!sale) return "-";
     if (!hasEnoughSample(sale)) return realestateLowSampleHtml(sale);
@@ -1106,7 +1047,6 @@
 
   function realestateRowHtml(rawEntry, label, isOverall) {
     const entry = normalizeRealestateEntry(rawEntry);
-    // 서울 전체(overall) 행은 검색 필터로 걸러지지 않게 data-district-name을 안 붙인다.
     const searchAttr = isOverall ? "" : ` data-district-name="${label}"`;
     return `
       <tr class="${isOverall ? "overall-row" : ""}"${searchAttr}>
@@ -1127,8 +1067,6 @@
     });
   }
 
-  // 값을 감춘 구는 순위 근거도 없으므로 정렬에서 0으로 떨어뜨려 표 아래로 보낸다.
-  // 감춘 값으로 계속 줄을 세우면 화면에서만 안 보일 뿐 순위는 그대로 왜곡된다.
   function realestateSortValue(rawEntry) {
     const entry = normalizeRealestateEntry(rawEntry);
     if (hasEnoughSample(entry.sale)) {
@@ -1159,18 +1097,9 @@
     ];
     tbody.innerHTML = rows.join("");
     meta.textContent = t("realestatePeriodLabel")(realestate.period ?? "");
-    applyRealestateSearch(); // 테이블이 새로 그려지면 입력값 기준으로 다시 필터링
+    applyRealestateSearch();
   }
 
-  // 거래량(transactionCount)은 계약일이 아니라 "이번 달 누적 신고 건수"의
-  // 스냅샷이라, 월중에는 대체로 우상향하다가 월이 바뀌는 시점에 다시 작은
-  // 값으로 꺾이는 톱니 모양으로 나타난다(overall.sale 집계와 동일한 특성,
-  // withSaleChange 주변 주석 참고).
-  // "" = 서울 전체(overall). 구를 선택하면 history 각 날짜 스냅샷의
-  // districts 배열에서 같은 code를 찾아 그 구만의 추이를 보여준다 -
-  // 서버 쪽 realestate-history.json에 이미 구별 원값이 통째로 저장돼
-  // 있어서(appendHistory가 overall/districts를 그대로 남김) 백엔드
-  // 변경 없이 프론트에서만 필터링하면 된다.
   let selectedDistrictCode = "";
 
   function populateDistrictSelect() {
@@ -1198,10 +1127,6 @@
       ? (cache.realestate?.districts ?? []).find((d) => d.code === selectedDistrictCode)?.name ?? ""
       : t("realestateOverallOption");
     const countFormat = (v) => t("realestateCountSuffix")(Math.round(v));
-    // 가장 자주 찾는 두 지표(평당가/매매 거래량)를 앞에 두고 나머지는
-    // <details>로 접어서, 카드가 계속 늘어나도 기본 화면은 짧게 유지한다.
-    // 표에서 가린 값이 추이 그래프에서는 그대로 찍히면 같은 오해가 그대로 남는다.
-    // 표본이 부족한 날짜는 점 자체를 빼고 그린다(거래량 자체는 평균이 아니라 그대로 쓴다).
     const pricePoint = (metric, value) => (hasEnoughSample(metric) ? value : undefined);
     const series = [
       { label: t("realestateHistoryLabel")(scopeName), get: (h) => pricePoint(getScoped(h)?.sale, getScoped(h)?.sale?.avgPricePerPyeong10k), format: formatPyeongPrice },
@@ -1236,16 +1161,10 @@
     grid.innerHTML = html;
   }
 
-  // 뉴스 제목은 AI가 별도로 영어 번역(titleEn)을 만들어두면 그걸 쓰고,
-  // 없으면(번역 실패/아직 처리 전) 원문 한국어로 대체한다.
   function pickTitle(item) {
     return locale === "en" ? item.titleEn ?? item.title : item.title;
   }
 
-  // 카테고리 라벨. 실제 분류(어떤 기사가 어느 카테고리인지)는 수집 단계의
-  // scripts/categories.mjs가 정하고, 기사에는 그 key만 저장된다. 여기 있는 건
-  // key -> 화면 라벨 대응표뿐이라, categories.mjs에서 key를 추가할 때만 같이
-  // 손보면 된다. (모르는 key는 아래에서 "기타"로 떨어진다.)
   const NEWS_CATEGORY_LABELS = {
     rates: { ko: "금리·예금·투자상품", en: "Rates & Deposits" },
     realestate: { ko: "부동산", en: "Real Estate" },
@@ -1260,8 +1179,6 @@
   let newsCategoryFilter = "all";
   let newsQuery = "";
 
-  // 읽은 기사 표시는 localStorage에만 저장한다(서버로 안 보냄). 무한정 쌓이지
-  // 않게 최근 것만 남긴다.
   const READ_NEWS_KEY = "readNews";
   const READ_NEWS_MAX = 300;
 
@@ -1284,7 +1201,6 @@
     try {
       window.localStorage.setItem(READ_NEWS_KEY, JSON.stringify(trimmed));
     } catch {
-      // 사생활 보호 모드 등 저장이 막힌 환경 - 표시만 못 할 뿐 기능엔 지장 없음
     }
   }
 
@@ -1296,8 +1212,6 @@
     });
   }
 
-  // 하루 여러 번 갱신되다 보니 "몇 시 몇 분"보다 "몇 시간 전"이 신선도를 훨씬
-  // 빨리 알려준다. 하루가 넘어가면 상대 표기가 오히려 헷갈려서 날짜로 돌아간다.
   function newsTimeLabel(iso) {
     if (!iso) return "";
     const then = new Date(iso).getTime();
@@ -1322,8 +1236,6 @@
 
   function renderNewsFilters(items) {
     const box = document.getElementById("news-filters");
-    // category 필드가 없던 시절에 저장된 지난 기록은 전부 "기타"로 몰려서
-    // 필터가 의미가 없다. 그런 날짜에는 칩 자체를 숨긴다.
     if (!items.some((item) => item.category)) {
       box.hidden = true;
       return;
@@ -1353,8 +1265,6 @@
   function newsItemHtml(item) {
     const timeLabel = newsTimeLabel(item.publishedAt);
     const timeTitle = item.publishedAt ? ` title="${absoluteNewsTime(item.publishedAt)}"` : "";
-    // 미리보기는 원문 그대로의 한국어라, 영어 화면에서는 제목만 보여준다
-    // (제목은 titleEn으로 번역본이 따로 있음).
     const preview =
       locale === "ko" && item.preview ? `<div class="news-preview">${escapeHtml(item.preview)}</div>` : "";
     const dupes = item.dupes?.length
@@ -1397,17 +1307,12 @@
       : `<li class="news-empty">${t("newsNoMatch")}</li>`;
   }
 
-  // summary 필드는 { ko, en } 객체(현재 포맷)이거나, 그 이전에 저장된
-  // 한국어 전용 문자열(과거 아카이브 기록)일 수 있어 둘 다 처리한다.
   function pickSummaryText(summaryField) {
     if (!summaryField) return null;
     if (typeof summaryField === "string") return summaryField;
     return summaryField[locale] ?? summaryField.ko ?? null;
   }
 
-  // 요약 카테고리에 딸린 기사(items)는 link만 기준으로 저장돼 있고 제목은
-  // 한국어 원문뿐이라, 영어 로케일에서는 오늘자/히스토리 뉴스 캐시에서 같은
-  // link를 찾아 translate-news.mjs가 만들어둔 titleEn을 재사용한다.
   function findNewsItemByLink(link) {
     const pools = [cache.news?.items, ...(cache.newsHistory ?? []).map((h) => h.items)].filter(Boolean);
     for (const items of pools) {
@@ -1426,12 +1331,9 @@
     return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
 
-  // categories 필드가 없는 과거 형식(줄바꿈으로 구분된 통짜 텍스트)도, "- 라벨: 내용"
-  // 형태인 줄(주로 폴백 시 헤드라인 나열 줄)은 라벨만이라도 굵게 표시한다.
-  // LLM이 생성한 성공 문장 줄은 애초에 라벨이 안 붙어 있어 이 처리로도 못 살린다.
   function plainSummaryHtml(text) {
     return text
-      .replace(/\n{4,}/g, "\n\n\n") // 빈 줄이 연속 두 줄을 넘지 않도록
+      .replace(/\n{4,}/g, "\n\n\n")
       .trim()
       .split("\n")
       .map((line) => {
@@ -1477,8 +1379,6 @@
     if (hasCategories) {
       box.innerHTML = categories.map(summaryCategoryHtml).join("");
     } else {
-      // 카테고리 링크 정보가 없는 과거 아카이브 기록은 통짜 텍스트로 표시하되,
-      // "- 라벨: 내용" 형태인 줄만이라도 라벨을 굵게 강조한다.
       box.innerHTML = plainSummaryHtml(text);
     }
 
@@ -1488,9 +1388,6 @@
     box.appendChild(meta);
   }
 
-  // 아카이브(?date=) 조회 시에는 실시간 데이터 대신 각 히스토리 파일에서
-  // 해당 날짜 기록을 찾아 그대로 같은 렌더 함수에 넘긴다. 히스토리 항목은
-  // updatedAt만 없을 뿐 나머지 필드 구조는 실시간 파일과 동일하다.
   function effectiveNews() {
     if (!isArchiveView) return cache.news;
     const entry = findByDate(cache.newsHistory, viewDate);
@@ -1499,8 +1396,6 @@
   function effectiveSummary() {
     if (!isArchiveView) return cache.summary;
     const entry = findByDate(cache.summaryHistory, viewDate);
-    // 히스토리 기록에는 updatedAt이 없어서 summaryMeta 표시용으로 날짜
-    // 자정(KST) 기준 값을 대신 채워 넣는다.
     return entry ? { ...entry, updatedAt: entry.updatedAt ?? `${entry.date}T00:00:00+09:00` } : null;
   }
   function effectiveMarket() {
@@ -1531,7 +1426,7 @@
       backLink.hidden = false;
       backLink.textContent = t("archiveBackLink");
       document.getElementById("updated").textContent = t("archiveViewing")(viewDate);
-      updateSchedule.hidden = true; // 지난 기록을 보는 중에는 "매일 갱신" 안내가 혼란스러움
+      updateSchedule.hidden = true;
       return;
     }
     backLink.hidden = true;
@@ -1602,7 +1497,6 @@
     applyTheme(order[(order.indexOf(theme) + 1) % order.length]);
   });
 
-  // 오늘보다 미래 날짜는 애초에 데이터가 없으니 날짜 선택기에서 막아둔다.
   document.getElementById("archive-date-input").max = kstToday();
 
   document.getElementById("archive-date-jump").addEventListener("submit", (e) => {
@@ -1631,9 +1525,6 @@
     renderNews(effectiveNews());
   });
 
-  // 기사 링크는 새 탭으로 열려서 페이지가 그대로 남는다. 클릭 즉시 읽음 표시를
-  // 반영하되, 목록 전체를 다시 그리면 펼쳐둔 "다른 매체" 등이 닫히므로 해당
-  // 항목에만 클래스를 붙인다.
   document.getElementById("news-list").addEventListener("click", (e) => {
     const link = e.target.closest(".news-item > a");
     if (!link) return;
@@ -1641,11 +1532,6 @@
     link.parentElement.classList.add("read");
   });
 
-  // ---- 공유하기 -----------------------------------------------------------
-  // 모바일 등 Web Share API 지원 브라우저는 네이티브 공유 시트를 띄우고,
-  // 미지원 환경(대부분의 데스크톱 브라우저)은 현재 URL(아카이브의 ?date=
-  // 포함)을 클립보드로 복사한다. 두 방식 다 실패하면 prompt로 링크를 보여줘
-  // 수동 복사라도 가능하게 한다.
   const shareButton = document.getElementById("share-button");
   const shareIcon = shareButton.querySelector("span");
 
@@ -1664,8 +1550,7 @@
         await navigator.share(shareData);
         return;
       } catch (err) {
-        if (err && err.name === "AbortError") return; // 사용자가 공유 시트를 취소함
-        // 공유 시트 자체가 실패하면 클립보드 복사로 폴백
+        if (err && err.name === "AbortError") return;
       }
     }
 
@@ -1679,7 +1564,6 @@
 
   shareButton.addEventListener("click", shareCurrentPage);
 
-  // cache 키 -> 히스토리 파일 이름
   const HISTORY_FILES = {
     history: "market-history",
     summaryHistory: "summary-history",
@@ -1691,22 +1575,19 @@
     try {
       cache[cacheKey] = await loadJson(HISTORY_FILES[cacheKey]);
     } catch {
-      cache[cacheKey] = null; // 추이 카드만 비고 오늘 데이터 화면은 그대로 동작
+      cache[cacheKey] = null;
     }
   }
 
   async function main() {
     locale = getInitialLocale();
 
-    // 히스토리 파일은 4개 합쳐 100KB가 넘는데, 오늘 화면의 첫 렌더(요약/시장/
-    // 부동산/뉴스)에는 필요 없다. 오늘 데이터부터 그리고 추이 카드는 뒤따라 채운다.
     const todayKeys = ["market", "news", "summary", "realestate"];
     const results = await Promise.allSettled(todayKeys.map((key) => loadJson(key)));
     todayKeys.forEach((key, i) => {
       cache[key] = results[i].status === "fulfilled" ? results[i].value : null;
     });
 
-    // 아카이브(?date=) 조회는 히스토리가 곧 본문이라 먼저 다 받고 한 번에 그린다.
     if (isArchiveView) {
       await Promise.all(Object.keys(HISTORY_FILES).map(loadHistoryInto));
       applyLocale(locale);
@@ -1715,8 +1596,6 @@
 
     applyLocale(locale);
 
-    // 오늘 화면에서 히스토리가 쓰이는 곳은 추이 스파크라인뿐이다
-    // (뉴스/요약 히스토리는 아카이브 조회에서만 필요해서 아예 받지 않는다).
     await Promise.all([loadHistoryInto("history"), loadHistoryInto("realestateHistory")]);
     renderHistory(cache.history);
     renderRealestateHistory(cache.realestateHistory);
@@ -1724,11 +1603,9 @@
 
   main();
 
-  // 아카이브(?date=) 조회 중에는 과거 환율 값을 보여줘야 하므로 실시간
-  // 환율로 덮어쓰지 않는다.
   if (!isArchiveView) {
     fetchLiveUsdKrw();
-    setInterval(fetchLiveUsdKrw, 5 * 60 * 1000); // 소스 자체가 대략 1시간마다 갱신되므로 5분이면 충분
+    setInterval(fetchLiveUsdKrw, 5 * 60 * 1000);
   }
 
   if ("serviceWorker" in navigator) {
@@ -1737,11 +1614,6 @@
     });
   }
 
-  // ---- GA4 / 애드센스 -----------------------------------------------
-  // 이 값들은 kyhsa93.github.io 블로그(같은 origin, 같은 Google 계정)와
-  // 동일한 GA4 속성/애드센스 게시자를 그대로 재사용한다. GA 측정 ID와
-  // 애드센스 게시자 ID는 공개 값(모든 방문자의 브라우저 네트워크 탭에
-  // 그대로 노출됨)이라 시크릿으로 다룰 필요가 없다.
   const GA_MEASUREMENT_ID = "G-Z1LH7S1ZE5";
   const ADSENSE_CLIENT_ID = "ca-pub-1195159445218373";
 

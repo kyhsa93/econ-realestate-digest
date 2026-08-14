@@ -43,8 +43,6 @@
       --border: #2a2d35;
     }
   }
-  /* data-theme는 사용자가 수동으로 고른 테마. [data-theme=...]가 :root보다
-     구체적이라 OS 설정(prefers-color-scheme)보다 항상 우선한다. */
   :root[data-theme="dark"] {
     color-scheme: dark;
     --bg: #0f1115;
@@ -102,8 +100,6 @@
     text-decoration: none;
   }
   .back-link:hover { text-decoration: underline; }
-  /* index.html과 같은 페이지 네비게이션. 두 페이지를 오갈 수 있다는 걸
-     본문을 읽기 전에 알 수 있어야 한다. */
   .page-nav {
     display: flex;
     gap: 6px;
@@ -401,9 +397,6 @@
 </main>
 
 <script>
-  // ---- i18n -----------------------------------------------------------
-  // 금융사명·상품명은 공시 원문(한국어) 그대로 둔다. 번역하면 실제로 검색해서
-  // 찾아가야 하는 상품 이름이 달라져 오히려 쓸모가 없어진다.
   const T = {
     ko: {
       title: "예금·적금·대출 금리 비교",
@@ -527,11 +520,9 @@
 
   function getInitialLocale() {
     const saved = window.localStorage.getItem("lang");
-    // index.html과 같은 이유로 ko가 기본값이다(static meta가 전부 한국어).
     return saved === "en" || saved === "ko" ? saved : "ko";
   }
 
-  // ---- 테마(라이트/다크/자동) --------------------------------------------
   const THEME_ICONS = { auto: "🌓", light: "☀️", dark: "🌙" };
   let theme = "auto";
 
@@ -554,7 +545,6 @@
 
   applyTheme(getInitialTheme());
 
-  // ---- 상태 -------------------------------------------------------------
   const cache = { rates: null, history: null };
 
   const CATEGORY_KEYS = ["deposit", "saving", "mortgage", "rentLoan"];
@@ -578,7 +568,6 @@
     return Array.isArray(list) ? list : [];
   }
 
-  // ---- 유틸 -------------------------------------------------------------
   function escapeHtml(s) {
     return String(s ?? "")
       .replace(/&/g, "&amp;")
@@ -591,7 +580,6 @@
     return typeof v === "number" && Number.isFinite(v) ? `${v.toFixed(2)}%` : "-";
   }
 
-  /** 대출은 최저~최고로 공시되는 상품이 많아서 범위를 그대로 보여준다. */
   function fmtRateRange(min, max) {
     const hasMin = typeof min === "number" && Number.isFinite(min);
     const hasMax = typeof max === "number" && Number.isFinite(max);
@@ -618,7 +606,6 @@
     return locale === "ko" ? `${year}년 ${Number(mon)}월` : `${mon}/${year}`;
   }
 
-  /** 최고한도(원)를 억/만원 단위로 줄여 쓴다. 공시 값이 그대로면 자릿수가 너무 길다. */
   function fmtAmount(won) {
     if (typeof won !== "number" || !Number.isFinite(won)) return null;
     if (locale !== "ko") return won.toLocaleString("en-US") + " KRW";
@@ -639,7 +626,6 @@
     return res.json();
   }
 
-  // ---- 스파크라인 -------------------------------------------------------
   function sparklineSvg(values) {
     const points = values.filter((v) => typeof v === "number" && Number.isFinite(v));
     if (points.length < 2) return "";
@@ -657,11 +643,9 @@
     </svg>`;
   }
 
-  // ---- 추이 카드 --------------------------------------------------------
   function historyEntryRate(entry, key) {
     const value = entry?.[key];
     if (!value) return null;
-    // 예·적금은 권역별로 나눠 저장하므로 은행 → 저축은행 순으로 있는 쪽을 쓴다.
     if (key === "deposit12" || key === "saving12") {
       return value.savingsBank?.rate ?? value.bank?.rate ?? null;
     }
@@ -684,9 +668,6 @@
     const latest = latestEntry ? historyEntryRate(latestEntry, key) : null;
     const top = latestEntry ? historyEntryTop(latestEntry, key) : null;
     if (latest === null) return "";
-    // 적금 최고금리는 14%처럼 튀는 값이 나오는데 기본금리는 2%인 식이라(매일 출석
-    // 같은 우대조건을 다 채웠을 때의 금리다), 기본금리를 같이 적어두지 않으면
-    // 카드 숫자만 보고 오해하게 된다.
     const parts = [];
     if (typeof top?.baseRate === "number" && top.baseRate !== top.rate) {
       parts.push(`${t("historyBase")} ${fmtRate(top.baseRate)}`);
@@ -716,7 +697,6 @@
     grid.innerHTML = cards || `<div class="placeholder">${escapeHtml(t("historyEmpty"))}</div>`;
   }
 
-  // ---- 탭/필터 ----------------------------------------------------------
   function renderTabs() {
     const tabs = document.getElementById("tabs");
     tabs.innerHTML = CATEGORY_KEYS.map(
@@ -727,7 +707,6 @@
     ).join("");
   }
 
-  /** 현재 카테고리 데이터에 실제로 존재하는 저축 기간만 고른다. */
   function availableTerms() {
     const terms = new Set();
     for (const product of products()) {
@@ -738,7 +717,6 @@
     return [...terms].sort((a, b) => a - b);
   }
 
-  /** 대출 카테고리에서 고를 수 있는 금리 유형(고정/변동 등)을 모은다. */
   function availableRateTypes() {
     const types = new Set();
     for (const product of products()) {
@@ -757,7 +735,6 @@
 
     if (isSavingCategory(state.category)) {
       const terms = availableTerms();
-      // 12개월이 없는 데이터면 가장 가까운 기간으로 자동 보정한다.
       if (terms.length && !terms.includes(state.term)) {
         state.term = terms.reduce((a, b) => (Math.abs(b - 12) < Math.abs(a - 12) ? b : a), terms[0]);
       }
@@ -837,14 +814,12 @@
     }
   }
 
-  // ---- 상품 표 ----------------------------------------------------------
   function matchesQuery(product) {
     const q = state.query.trim().toLowerCase();
     if (!q) return true;
     return `${product.company ?? ""} ${product.name ?? ""}`.toLowerCase().includes(q);
   }
 
-  /** 화면에 그릴 행 목록을 만든다. 상품 하나에서 현재 조건에 맞는 옵션 하나를 골라 붙인다. */
   function visibleRows() {
     const rows = [];
     for (const product of products()) {
@@ -852,7 +827,6 @@
 
       if (isSavingCategory(state.category)) {
         if (!state.sectors[product.sector ?? "bank"]) continue;
-        // 같은 기간에 단리/복리가 따로 공시되기도 해서, 최고금리가 높은 쪽을 대표로 쓴다.
         let best = null;
         for (const opt of product.options ?? []) {
           if (opt.term !== state.term) continue;
@@ -873,7 +847,6 @@
       }
     }
 
-    // 예·적금은 높은 금리가, 대출은 낮은 금리가 위로 온다.
     rows.sort((a, b) => (isSavingCategory(state.category) ? b.sort - a.sort : a.sort - b.sort));
     return rows;
   }
@@ -982,7 +955,6 @@
     }
   }
 
-  // ---- 전체 렌더 --------------------------------------------------------
   function renderMeta() {
     document.documentElement.lang = locale;
     document.title = t("title");
@@ -1028,7 +1000,6 @@
     }
   }
 
-  // ---- 헤더 버튼 --------------------------------------------------------
   document.getElementById("lang-toggle").addEventListener("click", () => {
     locale = locale === "ko" ? "en" : "ko";
     window.localStorage.setItem("lang", locale);
@@ -1046,11 +1017,9 @@
       if (navigator.share) await navigator.share(shareData);
       else await navigator.clipboard.writeText(location.href);
     } catch {
-      // 사용자가 공유를 취소한 경우 - 아무것도 하지 않는다.
     }
   });
 
-  // ---- 부트스트랩 -------------------------------------------------------
   async function main() {
     try {
       cache.rates = await loadJson("rates");
@@ -1066,7 +1035,6 @@
     try {
       cache.history = await loadJson("rates-history");
     } catch {
-      // 추이는 없어도 본문은 보여준다.
       cache.history = [];
     }
 

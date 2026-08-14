@@ -10,8 +10,6 @@ import { promisify } from "node:util";
 const execFileAsync = promisify(execFile);
 const scriptPath = path.resolve(import.meta.dirname, "../scripts/fetch-rates.mjs");
 
-// 금감원 API를 흉내내는 스텁. 실제 키 없이 페이지네이션·조인·폴백 경로를
-// 강제로 태워보기 위한 것이라, 응답 필드 이름은 실제 공시 응답과 맞춰둔다.
 function startStub(handler) {
   const server = createServer((req, res) => {
     const url = new URL(req.url, "http://localhost");
@@ -166,7 +164,6 @@ test("예·적금과 대출을 수집해 상품 목록과 히스토리를 저장
     await run(stub.base, outDir);
     const rates = await readJson(outDir, "rates.json");
 
-    // 은행·저축은행 두 권역이 한 목록으로 합쳐지고, 권역 태그가 붙어야 한다.
     assert.equal(rates.deposit.length, 2);
     assert.deepEqual(
       rates.deposit.map((p) => p.sector).sort(),
@@ -182,7 +179,6 @@ test("예·적금과 대출을 수집해 상품 목록과 히스토리를 저장
       [12, 24]
     );
 
-    // 대출은 권역이 은행 하나뿐이고 금리 필드가 대출용으로 매핑돼야 한다.
     assert.equal(rates.mortgage.length, 1);
     assert.equal(rates.mortgage[0].options[0].avg, 4.3);
     assert.equal(rates.mortgage[0].options[0].rateType, "변동금리");
@@ -190,7 +186,6 @@ test("예·적금과 대출을 수집해 상품 목록과 히스토리를 저장
 
     const history = await readJson(outDir, "rates-history.json");
     assert.equal(history.length, 1);
-    // 12개월 최고금리는 권역별로 나뉘어야 한다(합치면 저축은행 값만 보인다).
     assert.equal(history[0].deposit12.bank.rate, 2.6);
     assert.equal(history[0].deposit12.savingsBank.rate, 3.5);
     assert.equal(history[0].deposit12.savingsBank.company, "OK저축은행");
@@ -227,7 +222,6 @@ test("여러 페이지를 max_page_no만큼 이어서 가져온다", async () =>
   try {
     await run(stub.base, outDir);
     const rates = await readJson(outDir, "rates.json");
-    // 권역 2개 × 3페이지
     assert.equal(pagesServed, 6);
     assert.equal(rates.deposit.length, 6);
   } finally {
@@ -269,7 +263,6 @@ test("금리 옵션이 없는 상품은 목록에서 제외한다", async () => 
 test("일부 상품군이 실패하면 직전 데이터를 유지하고 나머지는 갱신한다", async () => {
   const stub = await startStub(({ endpoint, topFinGrpNo }) => {
     if (endpoint === "savingProductsSearch") {
-      // 인증키 오류처럼 err_cd가 정상이 아닌 응답
       return { json: { result: { err_cd: "010", err_msg: "미등록 인증키", total_count: "0" } } };
     }
     return {
@@ -307,7 +300,6 @@ test("일부 상품군이 실패하면 직전 데이터를 유지하고 나머�
   try {
     await run(stub.base, outDir);
     const rates = await readJson(outDir, "rates.json");
-    // 실패한 적금은 이전 값 그대로, 성공한 정기예금은 새 값으로
     assert.equal(rates.saving[0].name, "이전상품");
     assert.equal(rates.deposit[0].name, "새상품");
   } finally {
@@ -380,8 +372,6 @@ test("같은 기간에 단리·복리가 함께 공시되면 금리가 높은 �
 });
 
 test("공시 내용이 그대로면 rates.json을 다시 쓰지 않는다", async () => {
-  // 공시는 월 단위로 갱신돼서 대부분의 날은 내용이 같다. updatedAt만 새로 찍어
-  // 다시 쓰면 1MB짜리 파일이 매일 커밋된다.
   const stub = await startStub(({ endpoint, topFinGrpNo }) => {
     if (endpoint !== "depositProductsSearch") return { json: savingResponse({ products: [] }) };
     return {
@@ -403,7 +393,7 @@ test("공시 내용이 그대로면 rates.json을 다시 쓰지 않는다", asyn
   try {
     await run(stub.base, outDir);
     const first = await readJson(outDir, "rates.json");
-    await run(stub.base, outDir, { force: true }); // 하루 1회 가드를 넘겨 재조회
+    await run(stub.base, outDir, { force: true });
     const second = await readJson(outDir, "rates.json");
     assert.equal(second.updatedAt, first.updatedAt, "내용이 같은데 updatedAt이 갱신됨");
   } finally {
@@ -435,10 +425,9 @@ test("대표 금리가 그대로면 히스토리에 새 점을 찍지 않는다"
     const first = await readJson(outDir, "rates-history.json");
     assert.equal(first.length, 1);
 
-    // 어제 기록으로 바꿔둔 뒤 다시 돌리면, 값이 같으니 새 점이 붙지 않아야 한다.
     first[0].date = "2000-01-01";
     await writeFile(path.join(outDir, "rates-history.json"), JSON.stringify(first));
-    await run(stub.base, outDir, { force: true }); // 하루 1회 가드를 넘겨 재조회
+    await run(stub.base, outDir, { force: true });
 
     const second = await readJson(outDir, "rates-history.json");
     assert.equal(second.length, 1);
@@ -477,7 +466,6 @@ test("같은 날 다시 실행하면 API를 아예 호출하지 않는다", asyn
     assert.equal(calls, afterFirst, "같은 날인데 API를 다시 호출했다");
     assert.match(stdout, /이미 조회함/);
 
-    // 강제 옵션을 주면 다시 받는다.
     await run(stub.base, outDir, { force: true });
     assert.ok(calls > afterFirst, "RATES_FORCE=1인데도 호출하지 않았다");
   } finally {
@@ -486,8 +474,6 @@ test("같은 날 다시 실행하면 API를 아예 호출하지 않는다", asyn
 });
 
 test("요청에 User-Agent를 반드시 실어 보낸다", async () => {
-  // 실제 서버는 UA가 없으면 TLS 연결을 그냥 끊어버려서, 이게 빠지면
-  // 에러 응답조차 없이 조용히 실패한다.
   const seen = new Set();
   const stub = await startStub(({ userAgent }) => {
     seen.add(userAgent);

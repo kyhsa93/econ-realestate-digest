@@ -1,8 +1,5 @@
 name: Summary model experiment
 
-# 요약 모델을 바꾸기 전에 "같은 날 같은 뉴스"로 모델을 비교해보기 위한 수동 전용
-# 워크플로. 저장소에 커밋된 docs/data/news.json을 그대로 입력으로 쓰고(뉴스를 다시
-# 받지 않아야 모델 간 비교가 공정하다), 결과는 로그에만 출력하고 커밋/배포하지 않는다.
 on:
   workflow_dispatch:
     inputs:
@@ -22,9 +19,9 @@ jobs:
   experiment:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
 
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: "20"
 

@@ -1,15 +1,11 @@
 name: Digest update
 
-# 뉴스는 하루 4번, 시장지표/부동산/AI 요약은 아침 1번만 갱신한다. 뉴스까지 하루
-# 1회로 두면 저녁 방문자는 12시간 묵은 목록을 보게 되고, 반대로 부동산 실거래가
-# API는 일일 호출 한도가 있어 하루 여러 번 호출할 수 없다.
-# (정각은 GitHub Actions 스케줄 트리거가 몰려 지연이 커서 7분씩 밀어둠)
 on:
   schedule:
-    - cron: "7 23 * * *" # 08:07 KST - 전체 갱신
-    - cron: "7 3 * * *" # 12:07 KST - 뉴스만
-    - cron: "7 7 * * *" # 16:07 KST - 뉴스만
-    - cron: "7 11 * * *" # 20:07 KST - 뉴스만
+    - cron: "7 23 * * *"
+    - cron: "7 3 * * *"
+    - cron: "7 7 * * *"
+    - cron: "7 11 * * *"
   workflow_dispatch:
     inputs:
       mode:
@@ -31,32 +27,21 @@ jobs:
   update:
     runs-on: ubuntu-latest
     env:
-      # 수동 실행은 입력값을 그대로 쓰고, 스케줄 실행은 아침 크론만 full로 본다.
       MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.mode || (github.event.schedule == '7 23 * * *' && 'full' || 'news') }}
-      # 요약/번역 모두 같은 모델을 쓴다. 러너가 4코어 CPU(GPU 없음)/16GB RAM이라
-      # RAM에 들어가는 상한이 14b급(Q4 약 9GB)이고, 실제로 같은 뉴스로 비교 실행해
-      # 고른 값이다. qwen3는 thinking이 기본이라 반드시 꺼야 한다(안 끄면 응답에
-      # <think> 블록이 붙어 요약/번역이 통째로 폐기됨).
       OLLAMA_MODEL: qwen3:14b
       OLLAMA_THINK: "false"
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
 
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: "20"
 
       - run: npm ci
 
-      # 이 워크플로가 커밋을 GITHUB_TOKEN으로 올리기 때문에 test.yml이 트리거되지
-      # 않는다. 하루 4번 도는 이 실행이 곧 배포라, 테스트를 여기서 직접 돌리지
-      # 않으면 데이터 갱신 경로는 검증을 한 번도 거치지 않는다.
-      #
-      # 수집 전에 한 번 — 스크립트가 깨졌으면 뒤의 Ollama 설치·요약(20분)을
-      # 태우기 전에 멈추는 게 낫다.
       - name: 테스트 (수집 전)
         run: npm test
 
@@ -74,23 +59,17 @@ jobs:
           MOLIT_RENT_API_KEY: ${{ secrets.MOLIT_RENT_API_KEY }}
           MOLIT_RENT_API_ENDPOINT: ${{ secrets.MOLIT_RENT_API_ENDPOINT }}
 
-      # 금감원 공시는 월 단위(dcls_month)로 갱신돼서 하루 4번 부를 이유가 없다.
-      # 뉴스만 갱신하는 실행에서는 건너뛴다.
       - name: 예·적금·대출 금리 수집
         if: env.MODE == 'full'
         run: node scripts/fetch-rates.mjs
         env:
           FSS_FINLIFE_API_KEY: ${{ secrets.FSS_FINLIFE_API_KEY }}
 
-      # 뉴스만 갱신하는 실행에서도 새로 들어온 제목을 영어로 번역해야 해서
-      # 모델은 매번 준비한다(설치 + 9GB pull이 1분 남짓).
       - name: Ollama 설치 및 모델 준비
         env:
           OLLAMA_VERSION: v0.32.6
           OLLAMA_SHA256: dec2fa50d24e6868ca3c4c977d69d059399372105f951a9acc320a5a79aadcfc
         run: |
-          # 공식 install.sh를 curl | sh로 그대로 실행하는 대신, 버전을 고정하고
-          # GitHub 릴리스가 게시한 sha256sum.txt와 대조해 무결성을 검증한다.
           command -v zstd >/dev/null || (sudo apt-get update -y && sudo apt-get install -y zstd)
           curl -fsSL -o ollama.tar.zst \
             "https://github.com/ollama/ollama/releases/download/${OLLAMA_VERSION}/ollama-linux-amd64.tar.zst"
@@ -106,18 +85,12 @@ jobs:
           done
           ollama pull "$OLLAMA_MODEL"
 
-      # 요약도 뉴스와 함께 하루 4번 다시 만든다. 아침 1회만 만들던 때는 저녁
-      # 방문자에게 "오늘의 AI 요약"이 아침 뉴스 기준이라 아래 뉴스 목록과 내용이
-      # 어긋났다. (실행당 4분쯤 더 걸리지만 배치라 문제되지 않음)
       - name: AI 요약 생성
         run: node scripts/summarize-digest.mjs
 
       - name: 뉴스 제목 영어 번역
         run: node scripts/translate-news.mjs
 
-      # 수집 후에 한 번 더 — 방금 받아온 docs/data를 상대로 돈다. 위의 실행은
-      # 직전 커밋 데이터만 봤으므로, 응답 형태가 바뀌어 생긴 문제는 여기서만 걸린다.
-      # 커밋 직전에 두는 게 핵심이다: 여기서 멈추면 깨진 데이터가 배포되지 않는다.
       - name: 테스트 (수집 후)
         run: npm test
 
@@ -147,13 +120,13 @@ jobs:
           exit 1
 
       - name: Pages 배포
-        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b
 
       - name: Pages 아티팩트 업로드
-        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa
         with:
           path: "./docs"
 
       - name: Pages에 배포
         id: deployment
-        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128
