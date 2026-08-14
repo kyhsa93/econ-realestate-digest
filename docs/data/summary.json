@@ -1,20 +1,30 @@
 {
-  "updatedAt": "2026-08-14T04:58:50.642Z",
+  "updatedAt": "2026-08-14T06:08:11.853Z",
   "model": "qwen3:14b",
   "summary": {
-    "ko": "- 부동산 관련 주요 뉴스로는 세종대의 공공주택 복합사업 특강, 국힘의 부동산 대책에 대한 공세, 홍콩 증시의 하락, 세제개편안에 대한 국민 의견, 청년미래보금자리론의 실효성 논란 등이 보도되었다.\n- 6월 브라질 소매판매가 증가했고, 국고채 금리가 하락했으며, 엔화 가치가 하락한 것으로 나타났다.\n- 이억원이 가계대출 총량목표와 관련해 실수요 지원을 위한 조치라고 강조했고, 7월 금융권 가계대출 증가폭이 줄어든 소식이 전해졌다.\n- 한국 증시는 상승과 하락을 반복하며 혼조세를 보이고 있고, 중국과 일본 증시도 각각 상승 출발하는 등 글로벌 시장이 다양한 방향으로 움직이고 있다.",
-    "en": "- Major real estate-related news included a special lecture on the public housing complex project by Seoul National University, the conservative party's aggressive stance on real estate measures, the decline in the Hong Kong stock market, public opinion on the tax reform proposal, and controversy over the effectiveness of the Youth Future Housing Program.\n- June retail sales in Brazil increased, government bond yields fell, and the yen's value declined.\n- Lee Eok-won emphasized that the measures relate to supporting genuine demand in connection with the overall household loan target, and news was reported that the increase in household loans by the financial sector in July had decreased.\n- The Korean stock market is showing a mixed performance, repeatedly fluctuating between rises and falls, while Chinese and Japanese stock markets are also starting to rise, indicating that global markets are moving in various directions."
+    "ko": "- 부동산 관련 세제 개편안에 대한 국민의 부정적 인식, 오래된 아파트의 재개발 계획, 공공주택 사업에 대한 특강 개최, 정당의 부동산 대책에 대한 비판, 그리고 홍콩 증시의 하락이 오늘의 주요 경제 뉴스로 보도되었다.\n- 미국 30년물 국채금리가 상승했고, 브라질 소매판매가 증가했으며, 국고채 금리가 하락했고, 엔화 가치가 하락한 것으로 나타났다.\n- 이억원이 가계대출 총량목표와 관련해 실수요 지원을 위한 조치라고 밝히고, 7월 금융권 가계대출 증가 상황이 발표되었다.\n- 한국 증시와 환율 관련 뉴스에서 코스피와 코스닥의 상승·하락, 중국 증시의 상승, 외신이 전한 개미 투자자의 상황 등 다양한 동향이 보도되었다.",
+    "en": "- Negative public perception of the proposed real estate tax reform, redevelopment plans for old apartment complexes, a special lecture on public housing projects, criticism of political parties' real estate policies, and the decline in the Hong Kong stock market were reported as today's major economic news.\n- The 30-year U.S. Treasury bond yield rose, Brazilian retail sales increased, the government bond yield fell, and the yen's value declined.\n- The 200 million won was stated as a measure to support genuine demand in relation to the overall household loan target, and the increase in household loan amounts in the financial sector in July was announced.\n- Various trends, including the rise and fall of the KOSPI and KOSDAQ, the rise of the Chinese stock market, and the situation of retail investors as reported by foreign media, were covered in news related to the Korean stock market and exchange rate."
   },
   "categories": [
     {
       "key": "realestate",
       "name": "부동산",
       "nameEn": "Real Estate",
-      "lineKo": "부동산 관련 주요 뉴스로는 세종대의 공공주택 복합사업 특강, 국힘의 부동산 대책에 대한 공세, 홍콩 증시의 하락, 세제개편안에 대한 국민 의견, 청년미래보금자리론의 실효성 논란 등이 보도되었다.",
-      "lineEn": "Major real estate-related news included a special lecture on the public housing complex project by Seoul National University, the conservative party's aggressive stance on real estate measures, the decline in the Hong Kong stock market, public opinion on the tax reform proposal, and controversy over the effectiveness of the Youth Future Housing Program.",
+      "lineKo": "부동산 관련 세제 개편안에 대한 국민의 부정적 인식, 오래된 아파트의 재개발 계획, 공공주택 사업에 대한 특강 개최, 정당의 부동산 대책에 대한 비판, 그리고 홍콩 증시의 하락이 오늘의 주요 경제 뉴스로 보도되었다.",
+      "lineEn": "Negative public perception of the proposed real estate tax reform, redevelopment plans for old apartment complexes, a special lecture on public housing projects, criticism of political parties' real estate policies, and the decline in the Hong Kong stock market were reported as today's major economic news.",
       "isFallback": false,
       "fallbackReason": null,
       "items": [
+        {
+          "title": "“집 가진 사람도 불안”…세제개편안에 국민 45% “부동산 부정적 영향” [한국갤럽]",
+          "link": "https://www.mk.co.kr/news/realestate/12127953",
+          "source": "매일경제 부동산"
+        },
+        {
+          "title": "50년 된 산호아파트, 최고 35층 단지로 탈바꿈",
+          "link": "https://www.hankyung.com/article/202608141787i",
+          "source": "한국경제 부동산"
+        },
         {
           "title": "세종대, ‘도심 공공주택 복합사업의 현황과 미래’ 특강 개최",
           "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/14/BPZ2HHBU7JC6DFKW62PU2AJNIY/",
@@ -29,16 +39,6 @@
           "title": "[올댓차이나] 홍콩 증시, 기술주에 이익매물로 나흘째 하락 출발… H주 0.62%↓",
           "link": "https://www.newsis.com/view/NISX20260814_0003749389",
           "source": "뉴시스 경제"
-        },
-        {
-          "title": "국민 45% \"세제개편안, 부동산 시장에 부정적 영향줄 것\"[한국갤럽]",
-          "link": "https://www.yna.co.kr/view/AKR20260814072700001",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "“빌라 말고 아파트 사고 싶은데”…청년미래보금자리론 실효성은",
-          "link": "https://www.mk.co.kr/news/realestate/12127776",
-          "source": "매일경제 부동산"
         }
       ]
     },
@@ -46,11 +46,16 @@
       "key": "rates",
       "name": "금리·예금·투자상품",
       "nameEn": "Rates, Deposits & Investment Products",
-      "lineKo": "6월 브라질 소매판매가 증가했고, 국고채 금리가 하락했으며, 엔화 가치가 하락한 것으로 나타났다.",
-      "lineEn": "June retail sales in Brazil increased, government bond yields fell, and the yen's value declined.",
+      "lineKo": "미국 30년물 국채금리가 상승했고, 브라질 소매판매가 증가했으며, 국고채 금리가 하락했고, 엔화 가치가 하락한 것으로 나타났다.",
+      "lineEn": "The 30-year U.S. Treasury bond yield rose, Brazilian retail sales increased, the government bond yield fell, and the yen's value declined.",
       "isFallback": false,
       "fallbackReason": null,
       "items": [
+        {
+          "title": "美 30년물 국채금리 5.22%…2001년 이후 최고",
+          "link": "https://www.newsis.com/view/NISX20260814_0003749333",
+          "source": "뉴시스 경제"
+        },
         {
           "title": "6월 브라질 소매판매 0.5%↑…\"고금리에도 소비 견조\"",
           "link": "https://www.newsis.com/view/NISX20260814_0003749426",
@@ -72,8 +77,8 @@
       "key": "other",
       "name": "기타 경제 소식",
       "nameEn": "Other Economic News",
-      "lineKo": "이억원이 가계대출 총량목표와 관련해 실수요 지원을 위한 조치라고 강조했고, 7월 금융권 가계대출 증가폭이 줄어든 소식이 전해졌다.",
-      "lineEn": "Lee Eok-won emphasized that the measures relate to supporting genuine demand in connection with the overall household loan target, and news was reported that the increase in household loans by the financial sector in July had decreased.",
+      "lineKo": "이억원이 가계대출 총량목표와 관련해 실수요 지원을 위한 조치라고 밝히고, 7월 금융권 가계대출 증가 상황이 발표되었다.",
+      "lineEn": "The 200 million won was stated as a measure to support genuine demand in relation to the overall household loan target, and the increase in household loan amounts in the financial sector in July was announced.",
       "isFallback": false,
       "fallbackReason": null,
       "items": [
@@ -98,8 +103,8 @@
       "key": "stocks",
       "name": "증시·환율",
       "nameEn": "Stocks & FX",
-      "lineKo": "한국 증시는 상승과 하락을 반복하며 혼조세를 보이고 있고, 중국과 일본 증시도 각각 상승 출발하는 등 글로벌 시장이 다양한 방향으로 움직이고 있다.",
-      "lineEn": "The Korean stock market is showing a mixed performance, repeatedly fluctuating between rises and falls, while Chinese and Japanese stock markets are also starting to rise, indicating that global markets are moving in various directions.",
+      "lineKo": "한국 증시와 환율 관련 뉴스에서 코스피와 코스닥의 상승·하락, 중국 증시의 상승, 외신이 전한 개미 투자자의 상황 등 다양한 동향이 보도되었다.",
+      "lineEn": "Various trends, including the rise and fall of the KOSPI and KOSDAQ, the rise of the Chinese stock market, and the situation of retail investors as reported by foreign media, were covered in news related to the Korean stock market and exchange rate.",
       "isFallback": false,
       "fallbackReason": null,
       "items": [
@@ -122,11 +127,6 @@
           "title": "코스피 2%대↑, 닷새째 상승…장중 '7천피' 회복(종합)",
           "link": "https://www.yna.co.kr/view/AKR20260814040800008",
           "source": "연합뉴스 경제"
-        },
-        {
-          "title": "日증시, 美증시 영향으로 상승 출발…닛케이지수 0.74%↑",
-          "link": "https://www.newsis.com/view/NISX20260814_0003748946",
-          "source": "뉴시스 경제"
         }
       ]
     }

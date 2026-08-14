@@ -463,7 +463,7 @@
         "link": "https://www.yna.co.kr/view/AKR20260812047300003",
         "publishedAt": "2026-08-12T00:51:41.000Z",
         "source": "연합뉴스 경제",
-        "titleEn": "부동산원·HUG, 확정일자 정보 연계…안심전세 앱서 확인"
+        "titleEn": "Real Estate Agency and HUG Link Confirmation Date Information… Check on Peace of Mind Rental App"
       },
       {
         "title": "“주민센터 안 가도 돼요”… 안심전세 앱에서 우선변제권 효력·확정일자 실시간 확인",
@@ -856,6 +856,36 @@
     "date": "2026-08-14",
     "items": [
       {
+        "title": "“집 가진 사람도 불안”…세제개편안에 국민 45% “부동산 부정적 영향” [한국갤럽]",
+        "link": "https://www.mk.co.kr/news/realestate/12127953",
+        "publishedAt": "2026-08-14T05:25:48.000Z",
+        "source": "매일경제 부동산",
+        "category": "realestate",
+        "preview": "정부가 내놓은 세제 개편안에 대해 국민 10명 중 4명 이상이 부동산·주택 시장에 부정적인 영향을 미칠 것으로 전망했다. 정부의 부동산 정책 개입 수준 역시 ‘더 줄여야 한다’는 ..",
+        "dupes": [],
+        "titleEn": "Even Homeowners Feel Unsecure\"... 45% of Public Say Real Estate Policy Revision Will Have Negative Impact [Korea Gallup]"
+      },
+      {
+        "title": "50년 된 산호아파트, 최고 35층 단지로 탈바꿈",
+        "link": "https://www.hankyung.com/article/202608141787i",
+        "publishedAt": "2026-08-14T05:24:54.000Z",
+        "source": "한국경제 부동산",
+        "category": "realestate",
+        "preview": null,
+        "dupes": [],
+        "titleEn": "50-year-old Sanho Apartment Complex Transformed into 35-Story Complex"
+      },
+      {
+        "title": "美 30년물 국채금리 5.22%…2001년 이후 최고",
+        "link": "https://www.newsis.com/view/NISX20260814_0003749333",
+        "publishedAt": "2026-08-14T04:56:54.000Z",
+        "source": "뉴시스 경제",
+        "category": "rates",
+        "preview": "[서울=뉴시스]박미선 기자 = 미국의 국가부채가 40조 달러에 육박한 가운데 30년 만기 국채 발행 금리가 2001년 이후 최고 수준으로 치솟았다. 재정적자 확대와 고물가 우려가 겹치면서 미국 정부의 차입 비용 부담…",
+        "dupes": [],
+        "titleEn": "U.S. 30-Year Treasury Yield Rises to 5.22%, Highest Since 2001"
+      },
+      {
         "title": "세종대, ‘도심 공공주택 복합사업의 현황과 미래’ 특강 개최",
         "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/14/BPZ2HHBU7JC6DFKW62PU2AJNIY/",
         "publishedAt": "2026-08-14T04:45:03.000Z",
@@ -893,7 +923,7 @@
         "category": "realestate",
         "preview": "[서울=뉴시스]이재준 기자 = 홍콩 증시는 14일 주요기업의 결산 발표가 이어지는 가운데 주력 기술주에 이익확정 매물이 선행하고 실적 부진 종목에 매도가 쏟아지면서 4거래일 연속 내려 개장했다. 항셍지수는 이날 전일…",
         "dupes": [],
-        "titleEn": "[AllChina] Hong Kong Market Opens Lower for Fourth Consecutive Day on Tech Stocks' Profit Taking... H-Share Down 0.62%"
+        "titleEn": "[AllChina] Hong Kong Market Opens Lower for Fourth Consecutive Day on Profit-Taking in Tech Stocks... H-Share Down 0.62%"
       },
       {
         "title": "이억원 “가계대출 총량목표, 실수요 지원 위한 것…투기수요 자극 신호 아냐”",
@@ -903,7 +933,7 @@
         "category": "other",
         "preview": "정부가 가계대출 총량 목표를 두 배로 높여 금융권에 약 30조원의 추가 대출 여력을 열어준 가운데, 금융당국이 은행권에 실수요자 대출 공급을 주문했다. 다만 총량 확대가 부동산 투..",
         "dupes": [],
-        "titleEn": "200 million won \"Household loan total target is to support genuine demand... not a signal stimulating speculative demand"
+        "titleEn": "200 million won \"Household loan total target is for supporting genuine demand... not a signal stimulating speculative demand"
       },
       {
         "title": "\"한국 증시 믿은 내가 바보\"…외신이 전한 코스피 개미들의 눈물",
@@ -913,7 +943,7 @@
         "category": "stocks",
         "preview": "[서울=뉴시스]박미선 기자 = 인공지능(AI) 투자 열풍을 타고 급등했던 코스피가 최근 극심한 변동성을 보이면서 한국 개인투자자들의 손실이 눈덩이처럼 불어나고 있다고 외신이 조명했다. 특히 대출을 받아 주식에 투자하…",
         "dupes": [],
-        "titleEn": "Korean Stock Market Belief Made Me a Fool\"... Tears of Kospi Retail Investors as Reported by Foreign Media"
+        "titleEn": "Korean Stock Market Believer Was a Fool\"… Tears of Kospi Retail Investors Reported by Foreign Media"
       },
       {
         "title": "국민 45% \"세제개편안, 부동산 시장에 부정적 영향줄 것\"[한국갤럽]",
@@ -933,7 +963,7 @@
         "category": "rates",
         "preview": "(서울=연합뉴스) 14일 국고채 금리가 대체로 하락하고 있다.",
         "dupes": [],
-        "titleEn": "Government bond rates mostly fall... 3-year bond hits 3.773% annually during trading"
+        "titleEn": "Government bond rates mostly fall...3-year bond hits 3.773% annually during trading"
       },
       {
         "title": "코스피 1%대↑, 상승률 다소 둔화…코스닥은 하락전환",
@@ -953,7 +983,7 @@
         "category": "realestate",
         "preview": "4억원 비아파트 구입 지원 상품 청년층은 아파트 선호 현상 뚜렷정부가 현재 월세 수준의 원리금을 부담하며 4억원 이하의 비(非) 아파트를 자가로 마련할 수 있게 ‘청년미래보금자리론..",
         "dupes": [],
-        "titleEn": "Want to Buy an Apartment Instead of a Villa?\"... Youth Future Housing Loan's Effectiveness"
+        "titleEn": "Want to buy an apartment instead of a villa?\"... Youth Future Housing Loan's Effectiveness"
       },
       {
         "title": "이억원 \"가계대출 총량 조정, 실수요 위한 것…투기 신호돼선 안돼\"",
@@ -963,7 +993,7 @@
         "category": "other",
         "preview": null,
         "dupes": [],
-        "titleEn": "200 million won \"Adjusting total household loan amounts is for real demand... speculation signals shouldn't be sent"
+        "titleEn": "200 million won \"Adjusting total household loan amounts is for real demand… speculation signals shouldn't be allowed"
       },
       {
         "title": "[올댓차이나] 중국 증시 상승 출발…상하이지수 0.08%↑",
@@ -973,7 +1003,7 @@
         "category": "stocks",
         "preview": "[서울=뉴시스] 문예성 기자 = 중국 증시가 14일 상승 출발했다. 이날 상하이종합지수는 전날보다 0.08% 상승한 3930.02로 장을 시작했다. 선전성분지수는 전장 대비 0.32% 오른 1만4335.41로, 중국…",
         "dupes": [],
-        "titleEn": "[AllChina] China's stock market rises on opening... Shanghai index up 0.08%"
+        "titleEn": "[AllChina] China's stock market rises on opening... Shanghai Index up 0.08%"
       },
       {
         "title": "용산구, 한강변 '산호아파트 재건축' 관리처분계획인가 고시",
@@ -983,7 +1013,7 @@
         "category": "realestate",
         "preview": "(서울=연합뉴스) 정준영 기자 = 서울시 용산구(구청장 김경대)는 원효로4가 118-16번지 일대 산호아파트 주택재건축정비사업의 관리처분계획을 ...",
         "dupes": [],
-        "titleEn": "Yongsan District Announces Approval of Management Disposition Plan for Han River 'Sahoh Apartment Reconstruction"
+        "titleEn": "Yongsan District Announces Approval of Management Disposition Plan for 'Sahoh Apartment Reconstruction' Along the Han River"
       },
       {
         "title": "전세금 맡기면 4~5% 수익…정부 파격실험 '안심신탁' 통할까",
@@ -1003,7 +1033,7 @@
         "category": "other",
         "preview": "(서울=연합뉴스) 한지훈 김지연 기자 = 지난달 금융권 가계대출 증가세가 전월보다 다소 둔화했다.",
         "dupes": [],
-        "titleEn": "July Household Loan Growth in Financial Sector Rises to 6,200,000,000,000 Won… Increase Slows Amid Subsiding 'Debt Investment' Trend"
+        "titleEn": "July Household Loan Growth in Financial Sector Rises to 6,200,000,000,000 Won… Growth Rate Slows Amid Subsiding 'Debt Investment' Trend"
       },
       {
         "title": "국토차관 \"용산어린이정원 등 주택공급 서울시와 협의할 것\"",
@@ -1023,7 +1053,7 @@
         "category": "realestate",
         "preview": "서울 도봉구 방학동 이에스에이아파트2에서 전용 84.98㎡가 7억 9,000만 원에 거래되며 최근 3년 내 신고가를 기록했다. [단지 정보] | 준공 | 2003년 | 세대수 | ..",
         "dupes": [],
-        "titleEn": "Do-bong-gu IES-A Apt2 84.98㎡, 700,000,000 9,0 won recent 3-year new high price"
+        "titleEn": "DoBong-gu IESAI Apt2 84.98㎡, 700,000,000 9,0 won recent 3-year new high price"
       },
       {
         "title": "엔화, 미일 금리차 축소 난망에 1달러=159엔대 중반 하락 출발",
@@ -1063,37 +1093,7 @@
         "category": "realestate",
         "preview": null,
         "dupes": [],
-        "titleEn": "50-Year-Old Yongsan District Sanho Apartment Complex Reborn as 35-Story New Construction Site"
-      },
-      {
-        "title": "'포레나힐스테이트 진주' 14일 견본주택 열고 분양 돌입",
-        "link": "https://www.newsis.com/view/NISX20260814_0003748965",
-        "publishedAt": "2026-08-14T00:32:54.000Z",
-        "source": "뉴시스 경제",
-        "category": "realestate",
-        "preview": "[서울=뉴시스]정진형 기자 = ㈜한화 건설부문과 현대건설이 14일 경남 진주시 주약동 일원에 짓는 '포레나힐스테이트 진주'의 견본주택 문을 열고 분양에 나선다. 포레나힐스테이트 진주는 이현1-5구역 재건축 정비사업을…",
-        "dupes": [],
-        "titleEn": "Forena Hills State Jinju' Opens Model House on 14th and Starts Sales"
-      },
-      {
-        "title": "日증시, 美증시 영향으로 상승 출발…닛케이지수 0.74%↑",
-        "link": "https://www.newsis.com/view/NISX20260814_0003748946",
-        "publishedAt": "2026-08-14T00:22:55.000Z",
-        "source": "뉴시스 경제",
-        "category": "stocks",
-        "preview": "[서울=뉴시스] 김예진 기자 = 14일 오전 일본 도쿄증시에서 주요 지수는 상승하며 시작했다. 니혼게이자이신문에 따르면 닛케이225지수(닛케이평균주가)는 이날 전 거래일 대비 502.58포인트(0.74%) 오른 6만…",
-        "dupes": [],
-        "titleEn": "Tokyo Stock Exchange Rises on U.S. Market Influence... Nikkei Index Up 0.74%"
-      },
-      {
-        "title": "[MK부동산 단신] 공주 정안IC 계획관리지역 다용도 개발사업용 토지",
-        "link": "https://www.mk.co.kr/news/realestate/12127629",
-        "publishedAt": "2026-08-14T00:17:56.000Z",
-        "source": "매일경제 부동산",
-        "category": "realestate",
-        "preview": "▶ 하림*동원*삼양 등 인접 교통 요지 ▶ 물류*요양시설*고급 타운하우스 ▶ 실버타운/갤러리*교육연구시설 학교법인 인산학원에서는 충남 공주시 정안면 인풍리에 소재한 폐교(인풍초등학..",
-        "dupes": [],
-        "titleEn": "[MK Real Estate Brief] Public Land for Multi-Use Development Project in Gongsan Jeongan IC Planned Management Area"
+        "titleEn": "50-year-old Yongsan District Sanho Apartment to be Reborn as a 35-Story New Construction Complex"
       }
     ]
   }
