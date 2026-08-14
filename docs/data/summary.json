@@ -1,74 +1,43 @@
 {
-  "updatedAt": "2026-08-14T11:53:29.778Z",
+  "updatedAt": "2026-08-14T23:33:59.659Z",
   "model": "qwen3:14b",
   "summary": {
-    "ko": "- 대만 증시가 이익실현 매도로 하락했고, 코스피는 강세장 진입을 예고하며 상승했으며, 중국 증시도 상승 마감했다.\n- 부동산 관련 뉴스에서 테라스 붕괴 사고에 대한 책임 논란, 서울시의회와 민주당 간의 부동산 관련 논쟁, 홍콩 증시의 기술주 하락, 주택 신속공급 방안에 대한 환영 반응, 용산공원 부지에 대한 정부와 서울시의 입장 차이가 보도되었다.\n- 기타 경제 소식: 올해 가계대출 증가액, 벌써 작년 육박\n- 연휴 앞두고 국고채 금리가 혼조세를 보였으며, 초장기물은 하락하는 등 다양한 움직임을 나타냈다.",
-    "en": "- Taiwan's stock market fell due to profit-taking selling, the KOSPI rose signaling entry into a bullish trend, and China's stock market also closed higher.\n- In real estate-related news, controversies over responsibility for the terrace collapse accident, disputes between the Seoul City Council and the Democratic Party over real estate issues, declines in technology stocks on the Hong Kong stock market, welcoming responses to rapid housing supply measures, and differences in positions between the government and Seoul City regarding the Yongsan Park site were reported.\n- Other Economic News: 올해 가계대출 증가액, 벌써 작년 육박\n- Ahead of the holiday, government bond rates showed mixed performance, with long-term bonds declining and exhibiting various movements."
+    "ko": "- 서울 주택난, 신규 분양 물량 발표, 오래된 공원 부지에 공공주택 계획, 주택 공급 속도 증가 노력, 아파트 테라스 붕괴 사고로 책임 논란 일어나고 있다.\n- 기타 경제 소식: 7월 미 소비자 지출 큰 폭 감소…경제 둔화 가능성, 美재무 \"다음주 이란 고강도 경제제재\"…국제유가, 1%대 상승, [올댓차이나] 대만 올해 경제성장 전망 11.05%로 상향…AI 수요 힘입어 39년 만에 최고 +1\n- 뉴욕증시가 소폭 하락한 반면, 코스피는 상승했고, 미국 증시의 과열 현상에 대한 지표가 발표되었다.\n- 연휴 앞두고 국고채 금리가 혼조세를 보였으며, 초장기물은 하락하는 등 다양한 움직임을 나타냈다.",
+    "en": "- Seoul housing crisis, new supply announcement, public housing plan on old park site, efforts to increase housing supply, controversy over responsibility arising from apartment terrace collapse accident.\n- Other Economic News: 7월 미 소비자 지출 큰 폭 감소…경제 둔화 가능성, 美재무 \"다음주 이란 고강도 경제제재\"…국제유가, 1%대 상승, [올댓차이나] 대만 올해 경제성장 전망 11.05%로 상향…AI 수요 힘입어 39년 만에 최고 +1\n- While the New York stock market fell slightly, the KOSPI rose, and an indicator of overheating in the U.S. stock market was released.\n- Ahead of the holiday, government bond rates showed mixed performance, with long-term bonds declining and exhibiting various movements."
   },
   "categories": [
-    {
-      "key": "stocks",
-      "name": "증시·환율",
-      "nameEn": "Stocks & FX",
-      "lineKo": "대만 증시가 이익실현 매도로 하락했고, 코스피는 강세장 진입을 예고하며 상승했으며, 중국 증시도 상승 마감했다.",
-      "lineEn": "Taiwan's stock market fell due to profit-taking selling, the KOSPI rose signaling entry into a bullish trend, and China's stock market also closed higher.",
-      "isFallback": false,
-      "fallbackReason": null,
-      "items": [
-        {
-          "title": "[올댓차이나] 대만 증시, 이익실현 매도로 닷새 만에 반락 마감…0.46%↓",
-          "link": "https://www.newsis.com/view/NISX20260814_0003750310",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "\"황소의 귀환\"…WSJ \"코스피, 새로운 강세장 진입\"",
-          "link": "https://www.newsis.com/view/NISX20260814_0003750265",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "[올댓차이나] 중국 증시 상승 마감…상하이지수 0.01%↑",
-          "link": "https://www.newsis.com/view/NISX20260814_0003750001",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "코스피 2.4%↑, 7천피 턱밑까지…이번주 내내 올랐다(종합)",
-          "link": "https://www.yna.co.kr/view/AKR20260814132200008",
-          "source": "연합뉴스 경제"
-        }
-      ]
-    },
     {
       "key": "realestate",
       "name": "부동산",
       "nameEn": "Real Estate",
-      "lineKo": "부동산 관련 뉴스에서 테라스 붕괴 사고에 대한 책임 논란, 서울시의회와 민주당 간의 부동산 관련 논쟁, 홍콩 증시의 기술주 하락, 주택 신속공급 방안에 대한 환영 반응, 용산공원 부지에 대한 정부와 서울시의 입장 차이가 보도되었다.",
-      "lineEn": "In real estate-related news, controversies over responsibility for the terrace collapse accident, disputes between the Seoul City Council and the Democratic Party over real estate issues, declines in technology stocks on the Hong Kong stock market, welcoming responses to rapid housing supply measures, and differences in positions between the government and Seoul City regarding the Yongsan Park site were reported.",
+      "lineKo": "서울 주택난, 신규 분양 물량 발표, 오래된 공원 부지에 공공주택 계획, 주택 공급 속도 증가 노력, 아파트 테라스 붕괴 사고로 책임 논란 일어나고 있다.",
+      "lineEn": "Seoul housing crisis, new supply announcement, public housing plan on old park site, efforts to increase housing supply, controversy over responsibility arising from apartment terrace collapse accident.",
       "isFallback": false,
       "fallbackReason": null,
       "items": [
         {
-          "title": "'테라스 붕괴' 아파트 찾은 박찬대 \"시공·감리 책임 묻겠다\"",
-          "link": "https://www.yna.co.kr/view/AKR20260814171200065",
+          "title": "[머니톡스] 서울로 서울로…해방의 기쁨과 함께 시작된 주택난",
+          "link": "https://www.yna.co.kr/view/AKR20260814042200546",
           "source": "연합뉴스 경제"
         },
         {
-          "title": "서울시의회 국힘 \"민주당, 부동산 사실 왜곡 멈추고 실책 인정해야\"",
-          "link": "https://www.newsis.com/view/NISX20260814_0003750213",
+          "title": "[부동산캘린더] 내주 서울 신길동 써밋클라비온 등 3천788가구 분양",
+          "link": "https://www.yna.co.kr/view/AKR20260814142900003",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "20년 묵은 '골칫거리' 염창공원, 1천가구 공공주택 품는다[8·13 신규택지 돋보기①]",
+          "link": "https://www.newsis.com/view/NISX20260814_0003749758",
           "source": "뉴시스 경제"
         },
         {
-          "title": "[올댓차이나] 홍콩 증시, 기술주에 이익매물로 나흘째 속락 마감… H주 1.02%↓",
-          "link": "https://www.newsis.com/view/NISX20260814_0003750272",
+          "title": "68개월→37개월…'빨리 짓기' 승부수, 주택 공급 체감 높일까",
+          "link": "https://www.newsis.com/view/NISX20260813_0003748455",
           "source": "뉴시스 경제"
         },
         {
-          "title": "건협, 정부 주택 신속공급 방안 환영…\"자금조달 부담 완화 기대\"",
-          "link": "https://www.newsis.com/view/NISX20260814_0003750197",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "용산공원 부지에 주택공급 두고 정부-서울시 입장차 뚜렷(종합2보)",
-          "link": "https://www.yna.co.kr/view/AKR20260814050552003",
+          "title": "'테라스 붕괴' 아파트 찾은 박찬대 \"시공·감리 책임 묻겠다\"",
+          "link": "https://www.yna.co.kr/view/AKR20260814171200065",
           "source": "연합뉴스 경제"
         }
       ]
@@ -77,15 +46,61 @@
       "key": "other",
       "name": "기타 경제 소식",
       "nameEn": "Other Economic News",
-      "lineKo": "기타 경제 소식: 올해 가계대출 증가액, 벌써 작년 육박",
-      "lineEn": "Other Economic News: 올해 가계대출 증가액, 벌써 작년 육박",
+      "lineKo": "기타 경제 소식: 7월 미 소비자 지출 큰 폭 감소…경제 둔화 가능성, 美재무 \"다음주 이란 고강도 경제제재\"…국제유가, 1%대 상승, [올댓차이나] 대만 올해 경제성장 전망 11.05%로 상향…AI 수요 힘입어 39년 만에 최고 +1",
+      "lineEn": "Other Economic News: 7월 미 소비자 지출 큰 폭 감소…경제 둔화 가능성, 美재무 \"다음주 이란 고강도 경제제재\"…국제유가, 1%대 상승, [올댓차이나] 대만 올해 경제성장 전망 11.05%로 상향…AI 수요 힘입어 39년 만에 최고 +1",
       "isFallback": true,
       "fallbackReason": "unverified-entity",
       "items": [
         {
+          "title": "7월 미 소비자 지출 큰 폭 감소…경제 둔화 가능성",
+          "link": "https://www.newsis.com/view/NISX20260815_0003750408",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "美재무 \"다음주 이란 고강도 경제제재\"…국제유가, 1%대 상승",
+          "link": "https://www.newsis.com/view/NISX20260815_0003750405",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "[올댓차이나] 대만 올해 경제성장 전망 11.05%로 상향…AI 수요 힘입어 39년 만에 최고",
+          "link": "https://www.newsis.com/view/NISX20260814_0003750375",
+          "source": "뉴시스 경제"
+        },
+        {
           "title": "올해 가계대출 증가액, 벌써 작년 육박",
           "link": "https://www.hankyung.com/article/2026081425081",
           "source": "한국경제 경제"
+        }
+      ]
+    },
+    {
+      "key": "stocks",
+      "name": "증시·환율",
+      "nameEn": "Stocks & FX",
+      "lineKo": "뉴욕증시가 소폭 하락한 반면, 코스피는 상승했고, 미국 증시의 과열 현상에 대한 지표가 발표되었다.",
+      "lineEn": "While the New York stock market fell slightly, the KOSPI rose, and an indicator of overheating in the U.S. stock market was released.",
+      "isFallback": false,
+      "fallbackReason": null,
+      "items": [
+        {
+          "title": "뉴욕증시, 숨고르기에 소폭 하락…나스닥 0.28%↓",
+          "link": "https://www.newsis.com/view/NISX20260815_0003750403",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "[속보]뉴욕증시, 소폭 하락 마감…나스닥 0.28%↓",
+          "link": "https://www.newsis.com/view/NISX20260815_0003750399",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "美 증시 얼마나 과열됐길래…'버핏 지표' 238% 사상 최고",
+          "link": "https://www.newsis.com/view/NISX20260814_0003749453",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "코스피 2.4%↑, 7천피 턱밑까지…이번주 내내 올랐다(종합)",
+          "link": "https://www.yna.co.kr/view/AKR20260814132200008",
+          "source": "연합뉴스 경제"
         }
       ]
     },

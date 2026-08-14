@@ -265,5 +265,134 @@
         ]
       }
     ]
+  },
+  {
+    "date": "2026-08-15",
+    "model": "qwen3:14b",
+    "summary": {
+      "ko": "- 서울 주택난, 신규 분양 물량 발표, 오래된 공원 부지에 공공주택 계획, 주택 공급 속도 증가 노력, 아파트 테라스 붕괴 사고로 책임 논란 일어나고 있다.\n- 기타 경제 소식: 7월 미 소비자 지출 큰 폭 감소…경제 둔화 가능성, 美재무 \"다음주 이란 고강도 경제제재\"…국제유가, 1%대 상승, [올댓차이나] 대만 올해 경제성장 전망 11.05%로 상향…AI 수요 힘입어 39년 만에 최고 +1\n- 뉴욕증시가 소폭 하락한 반면, 코스피는 상승했고, 미국 증시의 과열 현상에 대한 지표가 발표되었다.\n- 연휴 앞두고 국고채 금리가 혼조세를 보였으며, 초장기물은 하락하는 등 다양한 움직임을 나타냈다.",
+      "en": "- Seoul housing crisis, new supply announcement, public housing plan on old park site, efforts to increase housing supply, controversy over responsibility arising from apartment terrace collapse accident.\n- Other Economic News: 7월 미 소비자 지출 큰 폭 감소…경제 둔화 가능성, 美재무 \"다음주 이란 고강도 경제제재\"…국제유가, 1%대 상승, [올댓차이나] 대만 올해 경제성장 전망 11.05%로 상향…AI 수요 힘입어 39년 만에 최고 +1\n- While the New York stock market fell slightly, the KOSPI rose, and an indicator of overheating in the U.S. stock market was released.\n- Ahead of the holiday, government bond rates showed mixed performance, with long-term bonds declining and exhibiting various movements."
+    },
+    "categories": [
+      {
+        "key": "realestate",
+        "name": "부동산",
+        "nameEn": "Real Estate",
+        "lineKo": "서울 주택난, 신규 분양 물량 발표, 오래된 공원 부지에 공공주택 계획, 주택 공급 속도 증가 노력, 아파트 테라스 붕괴 사고로 책임 논란 일어나고 있다.",
+        "lineEn": "Seoul housing crisis, new supply announcement, public housing plan on old park site, efforts to increase housing supply, controversy over responsibility arising from apartment terrace collapse accident.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "items": [
+          {
+            "title": "[머니톡스] 서울로 서울로…해방의 기쁨과 함께 시작된 주택난",
+            "link": "https://www.yna.co.kr/view/AKR20260814042200546",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "[부동산캘린더] 내주 서울 신길동 써밋클라비온 등 3천788가구 분양",
+            "link": "https://www.yna.co.kr/view/AKR20260814142900003",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "20년 묵은 '골칫거리' 염창공원, 1천가구 공공주택 품는다[8·13 신규택지 돋보기①]",
+            "link": "https://www.newsis.com/view/NISX20260814_0003749758",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "68개월→37개월…'빨리 짓기' 승부수, 주택 공급 체감 높일까",
+            "link": "https://www.newsis.com/view/NISX20260813_0003748455",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "'테라스 붕괴' 아파트 찾은 박찬대 \"시공·감리 책임 묻겠다\"",
+            "link": "https://www.yna.co.kr/view/AKR20260814171200065",
+            "source": "연합뉴스 경제"
+          }
+        ]
+      },
+      {
+        "key": "other",
+        "name": "기타 경제 소식",
+        "nameEn": "Other Economic News",
+        "lineKo": "기타 경제 소식: 7월 미 소비자 지출 큰 폭 감소…경제 둔화 가능성, 美재무 \"다음주 이란 고강도 경제제재\"…국제유가, 1%대 상승, [올댓차이나] 대만 올해 경제성장 전망 11.05%로 상향…AI 수요 힘입어 39년 만에 최고 +1",
+        "lineEn": "Other Economic News: 7월 미 소비자 지출 큰 폭 감소…경제 둔화 가능성, 美재무 \"다음주 이란 고강도 경제제재\"…국제유가, 1%대 상승, [올댓차이나] 대만 올해 경제성장 전망 11.05%로 상향…AI 수요 힘입어 39년 만에 최고 +1",
+        "isFallback": true,
+        "fallbackReason": "unverified-entity",
+        "items": [
+          {
+            "title": "7월 미 소비자 지출 큰 폭 감소…경제 둔화 가능성",
+            "link": "https://www.newsis.com/view/NISX20260815_0003750408",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "美재무 \"다음주 이란 고강도 경제제재\"…국제유가, 1%대 상승",
+            "link": "https://www.newsis.com/view/NISX20260815_0003750405",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "[올댓차이나] 대만 올해 경제성장 전망 11.05%로 상향…AI 수요 힘입어 39년 만에 최고",
+            "link": "https://www.newsis.com/view/NISX20260814_0003750375",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "올해 가계대출 증가액, 벌써 작년 육박",
+            "link": "https://www.hankyung.com/article/2026081425081",
+            "source": "한국경제 경제"
+          }
+        ]
+      },
+      {
+        "key": "stocks",
+        "name": "증시·환율",
+        "nameEn": "Stocks & FX",
+        "lineKo": "뉴욕증시가 소폭 하락한 반면, 코스피는 상승했고, 미국 증시의 과열 현상에 대한 지표가 발표되었다.",
+        "lineEn": "While the New York stock market fell slightly, the KOSPI rose, and an indicator of overheating in the U.S. stock market was released.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "items": [
+          {
+            "title": "뉴욕증시, 숨고르기에 소폭 하락…나스닥 0.28%↓",
+            "link": "https://www.newsis.com/view/NISX20260815_0003750403",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "[속보]뉴욕증시, 소폭 하락 마감…나스닥 0.28%↓",
+            "link": "https://www.newsis.com/view/NISX20260815_0003750399",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "美 증시 얼마나 과열됐길래…'버핏 지표' 238% 사상 최고",
+            "link": "https://www.newsis.com/view/NISX20260814_0003749453",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "코스피 2.4%↑, 7천피 턱밑까지…이번주 내내 올랐다(종합)",
+            "link": "https://www.yna.co.kr/view/AKR20260814132200008",
+            "source": "연합뉴스 경제"
+          }
+        ]
+      },
+      {
+        "key": "rates",
+        "name": "금리·예금·투자상품",
+        "nameEn": "Rates, Deposits & Investment Products",
+        "lineKo": "연휴 앞두고 국고채 금리가 혼조세를 보였으며, 초장기물은 하락하는 등 다양한 움직임을 나타냈다.",
+        "lineEn": "Ahead of the holiday, government bond rates showed mixed performance, with long-term bonds declining and exhibiting various movements.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "items": [
+          {
+            "title": "연휴 앞두고 국고채 금리 혼조세…초장기물 하락(종합)",
+            "link": "https://www.yna.co.kr/view/AKR20260814141251008",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "국고채 금리 혼조세…3년물 연 3.796%",
+            "link": "https://www.yna.co.kr/view/AKR20260814141200008",
+            "source": "연합뉴스 경제"
+          }
+        ]
+      }
+    ]
   }
 ]
