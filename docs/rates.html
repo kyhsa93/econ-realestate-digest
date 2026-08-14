@@ -984,21 +984,18 @@
     renderControls();
     renderProducts();
     renderHistory();
-    bindTabEvents();
   }
 
-  function bindTabEvents() {
-    for (const tab of document.querySelectorAll("[data-category]")) {
-      tab.addEventListener("click", () => {
-        state.category = tab.dataset.category;
-        state.expanded.clear();
-        state.rateType = "";
-        renderTabs();
-        renderControls();
-        renderProducts();
-      });
-    }
-  }
+  document.getElementById("tabs").addEventListener("click", (event) => {
+    const tab = event.target.closest("[data-category]");
+    if (!tab) return;
+    state.category = tab.dataset.category;
+    state.expanded.clear();
+    state.rateType = "";
+    renderTabs();
+    renderControls();
+    renderProducts();
+  });
 
   document.getElementById("lang-toggle").addEventListener("click", () => {
     locale = locale === "ko" ? "en" : "ko";
