@@ -8,7 +8,7 @@
     "fetch:market": "node scripts/fetch-market.mjs",
     "fetch:rates": "node scripts/fetch-rates.mjs",
     "update": "node scripts/update-all.mjs",
-    "test": "node --test \"test/*.test.mjs\""
+    "test": "node --test test/*.test.mjs"
   },
   "dependencies": {
     "fast-xml-parser": "^5.0.0",
