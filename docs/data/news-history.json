@@ -856,6 +856,122 @@
     "date": "2026-08-14",
     "items": [
       {
+        "title": "[올댓차이나] 대만 증시, 이익실현 매도로 닷새 만에 반락 마감…0.46%↓",
+        "link": "https://www.newsis.com/view/NISX20260814_0003750310",
+        "publishedAt": "2026-08-14T11:20:40.000Z",
+        "source": "뉴시스 경제",
+        "category": "stocks",
+        "preview": "[서울=뉴시스]이재준 기자 = 대만 타이베이 증시는 14일 전날 미국 기술주 강세에 힘입어 상승 출발했다가 최근 상승에 따른 단기 과열 부담으로 차익 매물이 쏟아지면서 5거래일 만에 하락 마감했다. 자취안(加權) 지…",
+        "dupes": [],
+        "titleEn": "[Taiwan's stock market closes down 0.46% after five days on profit-taking sell-off]"
+      },
+      {
+        "title": "\"황소의 귀환\"…WSJ \"코스피, 새로운 강세장 진입\"",
+        "link": "https://www.newsis.com/view/NISX20260814_0003750265",
+        "publishedAt": "2026-08-14T10:26:55.000Z",
+        "source": "뉴시스 경제",
+        "category": "stocks",
+        "preview": "[서울=뉴시스]이기주 인턴 기자 = 한국 증시가 최근 급반등하며 다시 강세장(Bull market)에 진입했다. 삼성전자와 SK하이닉스 등 반도체주가 상승세를 이끌면서 코스피가 최근 저점 대비 20% 이상 올랐다.…",
+        "dupes": [],
+        "titleEn": "The Return of the Bull\"…WSJ \"KOSPI Enters a New Bull Market"
+      },
+      {
+        "title": "'테라스 붕괴' 아파트 찾은 박찬대 \"시공·감리 책임 묻겠다\"",
+        "link": "https://www.yna.co.kr/view/AKR20260814171200065",
+        "publishedAt": "2026-08-14T10:07:47.000Z",
+        "source": "연합뉴스 경제",
+        "category": "realestate",
+        "preview": "(인천=연합뉴스) 홍현기 기자 = 박찬대 인천시장은 14일 준공 1년 6개월 만에 외벽 테라스가 무너진 인천 송도국제도시 아파트를 찾아 시공사와...",
+        "dupes": [],
+        "titleEn": "Park Chan-deug visits apartment where \"terrace collapse\" occurred, vows to hold construction and supervision companies accountable"
+      },
+      {
+        "title": "서울시의회 국힘 \"민주당, 부동산 사실 왜곡 멈추고 실책 인정해야\"",
+        "link": "https://www.newsis.com/view/NISX20260814_0003750213",
+        "publishedAt": "2026-08-14T10:06:40.000Z",
+        "source": "뉴시스 경제",
+        "category": "realestate",
+        "preview": "[서울=뉴시스] 박대로 기자 = 서울시의회 국민의힘은 더불어민주당이 부동산 관련 사실을 왜곡하고 있다며 실책을 인정하라고 촉구했다. 최종부 서울시의회 국민의힘 대변인은 14일 논평에서 \"지난 13일 더불어민주당 부동…",
+        "dupes": [],
+        "titleEn": "Seoul City Council GOP: DP Must Stop Distorting Real Estate Facts and Admit Mistakes"
+      },
+      {
+        "title": "[올댓차이나] 홍콩 증시, 기술주에 이익매물로 나흘째 속락 마감… H주 1.02%↓",
+        "link": "https://www.newsis.com/view/NISX20260814_0003750272",
+        "publishedAt": "2026-08-14T09:59:26.000Z",
+        "source": "뉴시스 경제",
+        "category": "realestate",
+        "preview": "[서울=뉴시스]이재준 기자 = 홍콩 증시는 14일 주요기업의 결산 발표가 이어지는 가운데 주력 기술주에 이익확정 매물이 선행하고 실적 부진 종목에 매도가 쏟아지면서 4거래일 연속 하락 마감했다. 항셍지수는 이날 전일…",
+        "dupes": [],
+        "titleEn": "[AllChina] Hong Kong Market Closes Lower for Fourth Consecutive Day as Tech Stocks Face Profit-Taking… H-Share Down 1.02%"
+      },
+      {
+        "title": "건협, 정부 주택 신속공급 방안 환영…\"자금조달 부담 완화 기대\"",
+        "link": "https://www.newsis.com/view/NISX20260814_0003750197",
+        "publishedAt": "2026-08-14T09:04:35.000Z",
+        "source": "뉴시스 경제",
+        "category": "realestate",
+        "preview": "[서울=뉴시스] 박성환 기자 = 대한건설협회가 정부의 주택 신속공급 방안과 부동산 시장 안정을 위한 금융 종합대책에 대해 건설업계의 자금조달 부담을 완화하고 민간 주택공급 여건을 개선하는 실효성 있는 대책이라며 환영…",
+        "dupes": [],
+        "titleEn": "Korea Construction Industry Association Welcomes Government's Rapid Housing Supply Plan...\"Expectation of Easing Funding Burden"
+      },
+      {
+        "title": "용산공원 부지에 주택공급 두고 정부-서울시 입장차 뚜렷(종합2보)",
+        "link": "https://www.yna.co.kr/view/AKR20260814050552003",
+        "publishedAt": "2026-08-14T08:48:00.000Z",
+        "source": "연합뉴스 경제",
+        "category": "realestate",
+        "preview": "(서울·세종=연합뉴스) 임기창 오진송 김동규 기자 = 서울 용산공원 부지를 활용해 도심에 주택을 공급하는 방안을 두고 정부와 서울시가 뚜렷한 견...",
+        "dupes": [],
+        "titleEn": "Government and Seoul City Have Clear Differences Over Housing Supply at Yongsan Park Site (Comprehensive Report 2)"
+      },
+      {
+        "title": "서울시 “용산공원 훼손해 주택 공급, 매우 신중해야”",
+        "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/14/4GHPP7GGHNF6NCGCQJAAU6GXSM/",
+        "publishedAt": "2026-08-14T08:46:05.000Z",
+        "source": "조선비즈 부동산",
+        "category": "realestate",
+        "preview": null,
+        "dupes": [
+          {
+            "title": "[속보] 서울시 “용산공원 훼손해 주택공급, 매우 신중해야…미래 자산”",
+            "link": "https://www.mk.co.kr/news/realestate/12128206",
+            "source": "매일경제 부동산"
+          }
+        ],
+        "titleEn": "Seoul Says Housing Supply via Yongsan Park Damage Must Be Very Careful"
+      },
+      {
+        "title": "\"용산공원 전체, 주택 공급지로 검토\"",
+        "link": "https://www.hankyung.com/article/2026081425951",
+        "publishedAt": "2026-08-14T08:44:32.000Z",
+        "source": "한국경제 부동산",
+        "category": "realestate",
+        "preview": null,
+        "dupes": [],
+        "titleEn": "Yongsan Park Entire Area Under Consideration as Housing Supply Site"
+      },
+      {
+        "title": "서울시 \"용산공원은 소중한 국가자산, 주택공급 신중해야\"",
+        "link": "https://www.newsis.com/view/NISX20260814_0003750155",
+        "publishedAt": "2026-08-14T08:38:57.000Z",
+        "source": "뉴시스 경제",
+        "category": "realestate",
+        "preview": "[서울=뉴시스] 박대로 기자 = 김윤덕 국토교통부 장관이 용산공원 아파트 건립 강행을 시사한 가운데 서울시가 거듭 반대 의견을 내놨다. 이민경 서울시 대변인은 14일 입장문에서 \"서울의 마지막 대규모 도심 녹지인 용…",
+        "dupes": [],
+        "titleEn": "Seoul Says Yongsan Park Is a Valuable National Asset, Caution Needed in Housing Supply"
+      },
+      {
+        "title": "올해 가계대출 증가액, 벌써 작년 육박",
+        "link": "https://www.hankyung.com/article/2026081425081",
+        "publishedAt": "2026-08-14T08:30:43.000Z",
+        "source": "한국경제 경제",
+        "category": "other",
+        "preview": null,
+        "dupes": [],
+        "titleEn": "Household loan growth this year already nearing last year's figure"
+      },
+      {
         "title": "연휴 앞두고 국고채 금리 혼조세…초장기물 하락(종합)",
         "link": "https://www.yna.co.kr/view/AKR20260814141251008",
         "publishedAt": "2026-08-14T08:08:09.000Z",
@@ -873,7 +989,7 @@
         "category": "realestate",
         "preview": null,
         "dupes": [],
-        "titleEn": "50-year-old Yongsan Sango Apartment to be transformed into 35-story building with 679 units"
+        "titleEn": "50-year-old Yongsan Sango Apartment to be transformed into 35-floor, 679-unit complex"
       },
       {
         "title": "전·월세 안정화 카드?…'안심신탁'이 뭐길래",
@@ -913,7 +1029,7 @@
         "category": "stocks",
         "preview": "[서울=뉴시스] 문예성 기자 = 중국 증시가 14일 상승 마감했다. 이날 상하이종합지수는 전날보다 0.01% 오른 3927.18로 거래를 마쳤다. 선전성분지수는 전장 대비 0.45% 상승한 1만4354.31로, 중국…",
         "dupes": [],
-        "titleEn": "[AllChina] Chinese stock market closes higher…Shanghai index up 0.01%"
+        "titleEn": "[AllChina] China's stock market closes higher… Shanghai index up 0.01%"
       },
       {
         "title": "코스피 2.4%↑, 7천피 턱밑까지…이번주 내내 올랐다(종합)",
@@ -923,7 +1039,7 @@
         "category": "stocks",
         "preview": "(서울=연합뉴스) 김유아 기자 = 14일 코스피와 코스닥이 5거래일 연속 상승 마감했다.",
         "dupes": [],
-        "titleEn": "KOSPI rises 2.4%, nearing 7,000 won… stayed up all week (comprehensive)"
+        "titleEn": "Kospi rises 2.4%, nearing 7,000 won… stayed up all week (comprehensive)"
       },
       {
         "title": "與 \"국민의힘, 정부 부동산대책 왜곡…청년 주거불안 조장\"",
@@ -933,7 +1049,7 @@
         "category": "realestate",
         "preview": "[서울=뉴시스]권신혁 기자 = 더불어민주당은 14일 정부 '8.13 부동산 대책'과 관련해 \"국민의힘은 사실에 근거하지 않은 왜곡된 주장으로 청년들의 주거불안을 조장하고 있다\"고 했다. 이주희 민주당 원내대변인은 이…",
         "dupes": [],
-        "titleEn": "National Party Distorts Government Real Estate Measures, Exacerbating Youth Housing Anxiety"
+        "titleEn": "National People's Power Party Distorts Government Real Estate Measures, Exacerbating Youth Housing Anxiety"
       },
       {
         "title": "국토장관 \"용산공원 전체 주택공급 고민\"…오세훈과 대립각(종합)",
@@ -943,7 +1059,7 @@
         "category": "realestate",
         "preview": "(서울·세종=연합뉴스) 임기창 오진송 기자 = 서울 용산공원 부지를 활용해 도심에 주택을 공급하는 방안을 두고 정부와 서울시가 뚜렷한 견해차를 ...",
         "dupes": [],
-        "titleEn": "Land Minister Contemplates Housing Supply Across Yongsan Park... Facing Off with Oh Sehun (Comprehensive)"
+        "titleEn": "Land Minister Contemplates Housing Supply Across Yongsan Park... Clash with Oh Sehun (Comprehensive)"
       },
       {
         "title": "韓총리 \"주택공급, 총리 최우선 과제로…대책 속도감 있게 실행\"",
@@ -963,17 +1079,7 @@
         "category": "realestate",
         "preview": "김민석 더불어민주당 대표 후보는 14일 정부의 부동산 세제개편안에 대해 “비거주 1주택자 장기보유특별공제 전면 폐지는 사실상 증세”라며 보완이 필요하다는 입장을 밝혔다. 김 후보는..",
         "dupes": [],
-        "titleEn": "Kim Min-seok: \"Abolishing the special tax deduction for non-resident single-homeowners is effectively a tax increase; improvements needed"
-      },
-      {
-        "title": "국토장관 \"용산공원 전체 주택공급 검토…20일 오세훈 면담\"",
-        "link": "https://www.yna.co.kr/view/AKR20260814118800003",
-        "publishedAt": "2026-08-14T07:00:01.000Z",
-        "source": "연합뉴스 경제",
-        "category": "realestate",
-        "preview": "(세종=연합뉴스) 오진송 기자 = 김윤덕 국토교통부 장관이 용산 어린이정원뿐 아니라 용산공원 전체를 주택 공급에 활용하는 방안을 검토하고 있다고...",
-        "dupes": [],
-        "titleEn": "Land Minister to Review Housing Supply Across Yongsan Park... Meets Oh Se-hoon on 20th"
+        "titleEn": "Kim Min-seok: \"Abolishing the tax exemption for non-resident single-homeowners is effectively a tax increase... improvements needed"
       },
       {
         "title": "김윤덕 국토장관 “용산공원 전체 훑어 주택용지 추가 발굴”",
@@ -993,107 +1099,7 @@
         "category": "realestate",
         "preview": null,
         "dupes": [],
-        "titleEn": "Land Minister: Housing supply in Yongsan Park not limited to Children's Garden; considering opening up entire area"
-      },
-      {
-        "title": "8·13 공급 대책 발표 직전 서울 아파트값 0.13% 상승",
-        "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/14/CLOTYRMO3NDEPCSRQFCLM5TGCQ/",
-        "publishedAt": "2026-08-14T06:54:43.000Z",
-        "source": "조선비즈 부동산",
-        "category": "realestate",
-        "preview": null,
-        "dupes": [],
-        "titleEn": "Rising 0.13% Before Announcement of 8·13 Supply Measures in Seoul Apartment Prices"
-      },
-      {
-        "title": "미국 인플레 우려 완화에 달러 약세…환율 6거래일째 1,410원대",
-        "link": "https://www.yna.co.kr/view/AKR20260814123400002",
-        "publishedAt": "2026-08-14T06:46:17.000Z",
-        "source": "연합뉴스 경제",
-        "category": "stocks",
-        "preview": "(세종=연합뉴스) 김수현 기자 = 미국이 금리 인상 속도 조절에 나설 것이란 관측이 확산하면서 원/달러 환율은 14일 하락했다.",
-        "dupes": [],
-        "titleEn": "Dollar Weakens as U.S. Inflation Concerns Eased... Exchange Rate Stays Above 1,410 Won for 6 Trading Days"
-      },
-      {
-        "title": "“집 가진 사람도 불안”…세제개편안에 국민 45% “부동산 부정적 영향” [한국갤럽]",
-        "link": "https://www.mk.co.kr/news/realestate/12127953",
-        "publishedAt": "2026-08-14T05:25:48.000Z",
-        "source": "매일경제 부동산",
-        "category": "realestate",
-        "preview": "정부가 내놓은 세제 개편안에 대해 국민 10명 중 4명 이상이 부동산·주택 시장에 부정적인 영향을 미칠 것으로 전망했다. 정부의 부동산 정책 개입 수준 역시 ‘더 줄여야 한다’는 ..",
-        "dupes": [],
-        "titleEn": "Even Homeowners Feel Unsecure\"... 45% of Public Say Real Estate Policy Revision Will Have Negative Impact [Korea Gallup]"
-      },
-      {
-        "title": "50년 된 산호아파트, 최고 35층 단지로 탈바꿈",
-        "link": "https://www.hankyung.com/article/202608141787i",
-        "publishedAt": "2026-08-14T05:24:54.000Z",
-        "source": "한국경제 부동산",
-        "category": "realestate",
-        "preview": null,
-        "dupes": [],
-        "titleEn": "50-Year-Old Sanho Apartment Complex Transformed into 35-Story Complex"
-      },
-      {
-        "title": "美 30년물 국채금리 5.22%…2001년 이후 최고",
-        "link": "https://www.newsis.com/view/NISX20260814_0003749333",
-        "publishedAt": "2026-08-14T04:56:54.000Z",
-        "source": "뉴시스 경제",
-        "category": "rates",
-        "preview": "[서울=뉴시스]박미선 기자 = 미국의 국가부채가 40조 달러에 육박한 가운데 30년 만기 국채 발행 금리가 2001년 이후 최고 수준으로 치솟았다. 재정적자 확대와 고물가 우려가 겹치면서 미국 정부의 차입 비용 부담…",
-        "dupes": [],
-        "titleEn": "U.S. 30-Year Treasury Yield Rises to 5.22%, Highest Since 2001"
-      },
-      {
-        "title": "세종대, ‘도심 공공주택 복합사업의 현황과 미래’ 특강 개최",
-        "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/14/BPZ2HHBU7JC6DFKW62PU2AJNIY/",
-        "publishedAt": "2026-08-14T04:45:03.000Z",
-        "source": "조선비즈 부동산",
-        "category": "realestate",
-        "preview": null,
-        "dupes": [],
-        "titleEn": "Sejong University holds special lecture on \"Current Status and Future of Urban Public Housing Complex Projects"
-      },
-      {
-        "title": "6월 브라질 소매판매 0.5%↑…\"고금리에도 소비 견조\"",
-        "link": "https://www.newsis.com/view/NISX20260814_0003749426",
-        "publishedAt": "2026-08-14T03:48:28.000Z",
-        "source": "뉴시스 경제",
-        "category": "rates",
-        "preview": "[서울=뉴시스]이재준 기자 = 브라질 6월 소매판매는 고금리가 개인 소비를 제약하는 가운데서도 견조한 모습을 보였다. 마켓워치와 RTT 뉴스는 14일 브라질 지리통계원(IBGE)이 전날 발표한 관련 통계를 인용해 6…",
-        "dupes": [],
-        "titleEn": "June Brazil Retail Sales Rise 0.5%...\"Consumption Remains Strong Despite High Interest Rates"
-      },
-      {
-        "title": "[올댓차이나] 홍콩 증시, 기술주에 이익매물로 나흘째 하락 출발… H주 0.62%↓",
-        "link": "https://www.newsis.com/view/NISX20260814_0003749389",
-        "publishedAt": "2026-08-14T02:59:20.000Z",
-        "source": "뉴시스 경제",
-        "category": "realestate",
-        "preview": "[서울=뉴시스]이재준 기자 = 홍콩 증시는 14일 주요기업의 결산 발표가 이어지는 가운데 주력 기술주에 이익확정 매물이 선행하고 실적 부진 종목에 매도가 쏟아지면서 4거래일 연속 내려 개장했다. 항셍지수는 이날 전일…",
-        "dupes": [],
-        "titleEn": "[AllChina] Hong Kong Market Opens Lower for Fourth Consecutive Day on Profit-Taking in Tech Stocks... H-Share Down 0.62%"
-      },
-      {
-        "title": "이억원 “가계대출 총량목표, 실수요 지원 위한 것…투기수요 자극 신호 아냐”",
-        "link": "https://www.mk.co.kr/news/economy/12127835",
-        "publishedAt": "2026-08-14T02:51:28.000Z",
-        "source": "매일경제 부동산",
-        "category": "other",
-        "preview": "정부가 가계대출 총량 목표를 두 배로 높여 금융권에 약 30조원의 추가 대출 여력을 열어준 가운데, 금융당국이 은행권에 실수요자 대출 공급을 주문했다. 다만 총량 확대가 부동산 투..",
-        "dupes": [],
-        "titleEn": "200 million won \"Household loan aggregate target is to support genuine demand... not a signal stimulating speculative demand"
-      },
-      {
-        "title": "\"한국 증시 믿은 내가 바보\"…외신이 전한 코스피 개미들의 눈물",
-        "link": "https://www.newsis.com/view/NISX20260814_0003748998",
-        "publishedAt": "2026-08-14T02:50:03.000Z",
-        "source": "뉴시스 경제",
-        "category": "stocks",
-        "preview": "[서울=뉴시스]박미선 기자 = 인공지능(AI) 투자 열풍을 타고 급등했던 코스피가 최근 극심한 변동성을 보이면서 한국 개인투자자들의 손실이 눈덩이처럼 불어나고 있다고 외신이 조명했다. 특히 대출을 받아 주식에 투자하…",
-        "dupes": [],
-        "titleEn": "Believing in the Korean stock market made me a fool\"... Tears of KOSPI retail investors as reported by foreign media"
+        "titleEn": "Land Minister: Housing supply in Yongsan Park not limited to Children's Garden; considering opening entire area"
       }
     ]
   }

@@ -1,17 +1,100 @@
 {
-  "updatedAt": "2026-08-14T08:24:50.499Z",
+  "updatedAt": "2026-08-14T11:53:29.778Z",
   "model": "qwen3:14b",
   "summary": {
-    "ko": "- 연휴 앞두고 국고채 금리가 혼조세를 보였고, 미국 30년물 국채금리가 상승했으며, 브라질의 소매판매도 증가했다.\n- 부동산: 50년 된 용산 산호아파트, 35층 679가구로 탈바꿈, 전·월세 안정화 카드?…'안심신탁'이 뭐길래, 금융위 \"청년에 비아파트 구입할 추가기회 제공…틈새시장 배려\" +12\n- 중국 증시가 상승 마감되고 코스피도 상승한 가운데, 미국 인플레 우려 완화로 달러가 약세를 보이며 환율이 1,410원대를 유지하고 있으며, 한국 증시에 대한 외신의 평가가 분화되고 있다.\n- 이억원이 가계대출 총량목표가 실수요 지원을 위한 것이라며 투기수요 자극 신호가 아니라고 밝혔다.",
-    "en": "- Ahead of the holiday, government bond yields showed mixed performance, U.S. 30-year Treasury yields rose, and Brazil's retail sales also increased.\n- Real Estate: 50년 된 용산 산호아파트, 35층 679가구로 탈바꿈, 전·월세 안정화 카드?…'안심신탁'이 뭐길래, 금융위 \"청년에 비아파트 구입할 추가기회 제공…틈새시장 배려\" +12\n- As China's stock market closed higher and the Kospi also rose, the dollar weakened due to eased concerns over U.S. inflation, keeping the exchange rate in the 1,410 won range, while foreign media evaluations of the Korean stock market are divided.\n- Lee Eok-won stated that the household loan aggregate target is intended to support genuine demand and is not a signal that would stimulate speculative demand."
+    "ko": "- 대만 증시가 이익실현 매도로 하락했고, 코스피는 강세장 진입을 예고하며 상승했으며, 중국 증시도 상승 마감했다.\n- 부동산 관련 뉴스에서 테라스 붕괴 사고에 대한 책임 논란, 서울시의회와 민주당 간의 부동산 관련 논쟁, 홍콩 증시의 기술주 하락, 주택 신속공급 방안에 대한 환영 반응, 용산공원 부지에 대한 정부와 서울시의 입장 차이가 보도되었다.\n- 기타 경제 소식: 올해 가계대출 증가액, 벌써 작년 육박\n- 연휴 앞두고 국고채 금리가 혼조세를 보였으며, 초장기물은 하락하는 등 다양한 움직임을 나타냈다.",
+    "en": "- Taiwan's stock market fell due to profit-taking selling, the KOSPI rose signaling entry into a bullish trend, and China's stock market also closed higher.\n- In real estate-related news, controversies over responsibility for the terrace collapse accident, disputes between the Seoul City Council and the Democratic Party over real estate issues, declines in technology stocks on the Hong Kong stock market, welcoming responses to rapid housing supply measures, and differences in positions between the government and Seoul City regarding the Yongsan Park site were reported.\n- Other Economic News: 올해 가계대출 증가액, 벌써 작년 육박\n- Ahead of the holiday, government bond rates showed mixed performance, with long-term bonds declining and exhibiting various movements."
   },
   "categories": [
+    {
+      "key": "stocks",
+      "name": "증시·환율",
+      "nameEn": "Stocks & FX",
+      "lineKo": "대만 증시가 이익실현 매도로 하락했고, 코스피는 강세장 진입을 예고하며 상승했으며, 중국 증시도 상승 마감했다.",
+      "lineEn": "Taiwan's stock market fell due to profit-taking selling, the KOSPI rose signaling entry into a bullish trend, and China's stock market also closed higher.",
+      "isFallback": false,
+      "fallbackReason": null,
+      "items": [
+        {
+          "title": "[올댓차이나] 대만 증시, 이익실현 매도로 닷새 만에 반락 마감…0.46%↓",
+          "link": "https://www.newsis.com/view/NISX20260814_0003750310",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "\"황소의 귀환\"…WSJ \"코스피, 새로운 강세장 진입\"",
+          "link": "https://www.newsis.com/view/NISX20260814_0003750265",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "[올댓차이나] 중국 증시 상승 마감…상하이지수 0.01%↑",
+          "link": "https://www.newsis.com/view/NISX20260814_0003750001",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "코스피 2.4%↑, 7천피 턱밑까지…이번주 내내 올랐다(종합)",
+          "link": "https://www.yna.co.kr/view/AKR20260814132200008",
+          "source": "연합뉴스 경제"
+        }
+      ]
+    },
+    {
+      "key": "realestate",
+      "name": "부동산",
+      "nameEn": "Real Estate",
+      "lineKo": "부동산 관련 뉴스에서 테라스 붕괴 사고에 대한 책임 논란, 서울시의회와 민주당 간의 부동산 관련 논쟁, 홍콩 증시의 기술주 하락, 주택 신속공급 방안에 대한 환영 반응, 용산공원 부지에 대한 정부와 서울시의 입장 차이가 보도되었다.",
+      "lineEn": "In real estate-related news, controversies over responsibility for the terrace collapse accident, disputes between the Seoul City Council and the Democratic Party over real estate issues, declines in technology stocks on the Hong Kong stock market, welcoming responses to rapid housing supply measures, and differences in positions between the government and Seoul City regarding the Yongsan Park site were reported.",
+      "isFallback": false,
+      "fallbackReason": null,
+      "items": [
+        {
+          "title": "'테라스 붕괴' 아파트 찾은 박찬대 \"시공·감리 책임 묻겠다\"",
+          "link": "https://www.yna.co.kr/view/AKR20260814171200065",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "서울시의회 국힘 \"민주당, 부동산 사실 왜곡 멈추고 실책 인정해야\"",
+          "link": "https://www.newsis.com/view/NISX20260814_0003750213",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "[올댓차이나] 홍콩 증시, 기술주에 이익매물로 나흘째 속락 마감… H주 1.02%↓",
+          "link": "https://www.newsis.com/view/NISX20260814_0003750272",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "건협, 정부 주택 신속공급 방안 환영…\"자금조달 부담 완화 기대\"",
+          "link": "https://www.newsis.com/view/NISX20260814_0003750197",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "용산공원 부지에 주택공급 두고 정부-서울시 입장차 뚜렷(종합2보)",
+          "link": "https://www.yna.co.kr/view/AKR20260814050552003",
+          "source": "연합뉴스 경제"
+        }
+      ]
+    },
+    {
+      "key": "other",
+      "name": "기타 경제 소식",
+      "nameEn": "Other Economic News",
+      "lineKo": "기타 경제 소식: 올해 가계대출 증가액, 벌써 작년 육박",
+      "lineEn": "Other Economic News: 올해 가계대출 증가액, 벌써 작년 육박",
+      "isFallback": true,
+      "fallbackReason": "unverified-entity",
+      "items": [
+        {
+          "title": "올해 가계대출 증가액, 벌써 작년 육박",
+          "link": "https://www.hankyung.com/article/2026081425081",
+          "source": "한국경제 경제"
+        }
+      ]
+    },
     {
       "key": "rates",
       "name": "금리·예금·투자상품",
       "nameEn": "Rates, Deposits & Investment Products",
-      "lineKo": "연휴 앞두고 국고채 금리가 혼조세를 보였고, 미국 30년물 국채금리가 상승했으며, 브라질의 소매판매도 증가했다.",
-      "lineEn": "Ahead of the holiday, government bond yields showed mixed performance, U.S. 30-year Treasury yields rose, and Brazil's retail sales also increased.",
+      "lineKo": "연휴 앞두고 국고채 금리가 혼조세를 보였으며, 초장기물은 하락하는 등 다양한 움직임을 나타냈다.",
+      "lineEn": "Ahead of the holiday, government bond rates showed mixed performance, with long-term bonds declining and exhibiting various movements.",
       "isFallback": false,
       "fallbackReason": null,
       "items": [
@@ -24,99 +107,6 @@
           "title": "국고채 금리 혼조세…3년물 연 3.796%",
           "link": "https://www.yna.co.kr/view/AKR20260814141200008",
           "source": "연합뉴스 경제"
-        },
-        {
-          "title": "美 30년물 국채금리 5.22%…2001년 이후 최고",
-          "link": "https://www.newsis.com/view/NISX20260814_0003749333",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "6월 브라질 소매판매 0.5%↑…\"고금리에도 소비 견조\"",
-          "link": "https://www.newsis.com/view/NISX20260814_0003749426",
-          "source": "뉴시스 경제"
-        }
-      ]
-    },
-    {
-      "key": "realestate",
-      "name": "부동산",
-      "nameEn": "Real Estate",
-      "lineKo": "부동산: 50년 된 용산 산호아파트, 35층 679가구로 탈바꿈, 전·월세 안정화 카드?…'안심신탁'이 뭐길래, 금융위 \"청년에 비아파트 구입할 추가기회 제공…틈새시장 배려\" +12",
-      "lineEn": "Real Estate: 50년 된 용산 산호아파트, 35층 679가구로 탈바꿈, 전·월세 안정화 카드?…'안심신탁'이 뭐길래, 금융위 \"청년에 비아파트 구입할 추가기회 제공…틈새시장 배려\" +12",
-      "isFallback": true,
-      "fallbackReason": "unverified-entity",
-      "items": [
-        {
-          "title": "50년 된 용산 산호아파트, 35층 679가구로 탈바꿈",
-          "link": "https://www.hankyung.com/article/2026081423891",
-          "source": "한국경제 부동산"
-        },
-        {
-          "title": "전·월세 안정화 카드?…'안심신탁'이 뭐길래",
-          "link": "https://www.hankyung.com/article/2026081423931",
-          "source": "한국경제 부동산"
-        },
-        {
-          "title": "금융위 \"청년에 비아파트 구입할 추가기회 제공…틈새시장 배려\"",
-          "link": "https://www.yna.co.kr/view/AKR20260814136400002",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "與 \"국민의힘, 정부 부동산대책 왜곡…청년 주거불안 조장\"",
-          "link": "https://www.newsis.com/view/NISX20260814_0003749988",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "국토장관 \"용산공원 전체 주택공급 고민\"…오세훈과 대립각(종합)",
-          "link": "https://www.yna.co.kr/view/AKR20260814050551003",
-          "source": "연합뉴스 경제"
-        }
-      ]
-    },
-    {
-      "key": "stocks",
-      "name": "증시·환율",
-      "nameEn": "Stocks & FX",
-      "lineKo": "중국 증시가 상승 마감되고 코스피도 상승한 가운데, 미국 인플레 우려 완화로 달러가 약세를 보이며 환율이 1,410원대를 유지하고 있으며, 한국 증시에 대한 외신의 평가가 분화되고 있다.",
-      "lineEn": "As China's stock market closed higher and the Kospi also rose, the dollar weakened due to eased concerns over U.S. inflation, keeping the exchange rate in the 1,410 won range, while foreign media evaluations of the Korean stock market are divided.",
-      "isFallback": false,
-      "fallbackReason": null,
-      "items": [
-        {
-          "title": "[올댓차이나] 중국 증시 상승 마감…상하이지수 0.01%↑",
-          "link": "https://www.newsis.com/view/NISX20260814_0003750001",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "코스피 2.4%↑, 7천피 턱밑까지…이번주 내내 올랐다(종합)",
-          "link": "https://www.yna.co.kr/view/AKR20260814132200008",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "미국 인플레 우려 완화에 달러 약세…환율 6거래일째 1,410원대",
-          "link": "https://www.yna.co.kr/view/AKR20260814123400002",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "\"한국 증시 믿은 내가 바보\"…외신이 전한 코스피 개미들의 눈물",
-          "link": "https://www.newsis.com/view/NISX20260814_0003748998",
-          "source": "뉴시스 경제"
-        }
-      ]
-    },
-    {
-      "key": "other",
-      "name": "기타 경제 소식",
-      "nameEn": "Other Economic News",
-      "lineKo": "이억원이 가계대출 총량목표가 실수요 지원을 위한 것이라며 투기수요 자극 신호가 아니라고 밝혔다.",
-      "lineEn": "Lee Eok-won stated that the household loan aggregate target is intended to support genuine demand and is not a signal that would stimulate speculative demand.",
-      "isFallback": false,
-      "fallbackReason": null,
-      "items": [
-        {
-          "title": "이억원 “가계대출 총량목표, 실수요 지원 위한 것…투기수요 자극 신호 아냐”",
-          "link": "https://www.mk.co.kr/news/economy/12127835",
-          "source": "매일경제 부동산"
         }
       ]
     }
