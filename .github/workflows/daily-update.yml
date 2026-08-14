@@ -51,6 +51,15 @@ jobs:
 
       - run: npm ci
 
+      # 이 워크플로가 커밋을 GITHUB_TOKEN으로 올리기 때문에 test.yml이 트리거되지
+      # 않는다. 하루 4번 도는 이 실행이 곧 배포라, 테스트를 여기서 직접 돌리지
+      # 않으면 데이터 갱신 경로는 검증을 한 번도 거치지 않는다.
+      #
+      # 수집 전에 한 번 — 스크립트가 깨졌으면 뒤의 Ollama 설치·요약(20분)을
+      # 태우기 전에 멈추는 게 낫다.
+      - name: 테스트 (수집 전)
+        run: npm test
+
       - name: 뉴스 수집
         run: node scripts/fetch-news.mjs
 
@@ -105,6 +114,12 @@ jobs:
 
       - name: 뉴스 제목 영어 번역
         run: node scripts/translate-news.mjs
+
+      # 수집 후에 한 번 더 — 방금 받아온 docs/data를 상대로 돈다. 위의 실행은
+      # 직전 커밋 데이터만 봤으므로, 응답 형태가 바뀌어 생긴 문제는 여기서만 걸린다.
+      # 커밋 직전에 두는 게 핵심이다: 여기서 멈추면 깨진 데이터가 배포되지 않는다.
+      - name: 테스트 (수집 후)
+        run: npm test
 
       - name: 변경사항 커밋 및 푸시
         run: |
