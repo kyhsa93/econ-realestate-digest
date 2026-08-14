@@ -1,7 +1,147 @@
 {
-  "updatedAt": "2026-08-13T15:14:40.535Z",
+  "updatedAt": "2026-08-13T23:53:05.270Z",
   "date": "2026-08-14",
   "items": [
+    {
+      "title": "[오늘의 주요일정]경제(8월14일금요일)",
+      "link": "https://www.newsis.com/view/NISX20260813_0003747038",
+      "publishedAt": "2026-08-13T22:53:33.000Z",
+      "source": "뉴시스 경제",
+      "category": "other",
+      "preview": "[세종=뉴시스] ▲09:00 허장 재정경제부 2차관, 외환건전성협의회 겸 MSCI 선진국지수 편입 추진 TF(비공개) ▲09:30 송미령 농림축산식품부 장관, 국정과제 및 현안 점검 회의(세종) ▲09:30 김종구…",
+      "dupes": [],
+      "titleEn": "[Today's Major Schedule] Economy (August 14th, Friday)"
+    },
+    {
+      "title": "[마켓뷰] '인플레 압력 둔화' 美훈풍…코스피 5일째 상승 이어가나",
+      "link": "https://www.yna.co.kr/view/AKR20260814014500008",
+      "publishedAt": "2026-08-13T22:27:35.000Z",
+      "source": "연합뉴스 경제",
+      "category": "stocks",
+      "preview": "(서울=연합뉴스) 황철환 기자 = 14일 한국 주식시장은 미국 연방준비제도(Fed·연준)의 기준금리 인상 우려 완화와 글로벌 반도체주 강세의 영...",
+      "dupes": [],
+      "titleEn": "[Market View] U.S. inflation pressure eases, KOSPI to continue rising for 5th day?"
+    },
+    {
+      "title": "정부, 육아·돌봄도 실거주 인정 검토…비거주 1주택 세제 손질",
+      "link": "https://www.newsis.com/view/NISX20260813_0003748091",
+      "publishedAt": "2026-08-13T21:03:00.000Z",
+      "source": "뉴시스 경제",
+      "category": "realestate",
+      "preview": "[세종=뉴시스]박광온 기자 = 정부가 비거주 1세대 1주택자의 실거주 인정 예외 사유에 '육아'와 가족 돌봄 등을 추가하는 방향으로 세제개편안 보완에 나선 것으로 전해진다. 직장 발령이나 자녀 교육·육아, 부모 봉양…",
+      "dupes": [],
+      "titleEn": "Government to consider recognizing childcare and caregiving as actual residence... revising tax system for non-resident single-homeowners"
+    },
+    {
+      "title": "[삶-특집] \"한국 GDP, 뉴욕주 규모도 안된다…경제력-군사력 더 키워야\"",
+      "link": "https://www.yna.co.kr/view/AKR20260813111400546",
+      "publishedAt": "2026-08-13T21:01:01.000Z",
+      "source": "연합뉴스 경제",
+      "category": "other",
+      "preview": "(서울=연합뉴스) 윤근영 선임 기자= 한국은 침략당하고 또 당했다.",
+      "dupes": [],
+      "titleEn": "[Life-Special Report] \"South Korea's GDP Doesn't Even Reach That of New York State... Must Enhance Economic and Military Power"
+    },
+    {
+      "title": "환율·유가 하락에 7월 수입물가 1.0%↓…두달 연속 하락",
+      "link": "https://www.yna.co.kr/view/AKR20260813149300002",
+      "publishedAt": "2026-08-13T21:00:07.000Z",
+      "source": "연합뉴스 경제",
+      "category": "stocks",
+      "preview": "(서울=연합뉴스) 임지우 기자 = 지난 달 원/달러 환율과 국제 유가가 하락하면서 수입 물가가 2개월 연속 하락했다.",
+      "dupes": [],
+      "titleEn": "Fall in exchange rate and oil prices leads to 1.0% drop in July import prices... two consecutive months of decline"
+    },
+    {
+      "title": "부동산서비스업 체감경기 소폭 개선…공인중개업은 악화",
+      "link": "https://www.yna.co.kr/view/AKR20260813151300003",
+      "publishedAt": "2026-08-13T21:00:05.000Z",
+      "source": "연합뉴스 경제",
+      "category": "realestate",
+      "preview": "(세종=연합뉴스) 오진송 기자 = 올해 2분기 부동산서비스업의 체감경기가 소폭 개선됐지만, 여전히 부정적인 경기 인식이 우세한 것으로 나타났다.",
+      "dupes": [],
+      "titleEn": "Real Estate Service Industry Perceives Slight Improvement in Business Climate... Real Estate Brokerage Industry Worsens"
+    },
+    {
+      "title": "7월 서울 아파트 토지거래허가신청 4천681건…석 달째 감소세",
+      "link": "https://www.yna.co.kr/view/AKR20260813152100004",
+      "publishedAt": "2026-08-13T21:00:04.000Z",
+      "source": "연합뉴스 경제",
+      "category": "realestate",
+      "preview": "(서울=연합뉴스) 김준태 기자 = 서울시는 지난달 서울 아파트 토지거래허가 신규 신청 건수가 4천681건을 기록했다고 14일 밝혔다.",
+      "dupes": [],
+      "titleEn": "July Seoul apartment land transaction permit applications at 4,681 cases... decline for third consecutive month"
+    },
+    {
+      "title": "2분기 부동산 서비스업 체감경기 소폭 개선… “경제 불확실성이 최대 걸림돌”",
+      "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/14/TJ3YPYOWFNC3ZCZ5IKS4SC4I7M/",
+      "publishedAt": "2026-08-13T21:00:01.000Z",
+      "source": "조선비즈 부동산",
+      "category": "realestate",
+      "preview": null,
+      "dupes": [],
+      "titleEn": "Second-quarter real estate services sector business climate slightly improves... \"Economic uncertainty remains the biggest obstacle"
+    },
+    {
+      "title": "공급은 수년 뒤, 전세대출은 내년부터 제한… 서울 월세화 빨라지나",
+      "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/14/BT7YCSRCOFEL7IOLKXCVDHQN6Y/",
+      "publishedAt": "2026-08-13T21:00:01.000Z",
+      "source": "조선비즈 부동산",
+      "category": "realestate",
+      "preview": null,
+      "dupes": [],
+      "titleEn": "Supply to come years later, rental loans to be restricted from next year... Will Seoul's monthly rent increase accelerate?"
+    },
+    {
+      "title": "“세금 7억 아끼자”… 압구정 집주인들 아파트 맞교환 잇따라",
+      "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/14/SYBTWQONGRF5RMDR2PC2EMSNEA/",
+      "publishedAt": "2026-08-13T21:00:01.000Z",
+      "source": "조선비즈 부동산",
+      "category": "realestate",
+      "preview": null,
+      "dupes": [],
+      "titleEn": "Save 700,000,000 won in taxes\"… Apgujeong apartment owners continue to exchange apartments"
+    },
+    {
+      "title": "청년 첫 집 비아파트로 유도…'아파트 선호·빌라 포비아' 넘을까",
+      "link": "https://www.newsis.com/view/NISX20260813_0003748405",
+      "publishedAt": "2026-08-13T21:00:00.000Z",
+      "source": "뉴시스 경제",
+      "category": "realestate",
+      "preview": "[서울=뉴시스] 변해정 기자 = 정부가 청년들의 내 집 마련을 돕기 위해 4억원 이하 비아파트를 대상으로 저금리 정책모기지를 신설하지만, 청년층 사이에선 싸늘한 반응이 나온다. 아파트 선호가 뚜렷한 데다 전세사기 이…",
+      "dupes": [],
+      "titleEn": "Encouraging Young Adults to Move into Non-Apartment Housing... Can It Overcome 'Apartment Preference, Villa Phobia'?"
+    },
+    {
+      "title": "부동산서비스업 2분기 체감경기 '냉랭'…회복 기대감도 낮아",
+      "link": "https://www.newsis.com/view/NISX20260813_0003748477",
+      "publishedAt": "2026-08-13T21:00:00.000Z",
+      "source": "뉴시스 경제",
+      "category": "realestate",
+      "preview": "[서울=뉴시스] 변해정 기자 = 부동산서비스산업의 체감 경기지표가 기준치를 한참 밑도는 '침체' 수준을 이어갔다. 국토교통부는 이같은 내용의 2026년 2분기 부동산서비스산업 기업경기조사(BSI) 결과를 14일 공표…",
+      "dupes": [],
+      "titleEn": "Real Estate Services Sector's Second-Quarter Business Climate 'Cold'... Recovery Expectations Also Low"
+    },
+    {
+      "title": "美증시, 물가안정·유가하락에 상승…S&amp;P 0.65% 나스닥 0.8%↑",
+      "link": "https://www.newsis.com/view/NISX20260814_0003748638",
+      "publishedAt": "2026-08-13T20:40:55.000Z",
+      "source": "뉴시스 경제",
+      "category": "stocks",
+      "preview": "[서울=뉴시스] 김승민 기자 = 미국 7월 물가 지표가 안정세로 나타나고 국제 유가가 하락하면서 뉴욕증시가 일제 상승했다. 뉴욕증권거래소(NYSE)에 따르면 13일(현지 시간) 다우존스산업평균지수는 전장 대비 69.…",
+      "dupes": [],
+      "titleEn": "U.S. Markets Rise on Inflation Stability and Falling Oil Prices... S&P Up 0.65%, Nasdaq Up 0.8%"
+    },
+    {
+      "title": "[속보]뉴욕증시, 물가안정·유가하락 속 상승 마감…S&amp;P 0.65%↑",
+      "link": "https://www.newsis.com/view/NISX20260814_0003748637",
+      "publishedAt": "2026-08-13T20:06:56.000Z",
+      "source": "뉴시스 경제",
+      "category": "stocks",
+      "preview": null,
+      "dupes": [],
+      "titleEn": "[Breaking News] NY Stock Market Closes Higher Amid Stable Prices and Falling Oil Prices... S&P Rises 0.65%"
+    },
     {
       "title": "뉴욕증시, 7월 물가 안정세에 상승출발…다우 0.3% S&amp;P 0.2%↑",
       "link": "https://www.newsis.com/view/NISX20260813_0003748607",
@@ -30,37 +170,7 @@
       "category": "realestate",
       "preview": "[서울=뉴시스]조재완 기자 = 하준경 청와대 경제성장수석은 13일 \"150만호 정도를 정부 임기 내 착공할 수 있을 것\"이라고 밝혔다. 하 수석은 이날 오후 CBS라디오 '박재홍의 한판승부'에 출연해 \"관계기관들과…",
       "dupes": [],
-      "titleEn": "Blue House Ha Jun-kyung \"1,500,000 units to start construction during term... housing supply at Yongsan Children's Park also needed"
-    },
-    {
-      "title": "[올댓차이나] 대만 증시, 美 반도체주 강세에 4일째 상승 마감…1.11%↑",
-      "link": "https://www.newsis.com/view/NISX20260813_0003748550",
-      "publishedAt": "2026-08-13T11:04:21.000Z",
-      "source": "뉴시스 경제",
-      "category": "stocks",
-      "preview": "[서울=뉴시스]이재준 기자 = 대만 타이베이 증시는 13일 전날 뉴욕 증시에서 반도체를 중심으로 기술주가 강세를 보인데 힘입어 주력 기술주에 매수가 선행, 4거래일 연속 상승 마감했다. 자취안(加權) 지수는 전일 대…",
-      "dupes": [],
-      "titleEn": "[Taiwan's stock market closes up for fourth consecutive day on strong U.S. semiconductor stocks, rising 1.11%]"
-    },
-    {
-      "title": "\"비거주 1주택 불이익 과도\"…전문가들 \"실거주 특례 넓혀야\"",
-      "link": "https://www.newsis.com/view/NISX20260813_0003748548",
-      "publishedAt": "2026-08-13T11:01:10.000Z",
-      "source": "뉴시스 경제",
-      "category": "realestate",
-      "preview": "[세종=뉴시스]박광온 기자 = \"비거주 기간을 거주 기간으로 인정하는 특례에 '1년 이상 거주' 요건이 붙어 있는데, 이건 없애거나 최소한으로 줄여야 한다.\" \"부득이한 사유로 인한 거주 인정 기간을 지금 3년으로…",
-      "dupes": [],
-      "titleEn": "Non-resident single-home disadvantages excessive\"...Experts say \"expand actual residence exceptions"
-    },
-    {
-      "title": "[올댓차이나] 홍콩 증시, 中 경기불안에 사흘째 하락 마감… H주 0.23%↓",
-      "link": "https://www.newsis.com/view/NISX20260813_0003748524",
-      "publishedAt": "2026-08-13T09:52:55.000Z",
-      "source": "뉴시스 경제",
-      "category": "stocks",
-      "preview": "[서울=뉴시스]이재준 기자 = 홍콩 증시는 13일 중동 정세와 중국 경기에 대한 불안으로 매도가 출회하면서 3거래일 연속 내려 마감했다. 중국 주요 경제지표 발표를 앞두고 관망세가 퍼진 가운데 경기둔화에 대응해 중국…",
-      "dupes": [],
-      "titleEn": "[AllChina] Hong Kong stock market closes lower for third straight day amid China economic concerns... H shares down 0.23%"
+      "titleEn": "Blue House Ha Jun-kyung \"1,500,000 units to be started during term... housing supply at Yongsan Children's Park also needed"
     },
     {
       "title": "수도권 23만가구+α공급… 주담대 30조 더 푼다 [퇴근길 30초 경제]",
@@ -90,7 +200,7 @@
       "category": "other",
       "preview": null,
       "dupes": [],
-      "titleEn": "Double the 'total loan' limit... prioritize supply to youth and genuine demanders"
+      "titleEn": "Double the 'total loan' limit... Prioritize supply to youth and genuine demanders"
     },
     {
       "title": "실거주 이력 없으면 전세대출 연장 못한다",
@@ -100,7 +210,7 @@
       "category": "realestate",
       "preview": null,
       "dupes": [],
-      "titleEn": "No prior residency history means extension of lease-to-own loans is not possible"
+      "titleEn": "No rental history means extension of lease loan not possible"
     },
     {
       "title": "농협은행 '마을기업'에 1500억 저금리 대출 지원",
@@ -110,7 +220,7 @@
       "category": "rates",
       "preview": null,
       "dupes": [],
-      "titleEn": "Nonghyup Bank Provides 150,000,000,000 Won in Low-Interest Loans to 'Village Enterprises"
+      "titleEn": "NH Bank Provides Low-Interest Loan of 150,000,000,000 Won to 'Village Enterprises"
     },
     {
       "title": "한강 품고 강남 가까운 성동구…성수 이어 금호·옥수도 새 아파트촌 변신",
@@ -120,127 +230,17 @@
       "category": "realestate",
       "preview": null,
       "dupes": [],
-      "titleEn": "Seongdong-gu, with the Han River and close to Gangnam... Seongsu followed by Geumho and Okso transform into new apartment villages"
+      "titleEn": "Seongdong-gu, with the Han River and close to Gangnam... Seongshu followed by Geumho and Okso also transform into new apartment villages"
     },
     {
-      "title": "비아파트 공급 '영끌'…전세시장 안정은 '수요 회복'이 관건",
-      "link": "https://www.newsis.com/view/NISX20260813_0003748468",
-      "publishedAt": "2026-08-13T08:59:11.000Z",
-      "source": "뉴시스 경제",
-      "category": "realestate",
-      "preview": "[서울=뉴시스]이종성 기자 = 정부가 전세사기 이후 공급이 크게 위축된 다세대·다가구주택과 오피스텔 등 비아파트 시장을 되살리기 위해 건축·금융 규제를 대폭 완화한다. 아파트보다 상대적으로 빠르게 공급할 수 있는 비…",
-      "dupes": [],
-      "titleEn": "Non-apartment supply 'pulls down' prices... stabilizing the rental market hinges on demand recovery"
-    },
-    {
-      "title": "조기 착공땐 재건축 기부채납 부담 절반으로",
+      "title": "조기 착공땐 재건축 공공기여 부담 절반으로",
       "link": "https://www.hankyung.com/article/2026081301051",
       "publishedAt": "2026-08-13T08:53:11.000Z",
       "source": "한국경제 부동산",
       "category": "realestate",
       "preview": null,
       "dupes": [],
-      "titleEn": "Half the burden of reconstruction donation if construction starts early"
-    },
-    {
-      "title": "중장년층 위한 공공분양 … 집값 25%만 내고 거주하면서 지분 늘려",
-      "link": "https://www.mk.co.kr/news/realestate/12126866",
-      "publishedAt": "2026-08-13T08:51:18.000Z",
-      "source": "매일경제 부동산",
-      "category": "realestate",
-      "preview": "저소득층을 중심으로 공급되던 공공임대주택의 입주 문턱이 낮아진다. 목돈이 부족한 청년·중장년층을 위해 집값의 일부만 먼저 내고 장기간 지분을 늘려가는 공공분양도 도입한다. 민간에서..",
-      "dupes": [],
-      "titleEn": "Public housing for middle-aged and older adults ... pay only 25% of the house price while living there and increase ownership share"
-    },
-    {
-      "title": "[올댓차이나] 中 증시, 중동 불안·차익매물에 반락 마감…창업판 0.45%↓",
-      "link": "https://www.newsis.com/view/NISX20260813_0003748467",
-      "publishedAt": "2026-08-13T08:46:44.000Z",
-      "source": "뉴시스 경제",
-      "category": "realestate",
-      "preview": "[서울=뉴시스]이재준 기자 = 중국 증시는 13일 중동 정세 불안으로 투자심리가 악화하는 가운데 후반에 반도체주를 중심으로 차익 실현 매물이 출회하면서 반락 마감했다. 상하이 종합지수는 이날 전일 대비 19.71 포…",
-      "dupes": [],
-      "titleEn": "[AllChina] China's stock market closes lower amid Middle East tensions and profit-taking... Start-up board down 0.45%"
-    },
-    {
-      "title": "LH “이성훈 사장, 주택 3채 중 도곡 아파트 포함 2채 처분” 해명",
-      "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/13/NSAQGFZNNFCIPCGDGRMRNOYW2A/",
-      "publishedAt": "2026-08-13T08:43:18.000Z",
-      "source": "조선비즈 부동산",
-      "category": "realestate",
-      "preview": null,
-      "dupes": [],
-      "titleEn": "LH clarifies that CEO Lee Sung-hoon disposed of two properties, including the Do-gok Apartment, out of three homes"
-    },
-    {
-      "title": "\"주택 신속공급 의지 드러내…병목 요인 손보고 금융 물꼬 터줘\"",
-      "link": "https://www.hankyung.com/article/2026081301191",
-      "publishedAt": "2026-08-13T08:42:51.000Z",
-      "source": "한국경제 부동산",
-      "category": "realestate",
-      "preview": null,
-      "dupes": [],
-      "titleEn": "Show Resolve to Quickly Supply Housing... Address Bottlenecks and Ease Financial Constraints"
-    },
-    {
-      "title": "\"청년들, 오피스텔·빌라 사면 저리대출 지원\"… 아파트는 해당 안돼",
-      "link": "https://www.mk.co.kr/news/realestate/12126809",
-      "publishedAt": "2026-08-13T08:42:43.000Z",
-      "source": "매일경제 부동산",
-      "category": "realestate",
-      "preview": "앞으로 월세 80만~100만원을 내면서 수도권 오피스텔 등에 거주하는 청년들은 비슷한 수준의 원리금 부담으로 2억원대 오피스텔을 살 수 있게 된다. 기존 정책대출보다 2%포인트 ..",
-      "dupes": [],
-      "titleEn": "Youth to get low-interest loans for office apartments and villas... Not applicable to regular apartments"
-    },
-    {
-      "title": "세 부담 커지자…서초·강남 집값 3개월만에 하락세",
-      "link": "https://www.hankyung.com/article/2026081301271",
-      "publishedAt": "2026-08-13T08:40:43.000Z",
-      "source": "한국경제 부동산",
-      "category": "other",
-      "preview": null,
-      "dupes": [],
-      "titleEn": "Rising Burden Causes Seocho and Gangnam Home Prices to Drop After Three Months"
-    },
-    {
-      "title": "'일반주택형 미리내집' 128가구 공급",
-      "link": "https://www.hankyung.com/article/2026081301261",
-      "publishedAt": "2026-08-13T08:40:13.000Z",
-      "source": "한국경제 부동산",
-      "category": "realestate",
-      "preview": null,
-      "dupes": [],
-      "titleEn": "General residential type Mirinae House\" to supply 128 units"
-    },
-    {
-      "title": "\"전월세난 지속…무주택자, 세 낀 매물 눈여겨봐야\"",
-      "link": "https://www.hankyung.com/article/2026081301211",
-      "publishedAt": "2026-08-13T08:39:57.000Z",
-      "source": "한국경제 부동산",
-      "category": "realestate",
-      "preview": null,
-      "dupes": [],
-      "titleEn": "Rental and lease difficulties continue... Homeless people should keep an eye on tax-exempt listings"
-    },
-    {
-      "title": "국힘 “이성훈, 다주택 상태서 LH 사장 취임”…사측 “靑 재직때 2채 처분”",
-      "link": "https://www.mk.co.kr/news/realestate/12126784",
-      "publishedAt": "2026-08-13T08:27:21.000Z",
-      "source": "매일경제 부동산",
-      "category": "realestate",
-      "preview": "한국토지주택공사(LH)가 13일 이성훈 사장이 청와대 재직 당시 보유하고 있던 주택 3채 가운데 2채를 처분했다고 밝혔다. LH는 이날 “이성훈 사장은 청와대 재직 당시 기존 3주..",
-      "dupes": [],
-      "titleEn": "KDP says \"Lee Seung-hoon took up LH president post while owning multiple homes\"...LH says \"He disposed of two properties during his time at the Blue House"
-    },
-    {
-      "title": "국고채 금리 대체로 하락…50년물 최고치 경신(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260813145251008",
-      "publishedAt": "2026-08-13T08:25:07.000Z",
-      "source": "연합뉴스 경제",
-      "category": "rates",
-      "preview": "(서울=연합뉴스) 강수지 기자 = 13일 국고채 금리가 대체로 하락했다.",
-      "dupes": [],
-      "titleEn": "Government bond rates mostly fall... 50-year bond hits new high (comprehensive)"
+      "titleEn": "Half the Public Burden for Reconstruction if Construction Starts Early"
     }
   ]
 }
