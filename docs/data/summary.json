@@ -1,111 +1,44 @@
 {
-  "updatedAt": "2026-08-13T23:54:44.414Z",
+  "updatedAt": "2026-08-14T04:58:50.642Z",
   "model": "qwen3:14b",
   "summary": {
-    "ko": "- 오늘 경제 관련 주요일정이 발표되었고, 한국 GDP 규모에 대한 논의가 이어졌으며, 수도권 주택 공급 확대와 주담대 증대 계획이 발표되었고, 대출 총량 한도가 확대되며 청년과 실수요자에 대한 우선 공급이 발표되었다.\n- 미국 증시와 환율, 유가 하락 등으로 국내외 증시가 상승세를 이어가고 있으며, 7월 수입물가가 하락세를 지속하고 있다.\n- 정부가 실거주 인정 대상에 육아·돌봄을 포함하는 방안을 검토하고, 부동산 서비스업 체감경기 소폭 개선과 함께 서울 아파트 토지거래허가신청이 감소세를 이어가고 있으며, 서울의 월세화 가능성에 대한 논의가 진행되고 있다.\n- 농협은행이 마을기업에 저금리 대출을 지원하는 등 금리·예금·투자상품 관련 다양한 소식이 발표됐다.",
-    "en": "- Today, major economic schedules were announced, discussions on South Korea's GDP size continued, plans to expand housing supply in the capital area and increase mortgage lending were announced, and the overall loan limit was expanded with priority supply to young people and first-time homebuyers.\n- The domestic and foreign stock markets are continuing their upward trend due to factors such as the decline in the U.S. stock market, exchange rates, and oil prices, and the import price index in July is continuing its downward trend.\n- The government is reviewing options to include childcare and care in the actual residence recognition criteria, while the real estate service industry's perceived business climate has slightly improved, and applications for land transaction permits for Seoul apartments continue to decline, with discussions ongoing about the possibility of increasing monthly rent payments in Seoul.\n- Agricultural Cooperative Bank announced various news related to interest rates, deposits, and investment products, including supporting village enterprises with low-interest loans."
+    "ko": "- 부동산 관련 주요 뉴스로는 세종대의 공공주택 복합사업 특강, 국힘의 부동산 대책에 대한 공세, 홍콩 증시의 하락, 세제개편안에 대한 국민 의견, 청년미래보금자리론의 실효성 논란 등이 보도되었다.\n- 6월 브라질 소매판매가 증가했고, 국고채 금리가 하락했으며, 엔화 가치가 하락한 것으로 나타났다.\n- 이억원이 가계대출 총량목표와 관련해 실수요 지원을 위한 조치라고 강조했고, 7월 금융권 가계대출 증가폭이 줄어든 소식이 전해졌다.\n- 한국 증시는 상승과 하락을 반복하며 혼조세를 보이고 있고, 중국과 일본 증시도 각각 상승 출발하는 등 글로벌 시장이 다양한 방향으로 움직이고 있다.",
+    "en": "- Major real estate-related news included a special lecture on the public housing complex project by Seoul National University, the conservative party's aggressive stance on real estate measures, the decline in the Hong Kong stock market, public opinion on the tax reform proposal, and controversy over the effectiveness of the Youth Future Housing Program.\n- June retail sales in Brazil increased, government bond yields fell, and the yen's value declined.\n- Lee Eok-won emphasized that the measures relate to supporting genuine demand in connection with the overall household loan target, and news was reported that the increase in household loans by the financial sector in July had decreased.\n- The Korean stock market is showing a mixed performance, repeatedly fluctuating between rises and falls, while Chinese and Japanese stock markets are also starting to rise, indicating that global markets are moving in various directions."
   },
   "categories": [
-    {
-      "key": "other",
-      "name": "기타 경제 소식",
-      "nameEn": "Other Economic News",
-      "lineKo": "오늘 경제 관련 주요일정이 발표되었고, 한국 GDP 규모에 대한 논의가 이어졌으며, 수도권 주택 공급 확대와 주담대 증대 계획이 발표되었고, 대출 총량 한도가 확대되며 청년과 실수요자에 대한 우선 공급이 발표되었다.",
-      "lineEn": "Today, major economic schedules were announced, discussions on South Korea's GDP size continued, plans to expand housing supply in the capital area and increase mortgage lending were announced, and the overall loan limit was expanded with priority supply to young people and first-time homebuyers.",
-      "isFallback": false,
-      "fallbackReason": null,
-      "items": [
-        {
-          "title": "[오늘의 주요일정]경제(8월14일금요일)",
-          "link": "https://www.newsis.com/view/NISX20260813_0003747038",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "[삶-특집] \"한국 GDP, 뉴욕주 규모도 안된다…경제력-군사력 더 키워야\"",
-          "link": "https://www.yna.co.kr/view/AKR20260813111400546",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "수도권 23만가구+α공급… 주담대 30조 더 푼다 [퇴근길 30초 경제]",
-          "link": "https://www.hankyung.com/article/202608130271H",
-          "source": "한국경제 경제"
-        },
-        {
-          "title": "'대출 총량' 한도 두 배로 늘린다…청년·실수요자에 우선 공급",
-          "link": "https://www.hankyung.com/article/2026081300901",
-          "source": "한국경제 경제"
-        }
-      ]
-    },
-    {
-      "key": "stocks",
-      "name": "증시·환율",
-      "nameEn": "Stocks & FX",
-      "lineKo": "미국 증시와 환율, 유가 하락 등으로 국내외 증시가 상승세를 이어가고 있으며, 7월 수입물가가 하락세를 지속하고 있다.",
-      "lineEn": "The domestic and foreign stock markets are continuing their upward trend due to factors such as the decline in the U.S. stock market, exchange rates, and oil prices, and the import price index in July is continuing its downward trend.",
-      "isFallback": false,
-      "fallbackReason": null,
-      "items": [
-        {
-          "title": "[마켓뷰] '인플레 압력 둔화' 美훈풍…코스피 5일째 상승 이어가나",
-          "link": "https://www.yna.co.kr/view/AKR20260814014500008",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "환율·유가 하락에 7월 수입물가 1.0%↓…두달 연속 하락",
-          "link": "https://www.yna.co.kr/view/AKR20260813149300002",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "美증시, 물가안정·유가하락에 상승…S&amp;P 0.65% 나스닥 0.8%↑",
-          "link": "https://www.newsis.com/view/NISX20260814_0003748638",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "[속보]뉴욕증시, 물가안정·유가하락 속 상승 마감…S&amp;P 0.65%↑",
-          "link": "https://www.newsis.com/view/NISX20260814_0003748637",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "뉴욕증시, 7월 물가 안정세에 상승출발…다우 0.3% S&amp;P 0.2%↑",
-          "link": "https://www.newsis.com/view/NISX20260813_0003748607",
-          "source": "뉴시스 경제"
-        }
-      ]
-    },
     {
       "key": "realestate",
       "name": "부동산",
       "nameEn": "Real Estate",
-      "lineKo": "정부가 실거주 인정 대상에 육아·돌봄을 포함하는 방안을 검토하고, 부동산 서비스업 체감경기 소폭 개선과 함께 서울 아파트 토지거래허가신청이 감소세를 이어가고 있으며, 서울의 월세화 가능성에 대한 논의가 진행되고 있다.",
-      "lineEn": "The government is reviewing options to include childcare and care in the actual residence recognition criteria, while the real estate service industry's perceived business climate has slightly improved, and applications for land transaction permits for Seoul apartments continue to decline, with discussions ongoing about the possibility of increasing monthly rent payments in Seoul.",
+      "lineKo": "부동산 관련 주요 뉴스로는 세종대의 공공주택 복합사업 특강, 국힘의 부동산 대책에 대한 공세, 홍콩 증시의 하락, 세제개편안에 대한 국민 의견, 청년미래보금자리론의 실효성 논란 등이 보도되었다.",
+      "lineEn": "Major real estate-related news included a special lecture on the public housing complex project by Seoul National University, the conservative party's aggressive stance on real estate measures, the decline in the Hong Kong stock market, public opinion on the tax reform proposal, and controversy over the effectiveness of the Youth Future Housing Program.",
       "isFallback": false,
       "fallbackReason": null,
       "items": [
         {
-          "title": "정부, 육아·돌봄도 실거주 인정 검토…비거주 1주택 세제 손질",
-          "link": "https://www.newsis.com/view/NISX20260813_0003748091",
+          "title": "세종대, ‘도심 공공주택 복합사업의 현황과 미래’ 특강 개최",
+          "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/14/BPZ2HHBU7JC6DFKW62PU2AJNIY/",
+          "source": "조선비즈 부동산"
+        },
+        {
+          "title": "국힘, '정부 세제개편안·공급 대책'에 쌍끌이 부동산 공세",
+          "link": "https://www.yna.co.kr/view/AKR20260814076000001",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "[올댓차이나] 홍콩 증시, 기술주에 이익매물로 나흘째 하락 출발… H주 0.62%↓",
+          "link": "https://www.newsis.com/view/NISX20260814_0003749389",
           "source": "뉴시스 경제"
         },
         {
-          "title": "부동산서비스업 체감경기 소폭 개선…공인중개업은 악화",
-          "link": "https://www.yna.co.kr/view/AKR20260813151300003",
+          "title": "국민 45% \"세제개편안, 부동산 시장에 부정적 영향줄 것\"[한국갤럽]",
+          "link": "https://www.yna.co.kr/view/AKR20260814072700001",
           "source": "연합뉴스 경제"
         },
         {
-          "title": "7월 서울 아파트 토지거래허가신청 4천681건…석 달째 감소세",
-          "link": "https://www.yna.co.kr/view/AKR20260813152100004",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "2분기 부동산 서비스업 체감경기 소폭 개선… “경제 불확실성이 최대 걸림돌”",
-          "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/14/TJ3YPYOWFNC3ZCZ5IKS4SC4I7M/",
-          "source": "조선비즈 부동산"
-        },
-        {
-          "title": "공급은 수년 뒤, 전세대출은 내년부터 제한… 서울 월세화 빨라지나",
-          "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/14/BT7YCSRCOFEL7IOLKXCVDHQN6Y/",
-          "source": "조선비즈 부동산"
+          "title": "“빌라 말고 아파트 사고 싶은데”…청년미래보금자리론 실효성은",
+          "link": "https://www.mk.co.kr/news/realestate/12127776",
+          "source": "매일경제 부동산"
         }
       ]
     },
@@ -113,15 +46,87 @@
       "key": "rates",
       "name": "금리·예금·투자상품",
       "nameEn": "Rates, Deposits & Investment Products",
-      "lineKo": "농협은행이 마을기업에 저금리 대출을 지원하는 등 금리·예금·투자상품 관련 다양한 소식이 발표됐다.",
-      "lineEn": "Agricultural Cooperative Bank announced various news related to interest rates, deposits, and investment products, including supporting village enterprises with low-interest loans.",
+      "lineKo": "6월 브라질 소매판매가 증가했고, 국고채 금리가 하락했으며, 엔화 가치가 하락한 것으로 나타났다.",
+      "lineEn": "June retail sales in Brazil increased, government bond yields fell, and the yen's value declined.",
       "isFallback": false,
       "fallbackReason": null,
       "items": [
         {
-          "title": "농협은행 '마을기업'에 1500억 저금리 대출 지원",
-          "link": "https://www.hankyung.com/article/2026081301811",
+          "title": "6월 브라질 소매판매 0.5%↑…\"고금리에도 소비 견조\"",
+          "link": "https://www.newsis.com/view/NISX20260814_0003749426",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "국고채 금리 대체로 하락…3년물 장중 연 3.773%",
+          "link": "https://www.yna.co.kr/view/AKR20260814075400008",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "엔화, 미일 금리차 축소 난망에 1달러=159엔대 중반 하락 출발",
+          "link": "https://www.newsis.com/view/NISX20260814_0003749046",
+          "source": "뉴시스 경제"
+        }
+      ]
+    },
+    {
+      "key": "other",
+      "name": "기타 경제 소식",
+      "nameEn": "Other Economic News",
+      "lineKo": "이억원이 가계대출 총량목표와 관련해 실수요 지원을 위한 조치라고 강조했고, 7월 금융권 가계대출 증가폭이 줄어든 소식이 전해졌다.",
+      "lineEn": "Lee Eok-won emphasized that the measures relate to supporting genuine demand in connection with the overall household loan target, and news was reported that the increase in household loans by the financial sector in July had decreased.",
+      "isFallback": false,
+      "fallbackReason": null,
+      "items": [
+        {
+          "title": "이억원 “가계대출 총량목표, 실수요 지원 위한 것…투기수요 자극 신호 아냐”",
+          "link": "https://www.mk.co.kr/news/economy/12127835",
+          "source": "매일경제 부동산"
+        },
+        {
+          "title": "이억원 \"가계대출 총량 조정, 실수요 위한 것…투기 신호돼선 안돼\"",
+          "link": "https://www.hankyung.com/article/2026081413716",
           "source": "한국경제 경제"
+        },
+        {
+          "title": "7월 금융권 가계대출 6.2조↑…'빚투' 진정 등에 증가폭 축소",
+          "link": "https://www.yna.co.kr/view/AKR20260814053200002",
+          "source": "연합뉴스 경제"
+        }
+      ]
+    },
+    {
+      "key": "stocks",
+      "name": "증시·환율",
+      "nameEn": "Stocks & FX",
+      "lineKo": "한국 증시는 상승과 하락을 반복하며 혼조세를 보이고 있고, 중국과 일본 증시도 각각 상승 출발하는 등 글로벌 시장이 다양한 방향으로 움직이고 있다.",
+      "lineEn": "The Korean stock market is showing a mixed performance, repeatedly fluctuating between rises and falls, while Chinese and Japanese stock markets are also starting to rise, indicating that global markets are moving in various directions.",
+      "isFallback": false,
+      "fallbackReason": null,
+      "items": [
+        {
+          "title": "\"한국 증시 믿은 내가 바보\"…외신이 전한 코스피 개미들의 눈물",
+          "link": "https://www.newsis.com/view/NISX20260814_0003748998",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "코스피 1%대↑, 상승률 다소 둔화…코스닥은 하락전환",
+          "link": "https://www.yna.co.kr/view/AKR20260814068400008",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "[올댓차이나] 중국 증시 상승 출발…상하이지수 0.08%↑",
+          "link": "https://www.newsis.com/view/NISX20260814_0003749245",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "코스피 2%대↑, 닷새째 상승…장중 '7천피' 회복(종합)",
+          "link": "https://www.yna.co.kr/view/AKR20260814040800008",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "日증시, 美증시 영향으로 상승 출발…닛케이지수 0.74%↑",
+          "link": "https://www.newsis.com/view/NISX20260814_0003748946",
+          "source": "뉴시스 경제"
         }
       ]
     }
