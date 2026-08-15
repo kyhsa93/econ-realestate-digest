@@ -1649,12 +1649,18 @@
     realestateHistory: "realestate-history",
   };
 
-  async function loadHistoryInto(cacheKey) {
+  // 메인 화면 차트는 최근 30일치 평당가·거래건수만 쓰는데, 원본 히스토리는 180일치를
+  // 25개 구 전 항목으로 들고 있어서 하루 14KB씩 자란다. 여기서만 경량 파일을 받는다.
+  // 아카이브는 특정 날짜의 전체 내용이 필요하므로 원본을 그대로 받는다.
+  const LITE_HISTORY_FILES = { realestateHistory: "realestate-history-lite" };
+
+  async function loadHistoryInto(cacheKey, { lite = false } = {}) {
+    const file = (lite && LITE_HISTORY_FILES[cacheKey]) || HISTORY_FILES[cacheKey];
     try {
-      cache[cacheKey] = await loadJson(HISTORY_FILES[cacheKey]);
+      cache[cacheKey] = await loadJson(file);
     } catch (err) {
       cache[cacheKey] = null;
-      reportLoadFailure(HISTORY_FILES[cacheKey], err, false);
+      reportLoadFailure(file, err, false);
     }
   }
 
@@ -1669,14 +1675,17 @@
     });
 
     if (isArchiveView) {
-      await Promise.all(Object.keys(HISTORY_FILES).map(loadHistoryInto));
+      await Promise.all(Object.keys(HISTORY_FILES).map((key) => loadHistoryInto(key)));
       applyLocale(locale);
       return;
     }
 
     applyLocale(locale);
 
-    await Promise.all([loadHistoryInto("history"), loadHistoryInto("realestateHistory")]);
+    await Promise.all([
+      loadHistoryInto("history"),
+      loadHistoryInto("realestateHistory", { lite: true }),
+    ]);
     renderHistory(cache.history);
     renderRealestateHistory(cache.realestateHistory);
   }

@@ -34,6 +34,12 @@
   원문에 없는 고유명사(모델에겐 추출만 시키고 대조는 코드가 함)가 있으면 폐기하고 헤드라인
   나열로 대체하며, 그 사유를 `categories[].fallbackReason`에 남긴다
 - `scripts/translate-news.mjs` — 뉴스 제목을 영어로 번역(`titleEn`) → `docs/data/news.json`
+- `scripts/build-history-lite.mjs` — `realestate-history.json`에서 **메인 화면 차트가 실제로 읽는
+  필드만, 최근 35일치만** 추린 `realestate-history-lite.json`을 만든다. 원본은 180일치를 25개 구
+  전 항목으로 들고 있어서 **하루 14KB씩 자라는데**(180일이면 2.5MB) 차트는 `slice(-30)`으로 최근
+  30일의 평당가·거래건수만 쓴다. 그대로 두면 몇 달 뒤 모든 방문자가 매 방문마다 1MB 넘게 받게 된다.
+  메인은 경량 파일을, 아카이브(`?date=`)는 그날의 전체 내용이 필요하므로 원본을 받는다.
+  **경량 파일로 그린 차트가 원본으로 그린 것과 같은지 테스트가 대조한다**
 - `scripts/prerender.mjs` — `docs/data/*.json`을 읽어 그날 내용(요약·시장지표·부동산·뉴스)을
   `docs/index.html`의 자리표시 주석(`<!--prerender:이름-->`) 사이에 정적 마크업으로 심는다.
   이 페이지는 데이터를 클라이언트에서 받아 그리기 때문에 손대지 않으면 크롤러가 받는 HTML에는

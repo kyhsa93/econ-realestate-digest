@@ -10,6 +10,7 @@ function run(cmd) {
 async function main() {
   run("node scripts/fetch-news.mjs");
   run("node scripts/fetch-market.mjs");
+  run("node scripts/build-history-lite.mjs");
   run("node scripts/prerender.mjs");
   run("node scripts/build-rate-pages.mjs");
   run("node scripts/build-news-pages.mjs");

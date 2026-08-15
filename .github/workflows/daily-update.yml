@@ -93,6 +93,7 @@ jobs:
 
       - name: 정적 HTML에 오늘 내용 심기
         run: |
+          node scripts/build-history-lite.mjs
           node scripts/prerender.mjs
           node scripts/build-rate-pages.mjs
           node scripts/build-news-pages.mjs

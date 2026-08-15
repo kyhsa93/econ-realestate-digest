@@ -33,6 +33,7 @@ export async function loadIndexPage({ analytics, fetch: fetchImpl } = {}) {
 
   const store = {};
   const observed = [];
+  const byId = new Map();
 
   const sandbox = {
     console: { ...console, warn() {}, error() {} },
@@ -72,7 +73,11 @@ export async function loadIndexPage({ analytics, fetch: fetchImpl } = {}) {
       }
     },
     document: {
-      getElementById: () => stubElement(),
+      // 같은 id는 같은 노드를 돌려줘야 렌더 결과를 읽어볼 수 있다.
+      getElementById: (id) => {
+        if (!byId.has(id)) byId.set(id, stubElement());
+        return byId.get(id);
+      },
       querySelectorAll: () => [],
       querySelector: () => null,
       createElement: () => stubElement(),
@@ -88,7 +93,8 @@ export async function loadIndexPage({ analytics, fetch: fetchImpl } = {}) {
   sandbox.self = sandbox;
   sandbox.globalThis = sandbox;
   vm.createContext(sandbox);
-  new vm.Script(script, { filename: "docs/index.html:inline" }).runInContext(sandbox);
+  // 스크립트 최상위의 const는 컨텍스트 밖에서 못 보므로 cache만 따로 내보낸다.
+  new vm.Script(script + "\nglobalThis.__cache = cache;", { filename: "docs/index.html:inline" }).runInContext(sandbox);
 
   // main()이 await로 데이터를 읽고 첫 렌더를 마칠 때까지 기다린다.
   await new Promise((resolve) => setTimeout(resolve, 0));
@@ -96,6 +102,7 @@ export async function loadIndexPage({ analytics, fetch: fetchImpl } = {}) {
 
   return {
     app: sandbox,
+    byId: (id) => sandbox.document.getElementById(id),
     // 관찰 중인 섹션이 화면에 들어온 것처럼 만든다.
     scrollTo: (index) => {
       const observer = observed[0];
