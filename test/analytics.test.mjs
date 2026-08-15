@@ -26,6 +26,7 @@ async function loadAnalytics({
   title = "테스트 제목",
   href = "https://example.test/rates.html",
   search = "",
+  siteGroup = "digest",
 } = {}) {
   const source = await readFile(path.join(root, "docs/analytics.js"), "utf8");
 
@@ -38,6 +39,10 @@ async function loadAnalytics({
       title,
       head: { appendChild: (el) => appended.push(el) },
       createElement: () => ({}),
+      querySelector: (sel) =>
+        sel === 'meta[name="site-group"]' && siteGroup
+          ? { getAttribute: (name) => (name === "content" ? siteGroup : null) }
+          : null,
     },
     location: { href, search },
     URLSearchParams,
@@ -80,8 +85,15 @@ test("페이지뷰 자동 전송은 꺼두고 로더가 gtag/adsense를 붙인�
   const config = a.calls().find(([kind]) => kind === "config");
   assert.ok(config, "config 호출이 있어야 한다");
   assert.equal(config[2].send_page_view, false);
-  // 블로그와 같은 속성을 쓰므로 이게 빠지면 보고서에서 두 사이트가 섞인다.
+  // 블로그·다른 프로젝트와 같은 속성을 쓰므로 이게 빠지면 보고서에서 전부 섞인다.
   assert.equal(config[2].content_group, "digest");
+
+  // 값은 파일이 아니라 페이지가 정한다(다른 프로젝트가 이 파일을 그대로 복사해 쓴다).
+  const other = await loadAnalytics({ siteGroup: "housing-subsidy-radar" });
+  assert.equal(other.calls().find(([kind]) => kind === "config")[2].content_group, "housing-subsidy-radar");
+
+  const none = await loadAnalytics({ siteGroup: null });
+  assert.equal(none.calls().find(([kind]) => kind === "config")[2].content_group, undefined);
 
   const srcs = a.scriptSrcs();
   assert.ok(srcs.some((s) => s.includes("googletagmanager.com/gtag/js?id=G-")));
@@ -254,6 +266,7 @@ test("두 페이지와 서비스워커가 모두 analytics.js를 물고 있다",
     ["rates.html", rates],
   ]) {
     assert.ok(html.includes('<script src="./analytics.js"></script>'), `${name}에 로더가 없다`);
+    assert.ok(html.includes('<meta name="site-group" content="digest">'), `${name}에 사이트 구분이 없다`);
     // 로더로 옮기기 전처럼 페이지에 측정 코드가 다시 박히면 두 번 계측된다.
     assert.ok(!html.includes("googletagmanager.com"), `${name}에 인라인 GA가 남아 있다`);
     assert.ok(html.includes("privacy-policy"), `${name}에 개인정보처리방침 링크가 없다`);

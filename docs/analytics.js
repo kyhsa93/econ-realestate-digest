@@ -22,11 +22,14 @@
   // 배포된 사이트에서 이벤트가 실제로 나가는지 GA DebugView로 보려면 이게 있어야 한다.
   // 주소에 ?ga_debug=1을 붙였을 때만 켠다 — 늘 켜두면 일반 방문까지 디버그 스트림으로 샌다.
   const debugMode = new URLSearchParams(location.search ?? "").has("ga_debug");
+  // 같은 GA 속성을 블로그·다른 프로젝트 페이지와 함께 쓰기 때문에, 이 값이 없으면
+  // 보고서에서 전부 한 덩어리로 섞인다. 이 파일을 다른 프로젝트에 그대로 복사해
+  // 쓸 수 있도록 사이트 이름은 파일에 박지 않고 페이지의 meta에서 읽는다.
+  const siteGroup = document.querySelector('meta[name="site-group"]')?.getAttribute("content");
+
   gtag("config", GA_MEASUREMENT_ID, {
     send_page_view: false,
-    // 블로그(kyhsa93.github.io)와 같은 GA 속성·같은 도메인이라 이걸 안 붙이면
-    // 보고서에서 블로그 글과 이 사이트 페이지가 한 목록에 섞인다.
-    content_group: "digest",
+    ...(siteGroup ? { content_group: siteGroup } : {}),
     ...(debugMode ? { debug_mode: true } : {}),
   });
 
