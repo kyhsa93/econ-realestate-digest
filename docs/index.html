@@ -844,6 +844,16 @@
     return res.json();
   }
 
+  // 데이터를 못 받으면 화면엔 오류 문구만 뜨고 끝이라, 며칠째 그러고 있어도
+  // 알 방법이 없었다. CI는 파일을 만드는 데까지만 보고 브라우저에서 실제로
+  // 읽히는지는 안 본다. fatal은 그 파일이 없으면 페이지가 제구실을 못 하는 경우.
+  function reportLoadFailure(name, error, fatal) {
+    window.analytics?.event("exception", {
+      description: `load ${name}: ${error?.message ?? error}`.slice(0, 100),
+      fatal,
+    });
+  }
+
   function directionClass(direction) {
     if (direction === "RISING") return "up";
     if (direction === "FALLING") return "down";
@@ -1593,8 +1603,9 @@
   async function loadHistoryInto(cacheKey) {
     try {
       cache[cacheKey] = await loadJson(HISTORY_FILES[cacheKey]);
-    } catch {
+    } catch (err) {
       cache[cacheKey] = null;
+      reportLoadFailure(HISTORY_FILES[cacheKey], err, false);
     }
   }
 
@@ -1605,6 +1616,7 @@
     const results = await Promise.allSettled(todayKeys.map((key) => loadJson(key)));
     todayKeys.forEach((key, i) => {
       cache[key] = results[i].status === "fulfilled" ? results[i].value : null;
+      if (results[i].status === "rejected") reportLoadFailure(key, results[i].reason, true);
     });
 
     if (isArchiveView) {

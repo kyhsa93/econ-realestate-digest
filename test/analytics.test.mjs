@@ -8,6 +8,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import vm from "node:vm";
 import { loadRatesPage } from "./helpers/rates-page.mjs";
+import { loadIndexPage } from "./helpers/index-page.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
 
@@ -169,6 +170,38 @@ test("금리 페이지는 첫 렌더에서 페이지뷰를, 탭 전환에서 이
   const tabEvents = analytics.calls.filter(([name]) => name === "rate_tab");
   assert.equal(tabEvents.length, 1);
   assert.equal(tabEvents[0][1].rate_category, "mortgage");
+});
+
+test("데이터를 못 받으면 어느 파일이 실패했는지 남는다", async () => {
+  const analytics = recorder();
+  await loadIndexPage({ analytics });
+
+  const failures = analytics.calls.filter(([name]) => name === "exception");
+  // 오늘치 4종(market/news/summary/realestate)은 없으면 페이지가 제구실을 못 한다.
+  const fatal = failures.filter(([, params]) => params.fatal);
+  assert.equal(fatal.length, 4, `fatal 4건이어야 한다: ${JSON.stringify(failures)}`);
+  for (const key of ["market", "news", "summary", "realestate"]) {
+    assert.ok(
+      fatal.some(([, params]) => params.description.includes(`load ${key}:`)),
+      `${key} 실패가 안 남았다`
+    );
+  }
+
+  // 히스토리는 없어도 오늘 화면은 멀쩡하니 같은 무게로 다루지 않는다.
+  assert.ok(failures.some(([, params]) => params.fatal === false));
+  // GA 매개변수 값 상한이 100자라 그 안에서 끊어 보낸다.
+  assert.ok(failures.every(([, params]) => params.description.length <= 100));
+});
+
+test("금리 페이지도 로드 실패를 남긴다", async () => {
+  const analytics = recorder();
+  await loadRatesPage({ analytics, fetch: async () => ({ ok: false, json: async () => ({}) }) });
+
+  const failures = analytics.calls.filter(([name]) => name === "exception");
+  assert.ok(
+    failures.some(([, params]) => params.description.includes("load rates:") && params.fatal),
+    `rates 실패가 안 남았다: ${JSON.stringify(failures)}`
+  );
 });
 
 test("계측 스크립트가 차단돼도 금리 페이지는 그대로 그려진다", async () => {

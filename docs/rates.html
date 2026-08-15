@@ -687,6 +687,15 @@
     return res.json();
   }
 
+  // 데이터를 못 받으면 화면엔 오류 문구만 뜨고 끝이라 며칠째 그러고 있어도 알 수가 없다.
+  // fatal은 그 파일이 없으면 페이지가 제구실을 못 하는 경우.
+  function reportLoadFailure(name, error, fatal) {
+    window.analytics?.event("exception", {
+      description: `load ${name}: ${error?.message ?? error}`.slice(0, 100),
+      fatal,
+    });
+  }
+
   function sparklineSvg(values) {
     const points = values.filter((v) => typeof v === "number" && Number.isFinite(v));
     if (points.length < 2) return "";
@@ -1144,6 +1153,7 @@
       cache.rates = await loadJson("rates");
     } catch (err) {
       console.error("[rates] 로드 실패:", err.message);
+      reportLoadFailure("rates", err, true);
       document.getElementById("products-body").innerHTML = `<tr class="empty-row"><td>${escapeHtml(
         t("loadError")
       )}</td></tr>`;
@@ -1153,8 +1163,9 @@
 
     try {
       cache.history = await loadJson("rates-history");
-    } catch {
+    } catch (err) {
       cache.history = [];
+      reportLoadFailure("rates-history", err, false);
     }
 
     renderAll();

@@ -102,7 +102,7 @@ function makeDom() {
 
 // analytics를 넣어주면 페이지가 실제로 계측을 부르는지까지 볼 수 있다.
 // 안 넣으면 브라우저에서 광고 차단으로 로더가 안 뜬 상황과 같아진다.
-export async function loadRatesPage({ analytics } = {}) {
+export async function loadRatesPage({ analytics, fetch: fetchImpl } = {}) {
   const html = await readFile(path.join(root, "docs/rates.html"), "utf8");
   const script = [...html.matchAll(/<script>\n([\s\S]*?)\n<\/script>/g)].map((m) => m[1]).pop();
   assert.ok(script.includes("CATEGORY_KEYS"), "금리 페이지 스크립트를 찾지 못했다");
@@ -116,10 +116,12 @@ export async function loadRatesPage({ analytics } = {}) {
     console: { ...console, warn() {}, error() {} },
     Math, Date, JSON, Intl, URL, URLSearchParams,
     setTimeout, clearTimeout, setInterval: () => 0, clearInterval: () => {},
-    fetch: async (url) => ({
-      ok: true,
-      json: async () => (String(url).includes("rates-history") ? history : rates),
-    }),
+    fetch:
+      fetchImpl ??
+      (async (url) => ({
+        ok: true,
+        json: async () => (String(url).includes("rates-history") ? history : rates),
+      })),
     localStorage: {
       getItem: (k) => store[k] ?? null,
       setItem: (k, v) => (store[k] = String(v)),
