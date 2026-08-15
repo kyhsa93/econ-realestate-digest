@@ -906,6 +906,13 @@
   // 아카이브에서 보관 범위 밖으로 나간 것뿐이라는 걸 구분해서 알린다.
   let archiveMissing = false;
 
+  // 히스토리 파일은 받았는데 그 날짜만 없는 것과, 파일 자체를 못 받은 것은 다르다.
+  // 앞은 "기록 없음", 뒤는 진짜 로드 실패다. 히스토리마다 보관 시작일이 달라서
+  // (뉴스 08-09, 시장지표 08-10) 날짜 하나로 뭉뚱그리면 멀쩡한 날에도 오류가 뜬다.
+  function archiveNoRecordFor(historyKey) {
+    return isArchiveView && Array.isArray(cache[historyKey]);
+  }
+
   function archiveDates() {
     const all = new Set();
     for (const history of [cache.newsHistory, cache.summaryHistory, cache.history, cache.realestateHistory]) {
@@ -1028,7 +1035,7 @@
   function renderMarket(market) {
     const tbody = document.getElementById("market-grid");
     if (!market) {
-      tbody.innerHTML = `<tr><td colspan="3" class="error">${archiveMissing ? t("archiveNoRecord") : t("marketError")}</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="3" class="error">${archiveNoRecordFor("history") ? t("archiveNoRecord") : t("marketError")}</td></tr>`;
       return;
     }
     const rows = [];
@@ -1290,7 +1297,7 @@
     const tbody = document.getElementById("realestate-grid");
     const meta = document.getElementById("realestate-meta");
     if (!realestate?.overall) {
-      tbody.innerHTML = `<tr><td colspan="4" class="error">${archiveMissing ? t("archiveNoRecord") : t("realestateError")}</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="4" class="error">${archiveNoRecordFor("realestateHistory") ? t("archiveNoRecord") : t("realestateError")}</td></tr>`;
       meta.textContent = "";
       return;
     }
@@ -1521,7 +1528,7 @@
     const controls = document.getElementById("news-controls");
     if (!news || !news.items?.length) {
       controls.hidden = true;
-      list.innerHTML = `<li class="error">${archiveMissing ? t("archiveNoRecord") : t("newsError")}</li>`;
+      list.innerHTML = `<li class="error">${archiveNoRecordFor("newsHistory") ? t("archiveNoRecord") : t("newsError")}</li>`;
       return;
     }
 
@@ -1598,7 +1605,7 @@
 
     if (!hasCategories && !text) {
       box.classList.add("placeholder");
-      box.textContent = archiveMissing ? t("archiveNoRecord") : t("summaryEmpty");
+      box.textContent = archiveNoRecordFor("summaryHistory") ? t("archiveNoRecord") : t("summaryEmpty");
       return;
     }
 

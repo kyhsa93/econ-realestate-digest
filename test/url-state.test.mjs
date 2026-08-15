@@ -113,6 +113,39 @@ test("기록이 없는 날짜는 오류가 아니라 기록 없음으로 알린�
   assert.ok(String(present.byId("news-list").innerHTML).includes("news-item"), "있는 기록을 못 그린다");
 });
 
+// 히스토리마다 보관 시작일이 다르다(뉴스 08-09, 시장지표 08-10). 날짜 하나로 뭉뚱그려
+// 판정하면 뉴스는 멀쩡히 나오는데 시장지표만 "불러오지 못했습니다"가 뜬다.
+test("일부 섹션만 기록이 없는 날짜도 오류라고 말하지 않는다", async () => {
+  const { readFile } = await import("node:fs/promises");
+  const histories = await Promise.all(
+    ["news-history", "market-history"].map((n) =>
+      readFile(path.join(root, `docs/data/${n}.json`), "utf8").then(JSON.parse)
+    )
+  );
+  const [newsDates, marketDates] = histories.map((h) => h.map((e) => e.date));
+  const onlyNews = newsDates.find((d) => !marketDates.includes(d));
+  assert.ok(onlyNews, "한쪽에만 있는 날짜가 없어 이 테스트가 무의미하다");
+
+  const page = await loadIndexPage({
+    search: `?date=${onlyNews}`,
+    fetch: async (url) => {
+      const name = String(url).split("/data/")[1].split(".json")[0];
+      try {
+        return { ok: true, json: async () => JSON.parse(await readFile(path.join(root, `docs/data/${name}.json`), "utf8")) };
+      } catch {
+        return { ok: false, json: async () => ({}) };
+      }
+    },
+  });
+  await new Promise((r) => setTimeout(r, 30));
+
+  const news = String(page.byId("news-list").innerHTML);
+  const market = String(page.byId("market-grid").innerHTML);
+  assert.ok(news.includes("news-item"), "그날 뉴스는 있는데 안 그린다");
+  assert.ok(market.includes("기록이 없습니다"), `기록 없음 안내가 아니다: ${market.slice(0, 80)}`);
+  assert.ok(!market.includes("불러오지 못했습니다"), "기록 없음을 로드 실패로 말한다");
+});
+
 test("보관 범위보다 뒤로는 넘기지 못한다", async () => {
   const html = await read("docs/index.html");
   assert.ok(html.includes('document.getElementById("archive-prev-day").disabled'), "이전 날 버튼을 막지 않는다");
