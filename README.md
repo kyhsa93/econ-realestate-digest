@@ -61,6 +61,7 @@
   정렬 기준은 열 구성이 같은 탭끼리 공유한다(정기예금↔적금, 주담대↔전세자금대출).
   정렬할 값이 없는 상품은 표에서 빼지 않고 맨 아래로 보낸다. 뉴스는 "매일 훑는" 흐름이고 금리 비교는 "갈아탈까?" 하는 목적형 방문이라
   index.html에 섹션으로 넣지 않고 별도 URL로 뒀다
+- `docs/analytics.js` — 두 페이지가 공유하는 GA4 + 애드센스 로더. 자세한 건 아래 "GA / 애드센스" 참고
 - `.github/workflows/summary-experiment.yml` — 수동 전용. 요약 모델을 바꾸기 전에 저장소에 이미
   커밋된 그날 뉴스로 모델을 비교해보는 용도(뉴스를 다시 받지 않아 모델 간 조건이 같음).
   결과는 로그로만 출력하고 커밋/배포하지 않음. qwen3 계열은 `disable_thinking`을 켜야 함
@@ -116,7 +117,21 @@ GitHub Actions(`daily-update.yml`)가 하루 4회 자동 실행. 수동 실행�
 
 `kyhsa93.github.io` 블로그와 동일한 GA4 속성(`G-Z1LH7S1ZE5`)·애드센스 게시자(`ca-pub-1195159445218373`)를
 그대로 재사용함. 두 값 다 방문자 브라우저에 그대로 노출되는 공개 값이라 시크릿으로 다루지 않고
-`docs/index.html`에 직접 하드코딩함.
+`docs/analytics.js`에 직접 하드코딩함. 예전엔 `docs/index.html` 인라인이었는데, 그 바람에
+`rates.html`에는 측정 코드가 아예 없어서 금리 페이지 유입이 통째로 빠져 있었다. 지금은 두 페이지가
+같은 로더를 불러온다.
+
+`analytics.js`는 페이지뷰를 자동 전송하지 않는다(`send_page_view: false`). 두 페이지 모두 저장된
+언어에 맞춰 데이터를 받아온 뒤에야 `document.title`을 바꾸기 때문에, 자동 전송을 켜두면 영어 화면을
+보는 사람도 GA에는 늘 한국어 제목으로 기록된다. 대신 렌더가 끝나는 지점(`applyLocale`/`renderMeta`)에서
+`analytics.pageView({ site_language })`를 부르고, 렌더가 실패해 아무도 안 부르는 경우를 대비해
+로더 안의 타이머(4초)가 대신 보낸다. 언어 전환은 주소가 그대로인 같은 방문이라 페이지뷰를 다시 보내지
+않고(`pageView`는 첫 호출만 전송) `language_switch` 이벤트로만 남긴다.
+
+커스텀 이벤트: `news_filter` `news_search` `news_click` `archive_jump` `district_select` `share`
+(index), `rate_tab` `rate_sort` `rate_filter` `rate_search` `product_expand` `share` (rates),
+`language_switch`(공통). `site_language`·`news_source` 같은 이벤트 매개변수는 GA4 관리자에서
+맞춤 측정기준으로 등록해야 보고서에 열로 나온다.
 
 별도 쿠키 동의 배너 없이 페이지 로드 시 GA/애드센스 스크립트를 바로 불러옴(요청에 따라 배너 제거).
 
@@ -126,7 +141,8 @@ GitHub Actions(`daily-update.yml`)가 하루 4회 자동 실행. 수동 실행�
 별도 조치가 필요 없었음(확인 완료).
 
 애드센스 자동 광고(Auto ads) 설정만 돼 있고 이 페이지에 명시적 광고 슬롯(`<ins>`)은 아직 없음 —
-광고 배치는 별도 요청 시 진행.
+광고 배치는 별도 요청 시 진행. 광고를 띄우는 페이지에는 개인정보처리방침 링크가 있어야 해서
+`rates.html` 푸터에도 같은 링크를 넣어뒀다.
 
 개인정보처리방침은 별도 페이지를 두지 않고, 블로그 저장소(`kyhsa93.github.io`)가 이미 갖고 있는
 `https://kyhsa93.github.io/privacy-policy`를 footer에서 그대로 링크함(같은 GA4/애드센스 계정을

@@ -613,6 +613,7 @@
   </footer>
 </main>
 
+<script src="./analytics.js"></script>
 <script>
   const T = {
     ko: {
@@ -1486,10 +1487,14 @@
     notice.textContent = noticeText ?? "";
 
     renderAll();
+
+    // 제목이 언어에 맞게 정해진 뒤라야 GA에 제대로 남는다. 첫 호출만 전송된다.
+    window.analytics?.pageView({ site_language: locale, view_type: isArchiveView ? "archive" : "today" });
   }
 
   document.getElementById("lang-toggle").addEventListener("click", () => {
     applyLocale(locale === "en" ? "ko" : "en");
+    window.analytics?.event("language_switch", { site_language: locale });
   });
 
   document.getElementById("theme-toggle").addEventListener("click", () => {
@@ -1503,12 +1508,14 @@
     e.preventDefault();
     const value = document.getElementById("archive-date-input").value;
     if (!value) return;
+    window.analytics?.event("archive_jump", { archive_date: value });
     location.href = `./index.html?date=${value}`;
   });
 
   document.getElementById("realestate-district-select").addEventListener("change", (e) => {
     selectedDistrictCode = e.target.value;
     renderRealestateHistory(cache.realestateHistory);
+    window.analytics?.event("district_select", { district: e.target.value });
   });
 
   document.getElementById("realestate-search-input").addEventListener("input", applyRealestateSearch);
@@ -1518,18 +1525,27 @@
     if (!chip) return;
     newsCategoryFilter = chip.dataset.category;
     renderNews(effectiveNews());
+    window.analytics?.event("news_filter", { news_category: newsCategoryFilter || "all" });
   });
 
   document.getElementById("news-search-input").addEventListener("input", (e) => {
     newsQuery = e.target.value;
     renderNews(effectiveNews());
+    const term = newsQuery.trim();
+    if (term.length >= 2) window.analytics?.debouncedEvent("news_search", { search_term: term });
   });
 
   document.getElementById("news-list").addEventListener("click", (e) => {
     const link = e.target.closest(".news-item > a");
     if (!link) return;
-    markNewsRead(link.getAttribute("href"));
+    const href = link.getAttribute("href");
+    markNewsRead(href);
     link.parentElement.classList.add("read");
+    const item = findNewsItemByLink(href);
+    window.analytics?.event("news_click", {
+      news_source: item?.source ?? "unknown",
+      news_category: item?.category ?? "unknown",
+    });
   });
 
   const shareButton = document.getElementById("share-button");
@@ -1548,6 +1564,7 @@
     if (navigator.share) {
       try {
         await navigator.share(shareData);
+        window.analytics?.event("share", { method: "web_share" });
         return;
       } catch (err) {
         if (err && err.name === "AbortError") return;
@@ -1557,6 +1574,7 @@
     try {
       await navigator.clipboard.writeText(location.href);
       showShareFeedback();
+      window.analytics?.event("share", { method: "clipboard" });
     } catch {
       window.prompt("Copy this link:", location.href);
     }
@@ -1613,27 +1631,6 @@
       navigator.serviceWorker.register("./sw.js").catch(() => {});
     });
   }
-
-  const GA_MEASUREMENT_ID = "G-Z1LH7S1ZE5";
-  const ADSENSE_CLIENT_ID = "ca-pub-1195159445218373";
-
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = function gtag() {
-    window.dataLayer.push(arguments);
-  };
-  window.gtag("js", new Date());
-  window.gtag("config", GA_MEASUREMENT_ID);
-
-  const gaScript = document.createElement("script");
-  gaScript.async = true;
-  gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
-  document.head.appendChild(gaScript);
-
-  const adScript = document.createElement("script");
-  adScript.async = true;
-  adScript.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_ID}`;
-  adScript.crossOrigin = "anonymous";
-  document.head.appendChild(adScript);
 </script>
 </body>
 </html>

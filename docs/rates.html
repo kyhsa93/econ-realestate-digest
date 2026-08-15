@@ -408,10 +408,12 @@
     <div id="footer-source"></div>
     <div style="margin-top: 6px;">
       <a href="./index.html" id="footer-home">데일리 다이제스트</a>
+      <a href="https://kyhsa93.github.io/privacy-policy" id="footer-privacy-link" target="_blank" rel="noopener" style="margin-left: 10px;">개인정보처리방침</a>
     </div>
   </footer>
 </main>
 
+<script src="./analytics.js"></script>
 <script>
   const T = {
     ko: {
@@ -469,6 +471,7 @@
       loanNote: "금리(최저~최고)는 지금 제시되는 범위이고, 평균은 지난달에 실제로 나간 대출의 평균이라 서로 다른 수치입니다. 그래서 평균이 최저보다 낮게 나오기도 합니다. 기본 정렬은 모든 상품에 값이 있는 최저금리 기준이며, 금리 열 머리글을 누르면 기준을 바꿀 수 있습니다. 실제 승인 금리는 신용점수·담보·상환방식에 따라 달라집니다.",
       source: "출처: 금융감독원 금융상품통합비교공시(금융상품 한눈에)",
       footerHome: "데일리 다이제스트",
+      footerPrivacyLink: "개인정보처리방침",
       shareTitle: "예금·적금·대출 금리 비교",
     },
     en: {
@@ -526,6 +529,7 @@
       loanNote: "The min\u2013max column is the range currently on offer, while the average is over loans actually made last month \u2014 two different measures, which is why an average can fall below the minimum. Sorting defaults to the minimum rate, the one value every product has; click a rate column header to sort by another. Your approved rate still depends on credit score, collateral and repayment type.",
       source: "Source: FSS Financial Product Comparison Disclosure",
       footerHome: "Daily digest",
+      footerPrivacyLink: "Privacy Policy",
       shareTitle: "Deposit, Savings & Loan Rates",
     },
   };
@@ -844,6 +848,7 @@
       termSelect.addEventListener("change", (e) => {
         state.term = Number(e.target.value);
         renderProducts();
+        window.analytics?.event("rate_filter", { filter: "term", value: String(state.term) });
       });
     }
 
@@ -852,6 +857,7 @@
       rateTypeSelect.addEventListener("change", (e) => {
         state.rateType = e.target.value;
         renderProducts();
+        window.analytics?.event("rate_filter", { filter: "rate_type", value: state.rateType || "all" });
       });
     }
 
@@ -859,6 +865,10 @@
       box.addEventListener("change", (e) => {
         state.sectors[e.target.dataset.sector] = e.target.checked;
         renderProducts();
+        window.analytics?.event("rate_filter", {
+          filter: "sector",
+          value: `${e.target.dataset.sector}:${e.target.checked ? "on" : "off"}`,
+        });
       });
     }
 
@@ -867,6 +877,8 @@
       search.addEventListener("input", (e) => {
         state.query = e.target.value;
         renderProducts();
+        const term = state.query.trim();
+        if (term.length >= 2) window.analytics?.debouncedEvent("rate_search", { search_term: term });
       });
     }
   }
@@ -1029,9 +1041,13 @@
     for (const button of body.querySelectorAll("[data-detail]")) {
       button.addEventListener("click", () => {
         const id = button.dataset.detail;
-        if (state.expanded.has(id)) state.expanded.delete(id);
-        else state.expanded.add(id);
+        const expanding = !state.expanded.has(id);
+        if (expanding) state.expanded.add(id);
+        else state.expanded.delete(id);
         renderProducts();
+        if (expanding) {
+          window.analytics?.event("product_expand", { rate_category: state.category, product_id: id });
+        }
       });
     }
   }
@@ -1048,6 +1064,7 @@
     document.getElementById("update-schedule").textContent = t("updateSchedule");
     document.getElementById("footer-source").textContent = t("source");
     document.getElementById("footer-home").textContent = t("footerHome");
+    document.getElementById("footer-privacy-link").textContent = t("footerPrivacyLink");
 
     const month = fmtDisclosureMonth(cache.rates?.disclosureMonth);
     document.getElementById("content-notice").textContent = month
@@ -1057,6 +1074,10 @@
     document.getElementById("updated").textContent = cache.rates?.updatedAt
       ? `${t("updatedPrefix")}: ${fmtUpdated(cache.rates.updatedAt)}`
       : "-";
+
+    // 제목이 언어에 맞게 정해진 뒤라야 GA에 제대로 남는다. 첫 호출만 전송된다.
+    // 로드 실패 경로에서도 renderMeta는 불리므로 유입 자체는 빠지지 않는다.
+    window.analytics?.pageView({ site_language: locale });
   }
 
   function renderAll() {
@@ -1075,6 +1096,8 @@
     toggleSort(button.dataset.sort);
     state.expanded.clear();
     renderProducts();
+    const { key, dir } = activeSort();
+    window.analytics?.event("rate_sort", { sort_key: key, sort_dir: dir, rate_category: state.category });
   });
 
   document.getElementById("tabs").addEventListener("click", (event) => {
@@ -1086,12 +1109,14 @@
     renderTabs();
     renderControls();
     renderProducts();
+    window.analytics?.event("rate_tab", { rate_category: state.category });
   });
 
   document.getElementById("lang-toggle").addEventListener("click", () => {
     locale = locale === "ko" ? "en" : "ko";
     window.localStorage.setItem("lang", locale);
     renderAll();
+    window.analytics?.event("language_switch", { site_language: locale });
   });
 
   document.getElementById("theme-toggle").addEventListener("click", () => {
@@ -1102,8 +1127,13 @@
   document.getElementById("share-button").addEventListener("click", async () => {
     const shareData = { title: t("shareTitle"), text: t("description"), url: location.href };
     try {
-      if (navigator.share) await navigator.share(shareData);
-      else await navigator.clipboard.writeText(location.href);
+      if (navigator.share) {
+        await navigator.share(shareData);
+        window.analytics?.event("share", { method: "web_share" });
+      } else {
+        await navigator.clipboard.writeText(location.href);
+        window.analytics?.event("share", { method: "clipboard" });
+      }
     } catch {
     }
   });
