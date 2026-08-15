@@ -12,6 +12,7 @@ import path from "node:path";
 
 const root = path.resolve(import.meta.dirname, "..");
 const INDEX_PATH = path.join(root, "docs/index.html");
+const RATES_PATH = path.join(root, "docs/rates.html");
 const DATA_DIR = path.join(root, "docs/data");
 
 // 자치구 평당가는 신고 건수가 적으면 "그 구의 시세"가 아니라 "그 아파트 한 채의
@@ -96,6 +97,57 @@ export function newsHtml(news) {
     .join("");
 }
 
+// 금리 페이지는 첫 화면(정기예금 · 12개월 · 최고금리 내림차순)만 심는다.
+// 안 보이는 탭까지 숨겨서 심으면 화면에 없는 내용을 크롤러에만 보여주는 셈이 된다.
+// 순서·선택 기준은 rates.html의 visibleRows와 같아야 한다 - 다르면 검색 결과에
+// 뜨는 순서와 실제 화면이 어긋난다. 테스트가 실제 렌더 결과와 대조한다.
+const RATES_TERM = 12;
+const RATES_ROWS = 20;
+
+const rate = (value) => (typeof value === "number" ? `${value.toFixed(2)}%` : "-");
+
+export function ratesHtml(rates, { limit = RATES_ROWS } = {}) {
+  const products = rates?.deposit ?? [];
+  if (!products.length) return null;
+
+  const rows = [];
+  for (const product of products) {
+    let best = null;
+    let bestValue = null;
+    let fallback = null;
+    for (const option of product.options ?? []) {
+      if (option.term !== RATES_TERM) continue;
+      fallback ??= option;
+      const value = option.maxRate;
+      if (value === null || value === undefined) continue;
+      if (best === null || value > bestValue) {
+        best = option;
+        bestValue = value;
+      }
+    }
+    if (best) rows.push({ product, option: best, sort: bestValue });
+    else if (fallback) rows.push({ product, option: fallback, sort: null });
+  }
+
+  // 정렬할 값이 없는 상품은 빼지 않고 맨 아래로 보낸다(화면과 같은 규칙).
+  rows.sort((a, b) => {
+    if (a.sort === null || b.sort === null) return (a.sort === null) - (b.sort === null);
+    return b.sort - a.sort;
+  });
+
+  if (!rows.length) return null;
+
+  return rows
+    .slice(0, limit)
+    .map(
+      ({ product, option }) =>
+        `<tr><td><div class="product-name">${escapeHtml(product.name ?? "-")}</div>` +
+        `<div class="product-company">${escapeHtml(product.company ?? "")}</div></td>` +
+        `<td>${rate(option.rate)}</td><td class="rate-strong">${rate(option.maxRate ?? option.rate)}</td></tr>`
+    )
+    .join("");
+}
+
 // 마커가 없으면 조용히 지나가지 않는다. 심었다고 생각하는데 실제로는 아무것도
 // 안 들어간 상태가 제일 나쁘다.
 export function applyPrerender(html, blocks) {
@@ -106,7 +158,7 @@ export function applyPrerender(html, blocks) {
     const start = out.indexOf(open);
     const end = out.indexOf(close);
     if (start === -1 || end === -1 || end < start) {
-      throw new Error(`${name} 자리표시 주석을 찾지 못했습니다. index.html에서 마커가 지워졌는지 확인해주세요.`);
+      throw new Error(`${name} 자리표시 주석을 찾지 못했습니다. 대상 HTML에서 마커가 지워졌는지 확인해주세요.`);
     }
     if (content == null) continue; // 데이터가 없으면 기존 안내 문구를 그대로 둔다
     out = `${out.slice(0, start + open.length)}${content}${out.slice(end)}`;
@@ -134,19 +186,26 @@ async function main() {
     news: newsHtml(news),
   };
 
-  const html = await readFile(INDEX_PATH, "utf8");
-  const next = applyPrerender(html, blocks);
+  const rates = await readJson("rates");
 
-  for (const [name, content] of Object.entries(blocks)) {
-    console.log(`  ${name.padEnd(11)} ${content ? `${content.length}자` : "데이터 없음 - 건너뜀"}`);
-  }
+  for (const [file, path_, fileBlocks] of [
+    ["docs/index.html", INDEX_PATH, blocks],
+    ["docs/rates.html", RATES_PATH, { rates: ratesHtml(rates) }],
+  ]) {
+    const html = await readFile(path_, "utf8");
+    const next = applyPrerender(html, fileBlocks);
 
-  if (next === html) {
-    console.log("변경 없음");
-    return;
+    for (const [name, content] of Object.entries(fileBlocks)) {
+      console.log(`  ${file} ${name.padEnd(11)} ${content ? `${content.length}자` : "데이터 없음 - 건너뜀"}`);
+    }
+
+    if (next === html) {
+      console.log(`  ${file} 변경 없음`);
+      continue;
+    }
+    await writeFile(path_, next);
+    console.log(`  ${file} 갱신`);
   }
-  await writeFile(INDEX_PATH, next);
-  console.log("docs/index.html 갱신");
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === path.resolve(import.meta.filename)) {

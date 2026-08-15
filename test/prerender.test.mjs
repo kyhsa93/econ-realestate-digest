@@ -9,12 +9,17 @@ import {
   escapeHtml,
   marketHtml,
   newsHtml,
+  ratesHtml,
   realestateHtml,
   summaryHtml,
 } from "../scripts/prerender.mjs";
+import { loadRatesPage } from "./helpers/rates-page.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
 const readIndex = () => readFile(path.join(root, "docs/index.html"), "utf8");
+const readRates = () => readFile(path.join(root, "docs/rates.html"), "utf8");
+
+const productNames = (html) => [...html.matchAll(/class="product-name">([^<]*)/g)].map((m) => m[1].trim());
 const readData = async (name) =>
   JSON.parse(await readFile(path.join(root, `docs/data/${name}.json`), "utf8"));
 
@@ -107,6 +112,48 @@ test("커밋된 HTML이 지금 데이터로 다시 그린 결과와 같다", asy
   });
 
   assert.equal(html, expected, "docs/index.html이 데이터와 어긋납니다. node scripts/prerender.mjs를 실행하세요.");
+});
+
+// 정적 HTML이 화면과 다른 순서를 보여주면, 검색 결과로 들어온 사람이 보는 표가
+// 검색 결과에 뜬 내용과 어긋난다. 그래서 실제 렌더 결과와 직접 대조한다.
+test("금리 표의 정적 HTML이 실제 첫 화면과 같은 상품·순서다", async () => {
+  const [rates, { byId }] = await Promise.all([
+    readFile(path.join(root, "docs/data/rates.json"), "utf8").then(JSON.parse),
+    loadRatesPage(),
+  ]);
+
+  const rendered = productNames(byId.get("products-body").innerHTML);
+  const prerendered = productNames(ratesHtml(rates));
+
+  assert.ok(prerendered.length > 0, "정적 표가 비어 있다");
+  assert.deepEqual(prerendered, rendered.slice(0, prerendered.length));
+});
+
+test("금리 표는 첫 화면에 없는 탭까지 심지 않는다", async () => {
+  const [rates, html] = await Promise.all([
+    readFile(path.join(root, "docs/data/rates.json"), "utf8").then(JSON.parse),
+    readRates(),
+  ]);
+
+  const staticNames = new Set(productNames(ratesHtml(rates)));
+  // 대출 상품이 정적 HTML에 섞여 있으면 첫 화면(정기예금)과 다른 걸 보여주는 것이다.
+  for (const product of rates.mortgage ?? []) {
+    assert.ok(!staticNames.has(product.name), `대출 상품이 실렸다: ${product.name}`);
+  }
+  assert.ok(html.includes("<!--prerender:rates-->"), "rates.html에 자리표시 주석이 없다");
+});
+
+test("커밋된 rates.html이 지금 데이터로 다시 그린 결과와 같다", async () => {
+  const [html, rates] = await Promise.all([
+    readRates(),
+    readFile(path.join(root, "docs/data/rates.json"), "utf8").then(JSON.parse),
+  ]);
+
+  assert.equal(
+    html,
+    applyPrerender(html, { rates: ratesHtml(rates) }),
+    "docs/rates.html이 데이터와 어긋납니다. node scripts/prerender.mjs를 실행하세요."
+  );
 });
 
 test("크롤러가 받는 HTML에 오늘 기사 제목이 실제로 들어 있다", async () => {
