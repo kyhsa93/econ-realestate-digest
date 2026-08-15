@@ -180,6 +180,14 @@ test("무엇을 못 받았는지 이름을 말한다", async () => {
     assert.ok(!text.includes("을(를)"), `조사가 자동으로 안 붙는다: ${text}`);
   }
 
+  // 이유가 없으면 제보를 받아도 원인(오프라인/배포 어긋남/본문 깨짐)을 못 좁힌다.
+  const withReason = await loadWithFailure("summary");
+  await new Promise((r) => setTimeout(r, 30));
+  assert.ok(
+    /\(HTTP \d+\)/.test(withReason.byId("load-error-text").textContent),
+    `실패 이유가 안 실린다: ${withReason.byId("load-error-text").textContent}`
+  );
+
   // 요약은 "아직 없음"과 "못 받음"이 화면에서 구분돼야 한다.
   const summaryFailed = await loadWithFailure("summary");
   await new Promise((r) => setTimeout(r, 30));
