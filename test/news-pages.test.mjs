@@ -35,6 +35,12 @@ test("각 페이지가 자기 분야를 정규 URL·제목·필터로 선언한�
     );
     assert.ok(html.includes(`<meta name="news-category" content="${page.category}">`), `${page.file} 분야 지정이 없다`);
     assert.ok(!html.includes("<title>오늘의 경제·부동산 뉴스</title>"), `${page.file}에 원본 제목이 남았다`);
+    // 영어 사전까지 안 바꾸면 언어를 전환하는 순간 네 페이지가 같은 제목으로 돌아간다.
+    assert.ok(html.includes(`title: "${page.titleEn}"`), `${page.file} 영어 사전 제목이 안 바뀌었다`);
+    assert.ok(
+      !html.includes('title: "Today\'s Korean Economy & Real Estate News"'),
+      `${page.file} 영어 사전에 원본 제목이 남았다`
+    );
   }
 });
 
@@ -87,6 +93,17 @@ test("허브와 카테고리 페이지가 서로를 진짜 링크로 가리킨�
   // 크롤러가 메인에서 뉴스 허브로 들어올 수 있어야 한다.
   const index = await read("docs/index.html");
   assert.ok(index.includes('href="./news.html"'), "메인에 뉴스 허브 링크가 없다");
+});
+
+// 메인·금리 페이지엔 있는 토글이 여기만 없으면 사이트 안에서 UI가 끊긴다.
+test("뉴스 페이지에도 테마·언어 토글이 있다", async () => {
+  for (const file of ["docs/news.html", ...NEWS_PAGES.map((p) => `docs/${p.file}`)]) {
+    const html = await read(file);
+    assert.ok(html.includes('id="theme-toggle"'), `${file}에 테마 토글이 없다`);
+    assert.ok(html.includes('id="lang-toggle"'), `${file}에 언어 토글이 없다`);
+    // 영어 화면에서 한국어가 남지 않으려면 사전이 양쪽 다 있어야 한다.
+    assert.ok(html.includes("navRealestate:"), `${file}에 언어 사전이 없다`);
+  }
 });
 
 test("뉴스 페이지에도 GA 로더와 사이트 구분이 붙어 있다", async () => {

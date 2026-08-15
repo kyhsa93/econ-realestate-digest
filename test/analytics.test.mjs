@@ -274,3 +274,17 @@ test("두 페이지와 서비스워커가 모두 analytics.js를 물고 있다",
 
   assert.ok(sw.includes('"./analytics.js"'), "서비스워커 셸에 analytics.js가 빠졌다");
 });
+
+// 폴백된 요약이 화면상 정상 출력과 구분이 안 되면, 사용자는 검증에 걸린 문장을
+// 그대로 "AI 요약"으로 읽는다. 데이터에만 남기지 말고 화면에도 밝힌다.
+test("요약이 폴백된 날은 메인에도 그 사실을 표시한다", async () => {
+  const html = await readFile(path.join(root, "docs/index.html"), "utf8");
+  assert.ok(html.includes("summaryFallbackNote"), "안내 문구 사전 항목이 없다");
+  assert.ok(
+    html.includes("categories.some((c) => c.fallbackReason)"),
+    "fallbackReason을 화면 표시에 쓰지 않는다"
+  );
+  for (const dict of ["일부 항목은 검증에서", "Some summaries failed verification"]) {
+    assert.ok(html.includes(dict), `안내 문구가 한쪽 언어에만 있다: ${dict}`);
+  }
+});
