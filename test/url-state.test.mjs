@@ -60,3 +60,26 @@ test("기본값은 주소에 남기지 않는다", async () => {
   assert.ok(html.includes('["tab", state.category, DEFAULT_CATEGORY]'), "기본 탭 기준이 페이지에 맞지 않는다");
   assert.ok(html.includes('if (value === empty) next.delete(key);'), "기본값을 지우지 않는다");
 });
+
+test("부동산 표도 머리글로 정렬한다", async () => {
+  const html = await read("docs/index.html");
+  for (const key of ["name", "sale", "jeonse", "wolse"]) {
+    assert.ok(html.includes(`data-re-sort="${key}"`), `${key} 정렬 머리글이 없다`);
+  }
+  assert.ok(html.includes('aria-sort'), "정렬 상태를 알리지 않는다");
+});
+
+test("아카이브를 하루씩 넘길 수 있다", async () => {
+  const html = await read("docs/index.html");
+  assert.ok(html.includes('id="archive-prev-day"') && html.includes('id="archive-next-day"'), "이전/다음 날 버튼이 없다");
+  // 오늘보다 뒤로는 갈 수 없다.
+  assert.ok(html.includes("if (next > kstToday()) return;"), "미래 날짜를 막지 않는다");
+});
+
+test("뉴스 페이지도 읽은 기사를 표시한다", async () => {
+  const html = await read("docs/news.html");
+  // 메인과 같은 저장소를 써야 한 곳에서 읽은 게 다른 곳에도 반영된다.
+  assert.ok(html.includes('const READ_NEWS_KEY = "readNews"'), "읽음 저장소가 메인과 다르다");
+  assert.ok(html.includes("markNewsRead(link.getAttribute"), "클릭을 읽음으로 기록하지 않는다");
+  assert.ok(html.includes(".news-item.read"), "읽은 기사 스타일이 없다");
+});

@@ -83,7 +83,12 @@ export async function loadIndexPage({ analytics, fetch: fetchImpl, search = "" }
         return byId.get(id);
       },
       querySelectorAll: () => [],
-      querySelector: () => null,
+      // 실제 문서엔 있는 요소들이라, null을 주면 페이지가 로드 도중 죽어버려서
+      // 정작 보려던 렌더 동작에 닿지 못한다(금리 하네스와 같은 이유).
+      querySelector: (sel) => {
+        if (!byId.has(sel)) byId.set(sel, stubElement());
+        return byId.get(sel);
+      },
       createElement: () => stubElement(),
       addEventListener() {},
       documentElement: stubElement(),
@@ -98,7 +103,7 @@ export async function loadIndexPage({ analytics, fetch: fetchImpl, search = "" }
   sandbox.globalThis = sandbox;
   vm.createContext(sandbox);
   // 스크립트 최상위의 const는 컨텍스트 밖에서 못 보므로 cache만 따로 내보낸다.
-  new vm.Script(script + "\nglobalThis.__cache = cache; globalThis.__newsState = () => ({ cat: newsCategoryFilter, q: newsQuery });", { filename: "docs/index.html:inline" }).runInContext(sandbox);
+  new vm.Script(script + "\nglobalThis.__cache = cache; globalThis.__realestateSort = realestateSort; globalThis.__newsState = () => ({ cat: newsCategoryFilter, q: newsQuery });", { filename: "docs/index.html:inline" }).runInContext(sandbox);
 
   // main()이 await로 데이터를 읽고 첫 렌더를 마칠 때까지 기다린다.
   await new Promise((resolve) => setTimeout(resolve, 0));

@@ -135,6 +135,7 @@
   .news-item:last-child { border-bottom: none; }
   .news-item a { color: var(--fg); text-decoration: none; font-size: 0.95rem; }
   .news-item a:hover { text-decoration: underline; }
+  .news-item.read > a { color: var(--muted); }
   .news-meta { color: var(--muted); font-size: 0.78rem; margin-top: 2px; }
   .empty { color: var(--muted); font-size: 0.9rem; }
   .empty button {
@@ -309,6 +310,32 @@
     return category ? items.filter((item) => item.category === category) : items;
   }
 
+  // 메인과 같은 저장소를 쓴다. 같은 기사를 두 번 읽게 되는 게 이 페이지의 문제였다.
+  const READ_NEWS_KEY = "readNews";
+  const READ_NEWS_MAX = 300;
+
+  function loadReadNewsLinks() {
+    try {
+      const raw = JSON.parse(window.localStorage.getItem(READ_NEWS_KEY));
+      return new Set(Array.isArray(raw) ? raw : []);
+    } catch {
+      return new Set();
+    }
+  }
+
+  let readNewsLinks = loadReadNewsLinks();
+
+  function markNewsRead(link) {
+    if (!link || readNewsLinks.has(link)) return;
+    readNewsLinks.add(link);
+    const trimmed = [...readNewsLinks].slice(-READ_NEWS_MAX);
+    readNewsLinks = new Set(trimmed);
+    try {
+      window.localStorage.setItem(READ_NEWS_KEY, JSON.stringify(trimmed));
+    } catch {
+    }
+  }
+
   const itemTitle = (item) => (locale === "en" ? item.titleEn ?? item.title : item.title);
   const summaryLine = (c) => (locale === "en" ? c.lineEn ?? c.lineKo : c.lineKo);
   const summaryName = (c) => (locale === "en" ? c.nameEn ?? c.name : c.name);
@@ -320,7 +347,7 @@
       ? items
           .map((item) => {
             const meta = [item.source, relativeTime(item.publishedAt)].filter(Boolean).join(" · ");
-            return `<li class="news-item">
+            return `<li class="news-item${readNewsLinks.has(item.link) ? " read" : ""}">
               <a href="${escapeHtml(item.link)}" target="_blank" rel="noopener">${escapeHtml(itemTitle(item))}</a>
               <div class="news-meta">${escapeHtml(meta)}</div>
             </li>`;
@@ -402,6 +429,8 @@
   document.getElementById("news-list").addEventListener("click", (e) => {
     const link = e.target.closest(".news-item > a");
     if (!link) return;
+    markNewsRead(link.getAttribute("href"));
+    link.parentElement.classList.add("read");
     window.analytics?.event("news_click", { news_category: category ?? "all" });
   });
 

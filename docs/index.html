@@ -373,6 +373,22 @@
     }
     .data-table td:empty { display: none; }
   }
+  .realestate-table th.sortable { padding: 0; }
+  .realestate-table th.sortable button {
+    font: inherit;
+    color: inherit;
+    width: 100%;
+    padding: 10px 12px;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    text-align: right;
+    white-space: nowrap;
+  }
+  .realestate-table th.sortable:first-child button { text-align: left; }
+  .realestate-table th.sortable button:hover { color: var(--fg); }
+  .realestate-table th.sortable button:focus-visible { outline: 2px solid var(--fg); outline-offset: -2px; }
+  .realestate-table th.sorted button { color: var(--fg); font-weight: 700; }
   .load-error {
     display: flex;
     align-items: center;
@@ -630,10 +646,10 @@
       <table class="data-table realestate-table">
         <thead>
           <tr>
-            <th id="re-th-district">지역</th>
-            <th id="re-th-sale">매매</th>
-            <th id="re-th-jeonse">전세</th>
-            <th id="re-th-wolse">월세</th>
+            <th class="sortable"><button type="button" data-re-sort="name" id="re-th-district">지역</button></th>
+            <th class="sortable"><button type="button" data-re-sort="sale" id="re-th-sale">매매</button></th>
+            <th class="sortable"><button type="button" data-re-sort="jeonse" id="re-th-jeonse">전세</button></th>
+            <th class="sortable"><button type="button" data-re-sort="wolse" id="re-th-wolse">월세</button></th>
           </tr>
         </thead>
         <tbody id="realestate-grid"><!--prerender:realestate--><tr><td>서울 전체</td><td data-label="매매">4,449만원</td><td data-label="전세">2,571만원</td><td data-label="월세">22,166만원 / 월 96만원</td></tr><tr><td>강남구</td><td data-label="매매">10,870만원</td><td data-label="전세">4,022만원</td><td data-label="월세">41,755만원 / 월 164만원</td></tr><tr><td>성동구</td><td data-label="매매">10,843만원</td><td data-label="전세">3,263만원</td><td data-label="월세">17,548만원 / 월 131만원</td></tr><tr><td>서초구</td><td data-label="매매">8,780만원</td><td data-label="전세">2,981만원</td><td data-label="월세">50,941만원 / 월 234만원</td></tr><tr><td>용산구</td><td data-label="매매">7,988만원</td><td data-label="전세">3,365만원</td><td data-label="월세">45,686만원 / 월 265만원</td></tr><tr><td>광진구</td><td data-label="매매">7,617만원</td><td data-label="전세">3,035만원</td><td data-label="월세">35,019만원 / 월 122만원</td></tr><tr><td>송파구</td><td data-label="매매">6,912만원</td><td data-label="전세">3,375만원</td><td data-label="월세">39,481만원 / 월 132만원</td></tr><tr><td>중구</td><td data-label="매매">6,908만원</td><td data-label="전세">3,221만원</td><td data-label="월세">21,035만원 / 월 125만원</td></tr><tr><td>영등포구</td><td data-label="매매">6,201만원</td><td data-label="전세">2,770만원</td><td data-label="월세">22,316만원 / 월 123만원</td></tr><tr><td>마포구</td><td data-label="매매">5,695만원</td><td data-label="전세">2,939만원</td><td data-label="월세">22,001만원 / 월 108만원</td></tr><tr><td>동작구</td><td data-label="매매">5,691만원</td><td data-label="전세">3,053만원</td><td data-label="월세">26,882만원 / 월 93만원</td></tr><!--/prerender:realestate--></tbody>
@@ -663,7 +679,9 @@
     <h2 id="archive-heading">지난 요약 기록</h2>
     <form class="archive-date-jump" id="archive-date-jump">
       <label for="archive-date-input" id="archive-date-jump-label">날짜로 바로가기</label>
+      <button type="button" id="archive-prev-day" aria-label="하루 전">←</button>
       <input type="date" id="archive-date-input">
+      <button type="button" id="archive-next-day" aria-label="하루 뒤">→</button>
       <button type="submit" id="archive-date-go">이동</button>
     </form>
   </section>
@@ -1203,16 +1221,47 @@
     });
   }
 
-  function realestateSortValue(rawEntry) {
+  // 금리 표는 머리글로 정렬되는데 부동산 표만 평당가 고정이라 조작 방식이 달랐다.
+  // 기본값은 예전 동작 그대로(매매 평당가 내림차순, 표본 부족은 아래로).
+  const realestateSort = { key: "sale", dir: "desc" };
+
+  function realestateMetricValue(rawEntry, key) {
     const entry = normalizeRealestateEntry(rawEntry);
-    if (hasEnoughSample(entry.sale)) {
-      const sale = entry.sale?.avgPricePerPyeong10k ?? entry.avgPricePerPyeong10k;
-      if (sale != null) return sale;
+    if (key === "sale") {
+      return hasEnoughSample(entry.sale)
+        ? entry.sale?.avgPricePerPyeong10k ?? entry.avgPricePerPyeong10k ?? null
+        : null;
     }
-    if (hasEnoughSample(entry.jeonse) && entry.jeonse?.avgDepositPerPyeong10k != null) {
-      return entry.jeonse.avgDepositPerPyeong10k;
+    if (key === "jeonse") {
+      return hasEnoughSample(entry.jeonse) ? entry.jeonse?.avgDepositPerPyeong10k ?? null : null;
     }
-    return 0;
+    if (key === "wolse") {
+      return hasEnoughSample(entry.wolse) ? entry.wolse?.avgDeposit10k ?? null : null;
+    }
+    return null;
+  }
+
+  function compareDistricts(a, b) {
+    if (realestateSort.key === "name") {
+      const order = (a.name ?? "").localeCompare(b.name ?? "", "ko");
+      return realestateSort.dir === "asc" ? order : -order;
+    }
+    // 값이 없는 구(표본 부족)는 방향과 무관하게 아래로 보낸다. 금리 표와 같은 규칙이다.
+    const av = realestateMetricValue(a, realestateSort.key);
+    const bv = realestateMetricValue(b, realestateSort.key);
+    if (av === null || bv === null) return (av === null) - (bv === null);
+    return realestateSort.dir === "asc" ? av - bv : bv - av;
+  }
+
+  function renderRealestateSortState() {
+    for (const button of document.querySelectorAll("[data-re-sort]")) {
+      const active = button.dataset.reSort === realestateSort.key;
+      const th = button.parentElement;
+      th.classList.toggle("sorted", active);
+      th.setAttribute("aria-sort", active ? (realestateSort.dir === "asc" ? "ascending" : "descending") : "none");
+      const base = button.textContent.replace(/[ \u25b2\u25bc]+$/, "");
+      button.textContent = active ? `${base} ${realestateSort.dir === "asc" ? "\u25b2" : "\u25bc"}` : base;
+    }
   }
 
   function renderRealestate(realestate) {
@@ -1228,10 +1277,11 @@
       realestateRowHtml(realestate.overall, t("realestateOverallLabel"), true),
       ...(realestate.districts ?? [])
         .slice()
-        .sort((a, b) => realestateSortValue(b) - realestateSortValue(a))
+        .sort(compareDistricts)
         .map((d) => realestateRowHtml(d, d.name, false)),
     ];
     tbody.innerHTML = rows.join("");
+    renderRealestateSortState();
     meta.textContent = t("realestatePeriodLabel")(realestate.period ?? "");
     applyRealestateSearch();
   }
@@ -1691,6 +1741,22 @@
   });
 
   document.getElementById("archive-date-input").max = kstToday();
+  document.getElementById("archive-date-input").value = viewDate ?? "";
+  document.getElementById("archive-next-day").disabled = !viewDate || viewDate >= kstToday();
+
+  // 하루씩 넘기려고 매번 날짜를 고르게 하지 않는다.
+  function shiftArchiveDay(days) {
+    const base = viewDate || kstToday();
+    const moved = new Date(`${base}T00:00:00Z`);
+    moved.setUTCDate(moved.getUTCDate() + days);
+    const next = moved.toISOString().slice(0, 10);
+    if (next > kstToday()) return;
+    window.analytics?.event("archive_jump", { archive_date: next, method: "step" });
+    location.href = `./index.html?date=${next}`;
+  }
+
+  document.getElementById("archive-prev-day").addEventListener("click", () => shiftArchiveDay(-1));
+  document.getElementById("archive-next-day").addEventListener("click", () => shiftArchiveDay(1));
 
   document.getElementById("archive-date-jump").addEventListener("submit", (e) => {
     e.preventDefault();
@@ -1707,6 +1773,21 @@
   });
 
   document.getElementById("realestate-search-input").addEventListener("input", applyRealestateSearch);
+
+  document.querySelector(".realestate-table thead").addEventListener("click", (e) => {
+    const button = e.target.closest("[data-re-sort]");
+    if (!button) return;
+    const key = button.dataset.reSort;
+    if (realestateSort.key === key) {
+      realestateSort.dir = realestateSort.dir === "asc" ? "desc" : "asc";
+    } else {
+      realestateSort.key = key;
+      // 이름은 가나다순이, 금액은 높은 쪽이 먼저 보이는 게 자연스럽다.
+      realestateSort.dir = key === "name" ? "asc" : "desc";
+    }
+    renderRealestate(effectiveRealestate());
+    window.analytics?.event("realestate_sort", { sort_key: realestateSort.key, sort_dir: realestateSort.dir });
+  });
 
   document.getElementById("news-filters").addEventListener("click", (e) => {
     const chip = e.target.closest(".news-chip");

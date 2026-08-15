@@ -40,18 +40,27 @@ test("표본이 부족한 구는 평당가 순위에서 빠진다", async () => 
   const app = await loadRenderer();
   const expensive = { name: "표본1건구", sale: saleOf(1) };
   const ordinary = { name: "보통구", sale: { ...saleOf(30), avgPricePerPyeong10k: 3000 } };
-  assert.ok(app.realestateSortValue(ordinary) > app.realestateSortValue(expensive));
-  assert.equal(app.realestateSortValue(expensive), 0);
+  // 값이 없는 쪽이 방향과 무관하게 아래로 간다.
+  assert.ok(app.compareDistricts(ordinary, expensive) < 0);
+  app.__realestateSort.dir = "asc";
+  assert.ok(app.compareDistricts(ordinary, expensive) < 0);
+  app.__realestateSort.dir = "desc";
 });
 
-test("매매 표본이 부족해도 전세 표본이 충분하면 전세로 줄을 세운다", async () => {
+// 열을 눌러 정렬하게 되면서 규칙이 바뀌었다. 예전엔 매매 표본이 부족하면 전세 값으로
+// 대신 줄을 세웠는데, 사용자가 "매매" 열을 고른 상황에서 다른 수치로 순위를 매기면
+// 표에 적힌 숫자와 순서가 서로 다른 얘기가 된다(금리 표에서 같은 이유로 피한 함정).
+test("고른 열의 표본이 부족하면 다른 지표로 대신 줄 세우지 않는다", async () => {
   const app = await loadRenderer();
-  const entry = {
-    name: "구",
-    sale: saleOf(2),
-    jeonse: { avgDepositPerPyeong10k: 3092, transactionCount: 40 },
-  };
-  assert.equal(app.realestateSortValue(entry), 3092);
+  const saleMissing = { name: "매매부족구", sale: saleOf(2), jeonse: { avgDepositPerPyeong10k: 9999, transactionCount: 40 } };
+  const saleOk = { name: "보통구", sale: { ...saleOf(30), avgPricePerPyeong10k: 3000 } };
+
+  assert.ok(app.compareDistricts(saleOk, saleMissing) < 0, "전세 값이 커도 매매 기준에선 아래로 가야 한다");
+
+  // 전세 열로 바꾸면 그 값으로 줄을 세운다.
+  app.__realestateSort.key = "jeonse";
+  assert.ok(app.compareDistricts(saleMissing, saleOk) < 0);
+  app.__realestateSort.key = "sale";
 });
 
 test("거래 건수를 모르는 과거 기록은 부족하다고 단정하지 않는다", async () => {
