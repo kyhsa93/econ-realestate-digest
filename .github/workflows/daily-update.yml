@@ -91,6 +91,9 @@ jobs:
       - name: 뉴스 제목 영어 번역
         run: node scripts/translate-news.mjs
 
+      - name: 정적 HTML에 오늘 내용 심기
+        run: node scripts/prerender.mjs
+
       - name: 테스트 (수집 후)
         run: npm test
 
@@ -98,11 +101,11 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          if git diff --quiet -- docs/data; then
+          if git diff --quiet -- docs/data docs/index.html; then
             echo "변경사항 없음, 커밋 생략"
             exit 0
           fi
-          git add docs/data
+          git add docs/data docs/index.html
           if [ "$MODE" = "full" ]; then
             git commit -m "chore: 데일리 데이터 갱신 $(TZ=Asia/Seoul date +%Y-%m-%d)"
           else
