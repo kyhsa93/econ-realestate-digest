@@ -341,6 +341,38 @@
     color: var(--fg);
     font-size: 0.95rem;
   }
+  /* 좁은 화면에서 4열 표는 가로 스크롤 없이는 읽을 수가 없다. 행을 카드로 세운다. */
+  @media (max-width: 480px) {
+    .data-table { white-space: normal; }
+    .data-table thead { display: none; }
+    .data-table tr {
+      display: block;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .data-table td {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      border: 0;
+      padding: 3px 0;
+      text-align: right;
+    }
+    .data-table td:first-child {
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding-bottom: 6px;
+    }
+    .data-table td[data-label]::before {
+      content: attr(data-label);
+      color: var(--muted);
+      font-size: 0.78rem;
+      text-align: left;
+      flex-shrink: 0;
+    }
+    .data-table td:empty { display: none; }
+  }
   .load-error {
     display: flex;
     align-items: center;
@@ -581,7 +613,7 @@
             <th id="market-th-change">증감</th>
           </tr>
         </thead>
-        <tbody id="market-grid"><!--prerender:market--><tr><td>코스피</td><td>6,977.94</td><td>164.60</td></tr><tr><td>원/달러 환율</td><td>1418.41원</td><td>-</td></tr><tr><td>기준금리</td><td>2.75%</td><td>2026년 07월 16일</td></tr><!--/prerender:market--></tbody>
+        <tbody id="market-grid"><!--prerender:market--><tr><td>코스피</td><td data-label="값">6,977.94</td><td data-label="증감">164.60</td></tr><tr><td>원/달러 환율</td><td data-label="값">1418.41원</td><td data-label="증감">-</td></tr><tr><td>기준금리</td><td data-label="값">2.75%</td><td data-label="증감">2026년 07월 16일</td></tr><!--/prerender:market--></tbody>
       </table>
     </div>
     <div class="history-grid" id="history-grid"></div>
@@ -604,7 +636,7 @@
             <th id="re-th-wolse">월세</th>
           </tr>
         </thead>
-        <tbody id="realestate-grid"><!--prerender:realestate--><tr><td>서울 전체</td><td>4,449만원</td><td>2,571만원</td><td>22,166만원 / 월 96만원</td></tr><tr><td>강남구</td><td>10,870만원</td><td>4,022만원</td><td>41,755만원 / 월 164만원</td></tr><tr><td>성동구</td><td>10,843만원</td><td>3,263만원</td><td>17,548만원 / 월 131만원</td></tr><tr><td>서초구</td><td>8,780만원</td><td>2,981만원</td><td>50,941만원 / 월 234만원</td></tr><tr><td>용산구</td><td>7,988만원</td><td>3,365만원</td><td>45,686만원 / 월 265만원</td></tr><tr><td>광진구</td><td>7,617만원</td><td>3,035만원</td><td>35,019만원 / 월 122만원</td></tr><tr><td>송파구</td><td>6,912만원</td><td>3,375만원</td><td>39,481만원 / 월 132만원</td></tr><tr><td>중구</td><td>6,908만원</td><td>3,221만원</td><td>21,035만원 / 월 125만원</td></tr><tr><td>영등포구</td><td>6,201만원</td><td>2,770만원</td><td>22,316만원 / 월 123만원</td></tr><tr><td>마포구</td><td>5,695만원</td><td>2,939만원</td><td>22,001만원 / 월 108만원</td></tr><tr><td>동작구</td><td>5,691만원</td><td>3,053만원</td><td>26,882만원 / 월 93만원</td></tr><!--/prerender:realestate--></tbody>
+        <tbody id="realestate-grid"><!--prerender:realestate--><tr><td>서울 전체</td><td data-label="매매">4,449만원</td><td data-label="전세">2,571만원</td><td data-label="월세">22,166만원 / 월 96만원</td></tr><tr><td>강남구</td><td data-label="매매">10,870만원</td><td data-label="전세">4,022만원</td><td data-label="월세">41,755만원 / 월 164만원</td></tr><tr><td>성동구</td><td data-label="매매">10,843만원</td><td data-label="전세">3,263만원</td><td data-label="월세">17,548만원 / 월 131만원</td></tr><tr><td>서초구</td><td data-label="매매">8,780만원</td><td data-label="전세">2,981만원</td><td data-label="월세">50,941만원 / 월 234만원</td></tr><tr><td>용산구</td><td data-label="매매">7,988만원</td><td data-label="전세">3,365만원</td><td data-label="월세">45,686만원 / 월 265만원</td></tr><tr><td>광진구</td><td data-label="매매">7,617만원</td><td data-label="전세">3,035만원</td><td data-label="월세">35,019만원 / 월 122만원</td></tr><tr><td>송파구</td><td data-label="매매">6,912만원</td><td data-label="전세">3,375만원</td><td data-label="월세">39,481만원 / 월 132만원</td></tr><tr><td>중구</td><td data-label="매매">6,908만원</td><td data-label="전세">3,221만원</td><td data-label="월세">21,035만원 / 월 125만원</td></tr><tr><td>영등포구</td><td data-label="매매">6,201만원</td><td data-label="전세">2,770만원</td><td data-label="월세">22,316만원 / 월 123만원</td></tr><tr><td>마포구</td><td data-label="매매">5,695만원</td><td data-label="전세">2,939만원</td><td data-label="월세">22,001만원 / 월 108만원</td></tr><tr><td>동작구</td><td data-label="매매">5,691만원</td><td data-label="전세">3,053만원</td><td data-label="월세">26,882만원 / 월 93만원</td></tr><!--/prerender:realestate--></tbody>
       </table>
     </div>
     <div class="realestate-history-controls">
@@ -964,8 +996,8 @@
       rows.push(`
         <tr>
           <td>${t("kospiLabel")}</td>
-          <td>${market.kospi.value}</td>
-          <td class="change ${directionClass(market.kospi.direction)}">${market.kospi.change ?? ""}</td>
+          <td data-label="${t("marketThValue")}">${market.kospi.value}</td>
+          <td class="change ${directionClass(market.kospi.direction)}" data-label="${t("marketThChange")}">${market.kospi.change ?? ""}</td>
         </tr>`);
     }
     if (market.usdKrw || liveUsdKrw) {
@@ -976,7 +1008,7 @@
       rows.push(`
         <tr>
           <td>${t("usdKrwLabel")}</td>
-          <td>${displayValue.toFixed(2)}${liveBadge}</td>
+          <td data-label="${t("marketThValue")}">${displayValue.toFixed(2)}${liveBadge}</td>
           <td></td>
         </tr>`);
     }
@@ -984,8 +1016,8 @@
       rows.push(`
         <tr>
           <td>${t("baseRateLabel")}</td>
-          <td>${market.baseRate.value}%</td>
-          <td class="change">${t("baseRateSince")(market.baseRate.effectiveFrom)}</td>
+          <td data-label="${t("marketThValue")}">${market.baseRate.value}%</td>
+          <td class="change" data-label="${t("marketThChange")}">${t("baseRateSince")(market.baseRate.effectiveFrom)}</td>
         </tr>`);
     }
     tbody.innerHTML = rows.join("") || `<tr><td colspan="3" class="error">${t("marketEmpty")}</td></tr>`;
@@ -1155,9 +1187,9 @@
     return `
       <tr class="${isOverall ? "overall-row" : ""}"${searchAttr}>
         <td>${label}</td>
-        <td>${realestateSaleCellHtml(entry.sale)}</td>
-        <td>${realestateJeonseCellHtml(entry.jeonse)}</td>
-        <td>${realestateWolseCellHtml(entry.wolse)}</td>
+        <td data-label="${t("realestateTagSale")}">${realestateSaleCellHtml(entry.sale)}</td>
+        <td data-label="${t("realestateTagJeonse")}">${realestateJeonseCellHtml(entry.jeonse)}</td>
+        <td data-label="${t("realestateTagWolse")}">${realestateWolseCellHtml(entry.wolse)}</td>
       </tr>`;
   }
 

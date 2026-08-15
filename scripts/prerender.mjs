@@ -54,7 +54,13 @@ export function marketHtml(market) {
   }
 
   if (!rows.length) return null;
-  return rows.map(([name, value, change]) => `<tr><td>${name}</td><td>${value}</td><td>${change}</td></tr>`).join("");
+  // 좁은 화면 카드 배치가 data-label을 읽는다. 클라이언트 렌더와 같은 라벨을 붙인다.
+  return rows
+    .map(
+      ([name, value, change]) =>
+        `<tr><td>${name}</td><td data-label="값">${value}</td><td data-label="증감">${change}</td></tr>`
+    )
+    .join("");
 }
 
 const man = (value) => `${Number(value).toLocaleString("ko-KR")}만원`;
@@ -78,9 +84,10 @@ export function realestateHtml(realestate) {
     .slice(0, MAX_DISTRICTS);
 
   const row = (name, data) =>
-    `<tr><td>${escapeHtml(name)}</td><td>${saleCell(data.sale)}</td><td>${jeonseCell(data.jeonse)}</td><td>${wolseCell(
-      data.wolse
-    )}</td></tr>`;
+    `<tr><td>${escapeHtml(name)}</td>` +
+    `<td data-label="매매">${saleCell(data.sale)}</td>` +
+    `<td data-label="전세">${jeonseCell(data.jeonse)}</td>` +
+    `<td data-label="월세">${wolseCell(data.wolse)}</td></tr>`;
 
   return [row("서울 전체", realestate.overall), ...districts.map((d) => row(d.name, d))].join("");
 }
@@ -143,7 +150,7 @@ const rateRange = (min, max) =>
 export function ratesHeadHtml(category = "deposit") {
   return SAVING_CATEGORIES.has(category)
     ? "<tr><th>상품</th><th>기본금리</th><th>최고금리</th></tr>"
-    : "<tr><th>상품</th><th>금리유형</th><th>금리범위</th><th>평균금리</th></tr>";
+    : "<tr><th>상품</th><th>금리 유형</th><th>금리(최저~최고)</th><th>평균</th></tr>";
 }
 
 export function ratesHtml(rates, { category = "deposit", limit = RATES_ROWS } = {}) {
@@ -189,10 +196,11 @@ export function ratesHtml(rates, { category = "deposit", limit = RATES_ROWS } = 
     .slice(0, limit)
     .map(({ product, option }) =>
       saving
-        ? `<tr>${productCell(product)}<td>${rate(option.rate)}</td>` +
-          `<td class="rate-strong">${rate(option.maxRate ?? option.rate)}</td></tr>`
-        : `<tr>${productCell(product)}<td>${escapeHtml(option.rateType ?? "-")}</td>` +
-          `<td>${rateRange(option.min, option.max)}</td><td class="rate-low">${rate(option.avg)}</td></tr>`
+        ? `<tr>${productCell(product)}<td data-label="기본금리">${rate(option.rate)}</td>` +
+          `<td class="rate-strong" data-label="최고금리">${rate(option.maxRate ?? option.rate)}</td></tr>`
+        : `<tr>${productCell(product)}<td data-label="금리 유형">${escapeHtml(option.rateType ?? "-")}</td>` +
+          `<td data-label="금리(최저~최고)">${rateRange(option.min, option.max)}</td>` +
+          `<td class="rate-low" data-label="평균">${rate(option.avg)}</td></tr>`
     )
     .join("");
 }

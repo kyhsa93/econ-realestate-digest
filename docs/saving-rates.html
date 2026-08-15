@@ -219,6 +219,35 @@
     margin-left: 8px;
     cursor: pointer;
   }
+  /* 좁은 화면에서 4열 표는 가로 스크롤 없이는 읽을 수가 없다. 행을 카드로 세운다. */
+  @media (max-width: 480px) {
+    .data-table { white-space: normal; }
+    .data-table thead { display: none; }
+    .data-table tbody tr {
+      display: block;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .data-table td {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      border: 0;
+      padding: 3px 0;
+      text-align: right;
+    }
+    .data-table td:first-child { padding-bottom: 6px; }
+    .data-table td[data-label]::before {
+      content: attr(data-label);
+      color: var(--muted);
+      font-size: 0.78rem;
+      text-align: left;
+      flex-shrink: 0;
+    }
+    /* 상세 펼침 행은 카드 안에서 그대로 흐르게 둔다. */
+    .data-table tr.detail-row td { display: block; text-align: left; }
+  }
   .rate-links {
     display: flex;
     flex-wrap: wrap;
@@ -418,7 +447,7 @@
     <div class="table-wrap">
       <table class="data-table">
         <thead id="products-head"><!--prerender:ratesHead--><tr><th>상품</th><th>기본금리</th><th>최고금리</th></tr><!--/prerender:ratesHead--></thead>
-        <tbody id="products-body"><!--prerender:rates--><tr><td><div class="product-name">웰뱅 라이킷(LIKIT) 적금</div><div class="product-company">웰컴저축은행</div></td><td>2.00%</td><td class="rate-strong">14.00%</td></tr><tr><td><div class="product-name">아이돌(iDoL) 적금</div><div class="product-company">예가람저축은행</div></td><td>3.00%</td><td class="rate-strong">10.00%</td></tr><tr><td><div class="product-name">애(愛)랑해적금</div><div class="product-company">애큐온저축은행</div></td><td>3.00%</td><td class="rate-strong">8.00%</td></tr><tr><td><div class="product-name">처음만난적금</div><div class="product-company">애큐온저축은행</div></td><td>6.50%</td><td class="rate-strong">8.00%</td></tr><tr><td><div class="product-name">마이홈 정기적금</div><div class="product-company">SBI저축은행</div></td><td>4.00%</td><td class="rate-strong">8.00%</td></tr><tr><td><div class="product-name">웰뱅 워킹 적금</div><div class="product-company">웰컴저축은행</div></td><td>1.00%</td><td class="rate-strong">8.00%</td></tr><tr><td><div class="product-name">WELCOME 아이사랑 정기적금</div><div class="product-company">웰컴저축은행</div></td><td>1.00%</td><td class="rate-strong">8.00%</td></tr><tr><td><div class="product-name">아이적금</div><div class="product-company">SBI저축은행</div></td><td>3.90%</td><td class="rate-strong">7.10%</td></tr><tr><td><div class="product-name">오면우대! 하면우대! 정기적금</div><div class="product-company">경남은행</div></td><td>1.90%</td><td class="rate-strong">7.00%</td></tr><tr><td><div class="product-name">마이키즈 적금</div><div class="product-company">주식회사 케이뱅크</div></td><td>3.00%</td><td class="rate-strong">7.00%</td></tr><tr><td><div class="product-name">카카오뱅크 우리아이적금</div><div class="product-company">주식회사 카카오뱅크</div></td><td>3.00%</td><td class="rate-strong">7.00%</td></tr><tr><td><div class="product-name">청년플랜적금</div><div class="product-company">애큐온저축은행</div></td><td>3.50%</td><td class="rate-strong">7.00%</td></tr><tr><td><div class="product-name">WELCOME 첫거래우대 e정기적금</div><div class="product-company">웰컴저축은행</div></td><td>1.00%</td><td class="rate-strong">7.00%</td></tr><tr><td><div class="product-name">WELCOME 첫거래우대 m정기적금</div><div class="product-company">웰컴저축은행</div></td><td>1.00%</td><td class="rate-strong">7.00%</td></tr><tr><td><div class="product-name">아이행복적금</div><div class="product-company">유안타저축은행</div></td><td>3.75%</td><td class="rate-strong">6.75%</td></tr><tr><td><div class="product-name">웰컴 페이적금</div><div class="product-company">웰컴저축은행</div></td><td>1.00%</td><td class="rate-strong">6.50%</td></tr><tr><td><div class="product-name">NH1934월복리적금</div><div class="product-company">농협은행주식회사</div></td><td>2.55%</td><td class="rate-strong">6.05%</td></tr><tr><td><div class="product-name">DB행복씨앗적금</div><div class="product-company">디비저축은행</div></td><td>4.00%</td><td class="rate-strong">6.00%</td></tr><tr><td><div class="product-name">M-DB행복씨앗적금</div><div class="product-company">디비저축은행</div></td><td>4.00%</td><td class="rate-strong">6.00%</td></tr><tr><td><div class="product-name">자녀와 행복 PLUS 정기 적금</div><div class="product-company">고려저축은행</div></td><td>3.00%</td><td class="rate-strong">6.00%</td></tr><!--/prerender:rates--></tbody>
+        <tbody id="products-body"><!--prerender:rates--><tr><td><div class="product-name">웰뱅 라이킷(LIKIT) 적금</div><div class="product-company">웰컴저축은행</div></td><td data-label="기본금리">2.00%</td><td class="rate-strong" data-label="최고금리">14.00%</td></tr><tr><td><div class="product-name">아이돌(iDoL) 적금</div><div class="product-company">예가람저축은행</div></td><td data-label="기본금리">3.00%</td><td class="rate-strong" data-label="최고금리">10.00%</td></tr><tr><td><div class="product-name">애(愛)랑해적금</div><div class="product-company">애큐온저축은행</div></td><td data-label="기본금리">3.00%</td><td class="rate-strong" data-label="최고금리">8.00%</td></tr><tr><td><div class="product-name">처음만난적금</div><div class="product-company">애큐온저축은행</div></td><td data-label="기본금리">6.50%</td><td class="rate-strong" data-label="최고금리">8.00%</td></tr><tr><td><div class="product-name">마이홈 정기적금</div><div class="product-company">SBI저축은행</div></td><td data-label="기본금리">4.00%</td><td class="rate-strong" data-label="최고금리">8.00%</td></tr><tr><td><div class="product-name">웰뱅 워킹 적금</div><div class="product-company">웰컴저축은행</div></td><td data-label="기본금리">1.00%</td><td class="rate-strong" data-label="최고금리">8.00%</td></tr><tr><td><div class="product-name">WELCOME 아이사랑 정기적금</div><div class="product-company">웰컴저축은행</div></td><td data-label="기본금리">1.00%</td><td class="rate-strong" data-label="최고금리">8.00%</td></tr><tr><td><div class="product-name">아이적금</div><div class="product-company">SBI저축은행</div></td><td data-label="기본금리">3.90%</td><td class="rate-strong" data-label="최고금리">7.10%</td></tr><tr><td><div class="product-name">오면우대! 하면우대! 정기적금</div><div class="product-company">경남은행</div></td><td data-label="기본금리">1.90%</td><td class="rate-strong" data-label="최고금리">7.00%</td></tr><tr><td><div class="product-name">마이키즈 적금</div><div class="product-company">주식회사 케이뱅크</div></td><td data-label="기본금리">3.00%</td><td class="rate-strong" data-label="최고금리">7.00%</td></tr><tr><td><div class="product-name">카카오뱅크 우리아이적금</div><div class="product-company">주식회사 카카오뱅크</div></td><td data-label="기본금리">3.00%</td><td class="rate-strong" data-label="최고금리">7.00%</td></tr><tr><td><div class="product-name">청년플랜적금</div><div class="product-company">애큐온저축은행</div></td><td data-label="기본금리">3.50%</td><td class="rate-strong" data-label="최고금리">7.00%</td></tr><tr><td><div class="product-name">WELCOME 첫거래우대 e정기적금</div><div class="product-company">웰컴저축은행</div></td><td data-label="기본금리">1.00%</td><td class="rate-strong" data-label="최고금리">7.00%</td></tr><tr><td><div class="product-name">WELCOME 첫거래우대 m정기적금</div><div class="product-company">웰컴저축은행</div></td><td data-label="기본금리">1.00%</td><td class="rate-strong" data-label="최고금리">7.00%</td></tr><tr><td><div class="product-name">아이행복적금</div><div class="product-company">유안타저축은행</div></td><td data-label="기본금리">3.75%</td><td class="rate-strong" data-label="최고금리">6.75%</td></tr><tr><td><div class="product-name">웰컴 페이적금</div><div class="product-company">웰컴저축은행</div></td><td data-label="기본금리">1.00%</td><td class="rate-strong" data-label="최고금리">6.50%</td></tr><tr><td><div class="product-name">NH1934월복리적금</div><div class="product-company">농협은행주식회사</div></td><td data-label="기본금리">2.55%</td><td class="rate-strong" data-label="최고금리">6.05%</td></tr><tr><td><div class="product-name">DB행복씨앗적금</div><div class="product-company">디비저축은행</div></td><td data-label="기본금리">4.00%</td><td class="rate-strong" data-label="최고금리">6.00%</td></tr><tr><td><div class="product-name">M-DB행복씨앗적금</div><div class="product-company">디비저축은행</div></td><td data-label="기본금리">4.00%</td><td class="rate-strong" data-label="최고금리">6.00%</td></tr><tr><td><div class="product-name">자녀와 행복 PLUS 정기 적금</div><div class="product-company">고려저축은행</div></td><td data-label="기본금리">3.00%</td><td class="rate-strong" data-label="최고금리">6.00%</td></tr><!--/prerender:rates--></tbody>
       </table>
     </div>
     <div class="content-notice" id="products-note" style="margin-top: 10px;"></div>
@@ -1032,17 +1061,17 @@
   function savingRowHtml({ product, option }) {
     return `<tr>
       ${productCellHtml(product)}
-      <td>${fmtRate(option.rate)}</td>
-      <td class="rate-strong">${fmtRate(option.maxRate ?? option.rate)}</td>
+      <td data-label="${escapeHtml(t("thBaseRate"))}">${fmtRate(option.rate)}</td>
+      <td class="rate-strong" data-label="${escapeHtml(t("thMaxRate"))}">${fmtRate(option.maxRate ?? option.rate)}</td>
     </tr>${detailRowHtml(product, 3)}`;
   }
 
   function loanRowHtml({ product, option }) {
     return `<tr>
       ${productCellHtml(product)}
-      <td>${escapeHtml(option.rateType ?? "-")}</td>
-      <td>${fmtRateRange(option.min, option.max)}</td>
-      <td class="rate-low">${fmtRate(option.avg)}</td>
+      <td data-label="${escapeHtml(t("thRateType"))}">${escapeHtml(option.rateType ?? "-")}</td>
+      <td data-label="${escapeHtml(t("thRateRange"))}">${fmtRateRange(option.min, option.max)}</td>
+      <td class="rate-low" data-label="${escapeHtml(t("thAvgRate"))}">${fmtRate(option.avg)}</td>
     </tr>${detailRowHtml(product, 4)}`;
   }
 

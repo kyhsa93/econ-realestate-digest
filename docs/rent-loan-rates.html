@@ -219,6 +219,35 @@
     margin-left: 8px;
     cursor: pointer;
   }
+  /* 좁은 화면에서 4열 표는 가로 스크롤 없이는 읽을 수가 없다. 행을 카드로 세운다. */
+  @media (max-width: 480px) {
+    .data-table { white-space: normal; }
+    .data-table thead { display: none; }
+    .data-table tbody tr {
+      display: block;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .data-table td {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      border: 0;
+      padding: 3px 0;
+      text-align: right;
+    }
+    .data-table td:first-child { padding-bottom: 6px; }
+    .data-table td[data-label]::before {
+      content: attr(data-label);
+      color: var(--muted);
+      font-size: 0.78rem;
+      text-align: left;
+      flex-shrink: 0;
+    }
+    /* 상세 펼침 행은 카드 안에서 그대로 흐르게 둔다. */
+    .data-table tr.detail-row td { display: block; text-align: left; }
+  }
   .rate-links {
     display: flex;
     flex-wrap: wrap;
@@ -417,8 +446,8 @@
 
     <div class="table-wrap">
       <table class="data-table">
-        <thead id="products-head"><!--prerender:ratesHead--><tr><th>상품</th><th>금리유형</th><th>금리범위</th><th>평균금리</th></tr><!--/prerender:ratesHead--></thead>
-        <tbody id="products-body"><!--prerender:rates--><tr><td><div class="product-name">NH전세대출(서울보증보험)</div><div class="product-company">농협은행주식회사</div></td><td>변동금리</td><td>3.28~5.98%</td><td class="rate-low">3.97%</td></tr><tr><td><div class="product-name">NH전세대출(주택금융공사)</div><div class="product-company">농협은행주식회사</div></td><td>변동금리</td><td>3.28~5.98%</td><td class="rate-low">3.97%</td></tr><tr><td><div class="product-name">NH전세대출(주택도시보증공사)</div><div class="product-company">농협은행주식회사</div></td><td>변동금리</td><td>3.28~5.98%</td><td class="rate-low">3.82%</td></tr><tr><td><div class="product-name">청년맞춤형 전월세보증금 대출</div><div class="product-company">광주은행</div></td><td>변동금리</td><td>3.32~3.52%</td><td class="rate-low">3.38%</td></tr><tr><td><div class="product-name">HF 전월세보증금 대출</div><div class="product-company">주식회사 카카오뱅크</div></td><td>변동금리</td><td>3.50~3.70%</td><td class="rate-low">3.83%</td></tr><tr><td><div class="product-name">SGI 전월세보증금 대출</div><div class="product-company">주식회사 카카오뱅크</div></td><td>변동금리</td><td>3.71~3.91%</td><td class="rate-low">4.09%</td></tr><tr><td><div class="product-name">우리전세론(서울보증)</div><div class="product-company">우리은행</div></td><td>변동금리</td><td>3.72~4.42%</td><td class="rate-low">4.10%</td></tr><tr><td><div class="product-name">우리전세론(주택금융보증)</div><div class="product-company">우리은행</div></td><td>변동금리</td><td>3.76~4.46%</td><td class="rate-low">3.96%</td></tr><tr><td><div class="product-name">KB주택전세자금대출</div><div class="product-company">국민은행</div></td><td>변동금리</td><td>3.81~5.21%</td><td class="rate-low">4.05%</td></tr><tr><td><div class="product-name">KB플러스전세자금대출</div><div class="product-company">국민은행</div></td><td>변동금리</td><td>3.93~5.33%</td><td class="rate-low">-</td></tr><tr><td><div class="product-name">전월세보증금 대출</div><div class="product-company">주식회사 케이뱅크</div></td><td>변동금리</td><td>3.94~3.94%</td><td class="rate-low">3.65%</td></tr><tr><td><div class="product-name">BNK프리미엄전세자금대출</div><div class="product-company">부산은행</div></td><td>변동금리</td><td>3.98~4.98%</td><td class="rate-low">-</td></tr><tr><td><div class="product-name">고정금리 전월세보증금 대출</div><div class="product-company">주식회사 케이뱅크</div></td><td>고정금리</td><td>4.03~4.33%</td><td class="rate-low">4.29%</td></tr><tr><td><div class="product-name">IBK전세대출 (HUG)</div><div class="product-company">중소기업은행</div></td><td>변동금리</td><td>4.07~4.67%</td><td class="rate-low">3.85%</td></tr><tr><td><div class="product-name">신한전세대출(주택금융공사)</div><div class="product-company">신한은행</div></td><td>변동금리</td><td>4.07~5.17%</td><td class="rate-low">4.63%</td></tr><tr><td><div class="product-name">IBK전세대출 (HF)</div><div class="product-company">중소기업은행</div></td><td>변동금리</td><td>4.08~4.68%</td><td class="rate-low">3.80%</td></tr><tr><td><div class="product-name">전월세보증금대출 플러스</div><div class="product-company">토스뱅크 주식회사</div></td><td>변동금리</td><td>4.13~4.13%</td><td class="rate-low">3.96%</td></tr><tr><td><div class="product-name">신한전세대출(서울보증)</div><div class="product-company">신한은행</div></td><td>변동금리</td><td>4.17~4.97%</td><td class="rate-low">4.73%</td></tr><tr><td><div class="product-name">BNK전세안심대출</div><div class="product-company">부산은행</div></td><td>변동금리</td><td>4.18~4.98%</td><td class="rate-low">-</td></tr><tr><td><div class="product-name">BNK행복스케치전세자금대출</div><div class="product-company">부산은행</div></td><td>변동금리</td><td>4.18~4.98%</td><td class="rate-low">4.33%</td></tr><!--/prerender:rates--></tbody>
+        <thead id="products-head"><!--prerender:ratesHead--><tr><th>상품</th><th>금리 유형</th><th>금리(최저~최고)</th><th>평균</th></tr><!--/prerender:ratesHead--></thead>
+        <tbody id="products-body"><!--prerender:rates--><tr><td><div class="product-name">NH전세대출(서울보증보험)</div><div class="product-company">농협은행주식회사</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">3.28~5.98%</td><td class="rate-low" data-label="평균">3.97%</td></tr><tr><td><div class="product-name">NH전세대출(주택금융공사)</div><div class="product-company">농협은행주식회사</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">3.28~5.98%</td><td class="rate-low" data-label="평균">3.97%</td></tr><tr><td><div class="product-name">NH전세대출(주택도시보증공사)</div><div class="product-company">농협은행주식회사</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">3.28~5.98%</td><td class="rate-low" data-label="평균">3.82%</td></tr><tr><td><div class="product-name">청년맞춤형 전월세보증금 대출</div><div class="product-company">광주은행</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">3.32~3.52%</td><td class="rate-low" data-label="평균">3.38%</td></tr><tr><td><div class="product-name">HF 전월세보증금 대출</div><div class="product-company">주식회사 카카오뱅크</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">3.50~3.70%</td><td class="rate-low" data-label="평균">3.83%</td></tr><tr><td><div class="product-name">SGI 전월세보증금 대출</div><div class="product-company">주식회사 카카오뱅크</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">3.71~3.91%</td><td class="rate-low" data-label="평균">4.09%</td></tr><tr><td><div class="product-name">우리전세론(서울보증)</div><div class="product-company">우리은행</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">3.72~4.42%</td><td class="rate-low" data-label="평균">4.10%</td></tr><tr><td><div class="product-name">우리전세론(주택금융보증)</div><div class="product-company">우리은행</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">3.76~4.46%</td><td class="rate-low" data-label="평균">3.96%</td></tr><tr><td><div class="product-name">KB주택전세자금대출</div><div class="product-company">국민은행</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">3.81~5.21%</td><td class="rate-low" data-label="평균">4.05%</td></tr><tr><td><div class="product-name">KB플러스전세자금대출</div><div class="product-company">국민은행</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">3.93~5.33%</td><td class="rate-low" data-label="평균">-</td></tr><tr><td><div class="product-name">전월세보증금 대출</div><div class="product-company">주식회사 케이뱅크</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">3.94~3.94%</td><td class="rate-low" data-label="평균">3.65%</td></tr><tr><td><div class="product-name">BNK프리미엄전세자금대출</div><div class="product-company">부산은행</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">3.98~4.98%</td><td class="rate-low" data-label="평균">-</td></tr><tr><td><div class="product-name">고정금리 전월세보증금 대출</div><div class="product-company">주식회사 케이뱅크</div></td><td data-label="금리 유형">고정금리</td><td data-label="금리(최저~최고)">4.03~4.33%</td><td class="rate-low" data-label="평균">4.29%</td></tr><tr><td><div class="product-name">IBK전세대출 (HUG)</div><div class="product-company">중소기업은행</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">4.07~4.67%</td><td class="rate-low" data-label="평균">3.85%</td></tr><tr><td><div class="product-name">신한전세대출(주택금융공사)</div><div class="product-company">신한은행</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">4.07~5.17%</td><td class="rate-low" data-label="평균">4.63%</td></tr><tr><td><div class="product-name">IBK전세대출 (HF)</div><div class="product-company">중소기업은행</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">4.08~4.68%</td><td class="rate-low" data-label="평균">3.80%</td></tr><tr><td><div class="product-name">전월세보증금대출 플러스</div><div class="product-company">토스뱅크 주식회사</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">4.13~4.13%</td><td class="rate-low" data-label="평균">3.96%</td></tr><tr><td><div class="product-name">신한전세대출(서울보증)</div><div class="product-company">신한은행</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">4.17~4.97%</td><td class="rate-low" data-label="평균">4.73%</td></tr><tr><td><div class="product-name">BNK전세안심대출</div><div class="product-company">부산은행</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">4.18~4.98%</td><td class="rate-low" data-label="평균">-</td></tr><tr><td><div class="product-name">BNK행복스케치전세자금대출</div><div class="product-company">부산은행</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">4.18~4.98%</td><td class="rate-low" data-label="평균">4.33%</td></tr><!--/prerender:rates--></tbody>
       </table>
     </div>
     <div class="content-notice" id="products-note" style="margin-top: 10px;"></div>
@@ -1032,17 +1061,17 @@
   function savingRowHtml({ product, option }) {
     return `<tr>
       ${productCellHtml(product)}
-      <td>${fmtRate(option.rate)}</td>
-      <td class="rate-strong">${fmtRate(option.maxRate ?? option.rate)}</td>
+      <td data-label="${escapeHtml(t("thBaseRate"))}">${fmtRate(option.rate)}</td>
+      <td class="rate-strong" data-label="${escapeHtml(t("thMaxRate"))}">${fmtRate(option.maxRate ?? option.rate)}</td>
     </tr>${detailRowHtml(product, 3)}`;
   }
 
   function loanRowHtml({ product, option }) {
     return `<tr>
       ${productCellHtml(product)}
-      <td>${escapeHtml(option.rateType ?? "-")}</td>
-      <td>${fmtRateRange(option.min, option.max)}</td>
-      <td class="rate-low">${fmtRate(option.avg)}</td>
+      <td data-label="${escapeHtml(t("thRateType"))}">${escapeHtml(option.rateType ?? "-")}</td>
+      <td data-label="${escapeHtml(t("thRateRange"))}">${fmtRateRange(option.min, option.max)}</td>
+      <td class="rate-low" data-label="${escapeHtml(t("thAvgRate"))}">${fmtRate(option.avg)}</td>
     </tr>${detailRowHtml(product, 4)}`;
   }
 

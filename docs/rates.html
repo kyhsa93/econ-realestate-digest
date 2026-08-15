@@ -218,6 +218,35 @@
     margin-left: 8px;
     cursor: pointer;
   }
+  /* 좁은 화면에서 4열 표는 가로 스크롤 없이는 읽을 수가 없다. 행을 카드로 세운다. */
+  @media (max-width: 480px) {
+    .data-table { white-space: normal; }
+    .data-table thead { display: none; }
+    .data-table tbody tr {
+      display: block;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .data-table td {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      border: 0;
+      padding: 3px 0;
+      text-align: right;
+    }
+    .data-table td:first-child { padding-bottom: 6px; }
+    .data-table td[data-label]::before {
+      content: attr(data-label);
+      color: var(--muted);
+      font-size: 0.78rem;
+      text-align: left;
+      flex-shrink: 0;
+    }
+    /* 상세 펼침 행은 카드 안에서 그대로 흐르게 둔다. */
+    .data-table tr.detail-row td { display: block; text-align: left; }
+  }
   .rate-links {
     display: flex;
     flex-wrap: wrap;
@@ -417,7 +446,7 @@
     <div class="table-wrap">
       <table class="data-table">
         <thead id="products-head"><!--prerender:ratesHead--><tr><th>상품</th><th>기본금리</th><th>최고금리</th></tr><!--/prerender:ratesHead--></thead>
-        <tbody id="products-body"><!--prerender:rates--><tr><td><div class="product-name">처음만난예금(모바일전용)</div><div class="product-company">애큐온저축은행</div></td><td>4.00%</td><td class="rate-strong">4.10%</td></tr><tr><td><div class="product-name">애플정기예금</div><div class="product-company">대백저축은행</div></td><td>4.10%</td><td class="rate-strong">4.10%</td></tr><tr><td><div class="product-name">다시만난예금(모바일전용)</div><div class="product-company">애큐온저축은행</div></td><td>3.70%</td><td class="rate-strong">4.05%</td></tr><tr><td><div class="product-name">e-회전yes정기예금(1년단위 변동금리상품) (인터넷뱅킹, 스마트뱅킹)</div><div class="product-company">키움예스저축은행</div></td><td>4.05%</td><td class="rate-strong">4.05%</td></tr><tr><td><div class="product-name">SB톡톡 회전yes정기예금(1년단위 변동금리상품) (비대면)</div><div class="product-company">키움예스저축은행</div></td><td>4.05%</td><td class="rate-strong">4.05%</td></tr><tr><td><div class="product-name">정기예금</div><div class="product-company">오투저축은행</div></td><td>4.02%</td><td class="rate-strong">4.02%</td></tr><tr><td><div class="product-name">E-정기예금</div><div class="product-company">오투저축은행</div></td><td>4.02%</td><td class="rate-strong">4.02%</td></tr><tr><td><div class="product-name">비대면 정기예금</div><div class="product-company">오투저축은행</div></td><td>4.02%</td><td class="rate-strong">4.02%</td></tr><tr><td><div class="product-name">정기예금(인터넷,모바일,비대면)</div><div class="product-company">CK저축은행</div></td><td>4.01%</td><td class="rate-strong">4.01%</td></tr><tr><td><div class="product-name">OK안심정기예금(변동금리)</div><div class="product-company">OK저축은행</div></td><td>3.91%</td><td class="rate-strong">4.01%</td></tr><tr><td><div class="product-name">OK e-안심정기예금(변동금리)</div><div class="product-company">OK저축은행</div></td><td>4.01%</td><td class="rate-strong">4.01%</td></tr><tr><td><div class="product-name">플러스회전식정기예금(모바일)</div><div class="product-company">애큐온저축은행</div></td><td>4.00%</td><td class="rate-strong">4.00%</td></tr><tr><td><div class="product-name">회전정기예금</div><div class="product-company">스카이저축은행</div></td><td>3.90%</td><td class="rate-strong">4.00%</td></tr><tr><td><div class="product-name">정기예금</div><div class="product-company">민국저축은행</div></td><td>3.90%</td><td class="rate-strong">4.00%</td></tr><tr><td><div class="product-name">푸른 정기예금</div><div class="product-company">푸른저축은행</div></td><td>3.90%</td><td class="rate-strong">4.00%</td></tr><tr><td><div class="product-name">e-정기예금(인터넷뱅킹, 스마트뱅킹)</div><div class="product-company">키움예스저축은행</div></td><td>4.00%</td><td class="rate-strong">4.00%</td></tr><tr><td><div class="product-name">SB톡톡 정기예금(비대면)</div><div class="product-company">키움예스저축은행</div></td><td>4.00%</td><td class="rate-strong">4.00%</td></tr><tr><td><div class="product-name">정기예금</div><div class="product-company">우리저축은행</div></td><td>4.00%</td><td class="rate-strong">4.00%</td></tr><tr><td><div class="product-name">정기예금</div><div class="product-company">금화저축은행</div></td><td>4.00%</td><td class="rate-strong">4.00%</td></tr><tr><td><div class="product-name">e-정기예금</div><div class="product-company">금화저축은행</div></td><td>4.00%</td><td class="rate-strong">4.00%</td></tr><!--/prerender:rates--></tbody>
+        <tbody id="products-body"><!--prerender:rates--><tr><td><div class="product-name">처음만난예금(모바일전용)</div><div class="product-company">애큐온저축은행</div></td><td data-label="기본금리">4.00%</td><td class="rate-strong" data-label="최고금리">4.10%</td></tr><tr><td><div class="product-name">애플정기예금</div><div class="product-company">대백저축은행</div></td><td data-label="기본금리">4.10%</td><td class="rate-strong" data-label="최고금리">4.10%</td></tr><tr><td><div class="product-name">다시만난예금(모바일전용)</div><div class="product-company">애큐온저축은행</div></td><td data-label="기본금리">3.70%</td><td class="rate-strong" data-label="최고금리">4.05%</td></tr><tr><td><div class="product-name">e-회전yes정기예금(1년단위 변동금리상품) (인터넷뱅킹, 스마트뱅킹)</div><div class="product-company">키움예스저축은행</div></td><td data-label="기본금리">4.05%</td><td class="rate-strong" data-label="최고금리">4.05%</td></tr><tr><td><div class="product-name">SB톡톡 회전yes정기예금(1년단위 변동금리상품) (비대면)</div><div class="product-company">키움예스저축은행</div></td><td data-label="기본금리">4.05%</td><td class="rate-strong" data-label="최고금리">4.05%</td></tr><tr><td><div class="product-name">정기예금</div><div class="product-company">오투저축은행</div></td><td data-label="기본금리">4.02%</td><td class="rate-strong" data-label="최고금리">4.02%</td></tr><tr><td><div class="product-name">E-정기예금</div><div class="product-company">오투저축은행</div></td><td data-label="기본금리">4.02%</td><td class="rate-strong" data-label="최고금리">4.02%</td></tr><tr><td><div class="product-name">비대면 정기예금</div><div class="product-company">오투저축은행</div></td><td data-label="기본금리">4.02%</td><td class="rate-strong" data-label="최고금리">4.02%</td></tr><tr><td><div class="product-name">정기예금(인터넷,모바일,비대면)</div><div class="product-company">CK저축은행</div></td><td data-label="기본금리">4.01%</td><td class="rate-strong" data-label="최고금리">4.01%</td></tr><tr><td><div class="product-name">OK안심정기예금(변동금리)</div><div class="product-company">OK저축은행</div></td><td data-label="기본금리">3.91%</td><td class="rate-strong" data-label="최고금리">4.01%</td></tr><tr><td><div class="product-name">OK e-안심정기예금(변동금리)</div><div class="product-company">OK저축은행</div></td><td data-label="기본금리">4.01%</td><td class="rate-strong" data-label="최고금리">4.01%</td></tr><tr><td><div class="product-name">플러스회전식정기예금(모바일)</div><div class="product-company">애큐온저축은행</div></td><td data-label="기본금리">4.00%</td><td class="rate-strong" data-label="최고금리">4.00%</td></tr><tr><td><div class="product-name">회전정기예금</div><div class="product-company">스카이저축은행</div></td><td data-label="기본금리">3.90%</td><td class="rate-strong" data-label="최고금리">4.00%</td></tr><tr><td><div class="product-name">정기예금</div><div class="product-company">민국저축은행</div></td><td data-label="기본금리">3.90%</td><td class="rate-strong" data-label="최고금리">4.00%</td></tr><tr><td><div class="product-name">푸른 정기예금</div><div class="product-company">푸른저축은행</div></td><td data-label="기본금리">3.90%</td><td class="rate-strong" data-label="최고금리">4.00%</td></tr><tr><td><div class="product-name">e-정기예금(인터넷뱅킹, 스마트뱅킹)</div><div class="product-company">키움예스저축은행</div></td><td data-label="기본금리">4.00%</td><td class="rate-strong" data-label="최고금리">4.00%</td></tr><tr><td><div class="product-name">SB톡톡 정기예금(비대면)</div><div class="product-company">키움예스저축은행</div></td><td data-label="기본금리">4.00%</td><td class="rate-strong" data-label="최고금리">4.00%</td></tr><tr><td><div class="product-name">정기예금</div><div class="product-company">우리저축은행</div></td><td data-label="기본금리">4.00%</td><td class="rate-strong" data-label="최고금리">4.00%</td></tr><tr><td><div class="product-name">정기예금</div><div class="product-company">금화저축은행</div></td><td data-label="기본금리">4.00%</td><td class="rate-strong" data-label="최고금리">4.00%</td></tr><tr><td><div class="product-name">e-정기예금</div><div class="product-company">금화저축은행</div></td><td data-label="기본금리">4.00%</td><td class="rate-strong" data-label="최고금리">4.00%</td></tr><!--/prerender:rates--></tbody>
       </table>
     </div>
     <div class="content-notice" id="products-note" style="margin-top: 10px;"></div>
@@ -1031,17 +1060,17 @@
   function savingRowHtml({ product, option }) {
     return `<tr>
       ${productCellHtml(product)}
-      <td>${fmtRate(option.rate)}</td>
-      <td class="rate-strong">${fmtRate(option.maxRate ?? option.rate)}</td>
+      <td data-label="${escapeHtml(t("thBaseRate"))}">${fmtRate(option.rate)}</td>
+      <td class="rate-strong" data-label="${escapeHtml(t("thMaxRate"))}">${fmtRate(option.maxRate ?? option.rate)}</td>
     </tr>${detailRowHtml(product, 3)}`;
   }
 
   function loanRowHtml({ product, option }) {
     return `<tr>
       ${productCellHtml(product)}
-      <td>${escapeHtml(option.rateType ?? "-")}</td>
-      <td>${fmtRateRange(option.min, option.max)}</td>
-      <td class="rate-low">${fmtRate(option.avg)}</td>
+      <td data-label="${escapeHtml(t("thRateType"))}">${escapeHtml(option.rateType ?? "-")}</td>
+      <td data-label="${escapeHtml(t("thRateRange"))}">${fmtRateRange(option.min, option.max)}</td>
+      <td class="rate-low" data-label="${escapeHtml(t("thAvgRate"))}">${fmtRate(option.avg)}</td>
     </tr>${detailRowHtml(product, 4)}`;
   }
 

@@ -162,3 +162,24 @@ test("크롤러가 받는 HTML에 오늘 기사 제목이 실제로 들어 있�
   assert.ok(html.includes(escapeHtml(first.title)), "첫 기사 제목이 정적 HTML에 없다");
   assert.ok(html.includes(escapeHtml(first.link)), "첫 기사 링크가 정적 HTML에 없다");
 });
+
+// 정적 마크업과 클라이언트 렌더의 라벨이 다르면 데이터를 받는 순간 화면이 튄다.
+test("좁은 화면 카드 라벨이 클라이언트 사전과 같은 글자다", async () => {
+  const [ratesHtmlSource, indexHtml] = await Promise.all([readRates(), readIndex()]);
+
+  const labelsIn = (html, block) => {
+    const body = new RegExp(`<!--prerender:${block}-->([\\s\\S]*?)<!--/prerender:${block}-->`).exec(html)?.[1] ?? "";
+    return new Set([...body.matchAll(/data-label="([^"]+)"/g)].map((m) => m[1]));
+  };
+
+  // 예적금 표(rates.html 기본 화면)
+  for (const label of labelsIn(ratesHtmlSource, "rates")) {
+    assert.ok(ratesHtmlSource.includes(`: "${label}"`), `금리 표 라벨이 사전에 없다: ${label}`);
+  }
+  for (const label of labelsIn(indexHtml, "realestate")) {
+    assert.ok(indexHtml.includes(`: "${label}"`), `부동산 표 라벨이 사전에 없다: ${label}`);
+  }
+  for (const label of labelsIn(indexHtml, "market")) {
+    assert.ok(indexHtml.includes(`: "${label}"`), `시장지표 표 라벨이 사전에 없다: ${label}`);
+  }
+});
