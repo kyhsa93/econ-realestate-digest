@@ -194,3 +194,41 @@ test("무엇을 못 받았는지 이름을 말한다", async () => {
   const box = String(summaryFailed.byId("summary-box").textContent);
   assert.ok(box.includes("불러오지 못했습니다"), `요약 실패가 정상 빈 화면처럼 보인다: ${box}`);
 });
+
+// 넷 중 하나가 순간적으로 실패한 것뿐인데도 배너가 남아 있었다. 실제 제보가 그랬다 -
+// 갱신 시각도 정상이고 나중에 직접 받아보면 네 파일 다 200인데 배너만 떠 있었다.
+test("한 번 실패해도 자동으로 다시 받아보고, 성공하면 오류를 안 보여준다", async () => {
+  const { readFile } = await import("node:fs/promises");
+  const tried = new Set();
+
+  const page = await loadIndexPage({
+    fetch: async (url) => {
+      const name = String(url).split("/data/")[1]?.split(".json")[0];
+      if (!name) throw new TypeError("Failed to fetch");
+      // 첫 요청만 실패하고, 다시 받으면 성공하는 상황.
+      if (name === "summary" && !tried.has(name)) {
+        tried.add(name);
+        return { ok: false, status: 503, json: async () => ({}) };
+      }
+      try {
+        return { ok: true, json: async () => JSON.parse(await readFile(path.join(root, `docs/data/${name}.json`), "utf8")) };
+      } catch {
+        return { ok: false, status: 404, json: async () => ({}) };
+      }
+    },
+  });
+
+  assert.equal(page.byId("load-error").hidden, true, "복구됐는데도 오류 배너가 남아 있다");
+  assert.ok(String(page.byId("summary-box").innerHTML).includes("summary-category"), "재시도 결과를 안 그린다");
+});
+
+// 배너가 플래그로 뜨면, 데이터가 다 있는데 배너만 떠 있는 상태가 생긴다.
+// 지금 화면에 실제로 빠진 데이터가 있을 때만 뜨게 한다.
+test("데이터가 다 있으면 어떤 경우에도 오류 배너가 뜨지 않는다", async () => {
+  const html = await read("docs/index.html");
+  assert.ok(
+    html.includes('["market", "news", "summary", "realestate"].filter((key) => !cache[key])'),
+    "배너가 여전히 플래그로 뜬다"
+  );
+  assert.ok(html.includes("showLoadError(missingNow.length > 0)"), "배너 조건이 화면 상태와 무관하다");
+});

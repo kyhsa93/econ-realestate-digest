@@ -1748,8 +1748,11 @@
     document.getElementById("archive-date-jump-label").textContent = t("archiveDateJumpLabel");
     document.getElementById("archive-date-go").textContent = t("archiveDateGo");
     document.getElementById("footer-privacy-link").textContent = t("footerPrivacyLink");
-    const failedNames = [...failedLoads.keys()].map((key) => t("loadFailedNames")[key] ?? key).join(", ");
-    const reasons = [...new Set(failedLoads.values())].join(", ");
+    const missing = isArchiveView
+      ? []
+      : ["market", "news", "summary", "realestate"].filter((key) => !cache[key]);
+    const failedNames = missing.map((key) => t("loadFailedNames")[key] ?? key).join(", ");
+    const reasons = [...new Set(missing.map((key) => failedLoads.get(key)).filter(Boolean))].join(", ");
     document.getElementById("load-error-text").textContent = t("loadFailedNotice")(failedNames, reasons);
     document.getElementById("load-error-retry").textContent = t("retry");
 
@@ -1762,7 +1765,12 @@
 
     renderAll();
 
-    showLoadError(hadFatalLoadFailure);
+    // 플래그가 아니라 지금 화면에 실제로 빠진 데이터를 기준으로 띄운다.
+    // 예전엔 넷 중 하나가 잠깐 실패했다가 복구돼도 배너가 남아 있었다.
+    const missingNow = isArchiveView
+      ? []
+      : ["market", "news", "summary", "realestate"].filter((key) => !cache[key]);
+    showLoadError(missingNow.length > 0);
 
     // 제목이 언어에 맞게 정해진 뒤라야 GA에 제대로 남는다. 첫 호출만 전송된다.
     window.analytics?.pageView({ site_language: locale, view_type: isArchiveView ? "archive" : "today" });
@@ -1952,18 +1960,32 @@
     locale = getInitialLocale();
 
     const todayKeys = ["market", "news", "summary", "realestate"];
-    const results = await Promise.allSettled(todayKeys.map((key) => loadJson(key)));
-    todayKeys.forEach((key, i) => {
-      cache[key] = results[i].status === "fulfilled" ? results[i].value : null;
-      if (results[i].status === "rejected") reportLoadFailure(key, results[i].reason, true);
-    });
-
-    if (hadFatalLoadFailure && !selfHealed && (await refreshServiceWorker())) {
-      hadFatalLoadFailure = false;
-      failedLoads.clear();
-      window.analytics?.event("sw_self_heal");
-      return main({ selfHealed: true });
+    async function loadTodayKeys(keys) {
+      const settled = await Promise.allSettled(keys.map((key) => loadJson(key)));
+      const stillFailing = [];
+      keys.forEach((key, i) => {
+        if (settled[i].status === "fulfilled") {
+          cache[key] = settled[i].value;
+          failedLoads.delete(key);
+        } else {
+          cache[key] = null;
+          stillFailing.push([key, settled[i].reason]);
+        }
+      });
+      return stillFailing;
     }
+
+    let failing = await loadTodayKeys(todayKeys);
+
+    // 순간적인 실패까지 사용자에게 떠넘기지 않는다. 실패한 것만 한 번 더 받아본다.
+    if (failing.length && !selfHealed) {
+      await refreshServiceWorker();
+      await new Promise((resolve) => setTimeout(resolve, 600));
+      failing = await loadTodayKeys(failing.map(([key]) => key));
+      if (!failing.length) window.analytics?.event("load_auto_recovered");
+    }
+
+    for (const [key, reason] of failing) reportLoadFailure(key, reason, true);
 
     if (isArchiveView) {
       await Promise.all(Object.keys(HISTORY_FILES).map((key) => loadHistoryInto(key)));
