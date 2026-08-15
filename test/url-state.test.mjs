@@ -151,3 +151,38 @@ test("보관 범위보다 뒤로는 넘기지 못한다", async () => {
   assert.ok(html.includes('document.getElementById("archive-prev-day").disabled'), "이전 날 버튼을 막지 않는다");
   assert.ok(html.includes("input.min = dates[0]"), "날짜 선택 범위를 제한하지 않는다");
 });
+
+// 네 파일 중 하나만 실패해도 배너는 "데이터를 불러오지 못했습니다"라고만 해서,
+// 나머지가 멀쩡한데도 전체가 고장난 것처럼 보였고 무엇이 문제인지도 알 수 없었다.
+test("무엇을 못 받았는지 이름을 말한다", async () => {
+  const { readFile } = await import("node:fs/promises");
+
+  const loadWithFailure = (failing) =>
+    loadIndexPage({
+      fetch: async (url) => {
+        const name = String(url).split("/data/")[1]?.split(".json")[0];
+        if (!name) throw new TypeError("Failed to fetch");
+        if (name === failing) return { ok: false, status: 404, json: async () => ({}) };
+        try {
+          return { ok: true, json: async () => JSON.parse(await readFile(path.join(root, `docs/data/${name}.json`), "utf8")) };
+        } catch {
+          return { ok: false, status: 404, json: async () => ({}) };
+        }
+      },
+    });
+
+  for (const [file, label] of [["summary", "AI 요약"], ["market", "시장지표"], ["news", "뉴스"], ["realestate", "부동산"]]) {
+    const page = await loadWithFailure(file);
+    await new Promise((r) => setTimeout(r, 30));
+    const text = page.byId("load-error-text").textContent;
+    assert.ok(text.includes(label), `${file} 실패인데 배너가 "${text}"다`);
+    // 받침에 맞는 조사여야 한다("시장지표을(를)"처럼 나오면 안 된다).
+    assert.ok(!text.includes("을(를)"), `조사가 자동으로 안 붙는다: ${text}`);
+  }
+
+  // 요약은 "아직 없음"과 "못 받음"이 화면에서 구분돼야 한다.
+  const summaryFailed = await loadWithFailure("summary");
+  await new Promise((r) => setTimeout(r, 30));
+  const box = String(summaryFailed.byId("summary-box").textContent);
+  assert.ok(box.includes("불러오지 못했습니다"), `요약 실패가 정상 빈 화면처럼 보인다: ${box}`);
+});
