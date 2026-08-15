@@ -1,20 +1,25 @@
 {
-  "updatedAt": "2026-08-15T03:51:28.637Z",
+  "updatedAt": "2026-08-15T07:38:31.288Z",
   "model": "qwen3:14b",
   "summary": {
-    "ko": "- 부동산 관련 뉴스에서는 신규 분양 물량 발표, 특정 아파트 가격 상승, 외국인 투자자에 대한 제도 변화로 인한 관심 감소, 서울 지역 주택난에 대한 언급, 그리고 다양한 지역에서의 분양 일정이 언급되었다.\n- 이주비 대출 완화, 성장전망과 가계부채 규모, 미국 소비자 지출 감소, 이란 경제제재 발표, 가계대출 증가 등 다양한 경제 관련 소식들이 오늘 전해졌다.\n- 뉴욕증시가 소폭 하락 마감했고, 미국 증시의 과열 수준이 매우 높은 것으로 나타났다.\n- 연휴 앞두고 국고채 금리가 혼조세를 보였으며, 초장기물은 하락하는 등 다양한 움직임을 나타냈다.",
-    "en": "- Real estate-related news mentioned the announcement of new supply volumes, price increases for specific apartments, decreased interest due to institutional changes affecting foreign investors, mentions of housing shortages in Seoul, and sales schedules in various regions.\n- Various economic news, including easing of migration fees loans, growth outlook and household debt levels, decline in U.S. consumer spending, announcement of economic sanctions against Iran, and increase in household loans, were reported today.\n- The New York stock market closed slightly lower, and the level of overheating in the U.S. stock market was found to be very high.\n- Ahead of the holiday, government bond yields showed mixed performance, with long-term bonds declining and exhibiting various movements."
+    "ko": "- 용산구의 주택공급 검토에 대한 반대, 상동역 주택 견본주택 방문객의 호평, 노원구 극동아파트 가격 상승, 외국인의 한국 부동산 투자 감소, 서울 주택난에 대한 언급 등 다양한 부동산 관련 소식들이 오늘의 경제 뉴스에 보도되었다.\n- 이주비 대출 완화, 성장전망과 가계부채 규모, 미국 소비자 지출 감소, 이란 경제제재 발표, 가계대출 증가 등 다양한 경제 관련 소식들이 오늘 전해졌다.\n- 뉴욕증시가 소폭 하락 마감했고, 미국 증시의 과열 수준이 매우 높은 것으로 나타났다.\n- 연휴 앞두고 국고채 금리 혼조세, 초장기물 하락 등 금리·예금·투자상품 관련 주요 동향이 나타났다.",
+    "en": "- Opposition to the review of housing supply in Yongsan-gu, praise from visitors to the sample housing unit at Sangdong Station, rising prices at Noeun-gu's Gyeongdong Apartment, a decrease in foreign investment in Korean real estate, and mentions of housing shortages in Seoul were among various real estate-related news items reported in today's economic news.\n- Various economic news, including easing of migration fees loans, growth outlook and household debt levels, decline in U.S. consumer spending, announcement of economic sanctions against Iran, and increase in household loans, were reported today.\n- The New York stock market closed slightly lower, and the overheated level of the U.S. stock market was found to be very high.\n- Before the holiday, government bond rates showed mixed trends, with long-term bonds declining, and major trends related to interest rates, deposits, and investment products emerged."
   },
   "categories": [
     {
       "key": "realestate",
       "name": "부동산",
       "nameEn": "Real Estate",
-      "lineKo": "부동산 관련 뉴스에서는 신규 분양 물량 발표, 특정 아파트 가격 상승, 외국인 투자자에 대한 제도 변화로 인한 관심 감소, 서울 지역 주택난에 대한 언급, 그리고 다양한 지역에서의 분양 일정이 언급되었다.",
-      "lineEn": "Real estate-related news mentioned the announcement of new supply volumes, price increases for specific apartments, decreased interest due to institutional changes affecting foreign investors, mentions of housing shortages in Seoul, and sales schedules in various regions.",
+      "lineKo": "용산구의 주택공급 검토에 대한 반대, 상동역 주택 견본주택 방문객의 호평, 노원구 극동아파트 가격 상승, 외국인의 한국 부동산 투자 감소, 서울 주택난에 대한 언급 등 다양한 부동산 관련 소식들이 오늘의 경제 뉴스에 보도되었다.",
+      "lineEn": "Opposition to the review of housing supply in Yongsan-gu, praise from visitors to the sample housing unit at Sangdong Station, rising prices at Noeun-gu's Gyeongdong Apartment, a decrease in foreign investment in Korean real estate, and mentions of housing shortages in Seoul were among various real estate-related news items reported in today's economic news.",
       "isFallback": false,
       "fallbackReason": null,
       "items": [
+        {
+          "title": "용산구 “용산공원 주택공급 검토 강력 반대”",
+          "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/15/PYKGMEOY7FD7TH45AVSHL3B2BQ/",
+          "source": "조선비즈 부동산"
+        },
         {
           "title": "“직접 보니 기대 이상”… ‘상동역 롯데캐슬 시그니처’ 견본주택 방문객 호평",
           "link": "https://www.mk.co.kr/news/realestate/12128719",
@@ -33,11 +38,6 @@
         {
           "title": "[머니톡스] 서울로 서울로…해방의 기쁨과 함께 시작된 주택난",
           "link": "https://www.yna.co.kr/view/AKR20260814042200546",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "[부동산캘린더] 내주 서울 신길동 써밋클라비온 등 3천788가구 분양",
-          "link": "https://www.yna.co.kr/view/AKR20260814142900003",
           "source": "연합뉴스 경제"
         }
       ]
@@ -83,7 +83,7 @@
       "name": "증시·환율",
       "nameEn": "Stocks & FX",
       "lineKo": "뉴욕증시가 소폭 하락 마감했고, 미국 증시의 과열 수준이 매우 높은 것으로 나타났다.",
-      "lineEn": "The New York stock market closed slightly lower, and the level of overheating in the U.S. stock market was found to be very high.",
+      "lineEn": "The New York stock market closed slightly lower, and the overheated level of the U.S. stock market was found to be very high.",
       "isFallback": false,
       "fallbackReason": null,
       "items": [
@@ -108,19 +108,14 @@
       "key": "rates",
       "name": "금리·예금·투자상품",
       "nameEn": "Rates, Deposits & Investment Products",
-      "lineKo": "연휴 앞두고 국고채 금리가 혼조세를 보였으며, 초장기물은 하락하는 등 다양한 움직임을 나타냈다.",
-      "lineEn": "Ahead of the holiday, government bond yields showed mixed performance, with long-term bonds declining and exhibiting various movements.",
+      "lineKo": "연휴 앞두고 국고채 금리 혼조세, 초장기물 하락 등 금리·예금·투자상품 관련 주요 동향이 나타났다.",
+      "lineEn": "Before the holiday, government bond rates showed mixed trends, with long-term bonds declining, and major trends related to interest rates, deposits, and investment products emerged.",
       "isFallback": false,
       "fallbackReason": null,
       "items": [
         {
           "title": "연휴 앞두고 국고채 금리 혼조세…초장기물 하락(종합)",
           "link": "https://www.yna.co.kr/view/AKR20260814141251008",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "국고채 금리 혼조세…3년물 연 3.796%",
-          "link": "https://www.yna.co.kr/view/AKR20260814141200008",
           "source": "연합뉴스 경제"
         }
       ]
