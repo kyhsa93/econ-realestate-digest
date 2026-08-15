@@ -984,9 +984,14 @@
   let hadFatalLoadFailure = false;
   const failedLoads = new Map();
 
-  function showLoadError(show) {
+  function showLoadError(show, text = "") {
     const banner = document.getElementById("load-error");
-    if (banner) banner.hidden = !show;
+    if (!banner) return;
+    banner.hidden = !show;
+    // 감출 때는 문구도 비운다. 숨어 있어도 DOM에 남아 있으면 화면엔 없는 오류가
+    // 있는 것처럼 읽힌다(검사 도구로 텍스트만 훑을 때 특히).
+    document.getElementById("load-error-text").textContent = show ? text : "";
+    document.getElementById("load-error-retry").textContent = show ? t("retry") : "";
   }
 
   function reportLoadFailure(name, error, fatal) {
@@ -1753,8 +1758,7 @@
       : ["market", "news", "summary", "realestate"].filter((key) => !cache[key]);
     const failedNames = missing.map((key) => t("loadFailedNames")[key] ?? key).join(", ");
     const reasons = [...new Set(missing.map((key) => failedLoads.get(key)).filter(Boolean))].join(", ");
-    document.getElementById("load-error-text").textContent = t("loadFailedNotice")(failedNames, reasons);
-    document.getElementById("load-error-retry").textContent = t("retry");
+    const loadErrorText = t("loadFailedNotice")(failedNames, reasons);
 
     const notice = document.getElementById("content-notice");
     const noticeText = archiveMissing
@@ -1767,10 +1771,7 @@
 
     // 플래그가 아니라 지금 화면에 실제로 빠진 데이터를 기준으로 띄운다.
     // 예전엔 넷 중 하나가 잠깐 실패했다가 복구돼도 배너가 남아 있었다.
-    const missingNow = isArchiveView
-      ? []
-      : ["market", "news", "summary", "realestate"].filter((key) => !cache[key]);
-    showLoadError(missingNow.length > 0);
+    showLoadError(missing.length > 0, loadErrorText);
 
     // 제목이 언어에 맞게 정해진 뒤라야 GA에 제대로 남는다. 첫 호출만 전송된다.
     window.analytics?.pageView({ site_language: locale, view_type: isArchiveView ? "archive" : "today" });

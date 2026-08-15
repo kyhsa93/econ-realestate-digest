@@ -230,5 +230,10 @@ test("데이터가 다 있으면 어떤 경우에도 오류 배너가 뜨지 않
     html.includes('["market", "news", "summary", "realestate"].filter((key) => !cache[key])'),
     "배너가 여전히 플래그로 뜬다"
   );
-  assert.ok(html.includes("showLoadError(missingNow.length > 0)"), "배너 조건이 화면 상태와 무관하다");
+  assert.ok(html.includes("showLoadError(missing.length > 0"), "배너 조건이 화면 상태와 무관하다");
+  // 감춰져 있어도 DOM에 문구가 남아 있으면, 화면엔 없는 오류가 있는 것처럼 읽힌다.
+  assert.ok(
+    html.includes('textContent = show ? text : ""'),
+    "감출 때 문구를 비우지 않는다"
+  );
 });
