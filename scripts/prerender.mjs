@@ -97,18 +97,32 @@ export function newsHtml(news) {
     .join("");
 }
 
-// 금리 페이지는 첫 화면(정기예금 · 12개월 · 최고금리 내림차순)만 심는다.
-// 안 보이는 탭까지 숨겨서 심으면 화면에 없는 내용을 크롤러에만 보여주는 셈이 된다.
-// 순서·선택 기준은 rates.html의 visibleRows와 같아야 한다 - 다르면 검색 결과에
-// 뜨는 순서와 실제 화면이 어긋난다. 테스트가 실제 렌더 결과와 대조한다.
+// 금리 페이지는 각 페이지의 첫 화면만 심는다. 안 보이는 탭까지 숨겨서 심으면
+// 화면에 없는 내용을 크롤러에만 보여주는 셈이 된다.
+//
+// 상품 선택·정렬 규칙은 rates.html의 visibleRows와 같아야 한다 - 다르면 검색 결과에
+// 뜨는 순서와 실제 화면이 어긋난다. 테스트가 실제 렌더 결과와 직접 대조한다.
 const RATES_TERM = 12;
 const RATES_ROWS = 20;
+const SAVING_CATEGORIES = new Set(["deposit", "saving"]);
 
 const rate = (value) => (typeof value === "number" ? `${value.toFixed(2)}%` : "-");
+const rateRange = (min, max) =>
+  typeof min === "number" && typeof max === "number" ? `${min.toFixed(2)}~${max.toFixed(2)}%` : rate(min ?? max);
 
-export function ratesHtml(rates, { limit = RATES_ROWS } = {}) {
-  const products = rates?.deposit ?? [];
+export function ratesHeadHtml(category = "deposit") {
+  return SAVING_CATEGORIES.has(category)
+    ? "<tr><th>상품</th><th>기본금리</th><th>최고금리</th></tr>"
+    : "<tr><th>상품</th><th>금리유형</th><th>금리범위</th><th>평균금리</th></tr>";
+}
+
+export function ratesHtml(rates, { category = "deposit", limit = RATES_ROWS } = {}) {
+  const products = rates?.[category] ?? [];
   if (!products.length) return null;
+
+  const saving = SAVING_CATEGORIES.has(category);
+  const key = saving ? "maxRate" : "min";
+  const asc = !saving; // 예적금은 높은 금리가, 대출은 낮은 금리가 위로 온다
 
   const rows = [];
   for (const product of products) {
@@ -116,11 +130,11 @@ export function ratesHtml(rates, { limit = RATES_ROWS } = {}) {
     let bestValue = null;
     let fallback = null;
     for (const option of product.options ?? []) {
-      if (option.term !== RATES_TERM) continue;
+      if (saving && option.term !== RATES_TERM) continue;
       fallback ??= option;
-      const value = option.maxRate;
+      const value = option[key];
       if (value === null || value === undefined) continue;
-      if (best === null || value > bestValue) {
+      if (best === null || (asc ? value < bestValue : value > bestValue)) {
         best = option;
         bestValue = value;
       }
@@ -132,18 +146,23 @@ export function ratesHtml(rates, { limit = RATES_ROWS } = {}) {
   // 정렬할 값이 없는 상품은 빼지 않고 맨 아래로 보낸다(화면과 같은 규칙).
   rows.sort((a, b) => {
     if (a.sort === null || b.sort === null) return (a.sort === null) - (b.sort === null);
-    return b.sort - a.sort;
+    return asc ? a.sort - b.sort : b.sort - a.sort;
   });
 
   if (!rows.length) return null;
 
+  const productCell = (product) =>
+    `<td><div class="product-name">${escapeHtml(product.name ?? "-")}</div>` +
+    `<div class="product-company">${escapeHtml(product.company ?? "")}</div></td>`;
+
   return rows
     .slice(0, limit)
-    .map(
-      ({ product, option }) =>
-        `<tr><td><div class="product-name">${escapeHtml(product.name ?? "-")}</div>` +
-        `<div class="product-company">${escapeHtml(product.company ?? "")}</div></td>` +
-        `<td>${rate(option.rate)}</td><td class="rate-strong">${rate(option.maxRate ?? option.rate)}</td></tr>`
+    .map(({ product, option }) =>
+      saving
+        ? `<tr>${productCell(product)}<td>${rate(option.rate)}</td>` +
+          `<td class="rate-strong">${rate(option.maxRate ?? option.rate)}</td></tr>`
+        : `<tr>${productCell(product)}<td>${escapeHtml(option.rateType ?? "-")}</td>` +
+          `<td>${rateRange(option.min, option.max)}</td><td class="rate-low">${rate(option.avg)}</td></tr>`
     )
     .join("");
 }
@@ -190,7 +209,7 @@ async function main() {
 
   for (const [file, path_, fileBlocks] of [
     ["docs/index.html", INDEX_PATH, blocks],
-    ["docs/rates.html", RATES_PATH, { rates: ratesHtml(rates) }],
+    ["docs/rates.html", RATES_PATH, { rates: ratesHtml(rates), ratesHead: ratesHeadHtml() }],
   ]) {
     const html = await readFile(path_, "utf8");
     const next = applyPrerender(html, fileBlocks);

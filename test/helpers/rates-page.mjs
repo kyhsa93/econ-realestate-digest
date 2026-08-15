@@ -10,7 +10,7 @@ const root = path.resolve(import.meta.dirname, "../..");
 // innerHTML로 갈아끼워지는 요소를 흉내내야 한다. 탭이 안 먹는 건 렌더 자체가
 // 틀려서가 아니라 다시 그릴 때 요소가 통째로 새로 생기면서 붙어 있던 클릭
 // 리스너가 같이 사라지기 때문이라, 그 교체를 재현하지 않으면 아무 문제도 안 보인다.
-function makeDom() {
+function makeDom(html = "") {
   const byId = new Map();
 
   function makeNode(id) {
@@ -86,7 +86,16 @@ function makeDom() {
     // renderMeta가 <meta>/<link> 같은 걸 셀렉터로 찾아 고친다. 없다고 하면
     // 첫 렌더에서 죽어서 정작 보려던 탭 동작에 닿지 못한다.
     querySelector(sel) {
-      if (!byId.has(sel)) byId.set(sel, makeNode(sel));
+      if (!byId.has(sel)) {
+        const node = makeNode(sel);
+        // 상품군별 페이지는 이 meta로만 첫 탭이 갈린다. 문서에서 실제 값을 읽어야
+        // "생성된 페이지가 그 상품군을 보여주는가"를 검사할 수 있다.
+        if (sel === 'meta[name="rates-category"]') {
+          const value = /<meta name="rates-category" content="([^"]*)"/.exec(html)?.[1] ?? null;
+          node.getAttribute = (name) => (name === "content" ? value : null);
+        }
+        byId.set(sel, node);
+      }
       return byId.get(sel);
     },
     createElement: (tag) => makeNode(tag),
@@ -102,14 +111,14 @@ function makeDom() {
 
 // analytics를 넣어주면 페이지가 실제로 계측을 부르는지까지 볼 수 있다.
 // 안 넣으면 브라우저에서 광고 차단으로 로더가 안 뜬 상황과 같아진다.
-export async function loadRatesPage({ analytics, fetch: fetchImpl } = {}) {
-  const html = await readFile(path.join(root, "docs/rates.html"), "utf8");
+export async function loadRatesPage({ analytics, fetch: fetchImpl, file = "docs/rates.html" } = {}) {
+  const html = await readFile(path.join(root, file), "utf8");
   const script = [...html.matchAll(/<script>\n([\s\S]*?)\n<\/script>/g)].map((m) => m[1]).pop();
   assert.ok(script.includes("CATEGORY_KEYS"), "금리 페이지 스크립트를 찾지 못했다");
 
   const rates = JSON.parse(await readFile(path.join(root, "docs/data/rates.json"), "utf8"));
   const history = JSON.parse(await readFile(path.join(root, "docs/data/rates-history.json"), "utf8"));
-  const { document, byId } = makeDom();
+  const { document, byId } = makeDom(html);
   const store = {};
 
   const sandbox = {
