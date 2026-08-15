@@ -854,6 +854,55 @@
     });
   }
 
+  const TRACKED_SECTIONS = [
+    ["summary-section", "summary"],
+    ["market-section", "market"],
+    ["realestate-section", "realestate"],
+    ["news-section", "news"],
+    ["archive-section", "archive"],
+  ];
+
+  // 어느 섹션이 실제로 읽히는지는 페이지 조회수로는 안 나온다. 화면에 들어온
+  // 섹션만 한 번씩 센다.
+  //
+  // 임계값(threshold) 대신 위아래를 깎은 rootMargin을 쓴다. 뉴스 섹션처럼 화면보다
+  // 긴 섹션은 "50% 노출"이 영원히 성립하지 않아서, 정작 제일 많이 읽는 섹션이
+  // 한 번도 안 잡힌다. 화면 가운데 띠에 걸리는지로 보면 길이와 무관하게 잡힌다.
+  //
+  // 한 번 보내고 관찰을 끊는 건 스크롤을 오르내릴 때마다 세면 "오래 붙잡는 섹션"이
+  // 아니라 "스크롤을 많이 한 사람"이 잡히기 때문이다.
+  let sectionsObserved = false;
+
+  function observeSections() {
+    if (sectionsObserved || typeof IntersectionObserver !== "function") return;
+    sectionsObserved = true;
+
+    const names = new Map();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          const name = names.get(entry.target);
+          if (!name) continue;
+          names.delete(entry.target);
+          observer.unobserve(entry.target);
+          window.analytics?.event("section_view", {
+            section_name: name,
+            view_type: isArchiveView ? "archive" : "today",
+          });
+        }
+      },
+      { rootMargin: "-25% 0px -25% 0px" }
+    );
+
+    for (const [id, name] of TRACKED_SECTIONS) {
+      const el = document.getElementById(id);
+      if (!el) continue;
+      names.set(el, name);
+      observer.observe(el);
+    }
+  }
+
   function directionClass(direction) {
     if (direction === "RISING") return "up";
     if (direction === "FALLING") return "down";
@@ -1500,6 +1549,7 @@
 
     // 제목이 언어에 맞게 정해진 뒤라야 GA에 제대로 남는다. 첫 호출만 전송된다.
     window.analytics?.pageView({ site_language: locale, view_type: isArchiveView ? "archive" : "today" });
+    observeSections();
   }
 
   document.getElementById("lang-toggle").addEventListener("click", () => {

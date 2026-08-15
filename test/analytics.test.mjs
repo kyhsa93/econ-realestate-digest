@@ -204,6 +204,39 @@ test("금리 페이지도 로드 실패를 남긴다", async () => {
   );
 });
 
+test("섹션은 화면에 들어왔을 때 한 번만 센다", async () => {
+  const analytics = recorder();
+  const page = await loadIndexPage({ analytics });
+
+  assert.equal(page.observedCount(), 5, "다섯 섹션 모두 관찰이 걸려야 한다");
+  assert.equal(analytics.calls.filter(([n]) => n === "section_view").length, 0, "보기 전엔 안 센다");
+
+  page.scrollTo(0);
+  page.scrollTo(0);
+  page.scrollTo(1);
+
+  const views = analytics.calls.filter(([n]) => n === "section_view");
+  assert.equal(views.length, 2, "같은 섹션을 다시 봐도 한 번이다");
+  assert.deepEqual(
+    views.map(([, params]) => params.section_name),
+    ["summary", "market"]
+  );
+  assert.equal(views[0][1].view_type, "today");
+});
+
+// 뉴스 섹션은 화면보다 길어서 "50% 노출"이 영원히 성립하지 않는다.
+// 그 조건으로 재면 제일 많이 읽는 섹션이 한 번도 안 잡힌다.
+test("섹션 노출은 길이에 좌우되는 조건으로 재지 않는다", async () => {
+  const page = await loadIndexPage({ analytics: recorder() });
+  const { options } = page.observer();
+
+  assert.ok(options.rootMargin?.includes("-"), "화면 가운데 띠로 재야 한다");
+  assert.ok(
+    options.threshold === undefined || options.threshold === 0,
+    `길이에 좌우되는 threshold를 쓰고 있다: ${options.threshold}`
+  );
+});
+
 test("계측 스크립트가 차단돼도 금리 페이지는 그대로 그려진다", async () => {
   const { byId } = await loadRatesPage();
   assert.ok(byId.get("products-body").innerHTML.includes("<tr"));

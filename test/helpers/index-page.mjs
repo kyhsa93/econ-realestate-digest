@@ -55,16 +55,20 @@ export async function loadIndexPage({ analytics, fetch: fetchImpl } = {}) {
         this.callback = callback;
         this.options = options;
         observed.push(this);
+        // 관찰을 끊은 뒤에도 브라우저는 콜백을 부르지 않는다. 그 동작을 그대로
+        // 흉내내야 "한 번만 센다"가 코드 덕분인지 하네스 덕분인지 구분된다.
         this.targets = [];
+        this.active = new Set();
       }
       observe(el) {
         this.targets.push(el);
+        this.active.add(el);
       }
       unobserve(el) {
-        this.targets = this.targets.filter((t) => t !== el);
+        this.active.delete(el);
       }
       disconnect() {
-        this.targets = [];
+        this.active.clear();
       }
     },
     document: {
@@ -97,9 +101,13 @@ export async function loadIndexPage({ analytics, fetch: fetchImpl } = {}) {
       const observer = observed[0];
       assert.ok(observer, "섹션 관찰이 걸리지 않았다");
       const target = observer.targets[index];
-      if (!target) return false;
+      if (!target || !observer.active.has(target)) return false;
       observer.callback([{ target, isIntersecting: true }]);
       return true;
+    },
+    observer: () => {
+      assert.ok(observed[0], "섹션 관찰이 걸리지 않았다");
+      return observed[0];
     },
     observerCount: () => observed.length,
     observedCount: () => observed[0]?.targets.length ?? 0,
