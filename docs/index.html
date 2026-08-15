@@ -1532,7 +1532,8 @@
     newsQuery = e.target.value;
     renderNews(effectiveNews());
     const term = newsQuery.trim();
-    if (term.length >= 2) window.analytics?.debouncedEvent("news_search", { search_term: term });
+    // GA4 권장 이벤트 이름이라 search_term이 기본 제공 차원으로 잡힌다(맞춤 측정기준 등록 불필요).
+    if (term.length >= 2) window.analytics?.debouncedEvent("search", { search_term: term });
   });
 
   document.getElementById("news-list").addEventListener("click", (e) => {

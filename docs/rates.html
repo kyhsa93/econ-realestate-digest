@@ -848,7 +848,7 @@
       termSelect.addEventListener("change", (e) => {
         state.term = Number(e.target.value);
         renderProducts();
-        window.analytics?.event("rate_filter", { filter: "term", value: String(state.term) });
+        window.analytics?.event("rate_filter", { filter: "term", filter_value: String(state.term) });
       });
     }
 
@@ -857,7 +857,7 @@
       rateTypeSelect.addEventListener("change", (e) => {
         state.rateType = e.target.value;
         renderProducts();
-        window.analytics?.event("rate_filter", { filter: "rate_type", value: state.rateType || "all" });
+        window.analytics?.event("rate_filter", { filter: "rate_type", filter_value: state.rateType || "all" });
       });
     }
 
@@ -867,7 +867,7 @@
         renderProducts();
         window.analytics?.event("rate_filter", {
           filter: "sector",
-          value: `${e.target.dataset.sector}:${e.target.checked ? "on" : "off"}`,
+          filter_value: `${e.target.dataset.sector}:${e.target.checked ? "on" : "off"}`,
         });
       });
     }
@@ -878,7 +878,8 @@
         state.query = e.target.value;
         renderProducts();
         const term = state.query.trim();
-        if (term.length >= 2) window.analytics?.debouncedEvent("rate_search", { search_term: term });
+        // GA4 권장 이벤트 이름이라 search_term이 기본 제공 차원으로 잡힌다(맞춤 측정기준 등록 불필요).
+        if (term.length >= 2) window.analytics?.debouncedEvent("search", { search_term: term });
       });
     }
   }

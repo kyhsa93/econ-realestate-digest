@@ -18,7 +18,14 @@
   window.gtag = gtag;
 
   gtag("js", new Date());
-  gtag("config", GA_MEASUREMENT_ID, { send_page_view: false });
+
+  // 배포된 사이트에서 이벤트가 실제로 나가는지 GA DebugView로 보려면 이게 있어야 한다.
+  // 주소에 ?ga_debug=1을 붙였을 때만 켠다 — 늘 켜두면 일반 방문까지 디버그 스트림으로 샌다.
+  const debugMode = new URLSearchParams(location.search ?? "").has("ga_debug");
+  gtag("config", GA_MEASUREMENT_ID, {
+    send_page_view: false,
+    ...(debugMode ? { debug_mode: true } : {}),
+  });
 
   let pageViewSent = false;
 

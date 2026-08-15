@@ -128,10 +128,19 @@ GitHub Actions(`daily-update.yml`)가 하루 4회 자동 실행. 수동 실행�
 로더 안의 타이머(4초)가 대신 보낸다. 언어 전환은 주소가 그대로인 같은 방문이라 페이지뷰를 다시 보내지
 않고(`pageView`는 첫 호출만 전송) `language_switch` 이벤트로만 남긴다.
 
-커스텀 이벤트: `news_filter` `news_search` `news_click` `archive_jump` `district_select` `share`
-(index), `rate_tab` `rate_sort` `rate_filter` `rate_search` `product_expand` `share` (rates),
-`language_switch`(공통). `site_language`·`news_source` 같은 이벤트 매개변수는 GA4 관리자에서
-맞춤 측정기준으로 등록해야 보고서에 열로 나온다.
+커스텀 이벤트: `news_filter` `news_click` `archive_jump` `district_select` `share`(index),
+`rate_tab` `rate_sort` `rate_filter` `product_expand` `share`(rates), `search`·`language_switch`(공통).
+검색은 GA4 권장 이벤트 이름 `search`를 그대로 써서 `search_term`이 기본 제공 차원으로 잡히게 한다.
+`site_language`·`news_source` 같은 나머지 매개변수는 GA4 관리자에서 맞춤 측정기준으로 등록해야
+보고서에 열로 나온다(소급 적용 안 됨).
+
+**매개변수 이름에 `value`를 쓰면 안 된다.** GA4에서 이벤트 값(숫자, `currency`와 짝)으로 예약된
+이름이라 문자열을 실으면 수집되지 않는다. 필터 값은 `filter_value`로 보낸다 — 테스트가 이 이름을
+감시한다.
+
+배포된 사이트에서 이벤트가 실제로 나가는지 보려면 주소에 `?ga_debug=1`을 붙이면 된다
+(`debug_mode`가 켜져 GA 콘솔 DebugView에 실시간으로 찍힌다). 일반 방문까지 디버그 스트림으로
+새지 않도록 이 파라미터가 있을 때만 켠다.
 
 별도 쿠키 동의 배너 없이 페이지 로드 시 GA/애드센스 스크립트를 바로 불러옴(요청에 따라 배너 제거).
 

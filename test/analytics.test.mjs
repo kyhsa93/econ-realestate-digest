@@ -21,7 +21,11 @@ function recorder() {
   };
 }
 
-async function loadAnalytics({ title = "테스트 제목", href = "https://example.test/rates.html" } = {}) {
+async function loadAnalytics({
+  title = "테스트 제목",
+  href = "https://example.test/rates.html",
+  search = "",
+} = {}) {
   const source = await readFile(path.join(root, "docs/analytics.js"), "utf8");
 
   const appended = [];
@@ -34,7 +38,8 @@ async function loadAnalytics({ title = "테스트 제목", href = "https://examp
       head: { appendChild: (el) => appended.push(el) },
       createElement: () => ({}),
     },
-    location: { href },
+    location: { href, search },
+    URLSearchParams,
     setTimeout(fn, ms) {
       timers.push({ fn, ms, cancelled: false });
       return timers.length;
@@ -115,14 +120,39 @@ test("렌더가 실패해 아무도 안 부르면 타이머가 대신 보낸다"
 test("검색 이벤트는 마지막 입력 한 번으로 합쳐진다", async () => {
   const a = await loadAnalytics();
 
-  a.analytics.debouncedEvent("news_search", { search_term: "금" });
-  a.analytics.debouncedEvent("news_search", { search_term: "금리" });
-  a.analytics.debouncedEvent("news_search", { search_term: "금리인하" });
+  a.analytics.debouncedEvent("search", { search_term: "금" });
+  a.analytics.debouncedEvent("search", { search_term: "금리" });
+  a.analytics.debouncedEvent("search", { search_term: "금리인하" });
   a.runTimers();
 
-  const searches = a.events().filter(([, name]) => name === "news_search");
+  const searches = a.events().filter(([, name]) => name === "search");
   assert.equal(searches.length, 1);
   assert.equal(searches[0][2].search_term, "금리인하");
+});
+
+test("DebugView는 ?ga_debug=1을 붙였을 때만 켜진다", async () => {
+  const off = await loadAnalytics();
+  assert.equal(off.calls().find(([kind]) => kind === "config")[2].debug_mode, undefined);
+
+  const on = await loadAnalytics({ search: "?ga_debug=1" });
+  assert.equal(on.calls().find(([kind]) => kind === "config")[2].debug_mode, true);
+});
+
+// GA4에서 value는 이벤트 값(숫자)으로 예약된 이름이라 문자열을 실으면 수집이 안 된다.
+test("이벤트 매개변수에 GA4 예약 이름을 쓰지 않는다", async () => {
+  const [index, rates] = await Promise.all(
+    ["docs/index.html", "docs/rates.html"].map((p) => readFile(path.join(root, p), "utf8"))
+  );
+
+  for (const [name, html] of [
+    ["index.html", index],
+    ["rates.html", rates],
+  ]) {
+    const params = [...html.matchAll(/window\.analytics\?\.\w+\(([\s\S]*?)\);/g)].map((m) => m[1]);
+    for (const block of params) {
+      assert.ok(!/[{,]\s*value:/.test(block), `${name}에 예약 매개변수 value가 쓰였다: ${block}`);
+    }
+  }
 });
 
 test("금리 페이지는 첫 렌더에서 페이지뷰를, 탭 전환에서 이벤트를 보고한다", async () => {
