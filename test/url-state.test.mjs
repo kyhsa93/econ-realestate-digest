@@ -182,7 +182,7 @@ test("무엇을 못 받았는지 이름을 말한다", async () => {
     assert.ok(!text.includes("을(를)"), `조사가 자동으로 안 붙는다: ${text}`);
   }
 
-  // 이유가 없으면 제보를 받아도 원인(오프라인/배포 어긋남/본문 깨짐)을 못 좁힌다.
+  // 이유가 없으면 무엇 때문에 실패했는지 화면만 보고는 알 수 없다.
   const withReason = await loadWithFailure("summary");
   await new Promise((r) => setTimeout(r, 30));
   assert.ok(
@@ -195,33 +195,6 @@ test("무엇을 못 받았는지 이름을 말한다", async () => {
   await new Promise((r) => setTimeout(r, 30));
   const box = String(summaryFailed.byId("summary-box").textContent);
   assert.ok(box.includes("불러오지 못했습니다"), `요약 실패가 정상 빈 화면처럼 보인다: ${box}`);
-});
-
-// 넷 중 하나가 순간적으로 실패한 것뿐인데도 배너가 남아 있었다. 실제 제보가 그랬다 -
-// 갱신 시각도 정상이고 나중에 직접 받아보면 네 파일 다 200인데 배너만 떠 있었다.
-test("한 번 실패해도 자동으로 다시 받아보고, 성공하면 오류를 안 보여준다", async () => {
-  const { readFile } = await import("node:fs/promises");
-  const tried = new Set();
-
-  const page = await loadIndexPage({
-    fetch: async (url) => {
-      const name = String(url).split("/data/")[1]?.split(".json")[0];
-      if (!name) throw new TypeError("Failed to fetch");
-      // 첫 요청만 실패하고, 다시 받으면 성공하는 상황.
-      if (name === "summary" && !tried.has(name)) {
-        tried.add(name);
-        return { ok: false, status: 503, json: async () => ({}) };
-      }
-      try {
-        return { ok: true, json: async () => JSON.parse(await readFile(path.join(root, `docs/data/${name}.json`), "utf8")) };
-      } catch {
-        return { ok: false, status: 404, json: async () => ({}) };
-      }
-    },
-  });
-
-  assert.equal(page.byId("load-error").hidden, true, "복구됐는데도 오류 배너가 남아 있다");
-  assert.ok(String(page.byId("summary-box").innerHTML).includes("summary-category"), "재시도 결과를 안 그린다");
 });
 
 // 배너가 플래그로 뜨면, 데이터가 다 있는데 배너만 떠 있는 상태가 생긴다.

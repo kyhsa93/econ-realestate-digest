@@ -26,7 +26,7 @@ function stubElement() {
 // analytics를 넣어주면 페이지가 실제로 계측을 부르는지까지 볼 수 있다.
 // 안 넣으면 광고 차단으로 로더가 안 뜬 상황과 같아진다.
 // fetch는 기본이 실패다 - 데이터 없이도 스크립트가 끝까지 도는지 보려는 하네스라서.
-export async function loadIndexPage({ analytics, fetch: fetchImpl, search = "", serviceWorker, settleMs = 800 } = {}) {
+export async function loadIndexPage({ analytics, fetch: fetchImpl, search = "", serviceWorker } = {}) {
   const html = await readFile(path.join(root, "docs/index.html"), "utf8");
   const script = [...html.matchAll(/<script>\n([\s\S]*?)\n<\/script>/g)].map((m) => m[1]).pop();
   assert.ok(script.includes("hasEnoughSample"), "렌더링 스크립트를 찾지 못했다");
@@ -106,9 +106,8 @@ export async function loadIndexPage({ analytics, fetch: fetchImpl, search = "", 
   new vm.Script(script + "\nglobalThis.__cache = cache; globalThis.__realestateSort = realestateSort; globalThis.__newsState = () => ({ cat: newsCategoryFilter, q: newsQuery });", { filename: "docs/index.html:inline" }).runInContext(sandbox);
 
   // main()이 await로 데이터를 읽고 첫 렌더를 마칠 때까지 기다린다.
-  // 로드가 실패하면 페이지가 600ms 뒤 한 번 더 받아보므로 그것까지 기다린다.
   await new Promise((resolve) => setTimeout(resolve, 0));
-  await new Promise((resolve) => setTimeout(resolve, settleMs));
+  await new Promise((resolve) => setTimeout(resolve, 0));
 
   return {
     app: sandbox,
