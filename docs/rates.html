@@ -623,12 +623,18 @@
     return CATEGORY_KEYS.includes(value) ? value : "deposit";
   }
 
+  // 탭·필터·검색을 주소에 남긴다. 안 그러면 걸러놓은 화면을 공유할 수 없고,
+  // 탭을 여러 번 바꾼 뒤 뒤로가기를 누르면 사이트를 빠져나가 버린다.
+  const urlParams = new URLSearchParams(location.search);
+
+  const DEFAULT_CATEGORY = initialCategory();
+
   const state = {
-    category: initialCategory(),
-    term: 12,
+    category: CATEGORY_KEYS.includes(urlParams.get("tab")) ? urlParams.get("tab") : DEFAULT_CATEGORY,
+    term: Number(urlParams.get("term")) || 12,
     sectors: { bank: true, savingsBank: true },
-    rateType: "",
-    query: "",
+    rateType: urlParams.get("type") ?? "",
+    query: urlParams.get("q") ?? "",
     expanded: new Set(),
     // 대출은 최저금리 오름차순이 기본이다. 공시의 평균금리는 "지난달 실제 취급 평균"
     // 이라 현재 제시되는 금리 범위와 다른 수치이고, 3분의 1 남짓은 값 자체가 없어서
@@ -895,6 +901,7 @@
       termSelect.addEventListener("change", (e) => {
         state.term = Number(e.target.value);
         renderProducts();
+        syncUrl({ push: true });
         window.analytics?.event("rate_filter", { filter: "term", filter_value: String(state.term) });
       });
     }
@@ -904,6 +911,7 @@
       rateTypeSelect.addEventListener("change", (e) => {
         state.rateType = e.target.value;
         renderProducts();
+        syncUrl({ push: true });
         window.analytics?.event("rate_filter", { filter: "rate_type", filter_value: state.rateType || "all" });
       });
     }
@@ -924,6 +932,7 @@
       search.addEventListener("input", (e) => {
         state.query = e.target.value;
         renderProducts();
+        syncUrl();
         const term = state.query.trim();
         // GA4 권장 이벤트 이름이라 search_term이 기본 제공 차원으로 잡힌다(맞춤 측정기준 등록 불필요).
         if (term.length >= 2) window.analytics?.debouncedEvent("search", { search_term: term });
@@ -1162,7 +1171,36 @@
     renderTabs();
     renderControls();
     renderProducts();
+    syncUrl({ push: true });
     window.analytics?.event("rate_tab", { rate_category: state.category });
+  });
+
+  function syncUrl({ push = false } = {}) {
+    const next = new URLSearchParams(location.search);
+    for (const [key, value, empty] of [
+      ["tab", state.category, DEFAULT_CATEGORY],
+      ["term", String(state.term), "12"],
+      ["type", state.rateType, ""],
+      ["q", state.query.trim(), ""],
+    ]) {
+      if (value === empty) next.delete(key);
+      else next.set(key, value);
+    }
+    const query = next.toString();
+    const url = `${location.pathname}${query ? `?${query}` : ""}`;
+    if (url === `${location.pathname}${location.search}`) return;
+    // 검색은 글자마다 기록을 쌓으면 뒤로가기가 못 쓰게 되므로 교체만 한다.
+    history[push ? "pushState" : "replaceState"](null, "", url);
+  }
+
+  window.addEventListener("popstate", () => {
+    const current = new URLSearchParams(location.search);
+    state.category = CATEGORY_KEYS.includes(current.get("tab")) ? current.get("tab") : DEFAULT_CATEGORY;
+    state.term = Number(current.get("term")) || 12;
+    state.rateType = current.get("type") ?? "";
+    state.query = current.get("q") ?? "";
+    state.expanded.clear();
+    renderAll();
   });
 
   document.getElementById("lang-toggle").addEventListener("click", () => {

@@ -111,7 +111,7 @@ function makeDom(html = "") {
 
 // analytics를 넣어주면 페이지가 실제로 계측을 부르는지까지 볼 수 있다.
 // 안 넣으면 브라우저에서 광고 차단으로 로더가 안 뜬 상황과 같아진다.
-export async function loadRatesPage({ analytics, fetch: fetchImpl, file = "docs/rates.html" } = {}) {
+export async function loadRatesPage({ analytics, fetch: fetchImpl, file = "docs/rates.html", search = "" } = {}) {
   const html = await readFile(path.join(root, file), "utf8");
   const script = [...html.matchAll(/<script>\n([\s\S]*?)\n<\/script>/g)].map((m) => m[1]).pop();
   assert.ok(script.includes("CATEGORY_KEYS"), "금리 페이지 스크립트를 찾지 못했다");
@@ -137,8 +137,12 @@ export async function loadRatesPage({ analytics, fetch: fetchImpl, file = "docs/
       removeItem: (k) => delete store[k],
     },
     navigator: { language: "ko" },
-    location: { search: "", origin: "https://x", pathname: "/", href: "https://x/" },
+    location: { search, origin: "https://x", pathname: "/", href: "https://x/" },
     matchMedia: () => ({ matches: false, addEventListener() {} }),
+    // 페이지가 popstate를 듣고 주소로 상태를 되돌린다. window 쪽 API가 없으면 로드 자체가 죽는다.
+    addEventListener() {},
+    removeEventListener() {},
+    history: { pushState() {}, replaceState() {} },
     document,
   };
   if (analytics) sandbox.analytics = analytics;

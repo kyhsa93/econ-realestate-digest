@@ -1280,8 +1280,27 @@
     return (NEWS_CATEGORY_LABELS[key] ?? NEWS_CATEGORY_LABELS.other)[locale];
   }
 
-  let newsCategoryFilter = "all";
-  let newsQuery = "";
+  // 필터·검색을 주소에 남긴다. 안 그러면 걸러놓은 화면을 공유할 수 없고,
+  // 뒤로가기가 필터를 되돌리는 대신 사이트를 빠져나가 버린다.
+  const params = new URLSearchParams(location.search);
+  let newsCategoryFilter = params.get("cat") || "all";
+  let newsQuery = params.get("q") ?? "";
+
+  function syncUrl({ push = false } = {}) {
+    const next = new URLSearchParams(location.search);
+    for (const [key, value, empty] of [
+      ["cat", newsCategoryFilter, "all"],
+      ["q", newsQuery.trim(), ""],
+    ]) {
+      if (value === empty) next.delete(key);
+      else next.set(key, value);
+    }
+    const query = next.toString();
+    const url = `${location.pathname}${query ? `?${query}` : ""}`;
+    if (url === `${location.pathname}${location.search}`) return;
+    // 검색은 글자마다 기록을 쌓으면 뒤로가기가 못 쓰게 되므로 교체만 한다.
+    history[push ? "pushState" : "replaceState"](null, "", url);
+  }
 
   const READ_NEWS_KEY = "readNews";
   const READ_NEWS_MAX = 300;
@@ -1583,7 +1602,9 @@
     document.getElementById("realestate-district-select-label").textContent = t("realestateDistrictSelectLabel");
     document.getElementById("realestate-search-input").placeholder = t("realestateSearchPlaceholder");
     document.getElementById("news-heading").textContent = t("newsHeading");
-    document.getElementById("news-search-input").placeholder = t("newsSearchPlaceholder");
+    const searchInput = document.getElementById("news-search-input");
+    searchInput.placeholder = t("newsSearchPlaceholder");
+    if (searchInput.value !== newsQuery) searchInput.value = newsQuery;
     document.getElementById("news-archive-link").textContent = t("newsArchiveLink");
     document.getElementById("archive-heading").textContent = t("archiveHeading");
     document.getElementById("archive-date-jump-label").textContent = t("archiveDateJumpLabel");
@@ -1623,6 +1644,15 @@
     window.analytics?.event("language_switch", { site_language: locale });
   });
 
+  window.addEventListener("popstate", () => {
+    const current = new URLSearchParams(location.search);
+    newsCategoryFilter = current.get("cat") || "all";
+    newsQuery = current.get("q") ?? "";
+    const input = document.getElementById("news-search-input");
+    if (input) input.value = newsQuery;
+    renderNews(effectiveNews());
+  });
+
   document.getElementById("theme-toggle").addEventListener("click", () => {
     const order = ["auto", "light", "dark"];
     applyTheme(order[(order.indexOf(theme) + 1) % order.length]);
@@ -1651,12 +1681,14 @@
     if (!chip) return;
     newsCategoryFilter = chip.dataset.category;
     renderNews(effectiveNews());
+    syncUrl({ push: true });
     window.analytics?.event("news_filter", { news_category: newsCategoryFilter || "all" });
   });
 
   document.getElementById("news-search-input").addEventListener("input", (e) => {
     newsQuery = e.target.value;
     renderNews(effectiveNews());
+    syncUrl();
     const term = newsQuery.trim();
     // GA4 권장 이벤트 이름이라 search_term이 기본 제공 차원으로 잡힌다(맞춤 측정기준 등록 불필요).
     if (term.length >= 2) window.analytics?.debouncedEvent("search", { search_term: term });
