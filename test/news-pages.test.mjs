@@ -114,3 +114,14 @@ test("뉴스 페이지에도 GA 로더와 사이트 구분이 붙어 있다", as
     assert.ok(html.includes("privacy-policy"), `${file}에 개인정보처리방침 링크가 없다`);
   }
 });
+
+// "불러오지 못했습니다"만 뜨면 오프라인인지, 배포가 어긋난 건지, 캐시가 옛것인지
+// 사용자도 나도 구분할 수가 없다. 상태 코드를 같이 보여준다.
+test("기사 로드 실패는 원인을 함께 알린다", async () => {
+  for (const file of ["docs/news.html", ...NEWS_PAGES.map((p) => `docs/${p.file}`)]) {
+    const html = await read(file);
+    assert.ok(html.includes("throw new Error(`HTTP ${res.status}`)"), `${file}가 상태 코드를 안 남긴다`);
+    assert.ok(html.includes("t(\"loadError\")(newsLoadError)"), `${file}가 실패 이유를 화면에 안 쓴다`);
+    assert.ok(html.includes("loadError: (reason)"), `${file} 문구가 이유를 받지 않는다`);
+  }
+});
