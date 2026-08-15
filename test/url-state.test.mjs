@@ -6,6 +6,8 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { loadIndexPage } from "./helpers/index-page.mjs";
 import { loadRatesPage } from "./helpers/rates-page.mjs";
+import { RATE_PAGES } from "../scripts/build-rate-pages.mjs";
+import { NEWS_PAGES } from "../scripts/build-news-pages.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
 const read = (rel) => readFile(path.join(root, rel), "utf8");
@@ -236,4 +238,25 @@ test("데이터가 다 있으면 어떤 경우에도 오류 배너가 뜨지 않
     html.includes('textContent = show ? text : ""'),
     "감출 때 문구를 비우지 않는다"
   );
+});
+
+// hidden 속성은 브라우저 기본 스타일(display:none)로 동작한다. 작성자 CSS가 그 요소에
+// display를 지정하면 그쪽이 이겨서 감춰지지 않는다 - 오류 배너가 display:flex 때문에
+// 늘 보이고 있었다. 화면 없는 테스트로는 못 잡으니 규칙 자체를 검사한다.
+test("감춰야 할 요소가 CSS 때문에 계속 보이지 않는다", async () => {
+  const files = [
+    "docs/index.html",
+    "docs/rates.html",
+    "docs/news.html",
+    ...RATE_PAGES.map((p) => `docs/${p.file}`),
+    ...NEWS_PAGES.map((p) => `docs/${p.file}`),
+  ];
+
+  for (const file of files) {
+    const html = await read(file);
+    assert.ok(
+      html.includes("[hidden] { display: none !important; }"),
+      `${file}에 감춤 보호 규칙이 없다`
+    );
+  }
 });
