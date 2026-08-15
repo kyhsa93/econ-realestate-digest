@@ -288,3 +288,13 @@ test("요약이 폴백된 날은 메인에도 그 사실을 표시한다", async
     assert.ok(html.includes(dict), `안내 문구가 한쪽 언어에만 있다: ${dict}`);
   }
 });
+
+// 실패했을 때 사용자가 할 수 있는 게 새로고침뿐이면, 그 안내라도 화면에 있어야 한다.
+test("로드가 실패하면 다시 시도할 수단을 준다", async () => {
+  for (const file of ["docs/index.html", "docs/rates.html", "docs/news.html"]) {
+    const html = await readFile(path.join(root, file), "utf8");
+    assert.ok(/id="load-(error-)?retry"/.test(html), `${file}에 재시도 버튼이 없다`);
+    assert.ok(html.includes('"다시 시도"') && html.includes('"Retry"'), `${file} 재시도 문구가 한쪽 언어에만 있다`);
+    assert.ok(html.includes('event("load_retry"'), `${file}에서 재시도를 계측하지 않는다`);
+  }
+});

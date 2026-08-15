@@ -209,6 +209,16 @@
     gap: 4px;
     cursor: pointer;
   }
+  .empty-row button {
+    font: inherit;
+    background: var(--fg);
+    color: var(--bg);
+    border: 0;
+    border-radius: 8px;
+    padding: 4px 12px;
+    margin-left: 8px;
+    cursor: pointer;
+  }
   .rate-links {
     display: flex;
     flex-wrap: wrap;
@@ -480,6 +490,7 @@
       detailLoanInciExpn: "부대비용",
       detailJoinWay: "가입 방법",
       emptyRow: "조건에 맞는 상품이 없습니다.",
+      retry: "다시 시도",
       loadError: "금리 데이터를 불러오지 못했습니다.",
       historyDeposit: "정기예금 12개월 최고",
       historySaving: "적금 12개월 최고",
@@ -540,6 +551,7 @@
       detailLoanInciExpn: "Incidental costs",
       detailJoinWay: "How to apply",
       emptyRow: "No products match these filters.",
+      retry: "Retry",
       loadError: "Could not load the rate data.",
       historyDeposit: "Best 12-month deposit",
       historySaving: "Best 12-month savings",
@@ -1188,7 +1200,12 @@
       reportLoadFailure("rates", err, true);
       document.getElementById("products-body").innerHTML = `<tr class="empty-row"><td>${escapeHtml(
         t("loadError")
-      )}</td></tr>`;
+      )} <button type="button" id="load-retry">${escapeHtml(t("retry"))}</button></td></tr>`;
+      document.getElementById("load-retry")?.addEventListener("click", (e) => {
+        e.currentTarget.disabled = true;
+        window.analytics?.event("load_retry", { rate_category: state.category });
+        main();
+      });
       renderMeta();
       return;
     }
