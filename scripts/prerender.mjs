@@ -13,6 +13,7 @@ import path from "node:path";
 const root = path.resolve(import.meta.dirname, "..");
 const INDEX_PATH = path.join(root, "docs/index.html");
 const RATES_PATH = path.join(root, "docs/rates.html");
+const NEWS_PATH = path.join(root, "docs/news.html");
 const DATA_DIR = path.join(root, "docs/data");
 
 // 자치구 평당가는 신고 건수가 적으면 "그 구의 시세"가 아니라 "그 아파트 한 채의
@@ -93,6 +94,35 @@ export function newsHtml(news) {
         `<li class="news-item"><a href="${escapeHtml(item.link)}" target="_blank" rel="noopener">${escapeHtml(
           item.title
         )}</a> <span class="news-source">${escapeHtml(item.source ?? "")}</span></li>`
+    )
+    .join("");
+}
+
+// news.html과 거기서 찍어낸 카테고리 페이지용. 화면 렌더와 같은 구성으로 만든다.
+// category가 null이면 전체.
+export function newsSummaryHtml(summary, category = null) {
+  const all = (summary?.categories ?? []).filter((c) => c.lineKo);
+  const shown = category ? all.filter((c) => c.key === category) : all;
+  if (!shown.length) return null;
+  return shown
+    .map((c) => `<p><strong>${escapeHtml(c.name)}</strong> ${escapeHtml(c.lineKo)}</p>`)
+    .join("");
+}
+
+export function newsListHtml(news, category = null) {
+  const all = news?.items ?? [];
+  const items = category ? all.filter((item) => item.category === category) : all;
+  if (!items.length) return null;
+
+  // 상대 시간("3시간 전")은 만든 시점에 좌우돼서 데이터가 그대로여도 결과가 달라진다.
+  // 정적 HTML엔 매체 이름만 넣고, 시간은 클라이언트가 그린다.
+  return items
+    .map(
+      (item) =>
+        `<li class="news-item">` +
+        `<a href="${escapeHtml(item.link)}" target="_blank" rel="noopener">${escapeHtml(item.title)}</a>` +
+        `<div class="news-meta">${escapeHtml(item.source ?? "")}</div>` +
+        `</li>`
     )
     .join("");
 }
@@ -210,6 +240,11 @@ async function main() {
   for (const [file, path_, fileBlocks] of [
     ["docs/index.html", INDEX_PATH, blocks],
     ["docs/rates.html", RATES_PATH, { rates: ratesHtml(rates), ratesHead: ratesHeadHtml() }],
+    [
+      "docs/news.html",
+      NEWS_PATH,
+      { newsSummary: newsSummaryHtml(summary), newsList: newsListHtml(news) },
+    ],
   ]) {
     const html = await readFile(path_, "utf8");
     const next = applyPrerender(html, fileBlocks);

@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#253e81">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<meta name="google-adsense-account" content="ca-pub-1195159445218373">
+<title>증시·환율 뉴스 - 오늘의 코스피·달러 소식</title>
+<meta name="description" content="경제지 RSS에서 모은 증시·환율 뉴스 - 오늘의 코스피·달러 소식를 카테고리별로 정리하고, 오픈소스 AI가 요약합니다. 하루 4회 자동 갱신합니다.">
+<meta name="site-group" content="digest">
+<meta name="news-category" content="stocks">
+<link rel="canonical" href="https://kyhsa93.github.io/econ-realestate-digest/stock-news.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="경제·부동산 데일리 다이제스트">
+<meta property="og:url" content="https://kyhsa93.github.io/econ-realestate-digest/stock-news.html">
+<meta property="og:title" content="증시·환율 뉴스 - 오늘의 코스피·달러 소식">
+<meta property="og:description" content="경제지 RSS에서 모은 증시·환율 뉴스 - 오늘의 코스피·달러 소식를 카테고리별로 정리하고, 오픈소스 AI가 요약합니다. 하루 4회 자동 갱신합니다.">
+<meta property="og:image" content="https://kyhsa93.github.io/econ-realestate-digest/icons/icon-512.png">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="증시·환율 뉴스 - 오늘의 코스피·달러 소식">
+<meta name="twitter:description" content="경제지 RSS에서 모은 증시·환율 뉴스 - 오늘의 코스피·달러 소식를 카테고리별로 정리하고, 오픈소스 AI가 요약합니다. 하루 4회 자동 갱신합니다.">
+<meta name="twitter:image" content="https://kyhsa93.github.io/econ-realestate-digest/icons/icon-512.png">
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #666;
+    --card: #f5f5f7;
+    --border: #e2e2e5;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1115;
+      --fg: #eaeaea;
+      --muted: #9a9a9a;
+      --card: #1a1d24;
+      --border: #2a2d35;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.5;
+  }
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 24px 16px 64px;
+  }
+  h1 { font-size: 1.4rem; margin: 0 0 4px; }
+  h2 {
+    font-size: 1.05rem;
+    margin: 0 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .updated { color: var(--muted); font-size: 0.85rem; }
+  .page-nav {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .page-nav a {
+    flex-shrink: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    color: var(--fg);
+    text-decoration: none;
+  }
+  .page-nav a[aria-current="page"] {
+    background: var(--fg);
+    color: var(--bg);
+    border-color: var(--fg);
+    font-weight: 600;
+  }
+  section { margin-bottom: 32px; }
+  .summary-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 0.92rem;
+  }
+  .summary-box p { margin: 0 0 8px; }
+  .summary-box p:last-child { margin-bottom: 0; }
+  .summary-note { color: var(--muted); font-size: 0.78rem; margin-top: 10px; }
+  ul.news-list { list-style: none; margin: 0; padding: 0; }
+  .news-item { padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .news-item:last-child { border-bottom: none; }
+  .news-item a { color: var(--fg); text-decoration: none; font-size: 0.95rem; }
+  .news-item a:hover { text-decoration: underline; }
+  .news-meta { color: var(--muted); font-size: 0.78rem; margin-top: 2px; }
+  .empty { color: var(--muted); font-size: 0.9rem; }
+  .site-footer {
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+  .site-footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1 id="page-title">증시·환율 뉴스 - 오늘의 코스피·달러 소식</h1>
+    <div class="updated" id="updated">불러오는 중...</div>
+  </header>
+
+  <nav class="page-nav" aria-label="페이지">
+    <a href="./index.html">데일리 다이제스트</a>
+    <a href="./news.html" data-news-page="all">뉴스 전체</a>
+    <a href="./realestate-news.html" data-news-page="realestate">부동산 뉴스</a>
+    <a href="./stock-news.html" data-news-page="stocks" aria-current="page">증시·환율 뉴스</a>
+    <a href="./rate-news.html" data-news-page="rates">금리 뉴스</a>
+    <a href="./rates.html">금리 비교</a>
+  </nav>
+
+  <section id="summary-section">
+    <h2 id="summary-heading">오늘의 AI 요약</h2>
+    <div class="summary-box" id="summary-box"><!--prerender:newsSummary--><p><strong>증시·환율</strong> 뉴욕증시가 소폭 하락 마감했고, 미국 증시의 과열 수준이 매우 높은 것으로 나타났다.</p><!--/prerender:newsSummary--></div>
+  </section>
+
+  <section id="news-section">
+    <h2 id="news-heading">기사 목록</h2>
+    <ul class="news-list" id="news-list"><!--prerender:newsList--><li class="news-item"><a href="https://www.newsis.com/view/NISX20260815_0003750403" target="_blank" rel="noopener">뉴욕증시, 숨고르기에 소폭 하락…나스닥 0.28%↓</a><div class="news-meta">뉴시스 경제</div></li><li class="news-item"><a href="https://www.newsis.com/view/NISX20260815_0003750399" target="_blank" rel="noopener">[속보]뉴욕증시, 소폭 하락 마감…나스닥 0.28%↓</a><div class="news-meta">뉴시스 경제</div></li><li class="news-item"><a href="https://www.newsis.com/view/NISX20260814_0003749453" target="_blank" rel="noopener">美 증시 얼마나 과열됐길래…'버핏 지표' 238% 사상 최고</a><div class="news-meta">뉴시스 경제</div></li><!--/prerender:newsList--></ul>
+  </section>
+
+  <footer class="site-footer">
+    <div>기사 제목과 링크는 각 언론사 RSS에서 모았고, 요약은 오픈소스 AI가 생성합니다. 원문은 각 매체에서 확인하세요.</div>
+    <div style="margin-top:6px;">
+      <a href="https://kyhsa93.github.io/privacy-policy" target="_blank" rel="noopener">개인정보처리방침</a>
+    </div>
+  </footer>
+</main>
+
+<script src="./analytics.js"></script>
+<script>
+  // 이 파일은 카테고리별 뉴스 페이지의 원본이기도 하다. 생성된 페이지는
+  // <meta name="news-category">로만 갈리고 나머지 코드는 그대로 공유한다.
+  const CATEGORY_NAMES = {
+    rates: "금리·예금·투자상품",
+    realestate: "부동산",
+    stocks: "증시·환율",
+    other: "기타 경제 소식",
+  };
+
+  const category = document.querySelector('meta[name="news-category"]')?.getAttribute("content") ?? null;
+
+  function escapeHtml(value) {
+    return String(value ?? "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;");
+  }
+
+  function reportLoadFailure(name, error, fatal) {
+    window.analytics?.event("exception", {
+      description: `load ${name}: ${error?.message ?? error}`.slice(0, 100),
+      fatal,
+    });
+  }
+
+  async function loadJson(name) {
+    const res = await fetch(`./data/${name}.json?_=${Date.now()}`);
+    if (!res.ok) throw new Error(`${name} load failed`);
+    return res.json();
+  }
+
+  function relativeTime(iso) {
+    if (!iso) return "";
+    const minutes = Math.round((Date.now() - new Date(iso).getTime()) / 60000);
+    if (!Number.isFinite(minutes) || minutes < 0) return "";
+    if (minutes < 60) return `${minutes}분 전`;
+    const hours = Math.round(minutes / 60);
+    if (hours < 24) return `${hours}시간 전`;
+    return `${Math.round(hours / 24)}일 전`;
+  }
+
+  function itemsOf(news) {
+    const items = news?.items ?? [];
+    return category ? items.filter((item) => item.category === category) : items;
+  }
+
+  function renderNews(news) {
+    const list = document.getElementById("news-list");
+    const items = itemsOf(news);
+    list.innerHTML = items.length
+      ? items
+          .map((item) => {
+            const meta = [item.source, relativeTime(item.publishedAt)].filter(Boolean).join(" · ");
+            return `<li class="news-item">
+              <a href="${escapeHtml(item.link)}" target="_blank" rel="noopener">${escapeHtml(item.title)}</a>
+              <div class="news-meta">${escapeHtml(meta)}</div>
+            </li>`;
+          })
+          .join("")
+      : '<li class="empty">오늘 이 분야 기사가 아직 없습니다.</li>';
+  }
+
+  function renderSummary(summary) {
+    const box = document.getElementById("summary-box");
+    const all = summary?.categories ?? [];
+    const shown = (category ? all.filter((c) => c.key === category) : all).filter((c) => c.lineKo);
+
+    if (!shown.length) {
+      box.innerHTML = '<p class="empty">오늘 요약이 아직 없습니다.</p>';
+      return;
+    }
+
+    // 폴백된 요약(헤드라인 나열)은 원문 대조에서 걸러진 결과라 그 사실을 밝힌다.
+    const fallback = shown.some((c) => c.fallbackReason);
+    box.innerHTML =
+      shown
+        .map((c) => `<p><strong>${escapeHtml(c.name)}</strong> ${escapeHtml(c.lineKo)}</p>`)
+        .join("") +
+      (fallback ? '<div class="summary-note">일부 항목은 검증에서 걸러져 헤드라인 요약으로 대체됐습니다.</div>' : "");
+  }
+
+  async function main() {
+    const [news, summary] = await Promise.allSettled([loadJson("news"), loadJson("summary")]);
+
+    if (news.status === "fulfilled") {
+      renderNews(news.value);
+      const updatedAt = news.value?.updatedAt;
+      document.getElementById("updated").textContent = updatedAt
+        ? `마지막 갱신: ${new Date(updatedAt).toLocaleString("ko-KR", { timeZone: "Asia/Seoul", dateStyle: "medium", timeStyle: "short" })} KST`
+        : "-";
+    } else {
+      reportLoadFailure("news", news.reason, true);
+      document.getElementById("updated").textContent = "-";
+    }
+
+    if (summary.status === "fulfilled") renderSummary(summary.value);
+    else reportLoadFailure("summary", summary.reason, false);
+
+    window.analytics?.pageView({ news_category: category ?? "all" });
+  }
+
+  document.getElementById("news-list").addEventListener("click", (e) => {
+    const link = e.target.closest(".news-item > a");
+    if (!link) return;
+    window.analytics?.event("news_click", { news_category: category ?? "all" });
+  });
+
+  main();
+</script>
+</body>
+</html>
