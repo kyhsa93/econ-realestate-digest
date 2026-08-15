@@ -83,3 +83,38 @@ test("뉴스 페이지도 읽은 기사를 표시한다", async () => {
   assert.ok(html.includes("markNewsRead(link.getAttribute"), "클릭을 읽음으로 기록하지 않는다");
   assert.ok(html.includes(".news-item.read"), "읽은 기사 스타일이 없다");
 });
+
+// 데이터는 멀쩡한데 보관 범위 밖 날짜를 열었을 뿐인데도 "불러오지 못했습니다"가 떠서,
+// 사이트가 고장난 것처럼 보였다. 하루씩 넘기는 버튼이 생기면서 훨씬 쉽게 도달하게 됐다.
+test("기록이 없는 날짜는 오류가 아니라 기록 없음으로 알린다", async () => {
+  const { readFile } = await import("node:fs/promises");
+  const load = (search) =>
+    loadIndexPage({
+      search,
+      fetch: async (url) => {
+        const name = String(url).split("/data/")[1].split(".json")[0];
+        try {
+          return { ok: true, json: async () => JSON.parse(await readFile(path.join(root, `docs/data/${name}.json`), "utf8")) };
+        } catch {
+          return { ok: false, json: async () => ({}) };
+        }
+      },
+    });
+
+  const missing = await load("?date=2026-01-01");
+  await new Promise((r) => setTimeout(r, 30));
+  const newsHtml = String(missing.byId("news-list").innerHTML);
+  assert.ok(newsHtml.includes("기록이 없습니다"), `기록 없음 안내가 아니다: ${newsHtml.slice(0, 80)}`);
+  assert.ok(!newsHtml.includes("불러오지 못했습니다"), "기록 없음을 로드 실패로 말한다");
+
+  // 보관 범위 안의 날짜는 그대로 그려진다.
+  const present = await load("?date=2026-08-13");
+  await new Promise((r) => setTimeout(r, 30));
+  assert.ok(String(present.byId("news-list").innerHTML).includes("news-item"), "있는 기록을 못 그린다");
+});
+
+test("보관 범위보다 뒤로는 넘기지 못한다", async () => {
+  const html = await read("docs/index.html");
+  assert.ok(html.includes('document.getElementById("archive-prev-day").disabled'), "이전 날 버튼을 막지 않는다");
+  assert.ok(html.includes("input.min = dates[0]"), "날짜 선택 범위를 제한하지 않는다");
+});

@@ -753,6 +753,11 @@
       realestateSearchPlaceholder: "지역 검색 (예: 강남)",
       newsHeading: "오늘의 경제·부동산 뉴스",
       newsError: "데이터를 불러오지 못했습니다.",
+      archiveNoRecord: "이 날짜의 기록이 없습니다.",
+      archiveNoRecordNotice: (date, from) =>
+        from
+          ? `${date} 기록이 없습니다. 기록은 ${from}부터 남아 있습니다.`
+          : `${date} 기록이 없습니다.`,
       newsArchiveLink: "지난 기록 보기 ↓",
       newsFilterAll: "전체",
       newsSearchPlaceholder: "뉴스 검색 (예: 금리)",
@@ -827,6 +832,9 @@
       realestateSearchPlaceholder: "Search district (Korean name, e.g. 강남)",
       newsHeading: "Today's Economy & Real Estate News",
       newsError: "Failed to load data.",
+      archiveNoRecord: "No record for this date.",
+      archiveNoRecordNotice: (date, from) =>
+        from ? `No record for ${date}. Records start from ${from}.` : `No record for ${date}.`,
       newsArchiveLink: "Browse past days ↓",
       newsFilterAll: "All",
       newsSearchPlaceholder: "Search news (Korean keyword, e.g. 금리)",
@@ -892,6 +900,20 @@
 
   function kstToday() {
     return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(new Date());
+  }
+
+  // 기록이 없는 날짜를 "불러오지 못했다"고 말하면, 데이터가 멀쩡한데 고장난 것처럼 보인다.
+  // 아카이브에서 보관 범위 밖으로 나간 것뿐이라는 걸 구분해서 알린다.
+  let archiveMissing = false;
+
+  function archiveDates() {
+    const all = new Set();
+    for (const history of [cache.newsHistory, cache.summaryHistory, cache.history, cache.realestateHistory]) {
+      for (const entry of Array.isArray(history) ? history : []) {
+        if (entry?.date) all.add(entry.date);
+      }
+    }
+    return [...all].sort();
   }
 
   function findByDate(history, date) {
@@ -1006,7 +1028,7 @@
   function renderMarket(market) {
     const tbody = document.getElementById("market-grid");
     if (!market) {
-      tbody.innerHTML = `<tr><td colspan="3" class="error">${t("marketError")}</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="3" class="error">${archiveMissing ? t("archiveNoRecord") : t("marketError")}</td></tr>`;
       return;
     }
     const rows = [];
@@ -1268,7 +1290,7 @@
     const tbody = document.getElementById("realestate-grid");
     const meta = document.getElementById("realestate-meta");
     if (!realestate?.overall) {
-      tbody.innerHTML = `<tr><td colspan="4" class="error">${t("realestateError")}</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="4" class="error">${archiveMissing ? t("archiveNoRecord") : t("realestateError")}</td></tr>`;
       meta.textContent = "";
       return;
     }
@@ -1499,7 +1521,7 @@
     const controls = document.getElementById("news-controls");
     if (!news || !news.items?.length) {
       controls.hidden = true;
-      list.innerHTML = `<li class="error">${t("newsError")}</li>`;
+      list.innerHTML = `<li class="error">${archiveMissing ? t("archiveNoRecord") : t("newsError")}</li>`;
       return;
     }
 
@@ -1576,7 +1598,7 @@
 
     if (!hasCategories && !text) {
       box.classList.add("placeholder");
-      box.textContent = t("summaryEmpty");
+      box.textContent = archiveMissing ? t("archiveNoRecord") : t("summaryEmpty");
       return;
     }
 
@@ -1696,7 +1718,9 @@
     document.getElementById("load-error-retry").textContent = t("retry");
 
     const notice = document.getElementById("content-notice");
-    const noticeText = t("contentNotice");
+    const noticeText = archiveMissing
+      ? t("archiveNoRecordNotice")(viewDate, archiveDates()[0] ?? null)
+      : t("contentNotice");
     notice.hidden = !noticeText;
     notice.textContent = noticeText ?? "";
 
@@ -1888,6 +1912,13 @@
 
     if (isArchiveView) {
       await Promise.all(Object.keys(HISTORY_FILES).map((key) => loadHistoryInto(key)));
+      const dates = archiveDates();
+      archiveMissing = !dates.includes(viewDate);
+      // 보관 범위 밖으로 더 나가지 못하게 막는다. 예전엔 계속 뒤로 갈 수 있어서
+      // 기록이 없는 날짜에 도달하면 화면이 통째로 오류처럼 보였다.
+      const input = document.getElementById("archive-date-input");
+      if (dates.length) input.min = dates[0];
+      document.getElementById("archive-prev-day").disabled = Boolean(dates.length) && viewDate <= dates[0];
       applyLocale(locale);
       return;
     }
