@@ -64,15 +64,32 @@ export function marketHtml(market) {
 }
 
 const man = (value) => `${Number(value).toLocaleString("ko-KR")}만원`;
+
+// 클라이언트가 값 옆에 붙이는 증감·건수까지 같이 그린다. 안 그리면 데이터를 받는
+// 순간 셀 높이가 바뀌면서 표 아래가 통째로 밀린다.
+const changeText = (change) => {
+  if (!change || typeof change.value10k !== "number") return "";
+  const sign = change.value10k > 0 ? "+" : change.value10k < 0 ? "-" : "";
+  return ` <span class="change">${sign}${Math.abs(change.value10k).toLocaleString("ko-KR")}만</span>`;
+};
+const countText = (metric) =>
+  typeof metric?.transactionCount === "number"
+    ? ` <span class="count">${metric.transactionCount.toLocaleString("ko-KR")}건</span>`
+    : "";
 const enough = (metric) => Boolean(metric) && (metric.transactionCount ?? 0) >= MIN_SAMPLE;
 
 // 매매·전세는 평당가, 월세는 보증금/월세라 셀 모양이 다르다(화면과 같은 구성).
-const saleCell = (sale) => (enough(sale) && sale.avgPricePerPyeong10k ? man(sale.avgPricePerPyeong10k) : "-");
+const saleCell = (sale) =>
+  enough(sale) && sale.avgPricePerPyeong10k
+    ? `${man(sale.avgPricePerPyeong10k)}${changeText(sale.change)}${countText(sale)}`
+    : "-";
 const jeonseCell = (jeonse) =>
-  enough(jeonse) && jeonse.avgDepositPerPyeong10k ? man(jeonse.avgDepositPerPyeong10k) : "-";
+  enough(jeonse) && jeonse.avgDepositPerPyeong10k
+    ? `${man(jeonse.avgDepositPerPyeong10k)}${changeText(jeonse.change)}${countText(jeonse)}`
+    : "-";
 const wolseCell = (wolse) =>
   enough(wolse) && wolse.avgDeposit10k
-    ? `${man(wolse.avgDeposit10k)} / 월 ${man(wolse.avgMonthlyRent10k)}`
+    ? `${man(wolse.avgDeposit10k)} / 월 ${man(wolse.avgMonthlyRent10k)}${countText(wolse)}`
     : "-";
 
 export function realestateHtml(realestate) {
@@ -92,15 +109,21 @@ export function realestateHtml(realestate) {
   return [row("서울 전체", realestate.overall), ...districts.map((d) => row(d.name, d))].join("");
 }
 
+// 클라이언트가 그리는 마크업과 구조를 맞춘다. 다르면 데이터를 받는 순간 목록 높이가
+// 바뀌면서 화면이 밀린다(광고가 붙은 페이지라 이 밀림은 수익에도 영향을 준다).
+// 상대 시간("3시간 전")만은 만든 시점에 좌우돼서 넣을 수 없으므로, 같은 줄에
+// 매체 이름만 넣어 줄 수를 맞춘다.
 export function newsHtml(news) {
   const items = news?.items ?? [];
   if (!items.length) return null;
   return items
     .map(
       (item) =>
-        `<li class="news-item"><a href="${escapeHtml(item.link)}" target="_blank" rel="noopener">${escapeHtml(
-          item.title
-        )}</a> <span class="news-source">${escapeHtml(item.source ?? "")}</span></li>`
+        `<li class="news-item">` +
+        `<a href="${escapeHtml(item.link)}" target="_blank" rel="noopener">${escapeHtml(item.title)}</a>` +
+        `<div class="news-meta">${escapeHtml(item.source ?? "")}</div>` +
+        (item.preview ? `<div class="news-preview">${escapeHtml(item.preview)}</div>` : "") +
+        `</li>`
     )
     .join("");
 }

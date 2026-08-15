@@ -411,6 +411,11 @@
     padding: 6px 14px;
     cursor: pointer;
   }
+  .load-error button.ghost {
+    background: none;
+    color: var(--muted);
+    margin-left: 6px;
+  }
   .summary-fallback-note {
     color: var(--muted);
     font-size: 0.78rem;
@@ -608,6 +613,14 @@
 
   <div class="content-notice" id="content-notice" hidden></div>
 
+  <div class="load-error" id="install-banner" hidden>
+    <span id="install-text"></span>
+    <span>
+      <button type="button" id="install-accept"></button>
+      <button type="button" id="install-dismiss" class="ghost"></button>
+    </span>
+  </div>
+
   <div class="load-error" id="load-error" hidden>
     <span id="load-error-text"></span>
     <button type="button" id="load-error-retry"></button>
@@ -652,7 +665,7 @@
             <th class="sortable"><button type="button" data-re-sort="wolse" id="re-th-wolse">월세</button></th>
           </tr>
         </thead>
-        <tbody id="realestate-grid"><!--prerender:realestate--><tr><td>서울 전체</td><td data-label="매매">4,449만원</td><td data-label="전세">2,571만원</td><td data-label="월세">22,166만원 / 월 96만원</td></tr><tr><td>강남구</td><td data-label="매매">10,870만원</td><td data-label="전세">4,022만원</td><td data-label="월세">41,755만원 / 월 164만원</td></tr><tr><td>성동구</td><td data-label="매매">10,843만원</td><td data-label="전세">3,263만원</td><td data-label="월세">17,548만원 / 월 131만원</td></tr><tr><td>서초구</td><td data-label="매매">8,780만원</td><td data-label="전세">2,981만원</td><td data-label="월세">50,941만원 / 월 234만원</td></tr><tr><td>용산구</td><td data-label="매매">7,988만원</td><td data-label="전세">3,365만원</td><td data-label="월세">45,686만원 / 월 265만원</td></tr><tr><td>광진구</td><td data-label="매매">7,617만원</td><td data-label="전세">3,035만원</td><td data-label="월세">35,019만원 / 월 122만원</td></tr><tr><td>송파구</td><td data-label="매매">6,912만원</td><td data-label="전세">3,375만원</td><td data-label="월세">39,481만원 / 월 132만원</td></tr><tr><td>중구</td><td data-label="매매">6,908만원</td><td data-label="전세">3,221만원</td><td data-label="월세">21,035만원 / 월 125만원</td></tr><tr><td>영등포구</td><td data-label="매매">6,201만원</td><td data-label="전세">2,770만원</td><td data-label="월세">22,316만원 / 월 123만원</td></tr><tr><td>마포구</td><td data-label="매매">5,695만원</td><td data-label="전세">2,939만원</td><td data-label="월세">22,001만원 / 월 108만원</td></tr><tr><td>동작구</td><td data-label="매매">5,691만원</td><td data-label="전세">3,053만원</td><td data-label="월세">26,882만원 / 월 93만원</td></tr><!--/prerender:realestate--></tbody>
+        <tbody id="realestate-grid"><!--prerender:realestate--><tr><td>서울 전체</td><td data-label="매매">4,449만원 <span class="change">+340만</span> <span class="count">575건</span></td><td data-label="전세">2,571만원 <span class="change">+38만</span> <span class="count">2,525건</span></td><td data-label="월세">22,166만원 / 월 96만원 <span class="count">2,223건</span></td></tr><tr><td>강남구</td><td data-label="매매">10,870만원 <span class="change">+712만</span> <span class="count">14건</span></td><td data-label="전세">4,022만원 <span class="change">+1만</span> <span class="count">169건</span></td><td data-label="월세">41,755만원 / 월 164만원 <span class="count">102건</span></td></tr><tr><td>성동구</td><td data-label="매매">10,843만원 <span class="count">5건</span></td><td data-label="전세">3,263만원 <span class="change">-116만</span> <span class="count">102건</span></td><td data-label="월세">17,548만원 / 월 131만원 <span class="count">136건</span></td></tr><tr><td>서초구</td><td data-label="매매">8,780만원 <span class="change">-2,472만</span> <span class="count">10건</span></td><td data-label="전세">2,981만원 <span class="change">+322만</span> <span class="count">251건</span></td><td data-label="월세">50,941만원 / 월 234만원 <span class="count">93건</span></td></tr><tr><td>용산구</td><td data-label="매매">7,988만원 <span class="change">+675만</span> <span class="count">5건</span></td><td data-label="전세">3,365만원 <span class="change">+201만</span> <span class="count">58건</span></td><td data-label="월세">45,686만원 / 월 265만원 <span class="count">45건</span></td></tr><tr><td>광진구</td><td data-label="매매">7,617만원 <span class="change">-303만</span> <span class="count">7건</span></td><td data-label="전세">3,035만원 <span class="change">+387만</span> <span class="count">35건</span></td><td data-label="월세">35,019만원 / 월 122만원 <span class="count">38건</span></td></tr><tr><td>송파구</td><td data-label="매매">6,912만원 <span class="count">16건</span></td><td data-label="전세">3,375만원 <span class="change">+114만</span> <span class="count">168건</span></td><td data-label="월세">39,481만원 / 월 132만원 <span class="count">110건</span></td></tr><tr><td>중구</td><td data-label="매매">6,908만원 <span class="change">+3,868만</span> <span class="count">7건</span></td><td data-label="전세">3,221만원 <span class="change">+178만</span> <span class="count">32건</span></td><td data-label="월세">21,035만원 / 월 125만원 <span class="count">32건</span></td></tr><tr><td>영등포구</td><td data-label="매매">6,201만원 <span class="change">+2,385만</span> <span class="count">21건</span></td><td data-label="전세">2,770만원 <span class="change">+146만</span> <span class="count">115건</span></td><td data-label="월세">22,316만원 / 월 123만원 <span class="count">83건</span></td></tr><tr><td>마포구</td><td data-label="매매">5,695만원 <span class="count">11건</span></td><td data-label="전세">2,939만원 <span class="change">+55만</span> <span class="count">98건</span></td><td data-label="월세">22,001만원 / 월 108만원 <span class="count">92건</span></td></tr><tr><td>동작구</td><td data-label="매매">5,691만원 <span class="change">-112만</span> <span class="count">9건</span></td><td data-label="전세">3,053만원 <span class="change">-157만</span> <span class="count">83건</span></td><td data-label="월세">26,882만원 / 월 93만원 <span class="count">69건</span></td></tr><!--/prerender:realestate--></tbody>
       </table>
     </div>
     <div class="realestate-history-controls">
@@ -671,7 +684,7 @@
         <input type="search" id="news-search-input" placeholder="뉴스 검색 (예: 금리)">
       </div>
     </div>
-    <ul class="news-list" id="news-list"><!--prerender:news--><li class="news-item"><a href="https://www.mk.co.kr/news/realestate/12128719" target="_blank" rel="noopener">“직접 보니 기대 이상”… ‘상동역 롯데캐슬 시그니처’ 견본주택 방문객 호평</a> <span class="news-source">매일경제 부동산</span></li><li class="news-item"><a href="https://www.mk.co.kr/news/realestate/12128717" target="_blank" rel="noopener">노원구 하계동 극동아파트 55.72㎡, 7억원 최근 3년 신고가</a> <span class="news-source">매일경제 부동산</span></li><li class="news-item"><a href="https://www.newsis.com/view/NISX20260814_0003750050" target="_blank" rel="noopener">이주비 대출 완화…중소·중견사 정비사업 기회 열리나</a> <span class="news-source">뉴시스 경제</span></li><li class="news-item"><a href="https://www.mk.co.kr/news/realestate/12128680" target="_blank" rel="noopener">‘한국 부동산 쇼핑’ 즐기던 왕서방 다 어디갔나…이 제도 탓에 발길 끊겼다는데</a> <span class="news-source">매일경제 부동산</span></li><li class="news-item"><a href="https://www.yna.co.kr/view/AKR20260815011500002" target="_blank" rel="noopener">[다음주 경제] 올해 성장전망 얼마나 높아질까…가계부채 규모도 주목</a> <span class="news-source">연합뉴스 경제</span></li><li class="news-item"><a href="https://www.yna.co.kr/view/AKR20260814042200546" target="_blank" rel="noopener">[머니톡스] 서울로 서울로…해방의 기쁨과 함께 시작된 주택난</a> <span class="news-source">연합뉴스 경제</span></li><li class="news-item"><a href="https://www.newsis.com/view/NISX20260815_0003750408" target="_blank" rel="noopener">7월 미 소비자 지출 큰 폭 감소…경제 둔화 가능성</a> <span class="news-source">뉴시스 경제</span></li><li class="news-item"><a href="https://www.yna.co.kr/view/AKR20260814142900003" target="_blank" rel="noopener">[부동산캘린더] 내주 서울 신길동 써밋클라비온 등 3천788가구 분양</a> <span class="news-source">연합뉴스 경제</span></li><li class="news-item"><a href="https://www.newsis.com/view/NISX20260815_0003750405" target="_blank" rel="noopener">美재무 &quot;다음주 이란 고강도 경제제재&quot;…국제유가, 1%대 상승</a> <span class="news-source">뉴시스 경제</span></li><li class="news-item"><a href="https://www.newsis.com/view/NISX20260814_0003749758" target="_blank" rel="noopener">20년 묵은 '골칫거리' 염창공원, 1천가구 공공주택 품는다[8·13 신규택지 돋보기①]</a> <span class="news-source">뉴시스 경제</span></li><li class="news-item"><a href="https://www.newsis.com/view/NISX20260815_0003750403" target="_blank" rel="noopener">뉴욕증시, 숨고르기에 소폭 하락…나스닥 0.28%↓</a> <span class="news-source">뉴시스 경제</span></li><li class="news-item"><a href="https://www.newsis.com/view/NISX20260815_0003750399" target="_blank" rel="noopener">[속보]뉴욕증시, 소폭 하락 마감…나스닥 0.28%↓</a> <span class="news-source">뉴시스 경제</span></li><li class="news-item"><a href="https://www.newsis.com/view/NISX20260813_0003748455" target="_blank" rel="noopener">68개월→37개월…'빨리 짓기' 승부수, 주택 공급 체감 높일까</a> <span class="news-source">뉴시스 경제</span></li><li class="news-item"><a href="https://www.newsis.com/view/NISX20260814_0003749453" target="_blank" rel="noopener">美 증시 얼마나 과열됐길래…'버핏 지표' 238% 사상 최고</a> <span class="news-source">뉴시스 경제</span></li><li class="news-item"><a href="https://www.yna.co.kr/view/AKR20260814171200065" target="_blank" rel="noopener">'테라스 붕괴' 아파트 찾은 박찬대 &quot;시공·감리 책임 묻겠다&quot;</a> <span class="news-source">연합뉴스 경제</span></li><li class="news-item"><a href="https://www.yna.co.kr/view/AKR20260814050552003" target="_blank" rel="noopener">용산공원 부지에 주택공급 두고 정부-서울시 입장차 뚜렷(종합2보)</a> <span class="news-source">연합뉴스 경제</span></li><li class="news-item"><a href="https://biz.chosun.com/real_estate/real_estate_general/2026/08/14/4GHPP7GGHNF6NCGCQJAAU6GXSM/" target="_blank" rel="noopener">서울시 “용산공원 훼손해 주택 공급, 매우 신중해야”</a> <span class="news-source">조선비즈 부동산</span></li><li class="news-item"><a href="https://www.hankyung.com/article/2026081425951" target="_blank" rel="noopener">김윤덕 장관 &quot;용산공원 전체, 주택 공급지로 검토&quot;</a> <span class="news-source">한국경제 부동산</span></li><li class="news-item"><a href="https://www.hankyung.com/article/2026081425081" target="_blank" rel="noopener">올해 가계대출 증가액, 벌써 작년 육박</a> <span class="news-source">한국경제 경제</span></li><li class="news-item"><a href="https://www.yna.co.kr/view/AKR20260814141251008" target="_blank" rel="noopener">연휴 앞두고 국고채 금리 혼조세…초장기물 하락(종합)</a> <span class="news-source">연합뉴스 경제</span></li><li class="news-item"><a href="https://www.hankyung.com/article/2026081423891" target="_blank" rel="noopener">50년 된 용산 산호아파트, 35층 679가구로 탈바꿈</a> <span class="news-source">한국경제 부동산</span></li><li class="news-item"><a href="https://www.hankyung.com/article/2026081423931" target="_blank" rel="noopener">전·월세 안정화 카드?…'안심신탁'이 뭐길래</a> <span class="news-source">한국경제 부동산</span></li><li class="news-item"><a href="https://www.yna.co.kr/view/AKR20260814136400002" target="_blank" rel="noopener">금융위 &quot;청년에 비아파트 구입할 추가기회 제공…틈새시장 배려&quot;</a> <span class="news-source">연합뉴스 경제</span></li><li class="news-item"><a href="https://www.yna.co.kr/view/AKR20260814141200008" target="_blank" rel="noopener">국고채 금리 혼조세…3년물 연 3.796%</a> <span class="news-source">연합뉴스 경제</span></li><!--/prerender:news--></ul>
+    <ul class="news-list" id="news-list"><!--prerender:news--><li class="news-item"><a href="https://www.mk.co.kr/news/realestate/12128719" target="_blank" rel="noopener">“직접 보니 기대 이상”… ‘상동역 롯데캐슬 시그니처’ 견본주택 방문객 호평</a><div class="news-meta">매일경제 부동산</div><div class="news-preview">전용 84㎡A·C·F, 113㎡A·121㎡ 특화 평면·수납공간에 관심 85㎡ 초과 일반공급 전량 추첨제 적용 가점 낮은 수요자도 당첨 기회롯데건설이 경기도 부천시 원미구 상동에서..</div></li><li class="news-item"><a href="https://www.mk.co.kr/news/realestate/12128717" target="_blank" rel="noopener">노원구 하계동 극동아파트 55.72㎡, 7억원 최근 3년 신고가</a><div class="news-meta">매일경제 부동산</div><div class="news-preview">서울 노원구 하계동 극동아파트에서 전용 55.72㎡가 7억원에 거래되며 최근 3년 내 신고가를 기록했다. [단지 정보] | 준공 | 1988년 6월 | 세대수 | 1,980세대 |..</div></li><li class="news-item"><a href="https://www.newsis.com/view/NISX20260814_0003750050" target="_blank" rel="noopener">이주비 대출 완화…중소·중견사 정비사업 기회 열리나</a><div class="news-meta">뉴시스 경제</div><div class="news-preview">[서울=뉴시스]정진형 기자 = 정부가 도심 주택 공급을 늘리기 위해 8·13 대책에 이주비 대출 규제를 완화하고 관련 보증 상품을 신설하는 계획을 발표하면서 중소·중견 건설사들의 서울 수도권 정비사업 도전 길이 열릴…</div></li><li class="news-item"><a href="https://www.mk.co.kr/news/realestate/12128680" target="_blank" rel="noopener">‘한국 부동산 쇼핑’ 즐기던 왕서방 다 어디갔나…이 제도 탓에 발길 끊겼다는데</a><div class="news-meta">매일경제 부동산</div><div class="news-preview">외국인 토허제 시행 1년 부동산 쇼핑 2000명 뚝 국토부 시한연장 검토중외국인 토지거래허가구역 시행 1년 간 수도권에서 아파트나 상가 등을 사들인 외국인 수가 2000명 넘게 급..</div></li><li class="news-item"><a href="https://www.yna.co.kr/view/AKR20260815011500002" target="_blank" rel="noopener">[다음주 경제] 올해 성장전망 얼마나 높아질까…가계부채 규모도 주목</a><div class="news-meta">연합뉴스 경제</div><div class="news-preview">(서울=연합뉴스) 이세원 한지훈 배영경 기자 = 다음 주(8월 17∼21일)에는 한국개발연구원(KDI)의 수정 경제전망이 발표된다. 한국은행이 ...</div></li><li class="news-item"><a href="https://www.yna.co.kr/view/AKR20260814042200546" target="_blank" rel="noopener">[머니톡스] 서울로 서울로…해방의 기쁨과 함께 시작된 주택난</a><div class="news-meta">연합뉴스 경제</div><div class="news-preview">(서울=연합뉴스) 윤선희 선임기자 = ＃ 1945년 서울역사는 몸살을 앓았다. 만주, 일본, 중국 등지에서 돌아온 귀환 동포와 월남민들이 매일 ...</div></li><li class="news-item"><a href="https://www.newsis.com/view/NISX20260815_0003750408" target="_blank" rel="noopener">7월 미 소비자 지출 큰 폭 감소…경제 둔화 가능성</a><div class="news-meta">뉴시스 경제</div><div class="news-preview">[뉴욕=AP/뉴시스]강영진 기자 = 지난달 미국인들의 소비가 예상과 달리 큰 폭으로 줄었다. 미 상무부가 14일(현지시각) 발표한 자료에 따르면 소매판매는 지난달 0.6% 감소했다. 이는 2025년 5월 이후 가장…</div></li><li class="news-item"><a href="https://www.yna.co.kr/view/AKR20260814142900003" target="_blank" rel="noopener">[부동산캘린더] 내주 서울 신길동 써밋클라비온 등 3천788가구 분양</a><div class="news-meta">연합뉴스 경제</div><div class="news-preview">(세종=연합뉴스) 오진송 기자 = 다음 주 전국에서 3천788가구가 분양에 나선다.</div></li><li class="news-item"><a href="https://www.newsis.com/view/NISX20260815_0003750405" target="_blank" rel="noopener">美재무 &quot;다음주 이란 고강도 경제제재&quot;…국제유가, 1%대 상승</a><div class="news-meta">뉴시스 경제</div><div class="news-preview">[서울=뉴시스]고재은 기자 = 미국이 이란에 대한 경제적 고립을 재차 위협한 가운데 국제 유가가 14일(현지 시간) 1%대 상승 마감했다. CNBC 등에 따르면 이날 유럽 ICE선물거래소에서 브렌트유 10월 인도분…</div></li><li class="news-item"><a href="https://www.newsis.com/view/NISX20260814_0003749758" target="_blank" rel="noopener">20년 묵은 '골칫거리' 염창공원, 1천가구 공공주택 품는다[8·13 신규택지 돋보기①]</a><div class="news-meta">뉴시스 경제</div><div class="news-preview">[서울=뉴시스] 박성환 기자 = 정부가 서울 강서구 염창동과 경기 남양주·광주 등 수도권 3곳에 신규 공공주택지구를 조성해 2만7000가구를 공급한다. 특히 서울 강서구 염창동 염창공원은 서울 도심 내 신규 공공택지…</div></li><li class="news-item"><a href="https://www.newsis.com/view/NISX20260815_0003750403" target="_blank" rel="noopener">뉴욕증시, 숨고르기에 소폭 하락…나스닥 0.28%↓</a><div class="news-meta">뉴시스 경제</div><div class="news-preview">[서울=뉴시스]고재은 기자 = 미국 뉴욕증시가 사상 최고치를 기록한 이후 14일(현지 시간) 소폭 하락 마감했다. CNBC 등에 따르면 스탠더드앤드푸어스(S&amp;P) 500 지수는 전장 대비 13.23포인트(0.17%)…</div></li><li class="news-item"><a href="https://www.newsis.com/view/NISX20260815_0003750399" target="_blank" rel="noopener">[속보]뉴욕증시, 소폭 하락 마감…나스닥 0.28%↓</a><div class="news-meta">뉴시스 경제</div><div class="news-preview">후속기사가 이어집니다 ◎공감언론 뉴시스 jeko@newsis.com</div></li><li class="news-item"><a href="https://www.newsis.com/view/NISX20260813_0003748455" target="_blank" rel="noopener">68개월→37개월…'빨리 짓기' 승부수, 주택 공급 체감 높일까</a><div class="news-meta">뉴시스 경제</div><div class="news-preview">[서울=뉴시스]이연희 기자 = 정부가 공공택지와 비아파트, 재건축·재개발 등 주택 공급 전반에서 '물량'보다 '속도'에 초점을 맞춘 대책을 내놨다. 계획대로 추진될 경우 이재명 정부 임기 내 신규 택지 분양과 착공까…</div></li><li class="news-item"><a href="https://www.newsis.com/view/NISX20260814_0003749453" target="_blank" rel="noopener">美 증시 얼마나 과열됐길래…'버핏 지표' 238% 사상 최고</a><div class="news-meta">뉴시스 경제</div><div class="news-preview">[서울=뉴시스]이지영 기자 = 미국 증시의 과열 여부를 나타내는 이른바 '버핏 지표'가 사상 최고치를 기록했다. 14일(현지시간) 미국 투자전문매체 모틀리풀에 따르면 이날 버핏 지표는 238%까지 치솟았다. 역대 최…</div></li><li class="news-item"><a href="https://www.yna.co.kr/view/AKR20260814171200065" target="_blank" rel="noopener">'테라스 붕괴' 아파트 찾은 박찬대 &quot;시공·감리 책임 묻겠다&quot;</a><div class="news-meta">연합뉴스 경제</div><div class="news-preview">(인천=연합뉴스) 홍현기 기자 = 박찬대 인천시장은 14일 준공 1년 6개월 만에 외벽 테라스가 무너진 인천 송도국제도시 아파트를 찾아 시공사와...</div></li><li class="news-item"><a href="https://www.yna.co.kr/view/AKR20260814050552003" target="_blank" rel="noopener">용산공원 부지에 주택공급 두고 정부-서울시 입장차 뚜렷(종합2보)</a><div class="news-meta">연합뉴스 경제</div><div class="news-preview">(서울·세종=연합뉴스) 임기창 오진송 김동규 기자 = 서울 용산공원 부지를 활용해 도심에 주택을 공급하는 방안을 두고 정부와 서울시가 뚜렷한 견...</div></li><li class="news-item"><a href="https://biz.chosun.com/real_estate/real_estate_general/2026/08/14/4GHPP7GGHNF6NCGCQJAAU6GXSM/" target="_blank" rel="noopener">서울시 “용산공원 훼손해 주택 공급, 매우 신중해야”</a><div class="news-meta">조선비즈 부동산</div></li><li class="news-item"><a href="https://www.hankyung.com/article/2026081425951" target="_blank" rel="noopener">김윤덕 장관 &quot;용산공원 전체, 주택 공급지로 검토&quot;</a><div class="news-meta">한국경제 부동산</div></li><li class="news-item"><a href="https://www.hankyung.com/article/2026081425081" target="_blank" rel="noopener">올해 가계대출 증가액, 벌써 작년 육박</a><div class="news-meta">한국경제 경제</div></li><li class="news-item"><a href="https://www.yna.co.kr/view/AKR20260814141251008" target="_blank" rel="noopener">연휴 앞두고 국고채 금리 혼조세…초장기물 하락(종합)</a><div class="news-meta">연합뉴스 경제</div><div class="news-preview">(서울=연합뉴스) 강수지 기자 = 14일 국고채 금리가 혼조세를 보였다.</div></li><li class="news-item"><a href="https://www.hankyung.com/article/2026081423891" target="_blank" rel="noopener">50년 된 용산 산호아파트, 35층 679가구로 탈바꿈</a><div class="news-meta">한국경제 부동산</div></li><li class="news-item"><a href="https://www.hankyung.com/article/2026081423931" target="_blank" rel="noopener">전·월세 안정화 카드?…'안심신탁'이 뭐길래</a><div class="news-meta">한국경제 부동산</div></li><li class="news-item"><a href="https://www.yna.co.kr/view/AKR20260814136400002" target="_blank" rel="noopener">금융위 &quot;청년에 비아파트 구입할 추가기회 제공…틈새시장 배려&quot;</a><div class="news-meta">연합뉴스 경제</div><div class="news-preview">(서울=연합뉴스) 배영경 강류나 기자 = 금융위원회는 14일 청년의 4억원 이하 비아파트 구입을 지원하는 '청년미래보금자리론' 도입 취지에 관해...</div></li><li class="news-item"><a href="https://www.yna.co.kr/view/AKR20260814141200008" target="_blank" rel="noopener">국고채 금리 혼조세…3년물 연 3.796%</a><div class="news-meta">연합뉴스 경제</div><div class="news-preview">(서울=연합뉴스) 14일 국고채 금리가 혼조세를 보였다.</div></li><!--/prerender:news--></ul>
     <a class="archive-link" id="news-archive-link" href="#archive-section">지난 기록 보기 ↓</a>
   </section>
 
@@ -706,6 +719,9 @@
       summaryEmpty: "아직 생성된 요약이 없습니다.",
       loadFailedNotice: "데이터를 불러오지 못했습니다.",
       retry: "다시 시도",
+      installPrompt: "홈 화면에 추가하면 매일 아침 바로 열 수 있습니다.",
+      installAction: "설치",
+      installDismiss: "닫기",
       summaryFallbackNote: "일부 항목은 검증에서 걸러져 헤드라인 요약으로 대체됐습니다.",
       summaryMeta: (model, date) => `${model} 생성 · ${date}`,
       marketHeading: "자산 시장 지표",
@@ -780,6 +796,9 @@
       summaryEmpty: "No summary generated yet.",
       loadFailedNotice: "Could not load the data.",
       retry: "Retry",
+      installPrompt: "Add it to your home screen to open it every morning.",
+      installAction: "Install",
+      installDismiss: "Dismiss",
       summaryFallbackNote: "Some summaries failed verification and were replaced with headline lists.",
       summaryMeta: (model, date) => `Generated by ${model} · ${date}`,
       marketHeading: "Market Indicators",
@@ -1694,6 +1713,9 @@
     document.getElementById("footer-privacy-link").textContent = t("footerPrivacyLink");
     document.getElementById("load-error-text").textContent = t("loadFailedNotice");
     document.getElementById("load-error-retry").textContent = t("retry");
+    document.getElementById("install-text").textContent = t("installPrompt");
+    document.getElementById("install-accept").textContent = t("installAction");
+    document.getElementById("install-dismiss").textContent = t("installDismiss");
 
     const notice = document.getElementById("content-notice");
     const noticeText = t("contentNotice");
@@ -1908,6 +1930,40 @@
     fetchLiveUsdKrw();
     setInterval(fetchLiveUsdKrw, 5 * 60 * 1000);
   }
+
+  // 매일 보는 성격의 사이트라 설치가 재방문에 직결된다. 다만 배너를 계속 띄우면
+  // 그 자체가 방해가 되므로, 브라우저가 설치 가능하다고 알려줄 때만 한 번 띄우고
+  // 닫으면 다시 묻지 않는다.
+  const INSTALL_DISMISSED_KEY = "installDismissed";
+  let installPrompt = null;
+
+  window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    if (window.localStorage.getItem(INSTALL_DISMISSED_KEY) === "1") return;
+    installPrompt = e;
+    document.getElementById("install-banner").hidden = false;
+    window.analytics?.event("install_prompt_shown");
+  });
+
+  function hideInstallBanner(dismissed) {
+    document.getElementById("install-banner").hidden = true;
+    if (dismissed) window.localStorage.setItem(INSTALL_DISMISSED_KEY, "1");
+  }
+
+  document.getElementById("install-accept").addEventListener("click", async () => {
+    if (!installPrompt) return hideInstallBanner(true);
+    hideInstallBanner(false);
+    installPrompt.prompt();
+    const choice = await installPrompt.userChoice.catch(() => null);
+    installPrompt = null;
+    window.analytics?.event("install_prompt_result", { outcome: choice?.outcome ?? "unknown" });
+    if (choice?.outcome === "dismissed") window.localStorage.setItem(INSTALL_DISMISSED_KEY, "1");
+  });
+
+  document.getElementById("install-dismiss").addEventListener("click", () => {
+    hideInstallBanner(true);
+    window.analytics?.event("install_prompt_result", { outcome: "banner_dismissed" });
+  });
 
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {

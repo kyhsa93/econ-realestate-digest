@@ -183,3 +183,19 @@ test("좁은 화면 카드 라벨이 클라이언트 사전과 같은 글자다"
     assert.ok(indexHtml.includes(`: "${label}"`), `시장지표 표 라벨이 사전에 없다: ${label}`);
   }
 });
+
+// 정적 마크업과 클라이언트 마크업의 구조가 다르면 데이터를 받는 순간 높이가 바뀌며
+// 화면이 밀린다. 광고가 붙은 페이지라 이 밀림은 수익에도 영향을 준다.
+test("정적 마크업이 클라이언트가 그리는 구조와 같은 뼈대다", async () => {
+  const news = await readData("news");
+  const item = newsHtml(news).split("</li>")[0];
+
+  // 기사 한 건은 제목 줄 + 매체 줄(+ 미리보기)로, 클라이언트와 같은 요소를 쓴다.
+  assert.ok(item.includes('<div class="news-meta">'), "매체 줄이 다른 요소로 그려진다");
+  assert.ok(!item.includes('class="news-source"'), "클라이언트에 없는 클래스를 쓴다");
+
+  const realestate = realestateHtml(await readData("realestate"));
+  // 값만 있고 증감·건수가 없으면 셀 높이가 하이드레이션 뒤에 바뀐다.
+  assert.ok(realestate.includes('<span class="change">'), "증감이 빠져 있다");
+  assert.ok(realestate.includes('<span class="count">'), "거래 건수가 빠져 있다");
+});
