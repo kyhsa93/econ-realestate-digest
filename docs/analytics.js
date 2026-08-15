@@ -24,6 +24,9 @@
   const debugMode = new URLSearchParams(location.search ?? "").has("ga_debug");
   gtag("config", GA_MEASUREMENT_ID, {
     send_page_view: false,
+    // 블로그(kyhsa93.github.io)와 같은 GA 속성·같은 도메인이라 이걸 안 붙이면
+    // 보고서에서 블로그 글과 이 사이트 페이지가 한 목록에 섞인다.
+    content_group: "digest",
     ...(debugMode ? { debug_mode: true } : {}),
   });
 

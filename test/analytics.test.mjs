@@ -79,6 +79,8 @@ test("페이지뷰 자동 전송은 꺼두고 로더가 gtag/adsense를 붙인�
   const config = a.calls().find(([kind]) => kind === "config");
   assert.ok(config, "config 호출이 있어야 한다");
   assert.equal(config[2].send_page_view, false);
+  // 블로그와 같은 속성을 쓰므로 이게 빠지면 보고서에서 두 사이트가 섞인다.
+  assert.equal(config[2].content_group, "digest");
 
   const srcs = a.scriptSrcs();
   assert.ok(srcs.some((s) => s.includes("googletagmanager.com/gtag/js?id=G-")));
