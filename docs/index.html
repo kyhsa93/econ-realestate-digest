@@ -750,6 +750,8 @@
         <tbody id="realestate-grid"><!--prerender:realestate--><tr><td>서울 전체</td><td data-label="매매">4,449만원 <span class="change">+340만</span> <span class="count">575건</span></td><td data-label="전세">2,571만원 <span class="change">+38만</span> <span class="count">2,525건</span></td><td data-label="월세">22,166만원 / 월 96만원 <span class="count">2,223건</span></td></tr><tr><td>강남구</td><td data-label="매매">10,870만원 <span class="change">+712만</span> <span class="count">14건</span></td><td data-label="전세">4,022만원 <span class="change">+1만</span> <span class="count">169건</span></td><td data-label="월세">41,755만원 / 월 164만원 <span class="count">102건</span></td></tr><tr><td>성동구</td><td data-label="매매">10,843만원 <span class="count">5건</span></td><td data-label="전세">3,263만원 <span class="change">-116만</span> <span class="count">102건</span></td><td data-label="월세">17,548만원 / 월 131만원 <span class="count">136건</span></td></tr><tr><td>서초구</td><td data-label="매매">8,780만원 <span class="change">-2,472만</span> <span class="count">10건</span></td><td data-label="전세">2,981만원 <span class="change">+322만</span> <span class="count">251건</span></td><td data-label="월세">50,941만원 / 월 234만원 <span class="count">93건</span></td></tr><tr><td>용산구</td><td data-label="매매">7,988만원 <span class="change">+675만</span> <span class="count">5건</span></td><td data-label="전세">3,365만원 <span class="change">+201만</span> <span class="count">58건</span></td><td data-label="월세">45,686만원 / 월 265만원 <span class="count">45건</span></td></tr><tr><td>광진구</td><td data-label="매매">7,617만원 <span class="change">-303만</span> <span class="count">7건</span></td><td data-label="전세">3,035만원 <span class="change">+387만</span> <span class="count">35건</span></td><td data-label="월세">35,019만원 / 월 122만원 <span class="count">38건</span></td></tr><tr><td>송파구</td><td data-label="매매">6,912만원 <span class="count">16건</span></td><td data-label="전세">3,375만원 <span class="change">+114만</span> <span class="count">168건</span></td><td data-label="월세">39,481만원 / 월 132만원 <span class="count">110건</span></td></tr><tr><td>중구</td><td data-label="매매">6,908만원 <span class="change">+3,868만</span> <span class="count">7건</span></td><td data-label="전세">3,221만원 <span class="change">+178만</span> <span class="count">32건</span></td><td data-label="월세">21,035만원 / 월 125만원 <span class="count">32건</span></td></tr><tr><td>영등포구</td><td data-label="매매">6,201만원 <span class="change">+2,385만</span> <span class="count">21건</span></td><td data-label="전세">2,770만원 <span class="change">+146만</span> <span class="count">115건</span></td><td data-label="월세">22,316만원 / 월 123만원 <span class="count">83건</span></td></tr><tr><td>마포구</td><td data-label="매매">5,695만원 <span class="count">11건</span></td><td data-label="전세">2,939만원 <span class="change">+55만</span> <span class="count">98건</span></td><td data-label="월세">22,001만원 / 월 108만원 <span class="count">92건</span></td></tr><tr><td>동작구</td><td data-label="매매">5,691만원 <span class="change">-112만</span> <span class="count">9건</span></td><td data-label="전세">3,053만원 <span class="change">-157만</span> <span class="count">83건</span></td><td data-label="월세">26,882만원 / 월 93만원 <span class="count">69건</span></td></tr><!--/prerender:realestate--></tbody>
       </table>
     </div>
+    <a class="back-link" id="realestate-more" href="./realestate.html" hidden></a>
+
     <div class="realestate-history-controls">
       <label for="realestate-district-select" id="realestate-district-select-label">지역 선택</label>
       <select id="realestate-district-select"></select>
@@ -841,6 +843,7 @@
       realestateHeading: "한국 부동산 가격 추이",
       realestateError: "데이터를 불러오지 못했습니다.",
       realestateOverallLabel: "서울 25개구 평균",
+      realestateMoreLink: (n) => `자치구 ${n}개 전체 보기 →`,
       realestateUnitCaption: "전용면적 기준 평당가(3.3㎡) · 국토교통부 아파트매매·전월세 실거래가 (서울 25개 자치구 전체). 공급면적(공용면적 포함) 기준 시세보다 높게 나올 수 있습니다. 신고 건수가 5건 미만인 구는 평균이 거래 한두 건에 좌우돼서 값을 보여주지 않습니다(월초에 특히 잦습니다).",
       realestateCountSuffix: (n) => `${n}건`,
       realestateLowSample: (n) => `표본 ${n}건`,
@@ -926,6 +929,7 @@
       realestateHeading: "Korean Real Estate Price Trend",
       realestateError: "Failed to load data.",
       realestateOverallLabel: "Seoul 25-district average",
+      realestateMoreLink: (n) => `See all ${n} districts →`,
       realestateUnitCaption: "Price per pyeong of exclusive area (3.3㎡) · based on MOLIT apartment sale & lease transactions (all 25 Seoul districts). May read higher than prices quoted by supply area (which includes shared space). Districts with fewer than 5 reported transactions are left blank, since one or two sales would decide the average (common early in the month).",
       realestateCountSuffix: (n) => `${n} txns`,
       realestateLowSample: (n) => `${n} txns only`,
@@ -1368,10 +1372,20 @@
     const input = document.getElementById("realestate-search-input");
     if (!input) return;
     const query = input.value.trim().toLowerCase();
-    document.querySelectorAll("#realestate-grid tr[data-district-name]").forEach((tr) => {
+    const rows = document.querySelectorAll("#realestate-grid tr[data-district-name]");
+    rows.forEach((tr, index) => {
       const name = (tr.getAttribute("data-district-name") || "").toLowerCase();
-      tr.hidden = query.length > 0 && !name.includes(query);
+      tr.hidden = query.length > 0 ? !name.includes(query) : index >= MAX_VISIBLE_DISTRICTS;
     });
+
+    // 감춘 구가 있다는 걸 알리고 전체를 볼 곳으로 보낸다. 그냥 잘라두면 서울에
+    // 열 개 구만 있는 것처럼 보인다.
+    const link = document.getElementById("realestate-more");
+    if (link) {
+      const hidden = !query && rows.length > MAX_VISIBLE_DISTRICTS;
+      link.hidden = !hidden;
+      link.textContent = t("realestateMoreLink")(rows.length);
+    }
   }
 
   // 금리 표는 머리글로 정렬되는데 부동산 표만 평당가 고정이라 조작 방식이 달랐다.
@@ -1416,6 +1430,15 @@
       button.textContent = active ? `${base} ${realestateSort.dir === "asc" ? "\u25b2" : "\u25bc"}` : base;
     }
   }
+
+  // 정적 HTML은 상위 10개 구만 심는데 화면이 25개를 다 그리면, 데이터를 받는 순간
+  // 표가 열한 행에서 스물여섯 행으로 늘어나면서 아래 섹션이 통째로 밀린다(광고가
+  // 붙은 페이지라 이 밀림은 수익에도 영향을 준다). scripts/prerender.mjs의
+  // MAX_DISTRICTS와 같은 값이어야 한다.
+  //
+  // 나머지 구를 DOM에서 빼지는 않는다 - 지역 검색이 여기 있어서, 안 그리면 "강북구"를
+  // 검색해도 안 나온다. 감춰만 두고 검색할 때 다시 보인다.
+  const MAX_VISIBLE_DISTRICTS = 10;
 
   function renderRealestate(realestate) {
     const tbody = document.getElementById("realestate-grid");

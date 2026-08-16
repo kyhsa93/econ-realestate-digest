@@ -8,7 +8,18 @@ import vm from "node:vm";
 const root = path.resolve(import.meta.dirname, "../..");
 
 function stubElement() {
+  // 리스너를 실제로 붙잡아 둬야 한다. Proxy가 삼켜버리면 화면이 이벤트를 안 듣는
+  // 것과 구분이 안 되고, 테스트는 "아무 일도 안 일어남"만 보게 된다.
+  const listeners = {};
   const base = {
+    listeners,
+    addEventListener(type, fn) {
+      (listeners[type] ||= []).push(fn);
+    },
+    removeEventListener() {},
+    dispatch(type, extra = {}) {
+      for (const fn of listeners[type] ?? []) fn({ target: this, ...extra });
+    },
     textContent: "",
     innerHTML: "",
     value: "",
@@ -84,7 +95,29 @@ export async function loadIndexPage({ analytics, fetch: fetchImpl, search = "", 
         if (!byId.has(id)) byId.set(id, stubElement());
         return byId.get(id);
       },
-      querySelectorAll: () => [],
+      // "#realestate-grid tr[data-district-name]" 같은 셀렉터를 실제로 답한다.
+      // 빈 배열만 돌려주면 화면이 행을 감추는 코드(지역 검색, 상위 N개 제한)가
+      // 통째로 안 돌고, 그 상태가 "기능이 없는 것"과 구분되지 않은 채 통과한다.
+      querySelectorAll: (sel) => {
+        const m = /^#([\w-]+) tr\[data-([\w-]+)\]$/.exec(String(sel));
+        if (!m) return [];
+        const parent = byId.get(m[1]);
+        if (!parent) return [];
+
+        const html = String(parent.innerHTML ?? "");
+        // innerHTML이 그대로면 같은 노드를 돌려줘야 hidden 같은 상태가 유지된다.
+        if (parent._rowsHtml !== html) {
+          const attr = `data-${m[2]}`;
+          const re = new RegExp(`<tr[^>]*${attr}="([^"]*)"`, "g");
+          parent._rowsHtml = html;
+          parent._rows = [...html.matchAll(re)].map(([, value]) => {
+            const row = stubElement();
+            row.getAttribute = (name) => (name === attr ? value : null);
+            return row;
+          });
+        }
+        return parent._rows;
+      },
       // 실제 문서엔 있는 요소들이라, null을 주면 페이지가 로드 도중 죽어버려서
       // 정작 보려던 렌더 동작에 닿지 못한다(금리 하네스와 같은 이유).
       querySelector: (sel) => {
