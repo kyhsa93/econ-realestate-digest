@@ -1,10 +1,14 @@
 import { XMLParser } from "fast-xml-parser";
 import { writeFile, mkdir, readFile } from "node:fs/promises";
 import path from "node:path";
+import { attachPrevious, isPreviousUsable } from "./realestate-previous.mjs";
 
 const dataDir = path.resolve(import.meta.dirname, "../docs/data");
 const outFile = path.join(dataDir, "realestate.json");
 const historyFile = path.join(dataDir, "realestate-history.json");
+// 지난달 요약. 달이 바뀔 때 한 번만 받고 커밋해 둔다 - CI는 매번 새 러너라 gitignore된
+// 캐시는 남지 않고, 그러면 매일 두 달치를 조회해 호출 한도에 걸린다.
+const previousFile = path.join(dataDir, "realestate-prev.json");
 const HISTORY_MAX_DAYS = 180;
 
 const SALE_API_URL = process.env.MOLIT_API_ENDPOINT;
@@ -344,12 +348,12 @@ async function main() {
 
   const yearMonths = [kstYearMonth(now, 0)];
 
-  async function fetchDistrictEntry({ code, name }) {
+  async function fetchDistrictEntry({ code, name }, months = yearMonths) {
     const entry = { code, name, sale: null, saleNational84: null, jeonse: null, wolse: null };
 
     if (hasSale) {
       try {
-        const saleResult = await fetchDistrictSale(code, yearMonths);
+        const saleResult = await fetchDistrictSale(code, months);
         entry.sale = saleResult.sale;
         entry.saleNational84 = saleResult.saleNational84;
       } catch (err) {
@@ -358,7 +362,7 @@ async function main() {
     }
     if (hasRent) {
       try {
-        const rent = await fetchDistrictRent(code, yearMonths);
+        const rent = await fetchDistrictRent(code, months);
         entry.jeonse = rent.jeonse;
         entry.wolse = rent.wolse;
       } catch (err) {
@@ -369,7 +373,7 @@ async function main() {
     return entry.sale || entry.jeonse || entry.wolse ? entry : null;
   }
 
-  const results = await mapWithConcurrency(targetDistricts, CONCURRENCY, fetchDistrictEntry);
+  const results = await mapWithConcurrency(targetDistricts, CONCURRENCY, (d) => fetchDistrictEntry(d));
 
   const failedIndexes = results.map((r, i) => (r ? -1 : i)).filter((i) => i >= 0);
   if (failedIndexes.length > 0) {
@@ -377,7 +381,7 @@ async function main() {
     const retried = await mapWithConcurrency(
       failedIndexes.map((i) => targetDistricts[i]),
       CONCURRENCY,
-      fetchDistrictEntry
+      (d) => fetchDistrictEntry(d)
     );
     failedIndexes.forEach((i, j) => {
       if (retried[j]) results[i] = retried[j];
@@ -462,7 +466,38 @@ async function main() {
   const baseline = findBaseline(history, now);
   const withChanges = attachChanges(overall, districts, baseline);
 
-  const payload = { updatedAt: now.toISOString(), period, ...withChanges };
+  // 지난달 값을 얹는다. 이번 달 신고가 아직 얇은 구는 화면이 이쪽으로 대체하고,
+  // 그 셀이 어느 달 기준인지 같이 표시한다.
+  const previousPeriod = kstYearMonth(now, 1);
+  let previous = null;
+  try {
+    previous = JSON.parse(await readFile(previousFile, "utf-8"));
+  } catch {
+    previous = null;
+  }
+
+  if (!isPreviousUsable(previous, previousPeriod)) {
+    console.log(`[fetch-realestate] 지난달(${previousPeriod}) 캐시 없음, 이번 한 번만 조회`);
+    try {
+      const prevResults = await mapWithConcurrency(DISTRICTS, CONCURRENCY, (d) =>
+        fetchDistrictEntry(d, [previousPeriod])
+      );
+      const prevDistricts = prevResults.filter(Boolean);
+      if (prevDistricts.length) {
+        previous = { period: previousPeriod, fetchedAt: now.toISOString(), districts: prevDistricts };
+        await writeFile(previousFile, JSON.stringify(previous, null, 2));
+        console.log(`[fetch-realestate] 지난달 캐시 저장 (${prevDistricts.length}개구)`);
+      } else {
+        previous = null;
+      }
+    } catch (err) {
+      // 지난달 조회가 실패해도 이번 달 데이터는 그대로 낸다. 다음 실행에서 다시 시도된다.
+      console.error(`[fetch-realestate] 지난달 조회 실패: ${err.message}`);
+      previous = null;
+    }
+  }
+
+  const payload = attachPrevious({ updatedAt: now.toISOString(), period, ...withChanges }, previous);
 
   await mkdir(dataDir, { recursive: true });
   await writeFile(outFile, JSON.stringify(payload, null, 2));

@@ -15,7 +15,11 @@ import {
   areaPrice,
   formatEok,
   formatMan,
+  formatPercent,
+  jeonseRatio,
   metricOf,
+  monthLabel,
+  resolveMetric,
   valueOf,
 } from "./realestate-format.mjs";
 
@@ -206,6 +210,7 @@ const RE_LABELS = {
   deposit: "평균 보증금",
   monthly: "평균 월세",
   count: "거래건수",
+  ratio: "전세가율",
   overall: "서울 전체",
 };
 
@@ -216,12 +221,10 @@ const reEok = (v) => formatEok(v);
 function reHeadLabels(kind) {
   if (!kind) return [RE_LABELS.district, RE_LABELS.sale, RE_LABELS.jeonse, RE_LABELS.wolse];
   if (kind === "wolse") return [RE_LABELS.district, RE_LABELS.deposit, RE_LABELS.monthly, RE_LABELS.count];
-  return [
-    RE_LABELS.district,
-    kind === "jeonse" ? RE_LABELS.perPyeongDeposit : RE_LABELS.perPyeong,
-    RE_LABELS.area,
-    RE_LABELS.count,
-  ];
+  if (kind === "jeonse") {
+    return [RE_LABELS.district, RE_LABELS.perPyeongDeposit, RE_LABELS.area, RE_LABELS.ratio, RE_LABELS.count];
+  }
+  return [RE_LABELS.district, RE_LABELS.perPyeong, RE_LABELS.area, RE_LABELS.count];
 }
 
 export function realestateHeadHtml(kind = null) {
@@ -241,49 +244,71 @@ const reCountSpan = (metric) =>
     ? ` <span class="count">${escapeHtml(reCount(metric.transactionCount))}</span>`
     : "";
 
+// 지난달 값으로 대체한 셀. 어느 달 기준인지 밝히지 않으면 8월 표에 7월 숫자가
+// 섞인 채로 읽힌다.
+function rePrevTag(isPrevious, previousPeriod) {
+  if (!isPrevious) return "";
+  const label = monthLabel(previousPeriod);
+  if (!label) return "";
+  return ` <span class="prev-tag" title="${escapeHtml("이번 달 신고가 아직 적어 지난달 기준으로 보여줍니다.")}">${escapeHtml(label)}</span>`;
+}
+
 function reLowSample(metric) {
   const n = metric?.transactionCount ?? 0;
   return `<span class="low-sample" title="${escapeHtml(`이번 달 신고가 ${n}건뿐이라 평균을 내지 않았습니다.`)}">${escapeHtml(`신고 ${n}건`)}</span>`;
 }
 
-function reCells(entry, kind) {
-  const metric = metricOf(entry, kind);
-  if (!metric) {
+function reCells(entry, kind, previousPeriod) {
+  const resolved = resolveMetric(entry, kind);
+  if (!resolved) {
     const raw = entry?.[KIND_FIELDS[kind].metric];
     return [raw ? reLowSample(raw) : "-", "-", "-"];
   }
+  const { metric, isPrevious } = resolved;
+  const tag = rePrevTag(isPrevious, previousPeriod);
+  // 증감은 이번 달 값끼리 비교한 것이라, 지난달로 대체한 셀에는 붙이지 않는다.
+  const change = (c, d) => (isPrevious ? "" : reChange(c, d));
+
   if (kind === "wolse") {
     return [
-      `<span class="price-strong">${reMan(metric.avgDeposit10k)}</span>${reChange(metric.depositChange, metric.baselineDate)}`,
-      `<span class="price-strong">월 ${reMan(metric.avgMonthlyRent10k)}</span>${reChange(metric.monthlyRentChange, metric.baselineDate)}`,
+      `<span class="price-strong">${reMan(metric.avgDeposit10k)}</span>${change(metric.depositChange, metric.baselineDate)}${tag}`,
+      `<span class="price-strong">월 ${reMan(metric.avgMonthlyRent10k)}</span>${change(metric.monthlyRentChange, metric.baselineDate)}`,
       `<span class="count">${escapeHtml(reCount(metric.transactionCount))}</span>`,
     ];
   }
   const perPyeong = valueOf(metric, kind);
-  return [
-    `<span class="price-strong">${reMan(perPyeong)}</span>${reChange(metric.change, metric.baselineDate)}`,
+  const cells = [
+    `<span class="price-strong">${reMan(perPyeong)}</span>${change(metric.change, metric.baselineDate)}${tag}`,
     `<span class="price-strong">${reEok(areaPrice(perPyeong))}</span>`,
-    `<span class="count">${escapeHtml(reCount(metric.transactionCount))}</span>`,
   ];
+  if (kind === "jeonse") {
+    const ratio = jeonseRatio(entry);
+    cells.push(ratio ? `<span class="ratio">${formatPercent(ratio.ratio)}</span>` : "-");
+  }
+  cells.push(`<span class="count">${escapeHtml(reCount(metric.transactionCount))}</span>`);
+  return cells;
 }
 
-function reAllCells(entry) {
+function reAllCells(entry, previousPeriod) {
   return ["sale", "jeonse", "wolse"].map((kind) => {
-    const metric = metricOf(entry, kind);
-    if (!metric) {
+    const resolved = resolveMetric(entry, kind);
+    if (!resolved) {
       const raw = entry?.[KIND_FIELDS[kind].metric];
       return raw ? reLowSample(raw) : "-";
     }
+    const { metric, isPrevious } = resolved;
+    const tag = rePrevTag(isPrevious, previousPeriod);
     if (kind === "wolse") {
-      return `${reMan(metric.avgDeposit10k)} / 월 ${reMan(metric.avgMonthlyRent10k)}${reCountSpan(metric)}`;
+      return `${reMan(metric.avgDeposit10k)} / 월 ${reMan(metric.avgMonthlyRent10k)}${reCountSpan(metric)}${tag}`;
     }
-    return `${reMan(valueOf(metric, kind))}${reChange(metric.change, metric.baselineDate)}${reCountSpan(metric)}`;
+    const change = isPrevious ? "" : reChange(metric.change, metric.baselineDate);
+    return `${reMan(valueOf(metric, kind))}${change}${reCountSpan(metric)}${tag}`;
   });
 }
 
-function reRow(entry, label, isOverall, kind) {
+function reRow(entry, label, isOverall, kind, previousPeriod) {
   const labels = reHeadLabels(kind);
-  const cells = kind ? reCells(entry, kind) : reAllCells(entry);
+  const cells = kind ? reCells(entry, kind, previousPeriod) : reAllCells(entry, previousPeriod);
   const body = cells
     .map((cell, i) => `<td data-label="${escapeHtml(labels[i + 1])}">${cell}</td>`)
     .join("");
@@ -294,8 +319,8 @@ function reRow(entry, label, isOverall, kind) {
 function reSorted(districts, kind) {
   const key = kind ?? "sale";
   return [...districts].sort((a, b) => {
-    const av = valueOf(metricOf(a, key), key);
-    const bv = valueOf(metricOf(b, key), key);
+    const av = valueOf(resolveMetric(a, key)?.metric, key);
+    const bv = valueOf(resolveMetric(b, key)?.metric, key);
     if (av === null && bv === null) return (a.name ?? "").localeCompare(b.name ?? "");
     if (av === null) return 1;
     if (bv === null) return -1;
@@ -306,10 +331,11 @@ function reSorted(districts, kind) {
 export function realestateTableHtml(realestate, kind = null) {
   const districts = realestate?.districts ?? [];
   if (!realestate?.overall && !districts.length) return null;
+  const previousPeriod = realestate.previousPeriod;
   return (
-    (realestate.overall ? reRow(realestate.overall, RE_LABELS.overall, true, kind) : "") +
+    (realestate.overall ? reRow(realestate.overall, RE_LABELS.overall, true, kind, previousPeriod) : "") +
     reSorted(districts, kind)
-      .map((d) => reRow(d, d.name ?? "-", false, kind))
+      .map((d) => reRow(d, d.name ?? "-", false, kind, previousPeriod))
       .join("")
   );
 }
@@ -327,7 +353,7 @@ export function realestateOverallHtml(realestate, kind = null) {
   if (!kind) {
     return ["sale", "jeonse", "wolse"]
       .map((k) => {
-        const metric = metricOf(overall, k);
+        const metric = resolveMetric(overall, k)?.metric;
         const label = RE_LABELS[k];
         if (!metric) return card(label, "-", "");
         if (k === "wolse") {
@@ -346,7 +372,7 @@ export function realestateOverallHtml(realestate, kind = null) {
       .join("");
   }
 
-  const metric = metricOf(overall, kind);
+  const metric = resolveMetric(overall, kind)?.metric;
   if (!metric) return card(RE_LABELS.overall, "-", "");
   if (kind === "wolse") {
     return (
@@ -356,9 +382,11 @@ export function realestateOverallHtml(realestate, kind = null) {
     );
   }
   const perPyeong = valueOf(metric, kind);
+  const ratio = kind === "jeonse" ? jeonseRatio(overall) : null;
   return (
     card(kind === "jeonse" ? RE_LABELS.perPyeongDeposit : RE_LABELS.perPyeong, reMan(perPyeong), "") +
     card(RE_LABELS.area, reEok(areaPrice(perPyeong)), "") +
+    (ratio ? card(RE_LABELS.ratio, formatPercent(ratio.ratio), "") : "") +
     card(RE_LABELS.count, escapeHtml(reCount(metric.transactionCount)), "")
   );
 }

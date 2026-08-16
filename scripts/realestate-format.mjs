@@ -69,3 +69,53 @@ export function metricOf(entry, kind) {
 }
 
 export const valueOf = (metric, kind) => metric?.[KIND_FIELDS[kind].value] ?? null;
+
+/**
+ * 이번 달 표본이 모자라면 지난달 값으로 대체한다. 어느 쪽을 썼는지 같이 돌려주는 게
+ * 핵심이다 - 화면이 그걸 표시해야 표를 읽는 사람이 기준을 안다. 값을 조용히
+ * 바꿔치기하면 "8월 시세"라고 적힌 표에 7월 숫자가 섞인다.
+ */
+export function resolveMetric(entry, kind) {
+  const current = metricOf(entry, kind);
+  if (current) return { metric: current, isPrevious: false };
+
+  const previous = entry?.prev ? metricOf(entry.prev, kind) : null;
+  if (previous) return { metric: previous, isPrevious: true };
+
+  return null;
+}
+
+/**
+ * 전세가율 = 전세 평당 보증금 / 매매 평당가. 매매가 대비 전세가 얼마나 비싼지를
+ * 한 숫자로 보여주는 지표라 갭투자 부담과 보증금 회수 위험을 가늠할 때 쓰인다.
+ * 우리는 매매·전세 평당가를 둘 다 갖고 있으므로 계산만 하면 되는데, 이걸 표로
+ * 주는 곳이 드물다.
+ *
+ * 두 지표가 서로 다른 달 기준이면 내지 않는다 - 7월 전세를 8월 매매로 나눈 값은
+ * 어느 시점의 전세가율도 아니다. 한쪽 표본이 모자랄 때도 마찬가지다(매매 5건짜리
+ * 구에서 30%가 나오는 건 시세가 아니라 그 한 채의 가격 때문이다).
+ */
+export function jeonseRatio(entry) {
+  const sale = resolveMetric(entry, "sale");
+  const jeonse = resolveMetric(entry, "jeonse");
+  if (!sale || !jeonse || sale.isPrevious !== jeonse.isPrevious) return null;
+
+  const salePrice = valueOf(sale.metric, "sale");
+  const jeonsePrice = valueOf(jeonse.metric, "jeonse");
+  if (!salePrice || !jeonsePrice) return null;
+
+  return { ratio: (jeonsePrice / salePrice) * 100, isPrevious: sale.isPrevious };
+}
+
+export const formatPercent = (value) =>
+  typeof value === "number" && Number.isFinite(value) ? `${value.toFixed(1)}%` : "-";
+
+/** 대체된 셀에 붙일 기준 월. "202607" → "7월". */
+export function monthLabel(period, locale = "ko") {
+  const month = Number(String(period ?? "").slice(4, 6));
+  if (!Number.isInteger(month) || month < 1 || month > 12) return "";
+  if (locale === "en") {
+    return ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][month - 1];
+  }
+  return `${month}월`;
+}

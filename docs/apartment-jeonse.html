@@ -229,7 +229,18 @@
   .change { font-size: 0.76rem; }
   .change.up { color: #d64545; }
   .change.down { color: #2f6fed; }
+  .ratio { font-weight: 600; font-variant-numeric: tabular-nums; }
   .low-sample { color: var(--muted); font-size: 0.78rem; }
+  /* 지난달 값으로 대체한 셀임을 알리는 표시. 값만 바꿔치기하면 표를 읽는 사람이 기준을 모른다. */
+  .prev-tag {
+    display: inline-block;
+    padding: 0 5px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--muted);
+    font-size: 0.7rem;
+    vertical-align: middle;
+  }
   .content-notice { color: var(--muted); font-size: 0.8rem; margin-top: 10px; line-height: 1.5; }
   /* 좁은 화면에서 4열 표는 가로 스크롤 없이 못 읽는다. 행을 카드로 세운다. */
   @media (max-width: 480px) {
@@ -276,15 +287,15 @@
 
   <section id="overall-section">
     <h2 id="overall-heading">서울 전체 평균</h2>
-    <div class="overall-cards" id="overall-cards"><!--prerender:realestateOverall--><div class="overall-card"><div class="label">평당 보증금</div><div class="value">2,571만원</div></div><div class="overall-card"><div class="label">84㎡ 환산</div><div class="value">6억 5,329만원</div></div><div class="overall-card"><div class="label">거래건수</div><div class="value">2,525건</div></div><!--/prerender:realestateOverall--></div>
+    <div class="overall-cards" id="overall-cards"><!--prerender:realestateOverall--><div class="overall-card"><div class="label">평당 보증금</div><div class="value">2,571만원</div></div><div class="overall-card"><div class="label">84㎡ 환산</div><div class="value">6억 5,329만원</div></div><div class="overall-card"><div class="label">전세가율</div><div class="value">57.8%</div></div><div class="overall-card"><div class="label">거래건수</div><div class="value">2,525건</div></div><!--/prerender:realestateOverall--></div>
   </section>
 
   <section id="district-section">
     <h2 id="district-heading">자치구별 시세</h2>
     <div class="table-wrap">
       <table class="data-table">
-        <thead id="district-head"><!--prerender:realestateHead--><tr><th>지역</th><th>평당 보증금</th><th>84㎡ 환산</th><th>거래건수</th></tr><!--/prerender:realestateHead--></thead>
-        <tbody id="district-grid"><!--prerender:realestateTable--><tr class="overall-row"><td>서울 전체</td><td data-label="평당 보증금"><span class="price-strong">2,571만원</span> <span class="change up" title="2026-08-10 대비">▲38만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">6억 5,329만원</span></td><td data-label="거래건수"><span class="count">2,525건</span></td></tr><tr class=""><td>강남구</td><td data-label="평당 보증금"><span class="price-strong">4,022만원</span> <span class="change up" title="2026-08-10 대비">▲1만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">10억 2,199만원</span></td><td data-label="거래건수"><span class="count">169건</span></td></tr><tr class=""><td>종로구</td><td data-label="평당 보증금"><span class="price-strong">3,478만원</span> <span class="change up" title="2026-08-10 대비">▲892만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">8억 8,376만원</span></td><td data-label="거래건수"><span class="count">11건</span></td></tr><tr class=""><td>송파구</td><td data-label="평당 보증금"><span class="price-strong">3,375만원</span> <span class="change up" title="2026-08-10 대비">▲114만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">8억 5,758만원</span></td><td data-label="거래건수"><span class="count">168건</span></td></tr><tr class=""><td>용산구</td><td data-label="평당 보증금"><span class="price-strong">3,365만원</span> <span class="change up" title="2026-08-10 대비">▲201만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">8억 5,504만원</span></td><td data-label="거래건수"><span class="count">58건</span></td></tr><tr class=""><td>성동구</td><td data-label="평당 보증금"><span class="price-strong">3,263만원</span> <span class="change down" title="2026-08-10 대비">▼116만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">8억 2,912만원</span></td><td data-label="거래건수"><span class="count">102건</span></td></tr><tr class=""><td>중구</td><td data-label="평당 보증금"><span class="price-strong">3,221만원</span> <span class="change up" title="2026-08-10 대비">▲178만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">8억 1,845만원</span></td><td data-label="거래건수"><span class="count">32건</span></td></tr><tr class=""><td>동작구</td><td data-label="평당 보증금"><span class="price-strong">3,053만원</span> <span class="change down" title="2026-08-10 대비">▼157만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">7억 7,576만원</span></td><td data-label="거래건수"><span class="count">83건</span></td></tr><tr class=""><td>광진구</td><td data-label="평당 보증금"><span class="price-strong">3,035만원</span> <span class="change up" title="2026-08-10 대비">▲387만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">7억 7,119만원</span></td><td data-label="거래건수"><span class="count">35건</span></td></tr><tr class=""><td>서초구</td><td data-label="평당 보증금"><span class="price-strong">2,981만원</span> <span class="change up" title="2026-08-10 대비">▲322만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">7억 5,747만원</span></td><td data-label="거래건수"><span class="count">251건</span></td></tr><tr class=""><td>마포구</td><td data-label="평당 보증금"><span class="price-strong">2,939만원</span> <span class="change up" title="2026-08-10 대비">▲55만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">7억 4,680만원</span></td><td data-label="거래건수"><span class="count">98건</span></td></tr><tr class=""><td>강동구</td><td data-label="평당 보증금"><span class="price-strong">2,822만원</span> <span class="change up" title="2026-08-10 대비">▲165만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">7억 1,707만원</span></td><td data-label="거래건수"><span class="count">99건</span></td></tr><tr class=""><td>동대문구</td><td data-label="평당 보증금"><span class="price-strong">2,771만원</span> <span class="change down" title="2026-08-10 대비">▼81만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">7억 411만원</span></td><td data-label="거래건수"><span class="count">69건</span></td></tr><tr class=""><td>영등포구</td><td data-label="평당 보증금"><span class="price-strong">2,770만원</span> <span class="change up" title="2026-08-10 대비">▲146만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">7억 385만원</span></td><td data-label="거래건수"><span class="count">115건</span></td></tr><tr class=""><td>서대문구</td><td data-label="평당 보증금"><span class="price-strong">2,653만원</span> <span class="change up" title="2026-08-10 대비">▲40만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">6억 7,412만원</span></td><td data-label="거래건수"><span class="count">77건</span></td></tr><tr class=""><td>양천구</td><td data-label="평당 보증금"><span class="price-strong">2,524만원</span> <span class="change down" title="2026-08-10 대비">▼233만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">6억 4,135만원</span></td><td data-label="거래건수"><span class="count">92건</span></td></tr><tr class=""><td>성북구</td><td data-label="평당 보증금"><span class="price-strong">2,432만원</span> <span class="change down" title="2026-08-10 대비">▼104만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">6억 1,797만원</span></td><td data-label="거래건수"><span class="count">79건</span></td></tr><tr class=""><td>관악구</td><td data-label="평당 보증금"><span class="price-strong">2,385만원</span> <span class="change up" title="2026-08-10 대비">▲35만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">6억 603만원</span></td><td data-label="거래건수"><span class="count">53건</span></td></tr><tr class=""><td>은평구</td><td data-label="평당 보증금"><span class="price-strong">2,245만원</span> <span class="change down" title="2026-08-10 대비">▼395만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">5억 7,045만원</span></td><td data-label="거래건수"><span class="count">106건</span></td></tr><tr class=""><td>강북구</td><td data-label="평당 보증금"><span class="price-strong">2,063만원</span> <span class="change up" title="2026-08-10 대비">▲119만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">5억 2,421만원</span></td><td data-label="거래건수"><span class="count">23건</span></td></tr><tr class=""><td>구로구</td><td data-label="평당 보증금"><span class="price-strong">2,010만원</span> <span class="change down" title="2026-08-10 대비">▼58만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">5억 1,074만원</span></td><td data-label="거래건수"><span class="count">69건</span></td></tr><tr class=""><td>금천구</td><td data-label="평당 보증금"><span class="price-strong">1,978만원</span> <span class="change down" title="2026-08-10 대비">▼247만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">5억 261만원</span></td><td data-label="거래건수"><span class="count">29건</span></td></tr><tr class=""><td>노원구</td><td data-label="평당 보증금"><span class="price-strong">1,913만원</span> <span class="change up" title="2026-08-10 대비">▲100만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">4억 8,609만원</span></td><td data-label="거래건수"><span class="count">174건</span></td></tr><tr class=""><td>도봉구</td><td data-label="평당 보증금"><span class="price-strong">1,613만원</span> <span class="change up" title="2026-08-10 대비">▲66만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">4억 986만원</span></td><td data-label="거래건수"><span class="count">38건</span></td></tr><tr class=""><td>강서구</td><td data-label="평당 보증금"><span class="price-strong">1,567만원</span> <span class="change up" title="2026-08-10 대비">▲170만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">3억 9,817만원</span></td><td data-label="거래건수"><span class="count">388건</span></td></tr><tr class=""><td>중랑구</td><td data-label="평당 보증금"><span class="price-strong">1,422만원</span> <span class="change down" title="2026-08-10 대비">▼426만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">3억 6,133만원</span></td><td data-label="거래건수"><span class="count">107건</span></td></tr><!--/prerender:realestateTable--></tbody>
+        <thead id="district-head"><!--prerender:realestateHead--><tr><th>지역</th><th>평당 보증금</th><th>84㎡ 환산</th><th>전세가율</th><th>거래건수</th></tr><!--/prerender:realestateHead--></thead>
+        <tbody id="district-grid"><!--prerender:realestateTable--><tr class="overall-row"><td>서울 전체</td><td data-label="평당 보증금"><span class="price-strong">2,571만원</span> <span class="change up" title="2026-08-10 대비">▲38만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">6억 5,329만원</span></td><td data-label="전세가율"><span class="ratio">57.8%</span></td><td data-label="거래건수"><span class="count">2,525건</span></td></tr><tr class=""><td>강남구</td><td data-label="평당 보증금"><span class="price-strong">4,022만원</span> <span class="change up" title="2026-08-10 대비">▲1만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">10억 2,199만원</span></td><td data-label="전세가율"><span class="ratio">37.0%</span></td><td data-label="거래건수"><span class="count">169건</span></td></tr><tr class=""><td>종로구</td><td data-label="평당 보증금"><span class="price-strong">3,478만원</span> <span class="change up" title="2026-08-10 대비">▲892만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">8억 8,376만원</span></td><td data-label="전세가율">-</td><td data-label="거래건수"><span class="count">11건</span></td></tr><tr class=""><td>송파구</td><td data-label="평당 보증금"><span class="price-strong">3,375만원</span> <span class="change up" title="2026-08-10 대비">▲114만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">8억 5,758만원</span></td><td data-label="전세가율"><span class="ratio">48.8%</span></td><td data-label="거래건수"><span class="count">168건</span></td></tr><tr class=""><td>용산구</td><td data-label="평당 보증금"><span class="price-strong">3,365만원</span> <span class="change up" title="2026-08-10 대비">▲201만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">8억 5,504만원</span></td><td data-label="전세가율"><span class="ratio">42.1%</span></td><td data-label="거래건수"><span class="count">58건</span></td></tr><tr class=""><td>성동구</td><td data-label="평당 보증금"><span class="price-strong">3,263만원</span> <span class="change down" title="2026-08-10 대비">▼116만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">8억 2,912만원</span></td><td data-label="전세가율"><span class="ratio">30.1%</span></td><td data-label="거래건수"><span class="count">102건</span></td></tr><tr class=""><td>중구</td><td data-label="평당 보증금"><span class="price-strong">3,221만원</span> <span class="change up" title="2026-08-10 대비">▲178만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">8억 1,845만원</span></td><td data-label="전세가율"><span class="ratio">46.6%</span></td><td data-label="거래건수"><span class="count">32건</span></td></tr><tr class=""><td>동작구</td><td data-label="평당 보증금"><span class="price-strong">3,053만원</span> <span class="change down" title="2026-08-10 대비">▼157만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">7억 7,576만원</span></td><td data-label="전세가율"><span class="ratio">53.6%</span></td><td data-label="거래건수"><span class="count">83건</span></td></tr><tr class=""><td>광진구</td><td data-label="평당 보증금"><span class="price-strong">3,035만원</span> <span class="change up" title="2026-08-10 대비">▲387만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">7억 7,119만원</span></td><td data-label="전세가율"><span class="ratio">39.8%</span></td><td data-label="거래건수"><span class="count">35건</span></td></tr><tr class=""><td>서초구</td><td data-label="평당 보증금"><span class="price-strong">2,981만원</span> <span class="change up" title="2026-08-10 대비">▲322만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">7억 5,747만원</span></td><td data-label="전세가율"><span class="ratio">34.0%</span></td><td data-label="거래건수"><span class="count">251건</span></td></tr><tr class=""><td>마포구</td><td data-label="평당 보증금"><span class="price-strong">2,939만원</span> <span class="change up" title="2026-08-10 대비">▲55만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">7억 4,680만원</span></td><td data-label="전세가율"><span class="ratio">51.6%</span></td><td data-label="거래건수"><span class="count">98건</span></td></tr><tr class=""><td>강동구</td><td data-label="평당 보증금"><span class="price-strong">2,822만원</span> <span class="change up" title="2026-08-10 대비">▲165만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">7억 1,707만원</span></td><td data-label="전세가율"><span class="ratio">63.6%</span></td><td data-label="거래건수"><span class="count">99건</span></td></tr><tr class=""><td>동대문구</td><td data-label="평당 보증금"><span class="price-strong">2,771만원</span> <span class="change down" title="2026-08-10 대비">▼81만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">7억 411만원</span></td><td data-label="전세가율"><span class="ratio">56.6%</span></td><td data-label="거래건수"><span class="count">69건</span></td></tr><tr class=""><td>영등포구</td><td data-label="평당 보증금"><span class="price-strong">2,770만원</span> <span class="change up" title="2026-08-10 대비">▲146만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">7억 385만원</span></td><td data-label="전세가율"><span class="ratio">44.7%</span></td><td data-label="거래건수"><span class="count">115건</span></td></tr><tr class=""><td>서대문구</td><td data-label="평당 보증금"><span class="price-strong">2,653만원</span> <span class="change up" title="2026-08-10 대비">▲40만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">6억 7,412만원</span></td><td data-label="전세가율"><span class="ratio">54.7%</span></td><td data-label="거래건수"><span class="count">77건</span></td></tr><tr class=""><td>양천구</td><td data-label="평당 보증금"><span class="price-strong">2,524만원</span> <span class="change down" title="2026-08-10 대비">▼233만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">6억 4,135만원</span></td><td data-label="전세가율"><span class="ratio">54.3%</span></td><td data-label="거래건수"><span class="count">92건</span></td></tr><tr class=""><td>성북구</td><td data-label="평당 보증금"><span class="price-strong">2,432만원</span> <span class="change down" title="2026-08-10 대비">▼104만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">6억 1,797만원</span></td><td data-label="전세가율"><span class="ratio">64.7%</span></td><td data-label="거래건수"><span class="count">79건</span></td></tr><tr class=""><td>관악구</td><td data-label="평당 보증금"><span class="price-strong">2,385만원</span> <span class="change up" title="2026-08-10 대비">▲35만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">6억 603만원</span></td><td data-label="전세가율"><span class="ratio">64.3%</span></td><td data-label="거래건수"><span class="count">53건</span></td></tr><tr class=""><td>은평구</td><td data-label="평당 보증금"><span class="price-strong">2,245만원</span> <span class="change down" title="2026-08-10 대비">▼395만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">5억 7,045만원</span></td><td data-label="전세가율"><span class="ratio">62.0%</span></td><td data-label="거래건수"><span class="count">106건</span></td></tr><tr class=""><td>강북구</td><td data-label="평당 보증금"><span class="price-strong">2,063만원</span> <span class="change up" title="2026-08-10 대비">▲119만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">5억 2,421만원</span></td><td data-label="전세가율"><span class="ratio">70.0%</span></td><td data-label="거래건수"><span class="count">23건</span></td></tr><tr class=""><td>구로구</td><td data-label="평당 보증금"><span class="price-strong">2,010만원</span> <span class="change down" title="2026-08-10 대비">▼58만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">5억 1,074만원</span></td><td data-label="전세가율"><span class="ratio">63.3%</span></td><td data-label="거래건수"><span class="count">69건</span></td></tr><tr class=""><td>금천구</td><td data-label="평당 보증금"><span class="price-strong">1,978만원</span> <span class="change down" title="2026-08-10 대비">▼247만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">5억 261만원</span></td><td data-label="전세가율"><span class="ratio">72.5%</span></td><td data-label="거래건수"><span class="count">29건</span></td></tr><tr class=""><td>노원구</td><td data-label="평당 보증금"><span class="price-strong">1,913만원</span> <span class="change up" title="2026-08-10 대비">▲100만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">4억 8,609만원</span></td><td data-label="전세가율"><span class="ratio">52.8%</span></td><td data-label="거래건수"><span class="count">174건</span></td></tr><tr class=""><td>도봉구</td><td data-label="평당 보증금"><span class="price-strong">1,613만원</span> <span class="change up" title="2026-08-10 대비">▲66만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">4억 986만원</span></td><td data-label="전세가율"><span class="ratio">63.8%</span></td><td data-label="거래건수"><span class="count">38건</span></td></tr><tr class=""><td>강서구</td><td data-label="평당 보증금"><span class="price-strong">1,567만원</span> <span class="change up" title="2026-08-10 대비">▲170만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">3억 9,817만원</span></td><td data-label="전세가율"><span class="ratio">35.6%</span></td><td data-label="거래건수"><span class="count">388건</span></td></tr><tr class=""><td>중랑구</td><td data-label="평당 보증금"><span class="price-strong">1,422만원</span> <span class="change down" title="2026-08-10 대비">▼426만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">3억 6,133만원</span></td><td data-label="전세가율"><span class="ratio">42.5%</span></td><td data-label="거래건수"><span class="count">107건</span></td></tr><!--/prerender:realestateTable--></tbody>
       </table>
     </div>
     <div class="content-notice" id="table-note"></div>
@@ -334,13 +345,15 @@ const T = {
     thDeposit: "평균 보증금",
     thMonthly: "평균 월세",
     thCount: "거래건수",
+    thRatio: "전세가율",
     overall: "서울 전체",
     countUnit: (n) => `${n.toLocaleString("ko-KR")}건`,
     lowSample: (n) => `신고 ${n}건`,
     lowSampleTitle: (n) => `이번 달 신고가 ${n}건뿐이라 평균을 내지 않았습니다.`,
     changeVs: (d) => `${d} 대비`,
+    prevTagTitle: "이번 달 신고가 아직 적어 지난달 기준으로 보여줍니다.",
     monthlyPrefix: "월 ",
-    note: "국토교통부에 신고된 이번 달 아파트 실거래 기준이며, 전용면적 평당가입니다. 공급면적으로 환산한 시세보다 높게 보일 수 있습니다. 84㎡ 환산가는 평당가에 25.41평을 곱한 값으로, 같은 구 안에서도 단지·층·연식에 따라 실제 거래가는 크게 다릅니다. 신고 건수가 5건 미만인 지역은 한두 건이 평균을 좌우하므로 값을 내지 않습니다.",
+    note: "국토교통부에 신고된 이번 달 아파트 실거래 기준이며, 전용면적 평당가입니다. 공급면적으로 환산한 시세보다 높게 보일 수 있습니다. 84㎡ 환산가는 평당가에 25.41평을 곱한 값으로, 같은 구 안에서도 단지·층·연식에 따라 실제 거래가는 크게 다릅니다. 신고 건수가 5건 미만인 지역은 한두 건이 평균을 좌우하므로 이번 달 값을 쓰지 않고, 지난달 값이 있으면 기준 월(예: 7월)을 붙여 대신 보여줍니다. 신고 기한이 계약 후 30일이라 매달 초에는 이번 달 신고가 적습니다. 전세가율은 전세 평당 보증금을 매매 평당가로 나눈 값으로, 높을수록 매매가 대비 전세가 비싸다는 뜻입니다. 매매·전세 표본이 모두 충분하고 같은 달 기준일 때만 냅니다.",
     footerSource: "출처: 국토교통부 아파트 매매·전월세 실거래가 공개시스템. 신고된 거래만 집계되며 신고 기한(계약 후 30일)이 있어 최근 거래는 나중에 반영됩니다.",
     footerPrivacy: "개인정보처리방침",
     loadError: "실거래가를 불러오지 못했습니다.",
@@ -374,13 +387,15 @@ const T = {
     thDeposit: "Avg deposit",
     thMonthly: "Avg monthly",
     thCount: "Transactions",
+    thRatio: "Jeonse ratio",
     overall: "Seoul total",
     countUnit: (n) => `${n.toLocaleString("en-US")}`,
     lowSample: (n) => `${n} reported`,
     lowSampleTitle: (n) => `Only ${n} transactions reported this month, so no average is shown.`,
     changeVs: (d) => `vs ${d}`,
+    prevTagTitle: "Too few filings this month, so last month\u2019s figure is shown.",
     monthlyPrefix: "",
-    note: "Based on apartment transactions reported to Korea's MOLIT this month, priced per pyeong (3.3m²) of exclusive area — higher than figures quoted per gross area. The 84m² column multiplies the per-pyeong price by 25.41 pyeong; actual prices vary widely by complex, floor and age. Districts with fewer than 5 reported transactions are left blank.",
+    note: "Based on apartment transactions reported to Korea's MOLIT this month, priced per pyeong (3.3m²) of exclusive area — higher than figures quoted per gross area. The 84m² column multiplies the per-pyeong price by 25.41 pyeong; actual prices vary widely by complex, floor and age. Districts with fewer than 5 reported transactions fall back to last month's figure, tagged with that month; filings can lag up to 30 days, so early in a month there is little current data. The jeonse ratio divides the jeonse deposit per pyeong by the sale price per pyeong; it is only shown when both have enough transactions from the same month.",
     footerSource: "Source: MOLIT real transaction price disclosure. Only reported deals are counted, and reporting can lag up to 30 days after contract.",
     footerPrivacy: "Privacy Policy",
     loadError: "Could not load transaction data.",
@@ -443,6 +458,46 @@ function metricOf(entry, k) {
 
 const valueOf = (metric, k) => metric?.[KIND_FIELDS[k].value] ?? null;
 
+// 이번 달 표본이 모자라면 지난달 값으로 대체하고, 어느 쪽을 썼는지 같이 돌려준다.
+// 값만 조용히 바꾸면 "8월 시세" 표에 7월 숫자가 섞인 채로 읽힌다.
+function resolveMetric(entry, k) {
+  const current = metricOf(entry, k);
+  if (current) return { metric: current, isPrevious: false };
+  const previous = entry?.prev ? metricOf(entry.prev, k) : null;
+  if (previous) return { metric: previous, isPrevious: true };
+  return null;
+}
+
+const MONTHS_EN = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+function monthLabel(period) {
+  const month = Number(String(period ?? "").slice(4, 6));
+  if (!Number.isInteger(month) || month < 1 || month > 12) return "";
+  return locale === "en" ? MONTHS_EN[month - 1] : `${month}월`;
+}
+
+// 전세 평당 보증금 / 매매 평당가. 두 지표가 서로 다른 달 기준이면 내지 않는다 -
+// 7월 전세를 8월 매매로 나눈 값은 어느 시점의 전세가율도 아니다.
+function jeonseRatio(entry) {
+  const sale = resolveMetric(entry, "sale");
+  const jeonse = resolveMetric(entry, "jeonse");
+  if (!sale || !jeonse || sale.isPrevious !== jeonse.isPrevious) return null;
+  const salePrice = valueOf(sale.metric, "sale");
+  const jeonsePrice = valueOf(jeonse.metric, "jeonse");
+  if (!salePrice || !jeonsePrice) return null;
+  return { ratio: (jeonsePrice / salePrice) * 100, isPrevious: sale.isPrevious };
+}
+
+const formatPercent = (value) =>
+  typeof value === "number" && Number.isFinite(value) ? `${value.toFixed(1)}%` : "-";
+
+function prevTagHtml(isPrevious) {
+  if (!isPrevious) return "";
+  const label = monthLabel(cache.realestate?.previousPeriod);
+  if (!label) return "";
+  return ` <span class="prev-tag" title="${escapeHtml(t("prevTagTitle"))}">${escapeHtml(label)}</span>`;
+}
+
 function areaPrice(pricePerPyeong10k) {
   if (typeof pricePerPyeong10k !== "number" || !Number.isFinite(pricePerPyeong10k)) return null;
   return Math.round(pricePerPyeong10k * BASE_AREA_PYEONG);
@@ -487,51 +542,61 @@ function lowSampleHtml(metric) {
 // 거래 유형 하나만 다루는 페이지는 평당가 옆에 84㎡ 환산가를 같이 적는다.
 // 월세는 평당 개념이 아니라 보증금·월세 평균이라 환산하지 않는다.
 function cellsFor(entry, k) {
-  const metric = metricOf(entry, k);
-  if (!metric) {
+  const resolved = resolveMetric(entry, k);
+  if (!resolved) {
     const raw = entry?.[KIND_FIELDS[k].metric];
-    const fallback = raw ? lowSampleHtml(raw) : "-";
-    return k === "wolse" ? [fallback, "-", "-"] : [fallback, "-", "-"];
+    return [raw ? lowSampleHtml(raw) : "-", "-", "-"];
   }
+  const { metric, isPrevious } = resolved;
+  const tag = prevTagHtml(isPrevious);
+  // 증감은 이번 달 값끼리 비교한 것이라 지난달로 대체한 셀에는 붙이지 않는다.
+  const change = (c, d) => (isPrevious ? "" : changeHtml(c, d));
+
   if (k === "wolse") {
     return [
-      `<span class="price-strong">${formatMan(metric.avgDeposit10k)}</span>${changeHtml(metric.depositChange, metric.baselineDate)}`,
-      `<span class="price-strong">${escapeHtml(t("monthlyPrefix"))}${formatMan(metric.avgMonthlyRent10k)}</span>${changeHtml(metric.monthlyRentChange, metric.baselineDate)}`,
+      `<span class="price-strong">${formatMan(metric.avgDeposit10k)}</span>${change(metric.depositChange, metric.baselineDate)}${tag}`,
+      `<span class="price-strong">${escapeHtml(t("monthlyPrefix"))}${formatMan(metric.avgMonthlyRent10k)}</span>${change(metric.monthlyRentChange, metric.baselineDate)}`,
       `<span class="count">${escapeHtml(t("countUnit")(metric.transactionCount))}</span>`,
     ];
   }
   const perPyeong = valueOf(metric, k);
-  return [
-    `<span class="price-strong">${formatMan(perPyeong)}</span>${changeHtml(metric.change, metric.baselineDate)}`,
+  const out = [
+    `<span class="price-strong">${formatMan(perPyeong)}</span>${change(metric.change, metric.baselineDate)}${tag}`,
     `<span class="price-strong">${formatEok(areaPrice(perPyeong))}</span>`,
-    `<span class="count">${escapeHtml(t("countUnit")(metric.transactionCount))}</span>`,
   ];
+  if (k === "jeonse") {
+    const ratio = jeonseRatio(entry);
+    out.push(ratio ? `<span class="ratio">${formatPercent(ratio.ratio)}</span>` : "-");
+  }
+  out.push(`<span class="count">${escapeHtml(t("countUnit")(metric.transactionCount))}</span>`);
+  return out;
 }
 
 // 허브(유형 미지정)는 세 유형을 한 줄에 나란히 보여준다.
 function allCells(entry) {
   return ["sale", "jeonse", "wolse"].map((k) => {
-    const metric = metricOf(entry, k);
-    if (!metric) {
+    const resolved = resolveMetric(entry, k);
+    if (!resolved) {
       const raw = entry?.[KIND_FIELDS[k].metric];
       return raw ? lowSampleHtml(raw) : "-";
     }
+    const { metric, isPrevious } = resolved;
+    const tag = prevTagHtml(isPrevious);
     if (k === "wolse") {
-      return `${formatMan(metric.avgDeposit10k)} / ${escapeHtml(t("monthlyPrefix"))}${formatMan(metric.avgMonthlyRent10k)}${countHtml(metric)}`;
+      return `${formatMan(metric.avgDeposit10k)} / ${escapeHtml(t("monthlyPrefix"))}${formatMan(metric.avgMonthlyRent10k)}${countHtml(metric)}${tag}`;
     }
-    return `${formatMan(valueOf(metric, k))}${changeHtml(metric.change, metric.baselineDate)}${countHtml(metric)}`;
+    const change = isPrevious ? "" : changeHtml(metric.change, metric.baselineDate);
+    return `${formatMan(valueOf(metric, k))}${change}${countHtml(metric)}${tag}`;
   });
 }
 
 function headLabels() {
   if (!kind) return [t("thDistrict"), t("thSale"), t("thJeonse"), t("thWolse")];
   if (kind === "wolse") return [t("thDistrict"), t("thDeposit"), t("thMonthly"), t("thCount")];
-  return [
-    t("thDistrict"),
-    kind === "jeonse" ? t("thPerPyeongDeposit") : t("thPerPyeong"),
-    t("thArea"),
-    t("thCount"),
-  ];
+  if (kind === "jeonse") {
+    return [t("thDistrict"), t("thPerPyeongDeposit"), t("thArea"), t("thRatio"), t("thCount")];
+  }
+  return [t("thDistrict"), t("thPerPyeong"), t("thArea"), t("thCount")];
 }
 
 function renderHead() {
@@ -544,8 +609,8 @@ function renderHead() {
 function sortedDistricts(districts) {
   const key = kind ?? "sale";
   return [...districts].sort((a, b) => {
-    const av = valueOf(metricOf(a, key), key);
-    const bv = valueOf(metricOf(b, key), key);
+    const av = valueOf(resolveMetric(a, key)?.metric, key);
+    const bv = valueOf(resolveMetric(b, key)?.metric, key);
     if (av === null && bv === null) return (a.name ?? "").localeCompare(b.name ?? "");
     if (av === null) return 1;
     if (bv === null) return -1;
@@ -593,7 +658,7 @@ function renderOverall(realestate) {
   if (!kind) {
     box.innerHTML = ["sale", "jeonse", "wolse"]
       .map((k) => {
-        const metric = metricOf(overall, k);
+        const metric = resolveMetric(overall, k)?.metric;
         const label = k === "sale" ? t("thSale") : k === "jeonse" ? t("thJeonse") : t("thWolse");
         if (!metric) return card(label, "-", "");
         if (k === "wolse") {
@@ -613,7 +678,7 @@ function renderOverall(realestate) {
     return;
   }
 
-  const metric = metricOf(overall, kind);
+  const metric = resolveMetric(overall, kind)?.metric;
   if (!metric) {
     box.innerHTML = card(t("overall"), "-", "");
     return;
@@ -626,9 +691,11 @@ function renderOverall(realestate) {
     return;
   }
   const perPyeong = valueOf(metric, kind);
+  const ratio = kind === "jeonse" ? jeonseRatio(overall) : null;
   box.innerHTML =
     card(kind === "jeonse" ? t("thPerPyeongDeposit") : t("thPerPyeong"), formatMan(perPyeong), "") +
     card(t("thArea"), formatEok(areaPrice(perPyeong)), "") +
+    (ratio ? card(t("thRatio"), formatPercent(ratio.ratio), "") : "") +
     card(t("thCount"), escapeHtml(t("countUnit")(metric.transactionCount)), "");
 }
 
