@@ -340,3 +340,32 @@ test("번역 재시도에는 무엇이 걸렸는지 알려준다", async () => {
   assert.match(retry, /Chinese characters/, "재시도 프롬프트에 반려 이유가 없다");
   assert.match(retry, /公示/, "무엇이 문제였는지 짚어주지 않았다");
 });
+
+test("한자만 걸린 번역은 한자를 걷어내고 살린다", async () => {
+  // 모델이 "공시가"를 公示로 옮기는 버릇은 재시도 힌트로도 안 고쳐졌다(CI에서 두 번 다 나왔다).
+  // 수식어 하나를 잃는 편이 영어 화면에 한국어 문단을 통째로 남기는 것보다 낫다.
+  const { summary, stderr } = await runSummarize(({ kind, prompt }) => {
+    if (kind === "entities") return "없음";
+    if (kind === "translate") return `A home with a公示value of 30,000 won.`;
+    return goodKo(prompt);
+  });
+
+  assert.match(stderr, /한자를 걷어내고 번역 채택/);
+  for (const category of summary.categories) {
+    assert.doesNotMatch(category.lineEn, /[\u4e00-\u9fff]/, "한자가 남았다");
+    assert.notEqual(category.lineEn, category.lineKo, "한국어로 떨어졌다");
+    assert.match(category.lineEn, /a value of/, "한자를 지우며 단어가 붙어버렸다");
+  }
+});
+
+test("한자를 걷어내도 안 되는 번역은 한국어를 유지한다", async () => {
+  // 한글이 남아 있으면 한자만 지운다고 번역이 되는 게 아니다.
+  const { summary, stderr } = await runSummarize(({ kind, prompt }) => {
+    if (kind === "entities") return "없음";
+    if (kind === "translate") return "The 公示 가격 rose by 30,000.";
+    return goodKo(prompt);
+  });
+
+  assert.match(stderr, /번역 검증 실패/);
+  assert.ok(summary.categories.every((c) => c.lineEn === c.lineKo));
+});

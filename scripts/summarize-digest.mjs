@@ -23,10 +23,12 @@ const MAX_ITEMS_PER_CATEGORY = 5;
 const BODY_CHARS_IN_CATEGORY_PROMPT = 400;
 const BODY_CHARS_IN_HIGHLIGHT_PROMPT = 900;
 
-// 사람이 3분쯤 읽는 분량(한국어 1,500자 안팎)을 핵심 3건과 카테고리 문단으로 나눈다.
-const CATEGORY_SENTENCES = 4;
+// 사람이 3분쯤 읽는 분량(한국어 1,500자 안팎)을 핵심 기사와 카테고리 문단으로 나눈다.
+// 4문장·3건으로는 1,200자에 그쳐 2.2분밖에 안 됐다. 모델이 글자 수 지시를 아래로
+// 벗어나는 편이라, 문장 수와 건수를 늘리는 쪽이 확실하다.
+const CATEGORY_SENTENCES = 5;
 const HIGHLIGHT_SENTENCES = 3;
-const HIGHLIGHT_COUNT = 3;
+const HIGHLIGHT_COUNT = 4;
 const MAX_HIGHLIGHTS_PER_CATEGORY = 2;
 // 이보다 본문이 짧으면 두세 문장을 채울 재료가 없어서 결국 제목을 늘여 쓰게 된다.
 const MIN_HIGHLIGHT_BODY = 250;
@@ -179,7 +181,7 @@ ${material}
 
   return `${intro}
 규칙:
-- ${CATEGORY_SENTENCES}문장 안팎으로 쓰고, 전체 250자에서 350자 사이로 맞춰.
+- ${CATEGORY_SENTENCES}문장 안팎으로 쓰고, 전체 300자에서 400자 사이로 맞춰.
 ${COMMON_RULES}
 
 요약:`;
@@ -451,7 +453,7 @@ async function summarizeCategory(bucket, bodies) {
     prompt: buildCategoryPrompt(label, items, bodies, isUngroupable),
     sourceText,
     maxSentences: CATEGORY_SENTENCES,
-    numPredict: 500,
+    numPredict: 620,
   });
   if (paragraph.text) return { line: paragraph.text, fallbackReason: null, degraded: false };
 
@@ -588,6 +590,16 @@ async function translateKoText(text, numPredict) {
 
     if (!isBadTranslation(translated, text, requiredNumbers)) return { text: translated, translated: true };
     lastRejected = translated;
+  }
+
+  // 모델이 "공시가"를 한자 公示로 옮기는 버릇은 재시도로도 안 고쳐졌다(두 번 다 나왔다).
+  // 걸린 게 한자뿐이라면 그것만 걷어내고 다시 본다. 수식어 하나를 잃는 편이 영어
+  // 화면에 한국어 문단을 통째로 남기는 것보다 낫다. 한글 잔존이나 숫자 누락이면
+  // 아래 재검증에서 그대로 다시 걸린다.
+  const withoutHanzi = (lastRejected ?? "").replace(/[一-鿿]+/g, " ").replace(/\s+/g, " ").trim();
+  if (withoutHanzi && !isBadTranslation(withoutHanzi, text, requiredNumbers)) {
+    console.error(`[summarize-digest] 한자를 걷어내고 번역 채택: ${withoutHanzi}`);
+    return { text: withoutHanzi, translated: true };
   }
 
   console.error(`[summarize-digest] 번역 검증 실패, 한국어 유지: ${lastRejected}`);
