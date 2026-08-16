@@ -41,7 +41,7 @@ function stubElement(attrs = {}, id = "") {
 
 // kind를 주면 거래 유형별 페이지(apartment-sale.html 등)처럼 동작한다 - 그 값은
 // 화면에서 <meta name="realestate-kind">로만 들어오기 때문에 여기서도 같은 길로 넣는다.
-export async function loadRealestatePage({ realestate, history, kind = null, locale = "ko", search = "", analytics } = {}) {
+export async function loadRealestatePage({ realestate, history, kind = null, district = null, locale = "ko", search = "", analytics } = {}) {
   const html = await readFile(path.join(root, "docs/realestate.html"), "utf8");
   const script = [...html.matchAll(/<script>\n([\s\S]*?)\n<\/script>/g)].map((m) => m[1]).pop();
 
@@ -100,6 +100,7 @@ export async function loadRealestatePage({ realestate, history, kind = null, loc
       },
       querySelector: (sel) => {
         if (sel.includes("realestate-kind")) return kind ? stubElement({ content: kind }) : null;
+        if (sel.includes("realestate-district")) return district ? stubElement({ content: district }) : null;
         if (!byId.has(sel)) byId.set(sel, stubElement());
         return byId.get(sel);
       },

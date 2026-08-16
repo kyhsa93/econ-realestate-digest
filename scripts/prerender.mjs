@@ -10,6 +10,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { DEFAULT_AMOUNT, formatWon, netInterestOf } from "./interest.mjs";
+import { DISTRICT_PAGES } from "./district-slugs.mjs";
 import {
   KIND_FIELDS,
   areaPrice,
@@ -227,8 +228,11 @@ function reHeadLabels(kind) {
   return [RE_LABELS.district, RE_LABELS.perPyeong, RE_LABELS.area, RE_LABELS.count];
 }
 
-export function realestateHeadHtml(kind = null) {
-  return `<tr>${reHeadLabels(kind).map((label) => `<th>${escapeHtml(label)}</th>`).join("")}</tr>`;
+export function realestateHeadHtml(kind = null, district = null) {
+  const labels = district
+    ? ["구분", RE_LABELS.perPyeong, RE_LABELS.area, RE_LABELS.count]
+    : reHeadLabels(kind);
+  return `<tr>${labels.map((label) => `<th>${escapeHtml(label)}</th>`).join("")}</tr>`;
 }
 
 function reChange(change, baselineDate) {
@@ -328,8 +332,41 @@ function reSorted(districts, kind) {
   });
 }
 
-export function realestateTableHtml(realestate, kind = null) {
+// 한 지역만 보여주는 페이지에서는 거래 유형이 행이 된다(화면과 같은 구성).
+function reDistrictRows(entry, previousPeriod) {
+  const labels = [RE_LABELS.sale, RE_LABELS.jeonse, RE_LABELS.wolse];
+  return ["sale", "jeonse", "wolse"]
+    .map((kind, i) => {
+      const cell = (price, area, count) =>
+        `<tr><td>${escapeHtml(labels[i])}</td>` +
+        `<td data-label="${escapeHtml(RE_LABELS.perPyeong)}">${price}</td>` +
+        `<td data-label="${escapeHtml(RE_LABELS.area)}">${area}</td>` +
+        `<td data-label="${escapeHtml(RE_LABELS.count)}">${count}</td></tr>`;
+
+      const resolved = resolveMetric(entry, kind);
+      if (!resolved) {
+        const raw = entry?.[KIND_FIELDS[kind].metric];
+        return cell(raw ? reLowSample(raw) : "-", "-", "-");
+      }
+      const { metric, isPrevious } = resolved;
+      const tag = rePrevTag(isPrevious, previousPeriod);
+      const change = isPrevious ? "" : reChange(metric.change, metric.baselineDate);
+      const price =
+        kind === "wolse"
+          ? `<span class="price-strong">${reMan(metric.avgDeposit10k)}</span> / <span class="price-strong">월 ${reMan(metric.avgMonthlyRent10k)}</span>${tag}`
+          : `<span class="price-strong">${reMan(valueOf(metric, kind))}</span>${change}${tag}`;
+      const area = kind === "wolse" ? "-" : `<span class="price-strong">${reEok(areaPrice(valueOf(metric, kind)))}</span>`;
+      return cell(price, area, `<span class="count">${escapeHtml(reCount(metric.transactionCount))}</span>`);
+    })
+    .join("");
+}
+
+export function realestateTableHtml(realestate, kind = null, district = null) {
   const districts = realestate?.districts ?? [];
+  if (district) {
+    const entry = districts.find((d) => d.name === district);
+    return entry ? reDistrictRows(entry, realestate?.previousPeriod) : null;
+  }
   if (!realestate?.overall && !districts.length) return null;
   const previousPeriod = realestate.previousPeriod;
   return (
@@ -340,8 +377,10 @@ export function realestateTableHtml(realestate, kind = null) {
   );
 }
 
-export function realestateOverallHtml(realestate, kind = null) {
-  const overall = realestate?.overall;
+export function realestateOverallHtml(realestate, kind = null, district = null) {
+  const overall = district
+    ? (realestate?.districts ?? []).find((d) => d.name === district)
+    : realestate?.overall;
   if (!overall) return null;
 
   const card = (label, value, sub) =>
@@ -349,6 +388,19 @@ export function realestateOverallHtml(realestate, kind = null) {
     `<div class="value">${value}</div>` +
     (sub ? `<div class="sub">${sub}</div>` : "") +
     `</div>`;
+
+  if (district) {
+    const sale = resolveMetric(overall, "sale")?.metric;
+    const ratio = jeonseRatio(overall);
+    return (
+      (sale
+        ? card(RE_LABELS.perPyeong, reMan(valueOf(sale, "sale")), "") +
+          card(RE_LABELS.area, reEok(areaPrice(valueOf(sale, "sale"))), "") +
+          card(RE_LABELS.count, escapeHtml(reCount(sale.transactionCount)), "")
+        : card(RE_LABELS.sale, "-", "")) +
+      (ratio ? card(RE_LABELS.ratio, formatPercent(ratio.ratio), "") : "")
+    );
+  }
 
   if (!kind) {
     return ["sale", "jeonse", "wolse"]
@@ -389,6 +441,16 @@ export function realestateOverallHtml(realestate, kind = null) {
     (ratio ? card(RE_LABELS.ratio, formatPercent(ratio.ratio), "") : "") +
     card(RE_LABELS.count, escapeHtml(reCount(metric.transactionCount)), "")
   );
+}
+
+// 자치구별 페이지로 가는 링크. 크롤러가 25개 페이지를 발견하는 유일한 내부 경로라
+// 정적 HTML에 반드시 들어가야 한다(sitemap만으로는 늦다).
+export function districtLinksHtml(current = null) {
+  return DISTRICT_PAGES.map(({ name, file }) =>
+    name === current
+      ? `<a href="./${file}" aria-current="page">${escapeHtml(name)}</a>`
+      : `<a href="./${file}">${escapeHtml(name)}</a>`
+  ).join("");
 }
 
 // 금리 페이지는 각 페이지의 첫 화면만 심는다. 안 보이는 탭까지 숨겨서 심으면
@@ -526,6 +588,7 @@ async function main() {
         realestateOverall: realestateOverallHtml(realestate),
         realestateHead: realestateHeadHtml(),
         realestateTable: realestateTableHtml(realestate),
+        districtLinks: districtLinksHtml(),
       },
     ],
   ]) {

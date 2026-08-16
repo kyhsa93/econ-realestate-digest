@@ -18,7 +18,12 @@ import {
   realestateOverallHtml,
   realestateTableHtml,
 } from "../scripts/prerender.mjs";
-import { REALESTATE_PAGES, buildRealestatePage } from "../scripts/build-realestate-pages.mjs";
+import {
+  REALESTATE_PAGES,
+  buildDistrictPage,
+  buildRealestatePage,
+} from "../scripts/build-realestate-pages.mjs";
+import { DISTRICT_PAGES } from "../scripts/district-slugs.mjs";
 import { loadRealestatePage } from "./helpers/realestate-page.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
@@ -363,4 +368,70 @@ test("추이를 못 받아도 표는 그대로 나온다", async () => {
   const realestate = await readJson("realestate");
   const page = await loadRealestatePage({ realestate, kind: "sale" });
   assert.ok(cells(page.tableHtml()).length > 0, "추이가 없다고 표까지 비었다");
+});
+
+// --- 자치구별 페이지 ---
+// "강남구 아파트 시세"처럼 지역 단위로 검색하는 사람에게 착지점을 만든다.
+test("자치구 페이지는 한 지역의 세 유형을 행으로 보여준다", async () => {
+  const [realestate, history] = await Promise.all([readJson("realestate"), readJson("realestate-history-lite")]);
+  const page = await loadRealestatePage({ realestate, history, district: "강남구" });
+
+  assert.deepEqual(headCells(page.headHtml()), ["구분", "평당가", "84㎡ 환산", "거래건수"]);
+  assert.deepEqual(names(page.tableHtml()), ["매매", "전세", "월세"]);
+  assert.match(page.sandbox.document.title, /강남구/);
+});
+
+// 월세는 평당 개념이 아니라 보증금·월세 평균이라 환산 칸이 비어야 한다.
+test("자치구 페이지의 월세 행에는 환산가가 없다", async () => {
+  const realestate = await readJson("realestate");
+  const page = await loadRealestatePage({ realestate, district: "강남구" });
+  const rows = page.tableHtml().split("</tr>");
+  const wolseRow = rows.find((r) => r.includes(">월세<"));
+  assert.ok(wolseRow.includes('data-label="84㎡ 환산">-<'), `월세 행: ${wolseRow}`);
+});
+
+test("자치구 페이지 추이는 그 지역 값을 그린다", async () => {
+  const [realestate, history] = await Promise.all([readJson("realestate"), readJson("realestate-history-lite")]);
+  const seoul = await loadRealestatePage({ realestate, history, kind: "sale" });
+  const gangnam = await loadRealestatePage({ realestate, history, district: "강남구" });
+  assert.notEqual(gangnam.trendMeta(), seoul.trendMeta(), "서울 전체 추이를 그대로 쓰고 있다");
+  assert.match(gangnam.trendMeta(), /10,870만원/);
+});
+
+test("자치구 페이지에는 평형 선택이 뜬다", async () => {
+  const realestate = await readJson("realestate");
+  const page = await loadRealestatePage({ realestate, district: "강남구" });
+  // 84㎡ 환산 열이 있으므로 평형을 고를 수 있어야 한다
+  assert.equal(page.byId("area-controls").hidden, false);
+});
+
+test("커밋된 자치구 페이지 25개가 지금 원본·데이터로 찍은 결과와 같다", async () => {
+  const [baseHtml, realestate] = await Promise.all([read("docs/realestate.html"), readJson("realestate")]);
+
+  assert.equal(DISTRICT_PAGES.length, 25);
+  for (const district of DISTRICT_PAGES) {
+    assert.equal(
+      await read(`docs/${district.file}`),
+      buildDistrictPage(baseHtml, district, realestate),
+      `docs/${district.file}이 원본과 어긋납니다. node scripts/build-realestate-pages.mjs를 실행하세요.`
+    );
+  }
+});
+
+// 크롤러가 25개 페이지를 발견하는 유일한 내부 경로다. sitemap만으로는 늦다.
+test("모든 시세 페이지가 25개 자치구로 링크한다", async () => {
+  for (const file of ["realestate.html", "apartment-sale.html", "district-gangnam.html"]) {
+    const html = await read(`docs/${file}`);
+    const block = html.split("<!--prerender:districtLinks-->")[1]?.split("<!--/prerender")[0] ?? "";
+    assert.equal((block.match(/<a /g) ?? []).length, 25, `${file}: 지역 링크가 25개가 아니다`);
+    for (const { file: target } of DISTRICT_PAGES) {
+      assert.ok(block.includes(`href="./${target}"`), `${file}: ${target} 링크가 없다`);
+    }
+  }
+});
+
+test("자치구 페이지는 자기 지역을 링크 목록에서 표시한다", async () => {
+  const html = await read("docs/district-songpa.html");
+  const block = html.split("<!--prerender:districtLinks-->")[1].split("<!--/prerender")[0];
+  assert.ok(block.includes('<a href="./district-songpa.html" aria-current="page">송파구</a>'));
 });

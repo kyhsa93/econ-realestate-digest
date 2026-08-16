@@ -236,6 +236,11 @@
   }
   .trend-chart svg { width: 100%; height: 60px; display: block; }
   .trend-meta { color: var(--muted); font-size: 0.78rem; margin-top: 6px; }
+  .district-links-heading { font-size: 0.85rem; color: var(--muted); margin: 18px 0 8px; font-weight: 600; }
+  .district-links { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 0.82rem; }
+  .district-links a { color: var(--muted); text-decoration: none; }
+  .district-links a:hover { text-decoration: underline; }
+  .district-links a[aria-current="page"] { color: var(--fg); font-weight: 600; }
   .table-wrap { overflow-x: auto; }
   .data-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; white-space: nowrap; }
   .data-table th, .data-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); text-align: right; }
@@ -330,6 +335,8 @@
       </table>
     </div>
     <div class="content-notice" id="table-note"></div>
+    <h3 class="district-links-heading" id="district-links-heading">다른 지역</h3>
+    <div class="district-links" id="district-links"><!--prerender:districtLinks--><a href="./district-jongno.html">종로구</a><a href="./district-jung.html">중구</a><a href="./district-yongsan.html">용산구</a><a href="./district-seongdong.html">성동구</a><a href="./district-gwangjin.html">광진구</a><a href="./district-dongdaemun.html">동대문구</a><a href="./district-jungnang.html">중랑구</a><a href="./district-seongbuk.html">성북구</a><a href="./district-gangbuk.html">강북구</a><a href="./district-dobong.html">도봉구</a><a href="./district-nowon.html">노원구</a><a href="./district-eunpyeong.html">은평구</a><a href="./district-seodaemun.html">서대문구</a><a href="./district-mapo.html">마포구</a><a href="./district-yangcheon.html">양천구</a><a href="./district-gangseo.html">강서구</a><a href="./district-guro.html">구로구</a><a href="./district-geumcheon.html">금천구</a><a href="./district-yeongdeungpo.html">영등포구</a><a href="./district-dongjak.html">동작구</a><a href="./district-gwanak.html">관악구</a><a href="./district-seocho.html">서초구</a><a href="./district-gangnam.html">강남구</a><a href="./district-songpa.html">송파구</a><a href="./district-gangdong.html">강동구</a><!--/prerender:districtLinks--></div>
   </section>
 
   <footer class="site-footer">
@@ -373,6 +380,10 @@ const T = {
     thPerPyeong: "평당가",
     thPerPyeongDeposit: "평당 보증금",
     thArea: (m2) => `${m2}㎡ 환산`,
+    districtTitle: (name) => `${name} 아파트 시세`,
+    thType: "구분",
+    otherDistricts: "다른 지역",
+    backToAll: "서울 전체 시세",
     trendHeading: "최근 추이",
     trendRange: (from, to, n) => `${from} ~ ${to} · ${n}일`,
     trendTooShort: "추이는 기록이 이틀 이상 쌓이면 표시됩니다.",
@@ -421,6 +432,10 @@ const T = {
     thPerPyeong: "Per pyeong",
     thPerPyeongDeposit: "Deposit per pyeong",
     thArea: (m2) => `For ${m2}m²`,
+    districtTitle: (name) => `${name} apartment prices`,
+    thType: "Type",
+    otherDistricts: "Other districts",
+    backToAll: "All Seoul prices",
     trendHeading: "Recent trend",
     trendRange: (from, to, n) => `${from} – ${to} · ${n} days`,
     trendTooShort: "The trend appears once more than one day of data is collected.",
@@ -464,6 +479,10 @@ const normalizeArea = (value) =>
 // 84㎡가 기본이지만 59㎡를 찾는 사람도 많다. 세후 이자의 금액 입력과 같은 성격이라
 // 고른 값은 주소에 남겨 그 화면을 공유할 수 있게 한다.
 let areaM2 = normalizeArea(new URLSearchParams(location.search).get("area"));
+
+// 자치구별 페이지(district-gangnam.html 등). 거래 유형 페이지와 다른 축이라 kind와
+// 함께 쓰지 않는다 - 이 페이지는 한 지역의 세 유형을 한꺼번에 보여준다.
+const districtName = document.querySelector('meta[name="realestate-district"]')?.getAttribute("content") ?? null;
 
 const kind = (() => {
   const value = document.querySelector('meta[name="realestate-kind"]')?.getAttribute("content") ?? null;
@@ -642,6 +661,7 @@ function allCells(entry) {
 }
 
 function headLabels() {
+  if (districtName) return [t("thType"), t("thPerPyeong"), t("thArea")(areaM2), t("thCount")];
   if (!kind) return [t("thDistrict"), t("thSale"), t("thJeonse"), t("thWolse")];
   if (kind === "wolse") return [t("thDistrict"), t("thDeposit"), t("thMonthly"), t("thCount")];
   if (kind === "jeonse") {
@@ -678,8 +698,38 @@ function rowHtml(entry, label, isOverall) {
   return `<tr class="${isOverall ? "overall-row" : ""}"><td>${escapeHtml(label)}</td>${body}</tr>`;
 }
 
+// 한 지역만 보여주는 페이지에서는 거래 유형이 행이 된다. 월세는 평당 개념이 아니라
+// 보증금·월세 평균이므로 환산 칸을 비운다.
+function districtRowsHtml(entry) {
+  const labels = [t("thSale"), t("thJeonse"), t("thWolse")];
+  return ["sale", "jeonse", "wolse"]
+    .map((k, i) => {
+      const resolved = resolveMetric(entry, k);
+      if (!resolved) {
+        const raw = entry?.[KIND_FIELDS[k].metric];
+        return `<tr><td>${escapeHtml(labels[i])}</td><td data-label="${escapeHtml(t("thPerPyeong"))}">${raw ? lowSampleHtml(raw) : "-"}</td><td data-label="${escapeHtml(t("thArea")(areaM2))}">-</td><td data-label="${escapeHtml(t("thCount"))}">-</td></tr>`;
+      }
+      const { metric, isPrevious } = resolved;
+      const tag = prevTagHtml(isPrevious);
+      const change = isPrevious ? "" : changeHtml(metric.change, metric.baselineDate);
+      const price =
+        k === "wolse"
+          ? `<span class="price-strong">${formatMan(metric.avgDeposit10k)}</span> / <span class="price-strong">${escapeHtml(t("monthlyPrefix"))}${formatMan(metric.avgMonthlyRent10k)}</span>${tag}`
+          : `<span class="price-strong">${formatMan(valueOf(metric, k))}</span>${change}${tag}`;
+      const area =
+        k === "wolse" ? "-" : `<span class="price-strong">${formatEok(areaPrice(valueOf(metric, k)))}</span>`;
+      return `<tr><td>${escapeHtml(labels[i])}</td><td data-label="${escapeHtml(t("thPerPyeong"))}">${price}</td><td data-label="${escapeHtml(t("thArea")(areaM2))}">${area}</td><td data-label="${escapeHtml(t("thCount"))}"><span class="count">${escapeHtml(t("countUnit")(metric.transactionCount))}</span></td></tr>`;
+    })
+    .join("");
+}
+
 function renderTable(realestate) {
   const grid = document.getElementById("district-grid");
+  if (districtName) {
+    const entry = districtEntry();
+    grid.innerHTML = entry ? districtRowsHtml(entry) : `<tr><td colspan="4">${escapeHtml(t("empty"))}</td></tr>`;
+    return;
+  }
   const districts = realestate?.districts ?? [];
   if (!realestate?.overall && !districts.length) {
     grid.innerHTML = `<tr><td colspan="4">${escapeHtml(t("empty"))}</td></tr>`;
@@ -695,7 +745,7 @@ function renderTable(realestate) {
 // 첫 화면에서 가장 먼저 읽히는 숫자다. 유형별 페이지는 84㎡ 환산가를 같이 세운다.
 function renderOverall(realestate) {
   const box = document.getElementById("overall-cards");
-  const overall = realestate?.overall;
+  const overall = districtName ? districtEntry() : realestate?.overall;
   if (!overall) {
     box.innerHTML = "";
     return;
@@ -705,6 +755,19 @@ function renderOverall(realestate) {
     `<div class="value">${value}</div>` +
     (sub ? `<div class="sub">${sub}</div>` : "") +
     `</div>`;
+
+  if (districtName) {
+    const sale = resolveMetric(overall, "sale")?.metric;
+    const ratio = jeonseRatio(overall);
+    box.innerHTML =
+      (sale
+        ? card(t("thPerPyeong"), formatMan(valueOf(sale, "sale")), "") +
+          card(t("thArea")(areaM2), formatEok(areaPrice(valueOf(sale, "sale"))), "") +
+          card(t("thCount"), escapeHtml(t("countUnit")(sale.transactionCount)), "")
+        : card(t("thSale"), "-", "")) +
+      (ratio ? card(t("thRatio"), formatPercent(ratio.ratio), "") : "");
+    return;
+  }
 
   if (!kind) {
     box.innerHTML = ["sale", "jeonse", "wolse"]
@@ -752,7 +815,14 @@ function renderOverall(realestate) {
 
 // 평형 선택은 84㎡ 환산가가 있는 화면(매매·전세)에서만 의미가 있다. 월세는 보증금·월세
 // 평균이라 환산하지 않고, 허브는 평당가만 나열한다.
-const hasAreaColumn = kind === "sale" || kind === "jeonse";
+// 자치구 페이지도 84㎡ 환산 열을 갖는다(월세 행만 비어 있다). 환산가가 아예 없는
+// 화면은 월세 페이지와 허브뿐이다.
+const hasAreaColumn = Boolean(districtName) || kind === "sale" || kind === "jeonse";
+
+function districtEntry() {
+  if (!districtName) return null;
+  return (cache.realestate?.districts ?? []).find((d) => d.name === districtName) ?? null;
+}
 
 function renderAreaControls() {
   const box = document.getElementById("area-controls");
@@ -808,9 +878,11 @@ function sparklineSvg(values) {
 function trendSeries(history) {
   const key = kind ?? "sale";
   const field = KIND_FIELDS[key];
+  const code = districtName ? districtEntry()?.code : null;
   return (history ?? [])
     .map((day) => {
-      const metric = day?.overall?.[field.metric];
+      const scope = code ? (day?.districts ?? []).find((d) => d.code === code) : day?.overall;
+      const metric = scope?.[field.metric];
       if (!hasEnoughSample(metric)) return null;
       const value = metric[field.value];
       return typeof value === "number" && Number.isFinite(value) ? { date: day.date, value } : null;
@@ -843,11 +915,13 @@ const NAV_KEYS = { all: "navAll", sale: "navSale", jeonse: "navJeonse", wolse: "
 
 function applyLocale() {
   const suffix = kind === "sale" ? "titleSale" : kind === "jeonse" ? "titleJeonse" : kind === "wolse" ? "titleWolse" : "title";
-  document.title = t(suffix);
-  document.getElementById("page-title").textContent = t(suffix);
+  const heading = districtName ? t("districtTitle")(districtName) : t(suffix);
+  document.title = heading;
+  document.getElementById("page-title").textContent = heading;
   document.getElementById("overall-heading").textContent = t("overallHeading");
   document.getElementById("district-heading").textContent = t("districtHeading");
   document.getElementById("table-note").textContent = t("note");
+  document.getElementById("district-links-heading").textContent = t("otherDistricts");
   document.getElementById("footer-source").textContent = t("footerSource");
   document.getElementById("footer-privacy").textContent = t("footerPrivacy");
   document.getElementById("nav-digest").textContent = t("navDigest");
