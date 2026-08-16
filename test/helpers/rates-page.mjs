@@ -121,6 +121,15 @@ export async function loadRatesPage({ analytics, fetch: fetchImpl, file = "docs/
   const { document, byId } = makeDom(html);
   const store = {};
 
+  const pushed = [];
+  const replaced = [];
+  function applyUrl(url) {
+    const [pathname, query = ""] = String(url).split("?");
+    sandbox.location.pathname = pathname;
+    sandbox.location.search = query ? `?${query}` : "";
+    sandbox.location.href = `https://x${pathname}${query ? `?${query}` : ""}`;
+  }
+
   const sandbox = {
     console: { ...console, warn() {}, error() {} },
     Math, Date, JSON, Intl, URL, URLSearchParams,
@@ -137,12 +146,23 @@ export async function loadRatesPage({ analytics, fetch: fetchImpl, file = "docs/
       removeItem: (k) => delete store[k],
     },
     navigator: { language: "ko" },
-    location: { search, origin: "https://x", pathname: "/", href: "https://x/" },
+    location: { search, origin: "https://x", pathname: "/", href: `https://x/${search}` },
     matchMedia: () => ({ matches: false, addEventListener() {} }),
     // 페이지가 popstate를 듣고 주소로 상태를 되돌린다. window 쪽 API가 없으면 로드 자체가 죽는다.
     addEventListener() {},
     removeEventListener() {},
-    history: { pushState() {}, replaceState() {} },
+    // 주소를 바꾸는 게 화면 상태의 일부다(필터를 걸어둔 화면을 공유할 수 있어야 한다).
+    // 아무것도 안 하는 스텁으로 두면 "주소에 남겼다"는 걸 확인할 방법이 없다.
+    history: {
+      pushState(_state, _title, url) {
+        pushed.push(url);
+        applyUrl(url);
+      },
+      replaceState(_state, _title, url) {
+        replaced.push(url);
+        applyUrl(url);
+      },
+    },
     document,
   };
   if (analytics) sandbox.analytics = analytics;
@@ -174,5 +194,5 @@ export async function loadRatesPage({ analytics, fetch: fetchImpl, file = "docs/
     else for (const fn of head.listeners.click ?? []) fn({ target: button });
   };
 
-  return { sandbox, byId, clickTab, clickSortHeader, rates, state: sandbox.__state };
+  return { sandbox, byId, clickTab, clickSortHeader, rates, state: sandbox.__state, pushed, replaced };
 }

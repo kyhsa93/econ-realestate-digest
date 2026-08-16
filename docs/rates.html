@@ -191,6 +191,7 @@
     color: var(--muted);
   }
   .controls select,
+  .controls input[type="number"],
   .controls input[type="search"] {
     background: var(--bg);
     color: var(--fg);
@@ -206,6 +207,13 @@
     gap: 10px;
     align-items: center;
   }
+  .amount-field {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .amount-field input { width: 130px; text-align: right; }
+  .amount-unit { font-size: 0.82rem; color: var(--muted); }
   .sector-filter label {
     display: inline-flex;
     align-items: center;
@@ -308,6 +316,12 @@
   .rate-low {
     font-weight: 600;
     color: var(--down);
+  }
+  /* 세후 이자는 금리와 달리 '내가 받는 돈'이라 표에서 제일 먼저 눈에 들어와야 한다.
+     다만 금리 열(빨강/파랑)과 색으로 경쟁하면 표가 산만해져서 굵기로만 세운다. */
+  .net-interest {
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
   }
   .product-name {
     white-space: normal;
@@ -449,8 +463,8 @@
 
     <div class="table-wrap">
       <table class="data-table">
-        <thead id="products-head"><!--prerender:ratesHead--><tr><th>상품</th><th>기본금리</th><th>최고금리</th></tr><!--/prerender:ratesHead--></thead>
-        <tbody id="products-body"><!--prerender:rates--><tr><td><div class="product-name">처음만난예금(모바일전용)</div><div class="product-company">애큐온저축은행</div></td><td data-label="기본금리">4.00%</td><td class="rate-strong" data-label="최고금리">4.10%</td></tr><tr><td><div class="product-name">애플정기예금</div><div class="product-company">대백저축은행</div></td><td data-label="기본금리">4.10%</td><td class="rate-strong" data-label="최고금리">4.10%</td></tr><tr><td><div class="product-name">다시만난예금(모바일전용)</div><div class="product-company">애큐온저축은행</div></td><td data-label="기본금리">3.70%</td><td class="rate-strong" data-label="최고금리">4.05%</td></tr><tr><td><div class="product-name">e-회전yes정기예금(1년단위 변동금리상품) (인터넷뱅킹, 스마트뱅킹)</div><div class="product-company">키움예스저축은행</div></td><td data-label="기본금리">4.05%</td><td class="rate-strong" data-label="최고금리">4.05%</td></tr><tr><td><div class="product-name">SB톡톡 회전yes정기예금(1년단위 변동금리상품) (비대면)</div><div class="product-company">키움예스저축은행</div></td><td data-label="기본금리">4.05%</td><td class="rate-strong" data-label="최고금리">4.05%</td></tr><tr><td><div class="product-name">정기예금</div><div class="product-company">오투저축은행</div></td><td data-label="기본금리">4.02%</td><td class="rate-strong" data-label="최고금리">4.02%</td></tr><tr><td><div class="product-name">E-정기예금</div><div class="product-company">오투저축은행</div></td><td data-label="기본금리">4.02%</td><td class="rate-strong" data-label="최고금리">4.02%</td></tr><tr><td><div class="product-name">비대면 정기예금</div><div class="product-company">오투저축은행</div></td><td data-label="기본금리">4.02%</td><td class="rate-strong" data-label="최고금리">4.02%</td></tr><tr><td><div class="product-name">정기예금(인터넷,모바일,비대면)</div><div class="product-company">CK저축은행</div></td><td data-label="기본금리">4.01%</td><td class="rate-strong" data-label="최고금리">4.01%</td></tr><tr><td><div class="product-name">OK안심정기예금(변동금리)</div><div class="product-company">OK저축은행</div></td><td data-label="기본금리">3.91%</td><td class="rate-strong" data-label="최고금리">4.01%</td></tr><tr><td><div class="product-name">OK e-안심정기예금(변동금리)</div><div class="product-company">OK저축은행</div></td><td data-label="기본금리">4.01%</td><td class="rate-strong" data-label="최고금리">4.01%</td></tr><tr><td><div class="product-name">플러스회전식정기예금(모바일)</div><div class="product-company">애큐온저축은행</div></td><td data-label="기본금리">4.00%</td><td class="rate-strong" data-label="최고금리">4.00%</td></tr><tr><td><div class="product-name">회전정기예금</div><div class="product-company">스카이저축은행</div></td><td data-label="기본금리">3.90%</td><td class="rate-strong" data-label="최고금리">4.00%</td></tr><tr><td><div class="product-name">정기예금</div><div class="product-company">민국저축은행</div></td><td data-label="기본금리">3.90%</td><td class="rate-strong" data-label="최고금리">4.00%</td></tr><tr><td><div class="product-name">푸른 정기예금</div><div class="product-company">푸른저축은행</div></td><td data-label="기본금리">3.90%</td><td class="rate-strong" data-label="최고금리">4.00%</td></tr><tr><td><div class="product-name">e-정기예금(인터넷뱅킹, 스마트뱅킹)</div><div class="product-company">키움예스저축은행</div></td><td data-label="기본금리">4.00%</td><td class="rate-strong" data-label="최고금리">4.00%</td></tr><tr><td><div class="product-name">SB톡톡 정기예금(비대면)</div><div class="product-company">키움예스저축은행</div></td><td data-label="기본금리">4.00%</td><td class="rate-strong" data-label="최고금리">4.00%</td></tr><tr><td><div class="product-name">정기예금</div><div class="product-company">우리저축은행</div></td><td data-label="기본금리">4.00%</td><td class="rate-strong" data-label="최고금리">4.00%</td></tr><tr><td><div class="product-name">정기예금</div><div class="product-company">금화저축은행</div></td><td data-label="기본금리">4.00%</td><td class="rate-strong" data-label="최고금리">4.00%</td></tr><tr><td><div class="product-name">e-정기예금</div><div class="product-company">금화저축은행</div></td><td data-label="기본금리">4.00%</td><td class="rate-strong" data-label="최고금리">4.00%</td></tr><!--/prerender:rates--></tbody>
+        <thead id="products-head"><!--prerender:ratesHead--><tr><th>상품</th><th>기본금리</th><th>최고금리</th><th>세후 이자</th></tr><!--/prerender:ratesHead--></thead>
+        <tbody id="products-body"><!--prerender:rates--><tr><td><div class="product-name">처음만난예금(모바일전용)</div><div class="product-company">애큐온저축은행</div></td><td data-label="기본금리">4.00%</td><td class="rate-strong" data-label="최고금리">4.10%</td><td class="net-interest" data-label="세후 이자">353,453원</td></tr><tr><td><div class="product-name">애플정기예금</div><div class="product-company">대백저축은행</div></td><td data-label="기본금리">4.10%</td><td class="rate-strong" data-label="최고금리">4.10%</td><td class="net-interest" data-label="세후 이자">346,860원</td></tr><tr><td><div class="product-name">다시만난예금(모바일전용)</div><div class="product-company">애큐온저축은행</div></td><td data-label="기본금리">3.70%</td><td class="rate-strong" data-label="최고금리">4.05%</td><td class="net-interest" data-label="세후 이자">342,630원</td></tr><tr><td><div class="product-name">e-회전yes정기예금(1년단위 변동금리상품) (인터넷뱅킹, 스마트뱅킹)</div><div class="product-company">키움예스저축은행</div></td><td data-label="기본금리">4.05%</td><td class="rate-strong" data-label="최고금리">4.05%</td><td class="net-interest" data-label="세후 이자">342,630원</td></tr><tr><td><div class="product-name">SB톡톡 회전yes정기예금(1년단위 변동금리상품) (비대면)</div><div class="product-company">키움예스저축은행</div></td><td data-label="기본금리">4.05%</td><td class="rate-strong" data-label="최고금리">4.05%</td><td class="net-interest" data-label="세후 이자">342,630원</td></tr><tr><td><div class="product-name">정기예금</div><div class="product-company">오투저축은행</div></td><td data-label="기본금리">4.02%</td><td class="rate-strong" data-label="최고금리">4.02%</td><td class="net-interest" data-label="세후 이자">340,092원</td></tr><tr><td><div class="product-name">E-정기예금</div><div class="product-company">오투저축은행</div></td><td data-label="기본금리">4.02%</td><td class="rate-strong" data-label="최고금리">4.02%</td><td class="net-interest" data-label="세후 이자">340,092원</td></tr><tr><td><div class="product-name">비대면 정기예금</div><div class="product-company">오투저축은행</div></td><td data-label="기본금리">4.02%</td><td class="rate-strong" data-label="최고금리">4.02%</td><td class="net-interest" data-label="세후 이자">340,092원</td></tr><tr><td><div class="product-name">정기예금(인터넷,모바일,비대면)</div><div class="product-company">CK저축은행</div></td><td data-label="기본금리">4.01%</td><td class="rate-strong" data-label="최고금리">4.01%</td><td class="net-interest" data-label="세후 이자">339,246원</td></tr><tr><td><div class="product-name">OK안심정기예금(변동금리)</div><div class="product-company">OK저축은행</div></td><td data-label="기본금리">3.91%</td><td class="rate-strong" data-label="최고금리">4.01%</td><td class="net-interest" data-label="세후 이자">339,246원</td></tr><tr><td><div class="product-name">OK e-안심정기예금(변동금리)</div><div class="product-company">OK저축은행</div></td><td data-label="기본금리">4.01%</td><td class="rate-strong" data-label="최고금리">4.01%</td><td class="net-interest" data-label="세후 이자">339,246원</td></tr><tr><td><div class="product-name">플러스회전식정기예금(모바일)</div><div class="product-company">애큐온저축은행</div></td><td data-label="기본금리">4.00%</td><td class="rate-strong" data-label="최고금리">4.00%</td><td class="net-interest" data-label="세후 이자">338,400원</td></tr><tr><td><div class="product-name">회전정기예금</div><div class="product-company">스카이저축은행</div></td><td data-label="기본금리">3.90%</td><td class="rate-strong" data-label="최고금리">4.00%</td><td class="net-interest" data-label="세후 이자">338,400원</td></tr><tr><td><div class="product-name">정기예금</div><div class="product-company">민국저축은행</div></td><td data-label="기본금리">3.90%</td><td class="rate-strong" data-label="최고금리">4.00%</td><td class="net-interest" data-label="세후 이자">338,400원</td></tr><tr><td><div class="product-name">푸른 정기예금</div><div class="product-company">푸른저축은행</div></td><td data-label="기본금리">3.90%</td><td class="rate-strong" data-label="최고금리">4.00%</td><td class="net-interest" data-label="세후 이자">338,400원</td></tr><tr><td><div class="product-name">e-정기예금(인터넷뱅킹, 스마트뱅킹)</div><div class="product-company">키움예스저축은행</div></td><td data-label="기본금리">4.00%</td><td class="rate-strong" data-label="최고금리">4.00%</td><td class="net-interest" data-label="세후 이자">338,400원</td></tr><tr><td><div class="product-name">SB톡톡 정기예금(비대면)</div><div class="product-company">키움예스저축은행</div></td><td data-label="기본금리">4.00%</td><td class="rate-strong" data-label="최고금리">4.00%</td><td class="net-interest" data-label="세후 이자">338,400원</td></tr><tr><td><div class="product-name">정기예금</div><div class="product-company">우리저축은행</div></td><td data-label="기본금리">4.00%</td><td class="rate-strong" data-label="최고금리">4.00%</td><td class="net-interest" data-label="세후 이자">338,400원</td></tr><tr><td><div class="product-name">정기예금</div><div class="product-company">금화저축은행</div></td><td data-label="기본금리">4.00%</td><td class="rate-strong" data-label="최고금리">4.00%</td><td class="net-interest" data-label="세후 이자">338,400원</td></tr><tr><td><div class="product-name">e-정기예금</div><div class="product-company">금화저축은행</div></td><td data-label="기본금리">4.00%</td><td class="rate-strong" data-label="최고금리">4.00%</td><td class="net-interest" data-label="세후 이자">338,400원</td></tr><!--/prerender:rates--></tbody>
       </table>
     </div>
     <div class="content-notice" id="products-note" style="margin-top: 10px;"></div>
@@ -505,9 +519,14 @@
       thProduct: "상품",
       thBaseRate: "기본금리",
       thMaxRate: "최고금리",
+      thAfterTax: "세후 이자",
       thRateRange: "금리(최저~최고)",
       thAvgRate: "평균",
       sortHint: "이 금리 기준으로 정렬",
+      amountLabelDeposit: "예치금액",
+      amountLabelSaving: "월 납입액",
+      amountUnit: "원",
+      amountHint: (won) => `${won} 기준`,
       historyBase: "기본",
       thRateType: "금리 유형",
       thJoinWay: "가입 방법",
@@ -530,6 +549,7 @@
       historyRentLoan: "전세자금대출 최저",
       historyEmpty: "추이는 데이터가 하루 이상 쌓이면 표시됩니다.",
       savingNote: "최고금리는 우대조건을 모두 충족했을 때의 금리입니다. 조건 없이 받는 금리는 기본금리 쪽을 보세요. 저축은행은 예금자보호 한도(1인당 5천만원)를 감안해 비교하세요.",
+      afterTaxNote: "세후 이자는 최고금리로 만기까지 넣었을 때 이자소득세 15.4%(소득세 14% + 지방소득세 1.4%)를 뗀 금액입니다. 적금은 매달 같은 금액을 넣는 정액적립식으로 계산했습니다. 비과세종합저축·세금우대 대상이면 실제로 받는 금액은 이보다 큽니다.",
       loanNote: "금리(최저~최고)는 지금 제시되는 범위이고, 평균은 지난달에 실제로 나간 대출의 평균이라 서로 다른 수치입니다. 그래서 평균이 최저보다 낮게 나오기도 합니다. 기본 정렬은 모든 상품에 값이 있는 최저금리 기준이며, 금리 열 머리글을 누르면 기준을 바꿀 수 있습니다. 실제 승인 금리는 신용점수·담보·상환방식에 따라 달라집니다.",
       source: "출처: 금융감독원 금융상품통합비교공시(금융상품 한눈에)",
       footerHome: "데일리 다이제스트",
@@ -566,9 +586,14 @@
       thProduct: "Product",
       thBaseRate: "Base",
       thMaxRate: "Max",
+      thAfterTax: "After-tax interest",
       thRateRange: "Rate (min–max)",
       thAvgRate: "Avg",
       sortHint: "Sort by this rate",
+      amountLabelDeposit: "Deposit amount",
+      amountLabelSaving: "Monthly payment",
+      amountUnit: "KRW",
+      amountHint: (won) => `for ${won}`,
       historyBase: "Base",
       thRateType: "Rate type",
       thJoinWay: "How to apply",
@@ -591,6 +616,7 @@
       historyRentLoan: "Lowest jeonse loan rate",
       historyEmpty: "The trend appears once more than one day of data is collected.",
       savingNote: "The max rate assumes every preferential condition is met; the base rate is what you get without them. For savings banks, keep the KRW 50M per-person deposit protection limit in mind.",
+      afterTaxNote: "After-tax interest is what is left once 15.4% interest income tax (14% income + 1.4% local) is withheld, assuming the max rate and holding to maturity. Savings plans are calculated as fixed monthly contributions. If you qualify for a tax-exempt account, you receive more than shown.",
       loanNote: "The min\u2013max column is the range currently on offer, while the average is over loans actually made last month \u2014 two different measures, which is why an average can fall below the minimum. Sorting defaults to the minimum rate, the one value every product has; click a rate column header to sort by another. Your approved rate still depends on credit score, collateral and repayment type.",
       source: "Source: FSS Financial Product Comparison Disclosure",
       footerHome: "Daily digest",
@@ -643,6 +669,9 @@
     saving: [
       { key: "rate", label: "thBaseRate", defaultDir: "desc" },
       { key: "maxRate", label: "thMaxRate", defaultDir: "desc" },
+      // 같은 기간 안에서도 단리·복리가 섞여 있어서 금리 순서와 세후 이자 순서가
+      // 항상 같지는 않다.
+      { key: "netInterest", label: "thAfterTax", defaultDir: "desc" },
     ],
     loan: [
       { key: "min", label: "thRateRange", defaultDir: "asc" },
@@ -662,9 +691,16 @@
 
   const DEFAULT_CATEGORY = initialCategory();
 
+  // 세후 이자를 낼 기준 금액. 예금은 목돈을 한 번에 넣고 적금은 매달 부으므로 기준이
+  // 달라서 탭별로 따로 든다(적금 탭에서 "월 1,000만원"을 묻는 화면이 되면 안 된다).
+  // scripts/interest.mjs의 DEFAULT_AMOUNT와 같아야 한다 - 정적 HTML이 그 값으로 심긴다.
+  const DEFAULT_AMOUNT = { deposit: 10000000, saving: 300000 };
+  const TAX_RATE = 0.154;
+
   const state = {
     category: CATEGORY_KEYS.includes(urlParams.get("tab")) ? urlParams.get("tab") : DEFAULT_CATEGORY,
     term: Number(urlParams.get("term")) || 12,
+    amounts: { ...DEFAULT_AMOUNT },
     sectors: { bank: true, savingsBank: true },
     rateType: urlParams.get("type") ?? "",
     query: urlParams.get("q") ?? "",
@@ -680,6 +716,57 @@
 
   function isSavingCategory(key) {
     return SAVING_CATEGORIES.has(key);
+  }
+
+  function amountKey() {
+    return state.category === "saving" ? "saving" : "deposit";
+  }
+
+  function currentAmount() {
+    return state.amounts[amountKey()];
+  }
+
+  // 주소로 들어온 금액. 음수·0·글자는 무시하고 기본값을 쓴다.
+  function readAmountParam(params) {
+    const raw = Number(params.get("amt"));
+    return Number.isFinite(raw) && raw > 0 ? Math.round(raw) : null;
+  }
+
+  const initialAmount = readAmountParam(urlParams);
+  if (initialAmount !== null) state.amounts[amountKey()] = initialAmount;
+
+  // scripts/interest.mjs와 같은 계산이다. 이 페이지는 인라인 스크립트라 모듈을 못 받아서
+  // 복제해 뒀고, 두 결과가 같은지는 테스트가 실제 렌더 결과로 대조한다.
+  function netInterestOf(option, { amount, saving }) {
+    const rate = option?.maxRate ?? option?.rate;
+    const term = option?.term;
+    if (typeof rate !== "number" || !Number.isFinite(rate)) return null;
+    if (typeof term !== "number" || !Number.isFinite(term) || term <= 0) return null;
+    if (typeof amount !== "number" || !Number.isFinite(amount) || amount <= 0) return null;
+
+    const monthlyRate = rate / 100 / 12;
+    const compound = (option.rateTypeName ?? "").includes("복리");
+
+    let gross;
+    if (saving) {
+      if (compound) {
+        gross = 0;
+        for (let n = term; n >= 1; n -= 1) gross += amount * ((1 + monthlyRate) ** n - 1);
+      } else {
+        gross = amount * monthlyRate * ((term * (term + 1)) / 2);
+      }
+    } else {
+      gross = compound
+        ? amount * ((1 + monthlyRate) ** term - 1)
+        : amount * monthlyRate * term;
+    }
+    return Math.round(gross - gross * TAX_RATE);
+  }
+
+  function fmtWon(value) {
+    if (typeof value !== "number" || !Number.isFinite(value)) return "-";
+    const n = Math.round(value);
+    return locale === "en" ? `₩${n.toLocaleString("en-US")}` : `${n.toLocaleString("ko-KR")}원`;
   }
 
   function sortFamily() {
@@ -905,6 +992,14 @@
             state.sectors.savingsBank ? "checked" : ""
           }> ${escapeHtml(t("sectorSavingsBank"))}</label>
         </span>
+        <label for="amount-input">${escapeHtml(
+          t(state.category === "saving" ? "amountLabelSaving" : "amountLabelDeposit")
+        )}</label>
+        <span class="amount-field">
+          <input type="number" id="amount-input" min="1" step="100000" inputmode="numeric"
+            value="${currentAmount()}">
+          <span class="amount-unit">${escapeHtml(t("amountUnit"))}</span>
+        </span>
         ${searchHtml}`;
     } else {
       const types = availableRateTypes();
@@ -936,6 +1031,23 @@
         renderProducts();
         syncUrl({ push: true });
         window.analytics?.event("rate_filter", { filter: "term", filter_value: String(state.term) });
+      });
+    }
+
+    const amountInput = document.getElementById("amount-input");
+    if (amountInput) {
+      // 지우는 도중(빈 칸)이나 0을 넣었다고 표를 비우면 입력이 불편하다. 값이
+      // 쓸 만해질 때까지 직전 금액을 그대로 쓴다.
+      amountInput.addEventListener("input", (e) => {
+        const next = Number(e.target.value);
+        if (!Number.isFinite(next) || next <= 0) return;
+        state.amounts[amountKey()] = Math.round(next);
+        renderProducts();
+        syncUrl();
+        window.analytics?.debouncedEvent?.("rate_amount", {
+          rate_category: state.category,
+          amount: String(state.amounts[amountKey()]),
+        });
       });
     }
 
@@ -992,12 +1104,23 @@
       let best = null;
       let bestValue = null;
       let fallback = null;
-      for (const opt of product.options ?? []) {
+      for (const raw of product.options ?? []) {
         if (isSavingCategory(state.category)) {
-          if (opt.term !== state.term) continue;
-        } else if (state.rateType && opt.rateType !== state.rateType) {
+          if (raw.term !== state.term) continue;
+        } else if (state.rateType && raw.rateType !== state.rateType) {
           continue;
         }
+        // 세후 이자는 공시에 없는 계산값이라 옵션에 얹어둔다. 그래야 정렬도 표시도
+        // 다른 금리 열과 똑같은 경로를 탄다.
+        const opt = isSavingCategory(state.category)
+          ? {
+              ...raw,
+              netInterest: netInterestOf(raw, {
+                amount: currentAmount(),
+                saving: state.category === "saving",
+              }),
+            }
+          : raw;
         fallback ??= opt;
         const value = opt[key];
         if (value === null || value === undefined) continue;
@@ -1066,7 +1189,8 @@
       ${productCellHtml(product)}
       <td data-label="${escapeHtml(t("thBaseRate"))}">${fmtRate(option.rate)}</td>
       <td class="rate-strong" data-label="${escapeHtml(t("thMaxRate"))}">${fmtRate(option.maxRate ?? option.rate)}</td>
-    </tr>${detailRowHtml(product, 3)}`;
+      <td class="net-interest" data-label="${escapeHtml(t("thAfterTax"))}">${fmtWon(option.netInterest)}</td>
+    </tr>${detailRowHtml(product, 4)}`;
   }
 
   function loanRowHtml({ product, option }) {
@@ -1099,6 +1223,7 @@
           <th>${escapeHtml(t("thProduct"))}</th>
           ${sortableThHtml("rate")}
           ${sortableThHtml("maxRate")}
+          ${sortableThHtml("netInterest")}
         </tr>`
       : `<tr>
           <th>${escapeHtml(t("thProduct"))}</th>
@@ -1111,7 +1236,7 @@
   function renderProducts() {
     renderProductsHead();
     const body = document.getElementById("products-body");
-    const columnCount = isSavingCategory(state.category) ? 3 : 4;
+    const columnCount = 4;
     const rows = visibleRows();
 
     if (!rows.length) {
@@ -1124,8 +1249,10 @@
         .join("");
     }
 
+    // 세후 이자는 가정을 깔고 낸 숫자라(최고금리·정액적립식·15.4%) 그 가정을 표
+    // 바로 아래에 같이 적는다. 숫자만 크게 보여주고 조건을 숨기면 오해를 만든다.
     document.getElementById("products-note").textContent = isSavingCategory(state.category)
-      ? t("savingNote")
+      ? `${t("savingNote")} ${t("afterTaxNote")}`
       : t("loanNote");
 
     for (const button of body.querySelectorAll("[data-detail]")) {
@@ -1215,6 +1342,8 @@
       ["term", String(state.term), "12"],
       ["type", state.rateType, ""],
       ["q", state.query.trim(), ""],
+      // 기본 금액이면 주소에 남기지 않는다(다른 필터와 같은 규칙).
+      ["amt", String(currentAmount()), String(DEFAULT_AMOUNT[amountKey()])],
     ]) {
       if (value === empty) next.delete(key);
       else next.set(key, value);
@@ -1232,6 +1361,7 @@
     state.term = Number(current.get("term")) || 12;
     state.rateType = current.get("type") ?? "";
     state.query = current.get("q") ?? "";
+    state.amounts[amountKey()] = readAmountParam(current) ?? DEFAULT_AMOUNT[amountKey()];
     state.expanded.clear();
     renderAll();
   });

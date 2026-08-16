@@ -9,6 +9,7 @@
 // 여기 있는 건 "받기 전에도 글자가 있게" 하려는 것뿐이다.
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { DEFAULT_AMOUNT, formatWon, netInterestOf } from "./interest.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
 const INDEX_PATH = path.join(root, "docs/index.html");
@@ -198,7 +199,7 @@ const rateRange = (min, max) =>
 
 export function ratesHeadHtml(category = "deposit") {
   return SAVING_CATEGORIES.has(category)
-    ? "<tr><th>상품</th><th>기본금리</th><th>최고금리</th></tr>"
+    ? "<tr><th>상품</th><th>기본금리</th><th>최고금리</th><th>세후 이자</th></tr>"
     : "<tr><th>상품</th><th>금리 유형</th><th>금리(최저~최고)</th><th>평균</th></tr>";
 }
 
@@ -241,12 +242,21 @@ export function ratesHtml(rates, { category = "deposit", limit = RATES_ROWS } = 
     `<td><div class="product-name">${escapeHtml(product.name ?? "-")}</div>` +
     `<div class="product-company">${escapeHtml(product.company ?? "")}</div></td>`;
 
+  // 세후 이자는 화면의 기본 금액(예금 1,000만원 / 적금 월 30만원)으로 심는다.
+  // 사용자가 금액을 바꾸면 클라이언트가 같은 계산으로 다시 그린다.
+  const amount = DEFAULT_AMOUNT[saving && category === "saving" ? "saving" : "deposit"];
+  const netCell = (option) => {
+    const net = netInterestOf(option, { amount, saving: category === "saving" });
+    return net === null ? "-" : formatWon(net);
+  };
+
   return rows
     .slice(0, limit)
     .map(({ product, option }) =>
       saving
         ? `<tr>${productCell(product)}<td data-label="기본금리">${rate(option.rate)}</td>` +
-          `<td class="rate-strong" data-label="최고금리">${rate(option.maxRate ?? option.rate)}</td></tr>`
+          `<td class="rate-strong" data-label="최고금리">${rate(option.maxRate ?? option.rate)}</td>` +
+          `<td class="net-interest" data-label="세후 이자">${netCell(option)}</td></tr>`
         : `<tr>${productCell(product)}<td data-label="금리 유형">${escapeHtml(option.rateType ?? "-")}</td>` +
           `<td data-label="금리(최저~최고)">${rateRange(option.min, option.max)}</td>` +
           `<td class="rate-low" data-label="평균">${rate(option.avg)}</td></tr>`
