@@ -279,11 +279,27 @@ function containsUnverifiedNumber(sentence, sourceText) {
 // 아예 빠져버려서, 검사를 하는 것처럼 보이지만 실제로는 안 하는 구간이 생긴다.
 const MAX_EXTRACTED_ENTITIES = 20;
 const MAX_ENTITY_LENGTH = 20;
+// 이 검증이 잡아야 하는 건 "국힘"을 "국민의당"으로 바꿔 쓰는 이름 바꿔치기다.
+// 경제 뉴스의 일반 용어까지 대조하면, 원문이 "7월 소비자물가지수와 7월 생산자물가지수"인데
+// 요약이 "7월 물가지수"로 묶어 쓴 것 같은 정상적인 일반화까지 환각으로 몰린다.
+// 수치는 containsUnverifiedNumber가 따로 대조하므로 여기서 빠져도 구멍이 아니다.
 const ENTITY_STOPWORDS = new Set([
   "정부", "시장", "경제", "금리", "주택", "부동산", "증시", "환율", "은행", "대출", "가격", "물가",
   "미디어", "언론", "당국", "업계", "기업", "정책", "지역", "소비자", "투자자", "국내", "해외",
+  "물가지수", "소비자물가", "소비자물가지수", "생산자물가", "생산자물가지수", "기준금리",
+  "가계대출", "가계부채", "가계신용", "전세대출", "주택담보대출", "국고채", "종부세",
+  "주식시장", "채권시장", "분양가", "공시가", "판매신용",
 ]);
 const ENTITY_SUFFIXES = ["지수", "증시", "시장", "정부", "당국", "은행", "그룹"];
+// 모델은 "미국 7월 소비자물가지수"를 "월 물가지수"처럼 날짜 조각을 달고 뽑아내기도 한다.
+// 날짜는 고유명사가 아니니 떼고 나서 일반 용어인지 본다.
+const DATE_PREFIX = /^\d*(?:년|월|일|분기|반기)/;
+
+function isGenericTerm(normalized) {
+  if (ENTITY_STOPWORDS.has(normalized)) return true;
+  const withoutDate = normalized.replace(DATE_PREFIX, "");
+  return withoutDate !== normalized && ENTITY_STOPWORDS.has(withoutDate);
+}
 
 const HANJA_COUNTRY_ABBREV = {
   韓: "한국", 日: "일본", 美: "미국", 中: "중국", 北: "북한", 英: "영국",
@@ -348,9 +364,9 @@ async function unverifiedEntities(sentence, sourceText) {
   const haystackWithoutDigits = haystack.replace(/\d/g, "");
 
   return entities.filter((entity) => {
-    if (ENTITY_STOPWORDS.has(entity)) return false;
     const normalized = normalizeForEntityMatch(entity);
-    if (!normalized || haystack.includes(normalized)) return false;
+    if (!normalized || isGenericTerm(normalized)) return false;
+    if (haystack.includes(normalized)) return false;
 
     // 원문 "미국 7월 물가지수"에서 모델이 "월 물가지수"를 고유명사로 뽑아내면
     // 숫자가 떨어져 나가 대조에 실패한다. 실제로 멀쩡한 문단이 이 이유로 버려졌다.
@@ -519,29 +535,44 @@ function isBadTranslation(text, original, requiredNumbers) {
   return false;
 }
 
-async function translateKoText(text, numPredict) {
-  const normalized = normalizeKoreanAmounts(text);
-  const requiredNumbers = extractNormalizedNumbers(text, normalized);
-
-  const prompt = `Translate the following Korean text into natural, concise English.
+function buildTranslatePrompt(normalized, hint) {
+  return `Translate the following Korean text into natural, concise English.
 The text may already contain plain Arabic numerals (e.g. "80,000,000") - if so, keep those numbers exactly as they are, do not round or rewrite them, just translate the surrounding Korean words (e.g. "원" -> "won").
 Keep every sentence: do not merge, drop, or add sentences.
 Write the translation in English only - do not use Chinese characters or any other language.
 Translate names of parties, institutions and people literally. Do NOT add roles or descriptions that are not in the Korean text (for example, never label a party as "ruling" or "opposition").
-Output ONLY the translation. No quotes, no explanation.
+Output ONLY the translation. No quotes, no explanation.${hint ? `\n${hint}` : ""}
 
 Korean: ${normalized}
 
 English:`;
+}
 
-  // 반려되면 온도를 낮춰 한 번 더. 실제로 걸린 건 한국어 "공시가"를 한자 公示로
-  // 옮겨버린 경우였는데, 이런 건 한 번 더 굴리면 대개 사라진다. 반려를 그대로
-  // 받아들이면 영어 화면에 한국어 문단이 통째로 남는다.
+// 온도만 낮춰 다시 부르면 같은 실수를 그대로 반복한다 - 한자 公示가 두 번 다
+// 나왔다. 무엇이 걸렸는지 짚어줘야 고칠 여지가 생긴다.
+function rejectionHint(rejected) {
+  if (!rejected) return null;
+  const hanzi = rejected.match(/[一-鿿]+/g);
+  if (hanzi) {
+    return `IMPORTANT: your previous attempt contained the Chinese characters "${[...new Set(hanzi)].join(", ")}". Write those words in plain English instead.`;
+  }
+  if (/[가-힣]/.test(rejected)) {
+    return "IMPORTANT: your previous attempt left Korean words untranslated. Every word must be English.";
+  }
+  return "IMPORTANT: your previous attempt was rejected. Keep every number exactly as written and translate the whole text.";
+}
+
+async function translateKoText(text, numPredict) {
+  const normalized = normalizeKoreanAmounts(text);
+  const requiredNumbers = extractNormalizedNumbers(text, normalized);
+
+  // 반려를 그대로 받아들이면 영어 화면에 한국어 문단이 통째로 남는다.
   let lastRejected = null;
 
   for (const temperature of [0.2, 0]) {
     let translated;
     try {
+      const prompt = buildTranslatePrompt(normalized, rejectionHint(lastRejected));
       const raw = await callOllama(prompt, { temperature, top_p: 0.8, num_predict: numPredict });
       // 문단은 여러 줄로 나뉘어 올 수 있다. 예전처럼 첫 줄만 쓰면 번역이 통째로 잘린다.
       const joined = raw.trim().replace(/\s*\n+\s*/g, " ").replace(/^["'“‘]+|["'”’]+$/g, "").trim();

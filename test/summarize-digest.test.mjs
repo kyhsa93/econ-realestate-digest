@@ -309,3 +309,34 @@ test("금액이 아닌 숫자는 건드리지 않는다", () => {
     assert.equal(normalizeKoreanAmounts(text), text);
   }
 });
+
+test("일반 경제 용어는 고유명사 대조에서 빼고 본다", async () => {
+  // 원문은 "미국 7월 소비자물가지수와 7월 생산자물가지수"인데 요약이 "7월 물가지수"로
+  // 묶어 썼다. 이건 일반화지 환각이 아니고, 애초에 물가지수는 고유명사가 아니다.
+  // 실제 CI에서 이 이유로 증시 문단이 두 번 연속 버려졌다.
+  const { summary, stderr } = await runSummarize(({ kind, prompt }) => {
+    if (kind === "entities") return "월 물가지수";
+    if (kind === "translate") return EN_OK;
+    return goodKo(prompt);
+  });
+
+  assert.doesNotMatch(stderr, /원문에 없는 고유명사/, "일반 용어를 환각으로 판정했다");
+  assert.ok(summary.categories.every((c) => !c.isFallback && !c.degraded));
+});
+
+test("번역 재시도에는 무엇이 걸렸는지 알려준다", async () => {
+  // 온도만 낮춰 다시 부르면 모델이 같은 한자를 그대로 또 쓴다. 실제로 그랬다.
+  const hints = [];
+  await runSummarize(({ kind, prompt }) => {
+    if (kind === "entities") return "없음";
+    if (kind === "translate") {
+      hints.push(prompt);
+      return hints.length === 1 ? `The 公示 price rose. ${EN_OK}` : EN_OK;
+    }
+    return goodKo(prompt);
+  });
+
+  const retry = hints[1] ?? "";
+  assert.match(retry, /Chinese characters/, "재시도 프롬프트에 반려 이유가 없다");
+  assert.match(retry, /公示/, "무엇이 문제였는지 짚어주지 않았다");
+});
