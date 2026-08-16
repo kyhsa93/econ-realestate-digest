@@ -17,6 +17,7 @@ async function main() {
   run("node scripts/prerender.mjs");
   run("node scripts/build-rate-pages.mjs");
   run("node scripts/build-news-pages.mjs");
+  run("node scripts/build-realestate-pages.mjs");
 
   const status = execSync("git status --porcelain -- docs", { cwd: repoRoot }).toString().trim();
   if (!status) {

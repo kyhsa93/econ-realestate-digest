@@ -10,11 +10,20 @@
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { DEFAULT_AMOUNT, formatWon, netInterestOf } from "./interest.mjs";
+import {
+  KIND_FIELDS,
+  areaPrice,
+  formatEok,
+  formatMan,
+  metricOf,
+  valueOf,
+} from "./realestate-format.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
 const INDEX_PATH = path.join(root, "docs/index.html");
 const RATES_PATH = path.join(root, "docs/rates.html");
 const NEWS_PATH = path.join(root, "docs/news.html");
+const REALESTATE_PATH = path.join(root, "docs/realestate.html");
 const DATA_DIR = path.join(root, "docs/data");
 
 // 자치구 평당가는 신고 건수가 적으면 "그 구의 시세"가 아니라 "그 아파트 한 채의
@@ -184,6 +193,176 @@ export function newsListHtml(news, category = null) {
     .join("");
 }
 
+// docs/realestate.html과 거기서 찍어낸 거래 유형별 페이지용. 화면 렌더와 같은
+// 마크업이어야 한다(테스트가 두 결과를 직접 대조한다). 정적 HTML은 한국어 화면이다.
+const RE_LABELS = {
+  district: "지역",
+  sale: "매매",
+  jeonse: "전세",
+  wolse: "월세",
+  perPyeong: "평당가",
+  perPyeongDeposit: "평당 보증금",
+  area: "84㎡ 환산",
+  deposit: "평균 보증금",
+  monthly: "평균 월세",
+  count: "거래건수",
+  overall: "서울 전체",
+};
+
+const reCount = (n) => `${n.toLocaleString("ko-KR")}건`;
+const reMan = (v) => formatMan(v);
+const reEok = (v) => formatEok(v);
+
+function reHeadLabels(kind) {
+  if (!kind) return [RE_LABELS.district, RE_LABELS.sale, RE_LABELS.jeonse, RE_LABELS.wolse];
+  if (kind === "wolse") return [RE_LABELS.district, RE_LABELS.deposit, RE_LABELS.monthly, RE_LABELS.count];
+  return [
+    RE_LABELS.district,
+    kind === "jeonse" ? RE_LABELS.perPyeongDeposit : RE_LABELS.perPyeong,
+    RE_LABELS.area,
+    RE_LABELS.count,
+  ];
+}
+
+export function realestateHeadHtml(kind = null) {
+  return `<tr>${reHeadLabels(kind).map((label) => `<th>${escapeHtml(label)}</th>`).join("")}</tr>`;
+}
+
+function reChange(change, baselineDate) {
+  if (!change || typeof change.value10k !== "number" || change.value10k === 0) return "";
+  const dir = change.value10k > 0 ? "up" : "down";
+  const arrow = change.value10k > 0 ? "▲" : "▼";
+  const title = baselineDate ? ` title="${escapeHtml(`${baselineDate} 대비`)}"` : "";
+  return ` <span class="change ${dir}"${title}>${arrow}${reMan(Math.abs(change.value10k))}</span>`;
+}
+
+const reCountSpan = (metric) =>
+  typeof metric?.transactionCount === "number"
+    ? ` <span class="count">${escapeHtml(reCount(metric.transactionCount))}</span>`
+    : "";
+
+function reLowSample(metric) {
+  const n = metric?.transactionCount ?? 0;
+  return `<span class="low-sample" title="${escapeHtml(`이번 달 신고가 ${n}건뿐이라 평균을 내지 않았습니다.`)}">${escapeHtml(`신고 ${n}건`)}</span>`;
+}
+
+function reCells(entry, kind) {
+  const metric = metricOf(entry, kind);
+  if (!metric) {
+    const raw = entry?.[KIND_FIELDS[kind].metric];
+    return [raw ? reLowSample(raw) : "-", "-", "-"];
+  }
+  if (kind === "wolse") {
+    return [
+      `<span class="price-strong">${reMan(metric.avgDeposit10k)}</span>${reChange(metric.depositChange, metric.baselineDate)}`,
+      `<span class="price-strong">월 ${reMan(metric.avgMonthlyRent10k)}</span>${reChange(metric.monthlyRentChange, metric.baselineDate)}`,
+      `<span class="count">${escapeHtml(reCount(metric.transactionCount))}</span>`,
+    ];
+  }
+  const perPyeong = valueOf(metric, kind);
+  return [
+    `<span class="price-strong">${reMan(perPyeong)}</span>${reChange(metric.change, metric.baselineDate)}`,
+    `<span class="price-strong">${reEok(areaPrice(perPyeong))}</span>`,
+    `<span class="count">${escapeHtml(reCount(metric.transactionCount))}</span>`,
+  ];
+}
+
+function reAllCells(entry) {
+  return ["sale", "jeonse", "wolse"].map((kind) => {
+    const metric = metricOf(entry, kind);
+    if (!metric) {
+      const raw = entry?.[KIND_FIELDS[kind].metric];
+      return raw ? reLowSample(raw) : "-";
+    }
+    if (kind === "wolse") {
+      return `${reMan(metric.avgDeposit10k)} / 월 ${reMan(metric.avgMonthlyRent10k)}${reCountSpan(metric)}`;
+    }
+    return `${reMan(valueOf(metric, kind))}${reChange(metric.change, metric.baselineDate)}${reCountSpan(metric)}`;
+  });
+}
+
+function reRow(entry, label, isOverall, kind) {
+  const labels = reHeadLabels(kind);
+  const cells = kind ? reCells(entry, kind) : reAllCells(entry);
+  const body = cells
+    .map((cell, i) => `<td data-label="${escapeHtml(labels[i + 1])}">${cell}</td>`)
+    .join("");
+  return `<tr class="${isOverall ? "overall-row" : ""}"><td>${escapeHtml(label)}</td>${body}</tr>`;
+}
+
+// 비싼 곳부터. 값을 낼 수 없는 지역은 맨 아래로 보낸다(화면과 같은 규칙).
+function reSorted(districts, kind) {
+  const key = kind ?? "sale";
+  return [...districts].sort((a, b) => {
+    const av = valueOf(metricOf(a, key), key);
+    const bv = valueOf(metricOf(b, key), key);
+    if (av === null && bv === null) return (a.name ?? "").localeCompare(b.name ?? "");
+    if (av === null) return 1;
+    if (bv === null) return -1;
+    return bv - av;
+  });
+}
+
+export function realestateTableHtml(realestate, kind = null) {
+  const districts = realestate?.districts ?? [];
+  if (!realestate?.overall && !districts.length) return null;
+  return (
+    (realestate.overall ? reRow(realestate.overall, RE_LABELS.overall, true, kind) : "") +
+    reSorted(districts, kind)
+      .map((d) => reRow(d, d.name ?? "-", false, kind))
+      .join("")
+  );
+}
+
+export function realestateOverallHtml(realestate, kind = null) {
+  const overall = realestate?.overall;
+  if (!overall) return null;
+
+  const card = (label, value, sub) =>
+    `<div class="overall-card"><div class="label">${escapeHtml(label)}</div>` +
+    `<div class="value">${value}</div>` +
+    (sub ? `<div class="sub">${sub}</div>` : "") +
+    `</div>`;
+
+  if (!kind) {
+    return ["sale", "jeonse", "wolse"]
+      .map((k) => {
+        const metric = metricOf(overall, k);
+        const label = RE_LABELS[k];
+        if (!metric) return card(label, "-", "");
+        if (k === "wolse") {
+          return card(
+            label,
+            `${reMan(metric.avgDeposit10k)} / 월 ${reMan(metric.avgMonthlyRent10k)}`,
+            escapeHtml(reCount(metric.transactionCount))
+          );
+        }
+        return card(
+          label,
+          reMan(valueOf(metric, k)),
+          `${escapeHtml(RE_LABELS.area)} ${reEok(areaPrice(valueOf(metric, k)))} · ${escapeHtml(reCount(metric.transactionCount))}`
+        );
+      })
+      .join("");
+  }
+
+  const metric = metricOf(overall, kind);
+  if (!metric) return card(RE_LABELS.overall, "-", "");
+  if (kind === "wolse") {
+    return (
+      card(RE_LABELS.deposit, reMan(metric.avgDeposit10k), "") +
+      card(RE_LABELS.monthly, `월 ${reMan(metric.avgMonthlyRent10k)}`, "") +
+      card(RE_LABELS.count, escapeHtml(reCount(metric.transactionCount)), "")
+    );
+  }
+  const perPyeong = valueOf(metric, kind);
+  return (
+    card(kind === "jeonse" ? RE_LABELS.perPyeongDeposit : RE_LABELS.perPyeong, reMan(perPyeong), "") +
+    card(RE_LABELS.area, reEok(areaPrice(perPyeong)), "") +
+    card(RE_LABELS.count, escapeHtml(reCount(metric.transactionCount)), "")
+  );
+}
+
 // 금리 페이지는 각 페이지의 첫 화면만 심는다. 안 보이는 탭까지 숨겨서 심으면
 // 화면에 없는 내용을 크롤러에만 보여주는 셈이 된다.
 //
@@ -311,6 +490,15 @@ async function main() {
       "docs/news.html",
       NEWS_PATH,
       { newsSummary: newsSummaryHtml(summary), newsList: newsListHtml(news) },
+    ],
+    [
+      "docs/realestate.html",
+      REALESTATE_PATH,
+      {
+        realestateOverall: realestateOverallHtml(realestate),
+        realestateHead: realestateHeadHtml(),
+        realestateTable: realestateTableHtml(realestate),
+      },
     ],
   ]) {
     const html = await readFile(path_, "utf8");

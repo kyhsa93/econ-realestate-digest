@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#253e81">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<meta name="google-adsense-account" content="ca-pub-1195159445218373">
+<title>서울 아파트 전세 시세 - 자치구별 평당 보증금·84㎡ 환산</title>
+<meta name="description" content="서울 25개 자치구 아파트 전세 실거래 보증금을 평당가와 84㎡ 환산가로 비교합니다. 국토교통부 신고 자료를 매일 갱신하며, 신고 건수가 적은 지역은 평균을 내지 않습니다.">
+<meta name="site-group" content="digest">
+<meta name="realestate-kind" content="jeonse">
+<link rel="canonical" href="https://kyhsa93.github.io/econ-realestate-digest/apartment-jeonse.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="경제·부동산 데일리 다이제스트">
+<meta property="og:url" content="https://kyhsa93.github.io/econ-realestate-digest/apartment-jeonse.html">
+<meta property="og:title" content="서울 아파트 전세 시세 - 자치구별 평당 보증금·84㎡ 환산">
+<meta property="og:description" content="서울 25개 자치구 아파트 전세 실거래 보증금을 평당가와 84㎡ 환산가로 비교합니다. 국토교통부 신고 자료를 매일 갱신하며, 신고 건수가 적은 지역은 평균을 내지 않습니다.">
+<meta property="og:image" content="https://kyhsa93.github.io/econ-realestate-digest/icons/icon-512.png">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="서울 아파트 전세 시세 - 자치구별 평당 보증금·84㎡ 환산">
+<meta name="twitter:description" content="서울 25개 자치구 아파트 전세 실거래 보증금을 평당가와 84㎡ 환산가로 비교합니다. 국토교통부 신고 자료를 매일 갱신하며, 신고 건수가 적은 지역은 평균을 내지 않습니다.">
+<meta name="twitter:image" content="https://kyhsa93.github.io/econ-realestate-digest/icons/icon-512.png">
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #666;
+    --card: #f5f5f7;
+    --border: #e2e2e5;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1115;
+      --fg: #eaeaea;
+      --muted: #9a9a9a;
+      --card: #1a1d24;
+      --border: #2a2d35;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #0f1115;
+    --fg: #eaeaea;
+    --muted: #9a9a9a;
+    --card: #1a1d24;
+    --border: #2a2d35;
+  }
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #666;
+    --card: #f5f5f7;
+    --border: #e2e2e5;
+  }
+  /* hidden 속성은 브라우저 기본 스타일(display:none)로 동작하는데, 작성자 CSS가 그 요소에
+     display를 지정하면 그쪽이 이겨서 감춰지지 않는다. 실제로 오류 배너가 display:flex 때문에
+     늘 보이고 있었다. 감춤은 항상 이 규칙이 이기게 못박는다. */
+  [hidden] { display: none !important; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.5;
+  }
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 24px 16px 64px;
+  }
+  header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .header-actions { display: flex; gap: 8px; flex-shrink: 0; }
+  .icon-toggle {
+    flex-shrink: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--fg);
+  }
+  h1 { font-size: 1.4rem; margin: 0 0 4px; }
+  h2 {
+    font-size: 1.05rem;
+    margin: 0 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .updated { color: var(--muted); font-size: 0.85rem; }
+  .page-nav {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .page-nav a {
+    flex-shrink: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    color: var(--fg);
+    text-decoration: none;
+  }
+  .page-nav a[aria-current="page"] {
+    background: var(--fg);
+    color: var(--bg);
+    border-color: var(--fg);
+    font-weight: 600;
+  }
+  section { margin-bottom: 32px; }
+  .summary-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 0.92rem;
+  }
+  .summary-box p { margin: 0 0 8px; }
+  .summary-box p:last-child { margin-bottom: 0; }
+  .summary-note { color: var(--muted); font-size: 0.78rem; margin-top: 10px; }
+  ul.news-list { list-style: none; margin: 0; padding: 0; }
+  .news-item { padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .news-item:last-child { border-bottom: none; }
+  .news-item a { color: var(--fg); text-decoration: none; font-size: 0.95rem; }
+  .news-item a:hover { text-decoration: underline; }
+  .news-item.read > a { color: var(--muted); }
+  .news-meta { color: var(--muted); font-size: 0.78rem; margin-top: 2px; }
+  .news-context { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  /* .news-item a 규칙이 글자 크기·밑줄까지 정해두고 있어서, 칩은 같은 자리에서
+     더 구체적인 선택자로 덮어써야 한다(안 그러면 제목과 같은 크기가 된다). */
+  .news-item .context-chip {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    padding: 3px 9px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--card);
+    font-size: 0.76rem;
+    text-decoration: none;
+  }
+  .news-item .context-chip:hover { border-color: var(--muted); text-decoration: none; }
+  .context-label { color: var(--muted); }
+  .context-value { color: var(--fg); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .empty { color: var(--muted); font-size: 0.9rem; }
+  .empty button {
+    font: inherit;
+    background: var(--fg);
+    color: var(--bg);
+    border: 0;
+    border-radius: 8px;
+    padding: 4px 12px;
+    margin-left: 8px;
+    cursor: pointer;
+  }
+  .site-footer {
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+  .site-footer a { color: var(--muted); }
+  .overall-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+  }
+  .overall-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .overall-card .label { color: var(--muted); font-size: 0.78rem; }
+  .overall-card .value { font-size: 1.15rem; font-weight: 700; margin-top: 2px; font-variant-numeric: tabular-nums; }
+  .overall-card .sub { color: var(--muted); font-size: 0.76rem; margin-top: 2px; }
+  .table-wrap { overflow-x: auto; }
+  .data-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; white-space: nowrap; }
+  .data-table th, .data-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); text-align: right; }
+  .data-table th { color: var(--muted); font-weight: 600; font-size: 0.78rem; }
+  .data-table th:first-child, .data-table td:first-child { text-align: left; }
+  .data-table tbody tr:hover { background: var(--card); }
+  .data-table .overall-row { font-weight: 700; }
+  .price-strong { font-weight: 700; font-variant-numeric: tabular-nums; }
+  .count { color: var(--muted); font-size: 0.76rem; }
+  .change { font-size: 0.76rem; }
+  .change.up { color: #d64545; }
+  .change.down { color: #2f6fed; }
+  .low-sample { color: var(--muted); font-size: 0.78rem; }
+  .content-notice { color: var(--muted); font-size: 0.8rem; margin-top: 10px; line-height: 1.5; }
+  /* 좁은 화면에서 4열 표는 가로 스크롤 없이 못 읽는다. 행을 카드로 세운다. */
+  @media (max-width: 480px) {
+    .data-table { white-space: normal; }
+    .data-table thead { display: none; }
+    .data-table tbody tr { display: block; padding: 10px 0; border-bottom: 1px solid var(--border); }
+    .data-table td {
+      display: flex; justify-content: space-between; align-items: baseline;
+      gap: 12px; border: 0; padding: 3px 0; text-align: right;
+    }
+    .data-table td:first-child { padding-bottom: 6px; font-weight: 600; }
+    .data-table td[data-label]::before {
+      content: attr(data-label); color: var(--muted); font-size: 0.78rem; text-align: left; flex-shrink: 0;
+    }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div>
+      <h1 id="page-title">서울 아파트 시세</h1>
+      <div class="updated" id="updated">불러오는 중...</div>
+    </div>
+    <div class="header-actions">
+      <button class="icon-toggle" type="button" id="theme-toggle" aria-label="테마 전환"><span aria-hidden="true">🌓</span></button>
+      <button class="icon-toggle" type="button" id="lang-toggle" aria-label="Switch language"><span aria-hidden="true">🌐</span></button>
+    </div>
+  </header>
+
+  <nav class="page-nav" aria-label="페이지">
+    <a href="./index.html" id="nav-digest">데일리 다이제스트</a>
+    <a href="./realestate.html" data-re-page="all">시세 전체</a>
+    <a href="./apartment-sale.html" data-re-page="sale">아파트 매매</a>
+    <a href="./apartment-jeonse.html" data-re-page="jeonse" aria-current="page">아파트 전세</a>
+    <a href="./apartment-rent.html" data-re-page="wolse">아파트 월세</a>
+    <a href="./news.html" id="nav-news">뉴스</a>
+    <a href="./rates.html" id="nav-rates">금리 비교</a>
+  </nav>
+
+  <section id="overall-section">
+    <h2 id="overall-heading">서울 전체 평균</h2>
+    <div class="overall-cards" id="overall-cards"><!--prerender:realestateOverall--><div class="overall-card"><div class="label">평당 보증금</div><div class="value">2,571만원</div></div><div class="overall-card"><div class="label">84㎡ 환산</div><div class="value">6억 5,329만원</div></div><div class="overall-card"><div class="label">거래건수</div><div class="value">2,525건</div></div><!--/prerender:realestateOverall--></div>
+  </section>
+
+  <section id="district-section">
+    <h2 id="district-heading">자치구별 시세</h2>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead id="district-head"><!--prerender:realestateHead--><tr><th>지역</th><th>평당 보증금</th><th>84㎡ 환산</th><th>거래건수</th></tr><!--/prerender:realestateHead--></thead>
+        <tbody id="district-grid"><!--prerender:realestateTable--><tr class="overall-row"><td>서울 전체</td><td data-label="평당 보증금"><span class="price-strong">2,571만원</span> <span class="change up" title="2026-08-10 대비">▲38만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">6억 5,329만원</span></td><td data-label="거래건수"><span class="count">2,525건</span></td></tr><tr class=""><td>강남구</td><td data-label="평당 보증금"><span class="price-strong">4,022만원</span> <span class="change up" title="2026-08-10 대비">▲1만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">10억 2,199만원</span></td><td data-label="거래건수"><span class="count">169건</span></td></tr><tr class=""><td>종로구</td><td data-label="평당 보증금"><span class="price-strong">3,478만원</span> <span class="change up" title="2026-08-10 대비">▲892만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">8억 8,376만원</span></td><td data-label="거래건수"><span class="count">11건</span></td></tr><tr class=""><td>송파구</td><td data-label="평당 보증금"><span class="price-strong">3,375만원</span> <span class="change up" title="2026-08-10 대비">▲114만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">8억 5,758만원</span></td><td data-label="거래건수"><span class="count">168건</span></td></tr><tr class=""><td>용산구</td><td data-label="평당 보증금"><span class="price-strong">3,365만원</span> <span class="change up" title="2026-08-10 대비">▲201만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">8억 5,504만원</span></td><td data-label="거래건수"><span class="count">58건</span></td></tr><tr class=""><td>성동구</td><td data-label="평당 보증금"><span class="price-strong">3,263만원</span> <span class="change down" title="2026-08-10 대비">▼116만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">8억 2,912만원</span></td><td data-label="거래건수"><span class="count">102건</span></td></tr><tr class=""><td>중구</td><td data-label="평당 보증금"><span class="price-strong">3,221만원</span> <span class="change up" title="2026-08-10 대비">▲178만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">8억 1,845만원</span></td><td data-label="거래건수"><span class="count">32건</span></td></tr><tr class=""><td>동작구</td><td data-label="평당 보증금"><span class="price-strong">3,053만원</span> <span class="change down" title="2026-08-10 대비">▼157만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">7억 7,576만원</span></td><td data-label="거래건수"><span class="count">83건</span></td></tr><tr class=""><td>광진구</td><td data-label="평당 보증금"><span class="price-strong">3,035만원</span> <span class="change up" title="2026-08-10 대비">▲387만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">7억 7,119만원</span></td><td data-label="거래건수"><span class="count">35건</span></td></tr><tr class=""><td>서초구</td><td data-label="평당 보증금"><span class="price-strong">2,981만원</span> <span class="change up" title="2026-08-10 대비">▲322만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">7억 5,747만원</span></td><td data-label="거래건수"><span class="count">251건</span></td></tr><tr class=""><td>마포구</td><td data-label="평당 보증금"><span class="price-strong">2,939만원</span> <span class="change up" title="2026-08-10 대비">▲55만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">7억 4,680만원</span></td><td data-label="거래건수"><span class="count">98건</span></td></tr><tr class=""><td>강동구</td><td data-label="평당 보증금"><span class="price-strong">2,822만원</span> <span class="change up" title="2026-08-10 대비">▲165만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">7억 1,707만원</span></td><td data-label="거래건수"><span class="count">99건</span></td></tr><tr class=""><td>동대문구</td><td data-label="평당 보증금"><span class="price-strong">2,771만원</span> <span class="change down" title="2026-08-10 대비">▼81만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">7억 411만원</span></td><td data-label="거래건수"><span class="count">69건</span></td></tr><tr class=""><td>영등포구</td><td data-label="평당 보증금"><span class="price-strong">2,770만원</span> <span class="change up" title="2026-08-10 대비">▲146만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">7억 385만원</span></td><td data-label="거래건수"><span class="count">115건</span></td></tr><tr class=""><td>서대문구</td><td data-label="평당 보증금"><span class="price-strong">2,653만원</span> <span class="change up" title="2026-08-10 대비">▲40만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">6억 7,412만원</span></td><td data-label="거래건수"><span class="count">77건</span></td></tr><tr class=""><td>양천구</td><td data-label="평당 보증금"><span class="price-strong">2,524만원</span> <span class="change down" title="2026-08-10 대비">▼233만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">6억 4,135만원</span></td><td data-label="거래건수"><span class="count">92건</span></td></tr><tr class=""><td>성북구</td><td data-label="평당 보증금"><span class="price-strong">2,432만원</span> <span class="change down" title="2026-08-10 대비">▼104만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">6억 1,797만원</span></td><td data-label="거래건수"><span class="count">79건</span></td></tr><tr class=""><td>관악구</td><td data-label="평당 보증금"><span class="price-strong">2,385만원</span> <span class="change up" title="2026-08-10 대비">▲35만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">6억 603만원</span></td><td data-label="거래건수"><span class="count">53건</span></td></tr><tr class=""><td>은평구</td><td data-label="평당 보증금"><span class="price-strong">2,245만원</span> <span class="change down" title="2026-08-10 대비">▼395만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">5억 7,045만원</span></td><td data-label="거래건수"><span class="count">106건</span></td></tr><tr class=""><td>강북구</td><td data-label="평당 보증금"><span class="price-strong">2,063만원</span> <span class="change up" title="2026-08-10 대비">▲119만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">5억 2,421만원</span></td><td data-label="거래건수"><span class="count">23건</span></td></tr><tr class=""><td>구로구</td><td data-label="평당 보증금"><span class="price-strong">2,010만원</span> <span class="change down" title="2026-08-10 대비">▼58만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">5억 1,074만원</span></td><td data-label="거래건수"><span class="count">69건</span></td></tr><tr class=""><td>금천구</td><td data-label="평당 보증금"><span class="price-strong">1,978만원</span> <span class="change down" title="2026-08-10 대비">▼247만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">5억 261만원</span></td><td data-label="거래건수"><span class="count">29건</span></td></tr><tr class=""><td>노원구</td><td data-label="평당 보증금"><span class="price-strong">1,913만원</span> <span class="change up" title="2026-08-10 대비">▲100만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">4억 8,609만원</span></td><td data-label="거래건수"><span class="count">174건</span></td></tr><tr class=""><td>도봉구</td><td data-label="평당 보증금"><span class="price-strong">1,613만원</span> <span class="change up" title="2026-08-10 대비">▲66만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">4억 986만원</span></td><td data-label="거래건수"><span class="count">38건</span></td></tr><tr class=""><td>강서구</td><td data-label="평당 보증금"><span class="price-strong">1,567만원</span> <span class="change up" title="2026-08-10 대비">▲170만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">3억 9,817만원</span></td><td data-label="거래건수"><span class="count">388건</span></td></tr><tr class=""><td>중랑구</td><td data-label="평당 보증금"><span class="price-strong">1,422만원</span> <span class="change down" title="2026-08-10 대비">▼426만원</span></td><td data-label="84㎡ 환산"><span class="price-strong">3억 6,133만원</span></td><td data-label="거래건수"><span class="count">107건</span></td></tr><!--/prerender:realestateTable--></tbody>
+      </table>
+    </div>
+    <div class="content-notice" id="table-note"></div>
+  </section>
+
+  <footer class="site-footer">
+    <div id="footer-source">출처: 국토교통부 아파트 매매·전월세 실거래가 공개시스템. 신고된 거래만 집계되며 신고 기한(계약 후 30일)이 있어 최근 거래는 나중에 반영됩니다.</div>
+    <div style="margin-top:6px;">
+      <a href="https://kyhsa93.github.io/privacy-policy" id="footer-privacy" target="_blank" rel="noopener">개인정보처리방침</a>
+    </div>
+  </footer>
+</main>
+<script src="./analytics.js"></script>
+<script>
+// 이 파일은 거래 유형별 페이지(아파트 매매/전세/월세)의 원본이기도 하다. 생성된
+// 페이지는 <meta name="realestate-kind">로만 갈리고 나머지 코드는 그대로 공유한다.
+//
+// index.html에도 부동산 표가 있지만 거기는 종합 대시보드의 한 섹션이라 "서울 아파트
+// 매매 시세" 같은 검색 의도에 정확히 걸리지 않는다. 여기는 그 의도마다 착지점을
+// 만드는 페이지이고, 그래서 평당가만 적지 않고 84㎡ 환산가를 같이 적는다 - 집을
+// 알아보는 사람이 묻는 건 "평당 얼마"가 아니라 "84㎡가 얼마"다.
+const T = {
+  ko: {
+    title: "서울 아파트 전세 시세 - 자치구별 평당 보증금·84㎡ 환산",
+    titleSale: "서울 아파트 매매 시세",
+    titleJeonse: "서울 아파트 전세 시세",
+    titleWolse: "서울 아파트 월세 시세",
+    navDigest: "데일리 다이제스트",
+    navAll: "시세 전체",
+    navSale: "아파트 매매",
+    navJeonse: "아파트 전세",
+    navWolse: "아파트 월세",
+    navNews: "뉴스",
+    navRates: "금리 비교",
+    overallHeading: "서울 전체 평균",
+    districtHeading: "자치구별 시세",
+    loading: "불러오는 중...",
+    updatedPrefix: "기준",
+    thDistrict: "지역",
+    thSale: "매매",
+    thJeonse: "전세",
+    thWolse: "월세",
+    thPerPyeong: "평당가",
+    thPerPyeongDeposit: "평당 보증금",
+    thArea: "84㎡ 환산",
+    thDeposit: "평균 보증금",
+    thMonthly: "평균 월세",
+    thCount: "거래건수",
+    overall: "서울 전체",
+    countUnit: (n) => `${n.toLocaleString("ko-KR")}건`,
+    lowSample: (n) => `신고 ${n}건`,
+    lowSampleTitle: (n) => `이번 달 신고가 ${n}건뿐이라 평균을 내지 않았습니다.`,
+    changeVs: (d) => `${d} 대비`,
+    monthlyPrefix: "월 ",
+    note: "국토교통부에 신고된 이번 달 아파트 실거래 기준이며, 전용면적 평당가입니다. 공급면적으로 환산한 시세보다 높게 보일 수 있습니다. 84㎡ 환산가는 평당가에 25.41평을 곱한 값으로, 같은 구 안에서도 단지·층·연식에 따라 실제 거래가는 크게 다릅니다. 신고 건수가 5건 미만인 지역은 한두 건이 평균을 좌우하므로 값을 내지 않습니다.",
+    footerSource: "출처: 국토교통부 아파트 매매·전월세 실거래가 공개시스템. 신고된 거래만 집계되며 신고 기한(계약 후 30일)이 있어 최근 거래는 나중에 반영됩니다.",
+    footerPrivacy: "개인정보처리방침",
+    loadError: "실거래가를 불러오지 못했습니다.",
+    retry: "다시 시도",
+    empty: "표시할 지역이 없습니다.",
+  },
+  en: {
+    title: "Seoul Apartment Jeonse Prices by District",
+    titleSale: "Seoul Apartment Sale Prices",
+    titleJeonse: "Seoul Apartment Jeonse Prices",
+    titleWolse: "Seoul Apartment Monthly Rent",
+    navDigest: "Daily digest",
+    navAll: "All prices",
+    navSale: "Sale",
+    navJeonse: "Jeonse",
+    navWolse: "Monthly rent",
+    navNews: "News",
+    navRates: "Rates",
+    overallHeading: "Seoul average",
+    districtHeading: "By district",
+    loading: "Loading...",
+    updatedPrefix: "As of",
+    thDistrict: "District",
+    thSale: "Sale",
+    thJeonse: "Jeonse",
+    thWolse: "Monthly rent",
+    thPerPyeong: "Per pyeong",
+    thPerPyeongDeposit: "Deposit per pyeong",
+    thArea: "For 84m²",
+    thDeposit: "Avg deposit",
+    thMonthly: "Avg monthly",
+    thCount: "Transactions",
+    overall: "Seoul total",
+    countUnit: (n) => `${n.toLocaleString("en-US")}`,
+    lowSample: (n) => `${n} reported`,
+    lowSampleTitle: (n) => `Only ${n} transactions reported this month, so no average is shown.`,
+    changeVs: (d) => `vs ${d}`,
+    monthlyPrefix: "",
+    note: "Based on apartment transactions reported to Korea's MOLIT this month, priced per pyeong (3.3m²) of exclusive area — higher than figures quoted per gross area. The 84m² column multiplies the per-pyeong price by 25.41 pyeong; actual prices vary widely by complex, floor and age. Districts with fewer than 5 reported transactions are left blank.",
+    footerSource: "Source: MOLIT real transaction price disclosure. Only reported deals are counted, and reporting can lag up to 30 days after contract.",
+    footerPrivacy: "Privacy Policy",
+    loadError: "Could not load transaction data.",
+    retry: "Retry",
+    empty: "No districts to show.",
+  },
+};
+
+// scripts/realestate-format.mjs와 같은 계산이다. 이 페이지는 인라인 스크립트라 모듈을
+// 못 받아서 복제해 뒀고, 두 결과가 같은지는 테스트가 실제 렌더 결과로 대조한다.
+const MIN_SAMPLE = 5;
+const BASE_AREA_PYEONG = 84 / 3.3058;
+const KIND_FIELDS = {
+  sale: { metric: "sale", value: "avgPricePerPyeong10k" },
+  jeonse: { metric: "jeonse", value: "avgDepositPerPyeong10k" },
+  wolse: { metric: "wolse", value: "avgDeposit10k" },
+};
+
+const kind = (() => {
+  const value = document.querySelector('meta[name="realestate-kind"]')?.getAttribute("content") ?? null;
+  return value && KIND_FIELDS[value] ? value : null;
+})();
+
+let locale = (() => {
+  const saved = window.localStorage.getItem("lang");
+  return saved === "en" || saved === "ko" ? saved : "ko";
+})();
+const t = (key) => T[locale][key];
+
+const THEME_ICONS = { auto: "🌓", light: "☀️", dark: "🌙" };
+let theme = (() => {
+  const saved = window.localStorage.getItem("theme");
+  return saved === "light" || saved === "dark" ? saved : "auto";
+})();
+function applyTheme(next) {
+  theme = next;
+  window.localStorage.setItem("theme", theme);
+  if (theme === "auto") document.documentElement.removeAttribute("data-theme");
+  else document.documentElement.setAttribute("data-theme", theme);
+  document.querySelector("#theme-toggle span").textContent = THEME_ICONS[theme];
+}
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
+
+const hasEnoughSample = (metric) => Boolean(metric) && (metric.transactionCount ?? 0) >= MIN_SAMPLE;
+
+function metricOf(entry, k) {
+  const field = KIND_FIELDS[k];
+  const metric = entry?.[field.metric];
+  if (!hasEnoughSample(metric)) return null;
+  const value = metric[field.value];
+  return typeof value === "number" && Number.isFinite(value) ? metric : null;
+}
+
+const valueOf = (metric, k) => metric?.[KIND_FIELDS[k].value] ?? null;
+
+function areaPrice(pricePerPyeong10k) {
+  if (typeof pricePerPyeong10k !== "number" || !Number.isFinite(pricePerPyeong10k)) return null;
+  return Math.round(pricePerPyeong10k * BASE_AREA_PYEONG);
+}
+
+function formatMan(value10k) {
+  if (typeof value10k !== "number" || !Number.isFinite(value10k)) return "-";
+  return locale === "en"
+    ? `₩${(value10k / 100).toLocaleString("en-US", { maximumFractionDigits: 1 })}M`
+    : `${Math.round(value10k).toLocaleString("ko-KR")}만원`;
+}
+
+function formatEok(value10k) {
+  if (typeof value10k !== "number" || !Number.isFinite(value10k)) return "-";
+  const n = Math.round(value10k);
+  if (locale === "en") return `₩${(n / 100).toLocaleString("en-US", { maximumFractionDigits: 0 })}M`;
+  const eok = Math.floor(n / 10000);
+  const man = n % 10000;
+  if (!eok) return `${man.toLocaleString("ko-KR")}만원`;
+  if (!man) return `${eok}억원`;
+  return `${eok}억 ${man.toLocaleString("ko-KR")}만원`;
+}
+
+function changeHtml(change, baselineDate) {
+  if (!change || typeof change.value10k !== "number" || change.value10k === 0) return "";
+  const dir = change.value10k > 0 ? "up" : "down";
+  const arrow = change.value10k > 0 ? "▲" : "▼";
+  const title = baselineDate ? ` title="${escapeHtml(t("changeVs")(baselineDate))}"` : "";
+  return ` <span class="change ${dir}"${title}>${arrow}${formatMan(Math.abs(change.value10k))}</span>`;
+}
+
+const countHtml = (metric) =>
+  typeof metric?.transactionCount === "number"
+    ? ` <span class="count">${escapeHtml(t("countUnit")(metric.transactionCount))}</span>`
+    : "";
+
+function lowSampleHtml(metric) {
+  const n = metric?.transactionCount ?? 0;
+  return `<span class="low-sample" title="${escapeHtml(t("lowSampleTitle")(n))}">${escapeHtml(t("lowSample")(n))}</span>`;
+}
+
+// 거래 유형 하나만 다루는 페이지는 평당가 옆에 84㎡ 환산가를 같이 적는다.
+// 월세는 평당 개념이 아니라 보증금·월세 평균이라 환산하지 않는다.
+function cellsFor(entry, k) {
+  const metric = metricOf(entry, k);
+  if (!metric) {
+    const raw = entry?.[KIND_FIELDS[k].metric];
+    const fallback = raw ? lowSampleHtml(raw) : "-";
+    return k === "wolse" ? [fallback, "-", "-"] : [fallback, "-", "-"];
+  }
+  if (k === "wolse") {
+    return [
+      `<span class="price-strong">${formatMan(metric.avgDeposit10k)}</span>${changeHtml(metric.depositChange, metric.baselineDate)}`,
+      `<span class="price-strong">${escapeHtml(t("monthlyPrefix"))}${formatMan(metric.avgMonthlyRent10k)}</span>${changeHtml(metric.monthlyRentChange, metric.baselineDate)}`,
+      `<span class="count">${escapeHtml(t("countUnit")(metric.transactionCount))}</span>`,
+    ];
+  }
+  const perPyeong = valueOf(metric, k);
+  return [
+    `<span class="price-strong">${formatMan(perPyeong)}</span>${changeHtml(metric.change, metric.baselineDate)}`,
+    `<span class="price-strong">${formatEok(areaPrice(perPyeong))}</span>`,
+    `<span class="count">${escapeHtml(t("countUnit")(metric.transactionCount))}</span>`,
+  ];
+}
+
+// 허브(유형 미지정)는 세 유형을 한 줄에 나란히 보여준다.
+function allCells(entry) {
+  return ["sale", "jeonse", "wolse"].map((k) => {
+    const metric = metricOf(entry, k);
+    if (!metric) {
+      const raw = entry?.[KIND_FIELDS[k].metric];
+      return raw ? lowSampleHtml(raw) : "-";
+    }
+    if (k === "wolse") {
+      return `${formatMan(metric.avgDeposit10k)} / ${escapeHtml(t("monthlyPrefix"))}${formatMan(metric.avgMonthlyRent10k)}${countHtml(metric)}`;
+    }
+    return `${formatMan(valueOf(metric, k))}${changeHtml(metric.change, metric.baselineDate)}${countHtml(metric)}`;
+  });
+}
+
+function headLabels() {
+  if (!kind) return [t("thDistrict"), t("thSale"), t("thJeonse"), t("thWolse")];
+  if (kind === "wolse") return [t("thDistrict"), t("thDeposit"), t("thMonthly"), t("thCount")];
+  return [
+    t("thDistrict"),
+    kind === "jeonse" ? t("thPerPyeongDeposit") : t("thPerPyeong"),
+    t("thArea"),
+    t("thCount"),
+  ];
+}
+
+function renderHead() {
+  document.getElementById("district-head").innerHTML =
+    `<tr>${headLabels().map((label) => `<th>${escapeHtml(label)}</th>`).join("")}</tr>`;
+}
+
+// 비싼 곳부터 본다. 값을 낼 수 없는 지역(표본 부족)은 맨 아래로 보낸다 - 표에서
+// 빼버리면 사용자 입장에선 그 구가 사라진 것으로 보인다.
+function sortedDistricts(districts) {
+  const key = kind ?? "sale";
+  return [...districts].sort((a, b) => {
+    const av = valueOf(metricOf(a, key), key);
+    const bv = valueOf(metricOf(b, key), key);
+    if (av === null && bv === null) return (a.name ?? "").localeCompare(b.name ?? "");
+    if (av === null) return 1;
+    if (bv === null) return -1;
+    return bv - av;
+  });
+}
+
+function rowHtml(entry, label, isOverall) {
+  const labels = headLabels();
+  const cells = kind ? cellsFor(entry, kind) : allCells(entry);
+  const body = cells
+    .map((cell, i) => `<td data-label="${escapeHtml(labels[i + 1])}">${cell}</td>`)
+    .join("");
+  return `<tr class="${isOverall ? "overall-row" : ""}"><td>${escapeHtml(label)}</td>${body}</tr>`;
+}
+
+function renderTable(realestate) {
+  const grid = document.getElementById("district-grid");
+  const districts = realestate?.districts ?? [];
+  if (!realestate?.overall && !districts.length) {
+    grid.innerHTML = `<tr><td colspan="4">${escapeHtml(t("empty"))}</td></tr>`;
+    return;
+  }
+  grid.innerHTML =
+    (realestate.overall ? rowHtml(realestate.overall, t("overall"), true) : "") +
+    sortedDistricts(districts)
+      .map((d) => rowHtml(d, d.name ?? "-", false))
+      .join("");
+}
+
+// 첫 화면에서 가장 먼저 읽히는 숫자다. 유형별 페이지는 84㎡ 환산가를 같이 세운다.
+function renderOverall(realestate) {
+  const box = document.getElementById("overall-cards");
+  const overall = realestate?.overall;
+  if (!overall) {
+    box.innerHTML = "";
+    return;
+  }
+  const card = (label, value, sub) =>
+    `<div class="overall-card"><div class="label">${escapeHtml(label)}</div>` +
+    `<div class="value">${value}</div>` +
+    (sub ? `<div class="sub">${sub}</div>` : "") +
+    `</div>`;
+
+  if (!kind) {
+    box.innerHTML = ["sale", "jeonse", "wolse"]
+      .map((k) => {
+        const metric = metricOf(overall, k);
+        const label = k === "sale" ? t("thSale") : k === "jeonse" ? t("thJeonse") : t("thWolse");
+        if (!metric) return card(label, "-", "");
+        if (k === "wolse") {
+          return card(
+            label,
+            `${formatMan(metric.avgDeposit10k)} / ${escapeHtml(t("monthlyPrefix"))}${formatMan(metric.avgMonthlyRent10k)}`,
+            escapeHtml(t("countUnit")(metric.transactionCount))
+          );
+        }
+        return card(
+          label,
+          formatMan(valueOf(metric, k)),
+          `${escapeHtml(t("thArea"))} ${formatEok(areaPrice(valueOf(metric, k)))} · ${escapeHtml(t("countUnit")(metric.transactionCount))}`
+        );
+      })
+      .join("");
+    return;
+  }
+
+  const metric = metricOf(overall, kind);
+  if (!metric) {
+    box.innerHTML = card(t("overall"), "-", "");
+    return;
+  }
+  if (kind === "wolse") {
+    box.innerHTML =
+      card(t("thDeposit"), formatMan(metric.avgDeposit10k), "") +
+      card(t("thMonthly"), `${escapeHtml(t("monthlyPrefix"))}${formatMan(metric.avgMonthlyRent10k)}`, "") +
+      card(t("thCount"), escapeHtml(t("countUnit")(metric.transactionCount)), "");
+    return;
+  }
+  const perPyeong = valueOf(metric, kind);
+  box.innerHTML =
+    card(kind === "jeonse" ? t("thPerPyeongDeposit") : t("thPerPyeong"), formatMan(perPyeong), "") +
+    card(t("thArea"), formatEok(areaPrice(perPyeong)), "") +
+    card(t("thCount"), escapeHtml(t("countUnit")(metric.transactionCount)), "");
+}
+
+const NAV_KEYS = { all: "navAll", sale: "navSale", jeonse: "navJeonse", wolse: "navWolse" };
+
+function applyLocale() {
+  const suffix = kind === "sale" ? "titleSale" : kind === "jeonse" ? "titleJeonse" : kind === "wolse" ? "titleWolse" : "title";
+  document.title = t(suffix);
+  document.getElementById("page-title").textContent = t(suffix);
+  document.getElementById("overall-heading").textContent = t("overallHeading");
+  document.getElementById("district-heading").textContent = t("districtHeading");
+  document.getElementById("table-note").textContent = t("note");
+  document.getElementById("footer-source").textContent = t("footerSource");
+  document.getElementById("footer-privacy").textContent = t("footerPrivacy");
+  document.getElementById("nav-digest").textContent = t("navDigest");
+  document.getElementById("nav-news").textContent = t("navNews");
+  document.getElementById("nav-rates").textContent = t("navRates");
+  for (const link of document.querySelectorAll("[data-re-page]")) {
+    link.textContent = t(NAV_KEYS[link.getAttribute("data-re-page")]);
+  }
+  document.documentElement.setAttribute("lang", locale);
+}
+
+function renderUpdated(realestate) {
+  const period = realestate?.period;
+  const updatedAt = realestate?.updatedAt;
+  const text = period
+    ? `${t("updatedPrefix")}: ${String(period).slice(0, 4)}.${String(period).slice(4, 6)}` +
+      (updatedAt
+        ? ` · ${new Date(updatedAt).toLocaleDateString(locale === "en" ? "en-US" : "ko-KR", { timeZone: "Asia/Seoul", dateStyle: "medium" })}`
+        : "")
+    : "-";
+  document.getElementById("updated").textContent = text;
+}
+
+const cache = { realestate: null };
+
+function renderAll() {
+  applyLocale();
+  renderHead();
+  if (!cache.realestate) return;
+  renderOverall(cache.realestate);
+  renderTable(cache.realestate);
+  renderUpdated(cache.realestate);
+}
+
+function reportLoadFailure(error) {
+  window.analytics?.event("exception", {
+    description: `load realestate: ${error?.message ?? error}`.slice(0, 100),
+    fatal: true,
+  });
+}
+
+async function main() {
+  applyTheme(theme);
+  applyLocale();
+  renderHead();
+  try {
+    const res = await fetch(`./data/realestate.json?_=${Date.now()}`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    cache.realestate = await res.json();
+    renderAll();
+  } catch (error) {
+    reportLoadFailure(error);
+    document.getElementById("district-grid").innerHTML =
+      `<tr><td colspan="4">${escapeHtml(t("loadError"))} <button type="button" id="load-retry">${escapeHtml(t("retry"))}</button></td></tr>`;
+    document.getElementById("load-retry")?.addEventListener("click", (e) => {
+      e.currentTarget.disabled = true;
+      main();
+    });
+  }
+}
+
+document.getElementById("theme-toggle").addEventListener("click", () => {
+  const order = ["auto", "light", "dark"];
+  applyTheme(order[(order.indexOf(theme) + 1) % order.length]);
+});
+
+document.getElementById("lang-toggle").addEventListener("click", () => {
+  locale = locale === "ko" ? "en" : "ko";
+  window.localStorage.setItem("lang", locale);
+  renderAll();
+  window.analytics?.event("language_switch", { site_language: locale });
+});
+
+main();
+</script>
+</body>
+</html>

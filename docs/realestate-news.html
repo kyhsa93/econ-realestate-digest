@@ -198,6 +198,7 @@
     <a href="./realestate-news.html" data-news-page="realestate" aria-current="page">부동산 뉴스</a>
     <a href="./stock-news.html" data-news-page="stocks">증시·환율 뉴스</a>
     <a href="./rate-news.html" data-news-page="rates">금리 뉴스</a>
+    <a href="./realestate.html" id="nav-realestate">아파트 시세</a>
     <a href="./rates.html" id="nav-rate-compare">금리 비교</a>
   </nav>
 
@@ -233,6 +234,7 @@
       navRealestate: "부동산 뉴스",
       navStocks: "증시·환율 뉴스",
       navRates: "금리 뉴스",
+      navRealestatePrices: "아파트 시세",
       navRateCompare: "금리 비교",
       summaryHeading: "오늘의 AI 요약",
       newsHeading: "기사 목록",
@@ -255,6 +257,7 @@
       navRealestate: "Real estate news",
       navStocks: "Stocks & FX news",
       navRates: "Rates news",
+      navRealestatePrices: "Apartment prices",
       navRateCompare: "Rates",
       summaryHeading: "Today's AI summary",
       newsHeading: "Headlines",
@@ -449,6 +452,7 @@
     document.getElementById("footer-source").textContent = t("footerSource");
     document.getElementById("footer-privacy").textContent = t("footerPrivacy");
     document.getElementById("nav-digest").textContent = t("navDigest");
+    document.getElementById("nav-realestate").textContent = t("navRealestatePrices");
     document.getElementById("nav-rate-compare").textContent = t("navRateCompare");
     for (const link of document.querySelectorAll("[data-news-page]")) {
       link.textContent = t(NAV_KEYS[link.dataset.newsPage]);
