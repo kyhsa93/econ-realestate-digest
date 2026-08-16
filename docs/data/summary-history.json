@@ -394,84 +394,91 @@
     "date": "2026-08-16",
     "model": "qwen3:14b",
     "summary": {
-      "ko": "- 부동산 관련 뉴스에서 증권가가 부동산 공급대책에 주목하고, 수도권 새 아파트 분양에 대한 관심이 높아지고 있으며, 세제개편에 대한 반발로 1주택 양도세 완화법 논의가 이어지고 있고, 고가 아파트의 저렴한 거래 사례가 등장했으며, 종부세 개편으로 인해 월세 상황에 대한 우려가 나오고 있다.\n- 코스피는 한주 내내 바닥다진 후 상승흐름을 이어갈 가능성이 있고, 뉴욕증시는 숨고르기에 소폭 하락했으며, 나스닥도 소폭 하락 마감했다.\n- 가계부채 증가와 금리 인상기의 건전성 문제에 대한 경고가 제기됐다.\n- 집단대출 별도 관리, 신규 대출여력 배분, 이주비 대출 완화, 성장전망과 가계부채 규모, 미 소비자 지출 감소 등 다양한 경제 관련 소식들이 오늘 보도되었다.",
-      "en": "- In real estate-related news, the securities industry is focusing on real estate supply measures, interest in new apartment sales in the Seoul metropolitan area is increasing, discussions on easing the capital gains tax for single-homeowners continue due to backlash against tax code revisions, inexpensive transaction cases of high-priced apartments are emerging, and concerns about rental situations are arising due to revisions in the property tax.\n- The KOSPI may continue its upward trend after hitting a low for the week, while the New York stock market slightly declined to catch its breath, and the Nasdaq also closed with a slight decline.\n- Warnings were raised about the debt problems of households and the soundness issues during periods of interest rate hikes.\n- Various economic-related news, including separate management of group loans, allocation of new loan capacity, easing of relocation expense loans, household debt scale and growth outlook, and a decline in U.S. consumer spending, were reported today."
+      "ko": "- 용산구 “용산공원 주택공급 검토 강력 반대”: 용산구는 정부가 용산공원을 주택 공급 후보지로 검토하는 데 강력히 반대한다고 밝혔다. 용산구는 용산공원이 120년 만에 국민의 품으로 돌아온 국가공원이라며 훼손을 반대했다. 국토교통부 장관은 용산공원 전체를 주택 공급 후보지로 고민하고 있다고 밝혔다.\n- \"비거주 1주택자 전세대출 막힌다\"더니…'반전' 있었다 [금융당국 백브리핑]: 금융당국이 비거주 1주택자에 대한 전세대출 규제를 발표했으나, 기준이 예상보다 널널한 것으로 나타났다. 수도권이나 규제지역 아파트를 보유하고, 가족이 아닌 제3자에게 임대하며 부부 모두 거주 이력이 없는 경우에만 대출이 제한된다. 비거주 사유를 별도로 입증할 필요는 없으며, 과거 거주 이력으로 실거주 의도를 확인한다.\n- 집값 5000만원 차이에 비거주 종부세 200만원↑…보완할까?: 정부가 2026년 세제개편안에서 비거주 1주택자의 종합부동산세 과세 기준을 20억원으로 설정해 세부담 차이가 발생하고 있다. 비거주 1주택자의 경우 공시가 14억5000만원 주택을 보유하면 약 209만원의 종부세를 내야 한다. 반면 실거주 1주택자는 시가 20억원 수준의 주택에서 종부세가 감소하는 방식으로 설계됐다.\n- 증시·환율: 코스피는 지난주 5일 연속 상승하며 외국인 투자자가 6조5천470억원을 순매수한 반면 개인은 7조원 이상을 순매도했고, 삼성전자와 SK하이닉스는 외국인의 주간 순매수 1, 2위이자 개인의 주간 순매도 1, 2위였으며, 8월 둘째주에는 미국의 물가지수 둔화와 유럽 국채 금리 급등으로 주식시장이 하락 전환했다.\n- 부동산: 10월에 수도권 아파트 지분적립 공공분양 단지가 공개되며 분양가의 25%만 먼저 내고 30년간 지분확대가 가능하고, 비거주 1주택자 전세대출 제한 기준이 수도권·규제지역 아파트 임대 및 부부 모두 거주하지 않은 경우에 한해 적용되며, 용산공원 내 주택 건설 계획이 공식화되면서 논란이 일고 있고, 정부는 서울시와 녹지훼손에 대한 의견 차이를 보이고 있으며, 증권가에서는 8·13 부동산 공급대책으로 중견건설사에 긍정적 영향을 줄 것으로 전망하고 있다.\n- 기타 경제 소식: 정부가 2026년 세제개편안에서 비거주 1주택자의 종합부동산세 과세 기준을 시가 20억원으로 설정하고, 집단대출을 별도 관리해 상호금융업권의 대출 여력이 생기며, 이주비 대출 규제 완화로 중소·중견 건설사의 정비사업 기회가 열리고, 7월 미국 소비자 지출이 큰 폭으로 감소했다.\n- 금리·예금·투자상품: 한국의 가계신용 규모가 사상 처음으로 2천조원대에 진입했다. 금융기관에서 빌린 가계대출은 1천865조8천억원으로, 3개월 만에 12조9천억원 증가했다. 신용카드 결제액 등 판매신용도 127조3천억원으로 1조1천억원 증가했다. 2분기 들어 가계대출 증가 속도는 더욱 빨라졌다.",
+      "en": "- 용산구 “용산공원 주택공급 검토 강력 반대”: Yongsan-gu strongly opposed the government's consideration of Yongsan Park as a candidate site for housing supply. Yongsan-gu opposed the destruction, stating that Yongsan Park has returned to the people after 120 years as a national park. The Minister of Land, Infrastructure and Transport stated that the entire Yongsan Park is being considered as a candidate site for housing supply.\n- \"비거주 1주택자 전세대출 막힌다\"더니…'반전' 있었다 [금융당국 백브리핑]: The financial authorities announced regulations on leasehold loans for non-resident single-homeowners, but the criteria turned out to be more lenient than expected. Loans are restricted only if the property is located in the capital area or a regulated zone, the apartment is rented to a third party who is not a family member, and neither spouse has a residence history. There is no need to separately prove the non-residency reason; instead, past residence history is used to verify the intention to reside.\n- 집값 5000만원 차이에 비거주 종부세 200만원↑…보완할까?: 정부가 2026년 세제개편안에서 비거주 1주택자의 종합부동산세 과세 기준을 20억원으로 설정해 세부담 차이가 발생하고 있다. 비거주 1주택자의 경우 공시가 14억5000만원 주택을 보유하면 약 209만원의 종부세를 내야 한다. 반면 실거주 1주택자는 시가 20억원 수준의 주택에서 종부세가 감소하는 방식으로 설계됐다.\n- Stocks & FX: 코스피는 지난주 5일 연속 상승하며 외국인 투자자가 6조5천470억원을 순매수한 반면 개인은 7조원 이상을 순매도했고, 삼성전자와 SK하이닉스는 외국인의 주간 순매수 1, 2위이자 개인의 주간 순매도 1, 2위였으며, 8월 둘째주에는 미국의 물가지수 둔화와 유럽 국채 금리 급등으로 주식시장이 하락 전환했다.\n- Real Estate: In October, public housing projects for apartment share accumulation in the capital area were announced, allowing buyers to pay only 25% of the purchase price upfront and expand their shares over 30 years. The restrictions on rental loans for non-resident single-homeowners apply only to apartments in the capital area and regulated zones when the property is rented out and both spouses do not reside there. Controversy has arisen following the official announcement of a housing construction plan within Yongsan Park. The government has shown differing opinions with the Seoul Metropolitan Government regarding green space damage. The securities industry expects the 8·13 real estate supply measures to have a positive impact on mid-sized construction companies.\n- Other Economic News: The government set the taxable benchmark for non-resident single-homeowners' comprehensive property tax at 2,000,000,000 won in the 2026 tax reform plan, managed group loans separately, creating lending capacity in the mutual finance sector, opened up redevelopment opportunities for small and medium-sized construction companies due to relaxed regulations on relocation expense loans, and U.S. consumer spending dropped sharply in July.\n- Rates, Deposits & Investment Products: South Korea's household credit reached a record high of 2,000,000,000,000,000 won. Household loans borrowed from financial institutions amounted to 1,865,000,000,000,000800,000,000,000 won, increasing by 12,000,000,000,000900,000,000,000 won within three months. Sales credit, including credit card payments, reached 127,000,000,000,000300,000,000,000 won, increasing by 1,000,000,000,000100,000,000,000 won. The growth rate of household loans has accelerated further since the second quarter."
     },
-    "categories": [
+    "highlights": [
       {
-        "key": "realestate",
-        "name": "부동산",
-        "nameEn": "Real Estate",
-        "lineKo": "부동산 관련 뉴스에서 증권가가 부동산 공급대책에 주목하고, 수도권 새 아파트 분양에 대한 관심이 높아지고 있으며, 세제개편에 대한 반발로 1주택 양도세 완화법 논의가 이어지고 있고, 고가 아파트의 저렴한 거래 사례가 등장했으며, 종부세 개편으로 인해 월세 상황에 대한 우려가 나오고 있다.",
-        "lineEn": "In real estate-related news, the securities industry is focusing on real estate supply measures, interest in new apartment sales in the Seoul metropolitan area is increasing, discussions on easing the capital gains tax for single-homeowners continue due to backlash against tax code revisions, inexpensive transaction cases of high-priced apartments are emerging, and concerns about rental situations are arising due to revisions in the property tax.",
-        "isFallback": false,
-        "fallbackReason": null,
-        "items": [
-          {
-            "title": "증권가, 8·13 부동산 공급대책에 \"중견건설사 모멘텀 주목\"",
-            "link": "https://www.yna.co.kr/view/AKR20260815020900008",
-            "source": "연합뉴스 경제"
-          },
-          {
-            "title": "1억대 자금으로 수도권 새 아파트?…25%만 먼저 사는 집 나온다",
-            "link": "https://www.yna.co.kr/view/AKR20260815044700003",
-            "source": "연합뉴스 경제"
-          },
-          {
-            "title": "세제개편 반발에… 국회서 1주택 양도세 완화법 잇따라",
-            "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/16/GZ3WCIHUT5DMNBVGML543XN42I/",
-            "source": "조선비즈 부동산"
-          },
-          {
-            "title": "시세 21억 아파트 10억원에…'송파 롯데캐슬' 줍줍 18일 등판",
-            "link": "https://www.newsis.com/view/NISX20260814_0003749863",
-            "source": "뉴시스 경제"
-          },
-          {
-            "title": "\"서울 월세 1000만원 흔해질 것\"…종부세 개편에 세입자 '불똥'",
-            "link": "https://www.newsis.com/view/NISX20260814_0003748914",
-            "source": "뉴시스 경제"
-          }
-        ]
+        "title": "용산구 “용산공원 주택공급 검토 강력 반대”",
+        "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/15/PYKGMEOY7FD7TH45AVSHL3B2BQ/",
+        "source": "조선비즈 부동산",
+        "category": "realestate",
+        "textKo": "용산구는 정부가 용산공원을 주택 공급 후보지로 검토하는 데 강력히 반대한다고 밝혔다. 용산구는 용산공원이 120년 만에 국민의 품으로 돌아온 국가공원이라며 훼손을 반대했다. 국토교통부 장관은 용산공원 전체를 주택 공급 후보지로 고민하고 있다고 밝혔다.",
+        "textEn": "Yongsan-gu strongly opposed the government's consideration of Yongsan Park as a candidate site for housing supply. Yongsan-gu opposed the destruction, stating that Yongsan Park has returned to the people after 120 years as a national park. The Minister of Land, Infrastructure and Transport stated that the entire Yongsan Park is being considered as a candidate site for housing supply."
       },
+      {
+        "title": "\"비거주 1주택자 전세대출 막힌다\"더니…'반전' 있었다 [금융당국 백브리핑]",
+        "link": "https://www.hankyung.com/article/202608163814i",
+        "source": "한국경제 경제",
+        "category": "realestate",
+        "textKo": "금융당국이 비거주 1주택자에 대한 전세대출 규제를 발표했으나, 기준이 예상보다 널널한 것으로 나타났다. 수도권이나 규제지역 아파트를 보유하고, 가족이 아닌 제3자에게 임대하며 부부 모두 거주 이력이 없는 경우에만 대출이 제한된다. 비거주 사유를 별도로 입증할 필요는 없으며, 과거 거주 이력으로 실거주 의도를 확인한다.",
+        "textEn": "The financial authorities announced regulations on leasehold loans for non-resident single-homeowners, but the criteria turned out to be more lenient than expected. Loans are restricted only if the property is located in the capital area or a regulated zone, the apartment is rented to a third party who is not a family member, and neither spouse has a residence history. There is no need to separately prove the non-residency reason; instead, past residence history is used to verify the intention to reside."
+      },
+      {
+        "title": "집값 5000만원 차이에 비거주 종부세 200만원↑…보완할까?",
+        "link": "https://www.newsis.com/view/NISX20260816_0003750838",
+        "source": "뉴시스 경제",
+        "category": "other",
+        "textKo": "정부가 2026년 세제개편안에서 비거주 1주택자의 종합부동산세 과세 기준을 20억원으로 설정해 세부담 차이가 발생하고 있다. 비거주 1주택자의 경우 공시가 14억5000만원 주택을 보유하면 약 209만원의 종부세를 내야 한다. 반면 실거주 1주택자는 시가 20억원 수준의 주택에서 종부세가 감소하는 방식으로 설계됐다.",
+        "textEn": "정부가 2026년 세제개편안에서 비거주 1주택자의 종합부동산세 과세 기준을 20억원으로 설정해 세부담 차이가 발생하고 있다. 비거주 1주택자의 경우 공시가 14억5000만원 주택을 보유하면 약 209만원의 종부세를 내야 한다. 반면 실거주 1주택자는 시가 20억원 수준의 주택에서 종부세가 감소하는 방식으로 설계됐다."
+      }
+    ],
+    "categories": [
       {
         "key": "stocks",
         "name": "증시·환율",
         "nameEn": "Stocks & FX",
-        "lineKo": "코스피는 한주 내내 바닥다진 후 상승흐름을 이어갈 가능성이 있고, 뉴욕증시는 숨고르기에 소폭 하락했으며, 나스닥도 소폭 하락 마감했다.",
-        "lineEn": "The KOSPI may continue its upward trend after hitting a low for the week, while the New York stock market slightly declined to catch its breath, and the Nasdaq also closed with a slight decline.",
+        "lineKo": "코스피는 지난주 5일 연속 상승하며 외국인 투자자가 6조5천470억원을 순매수한 반면 개인은 7조원 이상을 순매도했고, 삼성전자와 SK하이닉스는 외국인의 주간 순매수 1, 2위이자 개인의 주간 순매도 1, 2위였으며, 8월 둘째주에는 미국의 물가지수 둔화와 유럽 국채 금리 급등으로 주식시장이 하락 전환했다.",
+        "lineEn": "코스피는 지난주 5일 연속 상승하며 외국인 투자자가 6조5천470억원을 순매수한 반면 개인은 7조원 이상을 순매도했고, 삼성전자와 SK하이닉스는 외국인의 주간 순매수 1, 2위이자 개인의 주간 순매도 1, 2위였으며, 8월 둘째주에는 미국의 물가지수 둔화와 유럽 국채 금리 급등으로 주식시장이 하락 전환했다.",
         "isFallback": false,
         "fallbackReason": null,
+        "degraded": true,
         "items": [
+          {
+            "title": "코스피, 지난주 5일 연속 상승…외국인 순매수로 지수 견인",
+            "link": "https://www.yna.co.kr/view/AKR20260815041700008",
+            "source": "연합뉴스 경제"
+          },
           {
             "title": "[마켓인사이트] 한주 내내 바닥다진 코스피, 상승흐름 이어가나",
             "link": "https://www.yna.co.kr/view/AKR20260814186600008",
             "source": "연합뉴스 경제"
-          },
-          {
-            "title": "뉴욕증시, 숨고르기에 소폭 하락…나스닥 0.28%↓",
-            "link": "https://www.newsis.com/view/NISX20260815_0003750403",
-            "source": "뉴시스 경제"
-          },
-          {
-            "title": "[속보]뉴욕증시, 소폭 하락 마감…나스닥 0.28%↓",
-            "link": "https://www.newsis.com/view/NISX20260815_0003750399",
-            "source": "뉴시스 경제"
           }
         ]
       },
       {
-        "key": "rates",
-        "name": "금리·예금·투자상품",
-        "nameEn": "Rates, Deposits & Investment Products",
-        "lineKo": "가계부채 증가와 금리 인상기의 건전성 문제에 대한 경고가 제기됐다.",
-        "lineEn": "Warnings were raised about the debt problems of households and the soundness issues during periods of interest rate hikes.",
+        "key": "realestate",
+        "name": "부동산",
+        "nameEn": "Real Estate",
+        "lineKo": "10월에 수도권 아파트 지분적립 공공분양 단지가 공개되며 분양가의 25%만 먼저 내고 30년간 지분확대가 가능하고, 비거주 1주택자 전세대출 제한 기준이 수도권·규제지역 아파트 임대 및 부부 모두 거주하지 않은 경우에 한해 적용되며, 용산공원 내 주택 건설 계획이 공식화되면서 논란이 일고 있고, 정부는 서울시와 녹지훼손에 대한 의견 차이를 보이고 있으며, 증권가에서는 8·13 부동산 공급대책으로 중견건설사에 긍정적 영향을 줄 것으로 전망하고 있다.",
+        "lineEn": "In October, public housing projects for apartment share accumulation in the capital area were announced, allowing buyers to pay only 25% of the purchase price upfront and expand their shares over 30 years. The restrictions on rental loans for non-resident single-homeowners apply only to apartments in the capital area and regulated zones when the property is rented out and both spouses do not reside there. Controversy has arisen following the official announcement of a housing construction plan within Yongsan Park. The government has shown differing opinions with the Seoul Metropolitan Government regarding green space damage. The securities industry expects the 8·13 real estate supply measures to have a positive impact on mid-sized construction companies.",
         "isFallback": false,
         "fallbackReason": null,
+        "degraded": true,
         "items": [
           {
-            "title": "'가계부채 2천조원' 시대 진입…금리 인상기 건전성 비상",
-            "link": "https://www.yna.co.kr/view/AKR20260815039600002",
+            "title": "수도권 아파트를 1억대로 입주?…지분적립 공공분양 단지 10월 공개",
+            "link": "https://www.mk.co.kr/news/realestate/12128890",
+            "source": "매일경제 부동산"
+          },
+          {
+            "title": "\"비거주 1주택자 전세대출 막힌다\"더니…'반전' 있었다 [금융당국 백브리핑]",
+            "link": "https://www.hankyung.com/article/202608163814i",
+            "source": "한국경제 경제"
+          },
+          {
+            "title": "공론화된 용산공원내 주택 건설…'20년 금지' 빗장 풀리나",
+            "link": "https://www.yna.co.kr/view/AKR20260816016600003",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "'주택공급' 고민하는 정부, '녹지훼손' 안 된다는 서울시",
+            "link": "https://www.newsis.com/view/NISX20260814_0003750262",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "증권가, 8·13 부동산 공급대책에 \"중견건설사 모멘텀 주목\"",
+            "link": "https://www.yna.co.kr/view/AKR20260815020900008",
             "source": "연합뉴스 경제"
           }
         ]
@@ -480,11 +487,17 @@
         "key": "other",
         "name": "기타 경제 소식",
         "nameEn": "Other Economic News",
-        "lineKo": "집단대출 별도 관리, 신규 대출여력 배분, 이주비 대출 완화, 성장전망과 가계부채 규모, 미 소비자 지출 감소 등 다양한 경제 관련 소식들이 오늘 보도되었다.",
-        "lineEn": "Various economic-related news, including separate management of group loans, allocation of new loan capacity, easing of relocation expense loans, household debt scale and growth outlook, and a decline in U.S. consumer spending, were reported today.",
+        "lineKo": "정부가 2026년 세제개편안에서 비거주 1주택자의 종합부동산세 과세 기준을 시가 20억원으로 설정하고, 집단대출을 별도 관리해 상호금융업권의 대출 여력이 생기며, 이주비 대출 규제 완화로 중소·중견 건설사의 정비사업 기회가 열리고, 7월 미국 소비자 지출이 큰 폭으로 감소했다.",
+        "lineEn": "The government set the taxable benchmark for non-resident single-homeowners' comprehensive property tax at 2,000,000,000 won in the 2026 tax reform plan, managed group loans separately, creating lending capacity in the mutual finance sector, opened up redevelopment opportunities for small and medium-sized construction companies due to relaxed regulations on relocation expense loans, and U.S. consumer spending dropped sharply in July.",
         "isFallback": false,
         "fallbackReason": null,
+        "degraded": true,
         "items": [
+          {
+            "title": "집값 5000만원 차이에 비거주 종부세 200만원↑…보완할까?",
+            "link": "https://www.newsis.com/view/NISX20260816_0003750838",
+            "source": "뉴시스 경제"
+          },
           {
             "title": "집단대출 별도 관리로 '한도 제로' 상호금융도 여력 생긴다",
             "link": "https://www.yna.co.kr/view/AKR20260815046400002",
@@ -501,14 +514,26 @@
             "source": "뉴시스 경제"
           },
           {
-            "title": "[다음주 경제] 올해 성장전망 얼마나 높아질까…가계부채 규모도 주목",
-            "link": "https://www.yna.co.kr/view/AKR20260815011500002",
-            "source": "연합뉴스 경제"
-          },
-          {
             "title": "7월 미 소비자 지출 큰 폭 감소…경제 둔화 가능성",
             "link": "https://www.newsis.com/view/NISX20260815_0003750408",
             "source": "뉴시스 경제"
+          }
+        ]
+      },
+      {
+        "key": "rates",
+        "name": "금리·예금·투자상품",
+        "nameEn": "Rates, Deposits & Investment Products",
+        "lineKo": "한국의 가계신용 규모가 사상 처음으로 2천조원대에 진입했다. 금융기관에서 빌린 가계대출은 1천865조8천억원으로, 3개월 만에 12조9천억원 증가했다. 신용카드 결제액 등 판매신용도 127조3천억원으로 1조1천억원 증가했다. 2분기 들어 가계대출 증가 속도는 더욱 빨라졌다.",
+        "lineEn": "South Korea's household credit reached a record high of 2,000,000,000,000,000 won. Household loans borrowed from financial institutions amounted to 1,865,000,000,000,000800,000,000,000 won, increasing by 12,000,000,000,000900,000,000,000 won within three months. Sales credit, including credit card payments, reached 127,000,000,000,000300,000,000,000 won, increasing by 1,000,000,000,000100,000,000,000 won. The growth rate of household loans has accelerated further since the second quarter.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": false,
+        "items": [
+          {
+            "title": "'가계부채 2천조원' 시대 진입…금리 인상기 건전성 비상",
+            "link": "https://www.yna.co.kr/view/AKR20260815039600002",
+            "source": "연합뉴스 경제"
           }
         ]
       }
