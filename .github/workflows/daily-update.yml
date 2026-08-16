@@ -91,6 +91,9 @@ jobs:
       - name: 뉴스 제목 영어 번역
         run: node scripts/translate-news.mjs
 
+      - name: 기사에 실거래가·금리 수치 붙이기
+        run: node scripts/news-context.mjs
+
       - name: 정적 HTML에 오늘 내용 심기
         run: |
           node scripts/build-history-lite.mjs

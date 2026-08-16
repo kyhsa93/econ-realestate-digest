@@ -11,6 +11,9 @@ async function main() {
   run("node scripts/fetch-news.mjs");
   run("node scripts/fetch-market.mjs");
   run("node scripts/build-history-lite.mjs");
+  // 프리렌더가 news.json을 읽어 정적 HTML에 심으므로, 기사에 수치를 붙이는 건
+  // 반드시 그 전이어야 한다.
+  run("node scripts/news-context.mjs");
   run("node scripts/prerender.mjs");
   run("node scripts/build-rate-pages.mjs");
   run("node scripts/build-news-pages.mjs");

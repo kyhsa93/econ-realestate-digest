@@ -19,7 +19,7 @@ const DATA_DIR = path.join(root, "docs/data");
 // 자치구 평당가는 신고 건수가 적으면 "그 구의 시세"가 아니라 "그 아파트 한 채의
 // 가격"이라 화면에서 가린다. 정적 HTML은 검색 결과에 그대로 실릴 수 있으니
 // 같은 기준을 반드시 지켜야 한다.
-const MIN_SAMPLE = 5;
+export const MIN_SAMPLE = 5;
 const MAX_DISTRICTS = 10;
 
 export function escapeHtml(value) {
@@ -114,6 +114,25 @@ export function realestateHtml(realestate) {
   return [row("서울 전체", realestate.overall), ...districts.map((d) => row(d.name, d))].join("");
 }
 
+// 기사에 붙은 우리 데이터(자치구 실거래가·현재 금리·지수). news-context.mjs가
+// news.json에 넣어둔 값을 그대로 그린다. 화면(news.html·index.html)의 newsContextHtml과
+// 같은 마크업이어야 한다 - 테스트가 두 결과를 직접 대조한다.
+export function newsContextHtml(context) {
+  if (!context?.length) return "";
+  return (
+    `<div class="news-context">` +
+    context
+      .map(
+        (c) =>
+          `<a class="context-chip" href="${escapeHtml(c.href)}">` +
+          `<span class="context-label">${escapeHtml(c.label)}</span>` +
+          `<span class="context-value">${escapeHtml(c.value)}</span></a>`
+      )
+      .join("") +
+    `</div>`
+  );
+}
+
 // 클라이언트가 그리는 마크업과 구조를 맞춘다. 다르면 데이터를 받는 순간 목록 높이가
 // 바뀌면서 화면이 밀린다(광고가 붙은 페이지라 이 밀림은 수익에도 영향을 준다).
 // 상대 시간("3시간 전")만은 만든 시점에 좌우돼서 넣을 수 없으므로, 같은 줄에
@@ -128,6 +147,7 @@ export function newsHtml(news) {
         `<a href="${escapeHtml(item.link)}" target="_blank" rel="noopener">${escapeHtml(item.title)}</a>` +
         `<div class="news-meta">${escapeHtml(item.source ?? "")}</div>` +
         (item.preview ? `<div class="news-preview">${escapeHtml(item.preview)}</div>` : "") +
+        newsContextHtml(item.context) +
         `</li>`
     )
     .join("");
@@ -157,6 +177,7 @@ export function newsListHtml(news, category = null) {
         `<li class="news-item">` +
         `<a href="${escapeHtml(item.link)}" target="_blank" rel="noopener">${escapeHtml(item.title)}</a>` +
         `<div class="news-meta">${escapeHtml(item.source ?? "")}</div>` +
+        newsContextHtml(item.context) +
         `</li>`
     )
     .join("");

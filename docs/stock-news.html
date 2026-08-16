@@ -142,6 +142,23 @@
   .news-item a:hover { text-decoration: underline; }
   .news-item.read > a { color: var(--muted); }
   .news-meta { color: var(--muted); font-size: 0.78rem; margin-top: 2px; }
+  .news-context { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  /* .news-item a 규칙이 글자 크기·밑줄까지 정해두고 있어서, 칩은 같은 자리에서
+     더 구체적인 선택자로 덮어써야 한다(안 그러면 제목과 같은 크기가 된다). */
+  .news-item .context-chip {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    padding: 3px 9px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--card);
+    font-size: 0.76rem;
+    text-decoration: none;
+  }
+  .news-item .context-chip:hover { border-color: var(--muted); text-decoration: none; }
+  .context-label { color: var(--muted); }
+  .context-value { color: var(--fg); font-weight: 600; font-variant-numeric: tabular-nums; }
   .empty { color: var(--muted); font-size: 0.9rem; }
   .empty button {
     font: inherit;
@@ -349,6 +366,26 @@
   const summaryLine = (c) => (locale === "en" ? c.lineEn ?? c.lineKo : c.lineKo);
   const summaryName = (c) => (locale === "en" ? c.nameEn ?? c.name : c.name);
 
+  // 기사에 붙은 우리 데이터(자치구 실거래가·현재 금리·지수). 값은 news-context.mjs가
+  // 미리 계산해 news.json에 넣어둔 것을 그대로 쓴다 - 여기서 계산하려면 570KB짜리
+  // rates.json을 이 페이지가 받아야 한다. 마크업은 prerender.mjs의 newsContextHtml과
+  // 같아야 한다(테스트가 두 결과를 대조한다).
+  function newsContextHtml(context) {
+    if (!context?.length) return "";
+    return (
+      `<div class="news-context">` +
+      context
+        .map(
+          (c) =>
+            `<a class="context-chip" href="${escapeHtml(c.href)}">` +
+            `<span class="context-label">${escapeHtml(locale === "en" ? c.labelEn ?? c.label : c.label)}</span>` +
+            `<span class="context-value">${escapeHtml(locale === "en" ? c.valueEn ?? c.value : c.value)}</span></a>`
+        )
+        .join("") +
+      `</div>`
+    );
+  }
+
   function renderNews() {
     const list = document.getElementById("news-list");
     const items = itemsOf(cache.news);
@@ -359,6 +396,7 @@
             return `<li class="news-item${readNewsLinks.has(item.link) ? " read" : ""}">
               <a href="${escapeHtml(item.link)}" target="_blank" rel="noopener">${escapeHtml(itemTitle(item))}</a>
               <div class="news-meta">${escapeHtml(meta)}</div>
+              ${newsContextHtml(item.context)}
             </li>`;
           })
           .join("")
@@ -441,6 +479,18 @@
   }
 
   document.getElementById("news-list").addEventListener("click", (e) => {
+    // 칩은 기사가 아니라 우리 페이지로 가는 링크다. 읽음 처리에 걸리면 안 되고
+    // (선택자가 직계 자식만 보므로 자동으로 갈린다), 계측도 따로 세야 한다.
+    // 이 기능이 실제로 눌리는지는 이 수치 말고는 알 방법이 없다.
+    const chip = e.target.closest(".news-item .context-chip");
+    if (chip) {
+      window.analytics?.event("news_context_click", {
+        news_category: category ?? "all",
+        context_target: chip.getAttribute("href"),
+      });
+      return;
+    }
+
     const link = e.target.closest(".news-item > a");
     if (!link) return;
     markNewsRead(link.getAttribute("href"));
