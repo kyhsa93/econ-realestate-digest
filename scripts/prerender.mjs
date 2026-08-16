@@ -31,11 +31,16 @@ export function escapeHtml(value) {
 }
 
 export function summaryHtml(summary) {
+  const highlights = (summary?.highlights ?? []).filter((h) => h.textKo);
   const categories = (summary?.categories ?? []).filter((c) => c.lineKo);
-  if (!categories.length) return null;
-  return categories
-    .map((c) => `<p><strong>${escapeHtml(c.name)}</strong> ${escapeHtml(c.lineKo)}</p>`)
-    .join("");
+  if (!highlights.length && !categories.length) return null;
+
+  // 핵심 기사가 그날 페이지에서 가장 알맹이 있는 문단이다. 크롤러가 받는
+  // HTML에서 빠지면 검색 결과에는 분야별 한 줄 요약만 남는다.
+  return [
+    ...highlights.map((h) => `<p><strong>${escapeHtml(h.title)}</strong> ${escapeHtml(h.textKo)}</p>`),
+    ...categories.map((c) => `<p><strong>${escapeHtml(c.name)}</strong> ${escapeHtml(c.lineKo)}</p>`),
+  ].join("");
 }
 
 export function marketHtml(market) {

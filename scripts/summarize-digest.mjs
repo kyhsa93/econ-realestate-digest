@@ -2,9 +2,15 @@ import { writeFile, mkdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import { FALLBACK_CATEGORY, categoryOf } from "./categories.mjs";
 
-const dataDir = path.resolve(import.meta.dirname, "../docs/data");
+// fetch-rates와 같은 방식. 테스트가 실제 docs/data를 덮어쓰지 않게 하려는 것이다.
+const dataDir = process.env.SUMMARY_DATA_DIR
+  ? path.resolve(process.env.SUMMARY_DATA_DIR)
+  : path.resolve(import.meta.dirname, "../docs/data");
 const outFile = path.join(dataDir, "summary.json");
 const historyFile = path.join(dataDir, "summary-history.json");
+const bodiesFile = process.env.NEWS_BODIES_FILE
+  ? path.resolve(process.env.NEWS_BODIES_FILE)
+  : path.resolve(import.meta.dirname, "../cache/news-bodies.json");
 const HISTORY_MAX_DAYS = 180;
 
 const OLLAMA_URL = process.env.OLLAMA_URL ?? "http://127.0.0.1:11434";
@@ -12,6 +18,18 @@ const MODEL = process.env.OLLAMA_MODEL ?? "qwen3:14b";
 const DISABLE_THINKING = process.env.OLLAMA_THINK === "false";
 
 const MAX_ITEMS_PER_CATEGORY = 5;
+// 프롬프트에 넣을 기사당 본문 길이. 길수록 재료는 좋아지지만 CPU 러너에서는
+// 프롬프트 처리 시간도 같이 늘어난다.
+const BODY_CHARS_IN_CATEGORY_PROMPT = 400;
+const BODY_CHARS_IN_HIGHLIGHT_PROMPT = 900;
+
+// 사람이 3분쯤 읽는 분량(한국어 1,500자 안팎)을 핵심 3건과 카테고리 문단으로 나눈다.
+const CATEGORY_SENTENCES = 4;
+const HIGHLIGHT_SENTENCES = 3;
+const HIGHLIGHT_COUNT = 3;
+const MAX_HIGHLIGHTS_PER_CATEGORY = 2;
+// 이보다 본문이 짧으면 두세 문장을 채울 재료가 없어서 결국 제목을 늘여 쓰게 된다.
+const MIN_HIGHLIGHT_BODY = 250;
 
 const MAJOR_UNITS = { 조: 1_000_000_000_000, 억: 100_000_000, 만: 10_000 };
 const MINOR_UNITS = { 천: 1_000, 백: 100, 십: 10 };
@@ -80,43 +98,115 @@ function stripHanzi(text) {
   return text.replace(/[一-鿿]/g, "");
 }
 
-function firstSentence(text) {
-  const idx = text.search(/[.!?](?!\d)/);
-  return idx === -1 ? text : text.slice(0, idx + 1);
+// 모델은 목록 기호나 <think> 잔재를 붙여 놓기도 한다. 문단으로 쓰려면 줄 단위로
+// 정리해서 한 덩어리로 이어붙여야 화면에서도 문단으로 보인다.
+function cleanGenerated(raw) {
+  return stripHanzi(raw)
+    .replace(/<[^>]*>/g, " ")
+    .split("\n")
+    .map((line) => line.replace(/^\s*(?:[-*•]|\d+[.)])\s*/, "").trim())
+    .filter(Boolean)
+    .join(" ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+// num_predict에 걸려 잘린 마지막 조각은 버린다. 종결부호로 끝나지 않는 문장을
+// 그대로 내보내면 화면에서 말이 끊긴 채로 보인다.
+// 문장 경계는 "종결부호 + 공백"으로만 인정한다 - "2.5%"의 점에서 자르지 않으려면
+// 이 조건이 필요하다.
+export function completeSentences(text, maxSentences) {
+  const parts = text
+    .trim()
+    .split(/(?<=[.!?])\s+/)
+    .map((part) => part.trim())
+    .filter((part) => part && /[.!?]$/.test(part));
+
+  return parts.length > 0 ? parts.slice(0, maxSentences).join(" ") : null;
 }
 
 function listCategory(label, titles) {
   const shown = titles.slice(0, 3).join(", ");
   const more = titles.length > 3 ? ` +${titles.length - 3}` : "";
-  return `- ${label}: ${shown}${more}`;
+  return `${label}: ${shown}${more}`;
 }
 
-function buildBucketPrompt(label, titles, isUngroupable) {
-  const list = titles.slice(0, MAX_ITEMS_PER_CATEGORY).map((t, i) => `${i + 1}. ${t}`).join("\n");
+// 제목만 주면 모델이 할 수 있는 건 제목을 바꿔 쓰는 것뿐이다. 본문이 붙어야
+// 요약에 알맹이가 생긴다.
+function renderMaterial(items, bodies, bodyChars) {
+  return items
+    .map((item, index) => {
+      const body = bodies[item.link];
+      const excerpt = body ? `\n   ${body.slice(0, bodyChars)}` : "";
+      return `${index + 1}. ${item.title}${excerpt}`;
+    })
+    .join("\n\n");
+}
+
+// 숫자를 금지하는 대신 "원문에 적힌 그대로만"으로 바꾼다. 경제 뉴스에서 수치를
+// 빼면 읽을 알맹이가 사라지는데, 이제 본문이 프롬프트에 들어오므로 코드가
+// 원문 대조로 걸러낼 수 있다.
+const COMMON_RULES = `- 위에 적힌 사실만 사용해. 위에 없는 숫자·수치·전망·원인은 절대 지어내지 마.
+- 숫자와 금액은 위에 적힌 표기를 그대로 옮겨. 반올림하거나 단위를 바꾸지 마.
+- 서로 다른 기사를 인과관계("~때문에", "~해서")로 엮지 마. 별개의 사실이면 별개 문장으로 써.
+- 단체·정당·기관·인물 이름은 위에 적힌 표기를 그대로 써. 줄임말을 임의로 풀어쓰거나 다른 이름으로 바꾸지 마.
+- 투자 조언이나 예측은 하지 마.
+- 한국어(한글)로만 작성해. 한자, 중국어, 영어 단어를 섞지 마.
+- 번호나 목록 기호를 쓰지 말고 이어지는 문단으로 써.
+- 각 문장은 반드시 마침표로 끝내.`;
+
+function buildCategoryPrompt(label, items, bodies, isUngroupable) {
+  const material = renderMaterial(items.slice(0, MAX_ITEMS_PER_CATEGORY), bodies, BODY_CHARS_IN_CATEGORY_PROMPT);
 
   const intro = isUngroupable
-    ? `다음은 오늘자 한국 경제 뉴스 제목들이야. 서로 주제가 다른 소식들이야.
+    ? `다음은 오늘자 한국 경제 뉴스야. 서로 주제가 다른 소식들이고, 각 항목은 제목과 기사 본문 일부야.
 
-${list}
+${material}
 
-이 제목들을 하나로 엮지 말고, 오늘 어떤 소식들이 있었는지 나열하듯 한국어 한 문장으로 요약해줘.`
-    : `다음은 "${label}" 주제의 오늘자 한국 경제 뉴스 제목들이야.
+이 소식들을 하나로 엮지 말고, 오늘 어떤 일이 있었는지 차례로 짚어주는 한국어 ${CATEGORY_SENTENCES}문장 문단으로 요약해줘.`
+    : `다음은 "${label}" 주제의 오늘자 한국 경제 뉴스야. 각 항목은 제목과 기사 본문 일부야.
 
-${list}
+${material}
 
-이 제목들을 종합해서 한국어 한 문장으로 요약해줘.`;
+이 기사들을 종합해서 한국어 ${CATEGORY_SENTENCES}문장 문단으로 요약해줘. 무슨 일이 있었고 어떤 수치가 나왔는지 구체적으로 써.`;
 
   return `${intro}
 규칙:
-- 딱 한 문장만 출력해. 번호나 목록 형식 쓰지 마. 문장을 두 개 이상 잇지 마.
-- 제목에 나온 단어와 사실만 사용하고, 제목에 없는 숫자·수치·전망·원인은 절대 지어내지 마.
-- 숫자나 %, 금액을 문장에 절대 쓰지 마. 정확한 수치는 이미 다른 곳에 표로 나와 있으니, 여기서는 "상승", "증가", "발표" 같은 서술적 표현만 써.
-- 서로 다른 제목을 인과관계("~때문에", "~해서")로 엮지 마. 각 제목은 독립된 별개의 사실이야.
-- 단체·정당·기관·인물 이름은 제목에 적힌 표기를 그대로 써. 줄임말을 임의로 풀어쓰거나 다른 이름으로 바꾸지 마.
-- 투자 조언이나 예측은 하지 마.
-- 한국어(한글)로만 작성해. 한자, 중국어, 영어 단어를 섞지 마.
+- ${CATEGORY_SENTENCES}문장 안팎으로 쓰고, 전체 250자에서 350자 사이로 맞춰.
+${COMMON_RULES}
+
+요약:`;
+}
+
+// 문단 생성이 검증에서 막혔을 때 쓴다. 짧고 밋밋하지만 제목 나열보다는 낫다.
+function buildSingleSentencePrompt(label, items, bodies) {
+  const material = renderMaterial(items.slice(0, MAX_ITEMS_PER_CATEGORY), bodies, BODY_CHARS_IN_CATEGORY_PROMPT);
+
+  return `다음은 "${label}" 주제의 오늘자 한국 경제 뉴스야.
+
+${material}
+
+이 기사들을 종합해서 한국어 한 문장으로 요약해줘.
+규칙:
+- 딱 한 문장만 출력해.
+${COMMON_RULES}
 
 한 문장 요약:`;
+}
+
+function buildHighlightPrompt(item, body) {
+  return `다음은 오늘자 한국 경제 뉴스 한 건이야.
+
+제목: ${item.title}
+본문: ${body.slice(0, BODY_CHARS_IN_HIGHLIGHT_PROMPT)}
+
+이 기사를 한국어 ${HIGHLIGHT_SENTENCES}문장으로 요약해줘. 무슨 일이 있었는지, 누가 무엇을 했는지, 어떤 수치가 나왔는지를 담아.
+규칙:
+- ${HIGHLIGHT_SENTENCES}문장 안팎으로 쓰고, 전체 150자에서 250자 사이로 맞춰.
+- 제목을 그대로 옮겨 쓰지 말고 본문 내용으로 설명해.
+${COMMON_RULES}
+
+요약:`;
 }
 
 async function callOllama(prompt, options) {
@@ -137,10 +227,9 @@ async function callOllama(prompt, options) {
   return json.response;
 }
 
-async function generateKoSentence(prompt) {
-  const raw = await callOllama(prompt, { temperature: 0.1, top_p: 0.7, num_predict: 220 });
-  const firstLine = stripHanzi(raw).trim().split("\n")[0].trim();
-  return firstSentence(firstLine);
+async function generateKoText(prompt, { maxSentences, numPredict, temperature }) {
+  const raw = await callOllama(prompt, { temperature, top_p: 0.7, num_predict: numPredict });
+  return completeSentences(cleanGenerated(raw), maxSentences);
 }
 
 function containsUnverifiedNumber(sentence, sourceText) {
@@ -148,7 +237,9 @@ function containsUnverifiedNumber(sentence, sourceText) {
   return numbers.some((n) => !sourceText.includes(n));
 }
 
-const MAX_EXTRACTED_ENTITIES = 10;
+// 문단이 길어지면 고유명사도 많아진다. 상한이 낮으면 뒤쪽 고유명사가 검증에서
+// 아예 빠져버려서, 검사를 하는 것처럼 보이지만 실제로는 안 하는 구간이 생긴다.
+const MAX_EXTRACTED_ENTITIES = 20;
 const MAX_ENTITY_LENGTH = 20;
 const ENTITY_STOPWORDS = new Set([
   "정부", "시장", "경제", "금리", "주택", "부동산", "증시", "환율", "은행", "대출", "가격", "물가",
@@ -194,7 +285,7 @@ async function extractProperNouns(sentence) {
 
 고유명사:`;
 
-  const raw = await callOllama(prompt, { temperature: 0, top_p: 0.5, num_predict: 60 });
+  const raw = await callOllama(prompt, { temperature: 0, top_p: 0.5, num_predict: 160 });
   return raw
     .trim()
     .split("\n")[0]
@@ -234,67 +325,163 @@ const FALLBACK_REASONS = {
   UNVERIFIED_ENTITY: "unverified-entity",
 };
 
-async function summarizeBucketKo(bucket) {
+// 대조용 원문. 제목만 넣던 시절에는 본문에 있는 정상 수치도 "원문에 없는 숫자"로
+// 걸렸다. 프롬프트에 넣은 재료와 대조 대상이 같아야 한다.
+function sourceTextFor(items, bodies) {
+  return items.map((item) => `${item.title} ${bodies[item.link] ?? ""}`).join(" ");
+}
+
+async function verifyKoText(label, text, sourceText) {
+  if (containsUnverifiedNumber(text, sourceText)) {
+    console.error(`[summarize-digest] "${label}" 요약에 원문에 없는 숫자 포함: ${text}`);
+    return FALLBACK_REASONS.UNVERIFIED_NUMBER;
+  }
+
+  const unverified = await unverifiedEntities(text, sourceText);
+  if (unverified.length > 0) {
+    console.error(
+      `[summarize-digest] "${label}" 요약에 원문에 없는 고유명사(${unverified.join(", ")}) 포함: ${text}`
+    );
+    return FALLBACK_REASONS.UNVERIFIED_ENTITY;
+  }
+
+  return null;
+}
+
+// 검증에 걸리면 온도를 낮춰 한 번 더 시도한다. 실제로 걸리는 대부분은 모델이
+// 한 번 상상해서 덧붙인 경우라, 같은 프롬프트로도 두 번째엔 통과하는 일이 많다.
+async function generateVerified({ label, prompt, sourceText, maxSentences, numPredict }) {
+  let lastReason = FALLBACK_REASONS.GENERATION_FAILED;
+
+  for (const temperature of [0.1, 0]) {
+    let text;
+    try {
+      text = await generateKoText(prompt, { maxSentences, numPredict, temperature });
+    } catch (err) {
+      // 모델 호출 자체가 안 되는 상황은 다시 불러도 마찬가지다.
+      console.error(`[summarize-digest] "${label}" 생성 실패: ${err.message}`);
+      return { text: null, reason: FALLBACK_REASONS.GENERATION_FAILED };
+    }
+
+    if (!text) {
+      console.error(`[summarize-digest] "${label}" 완결된 문장을 못 얻음`);
+      lastReason = FALLBACK_REASONS.GENERATION_FAILED;
+      continue;
+    }
+
+    const reason = await verifyKoText(label, text, sourceText);
+    if (!reason) return { text, reason: null };
+    lastReason = reason;
+  }
+
+  return { text: null, reason: lastReason };
+}
+
+async function summarizeCategory(bucket, bodies) {
   const label = bucket.category.name;
   const isUngroupable = bucket.category === FALLBACK_CATEGORY;
+  const items = bucket.items.slice(0, MAX_ITEMS_PER_CATEGORY);
+  const sourceText = sourceTextFor(items, bodies);
 
-  const sourceText = bucket.titles.join(" ");
-  const prompt = buildBucketPrompt(label, bucket.titles, isUngroupable);
+  const paragraph = await generateVerified({
+    label,
+    prompt: buildCategoryPrompt(label, items, bodies, isUngroupable),
+    sourceText,
+    maxSentences: CATEGORY_SENTENCES,
+    numPredict: 500,
+  });
+  if (paragraph.text) return { line: paragraph.text, fallbackReason: null, degraded: false };
 
-  let sentence;
-  let reason = null;
-  try {
-    sentence = await generateKoSentence(prompt);
-  } catch (err) {
-    console.error(`[summarize-digest] "${label}" 요약 실패: ${err.message}`);
-    sentence = null;
-    reason = FALLBACK_REASONS.GENERATION_FAILED;
+  // 문단이 막혔다고 곧장 제목 나열로 가지 않는다. 한 문장 요약은 오래 굴려본
+  // 방식이라 성공률이 높고, 검증을 통과한 이상 제목 나열보다 읽을 값어치가 있다.
+  console.error(`[summarize-digest] "${label}" 문단 요약 실패(${paragraph.reason}), 한 문장으로 재시도`);
+  const single = await generateVerified({
+    label,
+    prompt: buildSingleSentencePrompt(label, items, bodies),
+    sourceText,
+    maxSentences: 1,
+    numPredict: 200,
+  });
+  if (single.text) return { line: single.text, fallbackReason: null, degraded: true };
+
+  // 이유는 본 요약이 왜 반려됐는지를 남긴다. 뒤이은 한 문장 시도의 실패 사유는
+  // 로그로 충분하고, 진단에 필요한 건 처음 걸린 지점이다.
+  return { line: listCategory(label, bucket.titles), fallbackReason: paragraph.reason, degraded: false };
+}
+
+async function summarizeHighlight(item, body) {
+  const label = `핵심: ${item.title.slice(0, 20)}`;
+  const sourceText = sourceTextFor([item], { [item.link]: body });
+
+  const result = await generateVerified({
+    label,
+    prompt: buildHighlightPrompt(item, body),
+    sourceText,
+    maxSentences: HIGHLIGHT_SENTENCES,
+    numPredict: 400,
+  });
+
+  // 핵심 기사는 요약이 없으면 실을 이유가 없다. 제목만 다시 보여주는 칸이
+  // 되느니 그 자리를 비우는 게 낫다.
+  if (!result.text) {
+    console.error(`[summarize-digest] 핵심 기사 요약 실패(${result.reason}): ${item.title}`);
+    return null;
   }
 
-  if (sentence && containsUnverifiedNumber(sentence, sourceText)) {
-    console.error(`[summarize-digest] "${label}" 요약에 검증 안 된 숫자 포함: ${sentence}`);
-    sentence = null;
-    reason = FALLBACK_REASONS.UNVERIFIED_NUMBER;
-  }
+  return {
+    title: item.title,
+    link: item.link,
+    source: item.source,
+    category: item.category ?? FALLBACK_CATEGORY.key,
+    textKo: result.text,
+  };
+}
 
-  if (sentence) {
-    const unverified = await unverifiedEntities(sentence, sourceText);
-    if (unverified.length > 0) {
-      console.error(
-        `[summarize-digest] "${label}" 요약에 원문에 없는 고유명사(${unverified.join(", ")}) 포함: ${sentence}`
-      );
-      sentence = null;
-      reason = FALLBACK_REASONS.UNVERIFIED_ENTITY;
-    }
-  }
+// 여러 매체가 같이 다룬 기사가 그날의 큰 뉴스다. 모델에게 고르라고 하면 호출이
+// 늘어나는 데다 근거 없는 판단이 섞이는데, 이건 수집 단계에서 이미 센 값이다.
+export function pickHighlights(items, bodies) {
+  const ranked = items
+    .map((item, index) => ({ item, body: bodies[item.link] ?? "", recency: -index }))
+    .filter((entry) => entry.body.length >= MIN_HIGHLIGHT_BODY)
+    .sort((a, b) => (b.item.dupes?.length ?? 0) - (a.item.dupes?.length ?? 0) || b.recency - a.recency);
 
-  if (!sentence) {
-    return { line: listCategory(label, bucket.titles), fallbackReason: reason ?? FALLBACK_REASONS.GENERATION_FAILED };
+  const picked = [];
+  const perCategory = new Map();
+  for (const entry of ranked) {
+    if (picked.length >= HIGHLIGHT_COUNT) break;
+    // 부동산 기사가 절반을 넘는 날이 흔해서, 막아두지 않으면 핵심 세 칸이
+    // 전부 같은 주제로 채워진다.
+    const key = entry.item.category ?? FALLBACK_CATEGORY.key;
+    const used = perCategory.get(key) ?? 0;
+    if (used >= MAX_HIGHLIGHTS_PER_CATEGORY) continue;
+    perCategory.set(key, used + 1);
+    picked.push(entry);
   }
-
-  return { line: `- ${sentence}`, fallbackReason: null };
+  return picked;
 }
 
 function isBadTranslation(text, original, requiredNumbers) {
   if (!text) return true;
   if (/[가-힣]/.test(text)) return true;
   if (/[一-鿿]/.test(text)) return true;
-  if (text.length > Math.max(240, original.length * 4)) return true;
+  // 한국어는 영어보다 압축적이라 번역하면 3~4배로 늘어난다. 상한을 빠듯하게
+  // 잡으면 멀쩡한 번역이 반려돼 영어 화면에 한국어가 그대로 남는다.
+  if (text.length > Math.max(400, original.length * 4)) return true;
   const textDigits = text.replace(/,/g, "");
   if (requiredNumbers.some((n) => !textDigits.includes(n))) return true;
   return false;
 }
 
-async function translateKoLine(koLine) {
-  const text = koLine.replace(/^-\s*/, "");
+async function translateKoText(text, numPredict) {
   const normalized = normalizeKoreanAmounts(text);
   const requiredNumbers = extractNormalizedNumbers(text, normalized);
 
-  const prompt = `Translate the following Korean sentence into natural, concise English.
-The sentence may already contain plain Arabic numerals (e.g. "80,000,000") - if so, keep those numbers exactly as they are, do not round or rewrite them, just translate the surrounding Korean words (e.g. "원" -> "won").
+  const prompt = `Translate the following Korean text into natural, concise English.
+The text may already contain plain Arabic numerals (e.g. "80,000,000") - if so, keep those numbers exactly as they are, do not round or rewrite them, just translate the surrounding Korean words (e.g. "원" -> "won").
+Keep every sentence: do not merge, drop, or add sentences.
 Write the translation in English only - do not use Chinese characters or any other language.
-Translate names of parties, institutions and people literally. Do NOT add roles or descriptions that are not in the Korean sentence (for example, never label a party as "ruling" or "opposition").
-Output ONLY the translated sentence. No quotes, no explanation.
+Translate names of parties, institutions and people literally. Do NOT add roles or descriptions that are not in the Korean text (for example, never label a party as "ruling" or "opposition").
+Output ONLY the translation. No quotes, no explanation.
 
 Korean: ${normalized}
 
@@ -302,19 +489,48 @@ English:`;
 
   let translated;
   try {
-    const raw = await callOllama(prompt, { temperature: 0.2, top_p: 0.8, num_predict: 300 });
-    translated = raw.trim().split("\n")[0].trim().replace(/^["'“‘]+|["'”’]+$/g, "");
+    const raw = await callOllama(prompt, { temperature: 0.2, top_p: 0.8, num_predict: numPredict });
+    // 문단은 여러 줄로 나뉘어 올 수 있다. 예전처럼 첫 줄만 쓰면 번역이 통째로 잘린다.
+    const joined = raw.trim().replace(/\s*\n+\s*/g, " ").replace(/^["'“‘]+|["'”’]+$/g, "").trim();
+    // 한국어 쪽과 달리 여기선 잘린 꼬리를 못 찾아도 통째로 버리지 않는다. 번역은
+    // 예산이 넉넉해 잘릴 일이 드물고, 마침표가 빠진 것 때문에 영어 화면에 한국어를
+    // 남기는 편이 더 나쁘다. 한글·한자·길이·숫자 검증은 아래에서 그대로 한다.
+    translated = completeSentences(joined, 12) ?? joined;
   } catch (err) {
     console.error(`[summarize-digest] 번역 실패, 한국어 유지: ${err.message}`);
-    return koLine;
+    return { text, translated: false };
   }
 
   if (isBadTranslation(translated, text, requiredNumbers)) {
     console.error(`[summarize-digest] 번역 검증 실패, 한국어 유지: ${translated}`);
-    return koLine;
+    return { text, translated: false };
   }
 
-  return `- ${translated}`;
+  return { text: translated, translated: true };
+}
+
+// 어제 본문으로 오늘 요약을 쓰면 사실이 어긋난다. 날짜가 다르면 없는 것으로 친다.
+async function readBodies(newsDate) {
+  try {
+    const cached = JSON.parse(await readFile(bodiesFile, "utf-8"));
+    if (newsDate && cached.date && cached.date !== newsDate) {
+      console.error(`[summarize-digest] 본문 캐시 날짜(${cached.date})가 news(${newsDate})와 다름, 무시`);
+      return null;
+    }
+    return cached.bodies ?? null;
+  } catch {
+    return null;
+  }
+}
+
+// categories를 못 읽는 경로(옛 데이터·프리렌더 폴백)에서도 같은 내용이 보이게
+// 통짜 텍스트를 같이 만들어 둔다.
+function summaryText(highlights, categories, locale) {
+  const isEn = locale === "en";
+  return [
+    ...highlights.map((h) => `- ${h.title}: ${(isEn ? h.textEn : h.textKo) ?? h.textKo}`),
+    ...categories.map((c) => `- ${isEn ? c.nameEn : c.name}: ${isEn ? c.lineEn : c.lineKo}`),
+  ].join("\n");
 }
 
 async function appendHistory(now, entry) {
@@ -358,59 +574,79 @@ async function main() {
     return;
   }
 
+  // 본문은 fetch-news가 같은 실행에서 떨궈둔 것이다. 없으면 예전처럼 제목만
+  // 보고 쓰게 되므로, 조용히 넘어가지 말고 남긴다.
+  const bodies = (await readBodies(news.date)) ?? {};
+  if (Object.keys(bodies).length === 0) {
+    console.error("[summarize-digest] 기사 본문 없음, 제목만으로 요약한다");
+  }
+
+  const highlightEntries = [];
+  for (const { item, body } of pickHighlights(news.items, bodies)) {
+    const highlight = await summarizeHighlight(item, body);
+    if (highlight) highlightEntries.push(highlight);
+  }
+
   const buckets = categorize(news.items);
-  const koLines = [];
-  const enLines = [];
   const categoryEntries = [];
-
   for (const bucket of buckets) {
-    const { line: koLine, fallbackReason } = await summarizeBucketKo(bucket);
+    const { line, fallbackReason, degraded } = await summarizeCategory(bucket, bodies);
     const isFallback = fallbackReason !== null;
-    koLines.push(koLine);
-
-    let enLine;
-    if (isFallback) {
-      enLine = listCategory(bucket.category.nameEn, bucket.titles);
-    } else {
-      enLine = await translateKoLine(koLine);
-    }
-    enLines.push(enLine);
-
     categoryEntries.push({
       key: bucket.category.key,
       name: bucket.category.name,
       nameEn: bucket.category.nameEn,
-      lineKo: koLine.replace(/^-\s*/, ""),
-      lineEn: enLine.replace(/^-\s*/, ""),
+      lineKo: line,
+      // 폴백은 번역할 문장이 아니라 제목 목록이라, 여기서 영어 목록으로 맞춰둔다.
+      lineEn: isFallback ? listCategory(bucket.category.nameEn, bucket.titles) : null,
       isFallback,
       fallbackReason,
+      degraded,
       items: bucket.items
         .slice(0, MAX_ITEMS_PER_CATEGORY)
         .map((i) => ({ title: i.title, link: i.link, source: i.source })),
     });
   }
 
-  if (koLines.length === 0) {
+  if (categoryEntries.length === 0) {
     console.error("[summarize-digest] 요약할 카테고리 없음");
     return;
   }
 
-  const summary = { ko: koLines.join("\n"), en: enLines.join("\n") };
+  // 번역은 한국어가 다 나온 뒤에 몰아서 한다. 실패해도 한국어 화면은 그대로다.
+  for (const highlight of highlightEntries) {
+    highlight.textEn = (await translateKoText(highlight.textKo, 480)).text;
+  }
+  for (const entry of categoryEntries) {
+    if (entry.lineEn === null) entry.lineEn = (await translateKoText(entry.lineKo, 700)).text;
+  }
+
+  const summary = {
+    ko: summaryText(highlightEntries, categoryEntries, "ko"),
+    en: summaryText(highlightEntries, categoryEntries, "en"),
+  };
+  const payload = { model: MODEL, summary, highlights: highlightEntries, categories: categoryEntries };
 
   await mkdir(dataDir, { recursive: true });
-  await writeFile(
-    outFile,
-    JSON.stringify({ updatedAt: now.toISOString(), model: MODEL, summary, categories: categoryEntries }, null, 2)
-  );
-  await appendHistory(now, { model: MODEL, summary, categories: categoryEntries });
+  await writeFile(outFile, JSON.stringify({ updatedAt: now.toISOString(), ...payload }, null, 2));
+  await appendHistory(now, payload);
 
   const fallen = categoryEntries.filter((c) => c.isFallback);
   const breakdown = [...new Set(fallen.map((c) => c.fallbackReason))]
     .map((r) => `${r} x${fallen.filter((c) => c.fallbackReason === r).length}`)
     .join(", ");
   console.log(
-    `[summarize-digest] 저장 완료 (폴백 ${fallen.length}/${categoryEntries.length}${breakdown ? `: ${breakdown}` : ""})`
+    `[summarize-digest] 저장 완료 ` +
+      `(핵심 ${highlightEntries.length}/${HIGHLIGHT_COUNT}건, ` +
+      `카테고리 ${categoryEntries.length}개 중 폴백 ${fallen.length}${breakdown ? `: ${breakdown}` : ""}, ` +
+      `한 문장으로 축소 ${categoryEntries.filter((c) => c.degraded).length}, ` +
+      `한국어 ${summary.ko.length}자)`
   );
 }
 
-main();
+if (process.argv[1] && path.resolve(process.argv[1]) === path.resolve(import.meta.filename)) {
+  main().catch((err) => {
+    console.error(`요약 생성 실패: ${err.message}`);
+    process.exit(1);
+  });
+}

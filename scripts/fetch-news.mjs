@@ -2,6 +2,7 @@ import Parser from "rss-parser";
 import { writeFile, mkdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import { categorizeTitle } from "./categories.mjs";
+import { extractArticleBody, isScrapable, stripTags } from "./article-body.mjs";
 
 const FEEDS = [
   { source: "매일경제 부동산", url: "https://www.mk.co.kr/rss/50300009/" },
@@ -21,9 +22,22 @@ const MAX_PREVIEW_LENGTH = 120;
 const MAX_DUPES = 3;
 const MAX_ITEMS_PER_SOURCE = 8;
 
+// 요약이 쓸 본문. 화면에 나가는 preview와 분리해 둔다 - preview를 늘리면 목록이
+// 길어지고, news.json과 180일치 history가 같이 불어난다.
+const MAX_BODY_LENGTH = 1200;
+// 이보다 짧으면 사실상 제목만 있는 것과 같아서 기사 페이지를 받아 본다.
+const MIN_BODY_LENGTH = 200;
+const SCRAPE_CONCURRENCY = 3;
+const SCRAPE_TIMEOUT_MS = 8000;
+const USER_AGENT = "Mozilla/5.0 (compatible; econ-realestate-digest/1.0; +https://kyhsa93.github.io/econ-realestate-digest/)";
+
 const dataDir = path.resolve(import.meta.dirname, "../docs/data");
 const outFile = path.join(dataDir, "news.json");
 const historyFile = path.join(dataDir, "news-history.json");
+// 본문은 요약 단계가 같은 실행 안에서 바로 쓰고 버린다. docs/ 밖에 두면
+// 커밋(git add docs)에도, 화면이 받는 파일에도 섞이지 않는다.
+const cacheDir = path.resolve(import.meta.dirname, "../cache");
+const bodiesFile = path.join(cacheDir, "news-bodies.json");
 const HISTORY_MAX_DAYS = 180;
 
 function matchesKeyword(title) {
@@ -118,15 +132,61 @@ async function appendHistory(now, items) {
   await writeFile(historyFile, JSON.stringify(history, null, 2));
 }
 
+// RSS에 본문을 싣는 양은 매체마다 다르다(조선비즈는 기사 전체, 연합은 한 줄).
+// 긴 필드부터 훑지 않으면 이미 받아둔 재료를 그냥 버리게 된다.
+function rawArticleText(item) {
+  return item["content:encoded"] ?? item.content ?? item.contentSnippet ?? item.summary ?? "";
+}
+
 function buildPreview(item, title) {
-  const raw = item.contentSnippet ?? item.summary ?? item.content ?? "";
-  const text = raw
-    .replace(/<[^>]*>/g, " ")
-    .replace(/&[a-z]+;|&#\d+;/gi, " ")
-    .replace(/\s+/g, " ")
-    .trim();
+  const text = stripTags(rawArticleText(item));
   if (!text || text.length < 20 || text.startsWith(title)) return null;
   return text.length > MAX_PREVIEW_LENGTH ? `${text.slice(0, MAX_PREVIEW_LENGTH).trimEnd()}…` : text;
+}
+
+function buildBody(item) {
+  const text = stripTags(rawArticleText(item));
+  return text ? text.slice(0, MAX_BODY_LENGTH) : null;
+}
+
+async function fetchArticleBody(url) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), SCRAPE_TIMEOUT_MS);
+  try {
+    const res = await fetch(url, { headers: { "User-Agent": USER_AGENT }, signal: controller.signal });
+    if (!res.ok) throw new Error(`http ${res.status}`);
+    return extractArticleBody(url, await res.text());
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+// 본문이 모자란 항목만, robots.txt가 열어둔 경로만 받는다. 실패는 넘어간다 -
+// 본문이 없으면 요약이 그 기사에 대해 제목만 보고 쓸 뿐, 수집을 멈출 일은 아니다.
+async function fillMissingBodies(items) {
+  const targets = items.filter(
+    (item) => (item.body?.length ?? 0) < MIN_BODY_LENGTH && isScrapable(item.link)
+  );
+  if (targets.length === 0) return;
+
+  const queue = [...targets];
+  let filled = 0;
+  const workers = Array.from({ length: Math.min(SCRAPE_CONCURRENCY, queue.length) }, async () => {
+    while (queue.length > 0) {
+      const item = queue.shift();
+      try {
+        const body = await fetchArticleBody(item.link);
+        if (body && body.length > (item.body?.length ?? 0)) {
+          item.body = body.slice(0, MAX_BODY_LENGTH);
+          filled += 1;
+        }
+      } catch (err) {
+        console.error(`[fetch-news] 본문 수집 실패 ${item.link}: ${err.message}`);
+      }
+    }
+  });
+  await Promise.all(workers);
+  console.log(`[fetch-news] 기사 본문 보강 ${filled}/${targets.length}건`);
 }
 
 async function fetchFeed(parser, feed) {
@@ -141,6 +201,7 @@ async function fetchFeed(parser, feed) {
         source: feed.source,
         category: categorizeTitle(title).key,
         preview: buildPreview(item, title),
+        body: buildBody(item),
       };
     });
   } catch (err) {
@@ -165,15 +226,34 @@ async function main() {
     return;
   }
 
+  await fillMissingBodies(items);
+
   const now = new Date();
+  // body는 화면도 히스토리도 쓰지 않는다. 같이 저장하면 news.json이 커지고
+  // 180일치 history는 눈덩이처럼 불어난다.
+  const publicItems = items.map(({ body, ...rest }) => rest);
+  const bodies = Object.fromEntries(items.filter((item) => item.body).map((item) => [item.link, item.body]));
+
   await mkdir(dataDir, { recursive: true });
   await writeFile(
     outFile,
-    JSON.stringify({ updatedAt: now.toISOString(), date: kstDateString(now), items }, null, 2)
+    JSON.stringify({ updatedAt: now.toISOString(), date: kstDateString(now), items: publicItems }, null, 2)
   );
-  await appendHistory(now, items);
+  await appendHistory(now, publicItems);
 
-  console.log(`[fetch-news] ${items.length}건 저장 완료`);
+  await mkdir(cacheDir, { recursive: true });
+  await writeFile(
+    bodiesFile,
+    JSON.stringify({ updatedAt: now.toISOString(), date: kstDateString(now), bodies }, null, 2)
+  );
+
+  // 본문 확보량이 요약 품질을 그대로 좌우한다. 조용히 줄어드는 걸 알아채려면
+  // 실행마다 남겨야 한다.
+  const withBody = items.filter((item) => (item.body?.length ?? 0) >= MIN_BODY_LENGTH).length;
+  const totalChars = items.reduce((sum, item) => sum + (item.body?.length ?? 0), 0);
+  console.log(
+    `[fetch-news] ${items.length}건 저장 완료 (본문 확보 ${withBody}/${items.length}건, 총 ${totalChars.toLocaleString("en-US")}자)`
+  );
 }
 
 main();
