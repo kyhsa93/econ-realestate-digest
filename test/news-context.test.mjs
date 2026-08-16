@@ -6,7 +6,7 @@ import { access, readFile } from "node:fs/promises";
 import path from "node:path";
 import { attachContext, bestRate, buildContext, findDistrict } from "../scripts/news-context.mjs";
 import { DISTRICT_PAGES, DISTRICT_SLUGS } from "../scripts/district-slugs.mjs";
-import { newsContextHtml, newsListHtml, ratesHtml } from "../scripts/prerender.mjs";
+import { newsContextHtml, newsListHtml, ratesHtml, realestateTableHtml } from "../scripts/prerender.mjs";
 import { loadNewsPage } from "./helpers/news-page.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
@@ -44,8 +44,8 @@ const context = (title, preview = null) => buildContext({ title, preview }, DATA
 test("자치구를 짚은 부동산 기사에 그 구의 평당가가 붙는다", () => {
   const [first] = context("송파 9억대 아파트, 하나 남았습니다");
   assert.equal(first.kind, "realestate");
-  assert.equal(first.label, "송파구 아파트 매매");
-  assert.equal(first.value, "6,912만원/평");
+  assert.equal(first.label, "송파구 아파트 84㎡ 매매");
+  assert.equal(first.value, "17억 5,633만원");
   assert.equal(first.href, "./district-songpa.html");
 });
 
@@ -89,7 +89,7 @@ test("한 글자로 줄어드는 자치구 이름은 짧은 형태로 찾지 않
 });
 
 test("기사가 전세·월세를 다루면 그 지표를 붙인다", () => {
-  assert.equal(context("송파 전세 매물 급감")[0].label, "송파구 아파트 전세");
+  assert.equal(context("송파 전세 매물 급감")[0].label, "송파구 아파트 84㎡ 전세");
 
   const [wolse] = context('"서울 월세 1000만원 흔해질 것"…종부세 개편에 세입자 불똥');
   assert.equal(wolse.label, "서울 전체 아파트 월세");
@@ -107,7 +107,7 @@ test("신고 건수가 적은 지표는 붙이지 않는다", () => {
 });
 
 test("자치구가 없으면 서울 기사에 서울 전체 평균을 붙인다", () => {
-  assert.equal(context("서울 빌라값 들썩")[0].label, "서울 전체 아파트 매매");
+  assert.equal(context("서울 빌라값 들썩")[0].label, "서울 전체 아파트 84㎡ 매매");
   // 수도권·지방은 우리가 가진 데이터(서울 25개구)로 답할 수 없다.
   assert.deepEqual(context("수도권 아파트를 1억대로 입주?"), []);
 });
@@ -141,6 +141,19 @@ test("금리 값이 금리 페이지 첫 줄과 같은 기준으로 뽑힌다", 
     const top = ratesHtml(rates, { category: key, limit: 1 }).match(cell)?.[1];
     assert.equal(bestRate(rates, key).toFixed(2), top, `${key} 금리가 금리 페이지 첫 줄과 다릅니다`);
   }
+});
+
+// 금리 칩과 같은 원칙이다. 칩은 평당가를 84㎡로 환산해 보여주는데, 그 환산을 여기서
+// 따로 하면 시세 페이지와 값이 어긋날 수 있다. 실제 데이터로 두 결과를 대조한다.
+test("84㎡ 환산가가 시세 페이지 표에 적힌 값과 같다", async () => {
+  const realestate = await readJson("realestate");
+  const [chip] = buildContext({ title: "서울 아파트 매매 시세 오름세" }, { realestate });
+
+  assert.equal(chip?.href, "./apartment-sale.html");
+  assert.ok(
+    realestateTableHtml(realestate, "sale").includes(chip.value),
+    `칩 값(${chip.value})이 매매 시세 표에 없습니다`
+  );
 });
 
 // 아래는 과거 8일치 뉴스로 대조하다 실제로 나온 오탐이다. 오늘 기사 스물몇 건만 보고
@@ -230,7 +243,7 @@ test("영어 화면은 칩도 영어로 그린다", async () => {
 
   const page = await loadNewsPage({ news, summary: { categories: [] }, locale: "en" });
   const rendered = page.newsListHtml();
-  assert.ok(rendered.includes("송파구 apartment sale"), "영어 라벨이 안 보인다");
-  assert.ok(rendered.includes("₩69.1M/pyeong"), "영어 표기 금액이 안 보인다");
-  assert.ok(!rendered.includes("6,912만원/평"), "영어 화면에 한국어 표기가 남아 있다");
+  assert.ok(rendered.includes("송파구 apartment 84㎡ sale"), "영어 라벨이 안 보인다");
+  assert.ok(rendered.includes("₩1,756M"), "영어 표기 금액이 안 보인다");
+  assert.ok(!rendered.includes("17억 5,633만원"), "영어 화면에 한국어 표기가 남아 있다");
 });

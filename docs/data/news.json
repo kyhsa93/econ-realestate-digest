@@ -14,10 +14,10 @@
       "context": [
         {
           "kind": "realestate",
-          "label": "강남구 아파트 매매",
-          "labelEn": "강남구 apartment sale",
-          "value": "10,870만원/평",
-          "valueEn": "₩108.7M/pyeong",
+          "label": "강남구 아파트 84㎡ 매매",
+          "labelEn": "강남구 apartment 84㎡ sale",
+          "value": "27억 6,205만원",
+          "valueEn": "₩2,762M",
           "href": "./district-gangnam.html"
         }
       ]
@@ -34,10 +34,10 @@
       "context": [
         {
           "kind": "realestate",
-          "label": "송파구 아파트 매매",
-          "labelEn": "송파구 apartment sale",
-          "value": "6,912만원/평",
-          "valueEn": "₩69.1M/pyeong",
+          "label": "송파구 아파트 84㎡ 매매",
+          "labelEn": "송파구 apartment 84㎡ sale",
+          "value": "17억 5,633만원",
+          "valueEn": "₩1,756M",
           "href": "./district-songpa.html"
         }
       ]
@@ -54,10 +54,10 @@
       "context": [
         {
           "kind": "realestate",
-          "label": "서울 전체 아파트 매매",
-          "labelEn": "Seoul apartment sale",
-          "value": "4,449만원/평",
-          "valueEn": "₩44.5M/pyeong",
+          "label": "서울 전체 아파트 84㎡ 매매",
+          "labelEn": "Seoul apartment 84㎡ sale",
+          "value": "11억 3,049만원",
+          "valueEn": "₩1,130M",
           "href": "./apartment-sale.html"
         }
       ]
@@ -74,10 +74,10 @@
       "context": [
         {
           "kind": "realestate",
-          "label": "서울 전체 아파트 전세",
-          "labelEn": "Seoul apartment jeonse",
-          "value": "2,571만원/평",
-          "valueEn": "₩25.7M/pyeong",
+          "label": "서울 전체 아파트 84㎡ 전세",
+          "labelEn": "Seoul apartment 84㎡ jeonse",
+          "value": "6억 5,329만원",
+          "valueEn": "₩653M",
           "href": "./apartment-jeonse.html"
         }
       ]
@@ -134,10 +134,10 @@
       "context": [
         {
           "kind": "realestate",
-          "label": "용산구 아파트 매매",
-          "labelEn": "용산구 apartment sale",
-          "value": "7,988만원/평",
-          "valueEn": "₩79.9M/pyeong",
+          "label": "용산구 아파트 84㎡ 매매",
+          "labelEn": "용산구 apartment 84㎡ sale",
+          "value": "20억 2,974만원",
+          "valueEn": "₩2,030M",
           "href": "./district-yongsan.html"
         }
       ]
@@ -164,10 +164,10 @@
       "context": [
         {
           "kind": "realestate",
-          "label": "서울 전체 아파트 매매",
-          "labelEn": "Seoul apartment sale",
-          "value": "4,449만원/평",
-          "valueEn": "₩44.5M/pyeong",
+          "label": "서울 전체 아파트 84㎡ 매매",
+          "labelEn": "Seoul apartment 84㎡ sale",
+          "value": "11억 3,049만원",
+          "valueEn": "₩1,130M",
           "href": "./apartment-sale.html"
         }
       ]
@@ -284,10 +284,10 @@
       "context": [
         {
           "kind": "realestate",
-          "label": "송파구 아파트 매매",
-          "labelEn": "송파구 apartment sale",
-          "value": "6,912만원/평",
-          "valueEn": "₩69.1M/pyeong",
+          "label": "송파구 아파트 84㎡ 매매",
+          "labelEn": "송파구 apartment 84㎡ sale",
+          "value": "17억 5,633만원",
+          "valueEn": "₩1,756M",
           "href": "./district-songpa.html"
         }
       ]
@@ -350,10 +350,10 @@
       "context": [
         {
           "kind": "realestate",
-          "label": "용산구 아파트 매매",
-          "labelEn": "용산구 apartment sale",
-          "value": "7,988만원/평",
-          "valueEn": "₩79.9M/pyeong",
+          "label": "용산구 아파트 84㎡ 매매",
+          "labelEn": "용산구 apartment 84㎡ sale",
+          "value": "20억 2,974만원",
+          "valueEn": "₩2,030M",
           "href": "./district-yongsan.html"
         }
       ]
@@ -380,10 +380,10 @@
       "context": [
         {
           "kind": "realestate",
-          "label": "노원구 아파트 매매",
-          "labelEn": "노원구 apartment sale",
-          "value": "3,624만원/평",
-          "valueEn": "₩36.2M/pyeong",
+          "label": "노원구 아파트 84㎡ 매매",
+          "labelEn": "노원구 apartment 84㎡ sale",
+          "value": "9억 2,085만원",
+          "valueEn": "₩921M",
           "href": "./district-nowon.html"
         }
       ]
@@ -400,10 +400,10 @@
       "context": [
         {
           "kind": "realestate",
-          "label": "서울 전체 아파트 매매",
-          "labelEn": "Seoul apartment sale",
-          "value": "4,449만원/평",
-          "valueEn": "₩44.5M/pyeong",
+          "label": "서울 전체 아파트 84㎡ 매매",
+          "labelEn": "Seoul apartment 84㎡ sale",
+          "value": "11억 3,049만원",
+          "valueEn": "₩1,130M",
           "href": "./apartment-sale.html"
         },
         {

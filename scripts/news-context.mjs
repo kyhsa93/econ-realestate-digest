@@ -2,7 +2,7 @@
 //
 // 제목과 링크만 나열하면 포털 뉴스 목록과 다를 게 없다. 이 저장소는 국토부 실거래가와
 // 금감원 예·적금·대출 금리를 매일 받아두고 있으므로, "송파 9억대 아파트" 기사 옆에
-// 송파구 실거래 평당가를, "가계부채 2천조" 기사 옆에 지금 주택담보대출 최저금리를
+// 송파구 아파트 84㎡ 실거래가를, "가계부채 2천조" 기사 옆에 지금 주택담보대출 최저금리를
 // 같이 보여줄 수 있다. 링크가 전부 바깥으로 나가던 목록에서 우리 페이지로 돌아오는
 // 길도 이걸로 생긴다.
 //
@@ -19,16 +19,17 @@
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { DISTRICT_SLUGS, districtFile } from "./district-slugs.mjs";
+import { BASE_AREA_M2, areaPrice, formatEok } from "./realestate-format.mjs";
 import { MIN_SAMPLE } from "./prerender.mjs";
 
 // 한 기사에 두 개까지만. 세 개부터는 기사 제목보다 수치가 눈에 먼저 들어온다.
 const MAX_CONTEXT = 2;
 
 // 자치구 이름이 나왔다고 다 부동산 기사는 아니다("강남 살인사건"). 부동산을 가리키는
-// 말이 같이 있을 때만 평당가를 붙인다.
+// 말이 같이 있을 때만 시세를 붙인다.
 //
 // '매물'은 넣으면 안 된다 - 증시 기사가 "차익 실현 매물", "이익확정 매물"로 쓴다.
-// 실제로 홍콩·대만 증시 기사에 서울 아파트 평당가가 붙었다(과거 뉴스 대조로 발견).
+// 실제로 홍콩·대만 증시 기사에 서울 아파트 시세가 붙었다(과거 뉴스 대조로 발견).
 const REALESTATE_HINTS = [
   "아파트", "전세", "월세", "집값", "분양", "재건축", "재개발", "주택", "매매",
   "시세", "청약", "입주", "빌라", "오피스텔", "보증금", "임대", "실거래",
@@ -85,7 +86,7 @@ const SAVING_CATEGORIES = new Set(["deposit", "saving"]);
 
 // 칩을 누른 사람이 도착해야 할 곳은 "그 칩에 적힌 수치가 주인공인 페이지"다.
 // 한동안 전부 메인의 시세 표(#realestate-section)로 보냈는데, 그 표는 서울 전체와
-// 상위 10개 구만 담고 있어서 "노원구 평당가" 칩을 누르면 노원구가 없는 표에
+// 상위 10개 구만 담고 있어서 "노원구 매매가" 칩을 누르면 노원구가 없는 표에
 // 도착했다. 자치구 페이지 25개와 거래 유형별 페이지 3개를 이미 찍고 있으므로
 // 칩이 가리키는 지역·유형 그대로 보낸다.
 const OVERALL_HREF = {
@@ -101,11 +102,12 @@ const hrefFor = (slug, kind) =>
 
 const hasAny = (text, words) => words.some((word) => text.includes(word));
 
-// index.html의 formatPyeongPrice와 같은 표기. 한 화면에서 같은 수치가 다른 모양으로
-// 보이면 어느 쪽이 맞는지 읽는 사람이 판단해야 한다.
-const pyeongKo = (value10k) => `${Math.round(value10k).toLocaleString("ko-KR")}만원/평`;
-const pyeongEn = (value10k) =>
-  `₩${(value10k / 100).toLocaleString("en-US", { maximumFractionDigits: 1 })}M/pyeong`;
+// 평당가가 아니라 84㎡ 환산가를 적는다. 기사는 "송파 9억대 아파트", "시세 21억
+// 아파트 10억원에"처럼 한 채 값을 억 단위로 쓰는데 칩만 평당가로 적혀 있으면
+// 읽는 사람이 25.4를 곱해야 기사와 같은 축에 놓인다. 시세 페이지가 평당가와
+// 84㎡ 환산을 나란히 주는 것과 같은 이유이고, 환산도 같은 함수를 쓴다.
+const areaKo = (perPyeong10k) => formatEok(areaPrice(perPyeong10k, BASE_AREA_M2), "ko");
+const areaEn = (perPyeong10k) => formatEok(areaPrice(perPyeong10k, BASE_AREA_M2), "en");
 
 const percentKo = (value) => `연 ${value.toFixed(2)}%`;
 const percentEn = (value) => `${value.toFixed(2)}% p.a.`;
@@ -130,7 +132,7 @@ export function findDistrict(text, districts = []) {
   return null;
 }
 
-// 기사가 전세 얘기면 전세 시세를, 월세 얘기면 월세를 붙인다. 매매 평당가를 기본으로
+// 기사가 전세 얘기면 전세 시세를, 월세 얘기면 월세를 붙인다. 매매가를 기본으로
 // 두되 기사 맥락과 다른 지표를 들이미는 건 오히려 방해가 된다.
 //
 // 값은 전부 국토부 아파트 실거래 신고분이라, 빌라·오피스텔 기사에 붙어도 오해가
@@ -151,20 +153,20 @@ function realestateEntry(entry, name, nameEn, text, slug) {
     if (kind === "sale" && metric.avgPricePerPyeong10k) {
       return {
         kind: "realestate",
-        label: `${name} 아파트 매매`,
-        labelEn: `${nameEn} apartment sale`,
-        value: pyeongKo(metric.avgPricePerPyeong10k),
-        valueEn: pyeongEn(metric.avgPricePerPyeong10k),
+        label: `${name} 아파트 ${BASE_AREA_M2}㎡ 매매`,
+        labelEn: `${nameEn} apartment ${BASE_AREA_M2}㎡ sale`,
+        value: areaKo(metric.avgPricePerPyeong10k),
+        valueEn: areaEn(metric.avgPricePerPyeong10k),
         href: hrefFor(slug, "sale"),
       };
     }
     if (kind === "jeonse" && metric.avgDepositPerPyeong10k) {
       return {
         kind: "realestate",
-        label: `${name} 아파트 전세`,
-        labelEn: `${nameEn} apartment jeonse`,
-        value: pyeongKo(metric.avgDepositPerPyeong10k),
-        valueEn: pyeongEn(metric.avgDepositPerPyeong10k),
+        label: `${name} 아파트 ${BASE_AREA_M2}㎡ 전세`,
+        labelEn: `${nameEn} apartment ${BASE_AREA_M2}㎡ jeonse`,
+        value: areaKo(metric.avgDepositPerPyeong10k),
+        valueEn: areaEn(metric.avgDepositPerPyeong10k),
         href: hrefFor(slug, "jeonse"),
       };
     }
