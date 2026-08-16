@@ -49,17 +49,24 @@ function parseCoefficient(str) {
   return value;
 }
 
-function normalizeKoreanAmounts(text) {
-  const numTokenRe = "\\d+(?:\\.\\d+)?(?:천|백|십)?";
-  let result = text.replace(
-    new RegExp(`(${numTokenRe})(억|조)\\s*(${numTokenRe})(만)`, "g"),
-    (_m, c1, u1, c2, u2) => (parseCoefficient(c1) * MAJOR_UNITS[u1] + parseCoefficient(c2) * MAJOR_UNITS[u2]).toLocaleString("en-US")
-  );
-  result = result.replace(
-    new RegExp(`(${numTokenRe})(조|억|만)`, "g"),
-    (_m, c, u) => (parseCoefficient(c) * MAJOR_UNITS[u]).toLocaleString("en-US")
-  );
-  return result;
+// 계수는 "5천470"처럼 작은 단위 뒤에 숫자가 더 붙는다. 여기서 뒷자리를 놓치면
+// 큰 단위만 변환되고 나머지가 글자로 남아 숫자가 통째로 망가진다.
+const COEFFICIENT = "\\d+(?:\\.\\d+)?(?:(?:천|백|십)\\d*)?";
+const MAJOR_UNIT = "(?:조|억|만)";
+// 큰 단위는 여러 개가 이어 붙는다("6조5천470억원", "1천865조8천억원"). 한 번에 한
+// 단위씩 바꾸면 "6조"만 숫자가 되고 뒤가 남아 6,000,000,000,0005천47,000,000,000이
+// 된다. 제목만 다룰 땐 이런 표기가 드물었는데 본문이 들어오면서 흔해졌다.
+const AMOUNT_RUN = new RegExp(`${COEFFICIENT}${MAJOR_UNIT}(?:\\s*${COEFFICIENT}${MAJOR_UNIT})*`, "g");
+const AMOUNT_PART = new RegExp(`(${COEFFICIENT})(${MAJOR_UNIT})`, "g");
+
+export function normalizeKoreanAmounts(text) {
+  return text.replace(AMOUNT_RUN, (run) => {
+    let total = 0;
+    for (const [, coefficient, unit] of run.matchAll(AMOUNT_PART)) {
+      total += parseCoefficient(coefficient) * MAJOR_UNITS[unit];
+    }
+    return total.toLocaleString("en-US");
+  });
 }
 
 function extractNormalizedNumbers(original, normalized) {
@@ -209,6 +216,16 @@ ${COMMON_RULES}
 요약:`;
 }
 
+// "fetch failed" 한 줄로는 왜 실패했는지 알 수가 없다. 원인은 cause에 들어 있다.
+function describeError(err) {
+  const cause = err?.cause?.code ?? err?.cause?.message;
+  return cause ? `${err.message} (${cause})` : err.message;
+}
+
+// stream:false로 부르면 생성이 끝날 때까지 응답 헤더가 오지 않는데, Node fetch의
+// headersTimeout 기본값은 300초다. 프롬프트에 기사 본문이 들어가고 num_predict가
+// 커지면서 재료가 많은 카테고리가 이 한도를 넘겨 통째로 실패했다. 조각으로 받으면
+// 계속 바이트가 흐르므로 한도에 걸리지 않는다.
 async function callOllama(prompt, options) {
   const res = await fetch(`${OLLAMA_URL}/api/generate`, {
     method: "POST",
@@ -216,15 +233,36 @@ async function callOllama(prompt, options) {
     body: JSON.stringify({
       model: MODEL,
       prompt,
-      stream: false,
+      stream: true,
       options,
       ...(DISABLE_THINKING ? { think: false } : {}),
     }),
   });
   if (!res.ok) throw new Error(`ollama http ${res.status}`);
-  const json = await res.json();
-  if (!json.response) throw new Error("ollama 응답에 response 필드 없음");
-  return json.response;
+
+  const decoder = new TextDecoder();
+  let pending = "";
+  let text = "";
+
+  const consume = (line) => {
+    const trimmed = line.trim();
+    if (!trimmed) return;
+    const chunk = JSON.parse(trimmed);
+    if (chunk.error) throw new Error(`ollama error: ${chunk.error}`);
+    if (typeof chunk.response === "string") text += chunk.response;
+  };
+
+  for await (const bytes of res.body) {
+    pending += decoder.decode(bytes, { stream: true });
+    const lines = pending.split("\n");
+    // 마지막 조각은 줄이 덜 끝났을 수 있으니 다음 덩어리와 이어 붙인다.
+    pending = lines.pop() ?? "";
+    for (const line of lines) consume(line);
+  }
+  consume(pending);
+
+  if (!text) throw new Error("ollama 응답이 비어 있음");
+  return text;
 }
 
 async function generateKoText(prompt, { maxSentences, numPredict, temperature }) {
@@ -300,17 +338,26 @@ async function unverifiedEntities(sentence, sourceText) {
   try {
     entities = await extractProperNouns(sentence);
   } catch (err) {
-    console.error(`[summarize-digest] 고유명사 추출 실패, 통과 처리: ${err.message}`);
+    console.error(`[summarize-digest] 고유명사 추출 실패, 통과 처리: ${describeError(err)}`);
     return [];
   }
 
   const haystack = normalizeForEntityMatch(
     `${sourceText} ${expandHanjaAbbrev(sourceText)} ${alternateAbbrevForms(sourceText)}`
   );
+  const haystackWithoutDigits = haystack.replace(/\d/g, "");
+
   return entities.filter((entity) => {
     if (ENTITY_STOPWORDS.has(entity)) return false;
     const normalized = normalizeForEntityMatch(entity);
     if (!normalized || haystack.includes(normalized)) return false;
+
+    // 원문 "미국 7월 물가지수"에서 모델이 "월 물가지수"를 고유명사로 뽑아내면
+    // 숫자가 떨어져 나가 대조에 실패한다. 실제로 멀쩡한 문단이 이 이유로 버려졌다.
+    // 숫자는 containsUnverifiedNumber가 따로 대조하므로 여기선 빼고 본다.
+    const withoutDigits = normalized.replace(/\d/g, "");
+    if (withoutDigits.length >= 2 && haystackWithoutDigits.includes(withoutDigits)) return false;
+
     const stripped = ENTITY_SUFFIXES.reduce(
       (acc, suffix) => (acc.endsWith(suffix) && acc.length > suffix.length ? acc.slice(0, -suffix.length) : acc),
       normalized
@@ -359,7 +406,7 @@ async function generateVerified({ label, prompt, sourceText, maxSentences, numPr
       text = await generateKoText(prompt, { maxSentences, numPredict, temperature });
     } catch (err) {
       // 모델 호출 자체가 안 되는 상황은 다시 불러도 마찬가지다.
-      console.error(`[summarize-digest] "${label}" 생성 실패: ${err.message}`);
+      console.error(`[summarize-digest] "${label}" 생성 실패: ${describeError(err)}`);
       return { text: null, reason: FALLBACK_REASONS.GENERATION_FAILED };
     }
 
@@ -487,26 +534,33 @@ Korean: ${normalized}
 
 English:`;
 
-  let translated;
-  try {
-    const raw = await callOllama(prompt, { temperature: 0.2, top_p: 0.8, num_predict: numPredict });
-    // 문단은 여러 줄로 나뉘어 올 수 있다. 예전처럼 첫 줄만 쓰면 번역이 통째로 잘린다.
-    const joined = raw.trim().replace(/\s*\n+\s*/g, " ").replace(/^["'“‘]+|["'”’]+$/g, "").trim();
-    // 한국어 쪽과 달리 여기선 잘린 꼬리를 못 찾아도 통째로 버리지 않는다. 번역은
-    // 예산이 넉넉해 잘릴 일이 드물고, 마침표가 빠진 것 때문에 영어 화면에 한국어를
-    // 남기는 편이 더 나쁘다. 한글·한자·길이·숫자 검증은 아래에서 그대로 한다.
-    translated = completeSentences(joined, 12) ?? joined;
-  } catch (err) {
-    console.error(`[summarize-digest] 번역 실패, 한국어 유지: ${err.message}`);
-    return { text, translated: false };
+  // 반려되면 온도를 낮춰 한 번 더. 실제로 걸린 건 한국어 "공시가"를 한자 公示로
+  // 옮겨버린 경우였는데, 이런 건 한 번 더 굴리면 대개 사라진다. 반려를 그대로
+  // 받아들이면 영어 화면에 한국어 문단이 통째로 남는다.
+  let lastRejected = null;
+
+  for (const temperature of [0.2, 0]) {
+    let translated;
+    try {
+      const raw = await callOllama(prompt, { temperature, top_p: 0.8, num_predict: numPredict });
+      // 문단은 여러 줄로 나뉘어 올 수 있다. 예전처럼 첫 줄만 쓰면 번역이 통째로 잘린다.
+      const joined = raw.trim().replace(/\s*\n+\s*/g, " ").replace(/^["'“‘]+|["'”’]+$/g, "").trim();
+      // 한국어 쪽과 달리 여기선 잘린 꼬리를 못 찾아도 통째로 버리지 않는다. 번역은
+      // 예산이 넉넉해 잘릴 일이 드물고, 마침표가 빠진 것 때문에 영어 화면에 한국어를
+      // 남기는 편이 더 나쁘다. 한글·한자·길이·숫자 검증은 아래에서 그대로 한다.
+      translated = completeSentences(joined, 12) ?? joined;
+    } catch (err) {
+      // 호출 자체가 안 되는 상황은 다시 불러도 마찬가지다.
+      console.error(`[summarize-digest] 번역 실패, 한국어 유지: ${describeError(err)}`);
+      return { text, translated: false };
+    }
+
+    if (!isBadTranslation(translated, text, requiredNumbers)) return { text: translated, translated: true };
+    lastRejected = translated;
   }
 
-  if (isBadTranslation(translated, text, requiredNumbers)) {
-    console.error(`[summarize-digest] 번역 검증 실패, 한국어 유지: ${translated}`);
-    return { text, translated: false };
-  }
-
-  return { text: translated, translated: true };
+  console.error(`[summarize-digest] 번역 검증 실패, 한국어 유지: ${lastRejected}`);
+  return { text, translated: false };
 }
 
 // 어제 본문으로 오늘 요약을 쓰면 사실이 어긋난다. 날짜가 다르면 없는 것으로 친다.

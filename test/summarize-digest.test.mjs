@@ -10,7 +10,7 @@ import { mkdtemp, mkdir, readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { promisify } from "node:util";
-import { pickHighlights } from "../scripts/summarize-digest.mjs";
+import { normalizeKoreanAmounts, pickHighlights } from "../scripts/summarize-digest.mjs";
 
 const execFileAsync = promisify(execFile);
 const scriptPath = path.resolve(import.meta.dirname, "../scripts/summarize-digest.mjs");
@@ -35,8 +35,18 @@ function startOllamaStub(reply) {
         res.writeHead(500).end("boom");
         return;
       }
-      res.writeHead(200, { "Content-Type": "application/json" });
-      res.end(JSON.stringify({ response }));
+
+      // Ollama는 stream:true면 NDJSON 조각을 흘려보낸다. 한 글자씩 쪼개서
+      // 보내되 TCP 경계는 JSON 줄 한가운데를 가르게 둔다 - 줄 단위로 모으지
+      // 않으면 여기서 파싱이 깨진다.
+      const payload =
+        [...response].map((ch) => `${JSON.stringify({ response: ch, done: false })}\n`).join("") +
+        `${JSON.stringify({ response: "", done: true })}\n`;
+      const cut = Math.floor(payload.length / 2);
+
+      res.writeHead(200, { "Content-Type": "application/x-ndjson" });
+      res.write(payload.slice(0, cut));
+      res.end(payload.slice(cut));
     });
   });
 
@@ -74,7 +84,7 @@ const BODIES = {
   "https://example.com/a":
     "국토교통부는 14일 신규 공공택지 후보지를 발표했다. 이번 후보지에는 3만 가구가 들어선다. 정부는 연내 추가 발표를 예고했다. ".repeat(5),
   "https://example.com/b":
-    "코스피가 전 거래일보다 12.5포인트 내린 채 거래를 마쳤다. 외국인이 순매도를 이어갔다. 원/달러 환율은 상승했다. ".repeat(5),
+    "코스피가 전 거래일보다 12.5포인트 내린 채 거래를 마쳤다. 미국 7월 물가지수 둔화가 영향을 줬다. 외국인이 순매도를 이어갔다. ".repeat(5),
 };
 
 async function runSummarize(reply) {
@@ -112,13 +122,15 @@ async function runSummarize(reply) {
 const KO_REALESTATE =
   "국토교통부는 14일 신규 공공택지 후보지를 발표했다. 이번 후보지에는 3만 가구가 들어선다. 정부는 연내 추가 발표를 예고했다.";
 const KO_STOCKS =
-  "코스피가 전 거래일보다 12.5포인트 내린 채 거래를 마쳤다. 외국인이 순매도를 이어갔다. 원/달러 환율은 상승했다.";
+  "코스피가 전 거래일보다 12.5포인트 내린 채 거래를 마쳤다. 미국 7월 물가지수 둔화가 영향을 줬다. 외국인이 순매도를 이어갔다.";
+// "3만 가구"가 30,000으로 정규화되므로, 번역이 이 숫자를 담지 않으면 검증에서 반려된다.
+const EN_OK = "The ministry announced 30,000 new homes. The index fell.";
 const goodKo = (prompt) => (/코스피/.test(prompt) ? KO_STOCKS : KO_REALESTATE);
 
 test("본문이 있으면 문단 요약과 핵심 기사가 함께 나온다", async () => {
   const { summary, stderr } = await runSummarize(({ kind, prompt }) => {
     if (kind === "entities") return /코스피/.test(prompt) ? "코스피" : "국토교통부";
-    if (kind === "translate") return "The ministry announced new housing sites. Some 30,000 homes will be built there.";
+    if (kind === "translate") return EN_OK;
     return goodKo(prompt);
   });
 
@@ -233,4 +245,67 @@ test("본문이 짧은 기사는 핵심으로 뽑지 않는다", () => {
   // 재료가 없으면 결국 제목을 늘여 쓰게 된다.
   const items = [{ title: "속보", link: "https://example.com/x", category: "stocks", dupes: [{}, {}] }];
   assert.deepEqual(pickHighlights(items, { "https://example.com/x": "짧다" }), []);
+});
+
+test("숫자가 떨어져 나간 고유명사를 환각으로 몰지 않는다", async () => {
+  // 원문은 "미국 7월 물가지수"인데 모델은 "월 물가지수"를 뽑아냈다. 그대로 대조하면
+  // 멀쩡한 문단이 버려진다 - 실제 CI에서 증시 카테고리가 이렇게 날아갔다.
+  const { summary, stderr } = await runSummarize(({ kind, prompt }) => {
+    if (kind === "entities") return /코스피|물가지수/.test(prompt) ? "월 물가지수" : "없음";
+    if (kind === "translate") return EN_OK;
+    return goodKo(prompt);
+  });
+
+  assert.doesNotMatch(stderr, /원문에 없는 고유명사/, "숫자 차이를 환각으로 판정했다");
+  assert.ok(summary.categories.every((c) => !c.isFallback && !c.degraded));
+});
+
+test("정말 다른 이름으로 바꿔 쓴 건 여전히 걸러낸다", async () => {
+  // 숫자를 무시하게 만들었다고 해서 검증이 헐거워지면 안 된다. 실제로 겪은
+  // 환각은 "국힘"을 "국민의당"으로 바꿔 쓴 것이었다.
+  const { stderr } = await runSummarize(({ kind, prompt }) => {
+    if (kind === "entities") return "국민의당";
+    if (kind === "translate") return "Translated.";
+    if (kind === "single") return "국토교통부가 발표했다.";
+    return goodKo(prompt);
+  });
+
+  assert.match(stderr, /원문에 없는 고유명사\(국민의당\)/);
+});
+
+test("반려된 번역은 한 번 더 시도한다", async () => {
+  // 한자가 섞여 반려됐을 때 그대로 포기하면 영어 화면에 한국어 문단이 남는다.
+  let attempts = 0;
+  const { summary, stderr } = await runSummarize(({ kind, prompt }) => {
+    if (kind === "entities") return "없음";
+    if (kind === "translate") {
+      attempts += 1;
+      // 첫 시도만 한자가 섞이게 한다. 재시도가 없으면 여기서 번역이 통째로 버려진다.
+      return attempts === 1 ? `The 公示 price rose. ${EN_OK}` : EN_OK;
+    }
+    return goodKo(prompt);
+  });
+
+  assert.doesNotMatch(stderr, /번역 검증 실패/, "재시도 없이 포기했다");
+  assert.ok(
+    summary.categories.every((c) => c.lineEn !== c.lineKo),
+    "영어 화면에 한국어가 남았다"
+  );
+});
+
+test("조·억이 이어 붙은 금액도 온전히 숫자로 바꾼다", () => {
+  // 제목만 다룰 땐 드물었는데 본문이 들어오면서 흔해진 표기다. 한 단위씩 바꾸면
+  // "6조"만 숫자가 되고 뒤가 글자로 남아 숫자가 통째로 망가진다.
+  assert.equal(normalizeKoreanAmounts("6조5천470억원 순매수"), "6,547,000,000,000원 순매수");
+  assert.equal(normalizeKoreanAmounts("가계대출은 1천865조8천억원"), "가계대출은 1,865,800,000,000,000원");
+  assert.equal(normalizeKoreanAmounts("3개월 만에 12조9천억원 증가"), "3개월 만에 12,900,000,000,000원 증가");
+  assert.equal(normalizeKoreanAmounts("공시가 14억5000만원 주택"), "공시가 1,450,000,000원 주택");
+  assert.equal(normalizeKoreanAmounts("약 209만원"), "약 2,090,000원");
+});
+
+test("금액이 아닌 숫자는 건드리지 않는다", () => {
+  // 연도·퍼센트·순위까지 금액으로 읽으면 멀쩡한 문장이 숫자 범벅이 된다.
+  for (const text of ["2026년 세제개편안", "분양가의 25%만 먼저 낸다", "8월 둘째주", "순매수 1, 2위"]) {
+    assert.equal(normalizeKoreanAmounts(text), text);
+  }
 });
