@@ -11,6 +11,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { DEFAULT_AMOUNT, formatWon, netInterestOf } from "./interest.mjs";
 import { DISTRICT_PAGES } from "./district-slugs.mjs";
+import { districtSentences } from "./district-summary.mjs";
 import {
   KIND_FIELDS,
   areaPrice,
@@ -443,6 +444,15 @@ export function realestateOverallHtml(realestate, kind = null, district = null) 
   );
 }
 
+// 자치구 페이지의 서술 문단. 25개가 구조만 같고 숫자만 다르면 템플릿을 대량으로
+// 찍어낸 것으로 보이므로, 그 지역 데이터로만 만들 수 있는 문장을 심는다.
+export function districtSummaryHtml(realestate, district, locale = "ko") {
+  if (!district) return "";
+  const entry = (realestate?.districts ?? []).find((d) => d.name === district);
+  const sentences = districtSentences(entry, realestate, locale);
+  return sentences.length ? escapeHtml(sentences.join(" ")) : "";
+}
+
 // 자치구별 페이지로 가는 링크. 크롤러가 25개 페이지를 발견하는 유일한 내부 경로라
 // 정적 HTML에 반드시 들어가야 한다(sitemap만으로는 늦다).
 export function districtLinksHtml(current = null) {
@@ -589,6 +599,8 @@ async function main() {
         realestateHead: realestateHeadHtml(),
         realestateTable: realestateTableHtml(realestate),
         districtLinks: districtLinksHtml(),
+        districtSummaryKo: "",
+        districtSummaryEn: "",
       },
     ],
   ]) {

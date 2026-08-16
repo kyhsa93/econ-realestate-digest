@@ -228,6 +228,17 @@
     font-size: 0.85rem;
     font-family: inherit;
   }
+  /* 지역별 서술. 문장 생성은 빌드 때 끝내고 화면은 언어만 고른다 - 로직을 화면에
+     복제하면 두 벌을 계속 맞춰야 하는데 그럴 만한 분량이 아니다. */
+  .district-summary {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.65;
+  }
   .trend-card {
     background: var(--card);
     border: 1px solid var(--border);
@@ -312,6 +323,11 @@
   <section id="overall-section">
     <h2 id="overall-heading">서울 전체 평균</h2>
     <div class="overall-cards" id="overall-cards"><!--prerender:realestateOverall--><div class="overall-card"><div class="label">평당가</div><div class="value">4,899만원</div></div><div class="overall-card"><div class="label">84㎡ 환산</div><div class="value">12억 4,483만원</div></div><div class="overall-card"><div class="label">거래건수</div><div class="value">27건</div></div><div class="overall-card"><div class="label">전세가율</div><div class="value">56.6%</div></div><!--/prerender:realestateOverall--></div>
+  </section>
+
+  <section id="district-summary-section" hidden>
+    <p class="district-summary" data-summary-lang="ko"><!--prerender:districtSummaryKo-->동대문구 아파트 매매가는 평당 4,899만원입니다. 서울 평균 4,449만원의 1.1배입니다. 신고 건수가 충분한 24개 구 가운데 11번째로 높습니다. 84㎡(약 25평) 기준으로 환산하면 약 12억 4,483만원입니다. 평당가가 가장 가까운 지역은 서대문구(4,852만원)입니다. 전세가율은 56.6%입니다. 서울 평균 57.8%보다 낮은 편입니다. 월세는 보증금 17,454만원에 월 90만원 수준입니다. 이 숫자들은 정부에 신고된 매매 27건, 전세 69건, 월세 91건을 집계한 것입니다.<!--/prerender:districtSummaryKo--></p>
+    <p class="district-summary" data-summary-lang="en" hidden><!--prerender:districtSummaryEn-->Apartments in 동대문구 trade at ₩49M per pyeong, 1.1× the Seoul average of ₩44.5M. That is 11th among the 24 districts with enough reported transactions. For an 84m² unit that works out to about ₩1,245M. The closest district by price is 서대문구 at ₩48.5M per pyeong. The jeonse ratio is 56.6%, below the Seoul average of 57.8%. Monthly rentals average a ₩174.5M deposit with ₩0.9M per month. These figures are based on 27 sales, 69 jeonse, 91 rentals reported to the government.<!--/prerender:districtSummaryEn--></p>
   </section>
 
   <section id="trend-section" hidden>
@@ -890,6 +906,15 @@ function trendSeries(history) {
     .filter(Boolean);
 }
 
+// 서술은 정적 HTML에 한국어·영어가 모두 심겨 있다. 여기서는 어느 쪽을 보일지만 정한다.
+function renderDistrictSummary() {
+  const section = document.getElementById("district-summary-section");
+  const paragraphs = [...document.querySelectorAll("[data-summary-lang]")];
+  const filled = paragraphs.some((p) => (p.textContent ?? "").trim().length > 0);
+  section.hidden = !filled;
+  for (const p of paragraphs) p.hidden = p.getAttribute("data-summary-lang") !== locale;
+}
+
 function renderTrend() {
   const section = document.getElementById("trend-section");
   const series = trendSeries(cache.history);
@@ -955,6 +980,7 @@ function renderAll() {
   if (!cache.realestate) return;
   renderOverall(cache.realestate);
   renderTable(cache.realestate);
+  renderDistrictSummary();
   renderTrend();
   renderUpdated(cache.realestate);
 }
@@ -970,6 +996,7 @@ async function main() {
   applyTheme(theme);
   applyLocale();
   renderAreaControls();
+  renderDistrictSummary();
   renderHead();
   try {
     const res = await fetch(`./data/realestate.json?_=${Date.now()}`);

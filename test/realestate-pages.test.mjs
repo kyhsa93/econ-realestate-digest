@@ -24,6 +24,7 @@ import {
   buildRealestatePage,
 } from "../scripts/build-realestate-pages.mjs";
 import { DISTRICT_PAGES } from "../scripts/district-slugs.mjs";
+import { districtSentences } from "../scripts/district-summary.mjs";
 import { loadRealestatePage } from "./helpers/realestate-page.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
@@ -435,3 +436,80 @@ test("자치구 페이지는 자기 지역을 링크 목록에서 표시한다",
   const block = html.split("<!--prerender:districtLinks-->")[1].split("<!--/prerender")[0];
   assert.ok(block.includes('<a href="./district-songpa.html" aria-current="page">송파구</a>'));
 });
+
+// --- 지역별 서술 ---
+// 25개 페이지가 구조만 같고 숫자만 다르면 템플릿 대량 생산으로 읽힌다. 그 지역
+// 데이터로만 만들 수 있는 문장이라야 페이지마다 실제로 다른 내용이 된다.
+test("지역마다 다른 문장이 나온다", async () => {
+  const realestate = await readJson("realestate");
+  const of = (name) =>
+    districtSentences(realestate.districts.find((d) => d.name === name), realestate).join(" ");
+
+  const gangnam = of("강남구");
+  const dobong = of("도봉구");
+
+  assert.notEqual(gangnam, dobong);
+  assert.match(gangnam, /가장 높습니다/);
+  assert.match(dobong, /가장 낮습니다/);
+  // 가장 비슷한 구가 서로 다르므로 문장도 갈린다
+  assert.ok(!gangnam.includes("도봉구") || !dobong.includes("강남구"));
+});
+
+test("서울 평균 대비 배수와 순위가 맞다", () => {
+  const realestate = {
+    overall: { sale: { avgPricePerPyeong10k: 4000, transactionCount: 500 } },
+    districts: [
+      district("비싼구", { sale: { avgPricePerPyeong10k: 8000, transactionCount: 10 } }),
+      district("보통구", { sale: { avgPricePerPyeong10k: 4000, transactionCount: 10 } }),
+      district("싼구", { sale: { avgPricePerPyeong10k: 2000, transactionCount: 10 } }),
+    ],
+  };
+  const text = districtSentences(realestate.districts[0], realestate).join(" ");
+  assert.match(text, /2배/);
+  assert.match(text, /3개 구 가운데 가장 높습니다/);
+
+  const same = districtSentences(realestate.districts[1], realestate).join(" ");
+  assert.match(same, /같은 수준/, `1.0배는 '같다'로 써야 한다: ${same}`);
+});
+
+// 값을 못 내는 상태를 문장으로 덮으면 안 된다. 왜 비어 있는지가 오히려 정보다.
+test("표본이 모자라면 지어내지 않고 그 사실을 쓴다", async () => {
+  const realestate = await readJson("realestate");
+  const jongno = realestate.districts.find((d) => d.name === "종로구");
+  const text = districtSentences(jongno, realestate).join(" ");
+
+  assert.match(text, /신고가 2건뿐이라 평균을 내지 않았습니다/);
+  assert.ok(!text.includes("배입니다"), `평균을 못 내는데 배수를 썼다: ${text}`);
+  // 매매가 없어도 전세는 신고가 많아 값이 있다. 그것마저 빼면 페이지가 빈 것처럼 보인다.
+  assert.match(text, /전세는 평당 보증금/);
+});
+
+test("조사를 받침에 맞춰 고른다", () => {
+  const thin = (name) => ({ name, sale: { avgPricePerPyeong10k: 9999, transactionCount: 1 } });
+  assert.match(districtSentences(thin("종로구"), {}).join(" "), /종로구는/);
+  assert.match(districtSentences(thin("서울시"), {}).join(" "), /서울시는/);
+  assert.match(districtSentences(thin("한남동"), {}).join(" "), /한남동은/);
+});
+
+test("정적 HTML에 한국어·영어 문단이 모두 심긴다", async () => {
+  const html = await read("docs/district-songpa.html");
+  const ko = html.split("<!--prerender:districtSummaryKo-->")[1].split("<!--/prerender")[0];
+  const en = html.split("<!--prerender:districtSummaryEn-->")[1].split("<!--/prerender")[0];
+
+  assert.match(ko, /송파구 아파트 매매가는/);
+  assert.match(en, /Apartments in 송파구/);
+});
+
+test("자치구가 아닌 페이지에는 서술이 없다", async () => {
+  for (const file of ["realestate.html", "apartment-sale.html"]) {
+    const html = await read(`docs/${file}`);
+    const ko = html.split("<!--prerender:districtSummaryKo-->")[1].split("<!--/prerender")[0];
+    assert.equal(ko, "", `${file}에 서술이 들어갔다`);
+  }
+});
+
+// 언어별 문단 전환은 여기서 검증하지 않는다. 이 하네스의 querySelectorAll이 빈 배열을
+// 돌려주기 때문에 루프가 아예 안 돌고, 그러면 "화면이 아무 일도 안 하는" 상태와
+// 구분되지 않는 채로 통과한다. 실제로 그렇게 통과하는 테스트를 한 번 만들었다가 뺐다.
+// 정적 HTML에 두 언어가 모두 심기는지는 위에서 확인하고, 전환은 hidden 속성을 바꾸는
+// 세 줄짜리 코드다.

@@ -14,6 +14,7 @@ import { DISTRICT_PAGES } from "./district-slugs.mjs";
 import {
   applyPrerender,
   districtLinksHtml,
+  districtSummaryHtml,
   realestateHeadHtml,
   realestateOverallHtml,
   realestateTableHtml,
@@ -102,6 +103,8 @@ export function buildRealestatePage(baseHtml, page, realestate) {
     realestateHead: realestateHeadHtml(page.kind),
     realestateTable: realestateTableHtml(realestate, page.kind),
     districtLinks: districtLinksHtml(),
+    districtSummaryKo: "",
+    districtSummaryEn: "",
   });
 }
 
@@ -141,6 +144,8 @@ export function buildDistrictPage(baseHtml, district, realestate) {
     realestateHead: realestateHeadHtml(null, district.name),
     realestateTable: realestateTableHtml(realestate, null, district.name),
     districtLinks: districtLinksHtml(district.name),
+    districtSummaryKo: districtSummaryHtml(realestate, district.name, "ko"),
+    districtSummaryEn: districtSummaryHtml(realestate, district.name, "en"),
   });
 }
 
