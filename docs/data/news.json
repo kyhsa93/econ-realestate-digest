@@ -1,7 +1,17 @@
 {
-  "updatedAt": "2026-08-16T03:55:59.611Z",
+  "updatedAt": "2026-08-16T07:38:16.967Z",
   "date": "2026-08-16",
   "items": [
+    {
+      "title": "전세 계약 전 등기부·체납 확인하세요…서울시가 피해 예방법 알려준다",
+      "link": "https://www.hankyung.com/article/202608163949i",
+      "publishedAt": "2026-08-16T04:40:09.000Z",
+      "source": "한국경제 부동산",
+      "category": "realestate",
+      "preview": null,
+      "dupes": [],
+      "titleEn": "Check the land register and delinquent taxes before signing a lease contract... Seoul provides prevention methods to avoid losses"
+    },
     {
       "title": "코스피, 지난주 5일 연속 상승…외국인 순매수로 지수 견인",
       "link": "https://www.yna.co.kr/view/AKR20260815041700008",
@@ -10,7 +20,7 @@
       "category": "stocks",
       "preview": "(서울=연합뉴스) 김유아 기자 = 지난 한 주간 코스피에서 외국인 투자자가 6조5천억원어치를 쓸어 담으며 이달 순매수로 지수 상승을 주로 견인한...",
       "dupes": [],
-      "titleEn": "Kospi rises for five consecutive days last week…index driven by foreign investors' net buying"
+      "titleEn": "Kospi rises for five consecutive days last week…index driven up by foreign investors' net buying"
     },
     {
       "title": "수도권 아파트를 1억대로 입주?…지분적립 공공분양 단지 10월 공개",
@@ -20,7 +30,7 @@
       "category": "realestate",
       "preview": "분양가 25% 먼저내고 30년간 지분확대 6억대 55㎡ 신축, 초기 부담금 1억원대 4분기 공공분양 물량부터 일부 적용키로 광교·왕숙·고덕·구리갈매 등 후보 거론분양가의 25%만 ..",
       "dupes": [],
-      "titleEn": "Resident in Seoul-area apartments with 100,000,000 won?... Public housing project with share accumulation to be unveiled in October"
+      "titleEn": "Resident in Seoul-area apartments worth 100,000,000 won?... Public housing project with share accumulation to be unveiled in October"
     },
     {
       "title": "\"비거주 1주택자 전세대출 막힌다\"더니…'반전' 있었다 [금융당국 백브리핑]",
@@ -38,7 +48,7 @@
       "publishedAt": "2026-08-16T01:27:54.000Z",
       "source": "연합뉴스 경제",
       "category": "realestate",
-      "preview": "(서울=연합뉴스) 서미숙 기자 = 정부가 지난 13일 발표한 공급대책에서 용산공원 내 어린이공원을 비롯한 공원 본체 부지 내 주택건설 추진 계획...",
+      "preview": "(서울=연합뉴스) 서미숙 기자 = 정부가 지난 13일 발표한 공급대책에서 용산공원 내 어린이정원을 비롯한 공원 본체 부지 내 주택건설 추진 계획...",
       "dupes": [],
       "titleEn": "Public Discussion on Housing Construction in Yongsan Park... '20-Year Ban' Lifted?"
     },
@@ -50,7 +60,7 @@
       "category": "other",
       "preview": "[세종=뉴시스] 안호균 기자 = 정부가 2026년 세제개편안에서 종합부동산세 과세를 강화한 '비거주 1주택'은 시가 20억원을 기준으로 세부담이 큰 격차를 보인다. 실거주 1주택자의 경우 시가 40억원이 넘는 '초고…",
       "dupes": [],
-      "titleEn": "Home price difference of 50,000,000 won leads to increase in non-resident property tax by 2,000,000 won... Will it be addressed?"
+      "titleEn": "Home price difference of 50,000,000 won leads to 2,000,000 won increase in non-resident property tax...Will it be addressed?"
     },
     {
       "title": "'주택공급' 고민하는 정부, '녹지훼손' 안 된다는 서울시",
@@ -70,7 +80,7 @@
       "category": "realestate",
       "preview": "(서울=연합뉴스) 임은진 기자 = 증권가는 16일 정부의 이번 부동산 공급 대책으로 중견 건설주가 혜택을 입을 것으로 전망했다.",
       "dupes": [],
-      "titleEn": "Securities firms eye mid-sized construction companies amid 8·13 real estate supply measures"
+      "titleEn": "Securities firms highlight momentum in mid-sized construction companies amid 8·13 real estate supply measures"
     },
     {
       "title": "1억대 자금으로 수도권 새 아파트?…25%만 먼저 사는 집 나온다",
@@ -100,7 +110,7 @@
       "category": "realestate",
       "preview": "정부가 발표한 ‘2026년 세제개편안’을 둘러싼 반발이 이어지면서 국회에서 1세대 1주택자의 세 부담을 줄이기 위한 보완 입법이 잇따르고 있다. 보유기간에 낸 재산세와 종합부동산세를 양도차익에서 빼주거나, 1주택 양…",
       "dupes": [],
-      "titleEn": "Tax Reform Opposition Sparks Succession of Laws to Ease Capital Gains Tax on Primary Residence at National Assembly"
+      "titleEn": "Tax Reform Opposition Sparks Succession of Laws to Ease Capital Gains Tax on Primary Residence at Congress"
     },
     {
       "title": "'가계부채 2천조원' 시대 진입…금리 인상기 건전성 비상",
@@ -120,7 +130,7 @@
       "category": "other",
       "preview": "(서울=연합뉴스) 김지연 강류나 기자 = 정부가 올해 가계부채 총량 증가율 목표치를 2배(1.5%→3%)로 올리고 집단대출을 금융회사 한도에서 ...",
       "dupes": [],
-      "titleEn": "Group loans to be managed separately, leading to 'zero limit' for mutual financial institutions gaining capacity"
+      "titleEn": "Group Loans Managed Separately Allow 'Zero Limit' Mutual Financial Institutions to Gain Capacity"
     },
     {
       "title": "신규 대출여력 30조 금융권 배분 본격 착수…19일 첫 실무회의",
@@ -130,7 +140,7 @@
       "category": "other",
       "preview": "(서울=연합뉴스) 배영경 기자 = 올해 가계부채 총량 증가율 목표치 2배 상향으로 확보한 신규 대출여력 30조원의 금융권 배분 협의가 다음 주 ...",
       "dupes": [],
-      "titleEn": "New lending capacity of 30,000,000,000,000 won to be officially allocated to financial institutions... first working meeting on 19th"
+      "titleEn": "New lending capacity of 30,000,000,000,000 won to be allocated to financial institutions - first working meeting on 19th"
     },
     {
       "title": "시세 21억 아파트 10억원에…'송파 롯데캐슬' 줍줍 18일 등판",
@@ -150,7 +160,7 @@
       "category": "realestate",
       "preview": "[서울=뉴시스]이지영 기자 = 정부의 종합부동산세 개편으로 고가주택 보유자의 세 부담이 커지면서 서울을 중심으로 월세 급등 현상이 나타날 것이란 분석이 나왔다. 집주인이 늘어난 종부세를 임대료에 반영할 경우 청년과…",
       "dupes": [],
-      "titleEn": "Monthly rent in Seoul to reach 10,000,000 won as property tax reform hits tenants"
+      "titleEn": "Monthly rent in Seoul to reach 10,000,000 won\"…Tenants caught in the crossfire of revised property tax"
     },
     {
       "title": "“생애최초 혜택 유지된다고?”…청년 비아파트 지원 대책에 ‘눈길’",
@@ -186,7 +196,7 @@
       "category": "realestate",
       "preview": "전용 84㎡A·C·F, 113㎡A·121㎡ 특화 평면·수납공간에 관심 85㎡ 초과 일반공급 전량 추첨제 적용 가점 낮은 수요자도 당첨 기회롯데건설이 경기도 부천시 원미구 상동에서..",
       "dupes": [],
-      "titleEn": "Directly seeing it exceeded expectations\"… 'Sangdong Station Lotte Castle Signature' Model House Visitors Praise"
+      "titleEn": "Directly seeing it exceeded expectations\"… 'Sangdong Station Lotte Castle Signature' model house visitors praise"
     },
     {
       "title": "노원구 하계동 극동아파트 55.72㎡, 7억원 최근 3년 신고가",
@@ -206,7 +216,7 @@
       "category": "other",
       "preview": "[서울=뉴시스]정진형 기자 = 정부가 도심 주택 공급을 늘리기 위해 8·13 대책에 이주비 대출 규제를 완화하고 관련 보증 상품을 신설하는 계획을 발표하면서 중소·중견 건설사들의 서울 수도권 정비사업 도전 길이 열릴…",
       "dupes": [],
-      "titleEn": "Easing of relocation loan sparks opportunities for SMEs and mid-sized companies in renovation projects"
+      "titleEn": "Easing of relocation loans… opportunities for SMEs and mid-sized companies in renovation projects?"
     },
     {
       "title": "‘한국 부동산 쇼핑’ 즐기던 왕서방 다 어디갔나…이 제도 탓에 발길 끊겼다는데",
@@ -216,7 +226,7 @@
       "category": "realestate",
       "preview": "외국인 토허제 시행 1년 부동산 쇼핑 2000명 뚝 국토부 시한연장 검토중외국인 토지거래허가구역 시행 1년 간 수도권에서 아파트나 상가 등을 사들인 외국인 수가 2000명 넘게 급..",
       "dupes": [],
-      "titleEn": "Where Did the King of \"Korean Real Estate Shopping\" Go? It Seems This System Has Stopped Him"
+      "titleEn": "Where Did the King's Wife Go After Enjoying 'Korea Real Estate Shopping'? Report Says This System Caused Her to Stop Visiting"
     },
     {
       "title": "7월 미 소비자 지출 큰 폭 감소…경제 둔화 가능성",
@@ -237,16 +247,6 @@
       "preview": "[서울=뉴시스]고재은 기자 = 미국이 이란에 대한 경제적 고립을 재차 위협한 가운데 국제 유가가 14일(현지 시간) 1%대 상승 마감했다. CNBC 등에 따르면 이날 유럽 ICE선물거래소에서 브렌트유 10월 인도분…",
       "dupes": [],
       "titleEn": "U.S. Treasury: \"High-intensity economic sanctions on Iran next week\"... International oil prices rise over 1%"
-    },
-    {
-      "title": "20년 묵은 '골칫거리' 염창공원, 1천가구 공공주택 품는다[8·13 신규택지 돋보기①]",
-      "link": "https://www.newsis.com/view/NISX20260814_0003749758",
-      "publishedAt": "2026-08-14T21:00:00.000Z",
-      "source": "뉴시스 경제",
-      "category": "realestate",
-      "preview": "[서울=뉴시스] 박성환 기자 = 정부가 서울 강서구 염창동과 경기 남양주·광주 등 수도권 3곳에 신규 공공주택지구를 조성해 2만7000가구를 공급한다. 특히 서울 강서구 염창동 염창공원은 서울 도심 내 신규 공공택지…",
-      "dupes": [],
-      "titleEn": "20-Year-Old 'Problem Child' Eumcheong Park to House 1,000-Household Public Housing [8·13 New Development Site Spotlight①]"
     }
   ]
 }
