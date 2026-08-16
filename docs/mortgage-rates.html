@@ -286,6 +286,24 @@
     /* 상세 펼침 행은 카드 안에서 그대로 흐르게 둔다. */
     .data-table tr.detail-row td { display: block; text-align: left; }
   }
+  .show-more {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .show-more button {
+    font: inherit;
+    background: var(--card);
+    color: var(--fg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+  .show-more button:hover { border-color: var(--muted); }
+  .shown-count { color: var(--muted); font-size: 0.8rem; }
   .rate-links {
     display: flex;
     flex-wrap: wrap;
@@ -495,6 +513,7 @@
         <tbody id="products-body"><!--prerender:rates--><tr><td><div class="product-name">집집마다 도움대출II</div><div class="product-company">경남은행</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">3.64~5.25%</td><td class="rate-low" data-label="평균">4.78%</td></tr><tr><td><div class="product-name">주택담보대출</div><div class="product-company">주식회사 카카오뱅크</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">4.01~4.66%</td><td class="rate-low" data-label="평균">4.62%</td></tr><tr><td><div class="product-name">하나원큐아파트론2</div><div class="product-company">주식회사 하나은행</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">4.17~5.37%</td><td class="rate-low" data-label="평균">4.73%</td></tr><tr><td><div class="product-name">우리아파트론</div><div class="product-company">우리은행</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">4.18~5.28%</td><td class="rate-low" data-label="평균">-</td></tr><tr><td><div class="product-name">우리부동산론</div><div class="product-company">우리은행</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">4.18~5.28%</td><td class="rate-low" data-label="평균">-</td></tr><tr><td><div class="product-name">BNK행복스케치 모기지론</div><div class="product-company">부산은행</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">4.20~5.60%</td><td class="rate-low" data-label="평균">4.10%</td></tr><tr><td><div class="product-name">JB해피홈론</div><div class="product-company">전북은행</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">4.20~6.20%</td><td class="rate-low" data-label="평균">-</td></tr><tr><td><div class="product-name">NH주택담보대출</div><div class="product-company">농협은행주식회사</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">4.24~6.54%</td><td class="rate-low" data-label="평균">-</td></tr><tr><td><div class="product-name">신한주택대출(아파트)</div><div class="product-company">신한은행</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">4.25~4.85%</td><td class="rate-low" data-label="평균">4.80%</td></tr><tr><td><div class="product-name">BNK모바일주택담보대출</div><div class="product-company">경남은행</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">4.26~6.79%</td><td class="rate-low" data-label="평균">3.85%</td></tr><tr><td><div class="product-name">산은 주택대출 (생활자금)</div><div class="product-company">한국산업은행</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">4.33~5.13%</td><td class="rate-low" data-label="평균">-</td></tr><tr><td><div class="product-name">신한주택대출</div><div class="product-company">신한은행</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">4.35~4.95%</td><td class="rate-low" data-label="평균">4.92%</td></tr><tr><td><div class="product-name">IBK주택담보대출</div><div class="product-company">중소기업은행</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">4.38~4.68%</td><td class="rate-low" data-label="평균">-</td></tr><tr><td><div class="product-name">주택담보대출</div><div class="product-company">한국스탠다드차타드은행</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">4.42~6.02%</td><td class="rate-low" data-label="평균">4.38%</td></tr><tr><td><div class="product-name">장기모기지론-코픽스6개월변동(생활)</div><div class="product-company">아이엠뱅크</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">4.43~5.53%</td><td class="rate-low" data-label="평균">4.89%</td></tr><tr><td><div class="product-name">장기모기지론-코픽스6개월변동(구입)</div><div class="product-company">아이엠뱅크</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">4.43~5.53%</td><td class="rate-low" data-label="평균">4.76%</td></tr><tr><td><div class="product-name">KB주택담보대출변동 (일반자금)</div><div class="product-company">국민은행</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">4.46~5.36%</td><td class="rate-low" data-label="평균">-</td></tr><tr><td><div class="product-name">아파트담보대출(구입)</div><div class="product-company">주식회사 케이뱅크</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">4.46~4.46%</td><td class="rate-low" data-label="평균">4.15%</td></tr><tr><td><div class="product-name">제주홈대출</div><div class="product-company">제주은행</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">4.52~5.52%</td><td class="rate-low" data-label="평균">4.16%</td></tr><tr><td><div class="product-name">JB우리집대출</div><div class="product-company">전북은행</div></td><td data-label="금리 유형">변동금리</td><td data-label="금리(최저~최고)">4.52~6.52%</td><td class="rate-low" data-label="평균">-</td></tr><!--/prerender:rates--></tbody>
       </table>
     </div>
+    <div class="show-more" id="show-more" hidden></div>
     <div class="content-notice" id="products-note" style="margin-top: 10px;"></div>
 
     <nav class="rate-links" id="rate-links" aria-label="상품군별 페이지">
@@ -569,6 +588,8 @@
       detailDlyRate: "연체 이자율",
       detailLoanInciExpn: "부대비용",
       detailJoinWay: "가입 방법",
+      showMore: (remaining) => `더 보기 (${remaining.toLocaleString("ko-KR")}개 남음)`,
+      shownCount: (shown, total) => `${total.toLocaleString("ko-KR")}개 중 ${shown.toLocaleString("ko-KR")}개`,
       emptyRow: "조건에 맞는 상품이 없습니다.",
       retry: "다시 시도",
       loadError: "금리 데이터를 불러오지 못했습니다.",
@@ -637,6 +658,8 @@
       detailDlyRate: "Late payment rate",
       detailLoanInciExpn: "Incidental costs",
       detailJoinWay: "How to apply",
+      showMore: (remaining) => `Show more (${remaining.toLocaleString("en-US")} left)`,
+      shownCount: (shown, total) => `${shown.toLocaleString("en-US")} of ${total.toLocaleString("en-US")}`,
       emptyRow: "No products match these filters.",
       retry: "Retry",
       loadError: "Could not load the rate data.",
@@ -724,6 +747,11 @@
   // 세후 이자를 낼 기준 금액. 예금은 목돈을 한 번에 넣고 적금은 매달 부으므로 기준이
   // 달라서 탭별로 따로 든다(적금 탭에서 "월 1,000만원"을 묻는 화면이 되면 안 된다).
   // scripts/interest.mjs의 DEFAULT_AMOUNT와 같아야 한다 - 정적 HTML이 그 값으로 심긴다.
+  // 정기예금만 356개, 적금은 328개다. 전부 한 번에 그리면 스크롤이 끝없이 길어지고,
+  // 정적 HTML(상위 20개)을 받은 화면이 데이터를 받는 순간 열여덟 배로 늘어난다.
+  // 금리순으로 줄 세운 표라 대부분은 위쪽 몇 개만 보고, 나머지는 검색·필터로 좁힌다.
+  const PAGE_SIZE = 20;
+
   const DEFAULT_AMOUNT = { deposit: 10000000, saving: 300000 };
   const TAX_RATE = 0.154;
 
@@ -735,6 +763,7 @@
     rateType: urlParams.get("type") ?? "",
     query: urlParams.get("q") ?? "",
     expanded: new Set(),
+    limit: PAGE_SIZE,
     // 대출은 최저금리 오름차순이 기본이다. 공시의 평균금리는 "지난달 실제 취급 평균"
     // 이라 현재 제시되는 금리 범위와 다른 수치이고, 3분의 1 남짓은 값 자체가 없어서
     // 상품끼리 줄을 세우는 기준으로는 최저금리 쪽이 일관된다.
@@ -1058,6 +1087,7 @@
     if (termSelect) {
       termSelect.addEventListener("change", (e) => {
         state.term = Number(e.target.value);
+        resetLimit();
         renderProducts();
         syncUrl({ push: true });
         window.analytics?.event("rate_filter", { filter: "term", filter_value: String(state.term) });
@@ -1085,6 +1115,7 @@
     if (rateTypeSelect) {
       rateTypeSelect.addEventListener("change", (e) => {
         state.rateType = e.target.value;
+        resetLimit();
         renderProducts();
         syncUrl({ push: true });
         window.analytics?.event("rate_filter", { filter: "rate_type", filter_value: state.rateType || "all" });
@@ -1094,6 +1125,7 @@
     for (const box of document.querySelectorAll("[data-sector]")) {
       box.addEventListener("change", (e) => {
         state.sectors[e.target.dataset.sector] = e.target.checked;
+        resetLimit();
         renderProducts();
         window.analytics?.event("rate_filter", {
           filter: "sector",
@@ -1106,6 +1138,7 @@
     if (search) {
       search.addEventListener("input", (e) => {
         state.query = e.target.value;
+        resetLimit();
         renderProducts();
         syncUrl();
         const term = state.query.trim();
@@ -1263,6 +1296,25 @@
         </tr>`;
   }
 
+  // 남은 상품이 몇 개인지 밝힌다. 그냥 잘라두면 사용자는 그게 전부인 줄 안다.
+  function renderShowMore(total) {
+    const box = document.getElementById("show-more");
+    const shown = Math.min(state.limit, total);
+    const remaining = total - shown;
+
+    box.innerHTML = remaining
+      ? `<button type="button" id="show-more-button">${escapeHtml(t("showMore")(remaining))}</button>` +
+        `<span class="shown-count">${escapeHtml(t("shownCount")(shown, total))}</span>`
+      : total
+        ? `<span class="shown-count">${escapeHtml(t("shownCount")(shown, total))}</span>`
+        : "";
+    box.hidden = !total;
+  }
+
+  function resetLimit() {
+    state.limit = PAGE_SIZE;
+  }
+
   function renderProducts() {
     renderProductsHead();
     const body = document.getElementById("products-body");
@@ -1275,9 +1327,12 @@
       )}</td></tr>`;
     } else {
       body.innerHTML = rows
+        .slice(0, state.limit)
         .map(isSavingCategory(state.category) ? savingRowHtml : loanRowHtml)
         .join("");
     }
+
+    renderShowMore(rows.length);
 
     // 세후 이자는 가정을 깔고 낸 숫자라(최고금리·정액적립식·15.4%) 그 가정을 표
     // 바로 아래에 같이 적는다. 숫자만 크게 보여주고 조건을 숨기면 오해를 만든다.
@@ -1343,10 +1398,18 @@
 
   // 탭과 같은 이유로 컨테이너에 위임한다. renderProductsHead가 <th>를 통째로 다시
   // 만들기 때문에, 버튼에 직접 붙이면 한 번 정렬한 뒤로 리스너가 사라진다.
+  document.getElementById("show-more").addEventListener("click", (event) => {
+    if (event.target?.id !== "show-more-button") return;
+    state.limit += PAGE_SIZE;
+    renderProducts();
+    window.analytics?.event("rate_show_more", { rate_category: state.category, shown: String(state.limit) });
+  });
+
   document.getElementById("products-head").addEventListener("click", (event) => {
     const button = event.target.closest("[data-sort]");
     if (!button) return;
     toggleSort(button.dataset.sort);
+    resetLimit();
     state.expanded.clear();
     renderProducts();
     const { key, dir } = activeSort();
@@ -1357,6 +1420,7 @@
     const tab = event.target.closest("[data-category]");
     if (!tab) return;
     state.category = tab.dataset.category;
+    resetLimit();
     state.expanded.clear();
     state.rateType = "";
     renderTabs();

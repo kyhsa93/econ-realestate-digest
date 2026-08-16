@@ -286,6 +286,24 @@
     /* 상세 펼침 행은 카드 안에서 그대로 흐르게 둔다. */
     .data-table tr.detail-row td { display: block; text-align: left; }
   }
+  .show-more {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .show-more button {
+    font: inherit;
+    background: var(--card);
+    color: var(--fg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+  .show-more button:hover { border-color: var(--muted); }
+  .shown-count { color: var(--muted); font-size: 0.8rem; }
   .rate-links {
     display: flex;
     flex-wrap: wrap;
@@ -495,6 +513,7 @@
         <tbody id="products-body"><!--prerender:rates--><tr><td><div class="product-name">웰뱅 라이킷(LIKIT) 적금</div><div class="product-company">웰컴저축은행</div></td><td data-label="기본금리">2.00%</td><td class="rate-strong" data-label="최고금리">14.00%</td><td class="net-interest" data-label="세후 이자">230,958원</td></tr><tr><td><div class="product-name">아이돌(iDoL) 적금</div><div class="product-company">예가람저축은행</div></td><td data-label="기본금리">3.00%</td><td class="rate-strong" data-label="최고금리">10.00%</td><td class="net-interest" data-label="세후 이자">164,970원</td></tr><tr><td><div class="product-name">애(愛)랑해적금</div><div class="product-company">애큐온저축은행</div></td><td data-label="기본금리">3.00%</td><td class="rate-strong" data-label="최고금리">8.00%</td><td class="net-interest" data-label="세후 이자">131,976원</td></tr><tr><td><div class="product-name">처음만난적금</div><div class="product-company">애큐온저축은행</div></td><td data-label="기본금리">6.50%</td><td class="rate-strong" data-label="최고금리">8.00%</td><td class="net-interest" data-label="세후 이자">131,976원</td></tr><tr><td><div class="product-name">마이홈 정기적금</div><div class="product-company">SBI저축은행</div></td><td data-label="기본금리">4.00%</td><td class="rate-strong" data-label="최고금리">8.00%</td><td class="net-interest" data-label="세후 이자">131,976원</td></tr><tr><td><div class="product-name">웰뱅 워킹 적금</div><div class="product-company">웰컴저축은행</div></td><td data-label="기본금리">1.00%</td><td class="rate-strong" data-label="최고금리">8.00%</td><td class="net-interest" data-label="세후 이자">131,976원</td></tr><tr><td><div class="product-name">WELCOME 아이사랑 정기적금</div><div class="product-company">웰컴저축은행</div></td><td data-label="기본금리">1.00%</td><td class="rate-strong" data-label="최고금리">8.00%</td><td class="net-interest" data-label="세후 이자">131,976원</td></tr><tr><td><div class="product-name">아이적금</div><div class="product-company">SBI저축은행</div></td><td data-label="기본금리">3.90%</td><td class="rate-strong" data-label="최고금리">7.10%</td><td class="net-interest" data-label="세후 이자">117,129원</td></tr><tr><td><div class="product-name">오면우대! 하면우대! 정기적금</div><div class="product-company">경남은행</div></td><td data-label="기본금리">1.90%</td><td class="rate-strong" data-label="최고금리">7.00%</td><td class="net-interest" data-label="세후 이자">115,479원</td></tr><tr><td><div class="product-name">마이키즈 적금</div><div class="product-company">주식회사 케이뱅크</div></td><td data-label="기본금리">3.00%</td><td class="rate-strong" data-label="최고금리">7.00%</td><td class="net-interest" data-label="세후 이자">115,479원</td></tr><tr><td><div class="product-name">카카오뱅크 우리아이적금</div><div class="product-company">주식회사 카카오뱅크</div></td><td data-label="기본금리">3.00%</td><td class="rate-strong" data-label="최고금리">7.00%</td><td class="net-interest" data-label="세후 이자">115,479원</td></tr><tr><td><div class="product-name">청년플랜적금</div><div class="product-company">애큐온저축은행</div></td><td data-label="기본금리">3.50%</td><td class="rate-strong" data-label="최고금리">7.00%</td><td class="net-interest" data-label="세후 이자">115,479원</td></tr><tr><td><div class="product-name">WELCOME 첫거래우대 e정기적금</div><div class="product-company">웰컴저축은행</div></td><td data-label="기본금리">1.00%</td><td class="rate-strong" data-label="최고금리">7.00%</td><td class="net-interest" data-label="세후 이자">115,479원</td></tr><tr><td><div class="product-name">WELCOME 첫거래우대 m정기적금</div><div class="product-company">웰컴저축은행</div></td><td data-label="기본금리">1.00%</td><td class="rate-strong" data-label="최고금리">7.00%</td><td class="net-interest" data-label="세후 이자">115,479원</td></tr><tr><td><div class="product-name">아이행복적금</div><div class="product-company">유안타저축은행</div></td><td data-label="기본금리">3.75%</td><td class="rate-strong" data-label="최고금리">6.75%</td><td class="net-interest" data-label="세후 이자">111,355원</td></tr><tr><td><div class="product-name">웰컴 페이적금</div><div class="product-company">웰컴저축은행</div></td><td data-label="기본금리">1.00%</td><td class="rate-strong" data-label="최고금리">6.50%</td><td class="net-interest" data-label="세후 이자">107,231원</td></tr><tr><td><div class="product-name">NH1934월복리적금</div><div class="product-company">농협은행주식회사</div></td><td data-label="기본금리">2.55%</td><td class="rate-strong" data-label="최고금리">6.05%</td><td class="net-interest" data-label="세후 이자">101,675원</td></tr><tr><td><div class="product-name">DB행복씨앗적금</div><div class="product-company">디비저축은행</div></td><td data-label="기본금리">4.00%</td><td class="rate-strong" data-label="최고금리">6.00%</td><td class="net-interest" data-label="세후 이자">100,820원</td></tr><tr><td><div class="product-name">M-DB행복씨앗적금</div><div class="product-company">디비저축은행</div></td><td data-label="기본금리">4.00%</td><td class="rate-strong" data-label="최고금리">6.00%</td><td class="net-interest" data-label="세후 이자">100,820원</td></tr><tr><td><div class="product-name">자녀와 행복 PLUS 정기 적금</div><div class="product-company">고려저축은행</div></td><td data-label="기본금리">3.00%</td><td class="rate-strong" data-label="최고금리">6.00%</td><td class="net-interest" data-label="세후 이자">98,982원</td></tr><!--/prerender:rates--></tbody>
       </table>
     </div>
+    <div class="show-more" id="show-more" hidden></div>
     <div class="content-notice" id="products-note" style="margin-top: 10px;"></div>
 
     <nav class="rate-links" id="rate-links" aria-label="상품군별 페이지">
@@ -569,6 +588,8 @@
       detailDlyRate: "연체 이자율",
       detailLoanInciExpn: "부대비용",
       detailJoinWay: "가입 방법",
+      showMore: (remaining) => `더 보기 (${remaining.toLocaleString("ko-KR")}개 남음)`,
+      shownCount: (shown, total) => `${total.toLocaleString("ko-KR")}개 중 ${shown.toLocaleString("ko-KR")}개`,
       emptyRow: "조건에 맞는 상품이 없습니다.",
       retry: "다시 시도",
       loadError: "금리 데이터를 불러오지 못했습니다.",
@@ -637,6 +658,8 @@
       detailDlyRate: "Late payment rate",
       detailLoanInciExpn: "Incidental costs",
       detailJoinWay: "How to apply",
+      showMore: (remaining) => `Show more (${remaining.toLocaleString("en-US")} left)`,
+      shownCount: (shown, total) => `${shown.toLocaleString("en-US")} of ${total.toLocaleString("en-US")}`,
       emptyRow: "No products match these filters.",
       retry: "Retry",
       loadError: "Could not load the rate data.",
@@ -724,6 +747,11 @@
   // 세후 이자를 낼 기준 금액. 예금은 목돈을 한 번에 넣고 적금은 매달 부으므로 기준이
   // 달라서 탭별로 따로 든다(적금 탭에서 "월 1,000만원"을 묻는 화면이 되면 안 된다).
   // scripts/interest.mjs의 DEFAULT_AMOUNT와 같아야 한다 - 정적 HTML이 그 값으로 심긴다.
+  // 정기예금만 356개, 적금은 328개다. 전부 한 번에 그리면 스크롤이 끝없이 길어지고,
+  // 정적 HTML(상위 20개)을 받은 화면이 데이터를 받는 순간 열여덟 배로 늘어난다.
+  // 금리순으로 줄 세운 표라 대부분은 위쪽 몇 개만 보고, 나머지는 검색·필터로 좁힌다.
+  const PAGE_SIZE = 20;
+
   const DEFAULT_AMOUNT = { deposit: 10000000, saving: 300000 };
   const TAX_RATE = 0.154;
 
@@ -735,6 +763,7 @@
     rateType: urlParams.get("type") ?? "",
     query: urlParams.get("q") ?? "",
     expanded: new Set(),
+    limit: PAGE_SIZE,
     // 대출은 최저금리 오름차순이 기본이다. 공시의 평균금리는 "지난달 실제 취급 평균"
     // 이라 현재 제시되는 금리 범위와 다른 수치이고, 3분의 1 남짓은 값 자체가 없어서
     // 상품끼리 줄을 세우는 기준으로는 최저금리 쪽이 일관된다.
@@ -1058,6 +1087,7 @@
     if (termSelect) {
       termSelect.addEventListener("change", (e) => {
         state.term = Number(e.target.value);
+        resetLimit();
         renderProducts();
         syncUrl({ push: true });
         window.analytics?.event("rate_filter", { filter: "term", filter_value: String(state.term) });
@@ -1085,6 +1115,7 @@
     if (rateTypeSelect) {
       rateTypeSelect.addEventListener("change", (e) => {
         state.rateType = e.target.value;
+        resetLimit();
         renderProducts();
         syncUrl({ push: true });
         window.analytics?.event("rate_filter", { filter: "rate_type", filter_value: state.rateType || "all" });
@@ -1094,6 +1125,7 @@
     for (const box of document.querySelectorAll("[data-sector]")) {
       box.addEventListener("change", (e) => {
         state.sectors[e.target.dataset.sector] = e.target.checked;
+        resetLimit();
         renderProducts();
         window.analytics?.event("rate_filter", {
           filter: "sector",
@@ -1106,6 +1138,7 @@
     if (search) {
       search.addEventListener("input", (e) => {
         state.query = e.target.value;
+        resetLimit();
         renderProducts();
         syncUrl();
         const term = state.query.trim();
@@ -1263,6 +1296,25 @@
         </tr>`;
   }
 
+  // 남은 상품이 몇 개인지 밝힌다. 그냥 잘라두면 사용자는 그게 전부인 줄 안다.
+  function renderShowMore(total) {
+    const box = document.getElementById("show-more");
+    const shown = Math.min(state.limit, total);
+    const remaining = total - shown;
+
+    box.innerHTML = remaining
+      ? `<button type="button" id="show-more-button">${escapeHtml(t("showMore")(remaining))}</button>` +
+        `<span class="shown-count">${escapeHtml(t("shownCount")(shown, total))}</span>`
+      : total
+        ? `<span class="shown-count">${escapeHtml(t("shownCount")(shown, total))}</span>`
+        : "";
+    box.hidden = !total;
+  }
+
+  function resetLimit() {
+    state.limit = PAGE_SIZE;
+  }
+
   function renderProducts() {
     renderProductsHead();
     const body = document.getElementById("products-body");
@@ -1275,9 +1327,12 @@
       )}</td></tr>`;
     } else {
       body.innerHTML = rows
+        .slice(0, state.limit)
         .map(isSavingCategory(state.category) ? savingRowHtml : loanRowHtml)
         .join("");
     }
+
+    renderShowMore(rows.length);
 
     // 세후 이자는 가정을 깔고 낸 숫자라(최고금리·정액적립식·15.4%) 그 가정을 표
     // 바로 아래에 같이 적는다. 숫자만 크게 보여주고 조건을 숨기면 오해를 만든다.
@@ -1343,10 +1398,18 @@
 
   // 탭과 같은 이유로 컨테이너에 위임한다. renderProductsHead가 <th>를 통째로 다시
   // 만들기 때문에, 버튼에 직접 붙이면 한 번 정렬한 뒤로 리스너가 사라진다.
+  document.getElementById("show-more").addEventListener("click", (event) => {
+    if (event.target?.id !== "show-more-button") return;
+    state.limit += PAGE_SIZE;
+    renderProducts();
+    window.analytics?.event("rate_show_more", { rate_category: state.category, shown: String(state.limit) });
+  });
+
   document.getElementById("products-head").addEventListener("click", (event) => {
     const button = event.target.closest("[data-sort]");
     if (!button) return;
     toggleSort(button.dataset.sort);
+    resetLimit();
     state.expanded.clear();
     renderProducts();
     const { key, dir } = activeSort();
@@ -1357,6 +1420,7 @@
     const tab = event.target.closest("[data-category]");
     if (!tab) return;
     state.category = tab.dataset.category;
+    resetLimit();
     state.expanded.clear();
     state.rateType = "";
     renderTabs();
