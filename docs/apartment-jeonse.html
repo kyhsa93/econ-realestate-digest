@@ -217,6 +217,25 @@
   .overall-card .label { color: var(--muted); font-size: 0.78rem; }
   .overall-card .value { font-size: 1.15rem; font-weight: 700; margin-top: 2px; font-variant-numeric: tabular-nums; }
   .overall-card .sub { color: var(--muted); font-size: 0.76rem; margin-top: 2px; }
+  .controls { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .controls label { font-size: 0.82rem; color: var(--muted); }
+  .controls select {
+    background: var(--bg);
+    color: var(--fg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 5px 9px;
+    font-size: 0.85rem;
+    font-family: inherit;
+  }
+  .trend-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .trend-chart svg { width: 100%; height: 60px; display: block; }
+  .trend-meta { color: var(--muted); font-size: 0.78rem; margin-top: 6px; }
   .table-wrap { overflow-x: auto; }
   .data-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; white-space: nowrap; }
   .data-table th, .data-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); text-align: right; }
@@ -290,8 +309,20 @@
     <div class="overall-cards" id="overall-cards"><!--prerender:realestateOverall--><div class="overall-card"><div class="label">평당 보증금</div><div class="value">2,571만원</div></div><div class="overall-card"><div class="label">84㎡ 환산</div><div class="value">6억 5,329만원</div></div><div class="overall-card"><div class="label">전세가율</div><div class="value">57.8%</div></div><div class="overall-card"><div class="label">거래건수</div><div class="value">2,525건</div></div><!--/prerender:realestateOverall--></div>
   </section>
 
+  <section id="trend-section" hidden>
+    <h2 id="trend-heading">최근 추이</h2>
+    <div class="trend-card">
+      <div class="trend-chart" id="trend-chart"></div>
+      <div class="trend-meta" id="trend-meta"></div>
+    </div>
+  </section>
+
   <section id="district-section">
     <h2 id="district-heading">자치구별 시세</h2>
+    <div class="controls" id="area-controls" hidden>
+      <label for="area-select" id="area-label">평형</label>
+      <select id="area-select"></select>
+    </div>
     <div class="table-wrap">
       <table class="data-table">
         <thead id="district-head"><!--prerender:realestateHead--><tr><th>지역</th><th>평당 보증금</th><th>84㎡ 환산</th><th>전세가율</th><th>거래건수</th></tr><!--/prerender:realestateHead--></thead>
@@ -341,7 +372,13 @@ const T = {
     thWolse: "월세",
     thPerPyeong: "평당가",
     thPerPyeongDeposit: "평당 보증금",
-    thArea: "84㎡ 환산",
+    thArea: (m2) => `${m2}㎡ 환산`,
+    trendHeading: "최근 추이",
+    trendRange: (from, to, n) => `${from} ~ ${to} · ${n}일`,
+    trendTooShort: "추이는 기록이 이틀 이상 쌓이면 표시됩니다.",
+    trendValue: (v) => `현재 ${v}`,
+    areaLabel: "평형",
+    areaUnit: "㎡",
     thDeposit: "평균 보증금",
     thMonthly: "평균 월세",
     thCount: "거래건수",
@@ -383,7 +420,13 @@ const T = {
     thWolse: "Monthly rent",
     thPerPyeong: "Per pyeong",
     thPerPyeongDeposit: "Deposit per pyeong",
-    thArea: "For 84m²",
+    thArea: (m2) => `For ${m2}m²`,
+    trendHeading: "Recent trend",
+    trendRange: (from, to, n) => `${from} – ${to} · ${n} days`,
+    trendTooShort: "The trend appears once more than one day of data is collected.",
+    trendValue: (v) => `now ${v}`,
+    areaLabel: "Unit size",
+    areaUnit: "m²",
     thDeposit: "Avg deposit",
     thMonthly: "Avg monthly",
     thCount: "Transactions",
@@ -407,12 +450,20 @@ const T = {
 // scripts/realestate-format.mjs와 같은 계산이다. 이 페이지는 인라인 스크립트라 모듈을
 // 못 받아서 복제해 뒀고, 두 결과가 같은지는 테스트가 실제 렌더 결과로 대조한다.
 const MIN_SAMPLE = 5;
-const BASE_AREA_PYEONG = 84 / 3.3058;
 const KIND_FIELDS = {
   sale: { metric: "sale", value: "avgPricePerPyeong10k" },
   jeonse: { metric: "jeonse", value: "avgDepositPerPyeong10k" },
   wolse: { metric: "wolse", value: "avgDeposit10k" },
 };
+
+const AREA_OPTIONS = [59, 84, 114];
+const DEFAULT_AREA_M2 = 84;
+const normalizeArea = (value) =>
+  AREA_OPTIONS.includes(Number(value)) ? Number(value) : DEFAULT_AREA_M2;
+
+// 84㎡가 기본이지만 59㎡를 찾는 사람도 많다. 세후 이자의 금액 입력과 같은 성격이라
+// 고른 값은 주소에 남겨 그 화면을 공유할 수 있게 한다.
+let areaM2 = normalizeArea(new URLSearchParams(location.search).get("area"));
 
 const kind = (() => {
   const value = document.querySelector('meta[name="realestate-kind"]')?.getAttribute("content") ?? null;
@@ -500,7 +551,7 @@ function prevTagHtml(isPrevious) {
 
 function areaPrice(pricePerPyeong10k) {
   if (typeof pricePerPyeong10k !== "number" || !Number.isFinite(pricePerPyeong10k)) return null;
-  return Math.round(pricePerPyeong10k * BASE_AREA_PYEONG);
+  return Math.round(pricePerPyeong10k * (areaM2 / 3.3058));
 }
 
 function formatMan(value10k) {
@@ -594,9 +645,9 @@ function headLabels() {
   if (!kind) return [t("thDistrict"), t("thSale"), t("thJeonse"), t("thWolse")];
   if (kind === "wolse") return [t("thDistrict"), t("thDeposit"), t("thMonthly"), t("thCount")];
   if (kind === "jeonse") {
-    return [t("thDistrict"), t("thPerPyeongDeposit"), t("thArea"), t("thRatio"), t("thCount")];
+    return [t("thDistrict"), t("thPerPyeongDeposit"), t("thArea")(areaM2), t("thRatio"), t("thCount")];
   }
-  return [t("thDistrict"), t("thPerPyeong"), t("thArea"), t("thCount")];
+  return [t("thDistrict"), t("thPerPyeong"), t("thArea")(areaM2), t("thCount")];
 }
 
 function renderHead() {
@@ -671,7 +722,7 @@ function renderOverall(realestate) {
         return card(
           label,
           formatMan(valueOf(metric, k)),
-          `${escapeHtml(t("thArea"))} ${formatEok(areaPrice(valueOf(metric, k)))} · ${escapeHtml(t("countUnit")(metric.transactionCount))}`
+          `${escapeHtml(t("thArea")(areaM2))} ${formatEok(areaPrice(valueOf(metric, k)))} · ${escapeHtml(t("countUnit")(metric.transactionCount))}`
         );
       })
       .join("");
@@ -694,9 +745,98 @@ function renderOverall(realestate) {
   const ratio = kind === "jeonse" ? jeonseRatio(overall) : null;
   box.innerHTML =
     card(kind === "jeonse" ? t("thPerPyeongDeposit") : t("thPerPyeong"), formatMan(perPyeong), "") +
-    card(t("thArea"), formatEok(areaPrice(perPyeong)), "") +
+    card(t("thArea")(areaM2), formatEok(areaPrice(perPyeong)), "") +
     (ratio ? card(t("thRatio"), formatPercent(ratio.ratio), "") : "") +
     card(t("thCount"), escapeHtml(t("countUnit")(metric.transactionCount)), "");
+}
+
+// 평형 선택은 84㎡ 환산가가 있는 화면(매매·전세)에서만 의미가 있다. 월세는 보증금·월세
+// 평균이라 환산하지 않고, 허브는 평당가만 나열한다.
+const hasAreaColumn = kind === "sale" || kind === "jeonse";
+
+function renderAreaControls() {
+  const box = document.getElementById("area-controls");
+  box.hidden = !hasAreaColumn;
+  if (!hasAreaColumn) return;
+
+  document.getElementById("area-label").textContent = t("areaLabel");
+  const select = document.getElementById("area-select");
+  select.innerHTML = AREA_OPTIONS.map(
+    (m2) => `<option value="${m2}"${m2 === areaM2 ? " selected" : ""}>${m2}${escapeHtml(t("areaUnit"))}</option>`
+  ).join("");
+}
+
+function syncAreaUrl() {
+  const params = new URLSearchParams(location.search);
+  // 기본값은 주소에 남기지 않는다(다른 페이지의 필터와 같은 규칙).
+  if (areaM2 === DEFAULT_AREA_M2) params.delete("area");
+  else params.set("area", String(areaM2));
+  const query = params.toString();
+  const url = `${location.pathname}${query ? `?${query}` : ""}`;
+  if (url !== `${location.pathname}${location.search}`) history.replaceState(null, "", url);
+}
+
+// 추이는 서울 전체 값만 그린다. 25개 구마다 그래프를 그리면 화면이 무거워지고,
+// 착지 페이지에서 먼저 알고 싶은 건 "요즘 오르는가 내리는가"다.
+// index.html의 스파크라인과 같은 모양으로 그린다.
+function sparklineSvg(values) {
+  const w = 280, h = 56, pad = 4;
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+  const range = max - min || 1;
+  const step = values.length > 1 ? (w - pad * 2) / (values.length - 1) : 0;
+  const points = values
+    .map((v, i) => {
+      const x = pad + i * step;
+      const y = h - pad - ((v - min) / range) * (h - pad * 2);
+      return `${x.toFixed(1)},${y.toFixed(1)}`;
+    })
+    .join(" ");
+  const last = values[values.length - 1];
+  const lastX = pad + (values.length - 1) * step;
+  const lastY = h - pad - ((last - min) / range) * (h - pad * 2);
+  const rising = values.length > 1 && last >= values[0];
+  const color = rising ? "#d64545" : "#2f6fed";
+  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" role="img">
+      <polyline points="${points}" fill="none" stroke="${color}" stroke-width="2" vector-effect="non-scaling-stroke" />
+      <circle cx="${lastX.toFixed(1)}" cy="${lastY.toFixed(1)}" r="2.5" fill="${color}" />
+    </svg>`;
+}
+
+// 표본이 모자란 날짜는 점을 찍지 않는다. 표에서 가리는 값을 그래프에서만 보여주면
+// 같은 페이지가 두 가지 기준으로 말하는 셈이 된다(index.html과 같은 규칙).
+function trendSeries(history) {
+  const key = kind ?? "sale";
+  const field = KIND_FIELDS[key];
+  return (history ?? [])
+    .map((day) => {
+      const metric = day?.overall?.[field.metric];
+      if (!hasEnoughSample(metric)) return null;
+      const value = metric[field.value];
+      return typeof value === "number" && Number.isFinite(value) ? { date: day.date, value } : null;
+    })
+    .filter(Boolean);
+}
+
+function renderTrend() {
+  const section = document.getElementById("trend-section");
+  const series = trendSeries(cache.history);
+
+  document.getElementById("trend-heading").textContent = t("trendHeading");
+
+  if (series.length < 2) {
+    // 기록이 하루뿐이면 선이 아니라 점이다. 빈 그래프를 보여주느니 이유를 적는다.
+    section.hidden = !cache.history;
+    document.getElementById("trend-chart").innerHTML = "";
+    document.getElementById("trend-meta").textContent = t("trendTooShort");
+    return;
+  }
+
+  section.hidden = false;
+  document.getElementById("trend-chart").innerHTML = sparklineSvg(series.map((p) => p.value));
+  const last = series[series.length - 1];
+  document.getElementById("trend-meta").textContent =
+    `${t("trendRange")(series[0].date, last.date, series.length)} · ${t("trendValue")(formatMan(last.value))}`;
 }
 
 const NAV_KEYS = { all: "navAll", sale: "navSale", jeonse: "navJeonse", wolse: "navWolse" };
@@ -732,14 +872,16 @@ function renderUpdated(realestate) {
   document.getElementById("updated").textContent = text;
 }
 
-const cache = { realestate: null };
+const cache = { realestate: null, history: null };
 
 function renderAll() {
   applyLocale();
+  renderAreaControls();
   renderHead();
   if (!cache.realestate) return;
   renderOverall(cache.realestate);
   renderTable(cache.realestate);
+  renderTrend();
   renderUpdated(cache.realestate);
 }
 
@@ -753,12 +895,24 @@ function reportLoadFailure(error) {
 async function main() {
   applyTheme(theme);
   applyLocale();
+  renderAreaControls();
   renderHead();
   try {
     const res = await fetch(`./data/realestate.json?_=${Date.now()}`);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     cache.realestate = await res.json();
     renderAll();
+
+    // 추이는 없어도 표는 보여야 하므로 따로, 실패해도 조용히 넘어간다.
+    try {
+      const trendRes = await fetch(`./data/realestate-history-lite.json?_=${Date.now()}`);
+      if (trendRes.ok) {
+        cache.history = await trendRes.json();
+        renderTrend();
+      }
+    } catch {
+      // 추이만 비고 나머지는 그대로 둔다
+    }
   } catch (error) {
     reportLoadFailure(error);
     document.getElementById("district-grid").innerHTML =
@@ -769,6 +923,14 @@ async function main() {
     });
   }
 }
+
+document.getElementById("area-controls").addEventListener("change", (e) => {
+  if (e.target?.id !== "area-select") return;
+  areaM2 = normalizeArea(e.target.value);
+  syncAreaUrl();
+  renderAll();
+  window.analytics?.event("realestate_area", { area_m2: String(areaM2), realestate_kind: kind ?? "all" });
+});
 
 document.getElementById("theme-toggle").addEventListener("click", () => {
   const order = ["auto", "light", "dark"];

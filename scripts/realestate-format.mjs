@@ -4,13 +4,20 @@
 // 검색하는 건 "강남구 84㎡가 얼마"이지 "평당 얼마"가 아니다. 세후 이자를 넣은 것과
 // 같은 이유다 - 우리가 가진 숫자를 사람이 실제로 묻는 형태로 옮기는 것.
 //
-// 84㎡(국민주택 규모)를 기준으로 삼는다. 아파트 분양·매매에서 가장 흔한 면적이고,
-// 다른 평형은 여기서 비례로 가늠할 수 있다.
+// 84㎡(국민주택 규모)를 기본으로 삼는다. 아파트 분양·매매에서 가장 흔한 면적이라
+// 이걸 기준으로 삼으면 다른 평형도 가늠이 되지만, 실제로는 59㎡를 찾는 사람도 많아서
+// 화면에서 바꿀 수 있게 열어둔다(전용면적 기준).
 export const BASE_AREA_M2 = 84;
+export const AREA_OPTIONS = [59, 84, 114];
 
 // 1평 = 3.3058㎡. 84㎡는 25.41평이다.
 const PYEONG_PER_M2 = 1 / 3.3058;
-export const BASE_AREA_PYEONG = BASE_AREA_M2 * PYEONG_PER_M2;
+export const pyeongOf = (areaM2) => areaM2 * PYEONG_PER_M2;
+export const BASE_AREA_PYEONG = pyeongOf(BASE_AREA_M2);
+
+/** 화면에서 넘어온 평형이 우리가 지원하는 값인지. 아니면 기본값으로 돌린다. */
+export const normalizeArea = (value) =>
+  AREA_OPTIONS.includes(Number(value)) ? Number(value) : BASE_AREA_M2;
 
 // 자치구 평당가는 신고 건수가 적으면 "그 구의 시세"가 아니라 "그 아파트 한 채의
 // 가격"이다. 화면 표와 같은 기준으로 가린다(prerender.mjs의 MIN_SAMPLE과 같은 값).
@@ -19,10 +26,10 @@ export const MIN_SAMPLE = 5;
 export const hasEnoughSample = (metric) =>
   Boolean(metric) && (metric.transactionCount ?? 0) >= MIN_SAMPLE;
 
-/** 평당가(만원) → 84㎡ 기준 금액(만원). 값이 없으면 null. */
-export function areaPrice(pricePerPyeong10k) {
+/** 평당가(만원) → 주어진 면적 기준 금액(만원). 값이 없으면 null. */
+export function areaPrice(pricePerPyeong10k, areaM2 = BASE_AREA_M2) {
   if (typeof pricePerPyeong10k !== "number" || !Number.isFinite(pricePerPyeong10k)) return null;
-  return Math.round(pricePerPyeong10k * BASE_AREA_PYEONG);
+  return Math.round(pricePerPyeong10k * pyeongOf(areaM2));
 }
 
 // 억 단위로 끊어 읽는 게 한국에서 집값을 말하는 방식이다. 11억 3,004만원처럼

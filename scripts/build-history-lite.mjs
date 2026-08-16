@@ -25,16 +25,33 @@ const price = (metric) =>
       }
     : null;
 
-// 전세·월세는 차트에서 거래 건수만 쓴다.
-const count = (metric) => (metric ? { transactionCount: metric.transactionCount ?? null } : null);
+// 전세·월세도 이제 추이를 그린다(아파트 시세 착지 페이지). 전세는 평당 보증금,
+// 월세는 보증금과 월세 평균이 필요하다 - 예전엔 메인 차트가 매매만 그려서 건수만
+// 남겼는데, 그 상태로 두면 새 화면이 값을 못 찾아 빈 그래프가 된다.
+const jeonsePrice = (metric) =>
+  metric
+    ? {
+        avgDepositPerPyeong10k: metric.avgDepositPerPyeong10k ?? null,
+        transactionCount: metric.transactionCount ?? null,
+      }
+    : null;
+
+const wolsePrice = (metric) =>
+  metric
+    ? {
+        avgDeposit10k: metric.avgDeposit10k ?? null,
+        avgMonthlyRent10k: metric.avgMonthlyRent10k ?? null,
+        transactionCount: metric.transactionCount ?? null,
+      }
+    : null;
 
 const scope = (entry) =>
   entry
     ? {
         sale: price(entry.sale),
         saleNational84: price(entry.saleNational84),
-        jeonse: count(entry.jeonse),
-        wolse: count(entry.wolse),
+        jeonse: jeonsePrice(entry.jeonse),
+        wolse: wolsePrice(entry.wolse),
       }
     : null;
 

@@ -31,7 +31,9 @@ test("차트가 안 쓰는 필드는 빼서 크기를 줄인다", async () => {
   const [full, lite] = await Promise.all([readJson("realestate-history"), readJson("realestate-history-lite")]);
   const text = JSON.stringify(lite);
 
-  for (const field of ["change", "baselineDate", "avgPricePerM2", "avgDeposit10k", "avgMonthlyRent10k"]) {
+  // 전세·월세 값은 아파트 시세 착지 페이지가 추이를 그리면서 쓰기 시작했다.
+  // 여전히 안 쓰는 건 증감 계산 결과와 ㎡당 원가다(화면은 평당 만원으로만 그린다).
+  for (const field of ["change", "baselineDate", "avgPricePerM2"]) {
     assert.ok(!text.includes(`"${field}"`), `차트가 안 쓰는 ${field}가 남아 있다`);
   }
 

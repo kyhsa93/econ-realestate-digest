@@ -8,8 +8,22 @@ import vm from "node:vm";
 
 const root = path.resolve(import.meta.dirname, "../..");
 
-function stubElement(attrs = {}) {
+// 화면 코드가 이벤트 위임에서 e.target.id로 어느 입력인지 가른다. id를 안 심으면
+// Proxy가 함수를 돌려줘서 비교가 조용히 실패하고, 테스트는 "아무 일도 안 일어남"만 본다.
+function stubElement(attrs = {}, id = "") {
+  // 리스너를 실제로 붙잡아 둬야 한다. 그냥 삼켜버리면 화면이 이벤트를 안 듣는 것과
+  // 구분이 안 되고, 테스트는 "아무 일도 안 일어남"만 보게 된다.
+  const listeners = {};
   const base = {
+    id,
+    listeners,
+    addEventListener(type, fn) {
+      (listeners[type] ||= []).push(fn);
+    },
+    removeEventListener() {},
+    dispatch(type, extra = {}) {
+      for (const fn of listeners[type] ?? []) fn({ target: this, ...extra });
+    },
     textContent: "",
     innerHTML: "",
     hidden: false,
@@ -27,13 +41,20 @@ function stubElement(attrs = {}) {
 
 // kind를 주면 거래 유형별 페이지(apartment-sale.html 등)처럼 동작한다 - 그 값은
 // 화면에서 <meta name="realestate-kind">로만 들어오기 때문에 여기서도 같은 길로 넣는다.
-export async function loadRealestatePage({ realestate, kind = null, locale = "ko", analytics } = {}) {
+export async function loadRealestatePage({ realestate, history, kind = null, locale = "ko", search = "", analytics } = {}) {
   const html = await readFile(path.join(root, "docs/realestate.html"), "utf8");
   const script = [...html.matchAll(/<script>\n([\s\S]*?)\n<\/script>/g)].map((m) => m[1]).pop();
 
   const store = { lang: locale };
   const byId = new Map();
-  const data = { realestate };
+  const data = { realestate, "realestate-history-lite": history };
+
+  function applyUrl(url) {
+    const [pathname, query = ""] = String(url).split("?");
+    sandbox.location.pathname = pathname;
+    sandbox.location.search = query ? `?${query}` : "";
+    sandbox.location.href = `https://x${pathname}${query ? `?${query}` : ""}`;
+  }
 
   const sandbox = {
     console: { ...console, warn() {}, error() {} },
@@ -53,11 +74,20 @@ export async function loadRealestatePage({ realestate, kind = null, locale = "ko
       removeItem: (k) => delete store[k],
     },
     navigator: { language: locale },
-    location: { search: "", origin: "https://x", pathname: "/", href: "https://x/" },
+    location: { search, origin: "https://x", pathname: "/", href: `https://x/${search}` },
     matchMedia: () => ({ matches: false, addEventListener() {} }),
     addEventListener() {},
     removeEventListener() {},
-    history: { pushState() {}, replaceState() {} },
+    // 고른 평형을 주소에 남기는 것도 화면 동작의 일부다(그 화면을 공유할 수 있어야
+    // 한다). 아무것도 안 하는 스텁으로 두면 그걸 확인할 방법이 없다.
+    history: {
+      pushState(_state, _title, url) {
+        applyUrl(url);
+      },
+      replaceState(_state, _title, url) {
+        applyUrl(url);
+      },
+    },
     IntersectionObserver: class {
       observe() {}
       unobserve() {}
@@ -65,7 +95,7 @@ export async function loadRealestatePage({ realestate, kind = null, locale = "ko
     },
     document: {
       getElementById: (id) => {
-        if (!byId.has(id)) byId.set(id, stubElement());
+        if (!byId.has(id)) byId.set(id, stubElement({}, id));
         return byId.get(id);
       },
       querySelector: (sel) => {
@@ -98,6 +128,8 @@ export async function loadRealestatePage({ realestate, kind = null, locale = "ko
     sandbox,
     byId: (id) => sandbox.document.getElementById(id),
     tableHtml: () => sandbox.document.getElementById("district-grid").innerHTML,
+    trendHtml: () => sandbox.document.getElementById("trend-chart").innerHTML,
+    trendMeta: () => sandbox.document.getElementById("trend-meta").textContent,
     headHtml: () => sandbox.document.getElementById("district-head").innerHTML,
     overallHtml: () => sandbox.document.getElementById("overall-cards").innerHTML,
   };

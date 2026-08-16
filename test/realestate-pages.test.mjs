@@ -11,6 +11,7 @@ import {
   formatEok,
   jeonseRatio,
   metricOf,
+  normalizeArea,
 } from "../scripts/realestate-format.mjs";
 import {
   realestateHeadHtml,
@@ -266,4 +267,100 @@ test("둘 다 지난달로 대체되면 전세가율을 낸다", () => {
 test("매매·월세 페이지에는 전세가율이 없다", () => {
   assert.ok(!realestateHeadHtml("sale").includes("전세가율"));
   assert.ok(!realestateHeadHtml("wolse").includes("전세가율"));
+});
+
+// --- 평형 선택 ---
+// 84㎡가 기본이지만 59㎡를 찾는 사람도 많다. 세후 이자의 금액 입력과 같은 성격이라
+// 고른 값이 표 전체에 반영되고 주소에도 남아야 한다.
+test("평형을 바꾸면 환산가와 열 제목이 같이 바뀐다", async () => {
+  const realestate = await readJson("realestate");
+  const page = await loadRealestatePage({ realestate, kind: "sale" });
+
+  const before = cells(page.tableHtml());
+  assert.ok(page.headHtml().includes("84㎡ 환산"));
+
+  const select = page.byId("area-select");
+  select.value = "59";
+  page.byId("area-controls").dispatch("change", { target: select });
+
+  const after = cells(page.tableHtml());
+  assert.ok(page.headHtml().includes("59㎡ 환산"), `열 제목이 안 바뀌었다: ${page.headHtml()}`);
+  assert.notDeepEqual(after, before, "평형을 바꿨는데 표가 그대로다");
+  assert.ok(page.sandbox.location.search.includes("area=59"), page.sandbox.location.search);
+});
+
+test("기본 평형은 주소에 남기지 않는다", async () => {
+  const realestate = await readJson("realestate");
+  const page = await loadRealestatePage({ realestate, kind: "sale" });
+  const select = page.byId("area-select");
+
+  select.value = "59";
+  page.byId("area-controls").dispatch("change", { target: select });
+  select.value = "84";
+  page.byId("area-controls").dispatch("change", { target: select });
+
+  assert.ok(!page.sandbox.location.search.includes("area="), page.sandbox.location.search);
+});
+
+test("지원하지 않는 평형은 기본값으로 돌린다", () => {
+  assert.equal(normalizeArea("999"), 84);
+  assert.equal(normalizeArea(null), 84);
+  assert.equal(normalizeArea("59"), 59);
+});
+
+// 월세는 보증금·월세 평균이라 환산 자체가 없고, 허브는 평당가만 나열한다.
+test("환산가가 없는 화면에는 평형 선택을 띄우지 않는다", async () => {
+  const realestate = await readJson("realestate");
+  for (const kind of ["wolse", null]) {
+    const page = await loadRealestatePage({ realestate, kind });
+    assert.equal(page.byId("area-controls").hidden, true, `${kind ?? "허브"}에 평형 선택이 떴다`);
+  }
+  const sale = await loadRealestatePage({ realestate, kind: "sale" });
+  assert.equal(sale.byId("area-controls").hidden, false);
+});
+
+test("주소로 들어온 평형으로 시작한다", async () => {
+  const realestate = await readJson("realestate");
+  const page = await loadRealestatePage({ realestate, kind: "sale", search: "?area=114" });
+  assert.ok(page.headHtml().includes("114㎡ 환산"), page.headHtml());
+});
+
+// --- 시세 추이 ---
+// 기록이 하루 4회 쌓이므로 지금은 6일치뿐이지만, 착지 페이지에서 먼저 알고 싶은 건
+// "요즘 오르는가 내리는가"라 자리를 만들어 둔다.
+test("거래 유형마다 자기 지표의 추이를 그린다", async () => {
+  const [realestate, history] = await Promise.all([readJson("realestate"), readJson("realestate-history-lite")]);
+
+  for (const kind of ["sale", "jeonse", "wolse"]) {
+    const page = await loadRealestatePage({ realestate, history, kind });
+    assert.ok(page.trendHtml().includes("polyline"), `${kind}: 그래프가 없다`);
+    assert.equal(page.byId("trend-section").hidden, false);
+  }
+});
+
+// 표에서 가린 값을 그래프에서만 보여주면 같은 페이지가 두 기준으로 말하는 셈이 된다.
+test("표본이 모자란 날짜는 추이에서 뺀다", async () => {
+  const realestate = await readJson("realestate");
+  const history = [
+    { date: "2026-08-01", overall: { sale: { avgPricePerPyeong10k: 9999, transactionCount: 2 } } },
+    { date: "2026-08-02", overall: { sale: { avgPricePerPyeong10k: 4000, transactionCount: 50 } } },
+    { date: "2026-08-03", overall: { sale: { avgPricePerPyeong10k: 4100, transactionCount: 60 } } },
+  ];
+  const page = await loadRealestatePage({ realestate, history, kind: "sale" });
+  assert.match(page.trendMeta(), /2026-08-02/, `표본 부족한 날이 남았다: ${page.trendMeta()}`);
+  assert.match(page.trendMeta(), /2일/);
+});
+
+test("기록이 하루뿐이면 빈 그래프 대신 이유를 적는다", async () => {
+  const realestate = await readJson("realestate");
+  const history = [{ date: "2026-08-15", overall: { sale: { avgPricePerPyeong10k: 4000, transactionCount: 50 } } }];
+  const page = await loadRealestatePage({ realestate, history, kind: "sale" });
+  assert.equal(page.trendHtml(), "");
+  assert.match(page.trendMeta(), /이틀 이상/);
+});
+
+test("추이를 못 받아도 표는 그대로 나온다", async () => {
+  const realestate = await readJson("realestate");
+  const page = await loadRealestatePage({ realestate, kind: "sale" });
+  assert.ok(cells(page.tableHtml()).length > 0, "추이가 없다고 표까지 비었다");
 });
