@@ -58,9 +58,6 @@
     --card: #f5f5f7;
     --border: #e2e2e5;
   }
-  /* hidden 속성은 브라우저 기본 스타일(display:none)로 동작하는데, 작성자 CSS가 그 요소에
-     display를 지정하면 그쪽이 이겨서 감춰지지 않는다. 실제로 오류 배너가 display:flex 때문에
-     늘 보이고 있었다. 감춤은 항상 이 규칙이 이기게 못박는다. */
   [hidden] { display: none !important; }
   * { box-sizing: border-box; }
   body {
@@ -169,8 +166,6 @@
   .news-item.read > a { color: var(--muted); }
   .news-meta { color: var(--muted); font-size: 0.78rem; margin-top: 2px; }
   .news-context { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
-  /* .news-item a 규칙이 글자 크기·밑줄까지 정해두고 있어서, 칩은 같은 자리에서
-     더 구체적인 선택자로 덮어써야 한다(안 그러면 제목과 같은 크기가 된다). */
   .news-item .context-chip {
     display: inline-flex;
     align-items: baseline;
@@ -252,9 +247,6 @@
 
 <script src="./analytics.js"></script>
 <script>
-  // 이 파일은 카테고리별 뉴스 페이지의 원본이기도 하다. 생성된 페이지는
-  // <meta name="news-category">로만 갈리고 나머지 코드는 그대로 공유한다.
-  // 문구는 index.html·rates.html과 같은 방식으로 사전에 둔다(언어 전환이 같은 키를 쓴다).
   const T = {
     ko: {
       title: "증시·환율 뉴스 - 오늘의 코스피·달러 소식",
@@ -348,8 +340,6 @@
 
   async function loadJson(name) {
     const res = await fetch(`./data/${name}.json?_=${Date.now()}`);
-    // 상태 코드를 남긴다. 503은 서비스워커가 오프라인에서 돌려주는 값이고,
-    // 404는 배포가 어긋난 것이라 원인이 전혀 다르다.
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return res.json();
   }
@@ -371,7 +361,6 @@
     return category ? items.filter((item) => item.category === category) : items;
   }
 
-  // 메인과 같은 저장소를 쓴다. 같은 기사를 두 번 읽게 되는 게 이 페이지의 문제였다.
   const READ_NEWS_KEY = "readNews";
   const READ_NEWS_MAX = 300;
 
@@ -401,10 +390,6 @@
   const summaryLine = (c) => (locale === "en" ? c.lineEn ?? c.lineKo : c.lineKo);
   const summaryName = (c) => (locale === "en" ? c.nameEn ?? c.name : c.name);
 
-  // 기사에 붙은 우리 데이터(자치구 실거래가·현재 금리·지수). 값은 news-context.mjs가
-  // 미리 계산해 news.json에 넣어둔 것을 그대로 쓴다 - 여기서 계산하려면 570KB짜리
-  // rates.json을 이 페이지가 받아야 한다. 마크업은 prerender.mjs의 newsContextHtml과
-  // 같아야 한다(테스트가 두 결과를 대조한다).
   function newsContextHtml(context) {
     if (!context?.length) return "";
     return (
@@ -456,7 +441,6 @@
       return;
     }
 
-    // 폴백된 요약(헤드라인 나열)은 원문 대조에서 걸러진 결과라 그 사실을 밝힌다.
     const fallback = shown.some((c) => c.fallbackReason);
     box.innerHTML =
       shown
@@ -516,9 +500,6 @@
   }
 
   document.getElementById("news-list").addEventListener("click", (e) => {
-    // 칩은 기사가 아니라 우리 페이지로 가는 링크다. 읽음 처리에 걸리면 안 되고
-    // (선택자가 직계 자식만 보므로 자동으로 갈린다), 계측도 따로 세야 한다.
-    // 이 기능이 실제로 눌리는지는 이 수치 말고는 알 방법이 없다.
     const chip = e.target.closest(".news-item .context-chip");
     if (chip) {
       window.analytics?.event("news_context_click", {
