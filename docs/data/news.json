@@ -1,7 +1,97 @@
 {
-  "updatedAt": "2026-08-15T11:27:34.857Z",
-  "date": "2026-08-15",
+  "updatedAt": "2026-08-15T23:30:35.443Z",
+  "date": "2026-08-16",
   "items": [
+    {
+      "title": "증권가, 8·13 부동산 공급대책에 \"중견건설사 모멘텀 주목\"",
+      "link": "https://www.yna.co.kr/view/AKR20260815020900008",
+      "publishedAt": "2026-08-15T21:20:01.000Z",
+      "source": "연합뉴스 경제",
+      "category": "realestate",
+      "preview": "(서울=연합뉴스) 임은진 기자 = 증권가는 16일 정부의 이번 부동산 공급 대책으로 중견 건설주가 혜택을 입을 것으로 전망했다.",
+      "dupes": [],
+      "titleEn": "Securities firms highlight mid-sized construction companies as momentum builds with the 8·13 real estate supply measures"
+    },
+    {
+      "title": "1억대 자금으로 수도권 새 아파트?…25%만 먼저 사는 집 나온다",
+      "link": "https://www.yna.co.kr/view/AKR20260815044700003",
+      "publishedAt": "2026-08-15T21:01:01.000Z",
+      "source": "연합뉴스 경제",
+      "category": "realestate",
+      "preview": "(세종=연합뉴스) 오진송 기자 = 분양가의 25%만 먼저 내고 입주한 뒤 나머지 지분을 장기간에 걸쳐 나눠 사는 '지분적립형' 공공분양 주택이 ...",
+      "dupes": [],
+      "titleEn": "100,000,000 won fund for new apartments in Seoul area?... Only 25% available for purchase first"
+    },
+    {
+      "title": "[마켓인사이트] 한주 내내 바닥다진 코스피, 상승흐름 이어가나",
+      "link": "https://www.yna.co.kr/view/AKR20260814186600008",
+      "publishedAt": "2026-08-15T21:00:16.000Z",
+      "source": "연합뉴스 경제",
+      "category": "stocks",
+      "preview": "(서울=연합뉴스) 황철환 기자 = 7월 역대급 변동성을 보인 국내 주식시장이 8월 둘째주인(10~14일) 지난주 내내 바닥을 다지며 반등 흐름을...",
+      "dupes": [],
+      "titleEn": "[Market Insight] KOSPI, Which Has Been Bottoming Out All Week, to Continue Uptrend"
+    },
+    {
+      "title": "세제개편 반발에… 국회서 1주택 양도세 완화법 잇따라",
+      "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/16/GZ3WCIHUT5DMNBVGML543XN42I/",
+      "publishedAt": "2026-08-15T21:00:00.000Z",
+      "source": "조선비즈 부동산",
+      "category": "realestate",
+      "preview": null,
+      "dupes": [],
+      "titleEn": "Tax Reform Opposition Sparks Succession of Laws to Ease Capital Gains Tax on Primary Residence in Congress"
+    },
+    {
+      "title": "'가계부채 2천조원' 시대 진입…금리 인상기 건전성 비상",
+      "link": "https://www.yna.co.kr/view/AKR20260815039600002",
+      "publishedAt": "2026-08-15T20:47:00.000Z",
+      "source": "연합뉴스 경제",
+      "category": "rates",
+      "preview": "(서울=연합뉴스) 한지훈 임지우 이도흔 기자 = 우리나라 가계신용 규모가 사상 처음 2천조원대에 들어선 것으로 추정된다.",
+      "dupes": [],
+      "titleEn": "Entry into the era of 2,000,000,000,000,000 won household debt… financial health on alert during interest rate hike period"
+    },
+    {
+      "title": "집단대출 별도 관리로 '한도 제로' 상호금융도 여력 생긴다",
+      "link": "https://www.yna.co.kr/view/AKR20260815046400002",
+      "publishedAt": "2026-08-15T20:45:04.000Z",
+      "source": "연합뉴스 경제",
+      "category": "other",
+      "preview": "(서울=연합뉴스) 김지연 강류나 기자 = 정부가 올해 가계부채 총량 증가율 목표치를 2배(1.5%→3%)로 올리고 집단대출을 금융회사 한도에서 ...",
+      "dupes": [],
+      "titleEn": "Group Loans Managed Separately Allow 'Zero Limit' Mutual Financial Institutions to Gain Capacity"
+    },
+    {
+      "title": "신규 대출여력 30조 금융권 배분 본격 착수…19일 첫 실무회의",
+      "link": "https://www.yna.co.kr/view/AKR20260815045000002",
+      "publishedAt": "2026-08-15T20:45:02.000Z",
+      "source": "연합뉴스 경제",
+      "category": "other",
+      "preview": "(서울=연합뉴스) 배영경 기자 = 올해 가계부채 총량 증가율 목표치 2배 상향으로 확보한 신규 대출여력 30조원의 금융권 배분 협의가 다음 주 ...",
+      "dupes": [],
+      "titleEn": "New lending capacity 30,000,000,000,000 won financial sector allocation officially begins... first working meeting on 19th"
+    },
+    {
+      "title": "시세 21억 아파트 10억원에…'송파 롯데캐슬' 줍줍 18일 등판",
+      "link": "https://www.newsis.com/view/NISX20260814_0003749863",
+      "publishedAt": "2026-08-15T20:00:00.000Z",
+      "source": "뉴시스 경제",
+      "category": "realestate",
+      "preview": "[서울=뉴시스]이종성 기자 = 서울 송파구 거여동 '송파 시그니처 롯데캐슬' 전용면적 84㎡ 1가구가 오는 18일 10억원대에 재공급된다. 최근 같은 면적 실거래가가 21억원대인 만큼 10억원 넘는 시세 차익이 기대…",
+      "dupes": [],
+      "titleEn": "Price 2,100,000,000 apartment 1,000,000,000 won... 'Songpa Lotte Castle' grab 18th day debut"
+    },
+    {
+      "title": "\"서울 월세 1000만원 흔해질 것\"…종부세 개편에 세입자 '불똥'",
+      "link": "https://www.newsis.com/view/NISX20260814_0003748914",
+      "publishedAt": "2026-08-15T15:40:00.000Z",
+      "source": "뉴시스 경제",
+      "category": "realestate",
+      "preview": "[서울=뉴시스]이지영 기자 = 정부의 종합부동산세 개편으로 고가주택 보유자의 세 부담이 커지면서 서울을 중심으로 월세 급등 현상이 나타날 것이란 분석이 나왔다. 집주인이 늘어난 종부세를 임대료에 반영할 경우 청년과…",
+      "dupes": [],
+      "titleEn": "Monthly rent in Seoul to reach 10,000,000 won as property tax reform hits tenants"
+    },
     {
       "title": "“생애최초 혜택 유지된다고?”…청년 비아파트 지원 대책에 ‘눈길’",
       "link": "https://www.mk.co.kr/news/realestate/12128759",
@@ -36,7 +126,7 @@
       "category": "realestate",
       "preview": "전용 84㎡A·C·F, 113㎡A·121㎡ 특화 평면·수납공간에 관심 85㎡ 초과 일반공급 전량 추첨제 적용 가점 낮은 수요자도 당첨 기회롯데건설이 경기도 부천시 원미구 상동에서..",
       "dupes": [],
-      "titleEn": "Directly seeing it exceeded expectations\"… 'Sangdong Station Lotte Castle Signature' Model House Visitors Praise"
+      "titleEn": "Better than expected\"… Visitors to 'Sangdong Station Lotte Castle Signature' model house praise the project"
     },
     {
       "title": "노원구 하계동 극동아파트 55.72㎡, 7억원 최근 3년 신고가",
@@ -56,7 +146,7 @@
       "category": "other",
       "preview": "[서울=뉴시스]정진형 기자 = 정부가 도심 주택 공급을 늘리기 위해 8·13 대책에 이주비 대출 규제를 완화하고 관련 보증 상품을 신설하는 계획을 발표하면서 중소·중견 건설사들의 서울 수도권 정비사업 도전 길이 열릴…",
       "dupes": [],
-      "titleEn": "Easing of relocation loan sparks opportunity for SMEs and mid-sized companies in renovation projects"
+      "titleEn": "Easing of relocation loan sparks opportunities for SMEs and mid-sized companies in renovation projects"
     },
     {
       "title": "‘한국 부동산 쇼핑’ 즐기던 왕서방 다 어디갔나…이 제도 탓에 발길 끊겼다는데",
@@ -66,7 +156,7 @@
       "category": "realestate",
       "preview": "외국인 토허제 시행 1년 부동산 쇼핑 2000명 뚝 국토부 시한연장 검토중외국인 토지거래허가구역 시행 1년 간 수도권에서 아파트나 상가 등을 사들인 외국인 수가 2000명 넘게 급..",
       "dupes": [],
-      "titleEn": "Where Did the King of \"Korean Real Estate Shopping\" Go? Allegedly Stopped by This System"
+      "titleEn": "Where Did the King's Shopping Spree in South Korean Real Estate Go? It Seems This System Has Halted His Footsteps"
     },
     {
       "title": "[다음주 경제] 올해 성장전망 얼마나 높아질까…가계부채 규모도 주목",
@@ -76,7 +166,7 @@
       "category": "other",
       "preview": "(서울=연합뉴스) 이세원 한지훈 배영경 기자 = 다음 주(8월 17∼21일)에는 한국개발연구원(KDI)의 수정 경제전망이 발표된다. 한국은행이 ...",
       "dupes": [],
-      "titleEn": "[Next Week's Economy] How high could this year's growth outlook rise... household debt size also in focus"
+      "titleEn": "[Next Week's Economy] How high could this year's growth forecast rise... household debt size also in focus"
     },
     {
       "title": "[머니톡스] 서울로 서울로…해방의 기쁨과 함께 시작된 주택난",
@@ -86,7 +176,7 @@
       "category": "realestate",
       "preview": "(서울=연합뉴스) 윤선희 선임기자 = ＃ 1945년 서울역사는 몸살을 앓았다. 만주, 일본, 중국 등지에서 돌아온 귀환 동포와 월남민들이 매일 ...",
       "dupes": [],
-      "titleEn": "[Moneytalks] From Seoul to Seoul... Housing crisis began with the joy of liberation"
+      "titleEn": "[MoneysTalks] From Seoul to Seoul... the housing crisis began with the joy of liberation"
     },
     {
       "title": "7월 미 소비자 지출 큰 폭 감소…경제 둔화 가능성",
@@ -96,17 +186,7 @@
       "category": "other",
       "preview": "[뉴욕=AP/뉴시스]강영진 기자 = 지난달 미국인들의 소비가 예상과 달리 큰 폭으로 줄었다. 미 상무부가 14일(현지시각) 발표한 자료에 따르면 소매판매는 지난달 0.6% 감소했다. 이는 2025년 5월 이후 가장…",
       "dupes": [],
-      "titleEn": "July U.S. Consumer Spending Plummets Sharply... Risk of Economic Slowdown"
-    },
-    {
-      "title": "[부동산캘린더] 내주 서울 신길동 써밋클라비온 등 3천788가구 분양",
-      "link": "https://www.yna.co.kr/view/AKR20260814142900003",
-      "publishedAt": "2026-08-14T21:05:01.000Z",
-      "source": "연합뉴스 경제",
-      "category": "realestate",
-      "preview": "(세종=연합뉴스) 오진송 기자 = 다음 주 전국에서 3천788가구가 분양에 나선다.",
-      "dupes": [],
-      "titleEn": "Real Estate Calendar: Next week's Seoul Sin-gil-dong Summit Klavion and others to offer 3,788 units for sale"
+      "titleEn": "July US Consumer Spending Plummets Sharply... Possibility of Economic Slowdown"
     },
     {
       "title": "美재무 \"다음주 이란 고강도 경제제재\"…국제유가, 1%대 상승",
@@ -116,7 +196,7 @@
       "category": "other",
       "preview": "[서울=뉴시스]고재은 기자 = 미국이 이란에 대한 경제적 고립을 재차 위협한 가운데 국제 유가가 14일(현지 시간) 1%대 상승 마감했다. CNBC 등에 따르면 이날 유럽 ICE선물거래소에서 브렌트유 10월 인도분…",
       "dupes": [],
-      "titleEn": "U.S. Treasury: \"High-intensity economic sanctions on Iran next week\"... International oil prices rise over 1%"
+      "titleEn": "U.S. Treasury: \"High-Intensity Economic Sanctions on Iran Next Week\"... International Oil Prices Rise Over 1%"
     },
     {
       "title": "20년 묵은 '골칫거리' 염창공원, 1천가구 공공주택 품는다[8·13 신규택지 돋보기①]",
@@ -126,7 +206,7 @@
       "category": "realestate",
       "preview": "[서울=뉴시스] 박성환 기자 = 정부가 서울 강서구 염창동과 경기 남양주·광주 등 수도권 3곳에 신규 공공주택지구를 조성해 2만7000가구를 공급한다. 특히 서울 강서구 염창동 염창공원은 서울 도심 내 신규 공공택지…",
       "dupes": [],
-      "titleEn": "20-Year-Old 'Problem Child' Eumcheong Park to Embrace 1,000-Household Public Housing [8·13 New Development Site Spotlight①]"
+      "titleEn": "20-Year-Old 'Problem Child' Eumcheong Park to House 1,000-Household Public Housing [8·13 New Development Site Spotlight①]"
     },
     {
       "title": "뉴욕증시, 숨고르기에 소폭 하락…나스닥 0.28%↓",
@@ -136,7 +216,7 @@
       "category": "stocks",
       "preview": "[서울=뉴시스]고재은 기자 = 미국 뉴욕증시가 사상 최고치를 기록한 이후 14일(현지 시간) 소폭 하락 마감했다. CNBC 등에 따르면 스탠더드앤드푸어스(S&P) 500 지수는 전장 대비 13.23포인트(0.17%)…",
       "dupes": [],
-      "titleEn": "New York stock market slightly declines as it takes a breather... Nasdaq down 0.28%"
+      "titleEn": "New York stock market declines slightly as it takes a breather... Nasdaq down 0.28%"
     },
     {
       "title": "[속보]뉴욕증시, 소폭 하락 마감…나스닥 0.28%↓",
@@ -147,46 +227,6 @@
       "preview": "후속기사가 이어집니다 ◎공감언론 뉴시스 jeko@newsis.com",
       "dupes": [],
       "titleEn": "[Breaking News] NY Stock Market Closes Slightly Lower... Nasdaq Down 0.28%"
-    },
-    {
-      "title": "68개월→37개월…'빨리 짓기' 승부수, 주택 공급 체감 높일까",
-      "link": "https://www.newsis.com/view/NISX20260813_0003748455",
-      "publishedAt": "2026-08-14T19:00:00.000Z",
-      "source": "뉴시스 경제",
-      "category": "realestate",
-      "preview": "[서울=뉴시스]이연희 기자 = 정부가 공공택지와 비아파트, 재건축·재개발 등 주택 공급 전반에서 '물량'보다 '속도'에 초점을 맞춘 대책을 내놨다. 계획대로 추진될 경우 이재명 정부 임기 내 신규 택지 분양과 착공까…",
-      "dupes": [],
-      "titleEn": "68 Months→37 Months… 'Build Faster' Strategy May Boost Housing Supply Perception"
-    },
-    {
-      "title": "美 증시 얼마나 과열됐길래…'버핏 지표' 238% 사상 최고",
-      "link": "https://www.newsis.com/view/NISX20260814_0003749453",
-      "publishedAt": "2026-08-14T15:15:00.000Z",
-      "source": "뉴시스 경제",
-      "category": "stocks",
-      "preview": "[서울=뉴시스]이지영 기자 = 미국 증시의 과열 여부를 나타내는 이른바 '버핏 지표'가 사상 최고치를 기록했다. 14일(현지시간) 미국 투자전문매체 모틀리풀에 따르면 이날 버핏 지표는 238%까지 치솟았다. 역대 최…",
-      "dupes": [],
-      "titleEn": "How overheated is the U.S. stock market... 'Buffett indicator' hits all-time high of 238%"
-    },
-    {
-      "title": "'테라스 붕괴' 아파트 찾은 박찬대 \"시공·감리 책임 묻겠다\"",
-      "link": "https://www.yna.co.kr/view/AKR20260814171200065",
-      "publishedAt": "2026-08-14T10:07:47.000Z",
-      "source": "연합뉴스 경제",
-      "category": "realestate",
-      "preview": "(인천=연합뉴스) 홍현기 기자 = 박찬대 인천시장은 14일 준공 1년 6개월 만에 외벽 테라스가 무너진 인천 송도국제도시 아파트를 찾아 시공사와...",
-      "dupes": [],
-      "titleEn": "Park Chan-deog visits apartment where \"terrace collapse\" occurred, vows to hold construction and supervision responsible"
-    },
-    {
-      "title": "용산공원 부지에 주택공급 두고 정부-서울시 입장차 뚜렷(종합2보)",
-      "link": "https://www.yna.co.kr/view/AKR20260814050552003",
-      "publishedAt": "2026-08-14T08:48:00.000Z",
-      "source": "연합뉴스 경제",
-      "category": "realestate",
-      "preview": "(서울·세종=연합뉴스) 임기창 오진송 김동규 기자 = 서울 용산공원 부지를 활용해 도심에 주택을 공급하는 방안을 두고 정부와 서울시가 뚜렷한 견...",
-      "dupes": [],
-      "titleEn": "Government and Seoul City Have Clear Diverging Views on Housing Supply at Yongsan Park Site (Comprehensive Report 2)"
     },
     {
       "title": "서울시 “용산공원 훼손해 주택 공급, 매우 신중해야”",
@@ -213,46 +253,6 @@
       "preview": null,
       "dupes": [],
       "titleEn": "Kim Yoon-deok minister considers entire Yongsan Park as potential housing supply site"
-    },
-    {
-      "title": "올해 가계대출 증가액, 벌써 작년 육박",
-      "link": "https://www.hankyung.com/article/2026081425081",
-      "publishedAt": "2026-08-14T08:30:43.000Z",
-      "source": "한국경제 경제",
-      "category": "other",
-      "preview": null,
-      "dupes": [],
-      "titleEn": "Household loan growth this year already nearing last year's figure"
-    },
-    {
-      "title": "연휴 앞두고 국고채 금리 혼조세…초장기물 하락(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260814141251008",
-      "publishedAt": "2026-08-14T08:08:09.000Z",
-      "source": "연합뉴스 경제",
-      "category": "rates",
-      "preview": "(서울=연합뉴스) 강수지 기자 = 14일 국고채 금리가 혼조세를 보였다.",
-      "dupes": [],
-      "titleEn": "Mixed performance of government bond yields ahead of holiday, long-term bonds fall (comprehensive)"
-    },
-    {
-      "title": "50년 된 용산 산호아파트, 35층 679가구로 탈바꿈",
-      "link": "https://www.hankyung.com/article/2026081423891",
-      "publishedAt": "2026-08-14T08:07:02.000Z",
-      "source": "한국경제 부동산",
-      "category": "realestate",
-      "preview": null,
-      "dupes": [],
-      "titleEn": "50-year-old Yongsan Sango Apartment to be transformed into 35-floor, 679-unit complex"
-    },
-    {
-      "title": "전·월세 안정화 카드?…'안심신탁'이 뭐길래",
-      "link": "https://www.hankyung.com/article/2026081423931",
-      "publishedAt": "2026-08-14T08:06:07.000Z",
-      "source": "한국경제 부동산",
-      "category": "realestate",
-      "preview": null,
-      "dupes": [],
-      "titleEn": "전·월세 안정화 카드?…'안심신탁'이 뭐길래"
     }
   ]
 }

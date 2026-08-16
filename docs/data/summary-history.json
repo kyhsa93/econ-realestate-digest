@@ -389,5 +389,129 @@
         ]
       }
     ]
+  },
+  {
+    "date": "2026-08-16",
+    "model": "qwen3:14b",
+    "summary": {
+      "ko": "- 부동산 관련 뉴스에서 증권가가 부동산 공급대책에 주목하고, 수도권 새 아파트 분양에 대한 관심이 높아지고 있으며, 세제개편에 대한 반발로 1주택 양도세 완화법 논의가 이어지고 있고, 고가 아파트의 저렴한 거래 사례가 등장했으며, 종부세 개편으로 인해 월세 상황에 대한 우려가 나오고 있다.\n- 코스피는 한주 내내 바닥다진 후 상승흐름을 이어갈 가능성이 있고, 뉴욕증시는 숨고르기에 소폭 하락했으며, 나스닥도 소폭 하락 마감했다.\n- 가계부채 증가와 금리 인상기의 건전성 문제에 대한 경고가 제기됐다.\n- 집단대출 별도 관리, 신규 대출여력 배분, 이주비 대출 완화, 성장전망과 가계부채 규모, 미 소비자 지출 감소 등 다양한 경제 관련 소식들이 오늘 보도되었다.",
+      "en": "- In real estate-related news, the securities industry is focusing on real estate supply measures, interest in new apartment sales in the Seoul metropolitan area is increasing, discussions on easing the capital gains tax for single-homeowners continue due to backlash against tax code revisions, inexpensive transaction cases of high-priced apartments are emerging, and concerns about rental situations are arising due to revisions in the property tax.\n- The KOSPI may continue its upward trend after hitting a low for the week, while the New York stock market slightly declined to catch its breath, and the Nasdaq also closed with a slight decline.\n- Warnings were raised about the debt problems of households and the soundness issues during periods of interest rate hikes.\n- Various economic-related news, including separate management of group loans, allocation of new loan capacity, easing of relocation expense loans, household debt scale and growth outlook, and a decline in U.S. consumer spending, were reported today."
+    },
+    "categories": [
+      {
+        "key": "realestate",
+        "name": "부동산",
+        "nameEn": "Real Estate",
+        "lineKo": "부동산 관련 뉴스에서 증권가가 부동산 공급대책에 주목하고, 수도권 새 아파트 분양에 대한 관심이 높아지고 있으며, 세제개편에 대한 반발로 1주택 양도세 완화법 논의가 이어지고 있고, 고가 아파트의 저렴한 거래 사례가 등장했으며, 종부세 개편으로 인해 월세 상황에 대한 우려가 나오고 있다.",
+        "lineEn": "In real estate-related news, the securities industry is focusing on real estate supply measures, interest in new apartment sales in the Seoul metropolitan area is increasing, discussions on easing the capital gains tax for single-homeowners continue due to backlash against tax code revisions, inexpensive transaction cases of high-priced apartments are emerging, and concerns about rental situations are arising due to revisions in the property tax.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "items": [
+          {
+            "title": "증권가, 8·13 부동산 공급대책에 \"중견건설사 모멘텀 주목\"",
+            "link": "https://www.yna.co.kr/view/AKR20260815020900008",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "1억대 자금으로 수도권 새 아파트?…25%만 먼저 사는 집 나온다",
+            "link": "https://www.yna.co.kr/view/AKR20260815044700003",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "세제개편 반발에… 국회서 1주택 양도세 완화법 잇따라",
+            "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/16/GZ3WCIHUT5DMNBVGML543XN42I/",
+            "source": "조선비즈 부동산"
+          },
+          {
+            "title": "시세 21억 아파트 10억원에…'송파 롯데캐슬' 줍줍 18일 등판",
+            "link": "https://www.newsis.com/view/NISX20260814_0003749863",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "\"서울 월세 1000만원 흔해질 것\"…종부세 개편에 세입자 '불똥'",
+            "link": "https://www.newsis.com/view/NISX20260814_0003748914",
+            "source": "뉴시스 경제"
+          }
+        ]
+      },
+      {
+        "key": "stocks",
+        "name": "증시·환율",
+        "nameEn": "Stocks & FX",
+        "lineKo": "코스피는 한주 내내 바닥다진 후 상승흐름을 이어갈 가능성이 있고, 뉴욕증시는 숨고르기에 소폭 하락했으며, 나스닥도 소폭 하락 마감했다.",
+        "lineEn": "The KOSPI may continue its upward trend after hitting a low for the week, while the New York stock market slightly declined to catch its breath, and the Nasdaq also closed with a slight decline.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "items": [
+          {
+            "title": "[마켓인사이트] 한주 내내 바닥다진 코스피, 상승흐름 이어가나",
+            "link": "https://www.yna.co.kr/view/AKR20260814186600008",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "뉴욕증시, 숨고르기에 소폭 하락…나스닥 0.28%↓",
+            "link": "https://www.newsis.com/view/NISX20260815_0003750403",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "[속보]뉴욕증시, 소폭 하락 마감…나스닥 0.28%↓",
+            "link": "https://www.newsis.com/view/NISX20260815_0003750399",
+            "source": "뉴시스 경제"
+          }
+        ]
+      },
+      {
+        "key": "rates",
+        "name": "금리·예금·투자상품",
+        "nameEn": "Rates, Deposits & Investment Products",
+        "lineKo": "가계부채 증가와 금리 인상기의 건전성 문제에 대한 경고가 제기됐다.",
+        "lineEn": "Warnings were raised about the debt problems of households and the soundness issues during periods of interest rate hikes.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "items": [
+          {
+            "title": "'가계부채 2천조원' 시대 진입…금리 인상기 건전성 비상",
+            "link": "https://www.yna.co.kr/view/AKR20260815039600002",
+            "source": "연합뉴스 경제"
+          }
+        ]
+      },
+      {
+        "key": "other",
+        "name": "기타 경제 소식",
+        "nameEn": "Other Economic News",
+        "lineKo": "집단대출 별도 관리, 신규 대출여력 배분, 이주비 대출 완화, 성장전망과 가계부채 규모, 미 소비자 지출 감소 등 다양한 경제 관련 소식들이 오늘 보도되었다.",
+        "lineEn": "Various economic-related news, including separate management of group loans, allocation of new loan capacity, easing of relocation expense loans, household debt scale and growth outlook, and a decline in U.S. consumer spending, were reported today.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "items": [
+          {
+            "title": "집단대출 별도 관리로 '한도 제로' 상호금융도 여력 생긴다",
+            "link": "https://www.yna.co.kr/view/AKR20260815046400002",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "신규 대출여력 30조 금융권 배분 본격 착수…19일 첫 실무회의",
+            "link": "https://www.yna.co.kr/view/AKR20260815045000002",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "이주비 대출 완화…중소·중견사 정비사업 기회 열리나",
+            "link": "https://www.newsis.com/view/NISX20260814_0003750050",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "[다음주 경제] 올해 성장전망 얼마나 높아질까…가계부채 규모도 주목",
+            "link": "https://www.yna.co.kr/view/AKR20260815011500002",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "7월 미 소비자 지출 큰 폭 감소…경제 둔화 가능성",
+            "link": "https://www.newsis.com/view/NISX20260815_0003750408",
+            "source": "뉴시스 경제"
+          }
+        ]
+      }
+    ]
   }
 ]

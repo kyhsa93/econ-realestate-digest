@@ -1,44 +1,86 @@
 {
-  "updatedAt": "2026-08-15T11:28:54.325Z",
+  "updatedAt": "2026-08-15T23:43:56.626Z",
   "model": "qwen3:14b",
   "summary": {
-    "ko": "- 부동산: “생애최초 혜택 유지된다고?”…청년 비아파트 지원 대책에 ‘눈길’, 용산구 “용산공원 주택공급 검토 강력 반대”, “직접 보니 기대 이상”… ‘상동역 롯데캐슬 시그니처’ 견본주택 방문객 호평 +12\n- 이주비 대출 완화, 성장전망과 가계부채 규모, 미국 소비자 지출 감소, 이란 경제제재 발표, 가계대출 증가 등 다양한 경제 관련 소식들이 오늘 전해졌다.\n- 뉴욕증시가 소폭 하락 마감했고, 미국 증시의 과열 수준이 매우 높은 것으로 나타났다.\n- 연휴 앞두고 국고채 금리 혼조세, 초장기물 하락 등 금리·예금·투자상품 관련 주요 동향이 나타났다.",
-    "en": "- Real Estate: “생애최초 혜택 유지된다고?”…청년 비아파트 지원 대책에 ‘눈길’, 용산구 “용산공원 주택공급 검토 강력 반대”, “직접 보니 기대 이상”… ‘상동역 롯데캐슬 시그니처’ 견본주택 방문객 호평 +12\n- Various economic news, including eased immigration loan conditions, growth outlook and household debt levels, declining U.S. consumer spending, Iran's economic sanctions announcement, and increased household loans, were reported today.\n- The New York stock market closed slightly lower, and the overheated level of the U.S. stock market was found to be very high.\n- Before the holiday, government bond rates showed mixed trends, with long-term bonds declining, and major trends related to interest rates, deposits, and investment products emerged."
+    "ko": "- 부동산 관련 뉴스에서 증권가가 부동산 공급대책에 주목하고, 수도권 새 아파트 분양에 대한 관심이 높아지고 있으며, 세제개편에 대한 반발로 1주택 양도세 완화법 논의가 이어지고 있고, 고가 아파트의 저렴한 거래 사례가 등장했으며, 종부세 개편으로 인해 월세 상황에 대한 우려가 나오고 있다.\n- 코스피는 한주 내내 바닥다진 후 상승흐름을 이어갈 가능성이 있고, 뉴욕증시는 숨고르기에 소폭 하락했으며, 나스닥도 소폭 하락 마감했다.\n- 가계부채 증가와 금리 인상기의 건전성 문제에 대한 경고가 제기됐다.\n- 집단대출 별도 관리, 신규 대출여력 배분, 이주비 대출 완화, 성장전망과 가계부채 규모, 미 소비자 지출 감소 등 다양한 경제 관련 소식들이 오늘 보도되었다.",
+    "en": "- In real estate-related news, the securities industry is focusing on real estate supply measures, interest in new apartment sales in the Seoul metropolitan area is increasing, discussions on easing the capital gains tax for single-homeowners continue due to backlash against tax code revisions, inexpensive transaction cases of high-priced apartments are emerging, and concerns about rental situations are arising due to revisions in the property tax.\n- The KOSPI may continue its upward trend after hitting a low for the week, while the New York stock market slightly declined to catch its breath, and the Nasdaq also closed with a slight decline.\n- Warnings were raised about the debt problems of households and the soundness issues during periods of interest rate hikes.\n- Various economic-related news, including separate management of group loans, allocation of new loan capacity, easing of relocation expense loans, household debt scale and growth outlook, and a decline in U.S. consumer spending, were reported today."
   },
   "categories": [
     {
       "key": "realestate",
       "name": "부동산",
       "nameEn": "Real Estate",
-      "lineKo": "부동산: “생애최초 혜택 유지된다고?”…청년 비아파트 지원 대책에 ‘눈길’, 용산구 “용산공원 주택공급 검토 강력 반대”, “직접 보니 기대 이상”… ‘상동역 롯데캐슬 시그니처’ 견본주택 방문객 호평 +12",
-      "lineEn": "Real Estate: “생애최초 혜택 유지된다고?”…청년 비아파트 지원 대책에 ‘눈길’, 용산구 “용산공원 주택공급 검토 강력 반대”, “직접 보니 기대 이상”… ‘상동역 롯데캐슬 시그니처’ 견본주택 방문객 호평 +12",
-      "isFallback": true,
-      "fallbackReason": "unverified-entity",
+      "lineKo": "부동산 관련 뉴스에서 증권가가 부동산 공급대책에 주목하고, 수도권 새 아파트 분양에 대한 관심이 높아지고 있으며, 세제개편에 대한 반발로 1주택 양도세 완화법 논의가 이어지고 있고, 고가 아파트의 저렴한 거래 사례가 등장했으며, 종부세 개편으로 인해 월세 상황에 대한 우려가 나오고 있다.",
+      "lineEn": "In real estate-related news, the securities industry is focusing on real estate supply measures, interest in new apartment sales in the Seoul metropolitan area is increasing, discussions on easing the capital gains tax for single-homeowners continue due to backlash against tax code revisions, inexpensive transaction cases of high-priced apartments are emerging, and concerns about rental situations are arising due to revisions in the property tax.",
+      "isFallback": false,
+      "fallbackReason": null,
       "items": [
         {
-          "title": "“생애최초 혜택 유지된다고?”…청년 비아파트 지원 대책에 ‘눈길’",
-          "link": "https://www.mk.co.kr/news/realestate/12128759",
-          "source": "매일경제 부동산"
+          "title": "증권가, 8·13 부동산 공급대책에 \"중견건설사 모멘텀 주목\"",
+          "link": "https://www.yna.co.kr/view/AKR20260815020900008",
+          "source": "연합뉴스 경제"
         },
         {
-          "title": "용산구 “용산공원 주택공급 검토 강력 반대”",
-          "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/15/PYKGMEOY7FD7TH45AVSHL3B2BQ/",
+          "title": "1억대 자금으로 수도권 새 아파트?…25%만 먼저 사는 집 나온다",
+          "link": "https://www.yna.co.kr/view/AKR20260815044700003",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "세제개편 반발에… 국회서 1주택 양도세 완화법 잇따라",
+          "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/16/GZ3WCIHUT5DMNBVGML543XN42I/",
           "source": "조선비즈 부동산"
         },
         {
-          "title": "“직접 보니 기대 이상”… ‘상동역 롯데캐슬 시그니처’ 견본주택 방문객 호평",
-          "link": "https://www.mk.co.kr/news/realestate/12128719",
-          "source": "매일경제 부동산"
+          "title": "시세 21억 아파트 10억원에…'송파 롯데캐슬' 줍줍 18일 등판",
+          "link": "https://www.newsis.com/view/NISX20260814_0003749863",
+          "source": "뉴시스 경제"
         },
         {
-          "title": "노원구 하계동 극동아파트 55.72㎡, 7억원 최근 3년 신고가",
-          "link": "https://www.mk.co.kr/news/realestate/12128717",
-          "source": "매일경제 부동산"
+          "title": "\"서울 월세 1000만원 흔해질 것\"…종부세 개편에 세입자 '불똥'",
+          "link": "https://www.newsis.com/view/NISX20260814_0003748914",
+          "source": "뉴시스 경제"
+        }
+      ]
+    },
+    {
+      "key": "stocks",
+      "name": "증시·환율",
+      "nameEn": "Stocks & FX",
+      "lineKo": "코스피는 한주 내내 바닥다진 후 상승흐름을 이어갈 가능성이 있고, 뉴욕증시는 숨고르기에 소폭 하락했으며, 나스닥도 소폭 하락 마감했다.",
+      "lineEn": "The KOSPI may continue its upward trend after hitting a low for the week, while the New York stock market slightly declined to catch its breath, and the Nasdaq also closed with a slight decline.",
+      "isFallback": false,
+      "fallbackReason": null,
+      "items": [
+        {
+          "title": "[마켓인사이트] 한주 내내 바닥다진 코스피, 상승흐름 이어가나",
+          "link": "https://www.yna.co.kr/view/AKR20260814186600008",
+          "source": "연합뉴스 경제"
         },
         {
-          "title": "‘한국 부동산 쇼핑’ 즐기던 왕서방 다 어디갔나…이 제도 탓에 발길 끊겼다는데",
-          "link": "https://www.mk.co.kr/news/realestate/12128680",
-          "source": "매일경제 부동산"
+          "title": "뉴욕증시, 숨고르기에 소폭 하락…나스닥 0.28%↓",
+          "link": "https://www.newsis.com/view/NISX20260815_0003750403",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "[속보]뉴욕증시, 소폭 하락 마감…나스닥 0.28%↓",
+          "link": "https://www.newsis.com/view/NISX20260815_0003750399",
+          "source": "뉴시스 경제"
+        }
+      ]
+    },
+    {
+      "key": "rates",
+      "name": "금리·예금·투자상품",
+      "nameEn": "Rates, Deposits & Investment Products",
+      "lineKo": "가계부채 증가와 금리 인상기의 건전성 문제에 대한 경고가 제기됐다.",
+      "lineEn": "Warnings were raised about the debt problems of households and the soundness issues during periods of interest rate hikes.",
+      "isFallback": false,
+      "fallbackReason": null,
+      "items": [
+        {
+          "title": "'가계부채 2천조원' 시대 진입…금리 인상기 건전성 비상",
+          "link": "https://www.yna.co.kr/view/AKR20260815039600002",
+          "source": "연합뉴스 경제"
         }
       ]
     },
@@ -46,11 +88,21 @@
       "key": "other",
       "name": "기타 경제 소식",
       "nameEn": "Other Economic News",
-      "lineKo": "이주비 대출 완화, 성장전망과 가계부채 규모, 미국 소비자 지출 감소, 이란 경제제재 발표, 가계대출 증가 등 다양한 경제 관련 소식들이 오늘 전해졌다.",
-      "lineEn": "Various economic news, including eased immigration loan conditions, growth outlook and household debt levels, declining U.S. consumer spending, Iran's economic sanctions announcement, and increased household loans, were reported today.",
+      "lineKo": "집단대출 별도 관리, 신규 대출여력 배분, 이주비 대출 완화, 성장전망과 가계부채 규모, 미 소비자 지출 감소 등 다양한 경제 관련 소식들이 오늘 보도되었다.",
+      "lineEn": "Various economic-related news, including separate management of group loans, allocation of new loan capacity, easing of relocation expense loans, household debt scale and growth outlook, and a decline in U.S. consumer spending, were reported today.",
       "isFallback": false,
       "fallbackReason": null,
       "items": [
+        {
+          "title": "집단대출 별도 관리로 '한도 제로' 상호금융도 여력 생긴다",
+          "link": "https://www.yna.co.kr/view/AKR20260815046400002",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "신규 대출여력 30조 금융권 배분 본격 착수…19일 첫 실무회의",
+          "link": "https://www.yna.co.kr/view/AKR20260815045000002",
+          "source": "연합뉴스 경제"
+        },
         {
           "title": "이주비 대출 완화…중소·중견사 정비사업 기회 열리나",
           "link": "https://www.newsis.com/view/NISX20260814_0003750050",
@@ -65,58 +117,6 @@
           "title": "7월 미 소비자 지출 큰 폭 감소…경제 둔화 가능성",
           "link": "https://www.newsis.com/view/NISX20260815_0003750408",
           "source": "뉴시스 경제"
-        },
-        {
-          "title": "美재무 \"다음주 이란 고강도 경제제재\"…국제유가, 1%대 상승",
-          "link": "https://www.newsis.com/view/NISX20260815_0003750405",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "올해 가계대출 증가액, 벌써 작년 육박",
-          "link": "https://www.hankyung.com/article/2026081425081",
-          "source": "한국경제 경제"
-        }
-      ]
-    },
-    {
-      "key": "stocks",
-      "name": "증시·환율",
-      "nameEn": "Stocks & FX",
-      "lineKo": "뉴욕증시가 소폭 하락 마감했고, 미국 증시의 과열 수준이 매우 높은 것으로 나타났다.",
-      "lineEn": "The New York stock market closed slightly lower, and the overheated level of the U.S. stock market was found to be very high.",
-      "isFallback": false,
-      "fallbackReason": null,
-      "items": [
-        {
-          "title": "뉴욕증시, 숨고르기에 소폭 하락…나스닥 0.28%↓",
-          "link": "https://www.newsis.com/view/NISX20260815_0003750403",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "[속보]뉴욕증시, 소폭 하락 마감…나스닥 0.28%↓",
-          "link": "https://www.newsis.com/view/NISX20260815_0003750399",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "美 증시 얼마나 과열됐길래…'버핏 지표' 238% 사상 최고",
-          "link": "https://www.newsis.com/view/NISX20260814_0003749453",
-          "source": "뉴시스 경제"
-        }
-      ]
-    },
-    {
-      "key": "rates",
-      "name": "금리·예금·투자상품",
-      "nameEn": "Rates, Deposits & Investment Products",
-      "lineKo": "연휴 앞두고 국고채 금리 혼조세, 초장기물 하락 등 금리·예금·투자상품 관련 주요 동향이 나타났다.",
-      "lineEn": "Before the holiday, government bond rates showed mixed trends, with long-term bonds declining, and major trends related to interest rates, deposits, and investment products emerged.",
-      "isFallback": false,
-      "fallbackReason": null,
-      "items": [
-        {
-          "title": "연휴 앞두고 국고채 금리 혼조세…초장기물 하락(종합)",
-          "link": "https://www.yna.co.kr/view/AKR20260814141251008",
-          "source": "연합뉴스 경제"
         }
       ]
     }
