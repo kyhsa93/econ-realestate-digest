@@ -2,9 +2,10 @@
 // 링크를 눌러 도착한 표의 맨 윗줄과 값이 다르면 이 기능은 신뢰를 깎아먹는다.
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { access, readFile } from "node:fs/promises";
 import path from "node:path";
 import { attachContext, bestRate, buildContext, findDistrict } from "../scripts/news-context.mjs";
+import { DISTRICT_PAGES, DISTRICT_SLUGS } from "../scripts/district-slugs.mjs";
 import { newsContextHtml, newsListHtml, ratesHtml } from "../scripts/prerender.mjs";
 import { loadNewsPage } from "./helpers/news-page.mjs";
 
@@ -45,7 +46,35 @@ test("자치구를 짚은 부동산 기사에 그 구의 평당가가 붙는다"
   assert.equal(first.kind, "realestate");
   assert.equal(first.label, "송파구 아파트 매매");
   assert.equal(first.value, "6,912만원/평");
-  assert.equal(first.href, "./index.html#realestate-section");
+  assert.equal(first.href, "./district-songpa.html");
+});
+
+// 칩은 "그 수치가 주인공인 페이지"로 보내야 한다. 예전엔 전부 메인 시세 표로 보냈는데,
+// 그 표는 상위 10개 구만 담고 있어서 노원구 칩을 누르면 노원구가 없는 표에 도착했다.
+test("자치구 칩은 그 구 페이지로, 서울 전체 칩은 거래 유형별 페이지로 간다", () => {
+  assert.equal(context("노원구 아파트 신고가")[0].href, "./district-nowon.html");
+  assert.equal(context("송파 전세 매물 급감")[0].href, "./district-songpa.html");
+
+  assert.equal(context("서울 빌라값 들썩")[0].href, "./apartment-sale.html");
+  assert.equal(context("서울 전세 계약 전 확인하세요")[0].href, "./apartment-jeonse.html");
+  assert.equal(context('"서울 월세 1000만원 흔해질 것"')[0].href, "./apartment-rent.html");
+});
+
+// 링크가 404면 없느니만 못하다. 붙을 수 있는 목적지가 전부 실제로 찍히는지 본다.
+test("칩이 가리키는 페이지가 모두 존재한다", async () => {
+  const targets = new Set(
+    [...DISTRICT_PAGES.map((d) => `./${d.file}`), "./apartment-sale.html", "./apartment-jeonse.html", "./apartment-rent.html"]
+  );
+  for (const href of targets) {
+    await access(path.join(root, "docs", href.slice(2)));
+  }
+
+  const districts = REALESTATE.districts.map((d) => d.name);
+  assert.deepEqual(
+    districts.filter((name) => !targets.has(`./district-${DISTRICT_SLUGS[name]}.html`)),
+    [],
+    "자치구 페이지가 없는 지역에 칩이 붙는다"
+  );
 });
 
 // "강남 살인사건"에 평당가가 붙는 화면은 만들지 않는다.

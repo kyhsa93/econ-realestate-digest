@@ -18,6 +18,7 @@
 // 뉴스가 갱신될 때마다(하루 4회) 최신 데이터로 다시 계산하므로 값이 묵지 않는다.
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { DISTRICT_SLUGS, districtFile } from "./district-slugs.mjs";
 import { MIN_SAMPLE } from "./prerender.mjs";
 
 // 한 기사에 두 개까지만. 세 개부터는 기사 제목보다 수치가 눈에 먼저 들어온다.
@@ -82,7 +83,21 @@ const RATE_RULES = [
 const SAVING_TERM = 12;
 const SAVING_CATEGORIES = new Set(["deposit", "saving"]);
 
-const REALESTATE_HREF = "./index.html#realestate-section";
+// 칩을 누른 사람이 도착해야 할 곳은 "그 칩에 적힌 수치가 주인공인 페이지"다.
+// 한동안 전부 메인의 시세 표(#realestate-section)로 보냈는데, 그 표는 서울 전체와
+// 상위 10개 구만 담고 있어서 "노원구 평당가" 칩을 누르면 노원구가 없는 표에
+// 도착했다. 자치구 페이지 25개와 거래 유형별 페이지 3개를 이미 찍고 있으므로
+// 칩이 가리키는 지역·유형 그대로 보낸다.
+const OVERALL_HREF = {
+  sale: "./apartment-sale.html",
+  jeonse: "./apartment-jeonse.html",
+  wolse: "./apartment-rent.html",
+};
+
+// 자치구 페이지는 한 지역의 매매·전세·월세를 한 화면에 담으므로 유형과 무관하게 하나다.
+// 슬러그가 없는 이름(데이터에 새 지역이 생긴 경우)은 유형별 페이지로 보낸다.
+const hrefFor = (slug, kind) =>
+  slug ? `./${districtFile(slug)}` : OVERALL_HREF[kind] ?? OVERALL_HREF.sale;
 
 const hasAny = (text, words) => words.some((word) => text.includes(word));
 
@@ -120,7 +135,7 @@ export function findDistrict(text, districts = []) {
 //
 // 값은 전부 국토부 아파트 실거래 신고분이라, 빌라·오피스텔 기사에 붙어도 오해가
 // 없도록 라벨에 '아파트'를 반드시 남긴다.
-function realestateEntry(entry, name, nameEn, text) {
+function realestateEntry(entry, name, nameEn, text, slug) {
   const wantsJeonse = text.includes("전세") || text.includes("전셋값");
   const wantsWolse = text.includes("월세") || text.includes("임대료");
 
@@ -140,7 +155,7 @@ function realestateEntry(entry, name, nameEn, text) {
         labelEn: `${nameEn} apartment sale`,
         value: pyeongKo(metric.avgPricePerPyeong10k),
         valueEn: pyeongEn(metric.avgPricePerPyeong10k),
-        href: REALESTATE_HREF,
+        href: hrefFor(slug, "sale"),
       };
     }
     if (kind === "jeonse" && metric.avgDepositPerPyeong10k) {
@@ -150,7 +165,7 @@ function realestateEntry(entry, name, nameEn, text) {
         labelEn: `${nameEn} apartment jeonse`,
         value: pyeongKo(metric.avgDepositPerPyeong10k),
         valueEn: pyeongEn(metric.avgDepositPerPyeong10k),
-        href: REALESTATE_HREF,
+        href: hrefFor(slug, "jeonse"),
       };
     }
     if (kind === "wolse" && metric.avgMonthlyRent10k) {
@@ -162,7 +177,7 @@ function realestateEntry(entry, name, nameEn, text) {
         labelEn: `${nameEn} apartment rent`,
         value: `보증금 ${deposit}만원 / 월 ${rent}만원`,
         valueEn: `₩${((metric.avgDeposit10k ?? 0) / 100).toLocaleString("en-US", { maximumFractionDigits: 1 })}M + ₩${(metric.avgMonthlyRent10k / 100).toLocaleString("en-US", { maximumFractionDigits: 2 })}M/mo`,
-        href: REALESTATE_HREF,
+        href: hrefFor(slug, "wolse"),
       };
     }
   }
@@ -176,8 +191,11 @@ function realestateContext(text, realestate) {
   if (!hasAny(text, REALESTATE_HINTS)) return null;
 
   const district = findDistrict(text, realestate?.districts);
-  if (district) return realestateEntry(district, district.name, district.name, text);
-  if (text.includes("서울")) return realestateEntry(realestate?.overall, "서울 전체", "Seoul", text);
+  if (district) {
+    const slug = DISTRICT_SLUGS[district.name] ?? null;
+    return realestateEntry(district, district.name, district.name, text, slug);
+  }
+  if (text.includes("서울")) return realestateEntry(realestate?.overall, "서울 전체", "Seoul", text, null);
   return null;
 }
 

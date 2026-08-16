@@ -18,7 +18,7 @@
           "labelEn": "강남구 apartment sale",
           "value": "10,870만원/평",
           "valueEn": "₩108.7M/pyeong",
-          "href": "./index.html#realestate-section"
+          "href": "./district-gangnam.html"
         }
       ]
     },
@@ -38,7 +38,7 @@
           "labelEn": "송파구 apartment sale",
           "value": "6,912만원/평",
           "valueEn": "₩69.1M/pyeong",
-          "href": "./index.html#realestate-section"
+          "href": "./district-songpa.html"
         }
       ]
     },
@@ -58,7 +58,7 @@
           "labelEn": "Seoul apartment sale",
           "value": "4,449만원/평",
           "valueEn": "₩44.5M/pyeong",
-          "href": "./index.html#realestate-section"
+          "href": "./apartment-sale.html"
         }
       ]
     },
@@ -78,7 +78,7 @@
           "labelEn": "Seoul apartment jeonse",
           "value": "2,571만원/평",
           "valueEn": "₩25.7M/pyeong",
-          "href": "./index.html#realestate-section"
+          "href": "./apartment-jeonse.html"
         }
       ]
     },
@@ -138,7 +138,7 @@
           "labelEn": "용산구 apartment sale",
           "value": "7,988만원/평",
           "valueEn": "₩79.9M/pyeong",
-          "href": "./index.html#realestate-section"
+          "href": "./district-yongsan.html"
         }
       ]
     },
@@ -168,7 +168,7 @@
           "labelEn": "Seoul apartment sale",
           "value": "4,449만원/평",
           "valueEn": "₩44.5M/pyeong",
-          "href": "./index.html#realestate-section"
+          "href": "./apartment-sale.html"
         }
       ]
     },
@@ -288,7 +288,7 @@
           "labelEn": "송파구 apartment sale",
           "value": "6,912만원/평",
           "valueEn": "₩69.1M/pyeong",
-          "href": "./index.html#realestate-section"
+          "href": "./district-songpa.html"
         }
       ]
     },
@@ -308,7 +308,7 @@
           "labelEn": "Seoul apartment rent",
           "value": "보증금 22,166만원 / 월 96만원",
           "valueEn": "₩221.7M + ₩0.96M/mo",
-          "href": "./index.html#realestate-section"
+          "href": "./apartment-rent.html"
         }
       ]
     },
@@ -354,7 +354,7 @@
           "labelEn": "용산구 apartment sale",
           "value": "7,988만원/평",
           "valueEn": "₩79.9M/pyeong",
-          "href": "./index.html#realestate-section"
+          "href": "./district-yongsan.html"
         }
       ]
     },
@@ -384,7 +384,7 @@
           "labelEn": "노원구 apartment sale",
           "value": "3,624만원/평",
           "valueEn": "₩36.2M/pyeong",
-          "href": "./index.html#realestate-section"
+          "href": "./district-nowon.html"
         }
       ]
     },
@@ -404,7 +404,7 @@
           "labelEn": "Seoul apartment sale",
           "value": "4,449만원/평",
           "valueEn": "₩44.5M/pyeong",
-          "href": "./index.html#realestate-section"
+          "href": "./apartment-sale.html"
         },
         {
           "kind": "rates",
