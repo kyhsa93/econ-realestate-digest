@@ -171,6 +171,23 @@ export function newsHtml(news) {
     .join("");
 }
 
+// 부동산 뉴스 페이지 맨 위의 서울 시세 카드. 값은 news-context.mjs가 news.json에
+// 넣어둔 것을 그대로 쓴다 - 화면(news.html)의 statCardsHtml과 같은 마크업이어야 한다.
+export function newsRealestateStatsHtml(news) {
+  const stats = news?.realestateStats ?? [];
+  if (!stats.length) return null;
+  return stats
+    .map(
+      (s) =>
+        `<a class="stat-card" href="${escapeHtml(s.href)}">` +
+        `<span class="stat-label">${escapeHtml(s.label)}</span>` +
+        `<span class="stat-value">${escapeHtml(s.value)}</span>` +
+        (s.note ? `<span class="stat-sub">${escapeHtml(s.note)}</span>` : "") +
+        `</a>`
+    )
+    .join("");
+}
+
 // news.html과 거기서 찍어낸 카테고리 페이지용. 화면 렌더와 같은 구성으로 만든다.
 // category가 null이면 전체.
 export function newsSummaryHtml(summary, category = null) {

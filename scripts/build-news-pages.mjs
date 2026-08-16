@@ -7,7 +7,7 @@
 // 남는 기사를 모은 것이라 페이지의 주제가 서지 않는다.
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { applyPrerender, newsListHtml, newsSummaryHtml } from "./prerender.mjs";
+import { applyPrerender, newsListHtml, newsRealestateStatsHtml, newsSummaryHtml } from "./prerender.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
 const NEWS_PATH = path.join(root, "docs/news.html");
@@ -91,9 +91,22 @@ export function buildNewsPage(baseHtml, page, { news, summary }) {
     "카테고리 링크"
   );
 
+  // 서울 시세 카드는 부동산 페이지에만 남긴다. 다른 페이지에서는 news.html이 들고 온
+  // hidden 섹션이 그대로 숨어 있는다(증시 기사 위에 아파트 시세가 놓일 이유는 없다).
+  const stats = page.category === "realestate" ? newsRealestateStatsHtml(news) : null;
+  if (stats) {
+    html = replaceOnce(
+      html,
+      '<section id="realestate-stats-section" hidden>',
+      '<section id="realestate-stats-section">',
+      "시세 카드 섹션"
+    );
+  }
+
   return applyPrerender(html, {
     newsSummary: newsSummaryHtml(summary, page.category),
     newsList: newsListHtml(news, page.category),
+    ...(stats ? { realestateStats: stats } : {}),
   });
 }
 

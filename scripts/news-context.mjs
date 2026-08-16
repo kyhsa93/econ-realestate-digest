@@ -19,8 +19,15 @@
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { DISTRICT_SLUGS, districtFile } from "./district-slugs.mjs";
-import { BASE_AREA_M2, areaPrice, formatEok, monthLabel } from "./realestate-format.mjs";
-import { MIN_SAMPLE } from "./prerender.mjs";
+// MIN_SAMPLE은 prerender.mjs도 같은 값을 다시 내보내지만 원본은 여기다. 프리렌더가
+// 이 파일의 값을 가져다 쓰게 됐으므로(부동산 뉴스 페이지 상단 지표) 원본에서 받는다.
+import {
+  BASE_AREA_M2,
+  MIN_SAMPLE,
+  areaPrice,
+  formatEok,
+  monthLabel,
+} from "./realestate-format.mjs";
 
 // 한 기사에 두 개까지만. 세 개부터는 기사 제목보다 수치가 눈에 먼저 들어온다.
 const MAX_CONTEXT = 2;
@@ -183,6 +190,58 @@ export function findDistrict(text, districts = []) {
 //
 // 값은 전부 국토부 아파트 실거래 신고분이라, 빌라·오피스텔 기사에 붙어도 오해가
 // 없도록 라벨에 '아파트'를 반드시 남긴다.
+// 거래 유형 하나를 칩(또는 지표 카드) 한 장으로 옮긴다. 기사 옆 칩과 부동산 뉴스
+// 페이지 상단 지표가 같은 문장을 쓰게 하려고 한 군데로 모아뒀다 - 같은 수치가 화면
+// 두 곳에서 다른 모양으로 보이면 어느 쪽이 맞는지 읽는 사람이 판단해야 한다.
+export function metricEntry(entry, kind, { name, nameEn, slug = null, period } = {}) {
+  const metric = entry?.[kind];
+  if (!enoughSample(metric)) return null;
+
+  const common = { kind: "realestate", href: hrefFor(slug, kind) };
+
+  if (kind === "sale" && metric.avgPricePerPyeong10k) {
+    return {
+      ...common,
+      label: `${name} 아파트 ${BASE_AREA_M2}㎡ 매매`,
+      labelEn: `${nameEn} apartment ${BASE_AREA_M2}㎡ sale`,
+      value: areaKo(metric.avgPricePerPyeong10k),
+      valueEn: areaEn(metric.avgPricePerPyeong10k),
+      note: noteOf(metric, metric.change, period, "ko"),
+      noteEn: noteOf(metric, metric.change, period, "en"),
+    };
+  }
+  if (kind === "jeonse" && metric.avgDepositPerPyeong10k) {
+    return {
+      ...common,
+      label: `${name} 아파트 ${BASE_AREA_M2}㎡ 전세`,
+      labelEn: `${nameEn} apartment ${BASE_AREA_M2}㎡ jeonse`,
+      value: areaKo(metric.avgDepositPerPyeong10k),
+      valueEn: areaEn(metric.avgDepositPerPyeong10k),
+      note: noteOf(metric, metric.change, period, "ko"),
+      noteEn: noteOf(metric, metric.change, period, "en"),
+    };
+  }
+  if (kind === "wolse" && metric.avgMonthlyRent10k) {
+    const deposit = Math.round(metric.avgDeposit10k ?? 0).toLocaleString("ko-KR");
+    const rent = Math.round(metric.avgMonthlyRent10k).toLocaleString("ko-KR");
+    return {
+      ...common,
+      label: `${name} 아파트 월세`,
+      labelEn: `${nameEn} apartment rent`,
+      value: `보증금 ${deposit}만원 / 월 ${rent}만원`,
+      valueEn: `₩${((metric.avgDeposit10k ?? 0) / 100).toLocaleString("en-US", { maximumFractionDigits: 1 })}M + ₩${(metric.avgMonthlyRent10k / 100).toLocaleString("en-US", { maximumFractionDigits: 2 })}M/mo`,
+      note: noteOf(metric, metric.depositChange, period, "ko"),
+      noteEn: noteOf(metric, metric.depositChange, period, "en"),
+    };
+  }
+  return null;
+}
+
+// 기사가 전세 얘기면 전세 시세를, 월세 얘기면 월세를 붙인다. 매매가를 기본으로
+// 두되 기사 맥락과 다른 지표를 들이미는 건 오히려 방해가 된다.
+//
+// 값은 전부 국토부 아파트 실거래 신고분이라, 빌라·오피스텔 기사에 붙어도 오해가
+// 없도록 라벨에 '아파트'를 반드시 남긴다.
 function realestateEntry(entry, name, nameEn, text, slug, period) {
   const wantsJeonse = text.includes("전세") || text.includes("전셋값");
   const wantsWolse = text.includes("월세") || text.includes("임대료");
@@ -193,47 +252,8 @@ function realestateEntry(entry, name, nameEn, text, slug, period) {
   candidates.push("sale", "jeonse");
 
   for (const kind of candidates) {
-    const metric = entry?.[kind];
-    if (!enoughSample(metric)) continue;
-
-    if (kind === "sale" && metric.avgPricePerPyeong10k) {
-      return {
-        kind: "realestate",
-        label: `${name} 아파트 ${BASE_AREA_M2}㎡ 매매`,
-        labelEn: `${nameEn} apartment ${BASE_AREA_M2}㎡ sale`,
-        value: areaKo(metric.avgPricePerPyeong10k),
-        valueEn: areaEn(metric.avgPricePerPyeong10k),
-        note: noteOf(metric, metric.change, period, "ko"),
-        noteEn: noteOf(metric, metric.change, period, "en"),
-        href: hrefFor(slug, "sale"),
-      };
-    }
-    if (kind === "jeonse" && metric.avgDepositPerPyeong10k) {
-      return {
-        kind: "realestate",
-        label: `${name} 아파트 ${BASE_AREA_M2}㎡ 전세`,
-        labelEn: `${nameEn} apartment ${BASE_AREA_M2}㎡ jeonse`,
-        value: areaKo(metric.avgDepositPerPyeong10k),
-        valueEn: areaEn(metric.avgDepositPerPyeong10k),
-        note: noteOf(metric, metric.change, period, "ko"),
-        noteEn: noteOf(metric, metric.change, period, "en"),
-        href: hrefFor(slug, "jeonse"),
-      };
-    }
-    if (kind === "wolse" && metric.avgMonthlyRent10k) {
-      const deposit = Math.round(metric.avgDeposit10k ?? 0).toLocaleString("ko-KR");
-      const rent = Math.round(metric.avgMonthlyRent10k).toLocaleString("ko-KR");
-      return {
-        kind: "realestate",
-        label: `${name} 아파트 월세`,
-        labelEn: `${nameEn} apartment rent`,
-        value: `보증금 ${deposit}만원 / 월 ${rent}만원`,
-        valueEn: `₩${((metric.avgDeposit10k ?? 0) / 100).toLocaleString("en-US", { maximumFractionDigits: 1 })}M + ₩${(metric.avgMonthlyRent10k / 100).toLocaleString("en-US", { maximumFractionDigits: 2 })}M/mo`,
-        note: noteOf(metric, metric.depositChange, period, "ko"),
-        noteEn: noteOf(metric, metric.depositChange, period, "en"),
-        href: hrefFor(slug, "wolse"),
-      };
-    }
+    const entryOf = metricEntry(entry, kind, { name, nameEn, slug, period });
+    if (entryOf) return entryOf;
   }
   return null;
 }
@@ -254,6 +274,27 @@ function realestateContext(text, realestate) {
     return realestateEntry(realestate?.overall, "서울 전체", "Seoul", text, null, period);
   }
   return null;
+}
+
+// 부동산 뉴스 페이지 맨 위에 놓을 서울 전체 지표. 기사 목록만 있는 화면은 칩을 빼면
+// 여전히 링크 모음이라, 기사를 하나도 누르지 않아도 남는 수치를 위에 둔다.
+//
+// 계산은 뉴스가 갱신될 때(하루 4회) 여기서 끝내고 news.json에 값째로 넣는다. 화면이
+// realestate.json(28KB)을 따로 받게 하지 않으려는 것이고, 칩을 그렇게 만든 이유와 같다.
+export function buildRealestateStats(realestate) {
+  const entries = ["sale", "jeonse", "wolse"]
+    .map((kind) =>
+      metricEntry(realestate?.overall, kind, {
+        name: "서울",
+        nameEn: "Seoul",
+        period: realestate?.period,
+      })
+    )
+    .filter(Boolean);
+
+  // 셋 중 하나만 남은 지표 줄은 "오늘의 시세"라고 부르기 어렵다. 월초처럼 신고가 덜
+  // 쌓인 시기엔 통째로 내리고 기사 목록만 보여준다.
+  return entries.length === 3 ? entries : null;
 }
 
 // 금리 페이지가 상품을 줄 세우는 기준과 같아야 한다 - 예적금은 12개월 최고금리,
@@ -304,12 +345,15 @@ export function buildContext(item, { realestate, rates } = {}) {
 // context가 하나도 없는 기사는 필드 자체를 넣지 않는다. 빈 배열을 넣으면 news.json이
 // 기사 수만큼 불어나기만 하고 화면에서 달라지는 게 없다.
 export function attachContext(news, data) {
-  const items = (news?.items ?? []).map((item) => {
+  const { realestateStats: _dropStats, ...base } = news ?? {};
+  const items = (base.items ?? []).map((item) => {
     const { context: _drop, ...rest } = item;
     const context = buildContext(item, data);
     return context.length ? { ...rest, context } : rest;
   });
-  return { ...news, items };
+
+  const realestateStats = buildRealestateStats(data?.realestate);
+  return realestateStats ? { ...base, items, realestateStats } : { ...base, items };
 }
 
 const dataDir = path.resolve(import.meta.dirname, "../docs/data");
