@@ -121,6 +121,32 @@
     color: var(--fg);
     text-decoration: none;
   }
+  .sub-nav {
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    margin: -10px 0 20px;
+    padding-bottom: 2px;
+  }
+  .sub-nav a {
+    flex-shrink: 0;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .sub-nav a[aria-current="page"] {
+    background: var(--card);
+    color: var(--fg);
+    font-weight: 600;
+  }
+  .page-nav a.active {
+    background: var(--fg);
+    color: var(--bg);
+    border-color: var(--fg);
+    font-weight: 600;
+  }
   .page-nav a[aria-current="page"] {
     background: var(--fg);
     color: var(--bg);
@@ -669,7 +695,7 @@
   </header>
 
   <nav class="page-nav">
-    <a id="nav-digest" href="./index.html" aria-current="page">데일리 다이제스트</a>
+    <a id="nav-digest" class="active" href="./index.html" aria-current="page">데일리 다이제스트</a>
     <a id="nav-news" href="./news.html">뉴스</a>
     <a id="nav-realestate" href="./realestate.html">아파트 시세</a>
     <a id="nav-rates" href="./rates.html">금리 비교</a>

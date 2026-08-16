@@ -118,6 +118,32 @@
     color: var(--fg);
     text-decoration: none;
   }
+  .sub-nav {
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    margin: -10px 0 20px;
+    padding-bottom: 2px;
+  }
+  .sub-nav a {
+    flex-shrink: 0;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .sub-nav a[aria-current="page"] {
+    background: var(--card);
+    color: var(--fg);
+    font-weight: 600;
+  }
+  .page-nav a.active {
+    background: var(--fg);
+    color: var(--bg);
+    border-color: var(--fg);
+    font-weight: 600;
+  }
   .page-nav a[aria-current="page"] {
     background: var(--fg);
     color: var(--bg);
@@ -234,14 +260,18 @@
     </div>
   </header>
 
-  <nav class="page-nav" aria-label="페이지">
+  <nav class="page-nav" aria-label="섹션">
     <a href="./index.html" id="nav-digest">데일리 다이제스트</a>
-    <a href="./realestate.html" data-re-page="all">시세 전체</a>
-    <a href="./apartment-sale.html" data-re-page="sale" aria-current="page">아파트 매매</a>
-    <a href="./apartment-jeonse.html" data-re-page="jeonse">아파트 전세</a>
-    <a href="./apartment-rent.html" data-re-page="wolse">아파트 월세</a>
     <a href="./news.html" id="nav-news">뉴스</a>
+    <a href="./realestate.html" id="nav-realestate" class="active">아파트 시세</a>
     <a href="./rates.html" id="nav-rates">금리 비교</a>
+  </nav>
+
+  <nav class="sub-nav" aria-label="거래 유형">
+    <a href="./realestate.html" data-re-page="all">전체</a>
+    <a href="./apartment-sale.html" data-re-page="sale" aria-current="page">매매</a>
+    <a href="./apartment-jeonse.html" data-re-page="jeonse">전세</a>
+    <a href="./apartment-rent.html" data-re-page="wolse">월세</a>
   </nav>
 
   <section id="overall-section">
@@ -283,10 +313,11 @@ const T = {
     titleJeonse: "서울 아파트 전세 시세",
     titleWolse: "서울 아파트 월세 시세",
     navDigest: "데일리 다이제스트",
-    navAll: "시세 전체",
-    navSale: "아파트 매매",
-    navJeonse: "아파트 전세",
-    navWolse: "아파트 월세",
+    navRealestatePrices: "아파트 시세",
+    navAll: "전체",
+    navSale: "매매",
+    navJeonse: "전세",
+    navWolse: "월세",
     navNews: "뉴스",
     navRates: "금리 비교",
     overallHeading: "서울 전체 평균",
@@ -322,7 +353,8 @@ const T = {
     titleJeonse: "Seoul Apartment Jeonse Prices",
     titleWolse: "Seoul Apartment Monthly Rent",
     navDigest: "Daily digest",
-    navAll: "All prices",
+    navRealestatePrices: "Apartment prices",
+    navAll: "All",
     navSale: "Sale",
     navJeonse: "Jeonse",
     navWolse: "Monthly rent",
@@ -613,6 +645,7 @@ function applyLocale() {
   document.getElementById("footer-privacy").textContent = t("footerPrivacy");
   document.getElementById("nav-digest").textContent = t("navDigest");
   document.getElementById("nav-news").textContent = t("navNews");
+  document.getElementById("nav-realestate").textContent = t("navRealestatePrices");
   document.getElementById("nav-rates").textContent = t("navRates");
   for (const link of document.querySelectorAll("[data-re-page]")) {
     link.textContent = t(NAV_KEYS[link.getAttribute("data-re-page")]);

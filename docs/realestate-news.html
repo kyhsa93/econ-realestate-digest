@@ -118,6 +118,32 @@
     color: var(--fg);
     text-decoration: none;
   }
+  .sub-nav {
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    margin: -10px 0 20px;
+    padding-bottom: 2px;
+  }
+  .sub-nav a {
+    flex-shrink: 0;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .sub-nav a[aria-current="page"] {
+    background: var(--card);
+    color: var(--fg);
+    font-weight: 600;
+  }
+  .page-nav a.active {
+    background: var(--fg);
+    color: var(--bg);
+    border-color: var(--fg);
+    font-weight: 600;
+  }
   .page-nav a[aria-current="page"] {
     background: var(--fg);
     color: var(--bg);
@@ -192,14 +218,18 @@
     </div>
   </header>
 
-  <nav class="page-nav" aria-label="페이지">
+  <nav class="page-nav" aria-label="섹션">
     <a href="./index.html" id="nav-digest">데일리 다이제스트</a>
-    <a href="./news.html" data-news-page="all">뉴스 전체</a>
-    <a href="./realestate-news.html" data-news-page="realestate" aria-current="page">부동산 뉴스</a>
-    <a href="./stock-news.html" data-news-page="stocks">증시·환율 뉴스</a>
-    <a href="./rate-news.html" data-news-page="rates">금리 뉴스</a>
+    <a href="./news.html" id="nav-news" class="active">뉴스</a>
     <a href="./realestate.html" id="nav-realestate">아파트 시세</a>
     <a href="./rates.html" id="nav-rate-compare">금리 비교</a>
+  </nav>
+
+  <nav class="sub-nav" aria-label="분야">
+    <a href="./news.html" data-news-page="all">전체</a>
+    <a href="./realestate-news.html" data-news-page="realestate" aria-current="page">부동산</a>
+    <a href="./stock-news.html" data-news-page="stocks">증시·환율</a>
+    <a href="./rate-news.html" data-news-page="rates">금리</a>
   </nav>
 
   <section id="summary-section">
@@ -230,10 +260,11 @@
       title: "부동산 뉴스 - 오늘의 아파트·전세·분양 소식",
       description: "경제지 RSS에서 모은 부동산 뉴스 - 오늘의 아파트·전세·분양 소식를 카테고리별로 정리하고, 오픈소스 AI가 요약합니다. 하루 4회 자동 갱신합니다.",
       navDigest: "데일리 다이제스트",
-      navAll: "뉴스 전체",
-      navRealestate: "부동산 뉴스",
-      navStocks: "증시·환율 뉴스",
-      navRates: "금리 뉴스",
+      navNews: "뉴스",
+      navAll: "전체",
+      navRealestate: "부동산",
+      navStocks: "증시·환율",
+      navRates: "금리",
       navRealestatePrices: "아파트 시세",
       navRateCompare: "금리 비교",
       summaryHeading: "오늘의 AI 요약",
@@ -253,10 +284,11 @@
       title: "Real Estate News - Korean Housing, Jeonse & Presale",
       description: "Today's Korean real estate headlines in one place: apartments, jeonse, monthly rent, presales and redevelopment, updated four times a day and summarized by an open-source AI.",
       navDigest: "Daily digest",
-      navAll: "All news",
-      navRealestate: "Real estate news",
-      navStocks: "Stocks & FX news",
-      navRates: "Rates news",
+      navNews: "News",
+      navAll: "All",
+      navRealestate: "Real estate",
+      navStocks: "Stocks & FX",
+      navRates: "Rates",
       navRealestatePrices: "Apartment prices",
       navRateCompare: "Rates",
       summaryHeading: "Today's AI summary",
@@ -452,6 +484,7 @@
     document.getElementById("footer-source").textContent = t("footerSource");
     document.getElementById("footer-privacy").textContent = t("footerPrivacy");
     document.getElementById("nav-digest").textContent = t("navDigest");
+    document.getElementById("nav-news").textContent = t("navNews");
     document.getElementById("nav-realestate").textContent = t("navRealestatePrices");
     document.getElementById("nav-rate-compare").textContent = t("navRateCompare");
     for (const link of document.querySelectorAll("[data-news-page]")) {

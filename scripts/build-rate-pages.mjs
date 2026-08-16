@@ -73,11 +73,12 @@ export function buildRatePage(baseHtml, page, rates) {
     "정규 URL 링크"
   );
 
-  // 전체 비교 페이지가 아니므로 상단 내비게이션의 현재 표시를 넘긴다.
+  // 상품군별 페이지에서도 섹션은 여전히 '금리 비교'라 활성 표시(class)는 남기고,
+  // 현재 페이지를 가리키는 aria-current만 뗀다(현재 페이지는 이 파일이 아니다).
   html = replaceOnce(
     html,
-    '<a id="nav-rates" href="./rates.html" aria-current="page">',
-    '<a id="nav-rates" href="./rates.html">',
+    '<a id="nav-rates" href="./rates.html" class="active" aria-current="page">',
+    '<a id="nav-rates" href="./rates.html" class="active">',
     "금리 비교 내비게이션"
   );
 
