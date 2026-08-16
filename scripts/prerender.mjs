@@ -142,7 +142,9 @@ export function newsContextHtml(context) {
         (c) =>
           `<a class="context-chip" href="${escapeHtml(c.href)}">` +
           `<span class="context-label">${escapeHtml(c.label)}</span>` +
-          `<span class="context-value">${escapeHtml(c.value)}</span></a>`
+          `<span class="context-value">${escapeHtml(c.value)}</span>` +
+          (c.note ? `<span class="context-note">${escapeHtml(c.note)}</span>` : "") +
+          `</a>`
       )
       .join("") +
     `</div>`

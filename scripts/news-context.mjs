@@ -19,7 +19,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { DISTRICT_SLUGS, districtFile } from "./district-slugs.mjs";
-import { BASE_AREA_M2, areaPrice, formatEok } from "./realestate-format.mjs";
+import { BASE_AREA_M2, areaPrice, formatEok, monthLabel } from "./realestate-format.mjs";
 import { MIN_SAMPLE } from "./prerender.mjs";
 
 // 한 기사에 두 개까지만. 세 개부터는 기사 제목보다 수치가 눈에 먼저 들어온다.
@@ -109,6 +109,52 @@ const hasAny = (text, words) => words.some((word) => text.includes(word));
 const areaKo = (perPyeong10k) => formatEok(areaPrice(perPyeong10k, BASE_AREA_M2), "ko");
 const areaEn = (perPyeong10k) => formatEok(areaPrice(perPyeong10k, BASE_AREA_M2), "en");
 
+// 값 하나만 적힌 칩은 "그래서 이게 몇 건짜리 평균인데?"에 답하지 못한다. 15건 평균과
+// 575건 평균은 같은 무게가 아니고, "거래 절벽"·"매수세 회복"을 주장하는 기사 옆이라면
+// 신고 건수 자체가 기사에 없는 반박 자료가 된다.
+//
+// 변화율은 건수 기준을 따로 둔다. 표시 최소치(MIN_SAMPLE=5)는 "평균을 낼 수 있는가"의
+// 기준이지, 두 시점의 평균을 빼도 되는가의 기준이 아니다 - 5건짜리 구는 비싼 한 채가
+// 들고 나는 것만으로 30%가 움직인다.
+const CHANGE_MIN_SAMPLE = 20;
+
+// "2026-08-10" → "8/10". 무엇 대비 오른 값인지 안 적으면 숫자가 혼자 떠 있게 된다.
+const baselineKo = (date) => {
+  const [, month, day] = String(date ?? "").split("-");
+  return month && day ? `${Number(month)}/${Number(day)}` : null;
+};
+// monthLabel은 "202608" 같은 기간 문자열의 5~6번째 글자를 월로 읽는다. 날짜에서 월만
+// 떼어 같은 모양으로 맞춰 넘기면 월 이름 표를 여기 또 만들지 않아도 된다.
+const baselineEn = (date) => {
+  const label = monthLabel(`0000${String(date ?? "").slice(5, 7)}`, "en");
+  const day = Number(String(date ?? "").slice(8, 10));
+  return label && day ? `${label} ${day}` : null;
+};
+
+const signed = (value) => `${value > 0 ? "+" : value < 0 ? "-" : ""}${Math.abs(value).toFixed(1)}%`;
+
+function noteOf(metric, change, period, locale) {
+  const count = metric?.transactionCount;
+  if (typeof count !== "number") return null;
+
+  const month = monthLabel(period, locale);
+  const parts = [
+    locale === "en"
+      ? `${count.toLocaleString("en-US")} deals${month ? ` in ${month}` : ""}`
+      : `${month ? `${month} ` : ""}신고 ${count.toLocaleString("ko-KR")}건`,
+  ];
+
+  // 기준일은 change 안이 아니라 지표 자체에 붙어 있다(월세는 보증금·월세 변화가 둘인데
+  // 기준일은 하나라서 그렇다).
+  const baseline = locale === "en" ? baselineEn(metric.baselineDate) : baselineKo(metric.baselineDate);
+  if (count >= CHANGE_MIN_SAMPLE && typeof change?.percent === "number" && baseline) {
+    parts.push(
+      locale === "en" ? `${signed(change.percent)} vs ${baseline}` : `${baseline} 대비 ${signed(change.percent)}`
+    );
+  }
+  return parts.join(" · ");
+}
+
 const percentKo = (value) => `연 ${value.toFixed(2)}%`;
 const percentEn = (value) => `${value.toFixed(2)}% p.a.`;
 
@@ -137,7 +183,7 @@ export function findDistrict(text, districts = []) {
 //
 // 값은 전부 국토부 아파트 실거래 신고분이라, 빌라·오피스텔 기사에 붙어도 오해가
 // 없도록 라벨에 '아파트'를 반드시 남긴다.
-function realestateEntry(entry, name, nameEn, text, slug) {
+function realestateEntry(entry, name, nameEn, text, slug, period) {
   const wantsJeonse = text.includes("전세") || text.includes("전셋값");
   const wantsWolse = text.includes("월세") || text.includes("임대료");
 
@@ -157,6 +203,8 @@ function realestateEntry(entry, name, nameEn, text, slug) {
         labelEn: `${nameEn} apartment ${BASE_AREA_M2}㎡ sale`,
         value: areaKo(metric.avgPricePerPyeong10k),
         valueEn: areaEn(metric.avgPricePerPyeong10k),
+        note: noteOf(metric, metric.change, period, "ko"),
+        noteEn: noteOf(metric, metric.change, period, "en"),
         href: hrefFor(slug, "sale"),
       };
     }
@@ -167,6 +215,8 @@ function realestateEntry(entry, name, nameEn, text, slug) {
         labelEn: `${nameEn} apartment ${BASE_AREA_M2}㎡ jeonse`,
         value: areaKo(metric.avgDepositPerPyeong10k),
         valueEn: areaEn(metric.avgDepositPerPyeong10k),
+        note: noteOf(metric, metric.change, period, "ko"),
+        noteEn: noteOf(metric, metric.change, period, "en"),
         href: hrefFor(slug, "jeonse"),
       };
     }
@@ -179,6 +229,8 @@ function realestateEntry(entry, name, nameEn, text, slug) {
         labelEn: `${nameEn} apartment rent`,
         value: `보증금 ${deposit}만원 / 월 ${rent}만원`,
         valueEn: `₩${((metric.avgDeposit10k ?? 0) / 100).toLocaleString("en-US", { maximumFractionDigits: 1 })}M + ₩${(metric.avgMonthlyRent10k / 100).toLocaleString("en-US", { maximumFractionDigits: 2 })}M/mo`,
+        note: noteOf(metric, metric.depositChange, period, "ko"),
+        noteEn: noteOf(metric, metric.depositChange, period, "en"),
         href: hrefFor(slug, "wolse"),
       };
     }
@@ -192,12 +244,15 @@ function realestateEntry(entry, name, nameEn, text, slug) {
 function realestateContext(text, realestate) {
   if (!hasAny(text, REALESTATE_HINTS)) return null;
 
+  const period = realestate?.period;
   const district = findDistrict(text, realestate?.districts);
   if (district) {
     const slug = DISTRICT_SLUGS[district.name] ?? null;
-    return realestateEntry(district, district.name, district.name, text, slug);
+    return realestateEntry(district, district.name, district.name, text, slug, period);
   }
-  if (text.includes("서울")) return realestateEntry(realestate?.overall, "서울 전체", "Seoul", text, null);
+  if (text.includes("서울")) {
+    return realestateEntry(realestate?.overall, "서울 전체", "Seoul", text, null, period);
+  }
   return null;
 }
 

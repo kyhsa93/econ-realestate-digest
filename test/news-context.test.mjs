@@ -23,8 +23,14 @@ const district = (name, extra = {}) => ({
 });
 
 const REALESTATE = {
+  period: "202608",
   overall: {
-    sale: { avgPricePerPyeong10k: 4449, transactionCount: 575 },
+    sale: {
+      avgPricePerPyeong10k: 4449,
+      transactionCount: 575,
+      change: { value10k: 340, percent: 8.27451934777318 },
+      baselineDate: "2026-08-10",
+    },
     jeonse: { avgDepositPerPyeong10k: 2571, transactionCount: 2525 },
     wolse: { avgDeposit10k: 22166, avgMonthlyRent10k: 96, transactionCount: 2223 },
   },
@@ -94,6 +100,23 @@ test("기사가 전세·월세를 다루면 그 지표를 붙인다", () => {
   const [wolse] = context('"서울 월세 1000만원 흔해질 것"…종부세 개편에 세입자 불똥');
   assert.equal(wolse.label, "서울 전체 아파트 월세");
   assert.equal(wolse.value, "보증금 22,166만원 / 월 96만원");
+});
+
+// 값 하나만 적힌 칩은 그게 몇 건짜리 평균인지 말해주지 않는다. "거래 절벽"을 주장하는
+// 기사 옆이라면 신고 건수 자체가 기사에 없는 자료다.
+test("칩에 신고 건수를 같이 적는다", () => {
+  assert.equal(context("송파 9억대 아파트")[0].note, "8월 신고 16건");
+  assert.equal(context("송파 9억대 아파트")[0].noteEn, "16 deals in Aug");
+});
+
+// 표시 최소치(5건)는 "평균을 낼 수 있는가"의 기준이지, 두 시점의 평균을 빼도 되는가의
+// 기준이 아니다. 5건짜리 구는 비싼 한 채가 들고 나는 것만으로 30%가 움직인다.
+test("변화율은 표본이 넉넉할 때만 적는다", () => {
+  assert.equal(context("서울 빌라값 들썩")[0].note, "8월 신고 575건 · 8/10 대비 +8.3%");
+  assert.equal(context("서울 빌라값 들썩")[0].noteEn, "575 deals in Aug · +8.3% vs Aug 10");
+
+  // 송파구는 16건이라 건수만 남는다.
+  assert.ok(!context("송파 9억대 아파트")[0].note.includes("대비"));
 });
 
 // 표본이 한두 건이면 '그 구의 시세'가 아니라 '그 아파트 한 채의 가격'이다.
@@ -245,5 +268,7 @@ test("영어 화면은 칩도 영어로 그린다", async () => {
   const rendered = page.newsListHtml();
   assert.ok(rendered.includes("송파구 apartment 84㎡ sale"), "영어 라벨이 안 보인다");
   assert.ok(rendered.includes("₩1,756M"), "영어 표기 금액이 안 보인다");
+  assert.ok(rendered.includes("16 deals in Aug"), "영어 보조 설명이 안 보인다");
   assert.ok(!rendered.includes("17억 5,633만원"), "영어 화면에 한국어 표기가 남아 있다");
+  assert.ok(!rendered.includes("신고 16건"), "영어 화면에 한국어 보조 설명이 남아 있다");
 });

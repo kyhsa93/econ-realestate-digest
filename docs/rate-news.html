@@ -169,7 +169,9 @@
   .news-item .context-chip {
     display: inline-flex;
     align-items: baseline;
-    gap: 6px;
+    flex-wrap: wrap;
+    max-width: 100%;
+    gap: 2px 6px;
     padding: 3px 9px;
     border: 1px solid var(--border);
     border-radius: 999px;
@@ -180,6 +182,8 @@
   .news-item .context-chip:hover { border-color: var(--muted); text-decoration: none; }
   .context-label { color: var(--muted); }
   .context-value { color: var(--fg); font-weight: 600; font-variant-numeric: tabular-nums; }
+  /* 신고 건수·변화는 값을 읽은 다음에 보면 되는 정보다. 한 단계 작고 흐리게 둔다. */
+  .context-note { color: var(--muted); font-size: 0.71rem; font-variant-numeric: tabular-nums; }
   .empty { color: var(--muted); font-size: 0.9rem; }
   .empty button {
     font: inherit;
@@ -390,6 +394,9 @@
   const summaryLine = (c) => (locale === "en" ? c.lineEn ?? c.lineKo : c.lineKo);
   const summaryName = (c) => (locale === "en" ? c.nameEn ?? c.name : c.name);
 
+  // 칩의 보조 설명(신고 건수·기준일 대비 변화). 붙지 않는 칩도 있어서 값이 없으면 그린다.
+  const contextNote = (c) => (locale === "en" ? c.noteEn ?? c.note : c.note);
+
   function newsContextHtml(context) {
     if (!context?.length) return "";
     return (
@@ -399,7 +406,9 @@
           (c) =>
             `<a class="context-chip" href="${escapeHtml(c.href)}">` +
             `<span class="context-label">${escapeHtml(locale === "en" ? c.labelEn ?? c.label : c.label)}</span>` +
-            `<span class="context-value">${escapeHtml(locale === "en" ? c.valueEn ?? c.value : c.value)}</span></a>`
+            `<span class="context-value">${escapeHtml(locale === "en" ? c.valueEn ?? c.value : c.value)}</span>` +
+            (contextNote(c) ? `<span class="context-note">${escapeHtml(contextNote(c))}</span>` : "") +
+            `</a>`
         )
         .join("") +
       `</div>`
