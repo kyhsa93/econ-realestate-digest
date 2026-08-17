@@ -424,9 +424,10 @@ const T = {
     otherDistricts: "다른 지역",
     backToAll: "서울 전체 시세",
     trendHeading: "최근 추이",
-    trendRange: (from, to, n) => `${from} ~ ${to} · ${n}일`,
-    trendTooShort: "추이는 기록이 이틀 이상 쌓이면 표시됩니다.",
-    trendValue: (v) => `현재 ${v}`,
+    trendBasis: "계약일 기준 · 신고 기한(계약 후 30일)이 지난 주까지",
+    trendRange: (from, to, n) => `${from} ~ ${to} · ${n}주`,
+    trendTooShort: "추이는 신고가 두 주 이상 쌓이면 표시됩니다.",
+    trendValue: (v) => `마지막 주 ${v}`,
     areaLabel: "평형",
     areaUnit: "㎡",
     thDeposit: "평균 보증금",
@@ -488,9 +489,10 @@ const T = {
     otherDistricts: "Other districts",
     backToAll: "All Seoul prices",
     trendHeading: "Recent trend",
-    trendRange: (from, to, n) => `${from} – ${to} · ${n} days`,
-    trendTooShort: "The trend appears once more than one day of data is collected.",
-    trendValue: (v) => `now ${v}`,
+    trendBasis: "By contract date, up to the last week past the 30-day filing deadline",
+    trendRange: (from, to, n) => `${from} – ${to} · ${n} weeks`,
+    trendTooShort: "The trend appears once at least two weeks of filings are recorded.",
+    trendValue: (v) => `Last week ${v}`,
     areaLabel: "Unit size",
     areaUnit: "m²",
     thDeposit: "Avg deposit",
@@ -930,17 +932,15 @@ function sparklineSvg(values) {
     </svg>`;
 }
 
-function trendSeries(history) {
-  const key = kind ?? "sale";
-  const field = KIND_FIELDS[key];
-  const code = districtName ? districtEntry()?.code : null;
-  return (history ?? [])
-    .map((day) => {
-      const scope = code ? (day?.districts ?? []).find((d) => d.code === code) : day?.overall;
-      const metric = scope?.[field.metric];
-      if (!hasEnoughSample(metric)) return null;
-      const value = metric[field.value];
-      return typeof value === "number" && Number.isFinite(value) ? { date: day.date, value } : null;
+function trendSeries(trend) {
+  const field = KIND_FIELDS[kind ?? "sale"];
+  const scope = districtName ? trend?.districts?.[districtName] : trend?.overall;
+  if (!scope) return [];
+
+  return (trend.weeks ?? [])
+    .map((week) => {
+      const value = scope[week]?.[field.metric]?.[field.value];
+      return typeof value === "number" && Number.isFinite(value) ? { date: week, value } : null;
     })
     .filter(Boolean);
 }
@@ -955,12 +955,12 @@ function renderDistrictSummary() {
 
 function renderTrend() {
   const section = document.getElementById("trend-section");
-  const series = trendSeries(cache.history);
+  const series = trendSeries(cache.trend);
 
   document.getElementById("trend-heading").textContent = t("trendHeading");
 
   if (series.length < 2) {
-    section.hidden = !cache.history;
+    section.hidden = !cache.trend;
     document.getElementById("trend-chart").innerHTML = "";
     document.getElementById("trend-meta").textContent = t("trendTooShort");
     return;
@@ -970,7 +970,8 @@ function renderTrend() {
   document.getElementById("trend-chart").innerHTML = sparklineSvg(series.map((p) => p.value));
   const last = series[series.length - 1];
   document.getElementById("trend-meta").textContent =
-    `${t("trendRange")(series[0].date, last.date, series.length)} · ${t("trendValue")(formatMan(last.value))}`;
+    `${t("trendRange")(series[0].date, last.date, series.length)} · ${t("trendValue")(formatMan(last.value))}` +
+    `\n${t("trendBasis")}`;
 }
 
 const budgetBand10k = (() => {
@@ -1087,7 +1088,7 @@ function renderUpdated(realestate) {
   document.getElementById("updated").textContent = text;
 }
 
-const cache = { realestate: null, history: null, budget: null };
+const cache = { realestate: null, trend: null, budget: null };
 
 function renderAll() {
   applyLocale();
@@ -1122,9 +1123,9 @@ async function main() {
     renderAll();
 
     try {
-      const trendRes = await fetch(`./data/realestate-history-lite.json?_=${Date.now()}`);
+      const trendRes = await fetch(`./data/realestate-trend.json?_=${Date.now()}`);
       if (trendRes.ok) {
-        cache.history = await trendRes.json();
+        cache.trend = await trendRes.json();
         renderTrend();
       }
     } catch {

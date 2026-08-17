@@ -56,11 +56,23 @@ const trendRealestate = () => ({
   districts: [{ ...TREND_DISTRICT, ...metrics(500) }, { code: "11350", name: "노원구", ...metrics(-500) }],
 });
 
-const trendHistory = () => [
-  { date: "2026-08-13", overall: metrics(-40), districts: [{ code: TREND_DISTRICT.code, ...metrics(460) }] },
-  { date: "2026-08-14", overall: metrics(-20), districts: [{ code: TREND_DISTRICT.code, ...metrics(480) }] },
-  { date: "2026-08-15", overall: metrics(), districts: [{ code: TREND_DISTRICT.code, ...metrics(500) }] },
-];
+const TREND_WEEKS = ["2026-07-27", "2026-08-03", "2026-08-10"];
+
+const trendData = () => ({
+  weeks: TREND_WEEKS,
+  overall: {
+    "2026-07-27": metrics(-40),
+    "2026-08-03": metrics(-20),
+    "2026-08-10": metrics(),
+  },
+  districts: {
+    [TREND_DISTRICT.name]: {
+      "2026-07-27": metrics(460),
+      "2026-08-03": metrics(480),
+      "2026-08-10": metrics(500),
+    },
+  },
+});
 
 test("84㎡ 환산이 손계산과 같다", () => {
   assert.equal(BASE_AREA_PYEONG.toFixed(3), "25.410");
@@ -330,33 +342,49 @@ test("주소로 들어온 평형으로 시작한다", async () => {
 
 test("거래 유형마다 자기 지표의 추이를 그린다", async () => {
   const realestate = trendRealestate();
-  const history = trendHistory();
+  const trend = trendData();
 
   for (const kind of ["sale", "jeonse", "wolse"]) {
-    const page = await loadRealestatePage({ realestate, history, kind });
+    const page = await loadRealestatePage({ realestate, trend, kind });
     assert.ok(page.trendHtml().includes("polyline"), `${kind}: 그래프가 없다`);
     assert.equal(page.byId("trend-section").hidden, false);
   }
 });
 
-test("표본이 모자란 날짜는 추이에서 뺀다", async () => {
-  const realestate = await readJson("realestate");
-  const history = [
-    { date: "2026-08-01", overall: { sale: { avgPricePerPyeong10k: 9999, transactionCount: 2 } } },
-    { date: "2026-08-02", overall: { sale: { avgPricePerPyeong10k: 4000, transactionCount: 50 } } },
-    { date: "2026-08-03", overall: { sale: { avgPricePerPyeong10k: 4100, transactionCount: 60 } } },
-  ];
-  const page = await loadRealestatePage({ realestate, history, kind: "sale" });
-  assert.match(page.trendMeta(), /2026-08-02/, `표본 부족한 날이 남았다: ${page.trendMeta()}`);
-  assert.match(page.trendMeta(), /2일/);
+test("추이는 주 단위로 적는다", async () => {
+  const page = await loadRealestatePage({ realestate: trendRealestate(), trend: trendData(), kind: "sale" });
+
+  assert.match(page.trendMeta(), /2026-07-27 ~ 2026-08-10/);
+  assert.match(page.trendMeta(), /3주/, page.trendMeta());
 });
 
-test("기록이 하루뿐이면 빈 그래프 대신 이유를 적는다", async () => {
+test("값이 없는 주는 추이에서 뺀다", async () => {
   const realestate = await readJson("realestate");
-  const history = [{ date: "2026-08-15", overall: { sale: { avgPricePerPyeong10k: 4000, transactionCount: 50 } } }];
-  const page = await loadRealestatePage({ realestate, history, kind: "sale" });
+  const trend = {
+    weeks: ["2026-07-27", "2026-08-03", "2026-08-10"],
+    overall: {
+      "2026-08-03": { sale: { avgPricePerPyeong10k: 4000, transactionCount: 50 } },
+      "2026-08-10": { sale: { avgPricePerPyeong10k: 4100, transactionCount: 60 } },
+    },
+    districts: {},
+  };
+  const page = await loadRealestatePage({ realestate, trend, kind: "sale" });
+
+  assert.match(page.trendMeta(), /2026-08-03 ~ 2026-08-10/, `값 없는 주가 남았다: ${page.trendMeta()}`);
+  assert.match(page.trendMeta(), /2주/);
+});
+
+test("한 주뿐이면 빈 그래프 대신 이유를 적는다", async () => {
+  const realestate = await readJson("realestate");
+  const trend = {
+    weeks: ["2026-08-10"],
+    overall: { "2026-08-10": { sale: { avgPricePerPyeong10k: 4000, transactionCount: 50 } } },
+    districts: {},
+  };
+  const page = await loadRealestatePage({ realestate, trend, kind: "sale" });
+
   assert.equal(page.trendHtml(), "");
-  assert.match(page.trendMeta(), /이틀 이상/);
+  assert.match(page.trendMeta(), /두 주 이상/);
 });
 
 test("추이를 못 받아도 표는 그대로 나온다", async () => {
@@ -366,8 +394,8 @@ test("추이를 못 받아도 표는 그대로 나온다", async () => {
 });
 
 test("자치구 페이지는 한 지역의 세 유형을 행으로 보여준다", async () => {
-  const [realestate, history] = await Promise.all([readJson("realestate"), readJson("realestate-history-lite")]);
-  const page = await loadRealestatePage({ realestate, history, district: "강남구" });
+  const realestate = await readJson("realestate");
+  const page = await loadRealestatePage({ realestate, district: "강남구" });
 
   assert.deepEqual(headCells(page.headHtml()), ["구분", "평당가", "84㎡ 환산", "거래건수"]);
   assert.deepEqual(names(page.tableHtml()), ["매매", "전세", "월세"]);
@@ -384,10 +412,10 @@ test("자치구 페이지의 월세 행에는 환산가가 없다", async () => 
 
 test("자치구 페이지 추이는 그 지역 값을 그린다", async () => {
   const realestate = trendRealestate();
-  const history = trendHistory();
+  const trend = trendData();
 
-  const seoul = await loadRealestatePage({ realestate, history, kind: "sale" });
-  const page = await loadRealestatePage({ realestate, history, district: TREND_DISTRICT.name });
+  const seoul = await loadRealestatePage({ realestate, trend, kind: "sale" });
+  const page = await loadRealestatePage({ realestate, trend, district: TREND_DISTRICT.name });
   assert.notEqual(page.trendMeta(), seoul.trendMeta(), "서울 전체 추이를 그대로 쓰고 있다");
 
   const now = realestate.districts.find((d) => d.name === TREND_DISTRICT.name).sale.avgPricePerPyeong10k;
@@ -532,4 +560,13 @@ test("자치구가 아닌 페이지에는 서술이 없다", async () => {
     const ko = html.split("<!--prerender:districtSummaryKo-->")[1].split("<!--/prerender")[0];
     assert.equal(ko, "", `${file}에 서술이 들어갔다`);
   }
+});
+
+test("추이가 어느 날짜 기준인지 밝힌다", async () => {
+  const page = await loadRealestatePage({ realestate: trendRealestate(), trend: trendData(), kind: "sale" });
+  const meta = page.trendMeta();
+
+  assert.match(meta, /계약일 기준/, meta);
+  assert.match(meta, /신고 기한/, meta);
+  assert.ok(!meta.includes("현재 "), `마지막 주 값을 현재 시세처럼 적었다: ${meta}`);
 });

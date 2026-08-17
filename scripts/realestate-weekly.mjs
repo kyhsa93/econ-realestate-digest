@@ -3,6 +3,8 @@ import { kstDateParts } from "./realestate-slots.mjs";
 const PYEONG_M2 = 3.3058;
 export const MOVING_WEEKS = 4;
 export const WEEKS_KEPT = 26;
+export const TREND_MIN_SAMPLE = 5;
+export const FILING_GRACE_DAYS = 30;
 
 export function weekStart(date) {
   const { year, month, day } = typeof date === "string" ? partsOfDate(date) : kstDateParts(date);
@@ -21,8 +23,11 @@ export function nextWeek(start, steps = 1) {
   return new Date(Date.parse(`${start}T00:00:00Z`) + steps * 7 * 86_400_000).toISOString().slice(0, 10);
 }
 
-export function settledWeek(now) {
-  return nextWeek(weekStart(now), -1);
+export function settledWeek(now, graceDays = 0) {
+  if (!graceDays) return nextWeek(weekStart(now), -1);
+  const parts = kstDateParts(now);
+  const cutoff = Date.UTC(parts.year, parts.month - 1, parts.day) - (graceDays + 6) * 86_400_000;
+  return weekStart(new Date(cutoff).toISOString().slice(0, 10));
 }
 
 function saleStats(rows) {
@@ -65,10 +70,12 @@ function wolseStats(rows) {
 
 const STATS = { sale: saleStats, jeonse: jeonseStats, wolse: wolseStats };
 
-function statsOf(rows) {
+function statsOf(rows, minSample) {
   const out = {};
   for (const [key, fn] of Object.entries(STATS)) {
-    const value = fn(rows.filter((row) => row.type === key));
+    const picked = rows.filter((row) => row.type === key);
+    if (picked.length < minSample) continue;
+    const value = fn(picked);
     if (value) out[key] = value;
   }
   return Object.keys(out).length ? out : null;
@@ -92,8 +99,8 @@ function movingRows(weeks, week, span) {
   return rows;
 }
 
-export function buildWeekly(arrivals, now, { weeksKept = WEEKS_KEPT, movingWeeks = MOVING_WEEKS } = {}) {
-  const settled = settledWeek(now);
+export function buildWeekly(arrivals, now, { weeksKept = WEEKS_KEPT, movingWeeks = MOVING_WEEKS, minSample = 1, graceDays = 0 } = {}) {
+  const settled = settledWeek(now, graceDays);
   const byWeek = groupByWeek(arrivals.filter((row) => weekStart(row.observedOn) <= settled));
 
   const weeks = [...byWeek.keys()].sort().slice(-weeksKept);
@@ -111,7 +118,7 @@ export function buildWeekly(arrivals, now, { weeksKept = WEEKS_KEPT, movingWeeks
 
   const overall = {};
   for (const week of weeks) {
-    const stats = statsOf(byWeek.get(week) ?? []);
+    const stats = statsOf(byWeek.get(week) ?? [], minSample);
     if (stats) overall[week] = stats;
   }
 
@@ -119,13 +126,13 @@ export function buildWeekly(arrivals, now, { weeksKept = WEEKS_KEPT, movingWeeks
   for (const [name, perWeek] of [...districtRows.entries()].sort((a, b) => a[0].localeCompare(b[0], "ko"))) {
     const entry = {};
     for (const week of weeks) {
-      const stats = statsOf(movingRows(perWeek, week, movingWeeks));
+      const stats = statsOf(movingRows(perWeek, week, movingWeeks), minSample);
       if (stats) entry[week] = stats;
     }
     if (Object.keys(entry).length) districts[name] = entry;
   }
 
-  return { weeks, movingWeeks, overall, districts };
+  return { weeks, movingWeeks, settledWeek: settled, overall, districts };
 }
 
 const PICK = {

@@ -31,13 +31,13 @@ function stubElement(attrs = {}, id = "") {
   });
 }
 
-export async function loadRealestatePage({ realestate, history, budget, budgetBand = null, kind = null, district = null, locale = "ko", search = "", analytics } = {}) {
+export async function loadRealestatePage({ realestate, trend, budget, budgetBand = null, kind = null, district = null, locale = "ko", search = "", analytics } = {}) {
   const html = await readFile(path.join(root, "docs/realestate.html"), "utf8");
   const script = [...html.matchAll(/<script>\n([\s\S]*?)\n<\/script>/g)].map((m) => m[1]).pop();
 
   const store = { lang: locale };
   const byId = new Map();
-  const data = { realestate, "realestate-history-lite": history, "budget-deals": budget };
+  const data = { realestate, "realestate-trend": trend, "budget-deals": budget };
 
   function applyUrl(url) {
     const [pathname, query = ""] = String(url).split("?");

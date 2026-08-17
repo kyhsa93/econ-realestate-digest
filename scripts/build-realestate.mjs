@@ -17,7 +17,7 @@ import {
 import { attachPrevious } from "./realestate-previous.mjs";
 import { itemKey, readSlotFile } from "./realestate-raw.mjs";
 import { shiftMonth, windowMonths, yearMonthOf } from "./realestate-slots.mjs";
-import { attachWeeklyChanges, buildWeekly } from "./realestate-weekly.mjs";
+import { FILING_GRACE_DAYS, TREND_MIN_SAMPLE, attachWeeklyChanges, buildWeekly } from "./realestate-weekly.mjs";
 import { buildRentFiles, rentFileName } from "./deal-files.mjs";
 import { readRentSource } from "./realestate-source.mjs";
 
@@ -27,6 +27,7 @@ const dataDir = process.env.REALESTATE_DATA_DIR
 const outFile = path.join(dataDir, "realestate.json");
 const historyFile = path.join(dataDir, "realestate-history.json");
 const weeklyFile = path.join(dataDir, "realestate-weekly.json");
+const trendFile = path.join(dataDir, "realestate-trend.json");
 const rentFilesDir = process.env.DEAL_FILES_DIR
   ? path.resolve(process.env.DEAL_FILES_DIR)
   : dataDir;
@@ -87,44 +88,66 @@ function appendHistory(history, now, entry) {
   return history.length > HISTORY_MAX_DAYS ? history.slice(history.length - HISTORY_MAX_DAYS) : history;
 }
 
-export function arrivalRows(file, districtName) {
-  const arrivals = file?.arrivals ?? {};
-  if (!Object.keys(arrivals).length) return [];
+function saleRow(deal, districtName, observedOn) {
+  return { type: "sale", district: districtName, observedOn, amount10k: deal.amount10k, area: deal.area };
+}
+
+function rentRow(deal, districtName, observedOn) {
+  return {
+    type: deal.monthlyRent10k > 0 ? "wolse" : "jeonse",
+    district: districtName,
+    observedOn,
+    deposit10k: deal.deposit10k,
+    monthlyRent10k: deal.monthlyRent10k ?? 0,
+    area: deal.area,
+  };
+}
+
+function weeklyRows(file, districtName, dateOf) {
+  if (!file) return [];
 
   const rows = [];
   const items = file.kind === "sale" ? dropCancelled(file.items ?? []) : file.items ?? [];
 
   for (const item of items) {
-    const observedOn = arrivals[itemKey(item)];
+    const observedOn = dateOf(item);
     if (!observedOn) continue;
 
     if (file.kind === "sale") {
       const deal = normalizeDeal(item, districtName);
-      if (deal) rows.push({ type: "sale", district: districtName, observedOn, amount10k: deal.amount10k, area: deal.area });
+      if (deal) rows.push(saleRow(deal, districtName, observedOn));
       continue;
     }
 
     const deal = normalizeRentDeal(item, districtName);
-    if (!deal || deal.renewal === true) continue;
-    rows.push({
-      type: deal.monthlyRent10k > 0 ? "wolse" : "jeonse",
-      district: districtName,
-      observedOn,
-      deposit10k: deal.deposit10k,
-      monthlyRent10k: deal.monthlyRent10k ?? 0,
-      area: deal.area,
-    });
+    if (deal && deal.renewal !== true) rows.push(rentRow(deal, districtName, observedOn));
   }
 
   return rows;
 }
 
-async function readArrivals(now) {
+export function arrivalRows(file, districtName) {
+  const arrivals = file?.arrivals ?? {};
+  if (!Object.keys(arrivals).length) return [];
+  return weeklyRows(file, districtName, (item) => arrivals[itemKey(item)]);
+}
+
+export function contractRows(file, districtName) {
+  return weeklyRows(file, districtName, (item) => {
+    const year = Number(item?.dealYear);
+    const month = Number(item?.dealMonth);
+    const day = Number(item?.dealDay);
+    if (!Number.isInteger(year) || !Number.isInteger(month) || !Number.isInteger(day)) return null;
+    return `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+  });
+}
+
+async function readWeeklyRows(now, rowsOf) {
   const months = windowMonths(now);
   const perSlot = await Promise.all(
     months.flatMap((yearMonth) =>
       DISTRICTS.flatMap(({ code, name }) =>
-        ["sale", "rent"].map(async (kind) => arrivalRows(await readSlotFile(kind, code, yearMonth), name))
+        ["sale", "rent"].map(async (kind) => rowsOf(await readSlotFile(kind, code, yearMonth), name))
       )
     )
   );
@@ -132,7 +155,7 @@ async function readArrivals(now) {
 }
 
 async function writeWeekly(now) {
-  const weekly = attachWeeklyChanges(buildWeekly(await readArrivals(now), now));
+  const weekly = attachWeeklyChanges(buildWeekly(await readWeeklyRows(now, arrivalRows), now));
   if (!weekly) {
     console.log("[build-realestate] 확정된 주가 아직 없어 주간 시세를 만들지 않았습니다");
     return;
@@ -149,6 +172,23 @@ async function writeWeekly(now) {
     `[build-realestate] 주간 시세 ${weekly.weeks.length}주 · 확정 주 ${weekly.latestWeek}` +
       (counts ? ` (${counts})` : "") +
       (weekly.baselineWeek ? ` · ${weekly.baselineWeek} 대비` : " · 견줄 주 없음")
+  );
+}
+
+async function writeTrend(now) {
+  const trend = buildWeekly(await readWeeklyRows(now, contractRows), now, {
+    minSample: TREND_MIN_SAMPLE,
+    graceDays: FILING_GRACE_DAYS,
+  });
+  if (!trend) {
+    console.log("[build-realestate] 계약일 기준 주간 추이를 만들 재료가 없습니다");
+    return;
+  }
+
+  await writeFile(trendFile, JSON.stringify({ updatedAt: now.toISOString(), ...trend }));
+  console.log(
+    `[build-realestate] 주간 추이 ${trend.weeks.length}주 (${trend.weeks[0]} ~ ${trend.weeks.at(-1)})` +
+      ` · 자치구 ${Object.keys(trend.districts).length}곳`
   );
 }
 
@@ -225,6 +265,7 @@ async function main() {
 
   await writeRentFiles(now);
   await writeWeekly(now);
+  await writeTrend(now);
 
   console.log(`[build-realestate] 저장 완료 (${fetchSummary(districts)})`);
 }
