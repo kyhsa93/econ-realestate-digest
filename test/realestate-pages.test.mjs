@@ -473,10 +473,27 @@ test("서울 평균 대비 배수와 순위가 맞다", () => {
 });
 
 // 값을 못 내는 상태를 문장으로 덮으면 안 된다. 왜 비어 있는지가 오히려 정보다.
-test("표본이 모자라면 지어내지 않고 그 사실을 쓴다", async () => {
-  const realestate = await readJson("realestate");
-  const jongno = realestate.districts.find((d) => d.name === "종로구");
-  const text = districtSentences(jongno, realestate).join(" ");
+//
+// 예전엔 그날 realestate.json에서 종로구를 꺼내 봤는데, 종로구 신고가 쌓이면(35건이 된
+// 날이 있었다) 테스트가 깨졌다. 검사하려는 건 특정 구의 그날 사정이 아니라 "표본이
+// 모자랄 때 문장이 어떻게 나오는가"라, 그 상태를 직접 만들어 확인한다.
+test("표본이 모자라면 지어내지 않고 그 사실을 쓴다", () => {
+  const thin = {
+    name: "종로구",
+    sale: { avgPricePerPyeong10k: 9999, transactionCount: 2 },
+    jeonse: { avgDepositPerPyeong10k: 3478, transactionCount: 11 },
+    wolse: { avgDeposit10k: 27349, avgMonthlyRent10k: 110, transactionCount: 18 },
+  };
+  const realestate = {
+    period: "202608",
+    overall: {
+      sale: { avgPricePerPyeong10k: 4449, transactionCount: 575 },
+      jeonse: { avgDepositPerPyeong10k: 2571, transactionCount: 2525 },
+      wolse: { avgDeposit10k: 22166, avgMonthlyRent10k: 96, transactionCount: 2223 },
+    },
+    districts: [thin],
+  };
+  const text = districtSentences(thin, realestate).join(" ");
 
   assert.match(text, /신고가 2건뿐이라 평균을 내지 않았습니다/);
   assert.ok(!text.includes("배입니다"), `평균을 못 내는데 배수를 썼다: ${text}`);

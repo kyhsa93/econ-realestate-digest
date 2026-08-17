@@ -47,9 +47,14 @@ test("각 페이지가 자기 분야를 정규 URL·제목·필터로 선언한�
 test("각 페이지의 정적 목록에 다른 분야 기사가 섞이지 않는다", async () => {
   const news = await readJson("news");
 
+  // 그날 그 분야 기사가 한 건도 없는 날이 있다(금리 쪽이 특히 그렇다). 그건 고장이
+  // 아니라 화면이 "오늘 이 분야 기사가 아직 없습니다"로 답하는 정상 상태다. 페이지마다
+  // 기사를 요구하면 그런 날 CI가 통째로 빨개져서 진짜 문제를 가린다.
+  let listedTotal = 0;
+
   for (const page of NEWS_PAGES) {
     const listed = new Set(titles(newsListHtml(news, page.category) ?? ""));
-    assert.ok(listed.size > 0, `${page.file} 정적 목록이 비어 있다`);
+    listedTotal += listed.size;
 
     for (const item of news.items) {
       const belongs = item.category === page.category;
@@ -60,6 +65,9 @@ test("각 페이지의 정적 목록에 다른 분야 기사가 섞이지 않는
       );
     }
   }
+
+  // 다만 세 페이지가 동시에 비는 건 데이터가 아니라 프리렌더가 고장난 것이다.
+  assert.ok(listedTotal > 0, "세 카테고리 페이지의 정적 목록이 전부 비어 있다");
 });
 
 test("요약도 그 분야 문장만 싣는다", async () => {
