@@ -41,7 +41,9 @@ async function renderWith(summary, storage) {
       return { ok: false, json: async () => ({}) };
     },
   });
-  await new Promise((r) => setTimeout(r, 30));
+  for (let i = 0; i < 200 && !String(page.byId("summary-box").innerHTML).trim(); i += 1) {
+    await new Promise((r) => setTimeout(r, 5));
+  }
   return String(page.byId("summary-box").innerHTML);
 }
 

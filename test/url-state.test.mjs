@@ -8,6 +8,14 @@ import { RATE_PAGES } from "../scripts/build-rate-pages.mjs";
 import { NEWS_PAGES } from "../scripts/build-news-pages.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
+
+const until = async (check) => {
+  for (let i = 0; i < 200; i += 1) {
+    if (check()) return true;
+    await new Promise((r) => setTimeout(r, 5));
+  }
+  return false;
+};
 const read = (rel) => readFile(path.join(root, rel), "utf8");
 
 test("메인은 주소의 카테고리·검색어로 시작한다", async () => {
@@ -93,7 +101,7 @@ test("기록이 없는 날짜는 오류가 아니라 기록 없음으로 알린�
     });
 
   const missing = await load("?date=2026-01-01");
-  await new Promise((r) => setTimeout(r, 30));
+  await until(() => String(missing.byId("news-list").innerHTML).includes("기록이 없습니다"));
   const newsHtml = String(missing.byId("news-list").innerHTML);
   assert.ok(newsHtml.includes("기록이 없습니다"), `기록 없음 안내가 아니다: ${newsHtml.slice(0, 80)}`);
   assert.ok(!newsHtml.includes("불러오지 못했습니다"), "기록 없음을 로드 실패로 말한다");
@@ -103,7 +111,7 @@ test("기록이 없는 날짜는 오류가 아니라 기록 없음으로 알린�
   assert.ok(kept, "뉴스 기록이 하나도 없어 '있는 날'을 고를 수 없다");
 
   const present = await load(`?date=${kept}`);
-  await new Promise((r) => setTimeout(r, 30));
+  await until(() => String(present.byId("news-list").innerHTML).includes("news-item"));
   assert.ok(String(present.byId("news-list").innerHTML).includes("news-item"), "있는 기록을 못 그린다");
 });
 
@@ -133,7 +141,7 @@ test("일부 섹션만 기록이 없는 날짜도 오류라고 말하지 않는�
       }
     },
   });
-  await new Promise((r) => setTimeout(r, 30));
+  await until(() => String(page.byId("news-list").innerHTML).includes("news-item"));
 
   const news = String(page.byId("news-list").innerHTML);
   const market = String(page.byId("market-grid").innerHTML);
@@ -167,21 +175,21 @@ test("무엇을 못 받았는지 이름을 말한다", async () => {
 
   for (const [file, label] of [["summary", "AI 요약"], ["market", "시장지표"], ["news", "뉴스"], ["realestate", "부동산"]]) {
     const page = await loadWithFailure(file);
-    await new Promise((r) => setTimeout(r, 30));
+    await until(() => String(page.byId("load-error-text").textContent).includes(label));
     const text = page.byId("load-error-text").textContent;
     assert.ok(text.includes(label), `${file} 실패인데 배너가 "${text}"다`);
     assert.ok(!text.includes("을(를)"), `조사가 자동으로 안 붙는다: ${text}`);
   }
 
   const withReason = await loadWithFailure("summary");
-  await new Promise((r) => setTimeout(r, 30));
+  await until(() => /\(HTTP \d+\)/.test(String(withReason.byId("load-error-text").textContent)));
   assert.ok(
     /\(HTTP \d+\)/.test(withReason.byId("load-error-text").textContent),
     `실패 이유가 안 실린다: ${withReason.byId("load-error-text").textContent}`
   );
 
   const summaryFailed = await loadWithFailure("summary");
-  await new Promise((r) => setTimeout(r, 30));
+  await until(() => String(summaryFailed.byId("summary-box").textContent).includes("불러오지 못했습니다"));
   const box = String(summaryFailed.byId("summary-box").textContent);
   assert.ok(box.includes("불러오지 못했습니다"), `요약 실패가 정상 빈 화면처럼 보인다: ${box}`);
 });
