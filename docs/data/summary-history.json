@@ -670,5 +670,144 @@
         ]
       }
     ]
+  },
+  {
+    "date": "2026-08-18",
+    "model": "qwen3:14b",
+    "summary": {
+      "ko": "- 기타 경제 소식: 오늘 경제 관련 주요일정이 발표되었다. 성남 중원은 대출 규제 풍선효과로 인해 1주일 만에 0.55% 상승했다. 관련 일정은 경제 분야에 집중되었다. 주요일정은 오늘 경제 동향을 파악하는 데 도움을 주었다. 성남 중원의 주가 상승은 금융 규제와 관련된 것으로 나타났다.\n- 부동산: 모듈러 주택이 연간 5천가구 공급될 예정이다. 서울시는 무주택 청년에게 이사비와 중개보수를 최대 40만원까지 지원한다. 김윤덕과 오세훈은 오는 20일 용산공원 주택공급 방안을 논의한다. 부동산 세금은 한 채의 집에 최대 다섯 개가 붙는 것으로 나타났다. 서울 전세 물량은 7년 만에 3만가구 감소했고, 반전세·월세는 5만가구 증가했다.\n- 증시·환율: 뉴욕증시는 미·이란 갈등 지속과 유가 급등으로 인해 하락 마감했으며, 다우지수는 0.51% 내렸다. 홍콩 증시는 저가 매수세로 닷새 만에 반등하며 H주가 1.19% 상승했다. 미국 증시는 유가 영향으로 약세를 보였으나, AI 낙관론에 반도체주는 상승했다. 뉴욕증시는 이란 불확실성 속 혼조 출발했으며, 나스닥은 0.01% 올랐다. 각 증시는 서로 다른 요인에 따라 다양한 방향으로 움직였다.\n- 금리·예금·투자상품: 미 30년물 금리가 5.31%로 19년 만에 최고치를 기록했다. 미국 달러화는 10주 만에 최저치를 기록하며 정책금리 인상 기대가 후퇴했다. 미국 경제학자 80%는 올해 내 금리인상이 없을 것으로 전망했다. 환율은 올해 최저치를 찍으며 1300원대를 눈앞에 두고 있다. 5대 은행의 주담대 가산금리가 고공행진하며 가계대출 억제의 영향을 보이고 있다.",
+      "en": "- Other Economic News: Today, major economic schedules were announced. Seongnam Jungwon rose 0.55% within a week due to the balloon effect of loan regulations. The related schedule focused on the economic field. The major schedule helped understand today's economic trends. The stock price increase of Seongnam Jungwon appeared to be related to financial regulations.\n- Real Estate: Modular housing is expected to supply 5,000 units annually. Seoul City will support homeless youth with up to 400,000 won for moving costs and brokerage fees. Kim Yoon-deok and Oh Se-hoon will discuss housing supply plans at Yongsan Park on the 20th. Real estate taxes have been found to be attached to a single property as many as five times. The number of Seoul's rental units has decreased by 30,000 units in seven years, while the number of semi-rental and monthly rental units has increased by 50,000 units.\n- Stocks & FX: The New York stock market closed lower due to the continued US-Iran conflict and a sharp rise in oil prices, with the Dow index falling 0.51%. The Hong Kong stock market rebounded for the first time in five days due to bargain hunting, with H-shares rising 1.19%. The US market showed weakness due to oil prices, but semiconductor stocks rose on optimism about AI. The New York stock market opened mixed amid Iranian uncertainty, with the Nasdaq rising 0.01%. Each market moved in different directions due to different factors.\n- Rates, Deposits & Investment Products: The 30-year U.S. Treasury bond yield reached 5.31%, the highest level in 19 years. The U.S. dollar hit its lowest level in 10 weeks, signaling a retreat in expectations for policy rate hikes. 80% of U.S. economists expect no interest rate hikes this year. The exchange rate has hit its lowest level this year, approaching the 1,300 won level. The added interest rates on housing loans by the five major banks are soaring, showing the impact of household loan suppression."
+    },
+    "highlights": [],
+    "categories": [
+      {
+        "key": "other",
+        "name": "기타 경제 소식",
+        "nameEn": "Other Economic News",
+        "lineKo": "오늘 경제 관련 주요일정이 발표되었다. 성남 중원은 대출 규제 풍선효과로 인해 1주일 만에 0.55% 상승했다. 관련 일정은 경제 분야에 집중되었다. 주요일정은 오늘 경제 동향을 파악하는 데 도움을 주었다. 성남 중원의 주가 상승은 금융 규제와 관련된 것으로 나타났다.",
+        "lineEn": "Today, major economic schedules were announced. Seongnam Jungwon rose 0.55% within a week due to the balloon effect of loan regulations. The related schedule focused on the economic field. The major schedule helped understand today's economic trends. The stock price increase of Seongnam Jungwon appeared to be related to financial regulations.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": false,
+        "items": [
+          {
+            "title": "[오늘의 주요일정]경제(8월18일화요일)",
+            "link": "https://www.newsis.com/view/NISX20260814_0003748771",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "대출 규제 풍선효과…성남 중원, 1주새 0.55% 올라",
+            "link": "https://www.hankyung.com/article/2026081753931",
+            "source": "한국경제 부동산"
+          }
+        ]
+      },
+      {
+        "key": "realestate",
+        "name": "부동산",
+        "nameEn": "Real Estate",
+        "lineKo": "모듈러 주택이 연간 5천가구 공급될 예정이다. 서울시는 무주택 청년에게 이사비와 중개보수를 최대 40만원까지 지원한다. 김윤덕과 오세훈은 오는 20일 용산공원 주택공급 방안을 논의한다. 부동산 세금은 한 채의 집에 최대 다섯 개가 붙는 것으로 나타났다. 서울 전세 물량은 7년 만에 3만가구 감소했고, 반전세·월세는 5만가구 증가했다.",
+        "lineEn": "Modular housing is expected to supply 5,000 units annually. Seoul City will support homeless youth with up to 400,000 won for moving costs and brokerage fees. Kim Yoon-deok and Oh Se-hoon will discuss housing supply plans at Yongsan Park on the 20th. Real estate taxes have been found to be attached to a single property as many as five times. The number of Seoul's rental units has decreased by 30,000 units in seven years, while the number of semi-rental and monthly rental units has increased by 50,000 units.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": false,
+        "items": [
+          {
+            "title": "20층 이상 고층아파트도 뚝딱…모듈러 주택 연 5천가구 ‘닥공’",
+            "link": "https://www.mk.co.kr/news/realestate/12129763",
+            "source": "매일경제 부동산"
+          },
+          {
+            "title": "서울시, 무주택 청년 이사비·중개보수 최대 40만원 지원",
+            "link": "https://www.yna.co.kr/view/AKR20260817032600004",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "김윤덕·오세훈 오는 20일 회동…용산공원 주택공급 '분수령'",
+            "link": "https://www.yna.co.kr/view/AKR20260817037200004",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "집 한 채에 세금만 다섯 개 붙는다 … 부동산 세금에 대한 100가지 사실(1)",
+            "link": "https://www.mk.co.kr/news/realestate/12129471",
+            "source": "매일경제 부동산"
+          },
+          {
+            "title": "서울 전세, 7년새 3만가구 증발…반전세 등 월세는 5만가구 늘어",
+            "link": "https://www.mk.co.kr/news/realestate/12129585",
+            "source": "매일경제 부동산"
+          }
+        ]
+      },
+      {
+        "key": "stocks",
+        "name": "증시·환율",
+        "nameEn": "Stocks & FX",
+        "lineKo": "뉴욕증시는 미·이란 갈등 지속과 유가 급등으로 인해 하락 마감했으며, 다우지수는 0.51% 내렸다. 홍콩 증시는 저가 매수세로 닷새 만에 반등하며 H주가 1.19% 상승했다. 미국 증시는 유가 영향으로 약세를 보였으나, AI 낙관론에 반도체주는 상승했다. 뉴욕증시는 이란 불확실성 속 혼조 출발했으며, 나스닥은 0.01% 올랐다. 각 증시는 서로 다른 요인에 따라 다양한 방향으로 움직였다.",
+        "lineEn": "The New York stock market closed lower due to the continued US-Iran conflict and a sharp rise in oil prices, with the Dow index falling 0.51%. The Hong Kong stock market rebounded for the first time in five days due to bargain hunting, with H-shares rising 1.19%. The US market showed weakness due to oil prices, but semiconductor stocks rose on optimism about AI. The New York stock market opened mixed amid Iranian uncertainty, with the Nasdaq rising 0.01%. Each market moved in different directions due to different factors.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": false,
+        "items": [
+          {
+            "title": "뉴욕증시, 미·이란 갈등 지속·유가 급등에 하락 마감…다우 0.51%↓",
+            "link": "https://www.newsis.com/view/NISX20260818_0003751727",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "[올댓차이나] 홍콩 증시, 저가 매수세로 닷새 만에 반등 마감… H주 1.19%↑",
+            "link": "https://www.newsis.com/view/NISX20260817_0003751710",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "'유가 영향' 美 증시 약세… AI 낙관에 반도체주는 상승",
+            "link": "https://www.hankyung.com/article/202608175622i",
+            "source": "한국경제 경제"
+          },
+          {
+            "title": "[속보]뉴욕증시, 이란 불확실성 속 혼조 출발.…나스닥 0.01%↑",
+            "link": "https://www.newsis.com/view/NISX20260817_0003751699",
+            "source": "뉴시스 경제"
+          }
+        ]
+      },
+      {
+        "key": "rates",
+        "name": "금리·예금·투자상품",
+        "nameEn": "Rates, Deposits & Investment Products",
+        "lineKo": "미 30년물 금리가 5.31%로 19년 만에 최고치를 기록했다. 미국 달러화는 10주 만에 최저치를 기록하며 정책금리 인상 기대가 후퇴했다. 미국 경제학자 80%는 올해 내 금리인상이 없을 것으로 전망했다. 환율은 올해 최저치를 찍으며 1300원대를 눈앞에 두고 있다. 5대 은행의 주담대 가산금리가 고공행진하며 가계대출 억제의 영향을 보이고 있다.",
+        "lineEn": "The 30-year U.S. Treasury bond yield reached 5.31%, the highest level in 19 years. The U.S. dollar hit its lowest level in 10 weeks, signaling a retreat in expectations for policy rate hikes. 80% of U.S. economists expect no interest rate hikes this year. The exchange rate has hit its lowest level this year, approaching the 1,300 won level. The added interest rates on housing loans by the five major banks are soaring, showing the impact of household loan suppression.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": false,
+        "items": [
+          {
+            "title": "美 30년물 금리 5.31%…19년 만에 최고치",
+            "link": "https://www.newsis.com/view/NISX20260818_0003751722",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "美달러화 10주 만에 최저치…정책금리 인상 기대 후퇴",
+            "link": "https://www.newsis.com/view/NISX20260818_0003751712",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "美 경제학자 80% \"올해 내 금리인상 없을 것\"",
+            "link": "https://www.hankyung.com/article/202608175594i",
+            "source": "한국경제 경제"
+          },
+          {
+            "title": "환율·채권, 올해 최저치 찍은 환율, 1300원대 눈앞",
+            "link": "https://www.hankyung.com/article/2026081753841",
+            "source": "한국경제 경제"
+          },
+          {
+            "title": "5대 은행 주담대 가산금리 고공행진…\"가계대출 억제 영향\"",
+            "link": "https://www.yna.co.kr/view/AKR20260817053700002",
+            "source": "연합뉴스 경제"
+          }
+        ]
+      }
+    ]
   }
 ]
