@@ -182,6 +182,18 @@ function filterByArea(items, minArea, maxArea) {
   });
 }
 
+// 국토부가 내려주는 거래 형태. 직거래에는 특수관계인 사이의 저가 거래가 섞여 있어
+// 시세를 읽는 눈으로 보면 노이즈다. 그래서 검색 화면이 "직거래 제외"를 걸 수 있어야 한다.
+//
+// 셋을 구분해서 담는다 - 직거래(true), 중개거래(false), 그리고 필드 자체가 비어 온 경우
+// (키를 안 만든다). 미상을 중개거래로 접어 넣으면 국토부가 필드 이름을 바꿔 전부 빈 칸이
+// 되는 날에도 화면상 달라지는 게 없어 알아챌 방법이 없다.
+export function dealingDirect(value) {
+  const text = String(value ?? "").trim();
+  if (!text) return null;
+  return text === "직거래";
+}
+
 // 예산 검색이 쓸 개별 거래. 집계만 남기고 버리던 것을 한 건씩 남긴다.
 //
 // 단지 이름이 없는 거래는 담지 않는다. 예산 화면은 "어느 아파트가 그 값에 팔렸나"에
@@ -203,6 +215,7 @@ export function normalizeDeal(item, districtName) {
 
   const floor = Number(item?.floor);
   const buildYear = Number(item?.buildYear);
+  const direct = dealingDirect(item?.dealingGbn);
 
   return {
     district: districtName,
@@ -213,6 +226,7 @@ export function normalizeDeal(item, districtName) {
     amount10k,
     date: `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`,
     buildYear: Number.isInteger(buildYear) && buildYear > 1900 ? buildYear : null,
+    ...(direct === null ? {} : { direct }),
   };
 }
 
@@ -677,7 +691,13 @@ async function main() {
     for (const [code, deals] of dealsByDistrict) byDistrict.set(code, deals);
 
     const districtsObj = Object.fromEntries(byDistrict);
-    const total = Object.values(districtsObj).reduce((sum, list) => sum + list.length, 0);
+    const all = Object.values(districtsObj).flat();
+    const total = all.length;
+    // 거래 형태가 몇 건에 붙었는지 센다. 검색 화면의 "직거래 제외"는 이 필드가 없으면
+    // 아무것도 거르지 않는데, 그건 조건이 안 걸린 화면과 구분이 안 간다. 국토부가 필드를
+    // 안 주거나 이름을 바꾼 날 로그에서 바로 드러나야 한다.
+    const directCount = all.filter((deal) => deal.direct === true).length;
+    const unknownCount = all.filter((deal) => !("direct" in deal)).length;
 
     await mkdir(path.dirname(dealsFile), { recursive: true });
     await writeFile(
@@ -689,7 +709,8 @@ async function main() {
     // 날이 와도 화면상 달라지는 게 없어 알아챌 방법이 없다.
     console.log(
       `[fetch-realestate] 예산 검색용 거래 ${total.toLocaleString("ko-KR")}건 저장` +
-        ` (해제 ${cancelledTotal.toLocaleString("ko-KR")}건 제외)`
+        ` (해제 ${cancelledTotal.toLocaleString("ko-KR")}건 제외,` +
+        ` 직거래 ${directCount.toLocaleString("ko-KR")}건 · 거래형태 미상 ${unknownCount.toLocaleString("ko-KR")}건)`
     );
   }
 

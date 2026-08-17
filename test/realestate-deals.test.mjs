@@ -5,7 +5,15 @@
 // 셈이 되고, 그건 평균이 조금 틀리는 것과는 성격이 다른 사고다.
 import test from "node:test";
 import assert from "node:assert/strict";
-import { carryForward, dropCancelled, errorDetail, fetchSummary, isCancelledDeal, normalizeDeal } from "../scripts/fetch-realestate.mjs";
+import {
+  carryForward,
+  dealingDirect,
+  dropCancelled,
+  errorDetail,
+  fetchSummary,
+  isCancelledDeal,
+  normalizeDeal,
+} from "../scripts/fetch-realestate.mjs";
 
 const deal = (extra = {}) => ({
   aptNm: "역삼아이파크",
@@ -49,6 +57,26 @@ test("거래 한 건을 화면이 쓸 모양으로 옮긴다", () => {
     date: "2026-08-14",
     buildYear: 2004,
   });
+});
+
+// 직거래에는 특수관계인 사이의 저가 거래가 섞여 있어 시세를 읽는 눈으로 보면 노이즈다.
+// 검색 화면이 "직거래 제외"를 걸려면 이 필드가 거래마다 붙어 있어야 한다.
+test("거래 형태를 직거래·중개거래·미상 셋으로 가른다", () => {
+  assert.equal(dealingDirect("직거래"), true);
+  assert.equal(dealingDirect("중개거래"), false);
+  assert.equal(dealingDirect(" 직거래 "), true);
+
+  // 미상을 중개거래로 접어 넣으면, 국토부가 이 필드를 안 주는 날에도 화면상 달라지는 게
+  // 없어 알아챌 방법이 없다.
+  assert.equal(dealingDirect(""), null);
+  assert.equal(dealingDirect("   "), null);
+  assert.equal(dealingDirect(undefined), null);
+});
+
+test("거래 형태를 신고한 거래에만 표시를 남긴다", () => {
+  assert.equal(normalizeDeal(deal({ dealingGbn: "직거래" }), "강남구").direct, true);
+  assert.equal(normalizeDeal(deal({ dealingGbn: "중개거래" }), "강남구").direct, false);
+  assert.ok(!("direct" in normalizeDeal(deal(), "강남구")), "미상에도 값을 지어냈다");
 });
 
 // 예산 화면은 "어느 아파트가 그 값에 팔렸나"에 답하는 자리다. 이름 없는 줄은

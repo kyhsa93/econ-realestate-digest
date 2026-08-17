@@ -150,12 +150,13 @@
     font-size: 0.8rem;
   }
   .site-footer a { color: var(--muted); }
-  /* 조건은 둘뿐이라 한 줄에 두고, 좁은 화면에서만 접힌다. 조건이 접혀 있으면 결과가
-     무엇으로 걸러진 목록인지 화면에서 사라진다. */
+  /* 조건을 접어 두지 않는다. 접혀 있으면 결과가 무엇으로 걸러진 목록인지 화면에서
+     사라지고, 그때부터 이 표는 "서울 전체"로 읽힌다. 좁은 화면에서는 줄로 흐른다. */
   .search-controls { display: flex; flex-wrap: wrap; gap: 10px 16px; margin-bottom: 14px; }
   .search-field { display: flex; align-items: center; gap: 8px; }
   .search-field label { font-size: 0.82rem; color: var(--muted); }
-  .search-field select {
+  .search-field select,
+  .search-field input[type="text"] {
     background: var(--bg);
     color: var(--fg);
     border: 1px solid var(--border);
@@ -165,6 +166,9 @@
     font-family: inherit;
     max-width: 12rem;
   }
+  .search-field input[type="text"] { width: 8.5rem; }
+  .search-field input[type="checkbox"] { margin: 0; }
+  .search-field.toggle label { cursor: pointer; }
   .budget-summary { font-size: 0.95rem; line-height: 1.6; }
   .budget-districts { color: var(--muted); font-size: 0.82rem; margin-top: 4px; }
   .budget-deals { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 6px; }
@@ -180,6 +184,16 @@
   }
   .budget-deal .place { font-weight: 600; }
   .budget-deal .spec, .budget-deal .when { color: var(--muted); font-size: 0.8rem; }
+  /* 직거래에만 붙는다. 중개거래는 대다수라 표시할 값이 없고, 거래 형태를 신고하지 않은
+     거래도 있어서 "표시가 없다 = 중개거래"라고 읽히면 안 된다. */
+  .budget-deal .tag {
+    font-size: 0.72rem;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0 6px;
+  }
+  .search-loading { color: var(--muted); font-size: 0.9rem; }
   .budget-deal .price { margin-left: auto; font-weight: 700; font-variant-numeric: tabular-nums; }
   .budget-empty { color: var(--muted); font-size: 0.9rem; }
   .budget-more { margin-top: 12px; font-size: 0.85rem; }
@@ -241,6 +255,22 @@
         <label for="budget-select" id="budget-label">예산</label>
         <select id="budget-select"></select>
       </div>
+      <div class="search-field">
+        <label for="area-select" id="area-label">면적</label>
+        <select id="area-select"></select>
+      </div>
+      <div class="search-field">
+        <label for="age-select" id="age-label">연식</label>
+        <select id="age-select"></select>
+      </div>
+      <div class="search-field">
+        <label for="apt-input" id="apt-label">단지명</label>
+        <input type="text" id="apt-input" autocomplete="off" spellcheck="false">
+      </div>
+      <div class="search-field toggle">
+        <input type="checkbox" id="direct-check">
+        <label for="direct-check" id="direct-label">직거래 제외</label>
+      </div>
     </div>
     <div id="search-result"></div>
     <div class="content-notice" id="search-note"></div>
@@ -280,12 +310,32 @@ const T = {
     searchHeading: "지역과 예산으로 찾기",
     districtLabel: "지역",
     budgetLabel: "예산",
+    areaLabel: "면적",
+    ageLabel: "연식",
+    aptLabel: "단지명",
+    directLabel: "직거래 제외",
     allDistricts: "서울 전체",
     allBudgets: "예산 전체",
+    allAreas: "면적 전체",
+    allAges: "연식 전체",
+    aptPlaceholder: "예: 주공",
     bandLabel: (from, to) =>
       to === null ? `${from}억 이상` : from === 0 ? `${to}억 미만` : `${from}억대`,
+    areaOption: (bucket) =>
+      bucket.min == null
+        ? `${bucket.max}㎡ 이하`
+        : bucket.max == null
+          ? `${bucket.min}㎡ 초과`
+          : `${bucket.min}~${bucket.max}㎡`,
+    ageOption: (bucket) => (bucket.within ? `${bucket.within}년 이내` : `${bucket.over}년 이상`),
+    aptScope: (query) => `단지명 "${query}"`,
+    directScope: "직거래 제외",
+    directTag: "직거래",
     summary: (scope, count) => `${scope}에서 ${count.toLocaleString("ko-KR")}건이 거래됐습니다.`,
-    scopeOf: (district, band) => (band ? `${district} ${band}` : district),
+    scopeOf: (parts) => parts.join(" "),
+    loading: "찾는 중...",
+    detailNotReady:
+      "면적·연식·단지명 조건은 지역별 실거래 자료가 있어야 걸 수 있는데, 아직 받지 못했습니다. 지역과 예산으로 먼저 찾아보세요.",
     periods: (periods) => `${periods} 신고분 기준`,
     topDistricts: "거래가 많은 지역",
     floor: (floor) => `${floor}층`,
@@ -294,7 +344,7 @@ const T = {
     empty: "조건에 맞는 신고 거래가 없습니다. 예산 구간을 넓히거나 다른 지역을 골라 보세요.",
     notReady: "아직 검색할 실거래 자료가 없습니다. 국토교통부 신고분을 받는 대로 채워집니다.",
     note:
-      "국토교통부에 신고된 아파트 매매 실거래 기록입니다. 지금 살 수 있는 매물이 아니며, 같은 단지라도 층·향·동에 따라 값이 크게 다릅니다. 계약 후 30일인 신고 기한 때문에 최근 거래는 나중에 반영됩니다. 조건마다 대표 거래 몇 건만 보여주며, 건수는 신고된 전체를 셉니다.",
+      "국토교통부에 신고된 아파트 매매 실거래 기록입니다. 지금 살 수 있는 매물이 아니며, 같은 단지라도 층·향·동에 따라 값이 크게 다릅니다. 계약 후 30일인 신고 기한 때문에 최근 거래는 나중에 반영됩니다. 목록은 최근 거래부터 일부만 보여주며, 건수는 조건에 맞는 신고 거래를 전부 셉니다. 연식은 준공연도가 신고된 거래에만, 직거래 표시는 거래 형태가 신고된 거래에만 걸립니다.",
     budgetLinksHeading: "예산대별 실거래",
     updatedPrefix: "기준",
     footerSource: "출처: 국토교통부 아파트 매매 실거래가 공개시스템. 신고된 거래만 집계되며 신고 기한(계약 후 30일)이 있어 최근 거래는 나중에 반영됩니다.",
@@ -316,16 +366,36 @@ const T = {
     searchHeading: "Search by district and budget",
     districtLabel: "District",
     budgetLabel: "Budget",
+    areaLabel: "Size",
+    ageLabel: "Age",
+    aptLabel: "Complex",
+    directLabel: "Exclude direct deals",
     allDistricts: "All of Seoul",
     allBudgets: "Any budget",
+    allAreas: "Any size",
+    allAges: "Any age",
+    aptPlaceholder: "e.g. Jugong",
     bandLabel: (from, to) =>
       to === null
         ? `₩${(from / 10).toFixed(1)}B and up`
         : from === 0
           ? `Under ₩${(to / 10).toFixed(1)}B`
           : `₩${(from / 10).toFixed(1)}B–${(to / 10).toFixed(1)}B`,
+    areaOption: (bucket) =>
+      bucket.min == null
+        ? `Up to ${bucket.max}㎡`
+        : bucket.max == null
+          ? `Over ${bucket.min}㎡`
+          : `${bucket.min}–${bucket.max}㎡`,
+    ageOption: (bucket) => (bucket.within ? `Within ${bucket.within} years` : `${bucket.over}+ years`),
+    aptScope: (query) => `complex "${query}"`,
+    directScope: "excluding direct deals",
+    directTag: "Direct",
     summary: (scope, count) => `${count.toLocaleString("en-US")} deals filed in ${scope}.`,
-    scopeOf: (district, band) => (band ? `${district}, ${band}` : district),
+    scopeOf: (parts) => parts.join(", "),
+    loading: "Searching...",
+    detailNotReady:
+      "Size, age and complex-name conditions need the per-district transaction files, which have not arrived yet. Try district and budget first.",
     periods: (periods) => `Filings for ${periods}`,
     topDistricts: "Most deals in",
     floor: (floor) => `${floor}F`,
@@ -334,7 +404,7 @@ const T = {
     empty: "No filed deals match these conditions. Try a wider budget or another district.",
     notReady: "No transaction data to search yet. It fills in as MOLIT filings come through.",
     note:
-      "Apartment sale transactions reported to Korea's MOLIT. These are filed deals, not listings for sale, and prices vary widely by floor, aspect and building within the same complex. Filings can lag up to 30 days after contract. Only a few representative deals are shown per condition; the count covers every filing.",
+      "Apartment sale transactions reported to Korea's MOLIT. These are filed deals, not listings for sale, and prices vary widely by floor, aspect and building within the same complex. Filings can lag up to 30 days after contract. The list shows the most recent matches only; the count covers every filing that matches. Age filters apply only where a build year was filed, and the direct-deal tag only where a deal type was filed.",
     budgetLinksHeading: "Deals by budget",
     updatedPrefix: "As of",
     footerSource: "Source: MOLIT real transaction price disclosure. Only reported deals are counted, and reporting can lag up to 30 days after contract.",
@@ -351,6 +421,39 @@ const EOK = 10000; // 1억(만원)
 const MAX_ROWS = 30;
 
 const ALL = "all";
+
+// scripts/budget-bands.mjs의 bandStart와 같은 규칙. 지역별 전수 자료를 화면에서 직접
+// 구간으로 가르기 때문에 여기에도 있어야 한다 - 어긋나면 고른 구간과 목록이 서로 다른
+// 거래를 가리키고, 그 어긋남은 그럴듯한 목록으로 나와 눈으로는 못 잡는다.
+const BAND_MIN = 3 * EOK;
+const BAND_MAX = 30 * EOK;
+
+function bandStartOf(amount10k) {
+  if (typeof amount10k !== "number" || !Number.isFinite(amount10k) || amount10k <= 0) return null;
+  if (amount10k < BAND_MIN) return 0;
+  if (amount10k >= BAND_MAX) return BAND_MAX;
+  return Math.floor(amount10k / EOK) * EOK;
+}
+
+// 전용면적 구간. 경계는 위쪽을 포함한다(84.97㎡는 "60~85㎡"). 국민평형이 경계 바로
+// 아래라 반대로 잡으면 제일 흔한 면적이 통째로 옆 칸으로 넘어간다.
+const AREA_BUCKETS = [
+  { key: "60", min: null, max: 60 },
+  { key: "60-85", min: 60, max: 85 },
+  { key: "85-135", min: 85, max: 135 },
+  { key: "135", min: 135, max: null },
+];
+
+const AGE_BUCKETS = [
+  { key: "5", within: 5 },
+  { key: "10", within: 10 },
+  { key: "20", within: 20 },
+  { key: "30", over: 30 },
+];
+
+// 띄어쓰기가 제각각인 단지 이름을 그대로 대조하면 "래미안 퍼스티지"로 찾는 사람이
+// "래미안퍼스티지"를 못 찾는다.
+const squash = (text) => String(text ?? "").replace(/\s+/g, "").toLowerCase();
 
 let locale = (() => {
   const saved = window.localStorage.getItem("lang");
@@ -386,7 +489,16 @@ function setText(id, text) {
 
 const cache = { budget: null, search: null };
 
-// 고른 조건은 주소에 남긴다. "노원구 8억대"를 그대로 보낼 수 있어야 검색 화면이다.
+// 지역별 전수 파일(docs/data/deals-<슬러그>.json). 조건을 정확히 걸려면 표본이 아니라
+// 전수가 있어야 한다 - 대표 몇 건 위에 면적·연식을 걸면 걸리는 건 그 몇 건뿐인데
+// 화면에 적히는 건수는 전수라, 조건을 늘리는 순간 건수가 거짓말이 된다.
+//
+// 값이 null이면 "그 지역 파일이 아직 없다"는 뜻이고(아직 안 찍힌 날), 키가 아예 없으면
+// 아직 받아보지 않았다는 뜻이다. 못 받은 것은 기억하지 않아 다음 조건 변경에서 다시
+// 시도된다.
+const fullDeals = new Map();
+
+// 고른 조건은 주소에 남긴다. "노원구 8억대 84㎡"를 그대로 보낼 수 있어야 검색 화면이다.
 const params = new URLSearchParams(location.search);
 let district = params.get("district") || ALL;
 let band10k = (() => {
@@ -396,6 +508,18 @@ let band10k = (() => {
   // 빈 문자열은 Number("")가 0이라 그냥 두면 "3억 미만"으로 읽힌다.
   return Number.isFinite(value) && value >= 0 ? value * EOK : null;
 })();
+// 주소로 들어온 값이 우리가 아는 구간인지 확인한다. 모르는 값을 그대로 두면 아무것도
+// 안 걸리는 조건이 화면에는 걸린 것처럼 남는다.
+const knownKey = (buckets, raw) => (buckets.some((b) => b.key === raw) ? raw : ALL);
+let areaKey = knownKey(AREA_BUCKETS, params.get("area"));
+let ageKey = knownKey(AGE_BUCKETS, params.get("age"));
+// 친 그대로 들고 있다가 쓸 때만 다듬는다. 칠 때마다 trim한 값을 입력창에 되쓰면 "래미안 "
+// 뒤의 공백이 매번 지워져 두 단어짜리 단지 이름을 아예 칠 수가 없다.
+let aptQuery = params.get("apt") ?? "";
+let excludeDirect = params.get("direct") === "exclude";
+
+const aptTerm = () => aptQuery.trim();
+const detailActive = () => areaKey !== ALL || ageKey !== ALL || aptTerm() !== "" || excludeDirect;
 
 const MONTHS_EN = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
@@ -427,6 +551,84 @@ function bandLabel(band) {
     Math.round(band.min10k / EOK),
     band.max10k === null ? null : Math.round(band.max10k / EOK)
   );
+}
+
+const bucketOf = (buckets, key) => buckets.find((bucket) => bucket.key === key) ?? null;
+
+// 연식의 기준 연도. 오늘 날짜가 아니라 자료가 말하는 기간에서 뽑는다 - 화면은 "8월
+// 신고분 기준"이라고 적어 두고 연식만 오늘로 세면 두 문장이 다른 시점을 말하게 된다.
+function baseYear() {
+  const periods = cache.search?.periods ?? cache.budget?.periods ?? [];
+  const year = Number(String(periods[periods.length - 1] ?? "").slice(0, 4));
+  return Number.isInteger(year) && year > 1900 ? year : null;
+}
+
+// 면적·연식·단지명·거래형태. 예산·지역과 달리 거래 한 건씩을 직접 본다.
+function matchesDetail(deal) {
+  if (areaKey !== ALL) {
+    const bucket = bucketOf(AREA_BUCKETS, areaKey);
+    const area = Number(deal?.area);
+    if (!bucket || !Number.isFinite(area)) return false;
+    if (bucket.min !== null && area <= bucket.min) return false;
+    if (bucket.max !== null && area > bucket.max) return false;
+  }
+
+  if (ageKey !== ALL) {
+    const bucket = bucketOf(AGE_BUCKETS, ageKey);
+    const year = baseYear();
+    // 준공연도가 없는 거래는 연식 조건에서 뺀다. 모르는 값을 통과시키면 "30년 이상"
+    // 목록에 준공연도 미상이 섞여 나오고, 화면은 그걸 30년 넘은 단지라고 말한다.
+    if (!bucket || !year || !Number.isInteger(deal?.buildYear)) return false;
+    const age = year - deal.buildYear;
+    if (bucket.within != null && age > bucket.within) return false;
+    if (bucket.over != null && age < bucket.over) return false;
+  }
+
+  const term = aptTerm();
+  if (term && !squash(deal?.apt).includes(squash(term))) return false;
+
+  // 거래 형태를 신고하지 않은 거래는 남긴다. 직거래라고 적힌 것만 뺀다 - 모르는 것까지
+  // 빼면 국토부가 그 필드를 안 주는 날 목록이 통째로 비어 버린다.
+  if (excludeDirect && deal?.direct === true) return false;
+
+  return true;
+}
+
+const scopeNames = () => (district === ALL ? districtNames() : [district]);
+
+// 전수가 필요한 조건인지. 서울 전체를 조건 없이 보는 첫 화면까지 25개 파일을 받게 하면
+// 들어오자마자 수백 KB를 내려받는다. 지역을 고르거나 상세 조건을 걸 때만 받는다.
+const needFull = () => district !== ALL || detailActive();
+
+/** 지금 조건이 가리키는 전수 거래. 한 지역이라도 자료가 없으면 null(전수라고 말할 수 없다). */
+function fullDealsOf() {
+  const names = scopeNames();
+  if (!names.length) return null;
+
+  const rows = [];
+  for (const name of names) {
+    const list = fullDeals.get(name);
+    if (!list) return null;
+    // 지역 파일은 지역 이름을 담지 않는다(파일 이름이 곧 열쇠다). 서울 전체로 합칠 때는
+    // 어느 구인지 적어야 하므로 여기서 채운다.
+    for (const deal of list) rows.push(deal.district ? deal : { ...deal, district: name });
+  }
+
+  return rows.sort((a, b) => String(b.date).localeCompare(String(a.date)) || b.amount10k - a.amount10k);
+}
+
+async function loadDistrictDeals(name) {
+  const slug = cache.search?.slugs?.[name];
+  if (!slug) {
+    fullDeals.set(name, null);
+    return;
+  }
+  try {
+    const file = await loadJson(`deals-${slug}`);
+    fullDeals.set(name, file?.deals ?? null);
+  } catch {
+    // 못 받은 것은 기억하지 않는다. 조건을 다시 건드리면 한 번 더 시도한다.
+  }
 }
 
 // 지역을 고르면 그 지역 파일에서, 서울 전체면 예산 파일에서 구간을 가져온다. 서울 전체
@@ -466,6 +668,28 @@ function renderControls() {
         optionHtml(String(Math.round(band.min10k / EOK)), bandLabel(band), band.min10k === band10k)
       )
       .join("");
+
+  // 면적·연식 선택지는 자료가 아니라 규칙에서 나온다. 지역과 예산은 그 칸에 거래가 있을
+  // 때만 고르게 두지만(빈 화면과 잘못 고른 조건을 구분하려고), 면적·연식은 조건을 걸기
+  // 전에는 무엇이 남을지 알 수 없어 같은 방식을 쓸 수가 없다.
+  document.getElementById("area-select").innerHTML =
+    optionHtml(ALL, t("allAreas"), areaKey === ALL) +
+    AREA_BUCKETS.map((bucket) =>
+      optionHtml(bucket.key, t("areaOption")(bucket), bucket.key === areaKey)
+    ).join("");
+
+  document.getElementById("age-select").innerHTML =
+    optionHtml(ALL, t("allAges"), ageKey === ALL) +
+    AGE_BUCKETS.map((bucket) =>
+      optionHtml(bucket.key, t("ageOption")(bucket), bucket.key === ageKey)
+    ).join("");
+
+  const aptInput = document.getElementById("apt-input");
+  // 글자를 치는 중에 값을 되쓰면 커서가 끝으로 튄다.
+  if (aptInput.value !== aptQuery) aptInput.value = aptQuery;
+  aptInput.setAttribute("placeholder", t("aptPlaceholder"));
+
+  document.getElementById("direct-check").checked = excludeDirect;
 }
 
 function dealHtml(deal, name) {
@@ -479,6 +703,7 @@ function dealHtml(deal, name) {
     `<li class="budget-deal">` +
     `<span class="place">${escapeHtml(place)}</span>` +
     `<span class="spec">${escapeHtml(spec)}</span>` +
+    (deal.direct === true ? `<span class="tag">${escapeHtml(t("directTag"))}</span>` : "") +
     `<span class="when">${escapeHtml(dealWhen(deal.date))}</span>` +
     `<span class="price">${escapeHtml(formatEok(deal.amount10k))}</span>` +
     `</li>`
@@ -501,10 +726,11 @@ function periodsHtml() {
   return periods ? ` <span class="when">${escapeHtml(t("periods")(periods))}</span>` : "";
 }
 
-// 예산 구간 페이지가 있는 구간이면 그쪽으로 보낸다. 서울 전체 기준으로 만든 페이지라
-// 지역을 고른 상태에서는 걸지 않는다 - 누른 사람이 보게 될 목록이 지금 화면과 다르다.
+// 예산 구간 페이지가 있는 구간이면 그쪽으로 보낸다. 서울 전체 기준으로 조건 없이 찍은
+// 페이지라 지역이나 상세 조건을 건 상태에서는 걸지 않는다 - 누른 사람이 보게 될 목록이
+// 지금 화면과 다르다.
 function moreHtml(band) {
-  if (district !== ALL || !band) return "";
+  if (district !== ALL || !band || detailActive()) return "";
   const eok = Math.round(band.min10k / EOK);
   if (eok < 3 || eok > 20) return "";
   return (
@@ -514,8 +740,73 @@ function moreHtml(band) {
   );
 }
 
-function renderResult() {
-  const box = document.getElementById("search-result");
+/** 금액 구간의 시작값으로 구간을 되만든다. 전수 자료에는 구간이 담겨 있지 않다. */
+function bandOf(min10k) {
+  if (min10k === null) return null;
+  return { min10k, max10k: min10k === 0 ? BAND_MIN : min10k === BAND_MAX ? null : min10k + EOK };
+}
+
+// 고른 조건을 결과와 같은 자리에 적는다. 걸러진 목록을 조건 없이 읽으면 그 표는 그냥
+// "서울 전체"가 되고, 화면에 적힌 건수도 다른 뜻으로 읽힌다.
+function scopeLabel(band) {
+  const parts = [district === ALL ? t("allDistricts") : district];
+  if (band) parts.push(bandLabel(band));
+  if (areaKey !== ALL) parts.push(t("areaOption")(bucketOf(AREA_BUCKETS, areaKey)));
+  if (ageKey !== ALL) parts.push(t("ageOption")(bucketOf(AGE_BUCKETS, ageKey)));
+  if (aptTerm()) parts.push(t("aptScope")(aptTerm()));
+  if (excludeDirect) parts.push(t("directScope"));
+  return t("scopeOf")(parts);
+}
+
+const localeTag = () => (locale === "en" ? "en-US" : "ko-KR");
+
+function topDistrictsHtml(pairs) {
+  const top = pairs
+    .map(([name, count]) => `${escapeHtml(name)} ${count.toLocaleString(localeTag())}`)
+    .join(" · ");
+  return top ? `<div class="budget-districts">${escapeHtml(t("topDistricts"))}: ${top}</div>` : "";
+}
+
+function resultHtml(scope, count, rows, top, band) {
+  return (
+    `<p class="budget-summary">${escapeHtml(t("summary")(scope, count))}${periodsHtml()}</p>` +
+    top +
+    (count > rows.length ? `<div class="budget-districts">${escapeHtml(t("shown")(rows.length))}</div>` : "") +
+    `<ul class="budget-deals">${rows.map((deal) => dealHtml(deal, district)).join("")}</ul>` +
+    moreHtml(band)
+  );
+}
+
+// 전수 자료로 그린다. 여기서만 건수가 조건에 맞는 거래를 전부 센 값이 된다.
+function renderFull(box, deals) {
+  const band = bandOf(band10k);
+  const matched = deals.filter(
+    (deal) => (band10k === null || bandStartOf(deal.amount10k) === band10k) && matchesDetail(deal)
+  );
+
+  if (!matched.length) {
+    box.innerHTML = `<p class="budget-empty">${escapeHtml(t("empty"))}</p>`;
+    return;
+  }
+
+  // 지역 분포는 서울 전체에서 구간을 고른 경우에만. 지역을 이미 고른 화면에서는 그 지역
+  // 하나뿐이고, 구간을 안 고른 목록의 분포는 "서울 거래가 어디에 많나"라는 다른 질문이다.
+  const counts = new Map();
+  if (district === ALL && band) {
+    for (const deal of matched) counts.set(deal.district, (counts.get(deal.district) ?? 0) + 1);
+  }
+  const top = topDistrictsHtml(
+    [...counts.entries()]
+      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], "ko"))
+      .slice(0, 5)
+  );
+
+  box.innerHTML = resultHtml(scopeLabel(band), matched.length, matched.slice(0, MAX_ROWS), top, band);
+}
+
+// 구간 요약으로 그린다. 서울 전체를 조건 없이 보는 첫 화면의 경로다 - 칸마다 대표 거래
+// 몇 건만 들어 있어서 여기에는 상세 조건을 걸 수 없다.
+function renderFromBands(box) {
   const bands = bandsFor(district);
   const band = band10k === null ? null : bands.find((b) => b.min10k === band10k) ?? null;
   const selected = band ? [band] : band10k === null ? bands : [];
@@ -526,35 +817,43 @@ function renderResult() {
     return;
   }
 
-  const districtLabel = district === ALL ? t("allDistricts") : district;
-  const scope = t("scopeOf")(districtLabel, band ? bandLabel(band) : null);
-  const deals = dealsOf(selected);
-  const rows = deals.slice(0, MAX_ROWS);
-
-  // 서울 전체에서 한 구간을 고른 경우에만 지역 분포를 적는다. 지역을 이미 고른 화면에서는
-  // 그 지역 하나뿐이고, 구간을 안 고른 목록의 분포는 "서울 거래가 어디에 많나"라는
-  // 다른 질문의 답이 된다.
+  const rows = dealsOf(selected).slice(0, MAX_ROWS);
   const top =
     district === ALL && band
-      ? (band.districts ?? [])
-          .map((d) => `${escapeHtml(d.name)} ${d.count.toLocaleString(locale === "en" ? "en-US" : "ko-KR")}`)
-          .join(" · ")
+      ? topDistrictsHtml((band.districts ?? []).map((d) => [d.name, d.count]))
       : "";
 
-  box.innerHTML =
-    `<p class="budget-summary">${escapeHtml(t("summary")(scope, count))}${periodsHtml()}</p>` +
-    (top ? `<div class="budget-districts">${escapeHtml(t("topDistricts"))}: ${top}</div>` : "") +
-    (count > rows.length ? `<div class="budget-districts">${escapeHtml(t("shown")(rows.length))}</div>` : "") +
-    `<ul class="budget-deals">${rows.map((deal) => dealHtml(deal, district)).join("")}</ul>` +
-    moreHtml(band);
+  box.innerHTML = resultHtml(scopeLabel(band), count, rows, top, band);
+}
+
+function renderResult() {
+  const box = document.getElementById("search-result");
+  const full = needFull() ? fullDealsOf() : null;
+  if (full) {
+    renderFull(box, full);
+    return;
+  }
+
+  // 전수 자료가 없는데 상세 조건이 걸려 있다면 요약으로 대신 답하지 않는다. 조건을
+  // 무시한 목록을 조건이 걸린 것처럼 보여주는 게 이 화면에서 제일 나쁜 실패다.
+  if (detailActive()) {
+    box.innerHTML = `<p class="budget-empty">${escapeHtml(t("detailNotReady"))}</p>`;
+    return;
+  }
+
+  renderFromBands(box);
 }
 
 function syncUrl() {
   const next = new URLSearchParams(location.search);
-  if (district === ALL) next.delete("district");
-  else next.set("district", district);
-  if (band10k === null) next.delete("budget");
-  else next.set("budget", String(Math.round(band10k / EOK)));
+  const put = (key, value) => (value === null ? next.delete(key) : next.set(key, value));
+
+  put("district", district === ALL ? null : district);
+  put("budget", band10k === null ? null : String(Math.round(band10k / EOK)));
+  put("area", areaKey === ALL ? null : areaKey);
+  put("age", ageKey === ALL ? null : ageKey);
+  put("apt", aptTerm() || null);
+  put("direct", excludeDirect ? "exclude" : null);
 
   const query = next.toString();
   const url = `${location.pathname}${query ? `?${query}` : ""}`;
@@ -586,6 +885,10 @@ function applyLocale() {
   setText("search-heading", t("searchHeading"));
   setText("district-label", t("districtLabel"));
   setText("budget-label", t("budgetLabel"));
+  setText("area-label", t("areaLabel"));
+  setText("age-label", t("ageLabel"));
+  setText("apt-label", t("aptLabel"));
+  setText("direct-label", t("directLabel"));
   setText("search-note", t("note"));
   setText("nav-digest", t("navDigest"));
   setText("nav-news", t("navNews"));
@@ -602,10 +905,36 @@ function applyLocale() {
   document.documentElement.setAttribute("lang", locale);
 }
 
+let refreshToken = 0;
+
+/**
+ * 조건이 전수 자료를 요구하면 받아 온 뒤에 그린다.
+ *
+ * 이미 받아 둔 지역만 필요하면 await 없이 그대로 그린다 - 언어를 바꿀 때처럼 화면을
+ * 다시 그리는 자리가 비동기가 되면, 부르는 쪽마다 기다릴지 말지를 신경 써야 한다.
+ */
+async function refresh() {
+  const token = ++refreshToken;
+
+  if (needFull()) {
+    const missing = scopeNames().filter((name) => !fullDeals.has(name));
+    if (missing.length) {
+      // 받는 동안 이전 조건의 목록을 그대로 두면 그게 새 조건의 답으로 읽힌다.
+      document.getElementById("search-result").innerHTML =
+        `<p class="search-loading">${escapeHtml(t("loading"))}</p>`;
+      await Promise.all(missing.map(loadDistrictDeals));
+      // 받는 사이에 조건이 또 바뀌었다면 이건 이미 지난 조건의 답이다.
+      if (token !== refreshToken) return;
+    }
+  }
+
+  renderResult();
+}
+
 function renderAll() {
   applyLocale();
   renderControls();
-  renderResult();
+  refresh();
   renderUpdated();
 }
 
@@ -657,21 +986,37 @@ async function main() {
   }
 }
 
-document.getElementById("search-controls").addEventListener("change", (e) => {
+function onControlChange(e) {
   const id = e.target?.id;
   if (id === "district-select") district = e.target.value || ALL;
   else if (id === "budget-select") {
     const raw = e.target.value;
     band10k = raw === ALL ? null : Number(raw) * EOK;
-  } else return;
+  } else if (id === "area-select") areaKey = e.target.value || ALL;
+  else if (id === "age-select") ageKey = e.target.value || ALL;
+  else if (id === "apt-input") aptQuery = String(e.target.value ?? "");
+  else if (id === "direct-check") excludeDirect = Boolean(e.target.checked);
+  else return;
 
   syncUrl();
   renderControls();
-  renderResult();
+  refresh();
   window.analytics?.event("deal_search", {
     search_district: district,
     search_budget_eok: band10k === null ? ALL : String(Math.round(band10k / EOK)),
+    search_area: areaKey,
+    search_age: ageKey,
+    search_apt: aptTerm(),
+    search_exclude_direct: excludeDirect,
   });
+}
+
+const controls = document.getElementById("search-controls");
+controls.addEventListener("change", onControlChange);
+// 단지명은 글자를 칠 때마다 좁혀져야 한다. change만 듣고 있으면 포커스를 뺄 때까지
+// 아무 일도 안 일어나서, 친 사람은 검색이 안 되는 줄 안다.
+controls.addEventListener("input", (e) => {
+  if (e.target?.id === "apt-input") onControlChange(e);
 });
 
 document.getElementById("theme-toggle").addEventListener("click", () => {
