@@ -158,8 +158,6 @@
   .summary-box p { margin: 0 0 8px; }
   .summary-box p:last-child { margin-bottom: 0; }
   .summary-note { color: var(--muted); font-size: 0.78rem; margin-top: 10px; }
-  /* 부동산 뉴스 페이지 맨 위 지표. 기사 목록만 있는 화면은 칩을 빼면 링크 모음이라,
-     기사를 하나도 누르지 않아도 남는 수치를 위에 둔다. */
   .stat-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 8px; }
   .stat-card {
     display: flex;
@@ -200,7 +198,6 @@
   .news-item .context-chip:hover { border-color: var(--muted); text-decoration: none; }
   .context-label { color: var(--muted); }
   .context-value { color: var(--fg); font-weight: 600; font-variant-numeric: tabular-nums; }
-  /* 신고 건수·변화는 값을 읽은 다음에 보면 되는 정보다. 한 단계 작고 흐리게 둔다. */
   .context-note { color: var(--muted); font-size: 0.71rem; font-variant-numeric: tabular-nums; }
   .empty { color: var(--muted); font-size: 0.9rem; }
   .empty button {
@@ -422,7 +419,6 @@
   const summaryLine = (c) => (locale === "en" ? c.lineEn ?? c.lineKo : c.lineKo);
   const summaryName = (c) => (locale === "en" ? c.nameEn ?? c.name : c.name);
 
-  // 칩의 보조 설명(신고 건수·기준일 대비 변화). 붙지 않는 칩도 있어서 값이 없으면 그린다.
   const contextNote = (c) => (locale === "en" ? c.noteEn ?? c.note : c.note);
 
   function newsContextHtml(context) {
@@ -468,8 +464,6 @@
     });
   }
 
-  // 프리렌더(build-news-pages.mjs)가 심는 마크업과 같은 모양이어야 한다. 다르면 데이터를
-  // 받는 순간 카드 높이가 바뀌면서 아래 요약과 기사 목록이 통째로 밀린다.
   function statCardsHtml(stats) {
     return stats
       .map(
@@ -483,7 +477,6 @@
       .join("");
   }
 
-  // 부동산 페이지에서만 그린다. 증시·금리 기사 위에 아파트 시세가 놓일 이유는 없다.
   function renderRealestateStats() {
     const section = document.getElementById("realestate-stats-section");
     const stats = cache.news?.realestateStats ?? [];
