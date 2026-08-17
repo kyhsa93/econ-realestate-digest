@@ -82,28 +82,11 @@ jobs:
 
       - name: 변경사항 커밋 및 푸시
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          if git diff --quiet -- docs; then
-            echo "변경사항 없음, 커밋 생략"
-            exit 0
-          fi
-          git add docs
           if [ "$MODE" = "full" ]; then
-            git commit -m "chore: 데일리 데이터 갱신 $(TZ=Asia/Seoul date +%Y-%m-%d)"
+            ./scripts/push-docs.sh "chore: 데일리 데이터 갱신 $(TZ=Asia/Seoul date +%Y-%m-%d)"
           else
-            git commit -m "chore: 뉴스 갱신 $(TZ=Asia/Seoul date +'%Y-%m-%d %H:%M') KST"
+            ./scripts/push-docs.sh "chore: 뉴스 갱신 $(TZ=Asia/Seoul date +'%Y-%m-%d %H:%M') KST"
           fi
-          for i in 1 2 3 4 5; do
-            if git push; then
-              exit 0
-            fi
-            echo "push 실패($i), rebase 후 재시도"
-            git pull --rebase origin "$(git rev-parse --abbrev-ref HEAD)"
-            sleep $((i * 3))
-          done
-          echo "push 재시도 모두 실패"
-          exit 1
 
       - name: Pages 배포
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b
