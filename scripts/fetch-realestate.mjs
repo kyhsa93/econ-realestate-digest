@@ -9,6 +9,12 @@ const historyFile = path.join(dataDir, "realestate-history.json");
 // 지난달 요약. 달이 바뀔 때 한 번만 받고 커밋해 둔다 - CI는 매번 새 러너라 gitignore된
 // 캐시는 남지 않고, 그러면 매일 두 달치를 조회해 호출 한도에 걸린다.
 const previousFile = path.join(dataDir, "realestate-prev.json");
+// 개별 거래 원본. 화면이 받는 docs/data가 아니라 캐시에 둔다 - 서울 한 달치가 수천 건이라
+// 여기 두면 화면이 받는 파일이 커지고 커밋 이력도 매일 그만큼 불어난다. 화면에 나가는 건
+// build-budget-deals.mjs가 여기서 추려낸 예산 구간 데이터뿐이다.
+const dealsFile = process.env.REALESTATE_DEALS_FILE
+  ? path.resolve(process.env.REALESTATE_DEALS_FILE)
+  : path.resolve(import.meta.dirname, "../cache/realestate-deals.json");
 const HISTORY_MAX_DAYS = 180;
 
 const SALE_API_URL = process.env.MOLIT_API_ENDPOINT;
@@ -120,6 +126,22 @@ async function fetchApi(apiUrl, serviceKey, districtCode, yearMonth) {
   throw lastErr;
 }
 
+// 계약이 해제된 거래는 "있었던 일"이 아니다. 국토부는 해제분을 지우지 않고 해제 표시만
+// 달아 그대로 내려주므로, 걸러내지 않으면 평균에 섞인다. 평균에 섞이는 건 작은 편향이지만
+// 예산 검색처럼 거래를 단지 이름과 함께 한 건씩 보여주는 화면에서는 취소된 거래를 실제
+// 거래인 것처럼 게시하게 된다.
+//
+// 스펙상 해제 표시는 cdealType("O")이고 해제일은 cdealDay인데, 둘 중 하나만 채워 내려오는
+// 응답도 있어 어느 쪽이든 값이 있으면 해제로 본다. 빈 칸은 XML 파서가 빈 문자열로 준다.
+export function isCancelledDeal(item) {
+  const filled = (value) => String(value ?? "").trim().length > 0;
+  return filled(item?.cdealType) || filled(item?.cdealDay);
+}
+
+export function dropCancelled(items) {
+  return items.filter((item) => !isCancelledDeal(item));
+}
+
 function parseWon10k(value) {
   const cleaned = String(value ?? "").replace(/,/g, "").trim();
   const num = Number(cleaned);
@@ -134,6 +156,40 @@ function filterByArea(items, minArea, maxArea) {
     const area = Number(item.excluUseAr);
     return Number.isFinite(area) && area >= minArea && area <= maxArea;
   });
+}
+
+// 예산 검색이 쓸 개별 거래. 집계만 남기고 버리던 것을 한 건씩 남긴다.
+//
+// 단지 이름이 없는 거래는 담지 않는다. 예산 화면은 "어느 아파트가 그 값에 팔렸나"에
+// 답하는 자리라, 이름 없는 줄은 보여줄 수도 없고 세어봐야 의미도 없다.
+export function normalizeDeal(item, districtName) {
+  const amount10k = parseWon10k(item?.dealAmount);
+  const area = Number(item?.excluUseAr);
+  const apt = String(item?.aptNm ?? "").trim();
+  const year = Number(item?.dealYear);
+  const month = Number(item?.dealMonth);
+  const day = Number(item?.dealDay);
+
+  if (!apt) return null;
+  if (amount10k == null || amount10k <= 0) return null;
+  if (!Number.isFinite(area) || area <= 0) return null;
+  // 빈 칸은 Number("")가 0이라 정수 검사만으로는 통과해버린다(날짜가 "2026-08-00"이 됐다).
+  const inRange = (value, min, max) => Number.isInteger(value) && value >= min && value <= max;
+  if (!inRange(year, 1900, 2999) || !inRange(month, 1, 12) || !inRange(day, 1, 31)) return null;
+
+  const floor = Number(item?.floor);
+  const buildYear = Number(item?.buildYear);
+
+  return {
+    district: districtName,
+    dong: String(item?.umdNm ?? "").trim(),
+    apt,
+    area: Math.round(area * 100) / 100,
+    floor: Number.isFinite(floor) && floor > 0 ? floor : null,
+    amount10k,
+    date: `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`,
+    buildYear: Number.isInteger(buildYear) && buildYear > 1900 ? buildYear : null,
+  };
 }
 
 function summarizeSale(items) {
@@ -203,10 +259,13 @@ function summarizeRent(items) {
 
 async function fetchDistrictSale(districtCode, yearMonths) {
   const results = await Promise.all(yearMonths.map((ym) => fetchApi(SALE_API_URL, SALE_SERVICE_KEY, districtCode, ym)));
-  const items = results.flat();
+  const all = results.flat();
+  const items = dropCancelled(all);
   return {
     sale: summarizeSale(items),
     saleNational84: summarizeSale(filterByArea(items, NATIONAL_PYEONG_MIN_M2, NATIONAL_PYEONG_MAX_M2)),
+    items,
+    cancelledCount: all.length - items.length,
   };
 }
 
@@ -348,7 +407,12 @@ async function main() {
 
   const yearMonths = [kstYearMonth(now, 0)];
 
-  async function fetchDistrictEntry({ code, name }, months = yearMonths) {
+  // 예산 검색용 거래는 이번 달 조회분만 모은다. 지난달 캐시를 채우려고 도는 조회까지
+  // 담으면 "최근 거래"에 지난달이 섞인다.
+  const dealsByDistrict = new Map();
+  let cancelledTotal = 0;
+
+  async function fetchDistrictEntry({ code, name }, months = yearMonths, collectDeals = true) {
     const entry = { code, name, sale: null, saleNational84: null, jeonse: null, wolse: null };
 
     if (hasSale) {
@@ -356,6 +420,12 @@ async function main() {
         const saleResult = await fetchDistrictSale(code, months);
         entry.sale = saleResult.sale;
         entry.saleNational84 = saleResult.saleNational84;
+        // 거래 원본은 entry에 싣지 않는다. entry는 realestate.json·history·지난달 캐시로
+        // 그대로 흘러가는 값이라, 여기 실으면 세 파일이 한꺼번에 수십 배로 불어난다.
+        if (collectDeals) {
+          dealsByDistrict.set(code, saleResult.items.map((item) => normalizeDeal(item, name)).filter(Boolean));
+          cancelledTotal += saleResult.cancelledCount;
+        }
       } catch (err) {
         console.error(`[fetch-realestate] ${name} 매매 조회 실패: ${err.message}`);
       }
@@ -480,7 +550,7 @@ async function main() {
     console.log(`[fetch-realestate] 지난달(${previousPeriod}) 캐시 없음, 이번 한 번만 조회`);
     try {
       const prevResults = await mapWithConcurrency(DISTRICTS, CONCURRENCY, (d) =>
-        fetchDistrictEntry(d, [previousPeriod])
+        fetchDistrictEntry(d, [previousPeriod], false)
       );
       const prevDistricts = prevResults.filter(Boolean);
       if (prevDistricts.length) {
@@ -497,15 +567,54 @@ async function main() {
     }
   }
 
+  // 오늘 일부 구만 재조회한 경우에도 조회한 구의 거래만 갈아끼우고 나머지는 남긴다.
+  // 조용히 사라지는 지역이 생기면 예산 화면에서 그 구가 통째로 빠져 보인다.
+  async function writeDeals(dealsPeriod, at) {
+    if (dealsByDistrict.size === 0) return;
+
+    let existingDeals = null;
+    try {
+      existingDeals = JSON.parse(await readFile(dealsFile, "utf-8"));
+    } catch {
+      existingDeals = null;
+    }
+
+    const byDistrict = new Map(
+      existingDeals?.period === dealsPeriod ? Object.entries(existingDeals.districts ?? {}) : []
+    );
+    for (const [code, deals] of dealsByDistrict) byDistrict.set(code, deals);
+
+    const districtsObj = Object.fromEntries(byDistrict);
+    const total = Object.values(districtsObj).reduce((sum, list) => sum + list.length, 0);
+
+    await mkdir(path.dirname(dealsFile), { recursive: true });
+    await writeFile(
+      dealsFile,
+      JSON.stringify({ period: dealsPeriod, updatedAt: at.toISOString(), districts: districtsObj }, null, 2)
+    );
+
+    // 해제분을 몇 건 걸렀는지 남긴다. 조용히 걸러내면 필드 이름이 바뀌어 한 건도 못 거르는
+    // 날이 와도 화면상 달라지는 게 없어 알아챌 방법이 없다.
+    console.log(
+      `[fetch-realestate] 예산 검색용 거래 ${total.toLocaleString("ko-KR")}건 저장` +
+        ` (해제 ${cancelledTotal.toLocaleString("ko-KR")}건 제외)`
+    );
+  }
+
   const payload = attachPrevious({ updatedAt: now.toISOString(), period, ...withChanges }, previous);
 
   await mkdir(dataDir, { recursive: true });
   await writeFile(outFile, JSON.stringify(payload, null, 2));
   await appendHistory(history, now, { period, overall, districts });
+  await writeDeals(period, now);
 
   console.log(
     `[fetch-realestate] 저장 완료 (매매 ${saleDistricts.length}개구, 전세 ${jeonseDistricts.length}개구, 월세 ${wolseDistricts.length}개구)`
   );
 }
 
-main();
+// 다른 파일에서 이 모듈의 함수를 가져다 쓰는 순간(테스트가 그렇다) import만으로 조회가
+// 시작되면 안 된다. 저장소의 다른 스크립트와 같은 가드를 둔다.
+if (process.argv[1] && path.resolve(process.argv[1]) === path.resolve(import.meta.filename)) {
+  main();
+}
