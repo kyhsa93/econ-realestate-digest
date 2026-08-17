@@ -20,9 +20,10 @@ async function main() {
   run("node scripts/prerender.mjs");
   run("node scripts/build-rate-pages.mjs");
   run("node scripts/build-news-pages.mjs");
-  run("node scripts/build-realestate-pages.mjs");
-  // 예산 페이지는 프리렌더가 끝난 realestate.html을 원본으로 쓴다.
+  // 예산 페이지가 시세 페이지에 링크를 심으므로, 시세 페이지에서 찍어내는 자치구·거래
+  // 유형 페이지보다 먼저 돌아야 한다.
   run("node scripts/build-budget-pages.mjs");
+  run("node scripts/build-realestate-pages.mjs");
 
   const status = execSync("git status --porcelain -- docs", { cwd: repoRoot }).toString().trim();
   if (!status) {

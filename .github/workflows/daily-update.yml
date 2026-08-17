@@ -101,8 +101,8 @@ jobs:
           node scripts/prerender.mjs
           node scripts/build-rate-pages.mjs
           node scripts/build-news-pages.mjs
-          node scripts/build-realestate-pages.mjs
           node scripts/build-budget-pages.mjs
+          node scripts/build-realestate-pages.mjs
 
       - name: 테스트 (수집 후)
         run: npm test

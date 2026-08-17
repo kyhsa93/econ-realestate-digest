@@ -127,3 +127,17 @@ test("예산 페이지에서는 입력창을 접고 주소를 건드리지 않�
   assert.equal(page.sandbox.location.search, "");
   assert.ok(!page.budgetHtml().includes("data-budget-to"), "정적 페이지에 이동 버튼이 남았다");
 });
+
+// 예산 페이지 생성은 시세 페이지에 링크를 심는다. 그 뒤에 자치구·거래 유형 페이지를
+// 찍어야 세 종류가 같은 내용을 갖는다. 순서를 뒤집었더니 커밋된 페이지와 지금 찍은
+// 결과가 어긋나 CI가 멈췄다.
+test("예산 페이지는 시세 페이지에서 찍어내는 것들보다 먼저 돈다", async () => {
+  for (const file of ["scripts/update-all.mjs", ".github/workflows/daily-update.yml"]) {
+    const text = await readFile(path.join(root, file), "utf8");
+    const budget = text.indexOf("build-budget-pages");
+    const realestate = text.indexOf("build-realestate-pages");
+
+    assert.ok(budget >= 0 && realestate >= 0, `${file}에 두 단계가 다 있어야 한다`);
+    assert.ok(budget < realestate, `${file}: 예산 페이지가 자치구 페이지보다 늦게 돈다`);
+  }
+});

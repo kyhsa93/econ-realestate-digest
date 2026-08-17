@@ -396,7 +396,12 @@ test("자치구 페이지 추이는 그 지역 값을 그린다", async () => {
   const seoul = await loadRealestatePage({ realestate, history, kind: "sale" });
   const gangnam = await loadRealestatePage({ realestate, history, district: "강남구" });
   assert.notEqual(gangnam.trendMeta(), seoul.trendMeta(), "서울 전체 추이를 그대로 쓰고 있다");
-  assert.match(gangnam.trendMeta(), /10,870만원/);
+
+  // 그날 강남구 평당가를 그대로 적어두면 값이 움직일 때마다 깨진다(10,870 → 11,108).
+  // 확인하려는 건 특정 금액이 아니라 "이 페이지가 강남구 값을 그리는가"다.
+  const gangnamNow = realestate.districts.find((d) => d.name === "강남구")?.sale?.avgPricePerPyeong10k;
+  assert.ok(gangnamNow, "강남구 매매 평당가가 데이터에 없다");
+  assert.match(gangnam.trendMeta(), new RegExp(`${gangnamNow.toLocaleString("ko-KR")}만원`));
 });
 
 test("자치구 페이지에는 평형 선택이 뜬다", async () => {

@@ -90,7 +90,7 @@ async function main() {
     return;
   }
 
-  const baseHtml = await readFile(REALESTATE_PATH, "utf8");
+  const sourceHtml = await readFile(REALESTATE_PATH, "utf8");
 
   // 링크로 걸 목록을 먼저 정한다. 거래가 없어 못 만드는 구간까지 링크하면 404가 되고,
   // 예전에 찍어둔 페이지는 살아 있으므로 그것도 목록에 남긴다.
@@ -103,6 +103,12 @@ async function main() {
     if (bandOf(page) || (await exists(page))) linked.push(page);
   }
   const links = budgetLinksHtml(linked);
+
+  // 링크를 먼저 시세 페이지에 심고, 그 결과를 예산 페이지의 원본으로 쓴다. 순서를 뒤집으면
+  // 예산 페이지에는 빈 링크 자리가 남고, 시세 페이지에서 찍어내는 자치구·거래 유형 페이지와도
+  // 내용이 어긋난다(그 어긋남을 "커밋된 페이지가 지금 찍은 결과와 같다" 테스트가 잡아냈다).
+  const baseHtml = applyPrerender(sourceHtml, { budgetLinks: links });
+  if (baseHtml !== sourceHtml) await writeFile(REALESTATE_PATH, baseHtml);
 
   let created = 0;
   let updated = 0;
@@ -124,11 +130,6 @@ async function main() {
     if (before === null) created += 1;
     else updated += 1;
   }
-
-  // 시세 페이지에도 같은 목록을 심는다. 프리렌더는 어느 페이지가 실제로 찍혔는지 모르므로
-  // 이 자리에서만 채울 수 있다.
-  const withLinks = applyPrerender(baseHtml, { budgetLinks: links });
-  if (withLinks !== baseHtml) await writeFile(REALESTATE_PATH, withLinks);
 
   console.log(`  예산 페이지 (생성 ${created} · 갱신 ${updated})${skipped.length ? ` · 거래 없어 건너뜀: ${skipped.join(", ")}` : ""}`);
 }
