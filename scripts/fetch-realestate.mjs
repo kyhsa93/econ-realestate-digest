@@ -388,6 +388,109 @@ function weightedAverage(list, getValue, getWeight) {
   return totalWeight ? totalWeighted / totalWeight : null;
 }
 
+/**
+ * 조회에 실패한 구를 지난번에 받아둔 값으로 채운다.
+ *
+ * 그냥 빠뜨리면 표가 조용히 24개구가 되고, 읽는 사람은 그 구에 거래가 없었다고 읽는다 -
+ * 못 받은 것과 거래가 없는 것은 전혀 다른 얘기다.
+ *
+ * 채운 구에는 그 값을 실제로 받은 시각(staleAt)을 남긴다. 이미 묵어 있던 구를 또 못
+ * 받았다면 그때 시각을 그대로 물려받아야 한다 - 매번 오늘로 갱신하면 며칠째 묵은 값이
+ * 어제 받은 값처럼 보인다.
+ */
+export function carryForward(allDistricts, fetched, existing, existingIsToday) {
+  const fetchedByCode = new Map((fetched ?? []).map((d) => [d.code, d]));
+  const existingByCode = new Map((existing?.districts ?? []).map((d) => [d.code, d]));
+
+  const districts = [];
+  const carriedNames = [];
+
+  for (const { code, name } of allDistricts) {
+    const fresh = fetchedByCode.get(code);
+    if (fresh) {
+      districts.push(fresh);
+      continue;
+    }
+
+    const old = existingByCode.get(code);
+    if (!old) continue;
+
+    // 오늘 이미 받아둔 구다(누락분만 다시 도는 실행). 묵은 값이 아니다.
+    if (existingIsToday) {
+      districts.push(old);
+      continue;
+    }
+
+    districts.push({ ...old, staleAt: old.staleAt ?? existing.updatedAt });
+    carriedNames.push(name);
+  }
+
+  return { districts, carriedNames };
+}
+
+// 서울 전체 평균. 구별 값을 신고 건수로 가중해 합친다.
+//
+// 화면에 나가는 값과 history에 남기는 값이 서로 다른 구 집합에서 나오기 때문에 함수로
+// 뺐다 - 조회에 실패해 지난번 값으로 채운 구는 화면에는 있어야 하지만, "오늘 신고분"
+// 기록에 섞이면 그날 추이가 며칠 전 값으로 만들어진다.
+function computeOverall(districts) {
+  const saleDistricts = districts.filter((d) => d.sale);
+  const overallSaleAvgM2 = weightedAverage(saleDistricts, (d) => d.sale.avgPricePerM2, (d) => d.sale.transactionCount);
+  const overallSale =
+    overallSaleAvgM2 == null
+      ? null
+      : {
+          avgPricePerM2: overallSaleAvgM2,
+          avgPricePerPyeong10k: Math.round((overallSaleAvgM2 * PYEONG_M2) / 10_000),
+          transactionCount: saleDistricts.reduce((sum, d) => sum + d.sale.transactionCount, 0),
+        };
+
+  const saleNational84Districts = districts.filter((d) => d.saleNational84);
+  const overallSaleNational84AvgM2 = weightedAverage(
+    saleNational84Districts,
+    (d) => d.saleNational84.avgPricePerM2,
+    (d) => d.saleNational84.transactionCount
+  );
+  const overallSaleNational84 =
+    overallSaleNational84AvgM2 == null
+      ? null
+      : {
+          avgPricePerM2: overallSaleNational84AvgM2,
+          avgPricePerPyeong10k: Math.round((overallSaleNational84AvgM2 * PYEONG_M2) / 10_000),
+          transactionCount: saleNational84Districts.reduce((sum, d) => sum + d.saleNational84.transactionCount, 0),
+        };
+
+  const jeonseDistricts = districts.filter((d) => d.jeonse);
+  const overallJeonseAvgM2 = weightedAverage(
+    jeonseDistricts,
+    (d) => d.jeonse.avgDepositPerM2,
+    (d) => d.jeonse.transactionCount
+  );
+  const overallJeonse =
+    overallJeonseAvgM2 == null
+      ? null
+      : {
+          avgDepositPerM2: overallJeonseAvgM2,
+          avgDepositPerPyeong10k: Math.round((overallJeonseAvgM2 * PYEONG_M2) / 10_000),
+          transactionCount: jeonseDistricts.reduce((sum, d) => sum + d.jeonse.transactionCount, 0),
+        };
+
+  const wolseDistricts = districts.filter((d) => d.wolse);
+  const overallWolse =
+    wolseDistricts.length === 0
+      ? null
+      : {
+          avgDeposit10k: Math.round(
+            weightedAverage(wolseDistricts, (d) => d.wolse.avgDeposit10k, (d) => d.wolse.transactionCount)
+          ),
+          avgMonthlyRent10k: Math.round(
+            weightedAverage(wolseDistricts, (d) => d.wolse.avgMonthlyRent10k, (d) => d.wolse.transactionCount)
+          ),
+          transactionCount: wolseDistricts.reduce((sum, d) => sum + d.wolse.transactionCount, 0),
+        };
+  return { sale: overallSale, saleNational84: overallSaleNational84, jeonse: overallJeonse, wolse: overallWolse };
+}
+
 async function main() {
   const hasSale = Boolean(SALE_SERVICE_KEY && SALE_API_URL);
   const hasRent = Boolean(RENT_SERVICE_KEY && RENT_API_URL);
@@ -478,71 +581,23 @@ async function main() {
   }
 
   const newlyFetched = results.filter(Boolean);
-  const districtsMap = new Map(existingIsToday ? (existing.districts ?? []).map((d) => [d.code, d]) : []);
-  for (const d of newlyFetched) districtsMap.set(d.code, d);
-  const districts = [...districtsMap.values()];
 
-  if (districts.length === 0) {
-    console.error("[fetch-realestate] 모든 지역 조회 실패, 기존 데이터 유지");
+  // 한 구도 못 받았으면 파일을 건드리지 않는다. 지난번 값으로만 채운 파일을 새로 쓰면
+  // 내용은 그대로인데 updatedAt만 오늘로 바뀌어, 화면이 "오늘 받은 값"이라고 말하게 된다.
+  if (newlyFetched.length === 0) {
+    console.error("[fetch-realestate] 모든 지역 조회 실패, 기존 데이터를 그대로 둡니다");
     return;
   }
 
-  const saleDistricts = districts.filter((d) => d.sale);
-  const overallSaleAvgM2 = weightedAverage(saleDistricts, (d) => d.sale.avgPricePerM2, (d) => d.sale.transactionCount);
-  const overallSale =
-    overallSaleAvgM2 == null
-      ? null
-      : {
-          avgPricePerM2: overallSaleAvgM2,
-          avgPricePerPyeong10k: Math.round((overallSaleAvgM2 * PYEONG_M2) / 10_000),
-          transactionCount: saleDistricts.reduce((sum, d) => sum + d.sale.transactionCount, 0),
-        };
+  const { districts, carriedNames } = carryForward(DISTRICTS, newlyFetched, existing, existingIsToday);
 
-  const saleNational84Districts = districts.filter((d) => d.saleNational84);
-  const overallSaleNational84AvgM2 = weightedAverage(
-    saleNational84Districts,
-    (d) => d.saleNational84.avgPricePerM2,
-    (d) => d.saleNational84.transactionCount
-  );
-  const overallSaleNational84 =
-    overallSaleNational84AvgM2 == null
-      ? null
-      : {
-          avgPricePerM2: overallSaleNational84AvgM2,
-          avgPricePerPyeong10k: Math.round((overallSaleNational84AvgM2 * PYEONG_M2) / 10_000),
-          transactionCount: saleNational84Districts.reduce((sum, d) => sum + d.saleNational84.transactionCount, 0),
-        };
+  if (carriedNames.length > 0) {
+    console.warn(
+      `[fetch-realestate] ${carriedNames.length}개구를 지난번 값으로 채웠습니다: ${carriedNames.join(", ")}`
+    );
+  }
 
-  const jeonseDistricts = districts.filter((d) => d.jeonse);
-  const overallJeonseAvgM2 = weightedAverage(
-    jeonseDistricts,
-    (d) => d.jeonse.avgDepositPerM2,
-    (d) => d.jeonse.transactionCount
-  );
-  const overallJeonse =
-    overallJeonseAvgM2 == null
-      ? null
-      : {
-          avgDepositPerM2: overallJeonseAvgM2,
-          avgDepositPerPyeong10k: Math.round((overallJeonseAvgM2 * PYEONG_M2) / 10_000),
-          transactionCount: jeonseDistricts.reduce((sum, d) => sum + d.jeonse.transactionCount, 0),
-        };
-
-  const wolseDistricts = districts.filter((d) => d.wolse);
-  const overallWolse =
-    wolseDistricts.length === 0
-      ? null
-      : {
-          avgDeposit10k: Math.round(
-            weightedAverage(wolseDistricts, (d) => d.wolse.avgDeposit10k, (d) => d.wolse.transactionCount)
-          ),
-          avgMonthlyRent10k: Math.round(
-            weightedAverage(wolseDistricts, (d) => d.wolse.avgMonthlyRent10k, (d) => d.wolse.transactionCount)
-          ),
-          transactionCount: wolseDistricts.reduce((sum, d) => sum + d.wolse.transactionCount, 0),
-        };
-
-  const overall = { sale: overallSale, saleNational84: overallSaleNational84, jeonse: overallJeonse, wolse: overallWolse };
+  const overall = computeOverall(districts);
   const period = yearMonths[0];
 
   const history = await readHistory();
@@ -618,7 +673,13 @@ async function main() {
 
   await mkdir(dataDir, { recursive: true });
   await writeFile(outFile, JSON.stringify(payload, null, 2));
-  await appendHistory(history, now, { period, overall, districts });
+  // history는 추이 그래프와 "며칠 전 대비" 기준선의 재료다. 지난번 값으로 채운 구를 오늘
+  // 신고분으로 기록하면 그날 변화가 0으로 눌리고, 그 왜곡이 180일치에 남는다.
+  await appendHistory(history, now, {
+    period,
+    overall: carriedNames.length ? computeOverall(newlyFetched) : overall,
+    districts: newlyFetched,
+  });
   await writeDeals(period, now);
 
   console.log(

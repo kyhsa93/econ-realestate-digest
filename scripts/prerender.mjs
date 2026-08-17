@@ -386,13 +386,24 @@ function reAllCells(entry, previousPeriod) {
   });
 }
 
+// 그날 조회에 실패해 지난번 값을 그대로 들고 있는 구. 화면(realestate.html)의
+// staleTagHtml과 같은 마크업이어야 한다 - 테스트가 두 결과를 직접 대조한다.
+function reStaleTag(entry) {
+  const at = entry?.staleAt;
+  if (!at) return "";
+  const date = new Date(at);
+  if (Number.isNaN(date.getTime())) return "";
+  const label = date.toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul", month: "numeric", day: "numeric" });
+  return ` <span class="prev-tag" title="${escapeHtml("이 지역은 오늘 실거래 조회에 실패해 지난번에 받은 값을 그대로 보여줍니다.")}">${escapeHtml(label)}</span>`;
+}
+
 function reRow(entry, label, isOverall, kind, previousPeriod) {
   const labels = reHeadLabels(kind);
   const cells = kind ? reCells(entry, kind, previousPeriod) : reAllCells(entry, previousPeriod);
   const body = cells
     .map((cell, i) => `<td data-label="${escapeHtml(labels[i + 1])}">${cell}</td>`)
     .join("");
-  return `<tr class="${isOverall ? "overall-row" : ""}"><td>${escapeHtml(label)}</td>${body}</tr>`;
+  return `<tr class="${isOverall ? "overall-row" : ""}"><td>${escapeHtml(label)}${reStaleTag(entry)}</td>${body}</tr>`;
 }
 
 // 비싼 곳부터. 값을 낼 수 없는 지역은 맨 아래로 보낸다(화면과 같은 규칙).

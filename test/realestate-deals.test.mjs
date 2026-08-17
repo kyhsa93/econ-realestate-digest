@@ -5,7 +5,7 @@
 // 셈이 되고, 그건 평균이 조금 틀리는 것과는 성격이 다른 사고다.
 import test from "node:test";
 import assert from "node:assert/strict";
-import { dropCancelled, errorDetail, isCancelledDeal, normalizeDeal } from "../scripts/fetch-realestate.mjs";
+import { carryForward, dropCancelled, errorDetail, isCancelledDeal, normalizeDeal } from "../scripts/fetch-realestate.mjs";
 
 const deal = (extra = {}) => ({
   aptNm: "역삼아이파크",
@@ -81,4 +81,61 @@ test("네트워크 실패는 원인까지 적는다", () => {
   assert.equal(errorDetail(err), "fetch failed ← UND_ERR_CONNECT_TIMEOUT");
 
   assert.equal(errorDetail(new Error("http 500")), "http 500");
+});
+
+// 조회가 실패한 구를 그냥 빠뜨리면 표가 조용히 24개구가 되고, 읽는 사람은 그 구에 거래가
+// 없었다고 읽는다. 못 받은 것과 거래가 없는 것은 전혀 다른 얘기다.
+const DISTRICTS = [
+  { code: "11110", name: "종로구" },
+  { code: "11350", name: "노원구" },
+  { code: "11680", name: "강남구" },
+];
+
+const entry = (code, name, count = 30) => ({
+  code,
+  name,
+  sale: { avgPricePerPyeong10k: 4000, transactionCount: count },
+});
+
+test("조회에 실패한 구를 지난번 값으로 채운다", () => {
+  const existing = {
+    updatedAt: "2026-08-14T23:32:15.722Z",
+    districts: [entry("11110", "종로구", 11), entry("11350", "노원구", 41), entry("11680", "강남구", 14)],
+  };
+  const fetched = [entry("11350", "노원구", 45)];
+
+  const { districts, carriedNames } = carryForward(DISTRICTS, fetched, existing, false);
+
+  assert.deepEqual(districts.map((d) => d.name), ["종로구", "노원구", "강남구"], "구가 사라졌다");
+  assert.deepEqual(carriedNames, ["종로구", "강남구"]);
+  assert.equal(districts[1].sale.transactionCount, 45, "새로 받은 값이 밀렸다");
+  assert.equal(districts[0].staleAt, "2026-08-14T23:32:15.722Z");
+  assert.ok(!("staleAt" in districts[1]), "새로 받은 구에 묵은 표시가 붙었다");
+});
+
+// 매번 오늘로 갱신하면 며칠째 묵은 값이 어제 받은 값처럼 보인다.
+test("이미 묵은 구는 처음 받은 시각을 물려받는다", () => {
+  const existing = {
+    updatedAt: "2026-08-16T23:30:00.000Z",
+    districts: [{ ...entry("11110", "종로구"), staleAt: "2026-08-14T23:32:15.722Z" }],
+  };
+
+  const { districts } = carryForward(DISTRICTS, [], existing, false);
+  assert.equal(districts[0].staleAt, "2026-08-14T23:32:15.722Z");
+});
+
+// 오늘 이미 받아둔 구를 누락분만 다시 도는 실행에서 묵은 값으로 표시하면 안 된다.
+test("같은 날 재조회에서는 묵은 표시를 붙이지 않는다", () => {
+  const existing = { updatedAt: "2026-08-17T01:00:00.000Z", districts: [entry("11110", "종로구")] };
+  const { districts, carriedNames } = carryForward(DISTRICTS, [], existing, true);
+
+  assert.equal(districts.length, 1);
+  assert.ok(!("staleAt" in districts[0]));
+  assert.deepEqual(carriedNames, []);
+});
+
+test("지난번 값도 없는 구는 만들어내지 않는다", () => {
+  const { districts, carriedNames } = carryForward(DISTRICTS, [entry("11350", "노원구")], null, false);
+  assert.deepEqual(districts.map((d) => d.name), ["노원구"]);
+  assert.deepEqual(carriedNames, []);
 });
