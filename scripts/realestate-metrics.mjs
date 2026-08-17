@@ -143,11 +143,21 @@ function summarizeSale(items) {
   };
 }
 
+export function isRenewalContract(item) {
+  return contractRenewal(item?.contractType) === true;
+}
+
 export function summarizeRent(items) {
   const jeonseRows = [];
   const wolseRows = [];
+  let renewalCount = 0;
 
   for (const item of items) {
+    if (isRenewalContract(item)) {
+      renewalCount += 1;
+      continue;
+    }
+
     const deposit10k = parseWon10k(item.deposit);
     const monthlyRent10k = parseWon10k(item.monthlyRent);
     const area = Number(item.excluUseAr);
@@ -181,7 +191,7 @@ export function summarizeRent(items) {
     };
   }
 
-  return { jeonse, wolse };
+  return { jeonse, wolse, renewalCount };
 }
 
 export function summarizeSaleItems(all) {

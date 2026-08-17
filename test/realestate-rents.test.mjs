@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import * as summarizeModule from "../scripts/realestate-metrics.mjs";
 import { contractRenewal, normalizeRentDeal } from "../scripts/realestate-metrics.mjs";
 import { buildRentFiles, collectDeals } from "../scripts/deal-files.mjs";
 
@@ -105,4 +106,42 @@ test("지역별 전월세 파일을 나누고 석 달만 남긴다", () => {
   assert.ok(names.includes("이번달"));
   assert.ok(!names.includes("다섯달"), "보관 기간을 넘긴 거래가 남았다");
   assert.ok(files.gangnam.deals.every((d) => !("district" in d)), "지역 이름이 거래마다 남았다");
+});
+
+test("시세 평균에서 갱신계약을 뺀다", () => {
+  const { summarizeRent } = summarizeModule;
+  const item = (deposit, extra = {}) => ({ deposit, excluUseAr: "60", monthlyRent: 0, ...extra });
+
+  const mixed = summarizeRent([
+    item("60,000"),
+    item("60,000"),
+    item("20,000", { contractType: "갱신" }),
+  ]);
+
+  assert.equal(mixed.jeonse.transactionCount, 2, "갱신계약이 평균에 섞였다");
+  assert.equal(mixed.renewalCount, 1);
+  assert.equal(mixed.jeonse.avgDepositPerPyeong10k, summarizeRent([item("60,000")]).jeonse.avgDepositPerPyeong10k);
+});
+
+test("계약 구분이 신고되지 않은 거래는 시세에 넣는다", () => {
+  const { summarizeRent } = summarizeModule;
+  const rows = [
+    { deposit: "60,000", excluUseAr: "60", monthlyRent: 0 },
+    { deposit: "60,000", excluUseAr: "60", monthlyRent: 0, contractType: "신규" },
+    { deposit: "60,000", excluUseAr: "60", monthlyRent: 0, contractType: "" },
+  ];
+
+  assert.equal(summarizeRent(rows).jeonse.transactionCount, 3, "구분이 없다고 빼버렸다");
+});
+
+test("월세 평균에서도 갱신계약을 뺀다", () => {
+  const { summarizeRent } = summarizeModule;
+  const rows = [
+    { deposit: "10,000", monthlyRent: "100", excluUseAr: "60" },
+    { deposit: "10,000", monthlyRent: "40", excluUseAr: "60", contractType: "갱신" },
+  ];
+
+  const summary = summarizeRent(rows);
+  assert.equal(summary.wolse.transactionCount, 1);
+  assert.equal(summary.wolse.avgMonthlyRent10k, 100);
 });

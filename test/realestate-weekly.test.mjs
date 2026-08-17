@@ -220,3 +220,10 @@ test("신고 기록이 없는 원본은 아무것도 내놓지 않는다", () =>
   assert.deepEqual(arrivalRows(rawFile("sale", [saleRaw()], [null]), "노원구"), []);
   assert.deepEqual(arrivalRows(null, "노원구"), []);
 });
+
+test("주간 시세에서도 갱신계약을 뺀다", () => {
+  const items = [rentRaw({ aptNm: "신규" }), rentRaw({ aptNm: "갱신", contractType: "갱신" })];
+  const rows = arrivalRows(rawFile("rent", items, ["2026-08-25", "2026-08-25"]), "노원구");
+
+  assert.equal(rows.length, 1, "갱신계약이 주간 집계에 들어갔다");
+});

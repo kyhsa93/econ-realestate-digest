@@ -105,7 +105,7 @@ export function arrivalRows(file, districtName) {
     }
 
     const deal = normalizeRentDeal(item, districtName);
-    if (!deal) continue;
+    if (!deal || deal.renewal === true) continue;
     rows.push({
       type: deal.monthlyRent10k > 0 ? "wolse" : "jeonse",
       district: districtName,
