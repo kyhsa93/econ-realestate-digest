@@ -18,7 +18,11 @@ message="${1:?커밋 메시지가 필요합니다}"
 git config user.name "github-actions[bot]"
 git config user.email "github-actions[bot]@users.noreply.github.com"
 
-if git diff --quiet -- docs; then
+# git diff는 추적 중인 파일의 변경만 본다. 새 데이터 파일이 처음 생기는 날(자치구별
+# 전수 파일 25개가 그랬다)에는 그것만 늘고 기존 파일은 그대로일 수 있는데, diff로 물으면
+# "변경사항 없음"이라 답해 그 파일들이 영영 커밋되지 않는다. update-all.mjs와 같은
+# 방식으로 추적되지 않는 파일까지 함께 본다.
+if [ -z "$(git status --porcelain -- docs)" ]; then
   echo "변경사항 없음, 커밋 생략"
   exit 0
 fi
