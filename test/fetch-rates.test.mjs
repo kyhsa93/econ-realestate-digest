@@ -307,6 +307,51 @@ test("일부 상품군이 실패하면 직전 데이터를 유지하고 나머�
   }
 });
 
+// 오류 없이 0건으로 오는 경우가 실패보다 위험하다. 그대로 쓰면 화면이 빈 표가 되고,
+// 그게 정상인지 고장인지 구분할 방법이 없다("못 받은 것과 없는 것은 다른 얘기").
+test("상품이 0건으로 와도 직전 목록을 지우지 않는다", async () => {
+  const stub = await startStub(({ endpoint }) =>
+    endpoint === "savingProductsSearch"
+      ? { json: savingResponse({ products: [] }) }
+      : {
+          json: savingResponse({
+            products: [
+              { co: "0010001", cd: "P1", company: "새은행", name: "새상품", options: [{ term: 12, rate: 3, maxRate: 3.3 }] },
+            ],
+          }),
+        }
+  );
+  const outDir = await tempDir();
+  await mkdir(outDir, { recursive: true });
+  await writeFile(
+    path.join(outDir, "rates.json"),
+    JSON.stringify({
+      updatedAt: "2026-08-01T00:00:00.000Z",
+      saving: [
+        {
+          id: "old",
+          sector: "bank",
+          company: "이전은행",
+          name: "이전상품",
+          options: [{ term: 12, rate: 1.0, maxRate: 1.1 }],
+        },
+      ],
+    })
+  );
+
+  try {
+    const { stderr } = await run(stub.base, outDir);
+    const rates = await readJson(outDir, "rates.json");
+    assert.equal(rates.saving.length, 1, "0건 응답으로 목록을 지웠다");
+    assert.equal(rates.saving[0].name, "이전상품");
+    assert.equal(rates.deposit[0].name, "새상품", "다른 상품군까지 멈췄다");
+    // 조용히 지난 값을 쓰면 며칠이 지나도 알아챌 수 없다.
+    assert.match(stderr, /0건으로 왔다/);
+  } finally {
+    await stub.close();
+  }
+});
+
 test("모든 상품군이 실패하면 0이 아닌 코드로 종료하고 기존 파일을 덮어쓰지 않는다", async () => {
   const stub = await startStub(() => ({
     status: 500,

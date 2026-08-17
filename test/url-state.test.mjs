@@ -109,8 +109,13 @@ test("기록이 없는 날짜는 오류가 아니라 기록 없음으로 알린�
   assert.ok(newsHtml.includes("기록이 없습니다"), `기록 없음 안내가 아니다: ${newsHtml.slice(0, 80)}`);
   assert.ok(!newsHtml.includes("불러오지 못했습니다"), "기록 없음을 로드 실패로 말한다");
 
-  // 보관 범위 안의 날짜는 그대로 그려진다.
-  const present = await load("?date=2026-08-13");
+  // 보관 범위 안의 날짜는 그대로 그려진다. 날짜를 적어두면 그날이 보관 범위(180일)를
+  // 벗어나는 순간 확정적으로 깨지므로, 기록이 실제로 있는 날을 자료에서 꺼내 쓴다.
+  const newsHistory = JSON.parse(await readFile(path.join(root, "docs/data/news-history.json"), "utf8"));
+  const kept = newsHistory.findLast((entry) => entry.items?.length)?.date;
+  assert.ok(kept, "뉴스 기록이 하나도 없어 '있는 날'을 고를 수 없다");
+
+  const present = await load(`?date=${kept}`);
   await new Promise((r) => setTimeout(r, 30));
   assert.ok(String(present.byId("news-list").innerHTML).includes("news-item"), "있는 기록을 못 그린다");
 });
@@ -119,19 +124,26 @@ test("기록이 없는 날짜는 오류가 아니라 기록 없음으로 알린�
 // 판정하면 뉴스는 멀쩡히 나오는데 시장지표만 "불러오지 못했습니다"가 뜬다.
 test("일부 섹션만 기록이 없는 날짜도 오류라고 말하지 않는다", async () => {
   const { readFile } = await import("node:fs/promises");
-  const histories = await Promise.all(
-    ["news-history", "market-history"].map((n) =>
-      readFile(path.join(root, `docs/data/${n}.json`), "utf8").then(JSON.parse)
-    )
-  );
-  const [newsDates, marketDates] = histories.map((h) => h.map((e) => e.date));
-  const onlyNews = newsDates.find((d) => !marketDates.includes(d));
-  assert.ok(onlyNews, "한쪽에만 있는 날짜가 없어 이 테스트가 무의미하다");
+  const readHistory = (name) =>
+    readFile(path.join(root, `docs/data/${name}.json`), "utf8").then(JSON.parse);
+
+  const [newsHistory, marketHistory] = await Promise.all([
+    readHistory("news-history"),
+    readHistory("market-history"),
+  ]);
+
+  // 예전에는 두 히스토리의 시작일이 하루 다른 걸 이용해 "한쪽에만 있는 날"을 찾았는데,
+  // 그건 보관 범위가 흐르면 사라지는 우연이다. 뉴스 기록이 있는 날을 고르고 시장지표
+  // 쪽에서만 그날을 덜어내, 검사하려는 상태를 직접 만든다.
+  const onlyNews = newsHistory.findLast((entry) => entry.items?.length)?.date;
+  assert.ok(onlyNews, "뉴스 기록이 하나도 없어 이 상태를 만들 수 없다");
+  const marketWithout = marketHistory.filter((entry) => entry.date !== onlyNews);
 
   const page = await loadIndexPage({
     search: `?date=${onlyNews}`,
     fetch: async (url) => {
       const name = String(url).split("/data/")[1].split(".json")[0];
+      if (name === "market-history") return { ok: true, json: async () => marketWithout };
       try {
         return { ok: true, json: async () => JSON.parse(await readFile(path.join(root, `docs/data/${name}.json`), "utf8")) };
       } catch {

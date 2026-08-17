@@ -162,7 +162,11 @@ test("금리 값이 금리 페이지 첫 줄과 같은 기준으로 뽑힌다", 
     ["mortgage", /data-label="금리\(최저~최고\)">([\d.]+)~/],
   ]) {
     const top = ratesHtml(rates, { category: key, limit: 1 }).match(cell)?.[1];
-    assert.equal(bestRate(rates, key).toFixed(2), top, `${key} 금리가 금리 페이지 첫 줄과 다릅니다`);
+    const best = bestRate(rates, key);
+    // 공시에 그 상품군이 통째로 비어 오면 bestRate가 null이다. 바로 toFixed를 부르면
+    // 단언 실패가 아니라 TypeError로 죽어 원인이 로그에 안 남는다.
+    assert.ok(typeof best === "number", `${key} 상품이 한 건도 없다`);
+    assert.equal(best.toFixed(2), top, `${key} 금리가 금리 페이지 첫 줄과 다릅니다`);
   }
 });
 
@@ -172,7 +176,9 @@ test("84㎡ 환산가가 시세 페이지 표에 적힌 값과 같다", async ()
   const realestate = await readJson("realestate");
   const [chip] = buildContext({ title: "서울 아파트 매매 시세 오름세" }, { realestate });
 
-  assert.equal(chip?.href, "./apartment-sale.html");
+  // 서울 전체 매매 표본이 5건에 못 미치는 날에는 칩이 아예 안 붙는다(그게 맞는 동작이다).
+  assert.ok(chip, "서울 전체 매매 표본이 모자라 칩이 안 붙었다");
+  assert.equal(chip.href, "./apartment-sale.html");
   assert.ok(
     realestateTableHtml(realestate, "sale").includes(chip.value),
     `칩 값(${chip.value})이 매매 시세 표에 없습니다`

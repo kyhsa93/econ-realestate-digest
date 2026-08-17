@@ -43,6 +43,32 @@ const district = (name, extra = {}) => ({
   ...extra,
 });
 
+// 추이는 "며칠치가 표본을 넘겼나"에 걸려 있다. 그날 수집분으로 검사하면 달 초처럼 표본이
+// 얇은 날, 전월세 API가 하루 죽은 날에 CI가 빨개지고 그날 수집분이 통째로 유실된다.
+// 그래서 추이 검사는 기간과 표본을 여기서 만들어 쓴다.
+const metrics = (offset = 0) => ({
+  sale: { avgPricePerPyeong10k: 4400 + offset, transactionCount: 50 },
+  saleNational84: { avgPricePerPyeong10k: 4100 + offset, transactionCount: 30 },
+  jeonse: { avgDepositPerPyeong10k: 2500 + offset, transactionCount: 40 },
+  wolse: { avgDeposit10k: 22000 + offset, avgMonthlyRent10k: 96, transactionCount: 35 },
+});
+
+const TREND_DISTRICT = { code: "11680", name: "강남구" };
+
+const trendRealestate = () => ({
+  period: "202608",
+  updatedAt: "2026-08-15T00:00:00.000Z",
+  overall: metrics(),
+  districts: [{ ...TREND_DISTRICT, ...metrics(500) }, { code: "11350", name: "노원구", ...metrics(-500) }],
+});
+
+// 마지막 날은 현재 값과 같아야 한다 - 화면이 오늘 값을 추이의 끝점으로 그리기 때문이다.
+const trendHistory = () => [
+  { date: "2026-08-13", overall: metrics(-40), districts: [{ code: TREND_DISTRICT.code, ...metrics(460) }] },
+  { date: "2026-08-14", overall: metrics(-20), districts: [{ code: TREND_DISTRICT.code, ...metrics(480) }] },
+  { date: "2026-08-15", overall: metrics(), districts: [{ code: TREND_DISTRICT.code, ...metrics(500) }] },
+];
+
 test("84㎡ 환산이 손계산과 같다", () => {
   // 84㎡ = 84 / 3.3058 = 25.410평. 평당 4,449만원이면 약 11억 3천만원.
   assert.equal(BASE_AREA_PYEONG.toFixed(3), "25.410");
@@ -335,7 +361,8 @@ test("주소로 들어온 평형으로 시작한다", async () => {
 // 기록이 하루 4회 쌓이므로 지금은 6일치뿐이지만, 착지 페이지에서 먼저 알고 싶은 건
 // "요즘 오르는가 내리는가"라 자리를 만들어 둔다.
 test("거래 유형마다 자기 지표의 추이를 그린다", async () => {
-  const [realestate, history] = await Promise.all([readJson("realestate"), readJson("realestate-history-lite")]);
+  const realestate = trendRealestate();
+  const history = trendHistory();
 
   for (const kind of ["sale", "jeonse", "wolse"]) {
     const page = await loadRealestatePage({ realestate, history, kind });
@@ -391,17 +418,20 @@ test("자치구 페이지의 월세 행에는 환산가가 없다", async () => 
   assert.ok(wolseRow.includes('data-label="84㎡ 환산">-<'), `월세 행: ${wolseRow}`);
 });
 
+// 그날 강남구 평당가를 적어두면 값이 움직일 때마다 깨지고(10,870 → 11,108), 그날
+// 데이터에서 꺼내 쓰면 강남구 신고가 5건에 못 미치는 달 초에 그 날짜가 추이에서 빠져
+// 마지막 점이 며칠 전 값이 된다. 확인하려는 건 "이 페이지가 자기 지역 값을 그리는가"라,
+// 지역과 기간을 여기서 만들어 쓴다.
 test("자치구 페이지 추이는 그 지역 값을 그린다", async () => {
-  const [realestate, history] = await Promise.all([readJson("realestate"), readJson("realestate-history-lite")]);
-  const seoul = await loadRealestatePage({ realestate, history, kind: "sale" });
-  const gangnam = await loadRealestatePage({ realestate, history, district: "강남구" });
-  assert.notEqual(gangnam.trendMeta(), seoul.trendMeta(), "서울 전체 추이를 그대로 쓰고 있다");
+  const realestate = trendRealestate();
+  const history = trendHistory();
 
-  // 그날 강남구 평당가를 그대로 적어두면 값이 움직일 때마다 깨진다(10,870 → 11,108).
-  // 확인하려는 건 특정 금액이 아니라 "이 페이지가 강남구 값을 그리는가"다.
-  const gangnamNow = realestate.districts.find((d) => d.name === "강남구")?.sale?.avgPricePerPyeong10k;
-  assert.ok(gangnamNow, "강남구 매매 평당가가 데이터에 없다");
-  assert.match(gangnam.trendMeta(), new RegExp(`${gangnamNow.toLocaleString("ko-KR")}만원`));
+  const seoul = await loadRealestatePage({ realestate, history, kind: "sale" });
+  const page = await loadRealestatePage({ realestate, history, district: TREND_DISTRICT.name });
+  assert.notEqual(page.trendMeta(), seoul.trendMeta(), "서울 전체 추이를 그대로 쓰고 있다");
+
+  const now = realestate.districts.find((d) => d.name === TREND_DISTRICT.name).sale.avgPricePerPyeong10k;
+  assert.match(page.trendMeta(), new RegExp(`${now.toLocaleString("ko-KR")}만원`));
 });
 
 test("자치구 페이지에는 평형 선택이 뜬다", async () => {
@@ -467,19 +497,33 @@ test("자치구 페이지는 자기 지역을 링크 목록에서 표시한다",
 // --- 지역별 서술 ---
 // 25개 페이지가 구조만 같고 숫자만 다르면 템플릿 대량 생산으로 읽힌다. 그 지역
 // 데이터로만 만들 수 있는 문장이라야 페이지마다 실제로 다른 내용이 된다.
-test("지역마다 다른 문장이 나온다", async () => {
+// 어느 구가 1위인지는 그날 신고에 따라 바뀐다(1·2위 차이가 0.25%인 날도 있었고, 달 초에는
+// 강남구 신고가 5건에 못 미쳐 순위 문장 자체가 안 나온다). 검사하려는 건 "1등 구에 1등
+// 문장이 붙는가"라, 구 이름을 적어두지 않고 그날 데이터가 정한 1등·꼴찌를 꺼내 본다.
+test("지역마다 다른 문장이 나온다", async (t) => {
   const realestate = await readJson("realestate");
-  const of = (name) =>
-    districtSentences(realestate.districts.find((d) => d.name === name), realestate).join(" ");
+  const of = (entry) => districtSentences(entry, realestate).join(" ");
 
-  const gangnam = of("강남구");
-  const dobong = of("도봉구");
+  const priced = realestate.districts
+    .filter((d) => typeof d.sale?.avgPricePerPyeong10k === "number" && d.sale.transactionCount >= 5)
+    .sort((a, b) => b.sale.avgPricePerPyeong10k - a.sale.avgPricePerPyeong10k);
 
-  assert.notEqual(gangnam, dobong);
-  assert.match(gangnam, /가장 높습니다/);
-  assert.match(dobong, /가장 낮습니다/);
+  // 달이 바뀐 직후에는 표본 5건을 넘긴 구가 둘도 안 되는 날이 있다(신고 기한이 30일이다).
+  // 그때는 순위 문장이 아예 안 나오는 게 맞는 동작이라(district-summary.mjs의 saleRank가
+  // null을 돌려준다) 검사할 것이 없다. 순위 규칙 자체는 바로 아래 고정 재료 테스트가 본다.
+  if (priced.length < 2) {
+    t.diagnostic(`표본이 충분한 구가 ${priced.length}개뿐이라 순위 문장 검사를 건너뛴다`);
+    return;
+  }
+
+  const top = of(priced[0]);
+  const bottom = of(priced[priced.length - 1]);
+
+  assert.notEqual(top, bottom);
+  assert.match(top, /가장 높습니다/);
+  assert.match(bottom, /가장 낮습니다/);
   // 가장 비슷한 구가 서로 다르므로 문장도 갈린다
-  assert.ok(!gangnam.includes("도봉구") || !dobong.includes("강남구"));
+  assert.ok(!top.includes(priced[priced.length - 1].name) || !bottom.includes(priced[0].name));
 });
 
 test("서울 평균 대비 배수와 순위가 맞다", () => {
@@ -535,13 +579,21 @@ test("조사를 받침에 맞춰 고른다", () => {
   assert.match(districtSentences(thin("한남동"), {}).join(" "), /한남동은/);
 });
 
+// 문장 첫머리를 그대로 적어두면 안 된다 - 그 구의 신고가 5건에 못 미치는 달 초에는
+// "송파구는 이번 달 아파트 매매 신고가 2건뿐이라 평균을 내지 않았습니다"로 바뀐다.
+// 그건 맞는 동작이고, 여기서 볼 것은 "두 언어 문단이 자기 지역 얘기로 심겼는가"다.
 test("정적 HTML에 한국어·영어 문단이 모두 심긴다", async () => {
   const html = await read("docs/district-songpa.html");
   const ko = html.split("<!--prerender:districtSummaryKo-->")[1].split("<!--/prerender")[0];
   const en = html.split("<!--prerender:districtSummaryEn-->")[1].split("<!--/prerender")[0];
 
-  assert.match(ko, /송파구 아파트 매매가는/);
-  assert.match(en, /Apartments in 송파구/);
+  assert.ok(ko.includes("송파구"), `한국어 문단이 비었거나 다른 지역이다: ${ko.slice(0, 80)}`);
+  assert.ok(en.includes("송파구"), `영어 문단이 비었거나 다른 지역이다: ${en.slice(0, 80)}`);
+  assert.match(ko, /니다\./, "한국어 문단이 문장으로 안 끝난다");
+  // 지역 이름은 영어 문단에서도 한국어 그대로 쓴다("Apartments in 송파구"). 문장이
+  // 영어로 쓰였는지만 본다.
+  assert.match(en, /[a-z]{4,}/, "영어 문단에 영어가 없다");
+  assert.ok(!/니다\./.test(en), `영어 문단에 한국어 문장이 남았다: ${en.slice(0, 80)}`);
 });
 
 test("자치구가 아닌 페이지에는 서술이 없다", async () => {

@@ -111,12 +111,22 @@ function makeDom(html = "") {
 
 // analytics를 넣어주면 페이지가 실제로 계측을 부르는지까지 볼 수 있다.
 // 안 넣으면 브라우저에서 광고 차단으로 로더가 안 뜬 상황과 같아진다.
-export async function loadRatesPage({ analytics, fetch: fetchImpl, file = "docs/rates.html", search = "" } = {}) {
+// rates를 넘기면 그날 수집된 공시 대신 그 자료로 화면을 돌린다. 상품 개수처럼 금감원
+// 공시가 정하는 값을 단언하는 테스트는 반드시 이쪽을 써야 한다 - 은행이 상품 하나를
+// 내놓거나 거둬들이는 날 CI가 빨개지고, 그러면 그날 수집분이 통째로 커밋되지 못한다.
+export async function loadRatesPage({
+  analytics,
+  fetch: fetchImpl,
+  file = "docs/rates.html",
+  search = "",
+  rates: ratesOverride,
+} = {}) {
   const html = await readFile(path.join(root, file), "utf8");
   const script = [...html.matchAll(/<script>\n([\s\S]*?)\n<\/script>/g)].map((m) => m[1]).pop();
   assert.ok(script.includes("CATEGORY_KEYS"), "금리 페이지 스크립트를 찾지 못했다");
 
-  const rates = JSON.parse(await readFile(path.join(root, "docs/data/rates.json"), "utf8"));
+  const rates =
+    ratesOverride ?? JSON.parse(await readFile(path.join(root, "docs/data/rates.json"), "utf8"));
   const history = JSON.parse(await readFile(path.join(root, "docs/data/rates-history.json"), "utf8"));
   const { document, byId } = makeDom(html);
   const store = {};

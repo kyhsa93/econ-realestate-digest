@@ -241,6 +241,21 @@ async function main() {
   for (const category of CATEGORIES) {
     try {
       const { products, disclosureMonth: month } = await fetchCategory(category);
+
+      // 호출은 됐는데 0건으로 온 경우. "그 상품군이 세상에서 사라졌다"보다 공시 쪽이
+      // 비어 온 것으로 보는 게 맞다 - 빈 배열을 그대로 쓰면 화면이 빈 표가 되고, 그게
+      // 정상인지 고장인지 구분할 방법이 없다(못 받은 것과 없는 것은 다른 얘기라는
+      // fetch-realestate의 carryForward와 같은 자리다).
+      const kept = previous[category.key] ?? [];
+      if (products.length === 0 && kept.length > 0) {
+        failed += 1;
+        console.warn(
+          `[fetch-rates] ${category.key}: 0건으로 왔다 - 지난번 ${kept.length}건을 그대로 둔다`
+        );
+        result[category.key] = kept;
+        continue;
+      }
+
       result[category.key] = products;
       disclosureMonth ??= month;
       console.log(`[fetch-rates] ${category.key}: 상품 ${products.length}건`);

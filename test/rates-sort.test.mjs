@@ -69,18 +69,32 @@ test("머리글을 여러 번 눌러도 계속 먹는다", async () => {
   }
 });
 
+// 공시의 평균금리는 "지난달 실제 취급 평균"이라 3분의 1 남짓은 값 자체가 없다. 그 비율은
+// 금감원이 정하는 값이라, 실제 자료에서 "평균 없는 상품이 있어야 한다"고 전제하면 언젠가
+// 조용히 무의미해지거나 깨진다. 섞인 상태를 여기서 만들어 쓴다.
 test("평균금리로 정렬해도 평균이 없는 상품이 사라지지 않는다", async () => {
-  const { sandbox, clickTab, clickSortHeader, rates } = await loadRatesPage();
+  const loan = (i, avg) => ({
+    id: `전세대출-${i}`,
+    sector: "bank",
+    company: `${i}은행`,
+    name: `전세대출 상품 ${i}`,
+    options: [{ rateType: "변동금리", min: 3 + i / 10, max: 4 + i / 10, avg }],
+  });
+  const rentLoan = [loan(0, 3.5), loan(1, null), loan(2, 3.1), loan(3, undefined), loan(4, 3.9)];
+
+  const { sandbox, clickTab, clickSortHeader } = await loadRatesPage({
+    rates: { updatedAt: "2026-08-17T00:00:00.000Z", deposit: [], saving: [], mortgage: [], rentLoan },
+  });
   clickTab("rentLoan");
   const before = sandbox.visibleRows().length;
-  assert.equal(before, rates.rentLoan.length);
+  assert.equal(before, rentLoan.length);
 
   clickSortHeader("avg");
   const after = sandbox.visibleRows();
   assert.equal(after.length, before, "평균이 없는 상품이 표에서 빠졌다");
   assert.ok(
     after.some((r) => r.option.avg === null || r.option.avg === undefined),
-    "평균 없는 상품이 실제로 있어야 이 테스트가 의미 있다"
+    "평균 없는 상품이 섞이지 않아 이 테스트가 의미 없다"
   );
   assertOrdered(after, "avg", "asc", "평균금리 정렬");
 });

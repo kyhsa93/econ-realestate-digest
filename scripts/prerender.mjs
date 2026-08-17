@@ -87,6 +87,12 @@ export function marketHtml(market) {
 
 const man = (value) => `${Number(value).toLocaleString("ko-KR")}만원`;
 
+// 표본이 모자란 셀. 화면(index.html의 realestateLowSampleHtml)과 같은 마크업이어야 한다 -
+// 정적 HTML이 "-"를 적어두고 클라이언트가 "표본 2건"으로 갈아끼우면 그 순간 글자가 바뀐다.
+const lowSampleText = (metric) =>
+  `<span class="low-sample" title="신고 ${metric.transactionCount}건이라 평균을 내기엔 표본이 부족합니다">` +
+  `표본 ${metric.transactionCount}건</span>`;
+
 // 클라이언트가 값 옆에 붙이는 증감·건수까지 같이 그린다. 안 그리면 데이터를 받는
 // 순간 셀 높이가 바뀌면서 표 아래가 통째로 밀린다.
 const changeText = (change) => {
@@ -101,25 +107,43 @@ const countText = (metric) =>
 const enough = (metric) => Boolean(metric) && (metric.transactionCount ?? 0) >= MIN_SAMPLE;
 
 // 매매·전세는 평당가, 월세는 보증금/월세라 셀 모양이 다르다(화면과 같은 구성).
+// 표본이 모자라면 값을 지우고 표본 수를 적는다 - 값이 없는 것과 표본이 얇은 것은 다른
+// 얘기라, 둘 다 "-"로 적으면 읽는 사람이 그 차이를 볼 수 없다(화면과 같은 규칙).
+const metricCell = (metric, valueText) => {
+  if (!metric) return "-";
+  if (!enough(metric)) return lowSampleText(metric);
+  return valueText(metric) ?? "-";
+};
+
 const saleCell = (sale) =>
-  enough(sale) && sale.avgPricePerPyeong10k
-    ? `${man(sale.avgPricePerPyeong10k)}${changeText(sale.change)}${countText(sale)}`
-    : "-";
+  metricCell(sale, (m) =>
+    m.avgPricePerPyeong10k ? `${man(m.avgPricePerPyeong10k)}${changeText(m.change)}${countText(m)}` : null
+  );
 const jeonseCell = (jeonse) =>
-  enough(jeonse) && jeonse.avgDepositPerPyeong10k
-    ? `${man(jeonse.avgDepositPerPyeong10k)}${changeText(jeonse.change)}${countText(jeonse)}`
-    : "-";
+  metricCell(jeonse, (m) =>
+    m.avgDepositPerPyeong10k ? `${man(m.avgDepositPerPyeong10k)}${changeText(m.change)}${countText(m)}` : null
+  );
 const wolseCell = (wolse) =>
-  enough(wolse) && wolse.avgDeposit10k
-    ? `${man(wolse.avgDeposit10k)} / 월 ${man(wolse.avgMonthlyRent10k)}${countText(wolse)}`
-    : "-";
+  metricCell(wolse, (m) =>
+    m.avgDeposit10k ? `${man(m.avgDeposit10k)} / 월 ${man(m.avgMonthlyRent10k)}${countText(m)}` : null
+  );
 
 export function realestateHtml(realestate) {
   if (!realestate?.overall) return null;
 
-  const districts = (realestate.districts ?? [])
-    .filter((d) => (d.sale?.transactionCount ?? 0) >= MIN_SAMPLE)
-    .sort((a, b) => (b.sale?.avgPricePerPyeong10k ?? 0) - (a.sale?.avgPricePerPyeong10k ?? 0))
+  // 표본이 모자란 구를 빼지 않고 아래로 내린다. 빼면 신고가 얇은 달 초에 정적 표가
+  // 여덟 줄, 화면은 열한 줄이 되어 데이터를 받는 순간 표 아래가 통째로 밀린다 -
+  // 이 함수가 증감·건수까지 그리는 이유와 같다(화면의 compareDistricts와 같은 규칙).
+  const priceOf = (d) => ((d.sale?.transactionCount ?? 0) >= MIN_SAMPLE ? d.sale?.avgPricePerPyeong10k ?? null : null);
+  const districts = [...(realestate.districts ?? [])]
+    .sort((a, b) => {
+      const [x, y] = [priceOf(a), priceOf(b)];
+      if (x === y) return 0;
+      // 값을 못 내는 구는 정렬 방향과 무관하게 아래로 간다.
+      if (x === null) return 1;
+      if (y === null) return -1;
+      return y - x;
+    })
     .slice(0, MAX_DISTRICTS);
 
   const row = (name, data) =>
