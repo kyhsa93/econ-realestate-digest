@@ -1,10 +1,15 @@
 import { execSync } from "node:child_process";
+import { existsSync } from "node:fs";
 import path from "node:path";
 
 const repoRoot = path.resolve(import.meta.dirname, "..");
 
 function run(cmd) {
   execSync(cmd, { cwd: repoRoot, stdio: "inherit" });
+}
+
+function trackedPaths() {
+  return ["docs", "raw"].filter((dir) => existsSync(path.join(repoRoot, dir)));
 }
 
 async function main() {
@@ -26,7 +31,7 @@ async function main() {
     return;
   }
 
-  run("git add docs raw");
+  run(`git add ${trackedPaths().join(" ")}`);
   run(
     `git commit -m "chore: 데일리 데이터 갱신 $(TZ=Asia/Seoul date +%Y-%m-%d)"`
   );

@@ -34,7 +34,10 @@ async function collect(server, { rawDir, dataDir, backfillLimit = 0, env = {} },
   };
 
   let stdout = "";
-  for (const step of steps) stdout += (await run("node", [step], options)).stdout;
+  for (const step of steps) {
+    const result = await run("node", [step], options);
+    stdout += result.stdout + result.stderr;
+  }
   return { stdout };
 }
 
@@ -270,4 +273,33 @@ test("날마다 새로 들어온 신고만 주간 시세로 쌓인다", async (t
   const second = JSON.parse(await readFile(path.join(space.rawDir, "sale", `11110-${PERIOD}.json`), "utf-8"));
   assert.equal(Object.keys(second.arrivals).length, 2, "새로 들어온 두 건만 잡아야 한다");
   assert.equal(second.count, 3);
+});
+
+test("연달아 실패하면 남은 슬롯을 다음 실행으로 넘긴다", async (t) => {
+  const server = await startFakeMolit(() => undefined);
+  t.after(() => server.close());
+  const space = await workspace();
+
+  const { stdout } = await collect(
+    server,
+    { ...space, backfillLimit: 50, env: { MOLIT_ABORT_AFTER: "5" } },
+    ["scripts/fetch-realestate.mjs"]
+  );
+
+  assert.match(stdout, /5개 연속 실패로 중단했습니다/, stdout);
+  assert.match(stdout, /남은 \d+개 슬롯은 다음 실행에서 받습니다/, stdout);
+  assert.ok(!stdout.includes("재시도 스윕"), "전부 막힌 상태에서 스윕까지 돌았다");
+});
+
+test("한 슬롯이 실패해도 나머지는 계속 받는다", async (t) => {
+  const server = await startFakeMolit((kind, { code }) =>
+    kind === "sale" && code === "11110" ? undefined : successXml([kind === "sale" ? saleItem() : rentItem()])
+  );
+  t.after(() => server.close());
+  const space = await workspace();
+
+  const { stdout } = await collect(server, { ...space, env: { MOLIT_ABORT_AFTER: "5" } });
+
+  assert.ok(!stdout.includes("연속 실패로 중단"), stdout);
+  assert.ok((await rawNames(space.rawDir, "sale")).length >= DISTRICT_COUNT, "성공한 슬롯이 저장되지 않았다");
 });

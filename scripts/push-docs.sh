@@ -11,7 +11,10 @@ if [ -z "$(git status --porcelain -- docs raw)" ]; then
   exit 0
 fi
 
-git add docs raw
+git add docs
+if [ -d raw ]; then
+  git add raw
+fi
 git commit -m "$message"
 
 branch="$(git rev-parse --abbrev-ref HEAD)"

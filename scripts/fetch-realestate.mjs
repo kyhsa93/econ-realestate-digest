@@ -11,7 +11,9 @@ const RENT_SERVICE_KEY = process.env.MOLIT_RENT_API_KEY;
 
 const CONCURRENCY = Number(process.env.MOLIT_CONCURRENCY ?? 3);
 const MAX_RETRIES = 3;
-const BACKFILL_LIMIT = Number(process.env.MOLIT_BACKFILL_LIMIT ?? 100);
+const BACKFILL_LIMIT = Number(process.env.MOLIT_BACKFILL_LIMIT ?? 50);
+const REQUEST_TIMEOUT_MS = Number(process.env.MOLIT_TIMEOUT_MS ?? 15_000);
+const ABORT_AFTER = Number(process.env.MOLIT_ABORT_AFTER ?? 12);
 const RETRY_BASE_MS = Number(process.env.MOLIT_RETRY_MS ?? 3000);
 const SWEEP_DELAY_MS = Number(process.env.MOLIT_SWEEP_DELAY_MS ?? 45_000);
 
@@ -50,7 +52,7 @@ async function fetchApiOnce(apiUrl, serviceKey, districtCode, yearMonth) {
   });
   const url = `${apiUrl}?serviceKey=${serviceKey}&${otherParams.toString()}`;
 
-  const res = await fetch(url);
+  const res = await fetch(url, { signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS) });
   if (!res.ok) throw new Error(`http ${res.status}`);
   const xml = await res.text();
 
@@ -113,8 +115,12 @@ async function main() {
 
   let changedSlots = 0;
   let arrived = 0;
+  let failedInARow = 0;
+  let givenUp = false;
 
   async function fetchSlot(slot) {
+    if (givenUp) return null;
+
     const { url, key, label } = endpoints[slot.kind];
     try {
       const response = await fetchApi(url, key, slot.code, slot.yearMonth);
@@ -132,19 +138,30 @@ async function main() {
         changedSlots += 1;
         arrived += written.added;
       }
+      failedInARow = 0;
       return true;
     } catch (err) {
       console.error(
         `[fetch-realestate] ${districtNames.get(slot.code) ?? slot.code} ${slot.yearMonth} ${label} 조회 실패:` +
           ` ${errorDetail(err)}`
       );
+      failedInARow += 1;
+      if (failedInARow >= ABORT_AFTER) givenUp = true;
       return false;
     }
   }
 
   const results = await mapWithConcurrency(plan.fetch, CONCURRENCY, fetchSlot);
 
-  const failedSlots = plan.fetch.filter((_, i) => !results[i]);
+  if (givenUp) {
+    const skipped = results.filter((result) => result === null).length;
+    console.error(
+      `[fetch-realestate] ${ABORT_AFTER}개 연속 실패로 중단했습니다.` +
+        ` 남은 ${skipped}개 슬롯은 다음 실행에서 받습니다`
+    );
+  }
+
+  const failedSlots = givenUp ? [] : plan.fetch.filter((_, i) => !results[i]);
   if (failedSlots.length > 0) {
     console.log(
       `[fetch-realestate] ${failedSlots.length}개 슬롯 실패,` +
