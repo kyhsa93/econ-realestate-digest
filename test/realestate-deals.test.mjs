@@ -5,7 +5,7 @@
 // 셈이 되고, 그건 평균이 조금 틀리는 것과는 성격이 다른 사고다.
 import test from "node:test";
 import assert from "node:assert/strict";
-import { carryForward, dropCancelled, errorDetail, isCancelledDeal, normalizeDeal } from "../scripts/fetch-realestate.mjs";
+import { carryForward, dropCancelled, errorDetail, fetchSummary, isCancelledDeal, normalizeDeal } from "../scripts/fetch-realestate.mjs";
 
 const deal = (extra = {}) => ({
   aptNm: "역삼아이파크",
@@ -138,4 +138,18 @@ test("지난번 값도 없는 구는 만들어내지 않는다", () => {
   const { districts, carriedNames } = carryForward(DISTRICTS, [entry("11350", "노원구")], null, false);
   assert.deepEqual(districts.map((d) => d.name), ["노원구"]);
   assert.deepEqual(carriedNames, []);
+});
+
+// 조회가 실제로 성공한 날에만 도는 마무리 줄이라, 전 구 타임아웃으로 일찍 return하던
+// 동안에는 없는 변수를 참조하는 채로 오래 남아 있었다. 데이터를 다 저장해 놓고 마지막
+// 줄에서 죽어 CI가 통째로 실패했다.
+test("마무리 로그는 유형별로 값이 있는 구만 센다", () => {
+  const districts = [
+    { name: "노원구", sale: { transactionCount: 3 }, jeonse: { transactionCount: 9 }, wolse: { transactionCount: 5 } },
+    { name: "도봉구", sale: null, jeonse: { transactionCount: 4 }, wolse: null },
+    { name: "종로구" },
+  ];
+
+  assert.equal(fetchSummary(districts), "매매 1개구, 전세 2개구, 월세 1개구");
+  assert.equal(fetchSummary([]), "매매 0개구, 전세 0개구, 월세 0개구");
 });

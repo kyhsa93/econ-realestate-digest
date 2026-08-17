@@ -444,6 +444,15 @@ export function carryForward(allDistricts, fetched, existing, existingIsToday) {
 // 화면에 나가는 값과 history에 남기는 값이 서로 다른 구 집합에서 나오기 때문에 함수로
 // 뺐다 - 조회에 실패해 지난번 값으로 채운 구는 화면에는 있어야 하지만, "오늘 신고분"
 // 기록에 섞이면 그날 추이가 며칠 전 값으로 만들어진다.
+// 마무리 로그. computeOverall 안에만 있던 구 집합을 main()에서 그대로 쓰려다 없는 변수를
+// 참조해, 조회가 실제로 성공한 날 마지막 줄에서 스크립트가 죽은 적이 있다(그전까지는 전 구
+// 타임아웃으로 일찍 return하는 바람에 이 줄까지 오지 못해 드러나지 않았다). 세는 규칙을
+// 한 곳에 두고 테스트가 붙잡는다.
+export function fetchSummary(districts) {
+  const countOf = (key) => (districts ?? []).filter((d) => d?.[key]).length;
+  return `매매 ${countOf("sale")}개구, 전세 ${countOf("jeonse")}개구, 월세 ${countOf("wolse")}개구`;
+}
+
 function computeOverall(districts) {
   const saleDistricts = districts.filter((d) => d.sale);
   const overallSaleAvgM2 = weightedAverage(saleDistricts, (d) => d.sale.avgPricePerM2, (d) => d.sale.transactionCount);
@@ -697,9 +706,7 @@ async function main() {
   });
   await writeDeals(period, now);
 
-  console.log(
-    `[fetch-realestate] 저장 완료 (매매 ${saleDistricts.length}개구, 전세 ${jeonseDistricts.length}개구, 월세 ${wolseDistricts.length}개구)`
-  );
+  console.log(`[fetch-realestate] 저장 완료 (${fetchSummary(districts)})`);
 }
 
 // 다른 파일에서 이 모듈의 함수를 가져다 쓰는 순간(테스트가 그렇다) import만으로 조회가
