@@ -382,12 +382,13 @@
 
   <section id="budget-section" hidden>
     <h2 id="budget-heading">예산으로 찾기</h2>
-    <div class="budget-controls">
+    <div class="budget-controls" id="budget-controls">
       <label for="budget-input" id="budget-label">예산</label>
       <input type="number" id="budget-input" min="1" max="60" step="1" inputmode="numeric" value="8">
       <span id="budget-unit">억원</span>
     </div>
-    <div id="budget-result"></div>
+    <div id="budget-result"><!--prerender:budgetResult--><!--/prerender:budgetResult--></div>
+    <div class="budget-nav" id="budget-page-nav"><!--prerender:budgetPageNav--><!--/prerender:budgetPageNav--></div>
     <div class="content-notice" id="budget-note"></div>
   </section>
 
@@ -404,6 +405,8 @@
       </table>
     </div>
     <div class="content-notice" id="table-note"></div>
+    <h3 class="district-links-heading" id="budget-links-heading" hidden>예산대별 실거래</h3>
+    <div class="district-links" id="budget-links"><!--prerender:budgetLinks--><!--/prerender:budgetLinks--></div>
     <h3 class="district-links-heading" id="district-links-heading">다른 지역</h3>
     <div class="district-links" id="district-links"><!--prerender:districtLinks--><a href="./district-jongno.html">종로구</a><a href="./district-jung.html">중구</a><a href="./district-yongsan.html">용산구</a><a href="./district-seongdong.html">성동구</a><a href="./district-gwangjin.html">광진구</a><a href="./district-dongdaemun.html">동대문구</a><a href="./district-jungnang.html">중랑구</a><a href="./district-seongbuk.html">성북구</a><a href="./district-gangbuk.html">강북구</a><a href="./district-dobong.html" aria-current="page">도봉구</a><a href="./district-nowon.html">노원구</a><a href="./district-eunpyeong.html">은평구</a><a href="./district-seodaemun.html">서대문구</a><a href="./district-mapo.html">마포구</a><a href="./district-yangcheon.html">양천구</a><a href="./district-gangseo.html">강서구</a><a href="./district-guro.html">구로구</a><a href="./district-geumcheon.html">금천구</a><a href="./district-yeongdeungpo.html">영등포구</a><a href="./district-dongjak.html">동작구</a><a href="./district-gwanak.html">관악구</a><a href="./district-seocho.html">서초구</a><a href="./district-gangnam.html">강남구</a><a href="./district-songpa.html">송파구</a><a href="./district-gangdong.html">강동구</a><!--/prerender:districtLinks--></div>
   </section>
@@ -427,6 +430,7 @@
 const T = {
   ko: {
     budgetHeading: "예산으로 찾기",
+    budgetLinksHeading: "예산대별 실거래",
     budgetLabel: "예산",
     budgetUnit: "억원",
     budgetNote:
@@ -493,6 +497,7 @@ const T = {
   },
   en: {
     budgetHeading: "Search by budget",
+    budgetLinksHeading: "Deals by budget",
     budgetLabel: "Budget",
     budgetUnit: "\u00a0100M KRW",
     budgetNote:
@@ -1020,10 +1025,22 @@ function renderTrend() {
 // 예산으로 찾기는 전체 시세 페이지에서만 연다. 자치구 페이지와 거래 유형 페이지는
 // 각자 주제가 따로 있고, 거기에 서울 전체 예산 검색이 끼면 화면이 무슨 페이지인지
 // 흐려진다(뉴스 쪽에서 시세 카드를 부동산 페이지에만 편 것과 같은 이유).
-const budgetEnabled = !kind && !districtName;
+//
+// budget-*.html은 구간 하나만 다루는 페이지다. 거기서는 예산을 바꾸는 입력 대신 옆 칸
+// 페이지로 가는 링크를 프리렌더가 심어 둔다(주소와 화면 내용이 어긋나지 않게).
+const budgetBand10k = (() => {
+  // 빈 문자열은 Number("")가 0이라 그냥 두면 "3억 미만 페이지"로 읽힌다.
+  const raw = document.querySelector('meta[name="budget-band"]')?.getAttribute("content");
+  if (raw === null || raw === undefined || String(raw).trim() === "") return null;
+  const value = Number(raw);
+  return Number.isFinite(value) && value >= 0 ? value : null;
+})();
+const isBudgetPage = budgetBand10k !== null;
+const budgetEnabled = isBudgetPage || (!kind && !districtName);
 const DEFAULT_BUDGET_EOK = 8;
 
 let budgetEok = (() => {
+  if (isBudgetPage) return Math.max(1, Math.round(budgetBand10k / 10000));
   const raw = Number(new URLSearchParams(location.search).get("budget"));
   return Number.isInteger(raw) && raw >= 1 && raw <= 60 ? raw : DEFAULT_BUDGET_EOK;
 })();
@@ -1091,6 +1108,7 @@ function renderBudget() {
   document.getElementById("budget-label").textContent = t("budgetLabel");
   document.getElementById("budget-unit").textContent = t("budgetUnit");
   document.getElementById("budget-note").textContent = t("budgetNote");
+  document.getElementById("budget-controls").hidden = isBudgetPage;
 
   const input = document.getElementById("budget-input");
   if (String(budgetEok) !== input.value) input.value = String(budgetEok);
@@ -1103,7 +1121,14 @@ function renderBudget() {
     return;
   }
 
-  const periods = (cache.budget.periods ?? [])
+  box.innerHTML = budgetBodyHtml(band, cache.budget.periods) + (isBudgetPage ? "" : budgetNavHtml(band));
+}
+
+// 예산 페이지(budget-*.html)의 정적 HTML도 같은 모양이어야 한다 - 프리렌더가 심은
+// 결과를 클라이언트가 다시 그리면서 화면이 밀리면 안 되고, 테스트가 두 결과를
+// 직접 대조한다. 옆 칸 이동만 정적 페이지에서는 링크라 여기 넣지 않는다.
+function budgetBodyHtml(band, periodList) {
+  const periods = (periodList ?? [])
     .map((p) => monthLabel(p))
     .filter(Boolean)
     .join(", ");
@@ -1111,16 +1136,17 @@ function renderBudget() {
     .map((d) => `${escapeHtml(d.name)} ${d.count.toLocaleString(locale === "en" ? "en-US" : "ko-KR")}`)
     .join(" · ");
 
-  box.innerHTML =
+  return (
     `<p class="budget-summary">${escapeHtml(t("budgetSummary")(bandLabel(band), band.count))}` +
     (periods ? ` <span class="when">${escapeHtml(t("budgetPeriods")(periods))}</span>` : "") +
     `</p>` +
     (districts ? `<div class="budget-districts">${escapeHtml(t("budgetDistricts"))}: ${districts}</div>` : "") +
-    `<ul class="budget-deals">${band.deals.map(budgetDealHtml).join("")}</ul>` +
-    budgetNavHtml(band);
+    `<ul class="budget-deals">${band.deals.map(budgetDealHtml).join("")}</ul>`
+  );
 }
 
 function syncBudgetUrl() {
+  if (isBudgetPage) return;
   const params = new URLSearchParams(location.search);
   if (budgetEok === DEFAULT_BUDGET_EOK) params.delete("budget");
   else params.set("budget", String(budgetEok));
@@ -1140,6 +1166,10 @@ function applyLocale() {
   document.getElementById("district-heading").textContent = t("districtHeading");
   document.getElementById("table-note").textContent = t("note");
   document.getElementById("district-links-heading").textContent = t("otherDistricts");
+  const budgetLinksHeading = document.getElementById("budget-links-heading");
+  budgetLinksHeading.textContent = t("budgetLinksHeading");
+  // 예산 페이지가 아직 안 찍힌 날에는 제목만 남지 않게 링크가 있을 때만 편다.
+  budgetLinksHeading.hidden = !document.getElementById("budget-links").innerHTML.trim();
   document.getElementById("footer-source").textContent = t("footerSource");
   document.getElementById("footer-privacy").textContent = t("footerPrivacy");
   document.getElementById("nav-digest").textContent = t("navDigest");

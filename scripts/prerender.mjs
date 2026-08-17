@@ -10,6 +10,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { DEFAULT_AMOUNT, formatWon, netInterestOf } from "./interest.mjs";
+import { BUDGET_PAGES } from "./budget-pages.mjs";
 import { DISTRICT_PAGES } from "./district-slugs.mjs";
 import { districtSentences } from "./district-summary.mjs";
 import {
@@ -169,6 +170,61 @@ export function newsHtml(news) {
         `</li>`
     )
     .join("");
+}
+
+// 예산 페이지(budget-*.html)에 심는 거래 목록. docs/realestate.html의 budgetBodyHtml과
+// 같은 마크업이어야 한다 - 테스트가 두 결과를 직접 대조한다. 정적 HTML은 한국어 화면이다.
+const budgetBandLabel = (band) => {
+  const from = Math.round(band.min10k / 10_000);
+  const to = band.max10k === null ? null : Math.round(band.max10k / 10_000);
+  if (to === null) return `${from}억 이상`;
+  if (from === 0) return `${to}억 미만`;
+  return `${from}억대`;
+};
+
+const budgetWhen = (date) => {
+  const [, month, day] = String(date ?? "").split("-");
+  return month && day ? `${Number(month)}/${Number(day)}` : "";
+};
+
+function budgetDealHtml(deal) {
+  const place = [deal.district, deal.dong, deal.apt].filter(Boolean).join(" ");
+  const spec = [`${deal.area}㎡`, deal.floor ? `${deal.floor}층` : null].filter(Boolean).join(" · ");
+  return (
+    `<li class="budget-deal">` +
+    `<span class="place">${escapeHtml(place)}</span>` +
+    `<span class="spec">${escapeHtml(spec)}</span>` +
+    `<span class="when">${escapeHtml(budgetWhen(deal.date))}</span>` +
+    `<span class="price">${escapeHtml(formatEok(deal.amount10k))}</span>` +
+    `</li>`
+  );
+}
+
+export function budgetBodyHtml(band, periodList) {
+  if (!band) return null;
+
+  const periods = (periodList ?? []).map((p) => monthLabel(p)).filter(Boolean).join(", ");
+  const districts = (band.districts ?? [])
+    .map((d) => `${escapeHtml(d.name)} ${d.count.toLocaleString("ko-KR")}`)
+    .join(" · ");
+
+  return (
+    `<p class="budget-summary">${escapeHtml(`${budgetBandLabel(band)}에서 ${band.count.toLocaleString("ko-KR")}건이 거래됐습니다.`)}` +
+    (periods ? ` <span class="when">${escapeHtml(`${periods} 신고분 기준`)}</span>` : "") +
+    `</p>` +
+    (districts ? `<div class="budget-districts">거래가 많은 지역: ${districts}</div>` : "") +
+    `<ul class="budget-deals">${band.deals.map(budgetDealHtml).join("")}</ul>`
+  );
+}
+
+export { budgetBandLabel };
+
+/**
+ * 시세 페이지 아래에 두는 예산 페이지 목록. 검색으로 들어온 사람이 옆 구간을 훑는 길이다.
+ * 실제로 찍힌 페이지만 넘겨받는다 - 거래가 없어 못 만든 구간까지 링크하면 404가 된다.
+ */
+export function budgetLinksHtml(pages = BUDGET_PAGES) {
+  return pages.map((p) => `<a href="./${p.file}">${escapeHtml(`${p.eok}억대`)}</a>`).join("");
 }
 
 // 부동산 뉴스 페이지 맨 위의 서울 시세 카드. 값은 news-context.mjs가 news.json에

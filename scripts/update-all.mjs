@@ -21,6 +21,8 @@ async function main() {
   run("node scripts/build-rate-pages.mjs");
   run("node scripts/build-news-pages.mjs");
   run("node scripts/build-realestate-pages.mjs");
+  // 예산 페이지는 프리렌더가 끝난 realestate.html을 원본으로 쓴다.
+  run("node scripts/build-budget-pages.mjs");
 
   const status = execSync("git status --porcelain -- docs", { cwd: repoRoot }).toString().trim();
   if (!status) {
