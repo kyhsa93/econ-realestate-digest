@@ -425,15 +425,37 @@ test("커밋된 자치구 페이지 25개가 지금 원본·데이터로 찍은 
 });
 
 // 크롤러가 25개 페이지를 발견하는 유일한 내부 경로다. sitemap만으로는 늦다.
+//
+// 경로는 페이지마다 다르다 - 전체·거래 유형 페이지는 표의 지역 이름이 곧 링크이고,
+// 자치구 페이지는 그 표가 없으므로 하단 목록이 그 역할을 한다. 어느 쪽이든 25개가 다
+// 걸려 있어야 한다.
 test("모든 시세 페이지가 25개 자치구로 링크한다", async () => {
   for (const file of ["realestate.html", "apartment-sale.html", "district-gangnam.html"]) {
     const html = await read(`docs/${file}`);
-    const block = html.split("<!--prerender:districtLinks-->")[1]?.split("<!--/prerender")[0] ?? "";
-    assert.equal((block.match(/<a /g) ?? []).length, 25, `${file}: 지역 링크가 25개가 아니다`);
     for (const { file: target } of DISTRICT_PAGES) {
-      assert.ok(block.includes(`href="./${target}"`), `${file}: ${target} 링크가 없다`);
+      assert.ok(html.includes(`href="./${target}"`), `${file}: ${target} 링크가 없다`);
     }
   }
+});
+
+// 표에서 바로 갈 수 있는데 같은 목록을 아래 한 번 더 두면 화면만 길어진다.
+test("표가 있는 페이지에는 하단 지역 목록을 두지 않는다", async () => {
+  const block = async (file) =>
+    (await read(`docs/${file}`)).split("<!--prerender:districtLinks-->")[1]?.split("<!--/prerender")[0] ?? "";
+
+  for (const file of ["realestate.html", "apartment-sale.html", "apartment-jeonse.html"]) {
+    assert.equal(await block(file), "", `${file}: 하단 목록이 남아 있다`);
+  }
+
+  // 자치구 페이지는 그 지역 표만 보여주므로 목록이 유일한 이동 수단이다.
+  assert.equal((await block("district-gangnam.html")).match(/<a /g)?.length, 25);
+});
+
+test("표의 지역 이름이 그 지역 페이지로 간다", async () => {
+  const html = await read("docs/realestate.html");
+  assert.match(html, /<td><a href="\.\/district-gangnam\.html">강남구<\/a>/);
+  // 서울 전체 행은 갈 곳이 없다.
+  assert.match(html, /<tr class="overall-row"><td>서울 전체<\/td>/);
 });
 
 test("자치구 페이지는 자기 지역을 링크 목록에서 표시한다", async () => {

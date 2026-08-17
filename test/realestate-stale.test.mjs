@@ -33,8 +33,8 @@ test("지난번 값을 들고 있는 구에 받은 날짜를 적는다", async (
   const html = page.tableHtml();
 
   // 2026-08-14T23:32Z는 KST로 8월 15일이다. 날짜는 서울 기준으로 적는다.
-  assert.match(html, /종로구 <span class="prev-tag" title="[^"]*조회에 실패[^"]*">8\. 15\.<\/span>/);
-  assert.ok(!/노원구 <span class="prev-tag"/.test(html), "새로 받은 구에 묵은 표시가 붙었다");
+  assert.match(html, /종로구<\/a> <span class="prev-tag" title="[^"]*조회에 실패[^"]*">8\. 15\.<\/span>/);
+  assert.ok(!/노원구<\/a> <span class="prev-tag"/.test(html), "새로 받은 구에 묵은 표시가 붙었다");
 });
 
 test("프리렌더와 화면이 같은 표시를 낸다", async () => {
@@ -45,7 +45,7 @@ test("프리렌더와 화면이 같은 표시를 낸다", async () => {
 test("영어 화면에서도 표시가 남는다", async () => {
   const page = await loadRealestatePage({ realestate: REALESTATE, locale: "en" });
   const html = page.tableHtml();
-  assert.match(html, /종로구 <span class="prev-tag" title="[^"]*lookup failed[^"]*">/);
+  assert.match(html, /종로구<\/a> <span class="prev-tag" title="[^"]*lookup failed[^"]*">/);
 });
 
 // staleAt이 없거나 값이 깨졌다고 표가 무너지면 안 된다.

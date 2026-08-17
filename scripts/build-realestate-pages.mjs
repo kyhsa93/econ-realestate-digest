@@ -102,7 +102,9 @@ export function buildRealestatePage(baseHtml, page, realestate) {
     realestateOverall: realestateOverallHtml(realestate, page.kind),
     realestateHead: realestateHeadHtml(page.kind),
     realestateTable: realestateTableHtml(realestate, page.kind),
-    districtLinks: districtLinksHtml(),
+    // 이 페이지도 25개 구 표를 그대로 갖고 있고 이름이 곧 링크다. 같은 목록을 아래
+    // 한 번 더 두지 않는다.
+    districtLinks: "",
     districtSummaryKo: "",
     districtSummaryEn: "",
   });

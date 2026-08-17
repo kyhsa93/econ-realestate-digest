@@ -266,6 +266,9 @@
   .change.down { color: #2f6fed; }
   .ratio { font-weight: 600; font-variant-numeric: tabular-nums; }
   .low-sample { color: var(--muted); font-size: 0.78rem; }
+  /* 지역 이름은 그 지역 페이지로 가는 링크다. 표 안에서도 누를 수 있다는 게 보여야 한다. */
+  .data-table td a { color: inherit; text-decoration: none; border-bottom: 1px dotted var(--border); }
+  .data-table td a:hover { border-bottom-color: var(--muted); }
   /* 지난달 값으로 대체한 셀임을 알리는 표시. 값만 바꿔치기하면 표를 읽는 사람이 기준을 모른다. */
   .prev-tag {
     display: inline-block;
@@ -407,7 +410,7 @@
     <div class="content-notice" id="table-note"></div>
     <h3 class="district-links-heading" id="budget-links-heading" hidden>예산대별 실거래</h3>
     <div class="district-links" id="budget-links"><!--prerender:budgetLinks--><!--/prerender:budgetLinks--></div>
-    <h3 class="district-links-heading" id="district-links-heading">다른 지역</h3>
+    <h3 class="district-links-heading" id="district-links-heading" hidden>다른 지역</h3>
     <div class="district-links" id="district-links"><!--prerender:districtLinks--><a href="./district-jongno.html">종로구</a><a href="./district-jung.html">중구</a><a href="./district-yongsan.html">용산구</a><a href="./district-seongdong.html">성동구</a><a href="./district-gwangjin.html">광진구</a><a href="./district-dongdaemun.html">동대문구</a><a href="./district-jungnang.html">중랑구</a><a href="./district-seongbuk.html">성북구</a><a href="./district-gangbuk.html">강북구</a><a href="./district-dobong.html">도봉구</a><a href="./district-nowon.html">노원구</a><a href="./district-eunpyeong.html">은평구</a><a href="./district-seodaemun.html">서대문구</a><a href="./district-mapo.html">마포구</a><a href="./district-yangcheon.html">양천구</a><a href="./district-gangseo.html">강서구</a><a href="./district-guro.html">구로구</a><a href="./district-geumcheon.html">금천구</a><a href="./district-yeongdeungpo.html">영등포구</a><a href="./district-dongjak.html">동작구</a><a href="./district-gwanak.html">관악구</a><a href="./district-seocho.html">서초구</a><a href="./district-gangnam.html">강남구</a><a href="./district-songpa.html" aria-current="page">송파구</a><a href="./district-gangdong.html">강동구</a><!--/prerender:districtLinks--></div>
   </section>
 
@@ -808,13 +811,29 @@ function staleTagHtml(entry) {
   return ` <span class="prev-tag" title="${escapeHtml(t("staleTagTitle"))}">${escapeHtml(label)}</span>`;
 }
 
+// 표에서 지역 이름을 누르면 그 지역 페이지로 간다. 프리렌더(prerender.mjs)의
+// reDistrictLink와 같은 마크업이어야 한다 - 테스트가 두 결과를 직접 대조한다.
+const DISTRICT_FILES = {
+  종로구: "jongno", 중구: "jung", 용산구: "yongsan", 성동구: "seongdong", 광진구: "gwangjin",
+  동대문구: "dongdaemun", 중랑구: "jungnang", 성북구: "seongbuk", 강북구: "gangbuk", 도봉구: "dobong",
+  노원구: "nowon", 은평구: "eunpyeong", 서대문구: "seodaemun", 마포구: "mapo", 양천구: "yangcheon",
+  강서구: "gangseo", 구로구: "guro", 금천구: "geumcheon", 영등포구: "yeongdeungpo", 동작구: "dongjak",
+  관악구: "gwanak", 서초구: "seocho", 강남구: "gangnam", 송파구: "songpa", 강동구: "gangdong",
+};
+
+function districtLinkHtml(label) {
+  const slug = DISTRICT_FILES[label];
+  return slug ? `<a href="./district-${slug}.html">${escapeHtml(label)}</a>` : escapeHtml(label);
+}
+
 function rowHtml(entry, label, isOverall) {
   const labels = headLabels();
   const cells = kind ? cellsFor(entry, kind) : allCells(entry);
   const body = cells
     .map((cell, i) => `<td data-label="${escapeHtml(labels[i + 1])}">${cell}</td>`)
     .join("");
-  return `<tr class="${isOverall ? "overall-row" : ""}"><td>${escapeHtml(label)}${staleTagHtml(entry)}</td>${body}</tr>`;
+  const name = isOverall ? escapeHtml(label) : districtLinkHtml(label);
+  return `<tr class="${isOverall ? "overall-row" : ""}"><td>${name}${staleTagHtml(entry)}</td>${body}</tr>`;
 }
 
 // 한 지역만 보여주는 페이지에서는 거래 유형이 행이 된다. 월세는 평당 개념이 아니라
@@ -1182,7 +1201,10 @@ function applyLocale() {
   document.getElementById("overall-heading").textContent = t("overallHeading");
   document.getElementById("district-heading").textContent = t("districtHeading");
   document.getElementById("table-note").textContent = t("note");
-  document.getElementById("district-links-heading").textContent = t("otherDistricts");
+  const districtLinksHeading = document.getElementById("district-links-heading");
+  districtLinksHeading.textContent = t("otherDistricts");
+  // 전체·거래 유형 페이지는 표의 지역 이름이 곧 링크라 이 목록을 심지 않는다.
+  districtLinksHeading.hidden = !document.getElementById("district-links").innerHTML.trim();
   const budgetLinksHeading = document.getElementById("budget-links-heading");
   budgetLinksHeading.textContent = t("budgetLinksHeading");
   // 예산 페이지가 아직 안 찍힌 날에는 제목만 남지 않게 링크가 있을 때만 편다.

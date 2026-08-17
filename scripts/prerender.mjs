@@ -11,7 +11,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { DEFAULT_AMOUNT, formatWon, netInterestOf } from "./interest.mjs";
 import { BUDGET_PAGES } from "./budget-pages.mjs";
-import { DISTRICT_PAGES } from "./district-slugs.mjs";
+import { DISTRICT_PAGES, DISTRICT_SLUGS, districtFile } from "./district-slugs.mjs";
 import { districtSentences } from "./district-summary.mjs";
 import {
   KIND_FIELDS,
@@ -397,13 +397,22 @@ function reStaleTag(entry) {
   return ` <span class="prev-tag" title="${escapeHtml("이 지역은 오늘 실거래 조회에 실패해 지난번에 받은 값을 그대로 보여줍니다.")}">${escapeHtml(label)}</span>`;
 }
 
+// 표에서 지역 이름을 누르면 그 지역 페이지로 간다. 25개 구를 훑다가 한 곳이 눈에 들면
+// 바로 들어갈 수 있어야 하는데, 그동안은 표 밑의 링크 목록에서 그 이름을 다시 찾아야 했다.
+// 화면(realestate.html)의 districtLinkHtml과 같은 마크업이어야 한다.
+function reDistrictLink(label) {
+  const slug = DISTRICT_SLUGS[label];
+  return slug ? `<a href="./${districtFile(slug)}">${escapeHtml(label)}</a>` : escapeHtml(label);
+}
+
 function reRow(entry, label, isOverall, kind, previousPeriod) {
   const labels = reHeadLabels(kind);
   const cells = kind ? reCells(entry, kind, previousPeriod) : reAllCells(entry, previousPeriod);
   const body = cells
     .map((cell, i) => `<td data-label="${escapeHtml(labels[i + 1])}">${cell}</td>`)
     .join("");
-  return `<tr class="${isOverall ? "overall-row" : ""}"><td>${escapeHtml(label)}${reStaleTag(entry)}</td>${body}</tr>`;
+  const name = isOverall ? escapeHtml(label) : reDistrictLink(label);
+  return `<tr class="${isOverall ? "overall-row" : ""}"><td>${name}${reStaleTag(entry)}</td>${body}</tr>`;
 }
 
 // 비싼 곳부터. 값을 낼 수 없는 지역은 맨 아래로 보낸다(화면과 같은 규칙).
@@ -684,7 +693,9 @@ async function main() {
         realestateOverall: realestateOverallHtml(realestate),
         realestateHead: realestateHeadHtml(),
         realestateTable: realestateTableHtml(realestate),
-        districtLinks: districtLinksHtml(),
+        // 표의 지역 이름이 곧 링크라 같은 목록을 아래 한 번 더 두지 않는다.
+        // 자치구 페이지에는 그 표가 없으므로 거기서만 채운다(build-realestate-pages.mjs).
+        districtLinks: "",
         districtSummaryKo: "",
         districtSummaryEn: "",
       },
