@@ -212,13 +212,15 @@ export function computeOverall(districts) {
   return { sale: overallSale, saleNational84: overallSaleNational84, jeonse: overallJeonse, wolse: overallWolse };
 }
 
-export function findBaseline(history, now) {
-  if (!history.length) return null;
+export function findBaseline(history, now, period) {
   const target = new Date(now);
   target.setDate(target.getDate() - 7);
   const targetDate = kstDateString(target);
-  const older = history.filter((h) => h.date <= targetDate);
-  const baseline = older.length ? older[older.length - 1] : history[0];
+
+  const older = history.filter((h) => h.period === period && h.date <= targetDate);
+  if (!older.length) return null;
+
+  const baseline = older[older.length - 1];
   return baseline.date === kstDateString(now) ? null : baseline;
 }
 

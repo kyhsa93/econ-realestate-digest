@@ -148,7 +148,7 @@ async function main() {
   await mkdir(dataDir, { recursive: true });
 
   const history = await readJson(historyFile, []);
-  const withChanges = attachChanges(overall, districts, findBaseline(history, now));
+  const withChanges = attachChanges(overall, districts, findBaseline(history, now, period));
 
   let previous = await readJson(previousFile);
   if (!isPreviousUsable(previous, previousPeriod)) {
