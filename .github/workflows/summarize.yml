@@ -101,7 +101,8 @@ jobs:
         run: npm test
 
       - name: 변경사항 커밋 및 푸시
-        run: ./scripts/push-docs.sh "chore: AI 요약 갱신 $(TZ=Asia/Seoul date +'%Y-%m-%d %H:%M') KST"
+        run: |
+          ./scripts/push-docs.sh "chore: AI 요약 갱신 $(TZ=Asia/Seoul date +'%Y-%m-%d %H:%M') KST"
 
       - name: Pages 배포
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b
