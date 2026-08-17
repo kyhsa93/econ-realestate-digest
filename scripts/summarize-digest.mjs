@@ -7,6 +7,15 @@ const dataDir = process.env.SUMMARY_DATA_DIR
   ? path.resolve(process.env.SUMMARY_DATA_DIR)
   : path.resolve(import.meta.dirname, "../docs/data");
 const outFile = path.join(dataDir, "summary.json");
+// 이 요약이 어떤 기사들을 보고 쓰였는지. 다음 실행에서 "다시 요약할 만큼 기사가 바뀌었나"를
+// 판정하는 재료다(scripts/summary-needed.mjs).
+//
+// summary.json에 같이 넣지 않는 이유는 화면이 받는 파일이기 때문이다. 카테고리마다 상위
+// 다섯 건만 남기는 items로는 셀 수 없어서 전체 링크가 필요한데, 그걸 화면에 딸려 보낼
+// 이유가 없다(realestate-prev.json·budget-months.json과 같은 자리).
+const sourceFile = process.env.SUMMARY_SOURCE_FILE
+  ? path.resolve(process.env.SUMMARY_SOURCE_FILE)
+  : path.join(dataDir, "summary-source.json");
 const historyFile = path.join(dataDir, "summary-history.json");
 const bodiesFile = process.env.NEWS_BODIES_FILE
   ? path.resolve(process.env.NEWS_BODIES_FILE)
@@ -726,6 +735,18 @@ async function main() {
 
   await mkdir(dataDir, { recursive: true });
   await writeFile(outFile, JSON.stringify({ updatedAt: now.toISOString(), ...payload }, null, 2));
+  await writeFile(
+    sourceFile,
+    JSON.stringify(
+      {
+        updatedAt: now.toISOString(),
+        newsUpdatedAt: news.updatedAt ?? null,
+        links: news.items.map((item) => item.link).filter(Boolean),
+      },
+      null,
+      2
+    )
+  );
   await appendHistory(now, payload);
 
   const fallen = categoryEntries.filter((c) => c.isFallback);

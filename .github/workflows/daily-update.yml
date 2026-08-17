@@ -19,8 +19,9 @@ permissions:
   pages: write
   id-token: write
 
+# 요약 워크플로도 같은 그룹을 쓴다. 둘 다 docs를 커밋하므로 겹쳐 돌면 push가 서로 밀린다.
 concurrency:
-  group: daily-update
+  group: digest-pipeline
   cancel-in-progress: false
 
 jobs:
@@ -28,8 +29,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.mode || (github.event.schedule == '7 23 * * *' && 'full' || 'news') }}
-      OLLAMA_MODEL: qwen3:14b
-      OLLAMA_THINK: "false"
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -66,32 +65,6 @@ jobs:
         env:
           FSS_FINLIFE_API_KEY: ${{ secrets.FSS_FINLIFE_API_KEY }}
 
-      - name: Ollama 설치 및 모델 준비
-        env:
-          OLLAMA_VERSION: v0.32.6
-          OLLAMA_SHA256: dec2fa50d24e6868ca3c4c977d69d059399372105f951a9acc320a5a79aadcfc
-        run: |
-          command -v zstd >/dev/null || (sudo apt-get update -y && sudo apt-get install -y zstd)
-          curl -fsSL -o ollama.tar.zst \
-            "https://github.com/ollama/ollama/releases/download/${OLLAMA_VERSION}/ollama-linux-amd64.tar.zst"
-          echo "${OLLAMA_SHA256}  ollama.tar.zst" | sha256sum -c -
-          zstd -d ollama.tar.zst -o ollama.tar
-          sudo tar -xf ollama.tar -C /usr/local
-          rm -f ollama.tar.zst ollama.tar
-
-          ollama serve &
-          for i in $(seq 1 30); do
-            curl -sf http://127.0.0.1:11434/api/version > /dev/null && break
-            sleep 1
-          done
-          ollama pull "$OLLAMA_MODEL"
-
-      - name: AI 요약 생성
-        run: node scripts/summarize-digest.mjs
-
-      - name: 뉴스 제목 영어 번역
-        run: node scripts/translate-news.mjs
-
       - name: 기사에 실거래가·금리 수치 붙이기
         run: node scripts/news-context.mjs
 
@@ -103,6 +76,9 @@ jobs:
           node scripts/build-news-pages.mjs
           node scripts/build-budget-pages.mjs
           node scripts/build-realestate-pages.mjs
+
+      - name: 요약이 다시 필요한지 판정
+        run: node scripts/summary-needed.mjs
 
       - name: 테스트 (수집 후)
         run: npm test

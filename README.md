@@ -29,6 +29,9 @@
   finlife.fss.or.kr에서 직접 발급받는 32자리 키이고(`FSS_FINLIFE_API_KEY`), 파라미터명도
   `serviceKey`가 아니라 `auth`다. **요청에 User-Agent를 안 실으면 서버가 TLS 핸드셰이크 직후
   연결을 끊어서 에러 응답조차 오지 않는다** — 헤더를 지우지 말 것
+- `scripts/summary-needed.mjs` — 요약 워크플로가 모델을 받기 전에 "지금 다시 요약할 만한가"를 판정한다.
+  판정 결과와 **그 이유**를 같이 남기는 게 핵심 - 안 돌린 날 로그에 이유가 없으면 요약이 며칠째
+  묵어도 알아챌 방법이 없다
 - `scripts/summarize-digest.mjs` — 로컬 Ollama(qwen3:14b)로 오늘의 뉴스를 카테고리별로 한국어/영어 요약 →
   `docs/data/summary.json`. 생성한 문장은 코드로 검증한다: 원문에 없는 숫자(substring 대조)와
   원문에 없는 고유명사(모델에겐 추출만 시키고 대조는 코드가 함)가 있으면 폐기하고 헤드라인
@@ -209,13 +212,23 @@
   커밋된 그날 뉴스로 모델을 비교해보는 용도(뉴스를 다시 받지 않아 모델 간 조건이 같음).
   결과는 로그로만 출력하고 커밋/배포하지 않음. qwen3 계열은 `disable_thinking`을 켜야 함
   (`OLLAMA_THINK=false` → 요청에 `think: false` 추가)
-- `.github/workflows/daily-update.yml` — 하루 4회(08·12·16·20시 KST) 실행. 매 실행마다 뉴스 수집 +
-  AI 요약 + 제목 영어 번역을 하고, 아침 실행(`MODE=full`)만 시장지표/부동산/금리까지 추가로 수집한다
-  (부동산 실거래가 API는 일일 호출 한도 때문에, 금리는 공시 자체가 월 단위로 갱신돼서 아침 1회로 고정). 이후 변경사항
-  커밋/푸시 → Pages 배포.
+- `.github/workflows/daily-update.yml` — 하루 4회(08·12·16·20시 KST) 실행. 매 실행마다 뉴스를 수집하고,
+  아침 실행(`MODE=full`)만 시장지표/부동산/금리까지 추가로 수집한다 (부동산 실거래가 API는 일일 호출
+  한도 때문에, 금리는 공시 자체가 월 단위로 갱신돼서 아침 1회로 고정). 이후 정적 HTML을 다시 심고
+  커밋/푸시 → Pages 배포. **AI 요약·번역은 여기 없다** (아래 참고). 5분 안에 끝난다
+- `.github/workflows/summarize.yml` — AI 요약·번역 전용. 수집 워크플로가 끝나면 `workflow_run`으로
+  이어서 돌되, `scripts/summary-needed.mjs`가 "지금 다시 요약할 만한가"를 먼저 판정해 필요할 때만
+  모델을 받는다(오늘 요약이 아직 없거나 · 요약 이후 새 기사가 10건 이상 · 번역 밀린 기사 5건 이상).
+  판정을 별도 job으로 뒀기 때문에 필요 없는 날은 1분짜리 job 하나로 끝나고 9GB 모델은 받지도 않는다.
+  임계값은 `SUMMARY_NEW_ARTICLES`·`SUMMARY_UNTRANSLATED`로 조절한다.
+  **왜 떼어냈나**: 요약·번역은 러너에 Ollama를 깔고 9GB 모델을 CPU로 돌리는 일이라 한 번에 40분~1시간이
+  걸린다. 수집은 기사가 계속 들어오니 하루 네 번 돌아야 하지만, 같은 하루의 다이제스트를 네 번 다시
+  쓸 이유는 없다. 붙어 있는 동안은 뉴스 한 줄 갱신하려고 매번 모델을 받아야 했고, 요약 단계에서 실패한
+  실행이 커밋 단계에 못 가서 그날 수집한 실거래가 데이터까지 통째로 버려지는 일도 있었다.
+  두 워크플로는 `concurrency: digest-pipeline`으로 같은 줄에 세운다(둘 다 docs를 커밋한다).
   요약/번역 모델은 `OLLAMA_MODEL`(현재 `qwen3:14b`) + `OLLAMA_THINK=false`를 job 레벨 env로 주입한다.
   러너가 4코어 CPU(GPU 없음)/16GB RAM이라 RAM에 들어가는 상한이 14b급(Q4 약 9GB)이고, 같은 뉴스로
-  qwen2.5:14b와 비교 실행해서 고른 값이다. 그만큼 느려서 실행 1회에 15~20분 걸린다(요약·번역이 대부분)
+  qwen2.5:14b와 비교 실행해서 고른 값이다
 
 ## 로컬 실행
 
@@ -253,6 +266,9 @@ npm test
 GitHub Actions(`daily-update.yml`)가 하루 4회 자동 실행. 수동 실행은 Actions 탭에서
 "Digest update" 워크플로를 `workflow_dispatch`로 트리거하며, 이때 `mode`(full/news)를 골라
 전체 갱신인지 뉴스만 갱신인지 정할 수 있다.
+
+AI 요약·번역은 뒤이어 도는 "Digest summarize"가 맡는다. 판정을 건너뛰고 지금 당장 다시 쓰고
+싶으면 그 워크플로를 `workflow_dispatch`로 트리거하면서 `force`를 켜면 된다.
 
 (참고: 이전에 Claude 클라우드 루틴으로 자동화를 시도했으나 GitHub Actions로 전환하며 비활성화함)
 
