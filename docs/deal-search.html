@@ -242,12 +242,24 @@
     <h2 id="search-heading">지역과 예산으로 찾기</h2>
     <div class="search-controls" id="search-controls">
       <div class="search-field">
+        <label for="kind-select" id="kind-label">거래 유형</label>
+        <select id="kind-select"></select>
+      </div>
+      <div class="search-field">
         <label for="district-select" id="district-label">지역</label>
         <select id="district-select"></select>
       </div>
-      <div class="search-field">
+      <div class="search-field" id="budget-field">
         <label for="budget-select" id="budget-label">예산</label>
         <select id="budget-select"></select>
+      </div>
+      <div class="search-field" id="deposit-field" hidden>
+        <label for="deposit-select" id="deposit-label">보증금</label>
+        <select id="deposit-select"></select>
+      </div>
+      <div class="search-field" id="rent-field" hidden>
+        <label for="rent-select" id="rent-label">월세</label>
+        <select id="rent-select"></select>
       </div>
       <div class="search-field">
         <label for="area-select" id="area-label">면적</label>
@@ -261,7 +273,7 @@
         <label for="apt-input" id="apt-label">단지명</label>
         <input type="text" id="apt-input" autocomplete="off" spellcheck="false">
       </div>
-      <div class="search-field toggle">
+      <div class="search-field toggle" id="direct-field">
         <input type="checkbox" id="direct-check">
         <label for="direct-check" id="direct-label">직거래 제외</label>
       </div>
@@ -292,6 +304,33 @@ const T = {
     navJeonse: "전세",
     navWolse: "월세",
     navDealSearch: "거래내역 검색",
+    kindLabel: "거래 유형",
+    kindSale: "매매",
+    kindJeonse: "전세",
+    kindWolse: "월세",
+    depositLabel: "보증금",
+    rentLabel: "월세",
+    allDeposits: "보증금 전체",
+    allRents: "월세 전체",
+    depositOption: (bucket) =>
+      bucket.min == null
+        ? `${bucket.max / 10000}억 미만`
+        : bucket.max == null
+          ? `${bucket.min / 10000}억 이상`
+          : `${bucket.min / 10000}~${bucket.max / 10000}억`,
+    rentOption: (bucket) =>
+      bucket.min == null
+        ? `${bucket.max}만원 미만`
+        : bucket.max == null
+          ? `${bucket.min}만원 이상`
+          : `${bucket.min}~${bucket.max}만원`,
+    renewalTag: "갱신",
+    rentPrice: (deposit, rent) => `${deposit} / 월 ${rent}만원`,
+    pickDistrict:
+      "전월세는 지역을 하나 골라야 찾을 수 있습니다. 서울 전체는 거래가 너무 많아 한 번에 받지 않습니다.",
+    rentNotReady: "이 지역의 전월세 자료가 아직 없습니다. 국토부 신고분이 들어오는 대로 채워집니다.",
+    rentNote:
+      "국토교통부에 신고된 아파트 전월세 계약입니다. 계약 후 30일 안에 신고하게 되어 있어 최근 계약은 나중에 반영됩니다. 목록은 최근 거래만 보여주고 건수는 조건에 맞는 전부를 셉니다. 갱신 표시는 계약 구분이 신고된 거래에만 붙습니다.",
     searchHeading: "지역과 예산으로 찾기",
     districtLabel: "지역",
     budgetLabel: "예산",
@@ -348,6 +387,33 @@ const T = {
     navJeonse: "Jeonse",
     navWolse: "Monthly rent",
     navDealSearch: "Deal search",
+    kindLabel: "Deal type",
+    kindSale: "Sale",
+    kindJeonse: "Jeonse",
+    kindWolse: "Monthly rent",
+    depositLabel: "Deposit",
+    rentLabel: "Monthly rent",
+    allDeposits: "Any deposit",
+    allRents: "Any rent",
+    depositOption: (bucket) =>
+      bucket.min == null
+        ? `Under \u20a9${bucket.max / 100}M`
+        : bucket.max == null
+          ? `\u20a9${bucket.min / 100}M and up`
+          : `\u20a9${bucket.min / 100}M-\u20a9${bucket.max / 100}M`,
+    rentOption: (bucket) =>
+      bucket.min == null
+        ? `Under \u20a9${bucket.max / 100}M a month`
+        : bucket.max == null
+          ? `\u20a9${bucket.min / 100}M a month and up`
+          : `\u20a9${bucket.min / 100}M-\u20a9${bucket.max / 100}M a month`,
+    renewalTag: "Renewal",
+    rentPrice: (deposit, rent) => `${deposit} / ${rent} a month`,
+    pickDistrict:
+      "Pick one district to search rentals. Seoul-wide is not loaded at once because there are too many filings.",
+    rentNotReady: "No rental data for this district yet. It fills in as MOLIT filings come through.",
+    rentNote:
+      "Apartment rental contracts reported to Korea's MOLIT. Filings can lag up to 30 days after contract. The list shows the most recent matches only; the count covers every filing that matches. The renewal tag appears only where a contract type was filed.",
     searchHeading: "Search by district and budget",
     districtLabel: "District",
     budgetLabel: "Budget",
@@ -422,6 +488,24 @@ const AREA_BUCKETS = [
   { key: "135", min: 135, max: null },
 ];
 
+const DEPOSIT_BUCKETS = [
+  { key: "1", min: null, max: 1 * EOK },
+  { key: "1-3", min: 1 * EOK, max: 3 * EOK },
+  { key: "3-5", min: 3 * EOK, max: 5 * EOK },
+  { key: "5-7", min: 5 * EOK, max: 7 * EOK },
+  { key: "7-10", min: 7 * EOK, max: 10 * EOK },
+  { key: "10", min: 10 * EOK, max: null },
+];
+
+const RENT_BUCKETS = [
+  { key: "50", min: null, max: 50 },
+  { key: "50-100", min: 50, max: 100 },
+  { key: "100-200", min: 100, max: 200 },
+  { key: "200", min: 200, max: null },
+];
+
+const KINDS = ["sale", "jeonse", "wolse"];
+
 const AGE_BUCKETS = [
   { key: "5", within: 5 },
   { key: "10", within: 10 },
@@ -466,8 +550,10 @@ function setText(id, text) {
 const cache = { budget: null, search: null };
 
 const fullDeals = new Map();
+const fullRents = new Map();
 
 const params = new URLSearchParams(location.search);
+let kind = KINDS.includes(params.get("kind")) ? params.get("kind") : "sale";
 let district = params.get("district") || ALL;
 let band10k = (() => {
   const raw = params.get("budget");
@@ -480,6 +566,10 @@ let areaKey = knownKey(AREA_BUCKETS, params.get("area"));
 let ageKey = knownKey(AGE_BUCKETS, params.get("age"));
 let aptQuery = params.get("apt") ?? "";
 let excludeDirect = params.get("direct") === "exclude";
+let depositKey = knownKey(DEPOSIT_BUCKETS, params.get("deposit"));
+let rentKey = knownKey(RENT_BUCKETS, params.get("rent"));
+
+const isRent = () => kind !== "sale";
 
 const aptTerm = () => aptQuery.trim();
 const detailActive = () => areaKey !== ALL || ageKey !== ALL || aptTerm() !== "" || excludeDirect;
@@ -581,6 +671,45 @@ async function loadDistrictDeals(name) {
   }
 }
 
+async function loadDistrictRents(name) {
+  const slug = cache.search?.slugs?.[name];
+  if (!slug) {
+    fullRents.set(name, null);
+    return;
+  }
+  try {
+    const file = await loadJson(`rents-${slug}`);
+    fullRents.set(name, file?.deals ?? null);
+  } catch {
+  }
+}
+
+function rentRows() {
+  const rows = fullRents.get(district);
+  if (!rows) return null;
+  return rows
+    .filter((deal) => (kind === "wolse" ? deal.monthlyRent10k > 0 : !(deal.monthlyRent10k > 0)))
+    .map((deal) => (deal.district ? deal : { ...deal, district }))
+    .sort((a, b) => String(b.date).localeCompare(String(a.date)) || b.deposit10k - a.deposit10k);
+}
+
+function inBucket(bucket, value) {
+  if (!bucket || !Number.isFinite(value)) return false;
+  if (bucket.min !== null && value < bucket.min) return false;
+  if (bucket.max !== null && value >= bucket.max) return false;
+  return true;
+}
+
+function matchesRent(deal) {
+  if (depositKey !== ALL && !inBucket(bucketOf(DEPOSIT_BUCKETS, depositKey), Number(deal?.deposit10k))) {
+    return false;
+  }
+  if (kind === "wolse" && rentKey !== ALL) {
+    if (!inBucket(bucketOf(RENT_BUCKETS, rentKey), Number(deal?.monthlyRent10k))) return false;
+  }
+  return matchesDetail(deal);
+}
+
 function bandsFor(name) {
   if (name === ALL) return cache.budget?.bands ?? [];
   return cache.search?.districts?.[name] ?? [];
@@ -601,8 +730,33 @@ function optionHtml(value, label, selected) {
   return `<option value="${escapeHtml(value)}"${selected ? " selected" : ""}>${escapeHtml(label)}</option>`;
 }
 
+function showField(id, visible) {
+  const el = document.getElementById(id);
+  if (el) el.hidden = !visible;
+}
+
 function renderControls() {
   const names = districtNames();
+
+  document.getElementById("kind-select").innerHTML = KINDS.map((value) =>
+    optionHtml(value, t(value === "sale" ? "kindSale" : value === "jeonse" ? "kindJeonse" : "kindWolse"), value === kind)
+  ).join("");
+
+  showField("budget-field", !isRent());
+  showField("deposit-field", isRent());
+  showField("rent-field", kind === "wolse");
+  showField("direct-field", !isRent());
+
+  document.getElementById("deposit-select").innerHTML =
+    optionHtml(ALL, t("allDeposits"), depositKey === ALL) +
+    DEPOSIT_BUCKETS.map((bucket) =>
+      optionHtml(bucket.key, t("depositOption")(bucket), bucket.key === depositKey)
+    ).join("");
+
+  document.getElementById("rent-select").innerHTML =
+    optionHtml(ALL, t("allRents"), rentKey === ALL) +
+    RENT_BUCKETS.map((bucket) => optionHtml(bucket.key, t("rentOption")(bucket), bucket.key === rentKey)).join("");
+
   document.getElementById("district-select").innerHTML =
     optionHtml(ALL, t("allDistricts"), district === ALL) +
     names.map((name) => optionHtml(name, name, name === district)).join("");
@@ -632,6 +786,58 @@ function renderControls() {
   aptInput.setAttribute("placeholder", t("aptPlaceholder"));
 
   document.getElementById("direct-check").checked = excludeDirect;
+}
+
+function rentPriceHtml(deal) {
+  const deposit = formatEok(deal.deposit10k);
+  return deal.monthlyRent10k > 0 ? t("rentPrice")(deposit, formatEok(deal.monthlyRent10k)) : deposit;
+}
+
+function rentHtml(deal, name) {
+  const place = [deal.district ?? (name === ALL ? null : name), deal.dong, deal.apt]
+    .filter(Boolean)
+    .join(" ");
+  const spec = [`${deal.area}\u33a1`, deal.floor ? t("floor")(deal.floor) : null].filter(Boolean).join(" \u00b7 ");
+  return (
+    `<li class="budget-deal">` +
+    `<span class="place">${escapeHtml(place)}</span>` +
+    `<span class="spec">${escapeHtml(spec)}</span>` +
+    (deal.renewal === true ? `<span class="tag">${escapeHtml(t("renewalTag"))}</span>` : "") +
+    `<span class="when">${escapeHtml(dealWhen(deal.date))}</span>` +
+    `<span class="price">${escapeHtml(rentPriceHtml(deal))}</span>` +
+    `</li>`
+  );
+}
+
+function renderRent(box) {
+  const rows = rentRows();
+  if (!rows) {
+    box.innerHTML = `<p class="budget-empty">${escapeHtml(t("rentNotReady"))}</p>`;
+    return;
+  }
+
+  const matched = rows.filter(matchesRent);
+  if (!matched.length) {
+    box.innerHTML = `<p class="budget-empty">${escapeHtml(t("empty"))}</p>`;
+    return;
+  }
+
+  box.innerHTML =
+    `<p class="budget-summary">${escapeHtml(t("summary")(rentScopeLabel(), matched.length))}${periodsHtml()}</p>` +
+    (matched.length > MAX_ROWS
+      ? `<div class="budget-districts">${escapeHtml(t("shown")(MAX_ROWS))}</div>`
+      : "") +
+    `<ul class="budget-deals">${matched.slice(0, MAX_ROWS).map((deal) => rentHtml(deal, district)).join("")}</ul>`;
+}
+
+function rentScopeLabel() {
+  const parts = [district, t(kind === "wolse" ? "kindWolse" : "kindJeonse")];
+  if (depositKey !== ALL) parts.push(t("depositOption")(bucketOf(DEPOSIT_BUCKETS, depositKey)));
+  if (kind === "wolse" && rentKey !== ALL) parts.push(t("rentOption")(bucketOf(RENT_BUCKETS, rentKey)));
+  if (areaKey !== ALL) parts.push(t("areaOption")(bucketOf(AREA_BUCKETS, areaKey)));
+  if (ageKey !== ALL) parts.push(t("ageOption")(bucketOf(AGE_BUCKETS, ageKey)));
+  if (aptTerm()) parts.push(t("aptScope")(aptTerm()));
+  return t("scopeOf")(parts);
 }
 
 function dealHtml(deal, name) {
@@ -755,6 +961,16 @@ function renderFromBands(box) {
 
 function renderResult() {
   const box = document.getElementById("search-result");
+
+  if (isRent()) {
+    if (district === ALL) {
+      box.innerHTML = `<p class="budget-empty">${escapeHtml(t("pickDistrict"))}</p>`;
+      return;
+    }
+    renderRent(box);
+    return;
+  }
+
   const full = needFull() ? fullDealsOf() : null;
   if (full) {
     renderFull(box, full);
@@ -779,6 +995,9 @@ function syncUrl() {
   put("age", ageKey === ALL ? null : ageKey);
   put("apt", aptTerm() || null);
   put("direct", excludeDirect ? "exclude" : null);
+  put("kind", kind === "sale" ? null : kind);
+  put("deposit", isRent() && depositKey !== ALL ? depositKey : null);
+  put("rent", kind === "wolse" && rentKey !== ALL ? rentKey : null);
 
   const query = next.toString();
   const url = `${location.pathname}${query ? `?${query}` : ""}`;
@@ -810,11 +1029,14 @@ function applyLocale() {
   setText("search-heading", t("searchHeading"));
   setText("district-label", t("districtLabel"));
   setText("budget-label", t("budgetLabel"));
+  setText("kind-label", t("kindLabel"));
+  setText("deposit-label", t("depositLabel"));
+  setText("rent-label", t("rentLabel"));
   setText("area-label", t("areaLabel"));
   setText("age-label", t("ageLabel"));
   setText("apt-label", t("aptLabel"));
   setText("direct-label", t("directLabel"));
-  setText("search-note", t("note"));
+  setText("search-note", isRent() ? t("rentNote") : t("note"));
   setText("nav-digest", t("navDigest"));
   setText("nav-news", t("navNews"));
   setText("nav-realestate", t("navRealestatePrices"));
@@ -832,6 +1054,17 @@ let refreshToken = 0;
 
 async function refresh() {
   const token = ++refreshToken;
+
+  if (isRent()) {
+    if (district !== ALL && !fullRents.has(district)) {
+      document.getElementById("search-result").innerHTML =
+        `<p class="search-loading">${escapeHtml(t("loading"))}</p>`;
+      await loadDistrictRents(district);
+      if (token !== refreshToken) return;
+    }
+    renderResult();
+    return;
+  }
 
   if (needFull()) {
     const missing = scopeNames().filter((name) => !fullDeals.has(name));
@@ -896,7 +1129,10 @@ async function main() {
 
 function onControlChange(e) {
   const id = e.target?.id;
-  if (id === "district-select") district = e.target.value || ALL;
+  if (id === "kind-select") kind = KINDS.includes(e.target.value) ? e.target.value : "sale";
+  else if (id === "deposit-select") depositKey = e.target.value || ALL;
+  else if (id === "rent-select") rentKey = e.target.value || ALL;
+  else if (id === "district-select") district = e.target.value || ALL;
   else if (id === "budget-select") {
     const raw = e.target.value;
     band10k = raw === ALL ? null : Number(raw) * EOK;
@@ -907,9 +1143,11 @@ function onControlChange(e) {
   else return;
 
   syncUrl();
+  applyLocale();
   renderControls();
   refresh();
   window.analytics?.event("deal_search", {
+    search_kind: kind,
     search_district: district,
     search_budget_eok: band10k === null ? ALL : String(Math.round(band10k / EOK)),
     search_area: areaKey,

@@ -220,3 +220,34 @@ test("수집이 통째로 실패해도 지난 원본으로 산출물을 만든�
   const payload = JSON.parse(await readFile(path.join(space.dataDir, "realestate.json"), "utf-8"));
   assert.equal(payload.districts.length, DISTRICT_COUNT);
 });
+
+test("전월세도 지역별 전수 파일로 남긴다", async (t) => {
+  const server = await startFakeMolit((kind) =>
+    kind === "sale"
+      ? successXml([saleItem()])
+      : successXml([
+          rentItem(),
+          rentItem({ aptNm: "월세단지", monthlyRent: "150", deposit: "10,000" }),
+          rentItem({ aptNm: "갱신단지", contractType: "갱신", deposit: "45,000" }),
+        ])
+  );
+  t.after(() => server.close());
+  const space = await workspace();
+
+  const { stdout } = await collect(server, space);
+
+  const file = JSON.parse(await readFile(path.join(space.dataDir, "rents-jongno.json"), "utf-8"));
+  assert.equal(file.district, "종로구");
+  assert.equal(file.deals.length, 3);
+  assert.deepEqual(file.periods, [PERIOD]);
+
+  const jeonse = file.deals.find((deal) => deal.apt === "테스트단지");
+  const wolse = file.deals.find((deal) => deal.apt === "월세단지");
+  assert.ok(!("monthlyRent10k" in jeonse), "전세에 월세 항목이 남았다");
+  assert.equal(wolse.monthlyRent10k, 150);
+  assert.equal(file.deals.find((deal) => deal.apt === "갱신단지").renewal, true);
+  assert.ok(file.deals.every((deal) => !("district" in deal)), "지역 이름이 거래마다 남았다");
+
+  assert.match(stdout, new RegExp(`전세 ${DISTRICT_COUNT * 2}건 · 월세 ${DISTRICT_COUNT}건`), stdout);
+  assert.match(stdout, new RegExp(`갱신계약 ${DISTRICT_COUNT}건`), stdout);
+});

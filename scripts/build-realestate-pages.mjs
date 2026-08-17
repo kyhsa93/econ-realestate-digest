@@ -84,6 +84,15 @@ export function buildRealestatePage(baseHtml, page, realestate) {
     "거래 유형 링크"
   );
 
+  if (page.kind !== "sale") {
+    html = replaceOnce(
+      html,
+      '<a href="./deal-search.html" data-re-page="search">',
+      `<a href="./deal-search.html?kind=${page.kind}" data-re-page="search">`,
+      "거래내역 검색 링크"
+    );
+  }
+
   return applyPrerender(html, {
     realestateOverall: realestateOverallHtml(realestate, page.kind),
     realestateHead: realestateHeadHtml(page.kind),

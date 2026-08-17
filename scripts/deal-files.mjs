@@ -12,7 +12,10 @@ function trimDeal({ district: _name, ...deal }) {
   return deal;
 }
 
-export function mergeDeals(existingDeals, period, freshDeals, maxMonths = MAX_MONTHS) {
+const byAmount = (deal) => deal.amount10k ?? 0;
+const byDeposit = (deal) => deal.deposit10k ?? 0;
+
+export function mergeDeals(existingDeals, period, freshDeals, maxMonths = MAX_MONTHS, valueOf = byAmount) {
   const kept = (existingDeals ?? []).filter((deal) => periodOf(deal?.date) !== period);
   const all = [...kept, ...(freshDeals ?? []).map(trimDeal)].filter((deal) => periodOf(deal?.date));
 
@@ -21,12 +24,12 @@ export function mergeDeals(existingDeals, period, freshDeals, maxMonths = MAX_MO
 
   const deals = all
     .filter((deal) => within.has(periodOf(deal.date)))
-    .sort((a, b) => String(b.date).localeCompare(String(a.date)) || b.amount10k - a.amount10k);
+    .sort((a, b) => String(b.date).localeCompare(String(a.date)) || valueOf(b) - valueOf(a));
 
   return { periods, deals };
 }
 
-export function buildDealFiles(source, existingByDistrict, now, maxMonths = MAX_MONTHS) {
+export function buildDealFiles(source, existingByDistrict, now, maxMonths = MAX_MONTHS, valueOf = byAmount) {
   const period = source?.period;
   if (!period) return null;
 
@@ -50,7 +53,8 @@ export function buildDealFiles(source, existingByDistrict, now, maxMonths = MAX_
       existingByDistrict?.[name]?.deals,
       period,
       freshByDistrict.get(name) ?? [],
-      maxMonths
+      maxMonths,
+      valueOf
     );
     if (!deals.length) continue;
 
@@ -61,3 +65,9 @@ export function buildDealFiles(source, existingByDistrict, now, maxMonths = MAX_
 }
 
 export const dealFileName = (slug) => `deals-${slug}.json`;
+
+export const rentFileName = (slug) => `rents-${slug}.json`;
+
+export function buildRentFiles(source, existingByDistrict, now, maxMonths = MAX_MONTHS) {
+  return buildDealFiles(source, existingByDistrict, now, maxMonths, byDeposit);
+}

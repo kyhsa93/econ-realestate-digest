@@ -47,8 +47,7 @@ export function dealingDirect(value) {
   return text === "직거래";
 }
 
-export function normalizeDeal(item, districtName) {
-  const amount10k = parseWon10k(item?.dealAmount);
+function commonDealFields(item, districtName) {
   const area = Number(item?.excluUseAr);
   const apt = String(item?.aptNm ?? "").trim();
   const year = Number(item?.dealYear);
@@ -56,14 +55,12 @@ export function normalizeDeal(item, districtName) {
   const day = Number(item?.dealDay);
 
   if (!apt) return null;
-  if (amount10k == null || amount10k <= 0) return null;
   if (!Number.isFinite(area) || area <= 0) return null;
   const inRange = (value, min, max) => Number.isInteger(value) && value >= min && value <= max;
   if (!inRange(year, 1900, 2999) || !inRange(month, 1, 12) || !inRange(day, 1, 31)) return null;
 
   const floor = Number(item?.floor);
   const buildYear = Number(item?.buildYear);
-  const direct = dealingDirect(item?.dealingGbn);
 
   return {
     district: districtName,
@@ -71,10 +68,54 @@ export function normalizeDeal(item, districtName) {
     apt,
     area: Math.round(area * 100) / 100,
     floor: Number.isFinite(floor) && floor > 0 ? floor : null,
-    amount10k,
     date: `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`,
     buildYear: Number.isInteger(buildYear) && buildYear > 1900 ? buildYear : null,
+  };
+}
+
+export function normalizeDeal(item, districtName) {
+  const amount10k = parseWon10k(item?.dealAmount);
+  if (amount10k == null || amount10k <= 0) return null;
+
+  const common = commonDealFields(item, districtName);
+  if (!common) return null;
+
+  const direct = dealingDirect(item?.dealingGbn);
+  const { date, buildYear, ...rest } = common;
+
+  return {
+    ...rest,
+    amount10k,
+    date,
+    buildYear,
     ...(direct === null ? {} : { direct }),
+  };
+}
+
+export function contractRenewal(value) {
+  const text = String(value ?? "").trim();
+  if (!text) return null;
+  return text === "갱신";
+}
+
+export function normalizeRentDeal(item, districtName) {
+  const deposit10k = parseWon10k(item?.deposit);
+  if (deposit10k == null || deposit10k <= 0) return null;
+
+  const common = commonDealFields(item, districtName);
+  if (!common) return null;
+
+  const monthlyRent10k = parseWon10k(item?.monthlyRent) ?? 0;
+  const renewal = contractRenewal(item?.contractType);
+  const { date, buildYear, ...rest } = common;
+
+  return {
+    ...rest,
+    deposit10k,
+    ...(monthlyRent10k > 0 ? { monthlyRent10k } : {}),
+    date,
+    buildYear,
+    ...(renewal === null ? {} : { renewal }),
   };
 }
 

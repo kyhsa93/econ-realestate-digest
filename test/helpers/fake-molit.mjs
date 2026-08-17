@@ -70,6 +70,7 @@ export const saleItem = (extra = {}) => ({
 export const rentItem = (extra = {}) => ({
   aptNm: "테스트단지",
   buildYear: 2005,
+  contractType: "신규",
   deposit: "40,000",
   dealDay: 14,
   dealMonth: 8,

@@ -41,6 +41,7 @@ export async function loadDealSearchPage({
   budget,
   search,
   deals,
+  rents,
   status = 404,
   locale = "ko",
   query = "",
@@ -55,6 +56,10 @@ export async function loadDealSearchPage({
 
   for (const [name, file] of Object.entries(deals ?? {})) {
     data[`deals-${DISTRICT_SLUGS[name] ?? name}`] = file;
+  }
+
+  for (const [name, file] of Object.entries(rents ?? {})) {
+    data[`rents-${DISTRICT_SLUGS[name] ?? name}`] = file;
   }
 
   const navLinks = ["all", "sale", "jeonse", "wolse", "search"].map((page) =>
@@ -148,5 +153,12 @@ export async function loadDealSearchPage({
     chooseAge: (value) => select("age-select", value),
     typeApt: (value) => dispatch("apt-input", "input", (el) => (el.value = value)),
     toggleDirect: (checked) => dispatch("direct-check", "change", (el) => (el.checked = checked)),
+    kindOptions: () => sandbox.document.getElementById("kind-select").innerHTML,
+    depositOptions: () => sandbox.document.getElementById("deposit-select").innerHTML,
+    rentOptions: () => sandbox.document.getElementById("rent-select").innerHTML,
+    chooseKind: (value) => select("kind-select", value),
+    chooseDeposit: (value) => select("deposit-select", value),
+    chooseRent: (value) => select("rent-select", value),
+    fieldHidden: (id) => sandbox.document.getElementById(id).hidden,
   };
 }
