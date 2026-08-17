@@ -19,13 +19,13 @@ async function main() {
   run("node scripts/build-budget-pages.mjs");
   run("node scripts/build-realestate-pages.mjs");
 
-  const status = execSync("git status --porcelain -- docs", { cwd: repoRoot }).toString().trim();
+  const status = execSync("git status --porcelain -- docs raw", { cwd: repoRoot }).toString().trim();
   if (!status) {
     console.log("[update-all] 변경사항 없음, 커밋 생략");
     return;
   }
 
-  run("git add docs");
+  run("git add docs raw");
   run(
     `git commit -m "chore: 데일리 데이터 갱신 $(TZ=Asia/Seoul date +%Y-%m-%d)"`
   );

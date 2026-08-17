@@ -2,8 +2,12 @@ import { XMLParser } from "fast-xml-parser";
 import { writeFile, mkdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import { attachPrevious, isPreviousUsable } from "./realestate-previous.mjs";
+import { buildSlotFile, readSlots, removeSlotFile, writeSlotFile } from "./realestate-raw.mjs";
+import { planFetch, planSummary, shiftMonth, slotKey, yearMonthOf } from "./realestate-slots.mjs";
 
-const dataDir = path.resolve(import.meta.dirname, "../docs/data");
+const dataDir = process.env.REALESTATE_DATA_DIR
+  ? path.resolve(process.env.REALESTATE_DATA_DIR)
+  : path.resolve(import.meta.dirname, "../docs/data");
 const outFile = path.join(dataDir, "realestate.json");
 const historyFile = path.join(dataDir, "realestate-history.json");
 const previousFile = path.join(dataDir, "realestate-prev.json");
@@ -50,6 +54,8 @@ const PYEONG_M2 = 3.3058;
 const CONCURRENCY = Number(process.env.MOLIT_CONCURRENCY ?? 3);
 const MAX_RETRIES = 3;
 
+const BACKFILL_LIMIT = Number(process.env.MOLIT_BACKFILL_LIMIT ?? 100);
+
 const RETRY_BASE_MS = Number(process.env.MOLIT_RETRY_MS ?? 3000);
 
 const SWEEP_DELAY_MS = Number(process.env.MOLIT_SWEEP_DELAY_MS ?? 45_000);
@@ -73,14 +79,6 @@ function sleep(ms) {
 
 function kstDateString(date) {
   return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(date);
-}
-
-function kstYearMonth(date, monthsAgo = 0) {
-  const kstNow = new Date(date.toLocaleString("en-US", { timeZone: "Asia/Seoul" }));
-  kstNow.setMonth(kstNow.getMonth() - monthsAgo);
-  const y = kstNow.getFullYear();
-  const m = String(kstNow.getMonth() + 1).padStart(2, "0");
-  return `${y}${m}`;
 }
 
 async function fetchApiOnce(apiUrl, serviceKey, districtCode, yearMonth) {
@@ -107,9 +105,12 @@ async function fetchApiOnce(apiUrl, serviceKey, districtCode, yearMonth) {
     throw new Error(header.resultMsg ?? `resultCode ${header.resultCode}`);
   }
 
+  const totalCount = Number(parsed?.response?.body?.totalCount);
   const items = parsed?.response?.body?.items?.item;
-  if (!items) return [];
-  return Array.isArray(items) ? items : [items];
+  return {
+    items: items ? (Array.isArray(items) ? items : [items]) : [],
+    totalCount: Number.isInteger(totalCount) ? totalCount : null,
+  };
 }
 
 async function fetchApi(apiUrl, serviceKey, districtCode, yearMonth) {
@@ -262,9 +263,7 @@ function summarizeRent(items) {
   return { jeonse, wolse };
 }
 
-async function fetchDistrictSale(districtCode, yearMonths) {
-  const results = await Promise.all(yearMonths.map((ym) => fetchApi(SALE_API_URL, SALE_SERVICE_KEY, districtCode, ym)));
-  const all = results.flat();
+function summarizeSaleItems(all) {
   const items = dropCancelled(all);
   return {
     sale: summarizeSale(items),
@@ -272,11 +271,6 @@ async function fetchDistrictSale(districtCode, yearMonths) {
     items,
     cancelledCount: all.length - items.length,
   };
-}
-
-async function fetchDistrictRent(districtCode, yearMonths) {
-  const results = await Promise.all(yearMonths.map((ym) => fetchApi(RENT_API_URL, RENT_SERVICE_KEY, districtCode, ym)));
-  return summarizeRent(results.flat());
 }
 
 async function readHistory() {
@@ -481,6 +475,13 @@ async function main() {
   }
 
   const now = new Date();
+  const observedAt = now.toISOString();
+  const kinds = [...(hasSale ? ["sale"] : []), ...(hasRent ? ["rent"] : [])];
+  const endpoints = {
+    sale: { url: SALE_API_URL, key: SALE_SERVICE_KEY, label: "매매" },
+    rent: { url: RENT_API_URL, key: RENT_SERVICE_KEY, label: "전월세" },
+  };
+  const nameOf = new Map(DISTRICTS.map((d) => [d.code, d.name]));
 
   let existing = null;
   try {
@@ -491,77 +492,105 @@ async function main() {
 
   const existingIsToday =
     Boolean(existing?.updatedAt) && kstDateString(new Date(existing.updatedAt)) === kstDateString(now);
-  const existingDistrictCodes = new Set((existing?.districts ?? []).map((d) => d.code));
-  const targetDistricts = existingIsToday ? DISTRICTS.filter((d) => !existingDistrictCodes.has(d.code)) : DISTRICTS;
 
-  if (existingIsToday && targetDistricts.length === 0) {
-    console.log(`[fetch-realestate] 오늘(${kstDateString(now)}) 25개구 전부 이미 조회 완료, 생략`);
-    return;
-  }
-  if (existingIsToday) {
-    console.log(`[fetch-realestate] 오늘 이미 조회했지만 ${targetDistricts.length}개구 누락, 누락분만 재조회`);
-  }
+  const plan = planFetch({
+    now,
+    districts: DISTRICTS,
+    kinds,
+    slots: await readSlots(),
+    backfillLimit: BACKFILL_LIMIT,
+  });
+  console.log(`[fetch-realestate] 원본 슬롯 ${planSummary(plan)}`);
 
-  const yearMonths = [kstYearMonth(now, 0)];
+  const items = new Map();
+  let changedSlots = 0;
+  let arrived = 0;
 
-  const dealsByDistrict = new Map();
-  let cancelledTotal = 0;
-
-  async function fetchDistrictEntry({ code, name }, months = yearMonths, collectDeals = true) {
-    const entry = { code, name, sale: null, saleNational84: null, jeonse: null, wolse: null };
-
-    if (hasSale) {
-      try {
-        const saleResult = await fetchDistrictSale(code, months);
-        entry.sale = saleResult.sale;
-        entry.saleNational84 = saleResult.saleNational84;
-        if (collectDeals) {
-          dealsByDistrict.set(code, saleResult.items.map((item) => normalizeDeal(item, name)).filter(Boolean));
-          cancelledTotal += saleResult.cancelledCount;
-        }
-      } catch (err) {
-        console.error(`[fetch-realestate] ${name} 매매 조회 실패: ${errorDetail(err)}`);
+  async function fetchSlot(slot) {
+    const { url, key, label } = endpoints[slot.kind];
+    try {
+      const response = await fetchApi(url, key, slot.code, slot.yearMonth);
+      const written = await writeSlotFile(
+        buildSlotFile({
+          kind: slot.kind,
+          code: slot.code,
+          yearMonth: slot.yearMonth,
+          items: response.items,
+          totalCount: response.totalCount,
+          observedAt,
+        })
+      );
+      items.set(slotKey(slot.kind, slot.code, slot.yearMonth), response.items);
+      if (written.changed) {
+        changedSlots += 1;
+        arrived += written.added;
       }
+      return true;
+    } catch (err) {
+      console.error(
+        `[fetch-realestate] ${nameOf.get(slot.code) ?? slot.code} ${slot.yearMonth} ${label} 조회 실패:` +
+          ` ${errorDetail(err)}`
+      );
+      return false;
     }
-    if (hasRent) {
-      try {
-        const rent = await fetchDistrictRent(code, months);
-        entry.jeonse = rent.jeonse;
-        entry.wolse = rent.wolse;
-      } catch (err) {
-        console.error(`[fetch-realestate] ${name} 전월세 조회 실패: ${errorDetail(err)}`);
-      }
-    }
-
-    return entry.sale || entry.jeonse || entry.wolse ? entry : null;
   }
 
-  const results = await mapWithConcurrency(targetDistricts, CONCURRENCY, (d) => fetchDistrictEntry(d));
+  const results = await mapWithConcurrency(plan.fetch, CONCURRENCY, fetchSlot);
 
-  const failedIndexes = results.map((r, i) => (r ? -1 : i)).filter((i) => i >= 0);
-  if (failedIndexes.length > 0) {
+  const failedSlots = plan.fetch.filter((_, i) => !results[i]);
+  if (failedSlots.length > 0) {
     console.log(
-      `[fetch-realestate] ${failedIndexes.length}개구 실패,` +
+      `[fetch-realestate] ${failedSlots.length}개 슬롯 실패,` +
         ` ${Math.round(SWEEP_DELAY_MS / 1000)}초 쉬고 재시도 스윕 시작`
     );
     await sleep(SWEEP_DELAY_MS);
-    const retried = await mapWithConcurrency(
-      failedIndexes.map((i) => targetDistricts[i]),
-      CONCURRENCY,
-      (d) => fetchDistrictEntry(d)
-    );
-    failedIndexes.forEach((i, j) => {
-      if (retried[j]) results[i] = retried[j];
-    });
-    const stillFailed = failedIndexes.filter((i) => !results[i]).map((i) => targetDistricts[i].name);
+    const retried = await mapWithConcurrency(failedSlots, CONCURRENCY, fetchSlot);
+    const stillFailed = failedSlots.filter((_, j) => !retried[j]);
     if (stillFailed.length > 0) {
-      console.error(`[fetch-realestate] 재시도 후에도 실패: ${stillFailed.join(", ")}`);
+      console.error(`[fetch-realestate] 재시도 후에도 실패한 슬롯 ${stillFailed.length}개`);
     } else {
       console.log("[fetch-realestate] 재시도 스윕으로 전부 복구됨");
     }
   }
 
-  const newlyFetched = results.filter(Boolean);
+  for (const slot of plan.expired) {
+    await removeSlotFile(slot.kind, slot.code, slot.yearMonth);
+  }
+
+  console.log(
+    `[fetch-realestate] 원본 저장 — 갱신 ${changedSlots}슬롯 · 새 거래 ${arrived.toLocaleString("ko-KR")}건` +
+      (plan.expired.length ? ` · 만료 ${plan.expired.length}슬롯 삭제` : "")
+  );
+
+  const period = yearMonthOf(now);
+  const dealsByDistrict = new Map();
+  let cancelledTotal = 0;
+
+  function districtEntry({ code, name }, yearMonth, collectDeals = true) {
+    const entry = { code, name, sale: null, saleNational84: null, jeonse: null, wolse: null };
+
+    const saleItems = items.get(slotKey("sale", code, yearMonth));
+    if (saleItems) {
+      const summary = summarizeSaleItems(saleItems);
+      entry.sale = summary.sale;
+      entry.saleNational84 = summary.saleNational84;
+      if (collectDeals) {
+        dealsByDistrict.set(code, summary.items.map((item) => normalizeDeal(item, name)).filter(Boolean));
+        cancelledTotal += summary.cancelledCount;
+      }
+    }
+
+    const rentItems = items.get(slotKey("rent", code, yearMonth));
+    if (rentItems) {
+      const rent = summarizeRent(rentItems);
+      entry.jeonse = rent.jeonse;
+      entry.wolse = rent.wolse;
+    }
+
+    return entry.sale || entry.jeonse || entry.wolse ? entry : null;
+  }
+
+  const newlyFetched = DISTRICTS.map((district) => districtEntry(district, period)).filter(Boolean);
 
   if (newlyFetched.length === 0) {
     console.error("[fetch-realestate] 모든 지역 조회 실패, 기존 데이터를 그대로 둡니다");
@@ -577,13 +606,14 @@ async function main() {
   }
 
   const overall = computeOverall(districts);
-  const period = yearMonths[0];
+
+  await mkdir(dataDir, { recursive: true });
 
   const history = await readHistory();
   const baseline = findBaseline(history, now);
   const withChanges = attachChanges(overall, districts, baseline);
 
-  const previousPeriod = kstYearMonth(now, 1);
+  const previousPeriod = shiftMonth(period, -1);
   let previous = null;
   try {
     previous = JSON.parse(await readFile(previousFile, "utf-8"));
@@ -592,21 +622,15 @@ async function main() {
   }
 
   if (!isPreviousUsable(previous, previousPeriod)) {
-    console.log(`[fetch-realestate] 지난달(${previousPeriod}) 캐시 없음, 이번 한 번만 조회`);
-    try {
-      const prevResults = await mapWithConcurrency(DISTRICTS, CONCURRENCY, (d) =>
-        fetchDistrictEntry(d, [previousPeriod], false)
-      );
-      const prevDistricts = prevResults.filter(Boolean);
-      if (prevDistricts.length) {
-        previous = { period: previousPeriod, fetchedAt: now.toISOString(), districts: prevDistricts };
-        await writeFile(previousFile, JSON.stringify(previous, null, 2));
-        console.log(`[fetch-realestate] 지난달 캐시 저장 (${prevDistricts.length}개구)`);
-      } else {
-        previous = null;
-      }
-    } catch (err) {
-      console.error(`[fetch-realestate] 지난달 조회 실패: ${errorDetail(err)}`);
+    const prevDistricts = DISTRICTS.map((district) => districtEntry(district, previousPeriod, false)).filter(
+      Boolean
+    );
+    if (prevDistricts.length) {
+      previous = { period: previousPeriod, fetchedAt: observedAt, districts: prevDistricts };
+      await writeFile(previousFile, JSON.stringify(previous, null, 2));
+      console.log(`[fetch-realestate] 지난달(${previousPeriod}) 요약 저장 (${prevDistricts.length}개구)`);
+    } else {
+      console.error(`[fetch-realestate] 지난달(${previousPeriod}) 원본이 없어 비교값을 만들지 못했습니다`);
       previous = null;
     }
   }
@@ -647,7 +671,6 @@ async function main() {
 
   const payload = attachPrevious({ updatedAt: now.toISOString(), period, ...withChanges }, previous);
 
-  await mkdir(dataDir, { recursive: true });
   await writeFile(outFile, JSON.stringify(payload, null, 2));
   await appendHistory(history, now, {
     period,

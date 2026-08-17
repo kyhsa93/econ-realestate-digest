@@ -26,6 +26,14 @@ test("워크플로가 직접 push하지 않는다", async () => {
   }
 });
 
+test("실거래 원본도 함께 커밋한다", async () => {
+  for (const file of ["scripts/push-docs.sh", "scripts/update-all.mjs"]) {
+    const text = await read(file);
+    assert.match(text, /git add docs raw/, `${file}가 원본을 커밋하지 않는다`);
+    assert.match(text, /git status --porcelain -- docs raw/, `${file}가 원본 변경을 보지 않는다`);
+  }
+});
+
 test("재시도는 rebase를 반드시 되돌리고 다음으로 넘어간다", async () => {
   const script = await read("scripts/push-docs.sh");
   assert.match(script, /git rebase --abort/, "충돌로 멈춘 rebase를 정리하지 않는다");

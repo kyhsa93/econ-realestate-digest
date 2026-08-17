@@ -6,12 +6,12 @@ message="${1:?커밋 메시지가 필요합니다}"
 git config user.name "github-actions[bot]"
 git config user.email "github-actions[bot]@users.noreply.github.com"
 
-if [ -z "$(git status --porcelain -- docs)" ]; then
+if [ -z "$(git status --porcelain -- docs raw)" ]; then
   echo "변경사항 없음, 커밋 생략"
   exit 0
 fi
 
-git add docs
+git add docs raw
 git commit -m "$message"
 
 branch="$(git rev-parse --abbrev-ref HEAD)"
