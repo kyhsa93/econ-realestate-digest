@@ -41,13 +41,13 @@ function stubElement(attrs = {}, id = "") {
 
 // kind를 주면 거래 유형별 페이지(apartment-sale.html 등)처럼 동작한다 - 그 값은
 // 화면에서 <meta name="realestate-kind">로만 들어오기 때문에 여기서도 같은 길로 넣는다.
-export async function loadRealestatePage({ realestate, history, kind = null, district = null, locale = "ko", search = "", analytics } = {}) {
+export async function loadRealestatePage({ realestate, history, budget, kind = null, district = null, locale = "ko", search = "", analytics } = {}) {
   const html = await readFile(path.join(root, "docs/realestate.html"), "utf8");
   const script = [...html.matchAll(/<script>\n([\s\S]*?)\n<\/script>/g)].map((m) => m[1]).pop();
 
   const store = { lang: locale };
   const byId = new Map();
-  const data = { realestate, "realestate-history-lite": history };
+  const data = { realestate, "realestate-history-lite": history, "budget-deals": budget };
 
   function applyUrl(url) {
     const [pathname, query = ""] = String(url).split("?");
@@ -133,5 +133,6 @@ export async function loadRealestatePage({ realestate, history, kind = null, dis
     trendMeta: () => sandbox.document.getElementById("trend-meta").textContent,
     headHtml: () => sandbox.document.getElementById("district-head").innerHTML,
     overallHtml: () => sandbox.document.getElementById("overall-cards").innerHTML,
+    budgetHtml: () => sandbox.document.getElementById("budget-result").innerHTML,
   };
 }

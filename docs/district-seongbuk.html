@@ -277,6 +277,48 @@
     vertical-align: middle;
   }
   .content-notice { color: var(--muted); font-size: 0.8rem; margin-top: 10px; line-height: 1.5; }
+  /* 예산으로 찾기. 값을 하나 입력하면 그 예산대에서 실제로 신고된 거래를 보여준다. */
+  .budget-controls { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+  .budget-controls input {
+    font: inherit;
+    width: 5.5rem;
+    padding: 6px 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--card);
+    color: var(--fg);
+    text-align: right;
+  }
+  .budget-summary { font-size: 0.92rem; line-height: 1.6; }
+  .budget-summary strong { font-variant-numeric: tabular-nums; }
+  .budget-districts { color: var(--muted); font-size: 0.82rem; margin-top: 4px; }
+  .budget-deals { list-style: none; padding: 0; margin: 10px 0 0; display: grid; gap: 6px; }
+  .budget-deal {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 10px;
+    padding: 9px 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--card);
+  }
+  .budget-deal .place { font-weight: 600; }
+  .budget-deal .spec, .budget-deal .when { color: var(--muted); font-size: 0.8rem; }
+  .budget-deal .price { margin-left: auto; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .budget-empty { color: var(--muted); font-size: 0.9rem; }
+  .budget-nav { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .budget-nav button {
+    font: inherit;
+    font-size: 0.82rem;
+    padding: 5px 11px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--card);
+    color: var(--fg);
+    cursor: pointer;
+  }
+  .budget-nav button:hover { border-color: var(--muted); }
   /* 좁은 화면에서 4열 표는 가로 스크롤 없이 못 읽는다. 행을 카드로 세운다. */
   @media (max-width: 480px) {
     .data-table { white-space: normal; }
@@ -338,6 +380,17 @@
     </div>
   </section>
 
+  <section id="budget-section" hidden>
+    <h2 id="budget-heading">예산으로 찾기</h2>
+    <div class="budget-controls">
+      <label for="budget-input" id="budget-label">예산</label>
+      <input type="number" id="budget-input" min="1" max="60" step="1" inputmode="numeric" value="8">
+      <span id="budget-unit">억원</span>
+    </div>
+    <div id="budget-result"></div>
+    <div class="content-notice" id="budget-note"></div>
+  </section>
+
   <section id="district-section">
     <h2 id="district-heading">자치구별 시세</h2>
     <div class="controls" id="area-controls" hidden>
@@ -373,6 +426,20 @@
 // 알아보는 사람이 묻는 건 "평당 얼마"가 아니라 "84㎡가 얼마"다.
 const T = {
   ko: {
+    budgetHeading: "예산으로 찾기",
+    budgetLabel: "예산",
+    budgetUnit: "억원",
+    budgetNote:
+      "국토교통부에 신고된 실거래 기록입니다. 지금 살 수 있는 매물이 아니며, 같은 단지라도 층·향·동에 따라 값이 크게 다릅니다. 계약 후 30일인 신고 기한 때문에 최근 거래는 나중에 반영됩니다.",
+    budgetBandLabel: (from, to) =>
+      to === null ? `${from}억 이상` : from === 0 ? `${to}억 미만` : `${from}억대`,
+    budgetSummary: (band, count) => `${band}에서 ${count.toLocaleString("ko-KR")}건이 거래됐습니다.`,
+    budgetPeriods: (periods) => `${periods} 신고분 기준`,
+    budgetDistricts: "거래가 많은 지역",
+    budgetEmpty: "이 예산대에는 신고된 거래가 없습니다.",
+    budgetLower: "한 칸 아래",
+    budgetHigher: "한 칸 위",
+    budgetFloor: (floor) => `${floor}층`,
     title: "성북구 아파트 시세 - 매매·전세·월세 실거래가",
     titleSale: "서울 아파트 매매 시세",
     titleJeonse: "서울 아파트 전세 시세",
@@ -425,6 +492,20 @@ const T = {
     empty: "표시할 지역이 없습니다.",
   },
   en: {
+    budgetHeading: "Search by budget",
+    budgetLabel: "Budget",
+    budgetUnit: "\u00a0100M KRW",
+    budgetNote:
+      "These are transactions filed with Korea's Ministry of Land, not listings for sale. Prices vary widely by floor and building even within the same complex, and filings are due within 30 days of contract, so the most recent deals show up later.",
+    budgetBandLabel: (from, to) =>
+      to === null ? `\u20a9${from / 10}B and up` : from === 0 ? `under \u20a9${to / 10}B` : `\u20a9${from / 10}B\u2013${to / 10}B`,
+    budgetSummary: (band, count) => `${count.toLocaleString("en-US")} deals filed in the ${band} range.`,
+    budgetPeriods: (periods) => `Filed in ${periods}`,
+    budgetDistricts: "Most active districts",
+    budgetEmpty: "No filed deals in this range.",
+    budgetLower: "One step down",
+    budgetHigher: "One step up",
+    budgetFloor: (floor) => `${floor}F`,
     title: "성북구 Apartment Prices - Sale, Jeonse & Rent",
     titleSale: "Seoul Apartment Sale Prices",
     titleJeonse: "Seoul Apartment Jeonse Prices",
@@ -936,6 +1017,118 @@ function renderTrend() {
     `${t("trendRange")(series[0].date, last.date, series.length)} · ${t("trendValue")(formatMan(last.value))}`;
 }
 
+// 예산으로 찾기는 전체 시세 페이지에서만 연다. 자치구 페이지와 거래 유형 페이지는
+// 각자 주제가 따로 있고, 거기에 서울 전체 예산 검색이 끼면 화면이 무슨 페이지인지
+// 흐려진다(뉴스 쪽에서 시세 카드를 부동산 페이지에만 편 것과 같은 이유).
+const budgetEnabled = !kind && !districtName;
+const DEFAULT_BUDGET_EOK = 8;
+
+let budgetEok = (() => {
+  const raw = Number(new URLSearchParams(location.search).get("budget"));
+  return Number.isInteger(raw) && raw >= 1 && raw <= 60 ? raw : DEFAULT_BUDGET_EOK;
+})();
+
+const EOK = 10000; // 1억(만원)
+
+// 구간 경계는 데이터가 들고 있다. 화면에서 같은 규칙을 다시 계산하면 생성기(budget-bands.mjs)와
+// 어긋날 수 있어서, 예산이 어느 칸에 들어가는지만 찾는다.
+function bandFor(amount10k) {
+  const bands = cache.budget?.bands ?? [];
+  return bands.find((b) => amount10k >= b.min10k && (b.max10k === null || amount10k < b.max10k)) ?? null;
+}
+
+function bandLabel(band) {
+  return t("budgetBandLabel")(Math.round(band.min10k / EOK), band.max10k === null ? null : Math.round(band.max10k / EOK));
+}
+
+function dealWhen(date) {
+  const [, month, day] = String(date ?? "").split("-");
+  if (!month || !day) return "";
+  return locale === "en" ? `${MONTHS_EN[Number(month) - 1]} ${Number(day)}` : `${Number(month)}/${Number(day)}`;
+}
+
+function budgetDealHtml(deal) {
+  const place = [deal.district, deal.dong, deal.apt].filter(Boolean).join(" ");
+  const spec = [`${deal.area}㎡`, deal.floor ? t("budgetFloor")(deal.floor) : null].filter(Boolean).join(" · ");
+  return (
+    `<li class="budget-deal">` +
+    `<span class="place">${escapeHtml(place)}</span>` +
+    `<span class="spec">${escapeHtml(spec)}</span>` +
+    `<span class="when">${escapeHtml(dealWhen(deal.date))}</span>` +
+    `<span class="price">${escapeHtml(formatEok(deal.amount10k))}</span>` +
+    `</li>`
+  );
+}
+
+// 옆 칸으로 옮기는 버튼. 예산은 한 번에 정해지는 값이 아니라 "조금 더 쓰면 뭐가 되나"를
+// 오가며 잡는 값이다.
+function budgetNavHtml(current) {
+  const bands = cache.budget?.bands ?? [];
+  const index = bands.findIndex((b) => b.min10k === current?.min10k);
+  const lower = index > 0 ? bands[index - 1] : null;
+  const higher = index >= 0 && index < bands.length - 1 ? bands[index + 1] : null;
+
+  const button = (band, key) =>
+    band
+      ? `<button type="button" data-budget-to="${Math.max(1, Math.round(band.min10k / EOK)) }">` +
+        `${escapeHtml(t(key))} · ${escapeHtml(bandLabel(band))}</button>`
+      : "";
+
+  const html = `${button(lower, "budgetLower")}${button(higher, "budgetHigher")}`;
+  return html ? `<div class="budget-nav">${html}</div>` : "";
+}
+
+function renderBudget() {
+  const section = document.getElementById("budget-section");
+  // 데이터가 아직 없는 날에는 빈 입력창만 남는다. 그럴 바엔 섹션을 통째로 접는다.
+  if (!budgetEnabled || !cache.budget?.bands?.length) {
+    section.hidden = true;
+    return;
+  }
+  section.hidden = false;
+
+  document.getElementById("budget-heading").textContent = t("budgetHeading");
+  document.getElementById("budget-label").textContent = t("budgetLabel");
+  document.getElementById("budget-unit").textContent = t("budgetUnit");
+  document.getElementById("budget-note").textContent = t("budgetNote");
+
+  const input = document.getElementById("budget-input");
+  if (String(budgetEok) !== input.value) input.value = String(budgetEok);
+
+  const band = bandFor(budgetEok * EOK);
+  const box = document.getElementById("budget-result");
+
+  if (!band) {
+    box.innerHTML = `<p class="budget-empty">${escapeHtml(t("budgetEmpty"))}</p>`;
+    return;
+  }
+
+  const periods = (cache.budget.periods ?? [])
+    .map((p) => monthLabel(p))
+    .filter(Boolean)
+    .join(", ");
+  const districts = (band.districts ?? [])
+    .map((d) => `${escapeHtml(d.name)} ${d.count.toLocaleString(locale === "en" ? "en-US" : "ko-KR")}`)
+    .join(" · ");
+
+  box.innerHTML =
+    `<p class="budget-summary">${escapeHtml(t("budgetSummary")(bandLabel(band), band.count))}` +
+    (periods ? ` <span class="when">${escapeHtml(t("budgetPeriods")(periods))}</span>` : "") +
+    `</p>` +
+    (districts ? `<div class="budget-districts">${escapeHtml(t("budgetDistricts"))}: ${districts}</div>` : "") +
+    `<ul class="budget-deals">${band.deals.map(budgetDealHtml).join("")}</ul>` +
+    budgetNavHtml(band);
+}
+
+function syncBudgetUrl() {
+  const params = new URLSearchParams(location.search);
+  if (budgetEok === DEFAULT_BUDGET_EOK) params.delete("budget");
+  else params.set("budget", String(budgetEok));
+  const query = params.toString();
+  const url = `${location.pathname}${query ? `?${query}` : ""}`;
+  if (url !== `${location.pathname}${location.search}`) history.replaceState(null, "", url);
+}
+
 const NAV_KEYS = { all: "navAll", sale: "navSale", jeonse: "navJeonse", wolse: "navWolse" };
 
 function applyLocale() {
@@ -971,7 +1164,7 @@ function renderUpdated(realestate) {
   document.getElementById("updated").textContent = text;
 }
 
-const cache = { realestate: null, history: null };
+const cache = { realestate: null, history: null, budget: null };
 
 function renderAll() {
   applyLocale();
@@ -982,6 +1175,7 @@ function renderAll() {
   renderTable(cache.realestate);
   renderDistrictSummary();
   renderTrend();
+  renderBudget();
   renderUpdated(cache.realestate);
 }
 
@@ -1014,6 +1208,20 @@ async function main() {
     } catch {
       // 추이만 비고 나머지는 그대로 둔다
     }
+
+    // 예산 데이터는 전체 시세 페이지에서만 받는다. 자치구·유형 페이지는 이 섹션을 열지
+    // 않으므로 받아봐야 쓰지 않는다.
+    if (budgetEnabled) {
+      try {
+        const budgetRes = await fetch(`./data/budget-deals.json?_=${Date.now()}`);
+        if (budgetRes.ok) {
+          cache.budget = await budgetRes.json();
+          renderBudget();
+        }
+      } catch {
+        // 예산 섹션만 접히고 시세 표는 그대로 보인다
+      }
+    }
   } catch (error) {
     reportLoadFailure(error);
     document.getElementById("district-grid").innerHTML =
@@ -1031,6 +1239,26 @@ document.getElementById("area-controls").addEventListener("change", (e) => {
   syncAreaUrl();
   renderAll();
   window.analytics?.event("realestate_area", { area_m2: String(areaM2), realestate_kind: kind ?? "all" });
+});
+
+function setBudget(next, source) {
+  const value = Math.min(60, Math.max(1, Math.round(Number(next))));
+  if (!Number.isFinite(value) || value === budgetEok) return;
+  budgetEok = value;
+  syncBudgetUrl();
+  renderBudget();
+  window.analytics?.event("realestate_budget", { budget_eok: String(budgetEok), source });
+}
+
+document.getElementById("budget-input").addEventListener("input", (e) => {
+  const raw = Number(e.target.value);
+  if (!Number.isFinite(raw) || raw < 1) return; // 지우는 중인 입력값으로 화면을 흔들지 않는다
+  setBudget(raw, "input");
+});
+
+document.getElementById("budget-result").addEventListener("click", (e) => {
+  const to = e.target.closest("[data-budget-to]")?.getAttribute("data-budget-to");
+  if (to) setBudget(to, "nav");
 });
 
 document.getElementById("theme-toggle").addEventListener("click", () => {
