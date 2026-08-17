@@ -101,6 +101,33 @@ test("링크 목록은 넘겨받은 페이지만 건다", () => {
   assert.ok(!html.includes("budget-6eok.html"));
 });
 
+// 심을 게 없는 날 제목만 남으면, 링크 하나 없는 "예산대별 실거래" 글자가 화면 아래에
+// 덩그러니 붙는다. 목록은 제목까지 한 덩어리로 심고 빈 목록이면 통째로 빠진다.
+test("걸 페이지가 없으면 제목도 심지 않는다", () => {
+  assert.equal(budgetLinksHtml([]), "");
+  assert.match(budgetLinksHtml(), /예산대별 실거래/);
+});
+
+// 시세 페이지의 본문은 자치구 표다. 그 아래 목적이 다른 링크 열여덟 개가 깔리면 표를
+// 다 읽은 사람에게 남는 게 그 목록뿐이다. 예산 페이지로 가는 길은 검색 페이지에 둔다.
+test("예산대 목록은 검색 페이지에만 두고 시세 페이지에는 두지 않는다", async () => {
+  const block = async (file) =>
+    (await readFile(path.join(root, "docs", file), "utf8"))
+      .split("<!--prerender:budgetLinks-->")[1]
+      ?.split("<!--/prerender")[0] ?? "";
+
+  for (const file of ["realestate.html", "apartment-sale.html", "district-gangnam.html"]) {
+    assert.equal(await block(file), "", `${file}: 예산대 목록이 남아 있다`);
+  }
+
+  assert.ok(
+    (await readFile(path.join(root, "docs/deal-search.html"), "utf8")).includes(
+      "<!--prerender:budgetLinks-->"
+    ),
+    "검색 페이지에 예산대 목록 자리가 없다"
+  );
+});
+
 test("프리렌더가 심은 거래 목록을 클라이언트가 그대로 다시 그린다", async () => {
   const page = await loadRealestatePage({
     realestate: REALESTATE,

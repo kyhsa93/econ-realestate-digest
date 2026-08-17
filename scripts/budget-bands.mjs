@@ -17,6 +17,11 @@ export const BAND_MAX = 300_000; // 30억 이상도 한 칸
 // 구간당 18건이 된다. 늘리면 그대로 파일 크기가 된다.
 export const DEALS_PER_BAND = 6;
 
+// 지역×구간 칸마다 남길 대표 거래 수. 서울 전체 구간보다 훨씬 적게 잡는다 - 칸이 25배로
+// 늘어나(서울에서 400칸쯤 된다) 같은 값을 쓰면 화면이 받는 파일이 반 메가를 넘는다.
+// 석 달치가 합쳐져 칸마다 여섯 건이 되고, 그 아래 "몇 건 거래됐다"는 전수로 센다.
+export const DEALS_PER_DISTRICT_BAND = 3;
+
 // 최근 몇 달치를 들고 있을지. 지난달 거래는 다시 받지 않는다(호출 한도 때문에 이 저장소는
 // 지난달 집계도 캐시해 쓴다). 그래서 달이 바뀌면 그 달 구간 데이터가 그대로 굳는다.
 export const MAX_MONTHS = 3;
@@ -67,7 +72,7 @@ function districtCounts(deals, limit = 5) {
 }
 
 /** 거래 목록 → 예산 구간 배열(금액 오름차순). 거래가 없는 구간은 만들지 않는다. */
-export function buildBands(deals) {
+export function buildBands(deals, limit = DEALS_PER_BAND) {
   const byStart = new Map();
 
   for (const deal of deals ?? []) {
@@ -84,8 +89,63 @@ export function buildBands(deals) {
       max10k: bandEnd(start),
       count: list.length,
       districts: districtCounts(list),
-      deals: pickRepresentatives(list),
+      deals: pickRepresentatives(list, limit),
     }));
+}
+
+/**
+ * 거래 목록 → { 지역: 구간 배열 }. 거래내역 검색이 "노원구에서 8억대"처럼 두 조건을
+ * 같이 걸기 때문에 지역으로 먼저 자른다.
+ *
+ * 저장은 이 모양 한 벌로만 한다. 서울 전체 구간을 따로 저장해 두면 같은 거래가 두 파일에
+ * 나뉘어 들어가고, 한쪽만 갱신되는 날 화면마다 다른 값을 보여주게 된다 - 서울 전체는
+ * flattenDistrictMonths로 다시 합쳐 만든다.
+ */
+export function buildDistrictBands(deals, limit = DEALS_PER_DISTRICT_BAND) {
+  const byDistrict = new Map();
+
+  for (const deal of deals ?? []) {
+    const name = String(deal?.district ?? "").trim();
+    // 지역 없는 거래는 검색 조건 자체가 안 선다. 서울 전체 집계에서도 빠지지만, 원본에
+    // 지역이 비어 오는 경우는 없어서(구 코드로 받아온다) 실질적인 손실은 없다.
+    if (!name) continue;
+    if (!byDistrict.has(name)) byDistrict.set(name, []);
+    byDistrict.get(name).push(deal);
+  }
+
+  return Object.fromEntries(
+    [...byDistrict.entries()]
+      .sort((a, b) => a[0].localeCompare(b[0], "ko"))
+      .map(([name, list]) => [name, buildBands(list, limit)])
+  );
+}
+
+/** { 기간: { 지역: 구간 } } → { 기간: 구간 }. 서울 전체는 지역별 구간을 다시 합쳐 만든다. */
+export function flattenDistrictMonths(months) {
+  return Object.fromEntries(
+    Object.entries(months ?? {}).map(([period, byDistrict]) => [
+      period,
+      Object.values(byDistrict ?? {}).flat(),
+    ])
+  );
+}
+
+/** { 기간: { 지역: 구간 } } → { 지역: 구간 }. 지역마다 여러 달을 하나로 합친다. */
+export function mergeDistrictMonths(months, limit = DEALS_PER_DISTRICT_BAND * 2) {
+  const byDistrict = new Map();
+
+  for (const [period, districts] of Object.entries(months ?? {})) {
+    for (const [name, bands] of Object.entries(districts ?? {})) {
+      if (!byDistrict.has(name)) byDistrict.set(name, {});
+      byDistrict.get(name)[period] = bands;
+    }
+  }
+
+  return Object.fromEntries(
+    [...byDistrict.entries()]
+      .sort((a, b) => a[0].localeCompare(b[0], "ko"))
+      .map(([name, monthsOf]) => [name, mergeBands(monthsOf, limit)])
+  );
 }
 
 /**

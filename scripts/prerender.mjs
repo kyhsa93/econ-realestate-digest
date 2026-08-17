@@ -219,12 +219,25 @@ export function budgetBodyHtml(band, periodList) {
 
 export { budgetBandLabel };
 
+// 링크 목록은 제목까지 한 덩어리로 심는다. 예전에는 제목을 정적 HTML에 두고 링크만
+// 갈아 끼웠는데, 링크가 빈 페이지에는 제목 글자만 남았다(hidden으로 감췄어도 문서에는
+// 그대로 있었다). 심을 게 없으면 제목도 안 나오게 한 덩어리로 묶는다.
+function linksBlockHtml(id, heading, links) {
+  if (!links) return "";
+  return (
+    `<h3 class="district-links-heading" id="${id}-heading">${escapeHtml(heading)}</h3>` +
+    `<div class="district-links" id="${id}">${links}</div>`
+  );
+}
+
 /**
- * 시세 페이지 아래에 두는 예산 페이지 목록. 검색으로 들어온 사람이 옆 구간을 훑는 길이다.
+ * 거래내역 검색 페이지 아래에 두는 예산 페이지 목록. 검색으로 들어온 사람이 옆 구간을
+ * 훑는 길이자, 크롤러가 예산 페이지를 발견하는 내부 경로다.
  * 실제로 찍힌 페이지만 넘겨받는다 - 거래가 없어 못 만든 구간까지 링크하면 404가 된다.
  */
 export function budgetLinksHtml(pages = BUDGET_PAGES) {
-  return pages.map((p) => `<a href="./${p.file}">${escapeHtml(`${p.eok}억대`)}</a>`).join("");
+  const links = pages.map((p) => `<a href="./${p.file}">${escapeHtml(`${p.eok}억대`)}</a>`).join("");
+  return linksBlockHtml("budget-links", "예산대별 실거래", links);
 }
 
 // 부동산 뉴스 페이지 맨 위의 서울 시세 카드. 값은 news-context.mjs가 news.json에
@@ -551,11 +564,12 @@ export function districtSummaryHtml(realestate, district, locale = "ko") {
 // 자치구별 페이지로 가는 링크. 크롤러가 25개 페이지를 발견하는 유일한 내부 경로라
 // 정적 HTML에 반드시 들어가야 한다(sitemap만으로는 늦다).
 export function districtLinksHtml(current = null) {
-  return DISTRICT_PAGES.map(({ name, file }) =>
+  const links = DISTRICT_PAGES.map(({ name, file }) =>
     name === current
       ? `<a href="./${file}" aria-current="page">${escapeHtml(name)}</a>`
       : `<a href="./${file}">${escapeHtml(name)}</a>`
   ).join("");
+  return linksBlockHtml("district-links", "다른 지역", links);
 }
 
 // 금리 페이지는 각 페이지의 첫 화면만 심는다. 안 보이는 탭까지 숨겨서 심으면

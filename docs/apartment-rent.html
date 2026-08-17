@@ -363,6 +363,7 @@
     <a href="./apartment-sale.html" data-re-page="sale">매매</a>
     <a href="./apartment-jeonse.html" data-re-page="jeonse">전세</a>
     <a href="./apartment-rent.html" data-re-page="wolse" aria-current="page">월세</a>
+    <a href="./deal-search.html" data-re-page="search">거래내역 검색</a>
   </nav>
 
   <section id="overall-section">
@@ -408,10 +409,8 @@
       </table>
     </div>
     <div class="content-notice" id="table-note"></div>
-    <h3 class="district-links-heading" id="budget-links-heading" hidden>예산대별 실거래</h3>
-    <div class="district-links" id="budget-links"><!--prerender:budgetLinks--><!--/prerender:budgetLinks--></div>
-    <h3 class="district-links-heading" id="district-links-heading" hidden>다른 지역</h3>
-    <div class="district-links" id="district-links"><!--prerender:districtLinks--><!--/prerender:districtLinks--></div>
+    <!--prerender:budgetLinks--><!--/prerender:budgetLinks-->
+    <!--prerender:districtLinks--><!--/prerender:districtLinks-->
   </section>
 
   <footer class="site-footer">
@@ -457,6 +456,7 @@ const T = {
     navSale: "매매",
     navJeonse: "전세",
     navWolse: "월세",
+    navDealSearch: "거래내역 검색",
     navNews: "뉴스",
     navRates: "금리 비교",
     overallHeading: "서울 전체 평균",
@@ -525,6 +525,7 @@ const T = {
     navSale: "Sale",
     navJeonse: "Jeonse",
     navWolse: "Monthly rent",
+    navDealSearch: "Deal search",
     navNews: "News",
     navRates: "Rates",
     overallHeading: "Seoul average",
@@ -621,6 +622,13 @@ function escapeHtml(value) {
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;");
+}
+
+// 프리렌더가 페이지마다 다르게 심는 요소가 있어서, 없는 자리에 말을 붙이려다 터지지
+// 않게 한 곳에서 받는다.
+function setText(id, text) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = text;
 }
 
 const hasEnoughSample = (metric) => Boolean(metric) && (metric.transactionCount ?? 0) >= MIN_SAMPLE;
@@ -1191,7 +1199,7 @@ function syncBudgetUrl() {
   if (url !== `${location.pathname}${location.search}`) history.replaceState(null, "", url);
 }
 
-const NAV_KEYS = { all: "navAll", sale: "navSale", jeonse: "navJeonse", wolse: "navWolse" };
+const NAV_KEYS = { all: "navAll", sale: "navSale", jeonse: "navJeonse", wolse: "navWolse", search: "navDealSearch" };
 
 function applyLocale() {
   const suffix = kind === "sale" ? "titleSale" : kind === "jeonse" ? "titleJeonse" : kind === "wolse" ? "titleWolse" : "title";
@@ -1201,14 +1209,10 @@ function applyLocale() {
   document.getElementById("overall-heading").textContent = t("overallHeading");
   document.getElementById("district-heading").textContent = t("districtHeading");
   document.getElementById("table-note").textContent = t("note");
-  const districtLinksHeading = document.getElementById("district-links-heading");
-  districtLinksHeading.textContent = t("otherDistricts");
-  // 전체·거래 유형 페이지는 표의 지역 이름이 곧 링크라 이 목록을 심지 않는다.
-  districtLinksHeading.hidden = !document.getElementById("district-links").innerHTML.trim();
-  const budgetLinksHeading = document.getElementById("budget-links-heading");
-  budgetLinksHeading.textContent = t("budgetLinksHeading");
-  // 예산 페이지가 아직 안 찍힌 날에는 제목만 남지 않게 링크가 있을 때만 편다.
-  budgetLinksHeading.hidden = !document.getElementById("budget-links").innerHTML.trim();
+  // 링크 목록은 프리렌더가 제목까지 통째로 심는다. 심을 게 없는 페이지에는 요소 자체가
+  // 없으므로(전체·거래 유형 페이지는 표의 지역 이름이 곧 링크다) 있을 때만 말을 바꾼다.
+  setText("district-links-heading", t("otherDistricts"));
+  setText("budget-links-heading", t("budgetLinksHeading"));
   document.getElementById("footer-source").textContent = t("footerSource");
   document.getElementById("footer-privacy").textContent = t("footerPrivacy");
   document.getElementById("nav-digest").textContent = t("navDigest");

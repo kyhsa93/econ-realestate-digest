@@ -10,6 +10,7 @@ import { applyPrerender, budgetBodyHtml, budgetLinksHtml } from "./prerender.mjs
 
 const root = path.resolve(import.meta.dirname, "..");
 const REALESTATE_PATH = path.join(root, "docs/realestate.html");
+const DEAL_SEARCH_PATH = path.join(root, "docs/deal-search.html");
 const BASE_URL = "https://kyhsa93.github.io/econ-realestate-digest/";
 
 // 문서 제목과 화면 사전의 제목은 값이 다르다(사전 쪽이 짧다). 문서 제목을 먼저 통째로
@@ -104,11 +105,16 @@ async function main() {
   }
   const links = budgetLinksHtml(linked);
 
-  // 링크를 먼저 시세 페이지에 심고, 그 결과를 예산 페이지의 원본으로 쓴다. 순서를 뒤집으면
-  // 예산 페이지에는 빈 링크 자리가 남고, 시세 페이지에서 찍어내는 자치구·거래 유형 페이지와도
-  // 내용이 어긋난다(그 어긋남을 "커밋된 페이지가 지금 찍은 결과와 같다" 테스트가 잡아냈다).
+  // 목록이 걸리는 자리는 거래내역 검색 페이지다. 시세 페이지에는 심지 않는다 - 그 페이지는
+  // 자치구 표가 본문이고, 그 아래 예산 구간 링크가 열여덟 개 깔리면 표를 다 읽은 사람에게
+  // 목적이 다른 목록만 남는다. 예산 페이지로 가는 내부 경로는 검색 페이지 하나로 충분하다.
+  const searchHtml = await readFile(DEAL_SEARCH_PATH, "utf8");
+  const nextSearchHtml = applyPrerender(searchHtml, { budgetLinks: links });
+  if (nextSearchHtml !== searchHtml) await writeFile(DEAL_SEARCH_PATH, nextSearchHtml);
+
+  // 예산 페이지끼리도 서로 닿아야 해서 같은 목록을 심는데, 원본인 시세 페이지에는 남기지
+  // 않으므로 파일로 되쓰지 않고 메모리에서만 얹는다.
   const baseHtml = applyPrerender(sourceHtml, { budgetLinks: links });
-  if (baseHtml !== sourceHtml) await writeFile(REALESTATE_PATH, baseHtml);
 
   let created = 0;
   let updated = 0;

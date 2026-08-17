@@ -20,8 +20,8 @@ async function main() {
   run("node scripts/prerender.mjs");
   run("node scripts/build-rate-pages.mjs");
   run("node scripts/build-news-pages.mjs");
-  // 예산 페이지가 시세 페이지에 링크를 심으므로, 시세 페이지에서 찍어내는 자치구·거래
-  // 유형 페이지보다 먼저 돌아야 한다.
+  // 예산 페이지는 시세 페이지를 원본으로 찍는다. 원본을 고치지는 않으므로 자치구·거래
+  // 유형 페이지와 순서를 다투지 않지만, 둘 다 같은 원본을 읽는다는 점은 그대로다.
   run("node scripts/build-budget-pages.mjs");
   run("node scripts/build-realestate-pages.mjs");
 
