@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-17T22:11:55.487Z",
+  "updatedAt": "2026-08-17T23:05:58.379Z",
   "period": "202608",
   "overall": {
     "sale": {
-      "avgPricePerM2": 13488241.480743939,
+      "avgPricePerM2": 13487897.318654468,
       "avgPricePerPyeong10k": 4459,
-      "transactionCount": 573,
+      "transactionCount": 581,
       "change": {
         "value10k": 112,
         "percent": 2.576489533011272
@@ -13,9 +13,9 @@
       "baselineDate": "2026-08-11"
     },
     "saleNational84": {
-      "avgPricePerM2": 12353954.408999097,
-      "avgPricePerPyeong10k": 4084,
-      "transactionCount": 206
+      "avgPricePerM2": 12326249.56055224,
+      "avgPricePerPyeong10k": 4075,
+      "transactionCount": 208
     },
     "jeonse": {
       "avgDepositPerM2": 9120741.98020194,
@@ -684,19 +684,19 @@
       "code": "11350",
       "name": "노원구",
       "sale": {
-        "avgPricePerM2": 10949017.343837194,
-        "avgPricePerPyeong10k": 3620,
-        "transactionCount": 39,
+        "avgPricePerM2": 10866800.021420622,
+        "avgPricePerPyeong10k": 3592,
+        "transactionCount": 42,
         "change": {
-          "value10k": -213,
-          "percent": -5.557004956952778
+          "value10k": -241,
+          "percent": -6.287503261153144
         },
         "baselineDate": "2026-08-11"
       },
       "saleNational84": {
-        "avgPricePerM2": 10462229.113519572,
-        "avgPricePerPyeong10k": 3459,
-        "transactionCount": 9
+        "avgPricePerM2": 10115545.574212905,
+        "avgPricePerPyeong10k": 3344,
+        "transactionCount": 10
       },
       "jeonse": {
         "avgDepositPerM2": 6184728.571144187,
@@ -724,14 +724,14 @@
       },
       "prev": {
         "sale": {
-          "avgPricePerM2": 10952450.292992799,
-          "avgPricePerPyeong10k": 3621,
-          "transactionCount": 632
+          "avgPricePerM2": 10936063.987721602,
+          "avgPricePerPyeong10k": 3615,
+          "transactionCount": 635
         },
         "saleNational84": {
-          "avgPricePerM2": 10311844.633792736,
-          "avgPricePerPyeong10k": 3409,
-          "transactionCount": 112
+          "avgPricePerM2": 10284494.813192623,
+          "avgPricePerPyeong10k": 3400,
+          "transactionCount": 114
         },
         "jeonse": {
           "avgDepositPerM2": 6128633.855005147,
@@ -749,19 +749,19 @@
       "code": "11380",
       "name": "은평구",
       "sale": {
-        "avgPricePerM2": 11193060.709956616,
-        "avgPricePerPyeong10k": 3700,
-        "transactionCount": 50,
+        "avgPricePerM2": 11420556.385599693,
+        "avgPricePerPyeong10k": 3775,
+        "transactionCount": 53,
         "change": {
-          "value10k": 12,
-          "percent": 0.32537960954446854
+          "value10k": 87,
+          "percent": 2.3590021691973972
         },
         "baselineDate": "2026-08-11"
       },
       "saleNational84": {
-        "avgPricePerM2": 10618044.778851695,
-        "avgPricePerPyeong10k": 3510,
-        "transactionCount": 20
+        "avgPricePerM2": 10681466.771315843,
+        "avgPricePerPyeong10k": 3531,
+        "transactionCount": 21
       },
       "jeonse": {
         "avgDepositPerM2": 8299600.004020346,
@@ -1399,12 +1399,12 @@
       "code": "11650",
       "name": "서초구",
       "sale": {
-        "avgPricePerM2": 27451371.172378182,
-        "avgPricePerPyeong10k": 9075,
-        "transactionCount": 9,
+        "avgPricePerM2": 25430721.52676401,
+        "avgPricePerPyeong10k": 8407,
+        "transactionCount": 11,
         "change": {
-          "value10k": -1526,
-          "percent": -14.394868408640694
+          "value10k": -2194,
+          "percent": -20.696160739552873
         },
         "baselineDate": "2026-08-11"
       },
@@ -1439,14 +1439,14 @@
       },
       "prev": {
         "sale": {
-          "avgPricePerM2": 28626979.735051148,
-          "avgPricePerPyeong10k": 9464,
-          "transactionCount": 100
+          "avgPricePerM2": 28657953.60067701,
+          "avgPricePerPyeong10k": 9474,
+          "transactionCount": 104
         },
         "saleNational84": {
-          "avgPricePerM2": 32323230.488204766,
-          "avgPricePerPyeong10k": 10685,
-          "transactionCount": 26
+          "avgPricePerM2": 33005119.161339313,
+          "avgPricePerPyeong10k": 10911,
+          "transactionCount": 27
         },
         "jeonse": {
           "avgDepositPerM2": 13280512.379103798,

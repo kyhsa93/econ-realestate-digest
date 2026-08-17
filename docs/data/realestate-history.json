@@ -3950,14 +3950,14 @@
     "period": "202608",
     "overall": {
       "sale": {
-        "avgPricePerM2": 13488241.480743939,
+        "avgPricePerM2": 13487897.318654468,
         "avgPricePerPyeong10k": 4459,
-        "transactionCount": 573
+        "transactionCount": 581
       },
       "saleNational84": {
-        "avgPricePerM2": 12353954.408999097,
-        "avgPricePerPyeong10k": 4084,
-        "transactionCount": 206
+        "avgPricePerM2": 12326249.56055224,
+        "avgPricePerPyeong10k": 4075,
+        "transactionCount": 208
       },
       "jeonse": {
         "avgDepositPerM2": 9120741.98020194,
@@ -4207,14 +4207,14 @@
         "code": "11350",
         "name": "노원구",
         "sale": {
-          "avgPricePerM2": 10949017.343837194,
-          "avgPricePerPyeong10k": 3620,
-          "transactionCount": 39
+          "avgPricePerM2": 10866800.021420622,
+          "avgPricePerPyeong10k": 3592,
+          "transactionCount": 42
         },
         "saleNational84": {
-          "avgPricePerM2": 10462229.113519572,
-          "avgPricePerPyeong10k": 3459,
-          "transactionCount": 9
+          "avgPricePerM2": 10115545.574212905,
+          "avgPricePerPyeong10k": 3344,
+          "transactionCount": 10
         },
         "jeonse": {
           "avgDepositPerM2": 6184728.571144187,
@@ -4231,14 +4231,14 @@
         "code": "11380",
         "name": "은평구",
         "sale": {
-          "avgPricePerM2": 11193060.709956616,
-          "avgPricePerPyeong10k": 3700,
-          "transactionCount": 50
+          "avgPricePerM2": 11420556.385599693,
+          "avgPricePerPyeong10k": 3775,
+          "transactionCount": 53
         },
         "saleNational84": {
-          "avgPricePerM2": 10618044.778851695,
-          "avgPricePerPyeong10k": 3510,
-          "transactionCount": 20
+          "avgPricePerM2": 10681466.771315843,
+          "avgPricePerPyeong10k": 3531,
+          "transactionCount": 21
         },
         "jeonse": {
           "avgDepositPerM2": 8299600.004020346,
@@ -4471,9 +4471,9 @@
         "code": "11650",
         "name": "서초구",
         "sale": {
-          "avgPricePerM2": 27451371.172378182,
-          "avgPricePerPyeong10k": 9075,
-          "transactionCount": 9
+          "avgPricePerM2": 25430721.52676401,
+          "avgPricePerPyeong10k": 8407,
+          "transactionCount": 11
         },
         "saleNational84": {
           "avgPricePerM2": 31479996.225702967,
