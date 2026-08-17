@@ -271,17 +271,6 @@
     vertical-align: middle;
   }
   .content-notice { color: var(--muted); font-size: 0.8rem; margin-top: 10px; line-height: 1.5; }
-  .budget-controls { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
-  .budget-controls input {
-    font: inherit;
-    width: 5.5rem;
-    padding: 6px 10px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: var(--card);
-    color: var(--fg);
-    text-align: right;
-  }
   .budget-summary { font-size: 0.92rem; line-height: 1.6; }
   .budget-summary strong { font-variant-numeric: tabular-nums; }
   .budget-districts { color: var(--muted); font-size: 0.82rem; margin-top: 4px; }
@@ -301,17 +290,6 @@
   .budget-deal .price { margin-left: auto; font-weight: 700; font-variant-numeric: tabular-nums; }
   .budget-empty { color: var(--muted); font-size: 0.9rem; }
   .budget-nav { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-  .budget-nav button {
-    font: inherit;
-    font-size: 0.82rem;
-    padding: 5px 11px;
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    background: var(--card);
-    color: var(--fg);
-    cursor: pointer;
-  }
-  .budget-nav button:hover { border-color: var(--muted); }
   @media (max-width: 480px) {
     .data-table { white-space: normal; }
     .data-table thead { display: none; }
@@ -375,11 +353,6 @@
 
   <section id="budget-section" hidden>
     <h2 id="budget-heading">예산으로 찾기</h2>
-    <div class="budget-controls" id="budget-controls">
-      <label for="budget-input" id="budget-label">예산</label>
-      <input type="number" id="budget-input" min="1" max="60" step="1" inputmode="numeric" value="8">
-      <span id="budget-unit">억원</span>
-    </div>
     <div id="budget-result"><!--prerender:budgetResult--><!--/prerender:budgetResult--></div>
     <div class="budget-nav" id="budget-page-nav"><!--prerender:budgetPageNav--><!--/prerender:budgetPageNav--></div>
     <div class="content-notice" id="budget-note"></div>
@@ -415,8 +388,6 @@ const T = {
   ko: {
     budgetHeading: "예산으로 찾기",
     budgetLinksHeading: "예산대별 실거래",
-    budgetLabel: "예산",
-    budgetUnit: "억원",
     budgetNote:
       "국토교통부에 신고된 실거래 기록입니다. 지금 살 수 있는 매물이 아니며, 같은 단지라도 층·향·동에 따라 값이 크게 다릅니다. 계약 후 30일인 신고 기한 때문에 최근 거래는 나중에 반영됩니다.",
     budgetBandLabel: (from, to) =>
@@ -425,8 +396,6 @@ const T = {
     budgetPeriods: (periods) => `${periods} 신고분 기준`,
     budgetDistricts: "거래가 많은 지역",
     budgetEmpty: "이 예산대에는 신고된 거래가 없습니다.",
-    budgetLower: "한 칸 아래",
-    budgetHigher: "한 칸 위",
     budgetFloor: (floor) => `${floor}층`,
     title: "중랑구 아파트 시세 - 매매·전세·월세 실거래가",
     titleSale: "서울 아파트 매매 시세",
@@ -484,8 +453,6 @@ const T = {
   en: {
     budgetHeading: "Search by budget",
     budgetLinksHeading: "Deals by budget",
-    budgetLabel: "Budget",
-    budgetUnit: "\u00a0100M KRW",
     budgetNote:
       "These are transactions filed with Korea's Ministry of Land, not listings for sale. Prices vary widely by floor and building even within the same complex, and filings are due within 30 days of contract, so the most recent deals show up later.",
     budgetBandLabel: (from, to) =>
@@ -494,8 +461,6 @@ const T = {
     budgetPeriods: (periods) => `Filed in ${periods}`,
     budgetDistricts: "Most active districts",
     budgetEmpty: "No filed deals in this range.",
-    budgetLower: "One step down",
-    budgetHigher: "One step up",
     budgetFloor: (floor) => `${floor}F`,
     title: "중랑구 Apartment Prices - Sale, Jeonse & Rent",
     titleSale: "Seoul Apartment Sale Prices",
@@ -1018,14 +983,8 @@ const budgetBand10k = (() => {
   return Number.isFinite(value) && value >= 0 ? value : null;
 })();
 const isBudgetPage = budgetBand10k !== null;
-const budgetEnabled = isBudgetPage || (!kind && !districtName);
-const DEFAULT_BUDGET_EOK = 8;
-
-let budgetEok = (() => {
-  if (isBudgetPage) return Math.max(1, Math.round(budgetBand10k / 10000));
-  const raw = Number(new URLSearchParams(location.search).get("budget"));
-  return Number.isInteger(raw) && raw >= 1 && raw <= 60 ? raw : DEFAULT_BUDGET_EOK;
-})();
+const budgetEnabled = isBudgetPage;
+const budgetEok = isBudgetPage ? Math.max(1, Math.round(budgetBand10k / 10000)) : null;
 
 const EOK = 10000;
 
@@ -1057,22 +1016,6 @@ function budgetDealHtml(deal) {
   );
 }
 
-function budgetNavHtml(current) {
-  const bands = cache.budget?.bands ?? [];
-  const index = bands.findIndex((b) => b.min10k === current?.min10k);
-  const lower = index > 0 ? bands[index - 1] : null;
-  const higher = index >= 0 && index < bands.length - 1 ? bands[index + 1] : null;
-
-  const button = (band, key) =>
-    band
-      ? `<button type="button" data-budget-to="${Math.max(1, Math.round(band.min10k / EOK)) }">` +
-        `${escapeHtml(t(key))} · ${escapeHtml(bandLabel(band))}</button>`
-      : "";
-
-  const html = `${button(lower, "budgetLower")}${button(higher, "budgetHigher")}`;
-  return html ? `<div class="budget-nav">${html}</div>` : "";
-}
-
 function renderBudget() {
   const section = document.getElementById("budget-section");
   if (!budgetEnabled || !cache.budget?.bands?.length) {
@@ -1082,14 +1025,7 @@ function renderBudget() {
   section.hidden = false;
 
   document.getElementById("budget-heading").textContent = t("budgetHeading");
-  document.getElementById("budget-label").textContent = t("budgetLabel");
-  document.getElementById("budget-unit").textContent = t("budgetUnit");
   document.getElementById("budget-note").textContent = t("budgetNote");
-  document.getElementById("budget-controls").hidden = isBudgetPage;
-
-  const input = document.getElementById("budget-input");
-  if (String(budgetEok) !== input.value) input.value = String(budgetEok);
-
   const band = bandFor(budgetEok * EOK);
   const box = document.getElementById("budget-result");
 
@@ -1098,7 +1034,7 @@ function renderBudget() {
     return;
   }
 
-  box.innerHTML = budgetBodyHtml(band, cache.budget.periods) + (isBudgetPage ? "" : budgetNavHtml(band));
+  box.innerHTML = budgetBodyHtml(band, cache.budget.periods);
 }
 
 function budgetBodyHtml(band, periodList) {
@@ -1117,16 +1053,6 @@ function budgetBodyHtml(band, periodList) {
     (districts ? `<div class="budget-districts">${escapeHtml(t("budgetDistricts"))}: ${districts}</div>` : "") +
     `<ul class="budget-deals">${band.deals.map(budgetDealHtml).join("")}</ul>`
   );
-}
-
-function syncBudgetUrl() {
-  if (isBudgetPage) return;
-  const params = new URLSearchParams(location.search);
-  if (budgetEok === DEFAULT_BUDGET_EOK) params.delete("budget");
-  else params.set("budget", String(budgetEok));
-  const query = params.toString();
-  const url = `${location.pathname}${query ? `?${query}` : ""}`;
-  if (url !== `${location.pathname}${location.search}`) history.replaceState(null, "", url);
 }
 
 const NAV_KEYS = { all: "navAll", sale: "navSale", jeonse: "navJeonse", wolse: "navWolse", search: "navDealSearch" };
@@ -1235,26 +1161,6 @@ document.getElementById("area-controls").addEventListener("change", (e) => {
   syncAreaUrl();
   renderAll();
   window.analytics?.event("realestate_area", { area_m2: String(areaM2), realestate_kind: kind ?? "all" });
-});
-
-function setBudget(next, source) {
-  const value = Math.min(60, Math.max(1, Math.round(Number(next))));
-  if (!Number.isFinite(value) || value === budgetEok) return;
-  budgetEok = value;
-  syncBudgetUrl();
-  renderBudget();
-  window.analytics?.event("realestate_budget", { budget_eok: String(budgetEok), source });
-}
-
-document.getElementById("budget-input").addEventListener("input", (e) => {
-  const raw = Number(e.target.value);
-  if (!Number.isFinite(raw) || raw < 1) return;
-  setBudget(raw, "input");
-});
-
-document.getElementById("budget-result").addEventListener("click", (e) => {
-  const to = e.target.closest("[data-budget-to]")?.getAttribute("data-budget-to");
-  if (to) setBudget(to, "nav");
 });
 
 document.getElementById("theme-toggle").addEventListener("click", () => {

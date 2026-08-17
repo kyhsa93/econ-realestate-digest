@@ -27,7 +27,7 @@ function navHtml(page) {
   if (BUDGET_PAGE_EOK.includes(page.eok + 1)) {
     links.push(`<a href="./${budgetPageFile(page.eok + 1)}">${page.eok + 1}억대</a>`);
   }
-  links.push(`<a href="./realestate.html?budget=${page.eok}">다른 예산으로 찾기</a>`);
+  links.push(`<a href="./deal-search.html?budget=${page.eok}">조건을 더해 찾기</a>`);
   return links.join("");
 }
 

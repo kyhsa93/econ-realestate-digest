@@ -67,11 +67,12 @@ test("예산 페이지에 그 구간 거래와 제목이 들어간다", async ()
   assert.match(html, /canonical" href="[^"]*budget-8eok\.html/);
 });
 
-test("옆 칸 페이지와 전체 검색으로 가는 길을 남긴다", async () => {
+test("옆 칸 페이지와 조건 검색으로 가는 길을 남긴다", async () => {
   const html = buildBudgetPage(await baseHtml(), page8, BUDGET);
   assert.match(html, /href="\.\/budget-7eok\.html"/);
   assert.match(html, /href="\.\/budget-9eok\.html"/);
-  assert.match(html, /href="\.\/realestate\.html\?budget=8"/);
+  assert.match(html, /href="\.\/deal-search\.html\?budget=8"/, "조건을 더 걸 수 있는 화면으로 가는 길이 없다");
+  assert.ok(!html.includes("realestate.html?budget="), "예산 검색이 없는 페이지로 보낸다");
 });
 
 test("목록 양 끝에서는 없는 이웃을 링크하지 않는다", async () => {
@@ -129,7 +130,7 @@ test("프리렌더가 심은 거래 목록을 클라이언트가 그대로 다�
   assert.equal(page.budgetHtml(), budgetBodyHtml(band, BUDGET.periods));
 });
 
-test("예산 페이지에서는 입력창을 접고 주소를 건드리지 않는다", async () => {
+test("예산 페이지는 그 구간만 보여주고 주소를 건드리지 않는다", async () => {
   const page = await loadRealestatePage({
     realestate: REALESTATE,
     budget: BUDGET,
@@ -138,9 +139,8 @@ test("예산 페이지에서는 입력창을 접고 주소를 건드리지 않�
   });
 
   assert.equal(page.byId("budget-section").hidden, false);
-  assert.equal(page.byId("budget-controls").hidden, true);
   assert.equal(page.sandbox.location.search, "");
-  assert.ok(!page.budgetHtml().includes("data-budget-to"), "정적 페이지에 이동 버튼이 남았다");
+  assert.ok(!page.budgetHtml().includes("data-budget-to"), "예산을 바꾸는 조작이 남았다");
 });
 
 test("예산 페이지는 시세 페이지에서 찍어내는 것들보다 먼저 돈다", async () => {
