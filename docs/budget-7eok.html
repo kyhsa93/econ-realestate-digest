@@ -1,0 +1,1275 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#253e81">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<meta name="google-adsense-account" content="ca-pub-1195159445218373">
+<title>7억대로 살 수 있는 서울 아파트 - 최근 실거래</title>
+<meta name="description" content="예산 7억대(7억~8억)로 서울에서 실제 거래된 아파트를 모았습니다. 국토교통부에 신고된 실거래 자료이며, 단지·전용면적·층·거래일과 거래가 많은 지역을 함께 보여줍니다.">
+<meta name="site-group" content="digest">
+<meta name="budget-band" content="70000">
+<link rel="canonical" href="https://kyhsa93.github.io/econ-realestate-digest/budget-7eok.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="경제·부동산 데일리 다이제스트">
+<meta property="og:url" content="https://kyhsa93.github.io/econ-realestate-digest/budget-7eok.html">
+<meta property="og:title" content="7억대로 살 수 있는 서울 아파트 - 최근 실거래">
+<meta property="og:description" content="예산 7억대(7억~8억)로 서울에서 실제 거래된 아파트를 모았습니다. 국토교통부에 신고된 실거래 자료이며, 단지·전용면적·층·거래일과 거래가 많은 지역을 함께 보여줍니다.">
+<meta property="og:image" content="https://kyhsa93.github.io/econ-realestate-digest/icons/icon-512.png">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="7억대로 살 수 있는 서울 아파트 - 최근 실거래">
+<meta name="twitter:description" content="예산 7억대(7억~8억)로 서울에서 실제 거래된 아파트를 모았습니다. 국토교통부에 신고된 실거래 자료이며, 단지·전용면적·층·거래일과 거래가 많은 지역을 함께 보여줍니다.">
+<meta name="twitter:image" content="https://kyhsa93.github.io/econ-realestate-digest/icons/icon-512.png">
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #666;
+    --card: #f5f5f7;
+    --border: #e2e2e5;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1115;
+      --fg: #eaeaea;
+      --muted: #9a9a9a;
+      --card: #1a1d24;
+      --border: #2a2d35;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #0f1115;
+    --fg: #eaeaea;
+    --muted: #9a9a9a;
+    --card: #1a1d24;
+    --border: #2a2d35;
+  }
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #666;
+    --card: #f5f5f7;
+    --border: #e2e2e5;
+  }
+  [hidden] { display: none !important; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.5;
+  }
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 24px 16px 64px;
+  }
+  header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .header-actions { display: flex; gap: 8px; flex-shrink: 0; }
+  .icon-toggle {
+    flex-shrink: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--fg);
+  }
+  h1 { font-size: 1.4rem; margin: 0 0 4px; }
+  h2 {
+    font-size: 1.05rem;
+    margin: 0 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .updated { color: var(--muted); font-size: 0.85rem; }
+  .page-nav {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .page-nav a {
+    flex-shrink: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    color: var(--fg);
+    text-decoration: none;
+  }
+  .sub-nav {
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    margin: -10px 0 20px;
+    padding-bottom: 2px;
+  }
+  .sub-nav a {
+    flex-shrink: 0;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .sub-nav a[aria-current="page"] {
+    background: var(--card);
+    color: var(--fg);
+    font-weight: 600;
+  }
+  .page-nav a.active {
+    background: var(--fg);
+    color: var(--bg);
+    border-color: var(--fg);
+    font-weight: 600;
+  }
+  .page-nav a[aria-current="page"] {
+    background: var(--fg);
+    color: var(--bg);
+    border-color: var(--fg);
+    font-weight: 600;
+  }
+  section { margin-bottom: 32px; }
+  .summary-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 0.92rem;
+  }
+  .summary-box p { margin: 0 0 8px; }
+  .summary-box p:last-child { margin-bottom: 0; }
+  .summary-note { color: var(--muted); font-size: 0.78rem; margin-top: 10px; }
+  ul.news-list { list-style: none; margin: 0; padding: 0; }
+  .news-item { padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .news-item:last-child { border-bottom: none; }
+  .news-item a { color: var(--fg); text-decoration: none; font-size: 0.95rem; }
+  .news-item a:hover { text-decoration: underline; }
+  .news-item.read > a { color: var(--muted); }
+  .news-meta { color: var(--muted); font-size: 0.78rem; margin-top: 2px; }
+  .news-context { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .news-item .context-chip {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    padding: 3px 9px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--card);
+    font-size: 0.76rem;
+    text-decoration: none;
+  }
+  .news-item .context-chip:hover { border-color: var(--muted); text-decoration: none; }
+  .context-label { color: var(--muted); }
+  .context-value { color: var(--fg); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .empty { color: var(--muted); font-size: 0.9rem; }
+  .empty button {
+    font: inherit;
+    background: var(--fg);
+    color: var(--bg);
+    border: 0;
+    border-radius: 8px;
+    padding: 4px 12px;
+    margin-left: 8px;
+    cursor: pointer;
+  }
+  .site-footer {
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+  .site-footer a { color: var(--muted); }
+  .overall-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+  }
+  .overall-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .overall-card .label { color: var(--muted); font-size: 0.78rem; }
+  .overall-card .value { font-size: 1.15rem; font-weight: 700; margin-top: 2px; font-variant-numeric: tabular-nums; }
+  .overall-card .sub { color: var(--muted); font-size: 0.76rem; margin-top: 2px; }
+  .controls { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .controls label { font-size: 0.82rem; color: var(--muted); }
+  .controls select {
+    background: var(--bg);
+    color: var(--fg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 5px 9px;
+    font-size: 0.85rem;
+    font-family: inherit;
+  }
+  .district-summary {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.65;
+  }
+  .trend-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .trend-chart svg { width: 100%; height: 60px; display: block; }
+  .trend-meta { color: var(--muted); font-size: 0.78rem; margin-top: 6px; }
+  .district-links-heading { font-size: 0.85rem; color: var(--muted); margin: 18px 0 8px; font-weight: 600; }
+  .district-links { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 0.82rem; }
+  .district-links a { color: var(--muted); text-decoration: none; }
+  .district-links a:hover { text-decoration: underline; }
+  .district-links a[aria-current="page"] { color: var(--fg); font-weight: 600; }
+  .table-wrap { overflow-x: auto; }
+  .data-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; white-space: nowrap; }
+  .data-table th, .data-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); text-align: right; }
+  .data-table th { color: var(--muted); font-weight: 600; font-size: 0.78rem; }
+  .data-table th:first-child, .data-table td:first-child { text-align: left; }
+  .data-table tbody tr:hover { background: var(--card); }
+  .data-table .overall-row { font-weight: 700; }
+  .price-strong { font-weight: 700; font-variant-numeric: tabular-nums; }
+  .count { color: var(--muted); font-size: 0.76rem; }
+  .change { font-size: 0.76rem; }
+  .change.up { color: #d64545; }
+  .change.down { color: #2f6fed; }
+  .ratio { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .low-sample { color: var(--muted); font-size: 0.78rem; }
+  .data-table td a { color: inherit; text-decoration: none; border-bottom: 1px dotted var(--border); }
+  .data-table td a:hover { border-bottom-color: var(--muted); }
+  .prev-tag {
+    display: inline-block;
+    padding: 0 5px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--muted);
+    font-size: 0.7rem;
+    vertical-align: middle;
+  }
+  .content-notice { color: var(--muted); font-size: 0.8rem; margin-top: 10px; line-height: 1.5; }
+  .budget-controls { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+  .budget-controls input {
+    font: inherit;
+    width: 5.5rem;
+    padding: 6px 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--card);
+    color: var(--fg);
+    text-align: right;
+  }
+  .budget-summary { font-size: 0.92rem; line-height: 1.6; }
+  .budget-summary strong { font-variant-numeric: tabular-nums; }
+  .budget-districts { color: var(--muted); font-size: 0.82rem; margin-top: 4px; }
+  .budget-deals { list-style: none; padding: 0; margin: 10px 0 0; display: grid; gap: 6px; }
+  .budget-deal {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 10px;
+    padding: 9px 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--card);
+  }
+  .budget-deal .place { font-weight: 600; }
+  .budget-deal .spec, .budget-deal .when { color: var(--muted); font-size: 0.8rem; }
+  .budget-deal .price { margin-left: auto; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .budget-empty { color: var(--muted); font-size: 0.9rem; }
+  .budget-nav { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .budget-nav button {
+    font: inherit;
+    font-size: 0.82rem;
+    padding: 5px 11px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--card);
+    color: var(--fg);
+    cursor: pointer;
+  }
+  .budget-nav button:hover { border-color: var(--muted); }
+  @media (max-width: 480px) {
+    .data-table { white-space: normal; }
+    .data-table thead { display: none; }
+    .data-table tbody tr { display: block; padding: 10px 0; border-bottom: 1px solid var(--border); }
+    .data-table td {
+      display: flex; justify-content: space-between; align-items: baseline;
+      gap: 12px; border: 0; padding: 3px 0; text-align: right;
+    }
+    .data-table td:first-child { padding-bottom: 6px; font-weight: 600; }
+    .data-table td[data-label]::before {
+      content: attr(data-label); color: var(--muted); font-size: 0.78rem; text-align: left; flex-shrink: 0;
+    }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div>
+      <h1 id="page-title">서울 아파트 시세</h1>
+      <div class="updated" id="updated">불러오는 중...</div>
+    </div>
+    <div class="header-actions">
+      <button class="icon-toggle" type="button" id="theme-toggle" aria-label="테마 전환"><span aria-hidden="true">🌓</span></button>
+      <button class="icon-toggle" type="button" id="lang-toggle" aria-label="Switch language"><span aria-hidden="true">🌐</span></button>
+    </div>
+  </header>
+
+  <nav class="page-nav" aria-label="섹션">
+    <a href="./index.html" id="nav-digest">데일리 다이제스트</a>
+    <a href="./news.html" id="nav-news">뉴스</a>
+    <a href="./realestate.html" id="nav-realestate" class="active">아파트 시세</a>
+    <a href="./rates.html" id="nav-rates">금리 비교</a>
+  </nav>
+
+  <nav class="sub-nav" aria-label="거래 유형">
+    <a href="./realestate.html" data-re-page="all" aria-current="page">전체</a>
+    <a href="./apartment-sale.html" data-re-page="sale">매매</a>
+    <a href="./apartment-jeonse.html" data-re-page="jeonse">전세</a>
+    <a href="./apartment-rent.html" data-re-page="wolse">월세</a>
+    <a href="./deal-search.html" data-re-page="search">거래내역 검색</a>
+  </nav>
+
+  <section id="overall-section">
+    <h2 id="overall-heading">서울 전체 평균</h2>
+    <div class="overall-cards" id="overall-cards"><!--prerender:realestateOverall--><div class="overall-card"><div class="label">매매</div><div class="value">4,459만원</div><div class="sub">84㎡ 환산 11억 3,303만원 · 573건</div></div><div class="overall-card"><div class="label">전세</div><div class="value">2,566만원</div><div class="sub">84㎡ 환산 6억 5,202만원 · 2,539건</div></div><div class="overall-card"><div class="label">월세</div><div class="value">22,145만원 / 월 96만원</div><div class="sub">2,226건</div></div><!--/prerender:realestateOverall--></div>
+  </section>
+
+  <section id="district-summary-section" hidden>
+    <p class="district-summary" data-summary-lang="ko"><!--prerender:districtSummaryKo--><!--/prerender:districtSummaryKo--></p>
+    <p class="district-summary" data-summary-lang="en" hidden><!--prerender:districtSummaryEn--><!--/prerender:districtSummaryEn--></p>
+  </section>
+
+  <section id="trend-section" hidden>
+    <h2 id="trend-heading">최근 추이</h2>
+    <div class="trend-card">
+      <div class="trend-chart" id="trend-chart"></div>
+      <div class="trend-meta" id="trend-meta"></div>
+    </div>
+  </section>
+
+  <section id="budget-section">
+    <h2 id="budget-heading">예산으로 찾기</h2>
+    <div class="budget-controls" id="budget-controls">
+      <label for="budget-input" id="budget-label">예산</label>
+      <input type="number" id="budget-input" min="1" max="60" step="1" inputmode="numeric" value="8">
+      <span id="budget-unit">억원</span>
+    </div>
+    <div id="budget-result"><!--prerender:budgetResult--><p class="budget-summary">7억대에서 953건이 거래됐습니다. <span class="when">6월, 7월, 8월 신고분 기준</span></p><div class="budget-districts">거래가 많은 지역: 노원구 259 · 구로구 170 · 강서구 135 · 성북구 129 · 중랑구 129</div><ul class="budget-deals"><li class="budget-deal"><span class="place">서대문구 홍은동 진흥</span><span class="spec">110.4㎡ · 12층</span><span class="when">8/12</span><span class="price">7억 4,500만원</span></li><li class="budget-deal"><span class="place">성북구 정릉동 정릉풍림아이원</span><span class="spec">114.75㎡ · 15층</span><span class="when">8/12</span><span class="price">7억 2,000만원</span></li><li class="budget-deal"><span class="place">은평구 수색동 DMCSK뷰아이파크포레</span><span class="spec">39.97㎡ · 10층</span><span class="when">8/12</span><span class="price">7억원</span></li><li class="budget-deal"><span class="place">구로구 항동 하버라인2단지</span><span class="spec">59.86㎡ · 5층</span><span class="when">8/11</span><span class="price">7억 4,500만원</span></li><li class="budget-deal"><span class="place">중랑구 묵동 세방</span><span class="spec">84.8㎡ · 8층</span><span class="when">8/11</span><span class="price">7억 1,000만원</span></li><li class="budget-deal"><span class="place">동대문구 장안동 흥해오크팰리스(576-0)</span><span class="spec">84.62㎡ · 13층</span><span class="when">8/10</span><span class="price">7억 4,700만원</span></li><li class="budget-deal"><span class="place">도봉구 창동 대우</span><span class="spec">84.88㎡ · 6층</span><span class="when">8/10</span><span class="price">7억 2,900만원</span></li><li class="budget-deal"><span class="place">은평구 수색동 e편한세상 수색 에코포레</span><span class="spec">59.9㎡ · 2층</span><span class="when">8/10</span><span class="price">7억 2,800만원</span></li><li class="budget-deal"><span class="place">동대문구 휘경동 휘경미소지움</span><span class="spec">59.84㎡ · 5층</span><span class="when">8/9</span><span class="price">7억 7,800만원</span></li><li class="budget-deal"><span class="place">성북구 정릉동 정릉e-편한세상</span><span class="spec">59.77㎡ · 17층</span><span class="when">8/9</span><span class="price">7억 4,000만원</span></li><li class="budget-deal"><span class="place">노원구 월계동 세양청마루</span><span class="spec">84.96㎡ · 2층</span><span class="when">8/9</span><span class="price">7억 2,000만원</span></li><li class="budget-deal"><span class="place">중랑구 신내동 신내우디안1단지</span><span class="spec">59.49㎡ · 12층</span><span class="when">8/8</span><span class="price">7억 8,700만원</span></li></ul><!--/prerender:budgetResult--></div>
+    <div class="budget-nav" id="budget-page-nav"><!--prerender:budgetPageNav--><a href="./budget-6eok.html">6억대</a><a href="./budget-8eok.html">8억대</a><a href="./realestate.html?budget=7">다른 예산으로 찾기</a><!--/prerender:budgetPageNav--></div>
+    <div class="content-notice" id="budget-note"></div>
+  </section>
+
+  <section id="district-section">
+    <h2 id="district-heading">자치구별 시세</h2>
+    <div class="controls" id="area-controls" hidden>
+      <label for="area-select" id="area-label">평형</label>
+      <select id="area-select"></select>
+    </div>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead id="district-head"><!--prerender:realestateHead--><tr><th>지역</th><th>매매</th><th>전세</th><th>월세</th></tr><!--/prerender:realestateHead--></thead>
+        <tbody id="district-grid"><!--prerender:realestateTable--><tr class="overall-row"><td>서울 전체</td><td data-label="매매">4,459만원 <span class="change up" title="2026-08-10 대비">▲350만원</span> <span class="count">573건</span></td><td data-label="전세">2,566만원 <span class="change up" title="2026-08-10 대비">▲33만원</span> <span class="count">2,539건</span></td><td data-label="월세">22,145만원 / 월 96만원 <span class="count">2,226건</span></td></tr><tr class=""><td><a href="./district-gangnam.html">강남구</a></td><td data-label="매매">11,108만원 <span class="change up" title="2026-08-10 대비">▲950만원</span> <span class="count">13건</span></td><td data-label="전세">4,003만원 <span class="change down" title="2026-08-10 대비">▼18만원</span> <span class="count">170건</span></td><td data-label="월세">41,755만원 / 월 164만원 <span class="count">102건</span></td></tr><tr class=""><td><a href="./district-seongdong.html">성동구</a></td><td data-label="매매">9,657만원 <span class="count">8건</span></td><td data-label="전세">3,263만원 <span class="change down" title="2026-08-10 대비">▼116만원</span> <span class="count">102건</span></td><td data-label="월세">17,548만원 / 월 131만원 <span class="count">136건</span></td></tr><tr class=""><td><a href="./district-seocho.html">서초구</a></td><td data-label="매매">9,075만원 <span class="change down" title="2026-08-10 대비">▼2,177만원</span> <span class="count">9건</span></td><td data-label="전세">2,981만원 <span class="change up" title="2026-08-10 대비">▲322만원</span> <span class="count">251건</span></td><td data-label="월세">50,941만원 / 월 234만원 <span class="count">93건</span></td></tr><tr class=""><td><a href="./district-yongsan.html">용산구</a></td><td data-label="매매">7,988만원 <span class="change up" title="2026-08-10 대비">▲675만원</span> <span class="count">5건</span></td><td data-label="전세">3,365만원 <span class="change up" title="2026-08-10 대비">▲201만원</span> <span class="count">58건</span></td><td data-label="월세">45,686만원 / 월 265만원 <span class="count">45건</span></td></tr><tr class=""><td><a href="./district-gwangjin.html">광진구</a></td><td data-label="매매">7,617만원 <span class="change down" title="2026-08-10 대비">▼303만원</span> <span class="count">7건</span></td><td data-label="전세">3,035만원 <span class="change up" title="2026-08-10 대비">▲387만원</span> <span class="count">35건</span></td><td data-label="월세">35,019만원 / 월 122만원 <span class="count">38건</span></td></tr><tr class=""><td><a href="./district-jung.html">중구</a></td><td data-label="매매">6,928만원 <span class="change up" title="2026-08-10 대비">▲3,888만원</span> <span class="count">6건</span></td><td data-label="전세">3,221만원 <span class="change up" title="2026-08-10 대비">▲178만원</span> <span class="count">32건</span></td><td data-label="월세">21,035만원 / 월 125만원 <span class="count">32건</span></td></tr><tr class=""><td><a href="./district-songpa.html">송파구</a></td><td data-label="매매">6,912만원 <span class="count">16건</span></td><td data-label="전세">3,360만원 <span class="change up" title="2026-08-10 대비">▲99만원</span> <span class="count">170건</span></td><td data-label="월세">39,481만원 / 월 132만원 <span class="count">110건</span></td></tr><tr class=""><td><a href="./district-yeongdeungpo.html">영등포구</a></td><td data-label="매매">6,201만원 <span class="change up" title="2026-08-10 대비">▲2,385만원</span> <span class="count">21건</span></td><td data-label="전세">2,770만원 <span class="change up" title="2026-08-10 대비">▲146만원</span> <span class="count">116건</span></td><td data-label="월세">22,170만원 / 월 122만원 <span class="count">84건</span></td></tr><tr class=""><td><a href="./district-mapo.html">마포구</a></td><td data-label="매매">5,695만원 <span class="count">11건</span></td><td data-label="전세">2,930만원 <span class="change up" title="2026-08-10 대비">▲46만원</span> <span class="count">99건</span></td><td data-label="월세">22,001만원 / 월 108만원 <span class="count">92건</span></td></tr><tr class=""><td><a href="./district-dongjak.html">동작구</a></td><td data-label="매매">5,691만원 <span class="change down" title="2026-08-10 대비">▼112만원</span> <span class="count">9건</span></td><td data-label="전세">3,053만원 <span class="change down" title="2026-08-10 대비">▼157만원</span> <span class="count">83건</span></td><td data-label="월세">26,882만원 / 월 93만원 <span class="count">69건</span></td></tr><tr class=""><td><a href="./district-dongdaemun.html">동대문구</a></td><td data-label="매매">4,899만원 <span class="change up" title="2026-08-10 대비">▲229만원</span> <span class="count">27건</span></td><td data-label="전세">2,771만원 <span class="change down" title="2026-08-10 대비">▼81만원</span> <span class="count">69건</span></td><td data-label="월세">17,454만원 / 월 90만원 <span class="count">91건</span></td></tr><tr class=""><td><a href="./district-seodaemun.html">서대문구</a></td><td data-label="매매">4,866만원 <span class="change up" title="2026-08-10 대비">▲950만원</span> <span class="count">25건</span></td><td data-label="전세">2,627만원 <span class="change up" title="2026-08-10 대비">▲14만원</span> <span class="count">78건</span></td><td data-label="월세">19,454만원 / 월 107만원 <span class="count">55건</span></td></tr><tr class=""><td><a href="./district-yangcheon.html">양천구</a></td><td data-label="매매">4,652만원 <span class="change up" title="2026-08-10 대비">▲659만원</span> <span class="count">35건</span></td><td data-label="전세">2,501만원 <span class="change down" title="2026-08-10 대비">▼256만원</span> <span class="count">93건</span></td><td data-label="월세">27,222만원 / 월 86만원 <span class="count">64건</span></td></tr><tr class=""><td><a href="./district-jongno.html">종로구</a></td><td data-label="매매">4,560만원 <span class="count">33건</span> <span class="prev-tag" title="이번 달 신고가 아직 적어 지난달 기준으로 보여줍니다.">7월</span></td><td data-label="전세">3,478만원 <span class="change up" title="2026-08-10 대비">▲892만원</span> <span class="count">11건</span></td><td data-label="월세">27,349만원 / 월 110만원 <span class="count">18건</span></td></tr><tr class=""><td><a href="./district-gangdong.html">강동구</a></td><td data-label="매매">4,437만원 <span class="change up" title="2026-08-10 대비">▲373만원</span> <span class="count">17건</span></td><td data-label="전세">2,822만원 <span class="change up" title="2026-08-10 대비">▲165만원</span> <span class="count">99건</span></td><td data-label="월세">29,210만원 / 월 88만원 <span class="count">99건</span></td></tr><tr class=""><td><a href="./district-gangseo.html">강서구</a></td><td data-label="매매">4,411만원 <span class="change up" title="2026-08-10 대비">▲323만원</span> <span class="count">53건</span></td><td data-label="전세">1,568만원 <span class="change up" title="2026-08-10 대비">▲171만원</span> <span class="count">391건</span></td><td data-label="월세">13,725만원 / 월 46만원 <span class="count">204건</span></td></tr><tr class=""><td><a href="./district-seongbuk.html">성북구</a></td><td data-label="매매">3,760만원 <span class="change down" title="2026-08-10 대비">▼384만원</span> <span class="count">37건</span></td><td data-label="전세">2,432만원 <span class="change down" title="2026-08-10 대비">▼104만원</span> <span class="count">79건</span></td><td data-label="월세">21,681만원 / 월 137만원 <span class="count">54건</span></td></tr><tr class=""><td><a href="./district-gwanak.html">관악구</a></td><td data-label="매매">3,703만원 <span class="change up" title="2026-08-10 대비">▲208만원</span> <span class="count">26건</span></td><td data-label="전세">2,385만원 <span class="change up" title="2026-08-10 대비">▲35만원</span> <span class="count">53건</span></td><td data-label="월세">15,098만원 / 월 85만원 <span class="count">55건</span></td></tr><tr class=""><td><a href="./district-eunpyeong.html">은평구</a></td><td data-label="매매">3,700만원 <span class="change up" title="2026-08-10 대비">▲29만원</span> <span class="count">50건</span></td><td data-label="전세">2,245만원 <span class="change down" title="2026-08-10 대비">▼395만원</span> <span class="count">106건</span></td><td data-label="월세">15,067만원 / 월 54만원 <span class="count">126건</span></td></tr><tr class=""><td><a href="./district-nowon.html">노원구</a></td><td data-label="매매">3,620만원 <span class="change up" title="2026-08-10 대비">▲26만원</span> <span class="count">39건</span></td><td data-label="전세">1,913만원 <span class="change up" title="2026-08-10 대비">▲100만원</span> <span class="count">176건</span></td><td data-label="월세">11,548만원 / 월 64만원 <span class="count">138건</span></td></tr><tr class=""><td><a href="./district-jungnang.html">중랑구</a></td><td data-label="매매">3,349만원 <span class="change up" title="2026-08-10 대비">▲269만원</span> <span class="count">43건</span></td><td data-label="전세">1,427만원 <span class="change down" title="2026-08-10 대비">▼421만원</span> <span class="count">108건</span></td><td data-label="월세">15,118만원 / 월 43만원 <span class="count">184건</span></td></tr><tr class=""><td><a href="./district-guro.html">구로구</a></td><td data-label="매매">3,174만원 <span class="change down" title="2026-08-10 대비">▼1만원</span> <span class="count">40건</span></td><td data-label="전세">2,008만원 <span class="change down" title="2026-08-10 대비">▼60만원</span> <span class="count">70건</span></td><td data-label="월세">18,426만원 / 월 61만원 <span class="count">181건</span></td></tr><tr class=""><td><a href="./district-gangbuk.html">강북구</a></td><td data-label="매매">2,946만원 <span class="change up" title="2026-08-10 대비">▲219만원</span> <span class="count">12건</span></td><td data-label="전세">2,063만원 <span class="change up" title="2026-08-10 대비">▲119만원</span> <span class="count">23건</span></td><td data-label="월세">15,123만원 / 월 99만원 <span class="count">26건</span></td></tr><tr class=""><td><a href="./district-geumcheon.html">금천구</a></td><td data-label="매매">2,727만원 <span class="change down" title="2026-08-10 대비">▼487만원</span> <span class="count">14건</span></td><td data-label="전세">1,978만원 <span class="change down" title="2026-08-10 대비">▼247만원</span> <span class="count">29건</span></td><td data-label="월세">9,176만원 / 월 55만원 <span class="count">105건</span></td></tr><tr class=""><td><a href="./district-dobong.html">도봉구</a></td><td data-label="매매">2,527만원 <span class="change up" title="2026-08-10 대비">▲142만원</span> <span class="count">48건</span></td><td data-label="전세">1,613만원 <span class="change up" title="2026-08-10 대비">▲66만원</span> <span class="count">38건</span></td><td data-label="월세">8,667만원 / 월 68만원 <span class="count">25건</span></td></tr><!--/prerender:realestateTable--></tbody>
+      </table>
+    </div>
+    <div class="content-notice" id="table-note"></div>
+    <!--prerender:budgetLinks--><h3 class="district-links-heading" id="budget-links-heading">예산대별 실거래</h3><div class="district-links" id="budget-links"><a href="./budget-3eok.html">3억대</a><a href="./budget-4eok.html">4억대</a><a href="./budget-5eok.html">5억대</a><a href="./budget-6eok.html">6억대</a><a href="./budget-7eok.html">7억대</a><a href="./budget-8eok.html">8억대</a><a href="./budget-9eok.html">9억대</a><a href="./budget-10eok.html">10억대</a><a href="./budget-11eok.html">11억대</a><a href="./budget-12eok.html">12억대</a><a href="./budget-13eok.html">13억대</a><a href="./budget-14eok.html">14억대</a><a href="./budget-15eok.html">15억대</a><a href="./budget-16eok.html">16억대</a><a href="./budget-17eok.html">17억대</a><a href="./budget-18eok.html">18억대</a><a href="./budget-19eok.html">19억대</a><a href="./budget-20eok.html">20억대</a></div><!--/prerender:budgetLinks-->
+    <!--prerender:districtLinks--><!--/prerender:districtLinks-->
+  </section>
+
+  <footer class="site-footer">
+    <div id="footer-source">출처: 국토교통부 아파트 매매·전월세 실거래가 공개시스템. 신고된 거래만 집계되며 신고 기한(계약 후 30일)이 있어 최근 거래는 나중에 반영됩니다.</div>
+    <div style="margin-top:6px;">
+      <a href="https://kyhsa93.github.io/privacy-policy" id="footer-privacy" target="_blank" rel="noopener">개인정보처리방침</a>
+    </div>
+  </footer>
+</main>
+<script src="./analytics.js"></script>
+<script>
+const T = {
+  ko: {
+    budgetHeading: "예산으로 찾기",
+    budgetLinksHeading: "예산대별 실거래",
+    budgetLabel: "예산",
+    budgetUnit: "억원",
+    budgetNote:
+      "국토교통부에 신고된 실거래 기록입니다. 지금 살 수 있는 매물이 아니며, 같은 단지라도 층·향·동에 따라 값이 크게 다릅니다. 계약 후 30일인 신고 기한 때문에 최근 거래는 나중에 반영됩니다.",
+    budgetBandLabel: (from, to) =>
+      to === null ? `${from}억 이상` : from === 0 ? `${to}억 미만` : `${from}억대`,
+    budgetSummary: (band, count) => `${band}에서 ${count.toLocaleString("ko-KR")}건이 거래됐습니다.`,
+    budgetPeriods: (periods) => `${periods} 신고분 기준`,
+    budgetDistricts: "거래가 많은 지역",
+    budgetEmpty: "이 예산대에는 신고된 거래가 없습니다.",
+    budgetLower: "한 칸 아래",
+    budgetHigher: "한 칸 위",
+    budgetFloor: (floor) => `${floor}층`,
+    title: "7억대로 살 수 있는 서울 아파트 - 최근 실거래",
+    titleSale: "서울 아파트 매매 시세",
+    titleJeonse: "서울 아파트 전세 시세",
+    titleWolse: "서울 아파트 월세 시세",
+    navDigest: "데일리 다이제스트",
+    navRealestatePrices: "아파트 시세",
+    navAll: "전체",
+    navSale: "매매",
+    navJeonse: "전세",
+    navWolse: "월세",
+    navDealSearch: "거래내역 검색",
+    navNews: "뉴스",
+    navRates: "금리 비교",
+    overallHeading: "서울 전체 평균",
+    districtHeading: "자치구별 시세",
+    loading: "불러오는 중...",
+    updatedPrefix: "기준",
+    thDistrict: "지역",
+    thSale: "매매",
+    thJeonse: "전세",
+    thWolse: "월세",
+    thPerPyeong: "평당가",
+    thPerPyeongDeposit: "평당 보증금",
+    thArea: (m2) => `${m2}㎡ 환산`,
+    districtTitle: (name) => `${name} 아파트 시세`,
+    thType: "구분",
+    otherDistricts: "다른 지역",
+    backToAll: "서울 전체 시세",
+    trendHeading: "최근 추이",
+    trendRange: (from, to, n) => `${from} ~ ${to} · ${n}일`,
+    trendTooShort: "추이는 기록이 이틀 이상 쌓이면 표시됩니다.",
+    trendValue: (v) => `현재 ${v}`,
+    areaLabel: "평형",
+    areaUnit: "㎡",
+    thDeposit: "평균 보증금",
+    thMonthly: "평균 월세",
+    thCount: "거래건수",
+    thRatio: "전세가율",
+    overall: "서울 전체",
+    countUnit: (n) => `${n.toLocaleString("ko-KR")}건`,
+    lowSample: (n) => `신고 ${n}건`,
+    lowSampleTitle: (n) => `이번 달 신고가 ${n}건뿐이라 평균을 내지 않았습니다.`,
+    changeVs: (d) => `${d} 대비`,
+    prevTagTitle: "이번 달 신고가 아직 적어 지난달 기준으로 보여줍니다.",
+    staleTagTitle: "이 지역은 오늘 실거래 조회에 실패해 지난번에 받은 값을 그대로 보여줍니다.",
+    monthlyPrefix: "월 ",
+    note: "국토교통부에 신고된 이번 달 아파트 실거래 기준이며, 전용면적 평당가입니다. 공급면적으로 환산한 시세보다 높게 보일 수 있습니다. 84㎡ 환산가는 평당가에 25.41평을 곱한 값으로, 같은 구 안에서도 단지·층·연식에 따라 실제 거래가는 크게 다릅니다. 신고 건수가 5건 미만인 지역은 한두 건이 평균을 좌우하므로 이번 달 값을 쓰지 않고, 지난달 값이 있으면 기준 월(예: 7월)을 붙여 대신 보여줍니다. 신고 기한이 계약 후 30일이라 매달 초에는 이번 달 신고가 적습니다. 전세가율은 전세 평당 보증금을 매매 평당가로 나눈 값으로, 높을수록 매매가 대비 전세가 비싸다는 뜻입니다. 매매·전세 표본이 모두 충분하고 같은 달 기준일 때만 냅니다.",
+    footerSource: "출처: 국토교통부 아파트 매매·전월세 실거래가 공개시스템. 신고된 거래만 집계되며 신고 기한(계약 후 30일)이 있어 최근 거래는 나중에 반영됩니다.",
+    footerPrivacy: "개인정보처리방침",
+    loadError: "실거래가를 불러오지 못했습니다.",
+    retry: "다시 시도",
+    empty: "표시할 지역이 없습니다.",
+  },
+  en: {
+    budgetHeading: "Search by budget",
+    budgetLinksHeading: "Deals by budget",
+    budgetLabel: "Budget",
+    budgetUnit: "\u00a0100M KRW",
+    budgetNote:
+      "These are transactions filed with Korea's Ministry of Land, not listings for sale. Prices vary widely by floor and building even within the same complex, and filings are due within 30 days of contract, so the most recent deals show up later.",
+    budgetBandLabel: (from, to) =>
+      to === null ? `\u20a9${from / 10}B and up` : from === 0 ? `under \u20a9${to / 10}B` : `\u20a9${from / 10}B\u2013${to / 10}B`,
+    budgetSummary: (band, count) => `${count.toLocaleString("en-US")} deals filed in the ${band} range.`,
+    budgetPeriods: (periods) => `Filed in ${periods}`,
+    budgetDistricts: "Most active districts",
+    budgetEmpty: "No filed deals in this range.",
+    budgetLower: "One step down",
+    budgetHigher: "One step up",
+    budgetFloor: (floor) => `${floor}F`,
+    title: "Seoul Apartments Around ₩0.7B - Recent Deals",
+    titleSale: "Seoul Apartment Sale Prices",
+    titleJeonse: "Seoul Apartment Jeonse Prices",
+    titleWolse: "Seoul Apartment Monthly Rent",
+    navDigest: "Daily digest",
+    navRealestatePrices: "Apartment prices",
+    navAll: "All",
+    navSale: "Sale",
+    navJeonse: "Jeonse",
+    navWolse: "Monthly rent",
+    navDealSearch: "Deal search",
+    navNews: "News",
+    navRates: "Rates",
+    overallHeading: "Seoul average",
+    districtHeading: "By district",
+    loading: "Loading...",
+    updatedPrefix: "As of",
+    thDistrict: "District",
+    thSale: "Sale",
+    thJeonse: "Jeonse",
+    thWolse: "Monthly rent",
+    thPerPyeong: "Per pyeong",
+    thPerPyeongDeposit: "Deposit per pyeong",
+    thArea: (m2) => `For ${m2}m²`,
+    districtTitle: (name) => `${name} apartment prices`,
+    thType: "Type",
+    otherDistricts: "Other districts",
+    backToAll: "All Seoul prices",
+    trendHeading: "Recent trend",
+    trendRange: (from, to, n) => `${from} – ${to} · ${n} days`,
+    trendTooShort: "The trend appears once more than one day of data is collected.",
+    trendValue: (v) => `now ${v}`,
+    areaLabel: "Unit size",
+    areaUnit: "m²",
+    thDeposit: "Avg deposit",
+    thMonthly: "Avg monthly",
+    thCount: "Transactions",
+    thRatio: "Jeonse ratio",
+    overall: "Seoul total",
+    countUnit: (n) => `${n.toLocaleString("en-US")}`,
+    lowSample: (n) => `${n} reported`,
+    lowSampleTitle: (n) => `Only ${n} transactions reported this month, so no average is shown.`,
+    changeVs: (d) => `vs ${d}`,
+    prevTagTitle: "Too few filings this month, so last month\u2019s figure is shown.",
+    staleTagTitle: "Today\u2019s filing lookup failed for this district, so the previous figures are shown.",
+    monthlyPrefix: "",
+    note: "Based on apartment transactions reported to Korea's MOLIT this month, priced per pyeong (3.3m²) of exclusive area — higher than figures quoted per gross area. The 84m² column multiplies the per-pyeong price by 25.41 pyeong; actual prices vary widely by complex, floor and age. Districts with fewer than 5 reported transactions fall back to last month's figure, tagged with that month; filings can lag up to 30 days, so early in a month there is little current data. The jeonse ratio divides the jeonse deposit per pyeong by the sale price per pyeong; it is only shown when both have enough transactions from the same month.",
+    footerSource: "Source: MOLIT real transaction price disclosure. Only reported deals are counted, and reporting can lag up to 30 days after contract.",
+    footerPrivacy: "Privacy Policy",
+    loadError: "Could not load transaction data.",
+    retry: "Retry",
+    empty: "No districts to show.",
+  },
+};
+
+const MIN_SAMPLE = 5;
+const KIND_FIELDS = {
+  sale: { metric: "sale", value: "avgPricePerPyeong10k" },
+  jeonse: { metric: "jeonse", value: "avgDepositPerPyeong10k" },
+  wolse: { metric: "wolse", value: "avgDeposit10k" },
+};
+
+const AREA_OPTIONS = [59, 84, 114];
+const DEFAULT_AREA_M2 = 84;
+const normalizeArea = (value) =>
+  AREA_OPTIONS.includes(Number(value)) ? Number(value) : DEFAULT_AREA_M2;
+
+let areaM2 = normalizeArea(new URLSearchParams(location.search).get("area"));
+
+const districtName = document.querySelector('meta[name="realestate-district"]')?.getAttribute("content") ?? null;
+
+const kind = (() => {
+  const value = document.querySelector('meta[name="realestate-kind"]')?.getAttribute("content") ?? null;
+  return value && KIND_FIELDS[value] ? value : null;
+})();
+
+let locale = (() => {
+  const saved = window.localStorage.getItem("lang");
+  return saved === "en" || saved === "ko" ? saved : "ko";
+})();
+const t = (key) => T[locale][key];
+
+const THEME_ICONS = { auto: "🌓", light: "☀️", dark: "🌙" };
+let theme = (() => {
+  const saved = window.localStorage.getItem("theme");
+  return saved === "light" || saved === "dark" ? saved : "auto";
+})();
+function applyTheme(next) {
+  theme = next;
+  window.localStorage.setItem("theme", theme);
+  if (theme === "auto") document.documentElement.removeAttribute("data-theme");
+  else document.documentElement.setAttribute("data-theme", theme);
+  document.querySelector("#theme-toggle span").textContent = THEME_ICONS[theme];
+}
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
+
+function setText(id, text) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = text;
+}
+
+const hasEnoughSample = (metric) => Boolean(metric) && (metric.transactionCount ?? 0) >= MIN_SAMPLE;
+
+function metricOf(entry, k) {
+  const field = KIND_FIELDS[k];
+  const metric = entry?.[field.metric];
+  if (!hasEnoughSample(metric)) return null;
+  const value = metric[field.value];
+  return typeof value === "number" && Number.isFinite(value) ? metric : null;
+}
+
+const valueOf = (metric, k) => metric?.[KIND_FIELDS[k].value] ?? null;
+
+function resolveMetric(entry, k) {
+  const current = metricOf(entry, k);
+  if (current) return { metric: current, isPrevious: false };
+  const previous = entry?.prev ? metricOf(entry.prev, k) : null;
+  if (previous) return { metric: previous, isPrevious: true };
+  return null;
+}
+
+const MONTHS_EN = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+function monthLabel(period) {
+  const month = Number(String(period ?? "").slice(4, 6));
+  if (!Number.isInteger(month) || month < 1 || month > 12) return "";
+  return locale === "en" ? MONTHS_EN[month - 1] : `${month}월`;
+}
+
+function jeonseRatio(entry) {
+  const sale = resolveMetric(entry, "sale");
+  const jeonse = resolveMetric(entry, "jeonse");
+  if (!sale || !jeonse || sale.isPrevious !== jeonse.isPrevious) return null;
+  const salePrice = valueOf(sale.metric, "sale");
+  const jeonsePrice = valueOf(jeonse.metric, "jeonse");
+  if (!salePrice || !jeonsePrice) return null;
+  return { ratio: (jeonsePrice / salePrice) * 100, isPrevious: sale.isPrevious };
+}
+
+const formatPercent = (value) =>
+  typeof value === "number" && Number.isFinite(value) ? `${value.toFixed(1)}%` : "-";
+
+function prevTagHtml(isPrevious) {
+  if (!isPrevious) return "";
+  const label = monthLabel(cache.realestate?.previousPeriod);
+  if (!label) return "";
+  return ` <span class="prev-tag" title="${escapeHtml(t("prevTagTitle"))}">${escapeHtml(label)}</span>`;
+}
+
+function areaPrice(pricePerPyeong10k) {
+  if (typeof pricePerPyeong10k !== "number" || !Number.isFinite(pricePerPyeong10k)) return null;
+  return Math.round(pricePerPyeong10k * (areaM2 / 3.3058));
+}
+
+function formatMan(value10k) {
+  if (typeof value10k !== "number" || !Number.isFinite(value10k)) return "-";
+  return locale === "en"
+    ? `₩${(value10k / 100).toLocaleString("en-US", { maximumFractionDigits: 1 })}M`
+    : `${Math.round(value10k).toLocaleString("ko-KR")}만원`;
+}
+
+function formatEok(value10k) {
+  if (typeof value10k !== "number" || !Number.isFinite(value10k)) return "-";
+  const n = Math.round(value10k);
+  if (locale === "en") return `₩${(n / 100).toLocaleString("en-US", { maximumFractionDigits: 0 })}M`;
+  const eok = Math.floor(n / 10000);
+  const man = n % 10000;
+  if (!eok) return `${man.toLocaleString("ko-KR")}만원`;
+  if (!man) return `${eok}억원`;
+  return `${eok}억 ${man.toLocaleString("ko-KR")}만원`;
+}
+
+function changeHtml(change, baselineDate) {
+  if (!change || typeof change.value10k !== "number" || change.value10k === 0) return "";
+  const dir = change.value10k > 0 ? "up" : "down";
+  const arrow = change.value10k > 0 ? "▲" : "▼";
+  const title = baselineDate ? ` title="${escapeHtml(t("changeVs")(baselineDate))}"` : "";
+  return ` <span class="change ${dir}"${title}>${arrow}${formatMan(Math.abs(change.value10k))}</span>`;
+}
+
+const countHtml = (metric) =>
+  typeof metric?.transactionCount === "number"
+    ? ` <span class="count">${escapeHtml(t("countUnit")(metric.transactionCount))}</span>`
+    : "";
+
+function lowSampleHtml(metric) {
+  const n = metric?.transactionCount ?? 0;
+  return `<span class="low-sample" title="${escapeHtml(t("lowSampleTitle")(n))}">${escapeHtml(t("lowSample")(n))}</span>`;
+}
+
+function cellsFor(entry, k) {
+  const resolved = resolveMetric(entry, k);
+  if (!resolved) {
+    const raw = entry?.[KIND_FIELDS[k].metric];
+    return [raw ? lowSampleHtml(raw) : "-", "-", "-"];
+  }
+  const { metric, isPrevious } = resolved;
+  const tag = prevTagHtml(isPrevious);
+  const change = (c, d) => (isPrevious ? "" : changeHtml(c, d));
+
+  if (k === "wolse") {
+    return [
+      `<span class="price-strong">${formatMan(metric.avgDeposit10k)}</span>${change(metric.depositChange, metric.baselineDate)}${tag}`,
+      `<span class="price-strong">${escapeHtml(t("monthlyPrefix"))}${formatMan(metric.avgMonthlyRent10k)}</span>${change(metric.monthlyRentChange, metric.baselineDate)}`,
+      `<span class="count">${escapeHtml(t("countUnit")(metric.transactionCount))}</span>`,
+    ];
+  }
+  const perPyeong = valueOf(metric, k);
+  const out = [
+    `<span class="price-strong">${formatMan(perPyeong)}</span>${change(metric.change, metric.baselineDate)}${tag}`,
+    `<span class="price-strong">${formatEok(areaPrice(perPyeong))}</span>`,
+  ];
+  if (k === "jeonse") {
+    const ratio = jeonseRatio(entry);
+    out.push(ratio ? `<span class="ratio">${formatPercent(ratio.ratio)}</span>` : "-");
+  }
+  out.push(`<span class="count">${escapeHtml(t("countUnit")(metric.transactionCount))}</span>`);
+  return out;
+}
+
+function allCells(entry) {
+  return ["sale", "jeonse", "wolse"].map((k) => {
+    const resolved = resolveMetric(entry, k);
+    if (!resolved) {
+      const raw = entry?.[KIND_FIELDS[k].metric];
+      return raw ? lowSampleHtml(raw) : "-";
+    }
+    const { metric, isPrevious } = resolved;
+    const tag = prevTagHtml(isPrevious);
+    if (k === "wolse") {
+      return `${formatMan(metric.avgDeposit10k)} / ${escapeHtml(t("monthlyPrefix"))}${formatMan(metric.avgMonthlyRent10k)}${countHtml(metric)}${tag}`;
+    }
+    const change = isPrevious ? "" : changeHtml(metric.change, metric.baselineDate);
+    return `${formatMan(valueOf(metric, k))}${change}${countHtml(metric)}${tag}`;
+  });
+}
+
+function headLabels() {
+  if (districtName) return [t("thType"), t("thPerPyeong"), t("thArea")(areaM2), t("thCount")];
+  if (!kind) return [t("thDistrict"), t("thSale"), t("thJeonse"), t("thWolse")];
+  if (kind === "wolse") return [t("thDistrict"), t("thDeposit"), t("thMonthly"), t("thCount")];
+  if (kind === "jeonse") {
+    return [t("thDistrict"), t("thPerPyeongDeposit"), t("thArea")(areaM2), t("thRatio"), t("thCount")];
+  }
+  return [t("thDistrict"), t("thPerPyeong"), t("thArea")(areaM2), t("thCount")];
+}
+
+function renderHead() {
+  document.getElementById("district-head").innerHTML =
+    `<tr>${headLabels().map((label) => `<th>${escapeHtml(label)}</th>`).join("")}</tr>`;
+}
+
+function sortedDistricts(districts) {
+  const key = kind ?? "sale";
+  return [...districts].sort((a, b) => {
+    const av = valueOf(resolveMetric(a, key)?.metric, key);
+    const bv = valueOf(resolveMetric(b, key)?.metric, key);
+    if (av === null && bv === null) return (a.name ?? "").localeCompare(b.name ?? "");
+    if (av === null) return 1;
+    if (bv === null) return -1;
+    return bv - av;
+  });
+}
+
+function staleTagHtml(entry) {
+  const at = entry?.staleAt;
+  if (!at) return "";
+  const date = new Date(at);
+  if (Number.isNaN(date.getTime())) return "";
+  const label = date.toLocaleDateString(locale === "en" ? "en-US" : "ko-KR", {
+    timeZone: "Asia/Seoul",
+    month: "numeric",
+    day: "numeric",
+  });
+  return ` <span class="prev-tag" title="${escapeHtml(t("staleTagTitle"))}">${escapeHtml(label)}</span>`;
+}
+
+const DISTRICT_FILES = {
+  종로구: "jongno", 중구: "jung", 용산구: "yongsan", 성동구: "seongdong", 광진구: "gwangjin",
+  동대문구: "dongdaemun", 중랑구: "jungnang", 성북구: "seongbuk", 강북구: "gangbuk", 도봉구: "dobong",
+  노원구: "nowon", 은평구: "eunpyeong", 서대문구: "seodaemun", 마포구: "mapo", 양천구: "yangcheon",
+  강서구: "gangseo", 구로구: "guro", 금천구: "geumcheon", 영등포구: "yeongdeungpo", 동작구: "dongjak",
+  관악구: "gwanak", 서초구: "seocho", 강남구: "gangnam", 송파구: "songpa", 강동구: "gangdong",
+};
+
+function districtLinkHtml(label) {
+  const slug = DISTRICT_FILES[label];
+  return slug ? `<a href="./district-${slug}.html">${escapeHtml(label)}</a>` : escapeHtml(label);
+}
+
+function rowHtml(entry, label, isOverall) {
+  const labels = headLabels();
+  const cells = kind ? cellsFor(entry, kind) : allCells(entry);
+  const body = cells
+    .map((cell, i) => `<td data-label="${escapeHtml(labels[i + 1])}">${cell}</td>`)
+    .join("");
+  const name = isOverall ? escapeHtml(label) : districtLinkHtml(label);
+  return `<tr class="${isOverall ? "overall-row" : ""}"><td>${name}${staleTagHtml(entry)}</td>${body}</tr>`;
+}
+
+function districtRowsHtml(entry) {
+  const labels = [t("thSale"), t("thJeonse"), t("thWolse")];
+  return ["sale", "jeonse", "wolse"]
+    .map((k, i) => {
+      const resolved = resolveMetric(entry, k);
+      if (!resolved) {
+        const raw = entry?.[KIND_FIELDS[k].metric];
+        return `<tr><td>${escapeHtml(labels[i])}</td><td data-label="${escapeHtml(t("thPerPyeong"))}">${raw ? lowSampleHtml(raw) : "-"}</td><td data-label="${escapeHtml(t("thArea")(areaM2))}">-</td><td data-label="${escapeHtml(t("thCount"))}">-</td></tr>`;
+      }
+      const { metric, isPrevious } = resolved;
+      const tag = prevTagHtml(isPrevious);
+      const change = isPrevious ? "" : changeHtml(metric.change, metric.baselineDate);
+      const price =
+        k === "wolse"
+          ? `<span class="price-strong">${formatMan(metric.avgDeposit10k)}</span> / <span class="price-strong">${escapeHtml(t("monthlyPrefix"))}${formatMan(metric.avgMonthlyRent10k)}</span>${tag}`
+          : `<span class="price-strong">${formatMan(valueOf(metric, k))}</span>${change}${tag}`;
+      const area =
+        k === "wolse" ? "-" : `<span class="price-strong">${formatEok(areaPrice(valueOf(metric, k)))}</span>`;
+      return `<tr><td>${escapeHtml(labels[i])}</td><td data-label="${escapeHtml(t("thPerPyeong"))}">${price}</td><td data-label="${escapeHtml(t("thArea")(areaM2))}">${area}</td><td data-label="${escapeHtml(t("thCount"))}"><span class="count">${escapeHtml(t("countUnit")(metric.transactionCount))}</span></td></tr>`;
+    })
+    .join("");
+}
+
+function renderTable(realestate) {
+  const grid = document.getElementById("district-grid");
+  if (districtName) {
+    const entry = districtEntry();
+    grid.innerHTML = entry ? districtRowsHtml(entry) : `<tr><td colspan="4">${escapeHtml(t("empty"))}</td></tr>`;
+    return;
+  }
+  const districts = realestate?.districts ?? [];
+  if (!realestate?.overall && !districts.length) {
+    grid.innerHTML = `<tr><td colspan="4">${escapeHtml(t("empty"))}</td></tr>`;
+    return;
+  }
+  grid.innerHTML =
+    (realestate.overall ? rowHtml(realestate.overall, t("overall"), true) : "") +
+    sortedDistricts(districts)
+      .map((d) => rowHtml(d, d.name ?? "-", false))
+      .join("");
+}
+
+function renderOverall(realestate) {
+  const box = document.getElementById("overall-cards");
+  const overall = districtName ? districtEntry() : realestate?.overall;
+  if (!overall) {
+    box.innerHTML = "";
+    return;
+  }
+  const card = (label, value, sub) =>
+    `<div class="overall-card"><div class="label">${escapeHtml(label)}</div>` +
+    `<div class="value">${value}</div>` +
+    (sub ? `<div class="sub">${sub}</div>` : "") +
+    `</div>`;
+
+  if (districtName) {
+    const sale = resolveMetric(overall, "sale")?.metric;
+    const ratio = jeonseRatio(overall);
+    box.innerHTML =
+      (sale
+        ? card(t("thPerPyeong"), formatMan(valueOf(sale, "sale")), "") +
+          card(t("thArea")(areaM2), formatEok(areaPrice(valueOf(sale, "sale"))), "") +
+          card(t("thCount"), escapeHtml(t("countUnit")(sale.transactionCount)), "")
+        : card(t("thSale"), "-", "")) +
+      (ratio ? card(t("thRatio"), formatPercent(ratio.ratio), "") : "");
+    return;
+  }
+
+  if (!kind) {
+    box.innerHTML = ["sale", "jeonse", "wolse"]
+      .map((k) => {
+        const metric = resolveMetric(overall, k)?.metric;
+        const label = k === "sale" ? t("thSale") : k === "jeonse" ? t("thJeonse") : t("thWolse");
+        if (!metric) return card(label, "-", "");
+        if (k === "wolse") {
+          return card(
+            label,
+            `${formatMan(metric.avgDeposit10k)} / ${escapeHtml(t("monthlyPrefix"))}${formatMan(metric.avgMonthlyRent10k)}`,
+            escapeHtml(t("countUnit")(metric.transactionCount))
+          );
+        }
+        return card(
+          label,
+          formatMan(valueOf(metric, k)),
+          `${escapeHtml(t("thArea")(areaM2))} ${formatEok(areaPrice(valueOf(metric, k)))} · ${escapeHtml(t("countUnit")(metric.transactionCount))}`
+        );
+      })
+      .join("");
+    return;
+  }
+
+  const metric = resolveMetric(overall, kind)?.metric;
+  if (!metric) {
+    box.innerHTML = card(t("overall"), "-", "");
+    return;
+  }
+  if (kind === "wolse") {
+    box.innerHTML =
+      card(t("thDeposit"), formatMan(metric.avgDeposit10k), "") +
+      card(t("thMonthly"), `${escapeHtml(t("monthlyPrefix"))}${formatMan(metric.avgMonthlyRent10k)}`, "") +
+      card(t("thCount"), escapeHtml(t("countUnit")(metric.transactionCount)), "");
+    return;
+  }
+  const perPyeong = valueOf(metric, kind);
+  const ratio = kind === "jeonse" ? jeonseRatio(overall) : null;
+  box.innerHTML =
+    card(kind === "jeonse" ? t("thPerPyeongDeposit") : t("thPerPyeong"), formatMan(perPyeong), "") +
+    card(t("thArea")(areaM2), formatEok(areaPrice(perPyeong)), "") +
+    (ratio ? card(t("thRatio"), formatPercent(ratio.ratio), "") : "") +
+    card(t("thCount"), escapeHtml(t("countUnit")(metric.transactionCount)), "");
+}
+
+const hasAreaColumn = Boolean(districtName) || kind === "sale" || kind === "jeonse";
+
+function districtEntry() {
+  if (!districtName) return null;
+  return (cache.realestate?.districts ?? []).find((d) => d.name === districtName) ?? null;
+}
+
+function renderAreaControls() {
+  const box = document.getElementById("area-controls");
+  box.hidden = !hasAreaColumn;
+  if (!hasAreaColumn) return;
+
+  document.getElementById("area-label").textContent = t("areaLabel");
+  const select = document.getElementById("area-select");
+  select.innerHTML = AREA_OPTIONS.map(
+    (m2) => `<option value="${m2}"${m2 === areaM2 ? " selected" : ""}>${m2}${escapeHtml(t("areaUnit"))}</option>`
+  ).join("");
+}
+
+function syncAreaUrl() {
+  const params = new URLSearchParams(location.search);
+  if (areaM2 === DEFAULT_AREA_M2) params.delete("area");
+  else params.set("area", String(areaM2));
+  const query = params.toString();
+  const url = `${location.pathname}${query ? `?${query}` : ""}`;
+  if (url !== `${location.pathname}${location.search}`) history.replaceState(null, "", url);
+}
+
+function sparklineSvg(values) {
+  const w = 280, h = 56, pad = 4;
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+  const range = max - min || 1;
+  const step = values.length > 1 ? (w - pad * 2) / (values.length - 1) : 0;
+  const points = values
+    .map((v, i) => {
+      const x = pad + i * step;
+      const y = h - pad - ((v - min) / range) * (h - pad * 2);
+      return `${x.toFixed(1)},${y.toFixed(1)}`;
+    })
+    .join(" ");
+  const last = values[values.length - 1];
+  const lastX = pad + (values.length - 1) * step;
+  const lastY = h - pad - ((last - min) / range) * (h - pad * 2);
+  const rising = values.length > 1 && last >= values[0];
+  const color = rising ? "#d64545" : "#2f6fed";
+  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" role="img">
+      <polyline points="${points}" fill="none" stroke="${color}" stroke-width="2" vector-effect="non-scaling-stroke" />
+      <circle cx="${lastX.toFixed(1)}" cy="${lastY.toFixed(1)}" r="2.5" fill="${color}" />
+    </svg>`;
+}
+
+function trendSeries(history) {
+  const key = kind ?? "sale";
+  const field = KIND_FIELDS[key];
+  const code = districtName ? districtEntry()?.code : null;
+  return (history ?? [])
+    .map((day) => {
+      const scope = code ? (day?.districts ?? []).find((d) => d.code === code) : day?.overall;
+      const metric = scope?.[field.metric];
+      if (!hasEnoughSample(metric)) return null;
+      const value = metric[field.value];
+      return typeof value === "number" && Number.isFinite(value) ? { date: day.date, value } : null;
+    })
+    .filter(Boolean);
+}
+
+function renderDistrictSummary() {
+  const section = document.getElementById("district-summary-section");
+  const paragraphs = [...document.querySelectorAll("[data-summary-lang]")];
+  const filled = paragraphs.some((p) => (p.textContent ?? "").trim().length > 0);
+  section.hidden = !filled;
+  for (const p of paragraphs) p.hidden = p.getAttribute("data-summary-lang") !== locale;
+}
+
+function renderTrend() {
+  const section = document.getElementById("trend-section");
+  const series = trendSeries(cache.history);
+
+  document.getElementById("trend-heading").textContent = t("trendHeading");
+
+  if (series.length < 2) {
+    section.hidden = !cache.history;
+    document.getElementById("trend-chart").innerHTML = "";
+    document.getElementById("trend-meta").textContent = t("trendTooShort");
+    return;
+  }
+
+  section.hidden = false;
+  document.getElementById("trend-chart").innerHTML = sparklineSvg(series.map((p) => p.value));
+  const last = series[series.length - 1];
+  document.getElementById("trend-meta").textContent =
+    `${t("trendRange")(series[0].date, last.date, series.length)} · ${t("trendValue")(formatMan(last.value))}`;
+}
+
+const budgetBand10k = (() => {
+  const raw = document.querySelector('meta[name="budget-band"]')?.getAttribute("content");
+  if (raw === null || raw === undefined || String(raw).trim() === "") return null;
+  const value = Number(raw);
+  return Number.isFinite(value) && value >= 0 ? value : null;
+})();
+const isBudgetPage = budgetBand10k !== null;
+const budgetEnabled = isBudgetPage || (!kind && !districtName);
+const DEFAULT_BUDGET_EOK = 8;
+
+let budgetEok = (() => {
+  if (isBudgetPage) return Math.max(1, Math.round(budgetBand10k / 10000));
+  const raw = Number(new URLSearchParams(location.search).get("budget"));
+  return Number.isInteger(raw) && raw >= 1 && raw <= 60 ? raw : DEFAULT_BUDGET_EOK;
+})();
+
+const EOK = 10000;
+
+function bandFor(amount10k) {
+  const bands = cache.budget?.bands ?? [];
+  return bands.find((b) => amount10k >= b.min10k && (b.max10k === null || amount10k < b.max10k)) ?? null;
+}
+
+function bandLabel(band) {
+  return t("budgetBandLabel")(Math.round(band.min10k / EOK), band.max10k === null ? null : Math.round(band.max10k / EOK));
+}
+
+function dealWhen(date) {
+  const [, month, day] = String(date ?? "").split("-");
+  if (!month || !day) return "";
+  return locale === "en" ? `${MONTHS_EN[Number(month) - 1]} ${Number(day)}` : `${Number(month)}/${Number(day)}`;
+}
+
+function budgetDealHtml(deal) {
+  const place = [deal.district, deal.dong, deal.apt].filter(Boolean).join(" ");
+  const spec = [`${deal.area}㎡`, deal.floor ? t("budgetFloor")(deal.floor) : null].filter(Boolean).join(" · ");
+  return (
+    `<li class="budget-deal">` +
+    `<span class="place">${escapeHtml(place)}</span>` +
+    `<span class="spec">${escapeHtml(spec)}</span>` +
+    `<span class="when">${escapeHtml(dealWhen(deal.date))}</span>` +
+    `<span class="price">${escapeHtml(formatEok(deal.amount10k))}</span>` +
+    `</li>`
+  );
+}
+
+function budgetNavHtml(current) {
+  const bands = cache.budget?.bands ?? [];
+  const index = bands.findIndex((b) => b.min10k === current?.min10k);
+  const lower = index > 0 ? bands[index - 1] : null;
+  const higher = index >= 0 && index < bands.length - 1 ? bands[index + 1] : null;
+
+  const button = (band, key) =>
+    band
+      ? `<button type="button" data-budget-to="${Math.max(1, Math.round(band.min10k / EOK)) }">` +
+        `${escapeHtml(t(key))} · ${escapeHtml(bandLabel(band))}</button>`
+      : "";
+
+  const html = `${button(lower, "budgetLower")}${button(higher, "budgetHigher")}`;
+  return html ? `<div class="budget-nav">${html}</div>` : "";
+}
+
+function renderBudget() {
+  const section = document.getElementById("budget-section");
+  if (!budgetEnabled || !cache.budget?.bands?.length) {
+    section.hidden = true;
+    return;
+  }
+  section.hidden = false;
+
+  document.getElementById("budget-heading").textContent = t("budgetHeading");
+  document.getElementById("budget-label").textContent = t("budgetLabel");
+  document.getElementById("budget-unit").textContent = t("budgetUnit");
+  document.getElementById("budget-note").textContent = t("budgetNote");
+  document.getElementById("budget-controls").hidden = isBudgetPage;
+
+  const input = document.getElementById("budget-input");
+  if (String(budgetEok) !== input.value) input.value = String(budgetEok);
+
+  const band = bandFor(budgetEok * EOK);
+  const box = document.getElementById("budget-result");
+
+  if (!band) {
+    box.innerHTML = `<p class="budget-empty">${escapeHtml(t("budgetEmpty"))}</p>`;
+    return;
+  }
+
+  box.innerHTML = budgetBodyHtml(band, cache.budget.periods) + (isBudgetPage ? "" : budgetNavHtml(band));
+}
+
+function budgetBodyHtml(band, periodList) {
+  const periods = (periodList ?? [])
+    .map((p) => monthLabel(p))
+    .filter(Boolean)
+    .join(", ");
+  const districts = (band.districts ?? [])
+    .map((d) => `${escapeHtml(d.name)} ${d.count.toLocaleString(locale === "en" ? "en-US" : "ko-KR")}`)
+    .join(" · ");
+
+  return (
+    `<p class="budget-summary">${escapeHtml(t("budgetSummary")(bandLabel(band), band.count))}` +
+    (periods ? ` <span class="when">${escapeHtml(t("budgetPeriods")(periods))}</span>` : "") +
+    `</p>` +
+    (districts ? `<div class="budget-districts">${escapeHtml(t("budgetDistricts"))}: ${districts}</div>` : "") +
+    `<ul class="budget-deals">${band.deals.map(budgetDealHtml).join("")}</ul>`
+  );
+}
+
+function syncBudgetUrl() {
+  if (isBudgetPage) return;
+  const params = new URLSearchParams(location.search);
+  if (budgetEok === DEFAULT_BUDGET_EOK) params.delete("budget");
+  else params.set("budget", String(budgetEok));
+  const query = params.toString();
+  const url = `${location.pathname}${query ? `?${query}` : ""}`;
+  if (url !== `${location.pathname}${location.search}`) history.replaceState(null, "", url);
+}
+
+const NAV_KEYS = { all: "navAll", sale: "navSale", jeonse: "navJeonse", wolse: "navWolse", search: "navDealSearch" };
+
+function applyLocale() {
+  const suffix = kind === "sale" ? "titleSale" : kind === "jeonse" ? "titleJeonse" : kind === "wolse" ? "titleWolse" : "title";
+  const heading = districtName ? t("districtTitle")(districtName) : t(suffix);
+  document.title = heading;
+  document.getElementById("page-title").textContent = heading;
+  document.getElementById("overall-heading").textContent = t("overallHeading");
+  document.getElementById("district-heading").textContent = t("districtHeading");
+  document.getElementById("table-note").textContent = t("note");
+  setText("district-links-heading", t("otherDistricts"));
+  setText("budget-links-heading", t("budgetLinksHeading"));
+  document.getElementById("footer-source").textContent = t("footerSource");
+  document.getElementById("footer-privacy").textContent = t("footerPrivacy");
+  document.getElementById("nav-digest").textContent = t("navDigest");
+  document.getElementById("nav-news").textContent = t("navNews");
+  document.getElementById("nav-realestate").textContent = t("navRealestatePrices");
+  document.getElementById("nav-rates").textContent = t("navRates");
+  for (const link of document.querySelectorAll("[data-re-page]")) {
+    link.textContent = t(NAV_KEYS[link.getAttribute("data-re-page")]);
+  }
+  document.documentElement.setAttribute("lang", locale);
+}
+
+function renderUpdated(realestate) {
+  const period = realestate?.period;
+  const updatedAt = realestate?.updatedAt;
+  const text = period
+    ? `${t("updatedPrefix")}: ${String(period).slice(0, 4)}.${String(period).slice(4, 6)}` +
+      (updatedAt
+        ? ` · ${new Date(updatedAt).toLocaleDateString(locale === "en" ? "en-US" : "ko-KR", { timeZone: "Asia/Seoul", dateStyle: "medium" })}`
+        : "")
+    : "-";
+  document.getElementById("updated").textContent = text;
+}
+
+const cache = { realestate: null, history: null, budget: null };
+
+function renderAll() {
+  applyLocale();
+  renderAreaControls();
+  renderHead();
+  if (!cache.realestate) return;
+  renderOverall(cache.realestate);
+  renderTable(cache.realestate);
+  renderDistrictSummary();
+  renderTrend();
+  renderBudget();
+  renderUpdated(cache.realestate);
+}
+
+function reportLoadFailure(error) {
+  window.analytics?.event("exception", {
+    description: `load realestate: ${error?.message ?? error}`.slice(0, 100),
+    fatal: true,
+  });
+}
+
+async function main() {
+  applyTheme(theme);
+  applyLocale();
+  renderAreaControls();
+  renderDistrictSummary();
+  renderHead();
+  try {
+    const res = await fetch(`./data/realestate.json?_=${Date.now()}`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    cache.realestate = await res.json();
+    renderAll();
+
+    try {
+      const trendRes = await fetch(`./data/realestate-history-lite.json?_=${Date.now()}`);
+      if (trendRes.ok) {
+        cache.history = await trendRes.json();
+        renderTrend();
+      }
+    } catch {
+    }
+
+    if (budgetEnabled) {
+      try {
+        const budgetRes = await fetch(`./data/budget-deals.json?_=${Date.now()}`);
+        if (budgetRes.ok) {
+          cache.budget = await budgetRes.json();
+          renderBudget();
+        }
+      } catch {
+      }
+    }
+  } catch (error) {
+    reportLoadFailure(error);
+    document.getElementById("district-grid").innerHTML =
+      `<tr><td colspan="4">${escapeHtml(t("loadError"))} <button type="button" id="load-retry">${escapeHtml(t("retry"))}</button></td></tr>`;
+    document.getElementById("load-retry")?.addEventListener("click", (e) => {
+      e.currentTarget.disabled = true;
+      main();
+    });
+  }
+}
+
+document.getElementById("area-controls").addEventListener("change", (e) => {
+  if (e.target?.id !== "area-select") return;
+  areaM2 = normalizeArea(e.target.value);
+  syncAreaUrl();
+  renderAll();
+  window.analytics?.event("realestate_area", { area_m2: String(areaM2), realestate_kind: kind ?? "all" });
+});
+
+function setBudget(next, source) {
+  const value = Math.min(60, Math.max(1, Math.round(Number(next))));
+  if (!Number.isFinite(value) || value === budgetEok) return;
+  budgetEok = value;
+  syncBudgetUrl();
+  renderBudget();
+  window.analytics?.event("realestate_budget", { budget_eok: String(budgetEok), source });
+}
+
+document.getElementById("budget-input").addEventListener("input", (e) => {
+  const raw = Number(e.target.value);
+  if (!Number.isFinite(raw) || raw < 1) return;
+  setBudget(raw, "input");
+});
+
+document.getElementById("budget-result").addEventListener("click", (e) => {
+  const to = e.target.closest("[data-budget-to]")?.getAttribute("data-budget-to");
+  if (to) setBudget(to, "nav");
+});
+
+document.getElementById("theme-toggle").addEventListener("click", () => {
+  const order = ["auto", "light", "dark"];
+  applyTheme(order[(order.indexOf(theme) + 1) % order.length]);
+});
+
+document.getElementById("lang-toggle").addEventListener("click", () => {
+  locale = locale === "ko" ? "en" : "ko";
+  window.localStorage.setItem("lang", locale);
+  renderAll();
+  window.analytics?.event("language_switch", { site_language: locale });
+});
+
+main();
+</script>
+</body>
+</html>

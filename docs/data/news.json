@@ -1,9 +1,163 @@
 {
-  "updatedAt": "2026-08-17T07:57:09.548Z",
+  "updatedAt": "2026-08-17T14:32:27.166Z",
   "date": "2026-08-17",
   "items": [
     {
-      "title": "[부동산 손품노트] 취득·보유·양도·상속·증여세… 집 관련 5가지 세금 집중해부",
+      "title": "[속보]뉴욕증시, 이란 불확실성 속 혼조 출발.…나스닥 0.01%↑",
+      "link": "https://www.newsis.com/view/NISX20260817_0003751699",
+      "publishedAt": "2026-08-17T13:39:55.000Z",
+      "source": "뉴시스 경제",
+      "category": "stocks",
+      "preview": "후속기사가 이어집니다 ◎공감언론 뉴시스 ksk@newsis.com",
+      "dupes": []
+    },
+    {
+      "title": "美 경제학자 80% \"올해 내 금리인상 없을 것\"",
+      "link": "https://www.hankyung.com/article/202608175594i",
+      "publishedAt": "2026-08-17T13:06:07.000Z",
+      "source": "한국경제 경제",
+      "category": "rates",
+      "preview": null,
+      "dupes": []
+    },
+    {
+      "title": "서울 전세, 7년새 3만가구 증발…반전세 등 월세는 5만가구 늘어",
+      "link": "https://www.mk.co.kr/news/realestate/12129585",
+      "publishedAt": "2026-08-17T11:30:11.000Z",
+      "source": "매일경제 부동산",
+      "category": "realestate",
+      "preview": "7년새 전세 비중 69.7→61.9% 월세는 30.3→38.1%로 상승 보유세 강화 미칠 영향에 촉각서울 아파트 임대차 시장의 무게추가 전세에서 월세로 빠르게 기울고 있다. 최근 ..",
+      "dupes": [],
+      "context": [
+        {
+          "kind": "realestate",
+          "href": "./apartment-jeonse.html",
+          "label": "서울 전체 아파트 84㎡ 전세",
+          "labelEn": "Seoul apartment 84㎡ jeonse",
+          "value": "6억 5,202만원",
+          "valueEn": "₩652M",
+          "note": "8월 신고 2,539건 · 8/10 대비 +1.3%",
+          "noteEn": "2,539 deals in Aug · +1.3% vs Aug 10"
+        }
+      ]
+    },
+    {
+      "title": "中, 자동차판매 -21%·부동산 투자 -19%…중국경제 '빨간불'",
+      "link": "https://www.hankyung.com/article/202608175454i",
+      "publishedAt": "2026-08-17T10:06:43.000Z",
+      "source": "한국경제 경제",
+      "category": "realestate",
+      "preview": null,
+      "dupes": []
+    },
+    {
+      "title": "'닥치고 공급' 또다른 논쟁…용산, 주택 공급이냐 공원 조성이냐",
+      "link": "https://www.hankyung.com/article/2026081753671",
+      "publishedAt": "2026-08-17T09:38:46.000Z",
+      "source": "한국경제 부동산",
+      "category": "realestate",
+      "preview": null,
+      "dupes": [],
+      "context": [
+        {
+          "kind": "realestate",
+          "href": "./district-yongsan.html",
+          "label": "용산구 아파트 84㎡ 매매",
+          "labelEn": "용산구 apartment 84㎡ sale",
+          "value": "20억 2,974만원",
+          "valueEn": "₩2,030M",
+          "note": "8월 신고 5건",
+          "noteEn": "5 deals in Aug"
+        }
+      ]
+    },
+    {
+      "title": "정부, ISA 세제 손질…부동산은 국회 논의",
+      "link": "https://www.hankyung.com/article/2026081753061",
+      "publishedAt": "2026-08-17T09:36:00.000Z",
+      "source": "한국경제 경제",
+      "category": "realestate",
+      "preview": null,
+      "dupes": []
+    },
+    {
+      "title": "환율·채권, 올해 최저치 찍은 환율, 1300원대 눈앞",
+      "link": "https://www.hankyung.com/article/2026081753841",
+      "publishedAt": "2026-08-17T09:17:21.000Z",
+      "source": "한국경제 경제",
+      "category": "rates",
+      "preview": null,
+      "dupes": []
+    },
+    {
+      "title": "규제 풍선효과…성남 중원 집값 1주새 0.55% 올라",
+      "link": "https://www.hankyung.com/article/2026081753931",
+      "publishedAt": "2026-08-17T09:16:30.000Z",
+      "source": "한국경제 부동산",
+      "category": "other",
+      "preview": null,
+      "dupes": []
+    },
+    {
+      "title": "\"폐점 부지에도 짓지마\"…주민 반발에 막힌 청년·노인주택",
+      "link": "https://www.hankyung.com/article/2026081753691",
+      "publishedAt": "2026-08-17T08:56:37.000Z",
+      "source": "한국경제 부동산",
+      "category": "realestate",
+      "preview": null,
+      "dupes": []
+    },
+    {
+      "title": "용산 어린이정원에 '청년 주택' 추진",
+      "link": "https://www.mk.co.kr/news/realestate/12129512",
+      "publishedAt": "2026-08-17T08:56:33.000Z",
+      "source": "매일경제 부동산",
+      "category": "realestate",
+      "preview": "이재명 정부가 서울 용산어린이정원 용지에 청년층을 위한 대규모 임대주택 단지를 조성하는 방안을 적극 검토하고 있는 것으로 전해졌다. 서울 노른자 땅에 민간 분양이 아닌 공공 청년주..",
+      "dupes": [],
+      "context": [
+        {
+          "kind": "realestate",
+          "href": "./district-yongsan.html",
+          "label": "용산구 아파트 84㎡ 매매",
+          "labelEn": "용산구 apartment 84㎡ sale",
+          "value": "20억 2,974만원",
+          "valueEn": "₩2,030M",
+          "note": "8월 신고 5건",
+          "noteEn": "5 deals in Aug"
+        }
+      ]
+    },
+    {
+      "title": "금리·비과세·배당 예전만 못하다…늙어가는 상호금융의 위기",
+      "link": "https://www.hankyung.com/article/2026081753301",
+      "publishedAt": "2026-08-17T08:47:38.000Z",
+      "source": "한국경제 경제",
+      "category": "rates",
+      "preview": null,
+      "dupes": []
+    },
+    {
+      "title": "5대 은행 주담대 가산금리 고공행진…\"가계대출 억제 영향\"",
+      "link": "https://www.yna.co.kr/view/AKR20260817053700002",
+      "publishedAt": "2026-08-17T08:08:57.000Z",
+      "source": "연합뉴스 경제",
+      "category": "rates",
+      "preview": "(서울=연합뉴스) 한지훈 기자 = 주요 시중은행이 가계대출 총량 관리를 강화하면서 높은 수준의 가산금리를 유지 중인 것으로 나타났다.",
+      "dupes": [],
+      "context": [
+        {
+          "kind": "rates",
+          "label": "주택담보대출 최저금리",
+          "labelEn": "Lowest mortgage rate",
+          "value": "연 3.64%",
+          "valueEn": "3.64% p.a.",
+          "href": "./mortgage-rates.html"
+        }
+      ]
+    },
+    {
+      "title": "[부동산 손품노트] 취득·보유·양도·상속·증여세…집 관련 5가지 세금 집중해부",
       "link": "https://www.mk.co.kr/news/realestate/12129384",
       "publishedAt": "2026-08-17T07:50:53.000Z",
       "source": "매일경제 부동산",
@@ -25,10 +179,10 @@
           "href": "./apartment-jeonse.html",
           "label": "서울 전체 아파트 84㎡ 전세",
           "labelEn": "Seoul apartment 84㎡ jeonse",
-          "value": "6억 5,329만원",
-          "valueEn": "₩653M",
-          "note": "8월 신고 2,525건 · 8/10 대비 +1.5%",
-          "noteEn": "2,525 deals in Aug · +1.5% vs Aug 10"
+          "value": "6억 5,202만원",
+          "valueEn": "₩652M",
+          "note": "8월 신고 2,539건 · 8/10 대비 +1.3%",
+          "noteEn": "2,539 deals in Aug · +1.3% vs Aug 10"
         }
       ]
     },
@@ -64,10 +218,10 @@
           "href": "./apartment-sale.html",
           "label": "서울 전체 아파트 84㎡ 매매",
           "labelEn": "Seoul apartment 84㎡ sale",
-          "value": "11억 3,049만원",
-          "valueEn": "₩1,130M",
-          "note": "8월 신고 575건 · 8/10 대비 +8.3%",
-          "noteEn": "575 deals in Aug · +8.3% vs Aug 10"
+          "value": "11억 3,303만원",
+          "valueEn": "₩1,133M",
+          "note": "8월 신고 573건 · 8/10 대비 +8.5%",
+          "noteEn": "573 deals in Aug · +8.5% vs Aug 10"
         }
       ]
     },
@@ -94,10 +248,10 @@
           "href": "./apartment-rent.html",
           "label": "서울 전체 아파트 월세",
           "labelEn": "Seoul apartment rent",
-          "value": "보증금 22,166만원 / 월 96만원",
-          "valueEn": "₩221.7M + ₩0.96M/mo",
-          "note": "8월 신고 2,223건 · 8/10 대비 +2.1%",
-          "noteEn": "2,223 deals in Aug · +2.1% vs Aug 10"
+          "value": "보증금 22,145만원 / 월 96만원",
+          "valueEn": "₩221.5M + ₩0.96M/mo",
+          "note": "8월 신고 2,226건 · 8/10 대비 +2.0%",
+          "noteEn": "2,226 deals in Aug · +2.0% vs Aug 10"
         }
       ]
     },
@@ -155,150 +309,6 @@
           "href": "./mortgage-rates.html"
         }
       ]
-    },
-    {
-      "title": "재건축·재개발의 위험…\"새 아파트 무조건 받는 것 아냐\" 경고 [이송렬의 우주인]",
-      "link": "https://www.hankyung.com/article/2026081407976",
-      "publishedAt": "2026-08-17T03:00:03.000Z",
-      "source": "한국경제 부동산",
-      "category": "realestate",
-      "preview": null,
-      "dupes": []
-    },
-    {
-      "title": "서울 아파트 7년 새 월세 비중 7.8%p↑… ‘전세의 월세화’",
-      "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/17/FCOYOBYQM5BQNCXRLNKRSDXPJE/",
-      "publishedAt": "2026-08-17T01:30:42.000Z",
-      "source": "조선비즈 부동산",
-      "category": "realestate",
-      "preview": "최근 7년 동안 서울 아파트 전세 가구가 3만 가구 넘게 감소했고 반전세를 포함한 월세 가구는 5만 가구 이상 증가한 것으로 나타났다. 17일 국가통계포털(KOSIS)에 따르면, 2024년 기준 서울 아파트 전세 가…",
-      "dupes": [
-        {
-          "title": "서울 아파트 '전세의 월세화'…7년새 월세 비중 7.8%p↑",
-          "link": "https://www.yna.co.kr/view/AKR20260811147900002",
-          "source": "연합뉴스 경제"
-        }
-      ],
-      "context": [
-        {
-          "kind": "realestate",
-          "href": "./apartment-jeonse.html",
-          "label": "서울 전체 아파트 84㎡ 전세",
-          "labelEn": "Seoul apartment 84㎡ jeonse",
-          "value": "6억 5,329만원",
-          "valueEn": "₩653M",
-          "note": "8월 신고 2,525건 · 8/10 대비 +1.5%",
-          "noteEn": "2,525 deals in Aug · +1.5% vs Aug 10"
-        }
-      ]
-    },
-    {
-      "title": "서초구, 부동산 세제개편안 관련 구민 의견 모아 정부에 전달",
-      "link": "https://www.yna.co.kr/view/AKR20260817024700004",
-      "publishedAt": "2026-08-17T01:03:22.000Z",
-      "source": "연합뉴스 경제",
-      "category": "realestate",
-      "preview": "(서울=연합뉴스) 황재하 기자 = 서울 서초구(구청장 전성수)는 지난 3일 정부가 발표한 부동산 세제 개편안과 관련한 구민 의견을 취합해 재정경...",
-      "dupes": []
-    },
-    {
-      "title": "LH, 아파트 승강기 냉방 의무화…침수 감지 기능도 도입",
-      "link": "https://www.newsis.com/view/NISX20260817_0003751268",
-      "publishedAt": "2026-08-17T00:50:47.000Z",
-      "source": "뉴시스 경제",
-      "category": "realestate",
-      "preview": "[서울=뉴시스] 변해정 기자 = 한국토지주택공사(LH) 아파트 승강기를 폭염과 집중호우 발생 시에도 보다 안전하고 쾌적하게 이용할 수 있게 될 전망이다. LH는 '승강기 종합 개선방안'을 마련해 시행에 들어간다고 1…",
-      "dupes": [
-        {
-          "title": "LH, 신규 아파트 승강기 에어컨 의무화…침수 감지 기능도 도입",
-          "link": "https://www.yna.co.kr/view/AKR20260817022800003",
-          "source": "연합뉴스 경제"
-        }
-      ]
-    },
-    {
-      "title": "LH 아파트 승강기에도 에어컨 의무 설치된다",
-      "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/17/2X4CJYLUPREXZBVAX2CDDNRP2U/",
-      "publishedAt": "2026-08-17T00:23:26.000Z",
-      "source": "조선비즈 부동산",
-      "category": "realestate",
-      "preview": "한국토지주택공사(LH)는 안전하고 쾌적한 공공주택 주거 환경 제공을 위해 ‘승강기 종합 개선방안’을 시행한다고 17일 밝혔다. 이번 개선안은 폭염, 집중호우 등 이상기후에 대응하여 안전하고 쾌적한 승강기 이용 환경을…",
-      "dupes": []
-    },
-    {
-      "title": "강남구, 9월 18일 '부동산 세금 설명회'…8·3 개편안 분석",
-      "link": "https://www.yna.co.kr/view/AKR20260817021900004",
-      "publishedAt": "2026-08-17T00:17:37.000Z",
-      "source": "연합뉴스 경제",
-      "category": "realestate",
-      "preview": "(서울=연합뉴스) 황재하 기자 = 서울 강남구(구청장 김현기)는 내달 18일 강남구민회관에서 구민 500명을 대상으로 8·3 부동산 세제 개편안...",
-      "dupes": []
-    },
-    {
-      "title": "충북도, '사회연대경제 일경험 사업' 참여 기업·청년 모집",
-      "link": "https://www.yna.co.kr/view/AKR20260814142600064",
-      "publishedAt": "2026-08-17T00:10:03.000Z",
-      "source": "연합뉴스 경제",
-      "category": "other",
-      "preview": "(청주=연합뉴스) 전창해 기자 = 충북도는 미취업 청년의 직무역량 제고와 기업의 인력난 해소를 지원하기 위해 '사회연대경제 청년 일경험 시범사업...",
-      "dupes": []
-    },
-    {
-      "title": "“공급까지는 한참 남았는데”…먼저 풀리는 대출, 집값 자극할라 우려",
-      "link": "https://www.mk.co.kr/news/realestate/12129204",
-      "publishedAt": "2026-08-16T23:07:33.000Z",
-      "source": "매일경제 부동산",
-      "category": "other",
-      "preview": "착공속도 압축 핵심…주택공급 공백 한계 서울 오름폭 둔화했지만…양극화 심화돼정부가 수도권 주택 공급을 확대하기로 했지만 실제로는 수년이 걸리는 만큼 오히려 금융 완화 효과가 집값을..",
-      "dupes": [],
-      "context": [
-        {
-          "kind": "realestate",
-          "href": "./apartment-sale.html",
-          "label": "서울 전체 아파트 84㎡ 매매",
-          "labelEn": "Seoul apartment 84㎡ sale",
-          "value": "11억 3,049만원",
-          "valueEn": "₩1,130M",
-          "note": "8월 신고 575건 · 8/10 대비 +8.3%",
-          "noteEn": "575 deals in Aug · +8.3% vs Aug 10"
-        }
-      ]
-    },
-    {
-      "title": "\"동 이름 둔산으로 바꿀래요\" 왜…재건축사업 아파트 값 상승효과?",
-      "link": "https://www.yna.co.kr/view/AKR20260814066000063",
-      "publishedAt": "2026-08-16T22:00:08.000Z",
-      "source": "연합뉴스 경제",
-      "category": "realestate",
-      "preview": "(대전=연합뉴스) 박주영 기자 = 정부의 재건축 사업이 추진 중인 대전 서구 둔산동의 아파트값이 연일 상승세를 보이면서 이웃한 지역에서 행정동 ...",
-      "dupes": []
-    },
-    {
-      "title": "반년 빨리 짓지만 비용 7천만원↑…모듈러 주택 성공할까",
-      "link": "https://www.yna.co.kr/view/AKR20260816025400003",
-      "publishedAt": "2026-08-16T21:09:00.000Z",
-      "source": "연합뉴스 경제",
-      "category": "realestate",
-      "preview": "(세종=연합뉴스) 오진송 기자 = 공장에서 주요 부분을 미리 만들어 현장에서 조립하는 '모듈러 주택'은 일반 공법보다 빨리 지을 수 있지만 공사...",
-      "dupes": []
-    },
-    {
-      "title": "조각투자 '증시 데뷔'…11월 신종증권시장 문 연다",
-      "link": "https://www.yna.co.kr/view/AKR20260815041500002",
-      "publishedAt": "2026-08-16T20:57:02.000Z",
-      "source": "연합뉴스 경제",
-      "category": "stocks",
-      "preview": "(서울=연합뉴스) 유동현 기자 = 미술품, 부동산 등 다양한 기초자산에 조각 투자할 수 있는 신종증권시장이 올해 11월 한국거래소(KRX)에 개...",
-      "dupes": []
-    },
-    {
-      "title": "공사비 50% 파격 지원…'모듈러 주택' 공급 게임체인저 될까",
-      "link": "https://www.newsis.com/view/NISX20260814_0003750218",
-      "publishedAt": "2026-08-16T20:00:00.000Z",
-      "source": "뉴시스 경제",
-      "category": "realestate",
-      "preview": "[서울=뉴시스]정진형 기자 = 정부가 8·13 공급 대책을 통해 모듈러 주택 활성화 지원에 나섰다. 공기 단축의 이점에도 높은 공사비에 발목 잡혀온 모듈러 주택 시장에 공공이 마중물이 돼 주택 공급 속도를 높이겠다는…",
-      "dupes": []
     }
   ],
   "realestateStats": [
@@ -307,30 +317,30 @@
       "href": "./apartment-sale.html",
       "label": "서울 아파트 84㎡ 매매",
       "labelEn": "Seoul apartment 84㎡ sale",
-      "value": "11억 3,049만원",
-      "valueEn": "₩1,130M",
-      "note": "8월 신고 575건 · 8/10 대비 +8.3%",
-      "noteEn": "575 deals in Aug · +8.3% vs Aug 10"
+      "value": "11억 3,303만원",
+      "valueEn": "₩1,133M",
+      "note": "8월 신고 573건 · 8/10 대비 +8.5%",
+      "noteEn": "573 deals in Aug · +8.5% vs Aug 10"
     },
     {
       "kind": "realestate",
       "href": "./apartment-jeonse.html",
       "label": "서울 아파트 84㎡ 전세",
       "labelEn": "Seoul apartment 84㎡ jeonse",
-      "value": "6억 5,329만원",
-      "valueEn": "₩653M",
-      "note": "8월 신고 2,525건 · 8/10 대비 +1.5%",
-      "noteEn": "2,525 deals in Aug · +1.5% vs Aug 10"
+      "value": "6억 5,202만원",
+      "valueEn": "₩652M",
+      "note": "8월 신고 2,539건 · 8/10 대비 +1.3%",
+      "noteEn": "2,539 deals in Aug · +1.3% vs Aug 10"
     },
     {
       "kind": "realestate",
       "href": "./apartment-rent.html",
       "label": "서울 아파트 월세",
       "labelEn": "Seoul apartment rent",
-      "value": "보증금 22,166만원 / 월 96만원",
-      "valueEn": "₩221.7M + ₩0.96M/mo",
-      "note": "8월 신고 2,223건 · 8/10 대비 +2.1%",
-      "noteEn": "2,223 deals in Aug · +2.1% vs Aug 10"
+      "value": "보증금 22,145만원 / 월 96만원",
+      "valueEn": "₩221.5M + ₩0.96M/mo",
+      "note": "8월 신고 2,226건 · 8/10 대비 +2.0%",
+      "noteEn": "2,226 deals in Aug · +2.0% vs Aug 10"
     }
   ]
 }
