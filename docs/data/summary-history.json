@@ -546,52 +546,19 @@
     "date": "2026-08-17",
     "model": "qwen3:14b",
     "summary": {
-      "ko": "- 서울 아파트 7년 새 월세 비중 7.8%p↑… ‘전세의 월세화’: 서울 아파트 전세 가구는 7년 만에 3만 가구 이상 감소했고, 월세 가구는 5만 가구 이상 증가했다. 2024년 기준 서울 아파트 임차 가구 중 전세 비중은 61.9%로, 2017년 대비 7.8%포인트 하락했다. 월세 비중은 같은 기간 30.3%에서 38.1%로 상승했다.\n- LH, 아파트 승강기 냉방 의무화…침수 감지 기능도 도입: 한국토지주택공사(LH)는 폭염과 집중호우에 대비해 승강기 설계 기준을 개선하는 방안을 시행한다. 승강기 냉방설비 설치를 의무화하고 침수 감지 기능을 도입해 안전성을 높인다. 47개 임대단지 725대 승강기 교체 시 냉방장치를 설치하고, 기존 승강기에도 예산과 설치 여건을 고려해 설치 여부를 검토한다.\n- [올댓차이나] 中 7월 은행대출 71.5조원 순감소…차입 수요 부진: 중국 7월 은행 대출이 가계와 기업의 수요 부진으로 사상 최대 규모로 순감소했다. 중국인민은행에 따르면 7월 한 달간 신규 대출보다 상환액이 많아 3400억 위안(약 71조5054억원) 줄었다. 1~7월 누적 신규 대출은 10조3800억 위안 증가해 작년 동기 대비 크게 줄었으며, 7월 말 대출 잔액은 전년 동월 대비 5.1% 즈음 증가했다.\n- 집값 5000만원 차이에 비거주 종부세 200만원↑…보완할까?: 정부가 2026년 세제개편안에서 비거주 1주택자의 종합부동산세 과세 기준을 강화했다. 비거주 1주택자는 공시가 14억5000만원(시가 20억원)을 넘으면 약 209만원의 종부세를 내야 한다. 반면 실거주 1주택자는 시가 20억원 수준에서 종부세가 현행보다 16만8000원 감소한다.\n- 부동산: 부동산: 서울 아파트 7년 새 월세 비중 7.8%p↑… ‘전세의 월세화’, 서초구, 부동산 세제개편안 관련 구민 의견 모아 정부에 전달, LH, 아파트 승강기 냉방 의무화…침수 감지 기능도 도입 +16\n- 기타 경제 소식: 충북도는 '사회연대경제 청년 일경험 시범사업'에 참여할 청년과 기업을 추가 모집한다고 밝혔다. 정부는 수도권 주택 공급 확대를 발표했지만, 실제 공급까지는 수년이 걸릴 것으로 보인다. 중국 7월 은행대출은 71.5조원 순감소하며 사상 최대폭으로 줄었다. 정부는 2026년 세제개편안에서 비거주 1주택자의 종부세 과세 기준을 시가 20억원으로 상향 조정했다. 충북도는 이번 모집을 통해 도내 사회연대경제 기업에서 근무할 청년 74명을 선발할 예정이다.\n- 증시·환율: 한국거래소는 2023년 12월 장내 신종증권시장 시범 운영을 혁신금융서비스로 지정받았지만, 상품 확보 지연으로 시장 개설을 늦춰 왔다. 11월에 미술품, 부동산 등 다양한 기초자산에 조각 투자할 수 있는 신종증권시장이 한국거래소에 개설된다. 최근 장내에서 신종증권을 발행하려는 사업자가 등장하면서 거래소가 시장 개설에 나설 수 있게 되었다. 이 시장은 조각투자에 대한 새로운 투자 기회를 제공할 것으로 기대된다. 거래소는 이에 따라 관련 상품의 유동성과 투자자 수요를 확대할 방침이다.",
-      "en": "- 서울 아파트 7년 새 월세 비중 7.8%p↑… ‘전세의 월세화’: Seoul's apartment leasehold households have decreased by more than 30,000 households for the first time in seven years, while rent households have increased by more than 50,000 households. As of 2024, the share of leasehold households among Seoul's apartment rental households is 61.9%, a decrease of 7.8 percentage points compared to 2017. The share of rent households increased from 30.3% to 38.1% during the same period.\n- LH, 아파트 승강기 냉방 의무화…침수 감지 기능도 도입: To prepare for extreme heat and heavy rainfall, Korea Land & Housing Corporation (LH) will implement measures to improve elevator design standards. It will mandate the installation of cooling equipment in elevators and introduce flood detection functions to enhance safety. When replacing 725 elevators across 47 rental complexes, cooling devices will be installed, and for existing elevators, the installation will be reviewed considering budget and installation conditions.\n- [올댓차이나] 中 7월 은행대출 71.5조원 순감소…차입 수요 부진: China's bank loans in July fell to a record low due to weak demand from households and businesses. According to the People's Bank of China, repayments exceeded new loans by 340,000,000,000 yuan (approximately 71,505,400,000,000 won) during the month. Cumulative new loans from January to July increased by 10,380,000,000,000 yuan, a significant decline compared to the same period last year, and loan balances at the end of July rose by about 5.1% compared to the same month last year.\n- 집값 5000만원 차이에 비거주 종부세 200만원↑…보완할까?: The government strengthened the tax criteria for non-resident single-homeowners in the 2026 tax reform plan. Non-resident single-homeowners who have a public valuation of 1,450,000,000 won (market value of 2,000,000,000 won) will have to pay approximately 2,090,000 won in property tax. In contrast, resident single-homeowners will see a decrease of 160,0008000 won in property tax at the market value level of 2,000,000,000 won compared to the current rate.\n- Real Estate: Real Estate: 서울 아파트 7년 새 월세 비중 7.8%p↑… ‘전세의 월세화’, 서초구, 부동산 세제개편안 관련 구민 의견 모아 정부에 전달, LH, 아파트 승강기 냉방 의무화…침수 감지 기능도 도입 +16\n- Other Economic News: Chungcheongbuk Province announced that it will additionally recruit young people and companies to participate in the \"Social Solidarity Economy Youth Work Experience Pilot Project.\" Although the government announced an expansion of housing supply in the Seoul metropolitan area, it is expected to take several years before actual supply increases. China's July bank loans decreased by 71,500,000,000,000 won, marking the largest-ever decline. The government raised the taxable value standard for non-resident single-homeowners in the 2026 tax reform plan to 2,000,000,000 won. Chungcheongbuk Province plans to select 74 young people to work at social solidarity economy companies within the province through this recruitment.\n- Stocks & FX: The Korea Exchange was designated as an innovative financial service for the pilot operation of the new securities market on the trading floor in December 2023, but has delayed the market opening due to delays in securing products. In November, a new securities market that allows investment in various underlying assets such as artworks and real estate through structured products will be established at the Korea Exchange. Recently, as companies seeking to issue new securities on the trading floor have emerged, the exchange has been able to proceed with market establishment. This market is expected to provide new investment opportunities for structured investments. The exchange plans to expand the liquidity and investor demand for related products accordingly."
+      "ko": "- 부동산: 서울 아파트의 월세 비중이 7년 만에 7.8%p 증가했다. 서초구는 부동산 세제개편안에 대한 구민 의견을 모아 정부에 전달하고 있다. LH는 아파트 승강기에 냉방 의무화와 침수 감지 기능 도입을 결정했다. LH 아파트 승강기에도 에어컨 설치가 의무화된다. 강남구는 9월 18일 부동산 세금 설명회를 열어 8·3 개편안을 분석한다.\n- 기타 경제 소식: 충북도는 ‘사회연대경제 일경험 사업’에 참여할 기업과 청년을 모집하고 있다. 부동산 시장에서는 대출 증가가 집값 상승을 유발할 수 있다는 우려가 나오고 있다. 중국은 7월 은행 대출이 71.5조원 순감소하며 차입 수요가 부진한 것으로 나타났다. 비거주 주택 소유자에게는 집값 차이에 따라 종부세가 200만원 증가하는 것으로 나타났다. 각 기사는 서로 다른 주제로, 별개의 경제 현상에 대한 보도이다.\n- 증시·환율: 11월부터 신종증권시장이 개장한다. 조각투자 상품이 증시에 처음 등장한다. 이는 기존 투자자들이 소액으로 다양한 자산에 투자할 수 있게 해준다. 기존 시장에서는 조각투자 상품이 거래되지 않았다. 이번 개장으로 투자 접근성이 크게 높아질 것으로 기대된다.",
+      "en": "- Real Estate: The share of monthly rent in Seoul apartments has increased by 7.8 percentage points, the highest in seven years. Seocho District is collecting residents' opinions on the real estate tax reform plan and relaying them to the government. LH has decided to enforce air conditioning and introduce flood detection functions in apartment elevators. Air conditioning installation will also be mandatory in LH apartment elevators. Gangnam District will hold a real estate tax explanation session on September 18 to analyze the 8·3 reform plan.\n- Other Economic News: Chungcheongbuk-do is recruiting companies and youth to participate in the \"Social Solidarity Economy Experience Project.\" In the real estate market, there are concerns that increased lending could lead to rising home prices. China saw a net decrease of 71,500,000,000,000 won in bank loans in July, indicating weak borrowing demand. It was found that non-resident property owners may see an increase of 2,000,000 won in property tax depending on the price difference of their homes. Each article covers a different topic and reports on separate economic phenomena.\n- Stocks & FX: The new securities market will open in November. Fragmented investment products will make their debut in the stock market for the first time. This will allow existing investors to invest small amounts in a variety of assets. Fragmented investment products were not traded in the existing market. It is expected that investment accessibility will significantly increase with this opening."
     },
-    "highlights": [
-      {
-        "title": "서울 아파트 7년 새 월세 비중 7.8%p↑… ‘전세의 월세화’",
-        "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/17/FCOYOBYQM5BQNCXRLNKRSDXPJE/",
-        "source": "조선비즈 부동산",
-        "category": "realestate",
-        "textKo": "서울 아파트 전세 가구는 7년 만에 3만 가구 이상 감소했고, 월세 가구는 5만 가구 이상 증가했다. 2024년 기준 서울 아파트 임차 가구 중 전세 비중은 61.9%로, 2017년 대비 7.8%포인트 하락했다. 월세 비중은 같은 기간 30.3%에서 38.1%로 상승했다.",
-        "textEn": "Seoul's apartment leasehold households have decreased by more than 30,000 households for the first time in seven years, while rent households have increased by more than 50,000 households. As of 2024, the share of leasehold households among Seoul's apartment rental households is 61.9%, a decrease of 7.8 percentage points compared to 2017. The share of rent households increased from 30.3% to 38.1% during the same period."
-      },
-      {
-        "title": "LH, 아파트 승강기 냉방 의무화…침수 감지 기능도 도입",
-        "link": "https://www.newsis.com/view/NISX20260817_0003751268",
-        "source": "뉴시스 경제",
-        "category": "realestate",
-        "textKo": "한국토지주택공사(LH)는 폭염과 집중호우에 대비해 승강기 설계 기준을 개선하는 방안을 시행한다. 승강기 냉방설비 설치를 의무화하고 침수 감지 기능을 도입해 안전성을 높인다. 47개 임대단지 725대 승강기 교체 시 냉방장치를 설치하고, 기존 승강기에도 예산과 설치 여건을 고려해 설치 여부를 검토한다.",
-        "textEn": "To prepare for extreme heat and heavy rainfall, Korea Land & Housing Corporation (LH) will implement measures to improve elevator design standards. It will mandate the installation of cooling equipment in elevators and introduce flood detection functions to enhance safety. When replacing 725 elevators across 47 rental complexes, cooling devices will be installed, and for existing elevators, the installation will be reviewed considering budget and installation conditions."
-      },
-      {
-        "title": "[올댓차이나] 中 7월 은행대출 71.5조원 순감소…차입 수요 부진",
-        "link": "https://www.newsis.com/view/NISX20260816_0003751116",
-        "source": "뉴시스 경제",
-        "category": "other",
-        "textKo": "중국 7월 은행 대출이 가계와 기업의 수요 부진으로 사상 최대 규모로 순감소했다. 중국인민은행에 따르면 7월 한 달간 신규 대출보다 상환액이 많아 3400억 위안(약 71조5054억원) 줄었다. 1~7월 누적 신규 대출은 10조3800억 위안 증가해 작년 동기 대비 크게 줄었으며, 7월 말 대출 잔액은 전년 동월 대비 5.1% 즈음 증가했다.",
-        "textEn": "China's bank loans in July fell to a record low due to weak demand from households and businesses. According to the People's Bank of China, repayments exceeded new loans by 340,000,000,000 yuan (approximately 71,505,400,000,000 won) during the month. Cumulative new loans from January to July increased by 10,380,000,000,000 yuan, a significant decline compared to the same period last year, and loan balances at the end of July rose by about 5.1% compared to the same month last year."
-      },
-      {
-        "title": "집값 5000만원 차이에 비거주 종부세 200만원↑…보완할까?",
-        "link": "https://www.newsis.com/view/NISX20260816_0003750838",
-        "source": "뉴시스 경제",
-        "category": "other",
-        "textKo": "정부가 2026년 세제개편안에서 비거주 1주택자의 종합부동산세 과세 기준을 강화했다. 비거주 1주택자는 공시가 14억5000만원(시가 20억원)을 넘으면 약 209만원의 종부세를 내야 한다. 반면 실거주 1주택자는 시가 20억원 수준에서 종부세가 현행보다 16만8000원 감소한다.",
-        "textEn": "The government strengthened the tax criteria for non-resident single-homeowners in the 2026 tax reform plan. Non-resident single-homeowners who have a public valuation of 1,450,000,000 won (market value of 2,000,000,000 won) will have to pay approximately 2,090,000 won in property tax. In contrast, resident single-homeowners will see a decrease of 160,0008000 won in property tax at the market value level of 2,000,000,000 won compared to the current rate."
-      }
-    ],
+    "highlights": [],
     "categories": [
       {
         "key": "realestate",
         "name": "부동산",
         "nameEn": "Real Estate",
-        "lineKo": "부동산: 서울 아파트 7년 새 월세 비중 7.8%p↑… ‘전세의 월세화’, 서초구, 부동산 세제개편안 관련 구민 의견 모아 정부에 전달, LH, 아파트 승강기 냉방 의무화…침수 감지 기능도 도입 +16",
-        "lineEn": "Real Estate: 서울 아파트 7년 새 월세 비중 7.8%p↑… ‘전세의 월세화’, 서초구, 부동산 세제개편안 관련 구민 의견 모아 정부에 전달, LH, 아파트 승강기 냉방 의무화…침수 감지 기능도 도입 +16",
-        "isFallback": true,
-        "fallbackReason": "generation-failed",
+        "lineKo": "서울 아파트의 월세 비중이 7년 만에 7.8%p 증가했다. 서초구는 부동산 세제개편안에 대한 구민 의견을 모아 정부에 전달하고 있다. LH는 아파트 승강기에 냉방 의무화와 침수 감지 기능 도입을 결정했다. LH 아파트 승강기에도 에어컨 설치가 의무화된다. 강남구는 9월 18일 부동산 세금 설명회를 열어 8·3 개편안을 분석한다.",
+        "lineEn": "The share of monthly rent in Seoul apartments has increased by 7.8 percentage points, the highest in seven years. Seocho District is collecting residents' opinions on the real estate tax reform plan and relaying them to the government. LH has decided to enforce air conditioning and introduce flood detection functions in apartment elevators. Air conditioning installation will also be mandatory in LH apartment elevators. Gangnam District will hold a real estate tax explanation session on September 18 to analyze the 8·3 reform plan.",
+        "isFallback": false,
+        "fallbackReason": null,
         "degraded": false,
         "items": [
           {
@@ -625,8 +592,8 @@
         "key": "other",
         "name": "기타 경제 소식",
         "nameEn": "Other Economic News",
-        "lineKo": "충북도는 '사회연대경제 청년 일경험 시범사업'에 참여할 청년과 기업을 추가 모집한다고 밝혔다. 정부는 수도권 주택 공급 확대를 발표했지만, 실제 공급까지는 수년이 걸릴 것으로 보인다. 중국 7월 은행대출은 71.5조원 순감소하며 사상 최대폭으로 줄었다. 정부는 2026년 세제개편안에서 비거주 1주택자의 종부세 과세 기준을 시가 20억원으로 상향 조정했다. 충북도는 이번 모집을 통해 도내 사회연대경제 기업에서 근무할 청년 74명을 선발할 예정이다.",
-        "lineEn": "Chungcheongbuk Province announced that it will additionally recruit young people and companies to participate in the \"Social Solidarity Economy Youth Work Experience Pilot Project.\" Although the government announced an expansion of housing supply in the Seoul metropolitan area, it is expected to take several years before actual supply increases. China's July bank loans decreased by 71,500,000,000,000 won, marking the largest-ever decline. The government raised the taxable value standard for non-resident single-homeowners in the 2026 tax reform plan to 2,000,000,000 won. Chungcheongbuk Province plans to select 74 young people to work at social solidarity economy companies within the province through this recruitment.",
+        "lineKo": "충북도는 ‘사회연대경제 일경험 사업’에 참여할 기업과 청년을 모집하고 있다. 부동산 시장에서는 대출 증가가 집값 상승을 유발할 수 있다는 우려가 나오고 있다. 중국은 7월 은행 대출이 71.5조원 순감소하며 차입 수요가 부진한 것으로 나타났다. 비거주 주택 소유자에게는 집값 차이에 따라 종부세가 200만원 증가하는 것으로 나타났다. 각 기사는 서로 다른 주제로, 별개의 경제 현상에 대한 보도이다.",
+        "lineEn": "Chungcheongbuk-do is recruiting companies and youth to participate in the \"Social Solidarity Economy Experience Project.\" In the real estate market, there are concerns that increased lending could lead to rising home prices. China saw a net decrease of 71,500,000,000,000 won in bank loans in July, indicating weak borrowing demand. It was found that non-resident property owners may see an increase of 2,000,000 won in property tax depending on the price difference of their homes. Each article covers a different topic and reports on separate economic phenomena.",
         "isFallback": false,
         "fallbackReason": null,
         "degraded": false,
@@ -657,8 +624,8 @@
         "key": "stocks",
         "name": "증시·환율",
         "nameEn": "Stocks & FX",
-        "lineKo": "한국거래소는 2023년 12월 장내 신종증권시장 시범 운영을 혁신금융서비스로 지정받았지만, 상품 확보 지연으로 시장 개설을 늦춰 왔다. 11월에 미술품, 부동산 등 다양한 기초자산에 조각 투자할 수 있는 신종증권시장이 한국거래소에 개설된다. 최근 장내에서 신종증권을 발행하려는 사업자가 등장하면서 거래소가 시장 개설에 나설 수 있게 되었다. 이 시장은 조각투자에 대한 새로운 투자 기회를 제공할 것으로 기대된다. 거래소는 이에 따라 관련 상품의 유동성과 투자자 수요를 확대할 방침이다.",
-        "lineEn": "The Korea Exchange was designated as an innovative financial service for the pilot operation of the new securities market on the trading floor in December 2023, but has delayed the market opening due to delays in securing products. In November, a new securities market that allows investment in various underlying assets such as artworks and real estate through structured products will be established at the Korea Exchange. Recently, as companies seeking to issue new securities on the trading floor have emerged, the exchange has been able to proceed with market establishment. This market is expected to provide new investment opportunities for structured investments. The exchange plans to expand the liquidity and investor demand for related products accordingly.",
+        "lineKo": "11월부터 신종증권시장이 개장한다. 조각투자 상품이 증시에 처음 등장한다. 이는 기존 투자자들이 소액으로 다양한 자산에 투자할 수 있게 해준다. 기존 시장에서는 조각투자 상품이 거래되지 않았다. 이번 개장으로 투자 접근성이 크게 높아질 것으로 기대된다.",
+        "lineEn": "The new securities market will open in November. Fragmented investment products will make their debut in the stock market for the first time. This will allow existing investors to invest small amounts in a variety of assets. Fragmented investment products were not traded in the existing market. It is expected that investment accessibility will significantly increase with this opening.",
         "isFallback": false,
         "fallbackReason": null,
         "degraded": false,

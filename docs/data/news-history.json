@@ -1628,7 +1628,19 @@
             "source": "연합뉴스 경제"
           }
         ],
-        "titleEn": "Seoul apartment rent share rises 7.8 percentage points in 7 years... 'Deposit-based rent becomes monthly rent"
+        "titleEn": "Seoul apartment rent share rises 7.8 percentage points in 7 years... 'Deposit-based rent becomes monthly rent",
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./apartment-jeonse.html",
+            "label": "서울 전체 아파트 84㎡ 전세",
+            "labelEn": "Seoul apartment 84㎡ jeonse",
+            "value": "6억 5,329만원",
+            "valueEn": "₩653M",
+            "note": "8월 신고 2,525건 · 8/10 대비 +1.5%",
+            "noteEn": "2,525 deals in Aug · +1.5% vs Aug 10"
+          }
+        ]
       },
       {
         "title": "서초구, 부동산 세제개편안 관련 구민 의견 모아 정부에 전달",
@@ -1694,7 +1706,19 @@
         "category": "other",
         "preview": "착공속도 압축 핵심…주택공급 공백 한계 서울 오름폭 둔화했지만…양극화 심화돼정부가 수도권 주택 공급을 확대하기로 했지만 실제로는 수년이 걸리는 만큼 오히려 금융 완화 효과가 집값을..",
         "dupes": [],
-        "titleEn": "Still a long way to go before supply increases\"...Loans ease first, raising concerns about stimulating home prices"
+        "titleEn": "Still a long way to go before supply increases\"...Loans ease first, raising concerns about stimulating home prices",
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./apartment-sale.html",
+            "label": "서울 전체 아파트 84㎡ 매매",
+            "labelEn": "Seoul apartment 84㎡ sale",
+            "value": "11억 3,049만원",
+            "valueEn": "₩1,130M",
+            "note": "8월 신고 575건 · 8/10 대비 +8.3%",
+            "noteEn": "575 deals in Aug · +8.3% vs Aug 10"
+          }
+        ]
       },
       {
         "title": "\"동 이름 둔산으로 바꿀래요\" 왜…재건축사업 아파트 값 상승효과?",
@@ -1764,7 +1788,19 @@
         "category": "realestate",
         "preview": "서울매매가격지수 상승세, 작년의 2.4배 토허제 등 각종 규제에 아파트 수요 이동 주택수 제외 연장, 매수세 더 자극할수도무주택 실거주 수요자의 주거 사다리 역할을 해온 빌라(연립..",
         "dupes": [],
-        "titleEn": "Apartment Joyini Villa Prices Rise 2.4 Times... 'Excluding Housing Units' Pours Oil on Fire"
+        "titleEn": "Apartment Joyini Villa Prices Rise 2.4 Times... 'Excluding Housing Units' Pours Oil on Fire",
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./apartment-sale.html",
+            "label": "서울 전체 아파트 84㎡ 매매",
+            "labelEn": "Seoul apartment 84㎡ sale",
+            "value": "11억 3,049만원",
+            "valueEn": "₩1,130M",
+            "note": "8월 신고 575건 · 8/10 대비 +8.3%",
+            "noteEn": "575 deals in Aug · +8.3% vs Aug 10"
+          }
+        ]
       },
       {
         "title": "[올댓차이나] 中 7월 은행대출 71.5조원 순감소…차입 수요 부진",
@@ -1784,7 +1820,19 @@
         "category": "realestate",
         "preview": null,
         "dupes": [],
-        "titleEn": "Prices of small apartments in Gangnam area surge, exceeding 100,000,000 won per 3.3㎡"
+        "titleEn": "Prices of small apartments in Gangnam area surge, exceeding 100,000,000 won per 3.3㎡",
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-gangnam.html",
+            "label": "강남구 아파트 84㎡ 매매",
+            "labelEn": "강남구 apartment 84㎡ sale",
+            "value": "27억 6,205만원",
+            "valueEn": "₩2,762M",
+            "note": "8월 신고 14건",
+            "noteEn": "14 deals in Aug"
+          }
+        ]
       },
       {
         "title": "송파 9억대 아파트, 하나 남았습니다",
@@ -1794,7 +1842,19 @@
         "category": "realestate",
         "preview": "'청약통장도 필요없다고? 송파 아파트 9억 줍줍 떴습니다.' 이번주 매부리TV '분양나우(牛)'에서는 서울시 송파구 거여동에 위치한 '송파시그니처롯데캐슬'을 분석합니다. 18일 청..",
         "dupes": [],
-        "titleEn": "Songpa 900,000,000 won apartment, one left"
+        "titleEn": "Songpa 900,000,000 won apartment, one left",
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-songpa.html",
+            "label": "송파구 아파트 84㎡ 매매",
+            "labelEn": "송파구 apartment 84㎡ sale",
+            "value": "17억 5,633만원",
+            "valueEn": "₩1,756M",
+            "note": "8월 신고 16건",
+            "noteEn": "16 deals in Aug"
+          }
+        ]
       },
       {
         "title": "빌라값 들썩 …'주택수 제외' 연장도 호재",
@@ -1804,7 +1864,19 @@
         "category": "realestate",
         "preview": "무주택 실거주 수요자의 주거 사다리 역할을 해온 빌라(연립주택) 가격이 들썩이고 있다. 올해 서울 빌라 매매가격 상승세는 지난해의 2배를 훌쩍 웃돈 것으로 나타났다. 아파트에 집중..",
         "dupes": [],
-        "titleEn": "Villa prices surge ... extension of 'exclusion of housing units' also a boon"
+        "titleEn": "Villa prices surge ... extension of 'exclusion of housing units' also a boon",
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./apartment-sale.html",
+            "label": "서울 전체 아파트 84㎡ 매매",
+            "labelEn": "Seoul apartment 84㎡ sale",
+            "value": "11억 3,049만원",
+            "valueEn": "₩1,130M",
+            "note": "8월 신고 575건 · 8/10 대비 +8.3%",
+            "noteEn": "575 deals in Aug · +8.3% vs Aug 10"
+          }
+        ]
       },
       {
         "title": "전세 계약 전 등기부·체납 확인하세요…서울시가 피해 예방법 알려준다",
@@ -1814,7 +1886,19 @@
         "category": "realestate",
         "preview": null,
         "dupes": [],
-        "titleEn": "Check the land register and delinquent taxes before signing a lease agreement... Seoul provides prevention methods to avoid losses"
+        "titleEn": "Check the land register and delinquent taxes before signing a lease agreement... Seoul provides prevention methods to avoid losses",
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./apartment-jeonse.html",
+            "label": "서울 전체 아파트 84㎡ 전세",
+            "labelEn": "Seoul apartment 84㎡ jeonse",
+            "value": "6억 5,329만원",
+            "valueEn": "₩653M",
+            "note": "8월 신고 2,525건 · 8/10 대비 +1.5%",
+            "noteEn": "2,525 deals in Aug · +1.5% vs Aug 10"
+          }
+        ]
       },
       {
         "title": "수도권 아파트를 1억대로 입주?…지분적립 공공분양 단지 10월 공개",
@@ -1834,7 +1918,17 @@
         "category": "realestate",
         "preview": null,
         "dupes": [],
-        "titleEn": "Non-resident single-homeowners to be blocked from lease-to-own loans... but there's a twist [Financial Authority Back Briefing]"
+        "titleEn": "Non-resident single-homeowners to be blocked from lease-to-own loans... but there's a twist [Financial Authority Back Briefing]",
+        "context": [
+          {
+            "kind": "rates",
+            "label": "전세자금대출 최저금리",
+            "labelEn": "Lowest jeonse loan rate",
+            "value": "연 3.28%",
+            "valueEn": "3.28% p.a.",
+            "href": "./rent-loan-rates.html"
+          }
+        ]
       },
       {
         "title": "집값 5000만원 차이에 비거주 종부세 200만원↑…보완할까?",
@@ -1854,7 +1948,19 @@
         "category": "realestate",
         "preview": "[서울=뉴시스] 박대로 기자 = 정부가 서울 시내 녹지가 있는 자리에 아파트를 공급하겠다는 의지를 밝힌 가운데 서울시는 녹지를 지켜야 한다며 반대 의견을 굽히지 않고 있다. 김윤덕 국토교통부 장관은 지난 14일 기자…",
         "dupes": [],
-        "titleEn": "Government Considering Housing Supply, Seoul Says 'Green Space Destruction' Not Acceptable"
+        "titleEn": "Government Considering Housing Supply, Seoul Says 'Green Space Destruction' Not Acceptable",
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./apartment-sale.html",
+            "label": "서울 전체 아파트 84㎡ 매매",
+            "labelEn": "Seoul apartment 84㎡ sale",
+            "value": "11억 3,049만원",
+            "valueEn": "₩1,130M",
+            "note": "8월 신고 575건 · 8/10 대비 +8.3%",
+            "noteEn": "575 deals in Aug · +8.3% vs Aug 10"
+          }
+        ]
       },
       {
         "title": "세제개편 반발에… 국회서 1주택 양도세 완화법 잇따라",
