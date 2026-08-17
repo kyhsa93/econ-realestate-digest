@@ -77,9 +77,6 @@ jobs:
           node scripts/build-budget-pages.mjs
           node scripts/build-realestate-pages.mjs
 
-      - name: 요약이 다시 필요한지 판정
-        run: node scripts/summary-needed.mjs
-
       - name: 테스트 (수집 후)
         run: npm test
 
