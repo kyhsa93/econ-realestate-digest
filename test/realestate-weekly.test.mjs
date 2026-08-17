@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import {
   attachWeeklyChanges,
   buildWeekly,
+  firstFullWeek,
   nextWeek,
   settledWeek,
   weekStart,
@@ -226,4 +227,22 @@ test("주간 시세에서도 갱신계약을 뺀다", () => {
   const rows = arrivalRows(rawFile("rent", items, ["2026-08-25", "2026-08-25"]), "노원구");
 
   assert.equal(rows.length, 1, "갱신계약이 주간 집계에 들어갔다");
+});
+
+test("보관 창에 걸쳐 잘린 첫 주는 넣지 않는다", () => {
+  assert.equal(firstFullWeek("2026-03-01"), "2026-03-02", "일요일에 시작하는 달의 첫 주가 잘린 채 남았다");
+  assert.equal(firstFullWeek("2026-06-01"), "2026-06-01", "월요일에 시작하는 달까지 한 주를 버렸다");
+
+  const rows = [sale("2026-03-01"), sale("2026-03-03"), sale("2026-03-10")];
+  const weekly = buildWeekly(rows, NOW, { from: firstFullWeek("2026-03-01") });
+
+  assert.ok(!weekly.weeks.includes("2026-02-23"), "3월 하루치뿐인 주가 남았다");
+  assert.deepEqual(weekly.weeks, ["2026-03-02", "2026-03-09"]);
+});
+
+test("신고 기한이 오늘 끝나는 주는 아직 확정으로 보지 않는다", () => {
+  const now = new Date("2026-08-18T00:00:00Z");
+
+  assert.equal(settledWeek(now, 30), "2026-07-06", "마감일 당일인 주를 확정으로 넣었다");
+  assert.equal(settledWeek(new Date("2026-08-19T00:00:00Z"), 30), "2026-07-13", "하루 지나도 안 넘어왔다");
 });

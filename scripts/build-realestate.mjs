@@ -17,7 +17,13 @@ import {
 import { attachPrevious } from "./realestate-previous.mjs";
 import { itemKey, readSlotFile } from "./realestate-raw.mjs";
 import { shiftMonth, windowMonths, yearMonthOf } from "./realestate-slots.mjs";
-import { FILING_GRACE_DAYS, TREND_MIN_SAMPLE, attachWeeklyChanges, buildWeekly } from "./realestate-weekly.mjs";
+import {
+  FILING_GRACE_DAYS,
+  TREND_MIN_SAMPLE,
+  attachWeeklyChanges,
+  buildWeekly,
+  firstFullWeek,
+} from "./realestate-weekly.mjs";
 import { buildRentFiles, rentFileName } from "./deal-files.mjs";
 import { readRentSource } from "./realestate-source.mjs";
 
@@ -176,9 +182,11 @@ async function writeWeekly(now) {
 }
 
 async function writeTrend(now) {
+  const oldest = windowMonths(now).at(-1);
   const trend = buildWeekly(await readWeeklyRows(now, contractRows), now, {
     minSample: TREND_MIN_SAMPLE,
     graceDays: FILING_GRACE_DAYS,
+    from: firstFullWeek(`${oldest.slice(0, 4)}-${oldest.slice(4, 6)}-01`),
   });
   if (!trend) {
     console.log("[build-realestate] 계약일 기준 주간 추이를 만들 재료가 없습니다");

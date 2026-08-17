@@ -19,6 +19,11 @@ function partsOfDate(text) {
   return { year, month, day };
 }
 
+export function firstFullWeek(firstDay) {
+  const start = weekStart(firstDay);
+  return start === firstDay ? start : nextWeek(start, 1);
+}
+
 export function nextWeek(start, steps = 1) {
   return new Date(Date.parse(`${start}T00:00:00Z`) + steps * 7 * 86_400_000).toISOString().slice(0, 10);
 }
@@ -26,7 +31,7 @@ export function nextWeek(start, steps = 1) {
 export function settledWeek(now, graceDays = 0) {
   if (!graceDays) return nextWeek(weekStart(now), -1);
   const parts = kstDateParts(now);
-  const cutoff = Date.UTC(parts.year, parts.month - 1, parts.day) - (graceDays + 6) * 86_400_000;
+  const cutoff = Date.UTC(parts.year, parts.month - 1, parts.day) - (graceDays + 7) * 86_400_000;
   return weekStart(new Date(cutoff).toISOString().slice(0, 10));
 }
 
@@ -99,11 +104,11 @@ function movingRows(weeks, week, span) {
   return rows;
 }
 
-export function buildWeekly(arrivals, now, { weeksKept = WEEKS_KEPT, movingWeeks = MOVING_WEEKS, minSample = 1, graceDays = 0 } = {}) {
+export function buildWeekly(arrivals, now, { weeksKept = WEEKS_KEPT, movingWeeks = MOVING_WEEKS, minSample = 1, graceDays = 0, from = null } = {}) {
   const settled = settledWeek(now, graceDays);
   const byWeek = groupByWeek(arrivals.filter((row) => weekStart(row.observedOn) <= settled));
 
-  const weeks = [...byWeek.keys()].sort().slice(-weeksKept);
+  const weeks = [...byWeek.keys()].sort().filter((week) => !from || week >= from).slice(-weeksKept);
   if (!weeks.length) return null;
 
   const districtRows = new Map();
