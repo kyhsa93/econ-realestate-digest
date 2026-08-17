@@ -5,7 +5,7 @@
 // 셈이 되고, 그건 평균이 조금 틀리는 것과는 성격이 다른 사고다.
 import test from "node:test";
 import assert from "node:assert/strict";
-import { dropCancelled, isCancelledDeal, normalizeDeal } from "../scripts/fetch-realestate.mjs";
+import { dropCancelled, errorDetail, isCancelledDeal, normalizeDeal } from "../scripts/fetch-realestate.mjs";
 
 const deal = (extra = {}) => ({
   aptNm: "역삼아이파크",
@@ -72,4 +72,13 @@ test("층·건축년도가 비어도 거래는 살린다", () => {
 
 test("한 자리 월·일도 두 자리로 맞춘다", () => {
   assert.equal(normalizeDeal(deal({ dealMonth: 9, dealDay: 3 }), "강남구").date, "2026-09-03");
+});
+
+// 25개구가 한꺼번에 "fetch failed"로 죽은 날, 로그만 보고는 API가 죽은 건지 우리가 막힌
+// 건지 알 수가 없었다. 진짜 이유는 err.cause에 들어 있다.
+test("네트워크 실패는 원인까지 적는다", () => {
+  const err = new Error("fetch failed", { cause: Object.assign(new Error("timeout"), { code: "UND_ERR_CONNECT_TIMEOUT" }) });
+  assert.equal(errorDetail(err), "fetch failed ← UND_ERR_CONNECT_TIMEOUT");
+
+  assert.equal(errorDetail(new Error("http 500")), "http 500");
 });

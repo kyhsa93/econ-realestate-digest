@@ -142,6 +142,19 @@ export function dropCancelled(items) {
   return items.filter((item) => !isCancelledDeal(item));
 }
 
+// Node의 fetch는 네트워크 단계에서 실패하면 메시지가 "fetch failed" 한 줄뿐이고 진짜
+// 이유(DNS·연결 거부·타임아웃·인증서)는 err.cause에 들어간다. 25개구가 한꺼번에
+// "fetch failed"로 죽은 날 로그만 보고는 API가 죽은 건지 우리가 막힌 건지 알 수가 없었다.
+export function errorDetail(err) {
+  const parts = [err?.message ?? String(err)];
+  let cause = err?.cause;
+  for (let depth = 0; cause && depth < 3; depth += 1) {
+    parts.push(cause.code ?? cause.message ?? String(cause));
+    cause = cause.cause;
+  }
+  return parts.filter(Boolean).join(" ← ");
+}
+
 function parseWon10k(value) {
   const cleaned = String(value ?? "").replace(/,/g, "").trim();
   const num = Number(cleaned);
@@ -427,7 +440,7 @@ async function main() {
           cancelledTotal += saleResult.cancelledCount;
         }
       } catch (err) {
-        console.error(`[fetch-realestate] ${name} 매매 조회 실패: ${err.message}`);
+        console.error(`[fetch-realestate] ${name} 매매 조회 실패: ${errorDetail(err)}`);
       }
     }
     if (hasRent) {
@@ -436,7 +449,7 @@ async function main() {
         entry.jeonse = rent.jeonse;
         entry.wolse = rent.wolse;
       } catch (err) {
-        console.error(`[fetch-realestate] ${name} 전월세 조회 실패: ${err.message}`);
+        console.error(`[fetch-realestate] ${name} 전월세 조회 실패: ${errorDetail(err)}`);
       }
     }
 
@@ -562,7 +575,7 @@ async function main() {
       }
     } catch (err) {
       // 지난달 조회가 실패해도 이번 달 데이터는 그대로 낸다. 다음 실행에서 다시 시도된다.
-      console.error(`[fetch-realestate] 지난달 조회 실패: ${err.message}`);
+      console.error(`[fetch-realestate] 지난달 조회 실패: ${errorDetail(err)}`);
       previous = null;
     }
   }
