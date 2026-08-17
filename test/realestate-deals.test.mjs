@@ -1,14 +1,14 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { errorDetail } from "../scripts/fetch-realestate.mjs";
 import {
   carryForward,
   dealingDirect,
   dropCancelled,
-  errorDetail,
   fetchSummary,
   isCancelledDeal,
   normalizeDeal,
-} from "../scripts/fetch-realestate.mjs";
+} from "../scripts/realestate-metrics.mjs";
 
 const deal = (extra = {}) => ({
   aptNm: "역삼아이파크",

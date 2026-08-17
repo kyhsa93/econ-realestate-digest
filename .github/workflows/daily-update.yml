@@ -51,6 +51,7 @@ jobs:
         run: |
           node scripts/fetch-market.mjs
           node scripts/fetch-realestate.mjs
+          node scripts/build-realestate.mjs
           node scripts/build-budget-deals.mjs
         env:
           MOLIT_API_KEY: ${{ secrets.MOLIT_API_KEY }}

@@ -13,9 +13,10 @@ const root = path.resolve(import.meta.dirname, "..");
 const NOW = new Date();
 const PERIOD = windowMonths(NOW)[0];
 const DISTRICT_COUNT = 25;
+const STEPS = ["scripts/fetch-realestate.mjs", "scripts/build-realestate.mjs"];
 
-async function collect(server, { rawDir, dataDir, dealsFile, backfillLimit = 0, env = {} }) {
-  return run("node", ["scripts/fetch-realestate.mjs"], {
+async function collect(server, { rawDir, dataDir, dealsFile, backfillLimit = 0, env = {} }, steps = STEPS) {
+  const options = {
     cwd: root,
     env: {
       ...process.env,
@@ -31,7 +32,11 @@ async function collect(server, { rawDir, dataDir, dealsFile, backfillLimit = 0, 
       MOLIT_RETRY_MS: "0",
       ...env,
     },
-  });
+  };
+
+  let stdout = "";
+  for (const step of steps) stdout += (await run("node", [step], options)).stdout;
+  return { stdout };
 }
 
 async function workspace() {
@@ -183,4 +188,35 @@ test("잘린 응답은 확정으로 굳히지 않고 다음 실행에 다시 받
 
   assert.match(stdout, /재조회 \d+/, stdout);
   assert.equal((await readJson(path.join(space.rawDir, "sale", `11110-${older}.json`))).totalCount, 1);
+});
+
+test("원본만 있으면 조회 없이 산출물을 다시 만든다", async (t) => {
+  const server = await startFakeMolit((kind) => successXml([kind === "sale" ? saleItem() : rentItem()]));
+  t.after(() => server.close());
+  const space = await workspace();
+
+  await collect(server, space);
+  const first = await readFile(path.join(space.dataDir, "realestate.json"), "utf-8");
+
+  await server.close();
+  await collect(server, space, ["scripts/build-realestate.mjs"]);
+  const second = await readFile(path.join(space.dataDir, "realestate.json"), "utf-8");
+
+  const strip = (text) => text.replace(/"updatedAt": "[^"]+"/g, "");
+  assert.equal(strip(second), strip(first), "원본만으로 같은 산출물을 만들지 못했다");
+});
+
+test("수집이 통째로 실패해도 지난 원본으로 산출물을 만든다", async (t) => {
+  const server = await startFakeMolit((kind) => successXml([kind === "sale" ? saleItem() : rentItem()]));
+  t.after(() => server.close());
+  const space = await workspace();
+
+  await collect(server, space);
+
+  const dead = { saleUrl: "http://127.0.0.1:1/sale", rentUrl: "http://127.0.0.1:1/rent" };
+  const { stdout } = await collect(dead, space);
+
+  assert.match(stdout, /저장 완료/, stdout);
+  const payload = JSON.parse(await readFile(path.join(space.dataDir, "realestate.json"), "utf-8"));
+  assert.equal(payload.districts.length, DISTRICT_COUNT);
 });
