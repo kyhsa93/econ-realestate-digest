@@ -586,3 +586,60 @@ test("추이가 어느 지표인지 라벨로 밝힌다", async () => {
     assert.match(page.trendMeta(), new RegExp(label.replace(/[()]/g, "\\$&")), `${kind}: ${page.trendMeta()}`);
   }
 });
+
+test("거래량 추이를 함께 그린다", async () => {
+  const page = await loadRealestatePage({ realestate: trendRealestate(), trend: trendData(), kind: "sale" });
+
+  assert.ok(page.volumeHtml().includes("polyline"), "거래량 그래프가 없다");
+  assert.match(page.volumeMeta(), /매매 거래량/, page.volumeMeta());
+  assert.match(page.volumeMeta(), /50건/, page.volumeMeta());
+  assert.equal(page.cardHidden("volume-card"), false);
+});
+
+test("거래 유형을 바꾸면 거래량도 그 유형을 센다", async () => {
+  const realestate = trendRealestate();
+  const trend = trendData();
+
+  const jeonse = await loadRealestatePage({ realestate, trend, kind: "jeonse" });
+  assert.match(jeonse.volumeMeta(), /전세 거래량/);
+  assert.match(jeonse.volumeMeta(), /40건/, jeonse.volumeMeta());
+
+  const wolse = await loadRealestatePage({ realestate, trend, kind: "wolse" });
+  assert.match(wolse.volumeMeta(), /월세 거래량/);
+});
+
+test("전세가율 추이를 그린다", async () => {
+  const page = await loadRealestatePage({ realestate: trendRealestate(), trend: trendData(), kind: "sale" });
+
+  assert.ok(page.ratioHtml().includes("polyline"), "전세가율 그래프가 없다");
+  assert.match(page.ratioMeta(), /전세가율/, page.ratioMeta());
+  assert.match(page.ratioMeta(), /56\.8%/, `2500/4400 = 56.8%가 아니다: ${page.ratioMeta()}`);
+});
+
+test("월세 페이지에는 전세가율을 두지 않는다", async () => {
+  const page = await loadRealestatePage({ realestate: trendRealestate(), trend: trendData(), kind: "wolse" });
+  assert.equal(page.cardHidden("ratio-card"), true, "월세와 상관없는 지표가 남았다");
+});
+
+test("매매나 전세 값이 없는 주는 전세가율에서 뺀다", async () => {
+  const realestate = await readJson("realestate");
+  const trend = {
+    weeks: ["2026-07-27", "2026-08-03", "2026-08-10"],
+    overall: {
+      "2026-07-27": { sale: { avgPricePerPyeong10k: 4000, transactionCount: 50 } },
+      "2026-08-03": {
+        sale: { avgPricePerPyeong10k: 4000, transactionCount: 50 },
+        jeonse: { avgDepositPerPyeong10k: 2400, transactionCount: 40 },
+      },
+      "2026-08-10": {
+        sale: { avgPricePerPyeong10k: 4000, transactionCount: 50 },
+        jeonse: { avgDepositPerPyeong10k: 2000, transactionCount: 40 },
+      },
+    },
+    districts: {},
+  };
+  const page = await loadRealestatePage({ realestate, trend, kind: "sale" });
+
+  assert.match(page.ratioMeta(), /2026-08-03 ~ 2026-08-10/, page.ratioMeta());
+  assert.match(page.ratioMeta(), /50\.0%/);
+});

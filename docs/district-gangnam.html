@@ -349,6 +349,14 @@
       <div class="trend-chart" id="trend-chart"></div>
       <div class="trend-meta" id="trend-meta"></div>
     </div>
+    <div class="trend-card" id="volume-card">
+      <div class="trend-chart" id="volume-chart"></div>
+      <div class="trend-meta" id="volume-meta"></div>
+    </div>
+    <div class="trend-card" id="ratio-card">
+      <div class="trend-chart" id="ratio-chart"></div>
+      <div class="trend-meta" id="ratio-meta"></div>
+    </div>
   </section>
 
   <section id="budget-section" hidden>
@@ -428,6 +436,13 @@ const T = {
     trendMetricSale: "매매 평당가",
     trendMetricJeonse: "전세 평당 보증금",
     trendMetricWolse: "월세 보증금(평당 아님)",
+    trendVolumeSale: "매매 거래량",
+    trendVolumeJeonse: "전세 거래량",
+    trendVolumeWolse: "월세 거래량",
+    trendVolumeValue: (n) => `마지막 주 ${n}`,
+    trendCount: (n) => `${n.toLocaleString("ko-KR")}건`,
+    trendRatio: "전세가율(전세 평당 보증금 ÷ 매매 평당가)",
+    trendRatioValue: (v) => `마지막 주 ${v}`,
     trendRange: (from, to, n) => `${from} ~ ${to} · ${n}주`,
     trendTooShort: "추이는 신고가 두 주 이상 쌓이면 표시됩니다.",
     trendValue: (v) => `마지막 주 ${v}`,
@@ -496,6 +511,13 @@ const T = {
     trendMetricSale: "Sale price per pyeong",
     trendMetricJeonse: "Jeonse deposit per pyeong",
     trendMetricWolse: "Monthly-rent deposit (not per pyeong)",
+    trendVolumeSale: "Sale transactions",
+    trendVolumeJeonse: "Jeonse contracts",
+    trendVolumeWolse: "Monthly-rent contracts",
+    trendVolumeValue: (n) => `Last week ${n}`,
+    trendCount: (n) => `${n.toLocaleString("en-US")}`,
+    trendRatio: "Jeonse ratio (jeonse deposit / sale price, per pyeong)",
+    trendRatioValue: (v) => `Last week ${v}`,
     trendRange: (from, to, n) => `${from} – ${to} · ${n} weeks`,
     trendTooShort: "The trend appears once at least two weeks of filings are recorded.",
     trendValue: (v) => `Last week ${v}`,
@@ -943,17 +965,55 @@ function trendMetricLabel() {
   return t(key === "jeonse" ? "trendMetricJeonse" : key === "wolse" ? "trendMetricWolse" : "trendMetricSale");
 }
 
-function trendSeries(trend) {
-  const field = KIND_FIELDS[kind ?? "sale"];
-  const scope = districtName ? trend?.districts?.[districtName] : trend?.overall;
+function trendScope(trend) {
+  return districtName ? trend?.districts?.[districtName] : trend?.overall;
+}
+
+function seriesOf(trend, pick) {
+  const scope = trendScope(trend);
   if (!scope) return [];
 
   return (trend.weeks ?? [])
     .map((week) => {
-      const value = scope[week]?.[field.metric]?.[field.value];
+      const value = pick(scope[week] ?? {});
       return typeof value === "number" && Number.isFinite(value) ? { date: week, value } : null;
     })
     .filter(Boolean);
+}
+
+function volumeSeries(trend) {
+  const field = KIND_FIELDS[kind ?? "sale"];
+  return seriesOf(trend, (week) => week[field.metric]?.transactionCount);
+}
+
+function ratioSeries(trend) {
+  return seriesOf(trend, (week) => {
+    const sale = week.sale?.avgPricePerPyeong10k;
+    const jeonse = week.jeonse?.avgDepositPerPyeong10k;
+    return sale > 0 && jeonse > 0 ? (jeonse / sale) * 100 : null;
+  });
+}
+
+function drawSeries(chartId, metaId, series, label, format) {
+  const chart = document.getElementById(chartId);
+  const meta = document.getElementById(metaId);
+  if (!chart || !meta) return false;
+
+  if (series.length < 2) {
+    chart.innerHTML = "";
+    meta.textContent = "";
+    return false;
+  }
+
+  const last = series[series.length - 1];
+  chart.innerHTML = sparklineSvg(series.map((p) => p.value));
+  meta.textContent = `${label} · ${t("trendRange")(series[0].date, last.date, series.length)} · ${format(last.value)}`;
+  return true;
+}
+
+function trendSeries(trend) {
+  const field = KIND_FIELDS[kind ?? "sale"];
+  return seriesOf(trend, (week) => week[field.metric]?.[field.value]);
 }
 
 function renderDistrictSummary() {
@@ -974,6 +1034,8 @@ function renderTrend() {
     section.hidden = !cache.trend;
     document.getElementById("trend-chart").innerHTML = "";
     document.getElementById("trend-meta").textContent = t("trendTooShort");
+    document.getElementById("volume-card").hidden = true;
+    document.getElementById("ratio-card").hidden = true;
     return;
   }
 
@@ -984,6 +1046,24 @@ function renderTrend() {
     `${trendMetricLabel()} · ${t("trendRange")(series[0].date, last.date, series.length)}` +
     ` · ${t("trendValue")(formatMan(last.value))}` +
     `\n${t("trendBasis")}`;
+
+  const volumeKey = kind === "jeonse" ? "trendVolumeJeonse" : kind === "wolse" ? "trendVolumeWolse" : "trendVolumeSale";
+  document.getElementById("volume-card").hidden = !drawSeries(
+    "volume-chart",
+    "volume-meta",
+    volumeSeries(cache.trend),
+    t(volumeKey),
+    (v) => t("trendVolumeValue")(t("trendCount")(Math.round(v)))
+  );
+
+  const ratioShown = kind !== "wolse" && drawSeries(
+    "ratio-chart",
+    "ratio-meta",
+    ratioSeries(cache.trend),
+    t("trendRatio"),
+    (v) => t("trendRatioValue")(`${v.toFixed(1)}%`)
+  );
+  document.getElementById("ratio-card").hidden = !ratioShown;
 }
 
 const budgetBand10k = (() => {
