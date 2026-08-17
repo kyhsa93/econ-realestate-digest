@@ -8,14 +8,16 @@ import {
   fetchSummary,
   findBaseline,
   kstDateString,
+  dropCancelled,
   normalizeDeal,
   normalizeRentDeal,
   summarizeRent,
   summarizeSaleItems,
 } from "./realestate-metrics.mjs";
 import { attachPrevious, isPreviousUsable } from "./realestate-previous.mjs";
-import { readSlotFile } from "./realestate-raw.mjs";
-import { shiftMonth, yearMonthOf } from "./realestate-slots.mjs";
+import { itemKey, readSlotFile } from "./realestate-raw.mjs";
+import { shiftMonth, windowMonths, yearMonthOf } from "./realestate-slots.mjs";
+import { attachWeeklyChanges, buildWeekly } from "./realestate-weekly.mjs";
 import { buildRentFiles, rentFileName } from "./deal-files.mjs";
 import { DISTRICT_SLUGS } from "./district-slugs.mjs";
 
@@ -25,6 +27,7 @@ const dataDir = process.env.REALESTATE_DATA_DIR
 const outFile = path.join(dataDir, "realestate.json");
 const historyFile = path.join(dataDir, "realestate-history.json");
 const previousFile = path.join(dataDir, "realestate-prev.json");
+const weeklyFile = path.join(dataDir, "realestate-weekly.json");
 const rentFilesDir = process.env.DEAL_FILES_DIR
   ? path.resolve(process.env.DEAL_FILES_DIR)
   : dataDir;
@@ -115,6 +118,71 @@ async function writeDeals(period, at, dealsByDistrict, cancelledTotal) {
     `[build-realestate] 예산 검색용 거래 ${all.length.toLocaleString("ko-KR")}건 저장` +
       ` (해제 ${cancelledTotal.toLocaleString("ko-KR")}건 제외,` +
       ` 직거래 ${directCount.toLocaleString("ko-KR")}건 · 거래형태 미상 ${unknownCount.toLocaleString("ko-KR")}건)`
+  );
+}
+
+export function arrivalRows(file, districtName) {
+  const arrivals = file?.arrivals ?? {};
+  if (!Object.keys(arrivals).length) return [];
+
+  const rows = [];
+  const items = file.kind === "sale" ? dropCancelled(file.items ?? []) : file.items ?? [];
+
+  for (const item of items) {
+    const observedOn = arrivals[itemKey(item)];
+    if (!observedOn) continue;
+
+    if (file.kind === "sale") {
+      const deal = normalizeDeal(item, districtName);
+      if (deal) rows.push({ type: "sale", district: districtName, observedOn, amount10k: deal.amount10k, area: deal.area });
+      continue;
+    }
+
+    const deal = normalizeRentDeal(item, districtName);
+    if (!deal) continue;
+    rows.push({
+      type: deal.monthlyRent10k > 0 ? "wolse" : "jeonse",
+      district: districtName,
+      observedOn,
+      deposit10k: deal.deposit10k,
+      monthlyRent10k: deal.monthlyRent10k ?? 0,
+      area: deal.area,
+    });
+  }
+
+  return rows;
+}
+
+async function readArrivals(now) {
+  const months = windowMonths(now);
+  const perSlot = await Promise.all(
+    months.flatMap((yearMonth) =>
+      DISTRICTS.flatMap(({ code, name }) =>
+        ["sale", "rent"].map(async (kind) => arrivalRows(await readSlotFile(kind, code, yearMonth), name))
+      )
+    )
+  );
+  return perSlot.flat();
+}
+
+async function writeWeekly(now) {
+  const weekly = attachWeeklyChanges(buildWeekly(await readArrivals(now), now));
+  if (!weekly) {
+    console.log("[build-realestate] 확정된 주가 아직 없어 주간 시세를 만들지 않았습니다");
+    return;
+  }
+
+  await writeFile(weeklyFile, JSON.stringify({ updatedAt: now.toISOString(), ...weekly }, null, 2));
+
+  const latest = weekly.overall[weekly.latestWeek] ?? {};
+  const counts = ["sale", "jeonse", "wolse"]
+    .filter((kind) => latest[kind])
+    .map((kind) => `${kind} ${latest[kind].transactionCount.toLocaleString("ko-KR")}건`)
+    .join(" · ");
+  console.log(
+    `[build-realestate] 주간 시세 ${weekly.weeks.length}주 · 확정 주 ${weekly.latestWeek}` +
+      (counts ? ` (${counts})` : "") +
+      (weekly.baselineWeek ? ` · ${weekly.baselineWeek} 대비` : " · 견줄 주 없음")
   );
 }
 
@@ -220,6 +288,7 @@ async function main() {
 
   await writeDeals(period, now, dealsByDistrict, cancelledTotal);
   await writeRentFiles(period, now, rentsByDistrict);
+  await writeWeekly(now);
 
   console.log(`[build-realestate] 저장 완료 (${fetchSummary(districts)})`);
 }

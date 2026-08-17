@@ -1,0 +1,222 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import {
+  attachWeeklyChanges,
+  buildWeekly,
+  nextWeek,
+  settledWeek,
+  weekStart,
+} from "../scripts/realestate-weekly.mjs";
+import { arrivalRows } from "../scripts/build-realestate.mjs";
+import { itemKey } from "../scripts/realestate-raw.mjs";
+
+const NOW = new Date("2026-09-07T00:00:00Z");
+
+const sale = (observedOn, extra = {}) => ({
+  type: "sale",
+  district: "노원구",
+  observedOn,
+  amount10k: 60_000,
+  area: 60,
+  ...extra,
+});
+
+const jeonse = (observedOn, extra = {}) => ({
+  type: "jeonse",
+  district: "노원구",
+  observedOn,
+  deposit10k: 30_000,
+  area: 60,
+  ...extra,
+});
+
+const wolse = (observedOn, extra = {}) => ({
+  type: "wolse",
+  district: "노원구",
+  observedOn,
+  deposit10k: 10_000,
+  monthlyRent10k: 80,
+  area: 60,
+  ...extra,
+});
+
+test("한 주는 월요일에 시작한다", () => {
+  assert.equal(weekStart("2026-08-24"), "2026-08-24");
+  assert.equal(weekStart("2026-08-30"), "2026-08-24");
+  assert.equal(weekStart("2026-08-31"), "2026-08-31");
+  assert.equal(weekStart(new Date("2026-08-30T15:30:00Z")), "2026-08-31", "KST로 날짜를 세지 않는다");
+});
+
+test("주는 달과 해를 넘어서도 이어진다", () => {
+  assert.equal(nextWeek("2026-08-31", -1), "2026-08-24");
+  assert.equal(nextWeek("2026-12-28", 1), "2027-01-04");
+  assert.equal(weekStart("2027-01-01"), "2026-12-28");
+});
+
+test("이번 주는 아직 끝나지 않았으므로 확정 주는 지난주다", () => {
+  assert.equal(settledWeek(NOW), "2026-08-31");
+});
+
+test("진행 중인 주는 집계에 넣지 않는다", () => {
+  const weekly = buildWeekly([sale("2026-08-25"), sale("2026-09-01"), sale("2026-09-07")], NOW);
+
+  assert.deepEqual(weekly.weeks, ["2026-08-24", "2026-08-31"]);
+  assert.ok(!weekly.overall["2026-09-07"], "이번 주를 확정으로 셌다");
+});
+
+test("서울 전체는 그 주 신고분만으로 센다", () => {
+  const weekly = buildWeekly(
+    [
+      sale("2026-08-25", { amount10k: 60_000, area: 60 }),
+      sale("2026-08-26", { amount10k: 90_000, area: 60 }),
+      sale("2026-09-01", { amount10k: 120_000, area: 60 }),
+    ],
+    NOW
+  );
+
+  assert.equal(weekly.overall["2026-08-24"].sale.transactionCount, 2);
+  assert.equal(weekly.overall["2026-08-31"].sale.transactionCount, 1, "지난주 거래가 이번 확정 주에 섞였다");
+});
+
+test("자치구는 네 주를 겹쳐 센다", () => {
+  const arrivals = ["2026-08-10", "2026-08-17", "2026-08-24", "2026-08-31"].map((day) => sale(day));
+  const weekly = buildWeekly(arrivals, NOW);
+
+  assert.equal(weekly.districts.노원구["2026-08-31"].sale.transactionCount, 4, "이동평균이 아니다");
+  assert.equal(weekly.overall["2026-08-31"].sale.transactionCount, 1, "서울 전체까지 겹쳐 셌다");
+  assert.equal(weekly.movingWeeks, 4);
+});
+
+test("전세와 월세를 갈라 센다", () => {
+  const weekly = buildWeekly(
+    [jeonse("2026-08-25"), jeonse("2026-08-26", { deposit10k: 50_000 }), wolse("2026-08-27")],
+    NOW
+  );
+
+  const week = weekly.overall["2026-08-24"];
+  assert.equal(week.jeonse.transactionCount, 2);
+  assert.equal(week.wolse.transactionCount, 1);
+  assert.equal(week.wolse.avgMonthlyRent10k, 80);
+  assert.ok(!week.sale, "매매가 없는데 값을 만들었다");
+});
+
+test("평당가는 면적으로 가중해 낸다", () => {
+  const weekly = buildWeekly(
+    [sale("2026-08-25", { amount10k: 60_000, area: 60 }), sale("2026-08-26", { amount10k: 30_000, area: 30 })],
+    NOW
+  );
+
+  assert.equal(weekly.overall["2026-08-24"].sale.avgPricePerPyeong10k, Math.round((1000 * 3.3058)));
+});
+
+test("확정된 두 주가 있어야 증감을 낸다", () => {
+  const oneWeek = attachWeeklyChanges(buildWeekly([sale("2026-08-25")], NOW));
+  assert.equal(oneWeek.overall["2026-08-24"].sale.change, undefined, "견줄 주가 없는데 증감을 만들었다");
+  assert.equal(oneWeek.latestWeek, "2026-08-24");
+
+  const twoWeeks = attachWeeklyChanges(
+    buildWeekly(
+      [sale("2026-08-25", { amount10k: 60_000, area: 60 }), sale("2026-09-01", { amount10k: 66_000, area: 60 })],
+      NOW
+    )
+  );
+
+  const latest = twoWeeks.overall["2026-08-31"].sale;
+  assert.equal(twoWeeks.baselineWeek, "2026-08-24");
+  assert.equal(latest.change.avgPricePerPyeong10k.percent.toFixed(1), "10.0");
+  assert.ok(latest.change.avgPricePerPyeong10k.value10k > 0);
+  assert.equal(latest.baselineWeek, "2026-08-24");
+});
+
+test("월세는 보증금과 월세 양쪽 증감을 낸다", () => {
+  const weekly = attachWeeklyChanges(
+    buildWeekly(
+      [wolse("2026-08-25"), wolse("2026-09-01", { deposit10k: 12_000, monthlyRent10k: 100 })],
+      NOW
+    )
+  );
+
+  const change = weekly.overall["2026-08-31"].wolse.change;
+  assert.equal(change.avgDeposit10k.value10k, 2_000);
+  assert.equal(change.avgMonthlyRent10k.value10k, 20);
+});
+
+test("신고 기록이 없으면 아무것도 만들지 않는다", () => {
+  assert.equal(buildWeekly([], NOW), null);
+  assert.equal(buildWeekly([sale("2026-09-07")], NOW), null, "이번 주뿐인데 주간값을 만들었다");
+  assert.equal(attachWeeklyChanges(null), null);
+});
+
+test("보관 주 수를 넘기면 오래된 주부터 떨어뜨린다", () => {
+  const arrivals = [];
+  for (let i = 0; i < 30; i += 1) arrivals.push(sale(nextWeek("2026-02-02", i)));
+
+  const weekly = buildWeekly(arrivals, NOW, { weeksKept: 26 });
+  assert.equal(weekly.weeks.length, 26);
+  assert.equal(weekly.weeks.at(-1), "2026-08-24");
+});
+
+const rawFile = (kind, items, days) => ({
+  kind,
+  items,
+  arrivals: Object.fromEntries(items.map((item, i) => [itemKey(item), days[i]]).filter(([, day]) => day)),
+});
+
+const saleRaw = (extra = {}) => ({
+  aptNm: "단지",
+  dealAmount: "60,000",
+  dealDay: 3,
+  dealMonth: 8,
+  dealYear: 2026,
+  excluUseAr: 60,
+  umdNm: "동",
+  ...extra,
+});
+
+const rentRaw = (extra = {}) => ({
+  aptNm: "단지",
+  deposit: "30,000",
+  dealDay: 3,
+  dealMonth: 8,
+  dealYear: 2026,
+  excluUseAr: 60,
+  monthlyRent: 0,
+  umdNm: "동",
+  ...extra,
+});
+
+test("원본에서 신고일이 적힌 거래만 뽑는다", () => {
+  const items = [saleRaw({ aptNm: "먼저" }), saleRaw({ aptNm: "나중" })];
+  const rows = arrivalRows(rawFile("sale", items, [null, "2026-08-25"]), "노원구");
+
+  assert.equal(rows.length, 1, "신고일을 모르는 거래까지 셌다");
+  assert.deepEqual(rows[0], {
+    type: "sale",
+    district: "노원구",
+    observedOn: "2026-08-25",
+    amount10k: 60_000,
+    area: 60,
+  });
+});
+
+test("해제된 거래는 주간 시세에서 뺀다", () => {
+  const items = [saleRaw({ aptNm: "해제", cdealType: "해제", cdealDay: "26.08.20" }), saleRaw({ aptNm: "성사" })];
+  const rows = arrivalRows(rawFile("sale", items, ["2026-08-25", "2026-08-25"]), "노원구");
+
+  assert.equal(rows.length, 1);
+  assert.equal(rows[0].amount10k, 60_000);
+});
+
+test("전세와 월세를 원본에서 갈라 담는다", () => {
+  const items = [rentRaw({ aptNm: "전세" }), rentRaw({ aptNm: "월세", monthlyRent: "80" })];
+  const rows = arrivalRows(rawFile("rent", items, ["2026-08-25", "2026-08-26"]), "노원구");
+
+  assert.deepEqual(rows.map((row) => row.type), ["jeonse", "wolse"]);
+  assert.equal(rows[0].monthlyRent10k, 0);
+  assert.equal(rows[1].monthlyRent10k, 80);
+});
+
+test("신고 기록이 없는 원본은 아무것도 내놓지 않는다", () => {
+  assert.deepEqual(arrivalRows(rawFile("sale", [saleRaw()], [null]), "노원구"), []);
+  assert.deepEqual(arrivalRows(null, "노원구"), []);
+});

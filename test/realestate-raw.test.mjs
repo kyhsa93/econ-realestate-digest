@@ -136,3 +136,51 @@ test("만료된 슬롯을 지운다", async () => {
   assert.deepEqual(await readSlots(root), {});
   await removeSlotFile("sale", "11350", "202608", root);
 });
+
+test("처음 받은 달은 신고일을 지어내지 않는다", async () => {
+  const root = await dir();
+  await writeSlotFile(slot([item(), item({ aptNm: "중계무지개" })]), root);
+
+  const file = await readSlotFile("sale", "11350", "202608", root);
+  assert.deepEqual(file.arrivals, {}, "언제 신고됐는지 모르는 거래에 날짜를 붙였다");
+});
+
+test("나중에 나타난 거래에만 관측한 날을 적는다", async () => {
+  const root = await dir();
+  await writeSlotFile(slot([item()]), root);
+
+  const later = "2026-08-19T23:07:00.000Z";
+  const result = await writeSlotFile(slot([item(), item({ aptNm: "새로들어온단지" })], { observedAt: later }), root);
+
+  const file = await readSlotFile("sale", "11350", "202608", root);
+  const days = Object.values(file.arrivals);
+  assert.equal(result.added, 1);
+  assert.deepEqual(days, ["2026-08-20"], "KST 기준 관측일이 아니다");
+});
+
+test("한 번 적은 신고일은 나중 실행에도 그대로 남는다", async () => {
+  const root = await dir();
+  await writeSlotFile(slot([item()]), root);
+  await writeSlotFile(slot([item(), item({ aptNm: "둘째" })], { observedAt: "2026-08-19T23:07:00.000Z" }), root);
+  const second = await readSlotFile("sale", "11350", "202608", root);
+
+  await writeSlotFile(
+    slot([item(), item({ aptNm: "둘째" }), item({ aptNm: "셋째" })], { observedAt: "2026-08-20T23:07:00.000Z" }),
+    root
+  );
+  const third = await readSlotFile("sale", "11350", "202608", root);
+
+  const [firstKey] = Object.keys(second.arrivals);
+  assert.equal(third.arrivals[firstKey], second.arrivals[firstKey], "지난번 신고일이 덮어써졌다");
+  assert.equal(Object.keys(third.arrivals).length, 2);
+});
+
+test("거래가 사라지면 그 신고 기록도 지운다", async () => {
+  const root = await dir();
+  await writeSlotFile(slot([item()]), root);
+  await writeSlotFile(slot([item(), item({ aptNm: "해제될단지" })], { observedAt: "2026-08-19T23:07:00.000Z" }), root);
+  await writeSlotFile(slot([item()], { observedAt: "2026-08-20T23:07:00.000Z" }), root);
+
+  const file = await readSlotFile("sale", "11350", "202608", root);
+  assert.deepEqual(file.arrivals, {}, "없어진 거래의 신고 기록이 남았다");
+});

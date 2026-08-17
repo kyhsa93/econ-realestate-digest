@@ -251,3 +251,27 @@ test("전월세도 지역별 전수 파일로 남긴다", async (t) => {
   assert.match(stdout, new RegExp(`전세 ${DISTRICT_COUNT * 2}건 · 월세 ${DISTRICT_COUNT}건`), stdout);
   assert.match(stdout, new RegExp(`갱신계약 ${DISTRICT_COUNT}건`), stdout);
 });
+
+test("날마다 새로 들어온 신고만 주간 시세로 쌓인다", async (t) => {
+  let extra = 0;
+  const server = await startFakeMolit((kind) => {
+    const rows = Array.from({ length: 1 + extra }, (_, i) =>
+      kind === "sale"
+        ? saleItem({ aptNm: `단지${i}`, dealAmount: `${50000 + i * 1000}` })
+        : rentItem({ aptNm: `전월세${i}`, deposit: `${30000 + i * 1000}` })
+    );
+    return successXml(rows);
+  });
+  t.after(() => server.close());
+  const space = await workspace();
+
+  await collect(server, space);
+  const first = JSON.parse(await readFile(path.join(space.rawDir, "sale", `11110-${PERIOD}.json`), "utf-8"));
+  assert.deepEqual(first.arrivals, {}, "처음 받은 거래에 신고일을 붙였다");
+
+  extra = 2;
+  await collect(server, space);
+  const second = JSON.parse(await readFile(path.join(space.rawDir, "sale", `11110-${PERIOD}.json`), "utf-8"));
+  assert.equal(Object.keys(second.arrivals).length, 2, "새로 들어온 두 건만 잡아야 한다");
+  assert.equal(second.count, 3);
+});

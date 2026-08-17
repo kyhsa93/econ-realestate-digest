@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { slotKey } from "./realestate-slots.mjs";
@@ -27,7 +28,18 @@ function canonical(value) {
 
 const sortKey = (item) => JSON.stringify(item);
 
-function serialize({ items, ...meta }) {
+export const itemKey = (item) => createHash("sha1").update(sortKey(item)).digest("hex").slice(0, 12);
+
+const kstDay = (iso) =>
+  new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(new Date(iso));
+
+function serialize({ items, arrivals, ...meta }) {
+  const head = JSON.stringify({ ...meta, arrivals: arrivals ?? {} }).slice(0, -1);
+  const body = items.length ? `[\n${items.map((item) => JSON.stringify(item)).join(",\n")}\n]` : "[]";
+  return `${head},"items":${body}}\n`;
+}
+
+function serializeWithoutArrivals({ items, ...meta }) {
   const head = JSON.stringify(meta).slice(0, -1);
   const body = items.length ? `[\n${items.map((item) => JSON.stringify(item)).join(",\n")}\n]` : "[]";
   return `${head},"items":${body}}\n`;
@@ -57,6 +69,28 @@ export async function readSlotFile(kind, code, yearMonth, dir = RAW_DIR) {
   }
 }
 
+function trackArrivals(payload, previous) {
+  if (!previous) return { arrivals: {}, added: 0 };
+
+  const known = new Set((previous.items ?? []).map(itemKey));
+  const before = previous.arrivals ?? {};
+  const day = kstDay(payload.observedAt);
+
+  const arrivals = {};
+  let added = 0;
+
+  for (const item of payload.items) {
+    const key = itemKey(item);
+    if (before[key]) arrivals[key] = before[key];
+    else if (!known.has(key)) {
+      arrivals[key] = day;
+      added += 1;
+    }
+  }
+
+  return { arrivals, added };
+}
+
 export async function writeSlotFile(payload, dir = RAW_DIR) {
   const { kind, district, yearMonth } = payload;
   const file = rawPath(kind, district, yearMonth, dir);
@@ -67,17 +101,17 @@ export async function writeSlotFile(payload, dir = RAW_DIR) {
     previous.ok === payload.ok &&
     previous.count === payload.count &&
     previous.totalCount === payload.totalCount &&
-    serialize({ ...previous, observedAt: null, previousObservedAt: null }) ===
-      serialize({ ...payload, observedAt: null, previousObservedAt: null });
+    serializeWithoutArrivals({ ...previous, arrivals: null, observedAt: null, previousObservedAt: null }) ===
+      serializeWithoutArrivals({ ...payload, arrivals: null, observedAt: null, previousObservedAt: null });
 
   if (same) return { changed: false, added: 0 };
 
-  const record = { ...payload, previousObservedAt: previous?.observedAt ?? null };
+  const { arrivals, added } = trackArrivals(payload, previous);
+  const record = { ...payload, previousObservedAt: previous?.observedAt ?? null, arrivals };
   await mkdir(path.dirname(file), { recursive: true });
   await writeFile(file, serialize(record));
 
-  const before = new Set((previous?.items ?? []).map(sortKey));
-  return { changed: true, added: record.items.filter((item) => !before.has(sortKey(item))).length };
+  return { changed: true, added };
 }
 
 export async function removeSlotFile(kind, code, yearMonth, dir = RAW_DIR) {
