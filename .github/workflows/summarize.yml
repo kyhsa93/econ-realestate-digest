@@ -1,18 +1,6 @@
 name: Digest summarize
 
-# AI 요약·번역만 따로 돌린다.
-#
-# 이 두 작업은 러너에 Ollama를 깔고 9GB짜리 모델을 받아 CPU로 돌리는 일이라 한 번에
-# 40분~1시간이 걸린다. 수집(뉴스·시장지표·실거래가)은 하루 네 번 돌아야 하지만 요약까지
-# 네 번 다시 쓸 이유는 없어서, 수집 파이프라인에서 떼어내고 필요할 때만 모델을 받는다.
-#
-# "필요할 때"는 scripts/summary-needed.mjs가 판정한다 - 오늘 요약이 아직 없거나, 요약
-# 이후 기사가 충분히 새로 들어왔거나, 번역이 밀렸을 때. 판정을 별도 job으로 둔 덕에
-# 필요 없는 날은 1분짜리 job 하나로 끝나고 모델은 받지도 않는다.
-
 on:
-  # 수집이 끝난 뒤에 이어서 본다. 새 기사가 들어온 직후가 다시 요약할지 판단하기
-  # 가장 좋은 시점이다.
   workflow_run:
     workflows: ["Digest update"]
     types: [completed]
@@ -28,7 +16,6 @@ permissions:
   pages: write
   id-token: write
 
-# 수집 워크플로도 같은 그룹을 쓴다. 둘 다 docs를 커밋하므로 겹쳐 돌면 push가 서로 밀린다.
 concurrency:
   group: digest-pipeline
   cancel-in-progress: false
@@ -36,7 +23,6 @@ concurrency:
 jobs:
   check:
     runs-on: ubuntu-latest
-    # 수집이 실패한 실행을 이어받아 봐야 재료가 없다.
     if: >-
       github.event_name == 'workflow_dispatch' ||
       github.event.workflow_run.conclusion == 'success'
@@ -44,8 +30,6 @@ jobs:
       needed: ${{ steps.decide.outputs.needed }}
       reason: ${{ steps.decide.outputs.reason }}
     steps:
-      # workflow_run은 트리거한 실행의 커밋을 기본으로 잡는다. 수집이 방금 밀어넣은
-      # 커밋을 받아야 하므로 브랜치 최신을 명시한다.
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           ref: main
@@ -105,8 +89,6 @@ jobs:
       - name: 뉴스 제목 영어 번역
         run: node scripts/translate-news.mjs
 
-      # 요약·번역이 summary.json과 news.json을 바꿨으니 정적 HTML을 다시 심는다.
-      # 칩 붙이기까지 다시 도는 이유는 번역된 제목이 기사 줄에 들어가기 때문이다.
       - name: 정적 HTML에 오늘 내용 심기
         run: |
           node scripts/news-context.mjs

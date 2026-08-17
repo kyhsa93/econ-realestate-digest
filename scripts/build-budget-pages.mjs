@@ -1,8 +1,3 @@
-// 예산 구간마다 착지 페이지를 찍는다(budget-8eok.html 등).
-//
-// 왜 나누나: "8억으로 살 수 있는 서울 아파트"처럼 예산 단위로 검색한다. 시세 페이지의
-// 입력창은 이미 답을 갖고 있지만, 검색 결과에서 그 화면으로 들어올 길이 없다. 자치구
-// 페이지·거래 유형 페이지를 찍은 것과 같은 이유다.
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { BUDGET_PAGES, BUDGET_PAGE_EOK, budgetPageFile } from "./budget-pages.mjs";
@@ -13,9 +8,6 @@ const REALESTATE_PATH = path.join(root, "docs/realestate.html");
 const DEAL_SEARCH_PATH = path.join(root, "docs/deal-search.html");
 const BASE_URL = "https://kyhsa93.github.io/econ-realestate-digest/";
 
-// 문서 제목과 화면 사전의 제목은 값이 다르다(사전 쪽이 짧다). 문서 제목을 먼저 통째로
-// 바꾸면서 사전 키까지 같이 갈아버리면 그다음 치환이 대상을 못 찾는다 - 거래 유형
-// 페이지가 쓰는 값을 그대로 쓴다.
 const BASE_TITLE = "서울 아파트 시세 - 25개 자치구 실거래가";
 const BASE_DESCRIPTION =
   "국토교통부 실거래 신고 자료로 서울 25개 자치구의 아파트 매매·전세·월세 시세를 평당가와 84㎡ 환산가로 함께 보여줍니다. 매일 갱신합니다.";
@@ -27,8 +19,6 @@ function replaceOnce(html, needle, replacement, what) {
   return html.replace(needle, replacement);
 }
 
-// 옆 칸으로 가는 길. 예산은 한 번에 정해지는 값이 아니라 "조금 더 쓰면 뭐가 되나"를
-// 오가며 잡는 값이라, 정적 페이지에서도 이 이동이 있어야 한다.
 function navHtml(page) {
   const links = [];
   if (BUDGET_PAGE_EOK.includes(page.eok - 1)) {
@@ -54,7 +44,6 @@ export function buildBudgetPage(baseHtml, page, budget, links = budgetLinksHtml(
   html = replaceOnce(html, BASE_TITLE_KEY, `title: ${JSON.stringify(page.title)},`, "한국어 제목 사전");
   html = replaceOnce(html, BASE_TITLE_KEY_EN, `title: ${JSON.stringify(page.titleEn)},`, "영어 제목 사전");
 
-  // 화면은 이 값으로 자기가 어느 구간을 다루는 페이지인지 안다.
   html = replaceOnce(
     html,
     '<link rel="canonical"',
@@ -93,8 +82,6 @@ async function main() {
 
   const sourceHtml = await readFile(REALESTATE_PATH, "utf8");
 
-  // 링크로 걸 목록을 먼저 정한다. 거래가 없어 못 만드는 구간까지 링크하면 404가 되고,
-  // 예전에 찍어둔 페이지는 살아 있으므로 그것도 목록에 남긴다.
   const bandOf = (page) => (budget.bands ?? []).find((b) => b.min10k === page.min10k) ?? null;
   const exists = async (page) =>
     Boolean(await readFile(path.join(root, "docs", page.file), "utf8").catch(() => null));
@@ -105,15 +92,10 @@ async function main() {
   }
   const links = budgetLinksHtml(linked);
 
-  // 목록이 걸리는 자리는 거래내역 검색 페이지다. 시세 페이지에는 심지 않는다 - 그 페이지는
-  // 자치구 표가 본문이고, 그 아래 예산 구간 링크가 열여덟 개 깔리면 표를 다 읽은 사람에게
-  // 목적이 다른 목록만 남는다. 예산 페이지로 가는 내부 경로는 검색 페이지 하나로 충분하다.
   const searchHtml = await readFile(DEAL_SEARCH_PATH, "utf8");
   const nextSearchHtml = applyPrerender(searchHtml, { budgetLinks: links });
   if (nextSearchHtml !== searchHtml) await writeFile(DEAL_SEARCH_PATH, nextSearchHtml);
 
-  // 예산 페이지끼리도 서로 닿아야 해서 같은 목록을 심는데, 원본인 시세 페이지에는 남기지
-  // 않으므로 파일로 되쓰지 않고 메모리에서만 얹는다.
   const baseHtml = applyPrerender(sourceHtml, { budgetLinks: links });
 
   let created = 0;
@@ -123,8 +105,6 @@ async function main() {
   for (const page of BUDGET_PAGES) {
     const html = buildBudgetPage(baseHtml, page, budget, links);
     if (!html) {
-      // 거래가 없는 구간은 페이지를 갈아엎지 않고 그대로 둔다. 한 번 만든 주소는
-      // 살려두되, 그날 데이터가 얇다고 빈 화면으로 덮어쓰지는 않는다.
       skipped.push(`${page.eok}억대`);
       continue;
     }

@@ -1,7 +1,3 @@
-// docs/news.html의 인라인 스크립트를 가짜 DOM 위에서 실제로 돌리는 하네스.
-// index.html 하네스와 같은 이유로 필요하다 - 이 환경엔 브라우저가 없고, 프리렌더한
-// HTML은 데이터를 받는 순간 클라이언트가 통째로 다시 그리기 때문에 "정적 HTML엔
-// 있는데 화면에선 사라지는" 상태를 프리렌더 테스트만으로는 못 잡는다.
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import vm from "node:vm";
@@ -25,8 +21,6 @@ function stubElement(attrs = {}) {
   });
 }
 
-// category를 주면 카테고리 페이지(realestate-news.html 등)처럼 동작한다 - 그 값은
-// 화면에서 <meta name="news-category">로만 들어오기 때문에 여기서도 같은 길로 넣는다.
 export async function loadNewsPage({ news, summary, category = null, locale = "ko", analytics } = {}) {
   const html = await readFile(path.join(root, "docs/news.html"), "utf8");
   const script = [...html.matchAll(/<script>\n([\s\S]*?)\n<\/script>/g)].map((m) => m[1]).pop();
@@ -89,7 +83,6 @@ export async function loadNewsPage({ news, summary, category = null, locale = "k
   vm.createContext(sandbox);
   new vm.Script(script, { filename: "docs/news.html:inline" }).runInContext(sandbox);
 
-  // main()이 데이터를 받아 첫 렌더를 마칠 때까지 기다린다.
   await new Promise((resolve) => setTimeout(resolve, 0));
   await new Promise((resolve) => setTimeout(resolve, 0));
 

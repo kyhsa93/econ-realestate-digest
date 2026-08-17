@@ -15,8 +15,5 @@ jobs:
         with:
           node-version: "20"
           cache: npm
-      # 의존성 설치 없이 npm test만 돌고 있었다. 외부 패키지를 쓰는 모듈(fast-xml-parser를
-      # import하는 fetch-realestate.mjs 등)을 테스트가 건드리는 순간 ERR_MODULE_NOT_FOUND로
-      # 죽는다 - 실제로 그 모듈에서 함수를 하나 가져다 쓰자마자 이 워크플로가 빨개졌다.
       - run: npm ci
       - run: npm test

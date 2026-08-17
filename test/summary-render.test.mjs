@@ -1,5 +1,3 @@
-// 요약이 한 문장에서 문단으로 바뀌면서 화면에 새 섹션이 붙었다. 데이터가
-// 아무리 좋아져도 여기서 안 그려지면 사용자에겐 달라진 게 없다.
 import test from "node:test";
 import assert from "node:assert/strict";
 import { loadIndexPage } from "./helpers/index-page.mjs";
@@ -75,8 +73,6 @@ test("핵심 기사가 없는 날은 섹션째 빠지고 분야별 요약만 남
 });
 
 test("모델이 쓴 문장에 태그가 섞여도 HTML로 실행되지 않는다", async () => {
-  // 요약이 문단으로 길어진 만큼 부등호가 섞일 확률도 올라갔고, 이 값은
-  // innerHTML로 바로 들어간다.
   const html = await renderWith({
     ...SUMMARY,
     highlights: [{ ...SUMMARY.highlights[0], textKo: "<img src=x onerror=alert(1)> 발표했다." }],
@@ -89,8 +85,6 @@ test("모델이 쓴 문장에 태그가 섞여도 HTML로 실행되지 않는다
 });
 
 test("프리렌더 HTML에도 핵심 기사가 들어간다", () => {
-  // 크롤러는 자바스크립트 렌더를 기다려주지 않는다. 여기서 빠지면 검색 결과엔
-  // 분야별 요약만 남는다.
   const html = summaryHtml(SUMMARY);
 
   assert.ok(html.includes("신규 공공택지 후보지를 발표했다"));

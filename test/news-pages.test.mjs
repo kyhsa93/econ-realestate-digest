@@ -1,5 +1,3 @@
-// 카테고리별 뉴스 페이지는 news.html에서 찍어낸 것이라, 원본이 바뀌면 조용히 어긋난다.
-// "찍어낸 결과와 커밋된 파일이 같은가"와 "그 페이지가 자기 분야 기사만 싣는가"를 지킨다.
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
@@ -35,7 +33,6 @@ test("각 페이지가 자기 분야를 정규 URL·제목·필터로 선언한�
     );
     assert.ok(html.includes(`<meta name="news-category" content="${page.category}">`), `${page.file} 분야 지정이 없다`);
     assert.ok(!html.includes("<title>오늘의 경제·부동산 뉴스</title>"), `${page.file}에 원본 제목이 남았다`);
-    // 영어 사전까지 안 바꾸면 언어를 전환하는 순간 네 페이지가 같은 제목으로 돌아간다.
     assert.ok(html.includes(`title: "${page.titleEn}"`), `${page.file} 영어 사전 제목이 안 바뀌었다`);
     assert.ok(
       !html.includes('title: "Today\'s Korean Economy & Real Estate News"'),
@@ -47,9 +44,6 @@ test("각 페이지가 자기 분야를 정규 URL·제목·필터로 선언한�
 test("각 페이지의 정적 목록에 다른 분야 기사가 섞이지 않는다", async () => {
   const news = await readJson("news");
 
-  // 그날 그 분야 기사가 한 건도 없는 날이 있다(금리 쪽이 특히 그렇다). 그건 고장이
-  // 아니라 화면이 "오늘 이 분야 기사가 아직 없습니다"로 답하는 정상 상태다. 페이지마다
-  // 기사를 요구하면 그런 날 CI가 통째로 빨개져서 진짜 문제를 가린다.
   let listedTotal = 0;
 
   for (const page of NEWS_PAGES) {
@@ -66,7 +60,6 @@ test("각 페이지의 정적 목록에 다른 분야 기사가 섞이지 않는
     }
   }
 
-  // 다만 세 페이지가 동시에 비는 건 데이터가 아니라 프리렌더가 고장난 것이다.
   assert.ok(listedTotal > 0, "세 카테고리 페이지의 정적 목록이 전부 비어 있다");
 });
 
@@ -81,8 +74,6 @@ test("요약도 그 분야 문장만 싣는다", async () => {
   }
 });
 
-// 상대 시간을 정적 HTML에 넣으면 데이터가 그대로여도 하루 뒤엔 결과가 달라져서,
-// 커밋된 HTML이 데이터와 맞는지 검사할 수 없게 된다.
 test("정적 목록에 만든 시점에 좌우되는 값을 넣지 않는다", async () => {
   const html = newsListHtml(await readJson("news"));
   assert.ok(!/분 전|시간 전|일 전/.test(html), "상대 시간이 정적 HTML에 실렸다");
@@ -98,18 +89,15 @@ test("허브와 카테고리 페이지가 서로를 진짜 링크로 가리킨�
     assert.ok(html.includes('href="./index.html"'), `${file}에 메인 링크가 없다`);
   }
 
-  // 크롤러가 메인에서 뉴스 허브로 들어올 수 있어야 한다.
   const index = await read("docs/index.html");
   assert.ok(index.includes('href="./news.html"'), "메인에 뉴스 허브 링크가 없다");
 });
 
-// 메인·금리 페이지엔 있는 토글이 여기만 없으면 사이트 안에서 UI가 끊긴다.
 test("뉴스 페이지에도 테마·언어 토글이 있다", async () => {
   for (const file of ["docs/news.html", ...NEWS_PAGES.map((p) => `docs/${p.file}`)]) {
     const html = await read(file);
     assert.ok(html.includes('id="theme-toggle"'), `${file}에 테마 토글이 없다`);
     assert.ok(html.includes('id="lang-toggle"'), `${file}에 언어 토글이 없다`);
-    // 영어 화면에서 한국어가 남지 않으려면 사전이 양쪽 다 있어야 한다.
     assert.ok(html.includes("navRealestate:"), `${file}에 언어 사전이 없다`);
   }
 });
@@ -123,8 +111,6 @@ test("뉴스 페이지에도 GA 로더와 사이트 구분이 붙어 있다", as
   }
 });
 
-// "불러오지 못했습니다"만 뜨면 오프라인인지, 배포가 어긋난 건지, 캐시가 옛것인지
-// 사용자도 나도 구분할 수가 없다. 상태 코드를 같이 보여준다.
 test("기사 로드 실패는 원인을 함께 알린다", async () => {
   for (const file of ["docs/news.html", ...NEWS_PAGES.map((p) => `docs/${p.file}`)]) {
     const html = await read(file);

@@ -61,9 +61,6 @@
     --card: #f5f5f7;
     --border: #e2e2e5;
   }
-  /* hidden 속성은 브라우저 기본 스타일(display:none)로 동작하는데, 작성자 CSS가 그 요소에
-     display를 지정하면 그쪽이 이겨서 감춰지지 않는다. 실제로 오류 배너가 display:flex 때문에
-     늘 보이고 있었다. 감춤은 항상 이 규칙이 이기게 못박는다. */
   [hidden] { display: none !important; }
   * { box-sizing: border-box; }
   body {
@@ -257,7 +254,6 @@
     margin-left: 8px;
     cursor: pointer;
   }
-  /* 좁은 화면에서 4열 표는 가로 스크롤 없이는 읽을 수가 없다. 행을 카드로 세운다. */
   @media (max-width: 480px) {
     .data-table { white-space: normal; }
     .data-table thead { display: none; }
@@ -283,7 +279,6 @@
       text-align: left;
       flex-shrink: 0;
     }
-    /* 상세 펼침 행은 카드 안에서 그대로 흐르게 둔다. */
     .data-table tr.detail-row td { display: block; text-align: left; }
   }
   .show-more {
@@ -340,7 +335,6 @@
     font: inherit;
     color: inherit;
     width: 100%;
-    /* 표 머리글은 손가락으로 누르기엔 얇아서 세로 여백을 따로 준다. */
     padding: 10px 12px;
     background: none;
     border: 0;
@@ -362,8 +356,6 @@
     font-weight: 600;
     color: var(--down);
   }
-  /* 세후 이자는 금리와 달리 '내가 받는 돈'이라 표에서 제일 먼저 눈에 들어와야 한다.
-     다만 금리 열(빨강/파랑)과 색으로 경쟁하면 표가 산만해져서 굵기로만 세운다. */
   .net-interest {
     font-weight: 700;
     font-variant-numeric: tabular-nums;
@@ -716,14 +708,10 @@
   const CATEGORY_KEYS = ["deposit", "saving", "mortgage", "rentLoan"];
   const SAVING_CATEGORIES = new Set(["deposit", "saving"]);
 
-  // 정렬 가능한 금리 열. 예적금과 대출은 열 구성 자체가 달라서 정렬 상태도 따로 든다
-  // (정기예금↔적금은 같은 열이라 정렬이 이어지고, 대출 두 탭도 마찬가지다).
   const SORT_COLUMNS = {
     saving: [
       { key: "rate", label: "thBaseRate", defaultDir: "desc" },
       { key: "maxRate", label: "thMaxRate", defaultDir: "desc" },
-      // 같은 기간 안에서도 단리·복리가 섞여 있어서 금리 순서와 세후 이자 순서가
-      // 항상 같지는 않다.
       { key: "netInterest", label: "thAfterTax", defaultDir: "desc" },
     ],
     loan: [
@@ -732,24 +720,15 @@
     ],
   };
 
-  // 상품군별 페이지(deposit-rates.html 등)는 같은 파일에서 찍어내고 이 meta로만 갈린다.
   function initialCategory() {
     const value = document.querySelector('meta[name="rates-category"]')?.getAttribute("content");
     return CATEGORY_KEYS.includes(value) ? value : "deposit";
   }
 
-  // 탭·필터·검색을 주소에 남긴다. 안 그러면 걸러놓은 화면을 공유할 수 없고,
-  // 탭을 여러 번 바꾼 뒤 뒤로가기를 누르면 사이트를 빠져나가 버린다.
   const urlParams = new URLSearchParams(location.search);
 
   const DEFAULT_CATEGORY = initialCategory();
 
-  // 세후 이자를 낼 기준 금액. 예금은 목돈을 한 번에 넣고 적금은 매달 부으므로 기준이
-  // 달라서 탭별로 따로 든다(적금 탭에서 "월 1,000만원"을 묻는 화면이 되면 안 된다).
-  // scripts/interest.mjs의 DEFAULT_AMOUNT와 같아야 한다 - 정적 HTML이 그 값으로 심긴다.
-  // 정기예금만 356개, 적금은 328개다. 전부 한 번에 그리면 스크롤이 끝없이 길어지고,
-  // 정적 HTML(상위 20개)을 받은 화면이 데이터를 받는 순간 열여덟 배로 늘어난다.
-  // 금리순으로 줄 세운 표라 대부분은 위쪽 몇 개만 보고, 나머지는 검색·필터로 좁힌다.
   const PAGE_SIZE = 20;
 
   const DEFAULT_AMOUNT = { deposit: 10000000, saving: 300000 };
@@ -764,9 +743,6 @@
     query: urlParams.get("q") ?? "",
     expanded: new Set(),
     limit: PAGE_SIZE,
-    // 대출은 최저금리 오름차순이 기본이다. 공시의 평균금리는 "지난달 실제 취급 평균"
-    // 이라 현재 제시되는 금리 범위와 다른 수치이고, 3분의 1 남짓은 값 자체가 없어서
-    // 상품끼리 줄을 세우는 기준으로는 최저금리 쪽이 일관된다.
     sort: {
       saving: { key: "maxRate", dir: "desc" },
       loan: { key: "min", dir: "asc" },
@@ -785,7 +761,6 @@
     return state.amounts[amountKey()];
   }
 
-  // 주소로 들어온 금액. 음수·0·글자는 무시하고 기본값을 쓴다.
   function readAmountParam(params) {
     const raw = Number(params.get("amt"));
     return Number.isFinite(raw) && raw > 0 ? Math.round(raw) : null;
@@ -794,8 +769,6 @@
   const initialAmount = readAmountParam(urlParams);
   if (initialAmount !== null) state.amounts[amountKey()] = initialAmount;
 
-  // scripts/interest.mjs와 같은 계산이다. 이 페이지는 인라인 스크립트라 모듈을 못 받아서
-  // 복제해 뒀고, 두 결과가 같은지는 테스트가 실제 렌더 결과로 대조한다.
   function netInterestOf(option, { amount, saving }) {
     const rate = option?.maxRate ?? option?.rate;
     const term = option?.term;
@@ -910,8 +883,6 @@
     return res.json();
   }
 
-  // 데이터를 못 받으면 화면엔 오류 문구만 뜨고 끝이라 며칠째 그러고 있어도 알 수가 없다.
-  // fatal은 그 파일이 없으면 페이지가 제구실을 못 하는 경우.
   function reportLoadFailure(name, error, fatal) {
     window.analytics?.event("exception", {
       description: `load ${name}: ${error?.message ?? error}`.slice(0, 100),
@@ -1096,8 +1067,6 @@
 
     const amountInput = document.getElementById("amount-input");
     if (amountInput) {
-      // 지우는 도중(빈 칸)이나 0을 넣었다고 표를 비우면 입력이 불편하다. 값이
-      // 쓸 만해질 때까지 직전 금액을 그대로 쓴다.
       amountInput.addEventListener("input", (e) => {
         const next = Number(e.target.value);
         if (!Number.isFinite(next) || next <= 0) return;
@@ -1142,7 +1111,6 @@
         renderProducts();
         syncUrl();
         const term = state.query.trim();
-        // GA4 권장 이벤트 이름이라 search_term이 기본 제공 차원으로 잡힌다(맞춤 측정기준 등록 불필요).
         if (term.length >= 2) window.analytics?.debouncedEvent("search", { search_term: term });
       });
     }
@@ -1161,9 +1129,6 @@
       if (!matchesQuery(product)) continue;
       if (isSavingCategory(state.category) && !state.sectors[product.sector ?? "bank"]) continue;
 
-      // 한 상품 안에서 조건이 다른 옵션이 여러 개 나오므로 한 줄만 골라 보여준다.
-      // 고르는 기준은 정렬 기준과 같아야 한다 - 최저금리로 줄을 세우면서 평균이
-      // 가장 낮은 옵션을 보여주면, 표에 적힌 숫자와 순서가 서로 다른 옵션 얘기가 된다.
       let best = null;
       let bestValue = null;
       let fallback = null;
@@ -1173,8 +1138,6 @@
         } else if (state.rateType && raw.rateType !== state.rateType) {
           continue;
         }
-        // 세후 이자는 공시에 없는 계산값이라 옵션에 얹어둔다. 그래야 정렬도 표시도
-        // 다른 금리 열과 똑같은 경로를 탄다.
         const opt = isSavingCategory(state.category)
           ? {
               ...raw,
@@ -1192,9 +1155,6 @@
           bestValue = value;
         }
       }
-      // 평균금리로 정렬하면 공시에 평균이 없는 상품이 나온다(전세자금대출 41개 중 10개).
-      // 정렬할 값이 없다고 표에서 빼버리면 사용자 입장에선 상품이 사라진 것이라,
-      // 남겨두고 맨 아래로만 보낸다.
       if (best) rows.push({ product, option: best, sort: bestValue });
       else if (fallback) rows.push({ product, option: fallback, sort: null });
     }
@@ -1265,7 +1225,6 @@
     </tr>${detailRowHtml(product, 4)}`;
   }
 
-  // 정렬 중인 열만 화살표를 달고, 나머지 금리 열은 누를 수 있다는 것만 알린다.
   function sortableThHtml(key) {
     const column = SORT_COLUMNS[sortFamily()].find((c) => c.key === key);
     const { key: activeKey, dir } = activeSort();
@@ -1296,7 +1255,6 @@
         </tr>`;
   }
 
-  // 남은 상품이 몇 개인지 밝힌다. 그냥 잘라두면 사용자는 그게 전부인 줄 안다.
   function renderShowMore(total) {
     const box = document.getElementById("show-more");
     const shown = Math.min(state.limit, total);
@@ -1334,8 +1292,6 @@
 
     renderShowMore(rows.length);
 
-    // 세후 이자는 가정을 깔고 낸 숫자라(최고금리·정액적립식·15.4%) 그 가정을 표
-    // 바로 아래에 같이 적는다. 숫자만 크게 보여주고 조건을 숨기면 오해를 만든다.
     document.getElementById("products-note").textContent = isSavingCategory(state.category)
       ? `${t("savingNote")} ${t("afterTaxNote")}`
       : t("loanNote");
@@ -1383,8 +1339,6 @@
       ? `${t("updatedPrefix")}: ${fmtUpdated(cache.rates.updatedAt)}`
       : "-";
 
-    // 제목이 언어에 맞게 정해진 뒤라야 GA에 제대로 남는다. 첫 호출만 전송된다.
-    // 로드 실패 경로에서도 renderMeta는 불리므로 유입 자체는 빠지지 않는다.
     window.analytics?.pageView({ site_language: locale });
   }
 
@@ -1396,8 +1350,6 @@
     renderHistory();
   }
 
-  // 탭과 같은 이유로 컨테이너에 위임한다. renderProductsHead가 <th>를 통째로 다시
-  // 만들기 때문에, 버튼에 직접 붙이면 한 번 정렬한 뒤로 리스너가 사라진다.
   document.getElementById("show-more").addEventListener("click", (event) => {
     if (event.target?.id !== "show-more-button") return;
     state.limit += PAGE_SIZE;
@@ -1437,7 +1389,6 @@
       ["term", String(state.term), "12"],
       ["type", state.rateType, ""],
       ["q", state.query.trim(), ""],
-      // 기본 금액이면 주소에 남기지 않는다(다른 필터와 같은 규칙).
       ["amt", String(currentAmount()), String(DEFAULT_AMOUNT[amountKey()])],
     ]) {
       if (value === empty) next.delete(key);
@@ -1446,7 +1397,6 @@
     const query = next.toString();
     const url = `${location.pathname}${query ? `?${query}` : ""}`;
     if (url === `${location.pathname}${location.search}`) return;
-    // 검색은 글자마다 기록을 쌓으면 뒤로가기가 못 쓰게 되므로 교체만 한다.
     history[push ? "pushState" : "replaceState"](null, "", url);
   }
 

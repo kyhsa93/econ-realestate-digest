@@ -58,9 +58,6 @@
     --card: #f5f5f7;
     --border: #e2e2e5;
   }
-  /* hidden 속성은 브라우저 기본 스타일(display:none)로 동작하는데, 작성자 CSS가 그 요소에
-     display를 지정하면 그쪽이 이겨서 감춰지지 않는다. 실제로 오류 배너가 display:flex 때문에
-     늘 보이고 있었다. 감춤은 항상 이 규칙이 이기게 못박는다. */
   [hidden] { display: none !important; }
   * { box-sizing: border-box; }
   body {
@@ -169,8 +166,6 @@
   .news-item.read > a { color: var(--muted); }
   .news-meta { color: var(--muted); font-size: 0.78rem; margin-top: 2px; }
   .news-context { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
-  /* .news-item a 규칙이 글자 크기·밑줄까지 정해두고 있어서, 칩은 같은 자리에서
-     더 구체적인 선택자로 덮어써야 한다(안 그러면 제목과 같은 크기가 된다). */
   .news-item .context-chip {
     display: inline-flex;
     align-items: baseline;
@@ -228,8 +223,6 @@
     font-size: 0.85rem;
     font-family: inherit;
   }
-  /* 지역별 서술. 문장 생성은 빌드 때 끝내고 화면은 언어만 고른다 - 로직을 화면에
-     복제하면 두 벌을 계속 맞춰야 하는데 그럴 만한 분량이 아니다. */
   .district-summary {
     background: var(--card);
     border: 1px solid var(--border);
@@ -266,10 +259,8 @@
   .change.down { color: #2f6fed; }
   .ratio { font-weight: 600; font-variant-numeric: tabular-nums; }
   .low-sample { color: var(--muted); font-size: 0.78rem; }
-  /* 지역 이름은 그 지역 페이지로 가는 링크다. 표 안에서도 누를 수 있다는 게 보여야 한다. */
   .data-table td a { color: inherit; text-decoration: none; border-bottom: 1px dotted var(--border); }
   .data-table td a:hover { border-bottom-color: var(--muted); }
-  /* 지난달 값으로 대체한 셀임을 알리는 표시. 값만 바꿔치기하면 표를 읽는 사람이 기준을 모른다. */
   .prev-tag {
     display: inline-block;
     padding: 0 5px;
@@ -280,7 +271,6 @@
     vertical-align: middle;
   }
   .content-notice { color: var(--muted); font-size: 0.8rem; margin-top: 10px; line-height: 1.5; }
-  /* 예산으로 찾기. 값을 하나 입력하면 그 예산대에서 실제로 신고된 거래를 보여준다. */
   .budget-controls { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
   .budget-controls input {
     font: inherit;
@@ -322,7 +312,6 @@
     cursor: pointer;
   }
   .budget-nav button:hover { border-color: var(--muted); }
-  /* 좁은 화면에서 4열 표는 가로 스크롤 없이 못 읽는다. 행을 카드로 세운다. */
   @media (max-width: 480px) {
     .data-table { white-space: normal; }
     .data-table thead { display: none; }
@@ -422,13 +411,6 @@
 </main>
 <script src="./analytics.js"></script>
 <script>
-// 이 파일은 거래 유형별 페이지(아파트 매매/전세/월세)의 원본이기도 하다. 생성된
-// 페이지는 <meta name="realestate-kind">로만 갈리고 나머지 코드는 그대로 공유한다.
-//
-// index.html에도 부동산 표가 있지만 거기는 종합 대시보드의 한 섹션이라 "서울 아파트
-// 매매 시세" 같은 검색 의도에 정확히 걸리지 않는다. 여기는 그 의도마다 착지점을
-// 만드는 페이지이고, 그래서 평당가만 적지 않고 84㎡ 환산가를 같이 적는다 - 집을
-// 알아보는 사람이 묻는 건 "평당 얼마"가 아니라 "84㎡가 얼마"다.
 const T = {
   ko: {
     budgetHeading: "예산으로 찾기",
@@ -570,8 +552,6 @@ const T = {
   },
 };
 
-// scripts/realestate-format.mjs와 같은 계산이다. 이 페이지는 인라인 스크립트라 모듈을
-// 못 받아서 복제해 뒀고, 두 결과가 같은지는 테스트가 실제 렌더 결과로 대조한다.
 const MIN_SAMPLE = 5;
 const KIND_FIELDS = {
   sale: { metric: "sale", value: "avgPricePerPyeong10k" },
@@ -584,12 +564,8 @@ const DEFAULT_AREA_M2 = 84;
 const normalizeArea = (value) =>
   AREA_OPTIONS.includes(Number(value)) ? Number(value) : DEFAULT_AREA_M2;
 
-// 84㎡가 기본이지만 59㎡를 찾는 사람도 많다. 세후 이자의 금액 입력과 같은 성격이라
-// 고른 값은 주소에 남겨 그 화면을 공유할 수 있게 한다.
 let areaM2 = normalizeArea(new URLSearchParams(location.search).get("area"));
 
-// 자치구별 페이지(district-gangnam.html 등). 거래 유형 페이지와 다른 축이라 kind와
-// 함께 쓰지 않는다 - 이 페이지는 한 지역의 세 유형을 한꺼번에 보여준다.
 const districtName = document.querySelector('meta[name="realestate-district"]')?.getAttribute("content") ?? null;
 
 const kind = (() => {
@@ -624,8 +600,6 @@ function escapeHtml(value) {
     .replaceAll('"', "&quot;");
 }
 
-// 프리렌더가 페이지마다 다르게 심는 요소가 있어서, 없는 자리에 말을 붙이려다 터지지
-// 않게 한 곳에서 받는다.
 function setText(id, text) {
   const el = document.getElementById(id);
   if (el) el.textContent = text;
@@ -643,8 +617,6 @@ function metricOf(entry, k) {
 
 const valueOf = (metric, k) => metric?.[KIND_FIELDS[k].value] ?? null;
 
-// 이번 달 표본이 모자라면 지난달 값으로 대체하고, 어느 쪽을 썼는지 같이 돌려준다.
-// 값만 조용히 바꾸면 "8월 시세" 표에 7월 숫자가 섞인 채로 읽힌다.
 function resolveMetric(entry, k) {
   const current = metricOf(entry, k);
   if (current) return { metric: current, isPrevious: false };
@@ -661,8 +633,6 @@ function monthLabel(period) {
   return locale === "en" ? MONTHS_EN[month - 1] : `${month}월`;
 }
 
-// 전세 평당 보증금 / 매매 평당가. 두 지표가 서로 다른 달 기준이면 내지 않는다 -
-// 7월 전세를 8월 매매로 나눈 값은 어느 시점의 전세가율도 아니다.
 function jeonseRatio(entry) {
   const sale = resolveMetric(entry, "sale");
   const jeonse = resolveMetric(entry, "jeonse");
@@ -724,8 +694,6 @@ function lowSampleHtml(metric) {
   return `<span class="low-sample" title="${escapeHtml(t("lowSampleTitle")(n))}">${escapeHtml(t("lowSample")(n))}</span>`;
 }
 
-// 거래 유형 하나만 다루는 페이지는 평당가 옆에 84㎡ 환산가를 같이 적는다.
-// 월세는 평당 개념이 아니라 보증금·월세 평균이라 환산하지 않는다.
 function cellsFor(entry, k) {
   const resolved = resolveMetric(entry, k);
   if (!resolved) {
@@ -734,7 +702,6 @@ function cellsFor(entry, k) {
   }
   const { metric, isPrevious } = resolved;
   const tag = prevTagHtml(isPrevious);
-  // 증감은 이번 달 값끼리 비교한 것이라 지난달로 대체한 셀에는 붙이지 않는다.
   const change = (c, d) => (isPrevious ? "" : changeHtml(c, d));
 
   if (k === "wolse") {
@@ -757,7 +724,6 @@ function cellsFor(entry, k) {
   return out;
 }
 
-// 허브(유형 미지정)는 세 유형을 한 줄에 나란히 보여준다.
 function allCells(entry) {
   return ["sale", "jeonse", "wolse"].map((k) => {
     const resolved = resolveMetric(entry, k);
@@ -790,8 +756,6 @@ function renderHead() {
     `<tr>${headLabels().map((label) => `<th>${escapeHtml(label)}</th>`).join("")}</tr>`;
 }
 
-// 비싼 곳부터 본다. 값을 낼 수 없는 지역(표본 부족)은 맨 아래로 보낸다 - 표에서
-// 빼버리면 사용자 입장에선 그 구가 사라진 것으로 보인다.
 function sortedDistricts(districts) {
   const key = kind ?? "sale";
   return [...districts].sort((a, b) => {
@@ -804,8 +768,6 @@ function sortedDistricts(districts) {
   });
 }
 
-// 그날 조회에 실패해 지난번 값을 그대로 들고 있는 구. 값만 남기고 조용히 넘어가면
-// 표를 읽는 사람은 그게 오늘 신고분인 줄 안다.
 function staleTagHtml(entry) {
   const at = entry?.staleAt;
   if (!at) return "";
@@ -819,8 +781,6 @@ function staleTagHtml(entry) {
   return ` <span class="prev-tag" title="${escapeHtml(t("staleTagTitle"))}">${escapeHtml(label)}</span>`;
 }
 
-// 표에서 지역 이름을 누르면 그 지역 페이지로 간다. 프리렌더(prerender.mjs)의
-// reDistrictLink와 같은 마크업이어야 한다 - 테스트가 두 결과를 직접 대조한다.
 const DISTRICT_FILES = {
   종로구: "jongno", 중구: "jung", 용산구: "yongsan", 성동구: "seongdong", 광진구: "gwangjin",
   동대문구: "dongdaemun", 중랑구: "jungnang", 성북구: "seongbuk", 강북구: "gangbuk", 도봉구: "dobong",
@@ -844,8 +804,6 @@ function rowHtml(entry, label, isOverall) {
   return `<tr class="${isOverall ? "overall-row" : ""}"><td>${name}${staleTagHtml(entry)}</td>${body}</tr>`;
 }
 
-// 한 지역만 보여주는 페이지에서는 거래 유형이 행이 된다. 월세는 평당 개념이 아니라
-// 보증금·월세 평균이므로 환산 칸을 비운다.
 function districtRowsHtml(entry) {
   const labels = [t("thSale"), t("thJeonse"), t("thWolse")];
   return ["sale", "jeonse", "wolse"]
@@ -888,7 +846,6 @@ function renderTable(realestate) {
       .join("");
 }
 
-// 첫 화면에서 가장 먼저 읽히는 숫자다. 유형별 페이지는 84㎡ 환산가를 같이 세운다.
 function renderOverall(realestate) {
   const box = document.getElementById("overall-cards");
   const overall = districtName ? districtEntry() : realestate?.overall;
@@ -959,10 +916,6 @@ function renderOverall(realestate) {
     card(t("thCount"), escapeHtml(t("countUnit")(metric.transactionCount)), "");
 }
 
-// 평형 선택은 84㎡ 환산가가 있는 화면(매매·전세)에서만 의미가 있다. 월세는 보증금·월세
-// 평균이라 환산하지 않고, 허브는 평당가만 나열한다.
-// 자치구 페이지도 84㎡ 환산 열을 갖는다(월세 행만 비어 있다). 환산가가 아예 없는
-// 화면은 월세 페이지와 허브뿐이다.
 const hasAreaColumn = Boolean(districtName) || kind === "sale" || kind === "jeonse";
 
 function districtEntry() {
@@ -984,7 +937,6 @@ function renderAreaControls() {
 
 function syncAreaUrl() {
   const params = new URLSearchParams(location.search);
-  // 기본값은 주소에 남기지 않는다(다른 페이지의 필터와 같은 규칙).
   if (areaM2 === DEFAULT_AREA_M2) params.delete("area");
   else params.set("area", String(areaM2));
   const query = params.toString();
@@ -992,9 +944,6 @@ function syncAreaUrl() {
   if (url !== `${location.pathname}${location.search}`) history.replaceState(null, "", url);
 }
 
-// 추이는 서울 전체 값만 그린다. 25개 구마다 그래프를 그리면 화면이 무거워지고,
-// 착지 페이지에서 먼저 알고 싶은 건 "요즘 오르는가 내리는가"다.
-// index.html의 스파크라인과 같은 모양으로 그린다.
 function sparklineSvg(values) {
   const w = 280, h = 56, pad = 4;
   const min = Math.min(...values);
@@ -1019,8 +968,6 @@ function sparklineSvg(values) {
     </svg>`;
 }
 
-// 표본이 모자란 날짜는 점을 찍지 않는다. 표에서 가리는 값을 그래프에서만 보여주면
-// 같은 페이지가 두 가지 기준으로 말하는 셈이 된다(index.html과 같은 규칙).
 function trendSeries(history) {
   const key = kind ?? "sale";
   const field = KIND_FIELDS[key];
@@ -1036,7 +983,6 @@ function trendSeries(history) {
     .filter(Boolean);
 }
 
-// 서술은 정적 HTML에 한국어·영어가 모두 심겨 있다. 여기서는 어느 쪽을 보일지만 정한다.
 function renderDistrictSummary() {
   const section = document.getElementById("district-summary-section");
   const paragraphs = [...document.querySelectorAll("[data-summary-lang]")];
@@ -1052,7 +998,6 @@ function renderTrend() {
   document.getElementById("trend-heading").textContent = t("trendHeading");
 
   if (series.length < 2) {
-    // 기록이 하루뿐이면 선이 아니라 점이다. 빈 그래프를 보여주느니 이유를 적는다.
     section.hidden = !cache.history;
     document.getElementById("trend-chart").innerHTML = "";
     document.getElementById("trend-meta").textContent = t("trendTooShort");
@@ -1066,14 +1011,7 @@ function renderTrend() {
     `${t("trendRange")(series[0].date, last.date, series.length)} · ${t("trendValue")(formatMan(last.value))}`;
 }
 
-// 예산으로 찾기는 전체 시세 페이지에서만 연다. 자치구 페이지와 거래 유형 페이지는
-// 각자 주제가 따로 있고, 거기에 서울 전체 예산 검색이 끼면 화면이 무슨 페이지인지
-// 흐려진다(뉴스 쪽에서 시세 카드를 부동산 페이지에만 편 것과 같은 이유).
-//
-// budget-*.html은 구간 하나만 다루는 페이지다. 거기서는 예산을 바꾸는 입력 대신 옆 칸
-// 페이지로 가는 링크를 프리렌더가 심어 둔다(주소와 화면 내용이 어긋나지 않게).
 const budgetBand10k = (() => {
-  // 빈 문자열은 Number("")가 0이라 그냥 두면 "3억 미만 페이지"로 읽힌다.
   const raw = document.querySelector('meta[name="budget-band"]')?.getAttribute("content");
   if (raw === null || raw === undefined || String(raw).trim() === "") return null;
   const value = Number(raw);
@@ -1089,10 +1027,8 @@ let budgetEok = (() => {
   return Number.isInteger(raw) && raw >= 1 && raw <= 60 ? raw : DEFAULT_BUDGET_EOK;
 })();
 
-const EOK = 10000; // 1억(만원)
+const EOK = 10000;
 
-// 구간 경계는 데이터가 들고 있다. 화면에서 같은 규칙을 다시 계산하면 생성기(budget-bands.mjs)와
-// 어긋날 수 있어서, 예산이 어느 칸에 들어가는지만 찾는다.
 function bandFor(amount10k) {
   const bands = cache.budget?.bands ?? [];
   return bands.find((b) => amount10k >= b.min10k && (b.max10k === null || amount10k < b.max10k)) ?? null;
@@ -1121,8 +1057,6 @@ function budgetDealHtml(deal) {
   );
 }
 
-// 옆 칸으로 옮기는 버튼. 예산은 한 번에 정해지는 값이 아니라 "조금 더 쓰면 뭐가 되나"를
-// 오가며 잡는 값이다.
 function budgetNavHtml(current) {
   const bands = cache.budget?.bands ?? [];
   const index = bands.findIndex((b) => b.min10k === current?.min10k);
@@ -1141,7 +1075,6 @@ function budgetNavHtml(current) {
 
 function renderBudget() {
   const section = document.getElementById("budget-section");
-  // 데이터가 아직 없는 날에는 빈 입력창만 남는다. 그럴 바엔 섹션을 통째로 접는다.
   if (!budgetEnabled || !cache.budget?.bands?.length) {
     section.hidden = true;
     return;
@@ -1168,9 +1101,6 @@ function renderBudget() {
   box.innerHTML = budgetBodyHtml(band, cache.budget.periods) + (isBudgetPage ? "" : budgetNavHtml(band));
 }
 
-// 예산 페이지(budget-*.html)의 정적 HTML도 같은 모양이어야 한다 - 프리렌더가 심은
-// 결과를 클라이언트가 다시 그리면서 화면이 밀리면 안 되고, 테스트가 두 결과를
-// 직접 대조한다. 옆 칸 이동만 정적 페이지에서는 링크라 여기 넣지 않는다.
 function budgetBodyHtml(band, periodList) {
   const periods = (periodList ?? [])
     .map((p) => monthLabel(p))
@@ -1209,8 +1139,6 @@ function applyLocale() {
   document.getElementById("overall-heading").textContent = t("overallHeading");
   document.getElementById("district-heading").textContent = t("districtHeading");
   document.getElementById("table-note").textContent = t("note");
-  // 링크 목록은 프리렌더가 제목까지 통째로 심는다. 심을 게 없는 페이지에는 요소 자체가
-  // 없으므로(전체·거래 유형 페이지는 표의 지역 이름이 곧 링크다) 있을 때만 말을 바꾼다.
   setText("district-links-heading", t("otherDistricts"));
   setText("budget-links-heading", t("budgetLinksHeading"));
   document.getElementById("footer-source").textContent = t("footerSource");
@@ -1271,7 +1199,6 @@ async function main() {
     cache.realestate = await res.json();
     renderAll();
 
-    // 추이는 없어도 표는 보여야 하므로 따로, 실패해도 조용히 넘어간다.
     try {
       const trendRes = await fetch(`./data/realestate-history-lite.json?_=${Date.now()}`);
       if (trendRes.ok) {
@@ -1279,11 +1206,8 @@ async function main() {
         renderTrend();
       }
     } catch {
-      // 추이만 비고 나머지는 그대로 둔다
     }
 
-    // 예산 데이터는 전체 시세 페이지에서만 받는다. 자치구·유형 페이지는 이 섹션을 열지
-    // 않으므로 받아봐야 쓰지 않는다.
     if (budgetEnabled) {
       try {
         const budgetRes = await fetch(`./data/budget-deals.json?_=${Date.now()}`);
@@ -1292,7 +1216,6 @@ async function main() {
           renderBudget();
         }
       } catch {
-        // 예산 섹션만 접히고 시세 표는 그대로 보인다
       }
     }
   } catch (error) {
@@ -1325,7 +1248,7 @@ function setBudget(next, source) {
 
 document.getElementById("budget-input").addEventListener("input", (e) => {
   const raw = Number(e.target.value);
-  if (!Number.isFinite(raw) || raw < 1) return; // 지우는 중인 입력값으로 화면을 흔들지 않는다
+  if (!Number.isFinite(raw) || raw < 1) return;
   setBudget(raw, "input");
 });
 

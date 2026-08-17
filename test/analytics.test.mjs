@@ -1,7 +1,3 @@
-// docs/analytics.js를 가짜 브라우저 위에서 실제로 돌린다.
-// 여기서 지키려는 건 두 가지다. (1) 유입이 통째로 빠지지 않을 것,
-// (2) 같은 방문이 두 번 세어지지 않을 것. 둘 다 화면에는 안 보여서
-// 사람 눈으로는 못 잡는다.
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
@@ -68,7 +64,6 @@ async function loadAnalytics({
         .filter(([kind]) => kind === "event"),
     scriptSrcs: () => appended.map((el) => el.src),
     runTimers: () => {
-      // 실행 중에 새 타이머가 걸릴 수 있으니 스냅샷을 떠서 돈다.
       for (const timer of [...timers]) {
         if (!timer.cancelled) {
           timer.cancelled = true;
@@ -85,10 +80,8 @@ test("페이지뷰 자동 전송은 꺼두고 로더가 gtag/adsense를 붙인�
   const config = a.calls().find(([kind]) => kind === "config");
   assert.ok(config, "config 호출이 있어야 한다");
   assert.equal(config[2].send_page_view, false);
-  // 블로그·다른 프로젝트와 같은 속성을 쓰므로 이게 빠지면 보고서에서 전부 섞인다.
   assert.equal(config[2].content_group, "digest");
 
-  // 값은 파일이 아니라 페이지가 정한다(다른 프로젝트가 이 파일을 그대로 복사해 쓴다).
   const other = await loadAnalytics({ siteGroup: "housing-subsidy-radar" });
   assert.equal(other.calls().find(([kind]) => kind === "config")[2].content_group, "housing-subsidy-radar");
 
@@ -153,7 +146,6 @@ test("DebugView는 ?ga_debug=1을 붙였을 때만 켜진다", async () => {
   assert.equal(on.calls().find(([kind]) => kind === "config")[2].debug_mode, true);
 });
 
-// GA4에서 value는 이벤트 값(숫자)으로 예약된 이름이라 문자열을 실으면 수집이 안 된다.
 test("이벤트 매개변수에 GA4 예약 이름을 쓰지 않는다", async () => {
   const [index, rates] = await Promise.all(
     ["docs/index.html", "docs/rates.html"].map((p) => readFile(path.join(root, p), "utf8"))
@@ -189,7 +181,6 @@ test("데이터를 못 받으면 어느 파일이 실패했는지 남는다", as
   await loadIndexPage({ analytics });
 
   const failures = analytics.calls.filter(([name]) => name === "exception");
-  // 오늘치 4종(market/news/summary/realestate)은 없으면 페이지가 제구실을 못 한다.
   const fatal = failures.filter(([, params]) => params.fatal);
   assert.equal(fatal.length, 4, `fatal 4건이어야 한다: ${JSON.stringify(failures)}`);
   for (const key of ["market", "news", "summary", "realestate"]) {
@@ -199,9 +190,7 @@ test("데이터를 못 받으면 어느 파일이 실패했는지 남는다", as
     );
   }
 
-  // 히스토리는 없어도 오늘 화면은 멀쩡하니 같은 무게로 다루지 않는다.
   assert.ok(failures.some(([, params]) => params.fatal === false));
-  // GA 매개변수 값 상한이 100자라 그 안에서 끊어 보낸다.
   assert.ok(failures.every(([, params]) => params.description.length <= 100));
 });
 
@@ -236,8 +225,6 @@ test("섹션은 화면에 들어왔을 때 한 번만 센다", async () => {
   assert.equal(views[0][1].view_type, "today");
 });
 
-// 뉴스 섹션은 화면보다 길어서 "50% 노출"이 영원히 성립하지 않는다.
-// 그 조건으로 재면 제일 많이 읽는 섹션이 한 번도 안 잡힌다.
 test("섹션 노출은 길이에 좌우되는 조건으로 재지 않는다", async () => {
   const page = await loadIndexPage({ analytics: recorder() });
   const { options } = page.observer();
@@ -267,7 +254,6 @@ test("두 페이지와 서비스워커가 모두 analytics.js를 물고 있다",
   ]) {
     assert.ok(html.includes('<script src="./analytics.js"></script>'), `${name}에 로더가 없다`);
     assert.ok(html.includes('<meta name="site-group" content="digest">'), `${name}에 사이트 구분이 없다`);
-    // 로더로 옮기기 전처럼 페이지에 측정 코드가 다시 박히면 두 번 계측된다.
     assert.ok(!html.includes("googletagmanager.com"), `${name}에 인라인 GA가 남아 있다`);
     assert.ok(html.includes("privacy-policy"), `${name}에 개인정보처리방침 링크가 없다`);
   }
@@ -275,8 +261,6 @@ test("두 페이지와 서비스워커가 모두 analytics.js를 물고 있다",
   assert.ok(sw.includes('"./analytics.js"'), "서비스워커 셸에 analytics.js가 빠졌다");
 });
 
-// 폴백된 요약이 화면상 정상 출력과 구분이 안 되면, 사용자는 검증에 걸린 문장을
-// 그대로 "AI 요약"으로 읽는다. 데이터에만 남기지 말고 화면에도 밝힌다.
 test("요약이 폴백된 날은 메인에도 그 사실을 표시한다", async () => {
   const html = await readFile(path.join(root, "docs/index.html"), "utf8");
   assert.ok(html.includes("summaryFallbackNote"), "안내 문구 사전 항목이 없다");
@@ -289,7 +273,6 @@ test("요약이 폴백된 날은 메인에도 그 사실을 표시한다", async
   }
 });
 
-// 실패했을 때 사용자가 할 수 있는 게 새로고침뿐이면, 그 안내라도 화면에 있어야 한다.
 test("로드가 실패하면 다시 시도할 수단을 준다", async () => {
   for (const file of ["docs/index.html", "docs/rates.html", "docs/news.html"]) {
     const html = await readFile(path.join(root, file), "utf8");

@@ -1,7 +1,3 @@
-// 이 저장소엔 돌릴 수 있는 Ollama가 없다. 대신 스텁 HTTP 서버를 세워 요약 스크립트를
-// 통째로 돌린다 - 검증 통과/숫자 환각/고유명사 환각/생성 실패를 강제해서, 각 경로가
-// 화면에 무엇을 내보내는지까지 본다. 조용한 폴백이 정상 출력과 구분이 안 되는 게
-// 이 파이프라인에서 제일 오래 못 알아챈 문제였다.
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { createServer } from "node:http";
@@ -36,9 +32,6 @@ function startOllamaStub(reply) {
         return;
       }
 
-      // Ollama는 stream:true면 NDJSON 조각을 흘려보낸다. 한 글자씩 쪼개서
-      // 보내되 TCP 경계는 JSON 줄 한가운데를 가르게 둔다 - 줄 단위로 모으지
-      // 않으면 여기서 파싱이 깨진다.
       const payload =
         [...response].map((ch) => `${JSON.stringify({ response: ch, done: false })}\n`).join("") +
         `${JSON.stringify({ response: "", done: true })}\n`;
@@ -117,13 +110,10 @@ async function runSummarize(reply) {
   }
 }
 
-// 검증은 카테고리마다 그 카테고리 기사만 원문으로 삼는다. 스텁도 프롬프트에 실제로
-// 들어간 재료 안에서만 답해야 한다 - 아무 문단이나 돌려주면 정상 동작을 환각으로 오해한다.
 const KO_REALESTATE =
   "국토교통부는 14일 신규 공공택지 후보지를 발표했다. 이번 후보지에는 3만 가구가 들어선다. 정부는 연내 추가 발표를 예고했다.";
 const KO_STOCKS =
   "코스피가 전 거래일보다 12.5포인트 내린 채 거래를 마쳤다. 미국 7월 물가지수 둔화가 영향을 줬다. 외국인이 순매도를 이어갔다.";
-// "3만 가구"가 30,000으로 정규화되므로, 번역이 이 숫자를 담지 않으면 검증에서 반려된다.
 const EN_OK = "The ministry announced 30,000 new homes. The index fell.";
 const goodKo = (prompt) => (/코스피/.test(prompt) ? KO_STOCKS : KO_REALESTATE);
 
@@ -138,7 +128,6 @@ test("본문이 있으면 문단 요약과 핵심 기사가 함께 나온다", a
   assert.ok(summary.highlights.length > 0, "핵심 기사가 비었다");
   assert.ok(summary.categories.every((c) => !c.isFallback), "폴백이 섞였다");
 
-  // 한 문장짜리로 돌아가면 이번 변경이 의미가 없다.
   for (const category of summary.categories) {
     assert.ok(category.lineKo.length > 60, `카테고리 요약이 너무 짧다: ${category.lineKo}`);
   }
@@ -156,13 +145,11 @@ test("원문에 없는 숫자를 지어내면 그 요약은 버린다", async ()
     if (kind === "translate") return "Translated.";
     if (kind === "single") return "국토교통부가 신규 택지를 발표했다.";
     paragraphCalls += 1;
-    // 본문에 없는 수치. 이런 게 그대로 나가면 읽는 사람은 사실로 받아들인다.
     return "국토교통부는 신규 택지 99만 가구를 공급한다고 발표했다. 분양가는 4억 5000만원으로 정해졌다.";
   });
 
   assert.match(stderr, /원문에 없는 숫자/);
   assert.ok(paragraphCalls >= 2, "온도를 낮춘 재시도가 없었다");
-  // 문단이 막혀도 곧장 제목 나열로 가지 않고 한 문장으로 물러난다.
   const degraded = summary.categories.filter((c) => c.degraded);
   assert.ok(degraded.length > 0, "한 문장 폴백이 동작하지 않았다");
   assert.ok(
@@ -191,13 +178,11 @@ test("모델이 죽어도 파일은 남고 폴백 이유가 기록된다", async
 
   assert.ok(summary.categories.length > 0);
   assert.ok(summary.categories.every((c) => c.isFallback && c.fallbackReason === "generation-failed"));
-  // 핵심 기사는 요약이 없으면 제목만 다시 보여주느니 자리를 비운다.
   assert.equal(summary.highlights.length, 0);
   assert.match(stdout, /폴백/);
 });
 
 test("잘린 문장은 내보내지 않는다", async () => {
-  // num_predict에 걸려 끊긴 꼬리가 그대로 나가면 화면에서 말이 끊겨 보인다.
   const { summary } = await runSummarize(({ kind }) => {
     if (kind === "entities") return "없음";
     if (kind === "translate") return "The ministry announced new sites.";
@@ -214,7 +199,6 @@ test("잘린 문장은 내보내지 않는다", async () => {
 test("번역이 검증에 걸리면 영어 화면은 한국어를 그대로 쓴다", async () => {
   const { summary, stderr } = await runSummarize(({ kind, prompt }) => {
     if (kind === "entities") return "없음";
-    // 한글이 남은 번역은 번역이 아니다.
     if (kind === "translate") return "The ministry 발표했다.";
     return goodKo(prompt);
   });
@@ -242,14 +226,11 @@ test("핵심 기사는 여러 매체가 다룬 순으로 뽑되 한 주제가 �
 });
 
 test("본문이 짧은 기사는 핵심으로 뽑지 않는다", () => {
-  // 재료가 없으면 결국 제목을 늘여 쓰게 된다.
   const items = [{ title: "속보", link: "https://example.com/x", category: "stocks", dupes: [{}, {}] }];
   assert.deepEqual(pickHighlights(items, { "https://example.com/x": "짧다" }), []);
 });
 
 test("숫자가 떨어져 나간 고유명사를 환각으로 몰지 않는다", async () => {
-  // 원문은 "미국 7월 물가지수"인데 모델은 "월 물가지수"를 뽑아냈다. 그대로 대조하면
-  // 멀쩡한 문단이 버려진다 - 실제 CI에서 증시 카테고리가 이렇게 날아갔다.
   const { summary, stderr } = await runSummarize(({ kind, prompt }) => {
     if (kind === "entities") return /코스피|물가지수/.test(prompt) ? "월 물가지수" : "없음";
     if (kind === "translate") return EN_OK;
@@ -261,8 +242,6 @@ test("숫자가 떨어져 나간 고유명사를 환각으로 몰지 않는다",
 });
 
 test("정말 다른 이름으로 바꿔 쓴 건 여전히 걸러낸다", async () => {
-  // 숫자를 무시하게 만들었다고 해서 검증이 헐거워지면 안 된다. 실제로 겪은
-  // 환각은 "국힘"을 "국민의당"으로 바꿔 쓴 것이었다.
   const { stderr } = await runSummarize(({ kind, prompt }) => {
     if (kind === "entities") return "국민의당";
     if (kind === "translate") return "Translated.";
@@ -274,13 +253,11 @@ test("정말 다른 이름으로 바꿔 쓴 건 여전히 걸러낸다", async (
 });
 
 test("반려된 번역은 한 번 더 시도한다", async () => {
-  // 한자가 섞여 반려됐을 때 그대로 포기하면 영어 화면에 한국어 문단이 남는다.
   let attempts = 0;
   const { summary, stderr } = await runSummarize(({ kind, prompt }) => {
     if (kind === "entities") return "없음";
     if (kind === "translate") {
       attempts += 1;
-      // 첫 시도만 한자가 섞이게 한다. 재시도가 없으면 여기서 번역이 통째로 버려진다.
       return attempts === 1 ? `The 公示 price rose. ${EN_OK}` : EN_OK;
     }
     return goodKo(prompt);
@@ -294,8 +271,6 @@ test("반려된 번역은 한 번 더 시도한다", async () => {
 });
 
 test("조·억이 이어 붙은 금액도 온전히 숫자로 바꾼다", () => {
-  // 제목만 다룰 땐 드물었는데 본문이 들어오면서 흔해진 표기다. 한 단위씩 바꾸면
-  // "6조"만 숫자가 되고 뒤가 글자로 남아 숫자가 통째로 망가진다.
   assert.equal(normalizeKoreanAmounts("6조5천470억원 순매수"), "6,547,000,000,000원 순매수");
   assert.equal(normalizeKoreanAmounts("가계대출은 1천865조8천억원"), "가계대출은 1,865,800,000,000,000원");
   assert.equal(normalizeKoreanAmounts("3개월 만에 12조9천억원 증가"), "3개월 만에 12,900,000,000,000원 증가");
@@ -304,16 +279,12 @@ test("조·억이 이어 붙은 금액도 온전히 숫자로 바꾼다", () => 
 });
 
 test("금액이 아닌 숫자는 건드리지 않는다", () => {
-  // 연도·퍼센트·순위까지 금액으로 읽으면 멀쩡한 문장이 숫자 범벅이 된다.
   for (const text of ["2026년 세제개편안", "분양가의 25%만 먼저 낸다", "8월 둘째주", "순매수 1, 2위"]) {
     assert.equal(normalizeKoreanAmounts(text), text);
   }
 });
 
 test("일반 경제 용어는 고유명사 대조에서 빼고 본다", async () => {
-  // 원문은 "미국 7월 소비자물가지수와 7월 생산자물가지수"인데 요약이 "7월 물가지수"로
-  // 묶어 썼다. 이건 일반화지 환각이 아니고, 애초에 물가지수는 고유명사가 아니다.
-  // 실제 CI에서 이 이유로 증시 문단이 두 번 연속 버려졌다.
   const { summary, stderr } = await runSummarize(({ kind, prompt }) => {
     if (kind === "entities") return "월 물가지수";
     if (kind === "translate") return EN_OK;
@@ -325,7 +296,6 @@ test("일반 경제 용어는 고유명사 대조에서 빼고 본다", async ()
 });
 
 test("번역 재시도에는 무엇이 걸렸는지 알려준다", async () => {
-  // 온도만 낮춰 다시 부르면 모델이 같은 한자를 그대로 또 쓴다. 실제로 그랬다.
   const hints = [];
   await runSummarize(({ kind, prompt }) => {
     if (kind === "entities") return "없음";
@@ -342,8 +312,6 @@ test("번역 재시도에는 무엇이 걸렸는지 알려준다", async () => {
 });
 
 test("한자만 걸린 번역은 한자를 걷어내고 살린다", async () => {
-  // 모델이 "공시가"를 公示로 옮기는 버릇은 재시도 힌트로도 안 고쳐졌다(CI에서 두 번 다 나왔다).
-  // 수식어 하나를 잃는 편이 영어 화면에 한국어 문단을 통째로 남기는 것보다 낫다.
   const { summary, stderr } = await runSummarize(({ kind, prompt }) => {
     if (kind === "entities") return "없음";
     if (kind === "translate") return `A home with a公示value of 30,000 won.`;
@@ -359,7 +327,6 @@ test("한자만 걸린 번역은 한자를 걷어내고 살린다", async () => 
 });
 
 test("한자를 걷어내도 안 되는 번역은 한국어를 유지한다", async () => {
-  // 한글이 남아 있으면 한자만 지운다고 번역이 되는 게 아니다.
   const { summary, stderr } = await runSummarize(({ kind, prompt }) => {
     if (kind === "entities") return "없음";
     if (kind === "translate") return "The 公示 가격 rose by 30,000.";

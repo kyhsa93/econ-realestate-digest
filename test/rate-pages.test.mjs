@@ -1,6 +1,3 @@
-// 상품군별 페이지는 rates.html에서 찍어낸 것이라, 원본이 바뀌면 조용히 어긋난다.
-// 그래서 "찍어낸 결과와 커밋된 파일이 같은가"와 "정적 표가 그 페이지의 첫 화면과
-// 같은가"를 둘 다 지킨다.
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
@@ -40,7 +37,6 @@ test("각 페이지가 자기 상품군을 정규 URL·제목·첫 탭으로 선
       html.includes(`<meta name="rates-category" content="${page.category}">`),
       `${page.file} 첫 탭 지정이 없다`
     );
-    // 제목을 사전까지 바꾸지 않으면 하이드레이션 뒤 클라이언트가 원래대로 되돌린다.
     assert.ok(!html.includes('title: "예금·적금·대출 금리 비교"'), `${page.file} 스크립트 사전에 옛 제목이 남았다`);
   }
 });
@@ -65,7 +61,6 @@ test("네 페이지가 서로 다른 상품을 보여준다", async () => {
 });
 
 test("모든 금리 페이지가 서로를 진짜 링크로 가리킨다", async () => {
-  // 탭은 버튼이라 크롤러에겐 링크가 아니다. 페이지를 나눠도 링크가 없으면 발견되지 않는다.
   const files = ["docs/rates.html", ...RATE_PAGES.map((p) => `docs/${p.file}`)];
   for (const file of files) {
     const html = await read(file);

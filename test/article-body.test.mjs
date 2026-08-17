@@ -1,6 +1,3 @@
-// 요약 재료를 만드는 첫 단계라, 여기가 조용히 빈 문자열을 뱉으면 요약은
-// 예전처럼 제목만 보고 쓰게 된다. 실제 페이지에서 겪은 모양(컨테이너 안에 섞인
-// 스크립트, 엔티티 인코딩, 구독 위젯)을 그대로 재현해 두고 확인한다.
 import test from "node:test";
 import assert from "node:assert/strict";
 import { decodeEntities, extractArticleBody, isScrapable, stripTags } from "../scripts/article-body.mjs";
@@ -60,8 +57,6 @@ test("매체별 규칙이 안 맞으면 meta description으로 물러난다", ()
 });
 
 test("본문이라 할 수 없을 만큼 짧으면 없는 것으로 친다", () => {
-  // 짧은 조각이 넘어오면 요약 프롬프트에는 재료가 늘어난 것처럼 보이는데
-  // 실제로는 제목만 있을 때와 같아서, 폴백 판단이 흐려진다.
   const page = `<html><head><meta name="description" content="속보"></head><body></body></html>`;
   assert.equal(extractArticleBody(HANKYUNG_URL, page), null);
 });
@@ -70,11 +65,9 @@ test("robots.txt가 막아둔 경로와 대상 외 매체는 아예 받지 않�
   assert.ok(isScrapable(YNA_URL));
   assert.ok(isScrapable(HANKYUNG_URL));
 
-  // 연합 외국어판과 한경 다운로드는 robots.txt에서 금지된 경로다.
   assert.equal(isScrapable("https://www.yna.co.kr/view/AEN20260815000100320"), false);
   assert.equal(isScrapable("https://www.hankyung.com/article/download/123"), false);
 
-  // 매일경제는 AI 크롤러를 막아두었고, 조선비즈·뉴시스는 RSS가 본문을 준다.
   assert.equal(isScrapable("https://www.mk.co.kr/news/realestate/12128759"), false);
   assert.equal(isScrapable("https://biz.chosun.com/real_estate/2026/08/15/ABC/"), false);
 
@@ -83,7 +76,6 @@ test("robots.txt가 막아둔 경로와 대상 외 매체는 아예 받지 않�
 });
 
 test("숫자 엔티티와 이름 엔티티를 모두 되돌린다", () => {
-  // 되돌리지 못하면 요약이 원문 대조 검증에서 애먼 이유로 걸린다.
   assert.equal(decodeEntities("&#039;전세&#039; &amp; &#x27;월세&#x27;"), "'전세' & '월세'");
   assert.equal(stripTags("<p>가계대출&hellip;</p><p>35조원</p>"), "가계대출… 35조원");
 });

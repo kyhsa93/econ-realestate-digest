@@ -1,5 +1,3 @@
-// docs/rates.html의 스크립트를 가짜 DOM 위에서 실제로 돌리는 하네스.
-// 탭과 정렬 테스트가 같은 걸 쓰므로 여기 한 곳에 둔다.
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
@@ -7,9 +5,6 @@ import vm from "node:vm";
 
 const root = path.resolve(import.meta.dirname, "../..");
 
-// innerHTML로 갈아끼워지는 요소를 흉내내야 한다. 탭이 안 먹는 건 렌더 자체가
-// 틀려서가 아니라 다시 그릴 때 요소가 통째로 새로 생기면서 붙어 있던 클릭
-// 리스너가 같이 사라지기 때문이라, 그 교체를 재현하지 않으면 아무 문제도 안 보인다.
 function makeDom(html = "") {
   const byId = new Map();
 
@@ -47,7 +42,6 @@ function makeDom(html = "") {
       get innerHTML() {
         return this._html ?? "";
       },
-      // 새 마크업이 들어오면 기존 자식(과 그 리스너)은 버려진다. 실제 브라우저와 같다.
       set innerHTML(html) {
         this._html = html;
         this.children = [...String(html).matchAll(/data-(category|detail|sort)="([^"]*)"/g)].map((m) => {
@@ -83,13 +77,9 @@ function makeDom(html = "") {
       for (const node of byId.values()) all.push(...collect(node, sel));
       return all;
     },
-    // renderMeta가 <meta>/<link> 같은 걸 셀렉터로 찾아 고친다. 없다고 하면
-    // 첫 렌더에서 죽어서 정작 보려던 탭 동작에 닿지 못한다.
     querySelector(sel) {
       if (!byId.has(sel)) {
         const node = makeNode(sel);
-        // 상품군별 페이지는 이 meta로만 첫 탭이 갈린다. 문서에서 실제 값을 읽어야
-        // "생성된 페이지가 그 상품군을 보여주는가"를 검사할 수 있다.
         if (sel === 'meta[name="rates-category"]') {
           const value = /<meta name="rates-category" content="([^"]*)"/.exec(html)?.[1] ?? null;
           node.getAttribute = (name) => (name === "content" ? value : null);
@@ -109,11 +99,6 @@ function makeDom(html = "") {
   return { document, byId };
 }
 
-// analytics를 넣어주면 페이지가 실제로 계측을 부르는지까지 볼 수 있다.
-// 안 넣으면 브라우저에서 광고 차단으로 로더가 안 뜬 상황과 같아진다.
-// rates를 넘기면 그날 수집된 공시 대신 그 자료로 화면을 돌린다. 상품 개수처럼 금감원
-// 공시가 정하는 값을 단언하는 테스트는 반드시 이쪽을 써야 한다 - 은행이 상품 하나를
-// 내놓거나 거둬들이는 날 CI가 빨개지고, 그러면 그날 수집분이 통째로 커밋되지 못한다.
 export async function loadRatesPage({
   analytics,
   fetch: fetchImpl,
@@ -158,11 +143,8 @@ export async function loadRatesPage({
     navigator: { language: "ko" },
     location: { search, origin: "https://x", pathname: "/", href: `https://x/${search}` },
     matchMedia: () => ({ matches: false, addEventListener() {} }),
-    // 페이지가 popstate를 듣고 주소로 상태를 되돌린다. window 쪽 API가 없으면 로드 자체가 죽는다.
     addEventListener() {},
     removeEventListener() {},
-    // 주소를 바꾸는 게 화면 상태의 일부다(필터를 걸어둔 화면을 공유할 수 있어야 한다).
-    // 아무것도 안 하는 스텁으로 두면 "주소에 남겼다"는 걸 확인할 방법이 없다.
     history: {
       pushState(_state, _title, url) {
         pushed.push(url);
@@ -180,10 +162,8 @@ export async function loadRatesPage({
   sandbox.self = sandbox;
   sandbox.globalThis = sandbox;
   vm.createContext(sandbox);
-    // 스크립트 최상위의 const는 컨텍스트 밖에서 못 보므로 state만 따로 내보낸다.
   new vm.Script(script + "\nglobalThis.__state = state;", { filename: "docs/rates.html:inline" }).runInContext(sandbox);
 
-  // main()이 await로 데이터를 읽고 첫 렌더를 마칠 때까지 기다린다.
   await new Promise((resolve) => setTimeout(resolve, 0));
   await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -191,7 +171,6 @@ export async function loadRatesPage({
     const tabs = byId.get("tabs");
     const tab = tabs.children.find((c) => c.dataset.category === category);
     assert.ok(tab, `${category} 탭이 없다`);
-    // 위임이든 개별 부착이든 실제 클릭과 같은 경로를 타게 한다.
     if ((tab.listeners.click ?? []).length > 0) tab.dispatch("click");
     else for (const fn of tabs.listeners.click ?? []) fn({ target: tab });
   };

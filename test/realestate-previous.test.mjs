@@ -1,5 +1,3 @@
-// 지난달 값을 얹는 단계. 값을 덮어쓰거나 합산하지 않는 게 핵심이다 - 어느 쪽을 쓸지는
-// 화면이 표본을 보고 정하고, 그때 기준 월도 같이 표시한다.
 import test from "node:test";
 import assert from "node:assert/strict";
 import { attachPrevious, isPreviousUsable } from "../scripts/realestate-previous.mjs";

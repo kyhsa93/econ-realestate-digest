@@ -11,7 +11,6 @@ function assertOrdered(rows, key, dir, label) {
     const ok = dir === "asc" ? known[i] >= known[i - 1] : known[i] <= known[i - 1];
     assert.ok(ok, `${label}: ${i}번째에서 역전 (${known[i - 1]} → ${known[i]})`);
   }
-  // 값이 없는 상품은 반드시 뒤쪽에 몰려 있어야 한다.
   const firstMissing = values.findIndex((v) => v === null || v === undefined);
   if (firstMissing !== -1) {
     assert.ok(
@@ -58,8 +57,6 @@ test("같은 머리글을 다시 누르면 오름·내림이 뒤집힌다", asyn
 });
 
 test("머리글을 여러 번 눌러도 계속 먹는다", async () => {
-  // 탭에서 났던 것과 같은 사고를 막는다. 머리글은 다시 그릴 때마다 새로 만들어지므로
-  // 버튼에 직접 리스너를 붙이면 첫 정렬 이후로 죽는다.
   const { sandbox, clickSortHeader } = await loadRatesPage();
   const keys = ["rate", "maxRate", "rate", "maxRate"];
   for (const key of keys) {
@@ -69,9 +66,6 @@ test("머리글을 여러 번 눌러도 계속 먹는다", async () => {
   }
 });
 
-// 공시의 평균금리는 "지난달 실제 취급 평균"이라 3분의 1 남짓은 값 자체가 없다. 그 비율은
-// 금감원이 정하는 값이라, 실제 자료에서 "평균 없는 상품이 있어야 한다"고 전제하면 언젠가
-// 조용히 무의미해지거나 깨진다. 섞인 상태를 여기서 만들어 쓴다.
 test("평균금리로 정렬해도 평균이 없는 상품이 사라지지 않는다", async () => {
   const loan = (i, avg) => ({
     id: `전세대출-${i}`,
@@ -107,21 +101,17 @@ test("정렬 기준은 같은 열 구성을 쓰는 탭끼리 유지된다", asyn
   assert.equal(sandbox.__state.sort.saving.key, "rate", "예금→적금에서 정렬이 풀렸다");
   assertOrdered(sandbox.visibleRows(), "rate", "desc", "적금");
 
-  // 대출은 열 구성이 달라서 따로 기억한다. 예적금에서 고른 기준이 넘어오면 안 된다.
   clickTab("mortgage");
   assert.equal(sandbox.__state.sort.loan.key, "min");
   clickSortHeader("avg");
   clickTab("rentLoan");
   assert.equal(sandbox.__state.sort.loan.key, "avg", "주담대→전세대출에서 정렬이 풀렸다");
 
-  // 다시 예적금으로 돌아오면 아까 고른 기준이 그대로다.
   clickTab("deposit");
   assert.equal(sandbox.__state.sort.saving.key, "rate");
 });
 
 test("표에 보이는 숫자와 정렬 기준이 같은 옵션에서 나온다", async () => {
-  // 한 상품에 조건이 다른 옵션이 여러 개 있다. 최저금리로 줄을 세우면서 평균이
-  // 가장 낮은 옵션의 숫자를 보여주면, 순서와 표시가 서로 다른 얘기를 하게 된다.
   const { sandbox, clickTab, clickSortHeader } = await loadRatesPage();
   clickTab("mortgage");
 

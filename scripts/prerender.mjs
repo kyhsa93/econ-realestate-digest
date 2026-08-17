@@ -1,12 +1,3 @@
-// 크롤러가 받는 HTML에 그날 내용을 심는다.
-//
-// 이 페이지는 data/*.json을 클라이언트에서 받아 그리기 때문에, 손대지 않으면 초기
-// HTML에는 "불러오는 중..."밖에 없다. 구글은 JS를 렌더링하지만 렌더 큐가 밀려서
-// 하루 4번 바뀌는 내용과 궁합이 나쁘고, 네이버 Yeti와 Bing은 JS 렌더링이 약하다.
-//
-// 심은 내용은 화면 동작에 영향을 주지 않는다 - 클라이언트가 같은 컨테이너를
-// innerHTML로 갈아끼우기 때문에, 데이터를 받은 뒤에는 어차피 전부 다시 그려진다.
-// 여기 있는 건 "받기 전에도 글자가 있게" 하려는 것뿐이다.
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { DEFAULT_AMOUNT, formatWon, netInterestOf } from "./interest.mjs";
@@ -33,9 +24,6 @@ const NEWS_PATH = path.join(root, "docs/news.html");
 const REALESTATE_PATH = path.join(root, "docs/realestate.html");
 const DATA_DIR = path.join(root, "docs/data");
 
-// 자치구 평당가는 신고 건수가 적으면 "그 구의 시세"가 아니라 "그 아파트 한 채의
-// 가격"이라 화면에서 가린다. 정적 HTML은 검색 결과에 그대로 실릴 수 있으니
-// 같은 기준을 반드시 지켜야 한다.
 export const MIN_SAMPLE = 5;
 const MAX_DISTRICTS = 10;
 
@@ -52,8 +40,6 @@ export function summaryHtml(summary) {
   const categories = (summary?.categories ?? []).filter((c) => c.lineKo);
   if (!highlights.length && !categories.length) return null;
 
-  // 핵심 기사가 그날 페이지에서 가장 알맹이 있는 문단이다. 크롤러가 받는
-  // HTML에서 빠지면 검색 결과에는 분야별 한 줄 요약만 남는다.
   return [
     ...highlights.map((h) => `<p><strong>${escapeHtml(h.title)}</strong> ${escapeHtml(h.textKo)}</p>`),
     ...categories.map((c) => `<p><strong>${escapeHtml(c.name)}</strong> ${escapeHtml(c.lineKo)}</p>`),
@@ -76,7 +62,6 @@ export function marketHtml(market) {
   }
 
   if (!rows.length) return null;
-  // 좁은 화면 카드 배치가 data-label을 읽는다. 클라이언트 렌더와 같은 라벨을 붙인다.
   return rows
     .map(
       ([name, value, change]) =>
@@ -87,14 +72,10 @@ export function marketHtml(market) {
 
 const man = (value) => `${Number(value).toLocaleString("ko-KR")}만원`;
 
-// 표본이 모자란 셀. 화면(index.html의 realestateLowSampleHtml)과 같은 마크업이어야 한다 -
-// 정적 HTML이 "-"를 적어두고 클라이언트가 "표본 2건"으로 갈아끼우면 그 순간 글자가 바뀐다.
 const lowSampleText = (metric) =>
   `<span class="low-sample" title="신고 ${metric.transactionCount}건이라 평균을 내기엔 표본이 부족합니다">` +
   `표본 ${metric.transactionCount}건</span>`;
 
-// 클라이언트가 값 옆에 붙이는 증감·건수까지 같이 그린다. 안 그리면 데이터를 받는
-// 순간 셀 높이가 바뀌면서 표 아래가 통째로 밀린다.
 const changeText = (change) => {
   if (!change || typeof change.value10k !== "number") return "";
   const sign = change.value10k > 0 ? "+" : change.value10k < 0 ? "-" : "";
@@ -106,9 +87,6 @@ const countText = (metric) =>
     : "";
 const enough = (metric) => Boolean(metric) && (metric.transactionCount ?? 0) >= MIN_SAMPLE;
 
-// 매매·전세는 평당가, 월세는 보증금/월세라 셀 모양이 다르다(화면과 같은 구성).
-// 표본이 모자라면 값을 지우고 표본 수를 적는다 - 값이 없는 것과 표본이 얇은 것은 다른
-// 얘기라, 둘 다 "-"로 적으면 읽는 사람이 그 차이를 볼 수 없다(화면과 같은 규칙).
 const metricCell = (metric, valueText) => {
   if (!metric) return "-";
   if (!enough(metric)) return lowSampleText(metric);
@@ -131,15 +109,11 @@ const wolseCell = (wolse) =>
 export function realestateHtml(realestate) {
   if (!realestate?.overall) return null;
 
-  // 표본이 모자란 구를 빼지 않고 아래로 내린다. 빼면 신고가 얇은 달 초에 정적 표가
-  // 여덟 줄, 화면은 열한 줄이 되어 데이터를 받는 순간 표 아래가 통째로 밀린다 -
-  // 이 함수가 증감·건수까지 그리는 이유와 같다(화면의 compareDistricts와 같은 규칙).
   const priceOf = (d) => ((d.sale?.transactionCount ?? 0) >= MIN_SAMPLE ? d.sale?.avgPricePerPyeong10k ?? null : null);
   const districts = [...(realestate.districts ?? [])]
     .sort((a, b) => {
       const [x, y] = [priceOf(a), priceOf(b)];
       if (x === y) return 0;
-      // 값을 못 내는 구는 정렬 방향과 무관하게 아래로 간다.
       if (x === null) return 1;
       if (y === null) return -1;
       return y - x;
@@ -155,9 +129,6 @@ export function realestateHtml(realestate) {
   return [row("서울 전체", realestate.overall), ...districts.map((d) => row(d.name, d))].join("");
 }
 
-// 기사에 붙은 우리 데이터(자치구 실거래가·현재 금리·지수). news-context.mjs가
-// news.json에 넣어둔 값을 그대로 그린다. 화면(news.html·index.html)의 newsContextHtml과
-// 같은 마크업이어야 한다 - 테스트가 두 결과를 직접 대조한다.
 export function newsContextHtml(context) {
   if (!context?.length) return "";
   return (
@@ -176,10 +147,6 @@ export function newsContextHtml(context) {
   );
 }
 
-// 클라이언트가 그리는 마크업과 구조를 맞춘다. 다르면 데이터를 받는 순간 목록 높이가
-// 바뀌면서 화면이 밀린다(광고가 붙은 페이지라 이 밀림은 수익에도 영향을 준다).
-// 상대 시간("3시간 전")만은 만든 시점에 좌우돼서 넣을 수 없으므로, 같은 줄에
-// 매체 이름만 넣어 줄 수를 맞춘다.
 export function newsHtml(news) {
   const items = news?.items ?? [];
   if (!items.length) return null;
@@ -196,8 +163,6 @@ export function newsHtml(news) {
     .join("");
 }
 
-// 예산 페이지(budget-*.html)에 심는 거래 목록. docs/realestate.html의 budgetBodyHtml과
-// 같은 마크업이어야 한다 - 테스트가 두 결과를 직접 대조한다. 정적 HTML은 한국어 화면이다.
 const budgetBandLabel = (band) => {
   const from = Math.round(band.min10k / 10_000);
   const to = band.max10k === null ? null : Math.round(band.max10k / 10_000);
@@ -243,9 +208,6 @@ export function budgetBodyHtml(band, periodList) {
 
 export { budgetBandLabel };
 
-// 링크 목록은 제목까지 한 덩어리로 심는다. 예전에는 제목을 정적 HTML에 두고 링크만
-// 갈아 끼웠는데, 링크가 빈 페이지에는 제목 글자만 남았다(hidden으로 감췄어도 문서에는
-// 그대로 있었다). 심을 게 없으면 제목도 안 나오게 한 덩어리로 묶는다.
 function linksBlockHtml(id, heading, links) {
   if (!links) return "";
   return (
@@ -254,18 +216,11 @@ function linksBlockHtml(id, heading, links) {
   );
 }
 
-/**
- * 거래내역 검색 페이지 아래에 두는 예산 페이지 목록. 검색으로 들어온 사람이 옆 구간을
- * 훑는 길이자, 크롤러가 예산 페이지를 발견하는 내부 경로다.
- * 실제로 찍힌 페이지만 넘겨받는다 - 거래가 없어 못 만든 구간까지 링크하면 404가 된다.
- */
 export function budgetLinksHtml(pages = BUDGET_PAGES) {
   const links = pages.map((p) => `<a href="./${p.file}">${escapeHtml(`${p.eok}억대`)}</a>`).join("");
   return linksBlockHtml("budget-links", "예산대별 실거래", links);
 }
 
-// 부동산 뉴스 페이지 맨 위의 서울 시세 카드. 값은 news-context.mjs가 news.json에
-// 넣어둔 것을 그대로 쓴다 - 화면(news.html)의 statCardsHtml과 같은 마크업이어야 한다.
 export function newsRealestateStatsHtml(news) {
   const stats = news?.realestateStats ?? [];
   if (!stats.length) return null;
@@ -281,8 +236,6 @@ export function newsRealestateStatsHtml(news) {
     .join("");
 }
 
-// news.html과 거기서 찍어낸 카테고리 페이지용. 화면 렌더와 같은 구성으로 만든다.
-// category가 null이면 전체.
 export function newsSummaryHtml(summary, category = null) {
   const all = (summary?.categories ?? []).filter((c) => c.lineKo);
   const shown = category ? all.filter((c) => c.key === category) : all;
@@ -297,8 +250,6 @@ export function newsListHtml(news, category = null) {
   const items = category ? all.filter((item) => item.category === category) : all;
   if (!items.length) return null;
 
-  // 상대 시간("3시간 전")은 만든 시점에 좌우돼서 데이터가 그대로여도 결과가 달라진다.
-  // 정적 HTML엔 매체 이름만 넣고, 시간은 클라이언트가 그린다.
   return items
     .map(
       (item) =>
@@ -311,8 +262,6 @@ export function newsListHtml(news, category = null) {
     .join("");
 }
 
-// docs/realestate.html과 거기서 찍어낸 거래 유형별 페이지용. 화면 렌더와 같은
-// 마크업이어야 한다(테스트가 두 결과를 직접 대조한다). 정적 HTML은 한국어 화면이다.
 const RE_LABELS = {
   district: "지역",
   sale: "매매",
@@ -361,8 +310,6 @@ const reCountSpan = (metric) =>
     ? ` <span class="count">${escapeHtml(reCount(metric.transactionCount))}</span>`
     : "";
 
-// 지난달 값으로 대체한 셀. 어느 달 기준인지 밝히지 않으면 8월 표에 7월 숫자가
-// 섞인 채로 읽힌다.
 function rePrevTag(isPrevious, previousPeriod) {
   if (!isPrevious) return "";
   const label = monthLabel(previousPeriod);
@@ -383,7 +330,6 @@ function reCells(entry, kind, previousPeriod) {
   }
   const { metric, isPrevious } = resolved;
   const tag = rePrevTag(isPrevious, previousPeriod);
-  // 증감은 이번 달 값끼리 비교한 것이라, 지난달로 대체한 셀에는 붙이지 않는다.
   const change = (c, d) => (isPrevious ? "" : reChange(c, d));
 
   if (kind === "wolse") {
@@ -423,8 +369,6 @@ function reAllCells(entry, previousPeriod) {
   });
 }
 
-// 그날 조회에 실패해 지난번 값을 그대로 들고 있는 구. 화면(realestate.html)의
-// staleTagHtml과 같은 마크업이어야 한다 - 테스트가 두 결과를 직접 대조한다.
 function reStaleTag(entry) {
   const at = entry?.staleAt;
   if (!at) return "";
@@ -434,9 +378,6 @@ function reStaleTag(entry) {
   return ` <span class="prev-tag" title="${escapeHtml("이 지역은 오늘 실거래 조회에 실패해 지난번에 받은 값을 그대로 보여줍니다.")}">${escapeHtml(label)}</span>`;
 }
 
-// 표에서 지역 이름을 누르면 그 지역 페이지로 간다. 25개 구를 훑다가 한 곳이 눈에 들면
-// 바로 들어갈 수 있어야 하는데, 그동안은 표 밑의 링크 목록에서 그 이름을 다시 찾아야 했다.
-// 화면(realestate.html)의 districtLinkHtml과 같은 마크업이어야 한다.
 function reDistrictLink(label) {
   const slug = DISTRICT_SLUGS[label];
   return slug ? `<a href="./${districtFile(slug)}">${escapeHtml(label)}</a>` : escapeHtml(label);
@@ -452,7 +393,6 @@ function reRow(entry, label, isOverall, kind, previousPeriod) {
   return `<tr class="${isOverall ? "overall-row" : ""}"><td>${name}${reStaleTag(entry)}</td>${body}</tr>`;
 }
 
-// 비싼 곳부터. 값을 낼 수 없는 지역은 맨 아래로 보낸다(화면과 같은 규칙).
 function reSorted(districts, kind) {
   const key = kind ?? "sale";
   return [...districts].sort((a, b) => {
@@ -465,7 +405,6 @@ function reSorted(districts, kind) {
   });
 }
 
-// 한 지역만 보여주는 페이지에서는 거래 유형이 행이 된다(화면과 같은 구성).
 function reDistrictRows(entry, previousPeriod) {
   const labels = [RE_LABELS.sale, RE_LABELS.jeonse, RE_LABELS.wolse];
   return ["sale", "jeonse", "wolse"]
@@ -576,8 +515,6 @@ export function realestateOverallHtml(realestate, kind = null, district = null) 
   );
 }
 
-// 자치구 페이지의 서술 문단. 25개가 구조만 같고 숫자만 다르면 템플릿을 대량으로
-// 찍어낸 것으로 보이므로, 그 지역 데이터로만 만들 수 있는 문장을 심는다.
 export function districtSummaryHtml(realestate, district, locale = "ko") {
   if (!district) return "";
   const entry = (realestate?.districts ?? []).find((d) => d.name === district);
@@ -585,8 +522,6 @@ export function districtSummaryHtml(realestate, district, locale = "ko") {
   return sentences.length ? escapeHtml(sentences.join(" ")) : "";
 }
 
-// 자치구별 페이지로 가는 링크. 크롤러가 25개 페이지를 발견하는 유일한 내부 경로라
-// 정적 HTML에 반드시 들어가야 한다(sitemap만으로는 늦다).
 export function districtLinksHtml(current = null) {
   const links = DISTRICT_PAGES.map(({ name, file }) =>
     name === current
@@ -596,11 +531,6 @@ export function districtLinksHtml(current = null) {
   return linksBlockHtml("district-links", "다른 지역", links);
 }
 
-// 금리 페이지는 각 페이지의 첫 화면만 심는다. 안 보이는 탭까지 숨겨서 심으면
-// 화면에 없는 내용을 크롤러에만 보여주는 셈이 된다.
-//
-// 상품 선택·정렬 규칙은 rates.html의 visibleRows와 같아야 한다 - 다르면 검색 결과에
-// 뜨는 순서와 실제 화면이 어긋난다. 테스트가 실제 렌더 결과와 직접 대조한다.
 const RATES_TERM = 12;
 const RATES_ROWS = 20;
 const SAVING_CATEGORIES = new Set(["deposit", "saving"]);
@@ -621,7 +551,7 @@ export function ratesHtml(rates, { category = "deposit", limit = RATES_ROWS } = 
 
   const saving = SAVING_CATEGORIES.has(category);
   const key = saving ? "maxRate" : "min";
-  const asc = !saving; // 예적금은 높은 금리가, 대출은 낮은 금리가 위로 온다
+  const asc = !saving;
 
   const rows = [];
   for (const product of products) {
@@ -642,7 +572,6 @@ export function ratesHtml(rates, { category = "deposit", limit = RATES_ROWS } = 
     else if (fallback) rows.push({ product, option: fallback, sort: null });
   }
 
-  // 정렬할 값이 없는 상품은 빼지 않고 맨 아래로 보낸다(화면과 같은 규칙).
   rows.sort((a, b) => {
     if (a.sort === null || b.sort === null) return (a.sort === null) - (b.sort === null);
     return asc ? a.sort - b.sort : b.sort - a.sort;
@@ -654,8 +583,6 @@ export function ratesHtml(rates, { category = "deposit", limit = RATES_ROWS } = 
     `<td><div class="product-name">${escapeHtml(product.name ?? "-")}</div>` +
     `<div class="product-company">${escapeHtml(product.company ?? "")}</div></td>`;
 
-  // 세후 이자는 화면의 기본 금액(예금 1,000만원 / 적금 월 30만원)으로 심는다.
-  // 사용자가 금액을 바꾸면 클라이언트가 같은 계산으로 다시 그린다.
   const amount = DEFAULT_AMOUNT[saving && category === "saving" ? "saving" : "deposit"];
   const netCell = (option) => {
     const net = netInterestOf(option, { amount, saving: category === "saving" });
@@ -676,8 +603,6 @@ export function ratesHtml(rates, { category = "deposit", limit = RATES_ROWS } = 
     .join("");
 }
 
-// 마커가 없으면 조용히 지나가지 않는다. 심었다고 생각하는데 실제로는 아무것도
-// 안 들어간 상태가 제일 나쁘다.
 export function applyPrerender(html, blocks) {
   let out = html;
   for (const [name, content] of Object.entries(blocks)) {
@@ -688,7 +613,7 @@ export function applyPrerender(html, blocks) {
     if (start === -1 || end === -1 || end < start) {
       throw new Error(`${name} 자리표시 주석을 찾지 못했습니다. 대상 HTML에서 마커가 지워졌는지 확인해주세요.`);
     }
-    if (content == null) continue; // 데이터가 없으면 기존 안내 문구를 그대로 둔다
+    if (content == null) continue;
     out = `${out.slice(0, start + open.length)}${content}${out.slice(end)}`;
   }
   return out;
@@ -731,8 +656,6 @@ async function main() {
         realestateOverall: realestateOverallHtml(realestate),
         realestateHead: realestateHeadHtml(),
         realestateTable: realestateTableHtml(realestate),
-        // 표의 지역 이름이 곧 링크라 같은 목록을 아래 한 번 더 두지 않는다.
-        // 자치구 페이지에는 그 표가 없으므로 거기서만 채운다(build-realestate-pages.mjs).
         districtLinks: "",
         districtSummaryKo: "",
         districtSummaryEn: "",

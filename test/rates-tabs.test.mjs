@@ -6,7 +6,6 @@ test("탭을 여러 번 눌러도 계속 전환된다", async () => {
   const { sandbox, clickTab, rates } = await loadRatesPage();
   assert.equal(sandbox.products().length, rates.deposit.length);
 
-  // 한 번은 되는데 그다음부터 안 되는 게 이 버그의 모양이라, 연속으로 눌러야 드러난다.
   clickTab("saving");
   assert.equal(sandbox.products().length, rates.saving.length, "적금으로 전환 실패");
 

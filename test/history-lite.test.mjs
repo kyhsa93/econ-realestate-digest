@@ -1,5 +1,3 @@
-// 메인 화면이 받는 부동산 히스토리를 줄인 것이라, 지켜야 할 건 두 가지다.
-// (1) 화면이 예전과 똑같이 그려질 것, (2) 파일이 다시 무한정 자라지 않을 것.
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
@@ -23,7 +21,6 @@ test("경량 파일은 날짜 수 상한이 있어서 무한정 자라지 않는
   const lite = await readJson("realestate-history-lite");
   assert.ok(lite.length <= LITE_DAYS, `${lite.length}일치가 들어 있다`);
 
-  // 차트가 slice(-30)만 그리므로 상한을 그보다 크게 잡되 과하지 않게 둔다.
   assert.ok(LITE_DAYS >= 30 && LITE_DAYS <= 60, `상한이 ${LITE_DAYS}일이면 차트 구간과 안 맞는다`);
 });
 
@@ -31,8 +28,6 @@ test("차트가 안 쓰는 필드는 빼서 크기를 줄인다", async () => {
   const [full, lite] = await Promise.all([readJson("realestate-history"), readJson("realestate-history-lite")]);
   const text = JSON.stringify(lite);
 
-  // 전세·월세 값은 아파트 시세 착지 페이지가 추이를 그리면서 쓰기 시작했다.
-  // 여전히 안 쓰는 건 증감 계산 결과와 ㎡당 원가다(화면은 평당 만원으로만 그린다).
   for (const field of ["change", "baselineDate", "avgPricePerM2"]) {
     assert.ok(!text.includes(`"${field}"`), `차트가 안 쓰는 ${field}가 남아 있다`);
   }
@@ -41,7 +36,6 @@ test("차트가 안 쓰는 필드는 빼서 크기를 줄인다", async () => {
   assert.ok(text.length < fullSize, `줄어들지 않았다 (${text.length} vs ${fullSize})`);
 });
 
-// 이 테스트가 이번 변경의 핵심이다. 데이터를 줄였는데 차트가 달라지면 의미가 없다.
 test("경량 파일로 그린 차트가 원본으로 그린 것과 완전히 같다", async () => {
   const [full, lite, today] = await Promise.all([
     readJson("realestate-history"),
@@ -71,7 +65,6 @@ test("메인 화면은 경량 파일을, 아카이브는 원본을 받는다", a
     "메인 화면이 경량 파일을 받지 않는다"
   );
 
-  // 아카이브는 그날의 전체 내용이 필요해서 원본(HISTORY_FILES)을 그대로 받아야 한다.
   assert.ok(
     html.includes("Object.keys(HISTORY_FILES).map((key) => loadHistoryInto(key))"),
     "아카이브가 원본 히스토리를 받지 않는다"

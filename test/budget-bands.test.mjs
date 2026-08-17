@@ -1,5 +1,3 @@
-// 예산 구간은 "8억이면 뭘 살 수 있나"에 답하는 자리다. 구간을 잘못 자르면 예산보다 비싼
-// 거래가 답으로 나오고, 대표 거래를 잘못 고르면 한 단지가 목록을 다 차지한다.
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
@@ -36,8 +34,6 @@ test("금액을 1억 단위 구간으로 나눈다", () => {
   assert.equal(bandEnd(BAND_MAX), null, "맨 위 구간은 끝이 없다");
 });
 
-// 양 끝은 한 칸으로 묶는다. 2억짜리와 1억짜리를 따로 세어봐야 서울에서는 표본이 안 되고,
-// 30억 위로는 1억 간격이 의미가 없다.
 test("아래위 오픈 구간으로 모은다", () => {
   assert.equal(bandStart(29_999), 0);
   assert.equal(bandStart(BAND_MAX), BAND_MAX);
@@ -60,7 +56,6 @@ test("구간마다 건수와 대표 거래를 담는다", () => {
   assert.deepEqual(bands[0].deals.map((d) => d.apt), ["나단지", "가단지"], "같은 날이면 비싼 쪽이 먼저");
 });
 
-// 한 단지가 대표 자리를 다 차지하면 "이 예산대에 뭐가 있나"를 보여주지 못한다.
 test("대표 거래는 단지마다 한 건씩만 남긴다", () => {
   const many = Array.from({ length: 12 }, (_, i) => deal(85_000, { apt: `단지${i % 3}`, date: `2026-08-${10 + i}` }));
   const [band] = buildBands(many);
@@ -86,8 +81,6 @@ test("어느 지역에 몰려 있는지 같이 센다", () => {
   ]);
 });
 
-// 지난달 거래는 다시 받아올 방법이 없다(호출 한도 때문에 이 저장소는 지난달 집계도
-// 캐시해 쓴다). 여기서 지우면 영영 사라진다.
 test("지난달 구간은 그대로 두고 오래된 달만 떨어뜨린다", () => {
   const first = mergeMonths(null, "202606", buildBands([deal(85_000)]));
   const second = mergeMonths({ months: first }, "202607", buildBands([deal(95_000)]));
@@ -138,6 +131,5 @@ test("구별 원본을 하나로 모아 구간을 만든다", () => {
   assert.deepEqual(payload.screen.bands.map((b) => b.min10k), [80_000, BAND_MAX]);
   assert.deepEqual(Object.keys(payload.months.months), ["202608"]);
 
-  // 화면이 받는 파일에는 월별 원본이 실리지 않는다. 같이 넣으면 크기만 세 배가 된다.
   assert.ok(!("months" in payload.screen));
 });

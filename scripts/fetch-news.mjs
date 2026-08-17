@@ -22,10 +22,7 @@ const MAX_PREVIEW_LENGTH = 120;
 const MAX_DUPES = 3;
 const MAX_ITEMS_PER_SOURCE = 8;
 
-// 요약이 쓸 본문. 화면에 나가는 preview와 분리해 둔다 - preview를 늘리면 목록이
-// 길어지고, news.json과 180일치 history가 같이 불어난다.
 const MAX_BODY_LENGTH = 1200;
-// 이보다 짧으면 사실상 제목만 있는 것과 같아서 기사 페이지를 받아 본다.
 const MIN_BODY_LENGTH = 200;
 const SCRAPE_CONCURRENCY = 3;
 const SCRAPE_TIMEOUT_MS = 8000;
@@ -34,8 +31,6 @@ const USER_AGENT = "Mozilla/5.0 (compatible; econ-realestate-digest/1.0; +https:
 const dataDir = path.resolve(import.meta.dirname, "../docs/data");
 const outFile = path.join(dataDir, "news.json");
 const historyFile = path.join(dataDir, "news-history.json");
-// 본문은 요약 단계가 같은 실행 안에서 바로 쓰고 버린다. docs/ 밖에 두면
-// 커밋(git add docs)에도, 화면이 받는 파일에도 섞이지 않는다.
 const cacheDir = path.resolve(import.meta.dirname, "../cache");
 const bodiesFile = path.join(cacheDir, "news-bodies.json");
 const HISTORY_MAX_DAYS = 180;
@@ -132,8 +127,6 @@ async function appendHistory(now, items) {
   await writeFile(historyFile, JSON.stringify(history, null, 2));
 }
 
-// RSS에 본문을 싣는 양은 매체마다 다르다(조선비즈는 기사 전체, 연합은 한 줄).
-// 긴 필드부터 훑지 않으면 이미 받아둔 재료를 그냥 버리게 된다.
 function rawArticleText(item) {
   return item["content:encoded"] ?? item.content ?? item.contentSnippet ?? item.summary ?? "";
 }
@@ -161,8 +154,6 @@ async function fetchArticleBody(url) {
   }
 }
 
-// 본문이 모자란 항목만, robots.txt가 열어둔 경로만 받는다. 실패는 넘어간다 -
-// 본문이 없으면 요약이 그 기사에 대해 제목만 보고 쓸 뿐, 수집을 멈출 일은 아니다.
 async function fillMissingBodies(items) {
   const targets = items.filter(
     (item) => (item.body?.length ?? 0) < MIN_BODY_LENGTH && isScrapable(item.link)
@@ -229,8 +220,6 @@ async function main() {
   await fillMissingBodies(items);
 
   const now = new Date();
-  // body는 화면도 히스토리도 쓰지 않는다. 같이 저장하면 news.json이 커지고
-  // 180일치 history는 눈덩이처럼 불어난다.
   const publicItems = items.map(({ body, ...rest }) => rest);
   const bodies = Object.fromEntries(items.filter((item) => item.body).map((item) => [item.link, item.body]));
 
@@ -247,8 +236,6 @@ async function main() {
     JSON.stringify({ updatedAt: now.toISOString(), date: kstDateString(now), bodies }, null, 2)
   );
 
-  // 본문 확보량이 요약 품질을 그대로 좌우한다. 조용히 줄어드는 걸 알아채려면
-  // 실행마다 남겨야 한다.
   const withBody = items.filter((item) => (item.body?.length ?? 0) >= MIN_BODY_LENGTH).length;
   const totalChars = items.reduce((sum, item) => sum + (item.body?.length ?? 0), 0);
   console.log(

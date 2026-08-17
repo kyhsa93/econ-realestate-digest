@@ -57,8 +57,6 @@
     --card: #f5f5f7;
     --border: #e2e2e5;
   }
-  /* hidden 속성은 브라우저 기본 스타일(display:none)로 동작하는데, 작성자 CSS가 그 요소에
-     display를 지정하면 그쪽이 이겨서 감춰지지 않는다. 감춤은 항상 이 규칙이 이기게 못박는다. */
   [hidden] { display: none !important; }
   * { box-sizing: border-box; }
   body {
@@ -150,8 +148,6 @@
     font-size: 0.8rem;
   }
   .site-footer a { color: var(--muted); }
-  /* 조건을 접어 두지 않는다. 접혀 있으면 결과가 무엇으로 걸러진 목록인지 화면에서
-     사라지고, 그때부터 이 표는 "서울 전체"로 읽힌다. 좁은 화면에서는 줄로 흐른다. */
   .search-controls { display: flex; flex-wrap: wrap; gap: 10px 16px; margin-bottom: 14px; }
   .search-field { display: flex; align-items: center; gap: 8px; }
   .search-field label { font-size: 0.82rem; color: var(--muted); }
@@ -184,8 +180,6 @@
   }
   .budget-deal .place { font-weight: 600; }
   .budget-deal .spec, .budget-deal .when { color: var(--muted); font-size: 0.8rem; }
-  /* 직거래에만 붙는다. 중개거래는 대다수라 표시할 값이 없고, 거래 형태를 신고하지 않은
-     거래도 있어서 "표시가 없다 = 중개거래"라고 읽히면 안 된다. */
   .budget-deal .tag {
     font-size: 0.72rem;
     color: var(--muted);
@@ -286,15 +280,6 @@
 </main>
 <script src="./analytics.js"></script>
 <script>
-// 지역과 예산을 같이 걸어 신고된 실거래를 찾는 화면.
-//
-// 시세 페이지의 "예산으로 찾기"는 서울 전체를 한 덩어리로 본다. 실제로 집을 알아보는
-// 사람은 "8억으로 서울 어디"보다 "노원구에서 8억이면 뭐가 있나"를 먼저 묻는데, 그 질문에
-// 답하려면 두 축을 같이 걸어야 한다. 그래서 시세 페이지에 조건을 하나 더 얹지 않고
-// 페이지를 나눴다 - 시세 페이지의 본문은 자치구별 평균표이고, 거기에 검색까지 들어가면
-// 무슨 페이지인지 흐려진다(거래 유형 페이지를 나눈 것과 같은 이유).
-//
-// 여기서 보여주는 건 매물이 아니라 이미 신고된 거래다. 화면 문구도 반드시 그렇게 적는다.
 const T = {
   ko: {
     title: "서울 아파트 실거래 검색",
@@ -414,17 +399,12 @@ const T = {
   },
 };
 
-const EOK = 10000; // 1억(만원)
+const EOK = 10000;
 
-// 조건을 걸지 않은 목록은 구간을 가로질러 합치므로 금방 수백 건이 된다. 화면에서 읽히는
-// 분량으로 자른다 - 건수는 따로 적으니 잘렸다는 사실이 감춰지지는 않는다.
 const MAX_ROWS = 30;
 
 const ALL = "all";
 
-// scripts/budget-bands.mjs의 bandStart와 같은 규칙. 지역별 전수 자료를 화면에서 직접
-// 구간으로 가르기 때문에 여기에도 있어야 한다 - 어긋나면 고른 구간과 목록이 서로 다른
-// 거래를 가리키고, 그 어긋남은 그럴듯한 목록으로 나와 눈으로는 못 잡는다.
 const BAND_MIN = 3 * EOK;
 const BAND_MAX = 30 * EOK;
 
@@ -435,8 +415,6 @@ function bandStartOf(amount10k) {
   return Math.floor(amount10k / EOK) * EOK;
 }
 
-// 전용면적 구간. 경계는 위쪽을 포함한다(84.97㎡는 "60~85㎡"). 국민평형이 경계 바로
-// 아래라 반대로 잡으면 제일 흔한 면적이 통째로 옆 칸으로 넘어간다.
 const AREA_BUCKETS = [
   { key: "60", min: null, max: 60 },
   { key: "60-85", min: 60, max: 85 },
@@ -451,8 +429,6 @@ const AGE_BUCKETS = [
   { key: "30", over: 30 },
 ];
 
-// 띄어쓰기가 제각각인 단지 이름을 그대로 대조하면 "래미안 퍼스티지"로 찾는 사람이
-// "래미안퍼스티지"를 못 찾는다.
 const squash = (text) => String(text ?? "").replace(/\s+/g, "").toLowerCase();
 
 let locale = (() => {
@@ -489,32 +465,19 @@ function setText(id, text) {
 
 const cache = { budget: null, search: null };
 
-// 지역별 전수 파일(docs/data/deals-<슬러그>.json). 조건을 정확히 걸려면 표본이 아니라
-// 전수가 있어야 한다 - 대표 몇 건 위에 면적·연식을 걸면 걸리는 건 그 몇 건뿐인데
-// 화면에 적히는 건수는 전수라, 조건을 늘리는 순간 건수가 거짓말이 된다.
-//
-// 값이 null이면 "그 지역 파일이 아직 없다"는 뜻이고(아직 안 찍힌 날), 키가 아예 없으면
-// 아직 받아보지 않았다는 뜻이다. 못 받은 것은 기억하지 않아 다음 조건 변경에서 다시
-// 시도된다.
 const fullDeals = new Map();
 
-// 고른 조건은 주소에 남긴다. "노원구 8억대 84㎡"를 그대로 보낼 수 있어야 검색 화면이다.
 const params = new URLSearchParams(location.search);
 let district = params.get("district") || ALL;
 let band10k = (() => {
   const raw = params.get("budget");
   if (raw === null || raw.trim() === "") return null;
   const value = Number(raw);
-  // 빈 문자열은 Number("")가 0이라 그냥 두면 "3억 미만"으로 읽힌다.
   return Number.isFinite(value) && value >= 0 ? value * EOK : null;
 })();
-// 주소로 들어온 값이 우리가 아는 구간인지 확인한다. 모르는 값을 그대로 두면 아무것도
-// 안 걸리는 조건이 화면에는 걸린 것처럼 남는다.
 const knownKey = (buckets, raw) => (buckets.some((b) => b.key === raw) ? raw : ALL);
 let areaKey = knownKey(AREA_BUCKETS, params.get("area"));
 let ageKey = knownKey(AGE_BUCKETS, params.get("age"));
-// 친 그대로 들고 있다가 쓸 때만 다듬는다. 칠 때마다 trim한 값을 입력창에 되쓰면 "래미안 "
-// 뒤의 공백이 매번 지워져 두 단어짜리 단지 이름을 아예 칠 수가 없다.
 let aptQuery = params.get("apt") ?? "";
 let excludeDirect = params.get("direct") === "exclude";
 
@@ -555,15 +518,12 @@ function bandLabel(band) {
 
 const bucketOf = (buckets, key) => buckets.find((bucket) => bucket.key === key) ?? null;
 
-// 연식의 기준 연도. 오늘 날짜가 아니라 자료가 말하는 기간에서 뽑는다 - 화면은 "8월
-// 신고분 기준"이라고 적어 두고 연식만 오늘로 세면 두 문장이 다른 시점을 말하게 된다.
 function baseYear() {
   const periods = cache.search?.periods ?? cache.budget?.periods ?? [];
   const year = Number(String(periods[periods.length - 1] ?? "").slice(0, 4));
   return Number.isInteger(year) && year > 1900 ? year : null;
 }
 
-// 면적·연식·단지명·거래형태. 예산·지역과 달리 거래 한 건씩을 직접 본다.
 function matchesDetail(deal) {
   if (areaKey !== ALL) {
     const bucket = bucketOf(AREA_BUCKETS, areaKey);
@@ -576,8 +536,6 @@ function matchesDetail(deal) {
   if (ageKey !== ALL) {
     const bucket = bucketOf(AGE_BUCKETS, ageKey);
     const year = baseYear();
-    // 준공연도가 없는 거래는 연식 조건에서 뺀다. 모르는 값을 통과시키면 "30년 이상"
-    // 목록에 준공연도 미상이 섞여 나오고, 화면은 그걸 30년 넘은 단지라고 말한다.
     if (!bucket || !year || !Number.isInteger(deal?.buildYear)) return false;
     const age = year - deal.buildYear;
     if (bucket.within != null && age > bucket.within) return false;
@@ -587,8 +545,6 @@ function matchesDetail(deal) {
   const term = aptTerm();
   if (term && !squash(deal?.apt).includes(squash(term))) return false;
 
-  // 거래 형태를 신고하지 않은 거래는 남긴다. 직거래라고 적힌 것만 뺀다 - 모르는 것까지
-  // 빼면 국토부가 그 필드를 안 주는 날 목록이 통째로 비어 버린다.
   if (excludeDirect && deal?.direct === true) return false;
 
   return true;
@@ -596,11 +552,8 @@ function matchesDetail(deal) {
 
 const scopeNames = () => (district === ALL ? districtNames() : [district]);
 
-// 전수가 필요한 조건인지. 서울 전체를 조건 없이 보는 첫 화면까지 25개 파일을 받게 하면
-// 들어오자마자 수백 KB를 내려받는다. 지역을 고르거나 상세 조건을 걸 때만 받는다.
 const needFull = () => district !== ALL || detailActive();
 
-/** 지금 조건이 가리키는 전수 거래. 한 지역이라도 자료가 없으면 null(전수라고 말할 수 없다). */
 function fullDealsOf() {
   const names = scopeNames();
   if (!names.length) return null;
@@ -609,8 +562,6 @@ function fullDealsOf() {
   for (const name of names) {
     const list = fullDeals.get(name);
     if (!list) return null;
-    // 지역 파일은 지역 이름을 담지 않는다(파일 이름이 곧 열쇠다). 서울 전체로 합칠 때는
-    // 어느 구인지 적어야 하므로 여기서 채운다.
     for (const deal of list) rows.push(deal.district ? deal : { ...deal, district: name });
   }
 
@@ -627,12 +578,9 @@ async function loadDistrictDeals(name) {
     const file = await loadJson(`deals-${slug}`);
     fullDeals.set(name, file?.deals ?? null);
   } catch {
-    // 못 받은 것은 기억하지 않는다. 조건을 다시 건드리면 한 번 더 시도한다.
   }
 }
 
-// 지역을 고르면 그 지역 파일에서, 서울 전체면 예산 파일에서 구간을 가져온다. 서울 전체
-// 구간을 검색 파일에 한 번 더 담지 않는 건 같은 거래를 두 벌 내려보내지 않기 위해서다.
 function bandsFor(name) {
   if (name === ALL) return cache.budget?.bands ?? [];
   return cache.search?.districts?.[name] ?? [];
@@ -640,8 +588,6 @@ function bandsFor(name) {
 
 const districtNames = () => Object.keys(cache.search?.districts ?? {});
 
-// 선택지는 데이터가 들고 있는 구간에서만 만든다. 거래가 한 건도 없는 구간을 골라 놓고
-// 빈 화면을 보여주면 조건이 잘못된 건지 데이터가 없는 건지 구분이 안 된다.
 function bandOptions() {
   const seen = new Map();
   for (const band of cache.budget?.bands ?? []) seen.set(band.min10k, band);
@@ -669,9 +615,6 @@ function renderControls() {
       )
       .join("");
 
-  // 면적·연식 선택지는 자료가 아니라 규칙에서 나온다. 지역과 예산은 그 칸에 거래가 있을
-  // 때만 고르게 두지만(빈 화면과 잘못 고른 조건을 구분하려고), 면적·연식은 조건을 걸기
-  // 전에는 무엇이 남을지 알 수 없어 같은 방식을 쓸 수가 없다.
   document.getElementById("area-select").innerHTML =
     optionHtml(ALL, t("allAreas"), areaKey === ALL) +
     AREA_BUCKETS.map((bucket) =>
@@ -685,7 +628,6 @@ function renderControls() {
     ).join("");
 
   const aptInput = document.getElementById("apt-input");
-  // 글자를 치는 중에 값을 되쓰면 커서가 끝으로 튄다.
   if (aptInput.value !== aptQuery) aptInput.value = aptQuery;
   aptInput.setAttribute("placeholder", t("aptPlaceholder"));
 
@@ -693,8 +635,6 @@ function renderControls() {
 }
 
 function dealHtml(deal, name) {
-  // 지역을 이미 고른 화면에서는 줄마다 같은 구 이름이 붙어 봐야 읽을 게 없다. 검색 파일도
-  // 그래서 지역 이름을 빼고 담는다 - 서울 전체일 때만 어느 구인지 적는다.
   const place = [deal.district ?? (name === ALL ? null : name), deal.dong, deal.apt]
     .filter(Boolean)
     .join(" ");
@@ -710,8 +650,6 @@ function dealHtml(deal, name) {
   );
 }
 
-// 예산을 안 고르면 구간을 가로질러 최근 거래를 모은다. 같은 날이면 비싼 쪽을 먼저 둔다 -
-// 예산을 다 쓰는 쪽이 궁금해서 들어온 화면이다(구간 대표를 고르는 규칙과 같다).
 function dealsOf(bands) {
   return bands
     .flatMap((band) => band.deals ?? [])
@@ -726,9 +664,6 @@ function periodsHtml() {
   return periods ? ` <span class="when">${escapeHtml(t("periods")(periods))}</span>` : "";
 }
 
-// 예산 구간 페이지가 있는 구간이면 그쪽으로 보낸다. 서울 전체 기준으로 조건 없이 찍은
-// 페이지라 지역이나 상세 조건을 건 상태에서는 걸지 않는다 - 누른 사람이 보게 될 목록이
-// 지금 화면과 다르다.
 function moreHtml(band) {
   if (district !== ALL || !band || detailActive()) return "";
   const eok = Math.round(band.min10k / EOK);
@@ -740,14 +675,11 @@ function moreHtml(band) {
   );
 }
 
-/** 금액 구간의 시작값으로 구간을 되만든다. 전수 자료에는 구간이 담겨 있지 않다. */
 function bandOf(min10k) {
   if (min10k === null) return null;
   return { min10k, max10k: min10k === 0 ? BAND_MIN : min10k === BAND_MAX ? null : min10k + EOK };
 }
 
-// 고른 조건을 결과와 같은 자리에 적는다. 걸러진 목록을 조건 없이 읽으면 그 표는 그냥
-// "서울 전체"가 되고, 화면에 적힌 건수도 다른 뜻으로 읽힌다.
 function scopeLabel(band) {
   const parts = [district === ALL ? t("allDistricts") : district];
   if (band) parts.push(bandLabel(band));
@@ -777,7 +709,6 @@ function resultHtml(scope, count, rows, top, band) {
   );
 }
 
-// 전수 자료로 그린다. 여기서만 건수가 조건에 맞는 거래를 전부 센 값이 된다.
 function renderFull(box, deals) {
   const band = bandOf(band10k);
   const matched = deals.filter(
@@ -789,8 +720,6 @@ function renderFull(box, deals) {
     return;
   }
 
-  // 지역 분포는 서울 전체에서 구간을 고른 경우에만. 지역을 이미 고른 화면에서는 그 지역
-  // 하나뿐이고, 구간을 안 고른 목록의 분포는 "서울 거래가 어디에 많나"라는 다른 질문이다.
   const counts = new Map();
   if (district === ALL && band) {
     for (const deal of matched) counts.set(deal.district, (counts.get(deal.district) ?? 0) + 1);
@@ -804,8 +733,6 @@ function renderFull(box, deals) {
   box.innerHTML = resultHtml(scopeLabel(band), matched.length, matched.slice(0, MAX_ROWS), top, band);
 }
 
-// 구간 요약으로 그린다. 서울 전체를 조건 없이 보는 첫 화면의 경로다 - 칸마다 대표 거래
-// 몇 건만 들어 있어서 여기에는 상세 조건을 걸 수 없다.
 function renderFromBands(box) {
   const bands = bandsFor(district);
   const band = band10k === null ? null : bands.find((b) => b.min10k === band10k) ?? null;
@@ -834,8 +761,6 @@ function renderResult() {
     return;
   }
 
-  // 전수 자료가 없는데 상세 조건이 걸려 있다면 요약으로 대신 답하지 않는다. 조건을
-  // 무시한 목록을 조건이 걸린 것처럼 보여주는 게 이 화면에서 제일 나쁜 실패다.
   if (detailActive()) {
     box.innerHTML = `<p class="budget-empty">${escapeHtml(t("detailNotReady"))}</p>`;
     return;
@@ -896,8 +821,6 @@ function applyLocale() {
   setText("nav-rates", t("navRates"));
   setText("footer-source", t("footerSource"));
   setText("footer-privacy", t("footerPrivacy"));
-  // 예산 페이지 목록은 프리렌더가 제목까지 심는다. 아직 찍힌 페이지가 없는 날에는
-  // 요소 자체가 없으므로 있을 때만 말을 바꾼다.
   setText("budget-links-heading", t("budgetLinksHeading"));
   for (const link of document.querySelectorAll("[data-re-page]")) {
     link.textContent = t(NAV_KEYS[link.getAttribute("data-re-page")]);
@@ -907,23 +830,15 @@ function applyLocale() {
 
 let refreshToken = 0;
 
-/**
- * 조건이 전수 자료를 요구하면 받아 온 뒤에 그린다.
- *
- * 이미 받아 둔 지역만 필요하면 await 없이 그대로 그린다 - 언어를 바꿀 때처럼 화면을
- * 다시 그리는 자리가 비동기가 되면, 부르는 쪽마다 기다릴지 말지를 신경 써야 한다.
- */
 async function refresh() {
   const token = ++refreshToken;
 
   if (needFull()) {
     const missing = scopeNames().filter((name) => !fullDeals.has(name));
     if (missing.length) {
-      // 받는 동안 이전 조건의 목록을 그대로 두면 그게 새 조건의 답으로 읽힌다.
       document.getElementById("search-result").innerHTML =
         `<p class="search-loading">${escapeHtml(t("loading"))}</p>`;
       await Promise.all(missing.map(loadDistrictDeals));
-      // 받는 사이에 조건이 또 바뀌었다면 이건 이미 지난 조건의 답이다.
       if (token !== refreshToken) return;
     }
   }
@@ -938,9 +853,6 @@ function renderAll() {
   renderUpdated();
 }
 
-// 파일이 아직 없는 것(404)과 못 받은 것을 가른다. 부동산 조회가 도는 건 하루 한 번이라
-// 배포 직후에는 자료 없이 뜨는 날이 있는데, 거기에 "불러오지 못했습니다"를 띄우면 멀쩡한
-// 화면을 고장 난 것으로 읽게 된다.
 async function loadJson(name) {
   const res = await fetch(`./data/${name}.json?_=${Date.now()}`);
   if (res.status === 404) return null;
@@ -953,8 +865,6 @@ async function main() {
   applyLocale();
 
   try {
-    // 두 파일이 같은 빌드에서 나오므로 하나만 늦게 오는 상태를 따로 다루지 않는다.
-    // 예산 파일은 서울 전체 구간, 검색 파일은 지역별 구간이라 둘 다 있어야 화면이 선다.
     const [budget, search] = await Promise.all([loadJson("budget-deals"), loadJson("deal-search")]);
     if (!budget || !search) {
       document.getElementById("search-controls").hidden = true;
@@ -967,8 +877,6 @@ async function main() {
     cache.budget = budget;
     cache.search = search;
 
-    // 주소로 들어온 지역이 데이터에 없으면(구 이름이 바뀌었거나 오타) 조용히 서울 전체로
-    // 되돌린다. 없는 지역을 고른 채로 두면 빈 화면만 남는다.
     if (district !== ALL && !districtNames().includes(district)) district = ALL;
     syncUrl();
     renderAll();
@@ -1013,8 +921,6 @@ function onControlChange(e) {
 
 const controls = document.getElementById("search-controls");
 controls.addEventListener("change", onControlChange);
-// 단지명은 글자를 칠 때마다 좁혀져야 한다. change만 듣고 있으면 포커스를 뺄 때까지
-// 아무 일도 안 일어나서, 친 사람은 검색이 안 되는 줄 안다.
 controls.addEventListener("input", (e) => {
   if (e.target?.id === "apt-input") onControlChange(e);
 });

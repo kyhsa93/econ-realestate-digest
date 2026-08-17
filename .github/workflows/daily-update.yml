@@ -19,7 +19,6 @@ permissions:
   pages: write
   id-token: write
 
-# 요약 워크플로도 같은 그룹을 쓴다. 둘 다 docs를 커밋하므로 겹쳐 돌면 push가 서로 밀린다.
 concurrency:
   group: digest-pipeline
   cancel-in-progress: false

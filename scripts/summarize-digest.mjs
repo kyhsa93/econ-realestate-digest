@@ -2,17 +2,10 @@ import { writeFile, mkdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import { FALLBACK_CATEGORY, categoryOf } from "./categories.mjs";
 
-// fetch-rates와 같은 방식. 테스트가 실제 docs/data를 덮어쓰지 않게 하려는 것이다.
 const dataDir = process.env.SUMMARY_DATA_DIR
   ? path.resolve(process.env.SUMMARY_DATA_DIR)
   : path.resolve(import.meta.dirname, "../docs/data");
 const outFile = path.join(dataDir, "summary.json");
-// 이 요약이 어떤 기사들을 보고 쓰였는지. 다음 실행에서 "다시 요약할 만큼 기사가 바뀌었나"를
-// 판정하는 재료다(scripts/summary-needed.mjs).
-//
-// summary.json에 같이 넣지 않는 이유는 화면이 받는 파일이기 때문이다. 카테고리마다 상위
-// 다섯 건만 남기는 items로는 셀 수 없어서 전체 링크가 필요한데, 그걸 화면에 딸려 보낼
-// 이유가 없다(realestate-prev.json·budget-months.json과 같은 자리).
 const sourceFile = process.env.SUMMARY_SOURCE_FILE
   ? path.resolve(process.env.SUMMARY_SOURCE_FILE)
   : path.join(dataDir, "summary-source.json");
@@ -27,19 +20,13 @@ const MODEL = process.env.OLLAMA_MODEL ?? "qwen3:14b";
 const DISABLE_THINKING = process.env.OLLAMA_THINK === "false";
 
 const MAX_ITEMS_PER_CATEGORY = 5;
-// 프롬프트에 넣을 기사당 본문 길이. 길수록 재료는 좋아지지만 CPU 러너에서는
-// 프롬프트 처리 시간도 같이 늘어난다.
 const BODY_CHARS_IN_CATEGORY_PROMPT = 400;
 const BODY_CHARS_IN_HIGHLIGHT_PROMPT = 900;
 
-// 사람이 3분쯤 읽는 분량(한국어 1,500자 안팎)을 핵심 기사와 카테고리 문단으로 나눈다.
-// 4문장·3건으로는 1,200자에 그쳐 2.2분밖에 안 됐다. 모델이 글자 수 지시를 아래로
-// 벗어나는 편이라, 문장 수와 건수를 늘리는 쪽이 확실하다.
 const CATEGORY_SENTENCES = 5;
 const HIGHLIGHT_SENTENCES = 3;
 const HIGHLIGHT_COUNT = 4;
 const MAX_HIGHLIGHTS_PER_CATEGORY = 2;
-// 이보다 본문이 짧으면 두세 문장을 채울 재료가 없어서 결국 제목을 늘여 쓰게 된다.
 const MIN_HIGHLIGHT_BODY = 250;
 
 const MAJOR_UNITS = { 조: 1_000_000_000_000, 억: 100_000_000, 만: 10_000 };
@@ -60,13 +47,8 @@ function parseCoefficient(str) {
   return value;
 }
 
-// 계수는 "5천470"처럼 작은 단위 뒤에 숫자가 더 붙는다. 여기서 뒷자리를 놓치면
-// 큰 단위만 변환되고 나머지가 글자로 남아 숫자가 통째로 망가진다.
 const COEFFICIENT = "\\d+(?:\\.\\d+)?(?:(?:천|백|십)\\d*)?";
 const MAJOR_UNIT = "(?:조|억|만)";
-// 큰 단위는 여러 개가 이어 붙는다("6조5천470억원", "1천865조8천억원"). 한 번에 한
-// 단위씩 바꾸면 "6조"만 숫자가 되고 뒤가 남아 6,000,000,000,0005천47,000,000,000이
-// 된다. 제목만 다룰 땐 이런 표기가 드물었는데 본문이 들어오면서 흔해졌다.
 const AMOUNT_RUN = new RegExp(`${COEFFICIENT}${MAJOR_UNIT}(?:\\s*${COEFFICIENT}${MAJOR_UNIT})*`, "g");
 const AMOUNT_PART = new RegExp(`(${COEFFICIENT})(${MAJOR_UNIT})`, "g");
 
@@ -116,8 +98,6 @@ function stripHanzi(text) {
   return text.replace(/[一-鿿]/g, "");
 }
 
-// 모델은 목록 기호나 <think> 잔재를 붙여 놓기도 한다. 문단으로 쓰려면 줄 단위로
-// 정리해서 한 덩어리로 이어붙여야 화면에서도 문단으로 보인다.
 function cleanGenerated(raw) {
   return stripHanzi(raw)
     .replace(/<[^>]*>/g, " ")
@@ -129,10 +109,6 @@ function cleanGenerated(raw) {
     .trim();
 }
 
-// num_predict에 걸려 잘린 마지막 조각은 버린다. 종결부호로 끝나지 않는 문장을
-// 그대로 내보내면 화면에서 말이 끊긴 채로 보인다.
-// 문장 경계는 "종결부호 + 공백"으로만 인정한다 - "2.5%"의 점에서 자르지 않으려면
-// 이 조건이 필요하다.
 export function completeSentences(text, maxSentences) {
   const parts = text
     .trim()
@@ -149,8 +125,6 @@ function listCategory(label, titles) {
   return `${label}: ${shown}${more}`;
 }
 
-// 제목만 주면 모델이 할 수 있는 건 제목을 바꿔 쓰는 것뿐이다. 본문이 붙어야
-// 요약에 알맹이가 생긴다.
 function renderMaterial(items, bodies, bodyChars) {
   return items
     .map((item, index) => {
@@ -161,9 +135,6 @@ function renderMaterial(items, bodies, bodyChars) {
     .join("\n\n");
 }
 
-// 숫자를 금지하는 대신 "원문에 적힌 그대로만"으로 바꾼다. 경제 뉴스에서 수치를
-// 빼면 읽을 알맹이가 사라지는데, 이제 본문이 프롬프트에 들어오므로 코드가
-// 원문 대조로 걸러낼 수 있다.
 const COMMON_RULES = `- 위에 적힌 사실만 사용해. 위에 없는 숫자·수치·전망·원인은 절대 지어내지 마.
 - 숫자와 금액은 위에 적힌 표기를 그대로 옮겨. 반올림하거나 단위를 바꾸지 마.
 - 서로 다른 기사를 인과관계("~때문에", "~해서")로 엮지 마. 별개의 사실이면 별개 문장으로 써.
@@ -196,7 +167,6 @@ ${COMMON_RULES}
 요약:`;
 }
 
-// 문단 생성이 검증에서 막혔을 때 쓴다. 짧고 밋밋하지만 제목 나열보다는 낫다.
 function buildSingleSentencePrompt(label, items, bodies) {
   const material = renderMaterial(items.slice(0, MAX_ITEMS_PER_CATEGORY), bodies, BODY_CHARS_IN_CATEGORY_PROMPT);
 
@@ -227,16 +197,11 @@ ${COMMON_RULES}
 요약:`;
 }
 
-// "fetch failed" 한 줄로는 왜 실패했는지 알 수가 없다. 원인은 cause에 들어 있다.
 function describeError(err) {
   const cause = err?.cause?.code ?? err?.cause?.message;
   return cause ? `${err.message} (${cause})` : err.message;
 }
 
-// stream:false로 부르면 생성이 끝날 때까지 응답 헤더가 오지 않는데, Node fetch의
-// headersTimeout 기본값은 300초다. 프롬프트에 기사 본문이 들어가고 num_predict가
-// 커지면서 재료가 많은 카테고리가 이 한도를 넘겨 통째로 실패했다. 조각으로 받으면
-// 계속 바이트가 흐르므로 한도에 걸리지 않는다.
 async function callOllama(prompt, options) {
   const res = await fetch(`${OLLAMA_URL}/api/generate`, {
     method: "POST",
@@ -266,7 +231,6 @@ async function callOllama(prompt, options) {
   for await (const bytes of res.body) {
     pending += decoder.decode(bytes, { stream: true });
     const lines = pending.split("\n");
-    // 마지막 조각은 줄이 덜 끝났을 수 있으니 다음 덩어리와 이어 붙인다.
     pending = lines.pop() ?? "";
     for (const line of lines) consume(line);
   }
@@ -286,14 +250,8 @@ function containsUnverifiedNumber(sentence, sourceText) {
   return numbers.some((n) => !sourceText.includes(n));
 }
 
-// 문단이 길어지면 고유명사도 많아진다. 상한이 낮으면 뒤쪽 고유명사가 검증에서
-// 아예 빠져버려서, 검사를 하는 것처럼 보이지만 실제로는 안 하는 구간이 생긴다.
 const MAX_EXTRACTED_ENTITIES = 20;
 const MAX_ENTITY_LENGTH = 20;
-// 이 검증이 잡아야 하는 건 "국힘"을 "국민의당"으로 바꿔 쓰는 이름 바꿔치기다.
-// 경제 뉴스의 일반 용어까지 대조하면, 원문이 "7월 소비자물가지수와 7월 생산자물가지수"인데
-// 요약이 "7월 물가지수"로 묶어 쓴 것 같은 정상적인 일반화까지 환각으로 몰린다.
-// 수치는 containsUnverifiedNumber가 따로 대조하므로 여기서 빠져도 구멍이 아니다.
 const ENTITY_STOPWORDS = new Set([
   "정부", "시장", "경제", "금리", "주택", "부동산", "증시", "환율", "은행", "대출", "가격", "물가",
   "미디어", "언론", "당국", "업계", "기업", "정책", "지역", "소비자", "투자자", "국내", "해외",
@@ -302,8 +260,6 @@ const ENTITY_STOPWORDS = new Set([
   "주식시장", "채권시장", "분양가", "공시가", "판매신용",
 ]);
 const ENTITY_SUFFIXES = ["지수", "증시", "시장", "정부", "당국", "은행", "그룹"];
-// 모델은 "미국 7월 소비자물가지수"를 "월 물가지수"처럼 날짜 조각을 달고 뽑아내기도 한다.
-// 날짜는 고유명사가 아니니 떼고 나서 일반 용어인지 본다.
 const DATE_PREFIX = /^\d*(?:년|월|일|분기|반기)/;
 
 function isGenericTerm(normalized) {
@@ -379,9 +335,6 @@ async function unverifiedEntities(sentence, sourceText) {
     if (!normalized || isGenericTerm(normalized)) return false;
     if (haystack.includes(normalized)) return false;
 
-    // 원문 "미국 7월 물가지수"에서 모델이 "월 물가지수"를 고유명사로 뽑아내면
-    // 숫자가 떨어져 나가 대조에 실패한다. 실제로 멀쩡한 문단이 이 이유로 버려졌다.
-    // 숫자는 containsUnverifiedNumber가 따로 대조하므로 여기선 빼고 본다.
     const withoutDigits = normalized.replace(/\d/g, "");
     if (withoutDigits.length >= 2 && haystackWithoutDigits.includes(withoutDigits)) return false;
 
@@ -399,8 +352,6 @@ const FALLBACK_REASONS = {
   UNVERIFIED_ENTITY: "unverified-entity",
 };
 
-// 대조용 원문. 제목만 넣던 시절에는 본문에 있는 정상 수치도 "원문에 없는 숫자"로
-// 걸렸다. 프롬프트에 넣은 재료와 대조 대상이 같아야 한다.
 function sourceTextFor(items, bodies) {
   return items.map((item) => `${item.title} ${bodies[item.link] ?? ""}`).join(" ");
 }
@@ -422,8 +373,6 @@ async function verifyKoText(label, text, sourceText) {
   return null;
 }
 
-// 검증에 걸리면 온도를 낮춰 한 번 더 시도한다. 실제로 걸리는 대부분은 모델이
-// 한 번 상상해서 덧붙인 경우라, 같은 프롬프트로도 두 번째엔 통과하는 일이 많다.
 async function generateVerified({ label, prompt, sourceText, maxSentences, numPredict }) {
   let lastReason = FALLBACK_REASONS.GENERATION_FAILED;
 
@@ -432,7 +381,6 @@ async function generateVerified({ label, prompt, sourceText, maxSentences, numPr
     try {
       text = await generateKoText(prompt, { maxSentences, numPredict, temperature });
     } catch (err) {
-      // 모델 호출 자체가 안 되는 상황은 다시 불러도 마찬가지다.
       console.error(`[summarize-digest] "${label}" 생성 실패: ${describeError(err)}`);
       return { text: null, reason: FALLBACK_REASONS.GENERATION_FAILED };
     }
@@ -466,8 +414,6 @@ async function summarizeCategory(bucket, bodies) {
   });
   if (paragraph.text) return { line: paragraph.text, fallbackReason: null, degraded: false };
 
-  // 문단이 막혔다고 곧장 제목 나열로 가지 않는다. 한 문장 요약은 오래 굴려본
-  // 방식이라 성공률이 높고, 검증을 통과한 이상 제목 나열보다 읽을 값어치가 있다.
   console.error(`[summarize-digest] "${label}" 문단 요약 실패(${paragraph.reason}), 한 문장으로 재시도`);
   const single = await generateVerified({
     label,
@@ -478,8 +424,6 @@ async function summarizeCategory(bucket, bodies) {
   });
   if (single.text) return { line: single.text, fallbackReason: null, degraded: true };
 
-  // 이유는 본 요약이 왜 반려됐는지를 남긴다. 뒤이은 한 문장 시도의 실패 사유는
-  // 로그로 충분하고, 진단에 필요한 건 처음 걸린 지점이다.
   return { line: listCategory(label, bucket.titles), fallbackReason: paragraph.reason, degraded: false };
 }
 
@@ -495,8 +439,6 @@ async function summarizeHighlight(item, body) {
     numPredict: 400,
   });
 
-  // 핵심 기사는 요약이 없으면 실을 이유가 없다. 제목만 다시 보여주는 칸이
-  // 되느니 그 자리를 비우는 게 낫다.
   if (!result.text) {
     console.error(`[summarize-digest] 핵심 기사 요약 실패(${result.reason}): ${item.title}`);
     return null;
@@ -511,8 +453,6 @@ async function summarizeHighlight(item, body) {
   };
 }
 
-// 여러 매체가 같이 다룬 기사가 그날의 큰 뉴스다. 모델에게 고르라고 하면 호출이
-// 늘어나는 데다 근거 없는 판단이 섞이는데, 이건 수집 단계에서 이미 센 값이다.
 export function pickHighlights(items, bodies) {
   const ranked = items
     .map((item, index) => ({ item, body: bodies[item.link] ?? "", recency: -index }))
@@ -523,8 +463,6 @@ export function pickHighlights(items, bodies) {
   const perCategory = new Map();
   for (const entry of ranked) {
     if (picked.length >= HIGHLIGHT_COUNT) break;
-    // 부동산 기사가 절반을 넘는 날이 흔해서, 막아두지 않으면 핵심 세 칸이
-    // 전부 같은 주제로 채워진다.
     const key = entry.item.category ?? FALLBACK_CATEGORY.key;
     const used = perCategory.get(key) ?? 0;
     if (used >= MAX_HIGHLIGHTS_PER_CATEGORY) continue;
@@ -538,8 +476,6 @@ function isBadTranslation(text, original, requiredNumbers) {
   if (!text) return true;
   if (/[가-힣]/.test(text)) return true;
   if (/[一-鿿]/.test(text)) return true;
-  // 한국어는 영어보다 압축적이라 번역하면 3~4배로 늘어난다. 상한을 빠듯하게
-  // 잡으면 멀쩡한 번역이 반려돼 영어 화면에 한국어가 그대로 남는다.
   if (text.length > Math.max(400, original.length * 4)) return true;
   const textDigits = text.replace(/,/g, "");
   if (requiredNumbers.some((n) => !textDigits.includes(n))) return true;
@@ -559,8 +495,6 @@ Korean: ${normalized}
 English:`;
 }
 
-// 온도만 낮춰 다시 부르면 같은 실수를 그대로 반복한다 - 한자 公示가 두 번 다
-// 나왔다. 무엇이 걸렸는지 짚어줘야 고칠 여지가 생긴다.
 function rejectionHint(rejected) {
   if (!rejected) return null;
   const hanzi = rejected.match(/[一-鿿]+/g);
@@ -577,7 +511,6 @@ async function translateKoText(text, numPredict) {
   const normalized = normalizeKoreanAmounts(text);
   const requiredNumbers = extractNormalizedNumbers(text, normalized);
 
-  // 반려를 그대로 받아들이면 영어 화면에 한국어 문단이 통째로 남는다.
   let lastRejected = null;
 
   for (const temperature of [0.2, 0]) {
@@ -585,14 +518,9 @@ async function translateKoText(text, numPredict) {
     try {
       const prompt = buildTranslatePrompt(normalized, rejectionHint(lastRejected));
       const raw = await callOllama(prompt, { temperature, top_p: 0.8, num_predict: numPredict });
-      // 문단은 여러 줄로 나뉘어 올 수 있다. 예전처럼 첫 줄만 쓰면 번역이 통째로 잘린다.
       const joined = raw.trim().replace(/\s*\n+\s*/g, " ").replace(/^["'“‘]+|["'”’]+$/g, "").trim();
-      // 한국어 쪽과 달리 여기선 잘린 꼬리를 못 찾아도 통째로 버리지 않는다. 번역은
-      // 예산이 넉넉해 잘릴 일이 드물고, 마침표가 빠진 것 때문에 영어 화면에 한국어를
-      // 남기는 편이 더 나쁘다. 한글·한자·길이·숫자 검증은 아래에서 그대로 한다.
       translated = completeSentences(joined, 12) ?? joined;
     } catch (err) {
-      // 호출 자체가 안 되는 상황은 다시 불러도 마찬가지다.
       console.error(`[summarize-digest] 번역 실패, 한국어 유지: ${describeError(err)}`);
       return { text, translated: false };
     }
@@ -601,10 +529,6 @@ async function translateKoText(text, numPredict) {
     lastRejected = translated;
   }
 
-  // 모델이 "공시가"를 한자 公示로 옮기는 버릇은 재시도로도 안 고쳐졌다(두 번 다 나왔다).
-  // 걸린 게 한자뿐이라면 그것만 걷어내고 다시 본다. 수식어 하나를 잃는 편이 영어
-  // 화면에 한국어 문단을 통째로 남기는 것보다 낫다. 한글 잔존이나 숫자 누락이면
-  // 아래 재검증에서 그대로 다시 걸린다.
   const withoutHanzi = (lastRejected ?? "").replace(/[一-鿿]+/g, " ").replace(/\s+/g, " ").trim();
   if (withoutHanzi && !isBadTranslation(withoutHanzi, text, requiredNumbers)) {
     console.error(`[summarize-digest] 한자를 걷어내고 번역 채택: ${withoutHanzi}`);
@@ -615,7 +539,6 @@ async function translateKoText(text, numPredict) {
   return { text, translated: false };
 }
 
-// 어제 본문으로 오늘 요약을 쓰면 사실이 어긋난다. 날짜가 다르면 없는 것으로 친다.
 async function readBodies(newsDate) {
   try {
     const cached = JSON.parse(await readFile(bodiesFile, "utf-8"));
@@ -629,8 +552,6 @@ async function readBodies(newsDate) {
   }
 }
 
-// categories를 못 읽는 경로(옛 데이터·프리렌더 폴백)에서도 같은 내용이 보이게
-// 통짜 텍스트를 같이 만들어 둔다.
 function summaryText(highlights, categories, locale) {
   const isEn = locale === "en";
   return [
@@ -680,8 +601,6 @@ async function main() {
     return;
   }
 
-  // 본문은 fetch-news가 같은 실행에서 떨궈둔 것이다. 없으면 예전처럼 제목만
-  // 보고 쓰게 되므로, 조용히 넘어가지 말고 남긴다.
   const bodies = (await readBodies(news.date)) ?? {};
   if (Object.keys(bodies).length === 0) {
     console.error("[summarize-digest] 기사 본문 없음, 제목만으로 요약한다");
@@ -703,7 +622,6 @@ async function main() {
       name: bucket.category.name,
       nameEn: bucket.category.nameEn,
       lineKo: line,
-      // 폴백은 번역할 문장이 아니라 제목 목록이라, 여기서 영어 목록으로 맞춰둔다.
       lineEn: isFallback ? listCategory(bucket.category.nameEn, bucket.titles) : null,
       isFallback,
       fallbackReason,
@@ -719,7 +637,6 @@ async function main() {
     return;
   }
 
-  // 번역은 한국어가 다 나온 뒤에 몰아서 한다. 실패해도 한국어 화면은 그대로다.
   for (const highlight of highlightEntries) {
     highlight.textEn = (await translateKoText(highlight.textKo, 480)).text;
   }

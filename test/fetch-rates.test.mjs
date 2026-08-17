@@ -307,8 +307,6 @@ test("일부 상품군이 실패하면 직전 데이터를 유지하고 나머�
   }
 });
 
-// 오류 없이 0건으로 오는 경우가 실패보다 위험하다. 그대로 쓰면 화면이 빈 표가 되고,
-// 그게 정상인지 고장인지 구분할 방법이 없다("못 받은 것과 없는 것은 다른 얘기").
 test("상품이 0건으로 와도 직전 목록을 지우지 않는다", async () => {
   const stub = await startStub(({ endpoint }) =>
     endpoint === "savingProductsSearch"
@@ -345,7 +343,6 @@ test("상품이 0건으로 와도 직전 목록을 지우지 않는다", async (
     assert.equal(rates.saving.length, 1, "0건 응답으로 목록을 지웠다");
     assert.equal(rates.saving[0].name, "이전상품");
     assert.equal(rates.deposit[0].name, "새상품", "다른 상품군까지 멈췄다");
-    // 조용히 지난 값을 쓰면 며칠이 지나도 알아챌 수 없다.
     assert.match(stderr, /0건으로 왔다/);
   } finally {
     await stub.close();

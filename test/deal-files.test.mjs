@@ -1,8 +1,3 @@
-// 자치구별 실거래 전수 파일. 검색 조건이 붙는 자리이자, 지난달 거래의 유일한 보관처다.
-//
-// 거래 원본은 gitignore된 캐시라 러너가 바뀌면 사라지고, 호출 한도 때문에 지난달을 다시
-// 받아올 방법이 없다. 그래서 여기서 지난달치를 흘리면 그 달은 영영 사라진다 - 파일이
-// 멀쩡해 보이면서 내용만 한 달치로 줄어드는 실패라, 화면에서는 "거래가 적은 달"로 읽힌다.
 import test from "node:test";
 import assert from "node:assert/strict";
 import { buildDealFiles, mergeDeals, periodOf } from "../scripts/deal-files.mjs";
@@ -80,8 +75,6 @@ test("지역별로 파일을 나누고 지역 이름을 거래마다 담지 않�
   assert.deepEqual(files.nowon.periods, ["202608"]);
 });
 
-// 조건으로 쓰이는 필드를 여기서 떼면 그 조건을 만들 수가 없다. 면적·층·준공연도·거래형태는
-// 예산 구간 파일이 버리는 값이라, 이 파일이 유일하게 들고 있는 자리다.
 test("조건에 쓰이는 필드를 전부 남긴다", () => {
   const files = buildDealFiles(sourceOf([deal({ direct: true })]), null, NOW);
   assert.deepEqual(files.nowon.deals[0], {
@@ -96,7 +89,6 @@ test("조건에 쓰이는 필드를 전부 남긴다", () => {
   });
 });
 
-// 이번 달에 거래가 없는 구를 빼면 그 구의 지난달치까지 같이 사라진다.
 test("이번 달 거래가 없는 구도 지난달치를 들고 남는다", () => {
   const existing = { 강남구: { deals: [deal({ district: "강남구", date: "2026-07-02", apt: "지난달강남" })] } };
   const files = buildDealFiles(sourceOf([deal()]), existing, NOW);
@@ -105,8 +97,6 @@ test("이번 달 거래가 없는 구도 지난달치를 들고 남는다", () =
   assert.equal(files.gangnam.deals[0].apt, "지난달강남");
 });
 
-// 빈 파일을 내려보내면 화면이 "조건에 맞는 거래가 없다"와 "이 구는 자료가 없다"를 같은
-// 모양으로 말하게 된다.
 test("거래가 한 건도 없는 구는 파일을 만들지 않는다", () => {
   const files = buildDealFiles(sourceOf([deal()]), { 강남구: { deals: [] } }, NOW);
   assert.ok(!("gangnam" in files));
@@ -117,8 +107,6 @@ test("재료가 없으면 아무것도 만들지 않는다", () => {
   assert.equal(buildDealFiles({ districts: {} }, null, NOW), null);
 });
 
-// 서울 25개구가 아닌 이름이 섞여 들어오면 주소를 만들 수 없다. 조용히 담으면 파일 이름이
-// undefined가 된다.
 test("모르는 지역은 담지 않는다", () => {
   const files = buildDealFiles(sourceOf([deal({ district: "성남시" }), deal()]), null, NOW);
   assert.deepEqual(Object.keys(files), ["nowon"]);

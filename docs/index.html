@@ -60,9 +60,6 @@
     --card: #f5f5f7;
     --border: #e2e2e5;
   }
-  /* hidden 속성은 브라우저 기본 스타일(display:none)로 동작하는데, 작성자 CSS가 그 요소에
-     display를 지정하면 그쪽이 이겨서 감춰지지 않는다. 실제로 오류 배너가 display:flex 때문에
-     늘 보이고 있었다. 감춤은 항상 이 규칙이 이기게 못박는다. */
   [hidden] { display: none !important; }
   * { box-sizing: border-box; }
   body {
@@ -316,8 +313,6 @@
     gap: 6px;
     margin-top: 6px;
   }
-  /* .news-item a 규칙이 글자 크기·밑줄까지 정해두고 있어서, 칩은 같은 자리에서
-     더 구체적인 선택자로 덮어써야 한다(안 그러면 제목과 같은 크기가 된다). */
   .news-item .context-chip {
     display: inline-flex;
     align-items: baseline;
@@ -343,7 +338,6 @@
     font-weight: 600;
     font-variant-numeric: tabular-nums;
   }
-  /* 신고 건수·변화는 값을 읽은 다음에 보면 되는 정보다. 한 단계 작고 흐리게 둔다. */
   .context-note {
     color: var(--muted);
     font-size: 0.71rem;
@@ -410,7 +404,6 @@
     color: var(--fg);
     font-size: 0.95rem;
   }
-  /* 좁은 화면에서 4열 표는 가로 스크롤 없이는 읽을 수가 없다. 행을 카드로 세운다. */
   @media (max-width: 480px) {
     .data-table { white-space: normal; }
     .data-table thead { display: none; }
@@ -798,7 +791,6 @@
 
 <script src="./analytics.js"></script>
 <script>
-  // "시장지표을(를)"처럼 나오지 않게 받침을 보고 조사를 고른다.
   function withObjectParticle(word) {
     const last = word.charCodeAt(word.length - 1);
     const isHangul = last >= 0xac00 && last <= 0xd7a3;
@@ -1029,13 +1021,8 @@
     return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(new Date());
   }
 
-  // 기록이 없는 날짜를 "불러오지 못했다"고 말하면, 데이터가 멀쩡한데 고장난 것처럼 보인다.
-  // 아카이브에서 보관 범위 밖으로 나간 것뿐이라는 걸 구분해서 알린다.
   let archiveMissing = false;
 
-  // 히스토리 파일은 받았는데 그 날짜만 없는 것과, 파일 자체를 못 받은 것은 다르다.
-  // 앞은 "기록 없음", 뒤는 진짜 로드 실패다. 히스토리마다 보관 시작일이 달라서
-  // (뉴스 08-09, 시장지표 08-10) 날짜 하나로 뭉뚱그리면 멀쩡한 날에도 오류가 뜬다.
   function archiveNoRecordFor(historyKey) {
     return isArchiveView && Array.isArray(cache[historyKey]);
   }
@@ -1086,9 +1073,6 @@
     return res.json();
   }
 
-  // 데이터를 못 받으면 화면엔 오류 문구만 뜨고 끝이라, 며칠째 그러고 있어도
-  // 알 방법이 없었다. CI는 파일을 만드는 데까지만 보고 브라우저에서 실제로
-  // 읽히는지는 안 본다. fatal은 그 파일이 없으면 페이지가 제구실을 못 하는 경우.
   let hadFatalLoadFailure = false;
   const failedLoads = new Map();
 
@@ -1096,8 +1080,6 @@
     const banner = document.getElementById("load-error");
     if (!banner) return;
     banner.hidden = !show;
-    // 감출 때는 문구도 비운다. 숨어 있어도 DOM에 남아 있으면 화면엔 없는 오류가
-    // 있는 것처럼 읽힌다(검사 도구로 텍스트만 훑을 때 특히).
     document.getElementById("load-error-text").textContent = show ? text : "";
     document.getElementById("load-error-retry").textContent = show ? t("retry") : "";
   }
@@ -1121,15 +1103,6 @@
     ["archive-section", "archive"],
   ];
 
-  // 어느 섹션이 실제로 읽히는지는 페이지 조회수로는 안 나온다. 화면에 들어온
-  // 섹션만 한 번씩 센다.
-  //
-  // 임계값(threshold) 대신 위아래를 깎은 rootMargin을 쓴다. 뉴스 섹션처럼 화면보다
-  // 긴 섹션은 "50% 노출"이 영원히 성립하지 않아서, 정작 제일 많이 읽는 섹션이
-  // 한 번도 안 잡힌다. 화면 가운데 띠에 걸리는지로 보면 길이와 무관하게 잡힌다.
-  //
-  // 한 번 보내고 관찰을 끊는 건 스크롤을 오르내릴 때마다 세면 "오래 붙잡는 섹션"이
-  // 아니라 "스크롤을 많이 한 사람"이 잡히기 때문이다.
   let sectionsObserved = false;
 
   function observeSections() {
@@ -1386,8 +1359,6 @@
       tr.hidden = query.length > 0 ? !name.includes(query) : index >= MAX_VISIBLE_DISTRICTS;
     });
 
-    // 감춘 구가 있다는 걸 알리고 전체를 볼 곳으로 보낸다. 그냥 잘라두면 서울에
-    // 열 개 구만 있는 것처럼 보인다.
     const link = document.getElementById("realestate-more");
     if (link) {
       const hidden = !query && rows.length > MAX_VISIBLE_DISTRICTS;
@@ -1396,8 +1367,6 @@
     }
   }
 
-  // 금리 표는 머리글로 정렬되는데 부동산 표만 평당가 고정이라 조작 방식이 달랐다.
-  // 기본값은 예전 동작 그대로(매매 평당가 내림차순, 표본 부족은 아래로).
   const realestateSort = { key: "sale", dir: "desc" };
 
   function realestateMetricValue(rawEntry, key) {
@@ -1421,7 +1390,6 @@
       const order = (a.name ?? "").localeCompare(b.name ?? "", "ko");
       return realestateSort.dir === "asc" ? order : -order;
     }
-    // 값이 없는 구(표본 부족)는 방향과 무관하게 아래로 보낸다. 금리 표와 같은 규칙이다.
     const av = realestateMetricValue(a, realestateSort.key);
     const bv = realestateMetricValue(b, realestateSort.key);
     if (av === null || bv === null) return (av === null) - (bv === null);
@@ -1439,13 +1407,6 @@
     }
   }
 
-  // 정적 HTML은 상위 10개 구만 심는데 화면이 25개를 다 그리면, 데이터를 받는 순간
-  // 표가 열한 행에서 스물여섯 행으로 늘어나면서 아래 섹션이 통째로 밀린다(광고가
-  // 붙은 페이지라 이 밀림은 수익에도 영향을 준다). scripts/prerender.mjs의
-  // MAX_DISTRICTS와 같은 값이어야 한다.
-  //
-  // 나머지 구를 DOM에서 빼지는 않는다 - 지역 검색이 여기 있어서, 안 그리면 "강북구"를
-  // 검색해도 안 나온다. 감춰만 두고 검색할 때 다시 보인다.
   const MAX_VISIBLE_DISTRICTS = 10;
 
   function renderRealestate(realestate) {
@@ -1546,8 +1507,6 @@
     return (NEWS_CATEGORY_LABELS[key] ?? NEWS_CATEGORY_LABELS.other)[locale];
   }
 
-  // 필터·검색을 주소에 남긴다. 안 그러면 걸러놓은 화면을 공유할 수 없고,
-  // 뒤로가기가 필터를 되돌리는 대신 사이트를 빠져나가 버린다.
   const params = new URLSearchParams(location.search);
   let newsCategoryFilter = params.get("cat") || "all";
   let newsQuery = params.get("q") ?? "";
@@ -1564,7 +1523,6 @@
     const query = next.toString();
     const url = `${location.pathname}${query ? `?${query}` : ""}`;
     if (url === `${location.pathname}${location.search}`) return;
-    // 검색은 글자마다 기록을 쌓으면 뒤로가기가 못 쓰게 되므로 교체만 한다.
     history[push ? "pushState" : "replaceState"](null, "", url);
   }
 
@@ -1651,10 +1609,6 @@
       .join("");
   }
 
-  // 기사에 붙은 우리 데이터(자치구 실거래가·현재 금리·지수). 값은 news-context.mjs가
-  // 미리 계산해 news.json에 넣어둔 것을 그대로 쓴다. 마크업은 prerender.mjs의
-  // newsContextHtml과 같아야 한다(테스트가 두 결과를 대조한다).
-  // 칩의 보조 설명(신고 건수·기준일 대비 변화). 붙지 않는 칩도 있어서 값이 없으면 그린다.
   const contextNote = (c) => (locale === "en" ? c.noteEn ?? c.note : c.note);
 
   function newsContextHtml(context) {
@@ -1771,8 +1725,6 @@
     return (
       `<div class="summary-category">` +
       `<div class="summary-category-label">${escapeHtml(label)}</div>` +
-      // 모델이 쓴 문장이 그대로 innerHTML로 들어가는 자리다. 요약이 문단으로
-      // 길어진 만큼 부등호 하나가 섞일 확률도 같이 올라간다.
       `<div class="summary-category-line">${escapeHtml(line ?? "")}</div>` +
       (linksHtml ? `<ul class="summary-links">${linksHtml}</ul>` : "") +
       `</div>`
@@ -1794,7 +1746,6 @@
     const box = document.getElementById("summary-box");
     const categories = summary?.categories;
     const hasCategories = Array.isArray(categories) && categories.length > 0;
-    // 핵심 기사는 요약이 검증을 통과한 것만 실린다. 없는 날엔 섹션째 빠진다.
     const highlights = Array.isArray(summary?.highlights) ? summary.highlights : [];
     const text = pickSummaryText(summary?.summary);
 
@@ -1810,8 +1761,6 @@
 
     box.classList.remove("placeholder");
     if (hasCategories) {
-      // 폴백은 원문 대조에서 걸러진 결과다. 화면상 정상 요약과 구분이 안 되면
-      // 사용자는 검증에 걸린 문장을 "AI 요약"으로 그대로 읽게 된다.
       const fallback = categories.some((c) => c.fallbackReason);
       const highlightsHtml = highlights.length
         ? `<div class="summary-highlights">` +
@@ -1945,11 +1894,8 @@
 
     renderAll();
 
-    // 플래그가 아니라 지금 화면에 실제로 빠진 데이터를 기준으로 띄운다.
-    // 예전엔 넷 중 하나가 잠깐 실패했다가 복구돼도 배너가 남아 있었다.
     showLoadError(missing.length > 0, loadErrorText);
 
-    // 제목이 언어에 맞게 정해진 뒤라야 GA에 제대로 남는다. 첫 호출만 전송된다.
     window.analytics?.pageView({ site_language: locale, view_type: isArchiveView ? "archive" : "today" });
     observeSections();
   }
@@ -1990,7 +1936,6 @@
   document.getElementById("archive-date-input").value = viewDate ?? "";
   document.getElementById("archive-next-day").disabled = !viewDate || viewDate >= kstToday();
 
-  // 하루씩 넘기려고 매번 날짜를 고르게 하지 않는다.
   function shiftArchiveDay(days) {
     const base = viewDate || kstToday();
     const moved = new Date(`${base}T00:00:00Z`);
@@ -2028,7 +1973,6 @@
       realestateSort.dir = realestateSort.dir === "asc" ? "desc" : "asc";
     } else {
       realestateSort.key = key;
-      // 이름은 가나다순이, 금액은 높은 쪽이 먼저 보이는 게 자연스럽다.
       realestateSort.dir = key === "name" ? "asc" : "desc";
     }
     renderRealestate(effectiveRealestate());
@@ -2049,14 +1993,10 @@
     renderNews(effectiveNews());
     syncUrl();
     const term = newsQuery.trim();
-    // GA4 권장 이벤트 이름이라 search_term이 기본 제공 차원으로 잡힌다(맞춤 측정기준 등록 불필요).
     if (term.length >= 2) window.analytics?.debouncedEvent("search", { search_term: term });
   });
 
   document.getElementById("news-list").addEventListener("click", (e) => {
-    // 칩은 기사가 아니라 우리 페이지로 가는 링크다. 읽음 처리에 걸리면 안 되고
-    // (선택자가 직계 자식만 보므로 자동으로 갈린다), 계측도 따로 세야 한다.
-    // 이 기능이 실제로 눌리는지는 이 수치 말고는 알 방법이 없다.
     const chip = e.target.closest(".news-item .context-chip");
     if (chip) {
       window.analytics?.event("news_context_click", {
@@ -2118,9 +2058,6 @@
     realestateHistory: "realestate-history",
   };
 
-  // 메인 화면 차트는 최근 30일치 평당가·거래건수만 쓰는데, 원본 히스토리는 180일치를
-  // 25개 구 전 항목으로 들고 있어서 하루 14KB씩 자란다. 여기서만 경량 파일을 받는다.
-  // 아카이브는 특정 날짜의 전체 내용이 필요하므로 원본을 그대로 받는다.
   const LITE_HISTORY_FILES = { realestateHistory: "realestate-history-lite" };
 
   async function loadHistoryInto(cacheKey, { lite = false } = {}) {
@@ -2159,8 +2096,6 @@
       await Promise.all(Object.keys(HISTORY_FILES).map((key) => loadHistoryInto(key)));
       const dates = archiveDates();
       archiveMissing = !dates.includes(viewDate);
-      // 보관 범위 밖으로 더 나가지 못하게 막는다. 예전엔 계속 뒤로 갈 수 있어서
-      // 기록이 없는 날짜에 도달하면 화면이 통째로 오류처럼 보였다.
       const input = document.getElementById("archive-date-input");
       if (dates.length) input.min = dates[0];
       document.getElementById("archive-prev-day").disabled = Boolean(dates.length) && viewDate <= dates[0];

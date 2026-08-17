@@ -1,8 +1,3 @@
-// 시세 페이지의 "예산으로 찾기".
-//
-// 이 화면이 답하는 건 "8억이면 뭘 살 수 있나"인데, 답으로 내놓는 건 매물이 아니라 이미
-// 신고된 거래다. 그래서 두 가지를 본다 - 예산이 엉뚱한 구간으로 떨어지지 않는가, 그리고
-// 이게 매물이 아니라는 안내가 화면에 남아 있는가.
 import test from "node:test";
 import assert from "node:assert/strict";
 import { buildBands, mergeBands } from "../scripts/budget-bands.mjs";
@@ -75,7 +70,6 @@ test("주소로 예산을 받고, 바꾸면 주소에 남긴다", async () => {
   assert.equal(page.sandbox.location.search, "?budget=7");
 });
 
-// 기본값을 주소에 남기면 공유한 주소마다 필터가 붙어 다닌다(다른 페이지와 같은 규칙).
 test("기본 예산은 주소에 남기지 않는다", async () => {
   const page = await open({ search: "?budget=7" });
   page.byId("budget-input").dispatch("input", { target: { value: "8" } });
@@ -99,7 +93,6 @@ test("거래가 없는 예산대는 빈 상태로 알린다", async () => {
   assert.match(page.budgetHtml(), /이 예산대에는 신고된 거래가 없습니다/);
 });
 
-// 이 화면이 매물 검색으로 읽히면 안 된다. 안내 문구가 빠지는 순간 성격이 바뀐다.
 test("매물이 아니라 신고된 거래라는 안내가 붙는다", async () => {
   const page = await open();
   const note = page.byId("budget-note").textContent;
@@ -112,8 +105,6 @@ test("데이터가 없는 날에는 섹션을 접는다", async () => {
   assert.equal(page.byId("budget-section").hidden, true);
 });
 
-// 자치구 페이지·거래 유형 페이지는 각자 주제가 따로 있다. 거기에 서울 전체 예산 검색이
-// 끼면 화면이 무슨 페이지인지 흐려진다.
 test("자치구·거래 유형 페이지에서는 열지 않는다", async () => {
   for (const extra of [{ kind: "sale" }, { kind: "jeonse" }, { district: "노원구" }]) {
     const page = await open(extra);

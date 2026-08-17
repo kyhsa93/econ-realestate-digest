@@ -1,7 +1,3 @@
-// 예산 구간 착지 페이지(budget-8eok.html 등).
-//
-// 이 페이지들은 검색 결과에 그대로 실리는 정적 HTML이라, 프리렌더가 심은 내용이 화면
-// 렌더와 어긋나면 데이터를 받는 순간 내용이 바뀐다. 두 결과를 직접 대조한다.
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
@@ -78,7 +74,6 @@ test("옆 칸 페이지와 전체 검색으로 가는 길을 남긴다", async (
   assert.match(html, /href="\.\/realestate\.html\?budget=8"/);
 });
 
-// 양 끝 구간은 한쪽 이웃이 없다. 없는 주소로 링크하면 404가 된다.
 test("목록 양 끝에서는 없는 이웃을 링크하지 않는다", async () => {
   const base = await baseHtml();
   const lowest = BUDGET_PAGES.at(0);
@@ -94,22 +89,17 @@ test("거래가 없는 구간은 페이지를 만들지 않는다", async () => 
   assert.equal(buildBudgetPage(await baseHtml(), empty, BUDGET), null);
 });
 
-// 찍히지 않은 페이지까지 링크하면 404가 된다.
 test("링크 목록은 넘겨받은 페이지만 건다", () => {
   const html = budgetLinksHtml(BUDGET_PAGES.filter((p) => p.eok <= 5));
   assert.match(html, /budget-3eok\.html/);
   assert.ok(!html.includes("budget-6eok.html"));
 });
 
-// 심을 게 없는 날 제목만 남으면, 링크 하나 없는 "예산대별 실거래" 글자가 화면 아래에
-// 덩그러니 붙는다. 목록은 제목까지 한 덩어리로 심고 빈 목록이면 통째로 빠진다.
 test("걸 페이지가 없으면 제목도 심지 않는다", () => {
   assert.equal(budgetLinksHtml([]), "");
   assert.match(budgetLinksHtml(), /예산대별 실거래/);
 });
 
-// 시세 페이지의 본문은 자치구 표다. 그 아래 목적이 다른 링크 열여덟 개가 깔리면 표를
-// 다 읽은 사람에게 남는 게 그 목록뿐이다. 예산 페이지로 가는 길은 검색 페이지에 둔다.
 test("예산대 목록은 검색 페이지에만 두고 시세 페이지에는 두지 않는다", async () => {
   const block = async (file) =>
     (await readFile(path.join(root, "docs", file), "utf8"))
@@ -139,8 +129,6 @@ test("프리렌더가 심은 거래 목록을 클라이언트가 그대로 다�
   assert.equal(page.budgetHtml(), budgetBodyHtml(band, BUDGET.periods));
 });
 
-// 구간이 곧 주소인 페이지에서 값을 바꾸면 주소와 화면이 어긋난다. 입력창 대신 옆 칸
-// 링크로만 움직인다.
 test("예산 페이지에서는 입력창을 접고 주소를 건드리지 않는다", async () => {
   const page = await loadRealestatePage({
     realestate: REALESTATE,
@@ -155,9 +143,6 @@ test("예산 페이지에서는 입력창을 접고 주소를 건드리지 않�
   assert.ok(!page.budgetHtml().includes("data-budget-to"), "정적 페이지에 이동 버튼이 남았다");
 });
 
-// 예산 페이지 생성은 시세 페이지에 링크를 심는다. 그 뒤에 자치구·거래 유형 페이지를
-// 찍어야 세 종류가 같은 내용을 갖는다. 순서를 뒤집었더니 커밋된 페이지와 지금 찍은
-// 결과가 어긋나 CI가 멈췄다.
 test("예산 페이지는 시세 페이지에서 찍어내는 것들보다 먼저 돈다", async () => {
   for (const file of ["scripts/update-all.mjs", ".github/workflows/daily-update.yml"]) {
     const text = await readFile(path.join(root, file), "utf8");

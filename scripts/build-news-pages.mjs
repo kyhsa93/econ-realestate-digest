@@ -1,10 +1,3 @@
-// 카테고리별 뉴스 페이지(부동산/증시·환율/금리)를 news.html에서 찍어낸다.
-//
-// 왜 나누나: "오늘의 경제 뉴스"보다 "부동산 뉴스", "금리 뉴스"처럼 분야 단위로 검색한다.
-// 날짜별 아카이브와 달리 페이지 수가 늘지 않으면서 검색 의도마다 착지점이 생긴다.
-//
-// "기타 경제 소식"은 만들지 않는다 - 아무도 그렇게 검색하지 않고, 내용도 그날그날
-// 남는 기사를 모은 것이라 페이지의 주제가 서지 않는다.
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { applyPrerender, newsListHtml, newsRealestateStatsHtml, newsSummaryHtml } from "./prerender.mjs";
@@ -17,8 +10,6 @@ const BASE_TITLE = "오늘의 경제·부동산 뉴스";
 const BASE_DESCRIPTION =
   "경제지 RSS에서 모은 오늘의 경제·부동산 뉴스를 카테고리별로 정리하고, 오픈소스 AI가 요약합니다. 하루 4회 자동 갱신합니다.";
 
-// 영어 사전의 제목·설명도 같이 바꿔야 한다. 안 그러면 언어를 전환하는 순간
-// 네 페이지가 전부 같은 영어 제목으로 돌아간다(한국어 쪽에서 이미 겪은 함정).
 const BASE_TITLE_EN = "Today's Korean Economy & Real Estate News";
 const BASE_DESCRIPTION_EN =
   "Korean economy and real estate headlines collected from newspaper RSS feeds, grouped by category and summarized by an open-source AI. Updated four times a day.";
@@ -91,8 +82,6 @@ export function buildNewsPage(baseHtml, page, { news, summary }) {
     "카테고리 링크"
   );
 
-  // 서울 시세 카드는 부동산 페이지에만 남긴다. 다른 페이지에서는 news.html이 들고 온
-  // hidden 섹션이 그대로 숨어 있는다(증시 기사 위에 아파트 시세가 놓일 이유는 없다).
   const stats = page.category === "realestate" ? newsRealestateStatsHtml(news) : null;
   if (stats) {
     html = replaceOnce(

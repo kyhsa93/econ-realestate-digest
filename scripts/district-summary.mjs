@@ -1,13 +1,3 @@
-// 자치구 페이지에 그 지역만의 문장을 붙인다.
-//
-// 25개 페이지가 구조는 같고 숫자만 다르면 크롤러 눈에는 템플릿을 대량으로 찍어낸
-// 것으로 보인다(이 계정은 이미 한 번 "가치 없는 콘텐츠"로 지적받은 적이 있다).
-// 그렇다고 지역마다 손으로 글을 쓸 수는 없으므로, **그 지역 데이터로만 만들 수 있는
-// 문장**을 낸다 - 서울 평균 대비 몇 배인지, 몇 번째인지, 전세가율이 어느 쪽인지,
-// 값이 가장 비슷한 구가 어디인지. 숫자가 다르면 문장 구성도 달라진다.
-//
-// 규칙 하나: 데이터가 말하는 것만 쓴다. "투자 유망" 같은 판단이나 전망은 넣지 않는다.
-// 표본이 모자라면 문장을 지어내는 대신 그 사실을 밝힌다.
 import {
   areaPrice,
   formatEok,
@@ -20,8 +10,6 @@ import {
 
 const round1 = (n) => Math.round(n * 10) / 10;
 
-// 자치구 이름은 전부 '구'로 끝나 받침이 없지만, 조사를 고정해두면 나중에 지역 단위가
-// 바뀔 때(동·시) 바로 어색해진다. 마지막 글자의 받침을 보고 고른다.
 function hasFinalConsonant(word) {
   const code = String(word).charCodeAt(String(word).length - 1) - 0xac00;
   if (code < 0 || code > 11171) return false;
@@ -29,7 +17,6 @@ function hasFinalConsonant(word) {
 }
 const topicParticle = (word) => (hasFinalConsonant(word) ? "은" : "는");
 
-/** 표본이 충분한 구들 사이에서 매매 평당가 순위(1부터). 못 구하면 null. */
 function saleRank(entry, districts) {
   const value = valueOf(resolveMetric(entry, "sale")?.metric, "sale");
   if (!value) return null;
@@ -42,7 +29,6 @@ function saleRank(entry, districts) {
   return { rank: priced.filter((v) => v > value).length + 1, total: priced.length };
 }
 
-/** 매매 평당가가 가장 가까운 다른 구. 페이지마다 다른 문장이 나오게 하는 축이다. */
 function nearestDistrict(entry, districts) {
   const value = valueOf(resolveMetric(entry, "sale")?.metric, "sale");
   if (!value) return null;
@@ -58,10 +44,6 @@ function nearestDistrict(entry, districts) {
   return best;
 }
 
-/**
- * 자치구 하나에 대한 서술 문장들. 화면과 정적 HTML이 같은 문장을 내야 하므로
- * 문자열 배열로 돌려주고, 감싸는 마크업은 부르는 쪽이 만든다.
- */
 export function districtSentences(entry, realestate, locale = "ko") {
   if (!entry) return [];
 
@@ -83,7 +65,6 @@ export function districtSentences(entry, realestate, locale = "ko") {
       : `${entry.name} 아파트 매매가는 평당 ${formatMan(value, locale)}입니다`;
 
     if (ratio) {
-      // 1.0배는 "같다"고 쓰는 게 자연스럽다.
       const comparison = en
         ? ratio === 1
           ? `, the same as the Seoul average of ${formatMan(overallValue, locale)}`
@@ -97,7 +78,6 @@ export function districtSentences(entry, realestate, locale = "ko") {
 
     const rank = saleRank(entry, districts);
     if (rank) {
-      // 1위·꼴찌를 "1번째로 높습니다"라고 쓰면 사람이 쓴 문장으로 안 읽힌다.
       const ko =
         rank.rank === 1
           ? `신고 건수가 충분한 ${rank.total}개 구 가운데 가장 높습니다.`
@@ -129,7 +109,6 @@ export function districtSentences(entry, realestate, locale = "ko") {
       );
     }
   } else {
-    // 값을 못 내는 상태를 문장으로 덮지 않는다. 왜 비어 있는지가 오히려 정보다.
     const reported = entry.sale?.transactionCount ?? 0;
     out.push(
       en
@@ -137,8 +116,6 @@ export function districtSentences(entry, realestate, locale = "ko") {
         : `${entry.name}${topicParticle(entry.name)} 이번 달 아파트 매매 신고가 ${reported}건뿐이라 평균을 내지 않았습니다.`
     );
 
-    // 매매를 못 내도 전세는 신고가 훨씬 많아 값이 있는 경우가 흔하다. 그것마저
-    // 빼면 페이지가 통째로 빈 것처럼 보인다.
     const jeonseOnly = resolveMetric(entry, "jeonse");
     if (jeonseOnly) {
       const deposit = valueOf(jeonseOnly.metric, "jeonse");
@@ -180,8 +157,6 @@ export function districtSentences(entry, realestate, locale = "ko") {
     );
   }
 
-  // 마지막은 이 숫자들이 몇 건에 근거하는지. 표본 크기를 밝히지 않으면 위 문장들이
-  // 실제보다 단단해 보인다.
   const counts = ["sale", "jeonse", "wolse"]
     .map((kind) => ({ kind, metric: resolveMetric(entry, kind)?.metric }))
     .filter((c) => c.metric);

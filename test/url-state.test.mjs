@@ -1,5 +1,3 @@
-// 필터·검색·탭이 주소에 남지 않으면 걸러놓은 화면을 공유할 수 없고, 뒤로가기가
-// 필터를 되돌리는 대신 사이트를 빠져나간다. 주소로 들어왔을 때 그 상태로 열리는지를 본다.
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
@@ -13,7 +11,6 @@ const root = path.resolve(import.meta.dirname, "..");
 const read = (rel) => readFile(path.join(root, rel), "utf8");
 
 test("메인은 주소의 카테고리·검색어로 시작한다", async () => {
-  // vm 컨텍스트에서 만들어진 객체라 프로토타입이 달라 deepEqual은 못 쓴다.
   const plain = (await loadIndexPage()).app.__newsState();
   assert.equal(plain.cat, "all");
   assert.equal(plain.q, "");
@@ -37,7 +34,6 @@ test("상품군별 페이지는 주소가 없어도 자기 탭으로 시작한�
   const page = await loadRatesPage({ file: "docs/rent-loan-rates.html" });
   assert.equal(page.state.category, "rentLoan");
 
-  // 주소의 탭이 meta보다 우선한다(공유된 링크가 이겨야 한다).
   const overridden = await loadRatesPage({ file: "docs/rent-loan-rates.html", search: "?tab=saving" });
   assert.equal(overridden.state.category, "saving");
 });
@@ -45,7 +41,6 @@ test("상품군별 페이지는 주소가 없어도 자기 탭으로 시작한�
 test("검색은 기록을 쌓지 않고 탭·필터는 쌓는다", async () => {
   for (const file of ["docs/index.html", "docs/rates.html"]) {
     const html = await read(file);
-    // 글자마다 pushState하면 뒤로가기가 못 쓰게 된다.
     assert.ok(
       /history\[push \? "pushState" : "replaceState"\]/.test(html),
       `${file}에 기록 방식 구분이 없다`
@@ -57,8 +52,6 @@ test("검색은 기록을 쌓지 않고 탭·필터는 쌓는다", async () => {
 
 test("기본값은 주소에 남기지 않는다", async () => {
   const html = await read("docs/rates.html");
-  // 상품군별 페이지는 기본 탭이 다르다. deposit을 기준으로 삼으면 그 페이지들에
-  // 의미 없는 ?tab=이 붙는다.
   assert.ok(html.includes('["tab", state.category, DEFAULT_CATEGORY]'), "기본 탭 기준이 페이지에 맞지 않는다");
   assert.ok(html.includes('if (value === empty) next.delete(key);'), "기본값을 지우지 않는다");
 });
@@ -74,20 +67,16 @@ test("부동산 표도 머리글로 정렬한다", async () => {
 test("아카이브를 하루씩 넘길 수 있다", async () => {
   const html = await read("docs/index.html");
   assert.ok(html.includes('id="archive-prev-day"') && html.includes('id="archive-next-day"'), "이전/다음 날 버튼이 없다");
-  // 오늘보다 뒤로는 갈 수 없다.
   assert.ok(html.includes("if (next > kstToday()) return;"), "미래 날짜를 막지 않는다");
 });
 
 test("뉴스 페이지도 읽은 기사를 표시한다", async () => {
   const html = await read("docs/news.html");
-  // 메인과 같은 저장소를 써야 한 곳에서 읽은 게 다른 곳에도 반영된다.
   assert.ok(html.includes('const READ_NEWS_KEY = "readNews"'), "읽음 저장소가 메인과 다르다");
   assert.ok(html.includes("markNewsRead(link.getAttribute"), "클릭을 읽음으로 기록하지 않는다");
   assert.ok(html.includes(".news-item.read"), "읽은 기사 스타일이 없다");
 });
 
-// 데이터는 멀쩡한데 보관 범위 밖 날짜를 열었을 뿐인데도 "불러오지 못했습니다"가 떠서,
-// 사이트가 고장난 것처럼 보였다. 하루씩 넘기는 버튼이 생기면서 훨씬 쉽게 도달하게 됐다.
 test("기록이 없는 날짜는 오류가 아니라 기록 없음으로 알린다", async () => {
   const { readFile } = await import("node:fs/promises");
   const load = (search) =>
@@ -109,8 +98,6 @@ test("기록이 없는 날짜는 오류가 아니라 기록 없음으로 알린�
   assert.ok(newsHtml.includes("기록이 없습니다"), `기록 없음 안내가 아니다: ${newsHtml.slice(0, 80)}`);
   assert.ok(!newsHtml.includes("불러오지 못했습니다"), "기록 없음을 로드 실패로 말한다");
 
-  // 보관 범위 안의 날짜는 그대로 그려진다. 날짜를 적어두면 그날이 보관 범위(180일)를
-  // 벗어나는 순간 확정적으로 깨지므로, 기록이 실제로 있는 날을 자료에서 꺼내 쓴다.
   const newsHistory = JSON.parse(await readFile(path.join(root, "docs/data/news-history.json"), "utf8"));
   const kept = newsHistory.findLast((entry) => entry.items?.length)?.date;
   assert.ok(kept, "뉴스 기록이 하나도 없어 '있는 날'을 고를 수 없다");
@@ -120,8 +107,6 @@ test("기록이 없는 날짜는 오류가 아니라 기록 없음으로 알린�
   assert.ok(String(present.byId("news-list").innerHTML).includes("news-item"), "있는 기록을 못 그린다");
 });
 
-// 히스토리마다 보관 시작일이 다르다(뉴스 08-09, 시장지표 08-10). 날짜 하나로 뭉뚱그려
-// 판정하면 뉴스는 멀쩡히 나오는데 시장지표만 "불러오지 못했습니다"가 뜬다.
 test("일부 섹션만 기록이 없는 날짜도 오류라고 말하지 않는다", async () => {
   const { readFile } = await import("node:fs/promises");
   const readHistory = (name) =>
@@ -132,9 +117,6 @@ test("일부 섹션만 기록이 없는 날짜도 오류라고 말하지 않는�
     readHistory("market-history"),
   ]);
 
-  // 예전에는 두 히스토리의 시작일이 하루 다른 걸 이용해 "한쪽에만 있는 날"을 찾았는데,
-  // 그건 보관 범위가 흐르면 사라지는 우연이다. 뉴스 기록이 있는 날을 고르고 시장지표
-  // 쪽에서만 그날을 덜어내, 검사하려는 상태를 직접 만든다.
   const onlyNews = newsHistory.findLast((entry) => entry.items?.length)?.date;
   assert.ok(onlyNews, "뉴스 기록이 하나도 없어 이 상태를 만들 수 없다");
   const marketWithout = marketHistory.filter((entry) => entry.date !== onlyNews);
@@ -166,8 +148,6 @@ test("보관 범위보다 뒤로는 넘기지 못한다", async () => {
   assert.ok(html.includes("input.min = dates[0]"), "날짜 선택 범위를 제한하지 않는다");
 });
 
-// 네 파일 중 하나만 실패해도 배너는 "데이터를 불러오지 못했습니다"라고만 해서,
-// 나머지가 멀쩡한데도 전체가 고장난 것처럼 보였고 무엇이 문제인지도 알 수 없었다.
 test("무엇을 못 받았는지 이름을 말한다", async () => {
   const { readFile } = await import("node:fs/promises");
 
@@ -190,11 +170,9 @@ test("무엇을 못 받았는지 이름을 말한다", async () => {
     await new Promise((r) => setTimeout(r, 30));
     const text = page.byId("load-error-text").textContent;
     assert.ok(text.includes(label), `${file} 실패인데 배너가 "${text}"다`);
-    // 받침에 맞는 조사여야 한다("시장지표을(를)"처럼 나오면 안 된다).
     assert.ok(!text.includes("을(를)"), `조사가 자동으로 안 붙는다: ${text}`);
   }
 
-  // 이유가 없으면 무엇 때문에 실패했는지 화면만 보고는 알 수 없다.
   const withReason = await loadWithFailure("summary");
   await new Promise((r) => setTimeout(r, 30));
   assert.ok(
@@ -202,15 +180,12 @@ test("무엇을 못 받았는지 이름을 말한다", async () => {
     `실패 이유가 안 실린다: ${withReason.byId("load-error-text").textContent}`
   );
 
-  // 요약은 "아직 없음"과 "못 받음"이 화면에서 구분돼야 한다.
   const summaryFailed = await loadWithFailure("summary");
   await new Promise((r) => setTimeout(r, 30));
   const box = String(summaryFailed.byId("summary-box").textContent);
   assert.ok(box.includes("불러오지 못했습니다"), `요약 실패가 정상 빈 화면처럼 보인다: ${box}`);
 });
 
-// 배너가 플래그로 뜨면, 데이터가 다 있는데 배너만 떠 있는 상태가 생긴다.
-// 지금 화면에 실제로 빠진 데이터가 있을 때만 뜨게 한다.
 test("데이터가 다 있으면 어떤 경우에도 오류 배너가 뜨지 않는다", async () => {
   const html = await read("docs/index.html");
   assert.ok(
@@ -218,16 +193,12 @@ test("데이터가 다 있으면 어떤 경우에도 오류 배너가 뜨지 않
     "배너가 여전히 플래그로 뜬다"
   );
   assert.ok(html.includes("showLoadError(missing.length > 0"), "배너 조건이 화면 상태와 무관하다");
-  // 감춰져 있어도 DOM에 문구가 남아 있으면, 화면엔 없는 오류가 있는 것처럼 읽힌다.
   assert.ok(
     html.includes('textContent = show ? text : ""'),
     "감출 때 문구를 비우지 않는다"
   );
 });
 
-// hidden 속성은 브라우저 기본 스타일(display:none)로 동작한다. 작성자 CSS가 그 요소에
-// display를 지정하면 그쪽이 이겨서 감춰지지 않는다 - 오류 배너가 display:flex 때문에
-// 늘 보이고 있었다. 화면 없는 테스트로는 못 잡으니 규칙 자체를 검사한다.
 test("감춰야 할 요소가 CSS 때문에 계속 보이지 않는다", async () => {
   const files = [
     "docs/index.html",

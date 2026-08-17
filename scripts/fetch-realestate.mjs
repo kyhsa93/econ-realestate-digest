@@ -6,12 +6,7 @@ import { attachPrevious, isPreviousUsable } from "./realestate-previous.mjs";
 const dataDir = path.resolve(import.meta.dirname, "../docs/data");
 const outFile = path.join(dataDir, "realestate.json");
 const historyFile = path.join(dataDir, "realestate-history.json");
-// 지난달 요약. 달이 바뀔 때 한 번만 받고 커밋해 둔다 - CI는 매번 새 러너라 gitignore된
-// 캐시는 남지 않고, 그러면 매일 두 달치를 조회해 호출 한도에 걸린다.
 const previousFile = path.join(dataDir, "realestate-prev.json");
-// 개별 거래 원본. 화면이 받는 docs/data가 아니라 캐시에 둔다 - 서울 한 달치가 수천 건이라
-// 여기 두면 화면이 받는 파일이 커지고 커밋 이력도 매일 그만큼 불어난다. 화면에 나가는 건
-// build-budget-deals.mjs가 여기서 추려낸 예산 구간 데이터뿐이다.
 const dealsFile = process.env.REALESTATE_DEALS_FILE
   ? path.resolve(process.env.REALESTATE_DEALS_FILE)
   : path.resolve(import.meta.dirname, "../cache/realestate-deals.json");
@@ -52,18 +47,11 @@ const DISTRICTS = [
 
 const PYEONG_M2 = 3.3058;
 
-// 25개구가 한꺼번에 UND_ERR_CONNECT_TIMEOUT으로 죽는 날이 잦다. 개별 요청이 아니라 그
-// 시각 러너와 국토부 서버 사이 경로가 통째로 막히는 모양새라(전부 성공 아니면 전부 실패),
-// 우리가 밀어넣는 동시 요청 수를 줄여 그 원인에서 우리 몫을 덜어낸다.
 const CONCURRENCY = Number(process.env.MOLIT_CONCURRENCY ?? 3);
 const MAX_RETRIES = 3;
 
-// 재시도 간격. 1초·2초는 연결이 막힌 상황에 너무 짧았다 - 5분 안에 세 번을 다 소진하고
-// 포기했는데, 52분 뒤 실행은 25개구가 전부 성공했다. 몇 초가 아니라 몇십 초를 기다린다.
 const RETRY_BASE_MS = Number(process.env.MOLIT_RETRY_MS ?? 3000);
 
-// 한 바퀴를 다 돌고 나서 실패한 구만 다시 훑기 전에 쉬는 시간. 앞의 재시도가 이미 그
-// 구를 세 번 두드린 직후라, 바로 다시 두드려봐야 같은 벽을 만난다.
 const SWEEP_DELAY_MS = Number(process.env.MOLIT_SWEEP_DELAY_MS ?? 45_000);
 
 async function mapWithConcurrency(items, limit, fn) {
@@ -137,13 +125,6 @@ async function fetchApi(apiUrl, serviceKey, districtCode, yearMonth) {
   throw lastErr;
 }
 
-// 계약이 해제된 거래는 "있었던 일"이 아니다. 국토부는 해제분을 지우지 않고 해제 표시만
-// 달아 그대로 내려주므로, 걸러내지 않으면 평균에 섞인다. 평균에 섞이는 건 작은 편향이지만
-// 예산 검색처럼 거래를 단지 이름과 함께 한 건씩 보여주는 화면에서는 취소된 거래를 실제
-// 거래인 것처럼 게시하게 된다.
-//
-// 스펙상 해제 표시는 cdealType("O")이고 해제일은 cdealDay인데, 둘 중 하나만 채워 내려오는
-// 응답도 있어 어느 쪽이든 값이 있으면 해제로 본다. 빈 칸은 XML 파서가 빈 문자열로 준다.
 export function isCancelledDeal(item) {
   const filled = (value) => String(value ?? "").trim().length > 0;
   return filled(item?.cdealType) || filled(item?.cdealDay);
@@ -153,9 +134,6 @@ export function dropCancelled(items) {
   return items.filter((item) => !isCancelledDeal(item));
 }
 
-// Node의 fetch는 네트워크 단계에서 실패하면 메시지가 "fetch failed" 한 줄뿐이고 진짜
-// 이유(DNS·연결 거부·타임아웃·인증서)는 err.cause에 들어간다. 25개구가 한꺼번에
-// "fetch failed"로 죽은 날 로그만 보고는 API가 죽은 건지 우리가 막힌 건지 알 수가 없었다.
 export function errorDetail(err) {
   const parts = [err?.message ?? String(err)];
   let cause = err?.cause;
@@ -182,22 +160,12 @@ function filterByArea(items, minArea, maxArea) {
   });
 }
 
-// 국토부가 내려주는 거래 형태. 직거래에는 특수관계인 사이의 저가 거래가 섞여 있어
-// 시세를 읽는 눈으로 보면 노이즈다. 그래서 검색 화면이 "직거래 제외"를 걸 수 있어야 한다.
-//
-// 셋을 구분해서 담는다 - 직거래(true), 중개거래(false), 그리고 필드 자체가 비어 온 경우
-// (키를 안 만든다). 미상을 중개거래로 접어 넣으면 국토부가 필드 이름을 바꿔 전부 빈 칸이
-// 되는 날에도 화면상 달라지는 게 없어 알아챌 방법이 없다.
 export function dealingDirect(value) {
   const text = String(value ?? "").trim();
   if (!text) return null;
   return text === "직거래";
 }
 
-// 예산 검색이 쓸 개별 거래. 집계만 남기고 버리던 것을 한 건씩 남긴다.
-//
-// 단지 이름이 없는 거래는 담지 않는다. 예산 화면은 "어느 아파트가 그 값에 팔렸나"에
-// 답하는 자리라, 이름 없는 줄은 보여줄 수도 없고 세어봐야 의미도 없다.
 export function normalizeDeal(item, districtName) {
   const amount10k = parseWon10k(item?.dealAmount);
   const area = Number(item?.excluUseAr);
@@ -209,7 +177,6 @@ export function normalizeDeal(item, districtName) {
   if (!apt) return null;
   if (amount10k == null || amount10k <= 0) return null;
   if (!Number.isFinite(area) || area <= 0) return null;
-  // 빈 칸은 Number("")가 0이라 정수 검사만으로는 통과해버린다(날짜가 "2026-08-00"이 됐다).
   const inRange = (value, min, max) => Number.isInteger(value) && value >= min && value <= max;
   if (!inRange(year, 1900, 2999) || !inRange(month, 1, 12) || !inRange(day, 1, 31)) return null;
 
@@ -413,16 +380,6 @@ function weightedAverage(list, getValue, getWeight) {
   return totalWeight ? totalWeighted / totalWeight : null;
 }
 
-/**
- * 조회에 실패한 구를 지난번에 받아둔 값으로 채운다.
- *
- * 그냥 빠뜨리면 표가 조용히 24개구가 되고, 읽는 사람은 그 구에 거래가 없었다고 읽는다 -
- * 못 받은 것과 거래가 없는 것은 전혀 다른 얘기다.
- *
- * 채운 구에는 그 값을 실제로 받은 시각(staleAt)을 남긴다. 이미 묵어 있던 구를 또 못
- * 받았다면 그때 시각을 그대로 물려받아야 한다 - 매번 오늘로 갱신하면 며칠째 묵은 값이
- * 어제 받은 값처럼 보인다.
- */
 export function carryForward(allDistricts, fetched, existing, existingIsToday) {
   const fetchedByCode = new Map((fetched ?? []).map((d) => [d.code, d]));
   const existingByCode = new Map((existing?.districts ?? []).map((d) => [d.code, d]));
@@ -440,7 +397,6 @@ export function carryForward(allDistricts, fetched, existing, existingIsToday) {
     const old = existingByCode.get(code);
     if (!old) continue;
 
-    // 오늘 이미 받아둔 구다(누락분만 다시 도는 실행). 묵은 값이 아니다.
     if (existingIsToday) {
       districts.push(old);
       continue;
@@ -453,15 +409,6 @@ export function carryForward(allDistricts, fetched, existing, existingIsToday) {
   return { districts, carriedNames };
 }
 
-// 서울 전체 평균. 구별 값을 신고 건수로 가중해 합친다.
-//
-// 화면에 나가는 값과 history에 남기는 값이 서로 다른 구 집합에서 나오기 때문에 함수로
-// 뺐다 - 조회에 실패해 지난번 값으로 채운 구는 화면에는 있어야 하지만, "오늘 신고분"
-// 기록에 섞이면 그날 추이가 며칠 전 값으로 만들어진다.
-// 마무리 로그. computeOverall 안에만 있던 구 집합을 main()에서 그대로 쓰려다 없는 변수를
-// 참조해, 조회가 실제로 성공한 날 마지막 줄에서 스크립트가 죽은 적이 있다(그전까지는 전 구
-// 타임아웃으로 일찍 return하는 바람에 이 줄까지 오지 못해 드러나지 않았다). 세는 규칙을
-// 한 곳에 두고 테스트가 붙잡는다.
 export function fetchSummary(districts) {
   const countOf = (key) => (districts ?? []).filter((d) => d?.[key]).length;
   return `매매 ${countOf("sale")}개구, 전세 ${countOf("jeonse")}개구, 월세 ${countOf("wolse")}개구`;
@@ -557,8 +504,6 @@ async function main() {
 
   const yearMonths = [kstYearMonth(now, 0)];
 
-  // 예산 검색용 거래는 이번 달 조회분만 모은다. 지난달 캐시를 채우려고 도는 조회까지
-  // 담으면 "최근 거래"에 지난달이 섞인다.
   const dealsByDistrict = new Map();
   let cancelledTotal = 0;
 
@@ -570,8 +515,6 @@ async function main() {
         const saleResult = await fetchDistrictSale(code, months);
         entry.sale = saleResult.sale;
         entry.saleNational84 = saleResult.saleNational84;
-        // 거래 원본은 entry에 싣지 않는다. entry는 realestate.json·history·지난달 캐시로
-        // 그대로 흘러가는 값이라, 여기 실으면 세 파일이 한꺼번에 수십 배로 불어난다.
         if (collectDeals) {
           dealsByDistrict.set(code, saleResult.items.map((item) => normalizeDeal(item, name)).filter(Boolean));
           cancelledTotal += saleResult.cancelledCount;
@@ -620,8 +563,6 @@ async function main() {
 
   const newlyFetched = results.filter(Boolean);
 
-  // 한 구도 못 받았으면 파일을 건드리지 않는다. 지난번 값으로만 채운 파일을 새로 쓰면
-  // 내용은 그대로인데 updatedAt만 오늘로 바뀌어, 화면이 "오늘 받은 값"이라고 말하게 된다.
   if (newlyFetched.length === 0) {
     console.error("[fetch-realestate] 모든 지역 조회 실패, 기존 데이터를 그대로 둡니다");
     return;
@@ -642,8 +583,6 @@ async function main() {
   const baseline = findBaseline(history, now);
   const withChanges = attachChanges(overall, districts, baseline);
 
-  // 지난달 값을 얹는다. 이번 달 신고가 아직 얇은 구는 화면이 이쪽으로 대체하고,
-  // 그 셀이 어느 달 기준인지 같이 표시한다.
   const previousPeriod = kstYearMonth(now, 1);
   let previous = null;
   try {
@@ -667,14 +606,11 @@ async function main() {
         previous = null;
       }
     } catch (err) {
-      // 지난달 조회가 실패해도 이번 달 데이터는 그대로 낸다. 다음 실행에서 다시 시도된다.
       console.error(`[fetch-realestate] 지난달 조회 실패: ${errorDetail(err)}`);
       previous = null;
     }
   }
 
-  // 오늘 일부 구만 재조회한 경우에도 조회한 구의 거래만 갈아끼우고 나머지는 남긴다.
-  // 조용히 사라지는 지역이 생기면 예산 화면에서 그 구가 통째로 빠져 보인다.
   async function writeDeals(dealsPeriod, at) {
     if (dealsByDistrict.size === 0) return;
 
@@ -693,9 +629,6 @@ async function main() {
     const districtsObj = Object.fromEntries(byDistrict);
     const all = Object.values(districtsObj).flat();
     const total = all.length;
-    // 거래 형태가 몇 건에 붙었는지 센다. 검색 화면의 "직거래 제외"는 이 필드가 없으면
-    // 아무것도 거르지 않는데, 그건 조건이 안 걸린 화면과 구분이 안 간다. 국토부가 필드를
-    // 안 주거나 이름을 바꾼 날 로그에서 바로 드러나야 한다.
     const directCount = all.filter((deal) => deal.direct === true).length;
     const unknownCount = all.filter((deal) => !("direct" in deal)).length;
 
@@ -705,8 +638,6 @@ async function main() {
       JSON.stringify({ period: dealsPeriod, updatedAt: at.toISOString(), districts: districtsObj }, null, 2)
     );
 
-    // 해제분을 몇 건 걸렀는지 남긴다. 조용히 걸러내면 필드 이름이 바뀌어 한 건도 못 거르는
-    // 날이 와도 화면상 달라지는 게 없어 알아챌 방법이 없다.
     console.log(
       `[fetch-realestate] 예산 검색용 거래 ${total.toLocaleString("ko-KR")}건 저장` +
         ` (해제 ${cancelledTotal.toLocaleString("ko-KR")}건 제외,` +
@@ -718,8 +649,6 @@ async function main() {
 
   await mkdir(dataDir, { recursive: true });
   await writeFile(outFile, JSON.stringify(payload, null, 2));
-  // history는 추이 그래프와 "며칠 전 대비" 기준선의 재료다. 지난번 값으로 채운 구를 오늘
-  // 신고분으로 기록하면 그날 변화가 0으로 눌리고, 그 왜곡이 180일치에 남는다.
   await appendHistory(history, now, {
     period,
     overall: carriedNames.length ? computeOverall(newlyFetched) : overall,
@@ -730,8 +659,6 @@ async function main() {
   console.log(`[fetch-realestate] 저장 완료 (${fetchSummary(districts)})`);
 }
 
-// 다른 파일에서 이 모듈의 함수를 가져다 쓰는 순간(테스트가 그렇다) import만으로 조회가
-// 시작되면 안 된다. 저장소의 다른 스크립트와 같은 가드를 둔다.
 if (process.argv[1] && path.resolve(process.argv[1]) === path.resolve(import.meta.filename)) {
   main();
 }
