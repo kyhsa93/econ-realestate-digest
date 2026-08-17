@@ -546,45 +546,104 @@
     "date": "2026-08-17",
     "model": "qwen3:14b",
     "summary": {
-      "ko": "- 부동산: 서울 아파트의 월세 비중이 7년 만에 7.8%p 증가했다. 서초구는 부동산 세제개편안에 대한 구민 의견을 모아 정부에 전달하고 있다. LH는 아파트 승강기에 냉방 의무화와 침수 감지 기능 도입을 결정했다. LH 아파트 승강기에도 에어컨 설치가 의무화된다. 강남구는 9월 18일 부동산 세금 설명회를 열어 8·3 개편안을 분석한다.\n- 기타 경제 소식: 충북도는 ‘사회연대경제 일경험 사업’에 참여할 기업과 청년을 모집하고 있다. 부동산 시장에서는 대출 증가가 집값 상승을 유발할 수 있다는 우려가 나오고 있다. 중국은 7월 은행 대출이 71.5조원 순감소하며 차입 수요가 부진한 것으로 나타났다. 비거주 주택 소유자에게는 집값 차이에 따라 종부세가 200만원 증가하는 것으로 나타났다. 각 기사는 서로 다른 주제로, 별개의 경제 현상에 대한 보도이다.\n- 증시·환율: 11월부터 신종증권시장이 개장한다. 조각투자 상품이 증시에 처음 등장한다. 이는 기존 투자자들이 소액으로 다양한 자산에 투자할 수 있게 해준다. 기존 시장에서는 조각투자 상품이 거래되지 않았다. 이번 개장으로 투자 접근성이 크게 높아질 것으로 기대된다.",
-      "en": "- Real Estate: The share of monthly rent in Seoul apartments has increased by 7.8 percentage points, the highest in seven years. Seocho District is collecting residents' opinions on the real estate tax reform plan and relaying them to the government. LH has decided to enforce air conditioning and introduce flood detection functions in apartment elevators. Air conditioning installation will also be mandatory in LH apartment elevators. Gangnam District will hold a real estate tax explanation session on September 18 to analyze the 8·3 reform plan.\n- Other Economic News: Chungcheongbuk-do is recruiting companies and youth to participate in the \"Social Solidarity Economy Experience Project.\" In the real estate market, there are concerns that increased lending could lead to rising home prices. China saw a net decrease of 71,500,000,000,000 won in bank loans in July, indicating weak borrowing demand. It was found that non-resident property owners may see an increase of 2,000,000 won in property tax depending on the price difference of their homes. Each article covers a different topic and reports on separate economic phenomena.\n- Stocks & FX: The new securities market will open in November. Fragmented investment products will make their debut in the stock market for the first time. This will allow existing investors to invest small amounts in a variety of assets. Fragmented investment products were not traded in the existing market. It is expected that investment accessibility will significantly increase with this opening."
+      "ko": "- 증시·환율: 뉴욕증시는 이란 불확실성 속 혼조 출발했고, 원/달러 환율은 5.3원 내린 1,413.0원으로 마감됐다.\n- 금리·예금·투자상품: 미국 경제학자 80%는 올해 내 금리인상이 없을 것으로 전망했다. 환율은 올해 최저치를 기록하며 1300원대에 근접했다. 상호금융은 금리, 비과세, 배당 등에서 예전보다 열세한 상황이다. 5대 은행의 주담대 가산금리는 고공행진하며 가계대출 억제에 영향을 미치고 있다. 일본의 10년물 국채금리는 한때 2.93%에 달하며 30년 만에 최고치를 기록했다.\n- 부동산: 서울 전세 물량은 7년 만에 3만가구 감소했고, 반전세와 월세는 5만가구 증가했다. 중국의 자동차 판매는 21% 감소했고, 부동산 투자도 19% 줄어들며 경제 위기 신호를 보였다. 용산에서는 주택 공급과 공원 조성에 대한 논쟁이 다시 일고 있다. 정부는 ISA 세제를 손질했고, 부동산 관련 세제는 국회에서 논의 중이다. 주민 반발로 인해 폐점 부지에 청년·노인주택 건설이 중단된 상태다.\n- 기타 경제 소식: 성남 중원 지역의 집값이 1주일 만에 0.55% 상승했다. 이는 규제가 오히려 풍선효과를 일으켰다는 분석이다. 한편, 기업대출과 회사채를 통해 안정적인 이자수익을 노리는 전략이 주목받고 있다. 해당 투자 방식은 최근 금융시장의 변동성 속에서 주로 활용되고 있다. 두 소식은 서로 다른 경제 현상에 대한 보도로, 직접적인 연관성은 없다.",
+      "en": "- Stocks & FX: The New York stock market opened mixed amid Iranian uncertainty, and the won/dollar exchange rate closed at 1,413.0 won, down 5.3 won.\n- Rates, Deposits & Investment Products: 80% of American economists expect no interest rate hikes this year. The exchange rate hit its lowest level this year, approaching the 1,300 won level. Mutual funds are at a disadvantage compared to before in terms of interest rates, tax exemptions, and dividends. The added interest rates on housing loans by the five major banks are soaring, affecting the suppression of household debt. Japan's 10-year government bond yield reached as high as 2.93%, marking its highest level in 30 years.\n- Real Estate: The number of Seoul's rental units has decreased by 30,000 for the first time in seven years, while the number of semi-rental and monthly rental units has increased by 50,000. China's automobile sales have decreased by 21%, and real estate investment has also decreased by 19%, showing signs of an economic crisis. In Yongsan, a debate has once again arisen regarding housing supply and park development. The government has revised the ISA tax system, and real estate-related tax policies are currently being discussed in the National Assembly. Construction of youth and elderly housing on the site of a closed-down business has been suspended due to residents' opposition.\n- Other Economic News: The housing prices in the Jungwon area of Seongnam rose 0.55% within a week. This is analyzed as a result of regulations causing a balloon effect. Meanwhile, a strategy of securing stable interest income through corporate loans and company bonds is gaining attention. This investment approach is mainly used in the recent volatile financial market. The two pieces of news are reports on different economic phenomena and have no direct connection."
     },
     "highlights": [],
     "categories": [
       {
-        "key": "realestate",
-        "name": "부동산",
-        "nameEn": "Real Estate",
-        "lineKo": "서울 아파트의 월세 비중이 7년 만에 7.8%p 증가했다. 서초구는 부동산 세제개편안에 대한 구민 의견을 모아 정부에 전달하고 있다. LH는 아파트 승강기에 냉방 의무화와 침수 감지 기능 도입을 결정했다. LH 아파트 승강기에도 에어컨 설치가 의무화된다. 강남구는 9월 18일 부동산 세금 설명회를 열어 8·3 개편안을 분석한다.",
-        "lineEn": "The share of monthly rent in Seoul apartments has increased by 7.8 percentage points, the highest in seven years. Seocho District is collecting residents' opinions on the real estate tax reform plan and relaying them to the government. LH has decided to enforce air conditioning and introduce flood detection functions in apartment elevators. Air conditioning installation will also be mandatory in LH apartment elevators. Gangnam District will hold a real estate tax explanation session on September 18 to analyze the 8·3 reform plan.",
+        "key": "stocks",
+        "name": "증시·환율",
+        "nameEn": "Stocks & FX",
+        "lineKo": "뉴욕증시는 이란 불확실성 속 혼조 출발했고, 원/달러 환율은 5.3원 내린 1,413.0원으로 마감됐다.",
+        "lineEn": "The New York stock market opened mixed amid Iranian uncertainty, and the won/dollar exchange rate closed at 1,413.0 won, down 5.3 won.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": true,
+        "items": [
+          {
+            "title": "[속보]뉴욕증시, 이란 불확실성 속 혼조 출발.…나스닥 0.01%↑",
+            "link": "https://www.newsis.com/view/NISX20260817_0003751699",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "[외환] 원/달러 환율 5.3원 내린 1,413.0원(15:30 기준가)",
+            "link": "https://www.yna.co.kr/view/AKR20260817046600002",
+            "source": "연합뉴스 경제"
+          }
+        ]
+      },
+      {
+        "key": "rates",
+        "name": "금리·예금·투자상품",
+        "nameEn": "Rates, Deposits & Investment Products",
+        "lineKo": "미국 경제학자 80%는 올해 내 금리인상이 없을 것으로 전망했다. 환율은 올해 최저치를 기록하며 1300원대에 근접했다. 상호금융은 금리, 비과세, 배당 등에서 예전보다 열세한 상황이다. 5대 은행의 주담대 가산금리는 고공행진하며 가계대출 억제에 영향을 미치고 있다. 일본의 10년물 국채금리는 한때 2.93%에 달하며 30년 만에 최고치를 기록했다.",
+        "lineEn": "80% of American economists expect no interest rate hikes this year. The exchange rate hit its lowest level this year, approaching the 1,300 won level. Mutual funds are at a disadvantage compared to before in terms of interest rates, tax exemptions, and dividends. The added interest rates on housing loans by the five major banks are soaring, affecting the suppression of household debt. Japan's 10-year government bond yield reached as high as 2.93%, marking its highest level in 30 years.",
         "isFallback": false,
         "fallbackReason": null,
         "degraded": false,
         "items": [
           {
-            "title": "서울 아파트 7년 새 월세 비중 7.8%p↑… ‘전세의 월세화’",
-            "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/17/FCOYOBYQM5BQNCXRLNKRSDXPJE/",
-            "source": "조선비즈 부동산"
+            "title": "美 경제학자 80% \"올해 내 금리인상 없을 것\"",
+            "link": "https://www.hankyung.com/article/202608175594i",
+            "source": "한국경제 경제"
           },
           {
-            "title": "서초구, 부동산 세제개편안 관련 구민 의견 모아 정부에 전달",
-            "link": "https://www.yna.co.kr/view/AKR20260817024700004",
+            "title": "환율·채권, 올해 최저치 찍은 환율, 1300원대 눈앞",
+            "link": "https://www.hankyung.com/article/2026081753841",
+            "source": "한국경제 경제"
+          },
+          {
+            "title": "금리·비과세·배당 예전만 못하다…늙어가는 상호금융의 위기",
+            "link": "https://www.hankyung.com/article/2026081753301",
+            "source": "한국경제 경제"
+          },
+          {
+            "title": "5대 은행 주담대 가산금리 고공행진…\"가계대출 억제 영향\"",
+            "link": "https://www.yna.co.kr/view/AKR20260817053700002",
             "source": "연합뉴스 경제"
           },
           {
-            "title": "LH, 아파트 승강기 냉방 의무화…침수 감지 기능도 도입",
-            "link": "https://www.newsis.com/view/NISX20260817_0003751268",
+            "title": "日, 10년물 국채금리 한때 2.93%…30년 만에 최고치",
+            "link": "https://www.newsis.com/view/NISX20260817_0003751457",
             "source": "뉴시스 경제"
+          }
+        ]
+      },
+      {
+        "key": "realestate",
+        "name": "부동산",
+        "nameEn": "Real Estate",
+        "lineKo": "서울 전세 물량은 7년 만에 3만가구 감소했고, 반전세와 월세는 5만가구 증가했다. 중국의 자동차 판매는 21% 감소했고, 부동산 투자도 19% 줄어들며 경제 위기 신호를 보였다. 용산에서는 주택 공급과 공원 조성에 대한 논쟁이 다시 일고 있다. 정부는 ISA 세제를 손질했고, 부동산 관련 세제는 국회에서 논의 중이다. 주민 반발로 인해 폐점 부지에 청년·노인주택 건설이 중단된 상태다.",
+        "lineEn": "The number of Seoul's rental units has decreased by 30,000 for the first time in seven years, while the number of semi-rental and monthly rental units has increased by 50,000. China's automobile sales have decreased by 21%, and real estate investment has also decreased by 19%, showing signs of an economic crisis. In Yongsan, a debate has once again arisen regarding housing supply and park development. The government has revised the ISA tax system, and real estate-related tax policies are currently being discussed in the National Assembly. Construction of youth and elderly housing on the site of a closed-down business has been suspended due to residents' opposition.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": false,
+        "items": [
+          {
+            "title": "서울 전세, 7년새 3만가구 증발…반전세 등 월세는 5만가구 늘어",
+            "link": "https://www.mk.co.kr/news/realestate/12129585",
+            "source": "매일경제 부동산"
           },
           {
-            "title": "LH 아파트 승강기에도 에어컨 의무 설치된다",
-            "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/17/2X4CJYLUPREXZBVAX2CDDNRP2U/",
-            "source": "조선비즈 부동산"
+            "title": "中, 자동차판매 -21%·부동산 투자 -19%…중국경제 '빨간불'",
+            "link": "https://www.hankyung.com/article/202608175454i",
+            "source": "한국경제 경제"
           },
           {
-            "title": "강남구, 9월 18일 '부동산 세금 설명회'…8·3 개편안 분석",
-            "link": "https://www.yna.co.kr/view/AKR20260817021900004",
-            "source": "연합뉴스 경제"
+            "title": "'닥치고 공급' 또다른 논쟁…용산, 주택 공급이냐 공원 조성이냐",
+            "link": "https://www.hankyung.com/article/2026081753671",
+            "source": "한국경제 부동산"
+          },
+          {
+            "title": "정부, ISA 세제 손질…부동산은 국회 논의",
+            "link": "https://www.hankyung.com/article/2026081753061",
+            "source": "한국경제 경제"
+          },
+          {
+            "title": "\"폐점 부지에도 짓지마\"…주민 반발에 막힌 청년·노인주택",
+            "link": "https://www.hankyung.com/article/2026081753691",
+            "source": "한국경제 부동산"
           }
         ]
       },
@@ -592,48 +651,21 @@
         "key": "other",
         "name": "기타 경제 소식",
         "nameEn": "Other Economic News",
-        "lineKo": "충북도는 ‘사회연대경제 일경험 사업’에 참여할 기업과 청년을 모집하고 있다. 부동산 시장에서는 대출 증가가 집값 상승을 유발할 수 있다는 우려가 나오고 있다. 중국은 7월 은행 대출이 71.5조원 순감소하며 차입 수요가 부진한 것으로 나타났다. 비거주 주택 소유자에게는 집값 차이에 따라 종부세가 200만원 증가하는 것으로 나타났다. 각 기사는 서로 다른 주제로, 별개의 경제 현상에 대한 보도이다.",
-        "lineEn": "Chungcheongbuk-do is recruiting companies and youth to participate in the \"Social Solidarity Economy Experience Project.\" In the real estate market, there are concerns that increased lending could lead to rising home prices. China saw a net decrease of 71,500,000,000,000 won in bank loans in July, indicating weak borrowing demand. It was found that non-resident property owners may see an increase of 2,000,000 won in property tax depending on the price difference of their homes. Each article covers a different topic and reports on separate economic phenomena.",
+        "lineKo": "성남 중원 지역의 집값이 1주일 만에 0.55% 상승했다. 이는 규제가 오히려 풍선효과를 일으켰다는 분석이다. 한편, 기업대출과 회사채를 통해 안정적인 이자수익을 노리는 전략이 주목받고 있다. 해당 투자 방식은 최근 금융시장의 변동성 속에서 주로 활용되고 있다. 두 소식은 서로 다른 경제 현상에 대한 보도로, 직접적인 연관성은 없다.",
+        "lineEn": "The housing prices in the Jungwon area of Seongnam rose 0.55% within a week. This is analyzed as a result of regulations causing a balloon effect. Meanwhile, a strategy of securing stable interest income through corporate loans and company bonds is gaining attention. This investment approach is mainly used in the recent volatile financial market. The two pieces of news are reports on different economic phenomena and have no direct connection.",
         "isFallback": false,
         "fallbackReason": null,
         "degraded": false,
         "items": [
           {
-            "title": "충북도, '사회연대경제 일경험 사업' 참여 기업·청년 모집",
-            "link": "https://www.yna.co.kr/view/AKR20260814142600064",
-            "source": "연합뉴스 경제"
+            "title": "규제 풍선효과…성남 중원 집값 1주새 0.55% 올라",
+            "link": "https://www.hankyung.com/article/2026081753931",
+            "source": "한국경제 부동산"
           },
           {
-            "title": "“공급까지는 한참 남았는데”…먼저 풀리는 대출, 집값 자극할라 우려",
-            "link": "https://www.mk.co.kr/news/realestate/12129204",
-            "source": "매일경제 부동산"
-          },
-          {
-            "title": "[올댓차이나] 中 7월 은행대출 71.5조원 순감소…차입 수요 부진",
-            "link": "https://www.newsis.com/view/NISX20260816_0003751116",
-            "source": "뉴시스 경제"
-          },
-          {
-            "title": "집값 5000만원 차이에 비거주 종부세 200만원↑…보완할까?",
-            "link": "https://www.newsis.com/view/NISX20260816_0003750838",
-            "source": "뉴시스 경제"
-          }
-        ]
-      },
-      {
-        "key": "stocks",
-        "name": "증시·환율",
-        "nameEn": "Stocks & FX",
-        "lineKo": "11월부터 신종증권시장이 개장한다. 조각투자 상품이 증시에 처음 등장한다. 이는 기존 투자자들이 소액으로 다양한 자산에 투자할 수 있게 해준다. 기존 시장에서는 조각투자 상품이 거래되지 않았다. 이번 개장으로 투자 접근성이 크게 높아질 것으로 기대된다.",
-        "lineEn": "The new securities market will open in November. Fragmented investment products will make their debut in the stock market for the first time. This will allow existing investors to invest small amounts in a variety of assets. Fragmented investment products were not traded in the existing market. It is expected that investment accessibility will significantly increase with this opening.",
-        "isFallback": false,
-        "fallbackReason": null,
-        "degraded": false,
-        "items": [
-          {
-            "title": "조각투자 '증시 데뷔'…11월 신종증권시장 문 연다",
-            "link": "https://www.yna.co.kr/view/AKR20260815041500002",
-            "source": "연합뉴스 경제"
+            "title": "기업대출·회사채 담아 안정적 이자수익 노린다",
+            "link": "https://www.hankyung.com/article/2026081748021",
+            "source": "한국경제 경제"
           }
         ]
       }
