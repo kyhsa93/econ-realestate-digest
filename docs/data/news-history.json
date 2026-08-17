@@ -1615,6 +1615,32 @@
     "date": "2026-08-17",
     "items": [
       {
+        "title": "서울 아파트 7년 새 월세 비중 7.8%p↑… ‘전세의 월세화’",
+        "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/17/FCOYOBYQM5BQNCXRLNKRSDXPJE/",
+        "publishedAt": "2026-08-17T01:30:42.000Z",
+        "source": "조선비즈 부동산",
+        "category": "realestate",
+        "preview": "최근 7년 동안 서울 아파트 전세 가구가 3만 가구 넘게 감소했고 반전세를 포함한 월세 가구는 5만 가구 이상 증가한 것으로 나타났다. 17일 국가통계포털(KOSIS)에 따르면, 2024년 기준 서울 아파트 전세 가…",
+        "dupes": [
+          {
+            "title": "서울 아파트 '전세의 월세화'…7년새 월세 비중 7.8%p↑",
+            "link": "https://www.yna.co.kr/view/AKR20260811147900002",
+            "source": "연합뉴스 경제"
+          }
+        ],
+        "titleEn": "Seoul apartment rent share rises 7.8 percentage points in 7 years... 'Deposit-based rent becomes monthly rent"
+      },
+      {
+        "title": "서초구, 부동산 세제개편안 관련 구민 의견 모아 정부에 전달",
+        "link": "https://www.yna.co.kr/view/AKR20260817024700004",
+        "publishedAt": "2026-08-17T01:03:22.000Z",
+        "source": "연합뉴스 경제",
+        "category": "realestate",
+        "preview": "(서울=연합뉴스) 황재하 기자 = 서울 서초구(구청장 전성수)는 지난 3일 정부가 발표한 부동산 세제 개편안과 관련한 구민 의견을 취합해 재정경...",
+        "dupes": [],
+        "titleEn": "Seocho District collects residents' opinions on real estate tax reform proposal and relays them to the government."
+      },
+      {
         "title": "LH, 아파트 승강기 냉방 의무화…침수 감지 기능도 도입",
         "link": "https://www.newsis.com/view/NISX20260817_0003751268",
         "publishedAt": "2026-08-17T00:50:47.000Z",
@@ -1628,7 +1654,7 @@
             "source": "연합뉴스 경제"
           }
         ],
-        "titleEn": "LH to Mandate Elevator Air Conditioning in Apartments, Introduce Flood Detection Features"
+        "titleEn": "LH to Mandate Air Conditioning in Apartment Elevators, Introduce Flood Detection Features"
       },
       {
         "title": "LH 아파트 승강기에도 에어컨 의무 설치된다",
@@ -1638,7 +1664,7 @@
         "category": "realestate",
         "preview": "한국토지주택공사(LH)는 안전하고 쾌적한 공공주택 주거 환경 제공을 위해 ‘승강기 종합 개선방안’을 시행한다고 17일 밝혔다. 이번 개선안은 폭염, 집중호우 등 이상기후에 대응하여 안전하고 쾌적한 승강기 이용 환경을…",
         "dupes": [],
-        "titleEn": "LH apartment elevators to mandatorily install air conditioners"
+        "titleEn": "LH Apartment Elevators to Mandatorily Install Air Conditioners"
       },
       {
         "title": "강남구, 9월 18일 '부동산 세금 설명회'…8·3 개편안 분석",
@@ -1648,7 +1674,7 @@
         "category": "realestate",
         "preview": "(서울=연합뉴스) 황재하 기자 = 서울 강남구(구청장 김현기)는 내달 18일 강남구민회관에서 구민 500명을 대상으로 8·3 부동산 세제 개편안...",
         "dupes": [],
-        "titleEn": "Gangnam-gu to Hold Real Estate Tax Explanation Meeting on Sept. 18…Analyzing the Revised 8·3 Plan"
+        "titleEn": "Gangnam-gu to Hold Real Estate Tax Explanation Meeting on Sept. 18...Analysis of 8·3 Revised Plan"
       },
       {
         "title": "충북도, '사회연대경제 일경험 사업' 참여 기업·청년 모집",
@@ -1678,7 +1704,7 @@
         "category": "realestate",
         "preview": "(대전=연합뉴스) 박주영 기자 = 정부의 재건축 사업이 추진 중인 대전 서구 둔산동의 아파트값이 연일 상승세를 보이면서 이웃한 지역에서 행정동 ...",
         "dupes": [],
-        "titleEn": "Why is \"Dong\" renamed Dusan? Effects of reconstruction project on apartment prices?"
+        "titleEn": "Why is \"Dong Name\" Changing to \"Dusan\"? Effects of Reconstruction Project on Apartment Prices?"
       },
       {
         "title": "반년 빨리 짓지만 비용 7천만원↑…모듈러 주택 성공할까",
@@ -1698,17 +1724,7 @@
         "category": "stocks",
         "preview": "(서울=연합뉴스) 유동현 기자 = 미술품, 부동산 등 다양한 기초자산에 조각 투자할 수 있는 신종증권시장이 올해 11월 한국거래소(KRX)에 개...",
         "dupes": [],
-        "titleEn": "Sculpture Investment Makes Stock Market Debut... New Securities Market Opens in November"
-      },
-      {
-        "title": "서울 아파트 '전세의 월세화'…7년새 월세 비중 7.8%p↑",
-        "link": "https://www.yna.co.kr/view/AKR20260811147900002",
-        "publishedAt": "2026-08-16T20:53:00.000Z",
-        "source": "연합뉴스 경제",
-        "category": "realestate",
-        "preview": "(서울=연합뉴스) 안채원 기자 = 지난 7년새 서울 아파트 전세 가구는 3만 가구 넘게 감소하고, 반전세를 포함한 월세 가구는 5만 가구 이상 ...",
-        "dupes": [],
-        "titleEn": "Seoul Apartments 'Rent-to-Deposit' Trend... Share of Monthly Rent Rises 7.8%p in 7 Years"
+        "titleEn": "Sculpture investment makes stock market debut... new securities market opens in November"
       },
       {
         "title": "26억 이하 1주택, 공동명의가 절세…장기거주는 단독이 유리",
@@ -1738,7 +1754,7 @@
         "category": "realestate",
         "preview": "[서울=뉴시스]정진형 기자 = 정부가 8·13 공급 대책을 통해 모듈러 주택 활성화 지원에 나섰다. 공기 단축의 이점에도 높은 공사비에 발목 잡혀온 모듈러 주택 시장에 공공이 마중물이 돼 주택 공급 속도를 높이겠다는…",
         "dupes": [],
-        "titleEn": "50% discount on construction costs... will 'modular housing' become a game-changer in supply?"
+        "titleEn": "50% discount on construction costs... Will 'modular housing' become a game-changer in supply?"
       },
       {
         "title": "아파트 조이니 빌라값 상승폭 2.4배…‘주택수 제외’가 기름붓나",
@@ -1748,7 +1764,7 @@
         "category": "realestate",
         "preview": "서울매매가격지수 상승세, 작년의 2.4배 토허제 등 각종 규제에 아파트 수요 이동 주택수 제외 연장, 매수세 더 자극할수도무주택 실거주 수요자의 주거 사다리 역할을 해온 빌라(연립..",
         "dupes": [],
-        "titleEn": "Apartment Joyuni Villa Prices Rise 2.4 Times... 'Excluding Housing Units' Pours Oil on Fire"
+        "titleEn": "Apartment Joyini Villa Prices Rise 2.4 Times... 'Excluding Housing Units' Pours Oil on Fire"
       },
       {
         "title": "[올댓차이나] 中 7월 은행대출 71.5조원 순감소…차입 수요 부진",
@@ -1788,7 +1804,7 @@
         "category": "realestate",
         "preview": "무주택 실거주 수요자의 주거 사다리 역할을 해온 빌라(연립주택) 가격이 들썩이고 있다. 올해 서울 빌라 매매가격 상승세는 지난해의 2배를 훌쩍 웃돈 것으로 나타났다. 아파트에 집중..",
         "dupes": [],
-        "titleEn": "Villa prices surge ... 'Exclusion of housing units' extension also a boon"
+        "titleEn": "Villa prices surge ... extension of 'exclusion of housing units' also a boon"
       },
       {
         "title": "전세 계약 전 등기부·체납 확인하세요…서울시가 피해 예방법 알려준다",
@@ -1798,7 +1814,7 @@
         "category": "realestate",
         "preview": null,
         "dupes": [],
-        "titleEn": "Check the land registry and delinquent taxes before signing a lease agreement... Seoul provides prevention methods to avoid losses"
+        "titleEn": "Check the land register and delinquent taxes before signing a lease agreement... Seoul provides prevention methods to avoid losses"
       },
       {
         "title": "수도권 아파트를 1억대로 입주?…지분적립 공공분양 단지 10월 공개",
@@ -1818,7 +1834,7 @@
         "category": "realestate",
         "preview": null,
         "dupes": [],
-        "titleEn": "Non-resident single-homeowners to be blocked from rental loans, but there's a twist [Financial Authority Back Briefing]"
+        "titleEn": "Non-resident single-homeowners to be blocked from lease-to-own loans... but there's a twist [Financial Authority Back Briefing]"
       },
       {
         "title": "집값 5000만원 차이에 비거주 종부세 200만원↑…보완할까?",
@@ -1828,7 +1844,7 @@
         "category": "other",
         "preview": "[세종=뉴시스] 안호균 기자 = 정부가 2026년 세제개편안에서 종합부동산세 과세를 강화한 '비거주 1주택'은 시가 20억원을 기준으로 세부담이 큰 격차를 보인다. 실거주 1주택자의 경우 시가 40억원이 넘는 '초고…",
         "dupes": [],
-        "titleEn": "Home price difference of 50,000,000 won leads to 2,000,000 won increase in non-resident property tax...Will it be addressed?"
+        "titleEn": "Home price 50,000,000 won difference leads to 2,000,000 won increase in non-resident property tax...Will it be addressed?"
       },
       {
         "title": "'주택공급' 고민하는 정부, '녹지훼손' 안 된다는 서울시",
@@ -1848,17 +1864,7 @@
         "category": "realestate",
         "preview": "정부가 발표한 ‘2026년 세제개편안’을 둘러싼 반발이 이어지면서 국회에서 1세대 1주택자의 세 부담을 줄이기 위한 보완 입법이 잇따르고 있다. 보유기간에 낸 재산세와 종합부동산세를 양도차익에서 빼주거나, 1주택 양…",
         "dupes": [],
-        "titleEn": "Tax Reform Opposition Sparks Succession of Laws to Ease Capital Gains Tax on Primary Residence at Congress"
-      },
-      {
-        "title": "시세 21억 아파트 10억원에…'송파 롯데캐슬' 줍줍 18일 등판",
-        "link": "https://www.newsis.com/view/NISX20260814_0003749863",
-        "publishedAt": "2026-08-15T20:00:00.000Z",
-        "source": "뉴시스 경제",
-        "category": "realestate",
-        "preview": "[서울=뉴시스]이종성 기자 = 서울 송파구 거여동 '송파 시그니처 롯데캐슬' 전용면적 84㎡ 1가구가 오는 18일 10억원대에 재공급된다. 최근 같은 면적 실거래가가 21억원대인 만큼 10억원 넘는 시세 차익이 기대…",
-        "dupes": [],
-        "titleEn": "Price 2,100,000,000 apartment 1,000,000,000 won... 'Songpa Lotte Castle' grab 18th day debut"
+        "titleEn": "Tax Reform Opposition Sparks Succession of Laws to Ease Capital Gains Tax on Primary Residence in Congress"
       }
     ]
   }
