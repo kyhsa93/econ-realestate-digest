@@ -570,3 +570,19 @@ test("추이가 어느 날짜 기준인지 밝힌다", async () => {
   assert.match(meta, /신고 기한/, meta);
   assert.ok(!meta.includes("현재 "), `마지막 주 값을 현재 시세처럼 적었다: ${meta}`);
 });
+
+test("추이가 어느 지표인지 라벨로 밝힌다", async () => {
+  const realestate = trendRealestate();
+  const trend = trendData();
+
+  const expected = {
+    sale: "매매 평당가",
+    jeonse: "전세 평당 보증금",
+    wolse: "월세 보증금(평당 아님)",
+  };
+
+  for (const [kind, label] of Object.entries(expected)) {
+    const page = await loadRealestatePage({ realestate, trend, kind });
+    assert.match(page.trendMeta(), new RegExp(label.replace(/[()]/g, "\\$&")), `${kind}: ${page.trendMeta()}`);
+  }
+});

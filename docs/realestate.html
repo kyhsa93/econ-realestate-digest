@@ -424,6 +424,9 @@ const T = {
     backToAll: "서울 전체 시세",
     trendHeading: "최근 추이",
     trendBasis: "계약일 기준 · 신고 기한(계약 후 30일)이 지난 주까지",
+    trendMetricSale: "매매 평당가",
+    trendMetricJeonse: "전세 평당 보증금",
+    trendMetricWolse: "월세 보증금(평당 아님)",
     trendRange: (from, to, n) => `${from} ~ ${to} · ${n}주`,
     trendTooShort: "추이는 신고가 두 주 이상 쌓이면 표시됩니다.",
     trendValue: (v) => `마지막 주 ${v}`,
@@ -489,6 +492,9 @@ const T = {
     backToAll: "All Seoul prices",
     trendHeading: "Recent trend",
     trendBasis: "By contract date, up to the last week past the 30-day filing deadline",
+    trendMetricSale: "Sale price per pyeong",
+    trendMetricJeonse: "Jeonse deposit per pyeong",
+    trendMetricWolse: "Monthly-rent deposit (not per pyeong)",
     trendRange: (from, to, n) => `${from} – ${to} · ${n} weeks`,
     trendTooShort: "The trend appears once at least two weeks of filings are recorded.",
     trendValue: (v) => `Last week ${v}`,
@@ -931,6 +937,11 @@ function sparklineSvg(values) {
     </svg>`;
 }
 
+function trendMetricLabel() {
+  const key = kind ?? "sale";
+  return t(key === "jeonse" ? "trendMetricJeonse" : key === "wolse" ? "trendMetricWolse" : "trendMetricSale");
+}
+
 function trendSeries(trend) {
   const field = KIND_FIELDS[kind ?? "sale"];
   const scope = districtName ? trend?.districts?.[districtName] : trend?.overall;
@@ -969,7 +980,8 @@ function renderTrend() {
   document.getElementById("trend-chart").innerHTML = sparklineSvg(series.map((p) => p.value));
   const last = series[series.length - 1];
   document.getElementById("trend-meta").textContent =
-    `${t("trendRange")(series[0].date, last.date, series.length)} · ${t("trendValue")(formatMan(last.value))}` +
+    `${trendMetricLabel()} · ${t("trendRange")(series[0].date, last.date, series.length)}` +
+    ` · ${t("trendValue")(formatMan(last.value))}` +
     `\n${t("trendBasis")}`;
 }
 
