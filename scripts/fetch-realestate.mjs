@@ -52,8 +52,19 @@ const DISTRICTS = [
 
 const PYEONG_M2 = 3.3058;
 
-const CONCURRENCY = 5;
+// 25개구가 한꺼번에 UND_ERR_CONNECT_TIMEOUT으로 죽는 날이 잦다. 개별 요청이 아니라 그
+// 시각 러너와 국토부 서버 사이 경로가 통째로 막히는 모양새라(전부 성공 아니면 전부 실패),
+// 우리가 밀어넣는 동시 요청 수를 줄여 그 원인에서 우리 몫을 덜어낸다.
+const CONCURRENCY = Number(process.env.MOLIT_CONCURRENCY ?? 3);
 const MAX_RETRIES = 3;
+
+// 재시도 간격. 1초·2초는 연결이 막힌 상황에 너무 짧았다 - 5분 안에 세 번을 다 소진하고
+// 포기했는데, 52분 뒤 실행은 25개구가 전부 성공했다. 몇 초가 아니라 몇십 초를 기다린다.
+const RETRY_BASE_MS = Number(process.env.MOLIT_RETRY_MS ?? 3000);
+
+// 한 바퀴를 다 돌고 나서 실패한 구만 다시 훑기 전에 쉬는 시간. 앞의 재시도가 이미 그
+// 구를 세 번 두드린 직후라, 바로 다시 두드려봐야 같은 벽을 만난다.
+const SWEEP_DELAY_MS = Number(process.env.MOLIT_SWEEP_DELAY_MS ?? 45_000);
 
 async function mapWithConcurrency(items, limit, fn) {
   const results = new Array(items.length);
@@ -120,7 +131,7 @@ async function fetchApi(apiUrl, serviceKey, districtCode, yearMonth) {
       return await fetchApiOnce(apiUrl, serviceKey, districtCode, yearMonth);
     } catch (err) {
       lastErr = err;
-      if (attempt < MAX_RETRIES) await sleep(attempt * 1000);
+      if (attempt < MAX_RETRIES) await sleep(attempt * RETRY_BASE_MS);
     }
   }
   throw lastErr;
@@ -563,7 +574,11 @@ async function main() {
 
   const failedIndexes = results.map((r, i) => (r ? -1 : i)).filter((i) => i >= 0);
   if (failedIndexes.length > 0) {
-    console.log(`[fetch-realestate] ${failedIndexes.length}개구 실패, 재시도 스윕 시작`);
+    console.log(
+      `[fetch-realestate] ${failedIndexes.length}개구 실패,` +
+        ` ${Math.round(SWEEP_DELAY_MS / 1000)}초 쉬고 재시도 스윕 시작`
+    );
+    await sleep(SWEEP_DELAY_MS);
     const retried = await mapWithConcurrency(
       failedIndexes.map((i) => targetDistricts[i]),
       CONCURRENCY,
