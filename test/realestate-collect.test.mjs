@@ -303,3 +303,17 @@ test("한 슬롯이 실패해도 나머지는 계속 받는다", async (t) => {
   assert.ok(!stdout.includes("연속 실패로 중단"), stdout);
   assert.ok((await rawNames(space.rawDir, "sale")).length >= DISTRICT_COUNT, "성공한 슬롯이 저장되지 않았다");
 });
+
+test("환경변수가 비어 있으면 기본값으로 돈다", async (t) => {
+  const server = await startFakeMolit((kind) => successXml([kind === "sale" ? saleItem() : rentItem()]));
+  t.after(() => server.close());
+  const space = await workspace();
+
+  const { stdout } = await collect(server, {
+    ...space,
+    env: { MOLIT_BACKFILL_LIMIT: "", MOLIT_CONCURRENCY: "", MOLIT_TIMEOUT_MS: "" },
+  });
+
+  assert.match(stdout, /신규 50\b/, `백필 상한이 0이 됐다: ${stdout}`);
+  assert.ok((await rawNames(space.rawDir, "sale")).length > 0, "한 슬롯도 받지 못했다");
+});

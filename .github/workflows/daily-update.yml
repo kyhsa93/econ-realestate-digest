@@ -13,6 +13,10 @@ on:
         type: choice
         options: [full, news]
         default: full
+      backfill:
+        description: "실거래 원본 백필 상한 (비우면 50)"
+        type: string
+        default: ""
 
 permissions:
   contents: write
@@ -58,6 +62,7 @@ jobs:
           MOLIT_API_ENDPOINT: ${{ secrets.MOLIT_API_ENDPOINT }}
           MOLIT_RENT_API_KEY: ${{ secrets.MOLIT_RENT_API_KEY }}
           MOLIT_RENT_API_ENDPOINT: ${{ secrets.MOLIT_RENT_API_ENDPOINT }}
+          MOLIT_BACKFILL_LIMIT: ${{ inputs.backfill }}
 
       - name: 예·적금·대출 금리 수집
         if: env.MODE == 'full'

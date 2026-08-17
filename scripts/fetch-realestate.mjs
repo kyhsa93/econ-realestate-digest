@@ -9,13 +9,20 @@ const SALE_SERVICE_KEY = process.env.MOLIT_API_KEY;
 const RENT_API_URL = process.env.MOLIT_RENT_API_ENDPOINT;
 const RENT_SERVICE_KEY = process.env.MOLIT_RENT_API_KEY;
 
-const CONCURRENCY = Number(process.env.MOLIT_CONCURRENCY ?? 3);
+function numberEnv(name, fallback) {
+  const raw = String(process.env[name] ?? "").trim();
+  if (!raw) return fallback;
+  const value = Number(raw);
+  return Number.isFinite(value) && value >= 0 ? value : fallback;
+}
+
+const CONCURRENCY = numberEnv("MOLIT_CONCURRENCY", 3) || 3;
 const MAX_RETRIES = 3;
-const BACKFILL_LIMIT = Number(process.env.MOLIT_BACKFILL_LIMIT ?? 50);
-const REQUEST_TIMEOUT_MS = Number(process.env.MOLIT_TIMEOUT_MS ?? 15_000);
-const ABORT_AFTER = Number(process.env.MOLIT_ABORT_AFTER ?? 12);
-const RETRY_BASE_MS = Number(process.env.MOLIT_RETRY_MS ?? 3000);
-const SWEEP_DELAY_MS = Number(process.env.MOLIT_SWEEP_DELAY_MS ?? 45_000);
+const BACKFILL_LIMIT = numberEnv("MOLIT_BACKFILL_LIMIT", 50);
+const REQUEST_TIMEOUT_MS = numberEnv("MOLIT_TIMEOUT_MS", 15_000);
+const ABORT_AFTER = numberEnv("MOLIT_ABORT_AFTER", 12);
+const RETRY_BASE_MS = numberEnv("MOLIT_RETRY_MS", 3000);
+const SWEEP_DELAY_MS = numberEnv("MOLIT_SWEEP_DELAY_MS", 45_000);
 
 async function mapWithConcurrency(items, limit, fn) {
   const results = new Array(items.length);
