@@ -371,7 +371,6 @@
       </table>
     </div>
     <div class="content-notice" id="table-note"></div>
-    <!--prerender:budgetLinks--><!--/prerender:budgetLinks-->
     <!--prerender:districtLinks--><h3 class="district-links-heading" id="district-links-heading">다른 지역</h3><div class="district-links" id="district-links"><a href="./district-jongno.html">종로구</a><a href="./district-jung.html">중구</a><a href="./district-yongsan.html">용산구</a><a href="./district-seongdong.html">성동구</a><a href="./district-gwangjin.html">광진구</a><a href="./district-dongdaemun.html">동대문구</a><a href="./district-jungnang.html">중랑구</a><a href="./district-seongbuk.html">성북구</a><a href="./district-gangbuk.html">강북구</a><a href="./district-dobong.html" aria-current="page">도봉구</a><a href="./district-nowon.html">노원구</a><a href="./district-eunpyeong.html">은평구</a><a href="./district-seodaemun.html">서대문구</a><a href="./district-mapo.html">마포구</a><a href="./district-yangcheon.html">양천구</a><a href="./district-gangseo.html">강서구</a><a href="./district-guro.html">구로구</a><a href="./district-geumcheon.html">금천구</a><a href="./district-yeongdeungpo.html">영등포구</a><a href="./district-dongjak.html">동작구</a><a href="./district-gwanak.html">관악구</a><a href="./district-seocho.html">서초구</a><a href="./district-gangnam.html">강남구</a><a href="./district-songpa.html">송파구</a><a href="./district-gangdong.html">강동구</a></div><!--/prerender:districtLinks-->
   </section>
 
@@ -387,7 +386,6 @@
 const T = {
   ko: {
     budgetHeading: "예산으로 찾기",
-    budgetLinksHeading: "예산대별 실거래",
     budgetNote:
       "국토교통부에 신고된 실거래 기록입니다. 지금 살 수 있는 매물이 아니며, 같은 단지라도 층·향·동에 따라 값이 크게 다릅니다. 계약 후 30일인 신고 기한 때문에 최근 거래는 나중에 반영됩니다.",
     budgetBandLabel: (from, to) =>
@@ -452,7 +450,6 @@ const T = {
   },
   en: {
     budgetHeading: "Search by budget",
-    budgetLinksHeading: "Deals by budget",
     budgetNote:
       "These are transactions filed with Korea's Ministry of Land, not listings for sale. Prices vary widely by floor and building even within the same complex, and filings are due within 30 days of contract, so the most recent deals show up later.",
     budgetBandLabel: (from, to) =>
@@ -1066,7 +1063,6 @@ function applyLocale() {
   document.getElementById("district-heading").textContent = t("districtHeading");
   document.getElementById("table-note").textContent = t("note");
   setText("district-links-heading", t("otherDistricts"));
-  setText("budget-links-heading", t("budgetLinksHeading"));
   document.getElementById("footer-source").textContent = t("footerSource");
   document.getElementById("footer-privacy").textContent = t("footerPrivacy");
   document.getElementById("nav-digest").textContent = t("navDigest");

@@ -280,7 +280,6 @@
     </div>
     <div id="search-result"></div>
     <div class="content-notice" id="search-note"></div>
-    <!--prerender:budgetLinks--><h3 class="district-links-heading" id="budget-links-heading">예산대별 실거래</h3><div class="district-links" id="budget-links"><a href="./budget-3eok.html">3억대</a><a href="./budget-4eok.html">4억대</a><a href="./budget-5eok.html">5억대</a><a href="./budget-6eok.html">6억대</a><a href="./budget-7eok.html">7억대</a><a href="./budget-8eok.html">8억대</a><a href="./budget-9eok.html">9억대</a><a href="./budget-10eok.html">10억대</a><a href="./budget-11eok.html">11억대</a><a href="./budget-12eok.html">12억대</a><a href="./budget-13eok.html">13억대</a><a href="./budget-14eok.html">14억대</a><a href="./budget-15eok.html">15억대</a><a href="./budget-16eok.html">16억대</a><a href="./budget-17eok.html">17억대</a><a href="./budget-18eok.html">18억대</a><a href="./budget-19eok.html">19억대</a><a href="./budget-20eok.html">20억대</a></div><!--/prerender:budgetLinks-->
   </section>
 
   <footer class="site-footer">
@@ -369,7 +368,6 @@ const T = {
     notReady: "아직 검색할 실거래 자료가 없습니다. 국토교통부 신고분을 받는 대로 채워집니다.",
     note:
       "국토교통부에 신고된 아파트 매매 실거래 기록입니다. 지금 살 수 있는 매물이 아니며, 같은 단지라도 층·향·동에 따라 값이 크게 다릅니다. 계약 후 30일인 신고 기한 때문에 최근 거래는 나중에 반영됩니다. 목록은 최근 거래부터 일부만 보여주며, 건수는 조건에 맞는 신고 거래를 전부 셉니다. 연식은 준공연도가 신고된 거래에만, 직거래 표시는 거래 형태가 신고된 거래에만 걸립니다.",
-    budgetLinksHeading: "예산대별 실거래",
     updatedPrefix: "기준",
     footerSource: "출처: 국토교통부 아파트 매매 실거래가 공개시스템. 신고된 거래만 집계되며 신고 기한(계약 후 30일)이 있어 최근 거래는 나중에 반영됩니다.",
     footerPrivacy: "개인정보처리방침",
@@ -456,7 +454,6 @@ const T = {
     notReady: "No transaction data to search yet. It fills in as MOLIT filings come through.",
     note:
       "Apartment sale transactions reported to Korea's MOLIT. These are filed deals, not listings for sale, and prices vary widely by floor, aspect and building within the same complex. Filings can lag up to 30 days after contract. The list shows the most recent matches only; the count covers every filing that matches. Age filters apply only where a build year was filed, and the direct-deal tag only where a deal type was filed.",
-    budgetLinksHeading: "Deals by budget",
     updatedPrefix: "As of",
     footerSource: "Source: MOLIT real transaction price disclosure. Only reported deals are counted, and reporting can lag up to 30 days after contract.",
     footerPrivacy: "Privacy Policy",
@@ -1043,7 +1040,6 @@ function applyLocale() {
   setText("nav-rates", t("navRates"));
   setText("footer-source", t("footerSource"));
   setText("footer-privacy", t("footerPrivacy"));
-  setText("budget-links-heading", t("budgetLinksHeading"));
   for (const link of document.querySelectorAll("[data-re-page]")) {
     link.textContent = t(NAV_KEYS[link.getAttribute("data-re-page")]);
   }

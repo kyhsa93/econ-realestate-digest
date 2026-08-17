@@ -371,7 +371,6 @@
       </table>
     </div>
     <div class="content-notice" id="table-note"></div>
-    <!--prerender:budgetLinks--><h3 class="district-links-heading" id="budget-links-heading">예산대별 실거래</h3><div class="district-links" id="budget-links"><a href="./budget-3eok.html">3억대</a><a href="./budget-4eok.html">4억대</a><a href="./budget-5eok.html">5억대</a><a href="./budget-6eok.html">6억대</a><a href="./budget-7eok.html">7억대</a><a href="./budget-8eok.html">8억대</a><a href="./budget-9eok.html">9억대</a><a href="./budget-10eok.html">10억대</a><a href="./budget-11eok.html">11억대</a><a href="./budget-12eok.html">12억대</a><a href="./budget-13eok.html">13억대</a><a href="./budget-14eok.html">14억대</a><a href="./budget-15eok.html">15억대</a><a href="./budget-16eok.html">16억대</a><a href="./budget-17eok.html">17억대</a><a href="./budget-18eok.html">18억대</a><a href="./budget-19eok.html">19억대</a><a href="./budget-20eok.html">20억대</a></div><!--/prerender:budgetLinks-->
     <!--prerender:districtLinks--><!--/prerender:districtLinks-->
   </section>
 
@@ -387,7 +386,6 @@
 const T = {
   ko: {
     budgetHeading: "예산으로 찾기",
-    budgetLinksHeading: "예산대별 실거래",
     budgetNote:
       "국토교통부에 신고된 실거래 기록입니다. 지금 살 수 있는 매물이 아니며, 같은 단지라도 층·향·동에 따라 값이 크게 다릅니다. 계약 후 30일인 신고 기한 때문에 최근 거래는 나중에 반영됩니다.",
     budgetBandLabel: (from, to) =>
@@ -452,7 +450,6 @@ const T = {
   },
   en: {
     budgetHeading: "Search by budget",
-    budgetLinksHeading: "Deals by budget",
     budgetNote:
       "These are transactions filed with Korea's Ministry of Land, not listings for sale. Prices vary widely by floor and building even within the same complex, and filings are due within 30 days of contract, so the most recent deals show up later.",
     budgetBandLabel: (from, to) =>
@@ -1066,7 +1063,6 @@ function applyLocale() {
   document.getElementById("district-heading").textContent = t("districtHeading");
   document.getElementById("table-note").textContent = t("note");
   setText("district-links-heading", t("otherDistricts"));
-  setText("budget-links-heading", t("budgetLinksHeading"));
   document.getElementById("footer-source").textContent = t("footerSource");
   document.getElementById("footer-privacy").textContent = t("footerPrivacy");
   document.getElementById("nav-digest").textContent = t("navDigest");

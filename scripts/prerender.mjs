@@ -216,11 +216,6 @@ function linksBlockHtml(id, heading, links) {
   );
 }
 
-export function budgetLinksHtml(pages = BUDGET_PAGES) {
-  const links = pages.map((p) => `<a href="./${p.file}">${escapeHtml(`${p.eok}억대`)}</a>`).join("");
-  return linksBlockHtml("budget-links", "예산대별 실거래", links);
-}
-
 export function newsRealestateStatsHtml(news) {
   const stats = news?.realestateStats ?? [];
   if (!stats.length) return null;

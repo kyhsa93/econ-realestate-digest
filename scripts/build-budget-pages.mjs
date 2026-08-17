@@ -1,11 +1,10 @@
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { BUDGET_PAGES, BUDGET_PAGE_EOK, budgetPageFile } from "./budget-pages.mjs";
-import { applyPrerender, budgetBodyHtml, budgetLinksHtml } from "./prerender.mjs";
+import { applyPrerender, budgetBodyHtml } from "./prerender.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
 const REALESTATE_PATH = path.join(root, "docs/realestate.html");
-const DEAL_SEARCH_PATH = path.join(root, "docs/deal-search.html");
 const BASE_URL = "https://kyhsa93.github.io/econ-realestate-digest/";
 
 const BASE_TITLE = "서울 아파트 시세 - 25개 자치구 실거래가";
@@ -31,7 +30,7 @@ function navHtml(page) {
   return links.join("");
 }
 
-export function buildBudgetPage(baseHtml, page, budget, links = budgetLinksHtml()) {
+export function buildBudgetPage(baseHtml, page, budget) {
   const band = (budget?.bands ?? []).find((b) => b.min10k === page.min10k) ?? null;
   const body = budgetBodyHtml(band, budget?.periods);
   if (!body) return null;
@@ -61,7 +60,6 @@ export function buildBudgetPage(baseHtml, page, budget, links = budgetLinksHtml(
   return applyPrerender(html, {
     budgetResult: body,
     budgetPageNav: navHtml(page),
-    budgetLinks: links,
   });
 }
 
@@ -80,30 +78,15 @@ async function main() {
     return;
   }
 
-  const sourceHtml = await readFile(REALESTATE_PATH, "utf8");
+  const baseHtml = await readFile(REALESTATE_PATH, "utf8");
 
-  const bandOf = (page) => (budget.bands ?? []).find((b) => b.min10k === page.min10k) ?? null;
-  const exists = async (page) =>
-    Boolean(await readFile(path.join(root, "docs", page.file), "utf8").catch(() => null));
-
-  const linked = [];
-  for (const page of BUDGET_PAGES) {
-    if (bandOf(page) || (await exists(page))) linked.push(page);
-  }
-  const links = budgetLinksHtml(linked);
-
-  const searchHtml = await readFile(DEAL_SEARCH_PATH, "utf8");
-  const nextSearchHtml = applyPrerender(searchHtml, { budgetLinks: links });
-  if (nextSearchHtml !== searchHtml) await writeFile(DEAL_SEARCH_PATH, nextSearchHtml);
-
-  const baseHtml = applyPrerender(sourceHtml, { budgetLinks: links });
 
   let created = 0;
   let updated = 0;
   const skipped = [];
 
   for (const page of BUDGET_PAGES) {
-    const html = buildBudgetPage(baseHtml, page, budget, links);
+    const html = buildBudgetPage(baseHtml, page, budget);
     if (!html) {
       skipped.push(`${page.eok}억대`);
       continue;

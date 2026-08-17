@@ -4,7 +4,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { BUDGET_PAGES, budgetPageFile } from "../scripts/budget-pages.mjs";
 import { buildBudgetPage } from "../scripts/build-budget-pages.mjs";
-import { budgetBodyHtml, budgetLinksHtml } from "../scripts/prerender.mjs";
+import { budgetBodyHtml } from "../scripts/prerender.mjs";
 import { buildBands, mergeBands } from "../scripts/budget-bands.mjs";
 import { loadRealestatePage } from "./helpers/realestate-page.mjs";
 
@@ -90,33 +90,12 @@ test("거래가 없는 구간은 페이지를 만들지 않는다", async () => 
   assert.equal(buildBudgetPage(await baseHtml(), empty, BUDGET), null);
 });
 
-test("링크 목록은 넘겨받은 페이지만 건다", () => {
-  const html = budgetLinksHtml(BUDGET_PAGES.filter((p) => p.eok <= 5));
-  assert.match(html, /budget-3eok\.html/);
-  assert.ok(!html.includes("budget-6eok.html"));
-});
-
-test("걸 페이지가 없으면 제목도 심지 않는다", () => {
-  assert.equal(budgetLinksHtml([]), "");
-  assert.match(budgetLinksHtml(), /예산대별 실거래/);
-});
-
-test("예산대 목록은 검색 페이지에만 두고 시세 페이지에는 두지 않는다", async () => {
-  const block = async (file) =>
-    (await readFile(path.join(root, "docs", file), "utf8"))
-      .split("<!--prerender:budgetLinks-->")[1]
-      ?.split("<!--/prerender")[0] ?? "";
-
-  for (const file of ["realestate.html", "apartment-sale.html", "district-gangnam.html"]) {
-    assert.equal(await block(file), "", `${file}: 예산대 목록이 남아 있다`);
+test("예산대 목록은 어느 페이지에도 두지 않는다", async () => {
+  for (const file of ["realestate.html", "deal-search.html", "apartment-sale.html", "district-gangnam.html", "budget-8eok.html"]) {
+    const html = await readFile(path.join(root, "docs", file), "utf8");
+    assert.ok(!html.includes("budget-links"), `${file}: 예산대 목록이 남아 있다`);
+    assert.ok(!html.includes("예산대별 실거래"), `${file}: 예산대 목록 제목이 남아 있다`);
   }
-
-  assert.ok(
-    (await readFile(path.join(root, "docs/deal-search.html"), "utf8")).includes(
-      "<!--prerender:budgetLinks-->"
-    ),
-    "검색 페이지에 예산대 목록 자리가 없다"
-  );
 });
 
 test("프리렌더가 심은 거래 목록을 클라이언트가 그대로 다시 그린다", async () => {
