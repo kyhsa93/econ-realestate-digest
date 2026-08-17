@@ -1,21 +1,16 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import {
-  MAX_MONTHS,
   buildDistrictBands,
   flattenDistrictMonths,
   mergeBands,
   mergeDistrictMonths,
-  mergeMonths,
 } from "./budget-bands.mjs";
-import { buildDealFiles, dealFileName } from "./deal-files.mjs";
+import { buildDealFiles, dealFileName, periodOf } from "./deal-files.mjs";
 import { DISTRICT_SLUGS } from "./district-slugs.mjs";
+import { readDealSource } from "./realestate-source.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
-
-const dealsFile = process.env.REALESTATE_DEALS_FILE
-  ? path.resolve(process.env.REALESTATE_DEALS_FILE)
-  : path.join(root, "cache/realestate-deals.json");
 
 const outFile = process.env.BUDGET_DEALS_FILE
   ? path.resolve(process.env.BUDGET_DEALS_FILE)
@@ -32,14 +27,6 @@ const monthsFile = process.env.BUDGET_MONTHS_FILE
 const dealFilesDir = process.env.DEAL_FILES_DIR
   ? path.resolve(process.env.DEAL_FILES_DIR)
   : path.join(root, "docs/data");
-
-async function readJson(file) {
-  try {
-    return JSON.parse(await readFile(file, "utf-8"));
-  } catch {
-    return null;
-  }
-}
 
 const trimForSearch = (byDistrict) =>
   Object.fromEntries(
@@ -59,12 +46,24 @@ const slugsFor = (byDistrict) =>
       .map((name) => [name, DISTRICT_SLUGS[name]])
   );
 
-export function buildPayload(source, existingMonths, now) {
+export function buildPayload(source, now) {
   const deals = Object.values(source?.districts ?? {}).flat();
   if (!deals.length) return null;
 
-  const months = mergeMonths(existingMonths, source.period, buildDistrictBands(deals), MAX_MONTHS);
-  const periods = Object.keys(months).sort();
+  const byPeriod = new Map();
+  for (const deal of deals) {
+    const period = periodOf(deal?.date);
+    if (!period) continue;
+    if (!byPeriod.has(period)) byPeriod.set(period, []);
+    byPeriod.get(period).push(deal);
+  }
+
+  const periods = [...byPeriod.keys()].sort();
+  if (!periods.length) return null;
+
+  const months = Object.fromEntries(
+    periods.map((period) => [period, buildDistrictBands(byPeriod.get(period))])
+  );
   const updatedAt = now.toISOString();
   const byDistrict = mergeDistrictMonths(months);
 
@@ -75,18 +74,8 @@ export function buildPayload(source, existingMonths, now) {
   };
 }
 
-async function readExistingDealFiles() {
-  const entries = await Promise.all(
-    Object.entries(DISTRICT_SLUGS).map(async ([name, slug]) => {
-      const file = await readJson(path.join(dealFilesDir, dealFileName(slug)));
-      return file?.deals?.length ? [name, file] : null;
-    })
-  );
-  return Object.fromEntries(entries.filter(Boolean));
-}
-
 async function writeDealFiles(source, now) {
-  const files = buildDealFiles(source, await readExistingDealFiles(), now);
+  const files = buildDealFiles(source, now);
   if (!files) return;
 
   await mkdir(dealFilesDir, { recursive: true });
@@ -106,15 +95,14 @@ async function writeDealFiles(source, now) {
 }
 
 async function main() {
-  const source = await readJson(dealsFile);
-  if (!source?.period) {
+  const now = new Date();
+  const source = await readDealSource(now);
+  if (!Object.keys(source.districts).length) {
     console.log("  거래 원본이 없습니다 - 기존 예산 데이터를 그대로 둡니다");
     return;
   }
 
-  const existingMonths = await readJson(monthsFile);
-  const now = new Date();
-  const payload = buildPayload(source, existingMonths, now);
+  const payload = buildPayload(source, now);
   if (!payload) {
     console.log(`  ${source.period} 거래가 한 건도 없습니다 - 기존 예산 데이터를 그대로 둡니다`);
     return;
@@ -131,7 +119,7 @@ async function main() {
   const total = payload.screen.bands.reduce((sum, band) => sum + band.count, 0);
   console.log(
     `  예산 구간 ${payload.screen.bands.length}칸 · 거래 ${total.toLocaleString("ko-KR")}건` +
-      ` (${payload.screen.periods.join(", ")})`
+      ` (${payload.screen.periods.join(", ")} · 해제 ${source.cancelled.toLocaleString("ko-KR")}건 제외)`
   );
   console.log(`  거래내역 검색 ${Object.keys(payload.search.districts).length}개 지역`);
 }

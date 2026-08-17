@@ -42,9 +42,9 @@ const RENTS = [
 const SALE_SOURCE = { period: "202608", districts: { seoul: [deal(85_000)] } };
 
 const FIXTURE = (() => {
-  const payload = buildPayload(SALE_SOURCE, null, NOW);
-  const deals = buildDealFiles(SALE_SOURCE, null, NOW) ?? {};
-  const rents = buildRentFiles({ period: "202608", districts: { seoul: RENTS } }, null, NOW) ?? {};
+  const payload = buildPayload(SALE_SOURCE, NOW);
+  const deals = buildDealFiles(SALE_SOURCE, NOW) ?? {};
+  const rents = buildRentFiles({ period: "202608", districts: { seoul: RENTS } }, NOW) ?? {};
   return {
     budget: payload.screen,
     search: payload.search,

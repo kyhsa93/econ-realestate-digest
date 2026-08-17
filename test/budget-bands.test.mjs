@@ -8,7 +8,6 @@ import {
   bandStart,
   buildBands,
   mergeBands,
-  mergeMonths,
 } from "../scripts/budget-bands.mjs";
 import { buildPayload } from "../scripts/build-budget-deals.mjs";
 
@@ -81,17 +80,6 @@ test("어느 지역에 몰려 있는지 같이 센다", () => {
   ]);
 });
 
-test("지난달 구간은 그대로 두고 오래된 달만 떨어뜨린다", () => {
-  const first = mergeMonths(null, "202606", buildBands([deal(85_000)]));
-  const second = mergeMonths({ months: first }, "202607", buildBands([deal(95_000)]));
-  const third = mergeMonths({ months: second }, "202608", buildBands([deal(105_000)]));
-
-  assert.deepEqual(Object.keys(third), ["202606", "202607", "202608"]);
-
-  const fourth = mergeMonths({ months: third }, "202609", buildBands([deal(115_000)]));
-  assert.deepEqual(Object.keys(fourth), ["202607", "202608", "202609"], "석 달치만 남는다");
-});
-
 test("여러 달의 같은 구간을 하나로 합친다", () => {
   const months = {
     "202607": buildBands([deal(85_000, { apt: "가단지", date: "2026-07-20" })]),
@@ -112,8 +100,8 @@ test("여러 달의 같은 구간을 하나로 합친다", () => {
 
 test("거래 원본이 비면 기존 결과를 건드리지 않는다", () => {
   const now = new Date("2026-08-17T00:00:00Z");
-  assert.equal(buildPayload({ period: "202608", districts: {} }, null, now), null);
-  assert.equal(buildPayload(null, null, now), null);
+  assert.equal(buildPayload({ period: "202608", districts: {} }, now), null);
+  assert.equal(buildPayload(null, now), null);
 });
 
 test("구별 원본을 하나로 모아 구간을 만든다", () => {
@@ -126,7 +114,7 @@ test("구별 원본을 하나로 모아 구간을 만든다", () => {
     },
   };
 
-  const payload = buildPayload(source, null, now);
+  const payload = buildPayload(source, now);
   assert.deepEqual(payload.screen.periods, ["202608"]);
   assert.deepEqual(payload.screen.bands.map((b) => b.min10k), [80_000, BAND_MAX]);
   assert.deepEqual(Object.keys(payload.months.months), ["202608"]);

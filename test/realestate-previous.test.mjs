@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { attachPrevious, isPreviousUsable } from "../scripts/realestate-previous.mjs";
+import { attachPrevious } from "../scripts/realestate-previous.mjs";
 
 const current = {
   period: "202608",
@@ -17,13 +17,6 @@ const previous = {
     { code: "11350", name: "노원구", sale: { avgPricePerPyeong10k: 3600, transactionCount: 40 }, jeonse: null },
   ],
 };
-
-test("지난달 캐시는 기간이 맞을 때만 쓴다", () => {
-  assert.equal(isPreviousUsable(previous, "202607"), true);
-  assert.equal(isPreviousUsable(previous, "202606"), false, "달이 바뀌었는데 옛 캐시를 썼다");
-  assert.equal(isPreviousUsable(null, "202607"), false);
-  assert.equal(isPreviousUsable({ period: "202607" }, "202607"), false, "districts 없는 캐시를 통과시켰다");
-});
 
 test("이번 달 값을 덮어쓰지 않고 prev로 얹는다", () => {
   const merged = attachPrevious(current, previous);

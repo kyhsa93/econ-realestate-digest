@@ -6,8 +6,6 @@ export const DEALS_PER_BAND = 6;
 
 export const DEALS_PER_DISTRICT_BAND = 3;
 
-export const MAX_MONTHS = 3;
-
 export function bandStart(amount10k) {
   if (!Number.isFinite(amount10k) || amount10k <= 0) return null;
   if (amount10k < BAND_MIN) return 0;
@@ -109,14 +107,6 @@ export function mergeDistrictMonths(months, limit = DEALS_PER_DISTRICT_BAND * 2)
       .sort((a, b) => a[0].localeCompare(b[0], "ko"))
       .map(([name, monthsOf]) => [name, mergeBands(monthsOf, limit)])
   );
-}
-
-export function mergeMonths(existing, period, bands, maxMonths = MAX_MONTHS) {
-  const months = { ...(existing?.months ?? {}), [period]: bands };
-  const kept = Object.keys(months)
-    .sort()
-    .slice(-maxMonths);
-  return Object.fromEntries(kept.map((key) => [key, months[key]]));
 }
 
 export function mergeBands(months, limit = DEALS_PER_BAND * 2) {

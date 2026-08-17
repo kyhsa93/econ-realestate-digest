@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { contractRenewal, normalizeRentDeal } from "../scripts/realestate-metrics.mjs";
-import { buildRentFiles, mergeDeals } from "../scripts/deal-files.mjs";
+import { buildRentFiles, collectDeals } from "../scripts/deal-files.mjs";
 
 const NOW = new Date("2026-08-17T00:00:00Z");
 
@@ -73,9 +73,7 @@ test("갱신계약은 표시해 둔다", () => {
 });
 
 test("전월세는 보증금이 큰 쪽을 앞에 둔다", () => {
-  const { deals } = mergeDeals(
-    [],
-    "202608",
+  const { deals } = collectDeals(
     [
       rentDeal({ apt: "싼쪽", deposit10k: 50_000 }),
       rentDeal({ apt: "어제", date: "2026-08-13" }),
@@ -89,17 +87,15 @@ test("전월세는 보증금이 큰 쪽을 앞에 둔다", () => {
 });
 
 test("지역별 전월세 파일을 나누고 석 달만 남긴다", () => {
-  const stored = ({ district: _name, ...deal }) => deal;
-  const existing = {
-    강남구: {
-      deals: [
-        stored(rentDeal({ date: "2026-05-10", apt: "다섯달" })),
-        stored(rentDeal({ date: "2026-06-10", apt: "여섯달" })),
-        stored(rentDeal({ date: "2026-07-10", apt: "지난달" })),
-      ],
-    },
-  };
-  const files = buildRentFiles(sourceOf([rentDeal({ apt: "이번달" })]), existing, NOW);
+  const files = buildRentFiles(
+    sourceOf([
+      rentDeal({ date: "2026-05-10", apt: "다섯달" }),
+      rentDeal({ date: "2026-06-10", apt: "여섯달" }),
+      rentDeal({ date: "2026-07-10", apt: "지난달" }),
+      rentDeal({ apt: "이번달" }),
+    ]),
+    NOW
+  );
 
   assert.deepEqual(Object.keys(files), ["gangnam"]);
   assert.deepEqual(files.gangnam.periods, ["202606", "202607", "202608"]);

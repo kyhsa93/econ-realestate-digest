@@ -27,8 +27,8 @@ const DEALS = [
 ];
 
 function fixtureOf(deals, period = "202608") {
-  const payload = buildPayload({ period, districts: { seoul: deals } }, null, NOW);
-  const files = buildDealFiles({ period, districts: { seoul: deals } }, null, NOW) ?? {};
+  const payload = buildPayload({ period, districts: { seoul: deals } }, NOW);
+  const files = buildDealFiles({ period, districts: { seoul: deals } }, NOW) ?? {};
   return {
     budget: payload.screen,
     search: payload.search,
@@ -342,7 +342,7 @@ test("지역을 고르면 표본이 아니라 전수를 보여준다", async () 
 });
 
 test("서울 전체 건수는 지역별 건수의 합과 같다", () => {
-  const payload = buildPayload({ period: "202608", districts: { 11350: DEALS } }, null, NOW);
+  const payload = buildPayload({ period: "202608", districts: { 11350: DEALS } }, NOW);
 
   const seoul = payload.screen.bands.reduce((sum, b) => sum + b.count, 0);
   const byDistrict = Object.values(payload.search.districts)
@@ -354,7 +354,7 @@ test("서울 전체 건수는 지역별 건수의 합과 같다", () => {
 });
 
 test("검색 자료는 지역별로 나뉘고 지역 이름을 다시 담지 않는다", () => {
-  const payload = buildPayload({ period: "202608", districts: { 11350: DEALS } }, null, NOW);
+  const payload = buildPayload({ period: "202608", districts: { 11350: DEALS } }, NOW);
 
   assert.deepEqual(Object.keys(payload.search.districts).sort(), ["강남구", "노원구", "도봉구"]);
 
@@ -367,7 +367,7 @@ test("검색 자료는 지역별로 나뉘고 지역 이름을 다시 담지 않
 });
 
 test("전수 파일 주소는 자료가 알려준다", () => {
-  const payload = buildPayload({ period: "202608", districts: { 11350: DEALS } }, null, NOW);
+  const payload = buildPayload({ period: "202608", districts: { 11350: DEALS } }, NOW);
   assert.equal(payload.search.slugs["노원구"], "nowon");
   assert.equal(payload.search.slugs["강남구"], "gangnam");
   assert.ok(!("송파구" in payload.search.slugs), "거래가 없는 지역까지 주소를 냈다");

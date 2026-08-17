@@ -15,7 +15,7 @@ const PERIOD = windowMonths(NOW)[0];
 const DISTRICT_COUNT = 25;
 const STEPS = ["scripts/fetch-realestate.mjs", "scripts/build-realestate.mjs"];
 
-async function collect(server, { rawDir, dataDir, dealsFile, backfillLimit = 0, env = {} }, steps = STEPS) {
+async function collect(server, { rawDir, dataDir, backfillLimit = 0, env = {} }, steps = STEPS) {
   const options = {
     cwd: root,
     env: {
@@ -26,7 +26,6 @@ async function collect(server, { rawDir, dataDir, dealsFile, backfillLimit = 0, 
       MOLIT_RENT_API_KEY: "test",
       REALESTATE_RAW_DIR: rawDir,
       REALESTATE_DATA_DIR: dataDir,
-      REALESTATE_DEALS_FILE: dealsFile,
       MOLIT_BACKFILL_LIMIT: String(backfillLimit),
       MOLIT_SWEEP_DELAY_MS: "0",
       MOLIT_RETRY_MS: "0",
@@ -41,11 +40,7 @@ async function collect(server, { rawDir, dataDir, dealsFile, backfillLimit = 0, 
 
 async function workspace() {
   const dir = await mkdtemp(path.join(tmpdir(), "collect-"));
-  return {
-    rawDir: path.join(dir, "raw"),
-    dataDir: path.join(dir, "data"),
-    dealsFile: path.join(dir, "deals.json"),
-  };
+  return { rawDir: path.join(dir, "raw"), dataDir: path.join(dir, "data") };
 }
 
 const readJson = async (file) => JSON.parse(await readFile(file, "utf-8"));
@@ -100,9 +95,7 @@ test("기존 산출물은 당월 기준 그대로 만들어진다", async (t) =>
   assert.equal(payload.districts.length, DISTRICT_COUNT);
   assert.equal(payload.overall.sale.transactionCount, DISTRICT_COUNT, "당월 거래만 세야 한다");
 
-  const previous = await readJson(path.join(space.dataDir, "realestate-prev.json"));
-  assert.equal(previous.period, refreshMonths(NOW)[1]);
-  assert.equal(previous.districts.length, DISTRICT_COUNT);
+  assert.equal(payload.previousPeriod, refreshMonths(NOW)[1], "지난달 비교값을 원본에서 만들지 않았다");
 });
 
 test("응답이 그대로면 원본 파일을 다시 쓰지 않는다", async (t) => {
@@ -222,24 +215,26 @@ test("수집이 통째로 실패해도 지난 원본으로 산출물을 만든�
 });
 
 test("전월세도 지역별 전수 파일로 남긴다", async (t) => {
-  const server = await startFakeMolit((kind) =>
-    kind === "sale"
-      ? successXml([saleItem()])
+  const server = await startFakeMolit((kind, { yearMonth }) => {
+    const on = { dealYear: Number(yearMonth.slice(0, 4)), dealMonth: Number(yearMonth.slice(4)) };
+    return kind === "sale"
+      ? successXml([saleItem(on)])
       : successXml([
-          rentItem(),
-          rentItem({ aptNm: "월세단지", monthlyRent: "150", deposit: "10,000" }),
-          rentItem({ aptNm: "갱신단지", contractType: "갱신", deposit: "45,000" }),
-        ])
-  );
+          rentItem(on),
+          rentItem({ ...on, aptNm: "월세단지", monthlyRent: "150", deposit: "10,000" }),
+          rentItem({ ...on, aptNm: "갱신단지", contractType: "갱신", deposit: "45,000" }),
+        ]);
+  });
   t.after(() => server.close());
   const space = await workspace();
 
   const { stdout } = await collect(server, space);
 
+  const months = refreshMonths(NOW);
   const file = JSON.parse(await readFile(path.join(space.dataDir, "rents-jongno.json"), "utf-8"));
   assert.equal(file.district, "종로구");
-  assert.equal(file.deals.length, 3);
-  assert.deepEqual(file.periods, [PERIOD]);
+  assert.deepEqual(file.periods, [...months].sort(), "받아둔 달이 다 담기지 않았다");
+  assert.equal(file.deals.length, 3 * months.length);
 
   const jeonse = file.deals.find((deal) => deal.apt === "테스트단지");
   const wolse = file.deals.find((deal) => deal.apt === "월세단지");
@@ -248,8 +243,9 @@ test("전월세도 지역별 전수 파일로 남긴다", async (t) => {
   assert.equal(file.deals.find((deal) => deal.apt === "갱신단지").renewal, true);
   assert.ok(file.deals.every((deal) => !("district" in deal)), "지역 이름이 거래마다 남았다");
 
-  assert.match(stdout, new RegExp(`전세 ${DISTRICT_COUNT * 2}건 · 월세 ${DISTRICT_COUNT}건`), stdout);
-  assert.match(stdout, new RegExp(`갱신계약 ${DISTRICT_COUNT}건`), stdout);
+  const total = DISTRICT_COUNT * months.length;
+  assert.match(stdout, new RegExp(`전세 ${total * 2}건 · 월세 ${total}건`), stdout);
+  assert.match(stdout, new RegExp(`갱신계약 ${total}건`), stdout);
 });
 
 test("날마다 새로 들어온 신고만 주간 시세로 쌓인다", async (t) => {

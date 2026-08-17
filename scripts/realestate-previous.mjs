@@ -1,7 +1,3 @@
-export function isPreviousUsable(cache, previousPeriod) {
-  return Boolean(cache) && cache.period === previousPeriod && Array.isArray(cache.districts);
-}
-
 const METRIC_KEYS = ["sale", "saleNational84", "jeonse", "wolse"];
 
 function pickMetrics(entry) {
