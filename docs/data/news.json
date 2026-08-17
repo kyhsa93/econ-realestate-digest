@@ -1,7 +1,76 @@
 {
-  "updatedAt": "2026-08-17T06:56:30.463Z",
+  "updatedAt": "2026-08-17T07:57:09.548Z",
   "date": "2026-08-17",
   "items": [
+    {
+      "title": "[부동산 손품노트] 취득·보유·양도·상속·증여세… 집 관련 5가지 세금 집중해부",
+      "link": "https://www.mk.co.kr/news/realestate/12129384",
+      "publishedAt": "2026-08-17T07:50:53.000Z",
+      "source": "매일경제 부동산",
+      "category": "realestate",
+      "preview": "세상에서 확실한 것은 죽음과 세금, 두 가지뿐이라는 말이 있다. 사람은 누구나 죽고, 살아 있는 동안에는 누구나 세금을 낸다. 그리고 세금 중에서도 가장 크고, 자주, 오래 따라붙..",
+      "dupes": []
+    },
+    {
+      "title": "서울 전세 3만가구 증발 … 월세는 5만가구 껑충",
+      "link": "https://www.mk.co.kr/news/realestate/12129367",
+      "publishedAt": "2026-08-17T07:31:10.000Z",
+      "source": "매일경제 부동산",
+      "category": "realestate",
+      "preview": "서울 아파트 임대차 시장의 무게추가 전세에서 월세로 빠르게 기울고 있다. 최근 7년 사이 전세 가구는 3만가구 넘게 줄어든 반면, 반전세를 포함한 월세 가구는 5만가구 이상 급증했..",
+      "dupes": [],
+      "context": [
+        {
+          "kind": "realestate",
+          "href": "./apartment-jeonse.html",
+          "label": "서울 전체 아파트 84㎡ 전세",
+          "labelEn": "Seoul apartment 84㎡ jeonse",
+          "value": "6억 5,329만원",
+          "valueEn": "₩653M",
+          "note": "8월 신고 2,525건 · 8/10 대비 +1.5%",
+          "noteEn": "2,525 deals in Aug · +1.5% vs Aug 10"
+        }
+      ]
+    },
+    {
+      "title": "공장서 뚝딱…모듈러 주택 年5천가구 '닥공'",
+      "link": "https://www.mk.co.kr/news/realestate/12129363",
+      "publishedAt": "2026-08-17T07:31:08.000Z",
+      "source": "매일경제 부동산",
+      "category": "realestate",
+      "preview": "정부가 주택 공급 속도를 끌어올리기 위해 공장에서 주택을 만들어 현장에서 조립하는 '모듈러 주택'을 본격적인 공급 수단으로 키운다. 그동안 학교·기숙사나 저층 주택 위주로 활용되던..",
+      "dupes": []
+    },
+    {
+      "title": "기업대출·회사채 담아 안정적 이자수익 노린다",
+      "link": "https://www.hankyung.com/article/2026081748021",
+      "publishedAt": "2026-08-17T07:08:25.000Z",
+      "source": "한국경제 경제",
+      "category": "other",
+      "preview": null,
+      "dupes": []
+    },
+    {
+      "title": "“서울 아파트 판 8.5억, 어디에”…40대 예비부부의 고민",
+      "link": "https://www.hankyung.com/article/202608130243i",
+      "publishedAt": "2026-08-17T06:49:28.000Z",
+      "source": "한국경제 경제",
+      "category": "realestate",
+      "preview": null,
+      "dupes": [],
+      "context": [
+        {
+          "kind": "realestate",
+          "href": "./apartment-sale.html",
+          "label": "서울 전체 아파트 84㎡ 매매",
+          "labelEn": "Seoul apartment 84㎡ sale",
+          "value": "11억 3,049만원",
+          "valueEn": "₩1,130M",
+          "note": "8월 신고 575건 · 8/10 대비 +8.3%",
+          "noteEn": "575 deals in Aug · +8.3% vs Aug 10"
+        }
+      ]
+    },
     {
       "title": "[외환] 원/달러 환율 5.3원 내린 1,413.0원(15:30 기준가)",
       "link": "https://www.yna.co.kr/view/AKR20260817046600002",
@@ -10,6 +79,27 @@
       "category": "stocks",
       "preview": null,
       "dupes": []
+    },
+    {
+      "title": "“서울 월세 비싸서 못살겠다”…주거비 감당 못한 대학생들, 고시텔 구하기 전쟁",
+      "link": "https://www.mk.co.kr/news/realestate/12129330",
+      "publishedAt": "2026-08-17T06:33:24.000Z",
+      "source": "매일경제 부동산",
+      "category": "realestate",
+      "preview": "서울 월세가 가파르게 오르면서 주거비를 감당하지 못한 대학생들이 원룸이나 오피스텔 대신 고시텔로 향하고 있다. 17일 연합뉴스에 따르면 개강을 2주 남짓 앞둔 지난 14일 서울 성..",
+      "dupes": [],
+      "context": [
+        {
+          "kind": "realestate",
+          "href": "./apartment-rent.html",
+          "label": "서울 전체 아파트 월세",
+          "labelEn": "Seoul apartment rent",
+          "value": "보증금 22,166만원 / 월 96만원",
+          "valueEn": "₩221.7M + ₩0.96M/mo",
+          "note": "8월 신고 2,223건 · 8/10 대비 +2.1%",
+          "noteEn": "2,223 deals in Aug · +2.1% vs Aug 10"
+        }
+      ]
     },
     {
       "title": "1주택자 종부세 공제 14억 상향…'이 조건' 모르면 손해",
@@ -209,120 +299,6 @@
       "category": "realestate",
       "preview": "[서울=뉴시스]정진형 기자 = 정부가 8·13 공급 대책을 통해 모듈러 주택 활성화 지원에 나섰다. 공기 단축의 이점에도 높은 공사비에 발목 잡혀온 모듈러 주택 시장에 공공이 마중물이 돼 주택 공급 속도를 높이겠다는…",
       "dupes": []
-    },
-    {
-      "title": "아파트 조이니 빌라값 상승폭 2.4배…‘주택수 제외’가 기름붓나",
-      "link": "https://www.mk.co.kr/news/realestate/12129164",
-      "publishedAt": "2026-08-16T14:02:15.000Z",
-      "source": "매일경제 부동산",
-      "category": "realestate",
-      "preview": "서울매매가격지수 상승세, 작년의 2.4배 토허제 등 각종 규제에 아파트 수요 이동 주택수 제외 연장, 매수세 더 자극할수도무주택 실거주 수요자의 주거 사다리 역할을 해온 빌라(연립..",
-      "dupes": [],
-      "context": [
-        {
-          "kind": "realestate",
-          "href": "./apartment-sale.html",
-          "label": "서울 전체 아파트 84㎡ 매매",
-          "labelEn": "Seoul apartment 84㎡ sale",
-          "value": "11억 3,049만원",
-          "valueEn": "₩1,130M",
-          "note": "8월 신고 575건 · 8/10 대비 +8.3%",
-          "noteEn": "575 deals in Aug · +8.3% vs Aug 10"
-        }
-      ]
-    },
-    {
-      "title": "[올댓차이나] 中 7월 은행대출 71.5조원 순감소…차입 수요 부진",
-      "link": "https://www.newsis.com/view/NISX20260816_0003751116",
-      "publishedAt": "2026-08-16T12:07:01.000Z",
-      "source": "뉴시스 경제",
-      "category": "other",
-      "preview": "[서울=뉴시스]이재준 기자 = 중국 신규 위안화 대출이 7월에 가계와 기업의 대출 수요가 약해진 가운데 계절적 요인까지 겹치면서 사상 최대폭으로 순감소했다. 경제통과 나우재경, 홍콩경제일보, 공상시보는 16일중국인민…",
-      "dupes": []
-    },
-    {
-      "title": "몸값 쑥 오른 강남권 초소형 아파트…3.3㎡당 1억 돌파",
-      "link": "https://www.hankyung.com/article/2026081641071",
-      "publishedAt": "2026-08-16T08:18:16.000Z",
-      "source": "한국경제 부동산",
-      "category": "realestate",
-      "preview": null,
-      "dupes": [],
-      "context": [
-        {
-          "kind": "realestate",
-          "href": "./district-gangnam.html",
-          "label": "강남구 아파트 84㎡ 매매",
-          "labelEn": "강남구 apartment 84㎡ sale",
-          "value": "27억 6,205만원",
-          "valueEn": "₩2,762M",
-          "note": "8월 신고 14건",
-          "noteEn": "14 deals in Aug"
-        }
-      ]
-    },
-    {
-      "title": "송파 9억대 아파트, 하나 남았습니다",
-      "link": "https://www.mk.co.kr/news/realestate/12129000",
-      "publishedAt": "2026-08-16T07:53:21.000Z",
-      "source": "매일경제 부동산",
-      "category": "realestate",
-      "preview": "'청약통장도 필요없다고? 송파 아파트 9억 줍줍 떴습니다.' 이번주 매부리TV '분양나우(牛)'에서는 서울시 송파구 거여동에 위치한 '송파시그니처롯데캐슬'을 분석합니다. 18일 청..",
-      "dupes": [],
-      "context": [
-        {
-          "kind": "realestate",
-          "href": "./district-songpa.html",
-          "label": "송파구 아파트 84㎡ 매매",
-          "labelEn": "송파구 apartment 84㎡ sale",
-          "value": "17억 5,633만원",
-          "valueEn": "₩1,756M",
-          "note": "8월 신고 16건",
-          "noteEn": "16 deals in Aug"
-        }
-      ]
-    },
-    {
-      "title": "빌라값 들썩 …'주택수 제외' 연장도 호재",
-      "link": "https://www.mk.co.kr/news/realestate/12128997",
-      "publishedAt": "2026-08-16T07:53:19.000Z",
-      "source": "매일경제 부동산",
-      "category": "realestate",
-      "preview": "무주택 실거주 수요자의 주거 사다리 역할을 해온 빌라(연립주택) 가격이 들썩이고 있다. 올해 서울 빌라 매매가격 상승세는 지난해의 2배를 훌쩍 웃돈 것으로 나타났다. 아파트에 집중..",
-      "dupes": [],
-      "context": [
-        {
-          "kind": "realestate",
-          "href": "./apartment-sale.html",
-          "label": "서울 전체 아파트 84㎡ 매매",
-          "labelEn": "Seoul apartment 84㎡ sale",
-          "value": "11억 3,049만원",
-          "valueEn": "₩1,130M",
-          "note": "8월 신고 575건 · 8/10 대비 +8.3%",
-          "noteEn": "575 deals in Aug · +8.3% vs Aug 10"
-        }
-      ]
-    },
-    {
-      "title": "전세 계약 전 등기부·체납 확인하세요…서울시가 피해 예방법 알려준다",
-      "link": "https://www.hankyung.com/article/202608163949i",
-      "publishedAt": "2026-08-16T04:40:09.000Z",
-      "source": "한국경제 부동산",
-      "category": "realestate",
-      "preview": null,
-      "dupes": [],
-      "context": [
-        {
-          "kind": "realestate",
-          "href": "./apartment-jeonse.html",
-          "label": "서울 전체 아파트 84㎡ 전세",
-          "labelEn": "Seoul apartment 84㎡ jeonse",
-          "value": "6억 5,329만원",
-          "valueEn": "₩653M",
-          "note": "8월 신고 2,525건 · 8/10 대비 +1.5%",
-          "noteEn": "2,525 deals in Aug · +1.5% vs Aug 10"
-        }
-      ]
     }
   ],
   "realestateStats": [
