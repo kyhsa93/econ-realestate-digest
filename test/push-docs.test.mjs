@@ -65,3 +65,15 @@ test("재시도는 rebase를 반드시 되돌리고 다음으로 넘어간다", 
   assert.match(script, /git rebase --abort/, "충돌로 멈춘 rebase를 정리하지 않는다");
   assert.match(script, /git pull --rebase -X theirs/, "충돌을 우리 산출물로 풀지 않는다");
 });
+
+test("실거래는 주 1회 금요일에만 받는다", async () => {
+  const yml = await read(".github/workflows/daily-update.yml");
+
+  assert.match(yml, /cron: "7 11 \* \* 5"/, "금요일 스케줄이 없다");
+  assert.match(yml, /'7 11 \* \* 5' && 'weekly'/, "금요일이 실거래 모드로 이어지지 않는다");
+
+  const step = yml.split("실거래 수집")[1]?.split("- name:")[0] ?? "";
+  assert.match(step, /if: env\.MODE == 'weekly'/, "실거래가 매일 도는 자리에 남아 있다");
+  assert.match(step, /fetch-realestate\.mjs/);
+  assert.ok(!step.includes("fetch-market.mjs"), "시장 지표까지 주 1회로 묶였다");
+});

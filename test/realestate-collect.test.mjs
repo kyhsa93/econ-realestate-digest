@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { execFile } from "node:child_process";
-import { mkdtemp, readFile, readdir, stat } from "node:fs/promises";
+import { mkdtemp, readFile, readdir, stat, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { promisify } from "node:util";
@@ -326,7 +326,30 @@ test("신고 기록이 창을 못 채우면 계약일 기준으로 낸다", asyn
 
   const { stdout } = await collect(server, { ...space, backfillLimit: 400 });
 
-  assert.match(stdout, /신고일 기준으로 낼 만큼 기록이 쌓이지 않았습니다/, stdout);
+  assert.match(stdout, /신고가 자치구 절반에도 못 미칩니다/, stdout);
   const payload = await readJson(path.join(space.dataDir, "realestate.json"));
   assert.equal(payload.window.basis, "contract");
+});
+
+test("기준이 바뀌는 날에는 지난 기준 값을 물려받지 않는다", async (t) => {
+  const server = await startFakeMolit((kind, { yearMonth }) => spread(kind, yearMonth));
+  t.after(() => server.close());
+  const space = await workspace();
+
+  await collect(server, { ...space, backfillLimit: 400 });
+  const first = await readJson(path.join(space.dataDir, "realestate.json"));
+  assert.equal(first.window.basis, "contract");
+
+  const swapped = { ...first, window: { ...first.window, basis: "arrival" } };
+  await writeFile(path.join(space.dataDir, "realestate.json"), JSON.stringify(swapped));
+
+  await collect(server, { ...space, backfillLimit: 400 }, ["scripts/build-realestate.mjs"]);
+  const again = await readJson(path.join(space.dataDir, "realestate.json"));
+
+  assert.equal(again.window.basis, "contract");
+  assert.equal(
+    again.overall.sale.transactionCount,
+    first.overall.sale.transactionCount,
+    "다른 기준으로 만든 값이 섞였다"
+  );
 });

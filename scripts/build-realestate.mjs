@@ -25,6 +25,7 @@ import {
   firstFullWeek,
   nextWeek,
   settledWeek,
+  weekStart,
 } from "./realestate-weekly.mjs";
 import { buildRentFiles, rentFileName } from "./deal-files.mjs";
 import { readRentSource } from "./realestate-source.mjs";
@@ -57,16 +58,18 @@ function contractDate(item) {
   return `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 }
 
+const dayBefore = (date) => new Date(Date.parse(`${date}T00:00:00Z`) - 86_400_000).toISOString().slice(0, 10);
+
 export function representWindow(now, basis = "contract", weeks = REPRESENT_WEEKS) {
-  const settled = settledWeek(now, basis === "arrival" ? 0 : FILING_GRACE_DAYS);
+  if (basis === "arrival") {
+    const from = weekStart(now);
+    const until = nextWeek(from, 1);
+    return { basis, from, to: kstDateString(now), until, weeks: 1 };
+  }
+
+  const settled = settledWeek(now, FILING_GRACE_DAYS);
   const until = nextWeek(settled, 1);
-  return {
-    basis,
-    from: nextWeek(settled, -(weeks - 1)),
-    to: new Date(Date.parse(`${until}T00:00:00Z`) - 86_400_000).toISOString().slice(0, 10),
-    until,
-    weeks,
-  };
+  return { basis, from: nextWeek(settled, -(weeks - 1)), to: dayBefore(until), until, weeks };
 }
 
 function monthsBetween(from, until) {
@@ -272,21 +275,21 @@ async function writeRentFiles(now) {
   );
 }
 
-export function arrivalWindowReady(window, earliestArrival, slotCount) {
-  return Boolean(earliestArrival) && earliestArrival <= window.from && slotCount > 0;
+export function arrivalWindowReady(items, districtCount = DISTRICTS.length) {
+  const covered = new Set([...items.keys()].map((key) => key.split(":")[1]));
+  return covered.size >= Math.ceil(districtCount / 2);
 }
 
 async function pickWindow(now) {
   const arrival = representWindow(now, "arrival");
   const read = await readWindowItems(now, arrival);
 
-  if (arrivalWindowReady(arrival, read.earliestArrival, read.items.size)) {
+  if (arrivalWindowReady(read.items)) {
     return { window: arrival, items: read.items };
   }
 
   console.log(
-    "[build-realestate] 신고일 기준으로 낼 만큼 기록이 쌓이지 않았습니다" +
-      ` (${read.earliestArrival ?? "없음"}부터, ${arrival.from}까지 필요), 계약일 기준으로 냅니다`
+    `[build-realestate] ${arrival.from} 이후 신고가 자치구 절반에도 못 미칩니다, 계약일 기준으로 냅니다`
   );
 
   const contract = representWindow(now, "contract");
@@ -304,7 +307,8 @@ async function writeRepresentative(now) {
     return;
   }
 
-  const existing = await readJson(outFile);
+  const stored = await readJson(outFile);
+  const existing = stored?.window?.basis === window.basis ? stored : null;
   const existingIsToday =
     Boolean(existing?.updatedAt) && kstDateString(new Date(existing.updatedAt)) === kstDateString(now);
 

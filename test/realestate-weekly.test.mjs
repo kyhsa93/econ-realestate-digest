@@ -247,24 +247,28 @@ test("신고 기한이 오늘 끝나는 주는 아직 확정으로 보지 않는
   assert.equal(settledWeek(new Date("2026-08-19T00:00:00Z"), 30), "2026-07-13", "하루 지나도 안 넘어왔다");
 });
 
-test("신고 기록이 창을 다 덮을 때만 신고일 기준으로 넘어간다", () => {
-  const window = representWindow(new Date("2026-09-21T00:00:00Z"), "arrival");
-  assert.equal(window.basis, "arrival");
-  assert.equal(window.from, "2026-08-24", `창이 어긋났다: ${JSON.stringify(window)}`);
-  assert.equal(window.to, "2026-09-20");
+test("신고일 기준 창은 이번 주다", () => {
+  const window = representWindow(new Date("2026-09-25T00:00:00Z"), "arrival");
 
-  assert.equal(arrivalWindowReady(window, "2026-08-18", 50), true);
-  assert.equal(arrivalWindowReady(window, "2026-08-24", 50), true, "창 첫날부터 기록이 있으면 써야 한다");
-  assert.equal(arrivalWindowReady(window, "2026-08-25", 50), false, "창 앞부분이 비었는데 썼다");
-  assert.equal(arrivalWindowReady(window, null, 50), false);
-  assert.equal(arrivalWindowReady(window, "2026-08-18", 0), false, "받은 원본이 없는데 썼다");
+  assert.equal(window.basis, "arrival");
+  assert.equal(window.from, "2026-09-21", `주 시작이 아니다: ${JSON.stringify(window)}`);
+  assert.equal(window.to, "2026-09-25", "오늘까지를 담아야 한다");
+  assert.equal(window.weeks, 1);
 });
 
 test("계약일 기준 창은 신고 기한만큼 더 뒤로 잡는다", () => {
-  const now = new Date("2026-09-21T00:00:00Z");
-  const arrival = representWindow(now, "arrival");
+  const now = new Date("2026-09-25T00:00:00Z");
   const contract = representWindow(now, "contract");
 
-  assert.ok(contract.to < arrival.to, "계약일 기준이 더 최근을 보고 있다");
-  assert.equal(contract.weeks, arrival.weeks);
+  assert.ok(contract.to < representWindow(now, "arrival").from, "계약일 기준이 이번 주를 보고 있다");
+  assert.equal(contract.weeks, 4);
+});
+
+test("신고가 자치구 절반에 못 미치면 신고일 기준을 쓰지 않는다", () => {
+  const items = (codes) => new Map(codes.flatMap((c) => [[`sale:${c}`, []], [`rent:${c}`, []]]));
+  const codes = (n) => Array.from({ length: n }, (_, i) => `111${String(i).padStart(2, "0")}`);
+
+  assert.equal(arrivalWindowReady(items(codes(13)), 25), true);
+  assert.equal(arrivalWindowReady(items(codes(12)), 25), false, "몇 개 구 신고만으로 서울 시세를 냈다");
+  assert.equal(arrivalWindowReady(new Map(), 25), false);
 });

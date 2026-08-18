@@ -5,13 +5,14 @@ on:
     - cron: "7 23 * * *"
     - cron: "7 3 * * *"
     - cron: "7 7 * * *"
-    - cron: "7 11 * * *"
+    - cron: "7 11 * * 0-4,6"
+    - cron: "7 11 * * 5"
   workflow_dispatch:
     inputs:
       mode:
-        description: "갱신 범위 (full=전체, news=뉴스만)"
+        description: "갱신 범위 (weekly=실거래까지, full=시장·금리, news=뉴스만)"
         type: choice
-        options: [full, news]
+        options: [weekly, full, news]
         default: full
       backfill:
         description: "실거래 원본 백필 상한 (비우면 50)"
@@ -31,7 +32,7 @@ jobs:
   update:
     runs-on: ubuntu-latest
     env:
-      MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.mode || (github.event.schedule == '7 23 * * *' && 'full' || 'news') }}
+      MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.mode || (github.event.schedule == '7 11 * * 5' && 'weekly' || (github.event.schedule == '7 23 * * *' && 'full' || 'news')) }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -50,10 +51,13 @@ jobs:
       - name: 뉴스 수집
         run: node scripts/fetch-news.mjs
 
-      - name: 시장 지표·부동산 수집
-        if: env.MODE == 'full'
+      - name: 시장 지표 수집
+        if: env.MODE != 'news'
+        run: node scripts/fetch-market.mjs
+
+      - name: 실거래 수집 (주 1회, 금요일)
+        if: env.MODE == 'weekly'
         run: |
-          node scripts/fetch-market.mjs
           node scripts/fetch-realestate.mjs
           node scripts/build-realestate.mjs
           node scripts/build-budget-deals.mjs
@@ -65,7 +69,7 @@ jobs:
           MOLIT_BACKFILL_LIMIT: ${{ inputs.backfill }}
 
       - name: 예·적금·대출 금리 수집
-        if: env.MODE == 'full'
+        if: env.MODE != 'news'
         run: node scripts/fetch-rates.mjs
         env:
           FSS_FINLIFE_API_KEY: ${{ secrets.FSS_FINLIFE_API_KEY }}
