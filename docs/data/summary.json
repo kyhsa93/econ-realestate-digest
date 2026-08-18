@@ -1,99 +1,67 @@
 {
-  "updatedAt": "2026-08-18T07:48:17.929Z",
+  "updatedAt": "2026-08-18T11:37:57.756Z",
   "model": "qwen3:14b",
   "summary": {
-    "ko": "- 부동산: ISA 혜택은 유지되나 부동산 관련 세제는 디테일 조정을 통해 보완이 가속화되고 있으며, 서울 민간아파트 분양가가 3.3㎡당 6209만원으로 또다시 상승했고, 오세훈은 국무회의에서 재건축 규제 완화를 요청했으며, 광진구 자양2동 모아타운 내 첫 모아주택 조합설립인가가 내려졌고, 용산공원 개발에 대한 반대 여론이 확산되고 있다.\n- 증시·환율: 코스피는 5거래일 연속 외국인 매수세를 기록하며 변동성이 줄어들었다. 반면, 같은 날 코스피는 1.55% 하락 마감했고 코스닥도 3.52% 내렸다. 일본 닛케이지수는 중동 정세 불확실성으로 2.54% 하락하며 마감했다. 최근 코스피는 반등세를 보였지만 거래대금과 거래량은 연중 최저 수준을 기록했다. 외국인의 매수세가 이어지면서 코스피의 변동성은 잦아들고 있다.\n- 금리·예금·투자상품: 금리·예금·투자상품: 힘 받는 9월 미국 금리 동결…환율, 10개월 만에 최저, 주담대 변동금리 넉 달째 상승…7월 코픽스 0.13%p↑(종합)\n- 기타 경제 소식: 7월 서울 집값 상승폭이 9개월 만에 최대를 기록했다. 노원·성북 지역에서는 트리플 강세를 보였다. 경실련은 서민 주거 불안을 우려하며 반응했다. 이는 잇단 대책에도 불구하고 집값 상승이 이어진 것으로 나타났다. 관련 소식들은 서로 다른 주제로 이어졌다.",
-    "en": "- Real Estate: ISA benefits remain in place, while adjustments to real estate-related taxation are being accelerated through detailed modifications. The selling price of private apartments in Seoul has again risen to 62,090,000 won per 3.3㎡. Oh Se-hoon requested the relaxation of reconstruction regulations at the State Council meeting. The first approval for the establishment of a housing cooperative for Moa Housing was granted within Moa Town in Jangyeong 2-dong, Gwangjin-gu. Opposition to the development of Yongsan Park is spreading.\n- Stocks & FX: The KOSPI saw reduced volatility as it recorded foreign buying for five consecutive trading days. Meanwhile, the KOSPI closed down 1.55% on the same day, and the KOSDAQ also fell by 3.52%. The Japanese Nikkei index closed down 2.54% due to uncertainty over the Middle East situation. Although the KOSPI has recently shown a rebound, trading value and volume have reached their lowest levels of the year. The KOSPI's volatility has been decreasing as foreign buying continues.\n- Rates, Deposits & Investment Products: Rates, Deposits & Investment Products: 힘 받는 9월 미국 금리 동결…환율, 10개월 만에 최저, 주담대 변동금리 넉 달째 상승…7월 코픽스 0.13%p↑(종합)\n- Other Economic News: The rate of increase in Seoul housing prices in July reached the highest level in nine months. In Nowon and Seongbuk areas, prices showed a triple-digit rise. The Korea Real Estate Research Institute expressed concern over the growing anxiety among low-income residents regarding housing. This indicates that housing prices have continued to rise despite repeated measures. Related news stories then shifted to different topics."
+    "ko": "- 증시·환율: 홍콩 증시는 중국 정책 기대에 따라 상승 마감했다. H주는 0.16% 상승했다. 중국 증시는 혼조세를 보였다. 상하이지수는 0.19% 올랐다. 두 지역 모두 외부 요인에 따라 변동이 있었다.\n- 부동산: 부동산: '10억 시세차익' 송파 아파트 줍줍에 9만명 몰려, 용산공원 주택공급 두고 '평행선'…개발 판도 변화 예고(종합2보), 김윤덕 \"조직·인력부터 자금까지 근본 대응\"…주택 공급 총력전 +11\n- 기타 경제 소식: 이 대통령은 오세훈에게 공급을 늘리고 집값 폭등 가능성에 주의할 것을 당부했다. 김동준 재정경제부 대외경제국장의 모친이 별세했다. 빌라 거래가 살아나며 6층과 청년대출에 탄력받는 것으로 보인다. 서울의 7월 집값 상승폭이 9개월 만에 최대를 기록했다. 노원·성북 지역은 트리플 강세를 보였다.\n- 금리·예금·투자상품: 조달금리가 연 4%에 근접하며 증권사들이 발행어음 발행을 줄이고 있는 것으로 나타났다. 국고채 금리가 일제히 상승했으며, 특히 30년과 50년물은 역대 최고치를 기록했다. 코픽스가 4개월째 상승세를 이어가며 변동형 주담대 금리가 연 6%에 도달할 것으로 보인다. 증권사의 발행어음 감소는 조달금리 상승과 관련된 것으로 확인됐다. 국고채 금리 상승은 장기물에서 특히 두드러진 것으로 나타났다.",
+    "en": "- Stocks & FX: The Hong Kong stock market closed higher in line with expectations of Chinese policy. H shares rose 0.16%. The Chinese stock market showed a mixed performance. The Shanghai index rose 0.19%. Both regions experienced fluctuations due to external factors.\n- Real Estate: Real Estate: '10억 시세차익' 송파 아파트 줍줍에 9만명 몰려, 용산공원 주택공급 두고 '평행선'…개발 판도 변화 예고(종합2보), 김윤덕 \"조직·인력부터 자금까지 근본 대응\"…주택 공급 총력전 +11\n- Other Economic News: The president urged Oh Se-hoon to increase supply and be cautious of the possibility of a sharp rise in housing prices. Kim Dong-jun, director of the External Economic Affairs Division at the Ministry of Finance and Economy, lost his mother. It appears that villa transactions are picking up, benefiting the 6th floor and youth loan programs. The price increase in Seoul in July reached the highest level in nine months. The Nowon and Seongbuk areas showed a triple increase.\n- Rates, Deposits & Investment Products: The procurement rate has approached 4% annually, and it has been observed that securities companies are reducing the issuance of commercial paper. The government bond rate has risen across the board, with the 30-year and 50-year bonds reaching record highs. The Cofix has continued its upward trend for the fourth consecutive month, suggesting that variable-rate housing loans may reach an annual rate of 6%. It has been confirmed that the reduction in commercial paper issuance by securities companies is related to the rise in procurement rates. The increase in government bond rates has been particularly pronounced in long-term bonds."
   },
   "highlights": [],
   "categories": [
     {
-      "key": "realestate",
-      "name": "부동산",
-      "nameEn": "Real Estate",
-      "lineKo": "ISA 혜택은 유지되나 부동산 관련 세제는 디테일 조정을 통해 보완이 가속화되고 있으며, 서울 민간아파트 분양가가 3.3㎡당 6209만원으로 또다시 상승했고, 오세훈은 국무회의에서 재건축 규제 완화를 요청했으며, 광진구 자양2동 모아타운 내 첫 모아주택 조합설립인가가 내려졌고, 용산공원 개발에 대한 반대 여론이 확산되고 있다.",
-      "lineEn": "ISA benefits remain in place, while adjustments to real estate-related taxation are being accelerated through detailed modifications. The selling price of private apartments in Seoul has again risen to 62,090,000 won per 3.3㎡. Oh Se-hoon requested the relaxation of reconstruction regulations at the State Council meeting. The first approval for the establishment of a housing cooperative for Moa Housing was granted within Moa Town in Jangyeong 2-dong, Gwangjin-gu. Opposition to the development of Yongsan Park is spreading.",
-      "isFallback": false,
-      "fallbackReason": null,
-      "degraded": true,
-      "items": [
-        {
-          "title": "ISA 혜택 유지, 부동산은 디테일 조정…세제개편 보완 속도 내나",
-          "link": "https://www.newsis.com/view/NISX20260818_0003752978",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "서울 민간아파트 분양가 또 올랐다…3.3㎡당 6209만원",
-          "link": "https://www.newsis.com/view/NISX20260818_0003752157",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "오세훈, 국무회의서 \"재건축 규제완화\"…李 \"총리와 협의해보라\"(종합)",
-          "link": "https://www.yna.co.kr/view/AKR20260818093051004",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "광진구, '자양2동 모아타운' 내 첫 모아주택 조합설립인가",
-          "link": "https://www.yna.co.kr/view/AKR20260818132900004",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "“국가공원 허물어 아파트? 옳지 않습니다”…용산공원 개발 반대 확산",
-          "link": "https://www.mk.co.kr/news/realestate/12130266",
-          "source": "매일경제 부동산"
-        }
-      ]
-    },
-    {
       "key": "stocks",
       "name": "증시·환율",
       "nameEn": "Stocks & FX",
-      "lineKo": "코스피는 5거래일 연속 외국인 매수세를 기록하며 변동성이 줄어들었다. 반면, 같은 날 코스피는 1.55% 하락 마감했고 코스닥도 3.52% 내렸다. 일본 닛케이지수는 중동 정세 불확실성으로 2.54% 하락하며 마감했다. 최근 코스피는 반등세를 보였지만 거래대금과 거래량은 연중 최저 수준을 기록했다. 외국인의 매수세가 이어지면서 코스피의 변동성은 잦아들고 있다.",
-      "lineEn": "The KOSPI saw reduced volatility as it recorded foreign buying for five consecutive trading days. Meanwhile, the KOSPI closed down 1.55% on the same day, and the KOSDAQ also fell by 3.52%. The Japanese Nikkei index closed down 2.54% due to uncertainty over the Middle East situation. Although the KOSPI has recently shown a rebound, trading value and volume have reached their lowest levels of the year. The KOSPI's volatility has been decreasing as foreign buying continues.",
+      "lineKo": "홍콩 증시는 중국 정책 기대에 따라 상승 마감했다. H주는 0.16% 상승했다. 중국 증시는 혼조세를 보였다. 상하이지수는 0.19% 올랐다. 두 지역 모두 외부 요인에 따라 변동이 있었다.",
+      "lineEn": "The Hong Kong stock market closed higher in line with expectations of Chinese policy. H shares rose 0.16%. The Chinese stock market showed a mixed performance. The Shanghai index rose 0.19%. Both regions experienced fluctuations due to external factors.",
       "isFallback": false,
       "fallbackReason": null,
       "degraded": false,
       "items": [
         {
-          "title": "코스피 변동성 잦아들자 외국인 돌아오나…5거래일 연속 '사자'(종합)",
-          "link": "https://www.yna.co.kr/view/AKR20260818070051008",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "日증시, 중동 정세 불확실성에 하락 마감…닛케이지수 2.54%↓",
-          "link": "https://www.newsis.com/view/NISX20260818_0003752966",
+          "title": "[올댓차이나] 홍콩 증시, 중국 정책 기대에 상승 마감… H주 0.16%↑",
+          "link": "https://www.newsis.com/view/NISX20260818_0003753301",
           "source": "뉴시스 경제"
         },
         {
-          "title": "최근 코스피 반등세에도…거래대금·거래량 연중 최저수준(종합)",
-          "link": "https://www.yna.co.kr/view/AKR20260818099751008",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "[속보] '전강후약' 코스피, 1.55% 하락 마감…코스닥 3.52%↓",
-          "link": "https://www.yna.co.kr/view/AKR20260818122500008",
-          "source": "연합뉴스 경제"
+          "title": "[올댓차이나] 중국 증시 혼조 마감…상하이지수 0.19%↑",
+          "link": "https://www.newsis.com/view/NISX20260818_0003753115",
+          "source": "뉴시스 경제"
         }
       ]
     },
     {
-      "key": "rates",
-      "name": "금리·예금·투자상품",
-      "nameEn": "Rates, Deposits & Investment Products",
-      "lineKo": "금리·예금·투자상품: 힘 받는 9월 미국 금리 동결…환율, 10개월 만에 최저, 주담대 변동금리 넉 달째 상승…7월 코픽스 0.13%p↑(종합)",
-      "lineEn": "Rates, Deposits & Investment Products: 힘 받는 9월 미국 금리 동결…환율, 10개월 만에 최저, 주담대 변동금리 넉 달째 상승…7월 코픽스 0.13%p↑(종합)",
+      "key": "realestate",
+      "name": "부동산",
+      "nameEn": "Real Estate",
+      "lineKo": "부동산: '10억 시세차익' 송파 아파트 줍줍에 9만명 몰려, 용산공원 주택공급 두고 '평행선'…개발 판도 변화 예고(종합2보), 김윤덕 \"조직·인력부터 자금까지 근본 대응\"…주택 공급 총력전 +11",
+      "lineEn": "Real Estate: '10억 시세차익' 송파 아파트 줍줍에 9만명 몰려, 용산공원 주택공급 두고 '평행선'…개발 판도 변화 예고(종합2보), 김윤덕 \"조직·인력부터 자금까지 근본 대응\"…주택 공급 총력전 +11",
       "isFallback": true,
-      "fallbackReason": "unverified-number",
+      "fallbackReason": "unverified-entity",
       "degraded": false,
       "items": [
         {
-          "title": "힘 받는 9월 미국 금리 동결…환율, 10개월 만에 최저",
-          "link": "https://www.yna.co.kr/view/AKR20260818125300002",
+          "title": "'10억 시세차익' 송파 아파트 줍줍에 9만명 몰려",
+          "link": "https://www.newsis.com/view/NISX20260818_0003753284",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "용산공원 주택공급 두고 '평행선'…개발 판도 변화 예고(종합2보)",
+          "link": "https://www.yna.co.kr/view/AKR20260818068952003",
           "source": "연합뉴스 경제"
         },
         {
-          "title": "주담대 변동금리 넉 달째 상승…7월 코픽스 0.13%p↑(종합)",
-          "link": "https://www.yna.co.kr/view/AKR20260818115051002",
+          "title": "김윤덕 \"조직·인력부터 자금까지 근본 대응\"…주택 공급 총력전",
+          "link": "https://www.newsis.com/view/NISX20260818_0003753217",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "권영세 \"용산공원 주택공급 철회해야\"…오세훈 \"녹지공간 필수\"",
+          "link": "https://www.yna.co.kr/view/AKR20260818155800001",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "與, 내일 '부동산 공급' 국토위 당정…용산공원 의견교환 주목",
+          "link": "https://www.yna.co.kr/view/AKR20260818136500001",
           "source": "연합뉴스 경제"
         }
       ]
@@ -102,21 +70,63 @@
       "key": "other",
       "name": "기타 경제 소식",
       "nameEn": "Other Economic News",
-      "lineKo": "7월 서울 집값 상승폭이 9개월 만에 최대를 기록했다. 노원·성북 지역에서는 트리플 강세를 보였다. 경실련은 서민 주거 불안을 우려하며 반응했다. 이는 잇단 대책에도 불구하고 집값 상승이 이어진 것으로 나타났다. 관련 소식들은 서로 다른 주제로 이어졌다.",
-      "lineEn": "The rate of increase in Seoul housing prices in July reached the highest level in nine months. In Nowon and Seongbuk areas, prices showed a triple-digit rise. The Korea Real Estate Research Institute expressed concern over the growing anxiety among low-income residents regarding housing. This indicates that housing prices have continued to rise despite repeated measures. Related news stories then shifted to different topics.",
+      "lineKo": "이 대통령은 오세훈에게 공급을 늘리고 집값 폭등 가능성에 주의할 것을 당부했다. 김동준 재정경제부 대외경제국장의 모친이 별세했다. 빌라 거래가 살아나며 6층과 청년대출에 탄력받는 것으로 보인다. 서울의 7월 집값 상승폭이 9개월 만에 최대를 기록했다. 노원·성북 지역은 트리플 강세를 보였다.",
+      "lineEn": "The president urged Oh Se-hoon to increase supply and be cautious of the possibility of a sharp rise in housing prices. Kim Dong-jun, director of the External Economic Affairs Division at the Ministry of Finance and Economy, lost his mother. It appears that villa transactions are picking up, benefiting the 6th floor and youth loan programs. The price increase in Seoul in July reached the highest level in nine months. The Nowon and Seongbuk areas showed a triple increase.",
       "isFallback": false,
       "fallbackReason": null,
       "degraded": false,
       "items": [
         {
+          "title": "이 대통령, 오세훈에 “공급 늘려야지, 집값 폭등가능성 높여선 안돼”",
+          "link": "https://www.mk.co.kr/news/realestate/12130565",
+          "source": "매일경제 부동산"
+        },
+        {
+          "title": "[부고]김동준 재정경제부 대외경제국장 모친상",
+          "link": "https://www.newsis.com/view/NISX20260818_0003753183",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "살아난 빌라 거래…6층·청년대출에 탄력받나",
+          "link": "https://www.hankyung.com/article/2026081878021",
+          "source": "한국경제 부동산"
+        },
+        {
+          "title": "[부고] 김동준(재정경제부 대외경제국장)씨 모친상",
+          "link": "https://www.yna.co.kr/view/AKR20260818160000002",
+          "source": "연합뉴스 경제"
+        },
+        {
           "title": "7월 서울 집값 상승폭 9개월 만에 최대… 노원·성북 ‘트리플 강세’",
           "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/18/PJC2G3UPNNCHVFI2WYRU7GJT7Y/",
           "source": "조선비즈 부동산"
+        }
+      ]
+    },
+    {
+      "key": "rates",
+      "name": "금리·예금·투자상품",
+      "nameEn": "Rates, Deposits & Investment Products",
+      "lineKo": "조달금리가 연 4%에 근접하며 증권사들이 발행어음 발행을 줄이고 있는 것으로 나타났다. 국고채 금리가 일제히 상승했으며, 특히 30년과 50년물은 역대 최고치를 기록했다. 코픽스가 4개월째 상승세를 이어가며 변동형 주담대 금리가 연 6%에 도달할 것으로 보인다. 증권사의 발행어음 감소는 조달금리 상승과 관련된 것으로 확인됐다. 국고채 금리 상승은 장기물에서 특히 두드러진 것으로 나타났다.",
+      "lineEn": "The procurement rate has approached 4% annually, and it has been observed that securities companies are reducing the issuance of commercial paper. The government bond rate has risen across the board, with the 30-year and 50-year bonds reaching record highs. The Cofix has continued its upward trend for the fourth consecutive month, suggesting that variable-rate housing loans may reach an annual rate of 6%. It has been confirmed that the reduction in commercial paper issuance by securities companies is related to the rise in procurement rates. The increase in government bond rates has been particularly pronounced in long-term bonds.",
+      "isFallback": false,
+      "fallbackReason": null,
+      "degraded": false,
+      "items": [
+        {
+          "title": "조달금리 연 4% 육박…발행어음 줄이는 증권사",
+          "link": "https://www.hankyung.com/article/2026081878141",
+          "source": "한국경제 경제"
         },
         {
-          "title": "“서민 주거 불안 부추겨”…잇단 대책에도 집값 뛰자 경실련 반응은",
-          "link": "https://www.mk.co.kr/news/realestate/12130110",
-          "source": "매일경제 부동산"
+          "title": "국고채 금리 일제히 상승…30년·50년물은 역대 최고치(종합)",
+          "link": "https://www.yna.co.kr/view/AKR20260818141151008",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "코픽스 넉 달째 상승…변동형 주담대 금리 연 6% '코앞'",
+          "link": "https://www.hankyung.com/article/202608187767i",
+          "source": "한국경제 경제"
         }
       ]
     }
