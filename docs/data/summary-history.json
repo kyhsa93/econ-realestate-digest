@@ -675,67 +675,45 @@
     "date": "2026-08-18",
     "model": "qwen3:14b",
     "summary": {
-      "ko": "- 기타 경제 소식: 오늘(8월 18일 화요일) 경제 관련 주요일정이 발표되었으며, 대출 규제의 풍선효과로 성남 중원은 1주일 만에 0.55% 상승했다.\n- 부동산: 모듈러 주택이 연간 5천가구 공급될 예정이다. 서울시는 무주택 청년에게 이사비와 중개보수를 최대 40만원까지 지원한다. 김윤덕과 오세훈은 오는 20일 용산공원 주택공급 방안을 논의한다. 부동산에 적용되는 세금은 최대 다섯 개에 달한다. 서울의 전세 물량은 7년 만에 3만가구 감소했고, 반전세·월세는 5만가구 증가했다.\n- 증시·환율: 뉴욕증시는 미·이란 갈등 지속과 유가 급등으로 하락 마감했고, 홍콩 증시는 저가 매수세로 닷새 만에 반등 마감했으며, 미국 증시는 유가 영향으로 약세를 보였으나 AI 낙관에 반도체주는 상승했고, 뉴욕증시는 이란 불확실성 속 혼조 출발했다.\n- 금리·예금·투자상품: 미 30년물 금리가 5.31%로 19년 만에 최고치를 기록했다. 미국 달러화는 10주 만에 최저치를 기록하며 정책금리 인상 기대가 후퇴했다. 미국 경제학자 80%는 올해 내 금리인상이 없을 것으로 전망했다. 환율은 올해 최저치를 찍으며 1300원대에 도달할 것으로 보인다. 5대 은행의 주담대 가산금리가 고공행진하며 가계대출 억제의 영향을 받고 있다.",
-      "en": "- Other Economic News: Today (Tuesday, August 18), major economic schedules were announced, and Seongnam Jungwon rose 0.55% within a week due to the balloon effect of loan regulations.\n- Real Estate: Modular housing is expected to supply 5,000 units annually. Seoul City will support young people without homes with up to 400,000 won for moving costs and brokerage fees. Kim Yoon-deok and Oh Se-hoon will discuss housing supply plans at Yongsan Park on the 20th. Up to five different taxes apply to real estate. The number of rental units in Seoul has decreased by 30,000 units over seven years, while the number of semi-rental and monthly rental units has increased by 50,000 units.\n- Stocks & FX: The New York stock market closed lower due to the continued U.S.-Iran conflict and a sharp rise in oil prices, while the Hong Kong stock market closed higher after a five-day decline due to bargain buying. The U.S. stock market showed weakness due to oil prices but semiconductor stocks rose on AI optimism. The New York stock market opened mixed amid Iran-related uncertainties.\n- Rates, Deposits & Investment Products: The 30-year U.S. Treasury bond yield reached 5.31%, the highest level in 19 years. The U.S. dollar hit a 10-week low, signaling a retreat in expectations for policy rate hikes. 80% of U.S. economists expect no interest rate hikes this year. The exchange rate is expected to reach a yearly low, hitting the 1,300 won range. The added interest rates on housing loans by the five major banks are soaring, experiencing the impact of household loan suppression."
+      "ko": "- 부동산: 부동산 관련 오늘자 뉴스에서 초고가 아파트의 부적절한 혜택 제공에 대한 벌금 조치가 발표되었다. 롯데건설은 '상동역 롯데캐슬 시그니처' 견본주택에 2만3천명이 방문한 것으로 나타났다. 2030세대는 생애최초 주택 마련에 대한 러시가 가속화되고 있는 것으로 보인다. 아산시는 신축 아파트에 국공립어린이집 개원 기간을 1개월 이상 단축하는 방안을 추진 중이다. 전세난으로 인해 내 집 마련에 대한 관심이 높아진 것으로 나타났다.\n- 증시·환율: 일본 닛케이지수는 미국 증시의 영향으로 0.54% 하락 출발했다. 한국 코스피는 상승 출발하며 7천피를 회복했다. 미국 다우지수는 미·이란 갈등과 유가 급등으로 0.51% 하락 마감했다. 홍콩 증시는 저가 매수세로 닷새 만에 반등하며 H주가 1.19% 상승했다. 미국 증시는 유가 영향으로 약세를 보였으나, AI 낙관에 반도체주는 상승했다.\n- 기타 경제 소식: 오늘 재정경제부 관련 인사 소식이 전해졌다. 부동산 시장에서 6개월 전에 주택을 구입했으면 가격이 6억 원 상승했을 것으로 나타났다. 오늘 경제 관련 주요 일정이 발표되었다. 각 기사는 서로 다른 주제로, 별도의 사건으로 분리된다. 오늘의 경제 뉴스는 다양한 분야에서의 소식을 담고 있다.\n- 금리·예금·투자상품: 고금리로 인해 사모대출 부실화가 우려되고 있으며, 미국 30년물 금리는 5.31%로 19년 만에 최고치를 기록했고, 미국 달러화는 10주 만에 최저치를 기록하며 정책금리 인상 기대가 후퇴했으며, 미국 경제학자 80%는 올해 내 금리인상이 없을 것으로 전망하고 있다.",
+      "en": "- Real Estate: Today's real estate news reported penalty measures for inappropriate benefits provided in high-end apartments. Lotte Construction showed that 20,0003 thousand people visited the model house for 'Sangdong Station Lotte Castle Signature'. It appears that the 2030 generation is accelerating a rush to secure their first home. Asan City is promoting a plan to shorten the opening period of public kindergartens in new apartment complexes by more than one month. It has been shown that interest in securing one's own home has increased due to the rental crisis.\n- Stocks & FX: The Nikkei index in Japan fell 0.54% at the open due to the impact of the U.S. stock market. The KOSPI in South Korea rose at the open, recovering 700 points. The Dow index in the U.S. closed down 0.51% due to the U.S.-Iran conflict and a sharp rise in oil prices. The Hong Kong stock market rebounded for the first time in five days due to low-price buying, with H-shares rising 1.19%. The U.S. stock market showed weakness due to the impact of oil prices, but semiconductor stocks rose on optimism about AI.\n- Other Economic News: Today, news about a person related to the Ministry of Finance and Economy was reported. It was found that if a house was purchased six months ago in the real estate market, its price would have increased by 600,000,000 won. Today, major economic schedules were announced. Each article covers different topics and is separated as individual events. Today's economic news includes reports from various fields.\n- Rates, Deposits & Investment Products: Concerns are rising over the deterioration of private loan quality due to high interest rates. The U.S. 30-year interest rate reached 5.31%, the highest level in 19 years, and the U.S. dollar hit its lowest level in 10 weeks, signaling a retreat in expectations for policy rate hikes. 80% of U.S. economists predict no interest rate hikes this year."
     },
     "highlights": [],
     "categories": [
       {
-        "key": "other",
-        "name": "기타 경제 소식",
-        "nameEn": "Other Economic News",
-        "lineKo": "오늘(8월 18일 화요일) 경제 관련 주요일정이 발표되었으며, 대출 규제의 풍선효과로 성남 중원은 1주일 만에 0.55% 상승했다.",
-        "lineEn": "Today (Tuesday, August 18), major economic schedules were announced, and Seongnam Jungwon rose 0.55% within a week due to the balloon effect of loan regulations.",
-        "isFallback": false,
-        "fallbackReason": null,
-        "degraded": true,
-        "items": [
-          {
-            "title": "[오늘의 주요일정]경제(8월18일화요일)",
-            "link": "https://www.newsis.com/view/NISX20260814_0003748771",
-            "source": "뉴시스 경제"
-          },
-          {
-            "title": "대출 규제 풍선효과…성남 중원, 1주새 0.55% 올라",
-            "link": "https://www.hankyung.com/article/2026081753931",
-            "source": "한국경제 부동산"
-          }
-        ]
-      },
-      {
         "key": "realestate",
         "name": "부동산",
         "nameEn": "Real Estate",
-        "lineKo": "모듈러 주택이 연간 5천가구 공급될 예정이다. 서울시는 무주택 청년에게 이사비와 중개보수를 최대 40만원까지 지원한다. 김윤덕과 오세훈은 오는 20일 용산공원 주택공급 방안을 논의한다. 부동산에 적용되는 세금은 최대 다섯 개에 달한다. 서울의 전세 물량은 7년 만에 3만가구 감소했고, 반전세·월세는 5만가구 증가했다.",
-        "lineEn": "Modular housing is expected to supply 5,000 units annually. Seoul City will support young people without homes with up to 400,000 won for moving costs and brokerage fees. Kim Yoon-deok and Oh Se-hoon will discuss housing supply plans at Yongsan Park on the 20th. Up to five different taxes apply to real estate. The number of rental units in Seoul has decreased by 30,000 units over seven years, while the number of semi-rental and monthly rental units has increased by 50,000 units.",
+        "lineKo": "부동산 관련 오늘자 뉴스에서 초고가 아파트의 부적절한 혜택 제공에 대한 벌금 조치가 발표되었다. 롯데건설은 '상동역 롯데캐슬 시그니처' 견본주택에 2만3천명이 방문한 것으로 나타났다. 2030세대는 생애최초 주택 마련에 대한 러시가 가속화되고 있는 것으로 보인다. 아산시는 신축 아파트에 국공립어린이집 개원 기간을 1개월 이상 단축하는 방안을 추진 중이다. 전세난으로 인해 내 집 마련에 대한 관심이 높아진 것으로 나타났다.",
+        "lineEn": "Today's real estate news reported penalty measures for inappropriate benefits provided in high-end apartments. Lotte Construction showed that 20,0003 thousand people visited the model house for 'Sangdong Station Lotte Castle Signature'. It appears that the 2030 generation is accelerating a rush to secure their first home. Asan City is promoting a plan to shorten the opening period of public kindergartens in new apartment complexes by more than one month. It has been shown that interest in securing one's own home has increased due to the rental crisis.",
         "isFallback": false,
         "fallbackReason": null,
         "degraded": false,
         "items": [
           {
-            "title": "20층 이상 고층아파트도 뚝딱…모듈러 주택 연 5천가구 ‘닥공’",
-            "link": "https://www.mk.co.kr/news/realestate/12129763",
+            "title": "[단독] 혜택만 받고 '먹튀' 초고가 아파트…벌금 폭탄 맞는다",
+            "link": "https://www.hankyung.com/article/202608186305i",
+            "source": "한국경제 부동산"
+          },
+          {
+            "title": "롯데건설, '상동역 롯데캐슬 시그니처' 견본주택 2만3천명 방문",
+            "link": "https://www.newsis.com/view/NISX20260818_0003752021",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "“더 늦었다가는 평생 무주택자 될라”…2030 생애최초 내 집 마련 러시",
+            "link": "https://www.mk.co.kr/news/realestate/12129838",
             "source": "매일경제 부동산"
           },
           {
-            "title": "서울시, 무주택 청년 이사비·중개보수 최대 40만원 지원",
-            "link": "https://www.yna.co.kr/view/AKR20260817032600004",
+            "title": "아산시, 신축 아파트 국공립어린이집 개원 1개월 이상 단축",
+            "link": "https://www.yna.co.kr/view/AKR20260818038000063",
             "source": "연합뉴스 경제"
           },
           {
-            "title": "김윤덕·오세훈 오는 20일 회동…용산공원 주택공급 '분수령'",
-            "link": "https://www.yna.co.kr/view/AKR20260817037200004",
-            "source": "연합뉴스 경제"
-          },
-          {
-            "title": "집 한 채에 세금만 다섯 개 붙는다 … 부동산 세금에 대한 100가지 사실(1)",
-            "link": "https://www.mk.co.kr/news/realestate/12129471",
-            "source": "매일경제 부동산"
-          },
-          {
-            "title": "서울 전세, 7년새 3만가구 증발…반전세 등 월세는 5만가구 늘어",
-            "link": "https://www.mk.co.kr/news/realestate/12129585",
-            "source": "매일경제 부동산"
+            "title": "\"전세난에 지쳤다\"…2030 '내 집 마련' 몰려간 이 동네",
+            "link": "https://www.hankyung.com/article/2026081859556",
+            "source": "한국경제 부동산"
           }
         ]
       },
@@ -743,12 +721,22 @@
         "key": "stocks",
         "name": "증시·환율",
         "nameEn": "Stocks & FX",
-        "lineKo": "뉴욕증시는 미·이란 갈등 지속과 유가 급등으로 하락 마감했고, 홍콩 증시는 저가 매수세로 닷새 만에 반등 마감했으며, 미국 증시는 유가 영향으로 약세를 보였으나 AI 낙관에 반도체주는 상승했고, 뉴욕증시는 이란 불확실성 속 혼조 출발했다.",
-        "lineEn": "The New York stock market closed lower due to the continued U.S.-Iran conflict and a sharp rise in oil prices, while the Hong Kong stock market closed higher after a five-day decline due to bargain buying. The U.S. stock market showed weakness due to oil prices but semiconductor stocks rose on AI optimism. The New York stock market opened mixed amid Iran-related uncertainties.",
+        "lineKo": "일본 닛케이지수는 미국 증시의 영향으로 0.54% 하락 출발했다. 한국 코스피는 상승 출발하며 7천피를 회복했다. 미국 다우지수는 미·이란 갈등과 유가 급등으로 0.51% 하락 마감했다. 홍콩 증시는 저가 매수세로 닷새 만에 반등하며 H주가 1.19% 상승했다. 미국 증시는 유가 영향으로 약세를 보였으나, AI 낙관에 반도체주는 상승했다.",
+        "lineEn": "The Nikkei index in Japan fell 0.54% at the open due to the impact of the U.S. stock market. The KOSPI in South Korea rose at the open, recovering 700 points. The Dow index in the U.S. closed down 0.51% due to the U.S.-Iran conflict and a sharp rise in oil prices. The Hong Kong stock market rebounded for the first time in five days due to low-price buying, with H-shares rising 1.19%. The U.S. stock market showed weakness due to the impact of oil prices, but semiconductor stocks rose on optimism about AI.",
         "isFallback": false,
         "fallbackReason": null,
-        "degraded": true,
+        "degraded": false,
         "items": [
+          {
+            "title": "日증시, 美증시 영향으로 하락 출발…닛케이지수 0.54%↓",
+            "link": "https://www.newsis.com/view/NISX20260818_0003752044",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "[속보] 코스피, 상승 출발…'7천피' 회복",
+            "link": "https://www.yna.co.kr/view/AKR20260818034600008",
+            "source": "연합뉴스 경제"
+          },
           {
             "title": "뉴욕증시, 미·이란 갈등 지속·유가 급등에 하락 마감…다우 0.51%↓",
             "link": "https://www.newsis.com/view/NISX20260818_0003751727",
@@ -763,10 +751,32 @@
             "title": "'유가 영향' 美 증시 약세… AI 낙관에 반도체주는 상승",
             "link": "https://www.hankyung.com/article/202608175622i",
             "source": "한국경제 경제"
+          }
+        ]
+      },
+      {
+        "key": "other",
+        "name": "기타 경제 소식",
+        "nameEn": "Other Economic News",
+        "lineKo": "오늘 재정경제부 관련 인사 소식이 전해졌다. 부동산 시장에서 6개월 전에 주택을 구입했으면 가격이 6억 원 상승했을 것으로 나타났다. 오늘 경제 관련 주요 일정이 발표되었다. 각 기사는 서로 다른 주제로, 별도의 사건으로 분리된다. 오늘의 경제 뉴스는 다양한 분야에서의 소식을 담고 있다.",
+        "lineEn": "Today, news about a person related to the Ministry of Finance and Economy was reported. It was found that if a house was purchased six months ago in the real estate market, its price would have increased by 600,000,000 won. Today, major economic schedules were announced. Each article covers different topics and is separated as individual events. Today's economic news includes reports from various fields.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": false,
+        "items": [
+          {
+            "title": "[인사] 재정경제부(종합)",
+            "link": "https://www.yna.co.kr/view/AKR20260818032551002",
+            "source": "연합뉴스 경제"
           },
           {
-            "title": "[속보]뉴욕증시, 이란 불확실성 속 혼조 출발.…나스닥 0.01%↑",
-            "link": "https://www.newsis.com/view/NISX20260817_0003751699",
+            "title": "\"6개월 전에 샀으면 6억 올랐다\"…집값 무섭게 뛰는 동네 어디",
+            "link": "https://www.hankyung.com/article/2026081860186",
+            "source": "한국경제 부동산"
+          },
+          {
+            "title": "[오늘의 주요일정]경제(8월18일화요일)",
+            "link": "https://www.newsis.com/view/NISX20260814_0003748771",
             "source": "뉴시스 경제"
           }
         ]
@@ -775,12 +785,17 @@
         "key": "rates",
         "name": "금리·예금·투자상품",
         "nameEn": "Rates, Deposits & Investment Products",
-        "lineKo": "미 30년물 금리가 5.31%로 19년 만에 최고치를 기록했다. 미국 달러화는 10주 만에 최저치를 기록하며 정책금리 인상 기대가 후퇴했다. 미국 경제학자 80%는 올해 내 금리인상이 없을 것으로 전망했다. 환율은 올해 최저치를 찍으며 1300원대에 도달할 것으로 보인다. 5대 은행의 주담대 가산금리가 고공행진하며 가계대출 억제의 영향을 받고 있다.",
-        "lineEn": "The 30-year U.S. Treasury bond yield reached 5.31%, the highest level in 19 years. The U.S. dollar hit a 10-week low, signaling a retreat in expectations for policy rate hikes. 80% of U.S. economists expect no interest rate hikes this year. The exchange rate is expected to reach a yearly low, hitting the 1,300 won range. The added interest rates on housing loans by the five major banks are soaring, experiencing the impact of household loan suppression.",
+        "lineKo": "고금리로 인해 사모대출 부실화가 우려되고 있으며, 미국 30년물 금리는 5.31%로 19년 만에 최고치를 기록했고, 미국 달러화는 10주 만에 최저치를 기록하며 정책금리 인상 기대가 후퇴했으며, 미국 경제학자 80%는 올해 내 금리인상이 없을 것으로 전망하고 있다.",
+        "lineEn": "Concerns are rising over the deterioration of private loan quality due to high interest rates. The U.S. 30-year interest rate reached 5.31%, the highest level in 19 years, and the U.S. dollar hit its lowest level in 10 weeks, signaling a retreat in expectations for policy rate hikes. 80% of U.S. economists predict no interest rate hikes this year.",
         "isFallback": false,
         "fallbackReason": null,
-        "degraded": false,
+        "degraded": true,
         "items": [
+          {
+            "title": "고금리에 흔들리는 사모대출…2020년대 대출 부실화",
+            "link": "https://www.hankyung.com/article/202608185935i",
+            "source": "한국경제 경제"
+          },
           {
             "title": "美 30년물 금리 5.31%…19년 만에 최고치",
             "link": "https://www.newsis.com/view/NISX20260818_0003751722",
@@ -795,16 +810,6 @@
             "title": "美 경제학자 80% \"올해 내 금리인상 없을 것\"",
             "link": "https://www.hankyung.com/article/202608175594i",
             "source": "한국경제 경제"
-          },
-          {
-            "title": "환율·채권, 올해 최저치 찍은 환율, 1300원대 눈앞",
-            "link": "https://www.hankyung.com/article/2026081753841",
-            "source": "한국경제 경제"
-          },
-          {
-            "title": "5대 은행 주담대 가산금리 고공행진…\"가계대출 억제 영향\"",
-            "link": "https://www.yna.co.kr/view/AKR20260817053700002",
-            "source": "연합뉴스 경제"
           }
         ]
       }
