@@ -318,3 +318,15 @@ test("환경변수가 비어 있으면 기본값으로 돈다", async (t) => {
   assert.match(stdout, /신규 50\b/, `백필 상한이 0이 됐다: ${stdout}`);
   assert.ok((await rawNames(space.rawDir, "sale")).length > 0, "한 슬롯도 받지 못했다");
 });
+
+test("신고 기록이 창을 못 채우면 계약일 기준으로 낸다", async (t) => {
+  const server = await startFakeMolit((kind, { yearMonth }) => spread(kind, yearMonth));
+  t.after(() => server.close());
+  const space = await workspace();
+
+  const { stdout } = await collect(server, { ...space, backfillLimit: 400 });
+
+  assert.match(stdout, /신고일 기준으로 낼 만큼 기록이 쌓이지 않았습니다/, stdout);
+  const payload = await readJson(path.join(space.dataDir, "realestate.json"));
+  assert.equal(payload.window.basis, "contract");
+});

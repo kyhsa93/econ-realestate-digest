@@ -418,7 +418,8 @@ const T = {
     overallHeading: "서울 전체 평균",
     districtHeading: "자치구별 시세",
     loading: "불러오는 중...",
-    updatedPrefix: "계약 기준",
+    basisContract: "계약 기준",
+    basisArrival: "신고 기준",
     thDistrict: "지역",
     thSale: "매매",
     thJeonse: "전세",
@@ -493,7 +494,8 @@ const T = {
     overallHeading: "Seoul average",
     districtHeading: "By district",
     loading: "Loading...",
-    updatedPrefix: "Contracts",
+    basisContract: "Contracts",
+    basisArrival: "Filings",
     thDistrict: "District",
     thSale: "Sale",
     thJeonse: "Jeonse",
@@ -1170,8 +1172,9 @@ function applyLocale() {
 function renderUpdated(realestate) {
   const window = realestate?.window;
   const updatedAt = realestate?.updatedAt;
+  const basis = window?.basis === "arrival" ? t("basisArrival") : t("basisContract");
   const text = window?.from
-    ? `${t("updatedPrefix")}: ${window.from} ~ ${window.to}` +
+    ? `${basis}: ${window.from} ~ ${window.to}` +
       (updatedAt
         ? ` · ${new Date(updatedAt).toLocaleDateString(locale === "en" ? "en-US" : "ko-KR", { timeZone: "Asia/Seoul", dateStyle: "medium" })}`
         : "")

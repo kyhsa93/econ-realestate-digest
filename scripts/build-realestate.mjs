@@ -57,10 +57,11 @@ function contractDate(item) {
   return `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 }
 
-export function representWindow(now, weeks = REPRESENT_WEEKS) {
-  const settled = settledWeek(now, FILING_GRACE_DAYS);
+export function representWindow(now, basis = "contract", weeks = REPRESENT_WEEKS) {
+  const settled = settledWeek(now, basis === "arrival" ? 0 : FILING_GRACE_DAYS);
   const until = nextWeek(settled, 1);
   return {
+    basis,
     from: nextWeek(settled, -(weeks - 1)),
     to: new Date(Date.parse(`${until}T00:00:00Z`) - 86_400_000).toISOString().slice(0, 10),
     until,
@@ -75,18 +76,26 @@ function monthsBetween(from, until) {
   return [...months];
 }
 
-async function readWindowItems(window) {
+async function readWindowItems(now, window) {
+  const months = window.basis === "arrival" ? windowMonths(now) : monthsBetween(window.from, window.until);
   const items = new Map();
+  let earliestArrival = null;
 
   await Promise.all(
-    monthsBetween(window.from, window.until).flatMap((yearMonth) =>
+    months.flatMap((yearMonth) =>
       DISTRICTS.flatMap(({ code }) =>
         ["sale", "rent"].map(async (kind) => {
           const file = await readSlotFile(kind, code, yearMonth);
           if (file?.ok === false || !Array.isArray(file?.items)) return;
 
+          const arrivals = file.arrivals ?? {};
+          for (const day of Object.values(arrivals)) {
+            if (!earliestArrival || day < earliestArrival) earliestArrival = day;
+          }
+
+          const dateOf = window.basis === "arrival" ? (item) => arrivals[itemKey(item)] : contractDate;
           const picked = file.items.filter((item) => {
-            const date = contractDate(item);
+            const date = dateOf(item);
             return date && date >= window.from && date < window.until;
           });
           if (!picked.length) return;
@@ -98,7 +107,7 @@ async function readWindowItems(window) {
     )
   );
 
-  return items;
+  return { items, earliestArrival };
 }
 
 export function districtEntries(months) {
@@ -263,8 +272,30 @@ async function writeRentFiles(now) {
   );
 }
 
-async function writeRepresentative(now, window) {
-  const newlyFetched = districtEntries(await readWindowItems(window));
+export function arrivalWindowReady(window, earliestArrival, slotCount) {
+  return Boolean(earliestArrival) && earliestArrival <= window.from && slotCount > 0;
+}
+
+async function pickWindow(now) {
+  const arrival = representWindow(now, "arrival");
+  const read = await readWindowItems(now, arrival);
+
+  if (arrivalWindowReady(arrival, read.earliestArrival, read.items.size)) {
+    return { window: arrival, items: read.items };
+  }
+
+  console.log(
+    "[build-realestate] 신고일 기준으로 낼 만큼 기록이 쌓이지 않았습니다" +
+      ` (${read.earliestArrival ?? "없음"}부터, ${arrival.from}까지 필요), 계약일 기준으로 냅니다`
+  );
+
+  const contract = representWindow(now, "contract");
+  return { window: contract, items: (await readWindowItems(now, contract)).items };
+}
+
+async function writeRepresentative(now) {
+  const { window, items } = await pickWindow(now);
+  const newlyFetched = districtEntries(items);
 
   if (newlyFetched.length === 0) {
     console.error(
@@ -300,7 +331,8 @@ async function writeRepresentative(now, window) {
   await writeFile(historyFile, JSON.stringify(nextHistory, null, 2));
 
   console.log(
-    `[build-realestate] 시세 저장 — ${window.from}부터 ${window.weeks}주 계약분 (${fetchSummary(districts)})`
+    `[build-realestate] 시세 저장 — ${window.from}~${window.to} ` +
+      `${window.basis === "arrival" ? "신고분" : "계약분"} (${fetchSummary(districts)})`
   );
 }
 
@@ -309,7 +341,7 @@ async function main() {
 
   await mkdir(dataDir, { recursive: true });
 
-  await writeRepresentative(now, representWindow(now));
+  await writeRepresentative(now);
   await writeRentFiles(now);
   await writeWeekly(now);
   await writeTrend(now);

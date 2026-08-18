@@ -848,7 +848,7 @@
       realestateCountSuffix: (n) => `${n}건`,
       realestateLowSample: (n) => `표본 ${n}건`,
       realestateLowSampleTitle: (n) => `신고 ${n}건이라 평균을 내기엔 표본이 부족합니다`,
-      realestatePeriodLabel: (window) => `계약 기준 ${window}`,
+      realestatePeriodLabel: (basis, span) => `${basis} 기준 ${span}`,
       realestateChangeVs: (dateStr) => `${dateStr} 대비`,
       realestateTagDistrict: "지역",
       realestateTagSale: "매매",
@@ -934,7 +934,7 @@
       realestateCountSuffix: (n) => `${n} txns`,
       realestateLowSample: (n) => `${n} txns only`,
       realestateLowSampleTitle: (n) => `${n} reported transaction(s) — too few to average`,
-      realestatePeriodLabel: (window) => `Contracts ${window}`,
+      realestatePeriodLabel: (basis, span) => `${basis} ${span}`,
       realestateChangeVs: (dateStr) => `vs ${dateStr}`,
       realestateTagDistrict: "District",
       realestateTagSale: "Sale",
@@ -1427,8 +1427,13 @@
     ];
     tbody.innerHTML = rows.join("");
     renderRealestateSortState();
+    const basisKo = realestate.window?.basis === "arrival" ? "신고" : "계약";
+    const basisEn = realestate.window?.basis === "arrival" ? "Filings" : "Contracts";
     meta.textContent = realestate.window?.from
-      ? t("realestatePeriodLabel")(`${realestate.window.from} ~ ${realestate.window.to}`)
+      ? t("realestatePeriodLabel")(
+          locale === "en" ? basisEn : basisKo,
+          `${realestate.window.from} ~ ${realestate.window.to}`
+        )
       : "";
     applyRealestateSearch();
   }
