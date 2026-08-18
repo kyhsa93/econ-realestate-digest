@@ -224,3 +224,40 @@ test("감춰야 할 요소가 CSS 때문에 계속 보이지 않는다", async (
     );
   }
 });
+
+test("아카이브에서는 부동산 섹션을 접는다", async () => {
+  const { readFile } = await import("node:fs/promises");
+  const load = (search) =>
+    loadIndexPage({
+      search,
+      fetch: async (url) => {
+        const name = String(url).split("/data/")[1].split(".json")[0];
+        try {
+          return { ok: true, json: async () => JSON.parse(await readFile(path.join(root, `docs/data/${name}.json`), "utf8")) };
+        } catch {
+          return { ok: false, status: 404, json: async () => ({}) };
+        }
+      },
+    });
+
+  const newsHistory = JSON.parse(await readFile(path.join(root, "docs/data/news-history.json"), "utf8"));
+  const kept = newsHistory.findLast((entry) => entry.items?.length)?.date;
+
+  const archive = await load(`?date=${kept}`);
+  await until(() => String(archive.byId("news-list").innerHTML).includes("news-item"));
+  assert.equal(archive.byId("realestate-section").hidden, true, "지난 날짜에 부동산을 그리려 한다");
+
+  const today = await load("");
+  await until(() => String(today.byId("realestate-grid").innerHTML).includes("<tr"));
+  assert.equal(today.byId("realestate-section").hidden, false, "오늘 화면에서 부동산이 사라졌다");
+});
+
+test("부동산 기록은 아카이브 날짜 목록에 넣지 않는다", async () => {
+  const html = await read("docs/index.html");
+
+  assert.ok(
+    !/archiveDates[\s\S]{0,200}realestateHistory/.test(html),
+    "부동산 기록 날짜가 아카이브 목록에 섞인다"
+  );
+  assert.ok(!html.includes('realestateHistory: "realestate-history"'), "쓰지 않는 기록을 계속 받는다");
+});

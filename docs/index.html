@@ -1028,7 +1028,6 @@
     summaryHistory: null,
     newsHistory: null,
     realestate: null,
-    realestateHistory: null,
     realestateTrend: null,
   };
 
@@ -1047,7 +1046,7 @@
 
   function archiveDates() {
     const all = new Set();
-    for (const history of [cache.newsHistory, cache.summaryHistory, cache.history, cache.realestateHistory]) {
+    for (const history of [cache.newsHistory, cache.summaryHistory, cache.history]) {
       for (const entry of Array.isArray(history) ? history : []) {
         if (entry?.date) all.add(entry.date);
       }
@@ -1515,7 +1514,7 @@
     const tbody = document.getElementById("realestate-grid");
     const meta = document.getElementById("realestate-meta");
     if (!realestate?.overall) {
-      tbody.innerHTML = `<tr><td colspan="4" class="error">${archiveNoRecordFor("realestateHistory") ? t("archiveNoRecord") : t("realestateError")}</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="4" class="error">${t("realestateError")}</td></tr>`;
       meta.textContent = "";
       return;
     }
@@ -1910,8 +1909,7 @@
     return findByDate(cache.history, viewDate);
   }
   function effectiveRealestate() {
-    if (!isArchiveView) return cache.realestate;
-    return findByDate(cache.realestateHistory, viewDate);
+    return isArchiveView ? null : cache.realestate;
   }
 
   function renderAll() {
@@ -1924,8 +1922,11 @@
     renderNews(news);
     renderSummary(summary);
     renderHistory(cache.history);
-    renderRealestate(realestate);
-    renderRealestateHistory(cache.realestateTrend);
+    document.getElementById("realestate-section").hidden = isArchiveView;
+    if (!isArchiveView) {
+      renderRealestate(realestate);
+      renderRealestateHistory(cache.realestateTrend);
+    }
 
     const backLink = document.getElementById("archive-back-link");
     const updateSchedule = document.getElementById("update-schedule");
@@ -2173,7 +2174,6 @@
     history: "market-history",
     summaryHistory: "summary-history",
     newsHistory: "news-history",
-    realestateHistory: "realestate-history",
   };
 
   async function loadTrend() {
