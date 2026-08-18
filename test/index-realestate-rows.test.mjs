@@ -85,3 +85,24 @@ test("감춘 구가 있으면 전체 보기로 안내한다", async () => {
   input.dispatch("input");
   assert.equal(link.hidden, true, "검색 중에는 안내를 띄우지 않는다");
 });
+
+test("메인 화면 추이 카드에도 양 축 눈금과 짚을 자리를 둔다", async () => {
+  const p = await page();
+  const grid = p.byId("realestate-history-grid").innerHTML;
+
+  assert.ok(grid.includes("polyline"), "추이 카드가 그려지지 않았다");
+  assert.match(grid, /class="axis y"/, "세로 눈금이 없다");
+  assert.match(grid, /class="axis x"/, "가로 눈금이 없다");
+  assert.match(grid, /class="marker" hidden/, "짚어줄 표시가 없다");
+  assert.match(grid, /class="history-chart" id="chart-\d+"/, "차트마다 식별자가 없다");
+  assert.ok(!grid.includes('preserveAspectRatio="none"'), "가로로 늘어나 글자가 찌그러진다");
+});
+
+test("시장 지표 추이도 같은 모양으로 그린다", async () => {
+  const p = await page();
+  const grid = p.byId("history-grid").innerHTML;
+
+  assert.ok(grid.includes("polyline"), "시장 지표 추이가 그려지지 않았다");
+  assert.match(grid, /class="axis y"/);
+  assert.match(grid, /class="axis x"/);
+});

@@ -628,18 +628,34 @@
     font-size: 0.72rem;
     white-space: nowrap;
   }
+  .history-chart { position: relative; }
   .history-card svg {
     display: block;
     width: 100%;
-    height: 56px;
+    height: auto;
+    touch-action: none;
   }
-  .history-card .range {
-    display: flex;
-    justify-content: space-between;
-    color: var(--muted);
-    font-size: 0.72rem;
-    margin-top: 4px;
+  .history-card .grid { stroke: var(--border); stroke-width: 1; }
+  .history-card .axis { fill: var(--muted); font-size: 9px; }
+  .history-card .axis.y { text-anchor: end; }
+  .history-card .axis.x { text-anchor: middle; }
+  .history-card .marker-line { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 3; }
+  .history-card .marker-dot { fill: var(--fg); }
+  .chart-tip {
+    position: fixed;
+    z-index: 20;
+    padding: 6px 9px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--fg);
+    font-size: 0.78rem;
+    line-height: 1.4;
+    white-space: nowrap;
+    pointer-events: none;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
   }
+  .chart-tip .tip-value { font-weight: 700; font-variant-numeric: tabular-nums; }
   .archive-date-jump {
     display: flex;
     align-items: center;
@@ -787,6 +803,7 @@
   <footer class="site-footer">
     <a href="https://kyhsa93.github.io/privacy-policy" id="footer-privacy-link" target="_blank" rel="noopener">개인정보처리방침</a>
   </footer>
+<div class="chart-tip" id="chart-tip" hidden></div>
 </main>
 
 <script src="./analytics.js"></script>
@@ -1180,28 +1197,60 @@
     tbody.innerHTML = rows.join("") || `<tr><td colspan="3" class="error">${t("marketEmpty")}</td></tr>`;
   }
 
-  function sparklineSvg(values) {
-    const w = 280, h = 56, pad = 4;
+  const CHART = { w: 320, h: 132, left: 52, right: 10, top: 12, bottom: 26 };
+
+  function chartScale(values) {
     const min = Math.min(...values);
     const max = Math.max(...values);
-    const range = max - min || 1;
-    const step = values.length > 1 ? (w - pad * 2) / (values.length - 1) : 0;
-    const points = values
+    const range = max - min || Math.abs(max) || 1;
+    const plotW = CHART.w - CHART.left - CHART.right;
+    const plotH = CHART.h - CHART.top - CHART.bottom;
+    const step = values.length > 1 ? plotW / (values.length - 1) : 0;
+    return { min, max, x: (i) => CHART.left + i * step, y: (v) => CHART.top + plotH - ((v - min) / range) * plotH };
+  }
+
+  function chartIndexAt(ratio, count) {
+    if (!Number.isFinite(ratio) || count < 1) return null;
+    const plotW = CHART.w - CHART.left - CHART.right;
+    const i = Math.round(((ratio * CHART.w - CHART.left) / plotW) * (count - 1));
+    return Math.min(count - 1, Math.max(0, i));
+  }
+
+  function shortDate(date) {
+    const [, month, day] = String(date ?? "").split("-");
+    return month && day ? `${Number(month)}/${Number(day)}` : "";
+  }
+
+  function sparklineSvg(series, format) {
+    const values = series.map((p) => p.value);
+    const scale = chartScale(values);
+    const points = series.map((p, i) => `${scale.x(i).toFixed(1)},${scale.y(p.value).toFixed(1)}`).join(" ");
+    const last = series[series.length - 1];
+    const color = values.length > 1 && last.value >= values[0] ? "#d64545" : "#2f6fed";
+
+    const yTicks = [scale.max, (scale.max + scale.min) / 2, scale.min]
       .map((v, i) => {
-        const x = pad + i * step;
-        const y = h - pad - ((v - min) / range) * (h - pad * 2);
-        return `${x.toFixed(1)},${y.toFixed(1)}`;
+        const y = CHART.top + (i * (CHART.h - CHART.top - CHART.bottom)) / 2;
+        return (
+          `<line x1="${CHART.left}" y1="${y}" x2="${CHART.w - CHART.right}" y2="${y}" class="grid" />` +
+          `<text x="${CHART.left - 6}" y="${y + 3}" class="axis y">${escapeHtml(format(v))}</text>`
+        );
       })
-      .join(" ");
-    const last = values[values.length - 1];
-    const lastX = pad + (values.length - 1) * step;
-    const lastY = h - pad - ((last - min) / range) * (h - pad * 2);
-    const rising = values.length > 1 && last >= values[0];
-    const color = rising ? "var(--up)" : "var(--down)";
-    return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">
-      <polyline points="${points}" fill="none" stroke="${color}" stroke-width="2" vector-effect="non-scaling-stroke" />
-      <circle cx="${lastX.toFixed(1)}" cy="${lastY.toFixed(1)}" r="2.5" fill="${color}" />
-    </svg>`;
+      .join("");
+
+    const xTicks = [...new Set([0, Math.floor((series.length - 1) / 2), series.length - 1])]
+      .map(
+        (i) =>
+          `<text x="${scale.x(i).toFixed(1)}" y="${CHART.h - 8}" class="axis x">${escapeHtml(shortDate(series[i].date))}</text>`
+      )
+      .join("");
+
+    return `<svg viewBox="0 0 ${CHART.w} ${CHART.h}" role="img">
+        ${yTicks}${xTicks}
+        <polyline points="${points}" fill="none" stroke="${color}" stroke-width="2" />
+        <circle cx="${scale.x(series.length - 1).toFixed(1)}" cy="${scale.y(last.value).toFixed(1)}" r="3" fill="${color}" />
+        <g class="marker" hidden><line class="marker-line" y1="${CHART.top}" y2="${CHART.h - CHART.bottom}" /><circle class="marker-dot" r="4" /></g>
+      </svg>`;
   }
 
   function parseNumeric(v) {
@@ -1210,19 +1259,20 @@
     return NaN;
   }
 
-  function historyCardHtml({ label, values, format, firstDate, lastDate }) {
-    const current = values[values.length - 1];
-    const min = Math.min(...values);
-    const max = Math.max(...values);
+  const chartSeries = new Map();
+
+  function historyCardHtml({ label, series, format }) {
+    const values = series.map((p) => p.value);
+    const id = `chart-${chartSeries.size}`;
+    chartSeries.set(id, { series, format });
     return `
       <div class="history-card">
         <div class="label">${label}</div>
         <div class="history-stats">
-          <span class="history-current">${format(current)}</span>
-          <span class="history-minmax">${t("historyMinMax")(format(max), format(min))}</span>
+          <span class="history-current">${format(values[values.length - 1])}</span>
+          <span class="history-minmax">${t("historyMinMax")(format(Math.max(...values)), format(Math.min(...values)))}</span>
         </div>
-        ${sparklineSvg(values)}
-        <div class="range"><span>${firstDate ?? ""}</span><span>${lastDate ?? ""}</span></div>
+        <div class="history-chart" id="${id}">${sparklineSvg(series, format)}</div>
       </div>`;
   }
 
@@ -1253,13 +1303,64 @@
 
     grid.innerHTML = series
       .map(({ label, get, format }) => {
-        const values = recent.map(get).filter((v) => !Number.isNaN(v));
-        if (values.length < 2) return "";
-        const first = recent.find((h) => !Number.isNaN(get(h)));
-        const last = recent.slice().reverse().find((h) => !Number.isNaN(get(h)));
-        return historyCardHtml({ label, values, format, firstDate: first?.date, lastDate: last?.date });
+        const series = recent
+          .map((h) => ({ date: h.date, value: get(h) }))
+          .filter((p) => !Number.isNaN(p.value) && p.value !== undefined);
+        if (series.length < 2) return "";
+        return historyCardHtml({ label, series, format });
       })
       .join("");
+  }
+
+  function hideChartTip() {
+    const tip = document.getElementById("chart-tip");
+    if (tip) tip.hidden = true;
+    for (const id of chartSeries.keys()) {
+      const marker = document.querySelector(`#${id} .marker`);
+      if (marker) marker.setAttribute("hidden", "hidden");
+    }
+  }
+
+  function showChartTip(chartId, clientX, clientY) {
+    const entry = chartSeries.get(chartId);
+    const svg = document.querySelector(`#${chartId} svg`);
+    const tip = document.getElementById("chart-tip");
+    if (!entry || !svg || !tip) return;
+
+    const box = svg.getBoundingClientRect();
+    if (!box.width) return;
+
+    const index = chartIndexAt((clientX - box.left) / box.width, entry.series.length);
+    if (index === null) return;
+
+    const point = entry.series[index];
+    const scale = chartScale(entry.series.map((p) => p.value));
+    const marker = svg.querySelector(".marker");
+    if (marker) {
+      const x = scale.x(index);
+      marker.querySelector(".marker-line").setAttribute("x1", x);
+      marker.querySelector(".marker-line").setAttribute("x2", x);
+      marker.querySelector(".marker-dot").setAttribute("cx", x);
+      marker.querySelector(".marker-dot").setAttribute("cy", scale.y(point.value));
+      marker.removeAttribute("hidden");
+    }
+
+    tip.innerHTML = `<div>${escapeHtml(point.date)}</div><div class="tip-value">${escapeHtml(entry.format(point.value))}</div>`;
+    tip.hidden = false;
+
+    const width = tip.offsetWidth || 110;
+    tip.style.left = `${Math.min(window.innerWidth - width - 8, Math.max(8, clientX - width / 2))}px`;
+    tip.style.top = `${Math.max(8, clientY - 56)}px`;
+  }
+
+  function onChartPointer(e) {
+    const holder = e.target?.closest?.(".history-chart");
+    if (!holder || !chartSeries.has(holder.id)) {
+      hideChartTip();
+      return;
+    }
+    const touch = e.touches?.[0];
+    showChartTip(holder.id, touch?.clientX ?? e.clientX, touch?.clientY ?? e.clientY);
   }
 
   function formatPyeongPrice(value10k) {
@@ -1482,11 +1583,9 @@
 
     const cards = series
       .map(({ label, get, format }) => {
-        const values = weeks.map(get).filter((v) => typeof v === "number");
-        if (values.length < 2) return null;
-        const first = weeks.find((w) => typeof get(w) === "number");
-        const last = weeks.slice().reverse().find((w) => typeof get(w) === "number");
-        return historyCardHtml({ label, values, format, firstDate: first, lastDate: last });
+        const series = weeks.map((w) => ({ date: w, value: get(w) })).filter((p) => typeof p.value === "number");
+        if (series.length < 2) return null;
+        return historyCardHtml({ label, series, format });
       })
       .filter(Boolean);
 
@@ -1939,6 +2038,12 @@
     if (input) input.value = newsQuery;
     renderNews(effectiveNews());
   });
+
+  document.addEventListener("mousemove", onChartPointer);
+  document.addEventListener("click", onChartPointer);
+  document.addEventListener("touchstart", onChartPointer, { passive: true });
+  document.addEventListener("touchmove", onChartPointer, { passive: true });
+  window.addEventListener("scroll", hideChartTip, { passive: true });
 
   document.getElementById("theme-toggle").addEventListener("click", () => {
     const order = ["auto", "light", "dark"];
