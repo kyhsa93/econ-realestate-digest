@@ -675,108 +675,44 @@
     "date": "2026-08-18",
     "model": "qwen3:14b",
     "summary": {
-      "ko": "- 부동산: 부동산 관련 오늘자 뉴스에서 초고가 아파트의 부적절한 혜택 제공에 대한 벌금 조치가 발표되었다. 롯데건설은 '상동역 롯데캐슬 시그니처' 견본주택에 2만3천명이 방문한 것으로 나타났다. 2030세대는 생애최초 주택 마련에 대한 러시가 가속화되고 있는 것으로 보인다. 아산시는 신축 아파트에 국공립어린이집 개원 기간을 1개월 이상 단축하는 방안을 추진 중이다. 전세난으로 인해 내 집 마련에 대한 관심이 높아진 것으로 나타났다.\n- 증시·환율: 일본 닛케이지수는 미국 증시의 영향으로 0.54% 하락 출발했다. 한국 코스피는 상승 출발하며 7천피를 회복했다. 미국 다우지수는 미·이란 갈등과 유가 급등으로 0.51% 하락 마감했다. 홍콩 증시는 저가 매수세로 닷새 만에 반등하며 H주가 1.19% 상승했다. 미국 증시는 유가 영향으로 약세를 보였으나, AI 낙관에 반도체주는 상승했다.\n- 기타 경제 소식: 오늘 재정경제부 관련 인사 소식이 전해졌다. 부동산 시장에서 6개월 전에 주택을 구입했으면 가격이 6억 원 상승했을 것으로 나타났다. 오늘 경제 관련 주요 일정이 발표되었다. 각 기사는 서로 다른 주제로, 별도의 사건으로 분리된다. 오늘의 경제 뉴스는 다양한 분야에서의 소식을 담고 있다.\n- 금리·예금·투자상품: 고금리로 인해 사모대출 부실화가 우려되고 있으며, 미국 30년물 금리는 5.31%로 19년 만에 최고치를 기록했고, 미국 달러화는 10주 만에 최저치를 기록하며 정책금리 인상 기대가 후퇴했으며, 미국 경제학자 80%는 올해 내 금리인상이 없을 것으로 전망하고 있다.",
-      "en": "- Real Estate: Today's real estate news reported penalty measures for inappropriate benefits provided in high-end apartments. Lotte Construction showed that 20,0003 thousand people visited the model house for 'Sangdong Station Lotte Castle Signature'. It appears that the 2030 generation is accelerating a rush to secure their first home. Asan City is promoting a plan to shorten the opening period of public kindergartens in new apartment complexes by more than one month. It has been shown that interest in securing one's own home has increased due to the rental crisis.\n- Stocks & FX: The Nikkei index in Japan fell 0.54% at the open due to the impact of the U.S. stock market. The KOSPI in South Korea rose at the open, recovering 700 points. The Dow index in the U.S. closed down 0.51% due to the U.S.-Iran conflict and a sharp rise in oil prices. The Hong Kong stock market rebounded for the first time in five days due to low-price buying, with H-shares rising 1.19%. The U.S. stock market showed weakness due to the impact of oil prices, but semiconductor stocks rose on optimism about AI.\n- Other Economic News: Today, news about a person related to the Ministry of Finance and Economy was reported. It was found that if a house was purchased six months ago in the real estate market, its price would have increased by 600,000,000 won. Today, major economic schedules were announced. Each article covers different topics and is separated as individual events. Today's economic news includes reports from various fields.\n- Rates, Deposits & Investment Products: Concerns are rising over the deterioration of private loan quality due to high interest rates. The U.S. 30-year interest rate reached 5.31%, the highest level in 19 years, and the U.S. dollar hit its lowest level in 10 weeks, signaling a retreat in expectations for policy rate hikes. 80% of U.S. economists predict no interest rate hikes this year."
+      "ko": "- 증시·환율: 홍콩 증시는 중동 정세와 미국 증시의 약세 영향으로 H주가 0.45% 하락했다. 코스피는 장중 하락전환하며 7,000선을 밑돌았고, 코스닥도 낙폭을 확대했다. 코스피는 7천피 안착을 시도했으나 상승 탄력은 다소 둔화된 상태다. 중국 증시는 하락 출발하며 상하이지수가 0.08% 내렸다. 일본 증시 역시 미국 증시의 영향으로 닛케이지수가 0.54% 하락했다.\n- 금리·예금·투자상품: 국고채 금리가 일제히 상승하며 3년물이 장중 연 3.862%를 기록했고, 중동발 인플레 공포로 글로벌 국채금리가 급등해 미국·일본·유럽의 국채금리가 수십년 만의 최고 수준을 기록했으며, 고금리로 인해 사모대출이 흔들리며 2020년대 대출 부실화가 나타나고 있다.\n- 부동산: 용산공원 주택 개발 계획이 발표되며 부동산 시장의 변화가 예상되고 있다. 제주경찰은 정관계 로비 의혹과 관련해 아파트를 압수수색하고 전담팀을 구성했다. 수원시는 역세권 청년임대주택 151호를 공급하며 보증금을 100만원으로 설정했다. 경실련은 20억원 미만 서울 아파트 가격이 부동산 공급대책으로 인해 상승할 것으로 전망했다. 7월 전국 주택 매매소비심리가 전월 대비 0.7포인트 상승했다.\n- 기타 경제 소식: 월가에서는 사모대출 부실이 확산되면서 대출을 줄이고 자산을 매각하는 움직임이 나타났다. 한 지역에서는 6개월 전에 집을 샀다면 현재 가격에 비해 6억 원이 올랐다. 집값이 급등한 동네에 대한 관심이 높아지고 있다. 경제 상황에 따라 부동산 시장과 금융시장이 각기 다른 방향으로 움직이고 있다. 오늘의 뉴스는 금융과 부동산 분야에서 각각의 변화를 보여주는 사례로 꼽힌다.",
+      "en": "- Stocks & FX: The Hong Kong stock market fell 0.45% as H-shares were affected by the Middle East situation and the weakness in the U.S. market. The KOSPI turned negative during the session, falling below the 7,000 level, and the KOSDAQ also widened its losses. The KOSPI attempted to stabilize above the 7,000 level, but its upward momentum has slightly slowed. The Chinese market started with a decline, with the Shanghai index dropping 0.08%. The Japanese market was also affected by the U.S. market, with the Nikkei index falling 0.54%.\n- Rates, Deposits & Investment Products: Treasury bond rates rose uniformly, with the 3-year bond reaching 3.862% annually during trading. Global bond rates surged sharply due to inflation fears from the Middle East, with bond rates in the U.S., Japan, and Europe reaching their highest levels in decades. Due to high interest rates, private loans are becoming unstable, and loan defaults have begun to appear in the 2020s.\n- Real Estate: The Yongsan Park housing development plan has been announced, and changes in the real estate market are expected. Jeju Police have conducted a search of an apartment and formed a special team in relation to allegations of political and business lobbying. Suwon City has supplied 151 units of youth rental housing in a railway station area, setting the deposit at 1,000,000 won. The Korean Real Estate Research Institute expects the price of Seoul apartments under 2,000,000,000 won to rise due to real estate supply measures. The nationwide housing sales consumer sentiment index rose by 0.7 points compared to the previous month in July.\n- Other Economic News: On Wall Street, as private loan defaults spread, there has been a movement to reduce lending and sell assets. In one area, if someone bought a house six months ago, its price has risen 600,000,000 won compared to the current price. Interest in neighborhoods where house prices have sharply increased is rising. The real estate market and financial market are moving in different directions depending on the economic situation. Today's news is cited as an example showing changes in both the financial and real estate sectors."
     },
     "highlights": [],
     "categories": [
       {
-        "key": "realestate",
-        "name": "부동산",
-        "nameEn": "Real Estate",
-        "lineKo": "부동산 관련 오늘자 뉴스에서 초고가 아파트의 부적절한 혜택 제공에 대한 벌금 조치가 발표되었다. 롯데건설은 '상동역 롯데캐슬 시그니처' 견본주택에 2만3천명이 방문한 것으로 나타났다. 2030세대는 생애최초 주택 마련에 대한 러시가 가속화되고 있는 것으로 보인다. 아산시는 신축 아파트에 국공립어린이집 개원 기간을 1개월 이상 단축하는 방안을 추진 중이다. 전세난으로 인해 내 집 마련에 대한 관심이 높아진 것으로 나타났다.",
-        "lineEn": "Today's real estate news reported penalty measures for inappropriate benefits provided in high-end apartments. Lotte Construction showed that 20,0003 thousand people visited the model house for 'Sangdong Station Lotte Castle Signature'. It appears that the 2030 generation is accelerating a rush to secure their first home. Asan City is promoting a plan to shorten the opening period of public kindergartens in new apartment complexes by more than one month. It has been shown that interest in securing one's own home has increased due to the rental crisis.",
-        "isFallback": false,
-        "fallbackReason": null,
-        "degraded": false,
-        "items": [
-          {
-            "title": "[단독] 혜택만 받고 '먹튀' 초고가 아파트…벌금 폭탄 맞는다",
-            "link": "https://www.hankyung.com/article/202608186305i",
-            "source": "한국경제 부동산"
-          },
-          {
-            "title": "롯데건설, '상동역 롯데캐슬 시그니처' 견본주택 2만3천명 방문",
-            "link": "https://www.newsis.com/view/NISX20260818_0003752021",
-            "source": "뉴시스 경제"
-          },
-          {
-            "title": "“더 늦었다가는 평생 무주택자 될라”…2030 생애최초 내 집 마련 러시",
-            "link": "https://www.mk.co.kr/news/realestate/12129838",
-            "source": "매일경제 부동산"
-          },
-          {
-            "title": "아산시, 신축 아파트 국공립어린이집 개원 1개월 이상 단축",
-            "link": "https://www.yna.co.kr/view/AKR20260818038000063",
-            "source": "연합뉴스 경제"
-          },
-          {
-            "title": "\"전세난에 지쳤다\"…2030 '내 집 마련' 몰려간 이 동네",
-            "link": "https://www.hankyung.com/article/2026081859556",
-            "source": "한국경제 부동산"
-          }
-        ]
-      },
-      {
         "key": "stocks",
         "name": "증시·환율",
         "nameEn": "Stocks & FX",
-        "lineKo": "일본 닛케이지수는 미국 증시의 영향으로 0.54% 하락 출발했다. 한국 코스피는 상승 출발하며 7천피를 회복했다. 미국 다우지수는 미·이란 갈등과 유가 급등으로 0.51% 하락 마감했다. 홍콩 증시는 저가 매수세로 닷새 만에 반등하며 H주가 1.19% 상승했다. 미국 증시는 유가 영향으로 약세를 보였으나, AI 낙관에 반도체주는 상승했다.",
-        "lineEn": "The Nikkei index in Japan fell 0.54% at the open due to the impact of the U.S. stock market. The KOSPI in South Korea rose at the open, recovering 700 points. The Dow index in the U.S. closed down 0.51% due to the U.S.-Iran conflict and a sharp rise in oil prices. The Hong Kong stock market rebounded for the first time in five days due to low-price buying, with H-shares rising 1.19%. The U.S. stock market showed weakness due to the impact of oil prices, but semiconductor stocks rose on optimism about AI.",
+        "lineKo": "홍콩 증시는 중동 정세와 미국 증시의 약세 영향으로 H주가 0.45% 하락했다. 코스피는 장중 하락전환하며 7,000선을 밑돌았고, 코스닥도 낙폭을 확대했다. 코스피는 7천피 안착을 시도했으나 상승 탄력은 다소 둔화된 상태다. 중국 증시는 하락 출발하며 상하이지수가 0.08% 내렸다. 일본 증시 역시 미국 증시의 영향으로 닛케이지수가 0.54% 하락했다.",
+        "lineEn": "The Hong Kong stock market fell 0.45% as H-shares were affected by the Middle East situation and the weakness in the U.S. market. The KOSPI turned negative during the session, falling below the 7,000 level, and the KOSDAQ also widened its losses. The KOSPI attempted to stabilize above the 7,000 level, but its upward momentum has slightly slowed. The Chinese market started with a decline, with the Shanghai index dropping 0.08%. The Japanese market was also affected by the U.S. market, with the Nikkei index falling 0.54%.",
         "isFallback": false,
         "fallbackReason": null,
         "degraded": false,
         "items": [
+          {
+            "title": "[올댓차이나] 홍콩 증시, 중동 정세·美 증시 약세에 반락… H주 0.45%↓",
+            "link": "https://www.newsis.com/view/NISX20260818_0003752555",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "코스피, 장중 하락전환해 7,000선 내줘…코스닥 낙폭 확대(종합)",
+            "link": "https://www.yna.co.kr/view/AKR20260818075351008",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "코스피, '7천피' 안착 시도…상승 탄력은 다소 둔화",
+            "link": "https://www.yna.co.kr/view/AKR20260818075300008",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "[올댓차이나] 중국 증시 하락 출발…상하이지수 0.08%↓",
+            "link": "https://www.newsis.com/view/NISX20260818_0003752387",
+            "source": "뉴시스 경제"
+          },
           {
             "title": "日증시, 美증시 영향으로 하락 출발…닛케이지수 0.54%↓",
             "link": "https://www.newsis.com/view/NISX20260818_0003752044",
-            "source": "뉴시스 경제"
-          },
-          {
-            "title": "[속보] 코스피, 상승 출발…'7천피' 회복",
-            "link": "https://www.yna.co.kr/view/AKR20260818034600008",
-            "source": "연합뉴스 경제"
-          },
-          {
-            "title": "뉴욕증시, 미·이란 갈등 지속·유가 급등에 하락 마감…다우 0.51%↓",
-            "link": "https://www.newsis.com/view/NISX20260818_0003751727",
-            "source": "뉴시스 경제"
-          },
-          {
-            "title": "[올댓차이나] 홍콩 증시, 저가 매수세로 닷새 만에 반등 마감… H주 1.19%↑",
-            "link": "https://www.newsis.com/view/NISX20260817_0003751710",
-            "source": "뉴시스 경제"
-          },
-          {
-            "title": "'유가 영향' 美 증시 약세… AI 낙관에 반도체주는 상승",
-            "link": "https://www.hankyung.com/article/202608175622i",
-            "source": "한국경제 경제"
-          }
-        ]
-      },
-      {
-        "key": "other",
-        "name": "기타 경제 소식",
-        "nameEn": "Other Economic News",
-        "lineKo": "오늘 재정경제부 관련 인사 소식이 전해졌다. 부동산 시장에서 6개월 전에 주택을 구입했으면 가격이 6억 원 상승했을 것으로 나타났다. 오늘 경제 관련 주요 일정이 발표되었다. 각 기사는 서로 다른 주제로, 별도의 사건으로 분리된다. 오늘의 경제 뉴스는 다양한 분야에서의 소식을 담고 있다.",
-        "lineEn": "Today, news about a person related to the Ministry of Finance and Economy was reported. It was found that if a house was purchased six months ago in the real estate market, its price would have increased by 600,000,000 won. Today, major economic schedules were announced. Each article covers different topics and is separated as individual events. Today's economic news includes reports from various fields.",
-        "isFallback": false,
-        "fallbackReason": null,
-        "degraded": false,
-        "items": [
-          {
-            "title": "[인사] 재정경제부(종합)",
-            "link": "https://www.yna.co.kr/view/AKR20260818032551002",
-            "source": "연합뉴스 경제"
-          },
-          {
-            "title": "\"6개월 전에 샀으면 6억 올랐다\"…집값 무섭게 뛰는 동네 어디",
-            "link": "https://www.hankyung.com/article/2026081860186",
-            "source": "한국경제 부동산"
-          },
-          {
-            "title": "[오늘의 주요일정]경제(8월18일화요일)",
-            "link": "https://www.newsis.com/view/NISX20260814_0003748771",
             "source": "뉴시스 경제"
           }
         ]
@@ -785,31 +721,85 @@
         "key": "rates",
         "name": "금리·예금·투자상품",
         "nameEn": "Rates, Deposits & Investment Products",
-        "lineKo": "고금리로 인해 사모대출 부실화가 우려되고 있으며, 미국 30년물 금리는 5.31%로 19년 만에 최고치를 기록했고, 미국 달러화는 10주 만에 최저치를 기록하며 정책금리 인상 기대가 후퇴했으며, 미국 경제학자 80%는 올해 내 금리인상이 없을 것으로 전망하고 있다.",
-        "lineEn": "Concerns are rising over the deterioration of private loan quality due to high interest rates. The U.S. 30-year interest rate reached 5.31%, the highest level in 19 years, and the U.S. dollar hit its lowest level in 10 weeks, signaling a retreat in expectations for policy rate hikes. 80% of U.S. economists predict no interest rate hikes this year.",
+        "lineKo": "국고채 금리가 일제히 상승하며 3년물이 장중 연 3.862%를 기록했고, 중동발 인플레 공포로 글로벌 국채금리가 급등해 미국·일본·유럽의 국채금리가 수십년 만의 최고 수준을 기록했으며, 고금리로 인해 사모대출이 흔들리며 2020년대 대출 부실화가 나타나고 있다.",
+        "lineEn": "Treasury bond rates rose uniformly, with the 3-year bond reaching 3.862% annually during trading. Global bond rates surged sharply due to inflation fears from the Middle East, with bond rates in the U.S., Japan, and Europe reaching their highest levels in decades. Due to high interest rates, private loans are becoming unstable, and loan defaults have begun to appear in the 2020s.",
         "isFallback": false,
         "fallbackReason": null,
         "degraded": true,
         "items": [
           {
+            "title": "국고채 금리 일제히 상승…3년물 장중 연 3.862%",
+            "link": "https://www.yna.co.kr/view/AKR20260818082100008",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "중동發 인플레 공포에 글로벌 국채금리 급등…美·日·유럽 수십년 만 최고",
+            "link": "https://www.newsis.com/view/NISX20260818_0003752206",
+            "source": "뉴시스 경제"
+          },
+          {
             "title": "고금리에 흔들리는 사모대출…2020년대 대출 부실화",
             "link": "https://www.hankyung.com/article/202608185935i",
             "source": "한국경제 경제"
+          }
+        ]
+      },
+      {
+        "key": "realestate",
+        "name": "부동산",
+        "nameEn": "Real Estate",
+        "lineKo": "용산공원 주택 개발 계획이 발표되며 부동산 시장의 변화가 예상되고 있다. 제주경찰은 정관계 로비 의혹과 관련해 아파트를 압수수색하고 전담팀을 구성했다. 수원시는 역세권 청년임대주택 151호를 공급하며 보증금을 100만원으로 설정했다. 경실련은 20억원 미만 서울 아파트 가격이 부동산 공급대책으로 인해 상승할 것으로 전망했다. 7월 전국 주택 매매소비심리가 전월 대비 0.7포인트 상승했다.",
+        "lineEn": "The Yongsan Park housing development plan has been announced, and changes in the real estate market are expected. Jeju Police have conducted a search of an apartment and formed a special team in relation to allegations of political and business lobbying. Suwon City has supplied 151 units of youth rental housing in a railway station area, setting the deposit at 1,000,000 won. The Korean Real Estate Research Institute expects the price of Seoul apartments under 2,000,000,000 won to rise due to real estate supply measures. The nationwide housing sales consumer sentiment index rose by 0.7 points compared to the previous month in July.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": false,
+        "items": [
+          {
+            "title": "용산공원에 어떤 주택·얼마나 공급하나…개발 판도 격변 예고",
+            "link": "https://www.yna.co.kr/view/AKR20260818068900003",
+            "source": "연합뉴스 경제"
           },
           {
-            "title": "美 30년물 금리 5.31%…19년 만에 최고치",
-            "link": "https://www.newsis.com/view/NISX20260818_0003751722",
+            "title": "제주경찰, 정관계 로비의혹 아파트 압수수색…전담팀도 구성",
+            "link": "https://www.yna.co.kr/view/AKR20260818074600056",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "수원시, 역세권 청년임대주택 151호 공급…보증금 100만원",
+            "link": "https://www.yna.co.kr/view/AKR20260818072200061",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "경실련 \"부동산 공급대책, 20억원 미만 서울 아파트 가격 올릴 것\"",
+            "link": "https://www.yna.co.kr/view/AKR20260818071500004",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "7월 전국 주택 매매소비심리 상승…전월대비 0.7p↑",
+            "link": "https://www.yna.co.kr/view/AKR20260818054800003",
+            "source": "연합뉴스 경제"
+          }
+        ]
+      },
+      {
+        "key": "other",
+        "name": "기타 경제 소식",
+        "nameEn": "Other Economic News",
+        "lineKo": "월가에서는 사모대출 부실이 확산되면서 대출을 줄이고 자산을 매각하는 움직임이 나타났다. 한 지역에서는 6개월 전에 집을 샀다면 현재 가격에 비해 6억 원이 올랐다. 집값이 급등한 동네에 대한 관심이 높아지고 있다. 경제 상황에 따라 부동산 시장과 금융시장이 각기 다른 방향으로 움직이고 있다. 오늘의 뉴스는 금융과 부동산 분야에서 각각의 변화를 보여주는 사례로 꼽힌다.",
+        "lineEn": "On Wall Street, as private loan defaults spread, there has been a movement to reduce lending and sell assets. In one area, if someone bought a house six months ago, its price has risen 600,000,000 won compared to the current price. Interest in neighborhoods where house prices have sharply increased is rising. The real estate market and financial market are moving in different directions depending on the economic situation. Today's news is cited as an example showing changes in both the financial and real estate sectors.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": false,
+        "items": [
+          {
+            "title": "사모대출 부실 확산에 몸 사리는 월가…대출 줄이고 자산 매각",
+            "link": "https://www.newsis.com/view/NISX20260818_0003752049",
             "source": "뉴시스 경제"
           },
           {
-            "title": "美달러화 10주 만에 최저치…정책금리 인상 기대 후퇴",
-            "link": "https://www.newsis.com/view/NISX20260818_0003751712",
-            "source": "뉴시스 경제"
-          },
-          {
-            "title": "美 경제학자 80% \"올해 내 금리인상 없을 것\"",
-            "link": "https://www.hankyung.com/article/202608175594i",
-            "source": "한국경제 경제"
+            "title": "\"6개월 전에 샀으면 6억 올랐다\"…집값 무섭게 뛰는 동네 어디",
+            "link": "https://www.hankyung.com/article/2026081860186",
+            "source": "한국경제 부동산"
           }
         ]
       }
