@@ -1958,7 +1958,8 @@
         "source": "뉴시스 경제",
         "category": "other",
         "preview": "[세종=뉴시스] ▲08:30 주병기 공정거래위원장, 을지연습 최초 상황보고(세종) ▲08:30 남동일 공정거래위원회 부위원장, 을지연습 최초 상황보고(세종) ▲10:00 박홍근 기획예산처 장관, 을지국무회의(세종청사…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "[Today's Major Schedule] Economy (August 18, Tuesday)"
       },
       {
         "title": "20층 이상 고층아파트도 뚝딱…모듈러 주택 연 5천가구 ‘닥공’",
@@ -1967,7 +1968,8 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "정부, 모듈러 주택 본격 공급 3년간 물량 1.2만→2만가구 20층 이상 고층아파트로 확대 공사기간 30% 단축 효과 추가 공사비 절반 재정 지원정부가 주택 공급 속도를 끌어올리기..",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "High-rise apartments of 20 floors or more built in a snap... modular homes to hit 5,000 units annually 'docgong"
       },
       {
         "title": "서울시, 무주택 청년 이사비·중개보수 최대 40만원 지원",
@@ -1976,7 +1978,20 @@
         "source": "연합뉴스 경제",
         "category": "realestate",
         "preview": "(서울=연합뉴스) 황재하 기자 = 서울시는 부동산 중개보수와 이사비로 최대 40만원을 지원하는 '청년 부동산 중개보수 및 이사비 지원' 대상자 ...",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./apartment-sale.html",
+            "label": "서울 전체 아파트 84㎡ 매매",
+            "labelEn": "Seoul apartment 84㎡ sale",
+            "value": "11억 3,303만원",
+            "valueEn": "₩1,133M",
+            "note": "8월 신고 581건 · 8/11 대비 +2.6%",
+            "noteEn": "581 deals in Aug · +2.6% vs Aug 11"
+          }
+        ],
+        "titleEn": "Seoul to Support Unmarried Young Adults with Up to 400,000 Won for Moving Costs and Broker Fees"
       },
       {
         "title": "김윤덕·오세훈 오는 20일 회동…용산공원 주택공급 '분수령'",
@@ -1985,7 +2000,20 @@
         "source": "연합뉴스 경제",
         "category": "realestate",
         "preview": "(서울=연합뉴스) 김동규 기자 = 용산공원 부지 내 주택공급을 둘러싼 정부와 서울시 갈등이 오는 20일 중대 분수령을 맞을 전망이다.",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-yongsan.html",
+            "label": "용산구 아파트 84㎡ 매매",
+            "labelEn": "용산구 apartment 84㎡ sale",
+            "value": "20억 2,974만원",
+            "valueEn": "₩2,030M",
+            "note": "8월 신고 5건",
+            "noteEn": "5 deals in Aug"
+          }
+        ],
+        "titleEn": "Kim Yoon-deok and Oh Se-hoon to meet on 20th… Yongsan Park housing supply to reach a turning point"
       },
       {
         "title": "뉴욕증시, 미·이란 갈등 지속·유가 급등에 하락 마감…다우 0.51%↓",
@@ -1994,7 +2022,8 @@
         "source": "뉴시스 경제",
         "category": "stocks",
         "preview": "[서울=뉴시스] 권성근 기자 = 뉴욕증시의 3대 주가지수가 미국과 이란의 갈등에 하락세로 장을 마감했다. 17일(현지 시간) 마켓워치, CNBC 등에 따르면 이날 뉴욕증권거래소(NYSE)에서 우량주 중심의 다우존스3…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "New York Stock Market Closes Lower as U.S.-Iran Tensions Continue and Oil Prices Surge... Dow Down 0.51%"
       },
       {
         "title": "집 한 채에 세금만 다섯 개 붙는다 … 부동산 세금에 대한 100가지 사실(1)",
@@ -2003,7 +2032,8 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "부동산 세금 집중 분석 (1~25)세상에서 확실한 것은 죽음과 세금, 두 가지뿐이라는 말이 있다. 사람은 누구나 죽고, 살아 있는 동안에는 누구나 세금을 낸다. 그리고 세금 중에서..",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "One house has five taxes attached ... 100 facts about real estate taxes (1)"
       },
       {
         "title": "美 30년물 금리 5.31%…19년 만에 최고치",
@@ -2012,7 +2042,8 @@
         "source": "뉴시스 경제",
         "category": "rates",
         "preview": "[서울=뉴시스] 권성근 기자 = 미국 30년 만기 국채 금리가 급증하는 국가 부채와 대규모 발행 영향으로 급등했다. 17일(현지 시간) 미 경제 매체 CNBC 등에 따르면 장기 금리 기준물인 30년 만기 수익률은 0…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "U.S. 30-Year Rate Hits 5.31%...Highest in 19 Years"
       },
       {
         "title": "美달러화 10주 만에 최저치…정책금리 인상 기대 후퇴",
@@ -2021,7 +2052,8 @@
         "source": "뉴시스 경제",
         "category": "rates",
         "preview": "[서울=뉴시스] 권성근 기자 = 미국 달러화 가치가 10주 만에 최저치를 기록했다. 달러는 17일(현지 시간) 미국의 소매 판매가 예상과 달리 감소하며 경기 둔화에 대한 우려가 제기돼 정책 금리 인상 기대감이 후퇴하…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Dollar hits 10-week low... expectations of policy rate hike retreat"
       },
       {
         "title": "[올댓차이나] 홍콩 증시, 저가 매수세로 닷새 만에 반등 마감… H주 1.19%↑",
@@ -2030,7 +2062,8 @@
         "source": "뉴시스 경제",
         "category": "stocks",
         "preview": "[서울=뉴시스]이재준 기자 = 홍콩 증시는 17일 그간 하락에 대한 반동으로 저가 매수세가 선행하면서 5거래일 만에 반등 마감했다. 대형 인터넷주와 비철금속 관련주가 강세로 보이고 추가 부양책 기대로 중국 증시도 상…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "[AllChina] Hong Kong Market Rises on Low-price Buying, Closing Up After Five Days… H-shares Up 1.19%"
       },
       {
         "title": "'유가 영향' 美 증시 약세… AI 낙관에 반도체주는 상승",
@@ -2039,7 +2072,8 @@
         "source": "한국경제 경제",
         "category": "stocks",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Oil prices impact U.S. markets negatively... Semiconductor stocks rise on AI optimism"
       },
       {
         "title": "[속보]뉴욕증시, 이란 불확실성 속 혼조 출발.…나스닥 0.01%↑",
@@ -2048,7 +2082,8 @@
         "source": "뉴시스 경제",
         "category": "stocks",
         "preview": "후속기사가 이어집니다 ◎공감언론 뉴시스 ksk@newsis.com",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "[Breaking News] New York Stock Market Opens Mixed Amid Iran Uncertainty... Nasdaq Up 0.01%"
       },
       {
         "title": "美 경제학자 80% \"올해 내 금리인상 없을 것\"",
@@ -2057,7 +2092,8 @@
         "source": "한국경제 경제",
         "category": "rates",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "80% of U.S. Economists Say No Interest Rate Hike This Year"
       },
       {
         "title": "서울 전세, 7년새 3만가구 증발…반전세 등 월세는 5만가구 늘어",
@@ -2066,7 +2102,20 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "7년새 전세 비중 69.7→61.9% 월세는 30.3→38.1%로 상승 보유세 강화 미칠 영향에 촉각서울 아파트 임대차 시장의 무게추가 전세에서 월세로 빠르게 기울고 있다. 최근 ..",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./apartment-jeonse.html",
+            "label": "서울 전체 아파트 84㎡ 전세",
+            "labelEn": "Seoul apartment 84㎡ jeonse",
+            "value": "7억 6,611만원",
+            "valueEn": "₩766M",
+            "note": "8월 신고 899건 · 8/11 대비 +18.6%",
+            "noteEn": "899 deals in Aug · +18.6% vs Aug 11"
+          }
+        ],
+        "titleEn": "Seoul's rental market sees 30,000 units disappear in 7 years... monthly rent units like half-rental increase by 50,000 units"
       },
       {
         "title": "中, 자동차판매 -21%·부동산 투자 -19%…중국경제 '빨간불'",
@@ -2075,7 +2124,8 @@
         "source": "한국경제 경제",
         "category": "realestate",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "China's car sales down 21%, real estate investment down 19%... China economy 'red light"
       },
       {
         "title": "'닥치고 공급' 또다른 논쟁…용산, 주택 공급이냐 공원 조성이냐",
@@ -2084,7 +2134,20 @@
         "source": "한국경제 부동산",
         "category": "realestate",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-yongsan.html",
+            "label": "용산구 아파트 84㎡ 매매",
+            "labelEn": "용산구 apartment 84㎡ sale",
+            "value": "20억 2,974만원",
+            "valueEn": "₩2,030M",
+            "note": "8월 신고 5건",
+            "noteEn": "5 deals in Aug"
+          }
+        ],
+        "titleEn": "Stop and Supply\" Sparks Another Debate... Yongsan: Housing Supply or Park Development?"
       },
       {
         "title": "정부, ISA 세제 손질…부동산은 국회 논의",
@@ -2093,7 +2156,8 @@
         "source": "한국경제 경제",
         "category": "realestate",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Government to Revise ISA Taxation... Real Estate to Be Discussed in Congress"
       },
       {
         "title": "환율·채권, 올해 최저치 찍은 환율, 1300원대 눈앞",
@@ -2102,7 +2166,8 @@
         "source": "한국경제 경제",
         "category": "rates",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Exchange rate, bonds: exchange rate hits this year's lowest level, approaching 1,300 won"
       },
       {
         "title": "대출 규제 풍선효과…성남 중원, 1주새 0.55% 올라",
@@ -2111,7 +2176,18 @@
         "source": "한국경제 부동산",
         "category": "other",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "rates",
+            "label": "주택담보대출 최저금리",
+            "labelEn": "Lowest mortgage rate",
+            "value": "연 3.64%",
+            "valueEn": "3.64% p.a.",
+            "href": "./mortgage-rates.html"
+          }
+        ],
+        "titleEn": "Loan regulation balloon effect... Seongnam Jungwon rises 0.55% in one week"
       },
       {
         "title": "\"폐점 부지에도 짓지마\"…주민 반발에 막힌 청년·노인주택",
@@ -2120,7 +2196,8 @@
         "source": "한국경제 부동산",
         "category": "realestate",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Don't build even on the closed-down site\"… Youth and elderly housing project blocked by residents' opposition"
       },
       {
         "title": "용산 어린이정원에 '청년 주택' 추진",
@@ -2129,7 +2206,20 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "이재명 정부가 서울 용산어린이정원 용지에 청년층을 위한 대규모 임대주택 단지를 조성하는 방안을 적극 검토하고 있는 것으로 전해졌다. 서울 노른자 땅에 민간 분양이 아닌 공공 청년주..",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-yongsan.html",
+            "label": "용산구 아파트 84㎡ 매매",
+            "labelEn": "용산구 apartment 84㎡ sale",
+            "value": "20억 2,974만원",
+            "valueEn": "₩2,030M",
+            "note": "8월 신고 5건",
+            "noteEn": "5 deals in Aug"
+          }
+        ],
+        "titleEn": "Push to build youth housing at Yongsan Children's Park"
       },
       {
         "title": "5대 은행 주담대 가산금리 고공행진…\"가계대출 억제 영향\"",
@@ -2138,7 +2228,18 @@
         "source": "연합뉴스 경제",
         "category": "rates",
         "preview": "(서울=연합뉴스) 한지훈 기자 = 주요 시중은행이 가계대출 총량 관리를 강화하면서 높은 수준의 가산금리를 유지 중인 것으로 나타났다.",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "rates",
+            "label": "주택담보대출 최저금리",
+            "labelEn": "Lowest mortgage rate",
+            "value": "연 3.64%",
+            "valueEn": "3.64% p.a.",
+            "href": "./mortgage-rates.html"
+          }
+        ],
+        "titleEn": "Five Major Banks' Housing Loan Interest Rates Soar...\"Impact of Controlling Household Loans"
       },
       {
         "title": "[부동산 손품노트] 취득·보유·양도·상속·증여세…집 관련 5가지 세금 집중해부",
@@ -2147,7 +2248,8 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "세상에서 확실한 것은 죽음과 세금, 두 가지뿐이라는 말이 있다. 사람은 누구나 죽고, 살아 있는 동안에는 누구나 세금을 낸다. 그리고 세금 중에서도 가장 크고, 자주, 오래 따라붙..",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Real Estate Tax Guide: In-Depth Analysis of 5 Types of Taxes Related to Property - Acquisition, Ownership, Transfer, Inheritance, and Gift Taxes"
       },
       {
         "title": "서울 전세 3만가구 증발 … 월세는 5만가구 껑충",
@@ -2156,7 +2258,20 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "서울 아파트 임대차 시장의 무게추가 전세에서 월세로 빠르게 기울고 있다. 최근 7년 사이 전세 가구는 3만가구 넘게 줄어든 반면, 반전세를 포함한 월세 가구는 5만가구 이상 급증했..",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./apartment-jeonse.html",
+            "label": "서울 전체 아파트 84㎡ 전세",
+            "labelEn": "Seoul apartment 84㎡ jeonse",
+            "value": "7억 6,611만원",
+            "valueEn": "₩766M",
+            "note": "8월 신고 899건 · 8/11 대비 +18.6%",
+            "noteEn": "899 deals in Aug · +18.6% vs Aug 11"
+          }
+        ],
+        "titleEn": "Seoul's rental market loses 30,000 units as 50,000 units jump to monthly rent"
       },
       {
         "title": "공장서 뚝딱…모듈러 주택 年5천가구 '닥공'",
@@ -2165,7 +2280,8 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "정부가 주택 공급 속도를 끌어올리기 위해 공장에서 주택을 만들어 현장에서 조립하는 '모듈러 주택'을 본격적인 공급 수단으로 키운다. 그동안 학교·기숙사나 저층 주택 위주로 활용되던..",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Factory-made... Modular homes to build 5,000 units a year 'Doc Gong"
       }
     ]
   }
