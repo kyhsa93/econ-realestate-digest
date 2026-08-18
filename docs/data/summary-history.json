@@ -675,45 +675,77 @@
     "date": "2026-08-18",
     "model": "qwen3:14b",
     "summary": {
-      "ko": "- 증시·환율: 홍콩 증시는 중동 정세와 미국 증시의 약세 영향으로 H주가 0.45% 하락했다. 코스피는 장중 하락전환하며 7,000선을 밑돌았고, 코스닥도 낙폭을 확대했다. 코스피는 7천피 안착을 시도했으나 상승 탄력은 다소 둔화된 상태다. 중국 증시는 하락 출발하며 상하이지수가 0.08% 내렸다. 일본 증시 역시 미국 증시의 영향으로 닛케이지수가 0.54% 하락했다.\n- 금리·예금·투자상품: 국고채 금리가 일제히 상승하며 3년물이 장중 연 3.862%를 기록했고, 중동발 인플레 공포로 글로벌 국채금리가 급등해 미국·일본·유럽의 국채금리가 수십년 만의 최고 수준을 기록했으며, 고금리로 인해 사모대출이 흔들리며 2020년대 대출 부실화가 나타나고 있다.\n- 부동산: 용산공원 주택 개발 계획이 발표되며 부동산 시장의 변화가 예상되고 있다. 제주경찰은 정관계 로비 의혹과 관련해 아파트를 압수수색하고 전담팀을 구성했다. 수원시는 역세권 청년임대주택 151호를 공급하며 보증금을 100만원으로 설정했다. 경실련은 20억원 미만 서울 아파트 가격이 부동산 공급대책으로 인해 상승할 것으로 전망했다. 7월 전국 주택 매매소비심리가 전월 대비 0.7포인트 상승했다.\n- 기타 경제 소식: 월가에서는 사모대출 부실이 확산되면서 대출을 줄이고 자산을 매각하는 움직임이 나타났다. 한 지역에서는 6개월 전에 집을 샀다면 현재 가격에 비해 6억 원이 올랐다. 집값이 급등한 동네에 대한 관심이 높아지고 있다. 경제 상황에 따라 부동산 시장과 금융시장이 각기 다른 방향으로 움직이고 있다. 오늘의 뉴스는 금융과 부동산 분야에서 각각의 변화를 보여주는 사례로 꼽힌다.",
-      "en": "- Stocks & FX: The Hong Kong stock market fell 0.45% as H-shares were affected by the Middle East situation and the weakness in the U.S. market. The KOSPI turned negative during the session, falling below the 7,000 level, and the KOSDAQ also widened its losses. The KOSPI attempted to stabilize above the 7,000 level, but its upward momentum has slightly slowed. The Chinese market started with a decline, with the Shanghai index dropping 0.08%. The Japanese market was also affected by the U.S. market, with the Nikkei index falling 0.54%.\n- Rates, Deposits & Investment Products: Treasury bond rates rose uniformly, with the 3-year bond reaching 3.862% annually during trading. Global bond rates surged sharply due to inflation fears from the Middle East, with bond rates in the U.S., Japan, and Europe reaching their highest levels in decades. Due to high interest rates, private loans are becoming unstable, and loan defaults have begun to appear in the 2020s.\n- Real Estate: The Yongsan Park housing development plan has been announced, and changes in the real estate market are expected. Jeju Police have conducted a search of an apartment and formed a special team in relation to allegations of political and business lobbying. Suwon City has supplied 151 units of youth rental housing in a railway station area, setting the deposit at 1,000,000 won. The Korean Real Estate Research Institute expects the price of Seoul apartments under 2,000,000,000 won to rise due to real estate supply measures. The nationwide housing sales consumer sentiment index rose by 0.7 points compared to the previous month in July.\n- Other Economic News: On Wall Street, as private loan defaults spread, there has been a movement to reduce lending and sell assets. In one area, if someone bought a house six months ago, its price has risen 600,000,000 won compared to the current price. Interest in neighborhoods where house prices have sharply increased is rising. The real estate market and financial market are moving in different directions depending on the economic situation. Today's news is cited as an example showing changes in both the financial and real estate sectors."
+      "ko": "- 부동산: ISA 혜택은 유지되나 부동산 관련 세제는 디테일 조정을 통해 보완이 가속화되고 있으며, 서울 민간아파트 분양가가 3.3㎡당 6209만원으로 또다시 상승했고, 오세훈은 국무회의에서 재건축 규제 완화를 요청했으며, 광진구 자양2동 모아타운 내 첫 모아주택 조합설립인가가 내려졌고, 용산공원 개발에 대한 반대 여론이 확산되고 있다.\n- 증시·환율: 코스피는 5거래일 연속 외국인 매수세를 기록하며 변동성이 줄어들었다. 반면, 같은 날 코스피는 1.55% 하락 마감했고 코스닥도 3.52% 내렸다. 일본 닛케이지수는 중동 정세 불확실성으로 2.54% 하락하며 마감했다. 최근 코스피는 반등세를 보였지만 거래대금과 거래량은 연중 최저 수준을 기록했다. 외국인의 매수세가 이어지면서 코스피의 변동성은 잦아들고 있다.\n- 금리·예금·투자상품: 금리·예금·투자상품: 힘 받는 9월 미국 금리 동결…환율, 10개월 만에 최저, 주담대 변동금리 넉 달째 상승…7월 코픽스 0.13%p↑(종합)\n- 기타 경제 소식: 7월 서울 집값 상승폭이 9개월 만에 최대를 기록했다. 노원·성북 지역에서는 트리플 강세를 보였다. 경실련은 서민 주거 불안을 우려하며 반응했다. 이는 잇단 대책에도 불구하고 집값 상승이 이어진 것으로 나타났다. 관련 소식들은 서로 다른 주제로 이어졌다.",
+      "en": "- Real Estate: ISA benefits remain in place, while adjustments to real estate-related taxation are being accelerated through detailed modifications. The selling price of private apartments in Seoul has again risen to 62,090,000 won per 3.3㎡. Oh Se-hoon requested the relaxation of reconstruction regulations at the State Council meeting. The first approval for the establishment of a housing cooperative for Moa Housing was granted within Moa Town in Jangyeong 2-dong, Gwangjin-gu. Opposition to the development of Yongsan Park is spreading.\n- Stocks & FX: The KOSPI saw reduced volatility as it recorded foreign buying for five consecutive trading days. Meanwhile, the KOSPI closed down 1.55% on the same day, and the KOSDAQ also fell by 3.52%. The Japanese Nikkei index closed down 2.54% due to uncertainty over the Middle East situation. Although the KOSPI has recently shown a rebound, trading value and volume have reached their lowest levels of the year. The KOSPI's volatility has been decreasing as foreign buying continues.\n- Rates, Deposits & Investment Products: Rates, Deposits & Investment Products: 힘 받는 9월 미국 금리 동결…환율, 10개월 만에 최저, 주담대 변동금리 넉 달째 상승…7월 코픽스 0.13%p↑(종합)\n- Other Economic News: The rate of increase in Seoul housing prices in July reached the highest level in nine months. In Nowon and Seongbuk areas, prices showed a triple-digit rise. The Korea Real Estate Research Institute expressed concern over the growing anxiety among low-income residents regarding housing. This indicates that housing prices have continued to rise despite repeated measures. Related news stories then shifted to different topics."
     },
     "highlights": [],
     "categories": [
       {
+        "key": "realestate",
+        "name": "부동산",
+        "nameEn": "Real Estate",
+        "lineKo": "ISA 혜택은 유지되나 부동산 관련 세제는 디테일 조정을 통해 보완이 가속화되고 있으며, 서울 민간아파트 분양가가 3.3㎡당 6209만원으로 또다시 상승했고, 오세훈은 국무회의에서 재건축 규제 완화를 요청했으며, 광진구 자양2동 모아타운 내 첫 모아주택 조합설립인가가 내려졌고, 용산공원 개발에 대한 반대 여론이 확산되고 있다.",
+        "lineEn": "ISA benefits remain in place, while adjustments to real estate-related taxation are being accelerated through detailed modifications. The selling price of private apartments in Seoul has again risen to 62,090,000 won per 3.3㎡. Oh Se-hoon requested the relaxation of reconstruction regulations at the State Council meeting. The first approval for the establishment of a housing cooperative for Moa Housing was granted within Moa Town in Jangyeong 2-dong, Gwangjin-gu. Opposition to the development of Yongsan Park is spreading.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": true,
+        "items": [
+          {
+            "title": "ISA 혜택 유지, 부동산은 디테일 조정…세제개편 보완 속도 내나",
+            "link": "https://www.newsis.com/view/NISX20260818_0003752978",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "서울 민간아파트 분양가 또 올랐다…3.3㎡당 6209만원",
+            "link": "https://www.newsis.com/view/NISX20260818_0003752157",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "오세훈, 국무회의서 \"재건축 규제완화\"…李 \"총리와 협의해보라\"(종합)",
+            "link": "https://www.yna.co.kr/view/AKR20260818093051004",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "광진구, '자양2동 모아타운' 내 첫 모아주택 조합설립인가",
+            "link": "https://www.yna.co.kr/view/AKR20260818132900004",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "“국가공원 허물어 아파트? 옳지 않습니다”…용산공원 개발 반대 확산",
+            "link": "https://www.mk.co.kr/news/realestate/12130266",
+            "source": "매일경제 부동산"
+          }
+        ]
+      },
+      {
         "key": "stocks",
         "name": "증시·환율",
         "nameEn": "Stocks & FX",
-        "lineKo": "홍콩 증시는 중동 정세와 미국 증시의 약세 영향으로 H주가 0.45% 하락했다. 코스피는 장중 하락전환하며 7,000선을 밑돌았고, 코스닥도 낙폭을 확대했다. 코스피는 7천피 안착을 시도했으나 상승 탄력은 다소 둔화된 상태다. 중국 증시는 하락 출발하며 상하이지수가 0.08% 내렸다. 일본 증시 역시 미국 증시의 영향으로 닛케이지수가 0.54% 하락했다.",
-        "lineEn": "The Hong Kong stock market fell 0.45% as H-shares were affected by the Middle East situation and the weakness in the U.S. market. The KOSPI turned negative during the session, falling below the 7,000 level, and the KOSDAQ also widened its losses. The KOSPI attempted to stabilize above the 7,000 level, but its upward momentum has slightly slowed. The Chinese market started with a decline, with the Shanghai index dropping 0.08%. The Japanese market was also affected by the U.S. market, with the Nikkei index falling 0.54%.",
+        "lineKo": "코스피는 5거래일 연속 외국인 매수세를 기록하며 변동성이 줄어들었다. 반면, 같은 날 코스피는 1.55% 하락 마감했고 코스닥도 3.52% 내렸다. 일본 닛케이지수는 중동 정세 불확실성으로 2.54% 하락하며 마감했다. 최근 코스피는 반등세를 보였지만 거래대금과 거래량은 연중 최저 수준을 기록했다. 외국인의 매수세가 이어지면서 코스피의 변동성은 잦아들고 있다.",
+        "lineEn": "The KOSPI saw reduced volatility as it recorded foreign buying for five consecutive trading days. Meanwhile, the KOSPI closed down 1.55% on the same day, and the KOSDAQ also fell by 3.52%. The Japanese Nikkei index closed down 2.54% due to uncertainty over the Middle East situation. Although the KOSPI has recently shown a rebound, trading value and volume have reached their lowest levels of the year. The KOSPI's volatility has been decreasing as foreign buying continues.",
         "isFallback": false,
         "fallbackReason": null,
         "degraded": false,
         "items": [
           {
-            "title": "[올댓차이나] 홍콩 증시, 중동 정세·美 증시 약세에 반락… H주 0.45%↓",
-            "link": "https://www.newsis.com/view/NISX20260818_0003752555",
-            "source": "뉴시스 경제"
-          },
-          {
-            "title": "코스피, 장중 하락전환해 7,000선 내줘…코스닥 낙폭 확대(종합)",
-            "link": "https://www.yna.co.kr/view/AKR20260818075351008",
+            "title": "코스피 변동성 잦아들자 외국인 돌아오나…5거래일 연속 '사자'(종합)",
+            "link": "https://www.yna.co.kr/view/AKR20260818070051008",
             "source": "연합뉴스 경제"
           },
           {
-            "title": "코스피, '7천피' 안착 시도…상승 탄력은 다소 둔화",
-            "link": "https://www.yna.co.kr/view/AKR20260818075300008",
+            "title": "日증시, 중동 정세 불확실성에 하락 마감…닛케이지수 2.54%↓",
+            "link": "https://www.newsis.com/view/NISX20260818_0003752966",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "최근 코스피 반등세에도…거래대금·거래량 연중 최저수준(종합)",
+            "link": "https://www.yna.co.kr/view/AKR20260818099751008",
             "source": "연합뉴스 경제"
           },
           {
-            "title": "[올댓차이나] 중국 증시 하락 출발…상하이지수 0.08%↓",
-            "link": "https://www.newsis.com/view/NISX20260818_0003752387",
-            "source": "뉴시스 경제"
-          },
-          {
-            "title": "日증시, 美증시 영향으로 하락 출발…닛케이지수 0.54%↓",
-            "link": "https://www.newsis.com/view/NISX20260818_0003752044",
-            "source": "뉴시스 경제"
+            "title": "[속보] '전강후약' 코스피, 1.55% 하락 마감…코스닥 3.52%↓",
+            "link": "https://www.yna.co.kr/view/AKR20260818122500008",
+            "source": "연합뉴스 경제"
           }
         ]
       },
@@ -721,62 +753,20 @@
         "key": "rates",
         "name": "금리·예금·투자상품",
         "nameEn": "Rates, Deposits & Investment Products",
-        "lineKo": "국고채 금리가 일제히 상승하며 3년물이 장중 연 3.862%를 기록했고, 중동발 인플레 공포로 글로벌 국채금리가 급등해 미국·일본·유럽의 국채금리가 수십년 만의 최고 수준을 기록했으며, 고금리로 인해 사모대출이 흔들리며 2020년대 대출 부실화가 나타나고 있다.",
-        "lineEn": "Treasury bond rates rose uniformly, with the 3-year bond reaching 3.862% annually during trading. Global bond rates surged sharply due to inflation fears from the Middle East, with bond rates in the U.S., Japan, and Europe reaching their highest levels in decades. Due to high interest rates, private loans are becoming unstable, and loan defaults have begun to appear in the 2020s.",
-        "isFallback": false,
-        "fallbackReason": null,
-        "degraded": true,
-        "items": [
-          {
-            "title": "국고채 금리 일제히 상승…3년물 장중 연 3.862%",
-            "link": "https://www.yna.co.kr/view/AKR20260818082100008",
-            "source": "연합뉴스 경제"
-          },
-          {
-            "title": "중동發 인플레 공포에 글로벌 국채금리 급등…美·日·유럽 수십년 만 최고",
-            "link": "https://www.newsis.com/view/NISX20260818_0003752206",
-            "source": "뉴시스 경제"
-          },
-          {
-            "title": "고금리에 흔들리는 사모대출…2020년대 대출 부실화",
-            "link": "https://www.hankyung.com/article/202608185935i",
-            "source": "한국경제 경제"
-          }
-        ]
-      },
-      {
-        "key": "realestate",
-        "name": "부동산",
-        "nameEn": "Real Estate",
-        "lineKo": "용산공원 주택 개발 계획이 발표되며 부동산 시장의 변화가 예상되고 있다. 제주경찰은 정관계 로비 의혹과 관련해 아파트를 압수수색하고 전담팀을 구성했다. 수원시는 역세권 청년임대주택 151호를 공급하며 보증금을 100만원으로 설정했다. 경실련은 20억원 미만 서울 아파트 가격이 부동산 공급대책으로 인해 상승할 것으로 전망했다. 7월 전국 주택 매매소비심리가 전월 대비 0.7포인트 상승했다.",
-        "lineEn": "The Yongsan Park housing development plan has been announced, and changes in the real estate market are expected. Jeju Police have conducted a search of an apartment and formed a special team in relation to allegations of political and business lobbying. Suwon City has supplied 151 units of youth rental housing in a railway station area, setting the deposit at 1,000,000 won. The Korean Real Estate Research Institute expects the price of Seoul apartments under 2,000,000,000 won to rise due to real estate supply measures. The nationwide housing sales consumer sentiment index rose by 0.7 points compared to the previous month in July.",
-        "isFallback": false,
-        "fallbackReason": null,
+        "lineKo": "금리·예금·투자상품: 힘 받는 9월 미국 금리 동결…환율, 10개월 만에 최저, 주담대 변동금리 넉 달째 상승…7월 코픽스 0.13%p↑(종합)",
+        "lineEn": "Rates, Deposits & Investment Products: 힘 받는 9월 미국 금리 동결…환율, 10개월 만에 최저, 주담대 변동금리 넉 달째 상승…7월 코픽스 0.13%p↑(종합)",
+        "isFallback": true,
+        "fallbackReason": "unverified-number",
         "degraded": false,
         "items": [
           {
-            "title": "용산공원에 어떤 주택·얼마나 공급하나…개발 판도 격변 예고",
-            "link": "https://www.yna.co.kr/view/AKR20260818068900003",
+            "title": "힘 받는 9월 미국 금리 동결…환율, 10개월 만에 최저",
+            "link": "https://www.yna.co.kr/view/AKR20260818125300002",
             "source": "연합뉴스 경제"
           },
           {
-            "title": "제주경찰, 정관계 로비의혹 아파트 압수수색…전담팀도 구성",
-            "link": "https://www.yna.co.kr/view/AKR20260818074600056",
-            "source": "연합뉴스 경제"
-          },
-          {
-            "title": "수원시, 역세권 청년임대주택 151호 공급…보증금 100만원",
-            "link": "https://www.yna.co.kr/view/AKR20260818072200061",
-            "source": "연합뉴스 경제"
-          },
-          {
-            "title": "경실련 \"부동산 공급대책, 20억원 미만 서울 아파트 가격 올릴 것\"",
-            "link": "https://www.yna.co.kr/view/AKR20260818071500004",
-            "source": "연합뉴스 경제"
-          },
-          {
-            "title": "7월 전국 주택 매매소비심리 상승…전월대비 0.7p↑",
-            "link": "https://www.yna.co.kr/view/AKR20260818054800003",
+            "title": "주담대 변동금리 넉 달째 상승…7월 코픽스 0.13%p↑(종합)",
+            "link": "https://www.yna.co.kr/view/AKR20260818115051002",
             "source": "연합뉴스 경제"
           }
         ]
@@ -785,21 +775,21 @@
         "key": "other",
         "name": "기타 경제 소식",
         "nameEn": "Other Economic News",
-        "lineKo": "월가에서는 사모대출 부실이 확산되면서 대출을 줄이고 자산을 매각하는 움직임이 나타났다. 한 지역에서는 6개월 전에 집을 샀다면 현재 가격에 비해 6억 원이 올랐다. 집값이 급등한 동네에 대한 관심이 높아지고 있다. 경제 상황에 따라 부동산 시장과 금융시장이 각기 다른 방향으로 움직이고 있다. 오늘의 뉴스는 금융과 부동산 분야에서 각각의 변화를 보여주는 사례로 꼽힌다.",
-        "lineEn": "On Wall Street, as private loan defaults spread, there has been a movement to reduce lending and sell assets. In one area, if someone bought a house six months ago, its price has risen 600,000,000 won compared to the current price. Interest in neighborhoods where house prices have sharply increased is rising. The real estate market and financial market are moving in different directions depending on the economic situation. Today's news is cited as an example showing changes in both the financial and real estate sectors.",
+        "lineKo": "7월 서울 집값 상승폭이 9개월 만에 최대를 기록했다. 노원·성북 지역에서는 트리플 강세를 보였다. 경실련은 서민 주거 불안을 우려하며 반응했다. 이는 잇단 대책에도 불구하고 집값 상승이 이어진 것으로 나타났다. 관련 소식들은 서로 다른 주제로 이어졌다.",
+        "lineEn": "The rate of increase in Seoul housing prices in July reached the highest level in nine months. In Nowon and Seongbuk areas, prices showed a triple-digit rise. The Korea Real Estate Research Institute expressed concern over the growing anxiety among low-income residents regarding housing. This indicates that housing prices have continued to rise despite repeated measures. Related news stories then shifted to different topics.",
         "isFallback": false,
         "fallbackReason": null,
         "degraded": false,
         "items": [
           {
-            "title": "사모대출 부실 확산에 몸 사리는 월가…대출 줄이고 자산 매각",
-            "link": "https://www.newsis.com/view/NISX20260818_0003752049",
-            "source": "뉴시스 경제"
+            "title": "7월 서울 집값 상승폭 9개월 만에 최대… 노원·성북 ‘트리플 강세’",
+            "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/18/PJC2G3UPNNCHVFI2WYRU7GJT7Y/",
+            "source": "조선비즈 부동산"
           },
           {
-            "title": "\"6개월 전에 샀으면 6억 올랐다\"…집값 무섭게 뛰는 동네 어디",
-            "link": "https://www.hankyung.com/article/2026081860186",
-            "source": "한국경제 부동산"
+            "title": "“서민 주거 불안 부추겨”…잇단 대책에도 집값 뛰자 경실련 반응은",
+            "link": "https://www.mk.co.kr/news/realestate/12130110",
+            "source": "매일경제 부동산"
           }
         ]
       }
