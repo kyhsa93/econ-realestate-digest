@@ -20,7 +20,6 @@ import {
   FILING_GRACE_DAYS,
   REPRESENT_WEEKS,
   TREND_MIN_SAMPLE,
-  attachWeeklyChanges,
   buildWeekly,
   firstFullWeek,
   nextWeek,
@@ -35,7 +34,6 @@ const dataDir = process.env.REALESTATE_DATA_DIR
   : path.resolve(import.meta.dirname, "../docs/data");
 const outFile = path.join(dataDir, "realestate.json");
 const historyFile = path.join(dataDir, "realestate-history.json");
-const weeklyFile = path.join(dataDir, "realestate-weekly.json");
 const trendFile = path.join(dataDir, "realestate-trend.json");
 const rentFilesDir = process.env.DEAL_FILES_DIR
   ? path.resolve(process.env.DEAL_FILES_DIR)
@@ -188,12 +186,6 @@ function weeklyRows(file, districtName, dateOf) {
   return rows;
 }
 
-export function arrivalRows(file, districtName) {
-  const arrivals = file?.arrivals ?? {};
-  if (!Object.keys(arrivals).length) return [];
-  return weeklyRows(file, districtName, (item) => arrivals[itemKey(item)]);
-}
-
 export function contractRows(file, districtName) {
   return weeklyRows(file, districtName, (item) => {
     const year = Number(item?.dealYear);
@@ -204,42 +196,21 @@ export function contractRows(file, districtName) {
   });
 }
 
-async function readWeeklyRows(now, rowsOf) {
+async function readContractRows(now) {
   const months = windowMonths(now);
   const perSlot = await Promise.all(
     months.flatMap((yearMonth) =>
       DISTRICTS.flatMap(({ code, name }) =>
-        ["sale", "rent"].map(async (kind) => rowsOf(await readSlotFile(kind, code, yearMonth), name))
+        ["sale", "rent"].map(async (kind) => contractRows(await readSlotFile(kind, code, yearMonth), name))
       )
     )
   );
   return perSlot.flat();
 }
 
-async function writeWeekly(now) {
-  const weekly = attachWeeklyChanges(buildWeekly(await readWeeklyRows(now, arrivalRows), now));
-  if (!weekly) {
-    console.log("[build-realestate] 확정된 주가 아직 없어 주간 시세를 만들지 않았습니다");
-    return;
-  }
-
-  await writeFile(weeklyFile, JSON.stringify({ updatedAt: now.toISOString(), ...weekly }, null, 2));
-
-  const latest = weekly.overall[weekly.latestWeek] ?? {};
-  const counts = ["sale", "jeonse", "wolse"]
-    .filter((kind) => latest[kind])
-    .map((kind) => `${kind} ${latest[kind].transactionCount.toLocaleString("ko-KR")}건`)
-    .join(" · ");
-  console.log(
-    `[build-realestate] 주간 시세 ${weekly.weeks.length}주 · 확정 주 ${weekly.latestWeek}` +
-      (counts ? ` (${counts})` : "") +
-      (weekly.baselineWeek ? ` · ${weekly.baselineWeek} 대비` : " · 견줄 주 없음")
-  );
-}
-
 async function writeTrend(now) {
   const oldest = windowMonths(now).at(-1);
-  const trend = buildWeekly(await readWeeklyRows(now, contractRows), now, {
+  const trend = buildWeekly(await readContractRows(now), now, {
     minSample: TREND_MIN_SAMPLE,
     graceDays: FILING_GRACE_DAYS,
     from: firstFullWeek(`${oldest.slice(0, 4)}-${oldest.slice(4, 6)}-01`),
@@ -366,7 +337,6 @@ async function main() {
 
   await writeRepresentative(now);
   await writeRentFiles(now);
-  await writeWeekly(now);
   await writeTrend(now);
 }
 
