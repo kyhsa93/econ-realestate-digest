@@ -22,33 +22,15 @@ const AUGUST = [
 const at = (date) => new Date(`${date}T00:00:00Z`);
 
 test("같은 달 안에서는 이레 전 값을 기준으로 잡는다", () => {
-  const baseline = findBaseline(AUGUST, at("2026-08-15"), "202608");
+  const baseline = findBaseline(AUGUST, at("2026-08-15"));
   assert.equal(baseline.date, "2026-08-08");
 });
 
-test("달이 바뀌는 날에는 기준값을 잡지 않는다", () => {
-  const history = [...AUGUST, entry("2026-09-01", "202609", 45, 3200)];
+test("달이 바뀌어도 이레 전 값을 그대로 견준다", () => {
+  const history = [...AUGUST, entry("2026-09-01", "202609", 1210, 3660)];
 
-  assert.equal(findBaseline(history, at("2026-09-01"), "202609"), null, "지난달 누계와 하루치를 견주고 있다");
-});
-
-test("새 달에 이레가 차기 전까지는 기준값이 없다", () => {
-  const history = [...AUGUST];
-  for (const [i, date] of ["2026-09-01", "2026-09-02", "2026-09-03"].entries()) {
-    history.push(entry(date, "202609", 45 * (i + 1), 3200));
-  }
-
-  assert.equal(findBaseline(history, at("2026-09-03"), "202609"), null);
-});
-
-test("이레가 차면 새 달 안에서 다시 견준다", () => {
-  const history = [...AUGUST];
-  for (let day = 1; day <= 9; day += 1) {
-    history.push(entry(`2026-09-0${day}`, "202609", 45 * day, 3200 + day));
-  }
-
-  const baseline = findBaseline(history, at("2026-09-09"), "202609");
-  assert.equal(baseline.date, "2026-09-02");
+  const baseline = findBaseline(history, at("2026-09-01"));
+  assert.equal(baseline.date, "2026-08-25", "달이 바뀌었다고 기준을 놓쳤다");
 });
 
 test("기준값이 없으면 증감을 붙이지 않는다", () => {
@@ -63,6 +45,6 @@ test("기준값이 없으면 증감을 붙이지 않는다", () => {
 });
 
 test("기록이 비어 있어도 기준값을 지어내지 않는다", () => {
-  assert.equal(findBaseline([], at("2026-08-15"), "202608"), null);
-  assert.equal(findBaseline(AUGUST.slice(0, 1), at("2026-08-01"), "202608"), null);
+  assert.equal(findBaseline([], at("2026-08-15")), null);
+  assert.equal(findBaseline(AUGUST.slice(0, 1), at("2026-08-01")), null);
 });

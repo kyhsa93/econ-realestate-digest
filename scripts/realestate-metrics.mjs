@@ -263,12 +263,12 @@ export function computeOverall(districts) {
   return { sale: overallSale, saleNational84: overallSaleNational84, jeonse: overallJeonse, wolse: overallWolse };
 }
 
-export function findBaseline(history, now, period) {
+export function findBaseline(history, now) {
   const target = new Date(now);
   target.setDate(target.getDate() - 7);
   const targetDate = kstDateString(target);
 
-  const older = history.filter((h) => h.period === period && h.date <= targetDate);
+  const older = history.filter((h) => h.date <= targetDate);
   if (!older.length) return null;
 
   const baseline = older[older.length - 1];

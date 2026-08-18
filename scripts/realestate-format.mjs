@@ -58,25 +58,20 @@ export function metricOf(entry, kind) {
 export const valueOf = (metric, kind) => metric?.[KIND_FIELDS[kind].value] ?? null;
 
 export function resolveMetric(entry, kind) {
-  const current = metricOf(entry, kind);
-  if (current) return { metric: current, isPrevious: false };
-
-  const previous = entry?.prev ? metricOf(entry.prev, kind) : null;
-  if (previous) return { metric: previous, isPrevious: true };
-
-  return null;
+  const metric = metricOf(entry, kind);
+  return metric ? { metric } : null;
 }
 
 export function jeonseRatio(entry) {
   const sale = resolveMetric(entry, "sale");
   const jeonse = resolveMetric(entry, "jeonse");
-  if (!sale || !jeonse || sale.isPrevious !== jeonse.isPrevious) return null;
+  if (!sale || !jeonse) return null;
 
   const salePrice = valueOf(sale.metric, "sale");
   const jeonsePrice = valueOf(jeonse.metric, "jeonse");
   if (!salePrice || !jeonsePrice) return null;
 
-  return { ratio: (jeonsePrice / salePrice) * 100, isPrevious: sale.isPrevious };
+  return { ratio: (jeonsePrice / salePrice) * 100 };
 }
 
 export const formatPercent = (value) =>

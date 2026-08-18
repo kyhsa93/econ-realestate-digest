@@ -14,15 +14,17 @@ import {
   summarizeRent,
   summarizeSaleItems,
 } from "./realestate-metrics.mjs";
-import { attachPrevious } from "./realestate-previous.mjs";
 import { itemKey, readSlotFile } from "./realestate-raw.mjs";
-import { shiftMonth, windowMonths, yearMonthOf } from "./realestate-slots.mjs";
+import { windowMonths } from "./realestate-slots.mjs";
 import {
   FILING_GRACE_DAYS,
+  REPRESENT_WEEKS,
   TREND_MIN_SAMPLE,
   attachWeeklyChanges,
   buildWeekly,
   firstFullWeek,
+  nextWeek,
+  settledWeek,
 } from "./realestate-weekly.mjs";
 import { buildRentFiles, rentFileName } from "./deal-files.mjs";
 import { readRentSource } from "./realestate-source.mjs";
@@ -47,16 +49,55 @@ async function readJson(file, fallback = null) {
   }
 }
 
-async function readMonth(yearMonth) {
+function contractDate(item) {
+  const year = Number(item?.dealYear);
+  const month = Number(item?.dealMonth);
+  const day = Number(item?.dealDay);
+  if (!Number.isInteger(year) || !Number.isInteger(month) || !Number.isInteger(day)) return null;
+  return `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+}
+
+export function representWindow(now, weeks = REPRESENT_WEEKS) {
+  const settled = settledWeek(now, FILING_GRACE_DAYS);
+  const until = nextWeek(settled, 1);
+  return {
+    from: nextWeek(settled, -(weeks - 1)),
+    to: new Date(Date.parse(`${until}T00:00:00Z`) - 86_400_000).toISOString().slice(0, 10),
+    until,
+    weeks,
+  };
+}
+
+function monthsBetween(from, until) {
+  const months = new Set();
+  for (let at = from; at < until; at = nextWeek(at)) months.add(at.slice(0, 4) + at.slice(5, 7));
+  months.add(until.slice(0, 4) + until.slice(5, 7));
+  return [...months];
+}
+
+async function readWindowItems(window) {
   const items = new Map();
+
   await Promise.all(
-    DISTRICTS.flatMap(({ code }) =>
-      ["sale", "rent"].map(async (kind) => {
-        const file = await readSlotFile(kind, code, yearMonth);
-        if (file?.ok !== false && Array.isArray(file?.items)) items.set(`${kind}:${code}`, file.items);
-      })
+    monthsBetween(window.from, window.until).flatMap((yearMonth) =>
+      DISTRICTS.flatMap(({ code }) =>
+        ["sale", "rent"].map(async (kind) => {
+          const file = await readSlotFile(kind, code, yearMonth);
+          if (file?.ok === false || !Array.isArray(file?.items)) return;
+
+          const picked = file.items.filter((item) => {
+            const date = contractDate(item);
+            return date && date >= window.from && date < window.until;
+          });
+          if (!picked.length) return;
+
+          const key = `${kind}:${code}`;
+          items.set(key, [...(items.get(key) ?? []), ...picked]);
+        })
+      )
     )
   );
+
   return items;
 }
 
@@ -222,16 +263,13 @@ async function writeRentFiles(now) {
   );
 }
 
-async function main() {
-  const now = new Date();
-  const period = yearMonthOf(now);
-  const previousPeriod = shiftMonth(period, -1);
-
-  const current = await readMonth(period);
-  const newlyFetched = districtEntries(current);
+async function writeRepresentative(now, window) {
+  const newlyFetched = districtEntries(await readWindowItems(window));
 
   if (newlyFetched.length === 0) {
-    console.error(`[build-realestate] ${period} 원본이 없습니다, 기존 데이터를 그대로 둡니다`);
+    console.error(
+      `[build-realestate] ${window.from}~${window.to} 계약분 원본이 없습니다, 시세는 기존 값을 그대로 둡니다`
+    );
     return;
   }
 
@@ -247,35 +285,34 @@ async function main() {
   }
 
   const overall = computeOverall(districts);
-
-  await mkdir(dataDir, { recursive: true });
-
   const history = await readJson(historyFile, []);
-  const withChanges = attachChanges(overall, districts, findBaseline(history, now, period));
 
-  const prevDistricts = districtEntries(await readMonth(previousPeriod));
-  const previous = prevDistricts.length
-    ? { period: previousPeriod, districts: prevDistricts }
-    : null;
-  if (!previous) {
-    console.error(`[build-realestate] 지난달(${previousPeriod}) 원본이 없어 비교값을 만들지 못했습니다`);
-  }
-
-  const payload = attachPrevious({ updatedAt: now.toISOString(), period, ...withChanges }, previous);
-  await writeFile(outFile, JSON.stringify(payload, null, 2));
+  await writeFile(
+    outFile,
+    JSON.stringify({ updatedAt: now.toISOString(), window, ...attachChanges(overall, districts, findBaseline(history, now)) }, null, 2)
+  );
 
   const nextHistory = appendHistory(history, now, {
-    period,
+    window,
     overall: carriedNames.length ? computeOverall(newlyFetched) : overall,
     districts: newlyFetched,
   });
   await writeFile(historyFile, JSON.stringify(nextHistory, null, 2));
 
+  console.log(
+    `[build-realestate] 시세 저장 — ${window.from}부터 ${window.weeks}주 계약분 (${fetchSummary(districts)})`
+  );
+}
+
+async function main() {
+  const now = new Date();
+
+  await mkdir(dataDir, { recursive: true });
+
+  await writeRepresentative(now, representWindow(now));
   await writeRentFiles(now);
   await writeWeekly(now);
   await writeTrend(now);
-
-  console.log(`[build-realestate] 저장 완료 (${fetchSummary(districts)})`);
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === path.resolve(import.meta.filename)) {

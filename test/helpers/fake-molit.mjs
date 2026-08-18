@@ -81,3 +81,10 @@ export const rentItem = (extra = {}) => ({
   umdNm: "테스트동",
   ...extra,
 });
+
+export const monthDays = (yearMonth, days = [1, 8, 15, 22, 28]) =>
+  days.map((day) => ({
+    dealYear: Number(String(yearMonth).slice(0, 4)),
+    dealMonth: Number(String(yearMonth).slice(4)),
+    dealDay: day,
+  }));

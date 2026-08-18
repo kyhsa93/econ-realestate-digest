@@ -5,7 +5,7 @@ import { mkdtemp, readFile, readdir, stat } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { promisify } from "node:util";
-import { errorXml, rentItem, saleItem, startFakeMolit, successXml } from "./helpers/fake-molit.mjs";
+import { errorXml, monthDays, rentItem, saleItem, startFakeMolit, successXml } from "./helpers/fake-molit.mjs";
 import { refreshMonths, windowMonths } from "../scripts/realestate-slots.mjs";
 
 const run = promisify(execFile);
@@ -14,6 +14,9 @@ const NOW = new Date();
 const PERIOD = windowMonths(NOW)[0];
 const DISTRICT_COUNT = 25;
 const STEPS = ["scripts/fetch-realestate.mjs", "scripts/build-realestate.mjs"];
+
+const spread = (kind, yearMonth, extra = {}) =>
+  successXml(monthDays(yearMonth).map((on) => (kind === "sale" ? saleItem({ ...on, ...extra }) : rentItem({ ...on, ...extra }))));
 
 async function collect(server, { rawDir, dataDir, backfillLimit = 0, env = {} }, steps = STEPS) {
   const options = {
@@ -83,22 +86,20 @@ test("원본은 응답을 그대로 담고 건수를 함께 남긴다", async (t
   assert.equal(file.items[0].dealingGbn, "중개거래");
 });
 
-test("기존 산출물은 당월 기준 그대로 만들어진다", async (t) => {
-  const server = await startFakeMolit((kind, { yearMonth }) => {
-    const amount = yearMonth === PERIOD ? "52,000" : "40,000";
-    return successXml([kind === "sale" ? saleItem({ dealAmount: amount }) : rentItem()]);
-  });
+test("산출물은 신고가 마감된 최근 몇 주 계약분으로 만들어진다", async (t) => {
+  const server = await startFakeMolit((kind, { yearMonth }) => spread(kind, yearMonth));
   t.after(() => server.close());
   const space = await workspace();
 
-  await collect(server, space);
+  await collect(server, { ...space, backfillLimit: 400 });
 
   const payload = await readJson(path.join(space.dataDir, "realestate.json"));
-  assert.equal(payload.period, PERIOD);
   assert.equal(payload.districts.length, DISTRICT_COUNT);
-  assert.equal(payload.overall.sale.transactionCount, DISTRICT_COUNT, "당월 거래만 세야 한다");
-
-  assert.equal(payload.previousPeriod, refreshMonths(NOW)[1], "지난달 비교값을 원본에서 만들지 않았다");
+  assert.equal(payload.window.weeks, 4);
+  assert.ok(payload.window.from < payload.window.to, JSON.stringify(payload.window));
+  assert.ok(!("period" in payload), "달 기준 필드가 남아 있다");
+  assert.ok(!("previousPeriod" in payload), "지난달 비교가 남아 있다");
+  assert.ok(payload.overall.sale.transactionCount > 0, "확정 구간에 든 거래가 없다");
 });
 
 test("응답이 그대로면 원본 파일을 다시 쓰지 않는다", async (t) => {
@@ -187,11 +188,11 @@ test("잘린 응답은 확정으로 굳히지 않고 다음 실행에 다시 받
 });
 
 test("원본만 있으면 조회 없이 산출물을 다시 만든다", async (t) => {
-  const server = await startFakeMolit((kind) => successXml([kind === "sale" ? saleItem() : rentItem()]));
+  const server = await startFakeMolit((kind, { yearMonth }) => spread(kind, yearMonth));
   t.after(() => server.close());
   const space = await workspace();
 
-  await collect(server, space);
+  await collect(server, { ...space, backfillLimit: 400 });
   const first = await readFile(path.join(space.dataDir, "realestate.json"), "utf-8");
 
   await server.close();
@@ -203,16 +204,16 @@ test("원본만 있으면 조회 없이 산출물을 다시 만든다", async (t
 });
 
 test("수집이 통째로 실패해도 지난 원본으로 산출물을 만든다", async (t) => {
-  const server = await startFakeMolit((kind) => successXml([kind === "sale" ? saleItem() : rentItem()]));
+  const server = await startFakeMolit((kind, { yearMonth }) => spread(kind, yearMonth));
   t.after(() => server.close());
   const space = await workspace();
 
-  await collect(server, space);
+  await collect(server, { ...space, backfillLimit: 400 });
 
   const dead = { saleUrl: "http://127.0.0.1:1/sale", rentUrl: "http://127.0.0.1:1/rent" };
   const { stdout } = await collect(dead, space);
 
-  assert.match(stdout, /저장 완료/, stdout);
+  assert.match(stdout, /시세 저장/, stdout);
   const payload = JSON.parse(await readFile(path.join(space.dataDir, "realestate.json"), "utf-8"));
   assert.equal(payload.districts.length, DISTRICT_COUNT);
 });
@@ -237,7 +238,7 @@ test("전월세도 지역별 전수 파일로 남긴다", async (t) => {
   const file = JSON.parse(await readFile(path.join(space.dataDir, "rents-jongno.json"), "utf-8"));
   assert.equal(file.district, "종로구");
   assert.deepEqual(file.periods, [...months].sort(), "받아둔 달이 다 담기지 않았다");
-  assert.equal(file.deals.length, 3 * months.length);
+  assert.equal(file.deals.length, 3 * months.length, "거래내역은 받아둔 달 전부를 담아야 한다");
 
   const jeonse = file.deals.find((deal) => deal.apt === "테스트단지");
   const wolse = file.deals.find((deal) => deal.apt === "월세단지");

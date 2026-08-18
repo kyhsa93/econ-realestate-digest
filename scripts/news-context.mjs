@@ -85,15 +85,15 @@ const baselineEn = (date) => {
 
 const signed = (value) => `${value > 0 ? "+" : value < 0 ? "-" : ""}${Math.abs(value).toFixed(1)}%`;
 
-function noteOf(metric, change, period, locale) {
+function noteOf(metric, change, window, locale) {
   const count = metric?.transactionCount;
   if (typeof count !== "number") return null;
 
-  const month = monthLabel(period, locale);
+  const span = window?.weeks ? (locale === "en" ? `last ${window.weeks} weeks` : `최근 ${window.weeks}주`) : "";
   const parts = [
     locale === "en"
-      ? `${count.toLocaleString("en-US")} deals${month ? ` in ${month}` : ""}`
-      : `${month ? `${month} ` : ""}신고 ${count.toLocaleString("ko-KR")}건`,
+      ? `${count.toLocaleString("en-US")} deals${span ? ` in the ${span}` : ""}`
+      : `${span ? `${span} ` : ""}계약 ${count.toLocaleString("ko-KR")}건`,
   ];
 
   const baseline = locale === "en" ? baselineEn(metric.baselineDate) : baselineKo(metric.baselineDate);
@@ -125,7 +125,7 @@ export function findDistrict(text, districts = []) {
   return null;
 }
 
-export function metricEntry(entry, kind, { name, nameEn, slug = null, period } = {}) {
+export function metricEntry(entry, kind, { name, nameEn, slug = null, window } = {}) {
   const metric = entry?.[kind];
   if (!enoughSample(metric)) return null;
 
@@ -138,8 +138,8 @@ export function metricEntry(entry, kind, { name, nameEn, slug = null, period } =
       labelEn: `${nameEn} apartment ${BASE_AREA_M2}㎡ sale`,
       value: areaKo(metric.avgPricePerPyeong10k),
       valueEn: areaEn(metric.avgPricePerPyeong10k),
-      note: noteOf(metric, metric.change, period, "ko"),
-      noteEn: noteOf(metric, metric.change, period, "en"),
+      note: noteOf(metric, metric.change, window, "ko"),
+      noteEn: noteOf(metric, metric.change, window, "en"),
     };
   }
   if (kind === "jeonse" && metric.avgDepositPerPyeong10k) {
@@ -149,8 +149,8 @@ export function metricEntry(entry, kind, { name, nameEn, slug = null, period } =
       labelEn: `${nameEn} apartment ${BASE_AREA_M2}㎡ jeonse`,
       value: areaKo(metric.avgDepositPerPyeong10k),
       valueEn: areaEn(metric.avgDepositPerPyeong10k),
-      note: noteOf(metric, metric.change, period, "ko"),
-      noteEn: noteOf(metric, metric.change, period, "en"),
+      note: noteOf(metric, metric.change, window, "ko"),
+      noteEn: noteOf(metric, metric.change, window, "en"),
     };
   }
   if (kind === "wolse" && metric.avgMonthlyRent10k) {
@@ -162,14 +162,14 @@ export function metricEntry(entry, kind, { name, nameEn, slug = null, period } =
       labelEn: `${nameEn} apartment rent`,
       value: `보증금 ${deposit}만원 / 월 ${rent}만원`,
       valueEn: `₩${((metric.avgDeposit10k ?? 0) / 100).toLocaleString("en-US", { maximumFractionDigits: 1 })}M + ₩${(metric.avgMonthlyRent10k / 100).toLocaleString("en-US", { maximumFractionDigits: 2 })}M/mo`,
-      note: noteOf(metric, metric.depositChange, period, "ko"),
-      noteEn: noteOf(metric, metric.depositChange, period, "en"),
+      note: noteOf(metric, metric.depositChange, window, "ko"),
+      noteEn: noteOf(metric, metric.depositChange, window, "en"),
     };
   }
   return null;
 }
 
-function realestateEntry(entry, name, nameEn, text, slug, period) {
+function realestateEntry(entry, name, nameEn, text, slug, window) {
   const wantsJeonse = text.includes("전세") || text.includes("전셋값");
   const wantsWolse = text.includes("월세") || text.includes("임대료");
 
@@ -179,7 +179,7 @@ function realestateEntry(entry, name, nameEn, text, slug, period) {
   candidates.push("sale", "jeonse");
 
   for (const kind of candidates) {
-    const entryOf = metricEntry(entry, kind, { name, nameEn, slug, period });
+    const entryOf = metricEntry(entry, kind, { name, nameEn, slug, window });
     if (entryOf) return entryOf;
   }
   return null;
@@ -188,14 +188,14 @@ function realestateEntry(entry, name, nameEn, text, slug, period) {
 function realestateContext(text, realestate) {
   if (!hasAny(text, REALESTATE_HINTS)) return null;
 
-  const period = realestate?.period;
+  const window = realestate?.window;
   const district = findDistrict(text, realestate?.districts);
   if (district) {
     const slug = DISTRICT_SLUGS[district.name] ?? null;
-    return realestateEntry(district, district.name, district.name, text, slug, period);
+    return realestateEntry(district, district.name, district.name, text, slug, window);
   }
   if (text.includes("서울")) {
-    return realestateEntry(realestate?.overall, "서울 전체", "Seoul", text, null, period);
+    return realestateEntry(realestate?.overall, "서울 전체", "Seoul", text, null, window);
   }
   return null;
 }
@@ -206,7 +206,7 @@ export function buildRealestateStats(realestate) {
       metricEntry(realestate?.overall, kind, {
         name: "서울",
         nameEn: "Seoul",
-        period: realestate?.period,
+        window: realestate?.window,
       })
     )
     .filter(Boolean);

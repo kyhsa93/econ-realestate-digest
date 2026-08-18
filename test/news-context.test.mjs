@@ -21,7 +21,7 @@ const district = (name, extra = {}) => ({
 });
 
 const REALESTATE = {
-  period: "202608",
+  window: { from: "2026-06-15", to: "2026-07-12", weeks: 4 },
   overall: {
     sale: {
       avgPricePerPyeong10k: 4449,
@@ -96,13 +96,13 @@ test("기사가 전세·월세를 다루면 그 지표를 붙인다", () => {
 });
 
 test("칩에 신고 건수를 같이 적는다", () => {
-  assert.equal(context("송파 9억대 아파트")[0].note, "8월 신고 16건");
-  assert.equal(context("송파 9억대 아파트")[0].noteEn, "16 deals in Aug");
+  assert.equal(context("송파 9억대 아파트")[0].note, "최근 4주 계약 16건");
+  assert.equal(context("송파 9억대 아파트")[0].noteEn, "16 deals in the last 4 weeks");
 });
 
 test("변화율은 표본이 넉넉할 때만 적는다", () => {
-  assert.equal(context("서울 빌라값 들썩")[0].note, "8월 신고 575건 · 8/10 대비 +8.3%");
-  assert.equal(context("서울 빌라값 들썩")[0].noteEn, "575 deals in Aug · +8.3% vs Aug 10");
+  assert.equal(context("서울 빌라값 들썩")[0].note, "최근 4주 계약 575건 · 8/10 대비 +8.3%");
+  assert.equal(context("서울 빌라값 들썩")[0].noteEn, "575 deals in the last 4 weeks · +8.3% vs Aug 10");
 
   assert.ok(!context("송파 9억대 아파트")[0].note.includes("대비"));
 });
@@ -244,7 +244,7 @@ test("영어 화면은 칩도 영어로 그린다", async () => {
   const rendered = page.newsListHtml();
   assert.ok(rendered.includes("송파구 apartment 84㎡ sale"), "영어 라벨이 안 보인다");
   assert.ok(rendered.includes("₩1,756M"), "영어 표기 금액이 안 보인다");
-  assert.ok(rendered.includes("16 deals in Aug"), "영어 보조 설명이 안 보인다");
+  assert.ok(rendered.includes("16 deals in the last 4 weeks"), "영어 보조 설명이 안 보인다");
   assert.ok(!rendered.includes("17억 5,633만원"), "영어 화면에 한국어 표기가 남아 있다");
   assert.ok(!rendered.includes("신고 16건"), "영어 화면에 한국어 보조 설명이 남아 있다");
 });

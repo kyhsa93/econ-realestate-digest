@@ -184,16 +184,6 @@ const thinWithPrev = (name) => ({
   },
 });
 
-test("이번 달 표본이 모자라면 지난달 값을 쓰고 기준 월을 밝힌다", () => {
-  const data = { previousPeriod: "202607", districts: [thinWithPrev("노원구")] };
-  const html = realestateTableHtml(data, "sale");
-
-  assert.ok(html.includes("4,000만원"), "지난달 값으로 대체되지 않았다");
-  assert.ok(!html.includes("9,999"), "표본 2건짜리 값이 그대로 나왔다");
-  assert.ok(html.includes("prev-tag"), "기준 월 표시가 없다");
-  assert.ok(html.includes(">7월<"), `기준 월이 7월이 아니다: ${html.slice(0, 300)}`);
-});
-
 test("이번 달 표본이 충분하면 지난달 값을 쓰지 않는다", () => {
   const entry = { ...thinWithPrev("강남구"), sale: { avgPricePerPyeong10k: 8000, transactionCount: 30 } };
   const html = realestateTableHtml({ previousPeriod: "202607", districts: [entry] }, "sale");
@@ -214,30 +204,6 @@ test("지난달 값도 없으면 표본 부족으로 남긴다", () => {
   const html = realestateTableHtml({ previousPeriod: "202607", districts: [entry] }, "sale");
   assert.ok(html.includes("신고 1건"));
   assert.ok(!html.includes("9,999"));
-});
-
-test("대체된 지역도 값 순서대로 줄을 선다", () => {
-  const data = {
-    previousPeriod: "202607",
-    districts: [
-      district("싼구", { sale: { avgPricePerPyeong10k: 3000, transactionCount: 10 } }),
-      thinWithPrev("대체구"),
-      district("비싼구", { sale: { avgPricePerPyeong10k: 8000, transactionCount: 10 } }),
-    ],
-  };
-  assert.deepEqual(names(realestateTableHtml(data, "sale")), ["비싼구", "대체구", "싼구"]);
-});
-
-test("정적 HTML과 화면이 대체 표시까지 같게 그린다", async () => {
-  const realestate = await readJson("realestate");
-  const data = {
-    ...realestate,
-    previousPeriod: "202607",
-    districts: realestate.districts.map((d, i) => (i % 3 === 0 ? thinWithPrev(d.name) : d)),
-  };
-  const page = await loadRealestatePage({ realestate: data, kind: "sale" });
-  assert.deepEqual(cells(page.tableHtml()), cells(realestateTableHtml(data, "sale")));
-  assert.ok(page.tableHtml().includes("prev-tag"), "화면에 대체 표시가 없다");
 });
 
 test("전세가율은 전세를 매매로 나눈 값이다", () => {
@@ -266,21 +232,6 @@ test("기준 달이 서로 다르면 전세가율을 내지 않는다", () => {
     prev: { sale: { avgPricePerPyeong10k: 4000, transactionCount: 40 } },
   };
   assert.equal(jeonseRatio(entry), null);
-});
-
-test("둘 다 지난달로 대체되면 전세가율을 낸다", () => {
-  const entry = {
-    name: "도봉구",
-    sale: { avgPricePerPyeong10k: 9999, transactionCount: 1 },
-    jeonse: { avgDepositPerPyeong10k: 8888, transactionCount: 1 },
-    prev: {
-      sale: { avgPricePerPyeong10k: 4000, transactionCount: 40 },
-      jeonse: { avgDepositPerPyeong10k: 2800, transactionCount: 50 },
-    },
-  };
-  const ratio = jeonseRatio(entry);
-  assert.equal(ratio.ratio.toFixed(1), "70.0");
-  assert.equal(ratio.isPrevious, true);
 });
 
 test("매매·월세 페이지에는 전세가율이 없다", () => {
@@ -642,4 +593,11 @@ test("매매나 전세 값이 없는 주는 전세가율에서 뺀다", async ()
 
   assert.match(page.ratioMeta(), /2026-08-03 ~ 2026-08-10/, page.ratioMeta());
   assert.match(page.ratioMeta(), /50\.0%/);
+});
+
+test("표본이 모자란 지역은 값을 비운다", () => {
+  const html = realestateTableHtml({ districts: [thinWithPrev("노원구")] }, "sale");
+
+  assert.ok(!html.includes("9999"), `표본 한 건짜리 평균이 표에 남았다: ${html}`);
+  assert.ok(!html.includes("지난달"), "지난달로 대체하는 표시가 남았다");
 });

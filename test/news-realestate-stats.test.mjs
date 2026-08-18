@@ -9,7 +9,7 @@ import { loadNewsPage } from "./helpers/news-page.mjs";
 const root = path.resolve(import.meta.dirname, "..");
 
 const REALESTATE = {
-  period: "202608",
+  window: { from: "2026-06-15", to: "2026-07-12", weeks: 4 },
   overall: {
     sale: {
       avgPricePerPyeong10k: 4449,
@@ -51,12 +51,12 @@ test("서울 매매·전세·월세 세 장이 각자 제 페이지로 간다", 
       ["서울 아파트 월세", "보증금 22,166만원 / 월 96만원", "./apartment-rent.html"],
     ]
   );
-  assert.equal(stats[0].note, "8월 신고 575건 · 8/10 대비 +8.3%");
+  assert.equal(stats[0].note, "최근 4주 계약 575건 · 8/10 대비 +8.3%");
 });
 
 test("세 지표가 다 서지 않으면 지표 줄 자체를 만들지 않는다", () => {
   const thin = {
-    period: "202608",
+    window: { from: "2026-06-15", to: "2026-07-12", weeks: 4 },
     overall: { sale: { avgPricePerPyeong10k: 4449, transactionCount: 3 }, jeonse: null, wolse: null },
   };
   assert.equal(buildRealestateStats(thin), null);
@@ -91,7 +91,7 @@ test("영어 화면은 카드도 영어로 그린다", async () => {
 
   const html = page.byId("realestate-stats").innerHTML;
   assert.ok(html.includes("Seoul apartment 84㎡ sale"), "영어 라벨이 안 보인다");
-  assert.ok(html.includes("575 deals in Aug"), "영어 보조 설명이 안 보인다");
+  assert.ok(html.includes("575 deals in the last 4 weeks"), "영어 보조 설명이 안 보인다");
   assert.ok(!html.includes("11억 3,049만원"), "영어 화면에 한국어 표기가 남아 있다");
 });
 

@@ -305,38 +305,31 @@ const reCountSpan = (metric) =>
     ? ` <span class="count">${escapeHtml(reCount(metric.transactionCount))}</span>`
     : "";
 
-function rePrevTag(isPrevious, previousPeriod) {
-  if (!isPrevious) return "";
-  const label = monthLabel(previousPeriod);
-  if (!label) return "";
-  return ` <span class="prev-tag" title="${escapeHtml("이번 달 신고가 아직 적어 지난달 기준으로 보여줍니다.")}">${escapeHtml(label)}</span>`;
-}
 
 function reLowSample(metric) {
   const n = metric?.transactionCount ?? 0;
   return `<span class="low-sample" title="${escapeHtml(`이번 달 신고가 ${n}건뿐이라 평균을 내지 않았습니다.`)}">${escapeHtml(`신고 ${n}건`)}</span>`;
 }
 
-function reCells(entry, kind, previousPeriod) {
+function reCells(entry, kind) {
   const resolved = resolveMetric(entry, kind);
   if (!resolved) {
     const raw = entry?.[KIND_FIELDS[kind].metric];
     return [raw ? reLowSample(raw) : "-", "-", "-"];
   }
-  const { metric, isPrevious } = resolved;
-  const tag = rePrevTag(isPrevious, previousPeriod);
-  const change = (c, d) => (isPrevious ? "" : reChange(c, d));
+  const { metric } = resolved;
+  const change = (c, d) => reChange(c, d);
 
   if (kind === "wolse") {
     return [
-      `<span class="price-strong">${reMan(metric.avgDeposit10k)}</span>${change(metric.depositChange, metric.baselineDate)}${tag}`,
+      `<span class="price-strong">${reMan(metric.avgDeposit10k)}</span>${change(metric.depositChange, metric.baselineDate)}`,
       `<span class="price-strong">월 ${reMan(metric.avgMonthlyRent10k)}</span>${change(metric.monthlyRentChange, metric.baselineDate)}`,
       `<span class="count">${escapeHtml(reCount(metric.transactionCount))}</span>`,
     ];
   }
   const perPyeong = valueOf(metric, kind);
   const cells = [
-    `<span class="price-strong">${reMan(perPyeong)}</span>${change(metric.change, metric.baselineDate)}${tag}`,
+    `<span class="price-strong">${reMan(perPyeong)}</span>${change(metric.change, metric.baselineDate)}`,
     `<span class="price-strong">${reEok(areaPrice(perPyeong))}</span>`,
   ];
   if (kind === "jeonse") {
@@ -347,20 +340,19 @@ function reCells(entry, kind, previousPeriod) {
   return cells;
 }
 
-function reAllCells(entry, previousPeriod) {
+function reAllCells(entry) {
   return ["sale", "jeonse", "wolse"].map((kind) => {
     const resolved = resolveMetric(entry, kind);
     if (!resolved) {
       const raw = entry?.[KIND_FIELDS[kind].metric];
       return raw ? reLowSample(raw) : "-";
     }
-    const { metric, isPrevious } = resolved;
-    const tag = rePrevTag(isPrevious, previousPeriod);
+    const { metric } = resolved;
     if (kind === "wolse") {
-      return `${reMan(metric.avgDeposit10k)} / 월 ${reMan(metric.avgMonthlyRent10k)}${reCountSpan(metric)}${tag}`;
+      return `${reMan(metric.avgDeposit10k)} / 월 ${reMan(metric.avgMonthlyRent10k)}${reCountSpan(metric)}`;
     }
-    const change = isPrevious ? "" : reChange(metric.change, metric.baselineDate);
-    return `${reMan(valueOf(metric, kind))}${change}${reCountSpan(metric)}${tag}`;
+    const change = reChange(metric.change, metric.baselineDate);
+    return `${reMan(valueOf(metric, kind))}${change}${reCountSpan(metric)}`;
   });
 }
 
@@ -378,9 +370,9 @@ function reDistrictLink(label) {
   return slug ? `<a href="./${districtFile(slug)}">${escapeHtml(label)}</a>` : escapeHtml(label);
 }
 
-function reRow(entry, label, isOverall, kind, previousPeriod) {
+function reRow(entry, label, isOverall, kind) {
   const labels = reHeadLabels(kind);
-  const cells = kind ? reCells(entry, kind, previousPeriod) : reAllCells(entry, previousPeriod);
+  const cells = kind ? reCells(entry, kind) : reAllCells(entry);
   const body = cells
     .map((cell, i) => `<td data-label="${escapeHtml(labels[i + 1])}">${cell}</td>`)
     .join("");
@@ -400,7 +392,7 @@ function reSorted(districts, kind) {
   });
 }
 
-function reDistrictRows(entry, previousPeriod) {
+function reDistrictRows(entry) {
   const labels = [RE_LABELS.sale, RE_LABELS.jeonse, RE_LABELS.wolse];
   return ["sale", "jeonse", "wolse"]
     .map((kind, i) => {
@@ -415,13 +407,12 @@ function reDistrictRows(entry, previousPeriod) {
         const raw = entry?.[KIND_FIELDS[kind].metric];
         return cell(raw ? reLowSample(raw) : "-", "-", "-");
       }
-      const { metric, isPrevious } = resolved;
-      const tag = rePrevTag(isPrevious, previousPeriod);
-      const change = isPrevious ? "" : reChange(metric.change, metric.baselineDate);
+      const { metric } = resolved;
+        const change = reChange(metric.change, metric.baselineDate);
       const price =
         kind === "wolse"
-          ? `<span class="price-strong">${reMan(metric.avgDeposit10k)}</span> / <span class="price-strong">월 ${reMan(metric.avgMonthlyRent10k)}</span>${tag}`
-          : `<span class="price-strong">${reMan(valueOf(metric, kind))}</span>${change}${tag}`;
+          ? `<span class="price-strong">${reMan(metric.avgDeposit10k)}</span> / <span class="price-strong">월 ${reMan(metric.avgMonthlyRent10k)}</span>`
+          : `<span class="price-strong">${reMan(valueOf(metric, kind))}</span>${change}`;
       const area = kind === "wolse" ? "-" : `<span class="price-strong">${reEok(areaPrice(valueOf(metric, kind)))}</span>`;
       return cell(price, area, `<span class="count">${escapeHtml(reCount(metric.transactionCount))}</span>`);
     })
@@ -432,14 +423,13 @@ export function realestateTableHtml(realestate, kind = null, district = null) {
   const districts = realestate?.districts ?? [];
   if (district) {
     const entry = districts.find((d) => d.name === district);
-    return entry ? reDistrictRows(entry, realestate?.previousPeriod) : null;
+    return entry ? reDistrictRows(entry) : null;
   }
   if (!realestate?.overall && !districts.length) return null;
-  const previousPeriod = realestate.previousPeriod;
   return (
-    (realestate.overall ? reRow(realestate.overall, RE_LABELS.overall, true, kind, previousPeriod) : "") +
+    (realestate.overall ? reRow(realestate.overall, RE_LABELS.overall, true, kind) : "") +
     reSorted(districts, kind)
-      .map((d) => reRow(d, d.name ?? "-", false, kind, previousPeriod))
+      .map((d) => reRow(d, d.name ?? "-", false, kind))
       .join("")
   );
 }
