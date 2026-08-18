@@ -272,3 +272,22 @@ test("신고가 자치구 절반에 못 미치면 신고일 기준을 쓰지 않
   assert.equal(arrivalWindowReady(items(codes(12)), 25), false, "몇 개 구 신고만으로 서울 시세를 냈다");
   assert.equal(arrivalWindowReady(new Map(), 25), false);
 });
+
+test("주간 추이에 국민평형 계열을 같이 담는다", () => {
+  const rows = [
+    sale("2026-08-25", { area: 84.9, amount10k: 90_000 }),
+    sale("2026-08-26", { area: 84.1, amount10k: 88_000 }),
+    sale("2026-08-27", { area: 40, amount10k: 30_000 }),
+  ];
+  const weekly = buildWeekly(rows, NOW);
+  const week = weekly.overall["2026-08-24"].sale;
+
+  assert.equal(week.transactionCount, 3);
+  assert.equal(week.national84.transactionCount, 2, "전용 82~86㎡만 골라야 한다");
+  assert.notEqual(week.national84.avgPricePerPyeong10k, week.avgPricePerPyeong10k);
+});
+
+test("국민평형 거래가 없으면 그 계열을 만들지 않는다", () => {
+  const weekly = buildWeekly([sale("2026-08-25", { area: 40, amount10k: 30_000 })], NOW);
+  assert.ok(!("national84" in weekly.overall["2026-08-24"].sale));
+});

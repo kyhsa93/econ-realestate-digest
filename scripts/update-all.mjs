@@ -16,7 +16,6 @@ async function main() {
   run("node scripts/fetch-news.mjs");
   run("node scripts/fetch-market.mjs");
   run("node scripts/build-realestate.mjs");
-  run("node scripts/build-history-lite.mjs");
   run("node scripts/build-budget-deals.mjs");
   run("node scripts/news-context.mjs");
   run("node scripts/prerender.mjs");

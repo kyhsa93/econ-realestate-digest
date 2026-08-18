@@ -855,11 +855,11 @@
       realestateTagJeonse: "전세",
       realestateTagWolse: "월세",
       realestateMonthlyPrefix: "월 ",
-      realestateHistoryLabel: (name) => `${name} 평당가 추이 (최근)`,
-      realestateNational84HistoryLabel: (name) => `${name} 국민평형(전용 84㎡ 안팎) 매매가 추이 (최근)`,
-      realestateVolumeHistoryLabel: (name) => `${name} 매매 거래량 추이 (이번 달 누적, 최근)`,
-      realestateJeonseVolumeHistoryLabel: (name) => `${name} 전세 거래량 추이 (이번 달 누적, 최근)`,
-      realestateWolseVolumeHistoryLabel: (name) => `${name} 월세 거래량 추이 (이번 달 누적, 최근)`,
+      realestateHistoryLabel: (name) => `${name} 평당가 추이 (주간)`,
+      realestateNational84HistoryLabel: (name) => `${name} 국민평형(전용 84㎡ 안팎) 매매가 추이 (주간)`,
+      realestateVolumeHistoryLabel: (name) => `${name} 매매 거래량 추이 (주간)`,
+      realestateJeonseVolumeHistoryLabel: (name) => `${name} 전세 거래량 추이 (주간)`,
+      realestateWolseVolumeHistoryLabel: (name) => `${name} 월세 거래량 추이 (주간)`,
       realestateDistrictSelectLabel: "지역 선택",
       realestateOverallOption: "서울 전체",
       realestateSearchPlaceholder: "지역 검색 (예: 강남)",
@@ -941,11 +941,11 @@
       realestateTagJeonse: "Jeonse",
       realestateTagWolse: "Monthly rent",
       realestateMonthlyPrefix: "mo. ",
-      realestateHistoryLabel: (name) => `${name} price/pyeong trend (recent)`,
-      realestateNational84HistoryLabel: (name) => `${name} 84㎡-ish ("national size") sale price trend (recent)`,
-      realestateVolumeHistoryLabel: (name) => `${name} sale transaction volume trend (month-to-date, recent)`,
-      realestateJeonseVolumeHistoryLabel: (name) => `${name} jeonse transaction volume trend (month-to-date, recent)`,
-      realestateWolseVolumeHistoryLabel: (name) => `${name} monthly rent transaction volume trend (month-to-date, recent)`,
+      realestateHistoryLabel: (name) => `${name} price/pyeong trend (weekly)`,
+      realestateNational84HistoryLabel: (name) => `${name} 84㎡-ish ("national size") sale price trend (weekly)`,
+      realestateVolumeHistoryLabel: (name) => `${name} sale transaction volume trend (weekly)`,
+      realestateJeonseVolumeHistoryLabel: (name) => `${name} jeonse transaction volume trend (weekly)`,
+      realestateWolseVolumeHistoryLabel: (name) => `${name} monthly rent transaction volume trend (weekly)`,
       realestateDistrictSelectLabel: "District",
       realestateOverallOption: "Seoul overall",
       realestateSearchPlaceholder: "Search district (Korean name, e.g. 강남)",
@@ -1012,6 +1012,7 @@
     newsHistory: null,
     realestate: null,
     realestateHistory: null,
+    realestateTrend: null,
   };
 
   const viewDate = new URLSearchParams(location.search).get("date");
@@ -1451,36 +1452,41 @@
     select.value = selectedDistrictCode;
   }
 
-  function renderRealestateHistory(history) {
+  function renderRealestateHistory(trend) {
     populateDistrictSelect();
     const grid = document.getElementById("realestate-history-grid");
-    if (!Array.isArray(history) || history.length < 2) {
+    const weeks = trend?.weeks ?? [];
+    if (weeks.length < 2) {
       grid.innerHTML = "";
       return;
     }
-    const recent = history.slice(-30);
-    const getScoped = (h) =>
-      selectedDistrictCode ? h.districts?.find((d) => d.code === selectedDistrictCode) : h.overall;
-    const scopeName = selectedDistrictCode
-      ? (cache.realestate?.districts ?? []).find((d) => d.code === selectedDistrictCode)?.name ?? ""
-      : t("realestateOverallOption");
+
+    const districtName = selectedDistrictCode
+      ? (cache.realestate?.districts ?? []).find((d) => d.code === selectedDistrictCode)?.name ?? null
+      : null;
+    const scope = districtName ? trend?.districts?.[districtName] : trend?.overall;
+    if (!scope) {
+      grid.innerHTML = "";
+      return;
+    }
+
+    const scopeName = districtName ?? t("realestateOverallOption");
     const countFormat = (v) => t("realestateCountSuffix")(Math.round(v));
-    const pricePoint = (metric, value) => (hasEnoughSample(metric) ? value : undefined);
     const series = [
-      { label: t("realestateHistoryLabel")(scopeName), get: (h) => pricePoint(getScoped(h)?.sale, getScoped(h)?.sale?.avgPricePerPyeong10k), format: formatPyeongPrice },
-      { label: t("realestateVolumeHistoryLabel")(scopeName), get: (h) => getScoped(h)?.sale?.transactionCount, format: countFormat },
-      { label: t("realestateNational84HistoryLabel")(scopeName), get: (h) => pricePoint(getScoped(h)?.saleNational84, getScoped(h)?.saleNational84?.avgPricePerPyeong10k), format: formatPyeongPrice },
-      { label: t("realestateJeonseVolumeHistoryLabel")(scopeName), get: (h) => getScoped(h)?.jeonse?.transactionCount, format: countFormat },
-      { label: t("realestateWolseVolumeHistoryLabel")(scopeName), get: (h) => getScoped(h)?.wolse?.transactionCount, format: countFormat },
+      { label: t("realestateHistoryLabel")(scopeName), get: (w) => scope[w]?.sale?.avgPricePerPyeong10k, format: formatPyeongPrice },
+      { label: t("realestateVolumeHistoryLabel")(scopeName), get: (w) => scope[w]?.sale?.transactionCount, format: countFormat },
+      { label: t("realestateNational84HistoryLabel")(scopeName), get: (w) => scope[w]?.sale?.national84?.avgPricePerPyeong10k, format: formatPyeongPrice },
+      { label: t("realestateJeonseVolumeHistoryLabel")(scopeName), get: (w) => scope[w]?.jeonse?.transactionCount, format: countFormat },
+      { label: t("realestateWolseVolumeHistoryLabel")(scopeName), get: (w) => scope[w]?.wolse?.transactionCount, format: countFormat },
     ];
 
     const cards = series
       .map(({ label, get, format }) => {
-        const values = recent.map(get).filter((v) => typeof v === "number");
+        const values = weeks.map(get).filter((v) => typeof v === "number");
         if (values.length < 2) return null;
-        const first = recent.find((h) => typeof get(h) === "number");
-        const last = recent.slice().reverse().find((h) => typeof get(h) === "number");
-        return historyCardHtml({ label, values, format, firstDate: first?.date, lastDate: last?.date });
+        const first = weeks.find((w) => typeof get(w) === "number");
+        const last = weeks.slice().reverse().find((w) => typeof get(w) === "number");
+        return historyCardHtml({ label, values, format, firstDate: first, lastDate: last });
       })
       .filter(Boolean);
 
@@ -1820,7 +1826,7 @@
     renderSummary(summary);
     renderHistory(cache.history);
     renderRealestate(realestate);
-    renderRealestateHistory(cache.realestateHistory);
+    renderRealestateHistory(cache.realestateTrend);
 
     const backLink = document.getElementById("archive-back-link");
     const updateSchedule = document.getElementById("update-schedule");
@@ -1966,7 +1972,7 @@
 
   document.getElementById("realestate-district-select").addEventListener("change", (e) => {
     selectedDistrictCode = e.target.value;
-    renderRealestateHistory(cache.realestateHistory);
+    renderRealestateHistory(cache.realestateTrend);
     window.analytics?.event("district_select", { district: e.target.value });
   });
 
@@ -2065,10 +2071,17 @@
     realestateHistory: "realestate-history",
   };
 
-  const LITE_HISTORY_FILES = { realestateHistory: "realestate-history-lite" };
+  async function loadTrend() {
+    try {
+      cache.realestateTrend = await loadJson("realestate-trend");
+    } catch (err) {
+      cache.realestateTrend = null;
+      reportLoadFailure("realestate-trend", err, false);
+    }
+  }
 
-  async function loadHistoryInto(cacheKey, { lite = false } = {}) {
-    const file = (lite && LITE_HISTORY_FILES[cacheKey]) || HISTORY_FILES[cacheKey];
+  async function loadHistoryInto(cacheKey) {
+    const file = HISTORY_FILES[cacheKey];
     try {
       cache[cacheKey] = await loadJson(file);
     } catch (err) {
@@ -2114,10 +2127,10 @@
 
     await Promise.all([
       loadHistoryInto("history"),
-      loadHistoryInto("realestateHistory", { lite: true }),
+      loadTrend(),
     ]);
     renderHistory(cache.history);
-    renderRealestateHistory(cache.realestateHistory);
+    renderRealestateHistory(cache.realestateTrend);
   }
 
   main();

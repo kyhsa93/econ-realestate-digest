@@ -36,7 +36,10 @@ export function settledWeek(now, graceDays = 0) {
   return weekStart(new Date(cutoff).toISOString().slice(0, 10));
 }
 
-function saleStats(rows) {
+const NATIONAL_MIN_M2 = 82;
+const NATIONAL_MAX_M2 = 86;
+
+function pricePerPyeong(rows) {
   let amountWon = 0;
   let area = 0;
   for (const row of rows) {
@@ -48,6 +51,16 @@ function saleStats(rows) {
     avgPricePerPyeong10k: Math.round(((amountWon / area) * PYEONG_M2) / 10_000),
     transactionCount: rows.length,
   };
+}
+
+function saleStats(rows) {
+  const base = pricePerPyeong(rows);
+  if (!base) return null;
+
+  const national = pricePerPyeong(
+    rows.filter((row) => row.area >= NATIONAL_MIN_M2 && row.area <= NATIONAL_MAX_M2)
+  );
+  return national ? { ...base, national84: national } : base;
 }
 
 function jeonseStats(rows) {

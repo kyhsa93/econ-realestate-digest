@@ -13,7 +13,7 @@ let loaded = null;
 async function page() {
   const names = [
     "summary", "market", "realestate", "news",
-    "realestate-history-lite", "market-history", "summary-history", "news-history",
+    "realestate-trend", "market-history", "summary-history", "news-history",
   ];
   const data = {};
   for (const name of names) data[name] = await readJson(name);
