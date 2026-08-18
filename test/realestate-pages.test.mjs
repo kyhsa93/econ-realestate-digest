@@ -601,3 +601,48 @@ test("표본이 모자란 지역은 값을 비운다", () => {
   assert.ok(!html.includes("9999"), `표본 한 건짜리 평균이 표에 남았다: ${html}`);
   assert.ok(!html.includes("지난달"), "지난달로 대체하는 표시가 남았다");
 });
+
+test("추이 그래프에 양 축 눈금을 적는다", async () => {
+  const page = await loadRealestatePage({ realestate: trendRealestate(), trend: trendData(), kind: "sale" });
+  const svg = page.trendHtml();
+
+  const yLabels = [...svg.matchAll(/class="axis y">([^<]+)</g)].map((m) => m[1]);
+  const xLabels = [...svg.matchAll(/class="axis x">([^<]+)</g)].map((m) => m[1]);
+
+  assert.equal(yLabels.length, 3, `세로 눈금이 없다: ${svg}`);
+  assert.ok(yLabels[0].includes("만원"), `세로 눈금에 단위가 없다: ${yLabels[0]}`);
+  assert.deepEqual(xLabels, ["7/27", "8/3", "8/10"], "가로 눈금이 주 날짜가 아니다");
+  assert.ok(!svg.includes('preserveAspectRatio="none"'), "가로로 늘어나 글자가 찌그러진다");
+});
+
+test("눈금 위아래로 값의 범위를 담는다", async () => {
+  const page = await loadRealestatePage({ realestate: trendRealestate(), trend: trendData(), kind: "sale" });
+  const yLabels = [...page.trendHtml().matchAll(/class="axis y">([^<]+)</g)].map((m) => m[1]);
+
+  const nums = yLabels.map((s) => Number(s.replace(/[^\d]/g, "")));
+  assert.ok(nums[0] > nums[2], `위쪽이 더 큰 값이어야 한다: ${yLabels.join(" / ")}`);
+  assert.equal(nums[0], 4400, "최댓값이 눈금에 없다");
+  assert.equal(nums[2], 4360, "최솟값이 눈금에 없다");
+});
+
+test("가로 위치에서 가장 가까운 지점을 고른다", async () => {
+  const page = await loadRealestatePage({ realestate: trendRealestate(), trend: trendData(), kind: "sale" });
+  const at = page.app.chartIndexAt;
+
+  assert.equal(at(0, 3), 0, "왼쪽 끝이 첫 지점이 아니다");
+  assert.equal(at(1, 3), 2, "오른쪽 끝이 마지막 지점이 아니다");
+  assert.equal(at(0.5, 3), 1);
+  assert.equal(at(-5, 3), 0, "그래프 밖을 벗어난 좌표를 가두지 못했다");
+  assert.equal(at(9, 3), 2);
+  assert.equal(at(0.5, 0), null);
+});
+
+test("그래프에 마우스를 올릴 자리를 마련해 둔다", async () => {
+  const page = await loadRealestatePage({ realestate: trendRealestate(), trend: trendData(), kind: "sale" });
+  assert.match(page.trendHtml(), /class="marker" hidden/, "짚어줄 표시가 없다");
+
+  const html = await readFile(path.join(root, "docs/realestate.html"), "utf8");
+  assert.match(html, /<div class="chart-tip" id="chart-tip" hidden>/, "말풍선이 처음부터 떠 있다");
+  assert.match(html, /trendSection\.addEventListener\("mousemove"/, "마우스를 따라가지 않는다");
+  assert.match(html, /trendSection\.addEventListener\("touchstart"/, "손가락으로는 볼 수 없다");
+});

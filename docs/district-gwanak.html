@@ -238,7 +238,29 @@
     border-radius: 10px;
     padding: 12px 14px;
   }
-  .trend-chart svg { width: 100%; height: 60px; display: block; }
+  .trend-chart { position: relative; }
+  .trend-chart svg { width: 100%; height: auto; display: block; touch-action: none; }
+  .trend-chart .grid { stroke: var(--border); stroke-width: 1; }
+  .trend-chart .axis { fill: var(--muted); font-size: 9px; }
+  .trend-chart .axis.y { text-anchor: end; }
+  .trend-chart .axis.x { text-anchor: middle; }
+  .trend-chart .marker-line { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 3; }
+  .trend-chart .marker-dot { fill: var(--fg); }
+  .chart-tip {
+    position: fixed;
+    z-index: 20;
+    padding: 6px 9px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--fg);
+    font-size: 0.78rem;
+    line-height: 1.4;
+    white-space: nowrap;
+    pointer-events: none;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+  }
+  .chart-tip .tip-value { font-weight: 700; font-variant-numeric: tabular-nums; }
   .trend-meta { color: var(--muted); font-size: 0.78rem; margin-top: 6px; }
   .district-links-heading { font-size: 0.85rem; color: var(--muted); margin: 18px 0 8px; font-weight: 600; }
   .district-links { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 0.82rem; }
@@ -357,6 +379,7 @@
       <div class="trend-chart" id="ratio-chart"></div>
       <div class="trend-meta" id="ratio-meta"></div>
     </div>
+    <div class="chart-tip" id="chart-tip" hidden></div>
   </section>
 
   <section id="budget-section" hidden>
@@ -938,27 +961,62 @@ function syncAreaUrl() {
   if (url !== `${location.pathname}${location.search}`) history.replaceState(null, "", url);
 }
 
-function sparklineSvg(values) {
-  const w = 280, h = 56, pad = 4;
+const CHART = { w: 320, h: 132, left: 52, right: 10, top: 12, bottom: 26 };
+
+function chartScale(values) {
   const min = Math.min(...values);
   const max = Math.max(...values);
-  const range = max - min || 1;
-  const step = values.length > 1 ? (w - pad * 2) / (values.length - 1) : 0;
-  const points = values
-    .map((v, i) => {
-      const x = pad + i * step;
-      const y = h - pad - ((v - min) / range) * (h - pad * 2);
-      return `${x.toFixed(1)},${y.toFixed(1)}`;
-    })
-    .join(" ");
-  const last = values[values.length - 1];
-  const lastX = pad + (values.length - 1) * step;
-  const lastY = h - pad - ((last - min) / range) * (h - pad * 2);
-  const rising = values.length > 1 && last >= values[0];
+  const range = max - min || Math.abs(max) || 1;
+  const plotW = CHART.w - CHART.left - CHART.right;
+  const plotH = CHART.h - CHART.top - CHART.bottom;
+  return {
+    min,
+    max,
+    step: values.length > 1 ? plotW / (values.length - 1) : 0,
+    x: (i) => CHART.left + i * (values.length > 1 ? plotW / (values.length - 1) : 0),
+    y: (v) => CHART.top + plotH - ((v - min) / range) * plotH,
+  };
+}
+
+function chartIndexAt(ratio, count) {
+  if (!Number.isFinite(ratio) || count < 1) return null;
+  const plotW = CHART.w - CHART.left - CHART.right;
+  const x = ratio * CHART.w;
+  const i = Math.round(((x - CHART.left) / plotW) * (count - 1));
+  return Math.min(count - 1, Math.max(0, i));
+}
+
+function shortDate(date) {
+  const [, month, day] = String(date ?? "").split("-");
+  return month && day ? `${Number(month)}/${Number(day)}` : "";
+}
+
+function sparklineSvg(series, format) {
+  const values = series.map((p) => p.value);
+  const scale = chartScale(values);
+  const points = series.map((p, i) => `${scale.x(i).toFixed(1)},${scale.y(p.value).toFixed(1)}`).join(" ");
+  const last = series[series.length - 1];
+  const rising = values.length > 1 && last.value >= values[0];
   const color = rising ? "#d64545" : "#2f6fed";
-  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" role="img">
-      <polyline points="${points}" fill="none" stroke="${color}" stroke-width="2" vector-effect="non-scaling-stroke" />
-      <circle cx="${lastX.toFixed(1)}" cy="${lastY.toFixed(1)}" r="2.5" fill="${color}" />
+
+  const yTicks = [scale.max, (scale.max + scale.min) / 2, scale.min].map((v, i) => {
+    const y = CHART.top + (i * (CHART.h - CHART.top - CHART.bottom)) / 2;
+    return (
+      `<line x1="${CHART.left}" y1="${y}" x2="${CHART.w - CHART.right}" y2="${y}" class="grid" />` +
+      `<text x="${CHART.left - 6}" y="${y + 3}" class="axis y">${escapeHtml(format(v))}</text>`
+    );
+  }).join("");
+
+  const xAt = [0, Math.floor((series.length - 1) / 2), series.length - 1];
+  const xTicks = [...new Set(xAt)].map((i) =>
+    `<text x="${scale.x(i).toFixed(1)}" y="${CHART.h - 8}" class="axis x">${escapeHtml(shortDate(series[i].date))}</text>`
+  ).join("");
+
+  return `<svg viewBox="0 0 ${CHART.w} ${CHART.h}" role="img">
+      ${yTicks}${xTicks}
+      <polyline points="${points}" fill="none" stroke="${color}" stroke-width="2" />
+      <circle cx="${scale.x(series.length - 1).toFixed(1)}" cy="${scale.y(last.value).toFixed(1)}" r="3" fill="${color}" />
+      <g class="marker" hidden><line class="marker-line" y1="${CHART.top}" y2="${CHART.h - CHART.bottom}" /><circle class="marker-dot" r="4" /></g>
     </svg>`;
 }
 
@@ -996,6 +1054,8 @@ function ratioSeries(trend) {
   });
 }
 
+const chartSeries = new Map();
+
 function drawSeries(chartId, metaId, series, label, format) {
   const chart = document.getElementById(chartId);
   const meta = document.getElementById(metaId);
@@ -1004,13 +1064,68 @@ function drawSeries(chartId, metaId, series, label, format) {
   if (series.length < 2) {
     chart.innerHTML = "";
     meta.textContent = "";
+    chartSeries.delete(chartId);
     return false;
   }
 
   const last = series[series.length - 1];
-  chart.innerHTML = sparklineSvg(series.map((p) => p.value));
+  chart.innerHTML = sparklineSvg(series, format);
+  chartSeries.set(chartId, { series, format, label });
   meta.textContent = `${label} · ${t("trendRange")(series[0].date, last.date, series.length)} · ${format(last.value)}`;
   return true;
+}
+
+function hideChartTip() {
+  const tip = document.getElementById("chart-tip");
+  if (tip) tip.hidden = true;
+  for (const id of chartSeries.keys()) {
+    const marker = document.querySelector(`#${id} .marker`);
+    if (marker) marker.setAttribute("hidden", "hidden");
+  }
+}
+
+function showChartTip(chartId, clientX, clientY) {
+  const entry = chartSeries.get(chartId);
+  const svg = document.querySelector(`#${chartId} svg`);
+  const tip = document.getElementById("chart-tip");
+  if (!entry || !svg || !tip) return;
+
+  const box = svg.getBoundingClientRect();
+  if (!box.width) return;
+
+  const index = chartIndexAt((clientX - box.left) / box.width, entry.series.length);
+  if (index === null) return;
+
+  const point = entry.series[index];
+  const scale = chartScale(entry.series.map((p) => p.value));
+  const marker = svg.querySelector(".marker");
+  if (marker) {
+    const x = scale.x(index);
+    marker.querySelector(".marker-line").setAttribute("x1", x);
+    marker.querySelector(".marker-line").setAttribute("x2", x);
+    marker.querySelector(".marker-dot").setAttribute("cx", x);
+    marker.querySelector(".marker-dot").setAttribute("cy", scale.y(point.value));
+    marker.removeAttribute("hidden");
+  }
+
+  tip.innerHTML =
+    `<div>${escapeHtml(point.date)}</div><div class="tip-value">${escapeHtml(entry.format(point.value))}</div>`;
+  tip.hidden = false;
+
+  const width = tip.offsetWidth || 110;
+  const left = Math.min(window.innerWidth - width - 8, Math.max(8, clientX - width / 2));
+  tip.style.left = `${left}px`;
+  tip.style.top = `${Math.max(8, clientY - 56)}px`;
+}
+
+function onChartPointer(e) {
+  const holder = e.target?.closest?.(".trend-chart");
+  if (!holder || !chartSeries.has(holder.id)) {
+    hideChartTip();
+    return;
+  }
+  const touch = e.touches?.[0];
+  showChartTip(holder.id, touch?.clientX ?? e.clientX, touch?.clientY ?? e.clientY);
 }
 
 function trendSeries(trend) {
@@ -1035,6 +1150,7 @@ function renderTrend() {
   if (series.length < 2) {
     section.hidden = !cache.trend;
     document.getElementById("trend-chart").innerHTML = "";
+    chartSeries.delete("trend-chart");
     document.getElementById("trend-meta").textContent = t("trendTooShort");
     document.getElementById("volume-card").hidden = true;
     document.getElementById("ratio-card").hidden = true;
@@ -1042,7 +1158,8 @@ function renderTrend() {
   }
 
   section.hidden = false;
-  document.getElementById("trend-chart").innerHTML = sparklineSvg(series.map((p) => p.value));
+  document.getElementById("trend-chart").innerHTML = sparklineSvg(series, formatMan);
+  chartSeries.set("trend-chart", { series, format: formatMan, label: trendMetricLabel() });
   const last = series[series.length - 1];
   document.getElementById("trend-meta").textContent =
     `${trendMetricLabel()} · ${t("trendRange")(series[0].date, last.date, series.length)}` +
@@ -1254,6 +1371,14 @@ document.getElementById("area-controls").addEventListener("change", (e) => {
   renderAll();
   window.analytics?.event("realestate_area", { area_m2: String(areaM2), realestate_kind: kind ?? "all" });
 });
+
+const trendSection = document.getElementById("trend-section");
+trendSection.addEventListener("mousemove", onChartPointer);
+trendSection.addEventListener("click", onChartPointer);
+trendSection.addEventListener("touchstart", onChartPointer, { passive: true });
+trendSection.addEventListener("touchmove", onChartPointer, { passive: true });
+trendSection.addEventListener("mouseleave", hideChartTip);
+window.addEventListener("scroll", hideChartTip, { passive: true });
 
 document.getElementById("theme-toggle").addEventListener("click", () => {
   const order = ["auto", "light", "dark"];
