@@ -3955,7 +3955,7 @@
     },
     "overall": {
       "sale": {
-        "avgPricePerM2": 15443571.980743846,
+        "avgPricePerM2": 15443571.980743848,
         "avgPricePerPyeong10k": 5105,
         "transactionCount": 5342
       },
@@ -4412,12 +4412,12 @@
         "code": "11560",
         "name": "영등포구",
         "sale": {
-          "avgPricePerM2": 18721709.318667445,
+          "avgPricePerM2": 18721709.318667457,
           "avgPricePerPyeong10k": 6189,
           "transactionCount": 248
         },
         "saleNational84": {
-          "avgPricePerM2": 16415398.974376319,
+          "avgPricePerM2": 16415398.974376325,
           "avgPricePerPyeong10k": 5427,
           "transactionCount": 76
         },
@@ -4537,7 +4537,7 @@
           "transactionCount": 264
         },
         "saleNational84": {
-          "avgPricePerM2": 28629706.928956106,
+          "avgPricePerM2": 28629706.92895611,
           "avgPricePerPyeong10k": 9464,
           "transactionCount": 94
         },
