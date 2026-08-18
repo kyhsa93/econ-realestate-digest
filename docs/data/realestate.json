@@ -1,11 +1,13 @@
 {
-  "updatedAt": "2026-08-18T01:10:48.699Z",
+  "updatedAt": "2026-08-18T01:17:43.517Z",
   "window": {
     "basis": "contract",
     "from": "2026-06-15",
     "to": "2026-07-12",
     "until": "2026-07-13",
-    "weeks": 4
+    "weeks": 4,
+    "districtFrom": "2026-06-15",
+    "districtWeeks": 4
   },
   "overall": {
     "sale": {

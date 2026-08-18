@@ -97,10 +97,11 @@ async function readWindowItems(now, window) {
           }
 
           const dateOf = window.basis === "arrival" ? (item) => arrivals[itemKey(item)] : contractDate;
-          const picked = file.items.filter((item) => {
+          const picked = [];
+          for (const item of file.items) {
             const date = dateOf(item);
-            return date && date >= window.from && date < window.until;
-          });
+            if (date && date >= window.from && date < window.until) picked.push({ item, date });
+          }
           if (!picked.length) return;
 
           const key = `${kind}:${code}`;
@@ -113,19 +114,21 @@ async function readWindowItems(now, window) {
   return { items, earliestArrival };
 }
 
+const rawItems = (rows) => (rows ?? []).map((row) => row.item);
+
 export function districtEntries(months) {
   return DISTRICTS.map(({ code, name }) => {
     const entry = { code, name, sale: null, saleNational84: null, jeonse: null, wolse: null };
 
-    const saleItems = months.get(`sale:${code}`);
-    if (saleItems) {
+    const saleItems = rawItems(months.get(`sale:${code}`));
+    if (saleItems.length) {
       const summary = summarizeSaleItems(saleItems);
       entry.sale = summary.sale;
       entry.saleNational84 = summary.saleNational84;
     }
 
-    const rentItems = months.get(`rent:${code}`);
-    if (rentItems) {
+    const rentItems = rawItems(months.get(`rent:${code}`));
+    if (rentItems.length) {
       const rent = summarizeRent(rentItems);
       entry.jeonse = rent.jeonse;
       entry.wolse = rent.wolse;
@@ -280,12 +283,27 @@ export function arrivalWindowReady(items, districtCount = DISTRICTS.length) {
   return covered.size >= Math.ceil(districtCount / 2);
 }
 
+function narrowTo(items, from) {
+  const out = new Map();
+  for (const [key, rows] of items) {
+    const kept = rows.filter((row) => row.date >= from);
+    if (kept.length) out.set(key, kept);
+  }
+  return out;
+}
+
 async function pickWindow(now) {
   const arrival = representWindow(now, "arrival");
-  const read = await readWindowItems(now, arrival);
+  const districtFrom = nextWeek(arrival.from, -(REPRESENT_WEEKS - 1));
+  const read = await readWindowItems(now, { ...arrival, from: districtFrom });
 
-  if (arrivalWindowReady(read.items)) {
-    return { window: arrival, items: read.items };
+  const thisWeek = narrowTo(read.items, arrival.from);
+  if (arrivalWindowReady(thisWeek)) {
+    return {
+      window: { ...arrival, districtFrom, districtWeeks: REPRESENT_WEEKS },
+      districtItems: read.items,
+      overallItems: thisWeek,
+    };
   }
 
   console.log(
@@ -293,12 +311,17 @@ async function pickWindow(now) {
   );
 
   const contract = representWindow(now, "contract");
-  return { window: contract, items: (await readWindowItems(now, contract)).items };
+  const items = (await readWindowItems(now, contract)).items;
+  return {
+    window: { ...contract, districtFrom: contract.from, districtWeeks: contract.weeks },
+    districtItems: items,
+    overallItems: items,
+  };
 }
 
 async function writeRepresentative(now) {
-  const { window, items } = await pickWindow(now);
-  const newlyFetched = districtEntries(items);
+  const { window, districtItems, overallItems } = await pickWindow(now);
+  const newlyFetched = districtEntries(districtItems);
 
   if (newlyFetched.length === 0) {
     console.error(
@@ -319,7 +342,7 @@ async function writeRepresentative(now) {
     );
   }
 
-  const overall = computeOverall(districts);
+  const overall = computeOverall(districtEntries(overallItems));
   const history = await readJson(historyFile, []);
 
   await writeFile(
@@ -327,11 +350,7 @@ async function writeRepresentative(now) {
     JSON.stringify({ updatedAt: now.toISOString(), window, ...attachChanges(overall, districts, findBaseline(history, now)) }, null, 2)
   );
 
-  const nextHistory = appendHistory(history, now, {
-    window,
-    overall: carriedNames.length ? computeOverall(newlyFetched) : overall,
-    districts: newlyFetched,
-  });
+  const nextHistory = appendHistory(history, now, { window, overall, districts: newlyFetched });
   await writeFile(historyFile, JSON.stringify(nextHistory, null, 2));
 
   console.log(

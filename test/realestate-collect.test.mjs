@@ -353,3 +353,30 @@ test("기준이 바뀌는 날에는 지난 기준 값을 물려받지 않는다"
     "다른 기준으로 만든 값이 섞였다"
   );
 });
+
+test("신고가 자치구 전반에 들어오면 신고일 기준으로 넘어간다", async (t) => {
+  let rows = 2;
+  const server = await startFakeMolit((kind, { yearMonth }) =>
+    successXml(
+      monthDays(yearMonth)
+        .slice(0, rows)
+        .map((on, i) => (kind === "sale" ? saleItem({ ...on, aptNm: `단지${i}` }) : rentItem({ ...on, aptNm: `단지${i}` })))
+    )
+  );
+  t.after(() => server.close());
+  const space = await workspace();
+
+  await collect(server, { ...space, backfillLimit: 400 });
+  const before = await readJson(path.join(space.dataDir, "realestate.json"));
+  assert.equal(before.window.basis, "contract", "첫 수집부터 신고일 기준을 썼다");
+
+  rows = 5;
+  const { stdout } = await collect(server, { ...space, backfillLimit: 400 });
+
+  const after = await readJson(path.join(space.dataDir, "realestate.json"));
+  assert.equal(after.window.basis, "arrival", stdout);
+  assert.equal(after.window.weeks, 1, "서울 전체는 이번 주만 세야 한다");
+  assert.equal(after.window.districtWeeks, 4, "자치구는 네 주를 겹쳐야 한다");
+  assert.ok(after.window.districtFrom < after.window.from, "자치구 창이 더 넓지 않다");
+  assert.ok(after.overall.sale.transactionCount > 0);
+});
