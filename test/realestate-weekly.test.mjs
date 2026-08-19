@@ -63,6 +63,32 @@ test("진행 중인 주는 집계에 넣지 않는다", () => {
   assert.ok(!weekly.overall["2026-09-07"], "이번 주를 확정으로 셌다");
 });
 
+test("신고 기한이 남은 주는 잠정으로 따로 낸다", () => {
+  const days = ["2026-07-28", "2026-08-04", "2026-08-11", "2026-08-25", "2026-09-01"];
+  const weekly = buildWeekly(days.map((day) => sale(day)), NOW, { graceDays: 30 });
+
+  assert.deepEqual(weekly.weeks, ["2026-07-27"], "기한이 지난 주가 확정에 다 들어가지 않았다");
+  assert.deepEqual(
+    weekly.pendingWeeks,
+    ["2026-08-03", "2026-08-10", "2026-08-24", "2026-08-31"],
+    "기한이 남은 주를 버렸다"
+  );
+  assert.ok(weekly.overall["2026-08-31"], "잠정 주의 값을 내지 않았다");
+  assert.ok(weekly.districts.노원구["2026-08-31"], "자치구는 잠정 주가 비었다");
+});
+
+test("이번 주는 잠정에도 넣지 않는다", () => {
+  const weekly = buildWeekly([sale("2026-07-28"), sale("2026-09-07")], NOW, { graceDays: 30 });
+
+  assert.ok(!weekly.pendingWeeks.includes("2026-09-07"), "아직 흐르는 주를 그린다");
+  assert.ok(!weekly.overall["2026-09-07"]);
+});
+
+test("기한을 두지 않으면 잠정 주도 없다", () => {
+  const weekly = buildWeekly([sale("2026-08-25"), sale("2026-09-01")], NOW);
+  assert.deepEqual(weekly.pendingWeeks, []);
+});
+
 test("서울 전체는 그 주 신고분만으로 센다", () => {
   const weekly = buildWeekly(
     [

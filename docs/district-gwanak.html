@@ -503,7 +503,7 @@ const T = {
     otherDistricts: "다른 지역",
     backToAll: "서울 전체 시세",
     trendHeading: "최근 추이",
-    trendBasis: "계약일 기준 · 신고 기한(계약 후 30일)이 지난 주까지",
+    trendBasis: "계약일 기준 · 실선은 신고 기한(계약 후 30일)이 지난 주까지",
     trendMetricSale: "매매 평당가",
     trendMetricJeonse: "전세 평당 보증금",
     trendMetricWolse: "월세 보증금(평당 아님)",
@@ -513,6 +513,8 @@ const T = {
     trendCount: (n) => `${n.toLocaleString("ko-KR")}건`,
     trendRatio: "전세가율(전세 평당 보증금 ÷ 매매 평당가)",
     trendRange: (from, to, n) => `${from} ~ ${to} · ${n}주`,
+    trendPendingNote: "점선은 기한이 남아 아직 덜 찬 주입니다",
+    trendPendingTag: "(잠정)",
     trendTooShort: "추이는 신고가 두 주 이상 쌓이면 표시됩니다.",
     historyMinMax: (max, min) => `최고 ${max} · 최저 ${min}`,
     areaLabel: "평형",
@@ -577,7 +579,7 @@ const T = {
     otherDistricts: "Other districts",
     backToAll: "All Seoul prices",
     trendHeading: "Recent trend",
-    trendBasis: "By contract date, up to the last week past the 30-day filing deadline",
+    trendBasis: "By contract date, solid up to the last week past the 30-day filing deadline",
     trendMetricSale: "Sale price per pyeong",
     trendMetricJeonse: "Jeonse deposit per pyeong",
     trendMetricWolse: "Monthly-rent deposit (not per pyeong)",
@@ -587,6 +589,8 @@ const T = {
     trendCount: (n) => `${n.toLocaleString("en-US")}`,
     trendRatio: "Jeonse ratio (jeonse deposit / sale price, per pyeong)",
     trendRange: (from, to, n) => `${from} – ${to} · ${n} weeks`,
+    trendPendingNote: "Dashed: weeks still inside that window",
+    trendPendingTag: "(provisional)",
     trendTooShort: "The trend appears once at least two weeks of filings are recorded.",
     historyMinMax: (max, min) => `High ${max} · Low ${min}`,
     areaLabel: "Unit size",
@@ -1074,9 +1078,14 @@ function yTickValues(values) {
 function sparklineSvg(series, format, box) {
   const values = series.map((p) => p.value);
   const scale = chartScale(values, box);
-  const points = series.map((p, i) => `${scale.x(i).toFixed(1)},${scale.y(p.value).toFixed(1)}`).join(" ");
-  const last = series[series.length - 1];
-  const rising = values.length > 1 && last.value >= values[0];
+  const points = series.map((p, i) => `${scale.x(i).toFixed(1)},${scale.y(p.value).toFixed(1)}`);
+  // 신고 기한이 남은 주는 점선으로 이어 붙인다. 마지막 확정 지점을 한 번 더 써서
+  // 실선과 점선이 끊기지 않게 한다.
+  const firmCount = series.findIndex((p) => p.pending) === -1 ? series.length : series.findIndex((p) => p.pending);
+  const firm = points.slice(0, firmCount).join(" ");
+  const pending = firmCount < series.length ? points.slice(Math.max(0, firmCount - 1)).join(" ") : "";
+  const last = series[Math.max(0, firmCount - 1)];
+  const rising = firmCount > 1 && last.value >= values[0];
   const color = rising ? "#d64545" : "#2f6fed";
 
   const yTicks = yTickValues(values).map((v, i) => {
@@ -1094,8 +1103,9 @@ function sparklineSvg(series, format, box) {
 
   return `<svg viewBox="0 0 ${box.w} ${box.h}" role="img">
       ${yTicks}${xTicks}
-      <polyline points="${points}" fill="none" stroke="${color}" stroke-width="2" />
-      <circle cx="${scale.x(series.length - 1).toFixed(1)}" cy="${scale.y(last.value).toFixed(1)}" r="3" fill="${color}" />
+      ${firmCount > 1 ? `<polyline points="${firm}" fill="none" stroke="${color}" stroke-width="2" />` : ""}
+      ${pending ? `<polyline class="pending" points="${pending}" fill="none" stroke="${color}" stroke-width="2" stroke-dasharray="4 4" opacity="0.55" />` : ""}
+      ${firmCount ? `<circle cx="${scale.x(firmCount - 1).toFixed(1)}" cy="${scale.y(last.value).toFixed(1)}" r="3" fill="${color}" />` : ""}
       <g class="marker" hidden><line class="marker-line" y1="${box.top}" y2="${box.h - box.bottom}" /><circle class="marker-dot" r="4" /></g>
     </svg>`;
 }
@@ -1113,10 +1123,15 @@ function seriesOf(trend, pick) {
   const scope = trendScope(trend);
   if (!scope) return [];
 
-  return (trend.weeks ?? [])
-    .map((week) => {
+  const marked = [
+    ...(trend.weeks ?? []).map((week) => [week, false]),
+    ...(trend.pendingWeeks ?? []).map((week) => [week, true]),
+  ];
+
+  return marked
+    .map(([week, pending]) => {
       const value = pick(scope[week] ?? {});
-      return typeof value === "number" && Number.isFinite(value) ? { date: week, value } : null;
+      return typeof value === "number" && Number.isFinite(value) ? { date: week, value, pending } : null;
     })
     .filter(Boolean);
 }
@@ -1164,7 +1179,9 @@ function fillCard(prefix, series, label, format) {
     return false;
   }
 
-  const values = series.map((p) => p.value);
+  // 값으로 적는 숫자는 신고가 다 들어온 주만 쓴다. 덜 찬 주는 그림에서 점선일 뿐이다.
+  const firm = series.filter((p) => !p.pending);
+  const values = (firm.length ? firm : series).map((p) => p.value);
   labelBox.textContent = label;
   current.textContent = format(values[values.length - 1]);
   minmax.textContent = t("historyMinMax")(format(Math.max(...values)), format(Math.min(...values)));
@@ -1206,7 +1223,8 @@ function showChartTip(chartId, clientX, clientY) {
   }
 
   tip.innerHTML =
-    `<div>${escapeHtml(point.date)}</div><div class="tip-value">${escapeHtml(entry.format(point.value))}</div>`;
+    `<div>${escapeHtml(point.date)}${point.pending ? ` ${escapeHtml(t("trendPendingTag"))}` : ""}</div>` +
+    `<div class="tip-value">${escapeHtml(entry.format(point.value))}</div>`;
   tip.hidden = false;
 
   const width = tip.offsetWidth || 110;
@@ -1241,6 +1259,7 @@ function renderDistrictSummary() {
 function renderTrend() {
   const section = document.getElementById("trend-section");
   const series = trendSeries(cache.trend);
+  const firm = series.filter((p) => !p.pending);
 
   document.getElementById("trend-heading").textContent = t("trendHeading");
 
@@ -1248,7 +1267,7 @@ function renderTrend() {
   const cards = ["trend", "volume", "ratio"].map((prefix) => document.getElementById(`${prefix}-card`));
   for (const card of cards) card.hidden = false;
 
-  if (series.length < 2) {
+  if (firm.length < 2) {
     section.hidden = !cache.trend;
     fillCard("trend", [], "", formatMan);
     for (const card of cards) card.hidden = true;
@@ -1257,10 +1276,11 @@ function renderTrend() {
   }
 
   section.hidden = false;
-  const last = series[series.length - 1];
+  const last = firm[firm.length - 1];
   cards[0].hidden = !fillCard("trend", series, trendMetricLabel(), formatMan);
   document.getElementById("trend-meta").textContent =
-    `${t("trendRange")(series[0].date, last.date, series.length)} · ${t("trendBasis")}`;
+    `${t("trendRange")(firm[0].date, last.date, firm.length)} · ${t("trendBasis")}` +
+    (series.length > firm.length ? ` · ${t("trendPendingNote")}` : "");
 
   const volumeKey = kind === "jeonse" ? "trendVolumeJeonse" : kind === "wolse" ? "trendVolumeWolse" : "trendVolumeSale";
   cards[1].hidden = !fillCard(

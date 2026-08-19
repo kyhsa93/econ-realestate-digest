@@ -120,9 +120,14 @@ function movingRows(weeks, week, span) {
 
 export function buildWeekly(arrivals, now, { weeksKept = WEEKS_KEPT, movingWeeks = MOVING_WEEKS, minSample = 1, graceDays = 0, from = null } = {}) {
   const settled = settledWeek(now, graceDays);
-  const byWeek = groupByWeek(arrivals.filter((row) => weekStart(row.observedOn) <= settled));
+  // 신고 기한이 남은 주도 함께 낸다 - 그림에 점선으로 이어 붙이는 몫이다. 이번 주는
+  // 아직 흐르는 중이라 끝난 주까지만 센다.
+  const elapsed = settledWeek(now, 0);
+  const byWeek = groupByWeek(arrivals.filter((row) => weekStart(row.observedOn) <= elapsed));
 
-  const weeks = [...byWeek.keys()].sort().filter((week) => !from || week >= from).slice(-weeksKept);
+  const known = [...byWeek.keys()].sort().filter((week) => !from || week >= from);
+  const weeks = known.filter((week) => week <= settled).slice(-weeksKept);
+  const pendingWeeks = known.filter((week) => week > settled);
   if (!weeks.length) return null;
 
   const districtRows = new Map();
@@ -135,8 +140,10 @@ export function buildWeekly(arrivals, now, { weeksKept = WEEKS_KEPT, movingWeeks
     }
   }
 
+  const drawn = [...weeks, ...pendingWeeks];
+
   const overall = {};
-  for (const week of weeks) {
+  for (const week of drawn) {
     const stats = statsOf(byWeek.get(week) ?? [], minSample);
     if (stats) overall[week] = stats;
   }
@@ -144,12 +151,12 @@ export function buildWeekly(arrivals, now, { weeksKept = WEEKS_KEPT, movingWeeks
   const districts = {};
   for (const [name, perWeek] of [...districtRows.entries()].sort((a, b) => a[0].localeCompare(b[0], "ko"))) {
     const entry = {};
-    for (const week of weeks) {
+    for (const week of drawn) {
       const stats = statsOf(movingRows(perWeek, week, movingWeeks), minSample);
       if (stats) entry[week] = stats;
     }
     if (Object.keys(entry).length) districts[name] = entry;
   }
 
-  return { weeks, movingWeeks, settledWeek: settled, overall, districts };
+  return { weeks, pendingWeeks, movingWeeks, settledWeek: settled, overall, districts };
 }

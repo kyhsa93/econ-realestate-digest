@@ -774,6 +774,7 @@
       <select id="realestate-district-select"></select>
     </div>
     <div class="history-grid" id="realestate-history-grid"></div>
+    <div class="summary-meta" id="realestate-history-note"></div>
     <div class="summary-meta" id="realestate-meta"></div>
   </section>
 
@@ -856,6 +857,8 @@
       historyUsdKrwLabel: "원/달러 환율 (최근 추이)",
       historyBaseRateLabel: "기준금리 (최근 추이)",
       historyMinMax: (max, min) => `최고 ${max} · 최저 ${min}`,
+      historyPendingNote: "점선은 신고 기한(계약 후 30일)이 남아 아직 덜 찬 주입니다. 실선까지가 확정치입니다",
+      historyPendingTag: "(잠정)",
       historyMoreToggle: (n) => `그 외 지표 ${n}개 더보기`,
       realestateHeading: "한국 부동산 가격 추이",
       realestateError: "데이터를 불러오지 못했습니다.",
@@ -942,6 +945,8 @@
       historyUsdKrwLabel: "USD/KRW (recent trend)",
       historyBaseRateLabel: "BOK Base Rate (recent trend)",
       historyMinMax: (max, min) => `High ${max} · Low ${min}`,
+      historyPendingNote: "Dashed: weeks still inside the 30-day filing window",
+      historyPendingTag: "(provisional)",
       historyMoreToggle: (n) => `Show ${n} more indicator${n === 1 ? "" : "s"}`,
       realestateHeading: "Korean Real Estate Price Trend",
       realestateError: "Failed to load data.",
@@ -1259,9 +1264,15 @@
   function sparklineSvg(series, format, box) {
     const values = series.map((p) => p.value);
     const scale = chartScale(values, box);
-    const points = series.map((p, i) => `${scale.x(i).toFixed(1)},${scale.y(p.value).toFixed(1)}`).join(" ");
-    const last = series[series.length - 1];
-    const color = values.length > 1 && last.value >= values[0] ? "#d64545" : "#2f6fed";
+    const points = series.map((p, i) => `${scale.x(i).toFixed(1)},${scale.y(p.value).toFixed(1)}`);
+    // 신고 기한이 남은 주는 점선으로 이어 붙인다. 마지막 확정 지점을 한 번 더 써서
+    // 실선과 점선이 끊기지 않게 한다.
+    const firstPending = series.findIndex((p) => p.pending);
+    const firmCount = firstPending === -1 ? series.length : firstPending;
+    const firm = points.slice(0, firmCount).join(" ");
+    const pending = firmCount < series.length ? points.slice(Math.max(0, firmCount - 1)).join(" ") : "";
+    const last = series[Math.max(0, firmCount - 1)];
+    const color = firmCount > 1 && last.value >= values[0] ? "#d64545" : "#2f6fed";
 
     const yTicks = yTickValues(values)
       .map((v, i) => {
@@ -1282,8 +1293,9 @@
 
     return `<svg viewBox="0 0 ${box.w} ${box.h}" role="img">
         ${yTicks}${xTicks}
-        <polyline points="${points}" fill="none" stroke="${color}" stroke-width="2" />
-        <circle cx="${scale.x(series.length - 1).toFixed(1)}" cy="${scale.y(last.value).toFixed(1)}" r="3" fill="${color}" />
+        ${firmCount > 1 ? `<polyline points="${firm}" fill="none" stroke="${color}" stroke-width="2" />` : ""}
+        ${pending ? `<polyline class="pending" points="${pending}" fill="none" stroke="${color}" stroke-width="2" stroke-dasharray="4 4" opacity="0.55" />` : ""}
+        ${firmCount ? `<circle cx="${scale.x(firmCount - 1).toFixed(1)}" cy="${scale.y(last.value).toFixed(1)}" r="3" fill="${color}" />` : ""}
         <g class="marker" hidden><line class="marker-line" y1="${box.top}" y2="${box.h - box.bottom}" /><circle class="marker-dot" r="4" /></g>
       </svg>`;
   }
@@ -1300,6 +1312,9 @@
   // 먼저 그리고, 심은 뒤 repaintCharts가 실제 너비로 다시 그린다.
   function historyCardHtml({ label, series, format }) {
     const values = series.map((p) => p.value);
+    // 값으로 적는 숫자는 신고가 다 들어온 주만 쓴다. 덜 찬 주는 그림에서 점선일 뿐이다.
+    const firm = series.filter((p) => !p.pending);
+    const shown = (firm.length ? firm : series).map((p) => p.value);
     const id = `chart-${chartSeries.size}`;
     const box = chartBox(null, yTickValues(values).map(format));
     chartSeries.set(id, { series, format, box });
@@ -1307,8 +1322,8 @@
       <div class="history-card">
         <div class="label">${label}</div>
         <div class="history-stats">
-          <span class="history-current">${format(values[values.length - 1])}</span>
-          <span class="history-minmax">${t("historyMinMax")(format(Math.max(...values)), format(Math.min(...values)))}</span>
+          <span class="history-current">${format(shown[shown.length - 1])}</span>
+          <span class="history-minmax">${t("historyMinMax")(format(Math.max(...shown)), format(Math.min(...shown)))}</span>
         </div>
         <div class="history-chart" id="${id}">${sparklineSvg(series, format, box)}</div>
       </div>`;
@@ -1394,7 +1409,9 @@
       marker.removeAttribute("hidden");
     }
 
-    tip.innerHTML = `<div>${escapeHtml(point.date)}</div><div class="tip-value">${escapeHtml(entry.format(point.value))}</div>`;
+    tip.innerHTML =
+      `<div>${escapeHtml(point.date)}${point.pending ? ` ${escapeHtml(t("historyPendingTag"))}` : ""}</div>` +
+      `<div class="tip-value">${escapeHtml(entry.format(point.value))}</div>`;
     tip.hidden = false;
 
     const width = tip.offsetWidth || 110;
@@ -1605,9 +1622,11 @@
   function renderRealestateHistory(trend) {
     populateDistrictSelect();
     const grid = document.getElementById("realestate-history-grid");
+    const note = document.getElementById("realestate-history-note");
     const weeks = trend?.weeks ?? [];
     if (weeks.length < 2) {
       grid.innerHTML = "";
+      note.textContent = "";
       return;
     }
 
@@ -1617,9 +1636,14 @@
     const scope = districtName ? trend?.districts?.[districtName] : trend?.overall;
     if (!scope) {
       grid.innerHTML = "";
+      note.textContent = "";
       return;
     }
 
+    const marked = [
+      ...weeks.map((week) => [week, false]),
+      ...(trend?.pendingWeeks ?? []).map((week) => [week, true]),
+    ];
     const scopeName = districtName ?? t("realestateOverallOption");
     const countFormat = (v) => t("realestateCountSuffix")(Math.round(v));
     const series = [
@@ -1630,10 +1654,14 @@
       { label: t("realestateWolseVolumeHistoryLabel")(scopeName), get: (w) => scope[w]?.wolse?.transactionCount, format: countFormat },
     ];
 
+    let pendingShown = false;
     const cards = series
       .map(({ label, get, format }) => {
-        const series = weeks.map((w) => ({ date: w, value: get(w) })).filter((p) => typeof p.value === "number");
-        if (series.length < 2) return null;
+        const series = marked
+          .map(([w, pending]) => ({ date: w, value: get(w), pending }))
+          .filter((p) => typeof p.value === "number");
+        if (series.filter((p) => !p.pending).length < 2) return null;
+        pendingShown = pendingShown || series.some((p) => p.pending);
         return historyCardHtml({ label, series, format });
       })
       .filter(Boolean);
@@ -1651,6 +1679,7 @@
         </details>`;
     }
     grid.innerHTML = html;
+    note.textContent = pendingShown ? t("historyPendingNote") : "";
     repaintCharts();
     // 접힌 카드는 너비가 0이라 어림한 크기 그대로다. 펼칠 때 다시 잰다.
     grid.querySelector(".history-more")?.addEventListener("toggle", repaintCharts);

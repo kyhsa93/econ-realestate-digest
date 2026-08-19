@@ -58,6 +58,18 @@ const trendRealestate = () => ({
 
 const TREND_WEEKS = ["2026-07-27", "2026-08-03", "2026-08-10"];
 
+const PENDING_WEEKS = ["2026-08-17", "2026-08-24"];
+
+const pendingTrendData = () => {
+  const trend = trendData();
+  trend.pendingWeeks = PENDING_WEEKS;
+  trend.overall["2026-08-17"] = metrics(-300);
+  trend.overall["2026-08-24"] = metrics(-600);
+  trend.districts[TREND_DISTRICT.name]["2026-08-17"] = metrics(200);
+  trend.districts[TREND_DISTRICT.name]["2026-08-24"] = metrics(100);
+  return trend;
+};
+
 const trendData = () => ({
   weeks: TREND_WEEKS,
   overall: {
@@ -595,6 +607,58 @@ test("매매나 전세 값이 없는 주는 전세가율에서 뺀다", async ()
   const weeks = [...page.ratioHtml().matchAll(/class="axis x">([^<]+)</g)].map((m) => m[1]);
   assert.deepEqual(weeks, ["8/3", "8/10"], `값 없는 주가 남았다: ${weeks.join(" ")}`);
   assert.match(page.cardCurrent("ratio"), /50\.0%/);
+});
+
+test("신고가 덜 찬 주는 점선으로 이어 그린다", async () => {
+  const page = await loadRealestatePage({
+    realestate: trendRealestate(),
+    trend: pendingTrendData(),
+    kind: "sale",
+  });
+  const svg = page.trendHtml();
+
+  const lines = [...svg.matchAll(/<polyline([^>]*)>/g)].map((m) => m[1]);
+  assert.equal(lines.length, 2, `실선과 점선 두 줄이어야 한다: ${lines.length}줄`);
+  assert.ok(!lines[0].includes("stroke-dasharray"), "확정 구간까지 점선으로 그렸다");
+  assert.match(lines[1], /class="pending"/, "잠정 구간에 표시가 없다");
+  assert.match(lines[1], /stroke-dasharray/, "잠정 구간이 실선이다");
+
+  const weeks = [...svg.matchAll(/class="axis x">([^<]+)</g)].map((m) => m[1]);
+  assert.equal(weeks.at(-1), "8/24", `잠정 주까지 가로축에 담기지 않았다: ${weeks.join(" ")}`);
+});
+
+test("점선은 마지막 확정 지점에서 이어 나간다", async () => {
+  const page = await loadRealestatePage({
+    realestate: trendRealestate(),
+    trend: pendingTrendData(),
+    kind: "sale",
+  });
+  const [firm, pending] = [...page.trendHtml().matchAll(/points="([^"]+)"/g)].map((m) => m[1].split(" "));
+
+  assert.equal(firm.length, TREND_WEEKS.length, "확정 구간 지점 수가 다르다");
+  assert.equal(pending.length, PENDING_WEEKS.length + 1, "점선이 이어 붙지 않고 떨어져 있다");
+  assert.equal(pending[0], firm.at(-1), "점선이 마지막 확정 지점에서 시작하지 않는다");
+});
+
+test("잠정 주는 카드에 적는 숫자로 세지 않는다", async () => {
+  const firm = await loadRealestatePage({ realestate: trendRealestate(), trend: trendData(), kind: "sale" });
+  const withPending = await loadRealestatePage({
+    realestate: trendRealestate(),
+    trend: pendingTrendData(),
+    kind: "sale",
+  });
+
+  assert.equal(withPending.cardCurrent("trend"), firm.cardCurrent("trend"), "덜 찬 주를 현재값으로 적었다");
+  assert.equal(withPending.cardMinMax("trend"), firm.cardMinMax("trend"), "덜 찬 주가 최고·최저에 섞였다");
+  assert.match(withPending.trendMeta(), /2026-07-27 ~ 2026-08-10/, "잠정 주까지 기간에 넣었다");
+  assert.match(withPending.trendMeta(), /점선/, "점선이 무엇인지 밝히지 않았다");
+});
+
+test("잠정 주가 없으면 점선도 안내도 없다", async () => {
+  const page = await loadRealestatePage({ realestate: trendRealestate(), trend: trendData(), kind: "sale" });
+
+  assert.ok(!page.trendHtml().includes("stroke-dasharray"), "그릴 잠정 주가 없는데 점선을 그었다");
+  assert.ok(!page.trendMeta().includes("점선"), "점선이 없는데 점선을 설명한다");
 });
 
 test("표본이 모자란 지역은 값을 비운다", () => {
