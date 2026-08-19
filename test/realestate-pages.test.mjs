@@ -367,10 +367,10 @@ test("자치구 페이지 추이는 그 지역 값을 그린다", async () => {
 
   const seoul = await loadRealestatePage({ realestate, trend, kind: "sale" });
   const page = await loadRealestatePage({ realestate, trend, district: TREND_DISTRICT.name });
-  assert.notEqual(page.trendMeta(), seoul.trendMeta(), "서울 전체 추이를 그대로 쓰고 있다");
+  assert.notEqual(page.trendHtml(), seoul.trendHtml(), "서울 전체 추이를 그대로 쓰고 있다");
 
   const now = realestate.districts.find((d) => d.name === TREND_DISTRICT.name).sale.avgPricePerPyeong10k;
-  assert.match(page.trendMeta(), new RegExp(`${now.toLocaleString("ko-KR")}만원`));
+  assert.match(page.cardCurrent("trend"), new RegExp(`${now.toLocaleString("ko-KR")}만원`));
 });
 
 test("자치구 페이지에는 평형 선택이 뜬다", async () => {
@@ -534,7 +534,7 @@ test("추이가 어느 지표인지 라벨로 밝힌다", async () => {
 
   for (const [kind, label] of Object.entries(expected)) {
     const page = await loadRealestatePage({ realestate, trend, kind });
-    assert.match(page.trendMeta(), new RegExp(label.replace(/[()]/g, "\\$&")), `${kind}: ${page.trendMeta()}`);
+    assert.match(page.cardLabel("trend"), new RegExp(label.replace(/[()]/g, "\\$&")), `${kind}: ${page.cardLabel("trend")}`);
   }
 });
 
@@ -542,8 +542,9 @@ test("거래량 추이를 함께 그린다", async () => {
   const page = await loadRealestatePage({ realestate: trendRealestate(), trend: trendData(), kind: "sale" });
 
   assert.ok(page.volumeHtml().includes("polyline"), "거래량 그래프가 없다");
-  assert.match(page.volumeMeta(), /매매 거래량/, page.volumeMeta());
-  assert.match(page.volumeMeta(), /50건/, page.volumeMeta());
+  assert.match(page.cardLabel("volume"), /매매 거래량/, page.cardLabel("volume"));
+  assert.match(page.cardCurrent("volume"), /50건/, page.cardCurrent("volume"));
+  assert.match(page.cardMinMax("volume"), /최고 .*건 · 최저 .*건/, page.cardMinMax("volume"));
   assert.equal(page.cardHidden("volume-card"), false);
 });
 
@@ -552,19 +553,19 @@ test("거래 유형을 바꾸면 거래량도 그 유형을 센다", async () =>
   const trend = trendData();
 
   const jeonse = await loadRealestatePage({ realestate, trend, kind: "jeonse" });
-  assert.match(jeonse.volumeMeta(), /전세 거래량/);
-  assert.match(jeonse.volumeMeta(), /40건/, jeonse.volumeMeta());
+  assert.match(jeonse.cardLabel("volume"), /전세 거래량/);
+  assert.match(jeonse.cardCurrent("volume"), /40건/, jeonse.cardCurrent("volume"));
 
   const wolse = await loadRealestatePage({ realestate, trend, kind: "wolse" });
-  assert.match(wolse.volumeMeta(), /월세 거래량/);
+  assert.match(wolse.cardLabel("volume"), /월세 거래량/);
 });
 
 test("전세가율 추이를 그린다", async () => {
   const page = await loadRealestatePage({ realestate: trendRealestate(), trend: trendData(), kind: "sale" });
 
   assert.ok(page.ratioHtml().includes("polyline"), "전세가율 그래프가 없다");
-  assert.match(page.ratioMeta(), /전세가율/, page.ratioMeta());
-  assert.match(page.ratioMeta(), /56\.8%/, `2500/4400 = 56.8%가 아니다: ${page.ratioMeta()}`);
+  assert.match(page.cardLabel("ratio"), /전세가율/, page.cardLabel("ratio"));
+  assert.match(page.cardCurrent("ratio"), /56\.8%/, `2500/4400 = 56.8%가 아니다: ${page.cardCurrent("ratio")}`);
 });
 
 test("월세 페이지에는 전세가율을 두지 않는다", async () => {
@@ -591,8 +592,9 @@ test("매매나 전세 값이 없는 주는 전세가율에서 뺀다", async ()
   };
   const page = await loadRealestatePage({ realestate, trend, kind: "sale" });
 
-  assert.match(page.ratioMeta(), /2026-08-03 ~ 2026-08-10/, page.ratioMeta());
-  assert.match(page.ratioMeta(), /50\.0%/);
+  const weeks = [...page.ratioHtml().matchAll(/class="axis x">([^<]+)</g)].map((m) => m[1]);
+  assert.deepEqual(weeks, ["8/3", "8/10"], `값 없는 주가 남았다: ${weeks.join(" ")}`);
+  assert.match(page.cardCurrent("ratio"), /50\.0%/);
 });
 
 test("표본이 모자란 지역은 값을 비운다", () => {
@@ -640,10 +642,51 @@ test("가로 위치에서 가장 가까운 지점을 고른다", async () => {
 test("축 글자를 시세 표 글자와 같은 크기로 적는다", async () => {
   const html = await readFile(path.join(root, "docs/realestate.html"), "utf8");
   const table = html.match(/\.data-table \{[^}]*font-size: ([\d.]+rem)/)?.[1];
-  const axis = html.match(/\.trend-chart \.axis \{[^}]*font-size: ([\d.]+rem)/)?.[1];
+  const axis = html.match(/\.history-card \.axis \{[^}]*font-size: ([\d.]+rem)/)?.[1];
 
   assert.ok(table, "시세 표 글자 크기를 읽지 못했다");
   assert.equal(axis, table, "그래프 축 글자가 시세 표 글자와 다른 크기다");
+});
+
+test("시세 페이지 추이 카드가 데일리 다이제스트와 같은 짜임이다", async () => {
+  const [realestate, index] = await Promise.all([
+    readFile(path.join(root, "docs/realestate.html"), "utf8"),
+    readFile(path.join(root, "docs/index.html"), "utf8"),
+  ]);
+
+  const rules = (html) =>
+    [
+      ".history-grid",
+      ".history-card",
+      ".history-card .label",
+      ".history-stats",
+      ".history-current",
+      ".history-minmax",
+      ".history-card .axis",
+    ].map((selector) => {
+      const at = html.indexOf(`  ${selector} {`);
+      assert.notEqual(at, -1, `${selector} 규칙이 없다`);
+      return html.slice(at, html.indexOf("}", at)).replace(/\s+/g, " ").trim();
+    });
+
+  assert.deepEqual(rules(realestate), rules(index), "두 화면의 카드 스타일이 갈라졌다");
+
+  for (const [what, html] of [["시세", realestate], ["다이제스트", index]]) {
+    assert.match(html, /class="history-card"/, `${what}: 카드 짜임이 다르다`);
+    assert.match(html, /class="history-stats"/, `${what}: 값 줄이 없다`);
+    assert.match(html, /class="history-chart"/, `${what}: 그래프 자리가 없다`);
+  }
+});
+
+test("두 화면의 그래프가 같은 좌표계로 그려진다", async () => {
+  const [realestate, index] = await Promise.all([
+    readFile(path.join(root, "docs/realestate.html"), "utf8"),
+    readFile(path.join(root, "docs/index.html"), "utf8"),
+  ]);
+
+  const chartConst = (html) => html.match(/const CHART = \{[^}]*\}/)?.[0].replace(/\s+/g, " ");
+  assert.ok(chartConst(realestate), "시세 페이지 좌표계를 읽지 못했다");
+  assert.equal(chartConst(realestate), chartConst(index), "두 화면의 그래프 크기 규칙이 갈라졌다");
 });
 
 test("그래프 좌표계를 그려질 자리의 픽셀과 1:1로 잡는다", async () => {
@@ -673,7 +716,7 @@ test("거래량·전세가율 눈금에는 마지막 주 문구를 붙이지 않
       assert.ok(!label.includes("마지막 주"), `${what} 눈금에 설명 문구가 들어가 잘린다: ${label}`);
     }
   }
-  assert.match(page.volumeMeta(), /마지막 주/, "설명 줄에서까지 문구가 사라졌다");
+  assert.match(page.cardCurrent("volume"), /^\d[\d,]*건$/, "카드 값에 설명 문구가 붙었다");
 });
 
 test("그래프에 마우스를 올릴 자리를 마련해 둔다", async () => {
