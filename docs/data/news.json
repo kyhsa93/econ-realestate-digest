@@ -1,70 +1,207 @@
 {
-  "updatedAt": "2026-08-19T11:35:02.431Z",
-  "date": "2026-08-19",
+  "updatedAt": "2026-08-19T23:32:58.838Z",
+  "date": "2026-08-20",
   "items": [
     {
-      "title": "[올댓차이나] 홍콩 증시, 실적 호조주 매수에 상승 마감… H주 0.21%↑",
-      "link": "https://www.newsis.com/view/NISX20260819_0003754974",
-      "publishedAt": "2026-08-19T10:56:11.000Z",
-      "source": "뉴시스 경제",
+      "title": "한투증권, 하반기 원/달러 평균 환율 1,420원 전망…50원 내려",
+      "link": "https://www.yna.co.kr/view/AKR20260820025100008",
+      "publishedAt": "2026-08-19T23:13:41.000Z",
+      "source": "연합뉴스 경제",
       "category": "stocks",
-      "preview": "[서울=뉴시스]이재준 기자 = 홍콩 증시는 19일 중동 정세 악화 우려와 세계적인 장기금리 상승 영향으로 반락 출발했다가 실적 호조를 보인 주요기업에 매수가 들어오면서 오름세를 이어간 채 마감했다. 항셍지수는 이날…",
-      "dupes": [],
-      "titleEn": "[AllChina] Hong Kong Market Rises on Strong Earnings, H-Shares Up 0.21%"
+      "preview": "(서울=연합뉴스) 임은진 기자 = 한국투자증권은 20일 올해 하반기 평균 원/달러 환율 전망을 1,420원으로, 기존 대비 50원 내렸다.",
+      "dupes": []
     },
     {
-      "title": "당정 '주택공급 방안' 협의…용산공원 여론조사도 검토(종합)",
-      "link": "https://www.newsis.com/view/NISX20260819_0003754945",
-      "publishedAt": "2026-08-19T10:04:21.000Z",
-      "source": "뉴시스 경제",
+      "title": "조합설립 1년 → 4개월로 확 줄인다…서울 재건축 “더 빠르게”",
+      "link": "https://www.mk.co.kr/news/realestate/12131813",
+      "publishedAt": "2026-08-19T23:08:51.000Z",
+      "source": "매일경제 부동산",
       "category": "realestate",
-      "preview": "[서울=뉴시스]정금민 신재현 김윤영 기자 = 국회 국토교통위원회 소속 더불어민주당 의원들이 19일 국토교통부와 당정협의회를 열고 부동산 공급 대책을 논의했다. 용산 공원 부지에 대해서는 공급 여력을 확인한 뒤 논의를…",
+      "preview": "서울시, 정비사업 절차 개선해 구역지정 전 조합설립 동시진행 2031년 31만호착공 공약 가속화서울시가 주택 공급 속도를 높이기 위해 정비구역지정 전이라도 조합설립 절차를 병행할 ..",
       "dupes": [],
-      "titleEn": "Government and ruling party to discuss housing supply plans... also considering opinion polls on Yongsan Park (Comprehensive)",
       "context": [
         {
           "kind": "realestate",
-          "href": "./district-yongsan.html",
-          "label": "용산구 아파트 84㎡ 매매",
-          "labelEn": "용산구 apartment 84㎡ sale",
-          "value": "19억 8,578만원",
-          "valueEn": "₩1,986M",
-          "note": "최근 4주 계약 61건 · 8/12 대비 +8.6%",
-          "noteEn": "61 deals in the last 4 weeks · +8.6% vs Aug 12"
+          "href": "./apartment-sale.html",
+          "label": "서울 전체 아파트 84㎡ 매매",
+          "labelEn": "Seoul apartment 84㎡ sale",
+          "value": "12억 8,472만원",
+          "valueEn": "₩1,285M",
+          "note": "최근 1주 계약 541건 · 8/13 대비 +15.7%",
+          "noteEn": "541 deals in the last 1 weeks · +15.7% vs Aug 13"
         }
       ]
     },
     {
-      "title": "[올댓차이나] 中 증시, 반도체 약세에 급하락 마감…창업판 6.26%↓",
-      "link": "https://www.newsis.com/view/NISX20260819_0003754944",
-      "publishedAt": "2026-08-19T09:44:53.000Z",
-      "source": "뉴시스 경제",
-      "category": "stocks",
-      "preview": "[서울=뉴시스]이재준 기자 = 중국 증시는 19일 중동 정세 불안으로 투자심리가 악화하는 가운데 반도체주를 중심으로 매물이 쏟아지면서 하락 마감했다. 전날 미국 반도체 지수(SOX)가 4.9% 급락한 여파로 아시아…",
-      "dupes": [],
-      "titleEn": "[AllChina] China's stock market plunges sharply amid semiconductor weakness... Start-up board drops 6.26%"
-    },
-    {
-      "title": "여야, 국토위서 '용산공원' 주택 추진 공방…\"백지화해야\" \"공원 부적합 지역 개발 취지\"",
-      "link": "https://www.newsis.com/view/NISX20260819_0003754932",
-      "publishedAt": "2026-08-19T09:40:02.000Z",
-      "source": "뉴시스 경제",
+      "title": "국토장관, 오늘 오세훈 면담…용산공원 주택공급 접점 모색",
+      "link": "https://www.yna.co.kr/view/AKR20260820023100003",
+      "publishedAt": "2026-08-19T23:08:27.000Z",
+      "source": "연합뉴스 경제",
       "category": "realestate",
-      "preview": "[서울=뉴시스]정금민 한재혁 기자 = 여야는 19일 국회 국토교통위원회(국토위)에서 1·29 대책 후속인 용산공원법 개정안(용산 캠프킴 부지 등 녹지기준 합리화), 용산공원 주택 공급 문제를 놓고 공방을 벌였다. 국…",
+      "preview": "(서울=연합뉴스) 임기창 기자 = 김윤덕 국토교통부 장관과 오세훈 서울시장이 20일 서울 모처에서 만나 용산공원을 활용한 주택 공급 등 서울 주...",
       "dupes": [],
-      "titleEn": "여야, 국토위서 '용산공원' 주택 추진 공방…\"백지화해야\" \"공원 부적합 지역 개발 취지\"",
       "context": [
         {
           "kind": "realestate",
           "href": "./district-yongsan.html",
-          "label": "용산구 아파트 84㎡ 매매",
-          "labelEn": "용산구 apartment 84㎡ sale",
-          "value": "19억 8,578만원",
-          "valueEn": "₩1,986M",
-          "note": "최근 4주 계약 61건 · 8/12 대비 +8.6%",
-          "noteEn": "61 deals in the last 4 weeks · +8.6% vs Aug 12"
+          "label": "용산구 아파트 84㎡ 전세",
+          "labelEn": "용산구 apartment 84㎡ jeonse",
+          "value": "6억 8,556만원",
+          "valueEn": "₩686M",
+          "note": "최근 1주 계약 5건",
+          "noteEn": "5 deals in the last 1 weeks"
         }
       ]
+    },
+    {
+      "title": "[마켓뷰] 美훈풍·하이닉스 주주환원…코스피 반등 시도하나",
+      "link": "https://www.yna.co.kr/view/AKR20260820020600008",
+      "publishedAt": "2026-08-19T23:03:45.000Z",
+      "source": "연합뉴스 경제",
+      "category": "stocks",
+      "preview": "(서울=연합뉴스) 김유향 기자 = 전날 5% 넘게 급락한 코스피가 20일 SK하이닉스의 대규모 주주환원 발표와 미국 장기 국채금리 진정세 등에 ...",
+      "dupes": []
+    },
+    {
+      "title": "염지훈 세무사 \"비거주 공동명의라면 '1주택 특례' 활용 고려를\"",
+      "link": "https://www.hankyung.com/article/2026081903551",
+      "publishedAt": "2026-08-19T23:00:09.000Z",
+      "source": "한국경제 부동산",
+      "category": "realestate",
+      "preview": null,
+      "dupes": []
+    },
+    {
+      "title": "청년주택 짓자고 용산공원까지?… 정부·서울시 정면충돌",
+      "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/20/AUK6CZ64Q5GJ3L4FUNTUBRBKJE/",
+      "publishedAt": "2026-08-19T21:00:01.000Z",
+      "source": "조선비즈 부동산",
+      "category": "realestate",
+      "preview": "서울의 마지막 대규모 도심 녹지로 꼽히는 용산공원에 청년주택 짓는 방안을 놓고 정부와 서울시가 정면으로 충돌하고 있다. 정부는 서울 한복판에서 대규모 주택을 공급할 수 있는 드문 부지인 만큼 일부 활용을 검토해야 한…",
+      "dupes": [],
+      "context": [
+        {
+          "kind": "realestate",
+          "href": "./district-yongsan.html",
+          "label": "용산구 아파트 84㎡ 전세",
+          "labelEn": "용산구 apartment 84㎡ jeonse",
+          "value": "6억 8,556만원",
+          "valueEn": "₩686M",
+          "note": "최근 1주 계약 5건",
+          "noteEn": "5 deals in the last 1 weeks"
+        }
+      ]
+    },
+    {
+      "title": "\"전세 가구, 자가보다 둘째아 출산 가능성 16.3% 낮아\"",
+      "link": "https://www.newsis.com/view/NISX20260819_0003753479",
+      "publishedAt": "2026-08-19T21:00:00.000Z",
+      "source": "뉴시스 경제",
+      "category": "realestate",
+      "preview": "[서울=뉴시스] 변해정 기자 = 전셋집에 사는 가구가 둘째 아이를 출산할 가능성이 자가 가구에 비해 16.3% 낮다는 분석이 나왔다. 한국부동산원 소속 부동산연구원은 최근 이같은 내용이 담긴 '주택점유형태와 주거비가…",
+      "dupes": []
+    },
+    {
+      "title": "[오늘의 주요일정]경제(8월20일목요일)",
+      "link": "https://www.newsis.com/view/NISX20260819_0003753419",
+      "publishedAt": "2026-08-19T21:00:00.000Z",
+      "source": "뉴시스 경제",
+      "category": "other",
+      "preview": "[세종=뉴시스] ▲07:40 문신학 산업통상부 차관, 비상경제본부회의 겸 경제관계 장관회의 겸 민생물가 특별관리 관계장관TF(서울청사) ▲08:00 구윤철 경제부총리 겸 재정경제부 장관, 비상경제본부 회의 겸 경제관…",
+      "dupes": []
+    },
+    {
+      "title": "ISA는 되돌리고 부동산세는 당정 테이블로…세제개편 막판 조율",
+      "link": "https://www.newsis.com/view/NISX20260819_0003754899",
+      "publishedAt": "2026-08-19T21:00:00.000Z",
+      "source": "뉴시스 경제",
+      "category": "realestate",
+      "preview": "[세종=뉴시스]임하은 기자 = 정부의 세제개편안이 입법예고를 마치는 가운데 김민석 신임 당대표 체제의 더불어민주당이 비거주 1주택자 과세 강화 등에 제동을 걸지 주목된다. 정부는 개인종합자산관리계좌(ISA)의 납입한…",
+      "dupes": []
+    },
+    {
+      "title": "美국채금리 하락에 뉴욕증시 상승 마감…다우 0.22%↑",
+      "link": "https://www.newsis.com/view/NISX20260820_0003755069",
+      "publishedAt": "2026-08-19T20:57:40.000Z",
+      "source": "뉴시스 경제",
+      "category": "rates",
+      "preview": "[서울=뉴시스] 김예진 기자 = 미국 뉴욕증시 주요 지수는 19일(현지 시간) 미국 재무부가 국채 바이백(재매입) 규모를 확대한다고 발표한 뒤 국채 금리가 하락한 영향을 받아 상승 마감했다. CNBC, 마켓워치 등에…",
+      "dupes": []
+    },
+    {
+      "title": "[속보]뉴욕증시, 美국채금리 하락에 상승 마감",
+      "link": "https://www.newsis.com/view/NISX20260820_0003755070",
+      "publishedAt": "2026-08-19T20:19:00.000Z",
+      "source": "뉴시스 경제",
+      "category": "rates",
+      "preview": "후속기사가 이어집니다 ◎공감언론 뉴시스 aci27@newsis.com",
+      "dupes": []
+    },
+    {
+      "title": "김윤덕·오세훈 오늘 회동…'용산공원 주택 공급' 이견 좁힐까",
+      "link": "https://www.newsis.com/view/NISX20260819_0003754657",
+      "publishedAt": "2026-08-19T20:00:00.000Z",
+      "source": "뉴시스 경제",
+      "category": "realestate",
+      "preview": "[서울=뉴시스] 박성환 기자 = 8·13 공급대책 발표 이후 용산공원 주택공급이 쟁점으로 떠오른 가운데 오늘 김윤덕 국토교통부 장관과 오세훈 서울시장이 직접 만나 서울 내 주택공급 방안을 논의한다. 지난달 24일 비…",
+      "dupes": [],
+      "context": [
+        {
+          "kind": "realestate",
+          "href": "./district-yongsan.html",
+          "label": "용산구 아파트 84㎡ 전세",
+          "labelEn": "용산구 apartment 84㎡ jeonse",
+          "value": "6억 8,556만원",
+          "valueEn": "₩686M",
+          "note": "최근 1주 계약 5건",
+          "noteEn": "5 deals in the last 1 weeks"
+        }
+      ]
+    },
+    {
+      "title": "10년 보유 양도세 2억이 9억으로, ‘부동산 절세 공식’ 깨진다 … 부동산 세금 100(3)",
+      "link": "https://www.mk.co.kr/news/realestate/12131372",
+      "publishedAt": "2026-08-19T19:00:00.000Z",
+      "source": "매일경제 부동산",
+      "category": "realestate",
+      "preview": "부동산 세금 집중 분석 (47~65)양도소득세는 집을 팔아서 남긴 돈에 매기는 세금이다. 손해를 보고 팔면 한 푼도 내지 않는다. 취득세나 재산세와 결정적으로 다른 지점이다. 그래..",
+      "dupes": []
+    },
+    {
+      "title": "美 바이백 확대에 국채금리 급락…모더나는 100% 폭등[박신영의 개장전 요것만]",
+      "link": "https://www.hankyung.com/article/202608190773i",
+      "publishedAt": "2026-08-19T15:04:41.000Z",
+      "source": "한국경제 경제",
+      "category": "rates",
+      "preview": null,
+      "dupes": []
+    },
+    {
+      "title": "美재무부 국채 금리 방어에…뉴욕 증시 반등 시도",
+      "link": "https://www.hankyung.com/article/202608190759i",
+      "publishedAt": "2026-08-19T14:11:16.000Z",
+      "source": "한국경제 경제",
+      "category": "rates",
+      "preview": null,
+      "dupes": []
+    },
+    {
+      "title": "[속보]뉴욕증시, 美재무부 국채 매입 확대 소식에 상승 출발",
+      "link": "https://www.newsis.com/view/NISX20260819_0003755040",
+      "publishedAt": "2026-08-19T13:56:38.000Z",
+      "source": "뉴시스 경제",
+      "category": "stocks",
+      "preview": "후속기사가 이어집니다 ◎공감언론 뉴시스 aci27@newsis.com",
+      "dupes": []
+    },
+    {
+      "title": "[올댓차이나] 대만 증시, 美 반도체주 급락에 이틀째 내려…1.3%↓",
+      "link": "https://www.newsis.com/view/NISX20260819_0003754995",
+      "publishedAt": "2026-08-19T11:52:16.000Z",
+      "source": "뉴시스 경제",
+      "category": "stocks",
+      "preview": "[서울=뉴시스]이재준 기자 = 대만 타이베이 증시는 19일 전날 뉴욕 증시에서 반도체주가 급락한 여파로 관련주에 매도세가 쏟아지면서 속락 마감했다. 자취안(加權) 지수는 전일 대비 589.33 포인트, 1.30% 내…",
+      "dupes": []
     },
     {
       "title": "원·달러 환율, 한달 반만에 160원 급락",
@@ -73,8 +210,7 @@
       "source": "한국경제 경제",
       "category": "stocks",
       "preview": null,
-      "dupes": [],
-      "titleEn": "Won-Dollar Exchange Rate Plummets 160 Won in a Month and a Half"
+      "dupes": []
     },
     {
       "title": "하이닉스, 40조 자사주 소각…증시 흐름 바꿀 변곡점 되나",
@@ -83,8 +219,7 @@
       "source": "한국경제 경제",
       "category": "stocks",
       "preview": null,
-      "dupes": [],
-      "titleEn": "Hyundai, 40,000,000,000,000 won share buyback... Could be a turning point in market trends"
+      "dupes": []
     },
     {
       "title": "조합설립 4개월내 뚝딱 … 서울 재건축 빨라진다",
@@ -94,17 +229,16 @@
       "category": "realestate",
       "preview": "서울시가 주택 공급 속도를 높이기 위해 정비구역지정 전이라도 조합설립 절차를 병행할 수 있도록 절차를 개선한다. 조합설립에 소요되는 기간을 기존 1년에서 4개월로 8개월 이상 줄일..",
       "dupes": [],
-      "titleEn": "Establishing a consortium within four months ... Seoul's reconstruction speeds up",
       "context": [
         {
           "kind": "realestate",
           "href": "./apartment-sale.html",
           "label": "서울 전체 아파트 84㎡ 매매",
           "labelEn": "Seoul apartment 84㎡ sale",
-          "value": "12억 9,184만원",
-          "valueEn": "₩1,292M",
-          "note": "최근 4주 계약 5,186건 · 8/12 대비 +14.3%",
-          "noteEn": "5,186 deals in the last 4 weeks · +14.3% vs Aug 12"
+          "value": "12억 8,472만원",
+          "valueEn": "₩1,285M",
+          "note": "최근 1주 계약 541건 · 8/13 대비 +15.7%",
+          "noteEn": "541 deals in the last 1 weeks · +15.7% vs Aug 13"
         }
       ]
     },
@@ -116,17 +250,16 @@
       "category": "realestate",
       "preview": "서울 서초동 대법원과 대검찰청 등 법조기관을 이전·재편한 뒤 해당 부지를 청년주택용 공공택지로 활용하자는 제안이 국회에서 나왔다. 정부가 용산공원 일부를 주택 공급에 활용하는 방안을 검토하는 상황에서 서울 도심의 공…",
       "dupes": [],
-      "titleEn": "Instead of Yongsan Park, Seocho Legal Town\"… Proposal for Youth Housing on Supreme Court and Prosecutors' Office Sites",
       "context": [
         {
           "kind": "realestate",
           "href": "./district-yongsan.html",
-          "label": "용산구 아파트 84㎡ 매매",
-          "labelEn": "용산구 apartment 84㎡ sale",
-          "value": "19억 8,578만원",
-          "valueEn": "₩1,986M",
-          "note": "최근 4주 계약 61건 · 8/12 대비 +8.6%",
-          "noteEn": "61 deals in the last 4 weeks · +8.6% vs Aug 12"
+          "label": "용산구 아파트 84㎡ 전세",
+          "labelEn": "용산구 apartment 84㎡ jeonse",
+          "value": "6억 8,556만원",
+          "valueEn": "₩686M",
+          "note": "최근 1주 계약 5건",
+          "noteEn": "5 deals in the last 1 weeks"
         }
       ]
     },
@@ -137,8 +270,7 @@
       "source": "한국경제 경제",
       "category": "stocks",
       "preview": null,
-      "dupes": [],
-      "titleEn": "Foreign companies to continue pushing for listings on the Korean stock market"
+      "dupes": []
     },
     {
       "title": "당정 '주택공급 속도전' 강조…용산공원 여론조사 검토(종합)",
@@ -148,29 +280,18 @@
       "category": "realestate",
       "preview": "(서울=연합뉴스) 김정진 오규진 정연솔 기자 = 더불어민주당은 19일 국회에서 국토교통부와 당정협의회를 열고 부동산 공급 대책을 논의했다.",
       "dupes": [],
-      "titleEn": "Govt and ruling party stress need for accelerated housing supply... considering public opinion survey on Yongsan Park (comprehensive)",
       "context": [
         {
           "kind": "realestate",
           "href": "./district-yongsan.html",
-          "label": "용산구 아파트 84㎡ 매매",
-          "labelEn": "용산구 apartment 84㎡ sale",
-          "value": "19억 8,578만원",
-          "valueEn": "₩1,986M",
-          "note": "최근 4주 계약 61건 · 8/12 대비 +8.6%",
-          "noteEn": "61 deals in the last 4 weeks · +8.6% vs Aug 12"
+          "label": "용산구 아파트 84㎡ 전세",
+          "labelEn": "용산구 apartment 84㎡ jeonse",
+          "value": "6억 8,556만원",
+          "valueEn": "₩686M",
+          "note": "최근 1주 계약 5건",
+          "noteEn": "5 deals in the last 1 weeks"
         }
       ]
-    },
-    {
-      "title": "亞증시, 국채금리 쇼크에 동반 하락…키옥시아 12%↓(종합)",
-      "link": "https://www.newsis.com/view/NISX20260819_0003754747",
-      "publishedAt": "2026-08-19T08:40:16.000Z",
-      "source": "뉴시스 경제",
-      "category": "rates",
-      "preview": "[서울=뉴시스]고재은 기자 = 19일 아시아 주요 증시가 일제히 하락했다. 중동 정세 긴장이 이어지고 주요국 국채금리가 일제히 급등하면서 기술주 중심으로 투자 심리가 위축되고 있다. 이날 한국 코스피 지수는 전장 대…",
-      "dupes": [],
-      "titleEn": "Asia's stock markets fall alongside bond yields shock... Kioxia drops 12% (comprehensive)"
     },
     {
       "title": "재건축 이주비 중복지원 막힌 이유는",
@@ -180,7 +301,6 @@
       "category": "realestate",
       "preview": null,
       "dupes": [],
-      "titleEn": "Reason Why Duplicate Support for Relocation Costs in Reconstruction Is Blocked",
       "context": [
         {
           "kind": "rates",
@@ -191,184 +311,6 @@
           "href": "./mortgage-rates.html"
         }
       ]
-    },
-    {
-      "title": "'너무 올랐나' 국고채 금리 일제히 하락…3년물 연 3.798%(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260819145551008",
-      "publishedAt": "2026-08-19T07:57:35.000Z",
-      "source": "연합뉴스 경제",
-      "category": "rates",
-      "preview": "(서울=연합뉴스) 고은지 기자 = 주가 급락에 안전자산 선호 심리가 강화되면서 최근 급등했던 국고채 금리가 일제히 하락했다.",
-      "dupes": [],
-      "titleEn": "Too High?\" Government Bond Rates Fall Across the Board...3-Year Paper at 3.798% Annually (Comprehensive)"
-    },
-    {
-      "title": "日증시, 중동 긴장·국채금리 상승에 하락 마감…키옥시아 12%↓",
-      "link": "https://www.newsis.com/view/NISX20260819_0003754677",
-      "publishedAt": "2026-08-19T07:48:40.000Z",
-      "source": "뉴시스 경제",
-      "category": "rates",
-      "preview": "[서울=뉴시스]고재은 기자 = 19일 일본 도쿄증시에서 주요 지수가 3% 넘게 하락 마감했다. 중동 정세 불안이 이어지고 주요국 국채금리가 일제히 급등하면서 반도체주 중심으로 투자 심리가 위축되고 있다. 니혼게이자이…",
-      "dupes": [],
-      "titleEn": "Tokyo Stock Exchange closes lower amid Middle East tensions and rising bond yields... Kioxia falls 12%"
-    },
-    {
-      "title": "김윤덕 \"용산공원, 주택공급·공원보존 양립 가능하다\"(종합2보)",
-      "link": "https://www.newsis.com/view/NISX20260819_0003754762",
-      "publishedAt": "2026-08-19T07:48:14.000Z",
-      "source": "뉴시스 경제",
-      "category": "realestate",
-      "preview": "[서울=뉴시스]홍찬선 변해정 이연희 정유선 이종성 기자 = 김윤덕 국토교통부 장관이 용산공원 부지 내 주택 공급 논란과 관련해 \"공원 기능을 상실한 일부 지역에 한해 제한적으로 청년주택을 공급하는 방안을 검토하겠다\"…",
-      "dupes": [],
-      "titleEn": "Kim Yoon-deok says \"Yongsan Park can coexist with housing supply and park preservation\" (Comprehensive Report 2)",
-      "context": [
-        {
-          "kind": "realestate",
-          "href": "./district-yongsan.html",
-          "label": "용산구 아파트 84㎡ 매매",
-          "labelEn": "용산구 apartment 84㎡ sale",
-          "value": "19억 8,578만원",
-          "valueEn": "₩1,986M",
-          "note": "최근 4주 계약 61건 · 8/12 대비 +8.6%",
-          "noteEn": "61 deals in the last 4 weeks · +8.6% vs Aug 12"
-        }
-      ]
-    },
-    {
-      "title": "정점식 \"與, 부동산 실패 책임 吳시장에 돌리려 용산공원 선동\"",
-      "link": "https://www.yna.co.kr/view/AKR20260819138100001",
-      "publishedAt": "2026-08-19T07:42:27.000Z",
-      "source": "연합뉴스 경제",
-      "category": "realestate",
-      "preview": "(서울=연합뉴스) 김연정 기자 = 국민의힘 정점식 원내대표는 19일 정부가 용산공원을 주택 공급에 활용하는 방안을 시사한 것과 관련, \"정부와 ...",
-      "dupes": [],
-      "titleEn": "Jeong Deok-sik: \"Conservatives try to shift blame for real estate failure to Mayor Oh by stirring up controversy over Yongsan Park",
-      "context": [
-        {
-          "kind": "realestate",
-          "href": "./district-yongsan.html",
-          "label": "용산구 아파트 84㎡ 매매",
-          "labelEn": "용산구 apartment 84㎡ sale",
-          "value": "19억 8,578만원",
-          "valueEn": "₩1,986M",
-          "note": "최근 4주 계약 61건 · 8/12 대비 +8.6%",
-          "noteEn": "61 deals in the last 4 weeks · +8.6% vs Aug 12"
-        }
-      ]
-    },
-    {
-      "title": "원/달러 환율 1,300원대로…11개월 만에 최저(종합2보)",
-      "link": "https://www.yna.co.kr/view/AKR20260819088552002",
-      "publishedAt": "2026-08-19T07:30:06.000Z",
-      "source": "연합뉴스 경제",
-      "category": "stocks",
-      "preview": "(서울·세종=연합뉴스) 김수현 이도흔 기자 = 원/달러 환율이 1,400원 아래로 내려가며 11개월 만에 최저를 기록했다.",
-      "dupes": [],
-      "titleEn": "Won/Dollar Exchange Rate Falls to 1,300 Won Level... Lowest in 11 Months (Comprehensive 2nd Report)"
-    },
-    {
-      "title": "금리 급등에 전세계 긴장…韓, 대규모 확장재정 괜찮을까?",
-      "link": "https://www.newsis.com/view/NISX20260819_0003754354",
-      "publishedAt": "2026-08-19T07:22:38.000Z",
-      "source": "뉴시스 경제",
-      "category": "rates",
-      "preview": "[세종=뉴시스] 안호균 기자 = 글로벌 국채 금리가 장기채를 중심으로 급등(가격 하락)해 금융시장의 불안이 커지고 있다. 중동 전쟁 장기화로 물가 상승세가 지속될 것이라는 우려에 각국의 재정 정책에 대한 시장의 불안…",
-      "dupes": [],
-      "titleEn": "Soaring interest rates tighten global nerves... South Korea, will large-scale expansionary fiscal policy be okay?"
-    },
-    {
-      "title": "김윤덕 “녹지 기능 상실한 장교 숙소·군인아파트 부지 등에 청년주택”",
-      "link": "https://www.mk.co.kr/news/realestate/12131255",
-      "publishedAt": "2026-08-19T07:00:53.000Z",
-      "source": "매일경제 부동산",
-      "category": "realestate",
-      "preview": "“용산공원 전체 개발 아냐” 진화 오세훈 “정부 부동산정책 실패… 용산공원으로 덮으려 해선 안돼”김윤덕 국토교통부 장관이 용산공원 내 주택 공급 논란과 관련해 “공원과 녹지로서의 ..",
-      "dupes": [],
-      "titleEn": "Kim Yoon-deok: \"Youth housing on sites of officer dormitories and military apartments where green space functions have been lost",
-      "context": [
-        {
-          "kind": "realestate",
-          "href": "./district-yongsan.html",
-          "label": "용산구 아파트 84㎡ 매매",
-          "labelEn": "용산구 apartment 84㎡ sale",
-          "value": "19억 8,578만원",
-          "valueEn": "₩1,986M",
-          "note": "최근 4주 계약 61건 · 8/12 대비 +8.6%",
-          "noteEn": "61 deals in the last 4 weeks · +8.6% vs Aug 12"
-        }
-      ]
-    },
-    {
-      "title": "문진석 “주택공급 활성화 법안, 야당 몽니 끌려다녀선 안 돼”",
-      "link": "https://www.mk.co.kr/news/realestate/12131253",
-      "publishedAt": "2026-08-19T06:59:36.000Z",
-      "source": "매일경제 부동산",
-      "category": "realestate",
-      "preview": "“도시정비법 국토위 통과 6개월째 계류” “내일 본회의 상정해야…필리버스터 땐 모순”더불어민주당 신임 수석사무부총장에 임명된 문진석 의원이 국회에서 계류 중인 도시 및 주거환경정비..",
-      "dupes": [],
-      "titleEn": "Moon Jin-seok says housing supply activation bill shouldn't be dragged by opposition's footdragging"
-    },
-    {
-      "title": "국토장관 \"용산공원 전체에 주택짓지 않아…녹지 상실한곳 대상\"(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260819083651003",
-      "publishedAt": "2026-08-19T06:52:18.000Z",
-      "source": "연합뉴스 경제",
-      "category": "realestate",
-      "preview": "(세종=연합뉴스) 오진송 기자 = 김윤덕 국토교통부 장관이 19일 용산공원에 주택을 공급하는 방안을 검토하는 것과 관련해 \"용산공원 전체의 녹지...",
-      "dupes": [],
-      "titleEn": "Land Minister: \"No housing to be built across Yongsan Park... areas where green space has been lost will be targeted\"(Comprehensive)",
-      "context": [
-        {
-          "kind": "realestate",
-          "href": "./district-yongsan.html",
-          "label": "용산구 아파트 84㎡ 매매",
-          "labelEn": "용산구 apartment 84㎡ sale",
-          "value": "19억 8,578만원",
-          "valueEn": "₩1,986M",
-          "note": "최근 4주 계약 61건 · 8/12 대비 +8.6%",
-          "noteEn": "61 deals in the last 4 weeks · +8.6% vs Aug 12"
-        }
-      ]
-    },
-    {
-      "title": "[외환] 원/달러 환율 14.1원 내린 1,397.7원(15:30 기준가)",
-      "link": "https://www.yna.co.kr/view/AKR20260819126400002",
-      "publishedAt": "2026-08-19T06:30:43.000Z",
-      "source": "연합뉴스 경제",
-      "category": "stocks",
-      "preview": null,
-      "dupes": [],
-      "titleEn": "[Yen/USD Exchange Rate Falls 14.1 Won to 1,397.7 Won (As of 15:30)]"
-    },
-    {
-      "title": "'대출 절벽' 완화 신호탄…당국·은행권 협의 결과 주목(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260819063151002",
-      "publishedAt": "2026-08-19T06:09:37.000Z",
-      "source": "연합뉴스 경제",
-      "category": "other",
-      "preview": "(서울=연합뉴스) 한지훈 기자 = NH농협은행이 변동형 주택담보대출 취급을 전격 재개한다.",
-      "dupes": [],
-      "titleEn": "Signal of relief from 'loan cliff' as authorities and banking sector negotiate - focus on outcome (comprehensive)",
-      "context": [
-        {
-          "kind": "rates",
-          "label": "주택담보대출 최저금리",
-          "labelEn": "Lowest mortgage rate",
-          "value": "연 3.64%",
-          "valueEn": "3.64% p.a.",
-          "href": "./mortgage-rates.html"
-        }
-      ]
-    },
-    {
-      "title": "수원축협서 75억 부당대출 혐의…대출담당자·브로커 구속",
-      "link": "https://www.yna.co.kr/view/AKR20260819116900061",
-      "publishedAt": "2026-08-19T06:06:47.000Z",
-      "source": "연합뉴스 경제",
-      "category": "other",
-      "preview": "(수원=연합뉴스) 강영훈 기자 = 경기 수원축산농협(이하 수원축협)의 한 지점에서 70억원이 넘는 부당대출을 일으킨 브로커와 대출을 내준 축협 ...",
-      "dupes": [],
-      "titleEn": "7,500,000,000 Unfair Loan Allegations at Suwon Agricultural Cooperative... Loan Officer and Broker Arrested"
     }
   ],
   "realestateStats": [
@@ -377,30 +319,30 @@
       "href": "./apartment-sale.html",
       "label": "서울 아파트 84㎡ 매매",
       "labelEn": "Seoul apartment 84㎡ sale",
-      "value": "12억 9,184만원",
-      "valueEn": "₩1,292M",
-      "note": "최근 4주 계약 5,186건 · 8/12 대비 +14.3%",
-      "noteEn": "5,186 deals in the last 4 weeks · +14.3% vs Aug 12"
+      "value": "12억 8,472만원",
+      "valueEn": "₩1,285M",
+      "note": "최근 1주 계약 541건 · 8/13 대비 +15.7%",
+      "noteEn": "541 deals in the last 1 weeks · +15.7% vs Aug 13"
     },
     {
       "kind": "realestate",
       "href": "./apartment-jeonse.html",
       "label": "서울 아파트 84㎡ 전세",
       "labelEn": "Seoul apartment 84㎡ jeonse",
-      "value": "7억 7,068만원",
-      "valueEn": "₩771M",
-      "note": "최근 4주 계약 3,237건 · 8/12 대비 +19.0%",
-      "noteEn": "3,237 deals in the last 4 weeks · +19.0% vs Aug 12"
+      "value": "7억 5,950만원",
+      "valueEn": "₩760M",
+      "note": "최근 1주 계약 399건 · 8/13 대비 +17.1%",
+      "noteEn": "399 deals in the last 1 weeks · +17.1% vs Aug 13"
     },
     {
       "kind": "realestate",
       "href": "./apartment-rent.html",
       "label": "서울 아파트 월세",
       "labelEn": "Seoul apartment rent",
-      "value": "보증금 19,771만원 / 월 129만원",
-      "valueEn": "₩197.7M + ₩1.29M/mo",
-      "note": "최근 4주 계약 4,748건 · 8/12 대비 -10.6%",
-      "noteEn": "4,748 deals in the last 4 weeks · -10.6% vs Aug 12"
+      "value": "보증금 20,207만원 / 월 121만원",
+      "valueEn": "₩202.1M + ₩1.21M/mo",
+      "note": "최근 1주 계약 590건 · 8/13 대비 -7.8%",
+      "noteEn": "590 deals in the last 1 weeks · -7.8% vs Aug 13"
     }
   ]
 }

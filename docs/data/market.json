@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-08-18T23:32:48.876Z",
+  "updatedAt": "2026-08-19T23:33:00.501Z",
   "kospi": {
-    "value": "6,869.83",
+    "value": "6,471.17",
     "change": "0.00",
     "direction": "UNCHANGED"
   },
   "usdKrw": {
-    "value": 1414.423042,
-    "asOf": "Tue, 18 Aug 2026 00:02:31 +0000"
+    "value": 1411.930856,
+    "asOf": "Wed, 19 Aug 2026 00:02:31 +0000"
   },
   "baseRate": {
     "value": "2.75",
