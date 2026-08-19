@@ -809,72 +809,35 @@
     "date": "2026-08-19",
     "model": "qwen3:14b",
     "summary": {
-      "ko": "- 부동산: 부동산 관련 오늘자 경제 뉴스에서는 전세사기 피해주택 우선매수권 경합의 부작용과 법 개정 필요성이 제기되었고, 국힘과 오세훈이 국회에서 부동산 토론회를 열며 재개발·재건축 문제를 강조했으며, 가계빚이 사상 처음으로 2000조원을 돌파하며 주택대출과 빚투가 급증했고, 김윤덕 국토장관은 용산공원 일부 활용 구상을 재확인하며 녹지 훼손 구역에만 청년주택 검토를 언급했으며, 당정은 부동산 공급대책을 논의하며 용산공원 개발 문제에 대한 여론조사 검토를 진행하고 있다.\n- 증시·환율: 홍콩 증시는 오늘 개장 후 실적 매수세로 출렁이며 H주가 0.43% 상승했다. 원/달러 환율은 10개월 반 만에 1,300원 대로 하락하며 1,300원 수준을 회복했다. 코스피는 상반기 매출이 2천조원을 기록하며 반도체 업종의 강세 속에 순이익이 작년 대비 4배로 증가했다. 중국 증시는 오늘 하락 출발하며 상하이지수가 0.96% 하락했다. 각 시장은 서로 다른 흐름을 보이며 움직였다.\n- 금리·예금·투자상품: 국힘은 뉴홈 사전청약 때 금리 1.9%를 제안했고, 김윤덕은 원안대로 하면 복잡해질 수 있다고 했으며, 미국 금리 동결 우세와 수출 네고로 환율이 10개월 반 만에 1,300원대를 기록했고, 국고채 금리는 일제히 하락하며 3년물이 장중 연 3.833%를 기록했으며, 월가에서는 채권금리 상승이 장기화될 수 있다고 했고, 엔화는 미국의 조기 금리인상 후퇴로 1달러=159엔대 중반에 상승 출발했다.\n- 기타 경제 소식: 오늘 경제 뉴스 중 하나는 집값이 비싸다보니 내 집 마련이 어려워지자, 경매를 통해 주택을 구입하는 방법에 대한 이야기였다. 또 다른 소식은 최근 경제 상황에 따라 소비자들의 구매 행동이 어떻게 변화하고 있는지를 다루고 있다. 부동산 시장의 변화에 따라 주택 구매에 대한 관심이 높아지고 있는 것으로 보인다. 경매를 통한 주택 구입은 새로운 선택지로 주목받고 있다. 이처럼 다양한 경로를 통해 주택을 마련하려는 시도가 늘고 있다.",
-      "en": "- Real Estate: In today's economic news related to real estate, the negative effects of the competition for priority purchase rights of housing for victims of rental fraud and the necessity of legal revisions were raised. The People Power Party and Oh Se-hoon held a real estate discussion session in the National Assembly, emphasizing redevelopment and reconstruction issues. Household debt has exceeded 2,000,000,000,000,000 won for the first time in history, with a sharp increase in housing loans and debt investment. Kim Yun-deok, the Minister of Land, confirmed the plan to partially utilize Yongsan Park again, mentioning that youth housing will be considered only in areas where green spaces are damaged. The ruling party and the government are discussing real estate supply measures and considering public opinion surveys regarding the development of Yongsan Park.\n- Stocks & FX: The Hong Kong stock market fluctuated after opening today due to buying activity based on performance, with H-shares rising 0.43%. The won/dollar exchange rate fell to the 1,300 won level, recovering to that level for the first time in 10 and a half months. The KOSPI recorded sales of 2,000,000,000,000,000 won in the first half of the year, with net profits increasing fourfold compared to last year amid strong performance in the semiconductor sector. The Chinese stock market started today with a decline, with the Shanghai index falling 0.96%. Each market moved with different trends.\n- Rates, Deposits & Investment Products: Korea's People Power Party proposed an interest rate of 1.9% during the New Home pre-sale, and Kim Yoon-deok said that proceeding as originally planned could complicate matters. The won reached the 1,300 range for the first time in 10 and a half months due to the U.S. interest rate freeze advantage and export negotiations. The 3-year government bond rate fell to 3.833% during trading. In Wall Street, it was said that bond rates could rise for a long time. The yen rose to the mid-159 yen per dollar range following the U.S. retreat from early interest rate hikes.\n- Other Economic News: One of today's economic news stories discussed how, due to high housing prices making it difficult to buy a home, people are turning to purchasing homes through auctions. Another report covered how consumer buying behavior is changing in light of the recent economic situation. It appears that interest in home buying is increasing due to changes in the real estate market. Home purchases through auctions are gaining attention as a new option. In this way, attempts to secure housing through various channels are on the rise."
+      "ko": "- 증시·환율: 원/달러 환율이 1,397.7원으로 하락하며 11개월 만에 최저 수준을 기록했다. 15시 30분 기준 환율은 전일 대비 14.1원 내렸다. 홍콩 증시는 반락한 후 실적 매수세로 인해 상승하며 H주가 0.43% 올랐다. 중국 증시는 개장과 동시에 하락 출발해 상하이지수가 0.96% 떨어졌다. 각 시장은 서로 다른 방향으로 움직이며 변동성을 보였다.\n- 금리·예금·투자상품: 금리 급등에 전세계 긴장이 고조되고 있으며, 국힘은 뉴홈 사전청약 때 금리 1.9%를 제안했고, 미국 금리 동결 우세와 수출 네고로 환율이 10개월 반 만에 1,300원대를 기록했다.\n- 부동산: 김윤덕은 녹지 기능 상실한 장교 숙소와 군인아파트 부지 등에 청년주택을 건설해야 한다고 주장했고, 문진석은 주택공급 활성화 법안을 위해 야당의 협조가 필요하다고 강조했으며, 국토장관은 용산공원 전체에 주택을 짓지 않겠다고 밝히고 녹지 상실한 지역을 대상으로 하겠다고 밝혔고, 국힘과 오세훈은 국회에서 부동산 토론회를 열어 재개발·재건축을 풀어야 한다고 주장했으며, 은마아파트 일부 세입자는 이사비와 추가 비용이 필요하다고 주장하고 조합은 버티면 소송을 진행하겠다고 밝혔다.\n- 기타 경제 소식: 대출 절벽 완화 신호탄으로 당국과 은행권의 협의가 주목받고 있으며, 수원축협에서 75억 원의 부당대출 혐의가 제기되어 관련 담당자와 브로커가 구속되었고, 오세훈과 국민의힘은 집값 실패를 용산공원으로 덮으려는 8·13 대책에 맹폭하며, 농협은행은 변동형 주담대 취급을 재개하는 등 다양한 경제 관련 소식이 전해졌다.",
+      "en": "- Stocks & FX: The won/dollar exchange rate fell to 1,397.7 won, reaching its lowest level in 11 months. As of 3:30 p.m., the exchange rate dropped 14.1 won from the previous day. The Hong Kong stock market fell initially but then rose due to earnings buying, with H-shares increasing 0.43%. The Chinese stock market started the day with a decline, with the Shanghai index falling 0.96%. Each market moved in different directions, showing volatility.\n- Rates, Deposits & Investment Products: Global tensions are rising due to a sharp increase in interest rates, and the People Power Party proposed an interest rate of 1.9% during the New Home pre-sale. Due to the dominance of the U.S. interest rate freeze and export negotiations, the exchange rate reached the 1,300 won level for the first time in 10 and a half months.\n- Real Estate: Kim Yoon-deok argued that young people's housing should be built on military officer dormitory sites and military apartment sites where green functions have been lost. Moon Jin-suk emphasized that cooperation from the opposition is needed for the bill to activate housing supply. The Minister of Land, Infrastructure and Transport stated that they will not build housing across the entire Yongsan Park, but will focus on areas where green space has been lost. The People Power Party and Oh Se-hoon argued that a real estate discussion session should be held in the National Assembly to resolve redevelopment and reconstruction issues. Some tenants of Eunma Apartment claimed that moving costs and additional expenses are needed, while the housing cooperative stated that they will proceed with legal action if they resist.\n- Other Economic News: Authorities and banks are drawing attention to their discussions as a signal for easing the loan cliff. At Suwon Agricultural Cooperative, 7,500,000,000 won of alleged unfair loans have been raised, and the relevant officials and brokers have been arrested. Oh Se-hoon and the People Power Party are fiercely opposing the 8·13 measures, which aim to cover up the failure of housing prices with the Yongsan Park. The Rural Credit Cooperative Bank has resumed handling variable-rate housing loans, among other various economic news."
     },
     "highlights": [],
     "categories": [
       {
-        "key": "realestate",
-        "name": "부동산",
-        "nameEn": "Real Estate",
-        "lineKo": "부동산 관련 오늘자 경제 뉴스에서는 전세사기 피해주택 우선매수권 경합의 부작용과 법 개정 필요성이 제기되었고, 국힘과 오세훈이 국회에서 부동산 토론회를 열며 재개발·재건축 문제를 강조했으며, 가계빚이 사상 처음으로 2000조원을 돌파하며 주택대출과 빚투가 급증했고, 김윤덕 국토장관은 용산공원 일부 활용 구상을 재확인하며 녹지 훼손 구역에만 청년주택 검토를 언급했으며, 당정은 부동산 공급대책을 논의하며 용산공원 개발 문제에 대한 여론조사 검토를 진행하고 있다.",
-        "lineEn": "In today's economic news related to real estate, the negative effects of the competition for priority purchase rights of housing for victims of rental fraud and the necessity of legal revisions were raised. The People Power Party and Oh Se-hoon held a real estate discussion session in the National Assembly, emphasizing redevelopment and reconstruction issues. Household debt has exceeded 2,000,000,000,000,000 won for the first time in history, with a sharp increase in housing loans and debt investment. Kim Yun-deok, the Minister of Land, confirmed the plan to partially utilize Yongsan Park again, mentioning that youth housing will be considered only in areas where green spaces are damaged. The ruling party and the government are discussing real estate supply measures and considering public opinion surveys regarding the development of Yongsan Park.",
-        "isFallback": false,
-        "fallbackReason": null,
-        "degraded": true,
-        "items": [
-          {
-            "title": "\"전세사기 피해주택 우선매수권 경합 부작용…법 개정해야\"",
-            "link": "https://www.newsis.com/view/NISX20260819_0003754208",
-            "source": "뉴시스 경제"
-          },
-          {
-            "title": "국힘·오세훈 국회서 '부동산 토론회'…\"재개발·재건축 풀어야\"",
-            "link": "https://www.yna.co.kr/view/AKR20260819087100001",
-            "source": "연합뉴스 경제"
-          },
-          {
-            "title": "가계빚 사상 첫 2000조원 돌파…주택대출 이어 빚투도 급증",
-            "link": "https://www.hankyung.com/article/202608199130i",
-            "source": "한국경제 경제"
-          },
-          {
-            "title": "김윤덕 국토장관, 용산공원 일부 활용 구상 재확인… “녹지 훼손 구역에만 청년주택 검토”",
-            "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/19/U4XHEEKRVRCYVGXH5ZJTL6S7FI/",
-            "source": "조선비즈 부동산"
-          },
-          {
-            "title": "당정, 부동산 공급대책 논의…용산공원 개발문제 여론조사 검토",
-            "link": "https://www.yna.co.kr/view/AKR20260819073400001",
-            "source": "연합뉴스 경제"
-          }
-        ]
-      },
-      {
         "key": "stocks",
         "name": "증시·환율",
         "nameEn": "Stocks & FX",
-        "lineKo": "홍콩 증시는 오늘 개장 후 실적 매수세로 출렁이며 H주가 0.43% 상승했다. 원/달러 환율은 10개월 반 만에 1,300원 대로 하락하며 1,300원 수준을 회복했다. 코스피는 상반기 매출이 2천조원을 기록하며 반도체 업종의 강세 속에 순이익이 작년 대비 4배로 증가했다. 중국 증시는 오늘 하락 출발하며 상하이지수가 0.96% 하락했다. 각 시장은 서로 다른 흐름을 보이며 움직였다.",
-        "lineEn": "The Hong Kong stock market fluctuated after opening today due to buying activity based on performance, with H-shares rising 0.43%. The won/dollar exchange rate fell to the 1,300 won level, recovering to that level for the first time in 10 and a half months. The KOSPI recorded sales of 2,000,000,000,000,000 won in the first half of the year, with net profits increasing fourfold compared to last year amid strong performance in the semiconductor sector. The Chinese stock market started today with a decline, with the Shanghai index falling 0.96%. Each market moved with different trends.",
+        "lineKo": "원/달러 환율이 1,397.7원으로 하락하며 11개월 만에 최저 수준을 기록했다. 15시 30분 기준 환율은 전일 대비 14.1원 내렸다. 홍콩 증시는 반락한 후 실적 매수세로 인해 상승하며 H주가 0.43% 올랐다. 중국 증시는 개장과 동시에 하락 출발해 상하이지수가 0.96% 떨어졌다. 각 시장은 서로 다른 방향으로 움직이며 변동성을 보였다.",
+        "lineEn": "The won/dollar exchange rate fell to 1,397.7 won, reaching its lowest level in 11 months. As of 3:30 p.m., the exchange rate dropped 14.1 won from the previous day. The Hong Kong stock market fell initially but then rose due to earnings buying, with H-shares increasing 0.43%. The Chinese stock market started the day with a decline, with the Shanghai index falling 0.96%. Each market moved in different directions, showing volatility.",
         "isFallback": false,
         "fallbackReason": null,
         "degraded": false,
         "items": [
           {
+            "title": "원/달러 환율 1,300원대로…11개월 만에 최저(종합2보)",
+            "link": "https://www.yna.co.kr/view/AKR20260819088552002",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "[외환] 원/달러 환율 14.1원 내린 1,397.7원(15:30 기준가)",
+            "link": "https://www.yna.co.kr/view/AKR20260819126400002",
+            "source": "연합뉴스 경제"
+          },
+          {
             "title": "[올댓차이나] 홍콩 증시, 반락 개장 후 실적 매수세로 출렁… H주 0.43%↑",
             "link": "https://www.newsis.com/view/NISX20260819_0003754189",
             "source": "뉴시스 경제"
-          },
-          {
-            "title": "[속보] 원/달러 환율 10개월 반 만에 1,300원 대로 하락",
-            "link": "https://www.yna.co.kr/view/AKR20260819084700002",
-            "source": "연합뉴스 경제"
-          },
-          {
-            "title": "코스피 상반기 매출 2천조원…반도체 독주속 순이익 작년 4배로",
-            "link": "https://www.yna.co.kr/view/AKR20260819080900008",
-            "source": "연합뉴스 경제"
           },
           {
             "title": "[올댓차이나] 중국 증시 하락 출발…상하이지수 0.96%↓",
@@ -887,12 +850,17 @@
         "key": "rates",
         "name": "금리·예금·투자상품",
         "nameEn": "Rates, Deposits & Investment Products",
-        "lineKo": "국힘은 뉴홈 사전청약 때 금리 1.9%를 제안했고, 김윤덕은 원안대로 하면 복잡해질 수 있다고 했으며, 미국 금리 동결 우세와 수출 네고로 환율이 10개월 반 만에 1,300원대를 기록했고, 국고채 금리는 일제히 하락하며 3년물이 장중 연 3.833%를 기록했으며, 월가에서는 채권금리 상승이 장기화될 수 있다고 했고, 엔화는 미국의 조기 금리인상 후퇴로 1달러=159엔대 중반에 상승 출발했다.",
-        "lineEn": "Korea's People Power Party proposed an interest rate of 1.9% during the New Home pre-sale, and Kim Yoon-deok said that proceeding as originally planned could complicate matters. The won reached the 1,300 range for the first time in 10 and a half months due to the U.S. interest rate freeze advantage and export negotiations. The 3-year government bond rate fell to 3.833% during trading. In Wall Street, it was said that bond rates could rise for a long time. The yen rose to the mid-159 yen per dollar range following the U.S. retreat from early interest rate hikes.",
+        "lineKo": "금리 급등에 전세계 긴장이 고조되고 있으며, 국힘은 뉴홈 사전청약 때 금리 1.9%를 제안했고, 미국 금리 동결 우세와 수출 네고로 환율이 10개월 반 만에 1,300원대를 기록했다.",
+        "lineEn": "Global tensions are rising due to a sharp increase in interest rates, and the People Power Party proposed an interest rate of 1.9% during the New Home pre-sale. Due to the dominance of the U.S. interest rate freeze and export negotiations, the exchange rate reached the 1,300 won level for the first time in 10 and a half months.",
         "isFallback": false,
         "fallbackReason": null,
         "degraded": true,
         "items": [
+          {
+            "title": "금리 급등에 전세계 긴장…韓, 대규모 확장재정 괜찮을까?",
+            "link": "https://www.newsis.com/view/NISX20260819_0003754354",
+            "source": "뉴시스 경제"
+          },
           {
             "title": "국힘 \"뉴홈 사전청약 땐 금리1.9%\"…김윤덕 \"원안대로 하면 복잡해져\"",
             "link": "https://www.newsis.com/view/NISX20260819_0003754178",
@@ -902,21 +870,43 @@
             "title": "美금리 동결 우세·수출 네고에…환율 10개월 반 만에 1,300원대",
             "link": "https://www.yna.co.kr/view/AKR20260819088500002",
             "source": "연합뉴스 경제"
+          }
+        ]
+      },
+      {
+        "key": "realestate",
+        "name": "부동산",
+        "nameEn": "Real Estate",
+        "lineKo": "김윤덕은 녹지 기능 상실한 장교 숙소와 군인아파트 부지 등에 청년주택을 건설해야 한다고 주장했고, 문진석은 주택공급 활성화 법안을 위해 야당의 협조가 필요하다고 강조했으며, 국토장관은 용산공원 전체에 주택을 짓지 않겠다고 밝히고 녹지 상실한 지역을 대상으로 하겠다고 밝혔고, 국힘과 오세훈은 국회에서 부동산 토론회를 열어 재개발·재건축을 풀어야 한다고 주장했으며, 은마아파트 일부 세입자는 이사비와 추가 비용이 필요하다고 주장하고 조합은 버티면 소송을 진행하겠다고 밝혔다.",
+        "lineEn": "Kim Yoon-deok argued that young people's housing should be built on military officer dormitory sites and military apartment sites where green functions have been lost. Moon Jin-suk emphasized that cooperation from the opposition is needed for the bill to activate housing supply. The Minister of Land, Infrastructure and Transport stated that they will not build housing across the entire Yongsan Park, but will focus on areas where green space has been lost. The People Power Party and Oh Se-hoon argued that a real estate discussion session should be held in the National Assembly to resolve redevelopment and reconstruction issues. Some tenants of Eunma Apartment claimed that moving costs and additional expenses are needed, while the housing cooperative stated that they will proceed with legal action if they resist.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": true,
+        "items": [
+          {
+            "title": "김윤덕 “녹지 기능 상실한 장교 숙소·군인아파트 부지 등에 청년주택”",
+            "link": "https://www.mk.co.kr/news/realestate/12131255",
+            "source": "매일경제 부동산"
           },
           {
-            "title": "국고채 금리 일제히 하락…3년물 장중 연 3.833%",
-            "link": "https://www.yna.co.kr/view/AKR20260819083900008",
+            "title": "문진석 “주택공급 활성화 법안, 야당 몽니 끌려다녀선 안 돼”",
+            "link": "https://www.mk.co.kr/news/realestate/12131253",
+            "source": "매일경제 부동산"
+          },
+          {
+            "title": "국토장관 \"용산공원 전체에 주택짓지 않아…녹지 상실한곳 대상\"(종합)",
+            "link": "https://www.yna.co.kr/view/AKR20260819083651003",
             "source": "연합뉴스 경제"
           },
           {
-            "title": "저금리 시대 끝났나…월가 \"채권금리 상승 장기화\"",
-            "link": "https://www.newsis.com/view/NISX20260819_0003753691",
-            "source": "뉴시스 경제"
+            "title": "국힘·오세훈 국회서 '부동산 토론회'…\"재개발·재건축 풀어야\"(종합)",
+            "link": "https://www.yna.co.kr/view/AKR20260819087151001",
+            "source": "연합뉴스 경제"
           },
           {
-            "title": "엔화, 美 조기 금리인상 후퇴에 1달러=159엔대 중반 상승 출발",
-            "link": "https://www.newsis.com/view/NISX20260819_0003753872",
-            "source": "뉴시스 경제"
+            "title": "은마아파트 일부 세입자 “이사비+α 필요”… 조합 “버티면 소송”",
+            "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/19/GEIXPZRKFBEENOONJIBCAZLQXQ/",
+            "source": "조선비즈 부동산"
           }
         ]
       },
@@ -924,16 +914,31 @@
         "key": "other",
         "name": "기타 경제 소식",
         "nameEn": "Other Economic News",
-        "lineKo": "오늘 경제 뉴스 중 하나는 집값이 비싸다보니 내 집 마련이 어려워지자, 경매를 통해 주택을 구입하는 방법에 대한 이야기였다. 또 다른 소식은 최근 경제 상황에 따라 소비자들의 구매 행동이 어떻게 변화하고 있는지를 다루고 있다. 부동산 시장의 변화에 따라 주택 구매에 대한 관심이 높아지고 있는 것으로 보인다. 경매를 통한 주택 구입은 새로운 선택지로 주목받고 있다. 이처럼 다양한 경로를 통해 주택을 마련하려는 시도가 늘고 있다.",
-        "lineEn": "One of today's economic news stories discussed how, due to high housing prices making it difficult to buy a home, people are turning to purchasing homes through auctions. Another report covered how consumer buying behavior is changing in light of the recent economic situation. It appears that interest in home buying is increasing due to changes in the real estate market. Home purchases through auctions are gaining attention as a new option. In this way, attempts to secure housing through various channels are on the rise.",
+        "lineKo": "대출 절벽 완화 신호탄으로 당국과 은행권의 협의가 주목받고 있으며, 수원축협에서 75억 원의 부당대출 혐의가 제기되어 관련 담당자와 브로커가 구속되었고, 오세훈과 국민의힘은 집값 실패를 용산공원으로 덮으려는 8·13 대책에 맹폭하며, 농협은행은 변동형 주담대 취급을 재개하는 등 다양한 경제 관련 소식이 전해졌다.",
+        "lineEn": "Authorities and banks are drawing attention to their discussions as a signal for easing the loan cliff. At Suwon Agricultural Cooperative, 7,500,000,000 won of alleged unfair loans have been raised, and the relevant officials and brokers have been arrested. Oh Se-hoon and the People Power Party are fiercely opposing the 8·13 measures, which aim to cover up the failure of housing prices with the Yongsan Park. The Rural Credit Cooperative Bank has resumed handling variable-rate housing loans, among other various economic news.",
         "isFallback": false,
         "fallbackReason": null,
-        "degraded": false,
+        "degraded": true,
         "items": [
           {
-            "title": "\"집값 비싸서 못 산다?\"…경매로 내 집 마련하는 법",
-            "link": "https://www.hankyung.com/article/2026081986826",
-            "source": "한국경제 부동산"
+            "title": "'대출 절벽' 완화 신호탄…당국·은행권 협의 결과 주목(종합)",
+            "link": "https://www.yna.co.kr/view/AKR20260819063151002",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "수원축협서 75억 부당대출 혐의…대출담당자·브로커 구속",
+            "link": "https://www.yna.co.kr/view/AKR20260819116900061",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "“집값 실패, 용산공원으로 덮지 마라”…오세훈·국민의힘, 8·13 대책 맹폭",
+            "link": "https://www.mk.co.kr/news/realestate/12131110",
+            "source": "매일경제 부동산"
+          },
+          {
+            "title": "가계대출 빗장 풀리나…농협은행, 변동형 주담대 취급 재개",
+            "link": "https://www.yna.co.kr/view/AKR20260819063100002",
+            "source": "연합뉴스 경제"
           }
         ]
       }

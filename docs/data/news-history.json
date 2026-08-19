@@ -2332,7 +2332,8 @@
         "source": "연합뉴스 경제",
         "category": "stocks",
         "preview": "(서울·세종=연합뉴스) 김수현 이도흔 기자 = 원/달러 환율이 1,400원 아래로 내려가며 11개월 만에 최저를 기록했다.",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Won/Dollar Exchange Rate Falls to 1,300 Won Level... Lowest in 11 Months (Comprehensive 2nd Report)"
       },
       {
         "title": "금리 급등에 전세계 긴장…韓, 대규모 확장재정 괜찮을까?",
@@ -2341,7 +2342,8 @@
         "source": "뉴시스 경제",
         "category": "rates",
         "preview": "[세종=뉴시스] 안호균 기자 = 글로벌 국채 금리가 장기채를 중심으로 급등(가격 하락)해 금융시장의 불안이 커지고 있다. 중동 전쟁 장기화로 물가 상승세가 지속될 것이라는 우려에 각국의 재정 정책에 대한 시장의 불안…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Rising interest rates tighten global nerves... South Korea, will large-scale expansionary fiscal policy be okay?"
       },
       {
         "title": "김윤덕 “녹지 기능 상실한 장교 숙소·군인아파트 부지 등에 청년주택”",
@@ -2350,7 +2352,20 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "“용산공원 전체 개발 아냐” 진화 오세훈 “정부 부동산정책 실패… 용산공원으로 덮으려 해선 안돼”김윤덕 국토교통부 장관이 용산공원 내 주택 공급 논란과 관련해 “공원과 녹지로서의 ..",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-yongsan.html",
+            "label": "용산구 아파트 84㎡ 매매",
+            "labelEn": "용산구 apartment 84㎡ sale",
+            "value": "19억 8,578만원",
+            "valueEn": "₩1,986M",
+            "note": "최근 4주 계약 61건 · 8/12 대비 +8.6%",
+            "noteEn": "61 deals in the last 4 weeks · +8.6% vs Aug 12"
+          }
+        ],
+        "titleEn": "Kim Yoon-deok: \"Youth housing on sites of officer dorms and military apartments that have lost their green space functions"
       },
       {
         "title": "문진석 “주택공급 활성화 법안, 야당 몽니 끌려다녀선 안 돼”",
@@ -2359,7 +2374,8 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "“도시정비법 국토위 통과 6개월째 계류” “내일 본회의 상정해야…필리버스터 땐 모순”더불어민주당 신임 수석사무부총장에 임명된 문진석 의원이 국회에서 계류 중인 도시 및 주거환경정비..",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Moon Jin-seok says housing supply activation bill shouldn't be dragged by opposition's footdragging"
       },
       {
         "title": "국토장관 \"용산공원 전체에 주택짓지 않아…녹지 상실한곳 대상\"(종합)",
@@ -2368,7 +2384,20 @@
         "source": "연합뉴스 경제",
         "category": "realestate",
         "preview": "(세종=연합뉴스) 오진송 기자 = 김윤덕 국토교통부 장관이 19일 용산공원에 주택을 공급하는 방안을 검토하는 것과 관련해 \"용산공원 전체의 녹지...",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-yongsan.html",
+            "label": "용산구 아파트 84㎡ 매매",
+            "labelEn": "용산구 apartment 84㎡ sale",
+            "value": "19억 8,578만원",
+            "valueEn": "₩1,986M",
+            "note": "최근 4주 계약 61건 · 8/12 대비 +8.6%",
+            "noteEn": "61 deals in the last 4 weeks · +8.6% vs Aug 12"
+          }
+        ],
+        "titleEn": "Land Minister: \"No housing to be built across Yongsan Park... Areas where green space has been lost to be targeted\"(Comprehensive)"
       },
       {
         "title": "[외환] 원/달러 환율 14.1원 내린 1,397.7원(15:30 기준가)",
@@ -2377,7 +2406,8 @@
         "source": "연합뉴스 경제",
         "category": "stocks",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "[Yen/USD Exchange Rate Falls 14.1 Won to 1,397.7 Won (15:30 Basis)]"
       },
       {
         "title": "'대출 절벽' 완화 신호탄…당국·은행권 협의 결과 주목(종합)",
@@ -2386,7 +2416,18 @@
         "source": "연합뉴스 경제",
         "category": "other",
         "preview": "(서울=연합뉴스) 한지훈 기자 = NH농협은행이 변동형 주택담보대출 취급을 전격 재개한다.",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "rates",
+            "label": "주택담보대출 최저금리",
+            "labelEn": "Lowest mortgage rate",
+            "value": "연 3.64%",
+            "valueEn": "3.64% p.a.",
+            "href": "./mortgage-rates.html"
+          }
+        ],
+        "titleEn": "Signal of relief from 'loan cliff' as authorities and banks await outcome of negotiations (comprehensive)"
       },
       {
         "title": "수원축협서 75억 부당대출 혐의…대출담당자·브로커 구속",
@@ -2395,7 +2436,8 @@
         "source": "연합뉴스 경제",
         "category": "other",
         "preview": "(수원=연합뉴스) 강영훈 기자 = 경기 수원축산농협(이하 수원축협)의 한 지점에서 70억원이 넘는 부당대출을 일으킨 브로커와 대출을 내준 축협 ...",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "7,500,000,000 Won Improper Loan Allegations at Suwon Agricultural Cooperative... Loan Officer and Broker Arrested"
       },
       {
         "title": "국힘·오세훈 국회서 '부동산 토론회'…\"재개발·재건축 풀어야\"(종합)",
@@ -2404,7 +2446,20 @@
         "source": "연합뉴스 경제",
         "category": "realestate",
         "preview": "(서울=연합뉴스) 류미나 조다운 기자 = 국민의힘 서울 지역 의원들은 19일 재개발·재건축을 통해 주택 공급 불안을 해소해야 한다고 목소리를 모...",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./apartment-sale.html",
+            "label": "서울 전체 아파트 84㎡ 매매",
+            "labelEn": "Seoul apartment 84㎡ sale",
+            "value": "12억 9,184만원",
+            "valueEn": "₩1,292M",
+            "note": "최근 4주 계약 5,186건 · 8/12 대비 +14.3%",
+            "noteEn": "5,186 deals in the last 4 weeks · +14.3% vs Aug 12"
+          }
+        ],
+        "titleEn": "GOP, Oh Sehun Hold Real Estate Forum in Congress…\"Must Resolve Redevelopment and Reconstruction Issues\"(Comprehensive)"
       },
       {
         "title": "은마아파트 일부 세입자 “이사비+α 필요”… 조합 “버티면 소송”",
@@ -2413,7 +2468,20 @@
         "source": "조선비즈 부동산",
         "category": "realestate",
         "preview": "내년 상반기 이주를 추진하는 서울 강남구 대치동 은마아파트에서 일부 세입자가 이사비 등 추가 보상이 필요하다는 목소리를 내고 있다. 조합은 정당한 사유 없이 이주를 거부해 사업이 지연되면 명도소송과 손해배상 청구에…",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-gangnam.html",
+            "label": "강남구 아파트 84㎡ 매매",
+            "labelEn": "강남구 apartment 84㎡ sale",
+            "value": "29억 5,441만원",
+            "valueEn": "₩2,954M",
+            "note": "최근 4주 계약 160건 · 8/12 대비 -0.2%",
+            "noteEn": "160 deals in the last 4 weeks · -0.2% vs Aug 12"
+          }
+        ],
+        "titleEn": "Some tenants of Eunma Apartment say \"moving costs plus α are needed\"... Association says \"if you hold out, litigation will follow"
       },
       {
         "title": "“집값 실패, 용산공원으로 덮지 마라”…오세훈·국민의힘, 8·13 대책 맹폭",
@@ -2422,7 +2490,20 @@
         "source": "매일경제 부동산",
         "category": "other",
         "preview": "국민의힘 서울 지역 의원들이 정부의 8·13 부동산 세제 개편안과 용산어린이정원 주택 공급 방안을 강력히 규탄하며 재개발·재건축 규제 완화를 통한 민간 주도의 주택 공급 확대를 촉..",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-yongsan.html",
+            "label": "용산구 아파트 84㎡ 매매",
+            "labelEn": "용산구 apartment 84㎡ sale",
+            "value": "19억 8,578만원",
+            "valueEn": "₩1,986M",
+            "note": "최근 4주 계약 61건 · 8/12 대비 +8.6%",
+            "noteEn": "61 deals in the last 4 weeks · +8.6% vs Aug 12"
+          }
+        ],
+        "titleEn": "Failures in housing prices, don't cover up with Yongsan Park\"…Oh Sehun, People Power Party fiercely criticize 8·13 measures"
       },
       {
         "title": "가계대출 빗장 풀리나…농협은행, 변동형 주담대 취급 재개",
@@ -2431,7 +2512,18 @@
         "source": "연합뉴스 경제",
         "category": "other",
         "preview": "(서울=연합뉴스) 한지훈 기자 = NH농협은행이 변동형 주택담보대출 취급을 전격 재개한다.",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "rates",
+            "label": "주택담보대출 최저금리",
+            "labelEn": "Lowest mortgage rate",
+            "value": "연 3.64%",
+            "valueEn": "3.64% p.a.",
+            "href": "./mortgage-rates.html"
+          }
+        ],
+        "titleEn": "Household Loan Restrictions Easing...Nonghyup Bank Resumes Handling Adjustable Rate Mortgages"
       },
       {
         "title": "서울에 4억대 아파트가?…2030 몰리더니 '없어서 못 산다' [시장톡]",
@@ -2440,7 +2532,20 @@
         "source": "한국경제 부동산",
         "category": "realestate",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./apartment-sale.html",
+            "label": "서울 전체 아파트 84㎡ 매매",
+            "labelEn": "Seoul apartment 84㎡ sale",
+            "value": "12억 9,184만원",
+            "valueEn": "₩1,292M",
+            "note": "최근 4주 계약 5,186건 · 8/12 대비 +14.3%",
+            "noteEn": "5,186 deals in the last 4 weeks · +14.3% vs Aug 12"
+          }
+        ],
+        "titleEn": "400,000,000 Apartments in Seoul?... Rushing to 2030, Now \"Can't Buy Because There Are None\" [Market Talk]"
       },
       {
         "title": "\"전세사기 피해주택 우선매수권 경합 부작용…법 개정해야\"",
@@ -2449,7 +2554,8 @@
         "source": "뉴시스 경제",
         "category": "realestate",
         "preview": "[서울=뉴시스]이연희 변해정 이종성 기자 = 전세사기 피해주택의 경매 과정에서 한국토지주택공사(LH)와 피해자 간 우선매수권 경합이 발생하는 부작용과 관련해 특별법 조항을 수정해야 한다는 지적이 나왔다. 더불어민주당…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Rental Fraud Victims' Priority Purchase Rights Compete, Leading to Negative Effects... Legal Reform Needed"
       },
       {
         "title": "[올댓차이나] 홍콩 증시, 반락 개장 후 실적 매수세로 출렁… H주 0.43%↑",
@@ -2458,7 +2564,8 @@
         "source": "뉴시스 경제",
         "category": "stocks",
         "preview": "[서울=뉴시스]이재준 기자 = 홍콩 증시는 19일 중동 정세 악화 우려와 세계적인 장기금리 상승 영향으로 반락 출발했다가 실적 호조를 보인 주요기업에 매수가 들어오면서 등락하고 있다. 항셍지수는 이날 전일 대비 12…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "[AllChina] Hong Kong stock market fluctuates as earnings buying follows opening decline... H shares up 0.43%"
       },
       {
         "title": "국힘 \"뉴홈 사전청약 땐 금리1.9%\"…김윤덕 \"원안대로 하면 복잡해져\"",
@@ -2467,7 +2574,18 @@
         "source": "뉴시스 경제",
         "category": "rates",
         "preview": "[서울=뉴시스]정금민 한재혁 기자 = 공공분양주택 '뉴홈 나눔형'(이익공유형) 본청약에서 사전청약 당시 안내됐던 전용 모기지의 금리 조건이 변경됐다는 논란이 인 가운데 김윤덕 국토교통부 장관과 국민의힘 의원이 정면…",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "rates",
+            "label": "주택담보대출 최저금리",
+            "labelEn": "Lowest mortgage rate",
+            "value": "연 3.64%",
+            "valueEn": "3.64% p.a.",
+            "href": "./mortgage-rates.html"
+          }
+        ],
+        "titleEn": "KDP says \"pre-sale interest rate at 1.9%\" for New Home... Kim Yoon-deok says \"if done as original plan, it will get complicated"
       },
       {
         "title": "美금리 동결 우세·수출 네고에…환율 10개월 반 만에 1,300원대",
@@ -2476,7 +2594,8 @@
         "source": "연합뉴스 경제",
         "category": "rates",
         "preview": "(세종=연합뉴스) 김수현 기자 = 미국 연방준비제도(Fed·연준)가 다음 달 기준금리를 인상하지 않을 것이란 관측에 무게가 실리고 수출업체의 달...",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "U.S. Interest Rates Hold Steady, Export Negotiations Push Exchange Rate to 1,300 Won After 10 Months"
       },
       {
         "title": "가계빚 사상 첫 2000조 돌파…주택대출 이어 빚투도 급증",
@@ -2485,7 +2604,8 @@
         "source": "한국경제 경제",
         "category": "realestate",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Household debt hits record high of 2,000,000,000,000,000 won…housing loans followed by debt investment surge"
       },
       {
         "title": "모듈러 주택 뜨자…전문기업 엔알비 영업익 2배 ‘쑥쑥’",
@@ -2494,7 +2614,8 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "상반기 매출 370억·영업이익 33억 PC모듈러 가동률 25%→40% 상승모듈러 1호 상장사 엔알비(NRB)가 올 상반기 영업이익을 두 배 이상 끌어올렸다. 정부가 주택 공급 속도..",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Modular Housing Boom Lifts ENRVI's Operating Profit Twice as High"
       },
       {
         "title": "쌍용건설 '쌍용 더 플래티넘 서대문' 견본주택 21일 개관",
@@ -2503,7 +2624,20 @@
         "source": "뉴시스 경제",
         "category": "realestate",
         "preview": "[서울=뉴시스]정진형 기자 = 쌍용건설이 오는 21일 '쌍용 더 플래티넘 서대문' 견본주택을 열고 본격적인 분양에 나선다고 19일 밝혔다. 쌍용 더 플래티넘 서대문은 서울 서대문구 홍은동 일원에 지하 4층~지상 20…",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-seodaemun.html",
+            "label": "서대문구 아파트 84㎡ 매매",
+            "labelEn": "서대문구 apartment 84㎡ sale",
+            "value": "12억 316만원",
+            "valueEn": "₩1,203M",
+            "note": "최근 4주 계약 191건 · 8/12 대비 -0.9%",
+            "noteEn": "191 deals in the last 4 weeks · -0.9% vs Aug 12"
+          }
+        ],
+        "titleEn": "Sungwon Construction's 'Sungwon The Platinum Seodaemun' Model House Opens on 21st"
       },
       {
         "title": "재건축 조합설립 8개월 당긴다…구역지정 전부터 ‘동시진행’",
@@ -2512,7 +2646,20 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "서울시, 정비사업 절차 개선해 구역지정 전 조합설립 병행 처리 2031년 31만호 착공 공약 가속화서울시가 주택공급 속도를 높이기 위해 정비구역 지정 전에도 조합설립 절차를 병행할..",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./apartment-sale.html",
+            "label": "서울 전체 아파트 84㎡ 매매",
+            "labelEn": "Seoul apartment 84㎡ sale",
+            "value": "12억 9,184만원",
+            "valueEn": "₩1,292M",
+            "note": "최근 4주 계약 5,186건 · 8/12 대비 +14.3%",
+            "noteEn": "5,186 deals in the last 4 weeks · +14.3% vs Aug 12"
+          }
+        ],
+        "titleEn": "Accelerate establishment of reconstruction consortium by 8 months... simultaneous progress before area designation"
       },
       {
         "title": "천장형 전기차 충전기부터 안전 서비스 로봇까지... 특화 상품 내건 브랜드 아파트",
@@ -2521,7 +2668,8 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "지방 부동산 시장에서 대형 건설사 브랜드 아파트에 대한 수요가 더욱 높아지고 있다. 똘똘한 한 채 현상이 심화하며 입지뿐 아니라 건설사별 특화 상품까지 따져보며 내 집 마련에 나서..",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "From ceiling-mounted electric vehicle chargers to safety service robots... brand apartment showcases specialized products"
       },
       {
         "title": "[올댓차이나] 중국 증시 하락 출발…상하이지수 0.96%↓",
@@ -2530,7 +2678,8 @@
         "source": "뉴시스 경제",
         "category": "stocks",
         "preview": "[서울=뉴시스] 문예성 기자 = 중국 증시가 19일 하락 출발했다. 이날 상하이종합지수는 전날보다 0.96% 하락한 3952.12로 장을 시작했다. 선전성분지수는 전장 대비 2.09% 떨어진 1만4316.98로, 중…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "[All China] Chinese stock market drops at start... Shanghai index down 0.96%"
       },
       {
         "title": "'1주택자 부담 완화'…세제개편 반발에 보완 입법 잇따라",
@@ -2539,7 +2688,8 @@
         "source": "뉴시스 경제",
         "category": "realestate",
         "preview": "[세종=뉴시스]박광온 기자 = 정부가 초고가 주택 및 비거주 1주택자의 세 부담을 강화하는 내용을 담은 기존 부동산 세제개편안의 큰 틀을 유지해 국회에 제출할 것으로 전망되는 가운데, 국회에서는 장기보유 1주택자의…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Legislation to Ease Burden on Homeowners Amid Tax Reform Backlash Continues"
       }
     ]
   }
