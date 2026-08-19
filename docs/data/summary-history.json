@@ -809,113 +809,44 @@
     "date": "2026-08-19",
     "model": "qwen3:14b",
     "summary": {
-      "ko": "- 금리·예금·투자상품: 기준금리 인상 한 달 만에 초장기채 금리가 하락했고, 미국·일본·독일·캐나다의 장기 국채 금리가 급상승했으며, 뉴욕증시는 중동 긴장과 미 국채금리 급등으로 하락 마감했고, 미국 7월 잠정주택판매는 고금리로 인해 두 달째 감소했으며, 야데니는 10년물 미국채 금리가 5%를 넘기기 전까지는 괜찮다고 했다.\n- 부동산: \"로또 아파트\"에 9만명이 몰리며 당첨 시 10억 원을 받을 수 있다는 기대감이 높아졌다. 부동산 세금 관련 정책이 실거주에 따라 보유세가 달라지면서 세제 변화가 주목받고 있다. 영등포 공장지대가 재건축을 통해 18억 원 규모의 개발이 추진되고 있다. 송파 아파트 청약에 1가구당 9만명이 몰리며 당첨 시 11억 원을 얻을 수 있다는 소식이 전해졌다. 서울 아파트값은 1.27% 상승하며 올해 최고 상승폭을 기록했다.\n- 기타 경제 소식: 오늘 경제 관련 주요일정이 발표되었다. 이 대통령은 오세훈에게 공급을 늘리라고 주문하며 집값 폭등 가능성에 경계를 표했다. 빌라 거래가 살아나고 있는 것으로 나타났다. 이는 6층과 청년대출에 탄력받은 것으로 보인다. 김동준 재정경제부 대외경제국장의 모친상이 발표되었다.\n- 증시·환율: 뉴욕증시는 미국과 이란 간 갈등 지속으로 하락 마감했으며, 나스닥은 1.33% 하락했다. 미국 증시는 국채수익률 상승 여파로 반도체주가 일제히 하락하는 등 전반적으로 약세를 보였다. 뉴욕증시는 미국·이란 갈등 지속으로 일제히 하락 출발했고, 나스닥은 1% 하락했다. 대만 증시는 한일 증시 약세에 영향을 받아 1.2% 하락 마감했다. 홍콩 증시는 중국 정책 기대에 따라 상승 마감했으며, H주는 0.16% 상승했다.",
-      "en": "- Rates, Deposits & Investment Products: Just one month after the interest rate hike, long-term bond rates fell, while long-term government bond rates in the United States, Japan, Germany, and Canada surged sharply. The New York stock market closed lower due to Middle East tensions and a sharp rise in U.S. Treasury bond rates. U.S. provisional home sales for July declined for the second consecutive month due to high interest rates. Yadini said it would be okay as long as the 10-year U.S. Treasury bond rate does not exceed 5%.\n- Real Estate: Expectations have risen that 90,000 people have gathered at \"Lotto Apartment,\" hoping to receive 1,000,000,000 won if they win. Tax policies related to real estate have drawn attention as ownership taxes vary depending on actual residence. In Yeongdeungpo, a development project worth 1,800,000,000 won is being pushed forward through reconstruction of the factory area. It was reported that 90,000 people have applied for a single unit in Songpa Apartment, with the chance to receive 1,100,000,000 won if they win. The price of apartments in Seoul rose 1.27%, recording the highest increase this year.\n- Other Economic News: Today, major economic schedules were announced. President Lee urged Oh Se-hoon to increase supply, expressing caution over the possibility of a sharp rise in housing prices. It appears that villa transactions are picking up, apparently due to the elasticity of the 6th floor and youth loan programs. The death of the mother of Kim Dong-jun, Director of the External Economic Affairs Division at the Ministry of Finance and Economy, was announced.\n- Stocks & FX: The New York stock market closed lower due to the continued conflict between the U.S. and Iran, with the Nasdaq falling 1.33%. The U.S. stock market showed overall weakness, with semiconductor stocks uniformly falling due to the impact of rising bond yields. The New York stock market opened uniformly lower due to the continued U.S.-Iran conflict, with the Nasdaq falling 1%. The Taiwan stock market closed down 1.2% due to the weakness in the Korean and Japanese markets. The Hong Kong stock market closed higher due to expectations of Chinese policy, with the H-Share index rising 0.16%."
+      "ko": "- 부동산: 부동산 관련 오늘자 경제 뉴스에서는 전세사기 피해주택 우선매수권 경합의 부작용과 법 개정 필요성이 제기되었고, 국힘과 오세훈이 국회에서 부동산 토론회를 열며 재개발·재건축 문제를 강조했으며, 가계빚이 사상 처음으로 2000조원을 돌파하며 주택대출과 빚투가 급증했고, 김윤덕 국토장관은 용산공원 일부 활용 구상을 재확인하며 녹지 훼손 구역에만 청년주택 검토를 언급했으며, 당정은 부동산 공급대책을 논의하며 용산공원 개발 문제에 대한 여론조사 검토를 진행하고 있다.\n- 증시·환율: 홍콩 증시는 오늘 개장 후 실적 매수세로 출렁이며 H주가 0.43% 상승했다. 원/달러 환율은 10개월 반 만에 1,300원 대로 하락하며 1,300원 수준을 회복했다. 코스피는 상반기 매출이 2천조원을 기록하며 반도체 업종의 강세 속에 순이익이 작년 대비 4배로 증가했다. 중국 증시는 오늘 하락 출발하며 상하이지수가 0.96% 하락했다. 각 시장은 서로 다른 흐름을 보이며 움직였다.\n- 금리·예금·투자상품: 국힘은 뉴홈 사전청약 때 금리 1.9%를 제안했고, 김윤덕은 원안대로 하면 복잡해질 수 있다고 했으며, 미국 금리 동결 우세와 수출 네고로 환율이 10개월 반 만에 1,300원대를 기록했고, 국고채 금리는 일제히 하락하며 3년물이 장중 연 3.833%를 기록했으며, 월가에서는 채권금리 상승이 장기화될 수 있다고 했고, 엔화는 미국의 조기 금리인상 후퇴로 1달러=159엔대 중반에 상승 출발했다.\n- 기타 경제 소식: 오늘 경제 뉴스 중 하나는 집값이 비싸다보니 내 집 마련이 어려워지자, 경매를 통해 주택을 구입하는 방법에 대한 이야기였다. 또 다른 소식은 최근 경제 상황에 따라 소비자들의 구매 행동이 어떻게 변화하고 있는지를 다루고 있다. 부동산 시장의 변화에 따라 주택 구매에 대한 관심이 높아지고 있는 것으로 보인다. 경매를 통한 주택 구입은 새로운 선택지로 주목받고 있다. 이처럼 다양한 경로를 통해 주택을 마련하려는 시도가 늘고 있다.",
+      "en": "- Real Estate: In today's economic news related to real estate, the negative effects of the competition for priority purchase rights of housing for victims of rental fraud and the necessity of legal revisions were raised. The People Power Party and Oh Se-hoon held a real estate discussion session in the National Assembly, emphasizing redevelopment and reconstruction issues. Household debt has exceeded 2,000,000,000,000,000 won for the first time in history, with a sharp increase in housing loans and debt investment. Kim Yun-deok, the Minister of Land, confirmed the plan to partially utilize Yongsan Park again, mentioning that youth housing will be considered only in areas where green spaces are damaged. The ruling party and the government are discussing real estate supply measures and considering public opinion surveys regarding the development of Yongsan Park.\n- Stocks & FX: The Hong Kong stock market fluctuated after opening today due to buying activity based on performance, with H-shares rising 0.43%. The won/dollar exchange rate fell to the 1,300 won level, recovering to that level for the first time in 10 and a half months. The KOSPI recorded sales of 2,000,000,000,000,000 won in the first half of the year, with net profits increasing fourfold compared to last year amid strong performance in the semiconductor sector. The Chinese stock market started today with a decline, with the Shanghai index falling 0.96%. Each market moved with different trends.\n- Rates, Deposits & Investment Products: Korea's People Power Party proposed an interest rate of 1.9% during the New Home pre-sale, and Kim Yoon-deok said that proceeding as originally planned could complicate matters. The won reached the 1,300 range for the first time in 10 and a half months due to the U.S. interest rate freeze advantage and export negotiations. The 3-year government bond rate fell to 3.833% during trading. In Wall Street, it was said that bond rates could rise for a long time. The yen rose to the mid-159 yen per dollar range following the U.S. retreat from early interest rate hikes.\n- Other Economic News: One of today's economic news stories discussed how, due to high housing prices making it difficult to buy a home, people are turning to purchasing homes through auctions. Another report covered how consumer buying behavior is changing in light of the recent economic situation. It appears that interest in home buying is increasing due to changes in the real estate market. Home purchases through auctions are gaining attention as a new option. In this way, attempts to secure housing through various channels are on the rise."
     },
     "highlights": [],
     "categories": [
       {
-        "key": "rates",
-        "name": "금리·예금·투자상품",
-        "nameEn": "Rates, Deposits & Investment Products",
-        "lineKo": "기준금리 인상 한 달 만에 초장기채 금리가 하락했고, 미국·일본·독일·캐나다의 장기 국채 금리가 급상승했으며, 뉴욕증시는 중동 긴장과 미 국채금리 급등으로 하락 마감했고, 미국 7월 잠정주택판매는 고금리로 인해 두 달째 감소했으며, 야데니는 10년물 미국채 금리가 5%를 넘기기 전까지는 괜찮다고 했다.",
-        "lineEn": "Just one month after the interest rate hike, long-term bond rates fell, while long-term government bond rates in the United States, Japan, Germany, and Canada surged sharply. The New York stock market closed lower due to Middle East tensions and a sharp rise in U.S. Treasury bond rates. U.S. provisional home sales for July declined for the second consecutive month due to high interest rates. Yadini said it would be okay as long as the 10-year U.S. Treasury bond rate does not exceed 5%.",
+        "key": "realestate",
+        "name": "부동산",
+        "nameEn": "Real Estate",
+        "lineKo": "부동산 관련 오늘자 경제 뉴스에서는 전세사기 피해주택 우선매수권 경합의 부작용과 법 개정 필요성이 제기되었고, 국힘과 오세훈이 국회에서 부동산 토론회를 열며 재개발·재건축 문제를 강조했으며, 가계빚이 사상 처음으로 2000조원을 돌파하며 주택대출과 빚투가 급증했고, 김윤덕 국토장관은 용산공원 일부 활용 구상을 재확인하며 녹지 훼손 구역에만 청년주택 검토를 언급했으며, 당정은 부동산 공급대책을 논의하며 용산공원 개발 문제에 대한 여론조사 검토를 진행하고 있다.",
+        "lineEn": "In today's economic news related to real estate, the negative effects of the competition for priority purchase rights of housing for victims of rental fraud and the necessity of legal revisions were raised. The People Power Party and Oh Se-hoon held a real estate discussion session in the National Assembly, emphasizing redevelopment and reconstruction issues. Household debt has exceeded 2,000,000,000,000,000 won for the first time in history, with a sharp increase in housing loans and debt investment. Kim Yun-deok, the Minister of Land, confirmed the plan to partially utilize Yongsan Park again, mentioning that youth housing will be considered only in areas where green spaces are damaged. The ruling party and the government are discussing real estate supply measures and considering public opinion surveys regarding the development of Yongsan Park.",
         "isFallback": false,
         "fallbackReason": null,
         "degraded": true,
         "items": [
           {
-            "title": "기준금리 인상 한 달, 초장기채만 무너졌다…\"정책보다 수급\"",
-            "link": "https://www.yna.co.kr/view/AKR20260818143900008",
+            "title": "\"전세사기 피해주택 우선매수권 경합 부작용…법 개정해야\"",
+            "link": "https://www.newsis.com/view/NISX20260819_0003754208",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "국힘·오세훈 국회서 '부동산 토론회'…\"재개발·재건축 풀어야\"",
+            "link": "https://www.yna.co.kr/view/AKR20260819087100001",
             "source": "연합뉴스 경제"
           },
           {
-            "title": "미국·일본·독일·캐나다 장기 국채 금리 급상승",
-            "link": "https://www.newsis.com/view/NISX20260819_0003753406",
-            "source": "뉴시스 경제"
-          },
-          {
-            "title": "뉴욕증시, 중동 긴장·미 국채금리 급등에 하락 마감…나스닥 1.33%↓",
-            "link": "https://www.newsis.com/view/NISX20260819_0003753381",
-            "source": "뉴시스 경제"
-          },
-          {
-            "title": "美 7월 잠정주택판매 전월비 2.3%↓…고금리에 두달째 감소",
-            "link": "https://www.newsis.com/view/NISX20260819_0003753369",
-            "source": "뉴시스 경제"
-          },
-          {
-            "title": "야데니 \"10년물 미국채 금리 5% 넘기전까진 괜찮아\"",
-            "link": "https://www.hankyung.com/article/202608188238i",
+            "title": "가계빚 사상 첫 2000조원 돌파…주택대출 이어 빚투도 급증",
+            "link": "https://www.hankyung.com/article/202608199130i",
             "source": "한국경제 경제"
-          }
-        ]
-      },
-      {
-        "key": "realestate",
-        "name": "부동산",
-        "nameEn": "Real Estate",
-        "lineKo": "\"로또 아파트\"에 9만명이 몰리며 당첨 시 10억 원을 받을 수 있다는 기대감이 높아졌다. 부동산 세금 관련 정책이 실거주에 따라 보유세가 달라지면서 세제 변화가 주목받고 있다. 영등포 공장지대가 재건축을 통해 18억 원 규모의 개발이 추진되고 있다. 송파 아파트 청약에 1가구당 9만명이 몰리며 당첨 시 11억 원을 얻을 수 있다는 소식이 전해졌다. 서울 아파트값은 1.27% 상승하며 올해 최고 상승폭을 기록했다.",
-        "lineEn": "Expectations have risen that 90,000 people have gathered at \"Lotto Apartment,\" hoping to receive 1,000,000,000 won if they win. Tax policies related to real estate have drawn attention as ownership taxes vary depending on actual residence. In Yeongdeungpo, a development project worth 1,800,000,000 won is being pushed forward through reconstruction of the factory area. It was reported that 90,000 people have applied for a single unit in Songpa Apartment, with the chance to receive 1,100,000,000 won if they win. The price of apartments in Seoul rose 1.27%, recording the highest increase this year.",
-        "isFallback": false,
-        "fallbackReason": null,
-        "degraded": false,
-        "items": [
-          {
-            "title": "\"당첨되면 10억 번다\"…'로또 아파트'에 9만명 우르르 몰렸다 [주간이집]",
-            "link": "https://www.hankyung.com/article/2026081863736",
-            "source": "한국경제 부동산"
           },
           {
-            "title": "실거주에 내 보유세 확 달라진다 … 부동산 세금 100(2)",
-            "link": "https://www.mk.co.kr/news/realestate/12130531",
-            "source": "매일경제 부동산"
+            "title": "김윤덕 국토장관, 용산공원 일부 활용 구상 재확인… “녹지 훼손 구역에만 청년주택 검토”",
+            "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/19/U4XHEEKRVRCYVGXH5ZJTL6S7FI/",
+            "source": "조선비즈 부동산"
           },
           {
-            "title": "“성수동 놓쳤다면 여기?” … 공장지대 확 바뀌는 영등포 ‘18억 재건축의 셈법’",
-            "link": "https://www.mk.co.kr/news/realestate/12130229",
-            "source": "매일경제 부동산"
-          },
-          {
-            "title": "당첨되면 11억 버는 ‘로또 청약’…송파 아파트 1가구에 9만명 몰렸다",
-            "link": "https://www.mk.co.kr/news/realestate/12130626",
-            "source": "매일경제 부동산"
-          },
-          {
-            "title": "서울 아파트값 1.27% '껑충'…올해 최고 상승폭 기록",
-            "link": "https://www.hankyung.com/article/2026081880957",
-            "source": "한국경제 부동산"
-          }
-        ]
-      },
-      {
-        "key": "other",
-        "name": "기타 경제 소식",
-        "nameEn": "Other Economic News",
-        "lineKo": "오늘 경제 관련 주요일정이 발표되었다. 이 대통령은 오세훈에게 공급을 늘리라고 주문하며 집값 폭등 가능성에 경계를 표했다. 빌라 거래가 살아나고 있는 것으로 나타났다. 이는 6층과 청년대출에 탄력받은 것으로 보인다. 김동준 재정경제부 대외경제국장의 모친상이 발표되었다.",
-        "lineEn": "Today, major economic schedules were announced. President Lee urged Oh Se-hoon to increase supply, expressing caution over the possibility of a sharp rise in housing prices. It appears that villa transactions are picking up, apparently due to the elasticity of the 6th floor and youth loan programs. The death of the mother of Kim Dong-jun, Director of the External Economic Affairs Division at the Ministry of Finance and Economy, was announced.",
-        "isFallback": false,
-        "fallbackReason": null,
-        "degraded": false,
-        "items": [
-          {
-            "title": "[오늘의 주요일정]경제(8월19일수요일)",
-            "link": "https://www.newsis.com/view/NISX20260818_0003751763",
-            "source": "뉴시스 경제"
-          },
-          {
-            "title": "이 대통령, 오세훈에 “공급 늘려야지, 집값 폭등가능성 높여선 안돼”",
-            "link": "https://www.mk.co.kr/news/realestate/12130565",
-            "source": "매일경제 부동산"
-          },
-          {
-            "title": "살아난 빌라 거래…6층·청년대출에 탄력받나",
-            "link": "https://www.hankyung.com/article/2026081878021",
-            "source": "한국경제 부동산"
-          },
-          {
-            "title": "[부고] 김동준(재정경제부 대외경제국장)씨 모친상",
-            "link": "https://www.yna.co.kr/view/AKR20260818160000002",
+            "title": "당정, 부동산 공급대책 논의…용산공원 개발문제 여론조사 검토",
+            "link": "https://www.yna.co.kr/view/AKR20260819073400001",
             "source": "연합뉴스 경제"
           }
         ]
@@ -924,36 +855,85 @@
         "key": "stocks",
         "name": "증시·환율",
         "nameEn": "Stocks & FX",
-        "lineKo": "뉴욕증시는 미국과 이란 간 갈등 지속으로 하락 마감했으며, 나스닥은 1.33% 하락했다. 미국 증시는 국채수익률 상승 여파로 반도체주가 일제히 하락하는 등 전반적으로 약세를 보였다. 뉴욕증시는 미국·이란 갈등 지속으로 일제히 하락 출발했고, 나스닥은 1% 하락했다. 대만 증시는 한일 증시 약세에 영향을 받아 1.2% 하락 마감했다. 홍콩 증시는 중국 정책 기대에 따라 상승 마감했으며, H주는 0.16% 상승했다.",
-        "lineEn": "The New York stock market closed lower due to the continued conflict between the U.S. and Iran, with the Nasdaq falling 1.33%. The U.S. stock market showed overall weakness, with semiconductor stocks uniformly falling due to the impact of rising bond yields. The New York stock market opened uniformly lower due to the continued U.S.-Iran conflict, with the Nasdaq falling 1%. The Taiwan stock market closed down 1.2% due to the weakness in the Korean and Japanese markets. The Hong Kong stock market closed higher due to expectations of Chinese policy, with the H-Share index rising 0.16%.",
+        "lineKo": "홍콩 증시는 오늘 개장 후 실적 매수세로 출렁이며 H주가 0.43% 상승했다. 원/달러 환율은 10개월 반 만에 1,300원 대로 하락하며 1,300원 수준을 회복했다. 코스피는 상반기 매출이 2천조원을 기록하며 반도체 업종의 강세 속에 순이익이 작년 대비 4배로 증가했다. 중국 증시는 오늘 하락 출발하며 상하이지수가 0.96% 하락했다. 각 시장은 서로 다른 흐름을 보이며 움직였다.",
+        "lineEn": "The Hong Kong stock market fluctuated after opening today due to buying activity based on performance, with H-shares rising 0.43%. The won/dollar exchange rate fell to the 1,300 won level, recovering to that level for the first time in 10 and a half months. The KOSPI recorded sales of 2,000,000,000,000,000 won in the first half of the year, with net profits increasing fourfold compared to last year amid strong performance in the semiconductor sector. The Chinese stock market started today with a decline, with the Shanghai index falling 0.96%. Each market moved with different trends.",
         "isFallback": false,
         "fallbackReason": null,
         "degraded": false,
         "items": [
           {
-            "title": "[속보]뉴욕증시, 미국·이란 갈등 지속에 하락 마감…나스닥 1.33%↓",
-            "link": "https://www.newsis.com/view/NISX20260819_0003753379",
+            "title": "[올댓차이나] 홍콩 증시, 반락 개장 후 실적 매수세로 출렁… H주 0.43%↑",
+            "link": "https://www.newsis.com/view/NISX20260819_0003754189",
             "source": "뉴시스 경제"
           },
           {
-            "title": "국채수익률 상승 여파로 美 증시 하락…반도체주 일제 하락",
-            "link": "https://www.hankyung.com/article/202608188217i",
-            "source": "한국경제 경제"
+            "title": "[속보] 원/달러 환율 10개월 반 만에 1,300원 대로 하락",
+            "link": "https://www.yna.co.kr/view/AKR20260819084700002",
+            "source": "연합뉴스 경제"
           },
           {
-            "title": "뉴욕증시, 미국·이란 갈등 지속에 일제히 하락 출발…나스닥 1%↓",
-            "link": "https://www.newsis.com/view/NISX20260818_0003753348",
+            "title": "코스피 상반기 매출 2천조원…반도체 독주속 순이익 작년 4배로",
+            "link": "https://www.yna.co.kr/view/AKR20260819080900008",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "[올댓차이나] 중국 증시 하락 출발…상하이지수 0.96%↓",
+            "link": "https://www.newsis.com/view/NISX20260819_0003754002",
+            "source": "뉴시스 경제"
+          }
+        ]
+      },
+      {
+        "key": "rates",
+        "name": "금리·예금·투자상품",
+        "nameEn": "Rates, Deposits & Investment Products",
+        "lineKo": "국힘은 뉴홈 사전청약 때 금리 1.9%를 제안했고, 김윤덕은 원안대로 하면 복잡해질 수 있다고 했으며, 미국 금리 동결 우세와 수출 네고로 환율이 10개월 반 만에 1,300원대를 기록했고, 국고채 금리는 일제히 하락하며 3년물이 장중 연 3.833%를 기록했으며, 월가에서는 채권금리 상승이 장기화될 수 있다고 했고, 엔화는 미국의 조기 금리인상 후퇴로 1달러=159엔대 중반에 상승 출발했다.",
+        "lineEn": "Korea's People Power Party proposed an interest rate of 1.9% during the New Home pre-sale, and Kim Yoon-deok said that proceeding as originally planned could complicate matters. The won reached the 1,300 range for the first time in 10 and a half months due to the U.S. interest rate freeze advantage and export negotiations. The 3-year government bond rate fell to 3.833% during trading. In Wall Street, it was said that bond rates could rise for a long time. The yen rose to the mid-159 yen per dollar range following the U.S. retreat from early interest rate hikes.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": true,
+        "items": [
+          {
+            "title": "국힘 \"뉴홈 사전청약 땐 금리1.9%\"…김윤덕 \"원안대로 하면 복잡해져\"",
+            "link": "https://www.newsis.com/view/NISX20260819_0003754178",
             "source": "뉴시스 경제"
           },
           {
-            "title": "[올댓차이나] 대만 증시, 한일 증시 약세에 반락 마감…1.2%↓",
-            "link": "https://www.newsis.com/view/NISX20260818_0003753321",
+            "title": "美금리 동결 우세·수출 네고에…환율 10개월 반 만에 1,300원대",
+            "link": "https://www.yna.co.kr/view/AKR20260819088500002",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "국고채 금리 일제히 하락…3년물 장중 연 3.833%",
+            "link": "https://www.yna.co.kr/view/AKR20260819083900008",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "저금리 시대 끝났나…월가 \"채권금리 상승 장기화\"",
+            "link": "https://www.newsis.com/view/NISX20260819_0003753691",
             "source": "뉴시스 경제"
           },
           {
-            "title": "[올댓차이나] 홍콩 증시, 중국 정책 기대에 상승 마감… H주 0.16%↑",
-            "link": "https://www.newsis.com/view/NISX20260818_0003753301",
+            "title": "엔화, 美 조기 금리인상 후퇴에 1달러=159엔대 중반 상승 출발",
+            "link": "https://www.newsis.com/view/NISX20260819_0003753872",
             "source": "뉴시스 경제"
+          }
+        ]
+      },
+      {
+        "key": "other",
+        "name": "기타 경제 소식",
+        "nameEn": "Other Economic News",
+        "lineKo": "오늘 경제 뉴스 중 하나는 집값이 비싸다보니 내 집 마련이 어려워지자, 경매를 통해 주택을 구입하는 방법에 대한 이야기였다. 또 다른 소식은 최근 경제 상황에 따라 소비자들의 구매 행동이 어떻게 변화하고 있는지를 다루고 있다. 부동산 시장의 변화에 따라 주택 구매에 대한 관심이 높아지고 있는 것으로 보인다. 경매를 통한 주택 구입은 새로운 선택지로 주목받고 있다. 이처럼 다양한 경로를 통해 주택을 마련하려는 시도가 늘고 있다.",
+        "lineEn": "One of today's economic news stories discussed how, due to high housing prices making it difficult to buy a home, people are turning to purchasing homes through auctions. Another report covered how consumer buying behavior is changing in light of the recent economic situation. It appears that interest in home buying is increasing due to changes in the real estate market. Home purchases through auctions are gaining attention as a new option. In this way, attempts to secure housing through various channels are on the rise.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": false,
+        "items": [
+          {
+            "title": "\"집값 비싸서 못 산다?\"…경매로 내 집 마련하는 법",
+            "link": "https://www.hankyung.com/article/2026081986826",
+            "source": "한국경제 부동산"
           }
         ]
       }
