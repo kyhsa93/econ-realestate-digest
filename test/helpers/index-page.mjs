@@ -38,6 +38,13 @@ export async function loadIndexPage({ analytics, fetch: fetchImpl, search = "", 
   const store = { ...storage };
   const observed = [];
   const byId = new Map();
+  const listeners = { window: {}, document: {} };
+  const reloads = [];
+
+  const listen = (where) => (type, fn) => (listeners[where][type] ||= []).push(fn);
+  const fire = (where, type, event = {}) => {
+    for (const fn of listeners[where][type] ?? []) fn(event);
+  };
 
   const sandbox = {
     console: { ...console, warn() {}, error() {} },
@@ -52,9 +59,15 @@ export async function loadIndexPage({ analytics, fetch: fetchImpl, search = "", 
       removeItem: (k) => delete store[k],
     },
     navigator: { language: "ko", ...(serviceWorker ? { serviceWorker } : {}) },
-    location: { search, origin: "https://x", pathname: "/", href: "https://x/" },
+    location: {
+      search,
+      origin: "https://x",
+      pathname: "/",
+      href: "https://x/",
+      reload: () => reloads.push(true),
+    },
     matchMedia: () => ({ matches: false, addEventListener() {} }),
-    addEventListener() {},
+    addEventListener: listen("window"),
     removeEventListener() {},
     history: { pushState() {}, replaceState() {} },
     IntersectionObserver: class {
@@ -105,7 +118,8 @@ export async function loadIndexPage({ analytics, fetch: fetchImpl, search = "", 
         return byId.get(sel);
       },
       createElement: () => stubElement(),
-      addEventListener() {},
+      addEventListener: listen("document"),
+      visibilityState: "visible",
       documentElement: stubElement(),
       body: stubElement(),
       head: stubElement(),
@@ -124,6 +138,8 @@ export async function loadIndexPage({ analytics, fetch: fetchImpl, search = "", 
 
   return {
     app: sandbox,
+    fire,
+    reloads: () => reloads.length,
     byId: (id) => sandbox.document.getElementById(id),
     scrollTo: (index) => {
       const observer = observed[0];

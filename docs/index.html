@@ -2300,8 +2300,28 @@
   }
 
   if ("serviceWorker" in navigator) {
+    // 홈 화면에 심은 앱은 며칠씩 열어둔 채로 다시 꺼내 본다. 그동안 새 코드가 올라와도
+    // 이미 뜬 화면은 옛 코드 그대로다. 다시 볼 때마다 새 일꾼이 있는지 묻고, 새 일꾼이
+    // 자리를 넘겨받으면 화면을 한 번 다시 읽는다.
+    const hadController = Boolean(navigator.serviceWorker.controller);
+    let reloading = false;
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (!hadController || reloading) return;
+      reloading = true;
+      window.location.reload();
+    });
+
     window.addEventListener("load", () => {
-      navigator.serviceWorker.register("./sw.js").catch(() => {});
+      navigator.serviceWorker
+        .register("./sw.js")
+        .then((registration) => {
+          const check = () => registration.update().catch(() => {});
+          check();
+          document.addEventListener("visibilitychange", () => {
+            if (document.visibilityState === "visible") check();
+          });
+        })
+        .catch(() => {});
     });
   }
 </script>

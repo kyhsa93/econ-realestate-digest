@@ -1,4 +1,4 @@
-const CACHE_NAME = "econ-digest-v8";
+const CACHE_NAME = "econ-digest-v9";
 const SHELL_ASSETS = [
   "./",
   "./index.html",
@@ -9,6 +9,23 @@ const SHELL_ASSETS = [
   "./icons/icon-192.png",
   "./icons/icon-512.png",
 ];
+
+// 브라우저 HTTP 캐시를 건너뛰고 받는다. GitHub Pages가 HTML과 스크립트에 max-age를
+// 걸어 두어, 그냥 받으면 새로 올린 코드 대신 몇 분 전 것이 그대로 돌아온다.
+function fetchFresh(request) {
+  return fetch(request, { cache: "reload" });
+}
+
+function keepInCache(key, response) {
+  if (!response.ok) return response;
+  const copy = response.clone();
+  caches.open(CACHE_NAME).then((cache) => cache.put(key, copy));
+  return response;
+}
+
+function offlineResponse(statusText) {
+  return new Response("", { status: 503, statusText });
+}
 
 function dataCacheKey(url) {
   return new Request(`${url.origin}${url.pathname}`);
@@ -23,8 +40,18 @@ function isHtmlRequest(request, url) {
   );
 }
 
+// 페이지를 움직이는 코드는 HTML 안에도 있고 따로 받는 스크립트에도 있다. 둘 다
+// 네트워크를 먼저 본다 - 캐시부터 주면 새로 올린 코드가 다음 실행에나 걸린다.
+function isPageCode(request, url) {
+  return isHtmlRequest(request, url) || url.pathname.endsWith(".js");
+}
+
 self.addEventListener("install", (event) => {
-  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(SHELL_ASSETS)));
+  event.waitUntil(
+    caches
+      .open(CACHE_NAME)
+      .then((cache) => cache.addAll(SHELL_ASSETS.map((asset) => new Request(asset, { cache: "reload" }))))
+  );
   self.skipWaiting();
 });
 
@@ -47,54 +74,35 @@ self.addEventListener("fetch", (event) => {
   if (url.pathname.includes("/data/")) {
     const key = dataCacheKey(url);
     event.respondWith(
-      fetch(event.request)
-        .then((response) => {
-          if (response.ok) {
-            const copy = response.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(key, copy));
-          }
-          return response;
-        })
+      fetchFresh(event.request)
+        .then((response) => keepInCache(key, response))
         .catch(() =>
-          caches.match(key).then(
-            (cached) =>
-              cached ?? new Response("", { status: 503, statusText: "offline, no cached data" })
-          )
+          caches.match(key).then((cached) => cached ?? offlineResponse("offline, no cached data"))
         )
     );
     return;
   }
 
-  if (isHtmlRequest(event.request, url)) {
+  if (isPageCode(event.request, url)) {
+    const html = isHtmlRequest(event.request, url);
     event.respondWith(
-      fetch(event.request)
-        .then((response) => {
-          if (response.ok) {
-            const copy = response.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
-          }
-          return response;
-        })
+      fetchFresh(event.request)
+        .then((response) => keepInCache(event.request, response))
         .catch(() =>
           caches
             .match(event.request)
-            .then((cached) => cached ?? caches.match("./index.html"))
-            .then((cached) => cached ?? new Response("", { status: 503, statusText: "offline" }))
+            .then((cached) => cached ?? (html ? caches.match("./index.html") : undefined))
+            .then((cached) => cached ?? offlineResponse("offline"))
         )
     );
     return;
   }
 
+  // 아이콘처럼 내용이 바뀌지 않는 파일만 캐시부터 준다.
   event.respondWith(
     caches.match(event.request).then((cached) => {
       const fetchPromise = fetch(event.request)
-        .then((response) => {
-          if (response.ok) {
-            const copy = response.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
-          }
-          return response;
-        })
+        .then((response) => keepInCache(event.request, response))
         .catch(() => cached);
       return cached || fetchPromise;
     })

@@ -34,6 +34,7 @@ async function loadServiceWorker({ network } = {}) {
   const source = await readFile(path.join(root, "docs/sw.js"), "utf8");
   const store = new Map();
   const handlers = {};
+  const calls = [];
 
   const cache = {
     addAll: async () => {},
@@ -54,8 +55,10 @@ async function loadServiceWorker({ network } = {}) {
       keys: async () => [],
       delete: async () => true,
     },
-    fetch: async (request) =>
-      network ? network(request) : new FakeResponse("live", { status: 200 }),
+    fetch: async (request, init) => {
+      calls.push({ url: String(request.url ?? request), init });
+      return network ? network(request) : new FakeResponse("live", { status: 200 });
+    },
     self: {
       addEventListener: (type, fn) => (handlers[type] = fn),
       skipWaiting() {},
@@ -73,7 +76,7 @@ async function loadServiceWorker({ network } = {}) {
     return responded === undefined ? undefined : await responded;
   };
 
-  return { respond, store, cache };
+  return { respond, store, cache, calls };
 }
 
 test("데이터는 쿼리를 뗀 주소로 캐시해서 다음에 찾을 수 있게 한다", async () => {
@@ -144,5 +147,49 @@ test("새 페이지들이 설치 시 미리 받는 목록에 들어 있다", asy
   for (const asset of ["./index.html", "./rates.html", "./news.html", "./analytics.js"]) {
     assert.ok(source.includes(`"${asset}"`), `${asset}이 셸 목록에 없다`);
   }
-  assert.ok(/CACHE_NAME = "econ-digest-v8"/.test(source), "캐시 버전을 올리지 않았다");
+  assert.ok(/CACHE_NAME = "econ-digest-v9"/.test(source), "캐시 버전을 올리지 않았다");
+});
+
+test("페이지 코드는 브라우저 캐시를 건너뛰고 받는다", async () => {
+  const sw = await loadServiceWorker();
+
+  await sw.respond(`${ORIGIN}/econ-realestate-digest/index.html`, { mode: "navigate" });
+  await sw.respond(`${ORIGIN}/econ-realestate-digest/analytics.js`);
+  await sw.respond(`${ORIGIN}/econ-realestate-digest/data/news.json?_=1`);
+
+  assert.equal(sw.calls.length, 3, "가로채지 못한 요청이 있다");
+  for (const call of sw.calls) {
+    assert.equal(call.init?.cache, "reload", `${call.url}: 브라우저 캐시가 끼어들 수 있다`);
+  }
+});
+
+test("스크립트도 네트워크를 먼저 본다", async () => {
+  let body = "old";
+  const sw = await loadServiceWorker({ network: async () => new FakeResponse(body, { status: 200 }) });
+  const url = `${ORIGIN}/econ-realestate-digest/analytics.js`;
+
+  await sw.respond(url);
+  await new Promise((r) => setTimeout(r, 0));
+
+  body = "new";
+  const again = await sw.respond(url);
+  assert.equal(again.body, "new", "받아둔 옛 스크립트를 그대로 준다");
+});
+
+test("스크립트가 안 받아지면 받아둔 것으로 버틴다", async () => {
+  let online = true;
+  const sw = await loadServiceWorker({
+    network: async () => {
+      if (!online) throw new Error("offline");
+      return new FakeResponse("script", { status: 200 });
+    },
+  });
+  const url = `${ORIGIN}/econ-realestate-digest/analytics.js`;
+
+  await sw.respond(url);
+  await new Promise((r) => setTimeout(r, 0));
+
+  online = false;
+  const cached = await sw.respond(url);
+  assert.equal(cached.body, "script", "오프라인에서 스크립트가 통째로 빈다");
 });
