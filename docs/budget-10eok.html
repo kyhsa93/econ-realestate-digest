@@ -241,7 +241,7 @@
   .trend-chart { position: relative; }
   .trend-chart svg { width: 100%; height: auto; display: block; touch-action: none; }
   .trend-chart .grid { stroke: var(--border); stroke-width: 1; }
-  .trend-chart .axis { fill: var(--muted); font-size: 9px; }
+  .trend-chart .axis { fill: var(--muted); font-size: 0.85rem; }
   .trend-chart .axis.y { text-anchor: end; }
   .trend-chart .axis.x { text-anchor: middle; }
   .trend-chart .marker-line { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 3; }
@@ -961,28 +961,59 @@ function syncAreaUrl() {
   if (url !== `${location.pathname}${location.search}`) history.replaceState(null, "", url);
 }
 
-const CHART = { w: 320, h: 132, left: 52, right: 10, top: 12, bottom: 26 };
+// 그래프는 그려질 자리의 너비를 그대로 좌표계로 쓴다. 좌표 한 칸이 화면 1픽셀이라
+// 축 글자는 스타일시트에 적은 크기(시세 표와 같은 0.85rem)로 그대로 보인다.
+const CHART = {
+  fallbackW: 320,
+  heightRatio: 0.289,
+  minH: 120,
+  minLeft: 44,
+  right: 10,
+  top: 16,
+  bottom: 28,
+  gap: 8,
+  axisFont: 13.6,
+};
 
-function chartScale(values) {
+function axisTextWidth(text) {
+  let width = 0;
+  for (const ch of String(text)) {
+    if (/[\uac00-\ud7a3]/.test(ch)) width += CHART.axisFont;
+    else if (ch === "," || ch === "." || ch === " ") width += CHART.axisFont * 0.32;
+    else width += CHART.axisFont * 0.58;
+  }
+  return width;
+}
+
+function chartBox(width, yLabels = []) {
+  const w = Math.round(typeof width === "number" && width > 0 ? width : CHART.fallbackW);
+  const h = Math.round(Math.max(CHART.minH, w * CHART.heightRatio));
+  const widest = yLabels.reduce((max, label) => Math.max(max, axisTextWidth(label)), 0);
+  const left = Math.round(Math.min(w * 0.42, Math.max(CHART.minLeft, widest + CHART.gap)));
+  return { w, h, left, right: CHART.right, top: CHART.top, bottom: CHART.bottom };
+}
+
+function chartScale(values, box = chartBox()) {
   const min = Math.min(...values);
   const max = Math.max(...values);
   const range = max - min || Math.abs(max) || 1;
-  const plotW = CHART.w - CHART.left - CHART.right;
-  const plotH = CHART.h - CHART.top - CHART.bottom;
+  const plotW = box.w - box.left - box.right;
+  const plotH = box.h - box.top - box.bottom;
+  const step = values.length > 1 ? plotW / (values.length - 1) : 0;
   return {
     min,
     max,
-    step: values.length > 1 ? plotW / (values.length - 1) : 0,
-    x: (i) => CHART.left + i * (values.length > 1 ? plotW / (values.length - 1) : 0),
-    y: (v) => CHART.top + plotH - ((v - min) / range) * plotH,
+    step,
+    x: (i) => box.left + i * step,
+    y: (v) => box.top + plotH - ((v - min) / range) * plotH,
   };
 }
 
-function chartIndexAt(ratio, count) {
+function chartIndexAt(ratio, count, box = chartBox()) {
   if (!Number.isFinite(ratio) || count < 1) return null;
-  const plotW = CHART.w - CHART.left - CHART.right;
-  const x = ratio * CHART.w;
-  const i = Math.round(((x - CHART.left) / plotW) * (count - 1));
+  const plotW = box.w - box.left - box.right;
+  const x = ratio * box.w;
+  const i = Math.round(((x - box.left) / plotW) * (count - 1));
   return Math.min(count - 1, Math.max(0, i));
 }
 
@@ -991,32 +1022,38 @@ function shortDate(date) {
   return month && day ? `${Number(month)}/${Number(day)}` : "";
 }
 
-function sparklineSvg(series, format) {
+function yTickValues(values) {
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+  return [max, (max + min) / 2, min];
+}
+
+function sparklineSvg(series, format, box) {
   const values = series.map((p) => p.value);
-  const scale = chartScale(values);
+  const scale = chartScale(values, box);
   const points = series.map((p, i) => `${scale.x(i).toFixed(1)},${scale.y(p.value).toFixed(1)}`).join(" ");
   const last = series[series.length - 1];
   const rising = values.length > 1 && last.value >= values[0];
   const color = rising ? "#d64545" : "#2f6fed";
 
-  const yTicks = [scale.max, (scale.max + scale.min) / 2, scale.min].map((v, i) => {
-    const y = CHART.top + (i * (CHART.h - CHART.top - CHART.bottom)) / 2;
+  const yTicks = yTickValues(values).map((v, i) => {
+    const y = box.top + (i * (box.h - box.top - box.bottom)) / 2;
     return (
-      `<line x1="${CHART.left}" y1="${y}" x2="${CHART.w - CHART.right}" y2="${y}" class="grid" />` +
-      `<text x="${CHART.left - 6}" y="${y + 3}" class="axis y">${escapeHtml(format(v))}</text>`
+      `<line x1="${box.left}" y1="${y}" x2="${box.w - box.right}" y2="${y}" class="grid" />` +
+      `<text x="${box.left - 6}" y="${(y + CHART.axisFont / 3).toFixed(1)}" class="axis y">${escapeHtml(format(v))}</text>`
     );
   }).join("");
 
   const xAt = [0, Math.floor((series.length - 1) / 2), series.length - 1];
   const xTicks = [...new Set(xAt)].map((i) =>
-    `<text x="${scale.x(i).toFixed(1)}" y="${CHART.h - 8}" class="axis x">${escapeHtml(shortDate(series[i].date))}</text>`
+    `<text x="${scale.x(i).toFixed(1)}" y="${box.h - 9}" class="axis x">${escapeHtml(shortDate(series[i].date))}</text>`
   ).join("");
 
-  return `<svg viewBox="0 0 ${CHART.w} ${CHART.h}" role="img">
+  return `<svg viewBox="0 0 ${box.w} ${box.h}" role="img">
       ${yTicks}${xTicks}
       <polyline points="${points}" fill="none" stroke="${color}" stroke-width="2" />
       <circle cx="${scale.x(series.length - 1).toFixed(1)}" cy="${scale.y(last.value).toFixed(1)}" r="3" fill="${color}" />
-      <g class="marker" hidden><line class="marker-line" y1="${CHART.top}" y2="${CHART.h - CHART.bottom}" /><circle class="marker-dot" r="4" /></g>
+      <g class="marker" hidden><line class="marker-line" y1="${box.top}" y2="${box.h - box.bottom}" /><circle class="marker-dot" r="4" /></g>
     </svg>`;
 }
 
@@ -1056,7 +1093,17 @@ function ratioSeries(trend) {
 
 const chartSeries = new Map();
 
-function drawSeries(chartId, metaId, series, label, format) {
+function drawChart(chartId, series, format, label) {
+  const chart = document.getElementById(chartId);
+  if (!chart) return false;
+
+  const box = chartBox(chart.clientWidth, yTickValues(series.map((p) => p.value)).map(format));
+  chart.innerHTML = sparklineSvg(series, format, box);
+  chartSeries.set(chartId, { series, format, label, box });
+  return true;
+}
+
+function drawSeries(chartId, metaId, series, label, format, tickFormat = format) {
   const chart = document.getElementById(chartId);
   const meta = document.getElementById(metaId);
   if (!chart || !meta) return false;
@@ -1069,8 +1116,7 @@ function drawSeries(chartId, metaId, series, label, format) {
   }
 
   const last = series[series.length - 1];
-  chart.innerHTML = sparklineSvg(series, format);
-  chartSeries.set(chartId, { series, format, label });
+  drawChart(chartId, series, tickFormat, label);
   meta.textContent = `${label} · ${t("trendRange")(series[0].date, last.date, series.length)} · ${format(last.value)}`;
   return true;
 }
@@ -1090,14 +1136,14 @@ function showChartTip(chartId, clientX, clientY) {
   const tip = document.getElementById("chart-tip");
   if (!entry || !svg || !tip) return;
 
-  const box = svg.getBoundingClientRect();
-  if (!box.width) return;
+  const rect = svg.getBoundingClientRect();
+  if (!rect.width) return;
 
-  const index = chartIndexAt((clientX - box.left) / box.width, entry.series.length);
+  const index = chartIndexAt((clientX - rect.left) / rect.width, entry.series.length, entry.box);
   if (index === null) return;
 
   const point = entry.series[index];
-  const scale = chartScale(entry.series.map((p) => p.value));
+  const scale = chartScale(entry.series.map((p) => p.value), entry.box);
   const marker = svg.querySelector(".marker");
   if (marker) {
     const x = scale.x(index);
@@ -1158,31 +1204,37 @@ function renderTrend() {
   }
 
   section.hidden = false;
-  document.getElementById("trend-chart").innerHTML = sparklineSvg(series, formatMan);
-  chartSeries.set("trend-chart", { series, format: formatMan, label: trendMetricLabel() });
+  drawChart("trend-chart", series, formatMan, trendMetricLabel());
   const last = series[series.length - 1];
   document.getElementById("trend-meta").textContent =
     `${trendMetricLabel()} · ${t("trendRange")(series[0].date, last.date, series.length)}` +
     ` · ${t("trendValue")(formatMan(last.value))}` +
     `\n${t("trendBasis")}`;
 
+  // 접혀 있는 카드는 너비가 0이라 그래프가 제 크기로 그려지지 않는다. 먼저 펼치고 잰다.
+  const volumeCard = document.getElementById("volume-card");
+  volumeCard.hidden = false;
   const volumeKey = kind === "jeonse" ? "trendVolumeJeonse" : kind === "wolse" ? "trendVolumeWolse" : "trendVolumeSale";
-  document.getElementById("volume-card").hidden = !drawSeries(
+  volumeCard.hidden = !drawSeries(
     "volume-chart",
     "volume-meta",
     volumeSeries(cache.trend),
     t(volumeKey),
-    (v) => t("trendVolumeValue")(t("trendCount")(Math.round(v)))
+    (v) => t("trendVolumeValue")(t("trendCount")(Math.round(v))),
+    (v) => t("trendCount")(Math.round(v))
   );
 
+  const ratioCard = document.getElementById("ratio-card");
+  ratioCard.hidden = false;
   const ratioShown = kind !== "wolse" && drawSeries(
     "ratio-chart",
     "ratio-meta",
     ratioSeries(cache.trend),
     t("trendRatio"),
-    (v) => t("trendRatioValue")(`${v.toFixed(1)}%`)
+    (v) => t("trendRatioValue")(`${v.toFixed(1)}%`),
+    (v) => `${v.toFixed(1)}%`
   );
-  document.getElementById("ratio-card").hidden = !ratioShown;
+  ratioCard.hidden = !ratioShown;
 }
 
 const budgetBand10k = (() => {
@@ -1379,6 +1431,14 @@ trendSection.addEventListener("touchstart", onChartPointer, { passive: true });
 trendSection.addEventListener("touchmove", onChartPointer, { passive: true });
 trendSection.addEventListener("mouseleave", hideChartTip);
 window.addEventListener("scroll", hideChartTip, { passive: true });
+
+let lastChartWidth = 0;
+window.addEventListener("resize", () => {
+  const width = document.getElementById("trend-chart")?.clientWidth ?? 0;
+  if (!width || width === lastChartWidth) return;
+  lastChartWidth = width;
+  if (cache.trend) renderTrend();
+});
 
 document.getElementById("theme-toggle").addEventListener("click", () => {
   const order = ["auto", "light", "dark"];

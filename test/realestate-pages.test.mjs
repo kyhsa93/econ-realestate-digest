@@ -637,6 +637,45 @@ test("가로 위치에서 가장 가까운 지점을 고른다", async () => {
   assert.equal(at(0.5, 0), null);
 });
 
+test("축 글자를 시세 표 글자와 같은 크기로 적는다", async () => {
+  const html = await readFile(path.join(root, "docs/realestate.html"), "utf8");
+  const table = html.match(/\.data-table \{[^}]*font-size: ([\d.]+rem)/)?.[1];
+  const axis = html.match(/\.trend-chart \.axis \{[^}]*font-size: ([\d.]+rem)/)?.[1];
+
+  assert.ok(table, "시세 표 글자 크기를 읽지 못했다");
+  assert.equal(axis, table, "그래프 축 글자가 시세 표 글자와 다른 크기다");
+});
+
+test("그래프 좌표계를 그려질 자리의 픽셀과 1:1로 잡는다", async () => {
+  const page = await loadRealestatePage({ realestate: trendRealestate(), trend: trendData(), kind: "sale" });
+  const box = page.app.chartBox(700, ["11,607만원", "9,983만원", "8,360만원"]);
+
+  assert.equal(box.w, 700, "가로 좌표가 그려질 자리 너비와 어긋나면 글자가 확대된다");
+  assert.equal(box.h, Math.round(700 * 0.7 * (132 / 320)), "예전 높이의 70%가 아니다");
+  assert.ok(box.left >= page.app.axisTextWidth("11,607만원"), `세로 눈금 글자가 잘린다: ${box.left}`);
+});
+
+test("좁은 화면에서도 그래프가 납작해지지 않는다", async () => {
+  const page = await loadRealestatePage({ realestate: trendRealestate(), trend: trendData(), kind: "sale" });
+  const box = page.app.chartBox(300, ["4,400만원"]);
+
+  assert.ok(box.h >= 120, `높이가 너무 낮다: ${box.h}`);
+  assert.ok(box.left < box.w * 0.45, `세로 눈금이 그림 자리를 다 먹었다: ${box.left}`);
+});
+
+test("거래량·전세가율 눈금에는 마지막 주 문구를 붙이지 않는다", async () => {
+  const page = await loadRealestatePage({ realestate: trendRealestate(), trend: trendData(), kind: "sale" });
+
+  for (const [what, svg] of [["거래량", page.volumeHtml()], ["전세가율", page.ratioHtml()]]) {
+    const labels = [...svg.matchAll(/class="axis y">([^<]+)</g)].map((m) => m[1]);
+    assert.equal(labels.length, 3, `${what} 세로 눈금이 없다`);
+    for (const label of labels) {
+      assert.ok(!label.includes("마지막 주"), `${what} 눈금에 설명 문구가 들어가 잘린다: ${label}`);
+    }
+  }
+  assert.match(page.volumeMeta(), /마지막 주/, "설명 줄에서까지 문구가 사라졌다");
+});
+
 test("그래프에 마우스를 올릴 자리를 마련해 둔다", async () => {
   const page = await loadRealestatePage({ realestate: trendRealestate(), trend: trendData(), kind: "sale" });
   assert.match(page.trendHtml(), /class="marker" hidden/, "짚어줄 표시가 없다");
