@@ -2705,7 +2705,20 @@
         "source": "연합뉴스 경제",
         "category": "realestate",
         "preview": "(서울=연합뉴스) 홍준석 기자 = 국립여성사박물관이 공공주택 공급계획 영향으로 새 부지를 찾게 됐다.",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-eunpyeong.html",
+            "label": "은평구 아파트 84㎡ 매매",
+            "labelEn": "은평구 apartment 84㎡ sale",
+            "value": "11억 3,455만원",
+            "valueEn": "₩1,135M",
+            "note": "최근 1주 계약 31건 · 8/13 대비 +25.7%",
+            "noteEn": "31 deals in the last 1 weeks · +25.7% vs Aug 13"
+          }
+        ],
+        "titleEn": "Gender Equality Ministry to Relocate Women's Safety Museum Site for Public Housing in Eunpyeong-gu"
       },
       {
         "title": "[올댓차이나] 홍콩 증시, 美 장기금리 하락에 상승 마감… H주 0.91%↑",
@@ -2714,7 +2727,8 @@
         "source": "뉴시스 경제",
         "category": "rates",
         "preview": "[서울=뉴시스]이재준 기자 = 홍콩 증시는 20일 전날 미국 장기금리 하락으로 매수 심리를 유지하면서 오름세를 이어간 채 마감했다. 항셍지수는 이날 전일 대비 203.42 포인트, 0.80% 올라간 2만5698.49…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "[AllChina] Hong Kong stock market closes higher as U.S. long-term interest rates fall... H-shares up 0.91%"
       },
       {
         "title": "은행권, 내달 입주 앞둔 '디에이치 방배' 잔금대출 한도 확대",
@@ -2729,7 +2743,28 @@
             "link": "https://www.hankyung.com/article/2026082030021",
             "source": "한국경제 경제"
           }
-        ]
+        ],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-seocho.html",
+            "label": "서초구 아파트 84㎡ 매매",
+            "labelEn": "서초구 apartment 84㎡ sale",
+            "value": "22억 9,426만원",
+            "valueEn": "₩2,294M",
+            "note": "최근 1주 계약 16건",
+            "noteEn": "16 deals in the last 1 weeks"
+          },
+          {
+            "kind": "rates",
+            "label": "주택담보대출 최저금리",
+            "labelEn": "Lowest mortgage rate",
+            "value": "연 3.64%",
+            "valueEn": "3.64% p.a.",
+            "href": "./mortgage-rates.html"
+          }
+        ],
+        "titleEn": "Banking sector expands down payment loan limits for 'Daecheong Bangbae' set to open next month"
       },
       {
         "title": "씨티 \"환율 1,390원 아래선 국민연금 환헤지 확대 멈출 수도\"",
@@ -2738,7 +2773,8 @@
         "source": "연합뉴스 경제",
         "category": "stocks",
         "preview": "(서울=연합뉴스) 이도흔 기자 = 원/달러 환율이 1.390원 이하 수준을 유지하면 국민연금이 환헤지 비율 확대를 중단할 수 있다는 전망이 나왔...",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Citigroup \"May Halt Expansion of National Pension Fund Currency Hedging if Exchange Rate Falls Below 1,390 Won"
       },
       {
         "title": "[올댓차이나] 中 증시, 저가 매수세에 반등 마감…창업판 0.64%↑",
@@ -2747,7 +2783,8 @@
         "source": "뉴시스 경제",
         "category": "stocks",
         "preview": "[서울=뉴시스]이재준 기자 = 중국 증시는 20일 전날 급락에 대한 반동으로 저가 매수세가 유입하면서 반등 마감했다. 상하이 종합지수는 이날 전일 대비 9.30 포인트, 0.24% 올라간 3903.72로 폐장했다.…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "[AllChina] China's stock market closes higher on bargain hunting... Start-up board up 0.64%"
       },
       {
         "title": "압구정 현대 열흘새 호가 5억 뚝…강남·서초 집값 ‘세제개편 후폭풍’",
@@ -2756,7 +2793,20 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "稅부담에 강남·서초 집값 낙폭 2배로 매물 증가분 5000건중 절반이 강남3구 성북·서대문·중랑은 0.4%↑ ‘온도차’세제개편안 발표 이후 2주 남짓한 기간 동안 서울 아파트 매물..",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-jungnang.html",
+            "label": "중랑구 아파트 84㎡ 매매",
+            "labelEn": "중랑구 apartment 84㎡ sale",
+            "value": "9억 1,958만원",
+            "valueEn": "₩920M",
+            "note": "최근 1주 계약 19건",
+            "noteEn": "19 deals in the last 1 weeks"
+          }
+        ],
+        "titleEn": "Apgujeong Hyundai's Asking Price Drops 500,000,000 Won in Ten Days... Gangnam, Seocho Home Prices Face 'Tax Reform Aftermath"
       },
       {
         "title": "새마을금고·신협, 대출 숨통 트인다",
@@ -2765,7 +2815,8 @@
         "source": "한국경제 경제",
         "category": "other",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "New Village Credit Union and Shinhyup Ease Loan Restrictions"
       },
       {
         "title": "신한銀, 중저신용자 대상…'슈퍼SOL중금리대출' 출시",
@@ -2774,7 +2825,8 @@
         "source": "한국경제 경제",
         "category": "rates",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Shinhan Bank Launches 'Super SOL Moderate Interest Loan' Targeting Medium-to-Low Creditworthiness Customers"
       },
       {
         "title": "국유지 청년·신혼주택 2.8만가구 착공",
@@ -2783,7 +2835,8 @@
         "source": "한국경제 부동산",
         "category": "realestate",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "State-owned land youth and newlywed housing 28,000 units start construction"
       },
       {
         "title": "\"열흘 새 5억 뚝\"… 강남 집값 낙폭 2배로",
@@ -2792,7 +2845,20 @@
         "source": "매일경제 부동산",
         "category": "other",
         "preview": "세제개편안 발표 이후 2주 남짓한 기간 동안 서울 아파트 매물이 5000건 가까이 늘었다. 늘어난 매물의 절반은 강남 3구(강남·서초·송파구)에서 나왔다. 보유세 부담이 커진 강남..",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-seocho.html",
+            "label": "서초구 아파트 84㎡ 매매",
+            "labelEn": "서초구 apartment 84㎡ sale",
+            "value": "22억 9,426만원",
+            "valueEn": "₩2,294M",
+            "note": "최근 1주 계약 16건",
+            "noteEn": "16 deals in the last 1 weeks"
+          }
+        ],
+        "titleEn": "Down 500,000,000 won in ten days\"… Gangnam home prices drop twice as much"
       },
       {
         "title": "전세금 HUG에 맡기고 집주인은 월세 받는다",
@@ -2801,7 +2867,8 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "임차인이 보증금을 돌려받지 못하는 위험 없이 전세로 거주할 수 있는 새로운 형태의 계약이 출시됐다. 보증금을 임대인이 아닌 전월세안정화기구에 예치하는 방식인데, 임대인은 이 기구의..",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Tenant pays deposit to HUG and landlord receives monthly rent"
       },
       {
         "title": "[단독] 분당 샛별마을 재건축, 상가 반발에 '제동' 걸리나",
@@ -2810,7 +2877,8 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "분당 1기 신도시 재건축 선도지구 중 빠른 속도를 내던 샛별마을(31구역·S4) 재건축 사업이 상가 소유주와의 갈등이라는 복병을 만났다. 20일 정비업계에 따르면 샛별마을 상가 소..",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "[Sole] Reconstruction of Sajibyeong-dong in Bundang may be halted due to shop opposition"
       },
       {
         "title": "혁신도시 산학연 클러스터·주택 포화상태",
@@ -2819,7 +2887,8 @@
         "source": "한국경제 부동산",
         "category": "realestate",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Innovative City Industry-Academia-Research Cluster and Housing Saturation State"
       },
       {
         "title": "협동조합·마을기업 지원 제도화…사회연대경제기본법 국회 통과",
@@ -2828,7 +2897,8 @@
         "source": "연합뉴스 경제",
         "category": "other",
         "preview": "(서울=연합뉴스) 홍준석 기자 = 사회적기업과 협동조합, 마을기업 등 지역에 기반을 두고 활동하는 사회연대경제조직을 체계적으로 육성·지원하기 위...",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Cooperatives and community enterprises to be supported through institutionalization... Social Solidarity Economy Basic Act passes in National Assembly"
       },
       {
         "title": "김윤덕 \"신길2 도심 공공주택 복합사업 속도감 있게 추진해야\"",
@@ -2837,7 +2907,20 @@
         "source": "뉴시스 경제",
         "category": "realestate",
         "preview": "[서울=뉴시스]이종성 기자 = 김윤덕 국토교통부 장관이 서울 영등포구 신길2 도심 공공주택 복합사업지를 찾아 사업 추진에 속도를 내고, 이주·철거 과정에서 주민 불편을 최소화할 것을 주문했다. 국토부는 김윤덕 장관이…",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-yeongdeungpo.html",
+            "label": "영등포구 아파트 84㎡ 매매",
+            "labelEn": "영등포구 apartment 84㎡ sale",
+            "value": "14억 5,294만원",
+            "valueEn": "₩1,453M",
+            "note": "최근 1주 계약 26건 · 8/13 대비 +0.2%",
+            "noteEn": "26 deals in the last 1 weeks · +0.2% vs Aug 13"
+          }
+        ],
+        "titleEn": "Kim Yoon-deok \"Seonggil 2 Urban Public Housing Complex Project Must Be Pushed Forward with Momentum"
       },
       {
         "title": "“나가면 전셋집 못구해”…20년 채운 서울시 장기전세주택, 대규모 ‘퇴거 폭탄’",
@@ -2846,7 +2929,20 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "서울시 송파구의 한 장기전세주택에 거주하는 70대 A씨는 최근 밤잠을 설치고 있다. 지난 2008년 입주해 무탈하게 가정을 꾸려온 이곳을 내년이면 떠나야 하기 때문이다. A씨는 “..",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-songpa.html",
+            "label": "송파구 아파트 84㎡ 전세",
+            "labelEn": "송파구 apartment 84㎡ jeonse",
+            "value": "9억 3,762만원",
+            "valueEn": "₩938M",
+            "note": "최근 1주 계약 43건 · 8/13 대비 +8.4%",
+            "noteEn": "43 deals in the last 1 weeks · +8.4% vs Aug 13"
+          }
+        ],
+        "titleEn": "If You Leave, You Can't Find a Rental Home\"… Seoul's 20-Year Long-Term Rental Housing Faces Massive \"Eviction Bomb"
       },
       {
         "title": "장단기 국고채 금리 혼조…외인 선물 매도·美 바이백 소화(종합)",
@@ -2855,7 +2951,8 @@
         "source": "연합뉴스 경제",
         "category": "rates",
         "preview": "(서울=연합뉴스) 강수지 기자 = 20일 국고채 금리는 장단기물이 엇갈린 움직임을 나타냈다.",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Short- and long-term government bond yields mixed... foreigners sell futures, U.S. buyback absorbed (comprehensive)"
       },
       {
         "title": "국고채 금리 대체로 하락…3년물 연 3.811%",
@@ -2864,7 +2961,8 @@
         "source": "연합뉴스 경제",
         "category": "rates",
         "preview": "(서울=연합뉴스) 20일 국고채 금리가 대체로 하락했다.",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Government bond rates mostly fall... 3-year rate at annual 3.811%"
       },
       {
         "title": "전세금 정부에 맡기고 월세 받는다… ‘전월세 안심신탁’ 집주인 참여 관건",
@@ -2873,7 +2971,8 @@
         "source": "조선비즈 부동산",
         "category": "realestate",
         "preview": "정부가 세입자의 전세보증금을 집주인 대신 맡아 운용하고 여기서 발생한 수익을 집주인에게 월세처럼 지급하는 ‘전월세 안심신탁’ 사업을 도입한다. 전세금을 공공기관이 관리해 보증금 미반환과 전세사기 위험을 낮추고 월세보…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Renters pay deposit to government and receive monthly rent... 'Rent Deposit Assurance Trust' hinges on landlord participation"
       },
       {
         "title": "한토신, 리츠 운용자산 4조 육박…오피스·임대주택 등 포트폴리오 확대",
@@ -2882,7 +2981,8 @@
         "source": "뉴시스 경제",
         "category": "realestate",
         "preview": "[서울=뉴시스] 박성환 기자 = 한국토지신탁이 운용하는 리츠(REITs·부동산투자회사) 자산 규모가 4조원에 육박했다. 한국토지신탁은 올해 2분기 기준 리츠 운용자산(AUM)이 3조9809억원으로 집계됐다고 20일…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Hanjin, REITs Assets Near 4,000,000,000,000 Won as Office, Rental Housing Portfolios Expand"
       },
       {
         "title": "용산공원 주택공급 띄웠지만…부지도 물량도 '안갯속'",
@@ -2891,7 +2991,20 @@
         "source": "뉴시스 경제",
         "category": "realestate",
         "preview": "[서울=뉴시스]이종성 기자 = 정부와 서울시가 약 한 달 만에 다시 만나 용산공원 내 주택 공급 방안을 논의했지만, 양측의 입장 차만 재확인한 채 구체적인 합의점을 찾지 못하고 '빈손'으로 돌아섰다. 양측은 용산공원…",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-yongsan.html",
+            "label": "용산구 아파트 84㎡ 전세",
+            "labelEn": "용산구 apartment 84㎡ jeonse",
+            "value": "6억 8,556만원",
+            "valueEn": "₩686M",
+            "note": "최근 1주 계약 5건",
+            "noteEn": "5 deals in the last 1 weeks"
+          }
+        ],
+        "titleEn": "Yongsan Park Housing Supply Raised, But Land and Supply Remain 'Foggy"
       },
       {
         "title": "HUG “보증금 떼일 걱정 없는 전세 살며 주거 비용 낮추세요”",
@@ -2900,7 +3013,8 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "임차인이 보증금을 돌려받지 못하는 위험 없이 전세로 거주할 수 있는 새로운 형태의 계약이 출시됐다. 보증금을 임대인이 아닌 전월세 안정화 기구에 예치하는 방식인데 임대인은 이 기구..",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "HUG \"Live in a Leasehold Without Worrying About Security Deposit, Reduce Housing Costs"
       },
       {
         "title": "日증시, 美국채금리 하락에 상승 마감…닛케이 1.36%↑",
@@ -2909,7 +3023,8 @@
         "source": "뉴시스 경제",
         "category": "rates",
         "preview": "[서울=뉴시스] 신효령 기자 = 20일 일본 도쿄증시에서 주요 지수가 일제히 상승 마감했다. 미국 장기금리가 하락하면서 전날 급락했던 종목을 중심으로 저가 매수세가 유입됐다. 니혼게이자이신문에 따르면 이날 닛케이22…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Tokyo Stock Exchange closes higher as U.S. bond yields fall… Nikkei rises 1.36%"
       },
       {
         "title": "금융당국 집단대출 완화 주문에…국민·신한, 디에이치방배 한도 확대",
@@ -2918,7 +3033,18 @@
         "source": "한국경제 경제",
         "category": "other",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "rates",
+            "label": "주택담보대출 최저금리",
+            "labelEn": "Lowest mortgage rate",
+            "value": "연 3.64%",
+            "valueEn": "3.64% p.a.",
+            "href": "./mortgage-rates.html"
+          }
+        ],
+        "titleEn": "Financial regulators urge easing of group lending…Kookmin, Shinhan expand DH Bangbae limits"
       }
     ]
   }

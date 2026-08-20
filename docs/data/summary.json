@@ -1,22 +1,74 @@
 {
-  "updatedAt": "2026-08-20T07:50:53.995Z",
+  "updatedAt": "2026-08-20T11:39:44.094Z",
   "model": "qwen3:14b",
   "summary": {
-    "ko": "- 금리·예금·투자상품: 국고채 금리가 대체로 하락하며 3년물은 연 3.811%를 기록했고, 일본 증시는 미국 국채 금리 하락에 따라 상승 마감하며 닛케이가 1.36% 올랐으며, 글로벌 국채 금리가 치솟는 가운데 중국 국채 금리는 하락하며 분산 투자처로 주목받고 있다.\n- 부동산: 정부가 전세금을 맡기고 월세를 받는 ‘전월세 안심신탁’을 도입하며 집주인 참여가 관건이라고 보도했다. 한토신은 리츠 운용자산이 4조 원에 달하며 오피스와 임대주택 포트폴리오를 확대하고 있다. 용산공원 주택공급 계획이 발표됐지만 부지와 물량은 여전히 불확실한 상태라고 전했다. HUG는 보증금 걱정 없이 전세를 살 수 있도록 하며 주거 비용 절감을 권장하고 있다. 이사 전 전세보증 가능 여부를 확인할 수 있는 HUG의 사전심사 제도가 도입됐다.\n- 기타 경제 소식: 금융당국의 집단대출 완화 주문에 따라 국민·신한은 디에이치방배 한도를 확대했다. 홈플러스는 2000억 투입에 이어 1.5조 추가 대출을 통해 회생 완주를 노리고 있다. '서민금융 잇다'앱은 상반기 3천294억 대출중개를 성공시키며 167억의 이자절감 효과를 냈다. 강남 지역에서는 집값 양극화 현상이 심화되며 호가가 상승하는 것으로 나타났다. 강남·서초의 집값 낙폭은 세 부담으로 인해 2배 이상 커졌고, 외곽 지역에서는 가격이 오히려 상승했다.\n- 증시·환율: 수출업체가 달러를 매도하고 약달러 거래가 이어지면서 원/달러 환율이 1,390원대 초반을 기록했다. 15시 30분 기준 원/달러 환율은 5.1원 하락한 1,392.6원을 기록했다. 수출업체의 달러 매도가 환율에 영향을 미친 것으로 보인다. 수출업체의 거래 동향은 환율 변동에 중요한 요인으로 작용했다. 이날 환율은 전일 대비 약간 하락한 수준을 보였다.",
-    "en": "- Rates, Deposits & Investment Products: The government bond rate fell generally, with the 3-year bond recording an annual rate of 3.811%. The Japanese stock market closed higher following the decline in U.S. Treasury bond rates, with the Nikkei rising 1.36%. Meanwhile, Chinese government bond rates fell amid rising global bond rates, drawing attention as a diversified investment option.\n- Real Estate: The government introduced the 'rental deposit trust,' where the government holds the deposit and collects monthly rent, and reported that the participation of landlords is crucial. Hanwha Asset Management has assets under management in its REITs reaching 4,000,000,000,000 won and is expanding its office and rental housing portfolio. It was reported that although the housing supply plan for Yongsan Park was announced, the site and quantity remain uncertain. HUG is encouraging residents to live in a rental without worrying about the deposit, thus reducing housing costs. HUG has introduced a pre-screening system that allows checking the possibility of a rental deposit before moving.\n- Other Economic News: In accordance with the financial regulatory authority's directive to ease group lending, KB and Shinhan expanded their DH Bangbae limits. Homeplus, after investing 200,000,000,000, is aiming for a full recovery through an additional 1,500,000,000,000 loan. The 'People's Financial Itda' app successfully facilitated 329,400,000,000 in loan mediation during the first half of the year, achieving a 16,700,000,000 interest savings effect. In the Gangnam area, the polarization of housing prices has intensified, with asking prices rising. The price decline in Gangnam and Seocho has more than doubled due to tax burdens, while prices in outlying areas have actually increased.\n- Stocks & FX: The exchange rate of won/dollar reached the early 1,390s as exporters sold dollars and weak-dollar transactions continued. As of 3:30 p.m., the won/dollar exchange rate stood at 1,392.6 won, down 5.1 won from the previous level. It appears that exporters' dollar sales have affected the exchange rate. Exporters' trading trends have acted as an important factor in exchange rate fluctuations. The exchange rate showed a slightly lower level compared to the previous day."
+    "ko": "- 부동산: 성평등부는 은평구 공공주택 공급을 위해 여성사박물관 부지를 이전하기로 했다. 압구정 현대의 호가는 열흘 만에 5억 원 떨어졌다. 국유지에 청년·신혼주택 2만 8천 가구 착공이 시작됐다. 전세금을 HUG에 맡기면 집주인은 월세를 받을 수 있게 됐다. 분당 샛별마을 재건축은 상가 반발로 인해 제동이 걸릴 가능성이 있다.\n- 금리·예금·투자상품: 홍콩 증시는 미국 장기금리 하락으로 인해 상승 마감하며 H주가 0.91% 올랐다. 신한은행은 중저신용자 대상으로 '슈퍼SOL중금리대출'을 출시했다. 장단기 국고채 금리는 혼조세를 보였으며, 외인은 선물 매도를 진행했다. 국고채 금리는 대체로 하락하며 3년물 금리가 연 3.811%를 기록했다. 일본 증시는 미국 국채금리 하락에 따라 상승 마감하며 닛케이가 1.36% 상승했다.\n- 기타 경제 소식: 은행권이 내달 입주 예정인 '디에이치 방배' 잔금대출 한도를 확대했다. 새마을금고와 신협도 대출 관련 규제를 완화하는 방향으로 조치를 내렸다. 강남 지역 주택 가격이 열흘 만에 5억 원이 감소하며 낙폭이 두 배로 확대됐다. 국회는 협동조합과 마을기업 지원을 위한 제도를 사회연대경제기본법에 포함시켜 통과시켰다. 금융당국의 집단대출 완화 요구에 따라 국민은행과 신한은행도 '디에이치방배' 잔금대출 한도를 확대했다.\n- 증시·환율: 씨티는 환율이 1,390원 아래선을할 경우 국민연금의 환헤지 확대가 중단될 수 있다고 분석했다. 중국 증시는 저가 매수세에 힘입어 반등하며 창업판 지수는 0.64% 상승했다. 국민연금의 환헤지 전략은 환율 변동에 따라 조정될 수 있는 상황이다. 중국 증시의 반등은 주로 저가 매수세가 주도했다. 각 기사는 서로 다른 주제를 다루고 있으며 관련성이 없다.",
+    "en": "- Real Estate: The Ministry of Gender Equality has decided to relocate the Women's History Museum site to supply public housing in Eunpyeong-gu. The price per square meter of Hyundai's Apgujeong housing fell 500,000,000 won in ten days. Construction of 20,000 8,000 units of youth and newlywed housing on state-owned land has started. If the deposit is entrusted to HUG, the landlord can receive monthly rent. The reconstruction of Sajib-ma-eul in Bundang may be halted due to opposition from shop owners.\n- Rates, Deposits & Investment Products: The Hong Kong stock market closed higher due to a decline in U.S. long-term interest rates, with H-shares rising 0.91%. Shinhan Bank launched the 'Super SOL Medium Interest Rate Loan' targeted at medium- and low-credit borrowers. The yields on government bonds showed mixed trends, with foreign investors conducting futures selling. Government bond yields generally declined, with the 3-year yield reaching 3.811% annually. The Japanese stock market closed higher following a decline in U.S. government bond yields, with the Nikkei rising 1.36%.\n- Other Economic News: The banking sector has expanded the down payment loan limit for 'Daecheong Bangbae,' which is scheduled to start construction next month. New Village Credit Union and Shinhan Financial Group have also taken measures to ease loan-related regulations. Housing prices in the Gangnam area fell 500,000,000 won within ten days, doubling the previous decline. The National Assembly passed a law incorporating systems to support cooperatives and community enterprises into the Social Solidarity Economy Basic Act. In response to the Financial Supervisory Authority's request to ease group lending restrictions, KB Kookmin Bank and Shinhan Bank also expanded the down payment loan limit for 'Daecheong Bangbae.\n- Stocks & FX: Citigroup analyzed that if the exchange rate falls below 1,390 won, the expansion of the National Pension Service's currency hedging could be halted. China's stock market rebounded due to low-price buying, with the Start-up Board index rising 0.64%. The National Pension Service's currency hedging strategy can be adjusted according to exchange rate fluctuations. The rebound in China's stock market was mainly driven by low-price buying. Each article covers different topics and is unrelated."
   },
   "highlights": [],
   "categories": [
     {
+      "key": "realestate",
+      "name": "부동산",
+      "nameEn": "Real Estate",
+      "lineKo": "성평등부는 은평구 공공주택 공급을 위해 여성사박물관 부지를 이전하기로 했다. 압구정 현대의 호가는 열흘 만에 5억 원 떨어졌다. 국유지에 청년·신혼주택 2만 8천 가구 착공이 시작됐다. 전세금을 HUG에 맡기면 집주인은 월세를 받을 수 있게 됐다. 분당 샛별마을 재건축은 상가 반발로 인해 제동이 걸릴 가능성이 있다.",
+      "lineEn": "The Ministry of Gender Equality has decided to relocate the Women's History Museum site to supply public housing in Eunpyeong-gu. The price per square meter of Hyundai's Apgujeong housing fell 500,000,000 won in ten days. Construction of 20,000 8,000 units of youth and newlywed housing on state-owned land has started. If the deposit is entrusted to HUG, the landlord can receive monthly rent. The reconstruction of Sajib-ma-eul in Bundang may be halted due to opposition from shop owners.",
+      "isFallback": false,
+      "fallbackReason": null,
+      "degraded": false,
+      "items": [
+        {
+          "title": "성평등부, 은평구 공공주택 공급에 여성사박물관 부지 이전키로",
+          "link": "https://www.yna.co.kr/view/AKR20260820179300530",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "압구정 현대 열흘새 호가 5억 뚝…강남·서초 집값 ‘세제개편 후폭풍’",
+          "link": "https://www.mk.co.kr/news/realestate/12132609",
+          "source": "매일경제 부동산"
+        },
+        {
+          "title": "국유지 청년·신혼주택 2.8만가구 착공",
+          "link": "https://www.hankyung.com/article/2026082029551",
+          "source": "한국경제 부동산"
+        },
+        {
+          "title": "전세금 HUG에 맡기고 집주인은 월세 받는다",
+          "link": "https://www.mk.co.kr/news/realestate/12132596",
+          "source": "매일경제 부동산"
+        },
+        {
+          "title": "[단독] 분당 샛별마을 재건축, 상가 반발에 '제동' 걸리나",
+          "link": "https://www.mk.co.kr/news/realestate/12132595",
+          "source": "매일경제 부동산"
+        }
+      ]
+    },
+    {
       "key": "rates",
       "name": "금리·예금·투자상품",
       "nameEn": "Rates, Deposits & Investment Products",
-      "lineKo": "국고채 금리가 대체로 하락하며 3년물은 연 3.811%를 기록했고, 일본 증시는 미국 국채 금리 하락에 따라 상승 마감하며 닛케이가 1.36% 올랐으며, 글로벌 국채 금리가 치솟는 가운데 중국 국채 금리는 하락하며 분산 투자처로 주목받고 있다.",
-      "lineEn": "The government bond rate fell generally, with the 3-year bond recording an annual rate of 3.811%. The Japanese stock market closed higher following the decline in U.S. Treasury bond rates, with the Nikkei rising 1.36%. Meanwhile, Chinese government bond rates fell amid rising global bond rates, drawing attention as a diversified investment option.",
+      "lineKo": "홍콩 증시는 미국 장기금리 하락으로 인해 상승 마감하며 H주가 0.91% 올랐다. 신한은행은 중저신용자 대상으로 '슈퍼SOL중금리대출'을 출시했다. 장단기 국고채 금리는 혼조세를 보였으며, 외인은 선물 매도를 진행했다. 국고채 금리는 대체로 하락하며 3년물 금리가 연 3.811%를 기록했다. 일본 증시는 미국 국채금리 하락에 따라 상승 마감하며 닛케이가 1.36% 상승했다.",
+      "lineEn": "The Hong Kong stock market closed higher due to a decline in U.S. long-term interest rates, with H-shares rising 0.91%. Shinhan Bank launched the 'Super SOL Medium Interest Rate Loan' targeted at medium- and low-credit borrowers. The yields on government bonds showed mixed trends, with foreign investors conducting futures selling. Government bond yields generally declined, with the 3-year yield reaching 3.811% annually. The Japanese stock market closed higher following a decline in U.S. government bond yields, with the Nikkei rising 1.36%.",
       "isFallback": false,
       "fallbackReason": null,
-      "degraded": true,
+      "degraded": false,
       "items": [
+        {
+          "title": "[올댓차이나] 홍콩 증시, 美 장기금리 하락에 상승 마감… H주 0.91%↑",
+          "link": "https://www.newsis.com/view/NISX20260820_0003756695",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "신한銀, 중저신용자 대상…'슈퍼SOL중금리대출' 출시",
+          "link": "https://www.hankyung.com/article/2026082030011",
+          "source": "한국경제 경제"
+        },
+        {
+          "title": "장단기 국고채 금리 혼조…외인 선물 매도·美 바이백 소화(종합)",
+          "link": "https://www.yna.co.kr/view/AKR20260820150351008",
+          "source": "연합뉴스 경제"
+        },
         {
           "title": "국고채 금리 대체로 하락…3년물 연 3.811%",
           "link": "https://www.yna.co.kr/view/AKR20260820150300008",
@@ -26,48 +78,6 @@
           "title": "日증시, 美국채금리 하락에 상승 마감…닛케이 1.36%↑",
           "link": "https://www.newsis.com/view/NISX20260820_0003756258",
           "source": "뉴시스 경제"
-        },
-        {
-          "title": "글로벌 국채금리 치솟는데 中은 하락…분산투자처로 주목",
-          "link": "https://www.newsis.com/view/NISX20260820_0003755904",
-          "source": "뉴시스 경제"
-        }
-      ]
-    },
-    {
-      "key": "realestate",
-      "name": "부동산",
-      "nameEn": "Real Estate",
-      "lineKo": "정부가 전세금을 맡기고 월세를 받는 ‘전월세 안심신탁’을 도입하며 집주인 참여가 관건이라고 보도했다. 한토신은 리츠 운용자산이 4조 원에 달하며 오피스와 임대주택 포트폴리오를 확대하고 있다. 용산공원 주택공급 계획이 발표됐지만 부지와 물량은 여전히 불확실한 상태라고 전했다. HUG는 보증금 걱정 없이 전세를 살 수 있도록 하며 주거 비용 절감을 권장하고 있다. 이사 전 전세보증 가능 여부를 확인할 수 있는 HUG의 사전심사 제도가 도입됐다.",
-      "lineEn": "The government introduced the 'rental deposit trust,' where the government holds the deposit and collects monthly rent, and reported that the participation of landlords is crucial. Hanwha Asset Management has assets under management in its REITs reaching 4,000,000,000,000 won and is expanding its office and rental housing portfolio. It was reported that although the housing supply plan for Yongsan Park was announced, the site and quantity remain uncertain. HUG is encouraging residents to live in a rental without worrying about the deposit, thus reducing housing costs. HUG has introduced a pre-screening system that allows checking the possibility of a rental deposit before moving.",
-      "isFallback": false,
-      "fallbackReason": null,
-      "degraded": false,
-      "items": [
-        {
-          "title": "전세금 정부에 맡기고 월세 받는다… ‘전월세 안심신탁’ 집주인 참여 관건",
-          "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/20/XTHQLPRQEVBQFJZKE27I46TH3M/",
-          "source": "조선비즈 부동산"
-        },
-        {
-          "title": "한토신, 리츠 운용자산 4조 육박…오피스·임대주택 등 포트폴리오 확대",
-          "link": "https://www.newsis.com/view/NISX20260820_0003756383",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "용산공원 주택공급 띄웠지만…부지도 물량도 '안갯속'",
-          "link": "https://www.newsis.com/view/NISX20260820_0003756372",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "HUG “보증금 떼일 걱정 없는 전세 살며 주거 비용 낮추세요”",
-          "link": "https://www.mk.co.kr/news/realestate/12132369",
-          "source": "매일경제 부동산"
-        },
-        {
-          "title": "이사 전 전세보증 가능 여부 확인… HUG, 사전심사 제도 도입",
-          "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/20/JJHSABVWCRD3JJ3EUZHC2543CI/",
-          "source": "조선비즈 부동산"
         }
       ]
     },
@@ -75,36 +85,36 @@
       "key": "other",
       "name": "기타 경제 소식",
       "nameEn": "Other Economic News",
-      "lineKo": "금융당국의 집단대출 완화 주문에 따라 국민·신한은 디에이치방배 한도를 확대했다. 홈플러스는 2000억 투입에 이어 1.5조 추가 대출을 통해 회생 완주를 노리고 있다. '서민금융 잇다'앱은 상반기 3천294억 대출중개를 성공시키며 167억의 이자절감 효과를 냈다. 강남 지역에서는 집값 양극화 현상이 심화되며 호가가 상승하는 것으로 나타났다. 강남·서초의 집값 낙폭은 세 부담으로 인해 2배 이상 커졌고, 외곽 지역에서는 가격이 오히려 상승했다.",
-      "lineEn": "In accordance with the financial regulatory authority's directive to ease group lending, KB and Shinhan expanded their DH Bangbae limits. Homeplus, after investing 200,000,000,000, is aiming for a full recovery through an additional 1,500,000,000,000 loan. The 'People's Financial Itda' app successfully facilitated 329,400,000,000 in loan mediation during the first half of the year, achieving a 16,700,000,000 interest savings effect. In the Gangnam area, the polarization of housing prices has intensified, with asking prices rising. The price decline in Gangnam and Seocho has more than doubled due to tax burdens, while prices in outlying areas have actually increased.",
+      "lineKo": "은행권이 내달 입주 예정인 '디에이치 방배' 잔금대출 한도를 확대했다. 새마을금고와 신협도 대출 관련 규제를 완화하는 방향으로 조치를 내렸다. 강남 지역 주택 가격이 열흘 만에 5억 원이 감소하며 낙폭이 두 배로 확대됐다. 국회는 협동조합과 마을기업 지원을 위한 제도를 사회연대경제기본법에 포함시켜 통과시켰다. 금융당국의 집단대출 완화 요구에 따라 국민은행과 신한은행도 '디에이치방배' 잔금대출 한도를 확대했다.",
+      "lineEn": "The banking sector has expanded the down payment loan limit for 'Daecheong Bangbae,' which is scheduled to start construction next month. New Village Credit Union and Shinhan Financial Group have also taken measures to ease loan-related regulations. Housing prices in the Gangnam area fell 500,000,000 won within ten days, doubling the previous decline. The National Assembly passed a law incorporating systems to support cooperatives and community enterprises into the Social Solidarity Economy Basic Act. In response to the Financial Supervisory Authority's request to ease group lending restrictions, KB Kookmin Bank and Shinhan Bank also expanded the down payment loan limit for 'Daecheong Bangbae.",
       "isFallback": false,
       "fallbackReason": null,
       "degraded": false,
       "items": [
         {
-          "title": "금융당국 집단대출 완화 주문에…국민·신한, 디에이치방배 한도 확대",
-          "link": "https://www.hankyung.com/article/202608202623i",
-          "source": "한국경제 경제"
-        },
-        {
-          "title": "'2000억 투입' 홈플러스, 1.5조 추가 대출 \"회생 완주 승부수\"",
-          "link": "https://www.hankyung.com/article/202608202205g",
-          "source": "한국경제 경제"
-        },
-        {
-          "title": "'서민금융 잇다'앱, 상반기 3천294억 대출중개…167억 이자절감",
-          "link": "https://www.yna.co.kr/view/AKR20260820112700002",
+          "title": "은행권, 내달 입주 앞둔 '디에이치 방배' 잔금대출 한도 확대",
+          "link": "https://www.yna.co.kr/view/AKR20260820176000002",
           "source": "연합뉴스 경제"
         },
         {
-          "title": "“어차피 못 들어가는 강남보다는”…집값 양극화에 호가 ‘쑥’ 이 동네",
-          "link": "https://www.mk.co.kr/news/realestate/12132160",
+          "title": "새마을금고·신협, 대출 숨통 트인다",
+          "link": "https://www.hankyung.com/article/2026082029991",
+          "source": "한국경제 경제"
+        },
+        {
+          "title": "\"열흘 새 5억 뚝\"… 강남 집값 낙폭 2배로",
+          "link": "https://www.mk.co.kr/news/realestate/12132597",
           "source": "매일경제 부동산"
         },
         {
-          "title": "세 부담에 강남·서초 집값 낙폭 2배 커져…외곽은 더 올랐다",
-          "link": "https://www.newsis.com/view/NISX20260820_0003755781",
-          "source": "뉴시스 경제"
+          "title": "협동조합·마을기업 지원 제도화…사회연대경제기본법 국회 통과",
+          "link": "https://www.yna.co.kr/view/AKR20260820159700530",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "금융당국 집단대출 완화 주문에…국민·신한, 디에이치방배 한도 확대",
+          "link": "https://www.hankyung.com/article/202608202623i",
+          "source": "한국경제 경제"
         }
       ]
     },
@@ -112,21 +122,21 @@
       "key": "stocks",
       "name": "증시·환율",
       "nameEn": "Stocks & FX",
-      "lineKo": "수출업체가 달러를 매도하고 약달러 거래가 이어지면서 원/달러 환율이 1,390원대 초반을 기록했다. 15시 30분 기준 원/달러 환율은 5.1원 하락한 1,392.6원을 기록했다. 수출업체의 달러 매도가 환율에 영향을 미친 것으로 보인다. 수출업체의 거래 동향은 환율 변동에 중요한 요인으로 작용했다. 이날 환율은 전일 대비 약간 하락한 수준을 보였다.",
-      "lineEn": "The exchange rate of won/dollar reached the early 1,390s as exporters sold dollars and weak-dollar transactions continued. As of 3:30 p.m., the won/dollar exchange rate stood at 1,392.6 won, down 5.1 won from the previous level. It appears that exporters' dollar sales have affected the exchange rate. Exporters' trading trends have acted as an important factor in exchange rate fluctuations. The exchange rate showed a slightly lower level compared to the previous day.",
+      "lineKo": "씨티는 환율이 1,390원 아래선을할 경우 국민연금의 환헤지 확대가 중단될 수 있다고 분석했다. 중국 증시는 저가 매수세에 힘입어 반등하며 창업판 지수는 0.64% 상승했다. 국민연금의 환헤지 전략은 환율 변동에 따라 조정될 수 있는 상황이다. 중국 증시의 반등은 주로 저가 매수세가 주도했다. 각 기사는 서로 다른 주제를 다루고 있으며 관련성이 없다.",
+      "lineEn": "Citigroup analyzed that if the exchange rate falls below 1,390 won, the expansion of the National Pension Service's currency hedging could be halted. China's stock market rebounded due to low-price buying, with the Start-up Board index rising 0.64%. The National Pension Service's currency hedging strategy can be adjusted according to exchange rate fluctuations. The rebound in China's stock market was mainly driven by low-price buying. Each article covers different topics and is unrelated.",
       "isFallback": false,
       "fallbackReason": null,
       "degraded": false,
       "items": [
         {
-          "title": "수출업체 달러 매도·약달러…환율 1,390원대 초반",
-          "link": "https://www.yna.co.kr/view/AKR20260820137600002",
+          "title": "씨티 \"환율 1,390원 아래선 국민연금 환헤지 확대 멈출 수도\"",
+          "link": "https://www.yna.co.kr/view/AKR20260820170400002",
           "source": "연합뉴스 경제"
         },
         {
-          "title": "[외환] 원/달러 환율 5.1원 내린 1,392.6원(15:30 기준가)",
-          "link": "https://www.yna.co.kr/view/AKR20260820131700002",
-          "source": "연합뉴스 경제"
+          "title": "[올댓차이나] 中 증시, 저가 매수세에 반등 마감…창업판 0.64%↑",
+          "link": "https://www.newsis.com/view/NISX20260820_0003756657",
+          "source": "뉴시스 경제"
         }
       ]
     }
