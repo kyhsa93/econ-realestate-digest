@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-08-19T23:33:19.140Z",
+  "updatedAt": "2026-08-20T23:39:17.689Z",
   "window": {
     "basis": "arrival",
     "from": "2026-08-17",
-    "to": "2026-08-20",
+    "to": "2026-08-21",
     "until": "2026-08-24",
     "weeks": 1,
     "districtFrom": "2026-07-27",
@@ -18,7 +18,7 @@
         "value10k": 685,
         "percent": 15.671471059254175
       },
-      "baselineDate": "2026-08-13"
+      "baselineDate": "2026-08-14"
     },
     "saleNational84": {
       "avgPricePerM2": 15693115.893026084,
@@ -28,7 +28,7 @@
         "value10k": 1043,
         "percent": 25.162846803377565
       },
-      "baselineDate": "2026-08-13"
+      "baselineDate": "2026-08-14"
     },
     "jeonse": {
       "avgDepositPerM2": 9042621.39714389,
@@ -38,7 +38,7 @@
         "value10k": 436,
         "percent": 17.07794751273012
       },
-      "baselineDate": "2026-08-13"
+      "baselineDate": "2026-08-14"
     },
     "wolse": {
       "avgDeposit10k": 20207,
@@ -52,7 +52,7 @@
         "value10k": 29,
         "percent": 31.521739130434785
       },
-      "baselineDate": "2026-08-13"
+      "baselineDate": "2026-08-14"
     }
   },
   "districts": [
@@ -67,7 +67,7 @@
           "value10k": -841,
           "percent": -18.680586406041762
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "saleNational84": null,
       "jeonse": {
@@ -78,7 +78,7 @@
           "value10k": 598,
           "percent": 19.340232858990944
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "wolse": {
         "avgDeposit10k": 23978,
@@ -92,7 +92,7 @@
           "value10k": 43,
           "percent": 50.588235294117645
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       }
     },
     {
@@ -106,7 +106,7 @@
           "value10k": 1900,
           "percent": 31.25
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "saleNational84": {
         "avgPricePerM2": 24635122.410546143,
@@ -116,7 +116,7 @@
           "value10k": 1785,
           "percent": 28.070451328825285
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "jeonse": {
         "avgDepositPerM2": 10932485.210467074,
@@ -126,7 +126,7 @@
           "value10k": 421,
           "percent": 13.185092389602254
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "wolse": {
         "avgDeposit10k": 9175,
@@ -140,7 +140,7 @@
           "value10k": 147,
           "percent": 110.5263157894737
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       }
     },
     {
@@ -154,7 +154,7 @@
           "value10k": 1678,
           "percent": 23.328235784790767
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "saleNational84": null,
       "jeonse": {
@@ -165,7 +165,7 @@
           "value10k": -541,
           "percent": -16.702686014201916
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "wolse": {
         "avgDeposit10k": 20034,
@@ -179,7 +179,7 @@
           "value10k": 27,
           "percent": 11.25
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       }
     },
     {
@@ -193,7 +193,7 @@
           "value10k": -2702,
           "percent": -23.034953111679453
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "saleNational84": {
         "avgPricePerM2": 31717957.7879967,
@@ -203,7 +203,7 @@
           "value10k": 1009,
           "percent": 10.647952722667792
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "jeonse": {
         "avgDepositPerM2": 9377727.485646978,
@@ -213,7 +213,7 @@
           "value10k": -108,
           "percent": -3.366583541147132
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "wolse": {
         "avgDeposit10k": 12093,
@@ -227,7 +227,7 @@
           "value10k": 3,
           "percent": 2.6548672566371683
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       }
     },
     {
@@ -241,7 +241,7 @@
           "value10k": 226,
           "percent": 3.0409041980624325
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "saleNational84": {
         "avgPricePerM2": 23425975.09883755,
@@ -251,7 +251,7 @@
           "value10k": 592,
           "percent": 8.277404921700224
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "jeonse": {
         "avgDepositPerM2": 8416426.542838782,
@@ -261,7 +261,7 @@
           "value10k": -209,
           "percent": -6.987629555332665
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "wolse": {
         "avgDeposit10k": 17000,
@@ -275,7 +275,7 @@
           "value10k": -33,
           "percent": -27.966101694915253
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       }
     },
     {
@@ -289,7 +289,7 @@
           "value10k": -39,
           "percent": -0.8123307644240784
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "saleNational84": {
         "avgPricePerM2": 14304205.192066524,
@@ -299,7 +299,7 @@
           "value10k": -174,
           "percent": -3.5488476442994084
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "jeonse": {
         "avgDepositPerM2": 8671944.694836335,
@@ -309,7 +309,7 @@
           "value10k": 110,
           "percent": 3.989844033369604
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "wolse": {
         "avgDeposit10k": 12749,
@@ -323,7 +323,7 @@
           "value10k": 22,
           "percent": 23.655913978494624
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       }
     },
     {
@@ -337,7 +337,7 @@
           "value10k": 314,
           "percent": 9.500756429652043
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "saleNational84": {
         "avgPricePerM2": 10873667.32710633,
@@ -347,7 +347,7 @@
           "value10k": 387,
           "percent": 12.06359102244389
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "jeonse": {
         "avgDepositPerM2": 6454448.6847395515,
@@ -357,7 +357,7 @@
           "value10k": 593,
           "percent": 38.48150551589877
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "wolse": {
         "avgDeposit10k": 13753,
@@ -371,7 +371,7 @@
           "value10k": 9,
           "percent": 20.930232558139537
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       }
     },
     {
@@ -385,7 +385,7 @@
           "value10k": 1180,
           "percent": 30.12509573653306
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "saleNational84": {
         "avgPricePerM2": 14544137.97062031,
@@ -395,7 +395,7 @@
           "value10k": 409,
           "percent": 9.297567629006592
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "jeonse": {
         "avgDepositPerM2": 8851244.039442442,
@@ -405,7 +405,7 @@
           "value10k": 503,
           "percent": 20.759389186958316
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "wolse": {
         "avgDeposit10k": 13251,
@@ -419,7 +419,7 @@
           "value10k": 0,
           "percent": 0
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       }
     },
     {
@@ -433,7 +433,7 @@
           "value10k": -214,
           "percent": -7.26408689748812
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "saleNational84": {
         "avgPricePerM2": 8554360.271551423,
@@ -443,7 +443,7 @@
           "value10k": -165,
           "percent": -5.51286334781156
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "jeonse": {
         "avgDepositPerM2": 7226224.126926233,
@@ -453,7 +453,7 @@
           "value10k": 422,
           "percent": 21.45399084900864
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "wolse": {
         "avgDeposit10k": 11800,
@@ -467,7 +467,7 @@
           "value10k": 14,
           "percent": 14.736842105263156
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       }
     },
     {
@@ -481,7 +481,7 @@
           "value10k": 208,
           "percent": 8.303393213572855
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "saleNational84": {
         "avgPricePerM2": 7795759.36435089,
@@ -491,17 +491,17 @@
           "value10k": 40,
           "percent": 1.5766653527788728
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "jeonse": {
-        "avgDepositPerM2": 5513043.980040206,
+        "avgDepositPerM2": 5513043.980040207,
         "avgDepositPerPyeong10k": 1823,
         "transactionCount": 13,
         "change": {
           "value10k": 185,
           "percent": 11.294261294261295
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "wolse": {
         "avgDeposit10k": 11708,
@@ -515,7 +515,7 @@
           "value10k": 26,
           "percent": 38.80597014925373
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       }
     },
     {
@@ -529,7 +529,7 @@
           "value10k": 240,
           "percent": 6.872852233676976
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "saleNational84": {
         "avgPricePerM2": 10418694.264799692,
@@ -539,7 +539,7 @@
           "value10k": 495,
           "percent": 16.7853509664293
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "jeonse": {
         "avgDepositPerM2": 5762632.267260518,
@@ -549,7 +549,7 @@
           "value10k": 29,
           "percent": 1.5458422174840085
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "wolse": {
         "avgDeposit10k": 11931,
@@ -563,7 +563,7 @@
           "value10k": 18,
           "percent": 29.508196721311474
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       }
     },
     {
@@ -577,7 +577,7 @@
           "value10k": 913,
           "percent": 25.70382882882883
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "saleNational84": {
         "avgPricePerM2": 11736755.069798106,
@@ -587,7 +587,7 @@
           "value10k": 350,
           "percent": 9.91501416430595
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "jeonse": {
         "avgDepositPerM2": 7475695.477483173,
@@ -597,7 +597,7 @@
           "value10k": 89,
           "percent": 3.736356003358522
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "wolse": {
         "avgDeposit10k": 21397,
@@ -611,7 +611,7 @@
           "value10k": 27,
           "percent": 47.368421052631575
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       }
     },
     {
@@ -625,7 +625,7 @@
           "value10k": -683,
           "percent": -13.45017723513194
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "saleNational84": {
         "avgPricePerM2": 10741301.059001515,
@@ -635,7 +635,7 @@
           "value10k": -1359,
           "percent": -27.67820773930754
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "jeonse": {
         "avgDepositPerM2": 7774868.369836424,
@@ -645,7 +645,7 @@
           "value10k": -83,
           "percent": -3.128533735393894
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "wolse": {
         "avgDeposit10k": 11917,
@@ -659,7 +659,7 @@
           "value10k": 12,
           "percent": 12.121212121212121
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       }
     },
     {
@@ -673,7 +673,7 @@
           "value10k": 142,
           "percent": 2.248258391386954
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "saleNational84": {
         "avgPricePerM2": 20242149.07302308,
@@ -683,7 +683,7 @@
           "value10k": -252,
           "percent": -3.6290322580645165
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "jeonse": {
         "avgDepositPerM2": 10573030.944568045,
@@ -693,7 +693,7 @@
           "value10k": 540,
           "percent": 18.274111675126903
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "wolse": {
         "avgDeposit10k": 27926,
@@ -707,7 +707,7 @@
           "value10k": 84,
           "percent": 79.24528301886792
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       }
     },
     {
@@ -721,7 +721,7 @@
           "value10k": 452,
           "percent": 9.604759881002975
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "saleNational84": {
         "avgPricePerM2": 13779434.66565995,
@@ -731,7 +731,7 @@
           "value10k": 344,
           "percent": 8.169080978389932
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "jeonse": {
         "avgDepositPerM2": 8046690.810711719,
@@ -741,7 +741,7 @@
           "value10k": 77,
           "percent": 2.9810298102981028
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "wolse": {
         "avgDeposit10k": 28778,
@@ -755,7 +755,7 @@
           "value10k": 0,
           "percent": 0
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       }
     },
     {
@@ -769,7 +769,7 @@
           "value10k": 87,
           "percent": 1.9926706367384335
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "saleNational84": {
         "avgPricePerM2": 13856153.483809924,
@@ -779,7 +779,7 @@
           "value10k": 357,
           "percent": 8.451704545454545
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "jeonse": {
         "avgDepositPerM2": 8190247.677763127,
@@ -789,7 +789,7 @@
           "value10k": 1202,
           "percent": 79.8140770252324
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "wolse": {
         "avgDeposit10k": 8238,
@@ -803,7 +803,7 @@
           "value10k": 11,
           "percent": 24.444444444444443
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       }
     },
     {
@@ -817,7 +817,7 @@
           "value10k": 144,
           "percent": 4.448563484708063
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "saleNational84": {
         "avgPricePerM2": 9896263.623042922,
@@ -827,7 +827,7 @@
           "value10k": -162,
           "percent": -4.7175305765870705
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "jeonse": {
         "avgDepositPerM2": 7551982.791452609,
@@ -837,7 +837,7 @@
           "value10k": 424,
           "percent": 20.453449107573565
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "wolse": {
         "avgDeposit10k": 7498,
@@ -851,7 +851,7 @@
           "value10k": 13,
           "percent": 20.967741935483872
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       }
     },
     {
@@ -865,7 +865,7 @@
           "value10k": 74,
           "percent": 2.67051605918441
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "saleNational84": {
         "avgPricePerM2": 7087853.703970929,
@@ -875,7 +875,7 @@
           "value10k": -353,
           "percent": -13.093471810089023
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "jeonse": {
         "avgDepositPerM2": 7748856.60001467,
@@ -885,7 +885,7 @@
           "value10k": 523,
           "percent": 25.649828347229032
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "wolse": {
         "avgDeposit10k": 10353,
@@ -899,7 +899,7 @@
           "value10k": 5,
           "percent": 9.090909090909092
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       }
     },
     {
@@ -913,7 +913,7 @@
           "value10k": 11,
           "percent": 0.19274575083231119
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "saleNational84": {
         "avgPricePerM2": 15858771.624590669,
@@ -923,7 +923,7 @@
           "value10k": 590,
           "percent": 12.679991403395658
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "jeonse": {
         "avgDepositPerM2": 9361149.134234391,
@@ -933,7 +933,7 @@
           "value10k": 316,
           "percent": 11.370996761424973
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "wolse": {
         "avgDeposit10k": 17768,
@@ -947,7 +947,7 @@
           "value10k": -6,
           "percent": -4.878048780487805
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       }
     },
     {
@@ -961,7 +961,7 @@
           "value10k": 1698,
           "percent": 35.126189491104675
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "saleNational84": {
         "avgPricePerM2": 19214068.276921183,
@@ -971,7 +971,7 @@
           "value10k": 1269,
           "percent": 24.965571512886093
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "jeonse": {
         "avgDepositPerM2": 9552521.711214224,
@@ -981,7 +981,7 @@
           "value10k": 23,
           "percent": 0.733652312599681
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "wolse": {
         "avgDeposit10k": 31461,
@@ -995,7 +995,7 @@
           "value10k": 56,
           "percent": 62.22222222222222
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       }
     },
     {
@@ -1009,7 +1009,7 @@
           "value10k": -552,
           "percent": -13.932357395254922
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "saleNational84": {
         "avgPricePerM2": 12052425.881331176,
@@ -1019,7 +1019,7 @@
           "value10k": 249,
           "percent": 6.666666666666667
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "jeonse": {
         "avgDepositPerM2": 8155400.253835144,
@@ -1029,7 +1029,7 @@
           "value10k": 307,
           "percent": 12.850565089995813
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "wolse": {
         "avgDeposit10k": 17380,
@@ -1043,7 +1043,7 @@
           "value10k": 14,
           "percent": 15.730337078651685
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       }
     },
     {
@@ -1057,7 +1057,7 @@
           "value10k": -390,
           "percent": -4.140566939165517
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "saleNational84": {
         "avgPricePerM2": 35614174.85468119,
@@ -1067,7 +1067,7 @@
           "value10k": 714,
           "percent": 6.456279952979474
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "jeonse": {
         "avgDepositPerM2": 11827708.197200218,
@@ -1077,7 +1077,7 @@
           "value10k": 1000,
           "percent": 34.36426116838488
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "wolse": {
         "avgDeposit10k": 42756,
@@ -1091,7 +1091,7 @@
           "value10k": -38,
           "percent": -16.740088105726873
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       }
     },
     {
@@ -1105,7 +1105,7 @@
           "value10k": -1088,
           "percent": -9.337452797802952
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "saleNational84": {
         "avgPricePerM2": 45893151.32972464,
@@ -1120,7 +1120,7 @@
           "value10k": -196,
           "percent": -4.807456463085602
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "wolse": {
         "avgDeposit10k": 43459,
@@ -1134,7 +1134,7 @@
           "value10k": 94,
           "percent": 58.75
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       }
     },
     {
@@ -1148,7 +1148,7 @@
           "value10k": 3961,
           "percent": 58.81217520415739
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "saleNational84": {
         "avgPricePerM2": 35866303.7339492,
@@ -1158,7 +1158,7 @@
           "value10k": 5109,
           "percent": 75.7113218731476
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "jeonse": {
         "avgDepositPerM2": 11162942.565011732,
@@ -1168,7 +1168,7 @@
           "value10k": 287,
           "percent": 8.433734939759036
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "wolse": {
         "avgDeposit10k": 42344,
@@ -1182,7 +1182,7 @@
           "value10k": 7,
           "percent": 5.511811023622047
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       }
     },
     {
@@ -1196,7 +1196,7 @@
           "value10k": 1493,
           "percent": 32.06615120274915
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "saleNational84": {
         "avgPricePerM2": 18567487.989445195,
@@ -1206,7 +1206,7 @@
           "value10k": 2799,
           "percent": 83.82749326145552
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "jeonse": {
         "avgDepositPerM2": 9596345.644778538,
@@ -1216,7 +1216,7 @@
           "value10k": 373,
           "percent": 13.326187924258665
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       },
       "wolse": {
         "avgDeposit10k": 18913,
@@ -1230,7 +1230,7 @@
           "value10k": 18,
           "percent": 20.689655172413794
         },
-        "baselineDate": "2026-08-13"
+        "baselineDate": "2026-08-14"
       }
     }
   ]
