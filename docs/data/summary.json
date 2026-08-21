@@ -1,46 +1,41 @@
 {
-  "updatedAt": "2026-08-20T23:42:08.008Z",
+  "updatedAt": "2026-08-21T04:01:15.790Z",
   "model": "qwen3:14b",
   "summary": {
-    "ko": "- 부동산: 6월 서울 아파트값은 한 달 만에 2.5% 상승하며 5년 만에 최대폭으로 올랐다. 강남 지역에서는 99억 원에 거래되던 아파트가 78억 원에 내놓는 등 집주인들의 다급한 매물 출시가 이어졌다. 서울의 전세난이 심화되면서 경기도에서도 ‘노룩 계약’이 발생하는 등 수요가 집중되고 있다. 부동산 관련 세금 문제도 부상하며 시장에 영향을 미치고 있다. 이처럼 부동산 시장은 가격 상승과 함께 다양한 변화를 보이고 있다.\n- 금리·예금·투자상품: 금리·예금·투자상품: 미 국채 금리 상승, 일반인에도 큰 영향, [마켓뷰] 또 오른 美국채 금리…전날 급등했던 코스피 발목 잡나, 美재무, 국채금리 상승에 추가 대응 시사…\"바이백 40억달러 넘길 수도\" +2\n- 기타 경제 소식: 미국이 이란에 대한 경제압박을 강화하자 국제유가가 2%대 급등하며 한 달 만에 최고치를 기록했다. 6월 국내은행 대출 연체율은 0.56%로 나타나 동월 기준 10년 만에 최고 수준을 기록했다. 오늘은 경제 관련 주요일정이 발표되었다. 10년 만에 북극항로가 시험 운영되며 경제성에 대한 기대감이 높아지고 있다. 은행권은 내달 입주를 앞둔 '디에이치 방배' 잔금대출 한도를 확대하기로 했다.\n- 증시·환율: 고환율 부담은 줄었지만, 유가 상승과 폭염으로 인해 하반기 물가에 대한 긴장감은 여전히 유지되고 있다. 미국이 이란에 대한 경제 압박을 강화하자 국제유가가 2% 이상 상승하며 브렌트유는 93달러대를 기록했다. 대만 증시는 한일 반도체 강세 영향으로 사흘 만에 0.48% 상승하며 반등했다. 씨티는 환율이 1,390원 아래선을 하면 국민연금의 환헤지 확대가 중단될 수 있다고 분석했다. 각 기사는 서로 다른 주제를 다루고 있으며, 구체적인 수치와 상황을 보여준다.",
-    "en": "- Real Estate: In June, apartment prices in Seoul rose 2.5% in a month, the largest increase in five years. In the Gangnam area, apartment owners have been hurriedly listing properties, with an apartment that was previously sold for 9,900,000,000 won now being offered for 7,800,000,000 won. As the shortage of apartments for rent in Seoul worsens, demand is concentrating in Gyeonggi Province, where \"no-look contracts\" are occurring. Issues related to real estate taxes are also emerging, affecting the market. In this way, the real estate market is showing various changes along with rising prices.\n- Rates, Deposits & Investment Products: Rates, Deposits & Investment Products: 미 국채 금리 상승, 일반인에도 큰 영향, [마켓뷰] 또 오른 美국채 금리…전날 급등했던 코스피 발목 잡나, 美재무, 국채금리 상승에 추가 대응 시사…\"바이백 40억달러 넘길 수도\" +2\n- Other Economic News: As the U.S. intensified economic pressure on Iran, international oil prices surged by over 2%, reaching their highest level in a month. The delinquency rate for domestic bank loans in June was 0.56%, the highest level in 10 years based on the same month. Today, major economic schedules were announced. A northern sea route, the first in 10 years, is set to begin trial operations, raising expectations about its economic viability. The banking sector has decided to expand the down payment loan limit for 'Daeheung Bangbae,' which is set to begin occupancy next month.\n- Stocks & FX: The burden of a high exchange rate has decreased, but concerns over inflation in the second half of the year remain due to rising oil prices and extreme heat. After the U.S. intensified economic pressure on Iran, international oil prices rose by more than 2%, with Brent crude reaching the $93 range. The Taiwan stock market rebounded by 0.48% over three days, influenced by the strong performance of semiconductor stocks in South Korea and Japan. Citigroup analyzed that if the exchange rate falls below 1,390 won, the expansion of the National Pension Service's currency hedging could be halted. Each article covers different topics and provides specific figures and situations."
+    "ko": "- 증시·환율: 홍콩 증시는 실적주 매수에 힘입어 상승세를 보이며 H주가 0.41% 올랐다. 중국 증시는 반락 개장 후 매수세로 상승 전환하며 창업판이 1.56% 상승했다. 삼전닉스는 주주환원의 효과로 미국 시장에서도 강세를 보이며 코스피 상승에 힘을 보탰다. 코스피는 혼조 속에서 상승 탄력성을 모색하고 있다. 코스닥은 5%대 급락하며 하락세를 이어갔다.\n- 금리·예금·투자상품: 미국과 영국의 금리 인상 전망이 후퇴하면서 유가는 94달러를 기록했다. 국고채 금리는 일제히 상승하며 3년물이 장중 연 3.844%를 기록했다. KB국민은행은 'KB카드쓰담적금'을 출시하며 최고 연 12%의 금리를 제공했다. 미국 재무부의 개입에도 불구하고 장기금리는 하루 만에 4.69%로 반등했다. 일본 증시는 미국 국채금리 상승으로 인해 하락 출발하며 닛케이가 1.19% 하락했다.\n- 부동산: 주택공급 강화 방안 발표가 이르면 26일 예정되며, 용산에서 최장 20년 장기전세 253가구가 제공되고 5500억 규모의 재개발 시공사가 선정될 예정이고, 6월 서울 아파트값이 한 달 만에 2.5% 상승하며 5년 만에 최대 상승폭을 기록했으며, 광주 소촌동 지역주택 추진위원장이 188억 사기 사건으로 징역 11년을 선고받았고, 전주에서는 월세 1만원의 청년만원주택이 하반기 입주자 모집을 진행한다.\n- 기타 경제 소식: 키움증권은 금융경제 멘토링 프로그램 '키움 드리머' 6기를 발족했다. 공주시는 1천793억 원 규모의 2차 추경예산을 확정했다. 해당 예산은 민생경제 지원에 중점을 뒀다. 공주시는 추경예산을 통해 핵심사업에도 투자할 계획이다. 키움증권의 멘토링 프로그램은 경제 인재 양성에 기여하고 있다.",
+    "en": "- Stocks & FX: The Hong Kong stock market rose on buying of earnings stocks, with H-shares up 0.41%. The Chinese stock market turned upward after a weak opening, with the Star Market rising 1.56%. Samsung Electronics showed strength in the U.S. market due to the effect of shareholder returns, contributing to the Kospi's rise. The Kospi is seeking upward resilience amid mixed performance. The KOSDAQ continued its downward trend with a sharp drop of over 5%.\n- Rates, Deposits & Investment Products: With the retreat of expectations for interest rate hikes in the U.S. and the U.K., oil prices reached 94 dollars. Government bond rates rose across the board, with the 3-year rate reaching 3.844% during the day. KB Kookmin Bank launched the \"KB Card Savings Account\" offering a maximum annual interest rate of 12%. Despite intervention by the U.S. Treasury, long-term interest rates rebounded to 4.69% within a day. The Japanese stock market started lower due to the rise in U.S. Treasury bond rates, with the Nikkei falling 1.19%.\n- Real Estate: The announcement of measures to strengthen housing supply is scheduled for as early as the 26th, with 253 long-term rental units available in Yongsan for up to 20 years, and a redevelopment construction company to be selected with a budget of 550,000,000,000. The apartment prices in Seoul rose 2.5% within a month in June, marking the largest increase in five years. The head of the regional housing promotion committee in Gwangju's Sosundong was sentenced to 11 years in prison for a fraud case involving 18,800,000,000. In Jeonju, the Youth 10,000 Won Housing with a monthly rent of 10,000 won will conduct recruitment for residents in the second half of the year.\n- Other Economic News: Kiwoom Securities has launched the sixth session of its financial economics mentoring program, \"Kiwoom Dreamer.\" Gongju City has finalized its second supplementary budget of 179,300,000,000 won. This budget focuses on supporting the people's livelihood and economy. Gongju City plans to invest in key projects through the supplementary budget. Kiwoom Securities' mentoring program contributes to cultivating economic talent."
   },
   "highlights": [],
   "categories": [
     {
-      "key": "realestate",
-      "name": "부동산",
-      "nameEn": "Real Estate",
-      "lineKo": "6월 서울 아파트값은 한 달 만에 2.5% 상승하며 5년 만에 최대폭으로 올랐다. 강남 지역에서는 99억 원에 거래되던 아파트가 78억 원에 내놓는 등 집주인들의 다급한 매물 출시가 이어졌다. 서울의 전세난이 심화되면서 경기도에서도 ‘노룩 계약’이 발생하는 등 수요가 집중되고 있다. 부동산 관련 세금 문제도 부상하며 시장에 영향을 미치고 있다. 이처럼 부동산 시장은 가격 상승과 함께 다양한 변화를 보이고 있다.",
-      "lineEn": "In June, apartment prices in Seoul rose 2.5% in a month, the largest increase in five years. In the Gangnam area, apartment owners have been hurriedly listing properties, with an apartment that was previously sold for 9,900,000,000 won now being offered for 7,800,000,000 won. As the shortage of apartments for rent in Seoul worsens, demand is concentrating in Gyeonggi Province, where \"no-look contracts\" are occurring. Issues related to real estate taxes are also emerging, affecting the market. In this way, the real estate market is showing various changes along with rising prices.",
+      "key": "stocks",
+      "name": "증시·환율",
+      "nameEn": "Stocks & FX",
+      "lineKo": "홍콩 증시는 실적주 매수에 힘입어 상승세를 보이며 H주가 0.41% 올랐다. 중국 증시는 반락 개장 후 매수세로 상승 전환하며 창업판이 1.56% 상승했다. 삼전닉스는 주주환원의 효과로 미국 시장에서도 강세를 보이며 코스피 상승에 힘을 보탰다. 코스피는 혼조 속에서 상승 탄력성을 모색하고 있다. 코스닥은 5%대 급락하며 하락세를 이어갔다.",
+      "lineEn": "The Hong Kong stock market rose on buying of earnings stocks, with H-shares up 0.41%. The Chinese stock market turned upward after a weak opening, with the Star Market rising 1.56%. Samsung Electronics showed strength in the U.S. market due to the effect of shareholder returns, contributing to the Kospi's rise. The Kospi is seeking upward resilience amid mixed performance. The KOSDAQ continued its downward trend with a sharp drop of over 5%.",
       "isFallback": false,
       "fallbackReason": null,
       "degraded": false,
       "items": [
         {
-          "title": "6월 서울 아파트값, 한 달 만에 2.5% 올랐다…5년來 최고 상승",
-          "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/21/KGHSDSXOM5GRZI6FXER7XQAAHE/",
-          "source": "조선비즈 부동산"
-        },
-        {
-          "title": "6월 서울 아파트값 한달새 2.5%↑…5년 만에 최대폭 상승",
-          "link": "https://www.yna.co.kr/view/AKR20260821008500004",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "\"99억 찍던 아파트 78억에 내놨다\"…다급해진 강남 집주인들",
-          "link": "https://www.hankyung.com/article/2026082030871",
-          "source": "한국경제 부동산"
-        },
-        {
-          "title": "\"집도 안 보고 계약금부터\"…서울 전세난에 경기도 '노룩 계약'",
-          "link": "https://www.newsis.com/view/NISX20260820_0003756163",
+          "title": "[올댓차이나] 홍콩 증시, 실적주 매수에 상승세… H주 0.41%↑",
+          "link": "https://www.newsis.com/view/NISX20260821_0003757486",
           "source": "뉴시스 경제"
         },
         {
-          "title": "“물려받은 건 집 아닌 세금” 시장서 벌어질 일 … 부동산 세금 100(4)",
-          "link": "https://www.mk.co.kr/news/realestate/12132241",
-          "source": "매일경제 부동산"
+          "title": "[올댓차이나] 中 증시, 반락 개장 후 매수세로 상승 전환…창업판 1.56%↑",
+          "link": "https://www.newsis.com/view/NISX20260821_0003757459",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "\"주주환원의 힘\"…美찬바람에도 삼전닉스 강세에 코스피 상승탄력",
+          "link": "https://www.yna.co.kr/view/AKR20260821084800008",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "코스피, 혼조속 상승 탄력 모색…코스닥 5%대 급락",
+          "link": "https://www.yna.co.kr/view/AKR20260821078500008",
+          "source": "연합뉴스 경제"
         }
       ]
     },
@@ -48,36 +43,73 @@
       "key": "rates",
       "name": "금리·예금·투자상품",
       "nameEn": "Rates, Deposits & Investment Products",
-      "lineKo": "금리·예금·투자상품: 미 국채 금리 상승, 일반인에도 큰 영향, [마켓뷰] 또 오른 美국채 금리…전날 급등했던 코스피 발목 잡나, 美재무, 국채금리 상승에 추가 대응 시사…\"바이백 40억달러 넘길 수도\" +2",
-      "lineEn": "Rates, Deposits & Investment Products: 미 국채 금리 상승, 일반인에도 큰 영향, [마켓뷰] 또 오른 美국채 금리…전날 급등했던 코스피 발목 잡나, 美재무, 국채금리 상승에 추가 대응 시사…\"바이백 40억달러 넘길 수도\" +2",
-      "isFallback": true,
-      "fallbackReason": "unverified-entity",
+      "lineKo": "미국과 영국의 금리 인상 전망이 후퇴하면서 유가는 94달러를 기록했다. 국고채 금리는 일제히 상승하며 3년물이 장중 연 3.844%를 기록했다. KB국민은행은 'KB카드쓰담적금'을 출시하며 최고 연 12%의 금리를 제공했다. 미국 재무부의 개입에도 불구하고 장기금리는 하루 만에 4.69%로 반등했다. 일본 증시는 미국 국채금리 상승으로 인해 하락 출발하며 닛케이가 1.19% 하락했다.",
+      "lineEn": "With the retreat of expectations for interest rate hikes in the U.S. and the U.K., oil prices reached 94 dollars. Government bond rates rose across the board, with the 3-year rate reaching 3.844% during the day. KB Kookmin Bank launched the \"KB Card Savings Account\" offering a maximum annual interest rate of 12%. Despite intervention by the U.S. Treasury, long-term interest rates rebounded to 4.69% within a day. The Japanese stock market started lower due to the rise in U.S. Treasury bond rates, with the Nikkei falling 1.19%.",
+      "isFallback": false,
+      "fallbackReason": null,
       "degraded": false,
       "items": [
         {
-          "title": "미 국채 금리 상승, 일반인에도 큰 영향",
-          "link": "https://www.newsis.com/view/NISX20260821_0003756934",
+          "title": "유가 94달러에도 긴축 기대 꺾였다…美·英 금리 인상 전망 후퇴",
+          "link": "https://www.newsis.com/view/NISX20260821_0003757180",
           "source": "뉴시스 경제"
         },
         {
-          "title": "[마켓뷰] 또 오른 美국채 금리…전날 급등했던 코스피 발목 잡나",
-          "link": "https://www.yna.co.kr/view/AKR20260821021400008",
+          "title": "국고채 금리 일제히 상승…3년물 장중 연 3.844%",
+          "link": "https://www.yna.co.kr/view/AKR20260821084700008",
           "source": "연합뉴스 경제"
         },
         {
-          "title": "美재무, 국채금리 상승에 추가 대응 시사…\"바이백 40억달러 넘길 수도\"",
-          "link": "https://www.newsis.com/view/NISX20260821_0003756816",
+          "title": "KB국민은행, 'KB카드쓰담적금' 출시…최고 금리 연 12%",
+          "link": "https://www.yna.co.kr/view/AKR20260821081700002",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "美 재무부 개입도 안 통했다…장기금리 하루 만에 4.69%로 반등",
+          "link": "https://www.newsis.com/view/NISX20260821_0003757057",
           "source": "뉴시스 경제"
         },
         {
-          "title": "베선트 '바이백' 언급에도…美 국채금리 또 솟구쳐",
-          "link": "https://www.hankyung.com/article/2026082135017",
-          "source": "한국경제 경제"
+          "title": "日증시, 美국채금리 상승에 하락 출발…닛케이 1.19%↓",
+          "link": "https://www.newsis.com/view/NISX20260821_0003757017",
+          "source": "뉴시스 경제"
+        }
+      ]
+    },
+    {
+      "key": "realestate",
+      "name": "부동산",
+      "nameEn": "Real Estate",
+      "lineKo": "주택공급 강화 방안 발표가 이르면 26일 예정되며, 용산에서 최장 20년 장기전세 253가구가 제공되고 5500억 규모의 재개발 시공사가 선정될 예정이고, 6월 서울 아파트값이 한 달 만에 2.5% 상승하며 5년 만에 최대 상승폭을 기록했으며, 광주 소촌동 지역주택 추진위원장이 188억 사기 사건으로 징역 11년을 선고받았고, 전주에서는 월세 1만원의 청년만원주택이 하반기 입주자 모집을 진행한다.",
+      "lineEn": "The announcement of measures to strengthen housing supply is scheduled for as early as the 26th, with 253 long-term rental units available in Yongsan for up to 20 years, and a redevelopment construction company to be selected with a budget of 550,000,000,000. The apartment prices in Seoul rose 2.5% within a month in June, marking the largest increase in five years. The head of the regional housing promotion committee in Gwangju's Sosundong was sentenced to 11 years in prison for a fraud case involving 18,800,000,000. In Jeonju, the Youth 10,000 Won Housing with a monthly rent of 10,000 won will conduct recruitment for residents in the second half of the year.",
+      "isFallback": false,
+      "fallbackReason": null,
+      "degraded": true,
+      "items": [
+        {
+          "title": "[단독]주택공급 '고삐'…이르면 26일 '도심 복합사업' 후보지 발표",
+          "link": "https://www.newsis.com/view/NISX20260821_0003757306",
+          "source": "뉴시스 경제"
         },
         {
-          "title": "신한은행, 중저신용자 대상 '슈퍼SOL중금리대출' 출시",
-          "link": "https://www.hankyung.com/article/2026082030011",
-          "source": "한국경제 경제"
+          "title": "용산에 ‘최장 20년’ 장기전세 253가구… 5500억 재개발 시공사 찾는다",
+          "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/21/HDCIF2JTMZEAZFHVYMX3BWKL2M/",
+          "source": "조선비즈 부동산"
+        },
+        {
+          "title": "6월 서울 아파트값 한달새 2.5%↑…5년 만에 최대폭 상승",
+          "link": "https://www.mk.co.kr/news/realestate/12133031",
+          "source": "매일경제 부동산"
+        },
+        {
+          "title": "'188억 사기' 광주 소촌동 지역주택 추진위원장, 징역 11년",
+          "link": "https://www.yna.co.kr/view/AKR20260821069900054",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "'월세 1만원'…전주 청년만원주택 하반기 입주자 모집",
+          "link": "https://www.yna.co.kr/view/AKR20260821073300055",
+          "source": "연합뉴스 경제"
         }
       ]
     },
@@ -85,67 +117,20 @@
       "key": "other",
       "name": "기타 경제 소식",
       "nameEn": "Other Economic News",
-      "lineKo": "미국이 이란에 대한 경제압박을 강화하자 국제유가가 2%대 급등하며 한 달 만에 최고치를 기록했다. 6월 국내은행 대출 연체율은 0.56%로 나타나 동월 기준 10년 만에 최고 수준을 기록했다. 오늘은 경제 관련 주요일정이 발표되었다. 10년 만에 북극항로가 시험 운영되며 경제성에 대한 기대감이 높아지고 있다. 은행권은 내달 입주를 앞둔 '디에이치 방배' 잔금대출 한도를 확대하기로 했다.",
-      "lineEn": "As the U.S. intensified economic pressure on Iran, international oil prices surged by over 2%, reaching their highest level in a month. The delinquency rate for domestic bank loans in June was 0.56%, the highest level in 10 years based on the same month. Today, major economic schedules were announced. A northern sea route, the first in 10 years, is set to begin trial operations, raising expectations about its economic viability. The banking sector has decided to expand the down payment loan limit for 'Daeheung Bangbae,' which is set to begin occupancy next month.",
+      "lineKo": "키움증권은 금융경제 멘토링 프로그램 '키움 드리머' 6기를 발족했다. 공주시는 1천793억 원 규모의 2차 추경예산을 확정했다. 해당 예산은 민생경제 지원에 중점을 뒀다. 공주시는 추경예산을 통해 핵심사업에도 투자할 계획이다. 키움증권의 멘토링 프로그램은 경제 인재 양성에 기여하고 있다.",
+      "lineEn": "Kiwoom Securities has launched the sixth session of its financial economics mentoring program, \"Kiwoom Dreamer.\" Gongju City has finalized its second supplementary budget of 179,300,000,000 won. This budget focuses on supporting the people's livelihood and economy. Gongju City plans to invest in key projects through the supplementary budget. Kiwoom Securities' mentoring program contributes to cultivating economic talent.",
       "isFallback": false,
       "fallbackReason": null,
       "degraded": false,
       "items": [
         {
-          "title": "美 '이란 경제압박' 강화에 국제유가 2%대 급등…한 달 만에 최고치",
-          "link": "https://www.newsis.com/view/NISX20260821_0003756806",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "6월 국내은행 대출 연체율 0.56%…동월 기준 10년 만에 최고",
-          "link": "https://www.yna.co.kr/view/AKR20260820164700002",
+          "title": "[게시판] 키움증권, 금융경제 멘토링 '키움 드리머' 6기 발족",
+          "link": "https://www.yna.co.kr/view/AKR20260821080400008",
           "source": "연합뉴스 경제"
         },
         {
-          "title": "[오늘의 주요일정]경제(8월21일금요일)",
-          "link": "https://www.newsis.com/view/NISX20260820_0003755154",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "10년 만에 '북극항로' 시험…경제성 '기대' 외교 '변수'",
-          "link": "https://www.newsis.com/view/NISX20260820_0003756584",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "은행권, 내달 입주 앞둔 '디에이치 방배' 잔금대출 한도 확대",
-          "link": "https://www.yna.co.kr/view/AKR20260820176000002",
-          "source": "연합뉴스 경제"
-        }
-      ]
-    },
-    {
-      "key": "stocks",
-      "name": "증시·환율",
-      "nameEn": "Stocks & FX",
-      "lineKo": "고환율 부담은 줄었지만, 유가 상승과 폭염으로 인해 하반기 물가에 대한 긴장감은 여전히 유지되고 있다. 미국이 이란에 대한 경제 압박을 강화하자 국제유가가 2% 이상 상승하며 브렌트유는 93달러대를 기록했다. 대만 증시는 한일 반도체 강세 영향으로 사흘 만에 0.48% 상승하며 반등했다. 씨티는 환율이 1,390원 아래선을 하면 국민연금의 환헤지 확대가 중단될 수 있다고 분석했다. 각 기사는 서로 다른 주제를 다루고 있으며, 구체적인 수치와 상황을 보여준다.",
-      "lineEn": "The burden of a high exchange rate has decreased, but concerns over inflation in the second half of the year remain due to rising oil prices and extreme heat. After the U.S. intensified economic pressure on Iran, international oil prices rose by more than 2%, with Brent crude reaching the $93 range. The Taiwan stock market rebounded by 0.48% over three days, influenced by the strong performance of semiconductor stocks in South Korea and Japan. Citigroup analyzed that if the exchange rate falls below 1,390 won, the expansion of the National Pension Service's currency hedging could be halted. Each article covers different topics and provides specific figures and situations.",
-      "isFallback": false,
-      "fallbackReason": null,
-      "degraded": false,
-      "items": [
-        {
-          "title": "고환율 부담 줄었지만…유가·폭염에 하반기 물가 '긴장'",
-          "link": "https://www.newsis.com/view/NISX20260820_0003756675",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "美 '이란 경제압박' 강화에 국제유가 2%대↑…브렌트유 93달러대",
-          "link": "https://www.yna.co.kr/view/AKR20260821006800072",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "[올댓차이나] 대만 증시, 한일 반도체 강세 영향 사흘 만에 반등…0.48%↑",
-          "link": "https://www.newsis.com/view/NISX20260820_0003756721",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "씨티 \"환율 1,390원 아래선 국민연금 환헤지 확대 멈출 수도\"",
-          "link": "https://www.yna.co.kr/view/AKR20260820170400002",
+          "title": "공주시, 1천793억 규모 2차 추경예산…민생경제·핵심사업 초점",
+          "link": "https://www.yna.co.kr/view/AKR20260821052900063",
           "source": "연합뉴스 경제"
         }
       ]

@@ -9,7 +9,8 @@
       "source": "뉴시스 경제",
       "category": "stocks",
       "preview": "[서울=뉴시스]이재준 기자 = 홍콩 증시는 21일 주요기업의 결산발표가 이어지는 가운데 실적 호조 종목을 중심으로 매수가 선행하면서 상승세를 이어간 채 개장했다. 항셍지수는 이날 전일 대비 109.12 포인트, 0.…",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "[AllChina] Hong Kong stock market rises on earnings stock buying... H shares up 0.41%"
     },
     {
       "title": "[올댓차이나] 中 증시, 반락 개장 후 매수세로 상승 전환…창업판 1.56%↑",
@@ -18,7 +19,8 @@
       "source": "뉴시스 경제",
       "category": "stocks",
       "preview": "[서울=뉴시스]이재준 기자 = 중국 증시는 21일 전날 뉴욕 증시 약세 여파로 반락 출발했다가 매수세 유입으로 상승하고 있다. 상하이 종합지수는 이날 전일 대비 12.55 포인트, 0.32% 밀린 3891.18로 거…",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "[AllChina] China's stock market turns upward as buying spree follows opening decline... Star Market rises 1.56%"
     },
     {
       "title": "\"주주환원의 힘\"…美찬바람에도 삼전닉스 강세에 코스피 상승탄력",
@@ -27,7 +29,8 @@
       "source": "연합뉴스 경제",
       "category": "stocks",
       "preview": "(서울=연합뉴스) 황철환 기자 = 미국 국채 금리 재상승과 글로벌 소비둔화 우려, 중동 위기 등 악재 속에 21일 국내 주식시장에서는 삼성전자[...",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Power of shareholder returns... Despite U.S. headwinds, Samsung Electronics' strength lifts KOSPI resilience"
     },
     {
       "title": "유가 94달러에도 긴축 기대 꺾였다…美·英 금리 인상 전망 후퇴",
@@ -36,7 +39,8 @@
       "source": "뉴시스 경제",
       "category": "rates",
       "preview": "[서울=뉴시스]박미선 기자 = 중동 전쟁에 따른 국제유가 상승으로 인플레이션 우려가 이어지고 있지만 투자자들은 미국과 영국의 금리 인상 전망을 낮추고 있다. 고용과 물가, 임금 등 경제지표가 둔화하면서 중앙은행들이…",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Oil Prices Fall Below 94 Dollars as Tightening Expectations Fade... U.S. and U.K. Rate Hike Outlook Retreats"
     },
     {
       "title": "[단독]주택공급 '고삐'…이르면 26일 '도심 복합사업' 후보지 발표",
@@ -45,7 +49,8 @@
       "source": "뉴시스 경제",
       "category": "realestate",
       "preview": "[서울=뉴시스]정유선 기자 = 정부가 수도권 도심 주택 공급 확대를 위해 추진하는 '도심 공공주택 복합사업' 신규 후보지를 다음 주 확정한다. 21일 관가에 따르면 국토교통부는 이르면 오는 26일 도심 공공주택 복합…",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "[Exclusive] Taming housing supply... candidate sites for 'urban complex projects' to be announced as early as 26th"
     },
     {
       "title": "국고채 금리 일제히 상승…3년물 장중 연 3.844%",
@@ -54,7 +59,8 @@
       "source": "연합뉴스 경제",
       "category": "rates",
       "preview": "(서울=연합뉴스) 21일 국고채 금리가 일제히 상승하고 있다.",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "South Korea's government bond yields rise across the board...3-year bond hits 3.844% intraday"
     },
     {
       "title": "KB국민은행, 'KB카드쓰담적금' 출시…최고 금리 연 12%",
@@ -64,6 +70,7 @@
       "category": "rates",
       "preview": "(서울=연합뉴스) 한지훈 기자 = KB국민은행은 KB국민카드와 함께 카드 이용·은행 거래 실적에 따라 최고 연 12.0%의 금리를 제공하는 'K...",
       "dupes": [],
+      "titleEn": "KB Kookmin Bank Launches 'KB Card Spend Savings Account' with Maximum Annual Interest Rate of 12%",
       "context": [
         {
           "kind": "rates",
@@ -82,7 +89,8 @@
       "source": "연합뉴스 경제",
       "category": "other",
       "preview": "▲ 키움증권[039490]은 서울 여의도 키움증권 본사에서 금융경제 교육 프로그램인 '키움 드리머' 6기의 발대식을 진행했다고 21일 밝혔다. ...",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "[Board] Kiwoom Securities Launches 6th Generation of Financial Economics Mentoring Program 'Kiwoom Dreamer"
     },
     {
       "title": "코스피, 혼조속 상승 탄력 모색…코스닥 5%대 급락",
@@ -91,7 +99,8 @@
       "source": "연합뉴스 경제",
       "category": "stocks",
       "preview": "(서울=연합뉴스) 임은진 기자 = 코스피가 21일 미국의 국채 금리 부담과 '반도체 투 톱'의 주주 환원 간 힘겨루기에 6,800대에서 등락을 ...",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Kospi seeks resilience amid mixed rise, Kosdaq plunges 5%"
     },
     {
       "title": "용산에 ‘최장 20년’ 장기전세 253가구… 5500억 재개발 시공사 찾는다",
@@ -101,6 +110,7 @@
       "category": "realestate",
       "preview": "서울 용산구 숙대입구역 인근에 최고 40층, 885가구 규모의 아파트를 짓는 역세권 재개발 사업이 시공사 선정에 들어갔다. 예정 공사비는 약 5500억원이다. 전체 임대주택 315가구 중 253가구는 최장 20년 거…",
       "dupes": [],
+      "titleEn": "Long-term rental units in Yongsan with a maximum 20-year lease for 253 households... seeking redevelopment contractor for 550,000,000,000 won",
       "context": [
         {
           "kind": "realestate",
@@ -128,6 +138,7 @@
           "source": "연합뉴스 경제"
         }
       ],
+      "titleEn": "June Seoul apartment prices rise 2.5% in a month... largest increase in 5 years",
       "context": [
         {
           "kind": "realestate",
@@ -148,7 +159,8 @@
       "source": "연합뉴스 경제",
       "category": "realestate",
       "preview": "(전남광주=연합뉴스) 정회성 기자 = 허위·과장 광고로 조합원을 모집해 180여억원을 가로챈 지역주택조합 추진위원장이 중형을 선고받고 법정구속 ...",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Guangju Socheon-dong Local Housing Promotion Committee Chair Convicted of 18,800,000,000 Won Fraud, Sentenced to 11 Years in Prison"
     },
     {
       "title": "'월세 1만원'…전주 청년만원주택 하반기 입주자 모집",
@@ -157,7 +169,8 @@
       "source": "연합뉴스 경제",
       "category": "realestate",
       "preview": "(전주=연합뉴스) 김동철 기자 = 전북 전주시는 청년들의 주거비 부담을 덜어주고자 다음 달 1∼3일 청년만원주택 '청춘★별채' 하반기 예비 입주...",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Monthly rent 10,000 won\"...Jeonju Youth 10,000 Won Housing to Recruit Residents in the Second Half of the Year"
     },
     {
       "title": "잠원동 신반포4차 재건축 탄력…최고 49층 1833가구 탈바꿈",
@@ -167,6 +180,7 @@
       "category": "realestate",
       "preview": "제17차 서울시 정비사업 통합심의위원회 숙대입구역세권에 장기전세 등 900가구 영진시장 최고 23층 주상복합아파트로서울 서초구 잠원동 신반포4차아파트 재건축이 서울시 통합심의를 ..",
       "dupes": [],
+      "titleEn": "Jamwon-dong Shin Banpo 4th Reconstruction Gains Momentum... Up to 49-Story Building to Transform 1,833 Units",
       "context": [
         {
           "kind": "realestate",
@@ -187,7 +201,8 @@
       "source": "연합뉴스 경제",
       "category": "other",
       "preview": "(세종=연합뉴스) 양영석 기자 = 충남 공주시는 1천793억원 규모의 올해 2차 추경 예산안을 편성해 시의회에 제출했다고 21일 밝혔다.",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "공주시, 1천793억 규모 2차 추경예산…민생경제·핵심사업 초점"
     },
     {
       "title": "美 재무부 개입도 안 통했다…장기금리 하루 만에 4.69%로 반등",
@@ -196,7 +211,8 @@
       "source": "뉴시스 경제",
       "category": "rates",
       "preview": "[서울=뉴시스]박미선 기자 = 스콧 베선트 미 재무장관이 치솟는 장기금리를 잡기 위해 국채 바이백(재매입) 규모를 두 배로 확대했지만 효과는 하루를 넘기지 못했다. 미국의 막대한 재정적자와 빅테크의 인공지능(AI)…",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "U.S. Treasury intervention fails to stop long-term interest rates from rebounding to 4.69% in one day"
     },
     {
       "title": "“이제는 30대가 부동산 큰 손”…이들이 몰려간 동네 어딘지 보니",
@@ -205,7 +221,8 @@
       "source": "매일경제 부동산",
       "category": "realestate",
       "preview": "30대, 서울 집합건물 매수 ‘1위’서울 집합건물 매수 시장에서 30대가 가장 활발하게 움직인 것으로 나타났다. 21일 부동산 정보 앱 집품이 대법원 등기정보광장의 ‘소유권이전등기..",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Now 30-somethings are big players in real estate\"... Seeing where they're flocking to"
     },
     {
       "title": "집값 오르고, 청약 몰리고…실수요자 시장서 수치로 확인된 ‘구관이 명관’",
@@ -214,7 +231,8 @@
       "source": "매일경제 부동산",
       "category": "realestate",
       "preview": "주택시장의 무게 중심이 막연한 ‘미래가치’에서 현재의 ‘삶의 질’로 이동하고 있다. 정부의 부동산 정책 기조 속, 시장이 실수요자 중심으로 재편되면서 실거주에 필요한 생활 인프라와..",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Rising home prices and a surge in applications... real demand confirmed by numbers in the market: \"Old pipes make good pipes"
     },
     {
       "title": "[MK부동산 단신] 이천 중리지구 6.6%대 유명 대형 치과 상가",
@@ -223,7 +241,8 @@
       "source": "매일경제 부동산",
       "category": "realestate",
       "preview": "▶ 유명 전문의 진료, 대형 치과 임대 ▶ 대규모 아파트 단지 앞 중심상권 대로변 ▶ 병원·학원 특화 신축 근생빌딩 이천시 중리지구 중심상권 대로변 코너에 위치한 신축 근생빌딩 중..",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "MK Real Estate Brief: Icheon Jungri Area Features Prominent Large Dental Clinic Shop with 6.6% Interest Rate"
     },
     {
       "title": "중랑구 상봉동 엘지,쌍용아파트 68㎡ 8.1억 ‘최근 3년 신고가’",
@@ -233,6 +252,7 @@
       "category": "realestate",
       "preview": "서울 중랑구 상봉동 엘지,쌍용아파트에서 전용 68.12㎡가 8억 1,000만 원에 거래되며 최근 3년 내 신고가를 기록했다. [단지 정보] | 준공 | 1996년 3월 | 세대수 ..",
       "dupes": [],
+      "titleEn": "Jungnang-gu Sangbong-dong LG, Samsung Apartments 68㎡ 810,000,000 'Highest Price in 3 Years",
       "context": [
         {
           "kind": "realestate",
@@ -253,7 +273,8 @@
       "source": "뉴시스 경제",
       "category": "rates",
       "preview": "[서울=뉴시스] 신효령 기자 = 21일 일본 도쿄증시에서 닛케이225지수(닛케이평균주가)가 하락 출발했다. 미국 장기국채 금리가 다시 오르면서 전날 뉴욕증시 주요 지수가 일제히 하락한 영향이다. 니혼게이자이신문에 따…",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Tokyo Stocks Drop on Rising U.S. Treasury Yields... Nikkei Down 1.19%"
     },
     {
       "title": "대우건설, '검암역 푸르지오 프라베뉴' 견본주택 개관",
@@ -262,7 +283,8 @@
       "source": "뉴시스 경제",
       "category": "realestate",
       "preview": "[서울=뉴시스]정유선 기자 = 대우건설은 인천광역시 서해구 검암동 일원에 조성하는 '검암역 푸르지오 프라베뉴'의 견본주택을 21일 열고 본격적인 분양 일정에 돌입했다. 청약 일정은 오는 31일 특별공급을 시작으로 다…",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Daewoo Engineering & Construction opens model house for 'Geumam Station Purio Pravenu"
     },
     {
       "title": "국토부 장관, 토지거래허가구역 지정 권한 확대… 노후청사·폐교엔 주택 공급",
@@ -271,7 +293,8 @@
       "source": "조선비즈 부동산",
       "category": "realestate",
       "preview": "국토교통부 장관은 앞으로 동일한 시·도 안의 일부 지역도 토지거래허가구역으로 직접 지정할 수 있게 된다. 투기거래가 국지적으로 발생해 주변으로 빠르게 확산하는 경우 중앙정부가 보다 신속하게 대응할 수 있도록 지정 권…",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Minister of Land, Infrastructure and Transport expands authority to designate land transaction permission areas... housing supply for aging offices and closed schools"
     },
     {
       "title": "헤지 펀드 등 민간 투자자가 미 국채 금리 상승 부채질",
@@ -280,7 +303,8 @@
       "source": "뉴시스 경제",
       "category": "rates",
       "preview": "[서울=뉴시스] 강영진 기자 = 금세기 초 금융위기 직전 미국 국채의 40% 가량을 보유하던 외국 정부와 국부 펀드, 중앙은행 등의 보유 비율이 12% 수준으로 줄었으며 헤지 펀드와 민간 투자자들의 보유 비중이 증가…",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Private investors, including hedge funds, fuel rise in U.S. Treasury yields"
     }
   ],
   "realestateStats": [
