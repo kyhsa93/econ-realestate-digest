@@ -84,5 +84,48 @@
       "name": "청년맞춤형 전월세보증금 대출",
       "rateType": "변동금리"
     }
+  },
+  {
+    "date": "2026-08-22",
+    "deposit12": {
+      "bank": {
+        "rate": 3.85,
+        "baseRate": 3.65,
+        "company": "한국스탠다드차타드은행",
+        "name": "e-그린세이브예금"
+      },
+      "savingsBank": {
+        "rate": 4.1,
+        "baseRate": 4.1,
+        "company": "대백저축은행",
+        "name": "애플정기예금"
+      }
+    },
+    "saving12": {
+      "bank": {
+        "rate": 7,
+        "baseRate": 1.9,
+        "company": "경남은행",
+        "name": "오면우대! 하면우대! 정기적금"
+      },
+      "savingsBank": {
+        "rate": 14,
+        "baseRate": 2,
+        "company": "웰컴저축은행",
+        "name": "웰뱅 라이킷(LIKIT) 적금"
+      }
+    },
+    "mortgage": {
+      "rate": 3.9,
+      "company": "경남은행",
+      "name": "BNK모바일주택담보대출",
+      "rateType": "변동금리"
+    },
+    "rentLoan": {
+      "rate": 3.46,
+      "company": "광주은행",
+      "name": "청년맞춤형 전월세보증금 대출",
+      "rateType": "변동금리"
+    }
   }
 ]
