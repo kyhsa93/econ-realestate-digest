@@ -1,59 +1,32 @@
 {
-  "updatedAt": "2026-08-21T07:51:51.105Z",
+  "updatedAt": "2026-08-21T11:38:15.775Z",
   "model": "qwen3:14b",
   "summary": {
-    "ko": "- 금리·예금·투자상품: 국고채 금리가 일제히 상승하며 3년물은 연 3.854%를 기록했다. 일본 증시는 미국 금리 상승과 소비 둔화 우려로 닛케이가 0.30% 하락했다. 2금융권 중금리대출은 총량에서 100% 제외되는 조치가 시행됐다. 일본 물가가 다시 상승하며 9월 금리 인상에 힘이 실리고 있다. KB국민은행은 'KB카드쓰담적금'을 출시하며 최고 연 12%의 금리를 제공한다.\n- 증시·환율: 증시·환율: \"주주환원의 힘\"…美찬바람에도 삼전닉스 강세에 코스피 상승(종합), 원/달러 환율 사흘째 1,300원대…원/엔 2년 2개월 만에 최저, [외환] 원/달러 환율 6.1원 내린 1,386.5원(15:30 기준가) +3\n- 부동산: GS건설은 신한은행과 목동12단지 재건축 금융 업무협약을 체결했다. 오세훈은 용산공원 임대주택 계획에 대해 청년 절박함을 정책 실패의 방패로 삼아선 안 된다고 비판했다. 그는 용산공원에 임대주택을 짓는 것은 '훼손된 곳'이 아니라 공원 예정지라고 설명했다. 광명 재건축 단지들은 시공사 선정이 코앞인데 공공임대 물량이 나오자 반발하고 있다. 용산공원 주택 공급은 법 개정과 정화비 문제로 인해 가시밭길에 놓여 있다.\n- 기타 경제 소식: 이란이 수십 년간 이어진 제재를 버텼지만, 트럼프 정부의 경제적 디데이가 실제로 통할지 주목받고 있다. 키움증권은 금융경제 멘토링 프로그램 '키움 드리머' 6기를 발족했다. 이란의 경제 상황은 국제적 관심을 끌고 있다. 키움증권의 멘토링 프로그램은 청년들의 경제 역량 강화를 목표로 한다. 두 소식은 서로 다른 분야에서 각각의 주제를 다루고 있다.",
-    "en": "- Rates, Deposits & Investment Products: The government bond rate rose uniformly, with the three-year rate reaching 3.854% annually. The Japanese stock market fell 0.30% as the Nikkei declined due to concerns over rising U.S. interest rates and slowing consumption. A measure has been implemented to exclude 100% of the total amount of medium-interest loans from the second financial sector. Japan's inflation is rising again, giving momentum to the possibility of a rate hike in September. KB Kookmin Bank has launched the \"KB Card Cudam Savings Account,\" offering a maximum annual interest rate of 12%.\n- Stocks & FX: Stocks & FX: \"주주환원의 힘\"…美찬바람에도 삼전닉스 강세에 코스피 상승(종합), 원/달러 환율 사흘째 1,300원대…원/엔 2년 2개월 만에 최저, [외환] 원/달러 환율 6.1원 내린 1,386.5원(15:30 기준가) +3\n- Real Estate: GS Construction has signed a financial business agreement with Shinhan Bank for the reconstruction of the Muldong 12th Complex. Oh Se-hoon criticized the plan for rental housing at Yongsan Park, stating that the desperation of youth should not be used as a shield for policy failure. He explained that building rental housing at Yongsang Park is not on a \"damaged site,\" but on a planned park area. In the Gwangmyeong reconstruction complex, developers are opposing the release of public rental housing units as the selection of the construction company is imminent. Housing supply at Yongsan Park is facing a difficult path due to legal amendments and issues regarding the cleanup costs.\n- Other Economic News: Iran has withstood decades of sanctions, but attention is now focused on whether Trump's government's economic D-Day will actually take effect. Kyoong Securities has launched the sixth session of its financial and economic mentoring program, \"Kyoong Dreamer.\" Iran's economic situation has drawn international attention. Kyoong Securities' mentoring program aims to strengthen the economic capabilities of young people. The two pieces of news address different topics in separate fields."
+    "ko": "- 증시·환율: 홍콩 증시는 실적주와 자원주 매수에 힘입어 1.01% 상승 마감했다. 중국 증시 역시 자원주 강세로 인해 창업판이 1.43% 오르며 상승 마감했다. 삼전닉스의 강세와 주주환원 정책의 효과로 코스피도 상승했다. 원/달러 환율은 사흘째 1,300원대를 유지하고 있다. 원/엔 환율은 2년 2개월 만에 최저 수준으로 떨어졌다.\n- 부동산: 서울 거주자 중 경기 아파트를 매입한 비중은 15.4%로 나타났다. 정부는 비주택 및 물류센터 PF 지원을 확대하고, 20년 임대 사업자에 대해 5%룰 적용 여부를 검토 중이다. 비거주 1주택자의 정확한 수는 아직 명확하지 않아 관심이 집중되고 있다. 주택공급 설명회에서는 용도전환 제약으로 인해 공급이 어려운 상황을 설명하며 업계의 의견이 쏟아졌다. 서울 아파트 청약 경쟁률은 9개월째 세 자릿수를 유지했으나, 전국 청약 경쟁률은 3년 만에 최저 수준으로 떨어졌다.\n- 기타 경제 소식: 5대 은행이 디에이치 방배 잔금대출 한도를 3배로 확대했다. 한일 재무차관 회의가 열려 세계 경제·금융시장 정책 대응 현황을 공유했다. 같은 주제의 회의에서 경제·금융 협력 강화를 논의했다. 4대 금융기관이 경남 수해 복구를 위해 20억 원 규모의 대출과 물품 지원을 약속했다. 이란은 수십 년간 제재를 견디었지만 트럼프의 '경제적 디데이'가 통할지 주목받고 있다.\n- 금리·예금·투자상품: 미국 국채금리 상승과 유가 변동이 다음주 주요 경제 변수로 주목받고 있다. 디에이치 방배 잔금대출 시장에서 금리 경쟁이 과열 조짐을 보이고 있다. 국고채 금리가 일제히 상승하며 다음주 금통위에 경계감을 유발하고 있다. 3년물 국고채 금리는 연 3.854%를 기록했다. 일본 증시는 미국 금리 상승과 소비 둔화 우려로 닛케이가 0.30% 하락했다.",
+    "en": "- Stocks & FX: The Hong Kong stock market closed up 1.01% driven by buying in earnings stocks and resource stocks. The Chinese stock market also closed higher, with the Star Market rising 1.43% due to strong performance in resource stocks. The Kospi also rose due to the strong performance of Samsung Electronics and the effects of its shareholder return policy. The won/dollar exchange rate has remained above 1,300 won for three consecutive days. The won/yen exchange rate fell to its lowest level in two years and two months.\n- Real Estate: Among Seoul residents, 15.4% purchased apartments in Gyeonggi. The government is expanding support for non-residential and logistics center PFs, and is currently reviewing whether to apply the 5% rule to 20-year lease operators. The exact number of non-resident single-homeowners is still unclear, drawing significant attention. At the housing supply explanation meeting, industry opinions poured in as the situation explaining the difficulty in supply due to use conversion restrictions was presented. The apartment subscription competition rate in Seoul has maintained three-digit numbers for nine consecutive months, but the national subscription competition rate has dropped to its lowest level in three years.\n- Other Economic News: The five major banks have expanded the limit for Daeheung Bangbae residual loan to three times. A meeting between South Korea and Japan's deputy finance ministers was held to share the current status of policy responses to the global economic and financial markets. In the same meeting, they discussed strengthening economic and financial cooperation. The four major financial institutions pledged to provide a 2,000,000,000 won loan and material support for the recovery from the flood damage in Gyeongsangnam-do. Iran has endured sanctions for decades, but attention is focused on whether Trump's \"economic D-Day\" will be effective.\n- Rates, Deposits & Investment Products: Rising U.S. Treasury yields and oil price fluctuations are expected to be key economic variables next week. The DH Bangpyeong Jangum loan market is showing signs of overheating in interest rate competition. The rise in government bond yields has triggered caution ahead of next week's Monetary Policy Board meeting. The 3-year government bond yield reached 3.854% annually. The Japanese stock market saw the Nikkei fall 0.30% due to concerns over rising U.S. interest rates and slowing consumption."
   },
   "highlights": [],
   "categories": [
     {
-      "key": "rates",
-      "name": "금리·예금·투자상품",
-      "nameEn": "Rates, Deposits & Investment Products",
-      "lineKo": "국고채 금리가 일제히 상승하며 3년물은 연 3.854%를 기록했다. 일본 증시는 미국 금리 상승과 소비 둔화 우려로 닛케이가 0.30% 하락했다. 2금융권 중금리대출은 총량에서 100% 제외되는 조치가 시행됐다. 일본 물가가 다시 상승하며 9월 금리 인상에 힘이 실리고 있다. KB국민은행은 'KB카드쓰담적금'을 출시하며 최고 연 12%의 금리를 제공한다.",
-      "lineEn": "The government bond rate rose uniformly, with the three-year rate reaching 3.854% annually. The Japanese stock market fell 0.30% as the Nikkei declined due to concerns over rising U.S. interest rates and slowing consumption. A measure has been implemented to exclude 100% of the total amount of medium-interest loans from the second financial sector. Japan's inflation is rising again, giving momentum to the possibility of a rate hike in September. KB Kookmin Bank has launched the \"KB Card Cudam Savings Account,\" offering a maximum annual interest rate of 12%.",
+      "key": "stocks",
+      "name": "증시·환율",
+      "nameEn": "Stocks & FX",
+      "lineKo": "홍콩 증시는 실적주와 자원주 매수에 힘입어 1.01% 상승 마감했다. 중국 증시 역시 자원주 강세로 인해 창업판이 1.43% 오르며 상승 마감했다. 삼전닉스의 강세와 주주환원 정책의 효과로 코스피도 상승했다. 원/달러 환율은 사흘째 1,300원대를 유지하고 있다. 원/엔 환율은 2년 2개월 만에 최저 수준으로 떨어졌다.",
+      "lineEn": "The Hong Kong stock market closed up 1.01% driven by buying in earnings stocks and resource stocks. The Chinese stock market also closed higher, with the Star Market rising 1.43% due to strong performance in resource stocks. The Kospi also rose due to the strong performance of Samsung Electronics and the effects of its shareholder return policy. The won/dollar exchange rate has remained above 1,300 won for three consecutive days. The won/yen exchange rate fell to its lowest level in two years and two months.",
       "isFallback": false,
       "fallbackReason": null,
       "degraded": false,
       "items": [
         {
-          "title": "국고채 금리 일제히 상승…3년물 연 3.854%",
-          "link": "https://www.yna.co.kr/view/AKR20260821142900008",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "日증시 혼조 마감…美금리 상승·소비둔화 우려에 닛케이 0.30%↓",
-          "link": "https://www.newsis.com/view/NISX20260821_0003757836",
+          "title": "[올댓차이나] 홍콩 증시, 실적주·자원주 매수에 상승 마감… H주 1.01.%↑",
+          "link": "https://www.newsis.com/view/NISX20260821_0003758220",
           "source": "뉴시스 경제"
         },
         {
-          "title": "2금융권 중금리대출 100% 총량서 빠진다",
-          "link": "https://www.hankyung.com/article/202608215112i",
-          "source": "한국경제 경제"
-        },
-        {
-          "title": "日 물가 다시 뛴다…'나프타플레이션'에 9월 금리 인상 힘 실려",
-          "link": "https://www.newsis.com/view/NISX20260821_0003757654",
+          "title": "[올댓차이나] 中 증시, 자원주 강세에 상승 마감…창업판 1.43%↑",
+          "link": "https://www.newsis.com/view/NISX20260821_0003758188",
           "source": "뉴시스 경제"
         },
-        {
-          "title": "KB국민은행, 'KB카드쓰담적금' 출시…최고 금리 연 12%",
-          "link": "https://www.yna.co.kr/view/AKR20260821081700002",
-          "source": "연합뉴스 경제"
-        }
-      ]
-    },
-    {
-      "key": "stocks",
-      "name": "증시·환율",
-      "nameEn": "Stocks & FX",
-      "lineKo": "증시·환율: \"주주환원의 힘\"…美찬바람에도 삼전닉스 강세에 코스피 상승(종합), 원/달러 환율 사흘째 1,300원대…원/엔 2년 2개월 만에 최저, [외환] 원/달러 환율 6.1원 내린 1,386.5원(15:30 기준가) +3",
-      "lineEn": "Stocks & FX: \"주주환원의 힘\"…美찬바람에도 삼전닉스 강세에 코스피 상승(종합), 원/달러 환율 사흘째 1,300원대…원/엔 2년 2개월 만에 최저, [외환] 원/달러 환율 6.1원 내린 1,386.5원(15:30 기준가) +3",
-      "isFallback": true,
-      "fallbackReason": "unverified-entity",
-      "degraded": false,
-      "items": [
         {
           "title": "\"주주환원의 힘\"…美찬바람에도 삼전닉스 강세에 코스피 상승(종합)",
           "link": "https://www.yna.co.kr/view/AKR20260821084851008",
@@ -63,21 +36,6 @@
           "title": "원/달러 환율 사흘째 1,300원대…원/엔 2년 2개월 만에 최저",
           "link": "https://www.yna.co.kr/view/AKR20260821126900002",
           "source": "연합뉴스 경제"
-        },
-        {
-          "title": "[외환] 원/달러 환율 6.1원 내린 1,386.5원(15:30 기준가)",
-          "link": "https://www.yna.co.kr/view/AKR20260821121600002",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "[올댓차이나] 홍콩 증시, 실적주 매수에 상승세… H주 0.41%↑",
-          "link": "https://www.newsis.com/view/NISX20260821_0003757486",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "[올댓차이나] 中 증시, 반락 개장 후 매수세로 상승 전환…창업판 1.56%↑",
-          "link": "https://www.newsis.com/view/NISX20260821_0003757459",
-          "source": "뉴시스 경제"
         }
       ]
     },
@@ -85,36 +43,36 @@
       "key": "realestate",
       "name": "부동산",
       "nameEn": "Real Estate",
-      "lineKo": "GS건설은 신한은행과 목동12단지 재건축 금융 업무협약을 체결했다. 오세훈은 용산공원 임대주택 계획에 대해 청년 절박함을 정책 실패의 방패로 삼아선 안 된다고 비판했다. 그는 용산공원에 임대주택을 짓는 것은 '훼손된 곳'이 아니라 공원 예정지라고 설명했다. 광명 재건축 단지들은 시공사 선정이 코앞인데 공공임대 물량이 나오자 반발하고 있다. 용산공원 주택 공급은 법 개정과 정화비 문제로 인해 가시밭길에 놓여 있다.",
-      "lineEn": "GS Construction has signed a financial business agreement with Shinhan Bank for the reconstruction of the Muldong 12th Complex. Oh Se-hoon criticized the plan for rental housing at Yongsan Park, stating that the desperation of youth should not be used as a shield for policy failure. He explained that building rental housing at Yongsang Park is not on a \"damaged site,\" but on a planned park area. In the Gwangmyeong reconstruction complex, developers are opposing the release of public rental housing units as the selection of the construction company is imminent. Housing supply at Yongsan Park is facing a difficult path due to legal amendments and issues regarding the cleanup costs.",
+      "lineKo": "서울 거주자 중 경기 아파트를 매입한 비중은 15.4%로 나타났다. 정부는 비주택 및 물류센터 PF 지원을 확대하고, 20년 임대 사업자에 대해 5%룰 적용 여부를 검토 중이다. 비거주 1주택자의 정확한 수는 아직 명확하지 않아 관심이 집중되고 있다. 주택공급 설명회에서는 용도전환 제약으로 인해 공급이 어려운 상황을 설명하며 업계의 의견이 쏟아졌다. 서울 아파트 청약 경쟁률은 9개월째 세 자릿수를 유지했으나, 전국 청약 경쟁률은 3년 만에 최저 수준으로 떨어졌다.",
+      "lineEn": "Among Seoul residents, 15.4% purchased apartments in Gyeonggi. The government is expanding support for non-residential and logistics center PFs, and is currently reviewing whether to apply the 5% rule to 20-year lease operators. The exact number of non-resident single-homeowners is still unclear, drawing significant attention. At the housing supply explanation meeting, industry opinions poured in as the situation explaining the difficulty in supply due to use conversion restrictions was presented. The apartment subscription competition rate in Seoul has maintained three-digit numbers for nine consecutive months, but the national subscription competition rate has dropped to its lowest level in three years.",
       "isFallback": false,
       "fallbackReason": null,
       "degraded": false,
       "items": [
         {
-          "title": "GS건설, 신한은행과 목동12단지 재건축 금융 업무협약",
-          "link": "https://www.newsis.com/view/NISX20260821_0003757762",
-          "source": "뉴시스 경제"
+          "title": "서울 거주자 경기 아파트 매입 비중 15.4%…여주·이천 '5억원대 신축' 관심",
+          "link": "https://www.hankyung.com/article/202608215678i",
+          "source": "한국경제 부동산"
         },
         {
-          "title": "오세훈 “청년 절박함, 정책 실패 방패 삼아선 안 돼”… 용산공원 임대주택 비판",
-          "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/21/QJCX3JFN7ZFKLCT4R56ZH5EU7U/",
+          "title": "정부 “비주택·물류센터 PF 지원, 20년 임대 사업자는 5%룰 배제도 검토할 것”",
+          "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/21/MDEIEI2F6JCRJCDXPLECKAEZ34/",
           "source": "조선비즈 부동산"
         },
         {
-          "title": "오세훈 \"용산공원에 임대주택? '훼손된 곳' 아니라 공원 예정지\"",
-          "link": "https://www.yna.co.kr/view/AKR20260821101000004",
+          "title": "7만? 80만?…비거주 1주택자 몇 명인지도 몰라",
+          "link": "https://www.hankyung.com/article/2026082155281",
+          "source": "한국경제 부동산"
+        },
+        {
+          "title": "\"용도전환 막혀 공급못해\"…주택공급 설명회서 업계건의 쏟아져",
+          "link": "https://www.yna.co.kr/view/AKR20260821153100003",
           "source": "연합뉴스 경제"
         },
         {
-          "title": "\"시공사 선정 코앞인데 공공임대?\"…광명 재건축 단지들 '발칵'",
-          "link": "https://www.newsis.com/view/NISX20260821_0003757453",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "용산공원 주택 공급 '가시밭길'…법 개정·정화비도 난제",
-          "link": "https://www.newsis.com/view/NISX20260821_0003757452",
-          "source": "뉴시스 경제"
+          "title": "서울 아파트 청약 경쟁률 9개월째 ‘세 자릿수’인데… 전국은 3년 만에 최저",
+          "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/21/DZX5SOC3PRE7XNVE4HLDFNTA7U/",
+          "source": "조선비즈 부동산"
         }
       ]
     },
@@ -122,21 +80,73 @@
       "key": "other",
       "name": "기타 경제 소식",
       "nameEn": "Other Economic News",
-      "lineKo": "이란이 수십 년간 이어진 제재를 버텼지만, 트럼프 정부의 경제적 디데이가 실제로 통할지 주목받고 있다. 키움증권은 금융경제 멘토링 프로그램 '키움 드리머' 6기를 발족했다. 이란의 경제 상황은 국제적 관심을 끌고 있다. 키움증권의 멘토링 프로그램은 청년들의 경제 역량 강화를 목표로 한다. 두 소식은 서로 다른 분야에서 각각의 주제를 다루고 있다.",
-      "lineEn": "Iran has withstood decades of sanctions, but attention is now focused on whether Trump's government's economic D-Day will actually take effect. Kyoong Securities has launched the sixth session of its financial and economic mentoring program, \"Kyoong Dreamer.\" Iran's economic situation has drawn international attention. Kyoong Securities' mentoring program aims to strengthen the economic capabilities of young people. The two pieces of news address different topics in separate fields.",
+      "lineKo": "5대 은행이 디에이치 방배 잔금대출 한도를 3배로 확대했다. 한일 재무차관 회의가 열려 세계 경제·금융시장 정책 대응 현황을 공유했다. 같은 주제의 회의에서 경제·금융 협력 강화를 논의했다. 4대 금융기관이 경남 수해 복구를 위해 20억 원 규모의 대출과 물품 지원을 약속했다. 이란은 수십 년간 제재를 견디었지만 트럼프의 '경제적 디데이'가 통할지 주목받고 있다.",
+      "lineEn": "The five major banks have expanded the limit for Daeheung Bangbae residual loan to three times. A meeting between South Korea and Japan's deputy finance ministers was held to share the current status of policy responses to the global economic and financial markets. In the same meeting, they discussed strengthening economic and financial cooperation. The four major financial institutions pledged to provide a 2,000,000,000 won loan and material support for the recovery from the flood damage in Gyeongsangnam-do. Iran has endured sanctions for decades, but attention is focused on whether Trump's \"economic D-Day\" will be effective.",
       "isFallback": false,
       "fallbackReason": null,
       "degraded": false,
       "items": [
         {
-          "title": "이란, 수십년 제재 버텼는데…트럼프 '경제적 디데이' 통할까",
-          "link": "https://www.newsis.com/view/NISX20260821_0003757421",
+          "title": "“대출 좀 받아가세요”…5대 은행, 디에이치 방배 잔금대출 한도 3배로",
+          "link": "https://www.mk.co.kr/news/economy/12133543",
+          "source": "매일경제 부동산"
+        },
+        {
+          "title": "한일 재무차관회의…세계 경제·금융시장 정책 대응 현황 공유",
+          "link": "https://www.yna.co.kr/view/AKR20260821120200002",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "韓日 재무차관회의 개최…경제·금융 협력 강화",
+          "link": "https://www.newsis.com/view/NISX20260821_0003757932",
           "source": "뉴시스 경제"
         },
         {
-          "title": "[게시판] 키움증권, 금융경제 멘토링 '키움 드리머' 6기 발족",
-          "link": "https://www.yna.co.kr/view/AKR20260821080400008",
+          "title": "4대 금융, 경남 수해 복구에 20억…대출·물품 지원도(종합)",
+          "link": "https://www.yna.co.kr/view/AKR20260821076951002",
           "source": "연합뉴스 경제"
+        },
+        {
+          "title": "이란, 수십년 제재 버텼는데…트럼프 '경제적 디데이' 통할까",
+          "link": "https://www.newsis.com/view/NISX20260821_0003757421",
+          "source": "뉴시스 경제"
+        }
+      ]
+    },
+    {
+      "key": "rates",
+      "name": "금리·예금·투자상품",
+      "nameEn": "Rates, Deposits & Investment Products",
+      "lineKo": "미국 국채금리 상승과 유가 변동이 다음주 주요 경제 변수로 주목받고 있다. 디에이치 방배 잔금대출 시장에서 금리 경쟁이 과열 조짐을 보이고 있다. 국고채 금리가 일제히 상승하며 다음주 금통위에 경계감을 유발하고 있다. 3년물 국고채 금리는 연 3.854%를 기록했다. 일본 증시는 미국 금리 상승과 소비 둔화 우려로 닛케이가 0.30% 하락했다.",
+      "lineEn": "Rising U.S. Treasury yields and oil price fluctuations are expected to be key economic variables next week. The DH Bangpyeong Jangum loan market is showing signs of overheating in interest rate competition. The rise in government bond yields has triggered caution ahead of next week's Monetary Policy Board meeting. The 3-year government bond yield reached 3.854% annually. The Japanese stock market saw the Nikkei fall 0.30% due to concerns over rising U.S. interest rates and slowing consumption.",
+      "isFallback": false,
+      "fallbackReason": null,
+      "degraded": false,
+      "items": [
+        {
+          "title": "美 국채금리·유가…그리고 엔비디아 [다음주 주요 변수 미리보기]",
+          "link": "https://www.hankyung.com/article/202608215342i",
+          "source": "한국경제 경제"
+        },
+        {
+          "title": "'디에이치 방배' 잔금대출 한도·금리 경쟁 과열 조짐(종합)",
+          "link": "https://www.yna.co.kr/view/AKR20260821146151002",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "국고채 금리 일제히 상승…다음주 금통위 경계감(종합)",
+          "link": "https://www.yna.co.kr/view/AKR20260821142951008",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "국고채 금리 일제히 상승…3년물 연 3.854%",
+          "link": "https://www.yna.co.kr/view/AKR20260821142900008",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "日증시 혼조 마감…美금리 상승·소비둔화 우려에 닛케이 0.30%↓",
+          "link": "https://www.newsis.com/view/NISX20260821_0003757836",
+          "source": "뉴시스 경제"
         }
       ]
     }
