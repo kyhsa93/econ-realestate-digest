@@ -1092,21 +1092,73 @@
     "date": "2026-08-21",
     "model": "qwen3:14b",
     "summary": {
-      "ko": "- 증시·환율: 홍콩 증시는 실적주 매수에 힘입어 상승세를 보이며 H주가 0.41% 올랐다. 중국 증시는 반락 개장 후 매수세로 상승 전환하며 창업판이 1.56% 상승했다. 삼전닉스는 주주환원의 효과로 미국 시장에서도 강세를 보이며 코스피 상승에 힘을 보탰다. 코스피는 혼조 속에서 상승 탄력성을 모색하고 있다. 코스닥은 5%대 급락하며 하락세를 이어갔다.\n- 금리·예금·투자상품: 미국과 영국의 금리 인상 전망이 후퇴하면서 유가는 94달러를 기록했다. 국고채 금리는 일제히 상승하며 3년물이 장중 연 3.844%를 기록했다. KB국민은행은 'KB카드쓰담적금'을 출시하며 최고 연 12%의 금리를 제공했다. 미국 재무부의 개입에도 불구하고 장기금리는 하루 만에 4.69%로 반등했다. 일본 증시는 미국 국채금리 상승으로 인해 하락 출발하며 닛케이가 1.19% 하락했다.\n- 부동산: 주택공급 강화 방안 발표가 이르면 26일 예정되며, 용산에서 최장 20년 장기전세 253가구가 제공되고 5500억 규모의 재개발 시공사가 선정될 예정이고, 6월 서울 아파트값이 한 달 만에 2.5% 상승하며 5년 만에 최대 상승폭을 기록했으며, 광주 소촌동 지역주택 추진위원장이 188억 사기 사건으로 징역 11년을 선고받았고, 전주에서는 월세 1만원의 청년만원주택이 하반기 입주자 모집을 진행한다.\n- 기타 경제 소식: 키움증권은 금융경제 멘토링 프로그램 '키움 드리머' 6기를 발족했다. 공주시는 1천793억 원 규모의 2차 추경예산을 확정했다. 해당 예산은 민생경제 지원에 중점을 뒀다. 공주시는 추경예산을 통해 핵심사업에도 투자할 계획이다. 키움증권의 멘토링 프로그램은 경제 인재 양성에 기여하고 있다.",
-      "en": "- Stocks & FX: The Hong Kong stock market rose on buying of earnings stocks, with H-shares up 0.41%. The Chinese stock market turned upward after a weak opening, with the Star Market rising 1.56%. Samsung Electronics showed strength in the U.S. market due to the effect of shareholder returns, contributing to the Kospi's rise. The Kospi is seeking upward resilience amid mixed performance. The KOSDAQ continued its downward trend with a sharp drop of over 5%.\n- Rates, Deposits & Investment Products: With the retreat of expectations for interest rate hikes in the U.S. and the U.K., oil prices reached 94 dollars. Government bond rates rose across the board, with the 3-year rate reaching 3.844% during the day. KB Kookmin Bank launched the \"KB Card Savings Account\" offering a maximum annual interest rate of 12%. Despite intervention by the U.S. Treasury, long-term interest rates rebounded to 4.69% within a day. The Japanese stock market started lower due to the rise in U.S. Treasury bond rates, with the Nikkei falling 1.19%.\n- Real Estate: The announcement of measures to strengthen housing supply is scheduled for as early as the 26th, with 253 long-term rental units available in Yongsan for up to 20 years, and a redevelopment construction company to be selected with a budget of 550,000,000,000. The apartment prices in Seoul rose 2.5% within a month in June, marking the largest increase in five years. The head of the regional housing promotion committee in Gwangju's Sosundong was sentenced to 11 years in prison for a fraud case involving 18,800,000,000. In Jeonju, the Youth 10,000 Won Housing with a monthly rent of 10,000 won will conduct recruitment for residents in the second half of the year.\n- Other Economic News: Kiwoom Securities has launched the sixth session of its financial economics mentoring program, \"Kiwoom Dreamer.\" Gongju City has finalized its second supplementary budget of 179,300,000,000 won. This budget focuses on supporting the people's livelihood and economy. Gongju City plans to invest in key projects through the supplementary budget. Kiwoom Securities' mentoring program contributes to cultivating economic talent."
+      "ko": "- 금리·예금·투자상품: 국고채 금리가 일제히 상승하며 3년물은 연 3.854%를 기록했다. 일본 증시는 미국 금리 상승과 소비 둔화 우려로 닛케이가 0.30% 하락했다. 2금융권 중금리대출은 총량에서 100% 제외되는 조치가 시행됐다. 일본 물가가 다시 상승하며 9월 금리 인상에 힘이 실리고 있다. KB국민은행은 'KB카드쓰담적금'을 출시하며 최고 연 12%의 금리를 제공한다.\n- 증시·환율: 증시·환율: \"주주환원의 힘\"…美찬바람에도 삼전닉스 강세에 코스피 상승(종합), 원/달러 환율 사흘째 1,300원대…원/엔 2년 2개월 만에 최저, [외환] 원/달러 환율 6.1원 내린 1,386.5원(15:30 기준가) +3\n- 부동산: GS건설은 신한은행과 목동12단지 재건축 금융 업무협약을 체결했다. 오세훈은 용산공원 임대주택 계획에 대해 청년 절박함을 정책 실패의 방패로 삼아선 안 된다고 비판했다. 그는 용산공원에 임대주택을 짓는 것은 '훼손된 곳'이 아니라 공원 예정지라고 설명했다. 광명 재건축 단지들은 시공사 선정이 코앞인데 공공임대 물량이 나오자 반발하고 있다. 용산공원 주택 공급은 법 개정과 정화비 문제로 인해 가시밭길에 놓여 있다.\n- 기타 경제 소식: 이란이 수십 년간 이어진 제재를 버텼지만, 트럼프 정부의 경제적 디데이가 실제로 통할지 주목받고 있다. 키움증권은 금융경제 멘토링 프로그램 '키움 드리머' 6기를 발족했다. 이란의 경제 상황은 국제적 관심을 끌고 있다. 키움증권의 멘토링 프로그램은 청년들의 경제 역량 강화를 목표로 한다. 두 소식은 서로 다른 분야에서 각각의 주제를 다루고 있다.",
+      "en": "- Rates, Deposits & Investment Products: The government bond rate rose uniformly, with the three-year rate reaching 3.854% annually. The Japanese stock market fell 0.30% as the Nikkei declined due to concerns over rising U.S. interest rates and slowing consumption. A measure has been implemented to exclude 100% of the total amount of medium-interest loans from the second financial sector. Japan's inflation is rising again, giving momentum to the possibility of a rate hike in September. KB Kookmin Bank has launched the \"KB Card Cudam Savings Account,\" offering a maximum annual interest rate of 12%.\n- Stocks & FX: Stocks & FX: \"주주환원의 힘\"…美찬바람에도 삼전닉스 강세에 코스피 상승(종합), 원/달러 환율 사흘째 1,300원대…원/엔 2년 2개월 만에 최저, [외환] 원/달러 환율 6.1원 내린 1,386.5원(15:30 기준가) +3\n- Real Estate: GS Construction has signed a financial business agreement with Shinhan Bank for the reconstruction of the Muldong 12th Complex. Oh Se-hoon criticized the plan for rental housing at Yongsan Park, stating that the desperation of youth should not be used as a shield for policy failure. He explained that building rental housing at Yongsang Park is not on a \"damaged site,\" but on a planned park area. In the Gwangmyeong reconstruction complex, developers are opposing the release of public rental housing units as the selection of the construction company is imminent. Housing supply at Yongsan Park is facing a difficult path due to legal amendments and issues regarding the cleanup costs.\n- Other Economic News: Iran has withstood decades of sanctions, but attention is now focused on whether Trump's government's economic D-Day will actually take effect. Kyoong Securities has launched the sixth session of its financial and economic mentoring program, \"Kyoong Dreamer.\" Iran's economic situation has drawn international attention. Kyoong Securities' mentoring program aims to strengthen the economic capabilities of young people. The two pieces of news address different topics in separate fields."
     },
     "highlights": [],
     "categories": [
       {
-        "key": "stocks",
-        "name": "증시·환율",
-        "nameEn": "Stocks & FX",
-        "lineKo": "홍콩 증시는 실적주 매수에 힘입어 상승세를 보이며 H주가 0.41% 올랐다. 중국 증시는 반락 개장 후 매수세로 상승 전환하며 창업판이 1.56% 상승했다. 삼전닉스는 주주환원의 효과로 미국 시장에서도 강세를 보이며 코스피 상승에 힘을 보탰다. 코스피는 혼조 속에서 상승 탄력성을 모색하고 있다. 코스닥은 5%대 급락하며 하락세를 이어갔다.",
-        "lineEn": "The Hong Kong stock market rose on buying of earnings stocks, with H-shares up 0.41%. The Chinese stock market turned upward after a weak opening, with the Star Market rising 1.56%. Samsung Electronics showed strength in the U.S. market due to the effect of shareholder returns, contributing to the Kospi's rise. The Kospi is seeking upward resilience amid mixed performance. The KOSDAQ continued its downward trend with a sharp drop of over 5%.",
+        "key": "rates",
+        "name": "금리·예금·투자상품",
+        "nameEn": "Rates, Deposits & Investment Products",
+        "lineKo": "국고채 금리가 일제히 상승하며 3년물은 연 3.854%를 기록했다. 일본 증시는 미국 금리 상승과 소비 둔화 우려로 닛케이가 0.30% 하락했다. 2금융권 중금리대출은 총량에서 100% 제외되는 조치가 시행됐다. 일본 물가가 다시 상승하며 9월 금리 인상에 힘이 실리고 있다. KB국민은행은 'KB카드쓰담적금'을 출시하며 최고 연 12%의 금리를 제공한다.",
+        "lineEn": "The government bond rate rose uniformly, with the three-year rate reaching 3.854% annually. The Japanese stock market fell 0.30% as the Nikkei declined due to concerns over rising U.S. interest rates and slowing consumption. A measure has been implemented to exclude 100% of the total amount of medium-interest loans from the second financial sector. Japan's inflation is rising again, giving momentum to the possibility of a rate hike in September. KB Kookmin Bank has launched the \"KB Card Cudam Savings Account,\" offering a maximum annual interest rate of 12%.",
         "isFallback": false,
         "fallbackReason": null,
         "degraded": false,
         "items": [
+          {
+            "title": "국고채 금리 일제히 상승…3년물 연 3.854%",
+            "link": "https://www.yna.co.kr/view/AKR20260821142900008",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "日증시 혼조 마감…美금리 상승·소비둔화 우려에 닛케이 0.30%↓",
+            "link": "https://www.newsis.com/view/NISX20260821_0003757836",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "2금융권 중금리대출 100% 총량서 빠진다",
+            "link": "https://www.hankyung.com/article/202608215112i",
+            "source": "한국경제 경제"
+          },
+          {
+            "title": "日 물가 다시 뛴다…'나프타플레이션'에 9월 금리 인상 힘 실려",
+            "link": "https://www.newsis.com/view/NISX20260821_0003757654",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "KB국민은행, 'KB카드쓰담적금' 출시…최고 금리 연 12%",
+            "link": "https://www.yna.co.kr/view/AKR20260821081700002",
+            "source": "연합뉴스 경제"
+          }
+        ]
+      },
+      {
+        "key": "stocks",
+        "name": "증시·환율",
+        "nameEn": "Stocks & FX",
+        "lineKo": "증시·환율: \"주주환원의 힘\"…美찬바람에도 삼전닉스 강세에 코스피 상승(종합), 원/달러 환율 사흘째 1,300원대…원/엔 2년 2개월 만에 최저, [외환] 원/달러 환율 6.1원 내린 1,386.5원(15:30 기준가) +3",
+        "lineEn": "Stocks & FX: \"주주환원의 힘\"…美찬바람에도 삼전닉스 강세에 코스피 상승(종합), 원/달러 환율 사흘째 1,300원대…원/엔 2년 2개월 만에 최저, [외환] 원/달러 환율 6.1원 내린 1,386.5원(15:30 기준가) +3",
+        "isFallback": true,
+        "fallbackReason": "unverified-entity",
+        "degraded": false,
+        "items": [
+          {
+            "title": "\"주주환원의 힘\"…美찬바람에도 삼전닉스 강세에 코스피 상승(종합)",
+            "link": "https://www.yna.co.kr/view/AKR20260821084851008",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "원/달러 환율 사흘째 1,300원대…원/엔 2년 2개월 만에 최저",
+            "link": "https://www.yna.co.kr/view/AKR20260821126900002",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "[외환] 원/달러 환율 6.1원 내린 1,386.5원(15:30 기준가)",
+            "link": "https://www.yna.co.kr/view/AKR20260821121600002",
+            "source": "연합뉴스 경제"
+          },
           {
             "title": "[올댓차이나] 홍콩 증시, 실적주 매수에 상승세… H주 0.41%↑",
             "link": "https://www.newsis.com/view/NISX20260821_0003757486",
@@ -1116,53 +1168,6 @@
             "title": "[올댓차이나] 中 증시, 반락 개장 후 매수세로 상승 전환…창업판 1.56%↑",
             "link": "https://www.newsis.com/view/NISX20260821_0003757459",
             "source": "뉴시스 경제"
-          },
-          {
-            "title": "\"주주환원의 힘\"…美찬바람에도 삼전닉스 강세에 코스피 상승탄력",
-            "link": "https://www.yna.co.kr/view/AKR20260821084800008",
-            "source": "연합뉴스 경제"
-          },
-          {
-            "title": "코스피, 혼조속 상승 탄력 모색…코스닥 5%대 급락",
-            "link": "https://www.yna.co.kr/view/AKR20260821078500008",
-            "source": "연합뉴스 경제"
-          }
-        ]
-      },
-      {
-        "key": "rates",
-        "name": "금리·예금·투자상품",
-        "nameEn": "Rates, Deposits & Investment Products",
-        "lineKo": "미국과 영국의 금리 인상 전망이 후퇴하면서 유가는 94달러를 기록했다. 국고채 금리는 일제히 상승하며 3년물이 장중 연 3.844%를 기록했다. KB국민은행은 'KB카드쓰담적금'을 출시하며 최고 연 12%의 금리를 제공했다. 미국 재무부의 개입에도 불구하고 장기금리는 하루 만에 4.69%로 반등했다. 일본 증시는 미국 국채금리 상승으로 인해 하락 출발하며 닛케이가 1.19% 하락했다.",
-        "lineEn": "With the retreat of expectations for interest rate hikes in the U.S. and the U.K., oil prices reached 94 dollars. Government bond rates rose across the board, with the 3-year rate reaching 3.844% during the day. KB Kookmin Bank launched the \"KB Card Savings Account\" offering a maximum annual interest rate of 12%. Despite intervention by the U.S. Treasury, long-term interest rates rebounded to 4.69% within a day. The Japanese stock market started lower due to the rise in U.S. Treasury bond rates, with the Nikkei falling 1.19%.",
-        "isFallback": false,
-        "fallbackReason": null,
-        "degraded": false,
-        "items": [
-          {
-            "title": "유가 94달러에도 긴축 기대 꺾였다…美·英 금리 인상 전망 후퇴",
-            "link": "https://www.newsis.com/view/NISX20260821_0003757180",
-            "source": "뉴시스 경제"
-          },
-          {
-            "title": "국고채 금리 일제히 상승…3년물 장중 연 3.844%",
-            "link": "https://www.yna.co.kr/view/AKR20260821084700008",
-            "source": "연합뉴스 경제"
-          },
-          {
-            "title": "KB국민은행, 'KB카드쓰담적금' 출시…최고 금리 연 12%",
-            "link": "https://www.yna.co.kr/view/AKR20260821081700002",
-            "source": "연합뉴스 경제"
-          },
-          {
-            "title": "美 재무부 개입도 안 통했다…장기금리 하루 만에 4.69%로 반등",
-            "link": "https://www.newsis.com/view/NISX20260821_0003757057",
-            "source": "뉴시스 경제"
-          },
-          {
-            "title": "日증시, 美국채금리 상승에 하락 출발…닛케이 1.19%↓",
-            "link": "https://www.newsis.com/view/NISX20260821_0003757017",
-            "source": "뉴시스 경제"
           }
         ]
       },
@@ -1170,36 +1175,36 @@
         "key": "realestate",
         "name": "부동산",
         "nameEn": "Real Estate",
-        "lineKo": "주택공급 강화 방안 발표가 이르면 26일 예정되며, 용산에서 최장 20년 장기전세 253가구가 제공되고 5500억 규모의 재개발 시공사가 선정될 예정이고, 6월 서울 아파트값이 한 달 만에 2.5% 상승하며 5년 만에 최대 상승폭을 기록했으며, 광주 소촌동 지역주택 추진위원장이 188억 사기 사건으로 징역 11년을 선고받았고, 전주에서는 월세 1만원의 청년만원주택이 하반기 입주자 모집을 진행한다.",
-        "lineEn": "The announcement of measures to strengthen housing supply is scheduled for as early as the 26th, with 253 long-term rental units available in Yongsan for up to 20 years, and a redevelopment construction company to be selected with a budget of 550,000,000,000. The apartment prices in Seoul rose 2.5% within a month in June, marking the largest increase in five years. The head of the regional housing promotion committee in Gwangju's Sosundong was sentenced to 11 years in prison for a fraud case involving 18,800,000,000. In Jeonju, the Youth 10,000 Won Housing with a monthly rent of 10,000 won will conduct recruitment for residents in the second half of the year.",
+        "lineKo": "GS건설은 신한은행과 목동12단지 재건축 금융 업무협약을 체결했다. 오세훈은 용산공원 임대주택 계획에 대해 청년 절박함을 정책 실패의 방패로 삼아선 안 된다고 비판했다. 그는 용산공원에 임대주택을 짓는 것은 '훼손된 곳'이 아니라 공원 예정지라고 설명했다. 광명 재건축 단지들은 시공사 선정이 코앞인데 공공임대 물량이 나오자 반발하고 있다. 용산공원 주택 공급은 법 개정과 정화비 문제로 인해 가시밭길에 놓여 있다.",
+        "lineEn": "GS Construction has signed a financial business agreement with Shinhan Bank for the reconstruction of the Muldong 12th Complex. Oh Se-hoon criticized the plan for rental housing at Yongsan Park, stating that the desperation of youth should not be used as a shield for policy failure. He explained that building rental housing at Yongsang Park is not on a \"damaged site,\" but on a planned park area. In the Gwangmyeong reconstruction complex, developers are opposing the release of public rental housing units as the selection of the construction company is imminent. Housing supply at Yongsan Park is facing a difficult path due to legal amendments and issues regarding the cleanup costs.",
         "isFallback": false,
         "fallbackReason": null,
-        "degraded": true,
+        "degraded": false,
         "items": [
           {
-            "title": "[단독]주택공급 '고삐'…이르면 26일 '도심 복합사업' 후보지 발표",
-            "link": "https://www.newsis.com/view/NISX20260821_0003757306",
+            "title": "GS건설, 신한은행과 목동12단지 재건축 금융 업무협약",
+            "link": "https://www.newsis.com/view/NISX20260821_0003757762",
             "source": "뉴시스 경제"
           },
           {
-            "title": "용산에 ‘최장 20년’ 장기전세 253가구… 5500억 재개발 시공사 찾는다",
-            "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/21/HDCIF2JTMZEAZFHVYMX3BWKL2M/",
+            "title": "오세훈 “청년 절박함, 정책 실패 방패 삼아선 안 돼”… 용산공원 임대주택 비판",
+            "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/21/QJCX3JFN7ZFKLCT4R56ZH5EU7U/",
             "source": "조선비즈 부동산"
           },
           {
-            "title": "6월 서울 아파트값 한달새 2.5%↑…5년 만에 최대폭 상승",
-            "link": "https://www.mk.co.kr/news/realestate/12133031",
-            "source": "매일경제 부동산"
-          },
-          {
-            "title": "'188억 사기' 광주 소촌동 지역주택 추진위원장, 징역 11년",
-            "link": "https://www.yna.co.kr/view/AKR20260821069900054",
+            "title": "오세훈 \"용산공원에 임대주택? '훼손된 곳' 아니라 공원 예정지\"",
+            "link": "https://www.yna.co.kr/view/AKR20260821101000004",
             "source": "연합뉴스 경제"
           },
           {
-            "title": "'월세 1만원'…전주 청년만원주택 하반기 입주자 모집",
-            "link": "https://www.yna.co.kr/view/AKR20260821073300055",
-            "source": "연합뉴스 경제"
+            "title": "\"시공사 선정 코앞인데 공공임대?\"…광명 재건축 단지들 '발칵'",
+            "link": "https://www.newsis.com/view/NISX20260821_0003757453",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "용산공원 주택 공급 '가시밭길'…법 개정·정화비도 난제",
+            "link": "https://www.newsis.com/view/NISX20260821_0003757452",
+            "source": "뉴시스 경제"
           }
         ]
       },
@@ -1207,20 +1212,20 @@
         "key": "other",
         "name": "기타 경제 소식",
         "nameEn": "Other Economic News",
-        "lineKo": "키움증권은 금융경제 멘토링 프로그램 '키움 드리머' 6기를 발족했다. 공주시는 1천793억 원 규모의 2차 추경예산을 확정했다. 해당 예산은 민생경제 지원에 중점을 뒀다. 공주시는 추경예산을 통해 핵심사업에도 투자할 계획이다. 키움증권의 멘토링 프로그램은 경제 인재 양성에 기여하고 있다.",
-        "lineEn": "Kiwoom Securities has launched the sixth session of its financial economics mentoring program, \"Kiwoom Dreamer.\" Gongju City has finalized its second supplementary budget of 179,300,000,000 won. This budget focuses on supporting the people's livelihood and economy. Gongju City plans to invest in key projects through the supplementary budget. Kiwoom Securities' mentoring program contributes to cultivating economic talent.",
+        "lineKo": "이란이 수십 년간 이어진 제재를 버텼지만, 트럼프 정부의 경제적 디데이가 실제로 통할지 주목받고 있다. 키움증권은 금융경제 멘토링 프로그램 '키움 드리머' 6기를 발족했다. 이란의 경제 상황은 국제적 관심을 끌고 있다. 키움증권의 멘토링 프로그램은 청년들의 경제 역량 강화를 목표로 한다. 두 소식은 서로 다른 분야에서 각각의 주제를 다루고 있다.",
+        "lineEn": "Iran has withstood decades of sanctions, but attention is now focused on whether Trump's government's economic D-Day will actually take effect. Kyoong Securities has launched the sixth session of its financial and economic mentoring program, \"Kyoong Dreamer.\" Iran's economic situation has drawn international attention. Kyoong Securities' mentoring program aims to strengthen the economic capabilities of young people. The two pieces of news address different topics in separate fields.",
         "isFallback": false,
         "fallbackReason": null,
         "degraded": false,
         "items": [
           {
-            "title": "[게시판] 키움증권, 금융경제 멘토링 '키움 드리머' 6기 발족",
-            "link": "https://www.yna.co.kr/view/AKR20260821080400008",
-            "source": "연합뉴스 경제"
+            "title": "이란, 수십년 제재 버텼는데…트럼프 '경제적 디데이' 통할까",
+            "link": "https://www.newsis.com/view/NISX20260821_0003757421",
+            "source": "뉴시스 경제"
           },
           {
-            "title": "공주시, 1천793억 규모 2차 추경예산…민생경제·핵심사업 초점",
-            "link": "https://www.yna.co.kr/view/AKR20260821052900063",
+            "title": "[게시판] 키움증권, 금융경제 멘토링 '키움 드리머' 6기 발족",
+            "link": "https://www.yna.co.kr/view/AKR20260821080400008",
             "source": "연합뉴스 경제"
           }
         ]
