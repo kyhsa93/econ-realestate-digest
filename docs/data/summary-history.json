@@ -1246,17 +1246,54 @@
     "date": "2026-08-22",
     "model": "qwen3:14b",
     "summary": {
-      "ko": "- 기타 경제 소식: 교육이 경제 발전의 주역으로 부상하며 반도체 인재 양성에 초중등 교육이 기반을 마련하고 있으며, 5대 은행이 디에이치 방배 잔금대출 한도를 3배로 확대하고 있고, 한일 재무차관 회의에서 세계 경제·금융시장 정책 대응 현황을 공유하고 있다.\n- 부동산: 무주택 4050세대가 청년 정책에 대한 불만을 표출하며 사회적 논란을 일으키고 있다. 분당 샛별마을 재건축 사업이 독립정산제 도입으로 인해 지연될 가능성이 제기되고 있다. 홍은·부천 등지에서 분양이 진행되고 있으며, 하월곡·성남 등지에서는 견본주택이 열리고 있다. 내주 상동역 롯데캐슬시그니처 등 5천430가구가 분양에 들어선다. 서울 장기전세 입주민 중 8%는 임대주택 거주에도 불구하고 내집 마련에 성공했다.\n- 금리·예금·투자상품: 다음주 기준금리 동결 여부와 작년 출생통계 발표, 미국과 중국의 장기채 금리 디커플링, 뉴욕증시 상승, 미국 국채금리와 유가, 그리고 '디에이치 방배' 잔금대출 한도·금리 경쟁 과열 조짐 등이 오늘 경제 뉴스에 보도되었다.\n- 증시·환율: 미국 증시가 일제히 상승 마감하며 나스닥은 0.44% 올랐다. 뉴욕증시는 상승 출발했고, 다우지수는 0.6% 상승했다. 비트코인 가격은 7만7000달러까지 올랐다. 금값과 유가도 함께 상승하는 모습을 보였다. 가상화폐 관련주는 급등하는 등 금융시장 전반에 긍정적인 분위기가 감지된다.",
-      "en": "- Other Economic News: As education emerges as a driving force for economic development, elementary and secondary education is laying the foundation for cultivating semiconductor talent. The five major banks are expanding the limit for the DHC Bangbae remaining payment loan to three times its original amount, and at the Japan-Korea ministerial meetings on finance, they are sharing the current status of policy responses to the global economic and financial markets.\n- Real Estate: Homeless 4,050 households are expressing dissatisfaction with youth policies, causing social controversy. The reconstruction project of Sajibyeon-dong in Bundang may be delayed due to the introduction of an independent accounting system. Sales are underway in Hongeun and Bucheon, and model homes are open in Hwareok and Seongnam. Next week, 5,430 units, including Lotte Castle Signature at Sangdong Station in Seoul, will start sales. Among long-term tenants in Seoul, 8% have successfully secured their own homes despite living in rental housing.\n- Rates, Deposits & Investment Products: Whether the benchmark interest rate will be held next week, the release of last year's birth statistics, the decoupling of long-term bond rates between the U.S. and China, the rise in the New York stock market, U.S. Treasury bond rates, crude oil prices, and signs of intensified competition in the 'DH Bangbae' remaining payment loan limits and interest rates were reported in today's economic news.\n- Stocks & FX: The U.S. stock market closed higher overall, with the Nasdaq rising 0.44%. The New York stock market opened higher, with the Dow index rising 0.6%. The price of bitcoin rose to 70,0007000 dollars. Gold prices and oil prices also showed signs of rising together. Stocks related to cryptocurrencies surged, indicating a positive atmosphere across the financial markets."
+      "ko": "- 부동산: 김영배와 오세훈은 오찬회동을 통해 용산공원 주택공급 문제를 논의했으나 입장 차이로 평행선을 걷고 있다. 강남구 래미안대치팰리스 114㎡는 63.8억 원, 압구정동 현대13차는 61억 원에 실거래 됐다. 무주택 4050세대는 청년 정책에 대한 불만을 표출하며 사회적 논란을 일으키고 있다. 분당 샛별마을 재건축은 독립정산제 도입으로 인해 진행이 지연될 가능성이 있다. 홍은·부천 등지에서는 분양이 진행되고 있으며, 하월곡·성남 등에서는 견본주택이 열리고 있다.\n- 기타 경제 소식: 교육이 경제 발전의 주역으로 주목받고 있으며, 5대 은행이 디에이치 방배 잔금대출 한도를 3배로 확대했고, 한일 재무차관 회의에서 세계 경제·금융시장 정책 대응 현황이 공유되었다.\n- 금리·예금·투자상품: 다음주 기준금리 동결 여부에 대한 논의가 이어지고 있으며, 작년 출생통계도 발표될 예정이다. 미국과 중국의 장기채 금리가 분리되는 추세를 보이고 있으며, 이는 AI 분야의 경쟁이 중요한 영향을 미칠 것으로 보인다. 뉴욕증시는 국채금리 안정에 힘입어 다우지수를 0.6% 상승 출발했다. 미국 국채금리와 유가, 그리고 엔비디아의 다음주 주요 변수에 대한 분석이 이어지고 있다. 각 기사는 별개의 주제를 다루고 있으며, 구체적인 수치나 전망은 제시되지 않았다.\n- 증시·환율: 미국 증시가 일제히 상승 마감하며 나스닥은 0.44% 올랐다. 뉴욕증시는 상승 출발했고, 다우지수는 0.6% 상승했다. 비트코인 가격은 7만7000달러까지 올랐다. 금값과 유가도 함께 상승하는 모습을 보였다. 가상화폐 관련주는 뉴욕증시에서 급등했다.",
+      "en": "- Real Estate: Kim Young-bae and Oh Se-hoon discussed the housing supply issue at Yongsan Park during a lunch meeting, but they are going their separate ways due to differences in their positions. The 114㎡ unit at Laimian Daechi Palace in Gangnam-gu was transacted for 6,380,000,000 won, and the Hyundai 13th phase in Apgujeong-dong was transacted for 6,100,000,000 won. The 4,050 homebuyers without housing are expressing dissatisfaction with youth policies, causing social controversy. The reconstruction of Saebyeol-myeon in Bundang may be delayed due to the introduction of an independent settlement system. Sales are ongoing in areas such as Hong-eun and Bucheon, and model homes are being opened in areas such as Hwareok and Seongnam.\n- Other Economic News: Education is gaining attention as a key driver of economic development, the five major banks have expanded the DHC Bangbae remainder loan limit threefold, and the Japan-Korea deputy ministers of finance meeting shared the current status of policy responses to the global economic and financial markets.\n- Rates, Deposits & Investment Products: Discussions continue regarding whether the benchmark interest rate will remain unchanged next week, and last year's birth statistics are also expected to be released. Long-term bond rates in the U.S. and China are showing a trend of divergence, which is expected to have a significant impact on competition in the AI field. The New York stock market opened with a 0.6% rise in the Dow index, driven by stable government bond rates. Analysis of U.S. government bond rates, oil prices, and key variables for NVIDIA next week continues. Each article covers separate topics, and specific figures or forecasts are not provided.\n- Stocks & FX: The U.S. stock market closed higher overall, with the Nasdaq rising 0.44%. The New York stock market opened higher, with the Dow index rising 0.6%. The price of bitcoin rose to 70,0007000 dollars. Gold prices and oil prices also showed signs of rising together. Cryptocurrency-related stocks surged on the New York stock market."
     },
     "highlights": [],
     "categories": [
       {
+        "key": "realestate",
+        "name": "부동산",
+        "nameEn": "Real Estate",
+        "lineKo": "김영배와 오세훈은 오찬회동을 통해 용산공원 주택공급 문제를 논의했으나 입장 차이로 평행선을 걷고 있다. 강남구 래미안대치팰리스 114㎡는 63.8억 원, 압구정동 현대13차는 61억 원에 실거래 됐다. 무주택 4050세대는 청년 정책에 대한 불만을 표출하며 사회적 논란을 일으키고 있다. 분당 샛별마을 재건축은 독립정산제 도입으로 인해 진행이 지연될 가능성이 있다. 홍은·부천 등지에서는 분양이 진행되고 있으며, 하월곡·성남 등에서는 견본주택이 열리고 있다.",
+        "lineEn": "Kim Young-bae and Oh Se-hoon discussed the housing supply issue at Yongsan Park during a lunch meeting, but they are going their separate ways due to differences in their positions. The 114㎡ unit at Laimian Daechi Palace in Gangnam-gu was transacted for 6,380,000,000 won, and the Hyundai 13th phase in Apgujeong-dong was transacted for 6,100,000,000 won. The 4,050 homebuyers without housing are expressing dissatisfaction with youth policies, causing social controversy. The reconstruction of Saebyeol-myeon in Bundang may be delayed due to the introduction of an independent settlement system. Sales are ongoing in areas such as Hong-eun and Bucheon, and model homes are being opened in areas such as Hwareok and Seongnam.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": false,
+        "items": [
+          {
+            "title": "與김영배, 오세훈과 오찬회동…용산공원 주택공급 두고 평행선(종합)",
+            "link": "https://www.yna.co.kr/view/AKR20260822034251001",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "강남구 래미안대치팰리스 114㎡ 63.8억·압구정동 현대13차 61억… 서울 아파트 실거래가",
+            "link": "https://www.mk.co.kr/news/realestate/12133772",
+            "source": "매일경제 부동산"
+          },
+          {
+            "title": "“맨날 청년 청년, 우린 안보입니까”…무주택 4050세대, 불만 폭발",
+            "link": "https://www.mk.co.kr/news/economy/12133744",
+            "source": "매일경제 부동산"
+          },
+          {
+            "title": "분당 샛별마을 재건축, 독립정산제 발목 잡히나",
+            "link": "https://www.hankyung.com/article/202608214912i",
+            "source": "한국경제 부동산"
+          },
+          {
+            "title": "홍은·부천 등 분양…하월곡·성남 등 견본주택[분양캘린더]",
+            "link": "https://www.newsis.com/view/NISX20260821_0003758123",
+            "source": "뉴시스 경제"
+          }
+        ]
+      },
+      {
         "key": "other",
         "name": "기타 경제 소식",
         "nameEn": "Other Economic News",
-        "lineKo": "교육이 경제 발전의 주역으로 부상하며 반도체 인재 양성에 초중등 교육이 기반을 마련하고 있으며, 5대 은행이 디에이치 방배 잔금대출 한도를 3배로 확대하고 있고, 한일 재무차관 회의에서 세계 경제·금융시장 정책 대응 현황을 공유하고 있다.",
-        "lineEn": "As education emerges as a driving force for economic development, elementary and secondary education is laying the foundation for cultivating semiconductor talent. The five major banks are expanding the limit for the DHC Bangbae remaining payment loan to three times its original amount, and at the Japan-Korea ministerial meetings on finance, they are sharing the current status of policy responses to the global economic and financial markets.",
+        "lineKo": "교육이 경제 발전의 주역으로 주목받고 있으며, 5대 은행이 디에이치 방배 잔금대출 한도를 3배로 확대했고, 한일 재무차관 회의에서 세계 경제·금융시장 정책 대응 현황이 공유되었다.",
+        "lineEn": "Education is gaining attention as a key driver of economic development, the five major banks have expanded the DHC Bangbae remainder loan limit threefold, and the Japan-Korea deputy ministers of finance meeting shared the current status of policy responses to the global economic and financial markets.",
         "isFallback": false,
         "fallbackReason": null,
         "degraded": true,
@@ -1279,51 +1316,14 @@
         ]
       },
       {
-        "key": "realestate",
-        "name": "부동산",
-        "nameEn": "Real Estate",
-        "lineKo": "무주택 4050세대가 청년 정책에 대한 불만을 표출하며 사회적 논란을 일으키고 있다. 분당 샛별마을 재건축 사업이 독립정산제 도입으로 인해 지연될 가능성이 제기되고 있다. 홍은·부천 등지에서 분양이 진행되고 있으며, 하월곡·성남 등지에서는 견본주택이 열리고 있다. 내주 상동역 롯데캐슬시그니처 등 5천430가구가 분양에 들어선다. 서울 장기전세 입주민 중 8%는 임대주택 거주에도 불구하고 내집 마련에 성공했다.",
-        "lineEn": "Homeless 4,050 households are expressing dissatisfaction with youth policies, causing social controversy. The reconstruction project of Sajibyeon-dong in Bundang may be delayed due to the introduction of an independent accounting system. Sales are underway in Hongeun and Bucheon, and model homes are open in Hwareok and Seongnam. Next week, 5,430 units, including Lotte Castle Signature at Sangdong Station in Seoul, will start sales. Among long-term tenants in Seoul, 8% have successfully secured their own homes despite living in rental housing.",
-        "isFallback": false,
-        "fallbackReason": null,
-        "degraded": false,
-        "items": [
-          {
-            "title": "“맨날 청년 청년, 우린 안보입니까”…무주택 4050세대, 불만 폭발",
-            "link": "https://www.mk.co.kr/news/economy/12133744",
-            "source": "매일경제 부동산"
-          },
-          {
-            "title": "분당 샛별마을 재건축, 독립정산제 발목 잡히나",
-            "link": "https://www.hankyung.com/article/202608214912i",
-            "source": "한국경제 부동산"
-          },
-          {
-            "title": "홍은·부천 등 분양…하월곡·성남 등 견본주택[분양캘린더]",
-            "link": "https://www.newsis.com/view/NISX20260821_0003758123",
-            "source": "뉴시스 경제"
-          },
-          {
-            "title": "[부동산캘린더] 내주 상동역 롯데캐슬시그니처 등 5천430가구 분양",
-            "link": "https://www.yna.co.kr/view/AKR20260821165400003",
-            "source": "연합뉴스 경제"
-          },
-          {
-            "title": "[팩트체크] 임대주택 살면 내집장만 못한다?…서울 장기전세 입주민 8% 마련",
-            "link": "https://www.yna.co.kr/view/AKR20260821082100518",
-            "source": "연합뉴스 경제"
-          }
-        ]
-      },
-      {
         "key": "rates",
         "name": "금리·예금·투자상품",
         "nameEn": "Rates, Deposits & Investment Products",
-        "lineKo": "다음주 기준금리 동결 여부와 작년 출생통계 발표, 미국과 중국의 장기채 금리 디커플링, 뉴욕증시 상승, 미국 국채금리와 유가, 그리고 '디에이치 방배' 잔금대출 한도·금리 경쟁 과열 조짐 등이 오늘 경제 뉴스에 보도되었다.",
-        "lineEn": "Whether the benchmark interest rate will be held next week, the release of last year's birth statistics, the decoupling of long-term bond rates between the U.S. and China, the rise in the New York stock market, U.S. Treasury bond rates, crude oil prices, and signs of intensified competition in the 'DH Bangbae' remaining payment loan limits and interest rates were reported in today's economic news.",
+        "lineKo": "다음주 기준금리 동결 여부에 대한 논의가 이어지고 있으며, 작년 출생통계도 발표될 예정이다. 미국과 중국의 장기채 금리가 분리되는 추세를 보이고 있으며, 이는 AI 분야의 경쟁이 중요한 영향을 미칠 것으로 보인다. 뉴욕증시는 국채금리 안정에 힘입어 다우지수를 0.6% 상승 출발했다. 미국 국채금리와 유가, 그리고 엔비디아의 다음주 주요 변수에 대한 분석이 이어지고 있다. 각 기사는 별개의 주제를 다루고 있으며, 구체적인 수치나 전망은 제시되지 않았다.",
+        "lineEn": "Discussions continue regarding whether the benchmark interest rate will remain unchanged next week, and last year's birth statistics are also expected to be released. Long-term bond rates in the U.S. and China are showing a trend of divergence, which is expected to have a significant impact on competition in the AI field. The New York stock market opened with a 0.6% rise in the Dow index, driven by stable government bond rates. Analysis of U.S. government bond rates, oil prices, and key variables for NVIDIA next week continues. Each article covers separate topics, and specific figures or forecasts are not provided.",
         "isFallback": false,
         "fallbackReason": null,
-        "degraded": true,
+        "degraded": false,
         "items": [
           {
             "title": "[다음주 경제] 기준금리 동결이냐 인상이냐…작년 출생통계도 발표",
@@ -1344,11 +1344,6 @@
             "title": "美 국채금리·유가…그리고 엔비디아 [다음주 주요 변수 미리보기]",
             "link": "https://www.hankyung.com/article/202608215342i",
             "source": "한국경제 경제"
-          },
-          {
-            "title": "'디에이치 방배' 잔금대출 한도·금리 경쟁 과열 조짐(종합)",
-            "link": "https://www.yna.co.kr/view/AKR20260821146151002",
-            "source": "연합뉴스 경제"
           }
         ]
       },
@@ -1356,8 +1351,8 @@
         "key": "stocks",
         "name": "증시·환율",
         "nameEn": "Stocks & FX",
-        "lineKo": "미국 증시가 일제히 상승 마감하며 나스닥은 0.44% 올랐다. 뉴욕증시는 상승 출발했고, 다우지수는 0.6% 상승했다. 비트코인 가격은 7만7000달러까지 올랐다. 금값과 유가도 함께 상승하는 모습을 보였다. 가상화폐 관련주는 급등하는 등 금융시장 전반에 긍정적인 분위기가 감지된다.",
-        "lineEn": "The U.S. stock market closed higher overall, with the Nasdaq rising 0.44%. The New York stock market opened higher, with the Dow index rising 0.6%. The price of bitcoin rose to 70,0007000 dollars. Gold prices and oil prices also showed signs of rising together. Stocks related to cryptocurrencies surged, indicating a positive atmosphere across the financial markets.",
+        "lineKo": "미국 증시가 일제히 상승 마감하며 나스닥은 0.44% 올랐다. 뉴욕증시는 상승 출발했고, 다우지수는 0.6% 상승했다. 비트코인 가격은 7만7000달러까지 올랐다. 금값과 유가도 함께 상승하는 모습을 보였다. 가상화폐 관련주는 뉴욕증시에서 급등했다.",
+        "lineEn": "The U.S. stock market closed higher overall, with the Nasdaq rising 0.44%. The New York stock market opened higher, with the Dow index rising 0.6%. The price of bitcoin rose to 70,0007000 dollars. Gold prices and oil prices also showed signs of rising together. Cryptocurrency-related stocks surged on the New York stock market.",
         "isFallback": false,
         "fallbackReason": null,
         "degraded": false,
