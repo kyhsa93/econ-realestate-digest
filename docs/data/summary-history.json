@@ -1246,21 +1246,63 @@
     "date": "2026-08-22",
     "model": "qwen3:14b",
     "summary": {
-      "ko": "- 부동산: 내주 상동역 롯데캐슬시그니처 등 5천430가구가 분양에 들어간다. 서울 장기전세 입주민 중 8%는 임대주택을 통해 내집 마련에 성공했다. 태릉CC는 주택공급 화약고로 주목받고 있으며, 이번에 본궤도에 오를지 기대된다. 1년 반 만에 아파트 테라스가 무너져 안전 문제가 제기되고 있다. 용산공원은 집을 지을지, 공원을 지킬지에 대한 논란으로 '뜨거운 감자'가 되고 있다.\n- 증시·환율: 미국 증시와 금값, 유가는 모두 상승세를 보였으며, 비트코인 가격도 7만7000달러를 기록했다. 뉴욕증시는 일제히 상승 마감하며 나스닥 지수가 0.44% 올랐다. 뉴욕증시는 상승 출발했고, 다우 지수가 0.6% 상승했다. 대만 증시는 미일 반도체주 강세로 이틀째 상승 마감하며 0.65% 올랐다. 홍콩 증시는 실적주와 자원주 매수로 상승 마감하며 H주가 1.01% 상승했다.\n- 금리·예금·투자상품: 뉴욕증시는 국채금리 안정에 따라 다우지수 0.6% 상승 출발했다. 미국 국채금리와 유가, 그리고 엔비디아가 다음주 주요 변수로 주목받고 있다. '디에이치 방배' 잔금대출의 한도와 금리 경쟁이 과열 조짐을 보이고 있다. 국고채 금리는 일제히 상승하며 다음주 금통위에 경계감을 유발하고 있다. 2금융권 중금리대출은 100% 총량에서 빠져나갔다.\n- 기타 경제 소식: 5대 은행이 디에이치 방배 잔금대출 한도를 3배로 확대했다. 한일 재무차관 회의에서 세계 경제와 금융시장 정책 대응 현황을 공유했다. 4대 금융기관은 경남 수해 복구를 위해 20억 원 규모의 지원을 진행 중이다. 지원은 대출과 물품 제공 형태로 이루어졌다. 각 기관은 별도의 방식으로 활동 중이다.",
-      "en": "- Real Estate: Next week, 5,430 units, including Lotte Castle Signature at Sangdong Station, will start sales. Among long-term leaseholders in Seoul, 8% have successfully secured homes through rental housing. Taereung CC is regarded as a housing supply powder keg and is expected to move forward this time. After 1.5 years, an apartment terrace collapsed, raising safety concerns. Yongsan Park has become a \"hot potato\" due to controversy over whether to build houses or preserve the park.\n- Stocks & FX: The U.S. stock market, gold prices, and oil prices all showed rising trends, and the bitcoin price reached 70,0007000 dollars. The New York stock market closed higher overall, with the Nasdaq index rising 0.44%. The New York stock market opened higher, with the Dow index rising 0.6%. The Taiwan stock market closed higher for the second consecutive day, rising 0.65%, driven by strong performance in semiconductor stocks from Japan and the U.S. The Hong Kong stock market closed higher due to buying in performance and resource stocks, with H shares rising 1.01%.\n- Rates, Deposits & Investment Products: The New York stock market opened 0.6% higher due to stable government bond rates. U.S. government bond rates, oil prices, and NVIDIA are expected to be major variables next week. The limit and interest rate competition for the 'DH Bangbae' remaining payment loan show signs of overheating. Government bond rates have all risen, causing caution ahead of next week's monetary policy meeting. The medium-interest loans in the second financial sector have completely exited the 100% total volume.\n- Other Economic News: The five major banks have expanded the limit for the Daejeon Bangbae remaining payment loan to three times its original amount. At the Japan-Korea meeting of deputy finance ministers, they shared the current status of policy responses to the global economy and financial markets. The four major financial institutions are currently providing support amounting to 2,000,000,000 won to aid in the recovery from the flood damage in Gyeongsangnam-do. The support is being provided in the form of loans and the supply of goods. Each institution is operating in a separate manner."
+      "ko": "- 기타 경제 소식: 교육이 경제 발전의 주역으로 부상하며 반도체 인재 양성에 초중등 교육이 기반을 마련하고 있으며, 5대 은행이 디에이치 방배 잔금대출 한도를 3배로 확대하고 있고, 한일 재무차관 회의에서 세계 경제·금융시장 정책 대응 현황을 공유하고 있다.\n- 부동산: 무주택 4050세대가 청년 정책에 대한 불만을 표출하며 사회적 논란을 일으키고 있다. 분당 샛별마을 재건축 사업이 독립정산제 도입으로 인해 지연될 가능성이 제기되고 있다. 홍은·부천 등지에서 분양이 진행되고 있으며, 하월곡·성남 등지에서는 견본주택이 열리고 있다. 내주 상동역 롯데캐슬시그니처 등 5천430가구가 분양에 들어선다. 서울 장기전세 입주민 중 8%는 임대주택 거주에도 불구하고 내집 마련에 성공했다.\n- 금리·예금·투자상품: 다음주 기준금리 동결 여부와 작년 출생통계 발표, 미국과 중국의 장기채 금리 디커플링, 뉴욕증시 상승, 미국 국채금리와 유가, 그리고 '디에이치 방배' 잔금대출 한도·금리 경쟁 과열 조짐 등이 오늘 경제 뉴스에 보도되었다.\n- 증시·환율: 미국 증시가 일제히 상승 마감하며 나스닥은 0.44% 올랐다. 뉴욕증시는 상승 출발했고, 다우지수는 0.6% 상승했다. 비트코인 가격은 7만7000달러까지 올랐다. 금값과 유가도 함께 상승하는 모습을 보였다. 가상화폐 관련주는 급등하는 등 금융시장 전반에 긍정적인 분위기가 감지된다.",
+      "en": "- Other Economic News: As education emerges as a driving force for economic development, elementary and secondary education is laying the foundation for cultivating semiconductor talent. The five major banks are expanding the limit for the DHC Bangbae remaining payment loan to three times its original amount, and at the Japan-Korea ministerial meetings on finance, they are sharing the current status of policy responses to the global economic and financial markets.\n- Real Estate: Homeless 4,050 households are expressing dissatisfaction with youth policies, causing social controversy. The reconstruction project of Sajibyeon-dong in Bundang may be delayed due to the introduction of an independent accounting system. Sales are underway in Hongeun and Bucheon, and model homes are open in Hwareok and Seongnam. Next week, 5,430 units, including Lotte Castle Signature at Sangdong Station in Seoul, will start sales. Among long-term tenants in Seoul, 8% have successfully secured their own homes despite living in rental housing.\n- Rates, Deposits & Investment Products: Whether the benchmark interest rate will be held next week, the release of last year's birth statistics, the decoupling of long-term bond rates between the U.S. and China, the rise in the New York stock market, U.S. Treasury bond rates, crude oil prices, and signs of intensified competition in the 'DH Bangbae' remaining payment loan limits and interest rates were reported in today's economic news.\n- Stocks & FX: The U.S. stock market closed higher overall, with the Nasdaq rising 0.44%. The New York stock market opened higher, with the Dow index rising 0.6%. The price of bitcoin rose to 70,0007000 dollars. Gold prices and oil prices also showed signs of rising together. Stocks related to cryptocurrencies surged, indicating a positive atmosphere across the financial markets."
     },
     "highlights": [],
     "categories": [
       {
+        "key": "other",
+        "name": "기타 경제 소식",
+        "nameEn": "Other Economic News",
+        "lineKo": "교육이 경제 발전의 주역으로 부상하며 반도체 인재 양성에 초중등 교육이 기반을 마련하고 있으며, 5대 은행이 디에이치 방배 잔금대출 한도를 3배로 확대하고 있고, 한일 재무차관 회의에서 세계 경제·금융시장 정책 대응 현황을 공유하고 있다.",
+        "lineEn": "As education emerges as a driving force for economic development, elementary and secondary education is laying the foundation for cultivating semiconductor talent. The five major banks are expanding the limit for the DHC Bangbae remaining payment loan to three times its original amount, and at the Japan-Korea ministerial meetings on finance, they are sharing the current status of policy responses to the global economic and financial markets.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": true,
+        "items": [
+          {
+            "title": "'교육'은 경제 발전 주역…반도체 인재도 초중등 기반[교부금 대수술③]",
+            "link": "https://www.newsis.com/view/NISX20260821_0003758169",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "“대출 좀 받아가세요”…5대 은행, 디에이치 방배 잔금대출 한도 3배로",
+            "link": "https://www.mk.co.kr/news/economy/12133543",
+            "source": "매일경제 부동산"
+          },
+          {
+            "title": "한일 재무차관회의…세계 경제·금융시장 정책 대응 현황 공유",
+            "link": "https://www.yna.co.kr/view/AKR20260821120200002",
+            "source": "연합뉴스 경제"
+          }
+        ]
+      },
+      {
         "key": "realestate",
         "name": "부동산",
         "nameEn": "Real Estate",
-        "lineKo": "내주 상동역 롯데캐슬시그니처 등 5천430가구가 분양에 들어간다. 서울 장기전세 입주민 중 8%는 임대주택을 통해 내집 마련에 성공했다. 태릉CC는 주택공급 화약고로 주목받고 있으며, 이번에 본궤도에 오를지 기대된다. 1년 반 만에 아파트 테라스가 무너져 안전 문제가 제기되고 있다. 용산공원은 집을 지을지, 공원을 지킬지에 대한 논란으로 '뜨거운 감자'가 되고 있다.",
-        "lineEn": "Next week, 5,430 units, including Lotte Castle Signature at Sangdong Station, will start sales. Among long-term leaseholders in Seoul, 8% have successfully secured homes through rental housing. Taereung CC is regarded as a housing supply powder keg and is expected to move forward this time. After 1.5 years, an apartment terrace collapsed, raising safety concerns. Yongsan Park has become a \"hot potato\" due to controversy over whether to build houses or preserve the park.",
+        "lineKo": "무주택 4050세대가 청년 정책에 대한 불만을 표출하며 사회적 논란을 일으키고 있다. 분당 샛별마을 재건축 사업이 독립정산제 도입으로 인해 지연될 가능성이 제기되고 있다. 홍은·부천 등지에서 분양이 진행되고 있으며, 하월곡·성남 등지에서는 견본주택이 열리고 있다. 내주 상동역 롯데캐슬시그니처 등 5천430가구가 분양에 들어선다. 서울 장기전세 입주민 중 8%는 임대주택 거주에도 불구하고 내집 마련에 성공했다.",
+        "lineEn": "Homeless 4,050 households are expressing dissatisfaction with youth policies, causing social controversy. The reconstruction project of Sajibyeon-dong in Bundang may be delayed due to the introduction of an independent accounting system. Sales are underway in Hongeun and Bucheon, and model homes are open in Hwareok and Seongnam. Next week, 5,430 units, including Lotte Castle Signature at Sangdong Station in Seoul, will start sales. Among long-term tenants in Seoul, 8% have successfully secured their own homes despite living in rental housing.",
         "isFallback": false,
         "fallbackReason": null,
         "degraded": false,
         "items": [
+          {
+            "title": "“맨날 청년 청년, 우린 안보입니까”…무주택 4050세대, 불만 폭발",
+            "link": "https://www.mk.co.kr/news/economy/12133744",
+            "source": "매일경제 부동산"
+          },
+          {
+            "title": "분당 샛별마을 재건축, 독립정산제 발목 잡히나",
+            "link": "https://www.hankyung.com/article/202608214912i",
+            "source": "한국경제 부동산"
+          },
+          {
+            "title": "홍은·부천 등 분양…하월곡·성남 등 견본주택[분양캘린더]",
+            "link": "https://www.newsis.com/view/NISX20260821_0003758123",
+            "source": "뉴시스 경제"
+          },
           {
             "title": "[부동산캘린더] 내주 상동역 롯데캐슬시그니처 등 5천430가구 분양",
             "link": "https://www.yna.co.kr/view/AKR20260821165400003",
@@ -1270,21 +1312,43 @@
             "title": "[팩트체크] 임대주택 살면 내집장만 못한다?…서울 장기전세 입주민 8% 마련",
             "link": "https://www.yna.co.kr/view/AKR20260821082100518",
             "source": "연합뉴스 경제"
-          },
+          }
+        ]
+      },
+      {
+        "key": "rates",
+        "name": "금리·예금·투자상품",
+        "nameEn": "Rates, Deposits & Investment Products",
+        "lineKo": "다음주 기준금리 동결 여부와 작년 출생통계 발표, 미국과 중국의 장기채 금리 디커플링, 뉴욕증시 상승, 미국 국채금리와 유가, 그리고 '디에이치 방배' 잔금대출 한도·금리 경쟁 과열 조짐 등이 오늘 경제 뉴스에 보도되었다.",
+        "lineEn": "Whether the benchmark interest rate will be held next week, the release of last year's birth statistics, the decoupling of long-term bond rates between the U.S. and China, the rise in the New York stock market, U.S. Treasury bond rates, crude oil prices, and signs of intensified competition in the 'DH Bangbae' remaining payment loan limits and interest rates were reported in today's economic news.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": true,
+        "items": [
           {
-            "title": "주택공급 화약고 태릉CC…이번엔 본궤도 오를까[주택공급 시험대②]",
-            "link": "https://www.newsis.com/view/NISX20260821_0003757961",
-            "source": "뉴시스 경제"
-          },
-          {
-            "title": "[현장in] \"내 집이 폭탄?\"…1년 반 만에 무너진 아파트 테라스",
-            "link": "https://www.yna.co.kr/view/AKR20260821055400065",
+            "title": "[다음주 경제] 기준금리 동결이냐 인상이냐…작년 출생통계도 발표",
+            "link": "https://www.yna.co.kr/view/AKR20260822016400002",
             "source": "연합뉴스 경제"
           },
           {
-            "title": "집 지을 것인가, 공원 지킬 것인가…용산공원 '뜨거운 감자'[주택공급 시험대①]",
-            "link": "https://www.newsis.com/view/NISX20260821_0003757704",
+            "title": "美·中 장기채 금리 디커플링… \"AI 소모전 승패 가를 것\"",
+            "link": "https://www.hankyung.com/article/202608214399i",
+            "source": "한국경제 경제"
+          },
+          {
+            "title": "[속보] 뉴욕증시, 국채금리 안정에 상승 출발…다우 0.6%↑",
+            "link": "https://www.newsis.com/view/NISX20260821_0003758269",
             "source": "뉴시스 경제"
+          },
+          {
+            "title": "美 국채금리·유가…그리고 엔비디아 [다음주 주요 변수 미리보기]",
+            "link": "https://www.hankyung.com/article/202608215342i",
+            "source": "한국경제 경제"
+          },
+          {
+            "title": "'디에이치 방배' 잔금대출 한도·금리 경쟁 과열 조짐(종합)",
+            "link": "https://www.yna.co.kr/view/AKR20260821146151002",
+            "source": "연합뉴스 경제"
           }
         ]
       },
@@ -1292,8 +1356,8 @@
         "key": "stocks",
         "name": "증시·환율",
         "nameEn": "Stocks & FX",
-        "lineKo": "미국 증시와 금값, 유가는 모두 상승세를 보였으며, 비트코인 가격도 7만7000달러를 기록했다. 뉴욕증시는 일제히 상승 마감하며 나스닥 지수가 0.44% 올랐다. 뉴욕증시는 상승 출발했고, 다우 지수가 0.6% 상승했다. 대만 증시는 미일 반도체주 강세로 이틀째 상승 마감하며 0.65% 올랐다. 홍콩 증시는 실적주와 자원주 매수로 상승 마감하며 H주가 1.01% 상승했다.",
-        "lineEn": "The U.S. stock market, gold prices, and oil prices all showed rising trends, and the bitcoin price reached 70,0007000 dollars. The New York stock market closed higher overall, with the Nasdaq index rising 0.44%. The New York stock market opened higher, with the Dow index rising 0.6%. The Taiwan stock market closed higher for the second consecutive day, rising 0.65%, driven by strong performance in semiconductor stocks from Japan and the U.S. The Hong Kong stock market closed higher due to buying in performance and resource stocks, with H shares rising 1.01%.",
+        "lineKo": "미국 증시가 일제히 상승 마감하며 나스닥은 0.44% 올랐다. 뉴욕증시는 상승 출발했고, 다우지수는 0.6% 상승했다. 비트코인 가격은 7만7000달러까지 올랐다. 금값과 유가도 함께 상승하는 모습을 보였다. 가상화폐 관련주는 급등하는 등 금융시장 전반에 긍정적인 분위기가 감지된다.",
+        "lineEn": "The U.S. stock market closed higher overall, with the Nasdaq rising 0.44%. The New York stock market opened higher, with the Dow index rising 0.6%. The price of bitcoin rose to 70,0007000 dollars. Gold prices and oil prices also showed signs of rising together. Stocks related to cryptocurrencies surged, indicating a positive atmosphere across the financial markets.",
         "isFallback": false,
         "fallbackReason": null,
         "degraded": false,
@@ -1312,80 +1376,6 @@
             "title": "뉴욕증시, 상승 출발…다우 0.6%↑·가상화폐 관련주 급등",
             "link": "https://www.newsis.com/view/NISX20260821_0003758274",
             "source": "뉴시스 경제"
-          },
-          {
-            "title": "[올댓차이나] 대만 증시, 미일 반도체주 강세에 이틀째 상승 마감…0.65%↑",
-            "link": "https://www.newsis.com/view/NISX20260821_0003758242",
-            "source": "뉴시스 경제"
-          },
-          {
-            "title": "[올댓차이나] 홍콩 증시, 실적주·자원주 매수에 상승 마감… H주 1.01.%↑",
-            "link": "https://www.newsis.com/view/NISX20260821_0003758220",
-            "source": "뉴시스 경제"
-          }
-        ]
-      },
-      {
-        "key": "rates",
-        "name": "금리·예금·투자상품",
-        "nameEn": "Rates, Deposits & Investment Products",
-        "lineKo": "뉴욕증시는 국채금리 안정에 따라 다우지수 0.6% 상승 출발했다. 미국 국채금리와 유가, 그리고 엔비디아가 다음주 주요 변수로 주목받고 있다. '디에이치 방배' 잔금대출의 한도와 금리 경쟁이 과열 조짐을 보이고 있다. 국고채 금리는 일제히 상승하며 다음주 금통위에 경계감을 유발하고 있다. 2금융권 중금리대출은 100% 총량에서 빠져나갔다.",
-        "lineEn": "The New York stock market opened 0.6% higher due to stable government bond rates. U.S. government bond rates, oil prices, and NVIDIA are expected to be major variables next week. The limit and interest rate competition for the 'DH Bangbae' remaining payment loan show signs of overheating. Government bond rates have all risen, causing caution ahead of next week's monetary policy meeting. The medium-interest loans in the second financial sector have completely exited the 100% total volume.",
-        "isFallback": false,
-        "fallbackReason": null,
-        "degraded": false,
-        "items": [
-          {
-            "title": "[속보] 뉴욕증시, 국채금리 안정에 상승 출발…다우 0.6%↑",
-            "link": "https://www.newsis.com/view/NISX20260821_0003758269",
-            "source": "뉴시스 경제"
-          },
-          {
-            "title": "美 국채금리·유가…그리고 엔비디아 [다음주 주요 변수 미리보기]",
-            "link": "https://www.hankyung.com/article/202608215342i",
-            "source": "한국경제 경제"
-          },
-          {
-            "title": "'디에이치 방배' 잔금대출 한도·금리 경쟁 과열 조짐(종합)",
-            "link": "https://www.yna.co.kr/view/AKR20260821146151002",
-            "source": "연합뉴스 경제"
-          },
-          {
-            "title": "국고채 금리 일제히 상승…다음주 금통위 경계감(종합)",
-            "link": "https://www.yna.co.kr/view/AKR20260821142951008",
-            "source": "연합뉴스 경제"
-          },
-          {
-            "title": "2금융권 중금리대출 100% 총량서 빠진다",
-            "link": "https://www.hankyung.com/article/202608215112i",
-            "source": "한국경제 경제"
-          }
-        ]
-      },
-      {
-        "key": "other",
-        "name": "기타 경제 소식",
-        "nameEn": "Other Economic News",
-        "lineKo": "5대 은행이 디에이치 방배 잔금대출 한도를 3배로 확대했다. 한일 재무차관 회의에서 세계 경제와 금융시장 정책 대응 현황을 공유했다. 4대 금융기관은 경남 수해 복구를 위해 20억 원 규모의 지원을 진행 중이다. 지원은 대출과 물품 제공 형태로 이루어졌다. 각 기관은 별도의 방식으로 활동 중이다.",
-        "lineEn": "The five major banks have expanded the limit for the Daejeon Bangbae remaining payment loan to three times its original amount. At the Japan-Korea meeting of deputy finance ministers, they shared the current status of policy responses to the global economy and financial markets. The four major financial institutions are currently providing support amounting to 2,000,000,000 won to aid in the recovery from the flood damage in Gyeongsangnam-do. The support is being provided in the form of loans and the supply of goods. Each institution is operating in a separate manner.",
-        "isFallback": false,
-        "fallbackReason": null,
-        "degraded": false,
-        "items": [
-          {
-            "title": "“대출 좀 받아가세요”…5대 은행, 디에이치 방배 잔금대출 한도 3배로",
-            "link": "https://www.mk.co.kr/news/economy/12133543",
-            "source": "매일경제 부동산"
-          },
-          {
-            "title": "한일 재무차관회의…세계 경제·금융시장 정책 대응 현황 공유",
-            "link": "https://www.yna.co.kr/view/AKR20260821120200002",
-            "source": "연합뉴스 경제"
-          },
-          {
-            "title": "4대 금융, 경남 수해 복구에 20억…대출·물품 지원도(종합)",
-            "link": "https://www.yna.co.kr/view/AKR20260821076951002",
-            "source": "연합뉴스 경제"
           }
         ]
       }
