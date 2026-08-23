@@ -5,6 +5,7 @@ import { BUDGET_PAGES } from "./budget-pages.mjs";
 import { DISTRICT_PAGES, DISTRICT_SLUGS, districtFile } from "./district-slugs.mjs";
 import { districtSentences } from "./district-summary.mjs";
 import { factSentences } from "./district-facts.mjs";
+import { rateFacts, factSentences as rateSentences } from "./rate-facts.mjs";
 import {
   KIND_FIELDS,
   areaPrice,
@@ -568,6 +569,41 @@ const rate = (value) => (typeof value === "number" ? `${value.toFixed(2)}%` : "-
 const rateRange = (min, max) =>
   typeof min === "number" && typeof max === "number" ? `${min.toFixed(2)}~${max.toFixed(2)}%` : rate(min ?? max);
 
+const RATE_CATEGORIES = ["deposit", "saving", "mortgage", "rentLoan"];
+
+/**
+ * 표가 보여주는 것 옆에 붙는 문단.
+ *
+ * 어느 상품군인지는 이 페이지에서 탭으로 바뀐다 — 페이지를 다시 받지 않는다. 그래서
+ * 네 상품군 것을 빌드에서 미리 계산해 한 덩이로 넘기고, 화면은 고르기만 한다. 같은
+ * 계산을 브라우저 쪽에 한 벌 더 두면 차트 코드처럼 두 곳을 같이 고쳐야 하는 짐이 하나
+ * 더 생기고, 실제로 그 짐 때문에 같은 수정을 두 번 한 적이 있다.
+ */
+export function rateFactsData(rates) {
+  const out = {};
+  for (const category of RATE_CATEGORIES) {
+    const facts = rateFacts(rates, category);
+    out[category] = { ko: rateSentences(facts, "ko"), en: rateSentences(facts, "en") };
+  }
+  return out;
+}
+
+/**
+ * `<script type="application/json">` 안에 넣을 수 있게 만든 JSON.
+ *
+ * `JSON.stringify`는 `<`도 `/`도 건드리지 않는다. 상품 이름에 `</script`가 들어 있으면
+ * 그 자리에서 스크립트 태그가 닫히고 뒤가 마크업이 된다 — 이 데이터는 금감원 API에서
+ * 그대로 받아 오는 것이라 내용을 우리가 정하지 못한다.
+ */
+export function jsonForScript(value) {
+  return JSON.stringify(value).replaceAll("</", "<\\/").replaceAll("<!--", "<\\u0021--");
+}
+
+export function rateFactsHtml(rates, category = "deposit", locale = "ko") {
+  const sentences = rateSentences(rateFacts(rates, category), locale);
+  return sentences.length ? escapeHtml(sentences.join(" ")) : "";
+}
+
 export function ratesHeadHtml(category = "deposit") {
   return SAVING_CATEGORIES.has(category)
     ? "<tr><th>상품</th><th>기본금리</th><th>최고금리</th><th>세후 이자</th></tr>"
@@ -672,7 +708,7 @@ async function main() {
 
   for (const [file, path_, fileBlocks] of [
     ["docs/index.html", INDEX_PATH, blocks],
-    ["docs/rates.html", RATES_PATH, { rates: ratesHtml(rates), ratesHead: ratesHeadHtml() }],
+    ["docs/rates.html", RATES_PATH, { rates: ratesHtml(rates), ratesHead: ratesHeadHtml(), rateFactsKo: rateFactsHtml(rates, "deposit", "ko"), rateFactsEn: rateFactsHtml(rates, "deposit", "en"), rateFactsData: jsonForScript(rateFactsData(rates)) }],
     [
       "docs/news.html",
       NEWS_PATH,

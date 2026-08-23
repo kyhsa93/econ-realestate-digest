@@ -1,6 +1,6 @@
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { applyPrerender, ratesHeadHtml, ratesHtml } from "./prerender.mjs";
+import { applyPrerender, jsonForScript, rateFactsData, rateFactsHtml, ratesHeadHtml, ratesHtml } from "./prerender.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
 const RATES_PATH = path.join(root, "docs/rates.html");
@@ -78,6 +78,11 @@ export function buildRatePage(baseHtml, page, rates) {
   return applyPrerender(html, {
     rates: ratesHtml(rates, { category: page.category }),
     ratesHead: ratesHeadHtml(page.category),
+    // 이 페이지가 처음 그리는 상품군의 문단은 HTML에 구워 넣고, 나머지 세 개는 탭을
+    // 눌렀을 때 쓰라고 한 덩이로 같이 넘긴다.
+    rateFactsKo: rateFactsHtml(rates, page.category, "ko"),
+    rateFactsEn: rateFactsHtml(rates, page.category, "en"),
+    rateFactsData: jsonForScript(rateFactsData(rates)),
   });
 }
 

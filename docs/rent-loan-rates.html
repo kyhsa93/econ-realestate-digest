@@ -180,6 +180,20 @@
     padding-bottom: 6px;
     border-bottom: 1px solid var(--border);
   }
+  /* 표가 보여주는 것 옆에 붙는 문단. 시세 페이지의 관찰 카드와 같은 모양으로 둔다 —
+     둘 다 "표만 봐서는 놓치는 것"을 적는 자리라 생김새가 같아야 읽는 쪽이 헷갈리지 않는다. */
+  .rates-facts {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin: 0 0 12px;
+    font-size: 0.9rem;
+    line-height: 1.65;
+  }
+  .rates-facts:empty {
+    display: none;
+  }
   .tabs {
     display: flex;
     gap: 6px;
@@ -496,6 +510,10 @@
     <h2 id="products-heading">상품별 금리</h2>
 
     <div class="tabs" id="tabs" role="tablist"></div>
+
+    <p class="rates-facts" id="rates-facts" data-lang="ko"><!--prerender:rateFactsKo-->표에 보이는 것은 41개 가운데 상위 20개입니다. 정렬과 검색은 전체를 대상으로 다시 줄을 세웁니다. 41개 전부 중도상환수수료가 붙고, 부대비용 항목도 전부 따로 적혀 있습니다. 표에 나온 금리만 견주면 이 둘이 빠집니다. 대출 금리는 하나의 숫자가 아니라 구간입니다. 농협은행주식회사 NH전세대출(서울보증보험)은 3.30%에서 6.00%까지 2.7%p 폭입니다. 그 안에서 어디에 걸릴지는 상품이 아니라 신용과 담보가 정합니다.<!--/prerender:rateFactsKo--></p>
+    <p class="rates-facts" id="rates-facts-en" data-lang="en" hidden><!--prerender:rateFactsEn-->The table shows the top 20 of 41 products; sorting or searching re-ranks all of them. All 41 carry an early-repayment fee, and every one of them also lists incidental costs. Comparing on the headline rate alone leaves both out. The rate on a loan is a range, not a number: NH전세대출(서울보증보험) from 농협은행주식회사 runs 3.30% to 6.00%, 2.7 points apart. Where you land inside that range is set by your credit and collateral, not by the product.<!--/prerender:rateFactsEn--></p>
+    <script type="application/json" id="rate-facts-data"><!--prerender:rateFactsData-->{"deposit":{"ko":["표에 보이는 것은 356개 가운데 상위 20개입니다. 정렬과 검색은 전체를 대상으로 다시 줄을 세웁니다.","이 가운데 43개(12%)는 조건 없이 받는 금리보다 높은 숫자를 내걸고 있습니다. 격차가 가장 큰 것은 제주은행 J정기예금 (만기지급식)으로 2.00%와 3.80%, 1.8%p 차이입니다.","상위 20개 중 20개가 은행이 아니라 저축은행입니다. 금리가 높은 대신 예금자보호는 금융회사별 한도까지라, 금액이 크면 나눠 넣을지 먼저 확인할 부분입니다.","203개(57%)는 영업점에서는 아예 가입되지 않습니다. 인터넷이나 스마트폰 전용입니다."],"en":["The table shows the top 20 of 356 products; sorting or searching re-ranks all of them.","43 of these (12%) advertise a higher rate than they pay without conditions. The widest gap is 제주은행 J정기예금 (만기지급식) at 2.00% against 3.80% — 1.8 points.","20 of the top 20 are savings banks rather than commercial banks. Rates there run higher, and deposit insurance is per institution up to a statutory ceiling — worth checking before splitting a large amount.","203 (57%) cannot be opened at a branch at all — internet or mobile only."]},"saving":{"ko":["표에 보이는 것은 328개 가운데 상위 20개입니다. 정렬과 검색은 전체를 대상으로 다시 줄을 세웁니다.","표 맨 위에 있는 웰컴저축은행 웰뱅 라이킷(LIKIT) 적금은 14.00%로 적혀 있지만, 그건 우대조건을 전부 채웠을 때입니다. 조건 없이 받는 금리는 2.00%로 12%p 차이입니다. 표에 두 숫자가 나란히 있어도, 실제로 어느 쪽을 받을지는 표에 없는 조건이 정합니다.","이 가운데 100개(30%)는 조건 없이 받는 금리보다 높은 숫자를 내걸고 있습니다.","상위 20개 중 16개가 은행이 아니라 저축은행입니다. 금리가 높은 대신 예금자보호는 금융회사별 한도까지라, 금액이 크면 나눠 넣을지 먼저 확인할 부분입니다.","151개(46%)는 영업점에서는 아예 가입되지 않습니다. 인터넷이나 스마트폰 전용입니다."],"en":["The table shows the top 20 of 328 products; sorting or searching re-ranks all of them.","The product at the top of the table, 웰뱅 라이킷(LIKIT) 적금 from 웰컴저축은행, is listed at 14.00% — but that is with every bonus condition met. Without them it pays 2.00%, a gap of 12 points. The table shows both numbers side by side; which one you actually get depends on conditions that are not in the table.","100 of these (30%) advertise a higher rate than they pay without conditions.","16 of the top 20 are savings banks rather than commercial banks. Rates there run higher, and deposit insurance is per institution up to a statutory ceiling — worth checking before splitting a large amount.","151 (46%) cannot be opened at a branch at all — internet or mobile only."]},"mortgage":{"ko":["표에 보이는 것은 34개 가운데 상위 20개입니다. 정렬과 검색은 전체를 대상으로 다시 줄을 세웁니다.","34개 전부 중도상환수수료가 붙고, 부대비용 항목도 전부 따로 적혀 있습니다. 표에 나온 금리만 견주면 이 둘이 빠집니다.","대출 금리는 하나의 숫자가 아니라 구간입니다. 농협은행주식회사 NH주택담보대출은 4.26%에서 6.56%까지 2.3%p 폭입니다. 그 안에서 어디에 걸릴지는 상품이 아니라 신용과 담보가 정합니다."],"en":["The table shows the top 20 of 34 products; sorting or searching re-ranks all of them.","All 34 carry an early-repayment fee, and every one of them also lists incidental costs. Comparing on the headline rate alone leaves both out.","The rate on a loan is a range, not a number: NH주택담보대출 from 농협은행주식회사 runs 4.26% to 6.56%, 2.3 points apart. Where you land inside that range is set by your credit and collateral, not by the product."]},"rentLoan":{"ko":["표에 보이는 것은 41개 가운데 상위 20개입니다. 정렬과 검색은 전체를 대상으로 다시 줄을 세웁니다.","41개 전부 중도상환수수료가 붙고, 부대비용 항목도 전부 따로 적혀 있습니다. 표에 나온 금리만 견주면 이 둘이 빠집니다.","대출 금리는 하나의 숫자가 아니라 구간입니다. 농협은행주식회사 NH전세대출(서울보증보험)은 3.30%에서 6.00%까지 2.7%p 폭입니다. 그 안에서 어디에 걸릴지는 상품이 아니라 신용과 담보가 정합니다."],"en":["The table shows the top 20 of 41 products; sorting or searching re-ranks all of them.","All 41 carry an early-repayment fee, and every one of them also lists incidental costs. Comparing on the headline rate alone leaves both out.","The rate on a loan is a range, not a number: NH전세대출(서울보증보험) from 농협은행주식회사 runs 3.30% to 6.00%, 2.7 points apart. Where you land inside that range is set by your credit and collateral, not by the product."]}}<!--/prerender:rateFactsData--></script>
 
     <div class="controls" id="controls"></div>
 
@@ -1352,11 +1370,44 @@
     window.analytics?.pageView({ site_language: locale });
   }
 
+  /**
+   * 표 위 문단. 상품군마다 다른 것을 말하고, 말할 것이 없으면 통째로 비운다.
+   *
+   * 문장은 빌드가 네 상품군 것을 미리 계산해 페이지에 심어 둔 것이다. 여기서 다시
+   * 계산하지 않는 이유는, 같은 계산을 두 곳에 두면 고칠 때 두 곳을 같이 고쳐야 하고
+   * 한쪽을 잊으면 표와 문단이 서로 다른 말을 하기 때문이다.
+   */
+  const RATE_FACTS = (() => {
+    try {
+      return JSON.parse(document.getElementById("rate-facts-data")?.textContent || "{}");
+    } catch {
+      return {};
+    }
+  })();
+
+  function renderRateFacts() {
+    const said = RATE_FACTS[state.category]?.[locale] ?? [];
+    const ko = document.getElementById("rates-facts");
+    const en = document.getElementById("rates-facts-en");
+    // 문단은 언어마다 하나씩이고, 지금 언어 것만 보인다. 안 보이는 쪽은 비워 둔다 —
+    // 남겨 두면 언어를 바꿨을 때 지난 상품군의 문장이 잠깐 스친다.
+    const here = locale === "en" ? en : ko;
+    const other = locale === "en" ? ko : en;
+    if (other) {
+      other.textContent = "";
+      other.hidden = true;
+    }
+    if (!here) return;
+    here.textContent = said.join(" ");
+    here.hidden = said.length === 0;
+  }
+
   function renderAll() {
     renderMeta();
     renderTabs();
     renderControls();
     renderProducts();
+    renderRateFacts();
     renderHistory();
   }
 
@@ -1388,6 +1439,7 @@
     renderTabs();
     renderControls();
     renderProducts();
+    renderRateFacts();
     syncUrl({ push: true });
     window.analytics?.event("rate_tab", { rate_category: state.category });
   });
