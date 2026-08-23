@@ -30,6 +30,15 @@
 
 ## 반드시 지킬 것
 
+**질문하지 마라.** 이 작업은 헤드리스로 돈다 — 답할 사람이 없다. 물어보고 멈추면
+아무것도 안 한 것이고, 찾아 놓은 것까지 같이 버려진다. 판단이 서지 않으면 두 길뿐이다:
+근거가 충분하면 올리고, 부족하면 올리지 않기로 정하고 왜 안 올렸는지 보고한다.
+
+**동시 실행은 걱정하지 마라.** 부르는 스크립트가 `flock`으로 막고 있어서 감사는 한
+번에 하나만 돈다. 프로세스 목록에서 `daily_audit.sh`나 `claude -p`가 보이면 그건
+너 자신이다 — 다른 감사가 도는지 확인하려 들지 마라. 실제로 첫 실행에서 자기 자신을
+보고 "중복될까 봐" 물어보며 멈춘 적이 있다.
+
 **전부 로컬에서 확인한다.** 추측으로 이슈를 쓰지 마라. 모든 주장에는 실제로 실행한
 명령과 그 출력이 붙어야 한다. 명령 없이 쓴 문장은 이슈에 넣지 마라.
 
@@ -67,7 +76,7 @@
    `node scripts/build-realestate-pages.mjs && node scripts/build-budget-pages.mjs && node scripts/build-news-pages.mjs && node scripts/build-rate-pages.mjs`
    실행 뒤 `git status --porcelain docs`가 비어야 한다
 5. 데이터 상태:
-   - `docs/data/*.json`의 `updatedAt`이 얼마나 묵었나 (실거래는 주 1회, 나머지는 하루 1회)
+   - `docs/data/*.json`의 `updatedAt`이 얼마나 묵었나 (전부 하루 1회 갱신이다)
    - `docs/data/realestate.json`에서 표본이 얇아 값을 비운 자치구가 몇이나 되나
    - `docs/data/realestate-trend.json`에서 주간 변동이 비정상적으로 큰 자치구
    - 예산대별 거래 건수(`docs/data/budget-deals.json`)가 0에 가까운 밴드
