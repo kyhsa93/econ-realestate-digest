@@ -1,82 +1,72 @@
 {
-  "updatedAt": "2026-08-23T03:59:49.578Z",
+  "updatedAt": "2026-08-23T07:42:40.807Z",
   "model": "qwen3:14b",
   "summary": {
-    "ko": "- 기타 경제 소식: 북한 장마당에서 소득 양극화가 2014∼2015년 경제충격 이후 심화되고 있다. 하나은행·기보·신보가 청년기업에 2천억원 규모의 보증대출을 지원한다. 금융권에서 '매도인 대출'에 대한 관심이 급증하고 있는 것으로 나타났다. 경기 집값 양극화 속 김포 풍무 지역이 5호선 기대에 따라 고점 대비 91% 회복했다. 이란은 미국의 경제 고립 조치를 '불법 경제전쟁'이라고 반발하고 있다.\n- 부동산: 임광현은 고가 법인주택 중 42%가 사주일가로 구입된 '황제사택'이라고 밝혔으며, 최고 가격은 200억 원에 달했다. 강훈식은 여당이 주택용지 확보 방안을 제시하면 청와대와 정부가 적극 검토할 것이라고 전했다. 광명 철산·하안 재건축은 공공임대 주택 확대 발표로 인해 날벼락을 맞았다. 오세훈은 용산공원 주택공급을 위해 대체부지 마련을 함께 모색하자고 제안했다. 또 다른 보도에서는 회삿돈으로 한강뷰를 누리는 고가 법인주택의 42%가 '황제사택'이라고 보도했다.\n- 금리·예금·투자상품: 국채금리 급등에 대응하려는 노력이 어려움을 겪었고, 한은은 금리 인상 사이클을 계속하며, 미 국채 금리 급등에 대해 베센트가 의견을 밝혔다.\n- 증시·환율: 삼전닉스의 반등에도 불구하고 투자심리는 냉랭한 상태이며, 코스피 회전율은 연중 최저 수준을 기록했다.",
-    "en": "- Other Economic News: Income inequality in North Korea's markets has deepened since the economic shock of 2014-2015. Hana Bank, KIB, and Shinhan Financial Group are providing a 200,000,000,000-won guarantee loan to youth enterprises. The financial sector is showing a sharp increase in interest in \"seller financing.\" In the midst of polarization in housing prices, the Fengmu area in Gimpo has recovered 91% from its peak due to expectations of the 5th Line. Iran is protesting against the U.S. economic isolation measures, calling them an \"illegal economic war.\n- Real Estate: Im Gwang-hyun stated that 42% of the high-priced corporate housing are \"Imperial Official Housing\" purchased by the families of officials, with the highest price reaching 20,000,000,000 won. Kang Hoon-sik said that if the ruling party proposes measures to secure residential land, the Blue House and the government will actively review them. The reconstruction projects in Gwangmyeong Cheonsan and Haan were hit hard by the announcement to expand public rental housing. Oh Se-hoon proposed to jointly explore alternative sites for housing supply in Yongsan Park. Another report stated that 42% of the high-priced corporate housing, which enjoy a view of the Han River, are \"Imperial Official Housing.\n- Rates, Deposits & Investment Products: Efforts to respond to the sharp rise in bond yields encountered difficulties, and the Bank of Korea continued its rate hiking cycle, with Bezen expressing views on the sharp increase in U.S. bond yields.\n- Stocks & FX: Despite Samcheonics' rebound, investor sentiment remains cold, and the Kospi turnover rate has hit its lowest level of the year."
+    "ko": "- 부동산: 서울 평균 아파트값이 16억원을 넘어서며 강북권과 경기 남부 지역에서 상승세가 지속되고 있다. 비주택 리모델링 실적은 4개월째 0건을 기록하며 공급 부진을 보이고 있다. 당정청은 단기 공급 가능한 주택용지를 추가로 발굴해 공급 속도전을 벌이고 있다. 길동에 청년주택 76가구가 공급되며 주거난 완화에 나선다. 서울시는 2031년까지 모아주택 4만가구 착공을 목표로 모아통합기획을 도입한다.\n- 기타 경제 소식: 하나은행, 기보, 신보가 청년기업에 2000억 규모의 보증대출을 지원했다. 북한의 장마당에서 소득 양극화가 2014∼2015년 경제충격 이후 심화되고 있는 것으로 나타났다. 대통령이 사용한 방식을 따라하는 ‘매도인 대출’이 급증하고 있는 것으로 보인다. 청년기업 지원을 위한 금융정책이 본격적으로 시행되고 있는 상황이다. 북한 경제 현황에 대한 분석이 지속적으로 이어지고 있다.\n- 금리·예금·투자상품: 국채금리 급등에 대응하려는 노력이 어려움을 겪었고, 한은은 금리 인상 사이클을 계속하며, 미 국채 금리 급등에 대해 베센트가 의견을 밝혔다.\n- 증시·환율: 삼전닉스의 반등에도 불구하고 투자심리가 냉랭한 가운데 코스피 회전율이 연중 최저 수준을 기록했다.",
+    "en": "- Real Estate: The average apartment price in Seoul has exceeded 1,600,000,000 won, with continued price increases in the Gangbuk area and the southern part of Gyeonggi. Non-residential remodeling performance has recorded zero cases for the fourth consecutive month, showing a supply shortage. The presidential office is actively searching for additional short-term residential land to increase supply. 76 units of youth housing will be supplied in Gil-dong to alleviate housing difficulties. Seoul plans to introduce the Moa Integrated Planning to achieve the construction of 40,000 Moa housing units by 2031.\n- Other Economic News: Hana Bank, KEB Hana Bank, and Shinhan Financial Group provided a 200,000,000,000 won guarantee loan to youth enterprises. Income polarization in North Korea's markets has been deepening since the economic shock of 2014-2015. It appears that \"seller financing,\" following the method used by the president, is rapidly increasing. Financial policies to support youth enterprises are being actively implemented. Analysis of the North Korean economy continues.\n- Rates, Deposits & Investment Products: Efforts to respond to the sharp rise in bond yields faced difficulties, and the Bank of Korea continued its rate hiking cycle, with Bernanke expressing views on the sharp rise in U.S. bond yields.\n- Stocks & FX: Despite Samsung Electronics' rebound, the Korea Composite Stock Price Index (KOSPI) turnover rate hit its lowest level of the year amid cold investor sentiment."
   },
   "highlights": [],
   "categories": [
     {
-      "key": "other",
-      "name": "기타 경제 소식",
-      "nameEn": "Other Economic News",
-      "lineKo": "북한 장마당에서 소득 양극화가 2014∼2015년 경제충격 이후 심화되고 있다. 하나은행·기보·신보가 청년기업에 2천억원 규모의 보증대출을 지원한다. 금융권에서 '매도인 대출'에 대한 관심이 급증하고 있는 것으로 나타났다. 경기 집값 양극화 속 김포 풍무 지역이 5호선 기대에 따라 고점 대비 91% 회복했다. 이란은 미국의 경제 고립 조치를 '불법 경제전쟁'이라고 반발하고 있다.",
-      "lineEn": "Income inequality in North Korea's markets has deepened since the economic shock of 2014-2015. Hana Bank, KIB, and Shinhan Financial Group are providing a 200,000,000,000-won guarantee loan to youth enterprises. The financial sector is showing a sharp increase in interest in \"seller financing.\" In the midst of polarization in housing prices, the Fengmu area in Gimpo has recovered 91% from its peak due to expectations of the 5th Line. Iran is protesting against the U.S. economic isolation measures, calling them an \"illegal economic war.",
+      "key": "realestate",
+      "name": "부동산",
+      "nameEn": "Real Estate",
+      "lineKo": "서울 평균 아파트값이 16억원을 넘어서며 강북권과 경기 남부 지역에서 상승세가 지속되고 있다. 비주택 리모델링 실적은 4개월째 0건을 기록하며 공급 부진을 보이고 있다. 당정청은 단기 공급 가능한 주택용지를 추가로 발굴해 공급 속도전을 벌이고 있다. 길동에 청년주택 76가구가 공급되며 주거난 완화에 나선다. 서울시는 2031년까지 모아주택 4만가구 착공을 목표로 모아통합기획을 도입한다.",
+      "lineEn": "The average apartment price in Seoul has exceeded 1,600,000,000 won, with continued price increases in the Gangbuk area and the southern part of Gyeonggi. Non-residential remodeling performance has recorded zero cases for the fourth consecutive month, showing a supply shortage. The presidential office is actively searching for additional short-term residential land to increase supply. 76 units of youth housing will be supplied in Gil-dong to alleviate housing difficulties. Seoul plans to introduce the Moa Integrated Planning to achieve the construction of 40,000 Moa housing units by 2031.",
       "isFallback": false,
       "fallbackReason": null,
       "degraded": false,
       "items": [
+        {
+          "title": "‘닥치고 공급’이라더니… 비주택 리모델링, 4개월째 실적 ‘0건’",
+          "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/23/TB2EWPTYUBGZTOMCPF3TRMLARI/",
+          "source": "조선비즈 부동산"
+        },
+        {
+          "title": "“서울 평균 아파트값 16억원 돌파… 강북권·경기 남부 상승세 지속”",
+          "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/23/YWRGFBN25VHWZCI73UANU3KT2Q/",
+          "source": "조선비즈 부동산"
+        },
+        {
+          "title": "단기 공급 가능한 주택용지 추가 발굴 나선다…당정청 '공급 속도전' 총력",
+          "link": "https://www.newsis.com/view/NISX20260823_0003758934",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "길동에 청년주택 76가구 공급",
+          "link": "https://www.hankyung.com/article/202608236892i",
+          "source": "한국경제 부동산"
+        },
+        {
+          "title": "서울시, 모아주택 2031년까지 4만가구 착공…모아통합기획 도입",
+          "link": "https://www.hankyung.com/article/202608236655i",
+          "source": "한국경제 부동산"
+        }
+      ]
+    },
+    {
+      "key": "other",
+      "name": "기타 경제 소식",
+      "nameEn": "Other Economic News",
+      "lineKo": "하나은행, 기보, 신보가 청년기업에 2000억 규모의 보증대출을 지원했다. 북한의 장마당에서 소득 양극화가 2014∼2015년 경제충격 이후 심화되고 있는 것으로 나타났다. 대통령이 사용한 방식을 따라하는 ‘매도인 대출’이 급증하고 있는 것으로 보인다. 청년기업 지원을 위한 금융정책이 본격적으로 시행되고 있는 상황이다. 북한 경제 현황에 대한 분석이 지속적으로 이어지고 있다.",
+      "lineEn": "Hana Bank, KEB Hana Bank, and Shinhan Financial Group provided a 200,000,000,000 won guarantee loan to youth enterprises. Income polarization in North Korea's markets has been deepening since the economic shock of 2014-2015. It appears that \"seller financing,\" following the method used by the president, is rapidly increasing. Financial policies to support youth enterprises are being actively implemented. Analysis of the North Korean economy continues.",
+      "isFallback": false,
+      "fallbackReason": null,
+      "degraded": false,
+      "items": [
+        {
+          "title": "하나은행·기보·신보, 청년기업에 2000억 규모 보증대출",
+          "link": "https://www.hankyung.com/article/202608236874i",
+          "source": "한국경제 경제"
+        },
         {
           "title": "\"북한 장마당 소득 양극화, 2014∼2015년 경제충격 이후 심화\"",
           "link": "https://www.yna.co.kr/view/AKR20260822046300002",
           "source": "연합뉴스 경제"
         },
         {
-          "title": "하나은행·기보·신보, 청년기업에 2천억원 규모 보증대출 지원",
-          "link": "https://www.yna.co.kr/view/AKR20260821175000002",
-          "source": "연합뉴스 경제"
-        },
-        {
           "title": "\"대통령도 했잖아요\"…급증하는 '매도인 대출' 정말 될까 [김용우의 각개전투]",
           "link": "https://www.hankyung.com/article/202608226081i",
-          "source": "한국경제 부동산"
-        },
-        {
-          "title": "경기 집값 양극화 속 김포 풍무 ‘꿈틀’… 5호선 기대에 고점 91% 회복",
-          "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/23/4MI2TOCN7NBALGCZ3GG5R2BH24/",
-          "source": "조선비즈 부동산"
-        },
-        {
-          "title": "이란, 美 '역사상 최대 규모 경제 고립' 예고에 \"불법 경제전쟁\" 반발",
-          "link": "https://www.newsis.com/view/NISX20260822_0003758571",
-          "source": "뉴시스 경제"
-        }
-      ]
-    },
-    {
-      "key": "realestate",
-      "name": "부동산",
-      "nameEn": "Real Estate",
-      "lineKo": "임광현은 고가 법인주택 중 42%가 사주일가로 구입된 '황제사택'이라고 밝혔으며, 최고 가격은 200억 원에 달했다. 강훈식은 여당이 주택용지 확보 방안을 제시하면 청와대와 정부가 적극 검토할 것이라고 전했다. 광명 철산·하안 재건축은 공공임대 주택 확대 발표로 인해 날벼락을 맞았다. 오세훈은 용산공원 주택공급을 위해 대체부지 마련을 함께 모색하자고 제안했다. 또 다른 보도에서는 회삿돈으로 한강뷰를 누리는 고가 법인주택의 42%가 '황제사택'이라고 보도했다.",
-      "lineEn": "Im Gwang-hyun stated that 42% of the high-priced corporate housing are \"Imperial Official Housing\" purchased by the families of officials, with the highest price reaching 20,000,000,000 won. Kang Hoon-sik said that if the ruling party proposes measures to secure residential land, the Blue House and the government will actively review them. The reconstruction projects in Gwangmyeong Cheonsan and Haan were hit hard by the announcement to expand public rental housing. Oh Se-hoon proposed to jointly explore alternative sites for housing supply in Yongsan Park. Another report stated that 42% of the high-priced corporate housing, which enjoy a view of the Han River, are \"Imperial Official Housing.",
-      "isFallback": false,
-      "fallbackReason": null,
-      "degraded": false,
-      "items": [
-        {
-          "title": "임광현 \"고가 법인주택 42%가 사주일가 '황제사택'…최고가 200억\"",
-          "link": "https://www.newsis.com/view/NISX20260823_0003758828",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "강훈식 \"與, 주택용지 확보방안 제시해주면 靑·정부 적극 검토\"",
-          "link": "https://www.yna.co.kr/view/AKR20260823024700001",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "“이제와서 공공임대 늘리라니”…광명 철산·하안 재건축 ‘날벼락’",
-          "link": "https://www.mk.co.kr/news/realestate/12133957",
-          "source": "매일경제 부동산"
-        },
-        {
-          "title": "용산공원 주택공급에 선 그은 오세훈…“대체부지 함께 찾자”",
-          "link": "https://www.hankyung.com/article/202608236666i",
-          "source": "한국경제 부동산"
-        },
-        {
-          "title": "\"회삿돈으로 한강뷰?\"…고가 법인주택 42%가 '황제사택'",
-          "link": "https://www.hankyung.com/article/2026082366047",
           "source": "한국경제 부동산"
         }
       ]
@@ -86,7 +76,7 @@
       "name": "금리·예금·투자상품",
       "nameEn": "Rates, Deposits & Investment Products",
       "lineKo": "국채금리 급등에 대응하려는 노력이 어려움을 겪었고, 한은은 금리 인상 사이클을 계속하며, 미 국채 금리 급등에 대해 베센트가 의견을 밝혔다.",
-      "lineEn": "Efforts to respond to the sharp rise in bond yields encountered difficulties, and the Bank of Korea continued its rate hiking cycle, with Bezen expressing views on the sharp increase in U.S. bond yields.",
+      "lineEn": "Efforts to respond to the sharp rise in bond yields faced difficulties, and the Bank of Korea continued its rate hiking cycle, with Bernanke expressing views on the sharp rise in U.S. bond yields.",
       "isFallback": false,
       "fallbackReason": null,
       "degraded": true,
@@ -112,8 +102,8 @@
       "key": "stocks",
       "name": "증시·환율",
       "nameEn": "Stocks & FX",
-      "lineKo": "삼전닉스의 반등에도 불구하고 투자심리는 냉랭한 상태이며, 코스피 회전율은 연중 최저 수준을 기록했다.",
-      "lineEn": "Despite Samcheonics' rebound, investor sentiment remains cold, and the Kospi turnover rate has hit its lowest level of the year.",
+      "lineKo": "삼전닉스의 반등에도 불구하고 투자심리가 냉랭한 가운데 코스피 회전율이 연중 최저 수준을 기록했다.",
+      "lineEn": "Despite Samsung Electronics' rebound, the Korea Composite Stock Price Index (KOSPI) turnover rate hit its lowest level of the year amid cold investor sentiment.",
       "isFallback": false,
       "fallbackReason": null,
       "degraded": true,

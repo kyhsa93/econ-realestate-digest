@@ -9,7 +9,8 @@
       "source": "조선비즈 부동산",
       "category": "realestate",
       "preview": "정부가 수도권 도심 내 주거 공간을 빠르게 늘리기 위해 4년 만에 재도입한 ‘비주택 리모델링’ 사업이 이후 4개월이 지나도록 단 한 건의 성과를 거두지 못한 것으로 나타났다. 23일 국회 국토교통위원회 소속 국민의힘…",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Promised Supply at All Costs\"... Non-residential Remodeling Remains at '0 Cases' for 4th Month"
     },
     {
       "title": "“서울 평균 아파트값 16억원 돌파… 강북권·경기 남부 상승세 지속”",
@@ -19,6 +20,7 @@
       "category": "realestate",
       "preview": "수도권 부동산 시장에서 서울 강북 지역과 경기 남부권을 중심으로 아파트값 강세가 이어지면서 이달 매매가격 상승률이 전월보다 소폭 확대됐다. 서울 아파트 평균 거래 가격은 16억원을 넘어섰다. 23일 KB국민은행이 발…",
       "dupes": [],
+      "titleEn": "Seoul's average apartment price surpasses 1,600,000,000 won... rising trend continues in Gangbuk area and southern Gyeonggi Province",
       "context": [
         {
           "kind": "realestate",
@@ -39,7 +41,8 @@
       "source": "뉴시스 경제",
       "category": "realestate",
       "preview": "[서울=뉴시스] 강세훈 기자 = 당정청이 수도권 주택 공급 확대를 위해 단기간 내 주택 공급이 가능한 용지를 추가로 발굴하고, 지방자치단체와 여당 지역조직 등이 제안하는 공급 후보지를 적극 검토하기로 했다. 강훈식…",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Efforts to identify additional short-term supply of residential land intensify as government, ruling party, and administration launch full-scale campaign to boost supply speed"
     },
     {
       "title": "길동에 청년주택 76가구 공급",
@@ -48,7 +51,8 @@
       "source": "한국경제 부동산",
       "category": "realestate",
       "preview": null,
-      "dupes": []
+      "dupes": [],
+      "titleEn": "76 units of youth housing to be supplied in Gil-dong"
     },
     {
       "title": "하나은행·기보·신보, 청년기업에 2000억 규모 보증대출",
@@ -63,7 +67,8 @@
           "link": "https://www.yna.co.kr/view/AKR20260821175000002",
           "source": "연합뉴스 경제"
         }
-      ]
+      ],
+      "titleEn": "Hana Bank, KIBO, and SHINPO, Provide 200,000,000,000 Won Guarantee Loans to Youth Startups"
     },
     {
       "title": "서울시, 모아주택 2031년까지 4만가구 착공…모아통합기획 도입",
@@ -73,6 +78,7 @@
       "category": "realestate",
       "preview": null,
       "dupes": [],
+      "titleEn": "Seoul to Start Construction of 40,000 Units of Moa Housing by 2031... Introducing Moa Integrated Planning",
       "context": [
         {
           "kind": "realestate",
@@ -94,6 +100,7 @@
       "category": "realestate",
       "preview": "(서울=연합뉴스) 임기창 기자 = KB국민은행이 조사한 이달 서울 아파트 매매가격이 강북권 중심으로 강세를 보인 가운데 상승률이 전월 대비 소폭...",
       "dupes": [],
+      "titleEn": "KB \"August Seoul Apartment Prices Rise 1.14%... Growth Rate Slightly Expands",
       "context": [
         {
           "kind": "realestate",
@@ -115,6 +122,7 @@
       "category": "realestate",
       "preview": "[서울=뉴시스]정유선 기자 = 수도권에서 서울 강북권과 경기 남부권을 중심으로 아파트값 강세가 이어지고 있다. 23일 KB국민은행 KB부동산이 발표한 '8월 전국주택가격동향'에 따르면 전국 주택 매매가격은 전월 대비…",
       "dupes": [],
+      "titleEn": "Jungnang-gu apartment prices rise 2.3% in a month... Seoul Gangbuk, Gyeonggi southern areas strong",
       "context": [
         {
           "kind": "realestate",
@@ -142,6 +150,7 @@
           "source": "조선비즈 부동산"
         }
       ],
+      "titleEn": "Yongsan Park housing supply deal in sight... Kim Yoon-deok, Oh Se-hoon to meet again this week",
       "context": [
         {
           "kind": "realestate",
@@ -162,7 +171,8 @@
       "source": "연합뉴스 경제",
       "category": "other",
       "preview": "(서울=연합뉴스) 이도흔 기자 = 장마당을 중심으로 확산한 북한의 시장부문 소득 양극화가 2014∼2015년 경제충격 이후 심화한 것으로 나타났...",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "North Korea's Market Income Inequality Intensifies After 2014-2015 Economic Shock"
     },
     {
       "title": "임광현 \"고가 법인주택 42%가 사주일가 '황제사택'…최고가 200억\"",
@@ -177,7 +187,8 @@
           "link": "https://www.yna.co.kr/view/AKR20260823016500002",
           "source": "연합뉴스 경제"
         }
-      ]
+      ],
+      "titleEn": "Im Gwang-hyun \"42% of high-priced corporate housing is 'Emperor's Residence' by SaJuIlGa...highest price 20,000,000,000"
     },
     {
       "title": "강훈식 \"與, 주택용지 확보방안 제시해주면 靑·정부 적극 검토\"",
@@ -186,7 +197,8 @@
       "source": "연합뉴스 경제",
       "category": "realestate",
       "preview": "(서울=연합뉴스) 고동욱 황윤기 정연솔 기자 = 강훈식 대통령 비서실장은 23일 수도권 주택공급 방안과 관련해 \"지역 상황에 밝은 여당의 지역위...",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Kang Hoon-sik says if the opposition presents a plan to secure residential land, the Blue House and government will actively review it."
     },
     {
       "title": "“이제와서 공공임대 늘리라니”…광명 철산·하안 재건축 ‘날벼락’",
@@ -195,7 +207,8 @@
       "source": "매일경제 부동산",
       "category": "realestate",
       "preview": "“주거 불균형 해소·공공성 확보” 조합원 “추가분담금·사업성 우려” 대형 건설사들도 사업 참여 ‘고심’경기도 광명시가 최근 각 정비사업 현장에 공공임대주택 비율을 확보하라고 요구해..",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Now they want to increase public rental housing?\" Gwangmyeong Cheolsan and Haan reconstruction projects hit by \"sudden blow"
     },
     {
       "title": "국채금리 급등 '대증요법'으로 눌러보려다 '교육당한' 美재무",
@@ -204,7 +217,8 @@
       "source": "연합뉴스 경제",
       "category": "rates",
       "preview": "(서울=연합뉴스) 임화섭 기자 = 채권 트레이더 출신인 스콧 베선트 미국 재무장관이 국채 금리 급등에 재매입(buyback) 확대 발표로 이를 ...",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "U.S. Treasury Tries to Suppress Sharp Rise in Bond Yields with 'Symptomatic Treatment,' Gets 'Educated"
     },
     {
       "title": "용산공원 주택공급에 선 그은 오세훈…“대체부지 함께 찾자”",
@@ -214,6 +228,7 @@
       "category": "realestate",
       "preview": null,
       "dupes": [],
+      "titleEn": "Oh Se-hoon draws the line on housing supply at Yongsan Park…“Let’s find alternative sites together",
       "context": [
         {
           "kind": "realestate",
@@ -234,7 +249,8 @@
       "source": "한국경제 부동산",
       "category": "realestate",
       "preview": null,
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Company funds for a Han River view?\"… 42% of high-priced corporate housing are 'emperor's residences"
     },
     {
       "title": "'폐버스 주택'→'욕조 고시원' 황당 릴레이…청년들 '부글부글'",
@@ -243,7 +259,8 @@
       "source": "한국경제 부동산",
       "category": "realestate",
       "preview": null,
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Used Bus Housing\" Turns into \"Bathtub Dormitory\" in Absurd Relay... Youth Say \"Bubbling"
     },
     {
       "title": "과천 경마장 이전 대상지 내달 발표…주민들 28일 '맞불 집회'[주택공급 시험대④]",
@@ -252,7 +269,8 @@
       "source": "뉴시스 경제",
       "category": "realestate",
       "preview": "[서울=뉴시스]정유선 기자 = 정부가 다음달 과천 경마장 이전 대상지를 발표하는 등 주택 공급 사업에 속도를 내고 있지만, 정작 과천시와 지역 주민들의 반발은 거세지고 있다. 정부가 ‘2029년 착공’이라는 구체적인…",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Gwacheon Racecourse Relocation Site to Be Announced Next Month... Residents Hold Counter-Protest on 28th [Housing Supply Trial④]"
     },
     {
       "title": "경남 최대 '재건축 조합장 20억 성과금'…조합원 투표서 부결",
@@ -261,7 +279,8 @@
       "source": "연합뉴스 경제",
       "category": "realestate",
       "preview": "(창원=연합뉴스) 박영민 기자 = 경남지역 재건축 조합장 성과금으로는 역대 최대 규모로 알려져 이목을 끈 창원의 한 정비사업 조합의 '20억원 ...",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Gyeongnam's Largest 'Reconstruction Committee Chair 2,000,000,000 Achievement Fund' Rejected by Committee Members' Vote"
     },
     {
       "title": "\"동결해도 끝 아냐\"…한은 금리 인상 사이클 계속",
@@ -270,7 +289,8 @@
       "source": "한국경제 경제",
       "category": "rates",
       "preview": null,
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Freezing won't be the end\"…Bank of Korea continues interest rate hike cycle"
     },
     {
       "title": "경기도, 전세사기 피해주택 수리비 최대 2천만원까지 지원",
@@ -279,7 +299,8 @@
       "source": "연합뉴스 경제",
       "category": "realestate",
       "preview": "(수원=연합뉴스) 최찬흥 기자 = 경기도는 '전세사기 피해주택 긴급관리 지원사업' 하반기 신청을 26일부터 다음 달 30일까지 받는다고 23일 ...",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Gyeonggi Province to Support Up to 20,000,000 Won for Repairing Affected Housing in Rent Fraud Cases"
     },
     {
       "title": "\"대통령도 했잖아요\"…급증하는 '매도인 대출' 정말 될까 [김용우의 각개전투]",
@@ -288,7 +309,8 @@
       "source": "한국경제 부동산",
       "category": "other",
       "preview": null,
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Even the President Did It\"… Will the Surge in \"Seller Loans\" Really Happen? [Kim Yong-woo's Battle on All Fronts]"
     },
     {
       "title": "미 국채 금리 급등하자…베센트가 꺼낸 한마디",
@@ -297,7 +319,8 @@
       "source": "한국경제 경제",
       "category": "rates",
       "preview": null,
-      "dupes": []
+      "dupes": [],
+      "titleEn": "As U.S. Treasury yields spike, Bernanke's remark surfaces"
     },
     {
       "title": "삼전닉스 반등에도 투심은 '냉랭'…코스피 회전율 연중 최저",
@@ -306,7 +329,8 @@
       "source": "연합뉴스 경제",
       "category": "stocks",
       "preview": "(서울=연합뉴스) 김유향 기자 = 최근 삼성전자[005930]와 SK하이닉스[000660]의 주가가 반등하면서 코스피 또한 상승을 시도하고 있지...",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Samsunghit Semiconductor's rebound fails to warm investor sentiment... Kospi turnover hits lowest level of the year"
     }
   ],
   "realestateStats": [
