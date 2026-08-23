@@ -656,6 +656,13 @@
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
   }
   .chart-tip .tip-value { font-weight: 700; font-variant-numeric: tabular-nums; }
+  /* 하루를 짚으면 같은 격자의 그래프가 모두 그날에 찍힌다. 말풍선도 그만큼 길어지므로
+     한 줄에 이름과 값을 좌우로 벌리고, 긴 이름은 잘라 낸다. */
+  .chart-tip { max-width: min(340px, calc(100vw - 16px)); }
+  .chart-tip .tip-date { color: var(--muted); margin-bottom: 3px; }
+  .chart-tip .tip-row { display: flex; gap: 12px; justify-content: space-between; align-items: baseline; }
+  .chart-tip .tip-row .tip-label { color: var(--muted); overflow: hidden; text-overflow: ellipsis; }
+  .chart-tip .tip-row.here .tip-label { color: var(--fg); }
   .archive-date-jump {
     display: flex;
     align-items: center;
@@ -1327,7 +1334,9 @@
     const shown = (firm.length ? firm : series).map((p) => p.value);
     const id = `chart-${chartSeries.size}`;
     const box = chartBox(null, yTickValues(values).map(format));
-    chartSeries.set(id, { series, format, box });
+    // 이름도 같이 둔다. 한 주를 짚으면 같은 격자의 그래프가 모두 그 주에 찍히고,
+    // 말풍선이 어느 줄이 무엇인지 말해야 하기 때문이다.
+    chartSeries.set(id, { series, format, box, label });
     return `
       <div class="history-card">
         <div class="label">${label}</div>
@@ -1389,10 +1398,72 @@
   function hideChartTip() {
     const tip = document.getElementById("chart-tip");
     if (tip) tip.hidden = true;
-    for (const id of chartSeries.keys()) {
-      const marker = document.querySelector(`#${id} .marker`);
-      if (marker) marker.setAttribute("hidden", "hidden");
+    for (const id of chartSeries.keys()) hideMarker(id);
+  }
+
+  function hideMarker(chartId) {
+    const marker = document.querySelector(`#${chartId} .marker`);
+    if (marker) marker.setAttribute("hidden", "hidden");
+  }
+
+  /**
+   * 한 그래프에서 고른 날을 다른 그래프에서 찾는다.
+   *
+   * 인덱스가 아니라 날짜로 찾는다. 값이 없는 날은 계열에서 빠지므로 같은 격자 안에서도
+   * 점 개수가 다를 수 있고, 그때 인덱스를 옮기면 하루씩 밀린 자리를 짚어 준다.
+   */
+  function indexOfDate(series, date) {
+    for (let i = 0; i < series.length; i += 1) {
+      if (series[i].date === date) return i;
     }
+    return -1;
+  }
+
+  /**
+   * 같은 x축을 쓰는 그래프들.
+   *
+   * 격자 하나가 축 하나다. 이 화면에는 격자가 둘 있는데 — 시장 지표는 날 단위,
+   * 부동산은 주 단위라 — 화면 전체에서 찾으면 "같은 좌표"라는 말이 성립하지 않는다.
+   */
+  function chartsSharingAxis(chartId) {
+    const grid = document.getElementById(chartId)?.closest?.(".history-grid");
+    const found = [...(grid?.querySelectorAll?.(".history-chart") ?? [])]
+      .map((el) => el.id)
+      .filter((id) => id && chartSeries.has(id));
+    return found.length ? found : chartSeries.has(chartId) ? [chartId] : [];
+  }
+
+  /** 그래프 하나에 표시를 찍고, 말풍선에 넣을 한 줄을 돌려준다. */
+  function markChart(chartId, date, here) {
+    const entry = chartSeries.get(chartId);
+    const svg = document.querySelector(`#${chartId} svg`);
+    if (!entry || !svg) return "";
+
+    const index = indexOfDate(entry.series, date);
+    if (index < 0) {
+      // 그날 값이 없는 그래프다. 아무 데나 찍는 것보다 비워 두는 편이 정직하다.
+      hideMarker(chartId);
+      return "";
+    }
+
+    const point = entry.series[index];
+    const scale = chartScale(entry.series.map((p) => p.value), entry.box);
+    const marker = svg.querySelector(".marker");
+    if (marker) {
+      const x = scale.x(index);
+      marker.querySelector(".marker-line").setAttribute("x1", x);
+      marker.querySelector(".marker-line").setAttribute("x2", x);
+      marker.querySelector(".marker-dot").setAttribute("cx", x);
+      marker.querySelector(".marker-dot").setAttribute("cy", scale.y(point.value));
+      marker.removeAttribute("hidden");
+    }
+
+    return (
+      `<div class="tip-row${here ? " here" : ""}">` +
+      `<span class="tip-label">${escapeHtml(entry.label ?? "")}</span>` +
+      `<span class="tip-value">${escapeHtml(entry.format(point.value))}</span>` +
+      `</div>`
+    );
   }
 
   function showChartTip(chartId, clientX, clientY) {
@@ -1407,21 +1478,13 @@
     const index = chartIndexAt((clientX - rect.left) / rect.width, entry.series.length, entry.box);
     if (index === null) return;
 
+    // 짚은 날을 정하는 것은 손이 올라간 그래프다. 나머지는 그날을 날짜로 찾아간다.
     const point = entry.series[index];
-    const scale = chartScale(entry.series.map((p) => p.value), entry.box);
-    const marker = svg.querySelector(".marker");
-    if (marker) {
-      const x = scale.x(index);
-      marker.querySelector(".marker-line").setAttribute("x1", x);
-      marker.querySelector(".marker-line").setAttribute("x2", x);
-      marker.querySelector(".marker-dot").setAttribute("cx", x);
-      marker.querySelector(".marker-dot").setAttribute("cy", scale.y(point.value));
-      marker.removeAttribute("hidden");
-    }
+    const rows = chartsSharingAxis(chartId).map((id) => markChart(id, point.date, id === chartId));
 
     tip.innerHTML =
-      `<div>${escapeHtml(point.date)}${point.pending ? ` ${escapeHtml(t("historyPendingTag"))}` : ""}</div>` +
-      `<div class="tip-value">${escapeHtml(entry.format(point.value))}</div>`;
+      `<div class="tip-date">${escapeHtml(point.date)}${point.pending ? ` ${escapeHtml(t("historyPendingTag"))}` : ""}</div>` +
+      rows.join("");
     tip.hidden = false;
 
     const width = tip.offsetWidth || 110;

@@ -300,6 +300,14 @@
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
   }
   .chart-tip .tip-value { font-weight: 700; font-variant-numeric: tabular-nums; }
+  /* 한 주를 짚으면 같은 축을 쓰는 그래프가 모두 그 주에 찍힌다. 말풍선도 그만큼
+     길어지므로 한 줄에 이름과 값을 좌우로 벌리고, 긴 이름은 잘라 낸다 — 전세가율은
+     이름만 스무 자가 넘어서 그대로 두면 말풍선이 화면을 가로지른다. */
+  .chart-tip { max-width: min(340px, calc(100vw - 16px)); }
+  .chart-tip .tip-date { color: var(--muted); margin-bottom: 3px; }
+  .chart-tip .tip-row { display: flex; gap: 12px; justify-content: space-between; align-items: baseline; }
+  .chart-tip .tip-row .tip-label { color: var(--muted); overflow: hidden; text-overflow: ellipsis; }
+  .chart-tip .tip-row.here .tip-label { color: var(--fg); }
   .trend-meta { color: var(--muted); font-size: 0.78rem; margin-top: 10px; }
   .district-links-heading { font-size: 0.85rem; color: var(--muted); margin: 18px 0 8px; font-weight: 600; }
   .district-links { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 0.82rem; }
@@ -1230,10 +1238,80 @@ function fillCard(prefix, series, label, format) {
 function hideChartTip() {
   const tip = document.getElementById("chart-tip");
   if (tip) tip.hidden = true;
-  for (const id of chartSeries.keys()) {
-    const marker = document.querySelector(`#${id} .marker`);
-    if (marker) marker.setAttribute("hidden", "hidden");
+  for (const id of chartSeries.keys()) hideMarker(id);
+}
+
+function hideMarker(chartId) {
+  const marker = document.querySelector(`#${chartId} .marker`);
+  if (marker) marker.setAttribute("hidden", "hidden");
+}
+
+/**
+ * 한 그래프에서 고른 주가 다른 그래프에서는 몇 번째인가.
+ *
+ * 인덱스를 그대로 옮기면 안 된다. `seriesOf`는 값이 없는 주를 빼고 넘기므로 같은 화면의
+ * 그래프끼리도 점 개수가 다를 수 있다 — 광진구는 매매가 스물세 주, 전세가 스물네 주다.
+ * 그 페이지에서 인덱스를 옮겼다면 한 주씩 밀린 곳을 짚어 주고, 어긋났다는 사실은 아무
+ * 데도 드러나지 않았을 것이다.
+ */
+function indexOfDate(series, date) {
+  for (let i = 0; i < series.length; i += 1) {
+    if (series[i].date === date) return i;
   }
+  return -1;
+}
+
+/**
+ * 같은 x축을 쓰는 그래프들.
+ *
+ * 격자 하나가 축 하나다. 화면 전체에서 찾지 않는 것은 축이 다른 그래프가 한 화면에
+ * 있을 수 있기 때문이다 — 첫 화면의 시장 지표는 일 단위, 부동산은 주 단위라 "같은
+ * 좌표"라는 말이 성립하지 않는다.
+ *
+ * 접혀 있는 카드는 뺀다. 월세 화면의 전세가율처럼, 그려는 두었으나 숨긴 그래프에
+ * 표시를 찍어 봐야 아무도 보지 못한다.
+ */
+function chartsSharingAxis(chartId) {
+  const holder = document.getElementById(chartId);
+  const grid = holder?.closest?.(".history-grid");
+  const found = [...(grid?.querySelectorAll?.(".history-chart") ?? [])]
+    .map((el) => el.id)
+    .filter((id) => id && chartSeries.has(id))
+    .filter((id) => document.getElementById(id)?.closest?.(".history-card")?.hidden !== true);
+  return found.length ? found : chartSeries.has(chartId) ? [chartId] : [];
+}
+
+/** 그래프 하나에 표시를 찍고, 말풍선에 넣을 한 줄을 돌려준다. */
+function markChart(chartId, date, here) {
+  const entry = chartSeries.get(chartId);
+  const svg = document.querySelector(`#${chartId} svg`);
+  if (!entry || !svg) return "";
+
+  const index = indexOfDate(entry.series, date);
+  if (index < 0) {
+    // 그 주에 값이 없는 그래프다. 아무 데나 찍는 것보다 비워 두는 편이 정직하다.
+    hideMarker(chartId);
+    return "";
+  }
+
+  const point = entry.series[index];
+  const scale = chartScale(entry.series.map((p) => p.value), entry.box);
+  const marker = svg.querySelector(".marker");
+  if (marker) {
+    const x = scale.x(index);
+    marker.querySelector(".marker-line").setAttribute("x1", x);
+    marker.querySelector(".marker-line").setAttribute("x2", x);
+    marker.querySelector(".marker-dot").setAttribute("cx", x);
+    marker.querySelector(".marker-dot").setAttribute("cy", scale.y(point.value));
+    marker.removeAttribute("hidden");
+  }
+
+  return (
+    `<div class="tip-row${here ? " here" : ""}">` +
+    `<span class="tip-label">${escapeHtml(entry.label ?? "")}</span>` +
+    `<span class="tip-value">${escapeHtml(entry.format(point.value))}</span>` +
+    `</div>`
+  );
 }
 
 function showChartTip(chartId, clientX, clientY) {
@@ -1248,21 +1326,13 @@ function showChartTip(chartId, clientX, clientY) {
   const index = chartIndexAt((clientX - rect.left) / rect.width, entry.series.length, entry.box);
   if (index === null) return;
 
+  // 짚은 주를 정하는 것은 손이 올라간 그래프다. 나머지는 그 주를 날짜로 찾아간다.
   const point = entry.series[index];
-  const scale = chartScale(entry.series.map((p) => p.value), entry.box);
-  const marker = svg.querySelector(".marker");
-  if (marker) {
-    const x = scale.x(index);
-    marker.querySelector(".marker-line").setAttribute("x1", x);
-    marker.querySelector(".marker-line").setAttribute("x2", x);
-    marker.querySelector(".marker-dot").setAttribute("cx", x);
-    marker.querySelector(".marker-dot").setAttribute("cy", scale.y(point.value));
-    marker.removeAttribute("hidden");
-  }
+  const rows = chartsSharingAxis(chartId).map((id) => markChart(id, point.date, id === chartId));
 
   tip.innerHTML =
-    `<div>${escapeHtml(point.date)}${point.pending ? ` ${escapeHtml(t("trendPendingTag"))}` : ""}</div>` +
-    `<div class="tip-value">${escapeHtml(entry.format(point.value))}</div>`;
+    `<div class="tip-date">${escapeHtml(point.date)}${point.pending ? ` ${escapeHtml(t("trendPendingTag"))}` : ""}</div>` +
+    rows.join("");
   tip.hidden = false;
 
   const width = tip.offsetWidth || 110;
