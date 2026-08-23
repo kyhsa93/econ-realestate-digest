@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-08-23T07:42:40.807Z",
+  "updatedAt": "2026-08-23T11:33:11.927Z",
   "model": "qwen3:14b",
   "summary": {
-    "ko": "- 부동산: 서울 평균 아파트값이 16억원을 넘어서며 강북권과 경기 남부 지역에서 상승세가 지속되고 있다. 비주택 리모델링 실적은 4개월째 0건을 기록하며 공급 부진을 보이고 있다. 당정청은 단기 공급 가능한 주택용지를 추가로 발굴해 공급 속도전을 벌이고 있다. 길동에 청년주택 76가구가 공급되며 주거난 완화에 나선다. 서울시는 2031년까지 모아주택 4만가구 착공을 목표로 모아통합기획을 도입한다.\n- 기타 경제 소식: 하나은행, 기보, 신보가 청년기업에 2000억 규모의 보증대출을 지원했다. 북한의 장마당에서 소득 양극화가 2014∼2015년 경제충격 이후 심화되고 있는 것으로 나타났다. 대통령이 사용한 방식을 따라하는 ‘매도인 대출’이 급증하고 있는 것으로 보인다. 청년기업 지원을 위한 금융정책이 본격적으로 시행되고 있는 상황이다. 북한 경제 현황에 대한 분석이 지속적으로 이어지고 있다.\n- 금리·예금·투자상품: 국채금리 급등에 대응하려는 노력이 어려움을 겪었고, 한은은 금리 인상 사이클을 계속하며, 미 국채 금리 급등에 대해 베센트가 의견을 밝혔다.\n- 증시·환율: 삼전닉스의 반등에도 불구하고 투자심리가 냉랭한 가운데 코스피 회전율이 연중 최저 수준을 기록했다.",
-    "en": "- Real Estate: The average apartment price in Seoul has exceeded 1,600,000,000 won, with continued price increases in the Gangbuk area and the southern part of Gyeonggi. Non-residential remodeling performance has recorded zero cases for the fourth consecutive month, showing a supply shortage. The presidential office is actively searching for additional short-term residential land to increase supply. 76 units of youth housing will be supplied in Gil-dong to alleviate housing difficulties. Seoul plans to introduce the Moa Integrated Planning to achieve the construction of 40,000 Moa housing units by 2031.\n- Other Economic News: Hana Bank, KEB Hana Bank, and Shinhan Financial Group provided a 200,000,000,000 won guarantee loan to youth enterprises. Income polarization in North Korea's markets has been deepening since the economic shock of 2014-2015. It appears that \"seller financing,\" following the method used by the president, is rapidly increasing. Financial policies to support youth enterprises are being actively implemented. Analysis of the North Korean economy continues.\n- Rates, Deposits & Investment Products: Efforts to respond to the sharp rise in bond yields faced difficulties, and the Bank of Korea continued its rate hiking cycle, with Bernanke expressing views on the sharp rise in U.S. bond yields.\n- Stocks & FX: Despite Samsung Electronics' rebound, the Korea Composite Stock Price Index (KOSPI) turnover rate hit its lowest level of the year amid cold investor sentiment."
+    "ko": "- 부동산: 고가 법인주택 중 42%는 사주의 주택으로 나타났다. 정부는 부동산 대책을 발표하며 2028년까지 집을 팔 것을 권장하고 있다. 500가구 이하 재개발·재건축 사업이 진행 중이다. 영등포 재건축 투자에 관심이 집중되고 있다. 비주택 리모델링 실적은 4개월째 0건을 기록하고 있다.\n- 금리·예금·투자상품: 금리·예금·투자상품: AI 투자 늘자…美데이터센터 채권 금리 年 7%로 급등, 경제전문가 63% \"한은, 두 달 연속 금리 올릴 것\", 국채금리 급등 '대증요법'으로 눌러보려다 '교육당한' 美재무\n- 기타 경제 소식: GTX-A 연결과 트램 도입으로 교통망 개선이 추진되고 있다. 성남 중원과 수원 권선 지역에서 대출 규제의 풍선효과가 나타나고 있다. 북한 장마당에서 소득 양극화가 2014∼2015년 경제충격 이후 심화되고 있는 것으로 나타났다. 하나은행, 기보, 신보가 청년기업에 2천억원 규모의 보증대출을 지원한다. 각 기사는 서로 다른 주제로, 별개의 사실을 담고 있다.",
+    "en": "- Real Estate: Of high-priced corporate housing, 42% were found to be owner-occupied homes. The government is recommending selling homes by 2028 as part of its real estate measures. There are ongoing redevelopment and reconstruction projects involving 500 households or fewer. Interest is focusing on investment in the Yeongdeungpo reconstruction. Non-residential remodeling achievements have recorded zero cases for the fourth consecutive month.\n- Rates, Deposits & Investment Products: Rates, Deposits & Investment Products: AI 투자 늘자…美데이터센터 채권 금리 年 7%로 급등, 경제전문가 63% \"한은, 두 달 연속 금리 올릴 것\", 국채금리 급등 '대증요법'으로 눌러보려다 '교육당한' 美재무\n- Other Economic News: Improvements in the transportation network are being promoted through the GTX-A connection and tram introduction. A balloon effect of loan regulations is appearing in the Seongnam Jungwon and Suwon Gwonseon areas. Income polarization in North Korea'sjangmadang has been deepening since the economic shock of 2014-2015. Hana Bank, KOSHA, and KOSMEF are providing a 200,000,000,000-won guarantee loan to youth enterprises. Each article covers a different topic and presents separate facts."
   },
   "highlights": [],
   "categories": [
@@ -11,63 +11,36 @@
       "key": "realestate",
       "name": "부동산",
       "nameEn": "Real Estate",
-      "lineKo": "서울 평균 아파트값이 16억원을 넘어서며 강북권과 경기 남부 지역에서 상승세가 지속되고 있다. 비주택 리모델링 실적은 4개월째 0건을 기록하며 공급 부진을 보이고 있다. 당정청은 단기 공급 가능한 주택용지를 추가로 발굴해 공급 속도전을 벌이고 있다. 길동에 청년주택 76가구가 공급되며 주거난 완화에 나선다. 서울시는 2031년까지 모아주택 4만가구 착공을 목표로 모아통합기획을 도입한다.",
-      "lineEn": "The average apartment price in Seoul has exceeded 1,600,000,000 won, with continued price increases in the Gangbuk area and the southern part of Gyeonggi. Non-residential remodeling performance has recorded zero cases for the fourth consecutive month, showing a supply shortage. The presidential office is actively searching for additional short-term residential land to increase supply. 76 units of youth housing will be supplied in Gil-dong to alleviate housing difficulties. Seoul plans to introduce the Moa Integrated Planning to achieve the construction of 40,000 Moa housing units by 2031.",
+      "lineKo": "고가 법인주택 중 42%는 사주의 주택으로 나타났다. 정부는 부동산 대책을 발표하며 2028년까지 집을 팔 것을 권장하고 있다. 500가구 이하 재개발·재건축 사업이 진행 중이다. 영등포 재건축 투자에 관심이 집중되고 있다. 비주택 리모델링 실적은 4개월째 0건을 기록하고 있다.",
+      "lineEn": "Of high-priced corporate housing, 42% were found to be owner-occupied homes. The government is recommending selling homes by 2028 as part of its real estate measures. There are ongoing redevelopment and reconstruction projects involving 500 households or fewer. Interest is focusing on investment in the Yeongdeungpo reconstruction. Non-residential remodeling achievements have recorded zero cases for the fourth consecutive month.",
       "isFallback": false,
       "fallbackReason": null,
       "degraded": false,
       "items": [
+        {
+          "title": "\"고가 법인주택 42%는 사주의 주택\"",
+          "link": "https://www.hankyung.com/article/2026082371041",
+          "source": "한국경제 경제"
+        },
+        {
+          "title": "“집 팔 거면 2028년까지 파세요”…부동산 대책에 숨겨진 정부의 ‘집값 시간표’ [나현준의 뉴스해부]",
+          "link": "https://www.mk.co.kr/news/realestate/12134252",
+          "source": "매일경제 부동산"
+        },
+        {
+          "title": "500가구 이하 재개발·재건축…",
+          "link": "https://www.mk.co.kr/news/realestate/12134209",
+          "source": "매일경제 부동산"
+        },
+        {
+          "title": "[부동산 심머니] \"우리도 성수처럼 직주락 도시로\"… 영등포 재건축 투자 주목",
+          "link": "https://www.mk.co.kr/news/realestate/12134149",
+          "source": "매일경제 부동산"
+        },
         {
           "title": "‘닥치고 공급’이라더니… 비주택 리모델링, 4개월째 실적 ‘0건’",
           "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/23/TB2EWPTYUBGZTOMCPF3TRMLARI/",
           "source": "조선비즈 부동산"
-        },
-        {
-          "title": "“서울 평균 아파트값 16억원 돌파… 강북권·경기 남부 상승세 지속”",
-          "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/23/YWRGFBN25VHWZCI73UANU3KT2Q/",
-          "source": "조선비즈 부동산"
-        },
-        {
-          "title": "단기 공급 가능한 주택용지 추가 발굴 나선다…당정청 '공급 속도전' 총력",
-          "link": "https://www.newsis.com/view/NISX20260823_0003758934",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "길동에 청년주택 76가구 공급",
-          "link": "https://www.hankyung.com/article/202608236892i",
-          "source": "한국경제 부동산"
-        },
-        {
-          "title": "서울시, 모아주택 2031년까지 4만가구 착공…모아통합기획 도입",
-          "link": "https://www.hankyung.com/article/202608236655i",
-          "source": "한국경제 부동산"
-        }
-      ]
-    },
-    {
-      "key": "other",
-      "name": "기타 경제 소식",
-      "nameEn": "Other Economic News",
-      "lineKo": "하나은행, 기보, 신보가 청년기업에 2000억 규모의 보증대출을 지원했다. 북한의 장마당에서 소득 양극화가 2014∼2015년 경제충격 이후 심화되고 있는 것으로 나타났다. 대통령이 사용한 방식을 따라하는 ‘매도인 대출’이 급증하고 있는 것으로 보인다. 청년기업 지원을 위한 금융정책이 본격적으로 시행되고 있는 상황이다. 북한 경제 현황에 대한 분석이 지속적으로 이어지고 있다.",
-      "lineEn": "Hana Bank, KEB Hana Bank, and Shinhan Financial Group provided a 200,000,000,000 won guarantee loan to youth enterprises. Income polarization in North Korea's markets has been deepening since the economic shock of 2014-2015. It appears that \"seller financing,\" following the method used by the president, is rapidly increasing. Financial policies to support youth enterprises are being actively implemented. Analysis of the North Korean economy continues.",
-      "isFallback": false,
-      "fallbackReason": null,
-      "degraded": false,
-      "items": [
-        {
-          "title": "하나은행·기보·신보, 청년기업에 2000억 규모 보증대출",
-          "link": "https://www.hankyung.com/article/202608236874i",
-          "source": "한국경제 경제"
-        },
-        {
-          "title": "\"북한 장마당 소득 양극화, 2014∼2015년 경제충격 이후 심화\"",
-          "link": "https://www.yna.co.kr/view/AKR20260822046300002",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "\"대통령도 했잖아요\"…급증하는 '매도인 대출' 정말 될까 [김용우의 각개전투]",
-          "link": "https://www.hankyung.com/article/202608226081i",
-          "source": "한국경제 부동산"
         }
       ]
     },
@@ -75,42 +48,57 @@
       "key": "rates",
       "name": "금리·예금·투자상품",
       "nameEn": "Rates, Deposits & Investment Products",
-      "lineKo": "국채금리 급등에 대응하려는 노력이 어려움을 겪었고, 한은은 금리 인상 사이클을 계속하며, 미 국채 금리 급등에 대해 베센트가 의견을 밝혔다.",
-      "lineEn": "Efforts to respond to the sharp rise in bond yields faced difficulties, and the Bank of Korea continued its rate hiking cycle, with Bernanke expressing views on the sharp rise in U.S. bond yields.",
-      "isFallback": false,
-      "fallbackReason": null,
-      "degraded": true,
+      "lineKo": "금리·예금·투자상품: AI 투자 늘자…美데이터센터 채권 금리 年 7%로 급등, 경제전문가 63% \"한은, 두 달 연속 금리 올릴 것\", 국채금리 급등 '대증요법'으로 눌러보려다 '교육당한' 美재무",
+      "lineEn": "Rates, Deposits & Investment Products: AI 투자 늘자…美데이터센터 채권 금리 年 7%로 급등, 경제전문가 63% \"한은, 두 달 연속 금리 올릴 것\", 국채금리 급등 '대증요법'으로 눌러보려다 '교육당한' 美재무",
+      "isFallback": true,
+      "fallbackReason": "unverified-entity",
+      "degraded": false,
       "items": [
+        {
+          "title": "AI 투자 늘자…美데이터센터 채권 금리 年 7%로 급등",
+          "link": "https://www.hankyung.com/article/2026082371451",
+          "source": "한국경제 경제"
+        },
+        {
+          "title": "경제전문가 63% \"한은, 두 달 연속 금리 올릴 것\"",
+          "link": "https://www.hankyung.com/article/2026082371081",
+          "source": "한국경제 경제"
+        },
         {
           "title": "국채금리 급등 '대증요법'으로 눌러보려다 '교육당한' 美재무",
           "link": "https://www.yna.co.kr/view/AKR20260823019100009",
           "source": "연합뉴스 경제"
-        },
-        {
-          "title": "\"동결해도 끝 아냐\"…한은 금리 인상 사이클 계속",
-          "link": "https://www.hankyung.com/article/2026082363977",
-          "source": "한국경제 경제"
-        },
-        {
-          "title": "미 국채 금리 급등하자…베센트가 꺼낸 한마디",
-          "link": "https://www.hankyung.com/article/202608226291i",
-          "source": "한국경제 경제"
         }
       ]
     },
     {
-      "key": "stocks",
-      "name": "증시·환율",
-      "nameEn": "Stocks & FX",
-      "lineKo": "삼전닉스의 반등에도 불구하고 투자심리가 냉랭한 가운데 코스피 회전율이 연중 최저 수준을 기록했다.",
-      "lineEn": "Despite Samsung Electronics' rebound, the Korea Composite Stock Price Index (KOSPI) turnover rate hit its lowest level of the year amid cold investor sentiment.",
+      "key": "other",
+      "name": "기타 경제 소식",
+      "nameEn": "Other Economic News",
+      "lineKo": "GTX-A 연결과 트램 도입으로 교통망 개선이 추진되고 있다. 성남 중원과 수원 권선 지역에서 대출 규제의 풍선효과가 나타나고 있다. 북한 장마당에서 소득 양극화가 2014∼2015년 경제충격 이후 심화되고 있는 것으로 나타났다. 하나은행, 기보, 신보가 청년기업에 2천억원 규모의 보증대출을 지원한다. 각 기사는 서로 다른 주제로, 별개의 사실을 담고 있다.",
+      "lineEn": "Improvements in the transportation network are being promoted through the GTX-A connection and tram introduction. A balloon effect of loan regulations is appearing in the Seongnam Jungwon and Suwon Gwonseon areas. Income polarization in North Korea'sjangmadang has been deepening since the economic shock of 2014-2015. Hana Bank, KOSHA, and KOSMEF are providing a 200,000,000,000-won guarantee loan to youth enterprises. Each article covers a different topic and presents separate facts.",
       "isFallback": false,
       "fallbackReason": null,
-      "degraded": true,
+      "degraded": false,
       "items": [
         {
-          "title": "삼전닉스 반등에도 투심은 '냉랭'…코스피 회전율 연중 최저",
-          "link": "https://www.yna.co.kr/view/AKR20260822025400008",
+          "title": "GTX-A 연결하고 트램 달린다…교통망 타고 집값 들썩",
+          "link": "https://www.hankyung.com/article/2026082370801",
+          "source": "한국경제 부동산"
+        },
+        {
+          "title": "대출 규제 풍선효과…성남 중원·수원 권선 '껑충'",
+          "link": "https://www.hankyung.com/article/2026082370551",
+          "source": "한국경제 부동산"
+        },
+        {
+          "title": "\"북한 장마당 소득 양극화, 2014∼2015년 경제충격 이후 심화\"",
+          "link": "https://www.yna.co.kr/view/AKR20260822046300002",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "하나은행·기보·신보, 청년기업에 2천억원 규모 보증대출 지원",
+          "link": "https://www.yna.co.kr/view/AKR20260821175000002",
           "source": "연합뉴스 경제"
         }
       ]

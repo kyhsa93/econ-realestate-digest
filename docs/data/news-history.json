@@ -3766,7 +3766,8 @@
         "source": "한국경제 경제",
         "category": "realestate",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "42% of high-priced corporate housing is owned by individuals."
       },
       {
         "title": "AI 투자 늘자…美데이터센터 채권 금리 年 7%로 급등",
@@ -3775,7 +3776,8 @@
         "source": "한국경제 경제",
         "category": "rates",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "AI investment rises... U.S. data center bonds surge to 7%"
       },
       {
         "title": "GTX-A 연결하고 트램 달린다…교통망 타고 집값 들썩",
@@ -3784,7 +3786,8 @@
         "source": "한국경제 부동산",
         "category": "other",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Connect GTX-A and ride the tram... housing prices rise with transportation network"
       },
       {
         "title": "“집 팔 거면 2028년까지 파세요”…부동산 대책에 숨겨진 정부의 ‘집값 시간표’ [나현준의 뉴스해부]",
@@ -3793,7 +3796,8 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "부동산 세제 ‘2028년’이 가진 의미는정부가 최근 내놓은 부동산 세제개편안을 시간 순서대로 펼쳐놓으면 유독 눈에 들어오는 숫자가 있습니다. 바로 2028년입니다. 다주택자 양도소..",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "If You Want to Sell Your Home, Do It by 2028\"… The Government's Hidden 'Housing Price Timeline' in Real Estate Measures [Na Hyun-jun's News Analysis]"
       },
       {
         "title": "대출 규제 풍선효과…성남 중원·수원 권선 '껑충'",
@@ -3802,7 +3806,18 @@
         "source": "한국경제 부동산",
         "category": "other",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "rates",
+            "label": "주택담보대출 최저금리",
+            "labelEn": "Lowest mortgage rate",
+            "value": "연 3.62%",
+            "valueEn": "3.62% p.a.",
+            "href": "./mortgage-rates.html"
+          }
+        ],
+        "titleEn": "Loan regulation balloon effect... Seongnam Jungwon, Suwon Gwanseon 'soar"
       },
       {
         "title": "경제전문가 63% \"한은, 두 달 연속 금리 올릴 것\"",
@@ -3811,7 +3826,8 @@
         "source": "한국경제 경제",
         "category": "rates",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "63% of economic experts say \"Bank of Korea to raise interest rates for two consecutive months"
       },
       {
         "title": "500가구 이하 재개발·재건축…",
@@ -3820,7 +3836,20 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "정부·여당이 서울 500가구 이하 재건축·재개발사업에 대한 정비구역 지정 권한을 서울시장에서 자치구청장으로 넘기는 방안을 추진한다. 당정이 민간 정비사업 규제 완화 필요성에도 공감..",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./apartment-sale.html",
+            "label": "서울 전체 아파트 84㎡ 매매",
+            "labelEn": "Seoul apartment 84㎡ sale",
+            "value": "12억 9,895만원",
+            "valueEn": "₩1,299M",
+            "note": "최근 1주 계약 993건 · 8/15 대비 +14.9%",
+            "noteEn": "993 deals in the last 1 weeks · +14.9% vs Aug 15"
+          }
+        ],
+        "titleEn": "500 households or fewer redevelopment and reconstruction..."
       },
       {
         "title": "[부동산 심머니] \"우리도 성수처럼 직주락 도시로\"… 영등포 재건축 투자 주목",
@@ -3829,7 +3858,20 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "정부의 8·13 공급대책으로 서울 영등포구 양평·문래·당산 일대 준공업지역이 다시 주목받고 있다. 공장·창고용지의 복합개발이 쉬워지면 일자리와 상권이 늘고 주변 아파트 가치도 재평..",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-yeongdeungpo.html",
+            "label": "영등포구 아파트 84㎡ 매매",
+            "labelEn": "영등포구 apartment 84㎡ sale",
+            "value": "16억 2,598만원",
+            "valueEn": "₩1,626M",
+            "note": "최근 1주 계약 43건 · 8/15 대비 +3.2%",
+            "noteEn": "43 deals in the last 1 weeks · +3.2% vs Aug 15"
+          }
+        ],
+        "titleEn": "[Real Estate Simmoney] \"We Want to Be Like Sangsu, a Work-Residence Integrated City\"… Yongsanpo Redevelopment Investment Gets Attention"
       },
       {
         "title": "‘닥치고 공급’이라더니… 비주택 리모델링, 4개월째 실적 ‘0건’",
@@ -3838,7 +3880,8 @@
         "source": "조선비즈 부동산",
         "category": "realestate",
         "preview": "정부가 수도권 도심 내 주거 공간을 빠르게 늘리기 위해 4년 만에 재도입한 ‘비주택 리모델링’ 사업이 이후 4개월이 지나도록 단 한 건의 성과를 거두지 못한 것으로 나타났다. 23일 국회 국토교통위원회 소속 국민의힘…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Promised Supply\" But Non-Residential Remodeling Remains at \"0 Cases\" for 4 Months"
       },
       {
         "title": "“서울 평균 아파트값 16억원 돌파… 강북권·경기 남부 상승세 지속”",
@@ -3847,7 +3890,20 @@
         "source": "조선비즈 부동산",
         "category": "realestate",
         "preview": "수도권 부동산 시장에서 서울 강북 지역과 경기 남부권을 중심으로 아파트값 강세가 이어지면서 이달 매매가격 상승률이 전월보다 소폭 확대됐다. 서울 아파트 평균 거래 가격은 16억원을 넘어섰다. 23일 KB국민은행이 발…",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-gangbuk.html",
+            "label": "강북구 아파트 84㎡ 매매",
+            "labelEn": "강북구 apartment 84㎡ sale",
+            "value": "7억 4,527만원",
+            "valueEn": "₩745M",
+            "note": "최근 1주 계약 22건 · 8/15 대비 -0.4%",
+            "noteEn": "22 deals in the last 1 weeks · -0.4% vs Aug 15"
+          }
+        ],
+        "titleEn": "Seoul's average apartment price surpasses 1,600,000,000 won... rising trend continues in Gangbuk area and southern Gyeonggi Province"
       },
       {
         "title": "길동에 청년주택 76가구 공급",
@@ -3856,7 +3912,8 @@
         "source": "한국경제 부동산",
         "category": "realestate",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "76 units of youth housing to be supplied in Gil-dong"
       },
       {
         "title": "서울시, 모아주택 2031년까지 4만가구 착공…모아통합기획 도입",
@@ -3865,7 +3922,20 @@
         "source": "한국경제 부동산",
         "category": "realestate",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./apartment-sale.html",
+            "label": "서울 전체 아파트 84㎡ 매매",
+            "labelEn": "Seoul apartment 84㎡ sale",
+            "value": "12억 9,895만원",
+            "valueEn": "₩1,299M",
+            "note": "최근 1주 계약 993건 · 8/15 대비 +14.9%",
+            "noteEn": "993 deals in the last 1 weeks · +14.9% vs Aug 15"
+          }
+        ],
+        "titleEn": "Seoul to Start Construction of 40,000 Moa Housing Units by 2031... Introducing Moa Integrated Planning"
       },
       {
         "title": "KB \"8월 서울 아파트값 1.14%↑…상승률 소폭 확대\"",
@@ -3874,7 +3944,20 @@
         "source": "연합뉴스 경제",
         "category": "realestate",
         "preview": "(서울=연합뉴스) 임기창 기자 = KB국민은행이 조사한 이달 서울 아파트 매매가격이 강북권 중심으로 강세를 보인 가운데 상승률이 전월 대비 소폭...",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-gangbuk.html",
+            "label": "강북구 아파트 84㎡ 매매",
+            "labelEn": "강북구 apartment 84㎡ sale",
+            "value": "7억 4,527만원",
+            "valueEn": "₩745M",
+            "note": "최근 1주 계약 22건 · 8/15 대비 -0.4%",
+            "noteEn": "22 deals in the last 1 weeks · -0.4% vs Aug 15"
+          }
+        ],
+        "titleEn": "KB \"August Seoul apartment prices up 1.14%...rise rate slightly expanded"
       },
       {
         "title": "중랑구 아파트값 한달새 2.3%↑…서울 강북·경기 남부권 강세",
@@ -3883,7 +3966,20 @@
         "source": "뉴시스 경제",
         "category": "realestate",
         "preview": "[서울=뉴시스]정유선 기자 = 수도권에서 서울 강북권과 경기 남부권을 중심으로 아파트값 강세가 이어지고 있다. 23일 KB국민은행 KB부동산이 발표한 '8월 전국주택가격동향'에 따르면 전국 주택 매매가격은 전월 대비…",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-jungnang.html",
+            "label": "중랑구 아파트 84㎡ 매매",
+            "labelEn": "중랑구 apartment 84㎡ sale",
+            "value": "8억 9,087만원",
+            "valueEn": "₩891M",
+            "note": "최근 1주 계약 34건 · 8/15 대비 +4.7%",
+            "noteEn": "34 deals in the last 1 weeks · +4.7% vs Aug 15"
+          }
+        ],
+        "titleEn": "Jungnang-gu apartment prices rise 2.3% in a month... Seoul Gangbuk and Gyeonggi southern areas show strong performance"
       },
       {
         "title": "용산공원 주택공급 접점 찾나…김윤덕·오세훈 이번주 다시 만난다",
@@ -3898,7 +3994,20 @@
             "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/23/LDRMTWTIHBCD5EENZSQ5C4PTYI/",
             "source": "조선비즈 부동산"
           }
-        ]
+        ],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-yongsan.html",
+            "label": "용산구 아파트 84㎡ 매매",
+            "labelEn": "용산구 apartment 84㎡ sale",
+            "value": "22억 2,184만원",
+            "valueEn": "₩2,222M",
+            "note": "최근 1주 계약 8건",
+            "noteEn": "8 deals in the last 1 weeks"
+          }
+        ],
+        "titleEn": "Yongsan Park housing supply deal in sight... Kim Yoon-deok, Oh Se-hoon to meet again this week"
       },
       {
         "title": "\"북한 장마당 소득 양극화, 2014∼2015년 경제충격 이후 심화\"",
@@ -3907,7 +4016,8 @@
         "source": "연합뉴스 경제",
         "category": "other",
         "preview": "(서울=연합뉴스) 이도흔 기자 = 장마당을 중심으로 확산한 북한의 시장부문 소득 양극화가 2014∼2015년 경제충격 이후 심화한 것으로 나타났...",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "North Korea's Market Income Inequality Intensifies After 2014-2015 Economic Shock"
       },
       {
         "title": "임광현 \"고가 법인주택 42%가 사주일가 '황제사택'…최고가 200억\"",
@@ -3922,7 +4032,8 @@
             "link": "https://www.yna.co.kr/view/AKR20260823016500002",
             "source": "연합뉴스 경제"
           }
-        ]
+        ],
+        "titleEn": "Im Gwang-hyun \"42% of high-priced corporate housing is 'emperor's residence' by SaJuIlGa...highest price 20,000,000,000"
       },
       {
         "title": "강훈식 \"與, 주택용지 확보방안 제시해주면 靑·정부 적극 검토\"",
@@ -3931,7 +4042,8 @@
         "source": "연합뉴스 경제",
         "category": "realestate",
         "preview": "(서울=연합뉴스) 고동욱 황윤기 정연솔 기자 = 강훈식 대통령 비서실장은 23일 수도권 주택공급 방안과 관련해 \"지역 상황에 밝은 여당의 지역위...",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Kang Hoon-sik says if the opposition presents a plan to secure residential land, the Blue House and government will actively review it."
       },
       {
         "title": "“이제와서 공공임대 늘리라니”…광명 철산·하안 재건축 ‘날벼락’",
@@ -3940,7 +4052,8 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "“주거 불균형 해소·공공성 확보” 조합원 “추가분담금·사업성 우려” 대형 건설사들도 사업 참여 ‘고심’경기도 광명시가 최근 각 정비사업 현장에 공공임대주택 비율을 확보하라고 요구해..",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Now they want to increase public rental housing?\"... Gwangmyeong Cheolsan and Haan reconstruction projects hit by \"sudden blow"
       },
       {
         "title": "국채금리 급등 '대증요법'으로 눌러보려다 '교육당한' 美재무",
@@ -3949,7 +4062,8 @@
         "source": "연합뉴스 경제",
         "category": "rates",
         "preview": "(서울=연합뉴스) 임화섭 기자 = 채권 트레이더 출신인 스콧 베선트 미국 재무장관이 국채 금리 급등에 재매입(buyback) 확대 발표로 이를 ...",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Treasury Yield Surge Pressed Down with 'Symptomatic Treatment,' Resulting in 'Taught a Lesson' for U.S. Treasury"
       },
       {
         "title": "용산공원 주택공급에 선 그은 오세훈…“대체부지 함께 찾자”",
@@ -3958,7 +4072,20 @@
         "source": "한국경제 부동산",
         "category": "realestate",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-yongsan.html",
+            "label": "용산구 아파트 84㎡ 매매",
+            "labelEn": "용산구 apartment 84㎡ sale",
+            "value": "22억 2,184만원",
+            "valueEn": "₩2,222M",
+            "note": "최근 1주 계약 8건",
+            "noteEn": "8 deals in the last 1 weeks"
+          }
+        ],
+        "titleEn": "Oh Sehun draws the line on housing supply at Yongsan Park…“Let’s find alternative sites together"
       },
       {
         "title": "\"회삿돈으로 한강뷰?\"…고가 법인주택 42%가 '황제사택'",
@@ -3967,7 +4094,8 @@
         "source": "한국경제 부동산",
         "category": "realestate",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Company funds for a Han River view?\"… 42% of high-priced corporate housing are 'emperor's residences"
       },
       {
         "title": "'폐버스 주택'→'욕조 고시원' 황당 릴레이…청년들 '부글부글'",
@@ -3976,7 +4104,8 @@
         "source": "한국경제 부동산",
         "category": "realestate",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Used Bus Housing\" Turns into \"Bathtub Dormitory\" in Absurd Relay... Youth Say \"Boiling Over"
       },
       {
         "title": "하나은행·기보·신보, 청년기업에 2천억원 규모 보증대출 지원",
@@ -3985,7 +4114,8 @@
         "source": "연합뉴스 경제",
         "category": "other",
         "preview": "(서울=연합뉴스) 이도흔 기자 = 하나은행은 청년기업 육성을 위해 기술보증기금·신용보증기금과 '청년기업 도약을 위한 Y-BRIDGE 보증 금융지...",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Hana Bank, KIBO, and SHINPO, Provide 200,000,000,000 Won in Guaranteed Loans to Youth Enterprises"
       }
     ]
   }
