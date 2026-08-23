@@ -1,8 +1,11 @@
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { DISTRICT_PAGES } from "./district-slugs.mjs";
+import { DISTRICT_PAGES, DISTRICT_SLUGS } from "./district-slugs.mjs";
+import { dealFileName } from "./deal-files.mjs";
+import { districtFacts } from "./district-facts.mjs";
 import {
   applyPrerender,
+  districtFactsHtml,
   districtLinksHtml,
   districtSummaryHtml,
   realestateHeadHtml,
@@ -100,10 +103,12 @@ export function buildRealestatePage(baseHtml, page, realestate) {
     districtLinks: "",
     districtSummaryKo: "",
     districtSummaryEn: "",
+    districtFactsKo: "",
+    districtFactsEn: "",
   });
 }
 
-export function buildDistrictPage(baseHtml, district, realestate) {
+export function buildDistrictPage(baseHtml, district, realestate, deals = null) {
   const title = `${district.name} 아파트 시세 - 매매·전세·월세 실거래가`;
   const description =
     `${district.name} 아파트 매매·전세·월세 실거래가를 평당가와 84㎡ 환산가로 보여줍니다. ` +
@@ -138,6 +143,10 @@ export function buildDistrictPage(baseHtml, district, realestate) {
     districtLinks: districtLinksHtml(district.name),
     districtSummaryKo: districtSummaryHtml(realestate, district.name, "ko"),
     districtSummaryEn: districtSummaryHtml(realestate, district.name, "en"),
+    // 시세 문장은 realestate.json 하나로 스물다섯 구가 같은 틀을 쓴다. 이쪽은 그 구의
+    // 전수 거래 파일을 따로 읽어, 그 구에서만 눈에 띄는 것을 말한다.
+    districtFactsKo: districtFactsHtml(districtFacts(deals), "ko"),
+    districtFactsEn: districtFactsHtml(districtFacts(deals), "en"),
   });
 }
 
@@ -154,7 +163,19 @@ async function main() {
   let created = 0;
   let updated = 0;
   for (const district of DISTRICT_PAGES) {
-    const result = await write(district.file, buildDistrictPage(baseHtml, district, realestate), true);
+    // 그 구의 전수 거래 파일. 없으면 관찰 문단이 통째로 비고 시세 문장만 남는다 —
+    // 페이지를 못 만드는 것보다는 낫고, 실제로 파일이 아직 없는 구가 생길 수 있다.
+    const deals = await readFile(
+      path.join(root, "docs/data", dealFileName(DISTRICT_SLUGS[district.name])),
+      "utf8"
+    )
+      .then(JSON.parse)
+      .catch(() => null);
+    const result = await write(
+      district.file,
+      buildDistrictPage(baseHtml, district, realestate, deals),
+      true
+    );
     if (result === "생성") created += 1;
     if (result === "갱신") updated += 1;
   }

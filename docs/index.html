@@ -725,10 +725,6 @@
     <button type="button" id="load-error-retry"></button>
   </div>
 
-  <section id="summary-section">
-    <h2 id="summary-heading">오늘의 AI 요약</h2>
-    <div class="placeholder" id="summary-box"><!--prerender:summary--><p><strong>부동산</strong> 고가 법인주택 중 42%는 사주의 주택으로 나타났다. 정부는 부동산 대책을 발표하며 2028년까지 집을 팔 것을 권장하고 있다. 500가구 이하 재개발·재건축 사업이 진행 중이다. 영등포 재건축 투자에 관심이 집중되고 있다. 비주택 리모델링 실적은 4개월째 0건을 기록하고 있다.</p><p><strong>금리·예금·투자상품</strong> 금리·예금·투자상품: AI 투자 늘자…美데이터센터 채권 금리 年 7%로 급등, 경제전문가 63% &quot;한은, 두 달 연속 금리 올릴 것&quot;, 국채금리 급등 '대증요법'으로 눌러보려다 '교육당한' 美재무</p><p><strong>기타 경제 소식</strong> GTX-A 연결과 트램 도입으로 교통망 개선이 추진되고 있다. 성남 중원과 수원 권선 지역에서 대출 규제의 풍선효과가 나타나고 있다. 북한 장마당에서 소득 양극화가 2014∼2015년 경제충격 이후 심화되고 있는 것으로 나타났다. 하나은행, 기보, 신보가 청년기업에 2천억원 규모의 보증대출을 지원한다. 각 기사는 서로 다른 주제로, 별개의 사실을 담고 있다.</p><!--/prerender:summary--></div>
-  </section>
 
   <section id="market-section">
     <h2 id="market-heading">자산 시장 지표</h2>
@@ -777,6 +773,10 @@
     <div class="summary-meta" id="realestate-history-note"></div>
     <div class="summary-meta" id="realestate-meta"></div>
   </section>
+  <section id="summary-section">
+    <h2 id="summary-heading">오늘의 AI 요약</h2>
+    <div class="placeholder" id="summary-box"><!--prerender:summary--><p><strong>부동산</strong> 고가 법인주택 중 42%는 사주의 주택으로 나타났다. 정부는 부동산 대책을 발표하며 2028년까지 집을 팔 것을 권장하고 있다. 500가구 이하 재개발·재건축 사업이 진행 중이다. 영등포 재건축 투자에 관심이 집중되고 있다. 비주택 리모델링 실적은 4개월째 0건을 기록하고 있다.</p><p><strong>금리·예금·투자상품</strong> 금리·예금·투자상품: AI 투자 늘자…美데이터센터 채권 금리 年 7%로 급등, 경제전문가 63% &quot;한은, 두 달 연속 금리 올릴 것&quot;, 국채금리 급등 '대증요법'으로 눌러보려다 '교육당한' 美재무</p><p><strong>기타 경제 소식</strong> GTX-A 연결과 트램 도입으로 교통망 개선이 추진되고 있다. 성남 중원과 수원 권선 지역에서 대출 규제의 풍선효과가 나타나고 있다. 북한 장마당에서 소득 양극화가 2014∼2015년 경제충격 이후 심화되고 있는 것으로 나타났다. 하나은행, 기보, 신보가 청년기업에 2천억원 규모의 보증대출을 지원한다. 각 기사는 서로 다른 주제로, 별개의 사실을 담고 있다.</p><!--/prerender:summary--></div>
+  </section>
 
   <section id="news-section">
     <h2 id="news-heading">오늘의 경제·부동산 뉴스</h2>
@@ -802,6 +802,10 @@
   </section>
 
   <footer class="site-footer">
+    <a href="./about.html" id="footer-about">소개</a>
+    <span aria-hidden="true"> · </span>
+    <a href="./method.html" id="footer-method">숫자를 만드는 방법</a>
+    <span aria-hidden="true"> · </span>
     <a href="https://kyhsa93.github.io/privacy-policy" id="footer-privacy-link" target="_blank" rel="noopener">개인정보처리방침</a>
   </footer>
 <div class="chart-tip" id="chart-tip" hidden></div>
@@ -904,6 +908,8 @@
       archiveBackLink: "오늘 기록으로 돌아가기 →",
       archiveViewing: (d) => `지난 기록 보는 중: ${d}`,
       footerPrivacyLink: "개인정보처리방침",
+      footerMethod: "숫자를 만드는 방법",
+      footerAbout: "소개",
     },
     en: {
       title: "Econ & Real Estate Digest",
@@ -990,6 +996,8 @@
       archiveBackLink: "Back to today →",
       archiveViewing: (d) => `Viewing archive: ${d}`,
       footerPrivacyLink: "Privacy Policy",
+      footerMethod: "How these numbers are made",
+      footerAbout: "About",
     },
   };
 
@@ -1117,10 +1125,12 @@
     });
   }
 
+  // 페이지에 놓인 순서 그대로. 요약이 맨 위에 있던 자리는 시장 지표와 실거래가
+  // 가져갔다 — 처음 보이는 것이 우리가 만든 데이터여야지 AI가 쓴 문단이면 안 된다.
   const TRACKED_SECTIONS = [
-    ["summary-section", "summary"],
     ["market-section", "market"],
     ["realestate-section", "realestate"],
+    ["summary-section", "summary"],
     ["news-section", "news"],
     ["archive-section", "archive"],
   ];
@@ -2073,6 +2083,8 @@
     document.getElementById("archive-date-jump-label").textContent = t("archiveDateJumpLabel");
     document.getElementById("archive-date-go").textContent = t("archiveDateGo");
     document.getElementById("footer-privacy-link").textContent = t("footerPrivacyLink");
+    document.getElementById("footer-method").textContent = t("footerMethod");
+    document.getElementById("footer-about").textContent = t("footerAbout");
     const missing = isArchiveView
       ? []
       : ["market", "news", "summary", "realestate"].filter((key) => !cache[key]);

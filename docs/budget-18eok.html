@@ -232,6 +232,14 @@
     font-size: 0.9rem;
     line-height: 1.65;
   }
+  /* 시세 문장 아래에 붙는 두 번째 카드. 위 문단이 "얼마인가"라면 이쪽은
+     "무엇이 팔리는가"라, 한 문단으로 이어 붙이지 않고 칸을 나눈다. */
+  .district-facts {
+    margin-top: 10px;
+  }
+  .district-facts:empty {
+    display: none;
+  }
   .history-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -395,6 +403,8 @@
   <section id="district-summary-section" hidden>
     <p class="district-summary" data-summary-lang="ko"><!--prerender:districtSummaryKo--><!--/prerender:districtSummaryKo--></p>
     <p class="district-summary" data-summary-lang="en" hidden><!--prerender:districtSummaryEn--><!--/prerender:districtSummaryEn--></p>
+    <p class="district-summary district-facts" data-summary-lang="ko"><!--prerender:districtFactsKo--><!--/prerender:districtFactsKo--></p>
+    <p class="district-summary district-facts" data-summary-lang="en" hidden><!--prerender:districtFactsEn--><!--/prerender:districtFactsEn--></p>
   </section>
 
   <section id="trend-section" hidden>
@@ -431,7 +441,7 @@
 
   <section id="budget-section">
     <h2 id="budget-heading">예산으로 찾기</h2>
-    <div id="budget-result"><!--prerender:budgetResult--><p class="budget-summary">18억대에서 240건이 거래됐습니다. <span class="when">6월, 7월, 8월 신고분 기준</span></p><div class="budget-districts">거래가 많은 지역: 강동구 59 · 송파구 41 · 영등포구 33 · 성동구 28 · 중구 24</div><ul class="budget-deals"><li class="budget-deal"><span class="place">강남구 세곡동 세곡푸르지오</span><span class="spec">74.74㎡ · 8층</span><span class="when">8/14</span><span class="price">18억 6,000만원</span></li><li class="budget-deal"><span class="place">중구 신당동 래미안하이베르</span><span class="spec">117㎡ · 6층</span><span class="when">8/14</span><span class="price">18억 6,000만원</span></li><li class="budget-deal"><span class="place">동작구 사당동 이수역리가</span><span class="spec">84.85㎡ · 10층</span><span class="when">8/11</span><span class="price">18억 3,000만원</span></li><li class="budget-deal"><span class="place">강동구 둔촌동 둔촌푸르지오</span><span class="spec">113.67㎡ · 13층</span><span class="when">8/10</span><span class="price">18억 6,000만원</span></li><li class="budget-deal"><span class="place">동작구 상도동 힐스테이트 상도 센트럴파크</span><span class="spec">59.78㎡ · 8층</span><span class="when">8/8</span><span class="price">18억 3,000만원</span></li><li class="budget-deal"><span class="place">영등포구 영등포동7가 아크로타워스퀘어</span><span class="spec">84.69㎡ · 2층</span><span class="when">8/8</span><span class="price">18억원</span></li><li class="budget-deal"><span class="place">영등포구 신길동 힐스테이트클래시안</span><span class="spec">59.91㎡ · 11층</span><span class="when">8/8</span><span class="price">18억원</span></li><li class="budget-deal"><span class="place">동대문구 이문동 래미안라그란데</span><span class="spec">99.98㎡ · 12층</span><span class="when">8/7</span><span class="price">18억 5,130만원</span></li><li class="budget-deal"><span class="place">강동구 둔촌동 올림픽파크포레온</span><span class="spec">59.99㎡ · 30층</span><span class="when">8/7</span><span class="price">18억원</span></li><li class="budget-deal"><span class="place">성동구 금호동2가 래미안하이리버</span><span class="spec">59.99㎡ · 12층</span><span class="when">8/6</span><span class="price">18억 6,500만원</span></li><li class="budget-deal"><span class="place">동작구 신대방동 보라매자이더포레스트</span><span class="spec">84.77㎡ · 8층</span><span class="when">8/4</span><span class="price">18억 3,000만원</span></li><li class="budget-deal"><span class="place">용산구 문배동 CJ나인파크</span><span class="spec">97.24㎡ · 23층</span><span class="when">8/3</span><span class="price">18억 7,000만원</span></li></ul><!--/prerender:budgetResult--></div>
+    <div id="budget-result"><!--prerender:budgetResult--><p class="budget-summary">18억대에서 240건이 거래됐습니다. <span class="when">6월, 7월, 8월 신고분 기준</span></p><p class="budget-where">18억대 거래의 55%가 강동구·송파구·영등포구 세 곳에서 나왔습니다. 이 예산으로 서울에서 고를 수 있는 곳은 사실상 여기입니다.</p><div class="budget-districts">거래가 많은 지역: 강동구 59 · 송파구 41 · 영등포구 33 · 성동구 28 · 중구 24</div><ul class="budget-deals"><li class="budget-deal"><span class="place">강남구 세곡동 세곡푸르지오</span><span class="spec">74.74㎡ · 8층</span><span class="when">8/14</span><span class="price">18억 6,000만원</span></li><li class="budget-deal"><span class="place">중구 신당동 래미안하이베르</span><span class="spec">117㎡ · 6층</span><span class="when">8/14</span><span class="price">18억 6,000만원</span></li><li class="budget-deal"><span class="place">동작구 사당동 이수역리가</span><span class="spec">84.85㎡ · 10층</span><span class="when">8/11</span><span class="price">18억 3,000만원</span></li><li class="budget-deal"><span class="place">강동구 둔촌동 둔촌푸르지오</span><span class="spec">113.67㎡ · 13층</span><span class="when">8/10</span><span class="price">18억 6,000만원</span></li><li class="budget-deal"><span class="place">동작구 상도동 힐스테이트 상도 센트럴파크</span><span class="spec">59.78㎡ · 8층</span><span class="when">8/8</span><span class="price">18억 3,000만원</span></li><li class="budget-deal"><span class="place">영등포구 영등포동7가 아크로타워스퀘어</span><span class="spec">84.69㎡ · 2층</span><span class="when">8/8</span><span class="price">18억원</span></li><li class="budget-deal"><span class="place">영등포구 신길동 힐스테이트클래시안</span><span class="spec">59.91㎡ · 11층</span><span class="when">8/8</span><span class="price">18억원</span></li><li class="budget-deal"><span class="place">동대문구 이문동 래미안라그란데</span><span class="spec">99.98㎡ · 12층</span><span class="when">8/7</span><span class="price">18억 5,130만원</span></li><li class="budget-deal"><span class="place">강동구 둔촌동 올림픽파크포레온</span><span class="spec">59.99㎡ · 30층</span><span class="when">8/7</span><span class="price">18억원</span></li><li class="budget-deal"><span class="place">성동구 금호동2가 래미안하이리버</span><span class="spec">59.99㎡ · 12층</span><span class="when">8/6</span><span class="price">18억 6,500만원</span></li><li class="budget-deal"><span class="place">동작구 신대방동 보라매자이더포레스트</span><span class="spec">84.77㎡ · 8층</span><span class="when">8/4</span><span class="price">18억 3,000만원</span></li><li class="budget-deal"><span class="place">용산구 문배동 CJ나인파크</span><span class="spec">97.24㎡ · 23층</span><span class="when">8/3</span><span class="price">18억 7,000만원</span></li></ul><!--/prerender:budgetResult--></div>
     <div class="budget-nav" id="budget-page-nav"><!--prerender:budgetPageNav--><a href="./budget-17eok.html">17억대</a><a href="./budget-19eok.html">19억대</a><a href="./deal-search.html?budget=18">조건을 더해 찾기</a><!--/prerender:budgetPageNav--></div>
     <div class="content-notice" id="budget-note"></div>
   </section>
@@ -455,6 +465,10 @@
   <footer class="site-footer">
     <div id="footer-source">출처: 국토교통부 아파트 매매·전월세 실거래가 공개시스템. 신고된 거래만 집계되며 신고 기한(계약 후 30일)이 있어 최근 거래는 나중에 반영됩니다.</div>
     <div style="margin-top:6px;">
+      <a href="./about.html" id="footer-about">소개</a>
+      <span aria-hidden="true"> · </span>
+      <a href="./method.html" id="footer-method">숫자를 만드는 방법</a>
+      <span aria-hidden="true"> · </span>
       <a href="https://kyhsa93.github.io/privacy-policy" id="footer-privacy" target="_blank" rel="noopener">개인정보처리방침</a>
     </div>
   </footer>
@@ -534,6 +548,8 @@ const T = {
     note: "국토교통부에 신고된 아파트 실거래 기준이며, 전용면적 평당가입니다. 서울 전체는 그 주에 신고된 거래로, 자치구는 최근 4주 신고분을 겹쳐 냅니다 — 한 주에 구당 스무 건 안팎이라 그대로 쓰면 몇 건에 평균이 휘둘립니다. 신고 기록이 모자란 동안에는 신고 기한(계약 후 30일)이 지나 마감된 4주 계약분으로 대신 냅니다. 공급면적으로 환산한 시세보다 높게 보일 수 있습니다. 84㎡ 환산가는 평당가에 25.41평을 곱한 값으로, 같은 구 안에서도 단지·층·연식에 따라 실제 거래가는 크게 다릅니다. 신고 건수가 5건 미만인 지역은 한두 건이 평균을 좌우하므로 값을 내지 않습니다. 전세·월세 시세는 신규 계약만 집계합니다. 갱신계약은 기존 조건을 잇는 것이라 지금 시세와 다르고, 서울 전월세 신고의 절반가량을 차지해 함께 평균 내면 시세가 낮게 나옵니다. 전세가율은 전세 평당 보증금을 매매 평당가로 나눈 값으로, 높을수록 매매가 대비 전세가 비싸다는 뜻입니다. 매매·전세 표본이 모두 충분하고 같은 달 기준일 때만 냅니다.",
     footerSource: "출처: 국토교통부 아파트 매매·전월세 실거래가 공개시스템. 신고된 거래만 집계되며 신고 기한(계약 후 30일)이 있어 최근 거래는 나중에 반영됩니다.",
     footerPrivacy: "개인정보처리방침",
+    footerMethod: "숫자를 만드는 방법",
+    footerAbout: "소개",
     loadError: "실거래가를 불러오지 못했습니다.",
     retry: "다시 시도",
     empty: "표시할 지역이 없습니다.",
@@ -610,6 +626,8 @@ const T = {
     note: "Based on apartment transactions reported to Korea's MOLIT — Seoul-wide figures cover deals filed this week, while each district averages the last four weeks of filings, since a single week leaves only about twenty deals per district. Until enough filing history accumulates, figures fall back to four weeks of contracts past the 30-day filing deadline. Priced per pyeong (3.3m²) of exclusive area — higher than figures quoted per gross area. The 84m² column multiplies the per-pyeong price by 25.41 pyeong; actual prices vary widely by complex, floor and age. Districts with fewer than 5 reported transactions are left blank, since one or two deals would drive the average. Jeonse and monthly rent figures count new contracts only. Renewals carry over the previous terms, so they sit below current market rates and make up about half of all filings. The jeonse ratio divides the jeonse deposit per pyeong by the sale price per pyeong; it is only shown when both have enough transactions from the same month.",
     footerSource: "Source: MOLIT real transaction price disclosure. Only reported deals are counted, and reporting can lag up to 30 days after contract.",
     footerPrivacy: "Privacy Policy",
+    footerMethod: "How these numbers are made",
+    footerAbout: "About",
     loadError: "Could not load transaction data.",
     retry: "Retry",
     empty: "No districts to show.",
@@ -1387,6 +1405,8 @@ function applyLocale() {
   setText("district-links-heading", t("otherDistricts"));
   document.getElementById("footer-source").textContent = t("footerSource");
   document.getElementById("footer-privacy").textContent = t("footerPrivacy");
+  document.getElementById("footer-method").textContent = t("footerMethod");
+  document.getElementById("footer-about").textContent = t("footerAbout");
   document.getElementById("nav-digest").textContent = t("navDigest");
   document.getElementById("nav-news").textContent = t("navNews");
   document.getElementById("nav-realestate").textContent = t("navRealestatePrices");

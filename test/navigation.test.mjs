@@ -19,6 +19,15 @@ const links = (block) => [...(block ?? "").matchAll(/<a\b[^>]*>([^<]*)<\/a>/g)].
 
 const SECTION_COUNT = 4;
 
+/**
+ * 섹션 넷 가운데 어디에도 속하지 않는 페이지.
+ *
+ * 방법론은 읽을거리지 섹션이 아니다 — 푸터에서 닿고, 다 읽으면 원래 보던 데이터로
+ * 돌아간다. 1층에서 넷 중 하나를 굳이 켜 두면 거기서 왔다는 거짓말이 되고, 다섯 번째
+ * 항목으로 올리면 매일 쓰는 네 곳 옆에 한 번 읽고 마는 문서가 끼는 셈이 된다.
+ */
+const OUTSIDE_SECTIONS = new Set(["method.html", "about.html"]);
+
 test("모든 페이지의 1층 내비게이션이 섹션 넷을 넘지 않는다", async () => {
   for (const file of await pages()) {
     const html = await readFile(path.join(docs, file), "utf8");
@@ -38,7 +47,8 @@ test("페이지마다 지금 보고 있는 섹션이 하나만 표시된다", as
     const block = navBlock(html, "page-nav");
     if (!block) continue;
     const active = links(block).filter((i) => i.attrs.includes('class="active"'));
-    assert.equal(active.length, 1, `${file}: 1층 활성 표시가 ${active.length}개다`);
+    const want = OUTSIDE_SECTIONS.has(file) ? 0 : 1;
+    assert.equal(active.length, want, `${file}: 1층 활성 표시가 ${active.length}개다`);
   }
 });
 

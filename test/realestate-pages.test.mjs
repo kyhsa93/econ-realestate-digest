@@ -20,7 +20,7 @@ import {
   buildDistrictPage,
   buildRealestatePage,
 } from "../scripts/build-realestate-pages.mjs";
-import { DISTRICT_PAGES } from "../scripts/district-slugs.mjs";
+import { DISTRICT_PAGES, DISTRICT_SLUGS } from "../scripts/district-slugs.mjs";
 import { districtSentences } from "../scripts/district-summary.mjs";
 import { loadRealestatePage } from "./helpers/realestate-page.mjs";
 
@@ -396,9 +396,12 @@ test("커밋된 자치구 페이지 25개가 지금 원본·데이터로 찍은 
 
   assert.equal(DISTRICT_PAGES.length, 25);
   for (const district of DISTRICT_PAGES) {
+    // 자치구 페이지는 realestate.json 말고 그 구의 전수 거래 파일도 읽는다. 빌드가
+    // 넘기는 것과 같은 것을 넘겨야 같은 결과가 나온다.
+    const deals = await readJson(`deals-${DISTRICT_SLUGS[district.name]}`).catch(() => null);
     assert.equal(
       await read(`docs/${district.file}`),
-      buildDistrictPage(baseHtml, district, realestate),
+      buildDistrictPage(baseHtml, district, realestate, deals),
       `docs/${district.file}이 원본과 어긋납니다. node scripts/build-realestate-pages.mjs를 실행하세요.`
     );
   }

@@ -519,6 +519,10 @@
     <div id="footer-source"></div>
     <div style="margin-top: 6px;">
       <a href="./index.html" id="footer-home">데일리 다이제스트</a>
+      <a href="./about.html" id="footer-about">소개</a>
+      <span aria-hidden="true"> · </span>
+      <a href="./method.html" id="footer-method">숫자를 만드는 방법</a>
+      <span aria-hidden="true"> · </span>
       <a href="https://kyhsa93.github.io/privacy-policy" id="footer-privacy-link" target="_blank" rel="noopener" style="margin-left: 10px;">개인정보처리방침</a>
     </div>
   </footer>
@@ -595,6 +599,8 @@
       source: "출처: 금융감독원 금융상품통합비교공시(금융상품 한눈에)",
       footerHome: "데일리 다이제스트",
       footerPrivacyLink: "개인정보처리방침",
+      footerMethod: "숫자를 만드는 방법",
+      footerAbout: "소개",
       shareTitle: "예금·적금·대출 금리 비교",
     },
     en: {
@@ -665,6 +671,8 @@
       source: "Source: FSS Financial Product Comparison Disclosure",
       footerHome: "Daily digest",
       footerPrivacyLink: "Privacy Policy",
+      footerMethod: "How these numbers are made",
+      footerAbout: "About",
       shareTitle: "Deposit, Savings & Loan Rates",
     },
   };
@@ -1324,6 +1332,8 @@
     document.getElementById("footer-source").textContent = t("source");
     document.getElementById("footer-home").textContent = t("footerHome");
     document.getElementById("footer-privacy-link").textContent = t("footerPrivacyLink");
+    document.getElementById("footer-method").textContent = t("footerMethod");
+    document.getElementById("footer-about").textContent = t("footerAbout");
 
     for (const link of document.querySelectorAll("#rate-links a[data-rate-page]")) {
       link.textContent = T[locale].ratePageLink(T[locale].tabs[link.dataset.ratePage]);

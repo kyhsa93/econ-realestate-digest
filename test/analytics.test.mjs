@@ -220,7 +220,7 @@ test("섹션은 화면에 들어왔을 때 한 번만 센다", async () => {
   assert.equal(views.length, 2, "같은 섹션을 다시 봐도 한 번이다");
   assert.deepEqual(
     views.map(([, params]) => params.section_name),
-    ["summary", "market"]
+    ["market", "realestate"]
   );
   assert.equal(views[0][1].view_type, "today");
 });

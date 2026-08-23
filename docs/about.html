@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#253e81">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<meta name="google-adsense-account" content="ca-pub-1195159445218373">
+<title>소개와 연락처 - 경제·부동산 데일리 다이제스트</title>
+<meta name="description" content="서울 아파트 실거래와 예적금·대출 금리를 매일 모아 보여주는 사이트입니다. 누가 무엇으로 어떻게 만들었는지, 무엇을 하지 않는지, 틀린 것을 찾았을 때 어디로 알리면 되는지 적어 두었습니다.">
+<meta name="site-group" content="digest">
+<link rel="canonical" href="https://kyhsa93.github.io/econ-realestate-digest/about.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="경제·부동산 데일리 다이제스트">
+<meta property="og:url" content="https://kyhsa93.github.io/econ-realestate-digest/about.html">
+<meta property="og:title" content="소개와 연락처 - 경제·부동산 데일리 다이제스트">
+<meta property="og:description" content="서울 아파트 실거래와 예적금·대출 금리를 매일 모아 보여주는 사이트입니다. 누가 무엇으로 어떻게 만들었는지, 무엇을 하지 않는지, 틀린 것을 찾았을 때 어디로 알리면 되는지 적어 두었습니다.">
+<meta property="og:image" content="https://kyhsa93.github.io/econ-realestate-digest/icons/icon-512.png">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="소개와 연락처 - 경제·부동산 데일리 다이제스트">
+<meta name="twitter:description" content="서울 아파트 실거래와 예적금·대출 금리를 매일 모아 보여주는 사이트입니다. 누가 무엇으로 어떻게 만들었는지, 무엇을 하지 않는지, 틀린 것을 찾았을 때 어디로 알리면 되는지 적어 두었습니다.">
+<meta name="twitter:image" content="https://kyhsa93.github.io/econ-realestate-digest/icons/icon-512.png">
+<style>
+
+  :root {
+    color-scheme: light dark;
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #666;
+    --card: #f5f5f7;
+    --border: #e2e2e5;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1115;
+      --fg: #eaeaea;
+      --muted: #9a9a9a;
+      --card: #1a1d24;
+      --border: #2a2d35;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #0f1115;
+    --fg: #eaeaea;
+    --muted: #9a9a9a;
+    --card: #1a1d24;
+    --border: #2a2d35;
+  }
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #666;
+    --card: #f5f5f7;
+    --border: #e2e2e5;
+  }
+  [hidden] { display: none !important; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.5;
+  }
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 24px 16px 64px;
+  }
+  header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .header-actions { display: flex; gap: 8px; flex-shrink: 0; }
+  .icon-toggle {
+    flex-shrink: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--fg);
+  }
+  h1 { font-size: 1.4rem; margin: 0 0 4px; }
+  h2 {
+    font-size: 1.05rem;
+    margin: 0 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .updated { color: var(--muted); font-size: 0.85rem; }
+  .page-nav {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .page-nav a {
+    flex-shrink: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    color: var(--fg);
+    text-decoration: none;
+  }
+  .sub-nav {
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    margin: -10px 0 20px;
+    padding-bottom: 2px;
+  }
+  .sub-nav a {
+    flex-shrink: 0;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .sub-nav a[aria-current="page"] {
+    background: var(--card);
+    color: var(--fg);
+    font-weight: 600;
+  }
+  .page-nav a.active {
+    background: var(--fg);
+    color: var(--bg);
+    border-color: var(--fg);
+    font-weight: 600;
+  }
+  .page-nav a[aria-current="page"] {
+    background: var(--fg);
+    color: var(--bg);
+    border-color: var(--fg);
+    font-weight: 600;
+  }
+  section { margin-bottom: 32px; }
+  .summary-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 0.92rem;
+  }
+  .summary-box p { margin: 0 0 8px; }
+  .summary-box p:last-child { margin-bottom: 0; }
+  .summary-note { color: var(--muted); font-size: 0.78rem; margin-top: 10px; }
+  .stat-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 8px; }
+  .stat-card {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--card);
+    text-decoration: none;
+  }
+  .stat-card:hover { border-color: var(--muted); text-decoration: none; }
+  .stat-label { color: var(--muted); font-size: 0.78rem; }
+  .stat-value { color: var(--fg); font-weight: 700; font-size: 1.02rem; font-variant-numeric: tabular-nums; }
+  .stat-sub { color: var(--muted); font-size: 0.72rem; font-variant-numeric: tabular-nums; }
+  .stat-note { color: var(--muted); font-size: 0.75rem; margin-top: 8px; }
+  ul.news-list { list-style: none; margin: 0; padding: 0; }
+  .news-item { padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .news-item:last-child { border-bottom: none; }
+  .news-item a { color: var(--fg); text-decoration: none; font-size: 0.95rem; }
+  .news-item a:hover { text-decoration: underline; }
+  .news-item.read > a { color: var(--muted); }
+  .news-meta { color: var(--muted); font-size: 0.78rem; margin-top: 2px; }
+  .news-context { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .news-item .context-chip {
+    display: inline-flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    max-width: 100%;
+    gap: 2px 6px;
+    padding: 3px 9px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--card);
+    font-size: 0.76rem;
+    text-decoration: none;
+  }
+  .news-item .context-chip:hover { border-color: var(--muted); text-decoration: none; }
+  .context-label { color: var(--muted); }
+  .context-value { color: var(--fg); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .context-note { color: var(--muted); font-size: 0.71rem; font-variant-numeric: tabular-nums; }
+  .empty { color: var(--muted); font-size: 0.9rem; }
+  .empty button {
+    font: inherit;
+    background: var(--fg);
+    color: var(--bg);
+    border: 0;
+    border-radius: 8px;
+    padding: 4px 12px;
+    margin-left: 8px;
+    cursor: pointer;
+  }
+  .site-footer {
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+  .site-footer a { color: var(--muted); }
+  /* 이 페이지에만 있는 것. 여기 실리는 것은 표가 아니라 글이라, 읽는 폭과 줄 간격이
+     데이터 페이지와 달라야 한다. */
+  .method-body { max-width: 46rem; }
+  .method-body h2 { margin: 28px 0 8px; font-size: 1.05rem; }
+  .method-body h2:first-of-type { margin-top: 8px; }
+  .method-body p { margin: 0 0 10px; line-height: 1.75; }
+  .method-body .lead {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    line-height: 1.7;
+  }
+  .method-body ul { margin: 0 0 10px; padding-left: 1.1rem; line-height: 1.75; }
+  .method-body li { margin-bottom: 4px; }
+  .method-body dl { margin: 0 0 10px; }
+  .method-body dt { font-weight: 600; margin-top: 10px; }
+  .method-body dd { margin: 2px 0 0; line-height: 1.7; color: var(--muted); }
+  .method-body code {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1px 5px;
+    font-size: 0.85em;
+  }
+  [data-lang] { display: none; }
+  [data-lang].on { display: block; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div>
+      <h1 id="page-title">소개와 연락처</h1>
+      <div class="updated" id="updated">무엇을, 누가, 어떻게</div>
+    </div>
+    <div class="header-actions">
+      <button class="icon-toggle" type="button" id="theme-toggle" aria-label="테마 전환"><span aria-hidden="true">🌓</span></button>
+      <button class="icon-toggle" type="button" id="lang-toggle" aria-label="Switch language"><span aria-hidden="true">🌐</span></button>
+    </div>
+  </header>
+
+  <nav class="page-nav" aria-label="섹션">
+    <a href="./index.html" id="nav-digest">데일리 다이제스트</a>
+    <a href="./news.html" id="nav-news">뉴스</a>
+    <a href="./realestate.html" id="nav-realestate">아파트 시세</a>
+    <a href="./rates.html" id="nav-rates">금리 비교</a>
+  </nav>
+
+  <section class="method-body">
+  <div data-lang="ko" class="on">
+    <p class="lead">서울 아파트 실거래와 예적금·대출 금리를 매일 모아 한 화면에 보여주는 사이트입니다. 정부가 공개한 원본만 쓰고, 광고비를 받고 무언가를 올리지 않습니다.</p>
+
+    <h2>왜 만들었나</h2>
+    <p>부동산 시세를 확인하려면 국토교통부 사이트에서 지역과 월을 골라 조회하고, 금리는 금융감독원 비교공시에서 따로 찾아야 합니다. 매주 같은 일을 반복하다가, 그 과정을 자동으로 돌려 한 페이지에 놓으면 될 일이라고 생각해서 만들었습니다.</p>
+    <p>만들다 보니 원본을 그대로 옮기면 틀린 그림이 나오는 대목이 여럿 있었습니다. 신고 기한 30일 때문에 최근 몇 주가 늘 꺼져 보이는 것, 자치구 하나의 한 주 표본으로는 평균이 출렁이는 것, 추려 놓은 목록 위에 조건을 얹으면 건수가 실제 건수가 아니게 되는 것. 그것을 어떻게 처리했는지는 <a href="./method.html">숫자를 만드는 방법</a>에 전부 적어 두었습니다.</p>
+
+    <h2>무엇이 있나</h2>
+    <ul>
+      <li><strong>데일리 다이제스트</strong> — 그날의 시장 지표와 부동산 시세, 경제 뉴스를 한 화면에.</li>
+      <li><strong>아파트 시세</strong> — 서울 25개 자치구의 매매·전세·월세 평당가와 84㎡ 환산가, 전주 대비 증감과 여섯 달 추이.</li>
+      <li><strong>실거래 검색</strong> — 신고된 거래를 지역·금액·면적·연식·단지명으로 찾기.</li>
+      <li><strong>예산대별 목록</strong> — 3억대부터 20억대까지, 그 예산으로 실제 거래된 아파트.</li>
+      <li><strong>금리 비교</strong> — 정기예금·적금·주택담보대출·전세자금대출 금리와 세후 이자.</li>
+    </ul>
+
+    <h2>어떻게 굴러가나</h2>
+    <p>서버가 없습니다. GitHub Actions가 정해진 시각에 공공 API를 호출해 데이터를 내려받고, 계산해서 정적 파일로 만들어 두면 GitHub Pages가 그 파일을 그대로 내보냅니다. 사람이 매일 손대는 곳은 없습니다.</p>
+    <p>뉴스 요약은 자체 서버에서 돌리는 오픈소스 모델이 만듭니다. 요약이 하는 일은 기사에서 문장을 뽑아 정리하는 것까지고, 전망이나 판단은 시키지 않습니다.</p>
+
+    <h2>만든 사람</h2>
+    <p>10년차 백엔드 개발자가 혼자 만들고 굴리고 있습니다. 부동산 업계에 몸담고 있지 않고, 중개나 분양과 아무 관계가 없습니다. 그래서 특정 지역이나 단지를 밀어 줄 이유가 없고, 실제로 밀지 않습니다.</p>
+
+    <h2>연락</h2>
+    <p>숫자가 틀렸거나, 계산이 이상하거나, 있으면 좋겠는 화면이 있으면 알려 주세요. 소스와 이슈 게시판은 <a href="https://github.com/kyhsa93/econ-realestate-digest" target="_blank" rel="noopener">GitHub 저장소</a>에 열려 있습니다. 국토부 응답 원본을 여섯 달치 보관하고 있어서, 특정 시점의 숫자를 다시 만들어 확인해 드릴 수 있습니다.</p>
+
+    <h2>알아 두실 것</h2>
+    <p>여기 있는 것은 이미 신고된 거래를 집계한 자료입니다. 투자 권유가 아니고, 앞으로의 가격을 예측하지 않습니다. 실제 계약 전에는 반드시 원 출처와 현장을 확인하시기 바랍니다.</p>
+  </div>
+  <div data-lang="en">
+    <p class="lead">A site that collects Seoul apartment transactions and Korean deposit and loan rates every day and puts them on one screen. It uses only data the government publishes, and takes no money to list anything.</p>
+
+    <h2>Why it exists</h2>
+    <p>Checking apartment prices means picking a district and a month on the ministry's site; checking rates means a separate trip to the Financial Supervisory Service comparison service. After repeating that every week it seemed clear the whole thing could run itself and land on one page.</p>
+    <p>Building it turned up several places where copying the source verbatim produces a wrong picture: the 30-day reporting window that makes recent weeks always sag, the single district whose weekly average swings on one sale, the filter over a trimmed list that returns a count which is not the real count. How each of those is handled is written down in <a href="./method.html">how these numbers are made</a>.</p>
+
+    <h2>What is here</h2>
+    <ul>
+      <li><strong>Daily digest</strong> — the day's market indicators, apartment prices and economic news on one screen.</li>
+      <li><strong>Apartment prices</strong> — sale, jeonse and monthly rent per pyeong for all 25 Seoul districts, with the 84m² equivalent, week-on-week change and a six-month trend.</li>
+      <li><strong>Transaction search</strong> — reported transactions by area, price, size, building age or complex name.</li>
+      <li><strong>By budget</strong> — what actually traded, from ₩300M up to ₩2B.</li>
+      <li><strong>Rates</strong> — term deposits, instalment savings, mortgages and jeonse loans, with after-tax interest.</li>
+    </ul>
+
+    <h2>How it runs</h2>
+    <p>There is no server. GitHub Actions calls the public APIs on a schedule, computes the figures and writes static files; GitHub Pages serves them. Nothing is touched by hand day to day.</p>
+    <p>News summaries come from an open-source model running on a self-hosted machine. Its job stops at pulling sentences out of the articles — it is not asked to forecast or to judge.</p>
+
+    <h2>Who made it</h2>
+    <p>One backend engineer, ten years in, building and running it alone. Not in the property business, and unconnected to any brokerage or developer — so there is no reason to push a particular district or complex, and none is pushed.</p>
+
+    <h2>Contact</h2>
+    <p>If a figure is wrong, a calculation looks off, or something is missing, please say so. The source and issue tracker are open at the <a href="https://github.com/kyhsa93/econ-realestate-digest" target="_blank" rel="noopener">GitHub repository</a>. The ministry's raw responses are kept for six months, so any figure can be rebuilt from a point in time and checked.</p>
+
+    <h2>Please note</h2>
+    <p>What is here is an aggregation of transactions already reported. It is not investment advice and does not forecast prices. Verify against the original sources before acting on anything.</p>
+  </div>
+  </section>
+
+  <footer>
+    <div id="footer-source">출처: 국토교통부 아파트 매매·전월세 실거래가 공개시스템, 금융감독원 금융상품통합비교공시, 한국은행.</div>
+    <div style="margin-top:6px;">
+      <a href="./about.html" id="footer-about">소개</a>
+      <span aria-hidden="true"> · </span>
+      <a href="./method.html" id="footer-method">숫자를 만드는 방법</a>
+      <span aria-hidden="true"> · </span>
+      <a href="https://kyhsa93.github.io/privacy-policy" id="footer-privacy" target="_blank" rel="noopener">개인정보처리방침</a>
+    </div>
+  </footer>
+</main>
+<script src="./analytics.js"></script>
+<script>
+// 이 페이지는 데이터를 읽지 않는다. 글만 있으니 필요한 것은 테마와 언어 두 가지뿐이고,
+// 저장하는 열쇠는 다른 페이지와 같은 것을 쓴다 — 여기서 영어로 바꾼 사람이 시세 페이지로
+// 넘어갔을 때 다시 한국어로 돌아가면 안 되기 때문이다.
+(function () {
+  const THEME_ICONS = { auto: "🌓", light: "☀️", dark: "🌙" };
+  let theme = (function () {
+    const saved = window.localStorage.getItem("theme");
+    return saved === "light" || saved === "dark" ? saved : "auto";
+  })();
+
+  function applyTheme(next) {
+    theme = next;
+    window.localStorage.setItem("theme", theme);
+    if (theme === "auto") document.documentElement.removeAttribute("data-theme");
+    else document.documentElement.setAttribute("data-theme", theme);
+    document.querySelector("#theme-toggle span").textContent = THEME_ICONS[theme];
+  }
+
+  const NAV = {
+    ko: {
+      digest: "데일리 다이제스트",
+      news: "뉴스",
+      realestate: "아파트 시세",
+      rates: "금리 비교",
+      title: "소개와 연락처",
+      updated: "무엇을, 누가, 어떻게",
+      about: "소개",
+      method: "숫자를 만드는 방법",
+      privacy: "개인정보처리방침",
+      source: "출처: 국토교통부 아파트 매매·전월세 실거래가 공개시스템, 금융감독원 금융상품통합비교공시, 한국은행.",
+    },
+    en: {
+      digest: "Daily digest",
+      news: "News",
+      realestate: "Apartment prices",
+      rates: "Rates",
+      title: "About and contact",
+      updated: "What, who and how",
+      about: "About",
+      method: "How these numbers are made",
+      privacy: "Privacy policy",
+      source: "Sources: Ministry of Land, Infrastructure and Transport; Financial Supervisory Service; Bank of Korea.",
+    },
+  };
+
+  let locale = window.localStorage.getItem("lang") === "en" ? "en" : "ko";
+
+  function applyLocale(next) {
+    locale = next;
+    window.localStorage.setItem("lang", locale);
+    document.documentElement.setAttribute("lang", locale);
+    for (const block of document.querySelectorAll("[data-lang]")) {
+      block.classList.toggle("on", block.getAttribute("data-lang") === locale);
+    }
+    const words = NAV[locale];
+    document.getElementById("nav-digest").textContent = words.digest;
+    document.getElementById("nav-news").textContent = words.news;
+    document.getElementById("nav-realestate").textContent = words.realestate;
+    document.getElementById("nav-rates").textContent = words.rates;
+    document.getElementById("page-title").textContent = words.title;
+    document.getElementById("updated").textContent = words.updated;
+    document.getElementById("footer-about").textContent = words.about;
+    document.getElementById("footer-method").textContent = words.method;
+    document.getElementById("footer-privacy").textContent = words.privacy;
+    document.getElementById("footer-source").textContent = words.source;
+  }
+
+  document.getElementById("theme-toggle").addEventListener("click", function () {
+    applyTheme(theme === "auto" ? "light" : theme === "light" ? "dark" : "auto");
+  });
+  document.getElementById("lang-toggle").addEventListener("click", function () {
+    applyLocale(locale === "ko" ? "en" : "ko");
+  });
+
+  applyTheme(theme);
+  applyLocale(locale);
+})();
+</script>
+</body>
+</html>

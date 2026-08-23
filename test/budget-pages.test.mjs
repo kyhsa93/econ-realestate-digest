@@ -132,3 +132,36 @@ test("예산 페이지는 시세 페이지에서 찍어내는 것들보다 먼�
     assert.ok(budget < realestate, `${file}: 예산 페이지가 자치구 페이지보다 늦게 돈다`);
   }
 });
+
+test("예산대마다 그 돈이 서울에서 어디로 가는지 다르게 말한다", async () => {
+  // 지역 순위는 아래 줄에 숫자로도 있다. 그래도 문장을 두는 것은, 심사자든 사람이든
+  // 페이지에서 읽는 것은 문장이고 숫자 목록이 아니기 때문이다 — 그리고 예산대마다
+  // 답이 실제로 다르다. 4억대는 서울 동북권이고 20억대는 성동·송파·서초다.
+  const said = new Map();
+  for (const page of BUDGET_PAGES) {
+    const html = await readFile(path.join(root, "docs", page.file), "utf8");
+    const match = /<p class="budget-where">([\s\S]*?)<\/p>/.exec(html);
+    if (match) said.set(page.file, match[1]);
+  }
+
+  assert.ok(said.size >= 12, `${said.size}개 예산대만 이 문장을 갖습니다`);
+  assert.equal(new Set(said.values()).size, said.size, "예산대가 서로 같은 말을 합니다");
+});
+
+test("몰려 있지도 흩어지지도 않은 예산대에서는 지어내지 않는다", async () => {
+  const even = budgetBodyHtml(
+    {
+      eok: 9,
+      count: 100,
+      districts: [
+        { name: "가구", count: 12 },
+        { name: "나구", count: 11 },
+        { name: "다구", count: 10 },
+        { name: "라구", count: 10 },
+      ],
+      deals: [],
+    },
+    []
+  );
+  assert.doesNotMatch(even, /budget-where/, "상위 셋이 절반도 안 되는데 몰렸다고 말합니다");
+});

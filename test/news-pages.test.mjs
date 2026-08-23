@@ -119,3 +119,38 @@ test("기사 로드 실패는 원인을 함께 알린다", async () => {
     assert.ok(html.includes("loadError: (reason)"), `${file} 문구가 이유를 받지 않는다`);
   }
 });
+
+test("뉴스 페이지는 색인에서 빠지고, 데이터 페이지는 빠지지 않는다", async () => {
+  // 애드센스가 "가치가 별로 없는 콘텐츠"로 반려한 뒤의 결정이다. 뉴스 면에 있는 것은
+  // 남의 기사 제목과 그 AI 요약이고, 그건 우리가 만든 것이 아니라서 변호가 서지 않는다.
+  // 실거래·금리는 공공데이터를 우리 방식으로 가공한 것이라 남긴다.
+  //
+  // 이 검사가 지키는 것은 두 방향이다. 뉴스가 다시 색인에 들어오는 것과, 색인에서
+  // 빼는 손이 미끄러져 돈이 되는 페이지까지 가져가는 것.
+  for (const file of ["news.html", "deal-search.html", ...NEWS_PAGES.map((p) => p.file)]) {
+    const html = await read(`docs/${file}`);
+    assert.match(
+      html,
+      /<meta name="robots" content="noindex, follow">/,
+      `docs/${file}에 noindex가 없습니다`
+    );
+  }
+
+  for (const file of ["index.html", "realestate.html", "rates.html", "district-gangnam.html", "budget-10eok.html"]) {
+    const html = await read(`docs/${file}`);
+    assert.doesNotMatch(html, /noindex/, `docs/${file}은 색인에서 빠지면 안 됩니다`);
+  }
+});
+
+test("첫 화면에 먼저 오는 것은 우리가 만든 데이터다", async () => {
+  // AI 요약이 맨 위에 있었다. 심사자가 사이트에서 처음 보는 것이 AI가 쓴 문단이면
+  // 그 사이트가 무엇으로 만들어졌는지에 대한 첫 인상이 그것으로 정해진다.
+  const html = await read("docs/index.html");
+  const at = (id) => html.indexOf(`<section id="${id}">`);
+  assert.ok(at("market-section") > 0 && at("realestate-section") > 0 && at("summary-section") > 0);
+  assert.ok(
+    at("summary-section") > at("realestate-section"),
+    "AI 요약이 실거래 시세보다 위에 있습니다"
+  );
+  assert.ok(at("realestate-section") > at("market-section"), "시장 지표가 맨 위여야 합니다");
+});

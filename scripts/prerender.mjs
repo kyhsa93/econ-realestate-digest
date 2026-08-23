@@ -4,6 +4,7 @@ import { DEFAULT_AMOUNT, formatWon, netInterestOf } from "./interest.mjs";
 import { BUDGET_PAGES } from "./budget-pages.mjs";
 import { DISTRICT_PAGES, DISTRICT_SLUGS, districtFile } from "./district-slugs.mjs";
 import { districtSentences } from "./district-summary.mjs";
+import { factSentences } from "./district-facts.mjs";
 import {
   KIND_FIELDS,
   areaPrice,
@@ -189,6 +190,36 @@ function budgetDealHtml(deal) {
   );
 }
 
+/**
+ * 이 예산이 서울에서 어디로 가는가.
+ *
+ * 지역 순위는 이미 아래 줄에 숫자로 있지만, 숫자를 세 개 읽고 나서야 알게 되는 것과
+ * 한 문장으로 읽는 것은 다르다. 그리고 예산대마다 답이 실제로 다르다 — 4억대는 노원·
+ * 도봉·중랑이고 18억대는 강동·송파·성동이라, 이 한 줄이 열여덟 장에서 열여덟 번
+ * 다른 말을 한다.
+ *
+ * 상위 세 구가 절반을 넘을 때만 쓴다. 고르게 흩어진 예산대에서 "여기에 몰려 있다"고
+ * 하면 사실이 아니고, 그럴 때는 흩어졌다는 것이 답이다.
+ */
+function budgetWhereHtml(band) {
+  const districts = band.districts ?? [];
+  if (districts.length < 3 || !band.count) return "";
+
+  const top3 = districts.slice(0, 3);
+  const share = top3.reduce((sum, d) => sum + d.count, 0) / band.count;
+  const names = top3.map((d) => d.name).join("·");
+  const label = budgetBandLabel(band);
+
+  const text =
+    share >= 0.5
+      ? `${label} 거래의 ${Math.round(share * 100)}%가 ${names} 세 곳에서 나왔습니다. 이 예산으로 서울에서 고를 수 있는 곳은 사실상 여기입니다.`
+      : districts.length >= 10
+        ? `${label} 거래는 ${districts.length}개 구에 흩어져 있고 상위 세 곳(${names})을 합쳐도 ${Math.round(share * 100)}%입니다. 이 예산에서는 지역이 아니라 단지가 선택을 가릅니다.`
+        : "";
+
+  return text ? `<p class="budget-where">${escapeHtml(text)}</p>` : "";
+}
+
 export function budgetBodyHtml(band, periodList) {
   if (!band) return null;
 
@@ -201,6 +232,7 @@ export function budgetBodyHtml(band, periodList) {
     `<p class="budget-summary">${escapeHtml(`${budgetBandLabel(band)}에서 ${band.count.toLocaleString("ko-KR")}건이 거래됐습니다.`)}` +
     (periods ? ` <span class="when">${escapeHtml(`${periods} 신고분 기준`)}</span>` : "") +
     `</p>` +
+    budgetWhereHtml(band) +
     (districts ? `<div class="budget-districts">거래가 많은 지역: ${districts}</div>` : "") +
     `<ul class="budget-deals">${band.deals.map(budgetDealHtml).join("")}</ul>`
   );
@@ -507,6 +539,18 @@ export function districtSummaryHtml(realestate, district, locale = "ko") {
   return sentences.length ? escapeHtml(sentences.join(" ")) : "";
 }
 
+/**
+ * 시세 문장 아래에 붙는 두 번째 문단.
+ *
+ * 위 문단은 스물다섯 구가 같은 틀이다 — 평당 얼마, 평균의 몇 배, 몇 번째. 이쪽은
+ * 구마다 눈에 띄는 것만 골라 말하므로 문장의 개수도 종류도 구마다 다르고, 말할 것이
+ * 없는 구에서는 통째로 비어 있다. 어느 쪽인지는 `district-facts.mjs`가 정한다.
+ */
+export function districtFactsHtml(facts, locale = "ko") {
+  const sentences = factSentences(facts, locale);
+  return sentences.length ? escapeHtml(sentences.join(" ")) : "";
+}
+
 export function districtLinksHtml(current = null) {
   const links = DISTRICT_PAGES.map(({ name, file }) =>
     name === current
@@ -644,6 +688,8 @@ async function main() {
         districtLinks: "",
         districtSummaryKo: "",
         districtSummaryEn: "",
+        districtFactsKo: "",
+        districtFactsEn: "",
       },
     ],
   ]) {

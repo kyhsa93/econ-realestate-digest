@@ -11,6 +11,11 @@
 <title>서울 아파트 실거래 검색 - 지역·예산으로 찾기</title>
 <meta name="description" content="서울 25개 자치구와 예산 구간을 골라 국토교통부에 신고된 아파트 실거래를 찾아봅니다. 단지·전용면적·층·거래일과 거래가를 함께 보여주며 매일 갱신합니다.">
 <meta name="site-group" content="digest">
+<!-- 검색 도구지 읽을거리가 아니다. 화면에 구워져 나가는 글자가 237자뿐이고 나머지는
+     전부 사용자가 조건을 넣어야 나오는 것이라, 색인해 봐야 얇은 페이지 한 장이 는다.
+     여기로 들어오는 링크는 모든 페이지에 걸려 있으니 follow로 예산대 페이지까지
+     권위는 그대로 흘러간다. -->
+<meta name="robots" content="noindex, follow">
 <link rel="canonical" href="https://kyhsa93.github.io/econ-realestate-digest/deal-search.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="경제·부동산 데일리 다이제스트">
@@ -285,6 +290,10 @@
   <footer class="site-footer">
     <div id="footer-source">출처: 국토교통부 아파트 매매 실거래가 공개시스템. 신고된 거래만 집계되며 신고 기한(계약 후 30일)이 있어 최근 거래는 나중에 반영됩니다.</div>
     <div style="margin-top:6px;">
+      <a href="./about.html" id="footer-about">소개</a>
+      <span aria-hidden="true"> · </span>
+      <a href="./method.html" id="footer-method">숫자를 만드는 방법</a>
+      <span aria-hidden="true"> · </span>
       <a href="https://kyhsa93.github.io/privacy-policy" id="footer-privacy" target="_blank" rel="noopener">개인정보처리방침</a>
     </div>
   </footer>
@@ -371,6 +380,8 @@ const T = {
     updatedPrefix: "기준",
     footerSource: "출처: 국토교통부 아파트 매매 실거래가 공개시스템. 신고된 거래만 집계되며 신고 기한(계약 후 30일)이 있어 최근 거래는 나중에 반영됩니다.",
     footerPrivacy: "개인정보처리방침",
+    footerMethod: "숫자를 만드는 방법",
+    footerAbout: "소개",
     loadError: "실거래를 불러오지 못했습니다.",
     retry: "다시 시도",
   },
@@ -457,6 +468,8 @@ const T = {
     updatedPrefix: "As of",
     footerSource: "Source: MOLIT real transaction price disclosure. Only reported deals are counted, and reporting can lag up to 30 days after contract.",
     footerPrivacy: "Privacy Policy",
+    footerMethod: "How these numbers are made",
+    footerAbout: "About",
     loadError: "Could not load transaction data.",
     retry: "Retry",
   },
@@ -1040,6 +1053,8 @@ function applyLocale() {
   setText("nav-rates", t("navRates"));
   setText("footer-source", t("footerSource"));
   setText("footer-privacy", t("footerPrivacy"));
+  setText("footer-method", t("footerMethod"));
+  setText("footer-about", t("footerAbout"));
   for (const link of document.querySelectorAll("[data-re-page]")) {
     link.textContent = t(NAV_KEYS[link.getAttribute("data-re-page")]);
   }
