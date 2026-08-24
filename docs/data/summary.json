@@ -1,46 +1,26 @@
 {
-  "updatedAt": "2026-08-23T11:33:11.927Z",
+  "updatedAt": "2026-08-23T23:34:05.041Z",
   "model": "qwen3:14b",
   "summary": {
-    "ko": "- 부동산: 고가 법인주택 중 42%는 사주의 주택으로 나타났다. 정부는 부동산 대책을 발표하며 2028년까지 집을 팔 것을 권장하고 있다. 500가구 이하 재개발·재건축 사업이 진행 중이다. 영등포 재건축 투자에 관심이 집중되고 있다. 비주택 리모델링 실적은 4개월째 0건을 기록하고 있다.\n- 금리·예금·투자상품: 금리·예금·투자상품: AI 투자 늘자…美데이터센터 채권 금리 年 7%로 급등, 경제전문가 63% \"한은, 두 달 연속 금리 올릴 것\", 국채금리 급등 '대증요법'으로 눌러보려다 '교육당한' 美재무\n- 기타 경제 소식: GTX-A 연결과 트램 도입으로 교통망 개선이 추진되고 있다. 성남 중원과 수원 권선 지역에서 대출 규제의 풍선효과가 나타나고 있다. 북한 장마당에서 소득 양극화가 2014∼2015년 경제충격 이후 심화되고 있는 것으로 나타났다. 하나은행, 기보, 신보가 청년기업에 2천억원 규모의 보증대출을 지원한다. 각 기사는 서로 다른 주제로, 별개의 사실을 담고 있다.",
-    "en": "- Real Estate: Of high-priced corporate housing, 42% were found to be owner-occupied homes. The government is recommending selling homes by 2028 as part of its real estate measures. There are ongoing redevelopment and reconstruction projects involving 500 households or fewer. Interest is focusing on investment in the Yeongdeungpo reconstruction. Non-residential remodeling achievements have recorded zero cases for the fourth consecutive month.\n- Rates, Deposits & Investment Products: Rates, Deposits & Investment Products: AI 투자 늘자…美데이터센터 채권 금리 年 7%로 급등, 경제전문가 63% \"한은, 두 달 연속 금리 올릴 것\", 국채금리 급등 '대증요법'으로 눌러보려다 '교육당한' 美재무\n- Other Economic News: Improvements in the transportation network are being promoted through the GTX-A connection and tram introduction. A balloon effect of loan regulations is appearing in the Seongnam Jungwon and Suwon Gwonseon areas. Income polarization in North Korea'sjangmadang has been deepening since the economic shock of 2014-2015. Hana Bank, KOSHA, and KOSMEF are providing a 200,000,000,000-won guarantee loan to youth enterprises. Each article covers a different topic and presents separate facts."
+    "ko": "- 증시·환율: 삼전과 닉스의 주주환원 약발 가능성과 코스피의 향방에 대한 분석이 이루어졌다.\n- 금리·예금·투자상품: 한투증권은 금융주가 고금리 환경에서도 방어력이 높고 주주환원 매력이 있다고 분석했다. 미니애폴리스 연은 총재는 이란 전쟁이 장기화될 경우 금리 인상이 가능하다고 밝혔다. 미국 데이터센터 채권 금리는 AI 투자 증가로 인해 7%로 급등했다. 경제전문가 63%는 한국은행이 두 달 연속 금리를 올릴 것으로 전망하고 있다. 각 기관은 금리와 관련된 다양한 시장 동향을 발표했다.\n- 부동산: 송파구 주택분 재산세가 공시가격 급등으로 23% 증가했다. 당정은 비거주 1주택자 인정 범위를 확대하는 방안을 논의 중이다. 용산공원 부지에 대한 논쟁이 40년 가까이 이어졌으나 해결 여부는 불확실하다. 비거주 1주택자 세부담 완화를 위한 예외범위와 기본공제 조정이 유력하다. 고가 법인주택 중 42%는 사주가 거주하고 있는 것으로 나타났다.\n- 기타 경제 소식: 수원의 인구 감소와 화성·용인의 인구 증가, 2조원 규모의 경제자유구역 추진, GTX-A 연결과 트램 도입으로 인한 집값 변동, 대출 규제로 인한 성남 중원·수원 권선 지역의 집값 상승, 8·13 대책 이후 단기 공급을 위한 자투리땅 활용 등이 오늘의 주요 경제 소식이다.",
+    "en": "- Stocks & FX: An analysis was conducted on the possibility of the negative effects of Samsung and Nick's shareholder return policies and the future direction of the KOSPI.\n- Rates, Deposits & Investment Products: Hanjin Securities analyzed that financial stocks have strong defensive capabilities even in a high-interest rate environment and offer attractive shareholder returns. Minneapolis Fed President stated that interest rates could rise if the Iran war prolongs. The U.S. data center bond rate surged to 7% due to increased AI investment. 63% of economic experts expect the Bank of Korea to raise interest rates for two consecutive months. Each institution announced various market trends related to interest rates.\n- Real Estate: Property tax in Songpa-gu's residential housing has increased by 23% due to a sharp rise in the announced price. The government and ruling party are discussing expanding the scope of recognizing non-resident single-homeowners. The debate over the Yongsan Park site has continued for nearly 40 years, but the resolution remains uncertain. It is likely that the exception scope and basic exemption adjustment will be considered to ease the tax burden on non-resident single-homeowners. It was found that 42% of high-priced corporate housing is occupied by shareholders.\n- Other Economic News: Decrease in Suwon's population and increase in Hwaseong and Yongin's population, promotion of an economic free zone with a scale of 2,000,000,000,000 won, fluctuation in housing prices due to GTX-A connection and tram introduction, rising housing prices in Seongnam Jungwon and Suwon Gwansun areas due to loan regulations, and utilization of leftover land for short-term supply after the 8·13 measures are today's major economic news."
   },
   "highlights": [],
   "categories": [
     {
-      "key": "realestate",
-      "name": "부동산",
-      "nameEn": "Real Estate",
-      "lineKo": "고가 법인주택 중 42%는 사주의 주택으로 나타났다. 정부는 부동산 대책을 발표하며 2028년까지 집을 팔 것을 권장하고 있다. 500가구 이하 재개발·재건축 사업이 진행 중이다. 영등포 재건축 투자에 관심이 집중되고 있다. 비주택 리모델링 실적은 4개월째 0건을 기록하고 있다.",
-      "lineEn": "Of high-priced corporate housing, 42% were found to be owner-occupied homes. The government is recommending selling homes by 2028 as part of its real estate measures. There are ongoing redevelopment and reconstruction projects involving 500 households or fewer. Interest is focusing on investment in the Yeongdeungpo reconstruction. Non-residential remodeling achievements have recorded zero cases for the fourth consecutive month.",
+      "key": "stocks",
+      "name": "증시·환율",
+      "nameEn": "Stocks & FX",
+      "lineKo": "삼전과 닉스의 주주환원 약발 가능성과 코스피의 향방에 대한 분석이 이루어졌다.",
+      "lineEn": "An analysis was conducted on the possibility of the negative effects of Samsung and Nick's shareholder return policies and the future direction of the KOSPI.",
       "isFallback": false,
       "fallbackReason": null,
-      "degraded": false,
+      "degraded": true,
       "items": [
         {
-          "title": "\"고가 법인주택 42%는 사주의 주택\"",
-          "link": "https://www.hankyung.com/article/2026082371041",
-          "source": "한국경제 경제"
-        },
-        {
-          "title": "“집 팔 거면 2028년까지 파세요”…부동산 대책에 숨겨진 정부의 ‘집값 시간표’ [나현준의 뉴스해부]",
-          "link": "https://www.mk.co.kr/news/realestate/12134252",
-          "source": "매일경제 부동산"
-        },
-        {
-          "title": "500가구 이하 재개발·재건축…",
-          "link": "https://www.mk.co.kr/news/realestate/12134209",
-          "source": "매일경제 부동산"
-        },
-        {
-          "title": "[부동산 심머니] \"우리도 성수처럼 직주락 도시로\"… 영등포 재건축 투자 주목",
-          "link": "https://www.mk.co.kr/news/realestate/12134149",
-          "source": "매일경제 부동산"
-        },
-        {
-          "title": "‘닥치고 공급’이라더니… 비주택 리모델링, 4개월째 실적 ‘0건’",
-          "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/23/TB2EWPTYUBGZTOMCPF3TRMLARI/",
-          "source": "조선비즈 부동산"
+          "title": "[마켓뷰] 삼전·닉스 주주환원 약발 이어질까…코스피 향방은",
+          "link": "https://www.yna.co.kr/view/AKR20260824020000008",
+          "source": "연합뉴스 경제"
         }
       ]
     },
@@ -48,12 +28,22 @@
       "key": "rates",
       "name": "금리·예금·투자상품",
       "nameEn": "Rates, Deposits & Investment Products",
-      "lineKo": "금리·예금·투자상품: AI 투자 늘자…美데이터센터 채권 금리 年 7%로 급등, 경제전문가 63% \"한은, 두 달 연속 금리 올릴 것\", 국채금리 급등 '대증요법'으로 눌러보려다 '교육당한' 美재무",
-      "lineEn": "Rates, Deposits & Investment Products: AI 투자 늘자…美데이터센터 채권 금리 年 7%로 급등, 경제전문가 63% \"한은, 두 달 연속 금리 올릴 것\", 국채금리 급등 '대증요법'으로 눌러보려다 '교육당한' 美재무",
-      "isFallback": true,
-      "fallbackReason": "unverified-entity",
+      "lineKo": "한투증권은 금융주가 고금리 환경에서도 방어력이 높고 주주환원 매력이 있다고 분석했다. 미니애폴리스 연은 총재는 이란 전쟁이 장기화될 경우 금리 인상이 가능하다고 밝혔다. 미국 데이터센터 채권 금리는 AI 투자 증가로 인해 7%로 급등했다. 경제전문가 63%는 한국은행이 두 달 연속 금리를 올릴 것으로 전망하고 있다. 각 기관은 금리와 관련된 다양한 시장 동향을 발표했다.",
+      "lineEn": "Hanjin Securities analyzed that financial stocks have strong defensive capabilities even in a high-interest rate environment and offer attractive shareholder returns. Minneapolis Fed President stated that interest rates could rise if the Iran war prolongs. The U.S. data center bond rate surged to 7% due to increased AI investment. 63% of economic experts expect the Bank of Korea to raise interest rates for two consecutive months. Each institution announced various market trends related to interest rates.",
+      "isFallback": false,
+      "fallbackReason": null,
       "degraded": false,
       "items": [
+        {
+          "title": "한투증권 \"금융주, 고금리 방어력 높고 주주환원 매력 겸비\"",
+          "link": "https://www.yna.co.kr/view/AKR20260824018800008",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "미니애폴리스 연은 총재 \"이란 전쟁 장기화하면 금리 올릴 수도\"",
+          "link": "https://www.newsis.com/view/NISX20260824_0003759182",
+          "source": "뉴시스 경제"
+        },
         {
           "title": "AI 투자 늘자…美데이터센터 채권 금리 年 7%로 급등",
           "link": "https://www.hankyung.com/article/2026082371451",
@@ -63,11 +53,43 @@
           "title": "경제전문가 63% \"한은, 두 달 연속 금리 올릴 것\"",
           "link": "https://www.hankyung.com/article/2026082371081",
           "source": "한국경제 경제"
+        }
+      ]
+    },
+    {
+      "key": "realestate",
+      "name": "부동산",
+      "nameEn": "Real Estate",
+      "lineKo": "송파구 주택분 재산세가 공시가격 급등으로 23% 증가했다. 당정은 비거주 1주택자 인정 범위를 확대하는 방안을 논의 중이다. 용산공원 부지에 대한 논쟁이 40년 가까이 이어졌으나 해결 여부는 불확실하다. 비거주 1주택자 세부담 완화를 위한 예외범위와 기본공제 조정이 유력하다. 고가 법인주택 중 42%는 사주가 거주하고 있는 것으로 나타났다.",
+      "lineEn": "Property tax in Songpa-gu's residential housing has increased by 23% due to a sharp rise in the announced price. The government and ruling party are discussing expanding the scope of recognizing non-resident single-homeowners. The debate over the Yongsan Park site has continued for nearly 40 years, but the resolution remains uncertain. It is likely that the exception scope and basic exemption adjustment will be considered to ease the tax burden on non-resident single-homeowners. It was found that 42% of high-priced corporate housing is occupied by shareholders.",
+      "isFallback": false,
+      "fallbackReason": null,
+      "degraded": false,
+      "items": [
+        {
+          "title": "공시가격 급등에 송파구 주택분 재산세 23%↑…\"산정체계 개선해야\"",
+          "link": "https://www.yna.co.kr/view/AKR20260824008900004",
+          "source": "연합뉴스 경제"
         },
         {
-          "title": "국채금리 급등 '대증요법'으로 눌러보려다 '교육당한' 美재무",
-          "link": "https://www.yna.co.kr/view/AKR20260823019100009",
-          "source": "연합뉴스 경제"
+          "title": "당정 \"불가피한 비거주 1주택자 인정 확대\"[간추린 주말 뉴스]",
+          "link": "https://www.newsis.com/view/NISX20260823_0003759101",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "주택난 때마다 소환된 용산공원… 40년 가까운 논쟁 끝날까",
+          "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/24/7D6PXG6NKZCPRLPEFHVUPEU36E/",
+          "source": "조선비즈 부동산"
+        },
+        {
+          "title": "비거주 1주택 세부담 완화 가닥…예외범위·기본공제 조정 유력",
+          "link": "https://www.newsis.com/view/NISX20260823_0003758978",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "\"고가 법인주택 42%는 사주가 거주\"",
+          "link": "https://www.hankyung.com/article/2026082371041",
+          "source": "한국경제 경제"
         }
       ]
     },
@@ -75,12 +97,27 @@
       "key": "other",
       "name": "기타 경제 소식",
       "nameEn": "Other Economic News",
-      "lineKo": "GTX-A 연결과 트램 도입으로 교통망 개선이 추진되고 있다. 성남 중원과 수원 권선 지역에서 대출 규제의 풍선효과가 나타나고 있다. 북한 장마당에서 소득 양극화가 2014∼2015년 경제충격 이후 심화되고 있는 것으로 나타났다. 하나은행, 기보, 신보가 청년기업에 2천억원 규모의 보증대출을 지원한다. 각 기사는 서로 다른 주제로, 별개의 사실을 담고 있다.",
-      "lineEn": "Improvements in the transportation network are being promoted through the GTX-A connection and tram introduction. A balloon effect of loan regulations is appearing in the Seongnam Jungwon and Suwon Gwonseon areas. Income polarization in North Korea'sjangmadang has been deepening since the economic shock of 2014-2015. Hana Bank, KOSHA, and KOSMEF are providing a 200,000,000,000-won guarantee loan to youth enterprises. Each article covers a different topic and presents separate facts.",
+      "lineKo": "수원의 인구 감소와 화성·용인의 인구 증가, 2조원 규모의 경제자유구역 추진, GTX-A 연결과 트램 도입으로 인한 집값 변동, 대출 규제로 인한 성남 중원·수원 권선 지역의 집값 상승, 8·13 대책 이후 단기 공급을 위한 자투리땅 활용 등이 오늘의 주요 경제 소식이다.",
+      "lineEn": "Decrease in Suwon's population and increase in Hwaseong and Yongin's population, promotion of an economic free zone with a scale of 2,000,000,000,000 won, fluctuation in housing prices due to GTX-A connection and tram introduction, rising housing prices in Seongnam Jungwon and Suwon Gwansun areas due to loan regulations, and utilization of leftover land for short-term supply after the 8·13 measures are today's major economic news.",
       "isFallback": false,
       "fallbackReason": null,
-      "degraded": false,
+      "degraded": true,
       "items": [
+        {
+          "title": "화성·용인 커지는데 인구 줄어든 수원… 2조원 경제자유구역 승부수",
+          "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/24/YHEJIEALMJEAPGVW7OBUA6G4PY/",
+          "source": "조선비즈 부동산"
+        },
+        {
+          "title": "[오늘의 주요일정]경제(8월24일월요일)",
+          "link": "https://www.newsis.com/view/NISX20260821_0003756896",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "8·13 대책에도 집값 불안하자…'단기 공급' 가능한 자투리땅 총동원령",
+          "link": "https://www.newsis.com/view/NISX20260823_0003759029",
+          "source": "뉴시스 경제"
+        },
         {
           "title": "GTX-A 연결하고 트램 달린다…교통망 타고 집값 들썩",
           "link": "https://www.hankyung.com/article/2026082370801",
@@ -90,16 +127,6 @@
           "title": "대출 규제 풍선효과…성남 중원·수원 권선 '껑충'",
           "link": "https://www.hankyung.com/article/2026082370551",
           "source": "한국경제 부동산"
-        },
-        {
-          "title": "\"북한 장마당 소득 양극화, 2014∼2015년 경제충격 이후 심화\"",
-          "link": "https://www.yna.co.kr/view/AKR20260822046300002",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "하나은행·기보·신보, 청년기업에 2천억원 규모 보증대출 지원",
-          "link": "https://www.yna.co.kr/view/AKR20260821175000002",
-          "source": "연합뉴스 경제"
         }
       ]
     }
