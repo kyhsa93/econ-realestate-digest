@@ -1,21 +1,107 @@
 {
-  "updatedAt": "2026-08-24T08:04:45.342Z",
+  "updatedAt": "2026-08-24T11:40:45.685Z",
   "model": "qwen3:14b",
   "summary": {
-    "ko": "- 증시·환율: 원/달러 환율은 13개월 만에 최저인 1,370원대까지 하락했다. 중국 증시는 상하이지수가 0.59% 하락하며 마감했다. 일본 증시는 반도체 업황 관망세로 인해 키옥시아 주가가 6% 하락했다. 한국 코스피는 삼전과 닉스의 급락으로 3% 하락했고, 코스닥은 1%대 상승했다. 원/달러 환율은 15:30 기준 1,382.4원으로 4.1원 내렸다.\n- 금리·예금·투자상품: 국고채 금리가 일제히 하락하며 3년물은 연 3.836%를 기록했다.\n- 부동산: 부동산융복합학회는 'K-CEO 경제·부동산 최고위 과정' 수강생을 모집하고 있다. 비거주 1주택자에 대한 종부세 기본공제 기준이 12억원으로 논의되고 있다. 강남3구의 급매물은 비거주 1주택 재논의 소식에 움직임을 보였다. 오세훈 시장은 용산공원 주택공급을 언급하며 \"역사의 죄인\"이라고 표현했다. 비거주 1주택자에 대한 규제 완화 기대감은 계속해서 확산되고 있다.",
-    "en": "- Stocks & FX: The won/dollar exchange rate fell to 1,370 won, the lowest in 13 months. The Chinese stock market closed with the Shanghai index down 0.59%. The Japanese stock market saw Kyocera's stock fall 6% due to of the semiconductor industry outlook. The Korean Kospi fell 3% due to sharp declines in Samsung and Nick's stocks, while the Kosdaq rose over 1%. As of 15:30, the won/dollar exchange rate was 1,382.4 won, down 4.1 won.\n- Rates, Deposits & Investment Products: The government bond yield fell uniformly, with the 3-year bond recording an annual rate of 3.836%.\n- Real Estate: The Real Estate Convergence Society is recruiting students for its \"K-CEO Economy and Real Estate Executive Program.\" The basic exemption threshold for non-resident single-homeowners for property tax is under discussion at 1,200,000,000 won. The immediate sale listings in the three Gangnam districts showed movement in response to the news of reconsidering regulations on non-resident single-homeowners. Seoul Mayor Oh Se-hoon expressed that the housing supply in Yongsan Park is \"a criminal act in history.\" Expectations for easing regulations on non-resident single-homeowners continue to spread."
+    "ko": "- 부동산: 서울의 매매와 전월세 가격이 모두 상승한 것으로 나타났다. 이억원은 잔금대출 기준에 대해 은행이 자율적으로 판단해야 한다고 밝혔다. 임대주택 기금이 1조 원 규모로 연체되며 분양전환에 차질이 생겼다. 비거주 1주택자의 종부세 기본공제 기준은 12억 원으로 논의되고 있다. 광주 제일풍경채 견본주택은 반세권 기대감으로 인해 방문객이 많았다.\n- 금리·예금·투자상품: 중금리대출 상품에 최대 1000만원을 대출받는 사람이 1.4만명에 달했다. 미국 재무 발표를 앞두고 국고채 금리가 일제히 하락했다. 3년물 국고채 금리는 연 3.836%로 기록됐다. 금리 하락은 시장의 기대감에 따라 발생했다. 각 기사는 별개의 경제 현상에 대한 보도로 연결되지 않았다.\n- 기타 경제 소식: 김은진은 대출 비중이 높은 빌라가 내집 마련의 징검다리가 될 수 있다고 밝혔다. 해당 발언은 주택 시장에 대한 우려를 드러낸 것이다. 대한상의는 경제연구총괄을 맡을 인물을 발표했다. 이시욱 전 대외경제정책연구원장이 내정된 것으로 알려졌다. 두 소식은 각각 경제와 주택 시장에 관련된 별개의 내용이다.\n- 증시·환율: 원/달러 환율이 13개월 만에 최저인 1,370원대로 하락했고, 중국 증시는 상하이지수가 0.59% 하락하며 마감했으며, 일본 증시는 소폭 하락했고 키옥시아는 6% 하락했고, 삼전과 닉스가 동반 급락하면서 코스피는 3% 하락했으나 코스닥은 1%대 상승했다.",
+    "en": "- Real Estate: Prices for both sales and rental transactions in Seoul have risen. Lee said that banks should make autonomous decisions regarding down payment loans. The housing fund for rental housing has been delayed by 1,000,000,000,000 won, causing delays in the conversion to sales. The basic exemption threshold for non-residential single-homeowners for property tax is under discussion at 1,200,000,000 won. The sample house of Gwangju Jeil Fengjingchae has seen many visitors due to expectations of a half-district area.\n- Rates, Deposits & Investment Products: Up to 14,000 people took out loans of up to 10,000,000 won through the medium-interest loan product. Treasury bond rates fell uniformly ahead of the U.S. financial announcement. The 3-year Treasury bond rate was recorded at 3.836% annually. The rate decline occurred due to market expectations. Each report was not linked to coverage of separate economic phenomena.\n- Other Economic News: Kim Eun-jin stated that villas with high loan ratios can serve as stepping stones to homeownership. This statement reveals concerns about the housing market. The Korea Chamber of Commerce and Industry announced a person to head its economic research department. It is reported that Lee Si-wook, former president of the Korea Institute for International Economic Policy, has been designated for the position. The two pieces of news are separate issues related to the economy and the housing market, respectively.\n- Stocks & FX: The won/dollar exchange rate fell to 1,370 won, the lowest in 13 months, China's stock market closed with the Shanghai index down 0.59%, Japan's stock market slightly declined, Kyocera fell 6%, and Samsung and Nichicon both sharply declined, causing the Kospi to drop 3%, although the KOSDAQ rose over 1%."
   },
   "highlights": [],
   "categories": [
     {
-      "key": "stocks",
-      "name": "증시·환율",
-      "nameEn": "Stocks & FX",
-      "lineKo": "원/달러 환율은 13개월 만에 최저인 1,370원대까지 하락했다. 중국 증시는 상하이지수가 0.59% 하락하며 마감했다. 일본 증시는 반도체 업황 관망세로 인해 키옥시아 주가가 6% 하락했다. 한국 코스피는 삼전과 닉스의 급락으로 3% 하락했고, 코스닥은 1%대 상승했다. 원/달러 환율은 15:30 기준 1,382.4원으로 4.1원 내렸다.",
-      "lineEn": "The won/dollar exchange rate fell to 1,370 won, the lowest in 13 months. The Chinese stock market closed with the Shanghai index down 0.59%. The Japanese stock market saw Kyocera's stock fall 6% due to of the semiconductor industry outlook. The Korean Kospi fell 3% due to sharp declines in Samsung and Nick's stocks, while the Kosdaq rose over 1%. As of 15:30, the won/dollar exchange rate was 1,382.4 won, down 4.1 won.",
+      "key": "realestate",
+      "name": "부동산",
+      "nameEn": "Real Estate",
+      "lineKo": "서울의 매매와 전월세 가격이 모두 상승한 것으로 나타났다. 이억원은 잔금대출 기준에 대해 은행이 자율적으로 판단해야 한다고 밝혔다. 임대주택 기금이 1조 원 규모로 연체되며 분양전환에 차질이 생겼다. 비거주 1주택자의 종부세 기본공제 기준은 12억 원으로 논의되고 있다. 광주 제일풍경채 견본주택은 반세권 기대감으로 인해 방문객이 많았다.",
+      "lineEn": "Prices for both sales and rental transactions in Seoul have risen. Lee said that banks should make autonomous decisions regarding down payment loans. The housing fund for rental housing has been delayed by 1,000,000,000,000 won, causing delays in the conversion to sales. The basic exemption threshold for non-residential single-homeowners for property tax is under discussion at 1,200,000,000 won. The sample house of Gwangju Jeil Fengjingchae has seen many visitors due to expectations of a half-district area.",
       "isFallback": false,
       "fallbackReason": null,
       "degraded": false,
+      "items": [
+        {
+          "title": "매매·전월세 모두 뛴 서울…원인은 유동성 급증",
+          "link": "https://www.hankyung.com/article/2026082494661",
+          "source": "한국경제 경제"
+        },
+        {
+          "title": "이억원 \"잔금대출 기준 분양가·감정가, 은행 자율적 판단\"(종합)",
+          "link": "https://www.yna.co.kr/view/AKR20260824139251002",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "'분양전환' 막혀 임대주택 기금 1조 연체",
+          "link": "https://www.hankyung.com/article/2026082494201",
+          "source": "한국경제 부동산"
+        },
+        {
+          "title": "비거주 1주택 종부세 기본공제 절충점 찾나…12억원 '주목'(종합)",
+          "link": "https://www.yna.co.kr/view/AKR20260824118651002",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "[포토] '반세권 기대감' 광주 제일풍경채 견본주택 북적",
+          "link": "https://www.mk.co.kr/news/realestate/12135014",
+          "source": "매일경제 부동산"
+        }
+      ]
+    },
+    {
+      "key": "rates",
+      "name": "금리·예금·투자상품",
+      "nameEn": "Rates, Deposits & Investment Products",
+      "lineKo": "중금리대출 상품에 최대 1000만원을 대출받는 사람이 1.4만명에 달했다. 미국 재무 발표를 앞두고 국고채 금리가 일제히 하락했다. 3년물 국고채 금리는 연 3.836%로 기록됐다. 금리 하락은 시장의 기대감에 따라 발생했다. 각 기사는 별개의 경제 현상에 대한 보도로 연결되지 않았다.",
+      "lineEn": "Up to 14,000 people took out loans of up to 10,000,000 won through the medium-interest loan product. Treasury bond rates fell uniformly ahead of the U.S. financial announcement. The 3-year Treasury bond rate was recorded at 3.836% annually. The rate decline occurred due to market expectations. Each report was not linked to coverage of separate economic phenomena.",
+      "isFallback": false,
+      "fallbackReason": null,
+      "degraded": false,
+      "items": [
+        {
+          "title": "[단독] '최대 1000만원' 중금리대출에 1.4만명 몰려",
+          "link": "https://www.hankyung.com/article/2026082495821",
+          "source": "한국경제 경제"
+        },
+        {
+          "title": "美 재무 발표 앞두고…국고채 금리 일제히 하락(종합)",
+          "link": "https://www.yna.co.kr/view/AKR20260824137251008",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "국고채 금리 일제히 하락…3년물 연 3.836%",
+          "link": "https://www.yna.co.kr/view/AKR20260824137200008",
+          "source": "연합뉴스 경제"
+        }
+      ]
+    },
+    {
+      "key": "other",
+      "name": "기타 경제 소식",
+      "nameEn": "Other Economic News",
+      "lineKo": "김은진은 대출 비중이 높은 빌라가 내집 마련의 징검다리가 될 수 있다고 밝혔다. 해당 발언은 주택 시장에 대한 우려를 드러낸 것이다. 대한상의는 경제연구총괄을 맡을 인물을 발표했다. 이시욱 전 대외경제정책연구원장이 내정된 것으로 알려졌다. 두 소식은 각각 경제와 주택 시장에 관련된 별개의 내용이다.",
+      "lineEn": "Kim Eun-jin stated that villas with high loan ratios can serve as stepping stones to homeownership. This statement reveals concerns about the housing market. The Korea Chamber of Commerce and Industry announced a person to head its economic research department. It is reported that Lee Si-wook, former president of the Korea Institute for International Economic Policy, has been designated for the position. The two pieces of news are separate issues related to the economy and the housing market, respectively.",
+      "isFallback": false,
+      "fallbackReason": null,
+      "degraded": false,
+      "items": [
+        {
+          "title": "김은진 \"80%까지 대출되는 빌라, 내집 마련 징검다리\"",
+          "link": "https://www.hankyung.com/article/2026082494241",
+          "source": "한국경제 부동산"
+        },
+        {
+          "title": "대한상의 경제연구총괄에 이시욱 전 대외경제정책연구원장 내정",
+          "link": "https://www.yna.co.kr/view/AKR20260824141500003",
+          "source": "연합뉴스 경제"
+        }
+      ]
+    },
+    {
+      "key": "stocks",
+      "name": "증시·환율",
+      "nameEn": "Stocks & FX",
+      "lineKo": "원/달러 환율이 13개월 만에 최저인 1,370원대로 하락했고, 중국 증시는 상하이지수가 0.59% 하락하며 마감했으며, 일본 증시는 소폭 하락했고 키옥시아는 6% 하락했고, 삼전과 닉스가 동반 급락하면서 코스피는 3% 하락했으나 코스닥은 1%대 상승했다.",
+      "lineEn": "The won/dollar exchange rate fell to 1,370 won, the lowest in 13 months, China's stock market closed with the Shanghai index down 0.59%, Japan's stock market slightly declined, Kyocera fell 6%, and Samsung and Nichicon both sharply declined, causing the Kospi to drop 3%, although the KOSDAQ rose over 1%.",
+      "isFallback": false,
+      "fallbackReason": null,
+      "degraded": true,
       "items": [
         {
           "title": "원/달러 환율 13개월 만에 최저…장중 1,370원대로 하락(종합)",
@@ -36,65 +122,6 @@
           "title": "삼전·닉스 동반 급락에 코스피 3%↓…코스닥은 1%대 올라(종합)",
           "link": "https://www.yna.co.kr/view/AKR20260824119751008",
           "source": "연합뉴스 경제"
-        },
-        {
-          "title": "[외환] 원/달러 환율 4.1원 내린 1,382.4원(15:30 기준가)",
-          "link": "https://www.yna.co.kr/view/AKR20260824118000002",
-          "source": "연합뉴스 경제"
-        }
-      ]
-    },
-    {
-      "key": "rates",
-      "name": "금리·예금·투자상품",
-      "nameEn": "Rates, Deposits & Investment Products",
-      "lineKo": "국고채 금리가 일제히 하락하며 3년물은 연 3.836%를 기록했다.",
-      "lineEn": "The government bond yield fell uniformly, with the 3-year bond recording an annual rate of 3.836%.",
-      "isFallback": false,
-      "fallbackReason": null,
-      "degraded": true,
-      "items": [
-        {
-          "title": "국고채 금리 일제히 하락…3년물 연 3.836%",
-          "link": "https://www.yna.co.kr/view/AKR20260824137200008",
-          "source": "연합뉴스 경제"
-        }
-      ]
-    },
-    {
-      "key": "realestate",
-      "name": "부동산",
-      "nameEn": "Real Estate",
-      "lineKo": "부동산융복합학회는 'K-CEO 경제·부동산 최고위 과정' 수강생을 모집하고 있다. 비거주 1주택자에 대한 종부세 기본공제 기준이 12억원으로 논의되고 있다. 강남3구의 급매물은 비거주 1주택 재논의 소식에 움직임을 보였다. 오세훈 시장은 용산공원 주택공급을 언급하며 \"역사의 죄인\"이라고 표현했다. 비거주 1주택자에 대한 규제 완화 기대감은 계속해서 확산되고 있다.",
-      "lineEn": "The Real Estate Convergence Society is recruiting students for its \"K-CEO Economy and Real Estate Executive Program.\" The basic exemption threshold for non-resident single-homeowners for property tax is under discussion at 1,200,000,000 won. The immediate sale listings in the three Gangnam districts showed movement in response to the news of reconsidering regulations on non-resident single-homeowners. Seoul Mayor Oh Se-hoon expressed that the housing supply in Yongsan Park is \"a criminal act in history.\" Expectations for easing regulations on non-resident single-homeowners continue to spread.",
-      "isFallback": false,
-      "fallbackReason": null,
-      "degraded": false,
-      "items": [
-        {
-          "title": "부동산융복합학회, 'K-CEO 경제·부동산 최고위 과정' 수강생 모집",
-          "link": "https://www.newsis.com/view/NISX20260824_0003760455",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "“어느 장단에 맞춰야”…비거주 1주택 재논의 소식에 늘었던 강남3구 급매물 ‘움찔’",
-          "link": "https://www.mk.co.kr/news/realestate/12134846",
-          "source": "매일경제 부동산"
-        },
-        {
-          "title": "'일타강사 자처' 오세훈 시장, 용산공원 주택공급에 \"역사의 죄인\"",
-          "link": "https://www.yna.co.kr/view/AKR20260824122100004",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "비거주 1주택 종부세 기본공제 절충점 찾나…12억원 '주목'",
-          "link": "https://www.yna.co.kr/view/AKR20260824118600002",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "“벼랑 끝 몰린 비거주 1주택자 구사일생?”…규제 완화 기대감 ‘솔솔’",
-          "link": "https://www.mk.co.kr/news/realestate/12134821",
-          "source": "매일경제 부동산"
         }
       ]
     }
