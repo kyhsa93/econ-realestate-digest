@@ -1482,25 +1482,45 @@
     "date": "2026-08-24",
     "model": "qwen3:14b",
     "summary": {
-      "ko": "- 증시·환율: 삼전과 닉스의 주주환원 약발 가능성과 코스피의 향방에 대한 분석이 이루어졌다.\n- 금리·예금·투자상품: 한투증권은 금융주가 고금리 환경에서도 방어력이 높고 주주환원 매력이 있다고 분석했다. 미니애폴리스 연은 총재는 이란 전쟁이 장기화될 경우 금리 인상이 가능하다고 밝혔다. 미국 데이터센터 채권 금리는 AI 투자 증가로 인해 7%로 급등했다. 경제전문가 63%는 한국은행이 두 달 연속 금리를 올릴 것으로 전망하고 있다. 각 기관은 금리와 관련된 다양한 시장 동향을 발표했다.\n- 부동산: 송파구 주택분 재산세가 공시가격 급등으로 23% 증가했다. 당정은 비거주 1주택자 인정 범위를 확대하는 방안을 논의 중이다. 용산공원 부지에 대한 논쟁이 40년 가까이 이어졌으나 해결 여부는 불확실하다. 비거주 1주택자 세부담 완화를 위한 예외범위와 기본공제 조정이 유력하다. 고가 법인주택 중 42%는 사주가 거주하고 있는 것으로 나타났다.\n- 기타 경제 소식: 수원의 인구 감소와 화성·용인의 인구 증가, 2조원 규모의 경제자유구역 추진, GTX-A 연결과 트램 도입으로 인한 집값 변동, 대출 규제로 인한 성남 중원·수원 권선 지역의 집값 상승, 8·13 대책 이후 단기 공급을 위한 자투리땅 활용 등이 오늘의 주요 경제 소식이다.",
-      "en": "- Stocks & FX: An analysis was conducted on the possibility of the negative effects of Samsung and Nick's shareholder return policies and the future direction of the KOSPI.\n- Rates, Deposits & Investment Products: Hanjin Securities analyzed that financial stocks have strong defensive capabilities even in a high-interest rate environment and offer attractive shareholder returns. Minneapolis Fed President stated that interest rates could rise if the Iran war prolongs. The U.S. data center bond rate surged to 7% due to increased AI investment. 63% of economic experts expect the Bank of Korea to raise interest rates for two consecutive months. Each institution announced various market trends related to interest rates.\n- Real Estate: Property tax in Songpa-gu's residential housing has increased by 23% due to a sharp rise in the announced price. The government and ruling party are discussing expanding the scope of recognizing non-resident single-homeowners. The debate over the Yongsan Park site has continued for nearly 40 years, but the resolution remains uncertain. It is likely that the exception scope and basic exemption adjustment will be considered to ease the tax burden on non-resident single-homeowners. It was found that 42% of high-priced corporate housing is occupied by shareholders.\n- Other Economic News: Decrease in Suwon's population and increase in Hwaseong and Yongin's population, promotion of an economic free zone with a scale of 2,000,000,000,000 won, fluctuation in housing prices due to GTX-A connection and tram introduction, rising housing prices in Seongnam Jungwon and Suwon Gwansun areas due to loan regulations, and utilization of leftover land for short-term supply after the 8·13 measures are today's major economic news."
+      "ko": "- 부동산: 성남시는 1세대 1주택자에 대해 재산세를 한시적으로 감면하는 방안을 추진하며, 이로 인해 169억원의 세금 감면 효과가 예상된다. 비거주 1주택자에 대한 재논의가 진행되면서 강남권의 매물과 호가에 영향을 미쳐 급매물이 움직이는 것으로 나타났다. 서울시민 3명 중 2명은 용산공원에 공공주택을 건설하는 것에 반대하는 입장을 보였다. 안전 등급이 최하위인 E등급 공동주택 거주자에게는 주거 및 이주 지원이 제공되고 있다. 서울에서 500세대 이하의 재개발·재건축 사업이 가속화될 경우 최소 6천세대가 영향을 받을 것으로 보인다.\n- 금리·예금·투자상품: 국고채 금리가 대체로 하락하며 3년물은 장중 연 3.856%를 기록했다. 미국의 부채 규모가 40조달러에 달하며 국채금리가 19년래 최고 수준을 기록했다. 중금리대출 규제가 풀리면서 NH저축은행은 최저 연 5.5%의 중금리대출을 출시했다. NH저축은행은 중·저신용자 대상의 중금리 생활안정대출을 새롭게 선보였다. 각 기사는 별개의 사실을 다루며 서로 다른 내용을 전달하고 있다.\n- 증시·환율: 원/달러 환율은 1,370원대까지 하락하며 작년 9월 이후 최저 수준을 기록했다. 코스피는 삼전과 하닉의 급락으로 인해 2%대 낙폭을 기록하며 하락세를 이어갔다. 중국 증시는 혼조세를 보이며 상하이지수가 0.06% 하락했다. 뉴욕증시는 엔비디아와 PCE, 잭슨홀 관련 이슈로 주목받고 있다. 일본 닛케이 지수는 미국 반도체주 약세로 인해 0.06% 하락 출발했다.\n- 기타 경제 소식: BNK금융그룹은 추석을 맞아 중소기업 등에 1조6천억원의 특별대출을 제공했다. 서울의 집값 기대감은 두 달째 하락했지만, 영통·수지·동탄 지역은 2%대 상승세를 보이고 있다. 원주시는 추석 전 공사·용역 대금을 조기 지급해 경제 활성화를 기대하고 있다. 각 지역과 기관은 서로 다른 방향으로 경제 활동을 이어가고 있다. 이처럼 다양한 경제 관련 소식들이 오늘 전해졌다.",
+      "en": "- Real Estate: Seongnam City is promoting a temporary tax reduction plan for single-household owners, which is expected to result in a tax reduction of 16,900,000,000 won. As discussions continue regarding non-resident single-household owners, it has been observed that this is affecting the supply and asking prices in the Gangnam area, causing quick-moving inventory. Out of three Seoul residents, two oppose the construction of public housing in Yongsan Park. Residents of E-grade apartment complexes, which have the lowest safety rating, are receiving support for housing and relocation. If redevelopment and reconstruction projects with fewer than 500 units in Seoul accelerate, at least 6,000 units are expected to be affected.\n- Rates, Deposits & Investment Products: The yield on government bonds fell, with the three-year bond reaching 3.856% during the day. The U.S. debt reached 40,000,000,000,000 dollars, and bond yields hit their highest level in 19 years. With the easing of regulations on medium-interest loans, NH Savings Bank launched a medium-interest loan with a minimum annual interest rate of 5.5%. NH Savings Bank introduced a new medium-interest living stability loan targeted at medium- and low-credit borrowers. Each article covers separate facts and conveys different information.\n- Stocks & FX: The won/dollar exchange rate fell to the 1,370 won range, reaching its lowest level since September last year. The KOSPI continued its downward trend, recording a decline of over 2% due to the sharp drop in shares of Samsung Electronics and Hanjin. The Chinese stock market showed a mixed performance, with the Shanghai index falling 0.06%. The New York stock market is drawing attention due to issues related to NVIDIA, PCE, and Jackson Hole. The Nikkei index in Japan started the day down 0.06% due to weakness in U.S. semiconductor stocks.\n- Other Economic News: BNK Financial Group provided a special loan of 1,600,000,000,000 won to small and medium-sized enterprises in preparation for Chuseok. Expectations for housing prices in Seoul have declined for the second consecutive month, but areas such as Yeongtong, Sujwi, and Dongtan are showing growth rates in the high 2 percent range. Wonju City is expecting economic activation by paying construction and service fees in advance before Chuseok. Each region and institution is continuing economic activities in different directions. In this way, various economic-related news was reported today."
     },
     "highlights": [],
     "categories": [
       {
-        "key": "stocks",
-        "name": "증시·환율",
-        "nameEn": "Stocks & FX",
-        "lineKo": "삼전과 닉스의 주주환원 약발 가능성과 코스피의 향방에 대한 분석이 이루어졌다.",
-        "lineEn": "An analysis was conducted on the possibility of the negative effects of Samsung and Nick's shareholder return policies and the future direction of the KOSPI.",
+        "key": "realestate",
+        "name": "부동산",
+        "nameEn": "Real Estate",
+        "lineKo": "성남시는 1세대 1주택자에 대해 재산세를 한시적으로 감면하는 방안을 추진하며, 이로 인해 169억원의 세금 감면 효과가 예상된다. 비거주 1주택자에 대한 재논의가 진행되면서 강남권의 매물과 호가에 영향을 미쳐 급매물이 움직이는 것으로 나타났다. 서울시민 3명 중 2명은 용산공원에 공공주택을 건설하는 것에 반대하는 입장을 보였다. 안전 등급이 최하위인 E등급 공동주택 거주자에게는 주거 및 이주 지원이 제공되고 있다. 서울에서 500세대 이하의 재개발·재건축 사업이 가속화될 경우 최소 6천세대가 영향을 받을 것으로 보인다.",
+        "lineEn": "Seongnam City is promoting a temporary tax reduction plan for single-household owners, which is expected to result in a tax reduction of 16,900,000,000 won. As discussions continue regarding non-resident single-household owners, it has been observed that this is affecting the supply and asking prices in the Gangnam area, causing quick-moving inventory. Out of three Seoul residents, two oppose the construction of public housing in Yongsan Park. Residents of E-grade apartment complexes, which have the lowest safety rating, are receiving support for housing and relocation. If redevelopment and reconstruction projects with fewer than 500 units in Seoul accelerate, at least 6,000 units are expected to be affected.",
         "isFallback": false,
         "fallbackReason": null,
-        "degraded": true,
+        "degraded": false,
         "items": [
           {
-            "title": "[마켓뷰] 삼전·닉스 주주환원 약발 이어질까…코스피 향방은",
-            "link": "https://www.yna.co.kr/view/AKR20260824020000008",
+            "title": "성남시, 1세대 1주택자 재산세 한시 감면 추진…169억원 경감",
+            "link": "https://www.yna.co.kr/view/AKR20260824077100061",
             "source": "연합뉴스 경제"
+          },
+          {
+            "title": "비거주 1주택 재논의에 급매물 움찔…\"강남권 매물·호가 영향\"",
+            "link": "https://www.yna.co.kr/view/AKR20260824074200003",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "서울시민 3명 중 2명 “용산공원에 공공주택 반대”",
+            "link": "https://www.mk.co.kr/news/realestate/12134595",
+            "source": "매일경제 부동산"
+          },
+          {
+            "title": "안전 최하 'E등급' 공동주택 거주자에 주거·이주 지원",
+            "link": "https://www.newsis.com/view/NISX20260824_0003759180",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "500세대 이하 재개발·재건축 빨라질까…서울 최소 6천세대 영향권",
+            "link": "https://www.newsis.com/view/NISX20260824_0003759757",
+            "source": "뉴시스 경제"
           }
         ]
       },
@@ -1508,68 +1528,68 @@
         "key": "rates",
         "name": "금리·예금·투자상품",
         "nameEn": "Rates, Deposits & Investment Products",
-        "lineKo": "한투증권은 금융주가 고금리 환경에서도 방어력이 높고 주주환원 매력이 있다고 분석했다. 미니애폴리스 연은 총재는 이란 전쟁이 장기화될 경우 금리 인상이 가능하다고 밝혔다. 미국 데이터센터 채권 금리는 AI 투자 증가로 인해 7%로 급등했다. 경제전문가 63%는 한국은행이 두 달 연속 금리를 올릴 것으로 전망하고 있다. 각 기관은 금리와 관련된 다양한 시장 동향을 발표했다.",
-        "lineEn": "Hanjin Securities analyzed that financial stocks have strong defensive capabilities even in a high-interest rate environment and offer attractive shareholder returns. Minneapolis Fed President stated that interest rates could rise if the Iran war prolongs. The U.S. data center bond rate surged to 7% due to increased AI investment. 63% of economic experts expect the Bank of Korea to raise interest rates for two consecutive months. Each institution announced various market trends related to interest rates.",
+        "lineKo": "국고채 금리가 대체로 하락하며 3년물은 장중 연 3.856%를 기록했다. 미국의 부채 규모가 40조달러에 달하며 국채금리가 19년래 최고 수준을 기록했다. 중금리대출 규제가 풀리면서 NH저축은행은 최저 연 5.5%의 중금리대출을 출시했다. NH저축은행은 중·저신용자 대상의 중금리 생활안정대출을 새롭게 선보였다. 각 기사는 별개의 사실을 다루며 서로 다른 내용을 전달하고 있다.",
+        "lineEn": "The yield on government bonds fell, with the three-year bond reaching 3.856% during the day. The U.S. debt reached 40,000,000,000,000 dollars, and bond yields hit their highest level in 19 years. With the easing of regulations on medium-interest loans, NH Savings Bank launched a medium-interest loan with a minimum annual interest rate of 5.5%. NH Savings Bank introduced a new medium-interest living stability loan targeted at medium- and low-credit borrowers. Each article covers separate facts and conveys different information.",
         "isFallback": false,
         "fallbackReason": null,
         "degraded": false,
         "items": [
           {
-            "title": "한투증권 \"금융주, 고금리 방어력 높고 주주환원 매력 겸비\"",
-            "link": "https://www.yna.co.kr/view/AKR20260824018800008",
+            "title": "국고채 금리 대체로 하락…3년물 장중 연 3.856%",
+            "link": "https://www.yna.co.kr/view/AKR20260824079400008",
             "source": "연합뉴스 경제"
           },
           {
-            "title": "미니애폴리스 연은 총재 \"이란 전쟁 장기화하면 금리 올릴 수도\"",
-            "link": "https://www.newsis.com/view/NISX20260824_0003759182",
+            "title": "美 부채 40조달러·국채금리 19년래 최고…워시 '잭슨홀 시험대'",
+            "link": "https://www.newsis.com/view/NISX20260824_0003759583",
             "source": "뉴시스 경제"
           },
           {
-            "title": "AI 투자 늘자…美데이터센터 채권 금리 年 7%로 급등",
-            "link": "https://www.hankyung.com/article/2026082371451",
+            "title": "규제 풀린 중금리대출, 공급 줄잇나…NH저축銀 최저 연 5.5% 내놔",
+            "link": "https://www.hankyung.com/article/202608248348i",
             "source": "한국경제 경제"
           },
           {
-            "title": "경제전문가 63% \"한은, 두 달 연속 금리 올릴 것\"",
-            "link": "https://www.hankyung.com/article/2026082371081",
-            "source": "한국경제 경제"
+            "title": "NH저축은행, 중·저신용자 위한 중금리 생활안정대출 출시",
+            "link": "https://www.yna.co.kr/view/AKR20260824067200002",
+            "source": "연합뉴스 경제"
           }
         ]
       },
       {
-        "key": "realestate",
-        "name": "부동산",
-        "nameEn": "Real Estate",
-        "lineKo": "송파구 주택분 재산세가 공시가격 급등으로 23% 증가했다. 당정은 비거주 1주택자 인정 범위를 확대하는 방안을 논의 중이다. 용산공원 부지에 대한 논쟁이 40년 가까이 이어졌으나 해결 여부는 불확실하다. 비거주 1주택자 세부담 완화를 위한 예외범위와 기본공제 조정이 유력하다. 고가 법인주택 중 42%는 사주가 거주하고 있는 것으로 나타났다.",
-        "lineEn": "Property tax in Songpa-gu's residential housing has increased by 23% due to a sharp rise in the announced price. The government and ruling party are discussing expanding the scope of recognizing non-resident single-homeowners. The debate over the Yongsan Park site has continued for nearly 40 years, but the resolution remains uncertain. It is likely that the exception scope and basic exemption adjustment will be considered to ease the tax burden on non-resident single-homeowners. It was found that 42% of high-priced corporate housing is occupied by shareholders.",
+        "key": "stocks",
+        "name": "증시·환율",
+        "nameEn": "Stocks & FX",
+        "lineKo": "원/달러 환율은 1,370원대까지 하락하며 작년 9월 이후 최저 수준을 기록했다. 코스피는 삼전과 하닉의 급락으로 인해 2%대 낙폭을 기록하며 하락세를 이어갔다. 중국 증시는 혼조세를 보이며 상하이지수가 0.06% 하락했다. 뉴욕증시는 엔비디아와 PCE, 잭슨홀 관련 이슈로 주목받고 있다. 일본 닛케이 지수는 미국 반도체주 약세로 인해 0.06% 하락 출발했다.",
+        "lineEn": "The won/dollar exchange rate fell to the 1,370 won range, reaching its lowest level since September last year. The KOSPI continued its downward trend, recording a decline of over 2% due to the sharp drop in shares of Samsung Electronics and Hanjin. The Chinese stock market showed a mixed performance, with the Shanghai index falling 0.06%. The New York stock market is drawing attention due to issues related to NVIDIA, PCE, and Jackson Hole. The Nikkei index in Japan started the day down 0.06% due to weakness in U.S. semiconductor stocks.",
         "isFallback": false,
         "fallbackReason": null,
         "degraded": false,
         "items": [
           {
-            "title": "공시가격 급등에 송파구 주택분 재산세 23%↑…\"산정체계 개선해야\"",
-            "link": "https://www.yna.co.kr/view/AKR20260824008900004",
+            "title": "원/달러 환율 1,370원대로 하락…작년 9월 이후 최저",
+            "link": "https://www.yna.co.kr/view/AKR20260824075800002",
             "source": "연합뉴스 경제"
           },
           {
-            "title": "당정 \"불가피한 비거주 1주택자 인정 확대\"[간추린 주말 뉴스]",
-            "link": "https://www.newsis.com/view/NISX20260823_0003759101",
+            "title": "삼전 급락이어 하닉도 약세…코스피, 2%대로 낙폭 확대",
+            "link": "https://www.yna.co.kr/view/AKR20260824071200008",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "[올댓차이나] 중국 증시 혼조 출발…상하이지수 0.06%↓",
+            "link": "https://www.newsis.com/view/NISX20260824_0003759803",
             "source": "뉴시스 경제"
           },
           {
-            "title": "주택난 때마다 소환된 용산공원… 40년 가까운 논쟁 끝날까",
-            "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/24/7D6PXG6NKZCPRLPEFHVUPEU36E/",
-            "source": "조선비즈 부동산"
-          },
-          {
-            "title": "비거주 1주택 세부담 완화 가닥…예외범위·기본공제 조정 유력",
-            "link": "https://www.newsis.com/view/NISX20260823_0003758978",
+            "title": "[주간 뉴욕증시] 엔비디아·PCE·잭슨홀 '빅위크'…증시 향방 가른다",
+            "link": "https://www.newsis.com/view/NISX20260824_0003759338",
             "source": "뉴시스 경제"
           },
           {
-            "title": "\"고가 법인주택 42%는 사주가 거주\"",
-            "link": "https://www.hankyung.com/article/2026082371041",
-            "source": "한국경제 경제"
+            "title": "日증시, 美반도체주 약세에 하락 출발…닛케이 0.06%↓",
+            "link": "https://www.newsis.com/view/NISX20260824_0003759381",
+            "source": "뉴시스 경제"
           }
         ]
       },
@@ -1577,36 +1597,26 @@
         "key": "other",
         "name": "기타 경제 소식",
         "nameEn": "Other Economic News",
-        "lineKo": "수원의 인구 감소와 화성·용인의 인구 증가, 2조원 규모의 경제자유구역 추진, GTX-A 연결과 트램 도입으로 인한 집값 변동, 대출 규제로 인한 성남 중원·수원 권선 지역의 집값 상승, 8·13 대책 이후 단기 공급을 위한 자투리땅 활용 등이 오늘의 주요 경제 소식이다.",
-        "lineEn": "Decrease in Suwon's population and increase in Hwaseong and Yongin's population, promotion of an economic free zone with a scale of 2,000,000,000,000 won, fluctuation in housing prices due to GTX-A connection and tram introduction, rising housing prices in Seongnam Jungwon and Suwon Gwansun areas due to loan regulations, and utilization of leftover land for short-term supply after the 8·13 measures are today's major economic news.",
+        "lineKo": "BNK금융그룹은 추석을 맞아 중소기업 등에 1조6천억원의 특별대출을 제공했다. 서울의 집값 기대감은 두 달째 하락했지만, 영통·수지·동탄 지역은 2%대 상승세를 보이고 있다. 원주시는 추석 전 공사·용역 대금을 조기 지급해 경제 활성화를 기대하고 있다. 각 지역과 기관은 서로 다른 방향으로 경제 활동을 이어가고 있다. 이처럼 다양한 경제 관련 소식들이 오늘 전해졌다.",
+        "lineEn": "BNK Financial Group provided a special loan of 1,600,000,000,000 won to small and medium-sized enterprises in preparation for Chuseok. Expectations for housing prices in Seoul have declined for the second consecutive month, but areas such as Yeongtong, Sujwi, and Dongtan are showing growth rates in the high 2 percent range. Wonju City is expecting economic activation by paying construction and service fees in advance before Chuseok. Each region and institution is continuing economic activities in different directions. In this way, various economic-related news was reported today.",
         "isFallback": false,
         "fallbackReason": null,
-        "degraded": true,
+        "degraded": false,
         "items": [
           {
-            "title": "화성·용인 커지는데 인구 줄어든 수원… 2조원 경제자유구역 승부수",
-            "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/24/YHEJIEALMJEAPGVW7OBUA6G4PY/",
-            "source": "조선비즈 부동산"
+            "title": "BNK금융그룹, 추석 맞아 중소기업 등에 1조6천억원 특별대출",
+            "link": "https://www.yna.co.kr/view/AKR20260824068200051",
+            "source": "연합뉴스 경제"
           },
           {
-            "title": "[오늘의 주요일정]경제(8월24일월요일)",
-            "link": "https://www.newsis.com/view/NISX20260821_0003756896",
-            "source": "뉴시스 경제"
+            "title": "서울 집값 기대감은 두 달째 꺾였는데…영통·수지·동탄은 2%대 ‘질주’",
+            "link": "https://www.mk.co.kr/news/realestate/12134517",
+            "source": "매일경제 부동산"
           },
           {
-            "title": "8·13 대책에도 집값 불안하자…'단기 공급' 가능한 자투리땅 총동원령",
-            "link": "https://www.newsis.com/view/NISX20260823_0003759029",
-            "source": "뉴시스 경제"
-          },
-          {
-            "title": "GTX-A 연결하고 트램 달린다…교통망 타고 집값 들썩",
-            "link": "https://www.hankyung.com/article/2026082370801",
-            "source": "한국경제 부동산"
-          },
-          {
-            "title": "대출 규제 풍선효과…성남 중원·수원 권선 '껑충'",
-            "link": "https://www.hankyung.com/article/2026082370551",
-            "source": "한국경제 부동산"
+            "title": "원주시, 추석 전 공사·용역 대금 조기 지급…경제 활성화 기대",
+            "link": "https://www.yna.co.kr/view/AKR20260824047000062",
+            "source": "연합뉴스 경제"
           }
         ]
       }
