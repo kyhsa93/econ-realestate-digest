@@ -4123,14 +4123,112 @@
     "date": "2026-08-24",
     "items": [
       {
+        "title": "매매·전월세 모두 뛴 서울…원인은 유동성 급증",
+        "link": "https://www.hankyung.com/article/2026082494661",
+        "publishedAt": "2026-08-24T10:01:07.000Z",
+        "source": "한국경제 경제",
+        "category": "realestate",
+        "preview": null,
+        "dupes": []
+      },
+      {
+        "title": "이억원 \"잔금대출 기준 분양가·감정가, 은행 자율적 판단\"(종합)",
+        "link": "https://www.yna.co.kr/view/AKR20260824139251002",
+        "publishedAt": "2026-08-24T09:45:19.000Z",
+        "source": "연합뉴스 경제",
+        "category": "realestate",
+        "preview": "(서울=연합뉴스) 배영경 김지연 기자 = 이억원 금융위원장은 24일 신축 아파트 잔금대출 한도를 정할 때 분양가·감정가 중 어떤 것을 기준으로 ...",
+        "dupes": []
+      },
+      {
+        "title": "[단독] '최대 1000만원' 중금리대출에 1.4만명 몰려",
+        "link": "https://www.hankyung.com/article/2026082495821",
+        "publishedAt": "2026-08-24T09:07:19.000Z",
+        "source": "한국경제 경제",
+        "category": "rates",
+        "preview": null,
+        "dupes": []
+      },
+      {
+        "title": "'분양전환' 막혀 임대주택 기금 1조 연체",
+        "link": "https://www.hankyung.com/article/2026082494201",
+        "publishedAt": "2026-08-24T08:22:46.000Z",
+        "source": "한국경제 부동산",
+        "category": "realestate",
+        "preview": null,
+        "dupes": []
+      },
+      {
+        "title": "김은진 \"80%까지 대출되는 빌라, 내집 마련 징검다리\"",
+        "link": "https://www.hankyung.com/article/2026082494241",
+        "publishedAt": "2026-08-24T08:22:17.000Z",
+        "source": "한국경제 부동산",
+        "category": "other",
+        "preview": null,
+        "dupes": []
+      },
+      {
+        "title": "비거주 1주택 종부세 기본공제 절충점 찾나…12억원 '주목'(종합)",
+        "link": "https://www.yna.co.kr/view/AKR20260824118651002",
+        "publishedAt": "2026-08-24T08:15:32.000Z",
+        "source": "연합뉴스 경제",
+        "category": "realestate",
+        "preview": "(세종=연합뉴스) 안채원 송정은 기자 = 세제 당국이 고위당정협의회에서 제기된 의견을 토대로 부동산 세제 개편안의 비거주 1주택자 기본공제 상향...",
+        "dupes": []
+      },
+      {
+        "title": "[포토] '반세권 기대감' 광주 제일풍경채 견본주택 북적",
+        "link": "https://www.mk.co.kr/news/realestate/12135014",
+        "publishedAt": "2026-08-24T08:15:15.000Z",
+        "source": "매일경제 부동산",
+        "category": "realestate",
+        "preview": null,
+        "dupes": []
+      },
+      {
+        "title": "서울시민 3명 중 2명 \"용산공원 아파트 반대\"",
+        "link": "https://www.mk.co.kr/news/realestate/12135012",
+        "publishedAt": "2026-08-24T08:15:13.000Z",
+        "source": "매일경제 부동산",
+        "category": "realestate",
+        "preview": "서울시민 3명 중 2명이 용산공원 용지에 공공주택을 짓는 데 반대하는 것으로 조사됐다. 김윤덕 국토교통부 장관과 오세훈 서울시장이 이번주 용산공원 주택 공급 문제를 다시 논의할 예..",
+        "dupes": []
+      },
+      {
+        "title": "美 재무 발표 앞두고…국고채 금리 일제히 하락(종합)",
+        "link": "https://www.yna.co.kr/view/AKR20260824137251008",
+        "publishedAt": "2026-08-24T08:05:17.000Z",
+        "source": "연합뉴스 경제",
+        "category": "rates",
+        "preview": "(서울=연합뉴스) 김태종 기자 = 스콧 베센트 미국 재무장관의 국채 관련 추가 대책 발표를 앞두고 24일 국고채 금리가 일제히 하락 마감했다.",
+        "dupes": []
+      },
+      {
+        "title": "대한상의 경제연구총괄에 이시욱 전 대외경제정책연구원장 내정",
+        "link": "https://www.yna.co.kr/view/AKR20260824141500003",
+        "publishedAt": "2026-08-24T08:04:46.000Z",
+        "source": "연합뉴스 경제",
+        "category": "other",
+        "preview": "(서울=연합뉴스) 임성호 기자 = 대한상공회의소는 신설 직책인 경제연구총괄에 이시욱(59) 전 대외경제정책연구원(KIEP) 원장을 내정했다고 2...",
+        "dupes": []
+      },
+      {
+        "title": "靑, 與 1주택 종부세 개편 요구에 \"당 요청 확인하고 수용\"",
+        "link": "https://www.newsis.com/view/NISX20260824_0003760516",
+        "publishedAt": "2026-08-24T08:01:08.000Z",
+        "source": "뉴시스 경제",
+        "category": "realestate",
+        "preview": "[서울=뉴시스] 김지은 김경록 기자 = 청와대는 24일 부동산 등 세제 개편안 수정안과 관련 \"정책 완성도, 국민적 수용도 제고를 위해 다양한 국민의견과 당정 협의 결과를 면밀하게 살펴보고 있다\"고 밝혔다. 강유정…",
+        "dupes": []
+      },
+      {
         "title": "원/달러 환율 13개월 만에 최저…장중 1,370원대로 하락(종합)",
         "link": "https://www.yna.co.kr/view/AKR20260824075851002",
         "publishedAt": "2026-08-24T07:54:04.000Z",
         "source": "연합뉴스 경제",
         "category": "stocks",
         "preview": "(서울=연합뉴스) 김지연 기자 = 원/달러 환율이 24일 장중 1,370원대로 내려가며 13개월 만에 최저를 기록했다.",
-        "dupes": [],
-        "titleEn": "Won/Dollar Exchange Rate Hits 13-Month Low, Falls to 1,370 Won Range During Trading (Comprehensive)"
+        "dupes": []
       },
       {
         "title": "국고채 금리 일제히 하락…3년물 연 3.836%",
@@ -4139,8 +4237,7 @@
         "source": "연합뉴스 경제",
         "category": "rates",
         "preview": "(서울=연합뉴스) 24일 국고채 금리가 일제히 하락했다.",
-        "dupes": [],
-        "titleEn": "South Korea's government bond yields fall across the board... 3-year bonds at 3.836% annually"
+        "dupes": []
       },
       {
         "title": "부동산융복합학회, 'K-CEO 경제·부동산 최고위 과정' 수강생 모집",
@@ -4149,8 +4246,7 @@
         "source": "뉴시스 경제",
         "category": "realestate",
         "preview": "[서울=뉴시스] 박성환 기자 = 한국부동산융복합학회가 급변하는 경제·부동산 시장에 대응할 실무형 전문가 양성을 위해 '제2기 K-CEO 한국 경제·부동산 최고위 과정' 수강생을 모집한다고 24일 밝혔다. 한국부동산융…",
-        "dupes": [],
-        "titleEn": "Real Estate Convergence Society to Recruit Students for 'K-CEO Economy and Real Estate Executive Program"
+        "dupes": []
       },
       {
         "title": "[올댓차이나] 중국 증시 하락 마감…상하이지수 0.59%↓",
@@ -4159,8 +4255,7 @@
         "source": "뉴시스 경제",
         "category": "stocks",
         "preview": "[서울=뉴시스] 문예성 기자 = 중국 증시가 24일 하락 마감했다. 이날 상하이종합지수는 전거래일보다 0.59% 내린 3882.01로 거래를 마쳤다. 선전성분지수는 전장 대비 2.13% 하락한 1만3794.29로,…",
-        "dupes": [],
-        "titleEn": "[AllChina] China's stock market closes lower… Shanghai Index down 0.59%"
+        "dupes": []
       },
       {
         "title": "日증시, 소폭 하락 마감…반도체 관망세에 키옥시아 6%↓",
@@ -4169,8 +4264,7 @@
         "source": "뉴시스 경제",
         "category": "stocks",
         "preview": "[서울=뉴시스]고재은 기자 = 24일 일본 도쿄 증시에서 닛케이225지수(닛케이평균주가)가 소폭 하락 마감했다. 이번 주 예정된 미국 반도체 기업 엔비디아의 실적 발표와 27일부터 시작되는 잭슨홀 경제정책 심포지엄을…",
-        "dupes": [],
-        "titleEn": "Tokyo Stock Exchange Closes Slightly Lower... Kyocera Falls 6% Amid Semiconductor Market Watchfulness"
+        "dupes": []
       },
       {
         "title": "삼전·닉스 동반 급락에 코스피 3%↓…코스닥은 1%대 올라(종합)",
@@ -4179,8 +4273,7 @@
         "source": "연합뉴스 경제",
         "category": "stocks",
         "preview": "(서울=연합뉴스) 김유향 기자 = 국내 반도체 '투톱'인 삼성전자와 SK하이닉스 주가가 큰 폭으로 내리면서 24일 코스피가 3% 넘게 하락했다.",
-        "dupes": [],
-        "titleEn": "Saeim·Nix Fall Together, Kospi Drops 3%... Kosdaq Rises in Single Digits (Comprehensive)"
+        "dupes": []
       },
       {
         "title": "“어느 장단에 맞춰야”…비거주 1주택 재논의 소식에 늘었던 강남3구 급매물 ‘움찔’",
@@ -4189,20 +4282,7 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "세 부담 우려에 쏟아진 강남권 급매물 비거주 1주택자 부담 완화 움직임에 매물 거두거나 호가 올리는 집주인 늘어 “세제 일관성 결여, 시장 혼란·불만 가중”세제개편안 이후 급매물이..",
-        "dupes": [],
-        "context": [
-          {
-            "kind": "realestate",
-            "href": "./district-gangnam.html",
-            "label": "강남구 아파트 84㎡ 매매",
-            "labelEn": "강남구 apartment 84㎡ sale",
-            "value": "28억 4,438만원",
-            "valueEn": "₩2,844M",
-            "note": "최근 1주 계약 26건 · 8/17 대비 +0.8%",
-            "noteEn": "26 deals in the last 1 weeks · +0.8% vs Aug 17"
-          }
-        ],
-        "titleEn": "Which rhythm to follow?\"... Strong South Districts' urgent listings waver as non-resident single-home ownership policy is reconsidered"
+        "dupes": []
       },
       {
         "title": "'일타강사 자처' 오세훈 시장, 용산공원 주택공급에 \"역사의 죄인\"",
@@ -4211,30 +4291,7 @@
         "source": "연합뉴스 경제",
         "category": "realestate",
         "preview": "(서울=연합뉴스) 김준태 기자 = 오세훈 서울시장이 24일 '부동산 일타강사'로 나서 용산공원 내 주택공급에 대한 반대 의견을 분명히 밝혔다.",
-        "dupes": [],
-        "context": [
-          {
-            "kind": "realestate",
-            "href": "./district-yongsan.html",
-            "label": "용산구 아파트 84㎡ 매매",
-            "labelEn": "용산구 apartment 84㎡ sale",
-            "value": "22억 2,184만원",
-            "valueEn": "₩2,222M",
-            "note": "최근 1주 계약 8건",
-            "noteEn": "8 deals in the last 1 weeks"
-          }
-        ],
-        "titleEn": "Mayor Oh Se-hoon, who positions himself as a \"one-strike teacher,\" calls housing supply in Yongsan Park \"a criminal act against history"
-      },
-      {
-        "title": "비거주 1주택 종부세 기본공제 절충점 찾나…12억원 '주목'",
-        "link": "https://www.yna.co.kr/view/AKR20260824118600002",
-        "publishedAt": "2026-08-24T06:38:45.000Z",
-        "source": "연합뉴스 경제",
-        "category": "realestate",
-        "preview": "(세종=연합뉴스) 안채원 송정은 기자 = 세제 당국이 고위당정협의회에서 제기된 의견을 토대로 부동산 세제 개편안의 비거주 1주택자 기본공제 상향...",
-        "dupes": [],
-        "titleEn": "Non-resident single-home property tax basic exemption compromise in sight... 1,200,000,000 won 'watched"
+        "dupes": []
       },
       {
         "title": "“벼랑 끝 몰린 비거주 1주택자 구사일생?”…규제 완화 기대감 ‘솔솔’",
@@ -4243,18 +4300,7 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "정부가 최근 발표한 부동산 세제 개편안을 두고 비거주 1주택자들의 반발이 거세지는 가운데 정치권에서도 제도 보완 및 규제 완화 목소리가 커지고 있다. 1주택 보유라는 타이틀을 가졌..",
-        "dupes": [],
-        "titleEn": "Non-resident single-homeowners on the brink? Regulatory easing hopes rise"
-      },
-      {
-        "title": "[외환] 원/달러 환율 4.1원 내린 1,382.4원(15:30 기준가)",
-        "link": "https://www.yna.co.kr/view/AKR20260824118000002",
-        "publishedAt": "2026-08-24T06:30:46.000Z",
-        "source": "연합뉴스 경제",
-        "category": "stocks",
-        "preview": null,
-        "dupes": [],
-        "titleEn": "[Yen/USD Exchange Rate Falls 4.1 Won to 1,382.4 Won (As of 15:30)]"
+        "dupes": []
       },
       {
         "title": "1주택 종부세 공제 재조정?…9억→14억 땐 부담 최대 85%↓",
@@ -4263,30 +4309,7 @@
         "source": "뉴시스 경제",
         "category": "realestate",
         "preview": "[세종=뉴시스]박광온 기자 = 당정이 비거주 1주택자의 종합부동산세 기본공제를 정부안(9억원)보다 높이는 방안을 검토하고 있다. 이번 세제개편안에서 종부세 기본공제는 시가 20억원 이상 비거주 1주택자의 세부담이 크…",
-        "dupes": [],
-        "titleEn": "Revised housing tax deduction for single homes?... Burden drops up to 85% when 900,000,000→1,400,000,000"
-      },
-      {
-        "title": "해안건축, 송파 올림픽훼밀리타운 재건축 설계사 선정",
-        "link": "https://www.yna.co.kr/view/AKR20260824107800003",
-        "publishedAt": "2026-08-24T05:59:46.000Z",
-        "source": "연합뉴스 경제",
-        "category": "realestate",
-        "preview": "(서울=연합뉴스) 임기창 기자 = 해안종합건축사사무소는 서울 송파구 올림픽훼밀리타운 재건축 사업 설계사로 최종 선정됐다고 24일 밝혔다.",
-        "dupes": [],
-        "context": [
-          {
-            "kind": "realestate",
-            "href": "./district-songpa.html",
-            "label": "송파구 아파트 84㎡ 매매",
-            "labelEn": "송파구 apartment 84㎡ sale",
-            "value": "26억 6,118만원",
-            "valueEn": "₩2,661M",
-            "note": "최근 1주 계약 48건 · 8/17 대비 +51.5%",
-            "noteEn": "48 deals in the last 1 weeks · +51.5% vs Aug 17"
-          }
-        ],
-        "titleEn": "Coastal Construction Selected as Designer for Songpa Olympic Family Town Redevelopment"
+        "dupes": []
       },
       {
         "title": "구윤철 \"합리적 이유 있는 비거주 1주택, 과감히 거주로 인정\"",
@@ -4295,8 +4318,7 @@
         "source": "뉴시스 경제",
         "category": "realestate",
         "preview": "[세종=뉴시스]임하은 기자 = 구윤철 경제부총리 겸 재정경제부 장관이 합리적인 사유로 실거주하지 못하는 1주택자에 대해서는 \"과감하게 거주주택으로 전환해 문제를 해결해드리겠다\"고 말했다. 구윤철 부총리는 24일 국회…",
-        "dupes": [],
-        "titleEn": "Koo Bohn-chul: \"Non-resident single-homeowners with reasonable reasons should be boldly recognized as residents"
+        "dupes": []
       },
       {
         "title": "나우동인건축, 3930가구 월계시영 재건축 설계 수주전 참여",
@@ -4305,8 +4327,7 @@
         "source": "한국경제 부동산",
         "category": "realestate",
         "preview": null,
-        "dupes": [],
-        "titleEn": "Nowdongin Architects to Participate in Design Bidding for 3930-unit Wolgye Siyeong Reconstruction Project"
+        "dupes": []
       },
       {
         "title": "해안건축, 4494가구 올림픽훼밀리타운 재건축 설계 맡는다",
@@ -4315,130 +4336,7 @@
         "source": "한국경제 부동산",
         "category": "realestate",
         "preview": null,
-        "dupes": [],
-        "titleEn": "Coastal Construction to Handle Design of 4494-unit Olympic Family Town Reconstruction"
-      },
-      {
-        "title": "용산공원 찾은 오세훈 \"정밀한 계획없는 주택공급 무책임\"",
-        "link": "https://www.newsis.com/view/NISX20260824_0003760154",
-        "publishedAt": "2026-08-24T05:41:47.000Z",
-        "source": "뉴시스 경제",
-        "category": "realestate",
-        "preview": "[서울=뉴시스] 박대로 기자 = 오세훈 서울시장이 용산어린이정원을 찾아 최근 논란이 되고 있는 용산공원 내 주택 공급에 대한 서울시 입장을 설명했다. 서울시는 24일 '일타시장-용산공원 편'을 서울시장 공식 누리집과…",
-        "dupes": [],
-        "context": [
-          {
-            "kind": "realestate",
-            "href": "./district-yongsan.html",
-            "label": "용산구 아파트 84㎡ 매매",
-            "labelEn": "용산구 apartment 84㎡ sale",
-            "value": "22억 2,184만원",
-            "valueEn": "₩2,222M",
-            "note": "최근 1주 계약 8건",
-            "noteEn": "8 deals in the last 1 weeks"
-          }
-        ],
-        "titleEn": "Oh Se-hoon at Yongsan Park: \"Unplanned Housing Supply is Irresponsible"
-      },
-      {
-        "title": "'에이원타워 당산' 매각…국내 상장리츠 간 첫 부동산 거래",
-        "link": "https://www.newsis.com/view/NISX20260824_0003759907",
-        "publishedAt": "2026-08-24T05:32:01.000Z",
-        "source": "뉴시스 경제",
-        "category": "realestate",
-        "preview": "[서울=뉴시스]이종성 기자 = 국내 상장리츠가 보유한 실물 부동산을 다른 상장리츠가 직접 인수한 첫 거래가 성사됐다. 알스퀘어는 세빌스코리아와 공동으로 매각 자문을 맡은 서울 영등포구 '에이원타워 당산'이 1630억…",
-        "dupes": [],
-        "titleEn": "Awon Tower Dangsan\" Sold... First Real Estate Transaction Between Domestic Listed REITs"
-      },
-      {
-        "title": "광명 재건축 '공공임대' 갈등 확산…시청 앞 근조화환 50개",
-        "link": "https://www.newsis.com/view/NISX20260824_0003760003",
-        "publishedAt": "2026-08-24T05:17:39.000Z",
-        "source": "뉴시스 경제",
-        "category": "realestate",
-        "preview": "[서울=뉴시스]이연희 기자 = 경기도 광명시가 각 정비사업 현장에 공공임대주택을 반영할 것을 요구한 것과 관련해 재건축 조합 등 주민들의 반발이 거세지고 있다. 24일 뉴시스 취재를 종합하면 이날 오전 광명시청 앞에…",
-        "dupes": [],
-        "titleEn": "Gwangmyeong redevelopment 'public lease' conflict spreads... 50 sympathy flower arrangements in front of city hall"
-      },
-      {
-        "title": "서울시, 2031년까지 모아주택 4만가구 착공",
-        "link": "https://www.hankyung.com/article/2026082370581",
-        "publishedAt": "2026-08-24T05:17:37.000Z",
-        "source": "한국경제 부동산",
-        "category": "realestate",
-        "preview": null,
-        "dupes": [],
-        "context": [
-          {
-            "kind": "realestate",
-            "href": "./apartment-sale.html",
-            "label": "서울 전체 아파트 84㎡ 매매",
-            "labelEn": "Seoul apartment 84㎡ sale",
-            "value": "16억 1,124만원",
-            "valueEn": "₩1,611M",
-            "note": "최근 1주 계약 18건",
-            "noteEn": "18 deals in the last 1 weeks"
-          }
-        ],
-        "titleEn": "Seoul to Start Construction on 40,000 Moa Housing Units by 2031"
-      },
-      {
-        "title": "“지역사회 상생도 함께”…동광종합토건, 22년째 국가유공자 노후주택 무료보수",
-        "link": "https://www.mk.co.kr/news/realestate/12134678",
-        "publishedAt": "2026-08-24T04:47:37.000Z",
-        "source": "매일경제 부동산",
-        "category": "realestate",
-        "preview": "24일 동광종합토건㈜이 올해도 ‘국가유공자 노후주택 무료보수사업’에 나서 경기도 가평군 국가유공자 2가구의 주거환경 개선공사를 오는 27일까지 마칠 계획이라고 밝혔다. 국가를 위해..",
-        "dupes": [],
-        "titleEn": "Community coexistence also together\"… Dongkwang General Construction, 22nd year in a row free repair of old national merit housing"
-      },
-      {
-        "title": "‘제일풍경채 첨단3지구 A6블록’  견본주택 개관 3일간 1만8000여 명 몰려",
-        "link": "https://www.mk.co.kr/news/realestate/12134664",
-        "publishedAt": "2026-08-24T04:31:56.000Z",
-        "source": "매일경제 부동산",
-        "category": "realestate",
-        "preview": "24일 분양업계에 따르면 이달 21일 개관한 ‘제일풍경채 첨단3지구 A6블록’ 견본주택에 3일간 1만8000여 명의 인파가 몰렸다. 이처럼 많은 방문객이 몰린 요인으로는 인공지능(..",
-        "dupes": [
-          {
-            "title": "'제일풍경채 첨단3지구 A6블록' 견본주택 사흘간 1만8000명",
-            "link": "https://www.hankyung.com/article/202608247891i",
-            "source": "한국경제 부동산"
-          }
-        ],
-        "titleEn": "Jeil Pungjeongchaeg Cheonjeon 3-gu A6 Block' Model House Opens, Over 10,0008000 Visitors in 3 Days"
-      },
-      {
-        "title": "성남시, 1세대 1주택자 재산세 한시 감면 추진…169억원 경감",
-        "link": "https://www.yna.co.kr/view/AKR20260824077100061",
-        "publishedAt": "2026-08-24T02:44:17.000Z",
-        "source": "연합뉴스 경제",
-        "category": "realestate",
-        "preview": "(성남=연합뉴스) 이우성 기자 = 경기 성남시는 고물가와 공시가격 상승에 따른 시민 부담을 덜기 위해 1세대 1주택자를 대상으로 올해 재산세를 ...",
-        "dupes": [],
-        "titleEn": "Sungnam City to temporarily reduce property tax for one household, one residence owners... 16,900,000,000 won reduction"
-      },
-      {
-        "title": "용산공원에 공공주택은 자연훼손…서울시민 3명 중 2명이 ‘반대’",
-        "link": "https://www.mk.co.kr/news/realestate/12134595",
-        "publishedAt": "2026-08-24T02:37:00.000Z",
-        "source": "매일경제 부동산",
-        "category": "realestate",
-        "preview": "서울시 자체 여론조사 반대 63.9%·찬성 32.0% ‘매우 반대’도 절반 육박해 전 연령·권역서 반대 60% 넘어 오세훈·김윤덕 이번 주 재회동서울시민 3명 중 2명은 용산공원 ..",
-        "dupes": [],
-        "context": [
-          {
-            "kind": "realestate",
-            "href": "./district-yongsan.html",
-            "label": "용산구 아파트 84㎡ 매매",
-            "labelEn": "용산구 apartment 84㎡ sale",
-            "value": "22억 2,184만원",
-            "valueEn": "₩2,222M",
-            "note": "최근 1주 계약 8건",
-            "noteEn": "8 deals in the last 1 weeks"
-          }
-        ],
-        "titleEn": "Public housing in Yongsan Park damages nature... 2 out of 3 Seoul citizens oppose it"
+        "dupes": []
       }
     ]
   }
