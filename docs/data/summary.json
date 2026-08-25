@@ -1,73 +1,46 @@
 {
-  "updatedAt": "2026-08-25T07:53:19.184Z",
+  "updatedAt": "2026-08-25T11:40:11.087Z",
   "model": "qwen3:14b",
   "summary": {
-    "ko": "- 금리·예금·투자상품: 국고채 금리가 일제히 하락하며 3년물은 연 3.830%를 기록했다. 일본은행의 한 정책위원은 9월과 내년 1월에 금리인상이 예상된다고 밝혔다. 미국은 장기금리가 치솟자 바이백 규모를 확대하는 방안을 검토하고 있다. FT는 미국의 재정적자 문제를 해결하지 않으면 바이백은 임시방편일 수 있다고 분석했다. 각 기사는 서로 다른 주제로 별개의 사실을 보고하고 있다.\n- 증시·환율: 증시·환율: [올댓차이나] 중국 증시 혼조 마감…상하이지수 0.19%↑, 환율 1,380원대 후반으로 상승…수출업체 달러 매도는 지속, '전약후강' 코스피, 상승전환해 0.68%↑…코스닥도 1%대 상승(종합) +5\n- 부동산: 용산공원 주택 공급 문제로 오세훈과 김윤덕이 마주 앉았고, 59㎡ 월세가 1년 만에 140만원 증가했으며, 한국 총리가 청년 주택 공급의 어려움을 언급했고, 노원구 재건축에 속도가 붙었고, 무주택자는 아파트 대신 빌라 구매를 고민하며 한숨을 쉬고 있다.\n- 기타 경제 소식: 울산상의가 울산시장을 초청한 간담회를 열어 지역경제 발전을 위한 소통과 협력을 논의했다. 트럼프가 '경제적 D-데이'를 선언하며 경제 관련 강력한 조치를 예고했다. 이와 별개로 중국 국유은행에 대한 제재 가능성도 제기되고 있다. 울산상의는 지역 경제 활성화를 위한 방안을 모색하고 있다. 트럼프의 발언은 국제 경제 상황에 영향을 미칠 수 있는 요소로 주목받고 있다.",
-    "en": "- Rates, Deposits & Investment Products: The government bond yield fell universally, with the 3-year bond recording an annual rate of 3.830%. A policy official from the Bank of Japan stated that interest rates are expected to rise in September and January next year. The U.S. is considering expanding the buyback scale as long-term interest rates soar. FT analyzed that buybacks could be a temporary measure if the U.S. does not resolve its fiscal deficit problem. Each article reports separate facts on different topics.\n- Stocks & FX: Stocks & FX: [올댓차이나] 중국 증시 혼조 마감…상하이지수 0.19%↑, 환율 1,380원대 후반으로 상승…수출업체 달러 매도는 지속, '전약후강' 코스피, 상승전환해 0.68%↑…코스닥도 1%대 상승(종합) +5\n- Real Estate: O Se-hoon and Kim Yun-deok faced off over the housing supply issue at Yongsan Park, and the monthly rent for a 59㎡ apartment has increased by 1,400,000 won in just one year. South Korea's Prime Minister mentioned the difficulties in supplying housing for young people, and reconstruction efforts in Nowon-gu have accelerated. Homeless people are sighing as they consider buying a villa instead of an apartment.\n- Other Economic News: Ulsan Chamber of Commerce held a meeting inviting the mayor of Ulsan to discuss communication and cooperation for regional economic development. Trump declared an \"economic D-day\" and hinted at strong measures related to the economy. Separately, the possibility of sanctions against Chinese state-owned banks has been raised. Ulsan Chamber of Commerce is exploring ways to promote regional economic activity. Trump's remarks are being watched as a factor that could influence the international economic situation."
+    "ko": "- 증시·환율: 증시·환율: [올댓차이나] 대만 증시, 기술주에 저가 매수세로 반등 마감…0.91%↑, [올댓차이나] 홍콩 증시, 미중대립 격화 우려에 속락 마감… H주 0.31%↓, 증시 휘청이자 '주춤'…4개월 만에 지갑 꽁꽁 닫았다 +2\n- 부동산: 소노그룹이 200억 원대 주택을 구입한 후 거주하지 않아 세무조사가 진행되고 있다. 강남 지역 집값이 세제개편 이후 급격히 하락하는 것으로 나타났다. 서울시는 재건축 사업을 위해 신속통합기획 자문을 처음으로 시행했다. 성남시는 원도심 재개발 임대주택 의무비율을 12%에서 10%로 낮추는 방안을 추진 중이다. 오세훈은 강남 탄천에 1.3만 가구를 공급하겠다고 밝혔다.\n- 금리·예금·투자상품: 고금리와 고분양가가 지속되며 '중도금 무이자' 상품이 인기이고, 변동형 주담대 금리가 연 6%에 근접하며, 김윤덕 장관은 뉴홈 '금리 약속'을 되살려 최장 40년·연 1.9~3.0% 고정 금리로 전용 모기지 조건을 확정했으며, 정부는 뉴홈 청약자 금리 조건을 유지해 정책 신뢰를 보호하고 있다.\n- 기타 경제 소식: JP모건이 주식담보대출 규정을 완화하며 신흥 AI 부자들을 겨냥했다. 오늘 경제 뉴스에서는 금융 규제 완화 관련 소식이 전해졌다. 해당 조치는 주식을 담보로 삼는 대출 접근성을 높이기 위한 것이다. JP모건의 이번 결정은 AI 산업과 관련된 투자 활동을 촉진하려는 의도로 보인다. 오늘 발표된 내용은 금융시장에 새로운 변화를 예고하고 있다.",
+    "en": "- Stocks & FX: Stocks & FX: [올댓차이나] 대만 증시, 기술주에 저가 매수세로 반등 마감…0.91%↑, [올댓차이나] 홍콩 증시, 미중대립 격화 우려에 속락 마감… H주 0.31%↓, 증시 휘청이자 '주춤'…4개월 만에 지갑 꽁꽁 닫았다 +2\n- Real Estate: Sonogroup is under tax investigation after purchasing a 20,000,000,000 won housing unit and not residing in it. Housing prices in the Gangnam area have sharply declined since the tax reform. Seoul has implemented rapid integrated planning consultation for the first time to promote reconstruction projects. Suwon is promoting a plan to lower the mandatory rental housing ratio for redevelopment in the inner city from 12% to 10%. Oh Se-hoon announced that 13,000 units will be supplied in Gangnam Tanchon.\n- Rates, Deposits & Investment Products: High interest rates and high selling prices continue, making the 'no-interest down payment' product popular, while adjustable-rate mortgage interest rates approach 6% annually. Minister Kim Yoon-deok revived the New Home \"interest rate promise,\" setting dedicated mortgage conditions with a maximum 40-year term and fixed interest rates between 1.9% and 3.0% annually. The government is maintaining the New Home applicants' interest rate conditions to protect policy credibility.\n- Other Economic News: JPMorgan has relaxed its margin loan rules targeting emerging AI billionaires. Today's economic news reported on the easing of financial regulations. This measure aims to increase accessibility to loans secured by stocks. JPMorgan's decision appears to intend to promote investment activities related to the AI industry. The information announced today signals new changes ahead in the financial market."
   },
   "highlights": [],
   "categories": [
     {
-      "key": "rates",
-      "name": "금리·예금·투자상품",
-      "nameEn": "Rates, Deposits & Investment Products",
-      "lineKo": "국고채 금리가 일제히 하락하며 3년물은 연 3.830%를 기록했다. 일본은행의 한 정책위원은 9월과 내년 1월에 금리인상이 예상된다고 밝혔다. 미국은 장기금리가 치솟자 바이백 규모를 확대하는 방안을 검토하고 있다. FT는 미국의 재정적자 문제를 해결하지 않으면 바이백은 임시방편일 수 있다고 분석했다. 각 기사는 서로 다른 주제로 별개의 사실을 보고하고 있다.",
-      "lineEn": "The government bond yield fell universally, with the 3-year bond recording an annual rate of 3.830%. A policy official from the Bank of Japan stated that interest rates are expected to rise in September and January next year. The U.S. is considering expanding the buyback scale as long-term interest rates soar. FT analyzed that buybacks could be a temporary measure if the U.S. does not resolve its fiscal deficit problem. Each article reports separate facts on different topics.",
-      "isFallback": false,
-      "fallbackReason": null,
-      "degraded": false,
-      "items": [
-        {
-          "title": "국고채 금리 일제히 하락…3년물 연 3.830%",
-          "link": "https://www.yna.co.kr/view/AKR20260825148000008",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "전 일본은행 정책위원 \"9월·내년 1월 금리인상 예상\"",
-          "link": "https://www.newsis.com/view/NISX20260825_0003762031",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "美, 장기금리 치솟자 바이백 확대…FT \"재정적자 놔두면 임시방편일 뿐\"",
-          "link": "https://www.newsis.com/view/NISX20260825_0003761451",
-          "source": "뉴시스 경제"
-        }
-      ]
-    },
-    {
       "key": "stocks",
       "name": "증시·환율",
       "nameEn": "Stocks & FX",
-      "lineKo": "증시·환율: [올댓차이나] 중국 증시 혼조 마감…상하이지수 0.19%↑, 환율 1,380원대 후반으로 상승…수출업체 달러 매도는 지속, '전약후강' 코스피, 상승전환해 0.68%↑…코스닥도 1%대 상승(종합) +5",
-      "lineEn": "Stocks & FX: [올댓차이나] 중국 증시 혼조 마감…상하이지수 0.19%↑, 환율 1,380원대 후반으로 상승…수출업체 달러 매도는 지속, '전약후강' 코스피, 상승전환해 0.68%↑…코스닥도 1%대 상승(종합) +5",
+      "lineKo": "증시·환율: [올댓차이나] 대만 증시, 기술주에 저가 매수세로 반등 마감…0.91%↑, [올댓차이나] 홍콩 증시, 미중대립 격화 우려에 속락 마감… H주 0.31%↓, 증시 휘청이자 '주춤'…4개월 만에 지갑 꽁꽁 닫았다 +2",
+      "lineEn": "Stocks & FX: [올댓차이나] 대만 증시, 기술주에 저가 매수세로 반등 마감…0.91%↑, [올댓차이나] 홍콩 증시, 미중대립 격화 우려에 속락 마감… H주 0.31%↓, 증시 휘청이자 '주춤'…4개월 만에 지갑 꽁꽁 닫았다 +2",
       "isFallback": true,
       "fallbackReason": "unverified-entity",
       "degraded": false,
       "items": [
         {
+          "title": "[올댓차이나] 대만 증시, 기술주에 저가 매수세로 반등 마감…0.91%↑",
+          "link": "https://www.newsis.com/view/NISX20260825_0003762373",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "[올댓차이나] 홍콩 증시, 미중대립 격화 우려에 속락 마감… H주 0.31%↓",
+          "link": "https://www.newsis.com/view/NISX20260825_0003762341",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "증시 휘청이자 '주춤'…4개월 만에 지갑 꽁꽁 닫았다",
+          "link": "https://www.hankyung.com/article/202608251682i",
+          "source": "한국경제 경제"
+        },
+        {
+          "title": "반도체 주주환원 기대에 환율 급락했는데…\"반도체 기업 원화 충분\"",
+          "link": "https://www.hankyung.com/article/202608252052i",
+          "source": "한국경제 경제"
+        },
+        {
           "title": "[올댓차이나] 중국 증시 혼조 마감…상하이지수 0.19%↑",
           "link": "https://www.newsis.com/view/NISX20260825_0003762131",
           "source": "뉴시스 경제"
-        },
-        {
-          "title": "환율 1,380원대 후반으로 상승…수출업체 달러 매도는 지속",
-          "link": "https://www.yna.co.kr/view/AKR20260825134700002",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "'전약후강' 코스피, 상승전환해 0.68%↑…코스닥도 1%대 상승(종합)",
-          "link": "https://www.yna.co.kr/view/AKR20260825130451008",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "日증시, 美반도체주 약세에도 상승 마감…닛케이 0.50%↑",
-          "link": "https://www.newsis.com/view/NISX20260825_0003761939",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "[외환] 원/달러 환율 3.7원 오른 1,386.1원(15:30 기준가)",
-          "link": "https://www.yna.co.kr/view/AKR20260825129200002",
-          "source": "연합뉴스 경제"
         }
       ]
     },
@@ -75,36 +48,73 @@
       "key": "realestate",
       "name": "부동산",
       "nameEn": "Real Estate",
-      "lineKo": "용산공원 주택 공급 문제로 오세훈과 김윤덕이 마주 앉았고, 59㎡ 월세가 1년 만에 140만원 증가했으며, 한국 총리가 청년 주택 공급의 어려움을 언급했고, 노원구 재건축에 속도가 붙었고, 무주택자는 아파트 대신 빌라 구매를 고민하며 한숨을 쉬고 있다.",
-      "lineEn": "O Se-hoon and Kim Yun-deok faced off over the housing supply issue at Yongsan Park, and the monthly rent for a 59㎡ apartment has increased by 1,400,000 won in just one year. South Korea's Prime Minister mentioned the difficulties in supplying housing for young people, and reconstruction efforts in Nowon-gu have accelerated. Homeless people are sighing as they consider buying a villa instead of an apartment.",
+      "lineKo": "소노그룹이 200억 원대 주택을 구입한 후 거주하지 않아 세무조사가 진행되고 있다. 강남 지역 집값이 세제개편 이후 급격히 하락하는 것으로 나타났다. 서울시는 재건축 사업을 위해 신속통합기획 자문을 처음으로 시행했다. 성남시는 원도심 재개발 임대주택 의무비율을 12%에서 10%로 낮추는 방안을 추진 중이다. 오세훈은 강남 탄천에 1.3만 가구를 공급하겠다고 밝혔다.",
+      "lineEn": "Sonogroup is under tax investigation after purchasing a 20,000,000,000 won housing unit and not residing in it. Housing prices in the Gangnam area have sharply declined since the tax reform. Seoul has implemented rapid integrated planning consultation for the first time to promote reconstruction projects. Suwon is promoting a plan to lower the mandatory rental housing ratio for redevelopment in the inner city from 12% to 10%. Oh Se-hoon announced that 13,000 units will be supplied in Gangnam Tanchon.",
+      "isFallback": false,
+      "fallbackReason": null,
+      "degraded": false,
+      "items": [
+        {
+          "title": "200억대 주택 사서 사주일가 거주…소노그룹 세무조사(종합)",
+          "link": "https://www.yna.co.kr/view/AKR20260825084351002",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "“세제개편 후폭풍 세긴 세네”…강남 집값 ‘폭락’ 이번엔 진짜일까 [부동산 손품노트]",
+          "link": "https://www.mk.co.kr/news/realestate/12136140",
+          "source": "매일경제 부동산"
+        },
+        {
+          "title": "\"현장에서 재건축 물꼬 튼다\"…서울시 신속통합기획 자문 첫 발",
+          "link": "https://www.yna.co.kr/view/AKR20260825167300004",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "성남시, 원도심 재개발 임대주택 의무비율 12→10% 추진",
+          "link": "https://www.yna.co.kr/view/AKR20260825163800061",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "오세훈 \"강남 탄천에 1.3만가구\"…'용산공원 임대주택'에 맞불",
+          "link": "https://www.mk.co.kr/news/realestate/12136047",
+          "source": "매일경제 부동산"
+        }
+      ]
+    },
+    {
+      "key": "rates",
+      "name": "금리·예금·투자상품",
+      "nameEn": "Rates, Deposits & Investment Products",
+      "lineKo": "고금리와 고분양가가 지속되며 '중도금 무이자' 상품이 인기이고, 변동형 주담대 금리가 연 6%에 근접하며, 김윤덕 장관은 뉴홈 '금리 약속'을 되살려 최장 40년·연 1.9~3.0% 고정 금리로 전용 모기지 조건을 확정했으며, 정부는 뉴홈 청약자 금리 조건을 유지해 정책 신뢰를 보호하고 있다.",
+      "lineEn": "High interest rates and high selling prices continue, making the 'no-interest down payment' product popular, while adjustable-rate mortgage interest rates approach 6% annually. Minister Kim Yoon-deok revived the New Home \"interest rate promise,\" setting dedicated mortgage conditions with a maximum 40-year term and fixed interest rates between 1.9% and 3.0% annually. The government is maintaining the New Home applicants' interest rate conditions to protect policy credibility.",
       "isFallback": false,
       "fallbackReason": null,
       "degraded": true,
       "items": [
         {
-          "title": "용산공원 주택 공급 놓고 또 마주 앉는 오세훈·김윤덕…이번엔 해법 나올까",
-          "link": "https://www.mk.co.kr/news/realestate/12135893",
-          "source": "매일경제 부동산"
-        },
-        {
-          "title": "“한 달 월급으로는 월세도 부족해요”…59㎡ 월세 1년새 140만원↑",
-          "link": "https://www.mk.co.kr/news/realestate/12135891",
-          "source": "매일경제 부동산"
-        },
-        {
-          "title": "韓총리, 吳 '재개발·재건축'에 \"청년 주택 공급은 쉽지 않아\"",
-          "link": "https://www.yna.co.kr/view/AKR20260825141800001",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "노원구 재건축에 '속도'…서울시 첫 '현장형 신통기획 자문'",
-          "link": "https://www.yna.co.kr/view/AKR20260825132300004",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "\"아파트 대신 빌라 사도 될까요?\"…무주택자 '한숨' [시장톡]",
-          "link": "https://www.hankyung.com/article/2026082494326",
+          "title": "고금리·고분양가 지속…'중도금 무이자' 인기",
+          "link": "https://www.hankyung.com/article/2026082521501",
           "source": "한국경제 부동산"
+        },
+        {
+          "title": "변동형 주담대 금리 연 6% 눈앞",
+          "link": "https://www.hankyung.com/article/2026082521421",
+          "source": "한국경제 경제"
+        },
+        {
+          "title": "김윤덕 장관, 뉴홈 ‘금리 약속’ 되살렸다…최장 40년·연 1.9~3.0% 고정",
+          "link": "https://www.mk.co.kr/news/realestate/12135949",
+          "source": "매일경제 부동산"
+        },
+        {
+          "title": "정부, 뉴홈 전용 모기지 조건 확정…최장 40년·금리 1.9~3.0%",
+          "link": "https://www.newsis.com/view/NISX20260825_0003762205",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "김윤덕 국토장관 “뉴홈 청약자 금리 조건 유지… 정책 신뢰 보호”",
+          "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/25/NGNNDXVV6RHOLBWFNEW3T4AZ2Y/",
+          "source": "조선비즈 부동산"
         }
       ]
     },
@@ -112,20 +122,15 @@
       "key": "other",
       "name": "기타 경제 소식",
       "nameEn": "Other Economic News",
-      "lineKo": "울산상의가 울산시장을 초청한 간담회를 열어 지역경제 발전을 위한 소통과 협력을 논의했다. 트럼프가 '경제적 D-데이'를 선언하며 경제 관련 강력한 조치를 예고했다. 이와 별개로 중국 국유은행에 대한 제재 가능성도 제기되고 있다. 울산상의는 지역 경제 활성화를 위한 방안을 모색하고 있다. 트럼프의 발언은 국제 경제 상황에 영향을 미칠 수 있는 요소로 주목받고 있다.",
-      "lineEn": "Ulsan Chamber of Commerce held a meeting inviting the mayor of Ulsan to discuss communication and cooperation for regional economic development. Trump declared an \"economic D-day\" and hinted at strong measures related to the economy. Separately, the possibility of sanctions against Chinese state-owned banks has been raised. Ulsan Chamber of Commerce is exploring ways to promote regional economic activity. Trump's remarks are being watched as a factor that could influence the international economic situation.",
+      "lineKo": "JP모건이 주식담보대출 규정을 완화하며 신흥 AI 부자들을 겨냥했다. 오늘 경제 뉴스에서는 금융 규제 완화 관련 소식이 전해졌다. 해당 조치는 주식을 담보로 삼는 대출 접근성을 높이기 위한 것이다. JP모건의 이번 결정은 AI 산업과 관련된 투자 활동을 촉진하려는 의도로 보인다. 오늘 발표된 내용은 금융시장에 새로운 변화를 예고하고 있다.",
+      "lineEn": "JPMorgan has relaxed its margin loan rules targeting emerging AI billionaires. Today's economic news reported on the easing of financial regulations. This measure aims to increase accessibility to loans secured by stocks. JPMorgan's decision appears to intend to promote investment activities related to the AI industry. The information announced today signals new changes ahead in the financial market.",
       "isFallback": false,
       "fallbackReason": null,
       "degraded": false,
       "items": [
         {
-          "title": "울산상의, 울산시장 초청 간담회 \"지역경제 발전 소통·협력\"",
-          "link": "https://www.yna.co.kr/view/AKR20260825133900057",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "트럼프 '경제적 D-데이' 선언…중국 국유은행까지 제재할까",
-          "link": "https://www.newsis.com/view/NISX20260825_0003761330",
+          "title": "\"신흥 AI 부자 잡자…JP모건, 주식담보대출 규정 완화\"",
+          "link": "https://www.newsis.com/view/NISX20260825_0003762049",
           "source": "뉴시스 경제"
         }
       ]
