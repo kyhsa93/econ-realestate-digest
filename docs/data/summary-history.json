@@ -1606,5 +1606,149 @@
         ]
       }
     ]
+  },
+  {
+    "date": "2026-08-25",
+    "model": "qwen3:14b",
+    "summary": {
+      "ko": "- 증시·환율: 증시·환율: 한투증권 \"조선, 3분기 환율 하락에 삼성重 제외 영업이익률↓\", 국내기업 경기전망 6개월만에 '긍정적'…환율 안정·추석 특수, 주가 하락으로 8월 소비심리 넉 달 만에↓…집값 상승 기대 줄어\n- 부동산: 부천에 '국평 16억' 아파트가 등장하며 서울보다 저렴한 주택에 대한 관심이 높아지고 있다. 비거주 1주택에 대한 규제 완화 논의가 진행되며 전월세 시장에 긍정적 영향을 주고 있다. 가을 이사철을 앞두고 전세 물량이 부족해지며 월세도 급등하는 등 주택 시장이 불안정한 상황이다. 8·3 세제안 발표 후 3주 만에 보완 논의가 제기되며 세제 개편에 대한 우려가 커지고 있다. 강남 지역에서 집값이 급격히 하락한 것으로 보이며 세제 개편의 영향이 실제 나타나고 있다.\n- 금리·예금·투자상품: 뉴욕증시는 국채 금리 하락에도 혼조 마감했고, 미국은 금리 인하에 진심이며 트럼프가 가상화폐 밀어주기 큰 그림을 그리고 있으며, 규제가 풀린 중금리대출에 한달새 1.4만명이 몰리고 있으며, 미국 재무 발표 앞두고 국고채 금리가 일제히 하락했다.\n- 기타 경제 소식: 삼성전자 ‘5억 저리대출’ 9월 풀리며 경기 남부 매수 문의가 증가했고, 미국은 이란에 대한 경제적 왕따 작전을 시작해 거래 지속 시 중국 등 거래국에 대한 2차 제재를 준비하고 있다.",
+      "en": "- Stocks & FX: Stocks & FX: 한투증권 \"조선, 3분기 환율 하락에 삼성重 제외 영업이익률↓\", 국내기업 경기전망 6개월만에 '긍정적'…환율 안정·추석 특수, 주가 하락으로 8월 소비심리 넉 달 만에↓…집값 상승 기대 줄어\n- Real Estate: An apartment called \"Kukpyeong 1,600,000,000\" has appeared in Bucheon, increasing interest in affordable housing compared to Seoul. Discussions on easing regulations for non-residential single homes are having a positive impact on the rental market. With the autumn moving season approaching, the lack of rental supply is causing rent to surge, making the housing market unstable. Three weeks after the announcement of the 8·3 tax reform proposal, concerns over tax reform have increased as discussions on revisions have been raised. It appears that housing prices in the Gangnam area have sharply declined, showing the actual impact of the tax reform.\n- Rates, Deposits & Investment Products: The New York stock market closed mixed despite falling bond yields, and the U.S. is genuinely considering rate cuts, while Trump is drawing up a big picture to promote cryptocurrencies, and 14,000 people have flocked to the recently deregulated mid-rate loans within a month, and government bond yields fell sharply ahead of the U.S. fiscal announcement.\n- Other Economic News: Samsung Electronics' 500,000,000 won low-interest loan is being released in September, leading to an increase in purchase inquiries in the southern part of Gyeonggi Province, and the U.S. has started an economic isolation operation against Iran, preparing for secondary sanctions against trading countries such as China if the trade continues."
+    },
+    "highlights": [],
+    "categories": [
+      {
+        "key": "stocks",
+        "name": "증시·환율",
+        "nameEn": "Stocks & FX",
+        "lineKo": "증시·환율: 한투증권 \"조선, 3분기 환율 하락에 삼성重 제외 영업이익률↓\", 국내기업 경기전망 6개월만에 '긍정적'…환율 안정·추석 특수, 주가 하락으로 8월 소비심리 넉 달 만에↓…집값 상승 기대 줄어",
+        "lineEn": "Stocks & FX: 한투증권 \"조선, 3분기 환율 하락에 삼성重 제외 영업이익률↓\", 국내기업 경기전망 6개월만에 '긍정적'…환율 안정·추석 특수, 주가 하락으로 8월 소비심리 넉 달 만에↓…집값 상승 기대 줄어",
+        "isFallback": true,
+        "fallbackReason": "unverified-number",
+        "degraded": false,
+        "items": [
+          {
+            "title": "한투증권 \"조선, 3분기 환율 하락에 삼성重 제외 영업이익률↓\"",
+            "link": "https://www.yna.co.kr/view/AKR20260825026500008",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "국내기업 경기전망 6개월만에 '긍정적'…환율 안정·추석 특수",
+            "link": "https://www.yna.co.kr/view/AKR20260824125200003",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "주가 하락으로 8월 소비심리 넉 달 만에↓…집값 상승 기대 줄어",
+            "link": "https://www.yna.co.kr/view/AKR20260824149100002",
+            "source": "연합뉴스 경제"
+          }
+        ]
+      },
+      {
+        "key": "realestate",
+        "name": "부동산",
+        "nameEn": "Real Estate",
+        "lineKo": "부천에 '국평 16억' 아파트가 등장하며 서울보다 저렴한 주택에 대한 관심이 높아지고 있다. 비거주 1주택에 대한 규제 완화 논의가 진행되며 전월세 시장에 긍정적 영향을 주고 있다. 가을 이사철을 앞두고 전세 물량이 부족해지며 월세도 급등하는 등 주택 시장이 불안정한 상황이다. 8·3 세제안 발표 후 3주 만에 보완 논의가 제기되며 세제 개편에 대한 우려가 커지고 있다. 강남 지역에서 집값이 급격히 하락한 것으로 보이며 세제 개편의 영향이 실제 나타나고 있다.",
+        "lineEn": "An apartment called \"Kukpyeong 1,600,000,000\" has appeared in Bucheon, increasing interest in affordable housing compared to Seoul. Discussions on easing regulations for non-residential single homes are having a positive impact on the rental market. With the autumn moving season approaching, the lack of rental supply is causing rent to surge, making the housing market unstable. Three weeks after the announcement of the 8·3 tax reform proposal, concerns over tax reform have increased as discussions on revisions have been raised. It appears that housing prices in the Gangnam area have sharply declined, showing the actual impact of the tax reform.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": false,
+        "items": [
+          {
+            "title": "\"서울이 더 싼데?\"…'국평 16억' 부천 새 아파트 등장에 '술렁' [시장톡]",
+            "link": "https://www.hankyung.com/article/2026082479446",
+            "source": "한국경제 부동산"
+          },
+          {
+            "title": "비거주 1주택 규제 풀리나… “전월세엔 숨통, 매매엔 불씨”",
+            "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/25/JDLR5TWDCRBSTO3ZOHIYCMGFMQ/",
+            "source": "조선비즈 부동산"
+          },
+          {
+            "title": "가을 이사철 코앞인데…씨 마른 전세에 월세마저 치솟아",
+            "link": "https://www.newsis.com/view/NISX20260824_0003760363",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "집은 쏟아지고 전세는 말랐다…8·3 세제안 3주 만에 보완론",
+            "link": "https://www.newsis.com/view/NISX20260824_0003760640",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "“세제개편 후폭풍 세긴 세네” … 강남 집값 ‘폭락’ 이번엔 진짜일까",
+            "link": "https://www.mk.co.kr/news/realestate/12135173",
+            "source": "매일경제 부동산"
+          }
+        ]
+      },
+      {
+        "key": "rates",
+        "name": "금리·예금·투자상품",
+        "nameEn": "Rates, Deposits & Investment Products",
+        "lineKo": "뉴욕증시는 국채 금리 하락에도 혼조 마감했고, 미국은 금리 인하에 진심이며 트럼프가 가상화폐 밀어주기 큰 그림을 그리고 있으며, 규제가 풀린 중금리대출에 한달새 1.4만명이 몰리고 있으며, 미국 재무 발표 앞두고 국고채 금리가 일제히 하락했다.",
+        "lineEn": "The New York stock market closed mixed despite falling bond yields, and the U.S. is genuinely considering rate cuts, while Trump is drawing up a big picture to promote cryptocurrencies, and 14,000 people have flocked to the recently deregulated mid-rate loans within a month, and government bond yields fell sharply ahead of the U.S. fiscal announcement.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": true,
+        "items": [
+          {
+            "title": "뉴욕증시, 국채 금리 하락에도 혼조 마감…다우 0.26%↑",
+            "link": "https://www.newsis.com/view/NISX20260825_0003760789",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "금리 인하에 진심인 미국…트럼프 '가상화폐 밀어주기' 큰 그림",
+            "link": "https://www.yna.co.kr/view/AKR20260825006900091",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "[단독] 규제 풀린 중금리대출, 한달새 1.4만명 몰려",
+            "link": "https://www.hankyung.com/article/2026082495821",
+            "source": "한국경제 경제"
+          },
+          {
+            "title": "美 재무 발표 앞두고…국고채 금리 일제히 하락(종합)",
+            "link": "https://www.yna.co.kr/view/AKR20260824137251008",
+            "source": "연합뉴스 경제"
+          }
+        ]
+      },
+      {
+        "key": "other",
+        "name": "기타 경제 소식",
+        "nameEn": "Other Economic News",
+        "lineKo": "삼성전자 ‘5억 저리대출’ 9월 풀리며 경기 남부 매수 문의가 증가했고, 미국은 이란에 대한 경제적 왕따 작전을 시작해 거래 지속 시 중국 등 거래국에 대한 2차 제재를 준비하고 있다.",
+        "lineEn": "Samsung Electronics' 500,000,000 won low-interest loan is being released in September, leading to an increase in purchase inquiries in the southern part of Gyeonggi Province, and the U.S. has started an economic isolation operation against Iran, preparing for secondary sanctions against trading countries such as China if the trade continues.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": true,
+        "items": [
+          {
+            "title": "삼성전자 ‘5억 저리대출’ 9월 풀린다… 경기 남부 매수 문의 들썩",
+            "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/25/7HVRNLJ2RJE7VEQKMOH2FEBW5U/",
+            "source": "조선비즈 부동산"
+          },
+          {
+            "title": "[오늘의 주요일정]경제(8월25일화요일)",
+            "link": "https://www.newsis.com/view/NISX20260824_0003759251",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "美, 이란 '경제적 왕따' 작전…中 등 거래국 2차제재 준비(종합)",
+            "link": "https://www.newsis.com/view/NISX20260825_0003760784",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "美 \"이란 경제 생명선 끊겠다…거래 지속땐 中도 2차제재\"",
+            "link": "https://www.newsis.com/view/NISX20260825_0003760778",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "[속보]美재무 \"이란 경제적 배제작전 시작…경제 생명선 끊는게 목표\"",
+            "link": "https://www.newsis.com/view/NISX20260825_0003760779",
+            "source": "뉴시스 경제"
+          }
+        ]
+      }
+    ]
   }
 ]

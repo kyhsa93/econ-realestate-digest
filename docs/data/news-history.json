@@ -4432,7 +4432,8 @@
         "source": "연합뉴스 경제",
         "category": "stocks",
         "preview": "(서울=연합뉴스) 임은진 기자 = 한국투자증권은 25일 환율 하락에 삼성중공업[010140]을 제외한 대형 조선 3사의 3분기 실적이 부진할 것...",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Hanjin Securities: Shipbuilding, 3Q Operating Profit Margin Falls as Samsung Heavy Excluded Amid Exchange Rate Decline"
       },
       {
         "title": "\"서울이 더 싼데?\"…'국평 16억' 부천 새 아파트 등장에 '술렁' [시장톡]",
@@ -4441,7 +4442,20 @@
         "source": "한국경제 부동산",
         "category": "realestate",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./apartment-sale.html",
+            "label": "서울 전체 아파트 84㎡ 매매",
+            "labelEn": "Seoul apartment 84㎡ sale",
+            "value": "13억 1,699만원",
+            "valueEn": "₩1,317M",
+            "note": "최근 1주 계약 224건 · 8/18 대비 +1.5%",
+            "noteEn": "224 deals in the last 1 weeks · +1.5% vs Aug 18"
+          }
+        ],
+        "titleEn": "Is Seoul Cheaper Now?\"... New Apartment in Bucheon Priced at 'National Average 1,600,000,000' Sparks Market Talk"
       },
       {
         "title": "뉴욕증시, 국채 금리 하락에도 혼조 마감…다우 0.26%↑",
@@ -4450,7 +4464,8 @@
         "source": "뉴시스 경제",
         "category": "rates",
         "preview": "[서울=뉴시스] 김예진 기자 = 미국 뉴욕증시 주요 지수는 24일(현지 시간) 국채 금리가 하락했음에도 혼조 마감했다. CNBC, 마켓워치 등에 따르면 이날 뉴욕증권거래소(NYSE)에서 다우존스 30 산업평균지수는…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "New York stock market closes mixed despite falling bond yields... Dow up 0.26%"
       },
       {
         "title": "국내기업 경기전망 6개월만에 '긍정적'…환율 안정·추석 특수",
@@ -4459,7 +4474,8 @@
         "source": "연합뉴스 경제",
         "category": "stocks",
         "preview": "(서울=연합뉴스) 장하나 기자 = 환율 부담 완화와 추석 명절 특수에 대한 기대로 국내 기업의 경기 전망이 6개월 만에 긍정적으로 돌아섰다.",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Domestic firms' business outlook turns positive after 6 months... stable exchange rate, Chuseok special circumstances"
       },
       {
         "title": "주가 하락으로 8월 소비심리 넉 달 만에↓…집값 상승 기대 줄어",
@@ -4468,7 +4484,8 @@
         "source": "연합뉴스 경제",
         "category": "stocks",
         "preview": "(서울=연합뉴스) 임지우 기자 = 국내 증시가 큰 폭으로 조정되면서 소비심리가 넉 달 만에 하락했다.",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Stock price drop causes consumer sentiment to fall to its lowest in four months in August...Expectation of rising home prices declines"
       },
       {
         "title": "삼성전자 ‘5억 저리대출’ 9월 풀린다… 경기 남부 매수 문의 들썩",
@@ -4477,7 +4494,8 @@
         "source": "조선비즈 부동산",
         "category": "other",
         "preview": "삼성전자가 9월 1일부터 무주택 임직원에게 연 1.5% 금리로 최대 5억원을 빌려주는 사내 주택대출을 시행한다. 삼성전자 사업장이 몰린 동탄·분당 등 경기 남부에서 직원들의 매매 문의가 이어지면서 저리 자금이 해당…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Samsung Electronics' '500,000,000 won low-interest loan' to be released in September... South Gyeonggi demand for purchases surges"
       },
       {
         "title": "비거주 1주택 규제 풀리나… “전월세엔 숨통, 매매엔 불씨”",
@@ -4486,7 +4504,8 @@
         "source": "조선비즈 부동산",
         "category": "realestate",
         "preview": "정부가 보유 주택에 직접 살지 않는 1주택자의 세 부담 강화 방안을 일부 손질할 가능성이 커졌다. 여당이 종합부동산세의 거주·비거주 차등을 재검토하고, 양도소득세를 매길 때 불가피한 비거주 사유를 폭넓게 인정해 달라…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Non-resident single-home regulations may be lifted... \"Rent and lease provide relief, sales spark flames"
       },
       {
         "title": "가을 이사철 코앞인데…씨 마른 전세에 월세마저 치솟아",
@@ -4495,7 +4514,20 @@
         "source": "뉴시스 경제",
         "category": "realestate",
         "preview": "[서울=뉴시스] 박성환 기자 = \"월세를 찾는 사람들은 많은데, 물건이 아예 없어요.\" 지난 24일 서울 마포구 대표 단지로 꼽히는 마포래미안푸르지오 인근의 한 공인중개업소 대표는 \"이 단지가 이런 적이 없는데 진짜…",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-mapo.html",
+            "label": "마포구 아파트 84㎡ 전세",
+            "labelEn": "마포구 apartment 84㎡ jeonse",
+            "value": "8억 6,216만원",
+            "valueEn": "₩862M",
+            "note": "최근 1주 계약 65건 · 8/18 대비 +3.9%",
+            "noteEn": "65 deals in the last 1 weeks · +3.9% vs Aug 18"
+          }
+        ],
+        "titleEn": "Autumn Moving Season Looms, But Vacant Rentals and Monthly Rent Soar"
       },
       {
         "title": "[오늘의 주요일정]경제(8월25일화요일)",
@@ -4504,7 +4536,8 @@
         "source": "뉴시스 경제",
         "category": "other",
         "preview": "[세종=뉴시스] ▲08:00 박홍근 기획예산처 장관, 예산안 당정협의(국회) ▲08:00 조용범 기획예산처 차관, 예산안 당정협의(국회) ▲10:00 구윤철 경제부총리 겸 재정경제부 장관, 국무회의(청와대) ▲10:…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "[Today's Major Schedule] Economy (August 25, Tuesday)"
       },
       {
         "title": "美, 이란 '경제적 왕따' 작전…中 등 거래국 2차제재 준비(종합)",
@@ -4513,7 +4546,8 @@
         "source": "뉴시스 경제",
         "category": "other",
         "preview": "[워싱턴=뉴시스] 이윤희 특파원 = 도널드 트럼프 미국 행정부가 이란과의 평화 협상에서 좀처럼 합의점을 찾지 못하는 가운데, 이란을 경제적으로 완전히 고립시키기 위한 '경제적 왕따 작전'에 에 돌입한다고 24일(현지…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "U.S. Launches 'Economic Boycott' Against Iran... China and Other Trading Nations Prepare for Second Round of Sanctions (Comprehensive)"
       },
       {
         "title": "집은 쏟아지고 전세는 말랐다…8·3 세제안 3주 만에 보완론",
@@ -4522,7 +4556,20 @@
         "source": "뉴시스 경제",
         "category": "realestate",
         "preview": "[서울=뉴시스]이종성 기자 = 비거주 1주택자의 세 부담을 강화한 8·3 세제개편안이 발표 3주 만에 재논의 테이블에 올랐다. 세제 개편안 발표 이후 강남권을 중심으로 서울 아파트 매매 매물은 증가한 반면 전세 매물…",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-gangnam.html",
+            "label": "강남구 아파트 84㎡ 전세",
+            "labelEn": "강남구 apartment 84㎡ jeonse",
+            "value": "10억 623만원",
+            "valueEn": "₩1,006M",
+            "note": "최근 1주 계약 60건 · 8/18 대비 -8.1%",
+            "noteEn": "60 deals in the last 1 weeks · -8.1% vs Aug 18"
+          }
+        ],
+        "titleEn": "Homes Pouring In, Rent Drying Up... 8·3 Tax Reform Proposal Gets Revised in 3 Weeks"
       },
       {
         "title": "금리 인하에 진심인 미국…트럼프 '가상화폐 밀어주기' 큰 그림",
@@ -4531,7 +4578,8 @@
         "source": "연합뉴스 경제",
         "category": "rates",
         "preview": "(샌프란시스코=연합뉴스) 권영전 특파원 = 미국 도널드 트럼프 행정부의 가상화폐 규제 완화 정책이 국채 시장 금리를 안정시켜 정부 차입 비용을 ...",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Sincere about rate cuts, US pushes Trump's 'crypto promotion' big picture"
       },
       {
         "title": "“세제개편 후폭풍 세긴 세네” … 강남 집값 ‘폭락’ 이번엔 진짜일까",
@@ -4540,7 +4588,20 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "부동산 이슈와 실거래가 브리핑서울 아파트값 상승세는 이어지고 있지만 지역별로 흐름이 갈리기 시작했다. 한국부동산원 8월 셋째 주(8월 17일 기준) 동향에 따르면 서울 아파트 매매..",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-gangnam.html",
+            "label": "강남구 아파트 84㎡ 매매",
+            "labelEn": "강남구 apartment 84㎡ sale",
+            "value": "27억 3,588만원",
+            "valueEn": "₩2,736M",
+            "note": "최근 1주 계약 31건 · 8/18 대비 -7.2%",
+            "noteEn": "31 deals in the last 1 weeks · -7.2% vs Aug 18"
+          }
+        ],
+        "titleEn": "Tax reform aftermath hits hard: Gangnam home prices plunge—this time, for real?"
       },
       {
         "title": "美 \"이란 경제 생명선 끊겠다…거래 지속땐 中도 2차제재\"",
@@ -4549,7 +4610,8 @@
         "source": "뉴시스 경제",
         "category": "other",
         "preview": "[워싱턴=뉴시스] 이윤희 특파원 = 도널드 트럼프 미국 행정부가 이란을 경제적으로 완전히 고립시키기 위한 '경제적 배제 작전(Operation Economic Outcast)'에 돌입한다고 24일(현지 시간) 발표했…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "U.S. vows to cut off Iran's economic lifeline... China to impose second round of sanctions if trade continues"
       },
       {
         "title": "[속보]美재무 \"이란 경제적 배제작전 시작…경제 생명선 끊는게 목표\"",
@@ -4558,7 +4620,8 @@
         "source": "뉴시스 경제",
         "category": "other",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "[Breaking News] U.S. Treasury: Iran Economic Exclusion Operation Begins... Cutting Off Economic Lifelines Is the Goal"
       },
       {
         "title": "매매·전월세 모두 뛴 서울…원인은 유동성 급증",
@@ -4567,7 +4630,20 @@
         "source": "한국경제 경제",
         "category": "realestate",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./apartment-rent.html",
+            "label": "서울 전체 아파트 월세",
+            "labelEn": "Seoul apartment rent",
+            "value": "보증금 21,839만원 / 월 125만원",
+            "valueEn": "₩218.4M + ₩1.25M/mo",
+            "note": "최근 1주 계약 329건 · 8/18 대비 +9.1%",
+            "noteEn": "329 deals in the last 1 weeks · +9.1% vs Aug 18"
+          }
+        ],
+        "titleEn": "Both sales and rental prices rise in Seoul amid surge in liquidity"
       },
       {
         "title": "이억원 \"잔금대출 기준 분양가·감정가, 은행 자율적 판단\"(종합)",
@@ -4576,7 +4652,18 @@
         "source": "연합뉴스 경제",
         "category": "realestate",
         "preview": "(서울=연합뉴스) 배영경 김지연 기자 = 이억원 금융위원장은 24일 신축 아파트 잔금대출 한도를 정할 때 분양가·감정가 중 어떤 것을 기준으로 ...",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "rates",
+            "label": "주택담보대출 최저금리",
+            "labelEn": "Lowest mortgage rate",
+            "value": "연 3.62%",
+            "valueEn": "3.62% p.a.",
+            "href": "./mortgage-rates.html"
+          }
+        ],
+        "titleEn": "200 million won \"Down payment loan criteria for selling price and appraisal price, banks to make autonomous decisions\"(Comprehensive)"
       },
       {
         "title": "[단독] 규제 풀린 중금리대출, 한달새 1.4만명 몰려",
@@ -4585,7 +4672,8 @@
         "source": "한국경제 경제",
         "category": "rates",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "[Exclusive] Mid-rate loans with lifted regulations draw 14,000 applicants in a month"
       },
       {
         "title": "'분양전환' 막혀 임대주택 기금 1조 연체",
@@ -4594,7 +4682,8 @@
         "source": "한국경제 부동산",
         "category": "realestate",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Leasehold housing fund 1,000,000,000,000 in arrears as 'sales conversion' blocked"
       },
       {
         "title": "김은진 \"80%까지 대출되는 빌라, 내집 마련 징검다리\"",
@@ -4603,7 +4692,8 @@
         "source": "한국경제 부동산",
         "category": "other",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Kim Eun-jin \"Villas with up to 80% loans, a stepping stone to owning a home"
       },
       {
         "title": "비거주 1주택 종부세 기본공제 절충점 찾나…12억원 '주목'(종합)",
@@ -4612,7 +4702,8 @@
         "source": "연합뉴스 경제",
         "category": "realestate",
         "preview": "(세종=연합뉴스) 안채원 송정은 기자 = 세제 당국이 고위당정협의회에서 제기된 의견을 토대로 부동산 세제 개편안의 비거주 1주택자 기본공제 상향...",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Non-resident single-home property tax basic exemption compromise in sight... 1,200,000,000 won 'watched'(comprehensive)"
       },
       {
         "title": "[포토] '반세권 기대감' 광주 제일풍경채 견본주택 북적",
@@ -4621,7 +4712,8 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "[Photo] Gwangju Jeil Pungjeongchae Model House Bustling with Half-a-Century Expectations"
       },
       {
         "title": "서울시민 3명 중 2명 \"용산공원 아파트 반대\"",
@@ -4630,7 +4722,20 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "서울시민 3명 중 2명이 용산공원 용지에 공공주택을 짓는 데 반대하는 것으로 조사됐다. 김윤덕 국토교통부 장관과 오세훈 서울시장이 이번주 용산공원 주택 공급 문제를 다시 논의할 예..",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-yongsan.html",
+            "label": "용산구 아파트 84㎡ 매매",
+            "labelEn": "용산구 apartment 84㎡ sale",
+            "value": "23억 4,203만원",
+            "valueEn": "₩2,342M",
+            "note": "최근 1주 계약 12건",
+            "noteEn": "12 deals in the last 1 weeks"
+          }
+        ],
+        "titleEn": "Two out of three Seoul residents oppose apartment construction in Yongsan Park"
       },
       {
         "title": "美 재무 발표 앞두고…국고채 금리 일제히 하락(종합)",
@@ -4639,7 +4744,8 @@
         "source": "연합뉴스 경제",
         "category": "rates",
         "preview": "(서울=연합뉴스) 김태종 기자 = 스콧 베센트 미국 재무장관의 국채 관련 추가 대책 발표를 앞두고 24일 국고채 금리가 일제히 하락 마감했다.",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "U.S. Treasury announcement ahead... government bond rates uniformly drop (comprehensive)"
       }
     ]
   }
