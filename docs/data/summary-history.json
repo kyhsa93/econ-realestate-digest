@@ -1611,45 +1611,72 @@
     "date": "2026-08-25",
     "model": "qwen3:14b",
     "summary": {
-      "ko": "- 증시·환율: 홍콩 증시는 개장 후 기술주 매도로 등락하며 H주가 0.45% 하락했다. 코스피는 삼전닉스 휘청에 따라 1∼2%대 하락세를 보이며 장중 낙폭은 다소 줄어들었다. 중국 증시는 상하이지수가 0.48% 하락하며 출발했다. 엔화는 이란 추가 경제제재로 인해 1달러=159엔대 전반 상승 출발했다. 각 시장은 서로 다른 요인에 따라 움직이며 하락 또는 상승을 보였다.\n- 부동산: 부동산: 연금받는 노인 절반 50만원이하…유주택자가 무주택자 1.6배 받아, 200억 법인주택이 황제사택으로…다주택 규제 회피 동원되기도, 국토장관·서울시장 내일 2차 회동…용산공원 주택공급 협의(종합) +8\n- 기타 경제 소식: 2분기 신규 주담대 평균 2억829만원으로 대출 규제에 따라 역대 최대폭으로 감소했고, 멕시코는 2분기 1.4% 경제성장으로 1분기 역성장에서 반등했으며, 미국은 '경제적 D-데이' 대이란 제재를 발표했고, 국토부는 \"집값 과열\"과 \"공급에 필요\"라는 의견이 갈리는 서울시의 제안을 거절했다.\n- 금리·예금·투자상품: 국고채 금리가 오늘 대체로 하락했으며, 3년물은 장중 연 3.844%를 기록했다. 채권시장 참여자의 79%는 8월 금통위에서 기준금리가 동결될 것으로 예상하고 있다. 하나은행은 'CJ ONE 내맘적금' 가입 이벤트를 진행 중이다. 해당 적금은 연 2.5%의 우대금리를 제공하고 있다. 오늘 발표된 내용은 금리 동향과 금융상품 관련 정보를 포함하고 있다.",
-      "en": "- Stocks & FX: The Hong Kong stock market fluctuated up and down after opening due to selling in tech stocks, with H-shares falling 0.45%. The Kospi fell by 1-2% due to fluctuations in Samsung Electronics, although the decline narrowed slightly during the session. The Chinese market opened with the Shanghai index down 0.48%. The yen rose to around 159 yen to the dollar due to additional economic sanctions against Iran. Each market moved up or down due to different factors.\n- Real Estate: Real Estate: 연금받는 노인 절반 50만원이하…유주택자가 무주택자 1.6배 받아, 200억 법인주택이 황제사택으로…다주택 규제 회피 동원되기도, 국토장관·서울시장 내일 2차 회동…용산공원 주택공급 협의(종합) +8\n- Other Economic News: In the second quarter, the average new housing loan was 208,290,000 won, decreasing to the largest decline in history due to loan regulations. Mexico rebounded from a first-quarter contraction with a 1.4% economic growth in the second quarter, and the U.S. announced economic sanctions against Iran, referred to as the \"economic D-day.\" The Ministry of Land, Infrastructure and Transport rejected Seoul's proposal, as opinions were divided between \"housing price overheating\" and \"necessary for supply.\n- Rates, Deposits & Investment Products: Today, the government bond yield generally fell, with the 3-year bond reaching an annual rate of 3.844% during the day. 79% of bond market participants expect the benchmark interest rate to remain unchanged at the August monetary policy committee meeting. Hana Bank is currently running a \"CJ ONE Inner Heart Savings Account\" enrollment event. The savings account offers a preferential interest rate of 2.5% annually. The content announced today includes information on interest rate trends and financial products."
+      "ko": "- 금리·예금·투자상품: 국고채 금리가 일제히 하락하며 3년물은 연 3.830%를 기록했다. 일본은행의 한 정책위원은 9월과 내년 1월에 금리인상이 예상된다고 밝혔다. 미국은 장기금리가 치솟자 바이백 규모를 확대하는 방안을 검토하고 있다. FT는 미국의 재정적자 문제를 해결하지 않으면 바이백은 임시방편일 수 있다고 분석했다. 각 기사는 서로 다른 주제로 별개의 사실을 보고하고 있다.\n- 증시·환율: 증시·환율: [올댓차이나] 중국 증시 혼조 마감…상하이지수 0.19%↑, 환율 1,380원대 후반으로 상승…수출업체 달러 매도는 지속, '전약후강' 코스피, 상승전환해 0.68%↑…코스닥도 1%대 상승(종합) +5\n- 부동산: 용산공원 주택 공급 문제로 오세훈과 김윤덕이 마주 앉았고, 59㎡ 월세가 1년 만에 140만원 증가했으며, 한국 총리가 청년 주택 공급의 어려움을 언급했고, 노원구 재건축에 속도가 붙었고, 무주택자는 아파트 대신 빌라 구매를 고민하며 한숨을 쉬고 있다.\n- 기타 경제 소식: 울산상의가 울산시장을 초청한 간담회를 열어 지역경제 발전을 위한 소통과 협력을 논의했다. 트럼프가 '경제적 D-데이'를 선언하며 경제 관련 강력한 조치를 예고했다. 이와 별개로 중국 국유은행에 대한 제재 가능성도 제기되고 있다. 울산상의는 지역 경제 활성화를 위한 방안을 모색하고 있다. 트럼프의 발언은 국제 경제 상황에 영향을 미칠 수 있는 요소로 주목받고 있다.",
+      "en": "- Rates, Deposits & Investment Products: The government bond yield fell universally, with the 3-year bond recording an annual rate of 3.830%. A policy official from the Bank of Japan stated that interest rates are expected to rise in September and January next year. The U.S. is considering expanding the buyback scale as long-term interest rates soar. FT analyzed that buybacks could be a temporary measure if the U.S. does not resolve its fiscal deficit problem. Each article reports separate facts on different topics.\n- Stocks & FX: Stocks & FX: [올댓차이나] 중국 증시 혼조 마감…상하이지수 0.19%↑, 환율 1,380원대 후반으로 상승…수출업체 달러 매도는 지속, '전약후강' 코스피, 상승전환해 0.68%↑…코스닥도 1%대 상승(종합) +5\n- Real Estate: O Se-hoon and Kim Yun-deok faced off over the housing supply issue at Yongsan Park, and the monthly rent for a 59㎡ apartment has increased by 1,400,000 won in just one year. South Korea's Prime Minister mentioned the difficulties in supplying housing for young people, and reconstruction efforts in Nowon-gu have accelerated. Homeless people are sighing as they consider buying a villa instead of an apartment.\n- Other Economic News: Ulsan Chamber of Commerce held a meeting inviting the mayor of Ulsan to discuss communication and cooperation for regional economic development. Trump declared an \"economic D-day\" and hinted at strong measures related to the economy. Separately, the possibility of sanctions against Chinese state-owned banks has been raised. Ulsan Chamber of Commerce is exploring ways to promote regional economic activity. Trump's remarks are being watched as a factor that could influence the international economic situation."
     },
     "highlights": [],
     "categories": [
       {
-        "key": "stocks",
-        "name": "증시·환율",
-        "nameEn": "Stocks & FX",
-        "lineKo": "홍콩 증시는 개장 후 기술주 매도로 등락하며 H주가 0.45% 하락했다. 코스피는 삼전닉스 휘청에 따라 1∼2%대 하락세를 보이며 장중 낙폭은 다소 줄어들었다. 중국 증시는 상하이지수가 0.48% 하락하며 출발했다. 엔화는 이란 추가 경제제재로 인해 1달러=159엔대 전반 상승 출발했다. 각 시장은 서로 다른 요인에 따라 움직이며 하락 또는 상승을 보였다.",
-        "lineEn": "The Hong Kong stock market fluctuated up and down after opening due to selling in tech stocks, with H-shares falling 0.45%. The Kospi fell by 1-2% due to fluctuations in Samsung Electronics, although the decline narrowed slightly during the session. The Chinese market opened with the Shanghai index down 0.48%. The yen rose to around 159 yen to the dollar due to additional economic sanctions against Iran. Each market moved up or down due to different factors.",
+        "key": "rates",
+        "name": "금리·예금·투자상품",
+        "nameEn": "Rates, Deposits & Investment Products",
+        "lineKo": "국고채 금리가 일제히 하락하며 3년물은 연 3.830%를 기록했다. 일본은행의 한 정책위원은 9월과 내년 1월에 금리인상이 예상된다고 밝혔다. 미국은 장기금리가 치솟자 바이백 규모를 확대하는 방안을 검토하고 있다. FT는 미국의 재정적자 문제를 해결하지 않으면 바이백은 임시방편일 수 있다고 분석했다. 각 기사는 서로 다른 주제로 별개의 사실을 보고하고 있다.",
+        "lineEn": "The government bond yield fell universally, with the 3-year bond recording an annual rate of 3.830%. A policy official from the Bank of Japan stated that interest rates are expected to rise in September and January next year. The U.S. is considering expanding the buyback scale as long-term interest rates soar. FT analyzed that buybacks could be a temporary measure if the U.S. does not resolve its fiscal deficit problem. Each article reports separate facts on different topics.",
         "isFallback": false,
         "fallbackReason": null,
         "degraded": false,
         "items": [
           {
-            "title": "[올댓차이나] 홍콩 증시, 반등 개장 후 기술주 매도로 등락… H주 0.45%↓",
-            "link": "https://www.newsis.com/view/NISX20260825_0003761598",
-            "source": "뉴시스 경제"
-          },
-          {
-            "title": "삼전닉스 휘청에 코스피 하락 지속…엔비디아 실적 이벤트 주시",
-            "link": "https://www.yna.co.kr/view/AKR20260825084600008",
+            "title": "국고채 금리 일제히 하락…3년물 연 3.830%",
+            "link": "https://www.yna.co.kr/view/AKR20260825148000008",
             "source": "연합뉴스 경제"
           },
           {
-            "title": "코스피, 1∼2%대 하락세…장중 낙폭은 다소 줄여",
-            "link": "https://www.yna.co.kr/view/AKR20260825081200008",
+            "title": "전 일본은행 정책위원 \"9월·내년 1월 금리인상 예상\"",
+            "link": "https://www.newsis.com/view/NISX20260825_0003762031",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "美, 장기금리 치솟자 바이백 확대…FT \"재정적자 놔두면 임시방편일 뿐\"",
+            "link": "https://www.newsis.com/view/NISX20260825_0003761451",
+            "source": "뉴시스 경제"
+          }
+        ]
+      },
+      {
+        "key": "stocks",
+        "name": "증시·환율",
+        "nameEn": "Stocks & FX",
+        "lineKo": "증시·환율: [올댓차이나] 중국 증시 혼조 마감…상하이지수 0.19%↑, 환율 1,380원대 후반으로 상승…수출업체 달러 매도는 지속, '전약후강' 코스피, 상승전환해 0.68%↑…코스닥도 1%대 상승(종합) +5",
+        "lineEn": "Stocks & FX: [올댓차이나] 중국 증시 혼조 마감…상하이지수 0.19%↑, 환율 1,380원대 후반으로 상승…수출업체 달러 매도는 지속, '전약후강' 코스피, 상승전환해 0.68%↑…코스닥도 1%대 상승(종합) +5",
+        "isFallback": true,
+        "fallbackReason": "unverified-entity",
+        "degraded": false,
+        "items": [
+          {
+            "title": "[올댓차이나] 중국 증시 혼조 마감…상하이지수 0.19%↑",
+            "link": "https://www.newsis.com/view/NISX20260825_0003762131",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "환율 1,380원대 후반으로 상승…수출업체 달러 매도는 지속",
+            "link": "https://www.yna.co.kr/view/AKR20260825134700002",
             "source": "연합뉴스 경제"
           },
           {
-            "title": "[올댓차이나] 중국 증시 하락 출발…상하이지수 0.48%↓",
-            "link": "https://www.newsis.com/view/NISX20260825_0003761464",
+            "title": "'전약후강' 코스피, 상승전환해 0.68%↑…코스닥도 1%대 상승(종합)",
+            "link": "https://www.yna.co.kr/view/AKR20260825130451008",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "日증시, 美반도체주 약세에도 상승 마감…닛케이 0.50%↑",
+            "link": "https://www.newsis.com/view/NISX20260825_0003761939",
             "source": "뉴시스 경제"
           },
           {
-            "title": "엔화, 對이란 추가 경제제재에 1달러=159엔대 전반 상승 출발",
-            "link": "https://www.newsis.com/view/NISX20260825_0003761300",
-            "source": "뉴시스 경제"
+            "title": "[외환] 원/달러 환율 3.7원 오른 1,386.1원(15:30 기준가)",
+            "link": "https://www.yna.co.kr/view/AKR20260825129200002",
+            "source": "연합뉴스 경제"
           }
         ]
       },
@@ -1657,36 +1684,36 @@
         "key": "realestate",
         "name": "부동산",
         "nameEn": "Real Estate",
-        "lineKo": "부동산: 연금받는 노인 절반 50만원이하…유주택자가 무주택자 1.6배 받아, 200억 법인주택이 황제사택으로…다주택 규제 회피 동원되기도, 국토장관·서울시장 내일 2차 회동…용산공원 주택공급 협의(종합) +8",
-        "lineEn": "Real Estate: 연금받는 노인 절반 50만원이하…유주택자가 무주택자 1.6배 받아, 200억 법인주택이 황제사택으로…다주택 규제 회피 동원되기도, 국토장관·서울시장 내일 2차 회동…용산공원 주택공급 협의(종합) +8",
-        "isFallback": true,
-        "fallbackReason": "unverified-entity",
-        "degraded": false,
+        "lineKo": "용산공원 주택 공급 문제로 오세훈과 김윤덕이 마주 앉았고, 59㎡ 월세가 1년 만에 140만원 증가했으며, 한국 총리가 청년 주택 공급의 어려움을 언급했고, 노원구 재건축에 속도가 붙었고, 무주택자는 아파트 대신 빌라 구매를 고민하며 한숨을 쉬고 있다.",
+        "lineEn": "O Se-hoon and Kim Yun-deok faced off over the housing supply issue at Yongsan Park, and the monthly rent for a 59㎡ apartment has increased by 1,400,000 won in just one year. South Korea's Prime Minister mentioned the difficulties in supplying housing for young people, and reconstruction efforts in Nowon-gu have accelerated. Homeless people are sighing as they consider buying a villa instead of an apartment.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": true,
         "items": [
           {
-            "title": "연금받는 노인 절반 50만원이하…유주택자가 무주택자 1.6배 받아",
-            "link": "https://www.yna.co.kr/view/AKR20260825088800002",
-            "source": "연합뉴스 경제"
-          },
-          {
-            "title": "200억 법인주택이 황제사택으로…다주택 규제 회피 동원되기도",
-            "link": "https://www.newsis.com/view/NISX20260825_0003761156",
-            "source": "뉴시스 경제"
-          },
-          {
-            "title": "국토장관·서울시장 내일 2차 회동…용산공원 주택공급 협의(종합)",
-            "link": "https://www.yna.co.kr/view/AKR20260825052151003",
-            "source": "연합뉴스 경제"
-          },
-          {
-            "title": "평균값 16억 넘자, 경기 아파트 산 서울 거주자 5년 만에 최다",
-            "link": "https://www.mk.co.kr/news/economy/12135472",
+            "title": "용산공원 주택 공급 놓고 또 마주 앉는 오세훈·김윤덕…이번엔 해법 나올까",
+            "link": "https://www.mk.co.kr/news/realestate/12135893",
             "source": "매일경제 부동산"
           },
           {
-            "title": "부동산 세제 입법의견 1만건 전수분석…5건 중 1건 '비거주 차등'",
-            "link": "https://www.newsis.com/view/NISX20260824_0003759626",
-            "source": "뉴시스 경제"
+            "title": "“한 달 월급으로는 월세도 부족해요”…59㎡ 월세 1년새 140만원↑",
+            "link": "https://www.mk.co.kr/news/realestate/12135891",
+            "source": "매일경제 부동산"
+          },
+          {
+            "title": "韓총리, 吳 '재개발·재건축'에 \"청년 주택 공급은 쉽지 않아\"",
+            "link": "https://www.yna.co.kr/view/AKR20260825141800001",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "노원구 재건축에 '속도'…서울시 첫 '현장형 신통기획 자문'",
+            "link": "https://www.yna.co.kr/view/AKR20260825132300004",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "\"아파트 대신 빌라 사도 될까요?\"…무주택자 '한숨' [시장톡]",
+            "link": "https://www.hankyung.com/article/2026082494326",
+            "source": "한국경제 부동산"
           }
         ]
       },
@@ -1694,58 +1721,21 @@
         "key": "other",
         "name": "기타 경제 소식",
         "nameEn": "Other Economic News",
-        "lineKo": "2분기 신규 주담대 평균 2억829만원으로 대출 규제에 따라 역대 최대폭으로 감소했고, 멕시코는 2분기 1.4% 경제성장으로 1분기 역성장에서 반등했으며, 미국은 '경제적 D-데이' 대이란 제재를 발표했고, 국토부는 \"집값 과열\"과 \"공급에 필요\"라는 의견이 갈리는 서울시의 제안을 거절했다.",
-        "lineEn": "In the second quarter, the average new housing loan was 208,290,000 won, decreasing to the largest decline in history due to loan regulations. Mexico rebounded from a first-quarter contraction with a 1.4% economic growth in the second quarter, and the U.S. announced economic sanctions against Iran, referred to as the \"economic D-day.\" The Ministry of Land, Infrastructure and Transport rejected Seoul's proposal, as opinions were divided between \"housing price overheating\" and \"necessary for supply.",
-        "isFallback": false,
-        "fallbackReason": null,
-        "degraded": true,
-        "items": [
-          {
-            "title": "2분기 신규 주담대 평균 2억829만원…대출 규제에 역대 최대폭↓",
-            "link": "https://www.yna.co.kr/view/AKR20260825076900002",
-            "source": "연합뉴스 경제"
-          },
-          {
-            "title": "멕시코 2분기 1.4% 경제성장…1분기 역성장서 반등",
-            "link": "https://www.newsis.com/view/NISX20260825_0003761559",
-            "source": "뉴시스 경제"
-          },
-          {
-            "title": "美 '경제적 D-데이' 대이란 제재…中·인도·튀르키예까지 압박",
-            "link": "https://www.newsis.com/view/NISX20260825_0003761255",
-            "source": "뉴시스 경제"
-          },
-          {
-            "title": "\"집값 과열\" vs \"공급에 필요\"…국토부가 거절한 서울시 제안 뭐길래",
-            "link": "https://www.hankyung.com/article/202608250145i",
-            "source": "한국경제 부동산"
-          }
-        ]
-      },
-      {
-        "key": "rates",
-        "name": "금리·예금·투자상품",
-        "nameEn": "Rates, Deposits & Investment Products",
-        "lineKo": "국고채 금리가 오늘 대체로 하락했으며, 3년물은 장중 연 3.844%를 기록했다. 채권시장 참여자의 79%는 8월 금통위에서 기준금리가 동결될 것으로 예상하고 있다. 하나은행은 'CJ ONE 내맘적금' 가입 이벤트를 진행 중이다. 해당 적금은 연 2.5%의 우대금리를 제공하고 있다. 오늘 발표된 내용은 금리 동향과 금융상품 관련 정보를 포함하고 있다.",
-        "lineEn": "Today, the government bond yield generally fell, with the 3-year bond reaching an annual rate of 3.844% during the day. 79% of bond market participants expect the benchmark interest rate to remain unchanged at the August monetary policy committee meeting. Hana Bank is currently running a \"CJ ONE Inner Heart Savings Account\" enrollment event. The savings account offers a preferential interest rate of 2.5% annually. The content announced today includes information on interest rate trends and financial products.",
+        "lineKo": "울산상의가 울산시장을 초청한 간담회를 열어 지역경제 발전을 위한 소통과 협력을 논의했다. 트럼프가 '경제적 D-데이'를 선언하며 경제 관련 강력한 조치를 예고했다. 이와 별개로 중국 국유은행에 대한 제재 가능성도 제기되고 있다. 울산상의는 지역 경제 활성화를 위한 방안을 모색하고 있다. 트럼프의 발언은 국제 경제 상황에 영향을 미칠 수 있는 요소로 주목받고 있다.",
+        "lineEn": "Ulsan Chamber of Commerce held a meeting inviting the mayor of Ulsan to discuss communication and cooperation for regional economic development. Trump declared an \"economic D-day\" and hinted at strong measures related to the economy. Separately, the possibility of sanctions against Chinese state-owned banks has been raised. Ulsan Chamber of Commerce is exploring ways to promote regional economic activity. Trump's remarks are being watched as a factor that could influence the international economic situation.",
         "isFallback": false,
         "fallbackReason": null,
         "degraded": false,
         "items": [
           {
-            "title": "국고채 금리 대체로 하락…3년물 장중 연 3.844%",
-            "link": "https://www.yna.co.kr/view/AKR20260825092400008",
+            "title": "울산상의, 울산시장 초청 간담회 \"지역경제 발전 소통·협력\"",
+            "link": "https://www.yna.co.kr/view/AKR20260825133900057",
             "source": "연합뉴스 경제"
           },
           {
-            "title": "채권시장 참여자 79% \"8월 금통위서 기준금리 동결 예상\"",
-            "link": "https://www.yna.co.kr/view/AKR20260825081500008",
-            "source": "연합뉴스 경제"
-          },
-          {
-            "title": "[게시판] 하나은행 'CJ ONE 내맘적금' 가입 이벤트…연 2.5% 우대금리",
-            "link": "https://www.yna.co.kr/view/AKR20260825073500002",
-            "source": "연합뉴스 경제"
+            "title": "트럼프 '경제적 D-데이' 선언…중국 국유은행까지 제재할까",
+            "link": "https://www.newsis.com/view/NISX20260825_0003761330",
+            "source": "뉴시스 경제"
           }
         ]
       }
