@@ -4432,7 +4432,8 @@
         "source": "뉴시스 경제",
         "category": "stocks",
         "preview": "[서울=뉴시스]이재준 기자 = 홍콩 증시는 25일 미국 장기금리 하락에 더해 저가 매수세가 유입하면서 반등 출발했다가 기술주를 중심으로 매물이 출회, 출렁이고 있다. 항셍지수는 이날 전일 대비 116.89 포인트,…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "[AllChina] Hong Kong Market Rises and Falls After Rebound Opening as Tech Stocks Sell Off... H-Share Down 0.45%"
       },
       {
         "title": "연금받는 노인 절반 50만원이하…유주택자가 무주택자 1.6배 받아",
@@ -4441,7 +4442,8 @@
         "source": "연합뉴스 경제",
         "category": "realestate",
         "preview": "(세종=연합뉴스) 안채원 송정은 기자 = 65세 이상 노인 10명 중 9명이 연금을 받지만, 이들 중 절반 이상은 월 50만원 이하를 받는 것으...",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Half of elderly pension recipients get 500,000 won or less... homeowners receive 1.6 times more than non-homeowners"
       },
       {
         "title": "2분기 신규 주담대 평균 2억829만원…대출 규제에 역대 최대폭↓",
@@ -4450,7 +4452,18 @@
         "source": "연합뉴스 경제",
         "category": "other",
         "preview": "(서울=연합뉴스) 임지우 기자 = 올해 2분기 금융권 가계대출 규제가 이어지면서 신규 가계대출과 주택담보대출 규모가 모두 줄었다.",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "rates",
+            "label": "주택담보대출 최저금리",
+            "labelEn": "Lowest mortgage rate",
+            "value": "연 3.62%",
+            "valueEn": "3.62% p.a.",
+            "href": "./mortgage-rates.html"
+          }
+        ],
+        "titleEn": "2nd Quarter New Home Purchase Loans Average 208,290,000 Won...Largest Ever Decline Due to Loan Regulations"
       },
       {
         "title": "200억 법인주택이 황제사택으로…다주택 규제 회피 동원되기도",
@@ -4459,7 +4472,20 @@
         "source": "뉴시스 경제",
         "category": "realestate",
         "preview": "[세종=뉴시스] 안호균 기자 = #1. A법인은 서울 용산구 한남동에 200억원대의 고가주택을 사들여 100억원 가량을 투입해 호화 증축·인테리어 공사를 한 뒤 사주와 자녀들이 사적으로 사용할 수 있도록 제공했다.…",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-yongsan.html",
+            "label": "용산구 아파트 84㎡ 매매",
+            "labelEn": "용산구 apartment 84㎡ sale",
+            "value": "23억 4,203만원",
+            "valueEn": "₩2,342M",
+            "note": "최근 1주 계약 12건",
+            "noteEn": "12 deals in the last 1 weeks"
+          }
+        ],
+        "titleEn": "20,000,000,000 Corporate Housing Becomes Emperor's Residence... Multi-Home Regulation Evasion Also Used"
       },
       {
         "title": "국고채 금리 대체로 하락…3년물 장중 연 3.844%",
@@ -4468,7 +4494,8 @@
         "source": "연합뉴스 경제",
         "category": "rates",
         "preview": "(서울=연합뉴스) 25일 국고채 금리가 대체로 하락하고 있다.",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Government bond rates mostly fall... 3-year bond hits 3.844% annually during trading"
       },
       {
         "title": "멕시코 2분기 1.4% 경제성장…1분기 역성장서 반등",
@@ -4477,7 +4504,8 @@
         "source": "뉴시스 경제",
         "category": "other",
         "preview": "[서울=뉴시스]이재준 기자 = 멕시코 경제는 올해 4~6월 2분기 1.4% 성장하며 1분기 역성장에서 플러스로 돌아섰다. 농업과 어업 및 광업을 포함한 1차 산업이 성장을 이끌었으며 2차 산업과 서비스업도 모두 상승…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Mexico's 2nd Quarter Economic Growth Rises 1.4% from 1st Quarter Recession"
       },
       {
         "title": "삼전닉스 휘청에 코스피 하락 지속…엔비디아 실적 이벤트 주시",
@@ -4486,7 +4514,8 @@
         "source": "연합뉴스 경제",
         "category": "stocks",
         "preview": "(서울=연합뉴스) 황철환 기자 = '인공지능(AI) 대장주' 엔비디아의 실적 발표를 앞두고 글로벌 반도체주 주가가 또다시 짓눌리고 있다.",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Samsung Electronics Shakes Up Kospi, Continues to Fall... Watch NVIDIA Earnings Event"
       },
       {
         "title": "채권시장 참여자 79% \"8월 금통위서 기준금리 동결 예상\"",
@@ -4495,7 +4524,8 @@
         "source": "연합뉴스 경제",
         "category": "rates",
         "preview": "(서울=연합뉴스) 강수지 기자 = 채권시장 참여자 10명 중 8명은 이달 한국은행 금융통화위원회에서 기준금리를 동결할 것으로 예상했다.",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "79% of bond market participants expect the Bank of Korea to hold interest rates at the August monetary policy meeting"
       },
       {
         "title": "코스피, 1∼2%대 하락세…장중 낙폭은 다소 줄여",
@@ -4504,7 +4534,8 @@
         "source": "연합뉴스 경제",
         "category": "stocks",
         "preview": "(서울=연합뉴스) 김유향 기자 = 25일 코스피는 뉴욕증시 반도체주 하락세 등에 하락 출발했지만, 장중 낙폭이 다소 완화되는 모습이다.",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Kospi falls 1-2%, decline narrows during trading session"
       },
       {
         "title": "[올댓차이나] 중국 증시 하락 출발…상하이지수 0.48%↓",
@@ -4513,7 +4544,8 @@
         "source": "뉴시스 경제",
         "category": "stocks",
         "preview": "[서울=뉴시스] 문예성 기자 = 중국 증시가 25일 하락 출발했다. 이날 상하이종합지수는 전날보다 0.48% 하락한 3863.37로 장을 시작했다. 선전성분지수는 전장 대비 0.8% 하락한 1만3683.91로, 중국…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "[AllChina] China's stock market drops at the open... Shanghai index down 0.48%"
       },
       {
         "title": "美 '경제적 D-데이' 대이란 제재…中·인도·튀르키예까지 압박",
@@ -4522,7 +4554,8 @@
         "source": "뉴시스 경제",
         "category": "other",
         "preview": "[서울=뉴시스] 신효령 기자 = 미국이 이란을 국제 금융·교역망에서 고립시키기 위한 대규모 경제 압박에 나섰다. 이란뿐 아니라 이란과 거래하는 중국, 인도, 튀르키예 등 제3국에도 거래 중단을 요구하며 2차 제재(S…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "U.S. 'Economic D-Day' Sanctions on Iran... Pressure Mounts on China, India, Turkey"
       },
       {
         "title": "[게시판] 하나은행 'CJ ONE 내맘적금' 가입 이벤트…연 2.5% 우대금리",
@@ -4531,7 +4564,18 @@
         "source": "연합뉴스 경제",
         "category": "rates",
         "preview": "▲ 하나은행은 'CJ ONE' 멤버십을 통해 'CJ ONE 내맘적금'에 가입한 고객에게 특별우대금리 연 2.5%를 적용하고 최대 1만원의 올리브...",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "rates",
+            "label": "적금 최고금리(12개월)",
+            "labelEn": "Top 12-month savings rate",
+            "value": "연 14.00%",
+            "valueEn": "14.00% p.a.",
+            "href": "./saving-rates.html"
+          }
+        ],
+        "titleEn": "[게시판] 하나은행 'CJ ONE 내맘적금' 가입 이벤트…연 2.5% 우대금리"
       },
       {
         "title": "국토장관·서울시장 내일 2차 회동…용산공원 주택공급 협의(종합)",
@@ -4540,7 +4584,20 @@
         "source": "연합뉴스 경제",
         "category": "realestate",
         "preview": "(서울·세종=연합뉴스) 김동규 임기창 오진송 기자 = 김윤덕 국토교통부 장관과 오세훈 서울시장이 26일 오전 서울 모처에서 만나 용산공원을 활용...",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-yongsan.html",
+            "label": "용산구 아파트 84㎡ 매매",
+            "labelEn": "용산구 apartment 84㎡ sale",
+            "value": "23억 4,203만원",
+            "valueEn": "₩2,342M",
+            "note": "최근 1주 계약 12건",
+            "noteEn": "12 deals in the last 1 weeks"
+          }
+        ],
+        "titleEn": "Minister of Land, Transport and Housing and Seoul Mayor to Hold Second Meeting Tomorrow... Negotiate Housing Supply at Yongsan Park (Comprehensive)"
       },
       {
         "title": "평균값 16억 넘자, 경기 아파트 산 서울 거주자 5년 만에 최다",
@@ -4549,7 +4606,20 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "상반기 기준 경기 아파트 매입 서울 거주자 2022년 6370건→올해 1만5149건서울 아파트 평균 매매가격은 이달 들어 16억원을 넘어섰다. 15억원 미만 아파트의 집값 오름세가..",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./apartment-sale.html",
+            "label": "서울 전체 아파트 84㎡ 매매",
+            "labelEn": "Seoul apartment 84㎡ sale",
+            "value": "13억 1,699만원",
+            "valueEn": "₩1,317M",
+            "note": "최근 1주 계약 224건 · 8/18 대비 +1.5%",
+            "noteEn": "224 deals in the last 1 weeks · +1.5% vs Aug 18"
+          }
+        ],
+        "titleEn": "Average exceeds 1,600,000,000, Gyeonggi apartment buyers from Seoul reach highest in 5 years"
       },
       {
         "title": "엔화, 對이란 추가 경제제재에 1달러=159엔대 전반 상승 출발",
@@ -4558,7 +4628,8 @@
         "source": "뉴시스 경제",
         "category": "stocks",
         "preview": "[서울=뉴시스]이재준 기자 = 엔화 환율은 25일 미국이 이란에 대해 새로운 경제제재를 발표하면서 1달러=159엔대 전반으로 소폭 올라 시작했다. 도쿄 외환시장에서 엔화 환율은 이날 오전 8시30분 시점에 1달러=1…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Yen rises to 159 yen per dollar amid additional economic sanctions against Iran"
       },
       {
         "title": "부동산 세제 입법의견 1만건 전수분석…5건 중 1건 '비거주 차등'",
@@ -4567,7 +4638,8 @@
         "source": "뉴시스 경제",
         "category": "realestate",
         "preview": "[세종=뉴시스]여동준 기자 = 정부의 부동산 세제개편 관련 입법예고에 제출된 입법의견 5건 중 1건 이상이 비거주자와 실거주자를 세제상 다르게 취급하는 조항에 대한 문제 제기인 것으로 나타났다. 실제 입법의견에는 직…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "10,000 property tax legislation opinions fully analyzed... 1 out of 5 'non-resident differential"
       },
       {
         "title": "“아파트 전세 난민 됐다”…갈 곳 없는 세입자들, 결국 ‘이곳’으로 몰렸다",
@@ -4576,7 +4648,20 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "서울 아파트 전세 시장에 한파가 불어 닥치면서 주거용 오피스텔 평균 전셋값이 역대 최고가를 갈아치웠다. 아파트와 유사한 구조를 갖춰 실거주 대안으로 꼽히는 이른바 ‘아파텔’이 전체..",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./apartment-jeonse.html",
+            "label": "서울 전체 아파트 84㎡ 전세",
+            "labelEn": "Seoul apartment 84㎡ jeonse",
+            "value": "7억 8,085만원",
+            "valueEn": "₩781M",
+            "note": "최근 1주 계약 280건 · 8/18 대비 +1.6%",
+            "noteEn": "280 deals in the last 1 weeks · +1.6% vs Aug 18"
+          }
+        ],
+        "titleEn": "Converted into apartment deposit refugees\"... renters with nowhere to go ultimately ended up here"
       },
       {
         "title": "LH, 신축 매입 절차 간소화…주택 공급 속도",
@@ -4585,7 +4670,8 @@
         "source": "한국경제 부동산",
         "category": "realestate",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "LH streamlines new construction acquisition process to accelerate housing supply"
       },
       {
         "title": "수도권 주택 공급 속도낸다…LH, 신축매입 ‘패스트트랙’ 도입",
@@ -4594,7 +4680,8 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "한국토지주택공사(LH)는 민간 보유 토지를 활용한 수도권 신축매입 물량 확보를 가속하기 위해 사업 절차를 대폭 간소화한 ‘신축매입 접수 간소화 및 입지 사전심의 사업’을 도입했다고..",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Seoul Area Accelerates Housing Supply...LH Introduces Fast Track for New Construction Purchases"
       },
       {
         "title": "日증시, 美반도체주 약세에 하락 출발…닛케이 0.51%↓",
@@ -4603,7 +4690,8 @@
         "source": "뉴시스 경제",
         "category": "stocks",
         "preview": "[서울=뉴시스] 신효령 기자 = 25일 일본 도쿄증시에서 닛케이225지수(닛케이평균주가)가 하락 출발했다. 미국 증시에서 반도체주가 약세를 보인 영향으로 일본의 인공지능(AI)·반도체 관련주에도 매도세가 이어졌다.…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Tokyo Stocks Drop on Weakness in U.S. Semiconductor Shares… Nikkei Down 0.51%"
       },
       {
         "title": "LH, 수도권 신축매입임대 사업 절차 간소화… 주택 공급 속도",
@@ -4612,7 +4700,8 @@
         "source": "조선비즈 부동산",
         "category": "realestate",
         "preview": "한국토지주택공사(LH)가 수도권 신축매입임대 주택 물량 확보 속도를 높이기 위해 사업 참여 절차를 대폭 간소화한다. LH는 ‘신축매입 접수 간소화 및 입지 사전심의 사업’을 도입했다고 25일 밝혔다. 신축매입약정 사…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "LH streamlines procedures for new construction purchase and lease projects in the Seoul metropolitan area to accelerate housing supply"
       },
       {
         "title": "금값 3개월여 만에 최고…전세계 뭉칫돈 몰린다",
@@ -4621,7 +4710,8 @@
         "source": "한국경제 경제",
         "category": "realestate",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Gold Price Hits Three-Month High… Global Funds Rush In"
       },
       {
         "title": "\"집값 과열\" vs \"공급에 필요\"…국토부가 거절한 서울시 제안 뭐길래",
@@ -4630,7 +4720,20 @@
         "source": "한국경제 부동산",
         "category": "other",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./apartment-sale.html",
+            "label": "서울 전체 아파트 84㎡ 매매",
+            "labelEn": "Seoul apartment 84㎡ sale",
+            "value": "13억 1,699만원",
+            "valueEn": "₩1,317M",
+            "note": "최근 1주 계약 224건 · 8/18 대비 +1.5%",
+            "noteEn": "224 deals in the last 1 weeks · +1.5% vs Aug 18"
+          }
+        ],
+        "titleEn": "Home Price Fever\" vs \"Needed for Supply\"... What Was the Seoul Proposal That the Ministry of Land, Infrastructure and Transport Rejected"
       },
       {
         "title": "\"서울이 더 싼데?\"…'국평 16억' 부천 새 아파트 등장에 '술렁' [시장톡]",
@@ -4639,7 +4742,20 @@
         "source": "한국경제 부동산",
         "category": "realestate",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./apartment-sale.html",
+            "label": "서울 전체 아파트 84㎡ 매매",
+            "labelEn": "Seoul apartment 84㎡ sale",
+            "value": "13억 1,699만원",
+            "valueEn": "₩1,317M",
+            "note": "최근 1주 계약 224건 · 8/18 대비 +1.5%",
+            "noteEn": "224 deals in the last 1 weeks · +1.5% vs Aug 18"
+          }
+        ],
+        "titleEn": "Is Seoul Cheaper Now?\"... New Apartment in Bucheon Priced at 'National Average 1,600,000,000' Sparks Market Talk"
       }
     ]
   }
