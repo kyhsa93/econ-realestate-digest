@@ -4785,7 +4785,20 @@
         "source": "연합뉴스 경제",
         "category": "realestate",
         "preview": "(서울=연합뉴스) 김동규 김준태 기자 = 용산공원 부지 주택공급 구상을 둘러싼 국토교통부와 서울시의 이견 속에 강남구 탄천물재생센터 일대가 대안...",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-yongsan.html",
+            "label": "용산구 아파트 84㎡ 매매",
+            "labelEn": "용산구 apartment 84㎡ sale",
+            "value": "23억 4,203만원",
+            "valueEn": "₩2,342M",
+            "note": "최근 1주 계약 12건",
+            "noteEn": "12 deals in the last 1 weeks"
+          }
+        ],
+        "titleEn": "Instead of Yongsan Park, Tancheon Water Reclamation Center?…Oh Se-hoon launches 13,000-unit youth housing project"
       },
       {
         "title": "고금리에 재생e투자 9.5%↓…에너지전환 준비 첫 역성장",
@@ -4794,7 +4807,8 @@
         "source": "뉴시스 경제",
         "category": "rates",
         "preview": "[세종=뉴시스]이수정 기자 = 글로벌 고금리 기조가 장기화하면서 재생에너지 투자가 위축되고, 세계 각국의 에너지전환 준비 수준도 관련 지수 산출 이후 처음으로 뒷걸음질친 것으로 나타났다. 초기 대규모 자본이 필요한…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "High interest rates cause renewable energy investment to drop 9.5%... first decline in energy transition preparations"
       },
       {
         "title": "吳 만난 김윤덕 국토장관 “용산공원 여전히 이견… 탄천 주택 공급 검토”",
@@ -4803,7 +4817,20 @@
         "source": "조선비즈 부동산",
         "category": "realestate",
         "preview": "김윤덕 국토교통부 장관은 26일 오세훈 서울시장과의 면담에서 용산공원을 주택 부지로 활용하는 방안에 대해 이견을 좁히지 못했다고 밝혔다. 서울시에서 용산공원 대신 주택 공급지로 제안한 탄천 물재생센터에 대해서는 “검…",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-yongsan.html",
+            "label": "용산구 아파트 84㎡ 매매",
+            "labelEn": "용산구 apartment 84㎡ sale",
+            "value": "23억 4,203만원",
+            "valueEn": "₩2,342M",
+            "note": "최근 1주 계약 12건",
+            "noteEn": "12 deals in the last 1 weeks"
+          }
+        ],
+        "titleEn": "Moon meets Kim Yun-deok, Minister of Land, \"Disagreement still exists over Yongsan Park... considering housing supply in Tanchon"
       },
       {
         "title": "[올댓차이나] 홍콩 증시, 기술주 매수로 사흘 만에 반등… H주 1.42%↑",
@@ -4812,7 +4839,8 @@
         "source": "뉴시스 경제",
         "category": "stocks",
         "preview": "[서울=뉴시스]이재준 기자 = 홍콩 증시는 26일 전날 뉴욕 증시 강세로 투자심리가 호전하면서 기술주를 중심으로 매수 선행, 3거래일 만에 반등 개장했다. 항셍지수는 이날 전일 대비 124.14 포인트, 0.48%…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "[Hong Kong Market] Hong Kong Stocks Rally on Tech Stock Buying, H-Shares Up 1.42% After Three Days"
       },
       {
         "title": "[지방세제 개편안 Q&A] 정부 \"고급주택 취득세 중과 회피 개선\"",
@@ -4821,7 +4849,8 @@
         "source": "연합뉴스 경제",
         "category": "realestate",
         "preview": "(서울=연합뉴스) 양정우 기자 = 정부가 주거 안정 지원을 위해 청년층·서민에 대한 생애최초 취득세 감면을 확대하고, 비주거시설의 주거시설 전환...",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "[Revised Local Tax System Q&A] Government: \"Improving Avoidance of Heavy Taxation on High-End Housing Acquisition"
       },
       {
         "title": "7월 국내 인구 이동, 4년 만에 최소…\"주택 매매량 등 줄어\"",
@@ -4830,7 +4859,8 @@
         "source": "연합뉴스 경제",
         "category": "realestate",
         "preview": "(세종=연합뉴스) 김수현 기자 = 주택 경기가 둔화하면서 7월 국내 인구 이동자 수가 같은 달 기준으로 4년 만에 최소치로 떨어졌다.",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "July Domestic Population Movement Reaches Four-Year Low...\"Home Sales Decline"
       },
       {
         "title": "가계대출 금리 석 달째 상승…주담대 2년 8개월 만에 최고",
@@ -4839,7 +4869,18 @@
         "source": "연합뉴스 경제",
         "category": "rates",
         "preview": "(서울=연합뉴스) 한지훈 기자 = 지난달 시장금리 상승 등의 영향으로 가계대출 금리가 석 달째 올랐다.",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "rates",
+            "label": "주택담보대출 최저금리",
+            "labelEn": "Lowest mortgage rate",
+            "value": "연 3.62%",
+            "valueEn": "3.62% p.a.",
+            "href": "./mortgage-rates.html"
+          }
+        ],
+        "titleEn": "Household Loan Rates Rise for Third Straight Month... Housing Loans Reach Highest in 2 Years, 8 Months"
       },
       {
         "title": "인구이동 4년 만에 최저…주택거래 감소하자 15.5%↓",
@@ -4848,7 +4889,8 @@
         "source": "뉴시스 경제",
         "category": "realestate",
         "preview": "[세종=뉴시스]박광온 기자 = 지난달 국내 인구 이동자 수가 46만명대로 떨어지며 2022년 이후 4년 만에 가장 낮은 수준을 기록했다. 인구 감소와 고령화로 이사 수요가 줄어드는 가운데, 최근 주택 매매와 아파트…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Population movement reaches lowest level in 4 years... housing transactions drop 15.5%"
       },
       {
         "title": "[올댓차이나] 中 증시, 혼조 개장 후 정책 기대에 상승세…창업판 1.39%↑",
@@ -4857,7 +4899,8 @@
         "source": "뉴시스 경제",
         "category": "stocks",
         "preview": "[서울=뉴시스]이재준 기자 = 중국 증시는 26일 국제 유가 하락에 혼조세로 출발했다가 정책 기대 관련주와 실적 호조 종목에 매수가 몰리면서 오르고 있다. 상하이 종합지수는 이날 전일 대비 7.70 포인트, 0.19…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "[AllChina] China's stock market rises on policy expectations after mixed opening... Start-up board up 1.39%"
       },
       {
         "title": "오세훈 \"용산공원 주택 반대 재확인…국토장관에 대안 제시\"(종합)",
@@ -4866,7 +4909,20 @@
         "source": "연합뉴스 경제",
         "category": "realestate",
         "preview": "(서울=연합뉴스) 황재하 김준태 기자 = 오세훈 서울시장은 26일 김윤덕 국토교통부 장관을 만나 용산공원 내 주택 공급 문제를 재차 논의했으나 ...",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-yongsan.html",
+            "label": "용산구 아파트 84㎡ 매매",
+            "labelEn": "용산구 apartment 84㎡ sale",
+            "value": "23억 4,203만원",
+            "valueEn": "₩2,342M",
+            "note": "최근 1주 계약 12건",
+            "noteEn": "12 deals in the last 1 weeks"
+          }
+        ],
+        "titleEn": "Oh Sehun Opposes Housing in Yongsan Park, Presents Alternative to Minister of Land, Transport and Maritime Affairs (Comprehensive)"
       },
       {
         "title": "국고채 금리 일제히 하락…3년물 장중 연 3.790%",
@@ -4875,7 +4931,8 @@
         "source": "연합뉴스 경제",
         "category": "rates",
         "preview": "(서울=연합뉴스) 26일 국고채 금리가 일제히 하락하고 있다.",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "South Korea's government bond yields fall across the board... 3-year bonds trade at 3.790% annually"
       },
       {
         "title": "캐나다, 美 200억불 상품에 보복 관세…미국 경제 영향은?",
@@ -4884,7 +4941,8 @@
         "source": "뉴시스 경제",
         "category": "other",
         "preview": "[서울=뉴시스]고재은 기자 = 캐나다가 200억 달러(27조6500여억원) 상당의 미국산 제품에 최대 50% 보복 관세를 부과하기로 한 가운데 미국 경제에 미칠 영향에 관심이 쏠리고 있다. 알루미늄·철강 등 주요 산…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Canada Imposes Retaliatory Tariffs on $20,000,000,000 Worth of U.S. Goods... What Impact on the U.S. Economy?"
       },
       {
         "title": "“위탁·보증 사실무근”…LH, 향동 고금리 대출영업 법무법인 계도 강화",
@@ -4893,7 +4951,8 @@
         "source": "매일경제 부동산",
         "category": "rates",
         "preview": "한국토지주택공사(LH)가 고금리 대출영업 법무법인에 소유권 이전등기 등 관련 업무를 위탁한 사실이 없다고 밝혔다. 앞서 한 매체는 전날 LH로부터 분양전환에 필요한 소유권 이전등기..",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "LH strengthens legal guidance for Hwangdong high-interest loan operations after 'entrustment and guarantee claims unfounded"
       },
       {
         "title": "美 '이란 경제적 왕따 작전', 중국에 막히나…제재 딜레마",
@@ -4902,7 +4961,8 @@
         "source": "뉴시스 경제",
         "category": "other",
         "preview": "[서울=뉴시스] 신효령 기자 = 미국의 대이란 경제 압박이 최대 원유 구매국인 중국의 반발에 부딪히면서 도널드 트럼프 행정부의 전략이 시험대에 올랐다. 미국이 중국까지 제재하면 미중 경제 갈등을 키울 수 있고, 중국…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "U.S. 'Iran Economic Isolation Operation' Hitting China... Sanctions Dilemma"
       },
       {
         "title": "코스피, 엔비디아 실적발표 경계감에 장중 보합권 유지",
@@ -4911,7 +4971,8 @@
         "source": "연합뉴스 경제",
         "category": "stocks",
         "preview": "(서울=연합뉴스) 김유향 기자 = 26일 코스피는 장중 보합권을 유지하고 있다.",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "KOSPI Remains Flat Amid Caution Ahead of NVIDIA Earnings Release"
       },
       {
         "title": "[속보] 오세훈 “탄천물재생센터 구상 정식 제안…청년주택단지 가능”",
@@ -4920,7 +4981,8 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "[Breaking News] Oh Sehun \"Formal proposal for Tancheon Water Reclamation Center plan... possibility of youth housing complex"
       },
       {
         "title": "노무라 \"한은 8월 금통위서 금리 인상 확률 최고 수준\"",
@@ -4929,7 +4991,8 @@
         "source": "연합뉴스 경제",
         "category": "rates",
         "preview": "(서울=연합뉴스) 강수지 기자 = 노무라 증권이 오는 27일 열리는 한국은행 금융통화위원회에서 기준금리가 25bp(1bp=0.01%포인트) 인상...",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Nomura: BOF's August MPC Meeting Has Highest Probability of Rate Hike"
       },
       {
         "title": "은평구 신사동 미성아파트 83.27㎡, 8억4500만원 최근 3년 신고가",
@@ -4938,7 +5001,20 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "서울 은평구 신사동 미성아파트 전용 83.27㎡가 8억4500만원에 거래되며 최근 3년 내 신고가를 기록했다. 2026년 8월 25일 국토부 실거래가 시스템에 신규 등록된 거래 내..",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-eunpyeong.html",
+            "label": "은평구 아파트 84㎡ 매매",
+            "labelEn": "은평구 apartment 84㎡ sale",
+            "value": "10억 5,731만원",
+            "valueEn": "₩1,057M",
+            "note": "최근 1주 계약 72건 · 8/19 대비 +3.9%",
+            "noteEn": "72 deals in the last 1 weeks · +3.9% vs Aug 19"
+          }
+        ],
+        "titleEn": "Eunpyeong-gu, Sinseo-dong, Misung Apartment 83.27㎡, 845,000,000won recent 3-year reported highest price"
       },
       {
         "title": "도봉구 럭키아파트 84.86㎡, 6억3천만원 최근 3년 신고가",
@@ -4947,7 +5023,20 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "서울 도봉구 도봉동 럭키아파트 전용 84.86㎡가 6억 3,000만 원에 거래되며 최근 3년 내 신고가를 기록했다. 2026년 8월 25일 국토부 실거래가 시스템에 신규 등록된 거..",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-dobong.html",
+            "label": "도봉구 아파트 84㎡ 매매",
+            "labelEn": "도봉구 apartment 84㎡ sale",
+            "value": "6억 8,607만원",
+            "valueEn": "₩686M",
+            "note": "최근 1주 계약 66건 · 8/19 대비 -2.1%",
+            "noteEn": "66 deals in the last 1 weeks · -2.1% vs Aug 19"
+          }
+        ],
+        "titleEn": "Dobong-gu Lucky Apartment 84.86㎡, 630,000,000won recent 3-year record high price"
       },
       {
         "title": "서울 재건축 메카는 강남 아닌 이곳…45개 단지 사업 추진",
@@ -4956,7 +5045,20 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "4·7호선 인근 단지 밀집 GTX 개통 기대감도 공사비 상승 따른 분담금 증가는 변수 단지별 맞춤형 행정지원서울 노원구에서 1980년대 후반부터 1990년대 초반 조성된 대규모 ..",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-nowon.html",
+            "label": "노원구 아파트 84㎡ 매매",
+            "labelEn": "노원구 apartment 84㎡ sale",
+            "value": "9억 4,703만원",
+            "valueEn": "₩947M",
+            "note": "최근 1주 계약 190건 · 8/19 대비 +3.0%",
+            "noteEn": "190 deals in the last 1 weeks · +3.0% vs Aug 19"
+          }
+        ],
+        "titleEn": "Seoul's reconstruction hub is not Gangnam but here... 45 projects underway"
       },
       {
         "title": "성북구 돈암동 한진아파트 84.87㎡, 11억 원에 거래... 최근 3년 신고가",
@@ -4965,7 +5067,20 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "서울 성북구 돈암동 한진아파트에서 전용 84.87㎡가 11억 원에 거래되며 최근 3년 내 최고가를 기록했다. 2026년 8월 25일 국토부 실거래가 시스템에 신규 등록된 거래에 따..",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-seongbuk.html",
+            "label": "성북구 아파트 84㎡ 매매",
+            "labelEn": "성북구 apartment 84㎡ sale",
+            "value": "11억 5,793만원",
+            "valueEn": "₩1,158M",
+            "note": "최근 1주 계약 61건 · 8/19 대비 +6.1%",
+            "noteEn": "61 deals in the last 1 weeks · +6.1% vs Aug 19"
+          }
+        ],
+        "titleEn": "Seongbuk-gu, Donam-dong Hanjin Apartment, 84.87㎡, traded for 1,100,000,000 won... new high price in the last 3 years"
       },
       {
         "title": "중랑구 신내동 진로아파트 134.37㎡, 11억원 최근 3년 신고가",
@@ -4974,7 +5089,20 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "서울 중랑구 신내동 진로아파트에서 전용 134.37㎡가 11억원에 거래되며 최근 3년 내 신고가를 기록했다. 국토교통부 실거래가 시스템에 2026년 8월 25일 신규 등록된 자료에..",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-jungnang.html",
+            "label": "중랑구 아파트 84㎡ 매매",
+            "labelEn": "중랑구 apartment 84㎡ sale",
+            "value": "8억 7,232만원",
+            "valueEn": "₩872M",
+            "note": "최근 1주 계약 39건 · 8/19 대비 -8.9%",
+            "noteEn": "39 deals in the last 1 weeks · -8.9% vs Aug 19"
+          }
+        ],
+        "titleEn": "Jungnang-gu Sinneung-dong Jinro Apartment 134.37㎡, 1,100,000,000 won recent 3-year new high price"
       },
       {
         "title": "연말 첫 '평화경제특구' 지정…\"기존 인센티브론 안돼\"",
@@ -4983,7 +5111,8 @@
         "source": "뉴시스 경제",
         "category": "other",
         "preview": "[세종=뉴시스]이수정 기자 = 올해 말 첫 지정을 앞둔 평화경제특구의 성공을 위해 국비 투입과 국내 최고 수준의 세제·보조금 지원이 필요하다는 제언이 나왔다. 산업연구원은 26일 이 같은 내용을 담은 '한반도 평화경…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "End-of-Year First 'Peace Economy Special Zone' Designation...\"Existing Incentives Won't Suffice"
       },
       {
         "title": "젠스타메이트, 잠실 사옥 등 대한제당 보유 부동산 3곳 개발전략 컨설팅 수주",
@@ -4992,7 +5121,8 @@
         "source": "조선비즈 부동산",
         "category": "realestate",
         "preview": "국내 주요 상업용 부동산 종합서비스 기업 젠스타메이트가 대한제당이 보유한 서울 소재 부동산 3곳의 개발전략 수립과 사업성 분석 컨설팅 용역을 수주했다고 26일 밝혔다. 이번 컨설팅 대상은 대한제당 사옥이 있는 송파구…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Jenstar Mate Secures Consultancy Contract for Development Strategy of Three Real Estate Properties Owned by Daehan Cheil, Including the Jamshil Office Building"
       }
     ]
   }

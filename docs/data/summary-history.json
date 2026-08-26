@@ -1750,8 +1750,8 @@
     "date": "2026-08-26",
     "model": "qwen3:14b",
     "summary": {
-      "ko": "- 부동산: 광명시와 철산·하안 재건축 주민은 공공임대 추가 분양을 둘러싼 갈등을 일으켰다. 서울 부동산 강제경매는 빚을 갚지 못한 집주인 수가 늘면서 역대 최다를 기록했다. 정부는 빌라 구매 시 대출 풀이와 주택 수 제한 완화를 발표하며 주택 시장에 영향을 미치고 있다. 강남 집값은 세제 개편으로 인해 폭락할 가능성이 제기되고 있다. 오세훈은 강남 탄천에 1.3만가구를 공급하겠다고 발표하며 용산공원 임대주택 계획에 맞불을 놓았다.\n- 기타 경제 소식: 오늘 경제 관련 주요일정이 발표되었다. JP모건이 주식담보대출 규정을 완화하는 방안을 발표했다. 해당 조치는 신흥 AI 부자들의 자금 조달을 지원하기 위한 목적이다. 경제 일정은 오늘의 주요 이슈로 꼽혔다. JP모건의 결정은 금융시장에 영향을 미칠 것으로 예상된다.\n- 금리·예금·투자상품: 뉴욕증시는 미국 국채 금리 하락과 반도체주 반등으로 상승했다. 나스닥 지수는 0.66% 올랐다. 국내에서는 고금리와 고분양가 지속으로 '중도금 무이자' 상품이 인기를 끌고 있다. 변동형 주담대 금리는 연 6%에 근접하고 있다. 김윤덕 장관은 뉴홈 '금리 약속'을 재개해 최장 40년 고정금리 1.9~3.0% 상품을 출시했다.\n- 증시·환율: 뉴욕 증시는 반도체주 강세에 상승 출발해 나스닥이 0.73% 상승했고, 대만 증시는 기술주에 저가 매수세로 0.91% 상승 마감했으나 홍콩 증시는 미중대립 격화 우려로 H주가 0.31% 하락 마감했으며, 국내 증시는 휘청이자 주춤해 4개월 만에 지갑을 꽁꽁 닫았고, 반도체 주주환원 기대에 환율이 급락했으나 반도체 기업 원화 충분한 것으로 나타났다.",
-      "en": "- Real Estate: Gwangmyeong City and residents of Cheolsan and Haan redevelopment areas clashed over additional public rental housing sales. Seoul's forced real estate auctions reached a record high as the number of homeowners unable to repay their debts increased. The government is affecting the housing market by announcing eased loan conditions and relaxed limits on the number of homes that can be owned when purchasing a villa. South Gangnam housing prices are at risk of plummeting due to tax reforms. Oh Se-hoon countered the Yongsan Park rental housing plan by announcing a plan to supply 13,000 units in Gangnam's Tanchon area.\n- Other Economic News: Today, major economic schedules were announced. JP Morgan announced a plan to ease stock collateral loan regulations. The measure aims to support fundraising by emerging AI billionaires. The economic schedule was cited as today's major issue. JP Morgan's decision is expected to affect the financial market.\n- Rates, Deposits & Investment Products: The New York stock market rose due to a decline in U.S. Treasury bond rates and a rebound in semiconductor stocks. The Nasdaq index increased by 0.66%. Domestically, 'zero-interest down payment' products are gaining popularity due to sustained high interest rates and high housing prices. The variable-rate housing loan interest rate is approaching 6% annually. Minister Kim Yoon-deok has resumed the New Home 'interest rate promise' and launched a product offering fixed interest rates of 1.9 to 3.0% for up to 40 years.\n- Stocks & FX: The New York stock market opened higher on a strong performance by semiconductor stocks, with the Nasdaq rising 0.73%. The Taiwan stock market closed up 0.91% due to bargain hunting in technology stocks, but the Hong Kong stock market closed down 0.31% as concerns over the escalation of US-China tensions caused H-shares to fall. The domestic stock market fluctuated and retreated, closing tightly for the first time in four months. The exchange rate sharply fell due to expectations of semiconductor shareholder returns, but it was found that semiconductor companies have sufficient won."
+      "ko": "- 부동산: 부동산: 용산공원 대신 탄천물재생센터?…1.3만호 청년주택 띄운 오세훈, 吳 만난 김윤덕 국토장관 “용산공원 여전히 이견… 탄천 주택 공급 검토”, [지방세제 개편안 Q&A] 정부 \"고급주택 취득세 중과 회피 개선\" +10\n- 금리·예금·투자상품: 고금리로 인한 재생e투자 감소, 가계대출 금리 상승, 국고채 금리 하락, LH의 고금리 대출영업 관련 법무법인 계도 강화, 노무라의 한은 금리 인상 확률 전망 등 다양한 금리·예금·투자상품 관련 동향이 보도되었다.\n- 증시·환율: 홍콩 증시는 기술주 매수로 사흘 만에 반등하며 H주가 1.42% 상승했다. 중국 증시는 혼조 개장 후 정책 기대에 따라 상승세를 보이며 창업판이 1.39% 올랐다. 코스피는 엔비디아 실적발표에 대한 경계감으로 장중 보합권을 유지하고 있다. 홍콩과 중국 증시 모두 기술주에 대한 관심이 높아진 것으로 나타났다. 각 시장은 서로 다른 요인에 따라 움직였으며, 구체적인 수치는 각각의 기사에서 명시되었다.\n- 기타 경제 소식: 캐나다가 미국의 200억불 상품에 대해 보복 관세를 부과했다. 미국은 이란에 대한 경제적 제재를 추진하고 있으나 중국의 반응으로 어려움을 겪고 있다. 연말 첫 '평화경제특구' 지정이 발표되며 기존 인센티브 방식의 한계가 드러났다. 각 기사는 서로 다른 주제로, 경제적 갈등과 정책 변화를 보여준다. 오늘의 뉴스는 국제 경제 관계와 국내 정책 방향을 동시에 다루고 있다.",
+      "en": "- Real Estate: Real Estate: 용산공원 대신 탄천물재생센터?…1.3만호 청년주택 띄운 오세훈, 吳 만난 김윤덕 국토장관 “용산공원 여전히 이견… 탄천 주택 공급 검토”, [지방세제 개편안 Q&A] 정부 \"고급주택 취득세 중과 회피 개선\" +10\n- Rates, Deposits & Investment Products: Decreased reinvestment due to high interest rates, rising household loan rates, falling government bond rates, intensified legal firm guidance related to high-interest lending operations by LH, Nomura's forecast of the likelihood of a Bank of Korea interest rate hike, and various other trends related to interest rates, deposits, and investment products were reported.\n- Stocks & FX: The Hong Kong stock market rebounded after three days of trading, with H-shares rising 1.42% due to buying in technology stocks. The Chinese stock market rose after a mixed opening, with the Star Market increasing 1.39% amid policy expectations. The KOSPI has remained flat during the day due to caution over NVIDIA's earnings announcement. Both the Hong Kong and Chinese stock markets have shown increased interest in technology stocks. Each market moved due to different factors, and specific figures are stated in their respective articles.\n- Other Economic News: Canada imposed retaliatory tariffs on $20,000,000,000 worth of U.S. goods. The U.S. is advancing economic sanctions against Iran but is facing difficulties due to China's response. The announcement of the first \"Peace Economic Special Zone\" at year-end revealed the limitations of the existing incentive approach. Each article covers different topics, illustrating economic conflicts and policy changes. Today's news addresses both international economic relations and domestic policy directions."
     },
     "highlights": [],
     "categories": [
@@ -1759,57 +1759,35 @@
         "key": "realestate",
         "name": "부동산",
         "nameEn": "Real Estate",
-        "lineKo": "광명시와 철산·하안 재건축 주민은 공공임대 추가 분양을 둘러싼 갈등을 일으켰다. 서울 부동산 강제경매는 빚을 갚지 못한 집주인 수가 늘면서 역대 최다를 기록했다. 정부는 빌라 구매 시 대출 풀이와 주택 수 제한 완화를 발표하며 주택 시장에 영향을 미치고 있다. 강남 집값은 세제 개편으로 인해 폭락할 가능성이 제기되고 있다. 오세훈은 강남 탄천에 1.3만가구를 공급하겠다고 발표하며 용산공원 임대주택 계획에 맞불을 놓았다.",
-        "lineEn": "Gwangmyeong City and residents of Cheolsan and Haan redevelopment areas clashed over additional public rental housing sales. Seoul's forced real estate auctions reached a record high as the number of homeowners unable to repay their debts increased. The government is affecting the housing market by announcing eased loan conditions and relaxed limits on the number of homes that can be owned when purchasing a villa. South Gangnam housing prices are at risk of plummeting due to tax reforms. Oh Se-hoon countered the Yongsan Park rental housing plan by announcing a plan to supply 13,000 units in Gangnam's Tanchon area.",
-        "isFallback": false,
-        "fallbackReason": null,
+        "lineKo": "부동산: 용산공원 대신 탄천물재생센터?…1.3만호 청년주택 띄운 오세훈, 吳 만난 김윤덕 국토장관 “용산공원 여전히 이견… 탄천 주택 공급 검토”, [지방세제 개편안 Q&A] 정부 \"고급주택 취득세 중과 회피 개선\" +10",
+        "lineEn": "Real Estate: 용산공원 대신 탄천물재생센터?…1.3만호 청년주택 띄운 오세훈, 吳 만난 김윤덕 국토장관 “용산공원 여전히 이견… 탄천 주택 공급 검토”, [지방세제 개편안 Q&A] 정부 \"고급주택 취득세 중과 회피 개선\" +10",
+        "isFallback": true,
+        "fallbackReason": "unverified-entity",
         "degraded": false,
         "items": [
           {
-            "title": "“공공임대 추가 못 받는다”… 광명시-철산·하안 재건축 주민 충돌",
-            "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/26/T6PQAYOSGJAK3OAPMTYHWSNPTA/",
+            "title": "용산공원 대신 탄천물재생센터?…1.3만호 청년주택 띄운 오세훈",
+            "link": "https://www.yna.co.kr/view/AKR20260826092800004",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "吳 만난 김윤덕 국토장관 “용산공원 여전히 이견… 탄천 주택 공급 검토”",
+            "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/26/FQWZQFKGPVEMLFVLML5Y2PJEUM/",
             "source": "조선비즈 부동산"
           },
           {
-            "title": "'빚 못 버틴 집주인' 늘었다…서울 부동산 강제경매 역대 최다",
-            "link": "https://www.newsis.com/view/NISX20260825_0003761748",
-            "source": "뉴시스 경제"
+            "title": "[지방세제 개편안 Q&A] 정부 \"고급주택 취득세 중과 회피 개선\"",
+            "link": "https://www.yna.co.kr/view/AKR20260826083500530",
+            "source": "연합뉴스 경제"
           },
           {
-            "title": "“대출 풀고 주택 수 빼준다” … 정부가 띄우는 빌라, ‘이것’ 꼭 따지고 사라",
-            "link": "https://www.mk.co.kr/news/realestate/12135671",
-            "source": "매일경제 부동산"
+            "title": "7월 국내 인구 이동, 4년 만에 최소…\"주택 매매량 등 줄어\"",
+            "link": "https://www.yna.co.kr/view/AKR20260826062900002",
+            "source": "연합뉴스 경제"
           },
           {
-            "title": "“세제개편 후폭풍 세긴 세네”…강남 집값 ‘폭락’ 이번엔 진짜일까 [부동산 손품노트]",
-            "link": "https://www.mk.co.kr/news/realestate/12136140",
-            "source": "매일경제 부동산"
-          },
-          {
-            "title": "오세훈 \"강남 탄천에 1.3만가구\"…'용산공원 임대주택'에 맞불",
-            "link": "https://www.mk.co.kr/news/realestate/12136047",
-            "source": "매일경제 부동산"
-          }
-        ]
-      },
-      {
-        "key": "other",
-        "name": "기타 경제 소식",
-        "nameEn": "Other Economic News",
-        "lineKo": "오늘 경제 관련 주요일정이 발표되었다. JP모건이 주식담보대출 규정을 완화하는 방안을 발표했다. 해당 조치는 신흥 AI 부자들의 자금 조달을 지원하기 위한 목적이다. 경제 일정은 오늘의 주요 이슈로 꼽혔다. JP모건의 결정은 금융시장에 영향을 미칠 것으로 예상된다.",
-        "lineEn": "Today, major economic schedules were announced. JP Morgan announced a plan to ease stock collateral loan regulations. The measure aims to support fundraising by emerging AI billionaires. The economic schedule was cited as today's major issue. JP Morgan's decision is expected to affect the financial market.",
-        "isFallback": false,
-        "fallbackReason": null,
-        "degraded": false,
-        "items": [
-          {
-            "title": "[오늘의 주요일정]경제(8월26일수요일)",
-            "link": "https://www.newsis.com/view/NISX20260825_0003760875",
-            "source": "뉴시스 경제"
-          },
-          {
-            "title": "\"신흥 AI 부자 잡자…JP모건, 주식담보대출 규정 완화\"",
-            "link": "https://www.newsis.com/view/NISX20260825_0003762049",
+            "title": "인구이동 4년 만에 최저…주택거래 감소하자 15.5%↓",
+            "link": "https://www.newsis.com/view/NISX20260826_0003763008",
             "source": "뉴시스 경제"
           }
         ]
@@ -1818,36 +1796,36 @@
         "key": "rates",
         "name": "금리·예금·투자상품",
         "nameEn": "Rates, Deposits & Investment Products",
-        "lineKo": "뉴욕증시는 미국 국채 금리 하락과 반도체주 반등으로 상승했다. 나스닥 지수는 0.66% 올랐다. 국내에서는 고금리와 고분양가 지속으로 '중도금 무이자' 상품이 인기를 끌고 있다. 변동형 주담대 금리는 연 6%에 근접하고 있다. 김윤덕 장관은 뉴홈 '금리 약속'을 재개해 최장 40년 고정금리 1.9~3.0% 상품을 출시했다.",
-        "lineEn": "The New York stock market rose due to a decline in U.S. Treasury bond rates and a rebound in semiconductor stocks. The Nasdaq index increased by 0.66%. Domestically, 'zero-interest down payment' products are gaining popularity due to sustained high interest rates and high housing prices. The variable-rate housing loan interest rate is approaching 6% annually. Minister Kim Yoon-deok has resumed the New Home 'interest rate promise' and launched a product offering fixed interest rates of 1.9 to 3.0% for up to 40 years.",
+        "lineKo": "고금리로 인한 재생e투자 감소, 가계대출 금리 상승, 국고채 금리 하락, LH의 고금리 대출영업 관련 법무법인 계도 강화, 노무라의 한은 금리 인상 확률 전망 등 다양한 금리·예금·투자상품 관련 동향이 보도되었다.",
+        "lineEn": "Decreased reinvestment due to high interest rates, rising household loan rates, falling government bond rates, intensified legal firm guidance related to high-interest lending operations by LH, Nomura's forecast of the likelihood of a Bank of Korea interest rate hike, and various other trends related to interest rates, deposits, and investment products were reported.",
         "isFallback": false,
         "fallbackReason": null,
-        "degraded": false,
+        "degraded": true,
         "items": [
           {
-            "title": "뉴욕증시, 美 국채 금리 하락·반도체주 반등에 상승…나스닥 0.66% ↑",
-            "link": "https://www.newsis.com/view/NISX20260826_0003762479",
+            "title": "고금리에 재생e투자 9.5%↓…에너지전환 준비 첫 역성장",
+            "link": "https://www.newsis.com/view/NISX20260826_0003762868",
             "source": "뉴시스 경제"
           },
           {
-            "title": "고금리·고분양가 지속…'중도금 무이자' 인기",
-            "link": "https://www.hankyung.com/article/2026082521501",
-            "source": "한국경제 부동산"
+            "title": "가계대출 금리 석 달째 상승…주담대 2년 8개월 만에 최고",
+            "link": "https://www.yna.co.kr/view/AKR20260826076000002",
+            "source": "연합뉴스 경제"
           },
           {
-            "title": "변동형 주담대 금리 연 6% 눈앞",
-            "link": "https://www.hankyung.com/article/2026082521421",
-            "source": "한국경제 경제"
+            "title": "국고채 금리 일제히 하락…3년물 장중 연 3.790%",
+            "link": "https://www.yna.co.kr/view/AKR20260826085800008",
+            "source": "연합뉴스 경제"
           },
           {
-            "title": "김윤덕 장관, 뉴홈 ‘금리 약속’ 되살렸다…최장 40년·연 1.9~3.0% 고정",
-            "link": "https://www.mk.co.kr/news/realestate/12135949",
+            "title": "“위탁·보증 사실무근”…LH, 향동 고금리 대출영업 법무법인 계도 강화",
+            "link": "https://www.mk.co.kr/news/realestate/12136621",
             "source": "매일경제 부동산"
           },
           {
-            "title": "정부, 뉴홈 전용 모기지 조건 확정…최장 40년·금리 1.9~3.0%",
-            "link": "https://www.newsis.com/view/NISX20260825_0003762205",
-            "source": "뉴시스 경제"
+            "title": "노무라 \"한은 8월 금통위서 금리 인상 확률 최고 수준\"",
+            "link": "https://www.yna.co.kr/view/AKR20260826071000008",
+            "source": "연합뉴스 경제"
           }
         ]
       },
@@ -1855,36 +1833,53 @@
         "key": "stocks",
         "name": "증시·환율",
         "nameEn": "Stocks & FX",
-        "lineKo": "뉴욕 증시는 반도체주 강세에 상승 출발해 나스닥이 0.73% 상승했고, 대만 증시는 기술주에 저가 매수세로 0.91% 상승 마감했으나 홍콩 증시는 미중대립 격화 우려로 H주가 0.31% 하락 마감했으며, 국내 증시는 휘청이자 주춤해 4개월 만에 지갑을 꽁꽁 닫았고, 반도체 주주환원 기대에 환율이 급락했으나 반도체 기업 원화 충분한 것으로 나타났다.",
-        "lineEn": "The New York stock market opened higher on a strong performance by semiconductor stocks, with the Nasdaq rising 0.73%. The Taiwan stock market closed up 0.91% due to bargain hunting in technology stocks, but the Hong Kong stock market closed down 0.31% as concerns over the escalation of US-China tensions caused H-shares to fall. The domestic stock market fluctuated and retreated, closing tightly for the first time in four months. The exchange rate sharply fell due to expectations of semiconductor shareholder returns, but it was found that semiconductor companies have sufficient won.",
+        "lineKo": "홍콩 증시는 기술주 매수로 사흘 만에 반등하며 H주가 1.42% 상승했다. 중국 증시는 혼조 개장 후 정책 기대에 따라 상승세를 보이며 창업판이 1.39% 올랐다. 코스피는 엔비디아 실적발표에 대한 경계감으로 장중 보합권을 유지하고 있다. 홍콩과 중국 증시 모두 기술주에 대한 관심이 높아진 것으로 나타났다. 각 시장은 서로 다른 요인에 따라 움직였으며, 구체적인 수치는 각각의 기사에서 명시되었다.",
+        "lineEn": "The Hong Kong stock market rebounded after three days of trading, with H-shares rising 1.42% due to buying in technology stocks. The Chinese stock market rose after a mixed opening, with the Star Market increasing 1.39% amid policy expectations. The KOSPI has remained flat during the day due to caution over NVIDIA's earnings announcement. Both the Hong Kong and Chinese stock markets have shown increased interest in technology stocks. Each market moved due to different factors, and specific figures are stated in their respective articles.",
         "isFallback": false,
         "fallbackReason": null,
-        "degraded": true,
+        "degraded": false,
         "items": [
           {
-            "title": "뉴욕 증시, 반도체주 강세에 상승 출발…나스닥 0.73% ↑",
-            "link": "https://www.newsis.com/view/NISX20260825_0003762442",
+            "title": "[올댓차이나] 홍콩 증시, 기술주 매수로 사흘 만에 반등… H주 1.42%↑",
+            "link": "https://www.newsis.com/view/NISX20260826_0003763315",
             "source": "뉴시스 경제"
           },
           {
-            "title": "[올댓차이나] 대만 증시, 기술주에 저가 매수세로 반등 마감…0.91%↑",
-            "link": "https://www.newsis.com/view/NISX20260825_0003762373",
+            "title": "[올댓차이나] 中 증시, 혼조 개장 후 정책 기대에 상승세…창업판 1.39%↑",
+            "link": "https://www.newsis.com/view/NISX20260826_0003763291",
             "source": "뉴시스 경제"
           },
           {
-            "title": "[올댓차이나] 홍콩 증시, 미중대립 격화 우려에 속락 마감… H주 0.31%↓",
-            "link": "https://www.newsis.com/view/NISX20260825_0003762341",
+            "title": "코스피, 엔비디아 실적발표 경계감에 장중 보합권 유지",
+            "link": "https://www.yna.co.kr/view/AKR20260826075300008",
+            "source": "연합뉴스 경제"
+          }
+        ]
+      },
+      {
+        "key": "other",
+        "name": "기타 경제 소식",
+        "nameEn": "Other Economic News",
+        "lineKo": "캐나다가 미국의 200억불 상품에 대해 보복 관세를 부과했다. 미국은 이란에 대한 경제적 제재를 추진하고 있으나 중국의 반응으로 어려움을 겪고 있다. 연말 첫 '평화경제특구' 지정이 발표되며 기존 인센티브 방식의 한계가 드러났다. 각 기사는 서로 다른 주제로, 경제적 갈등과 정책 변화를 보여준다. 오늘의 뉴스는 국제 경제 관계와 국내 정책 방향을 동시에 다루고 있다.",
+        "lineEn": "Canada imposed retaliatory tariffs on $20,000,000,000 worth of U.S. goods. The U.S. is advancing economic sanctions against Iran but is facing difficulties due to China's response. The announcement of the first \"Peace Economic Special Zone\" at year-end revealed the limitations of the existing incentive approach. Each article covers different topics, illustrating economic conflicts and policy changes. Today's news addresses both international economic relations and domestic policy directions.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": false,
+        "items": [
+          {
+            "title": "캐나다, 美 200억불 상품에 보복 관세…미국 경제 영향은?",
+            "link": "https://www.newsis.com/view/NISX20260826_0003762984",
             "source": "뉴시스 경제"
           },
           {
-            "title": "증시 휘청이자 '주춤'…4개월 만에 지갑 꽁꽁 닫았다",
-            "link": "https://www.hankyung.com/article/202608251682i",
-            "source": "한국경제 경제"
+            "title": "美 '이란 경제적 왕따 작전', 중국에 막히나…제재 딜레마",
+            "link": "https://www.newsis.com/view/NISX20260826_0003762740",
+            "source": "뉴시스 경제"
           },
           {
-            "title": "반도체 주주환원 기대에 환율 급락했는데…\"반도체 기업 원화 충분\"",
-            "link": "https://www.hankyung.com/article/202608252052i",
-            "source": "한국경제 경제"
+            "title": "연말 첫 '평화경제특구' 지정…\"기존 인센티브론 안돼\"",
+            "link": "https://www.newsis.com/view/NISX20260826_0003762581",
+            "source": "뉴시스 경제"
           }
         ]
       }
