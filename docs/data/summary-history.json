@@ -1750,21 +1750,132 @@
     "date": "2026-08-26",
     "model": "qwen3:14b",
     "summary": {
-      "ko": "- 기타 경제 소식: 재정경제부에서 인사 관련 소식이 전해졌다. 경제계는 산업용 지역 전기요금제를 환영하며 조속한 시행을 촉구했다. 농협은행은 주택담보대출 갈아타기 서비스를 석달만에 재개했다. 동탄 지역의 집값은 올해 16% 상승했으며, 삼성전자와 관련된 저리 대출이 발표되며 추가 상승 가능성에 주목받고 있다. 미국은 경제적 디데이 본격화에 따라 금과 암호화폐까지 조인하는 움직임을 보이고 있다.\n- 금리·예금·투자상품: 국고채 금리가 3년물 기준 연 3.816%로 하락했다. 미국의 7월 신축 단독주택 판매량은 60만채로 전월 대비 10.5% 감소했다. 미국 연준은 9월 금리 인상 여부에 대해 의견 분란을 보이고 있다. 고금리 영향으로 재생에너지 투자는 9.5% 감소하며 처음으로 역성장을 기록했다. LH는 향동 고금리 대출영업과 관련해 법무법인의 계도를 강화했다.\n- 부동산: 한국부동산원은 공공건축 설계공모 실무자 역량 강화 교육을 실시하고 있다. 7월 이동자 수는 4년 만에 최저 수준으로 나타났다. 청주 민간임대아파트 주민들은 20% 할인 분양 약속 이행을 요구하고 있다. 비거주 1주택자에 대한 종부세 기본공제는 개편 전 수준인 12억원으로 유지될 것으로 보인다. 부동산원은 공공건축 발주기관의 설계 공모 실무역량을 향상시키기 위한 교육을 진행 중이다.\n- 증시·환율: 일본 증시는 엔비디아 실적 발표를 앞두고 닛케이가 0.62% 상승하며 마감했다. 원/달러 환율은 한은 금통위 앞두고 1,380원대 중반에서 횡보했다. 코스피는 '전약후강' 양상으로 0.97% 상승했으나 거래량은 올해 평균의 절반을 밑돌았다. 홍콩 증시는 기술주 매수로 사흘 만에 반등하며 H주가 1.42% 올랐다. 각 시장은 서로 다른 요인에 따라 움직였다.",
-      "en": "- Other Economic News: The Ministry of Finance and Economy reported news related to personnel matters. The business community welcomed the industrial electricity rate plan and urged its prompt implementation. The Rural Credit Cooperative Bank has resumed its housing collateral loan transfer service three months after suspending it. Housing prices in the Dongtan area have risen 16% this year, and there is growing attention on the possibility of further increases due to the announcement of a low-interest loan related to Samsung Electronics. The United States is showing a movement toward joining gold and cryptocurrencies as the economic D-Day intensifies.\n- Rates, Deposits & Investment Products: The government bond rate fell to 3.816% annually for the three-year term. The number of new single-family home sales in the U.S. dropped 10.5% from the previous month to 600,000 units. The U.S. Federal Reserve is showing divided opinions on whether to raise interest rates in September. Renewable energy investment decreased by 9.5% due to the high interest rate impact, recording its first negative growth. LH has strengthened the guidance from a law firm regarding its high-interest rate lending operations in Hyangdong.\n- Real Estate: The Korea Real Estate Agency is conducting training to enhance the capabilities of professionals involved in public architecture design competitions. The number of mobile residents in July has reached its lowest level in four years. Residents of a private rental apartment complex in Cheongju are demanding the fulfillment of a promise to offer a 20% discount on sales. The basic exemption for non-residential single-homeowners for property tax is expected to remain at the pre-revision level of 1,200,000,000 won. The Real Estate Agency is conducting training to improve the design competition capabilities of public architecture commissioning agencies.\n- Stocks & FX: The Japanese stock market closed with the Nikkei rising 0.62% ahead of NVIDIA's earnings announcement. The won/dollar exchange rate hovered around the mid-1,380 level ahead of the Bank of Korea's monetary policy meeting. The KOSPI rose 0.97% showing a \"weak before strong\" pattern, but trading volume fell below half of the annual average. The Hong Kong stock market rebounded for the first time in three days due to buying in technology stocks, with H-shares rising 1.42%. Each market moved according to different factors."
+      "ko": "- 부동산: 미국이 전 세계 비자 면접 일시 중단을 발표했다. PF 사업장이 멈춰선 가운데 임대주택으로 전환하는 움직임이 나타났다. 현대건설이 2.6조 원 규모의 목동10단지 재건축사업 시공사 우선협상대상자로 선정됐다. 지역주택조합 사업승인률은 80%에 달하며 서울 9곳 개발에 청신호가 켜졌다. 잠실, 역삼, 필동 등 지역에서 기업들이 부동산 전략을 새로 짜고 있다.\n- 증시·환율: 홍콩 증시는 기술주 매수로 사흘 만에 반등하며 1.05% 상승 마감했다. 중국 증시는 정책지원 기대에 따라 상승 마감했으며, 창업판은 0.51% 올랐다. 일본 닛케이 지수는 엔비디아 실적 발표를 앞두고 0.62% 상승했다. 원/달러 환율은 한은 금통위 앞두고 1,380원대 중반에서 횡보하고 있다. 각 시장은 서로 다른 요인에 따라 움직였다.\n- 금리·예금·투자상품: 신한가 고금리 대출 금리를 인하하고 1년 연장했으며, 고정형 주담대는 변동형보다 금리가 높아 외면받고 있으며, 신용이 높을수록 대출 금리가 더 높아지는 현상이 나타나고 있고, 호주 CPI가 7월에 3.5%로 둔화하면서 금리인상 확률이 상승했으며, 국고채 금리는 금통위 경계로 인해 하락폭이 축소되어 3년물은 연 3.816%를 기록했다.\n- 기타 경제 소식: 네이버파이낸셜이 비금융데이터를 활용해 중저신용자 대출심사를 진행한다. 재정경제부에서 인사 관련 소식이 전해졌다. 경제계는 산업용 지역 전기요금제를 환영하며 조속한 시행을 요구하고 있다. 농협은행이 주담대 갈아타기 서비스를 석달만에 재개했다. 은행이 대출 문턱을 낮추는 방향으로 움직이고 있다.",
+      "en": "- Real Estate: The United States announced a temporary suspension of visa interviews worldwide. Amid the halt of PF projects, there is a movement to convert them into rental housing. Hyundai Engineering and Construction was selected as the preferred negotiation partner for the construction of the Muldong 10th Complex redevelopment project, with a budget of 2,600,000,000,000 won. The approval rate for local housing cooperatives has reached 80%, and green lights have been given for development in nine locations in Seoul. Companies are revising their real estate strategies in areas such as Jamshil, Iksan, and Pil Dong.\n- Stocks & FX: The Hong Kong stock market rebounded after three days, closing up 1.05% due to buying in technology stocks. The Chinese stock market closed higher, driven by expectations of policy support, with the Star Market rising 0.51%. The Nikkei index in Japan rose 0.62% ahead of NVIDIA's earnings announcement. The won/dollar exchange rate is hovering in the mid-1,380s ahead of the Bank of Korea's monetary policy meeting. Each market moved based on different factors.\n- Rates, Deposits & Investment Products: Shinhan Bank has lowered the high-interest loan rate and extended the term by one year. Fixed-rate housing loans are being avoided because their interest rates are higher than those of variable-rate loans. A phenomenon is occurring where the higher the credit rating, the higher the loan interest rate. Australia's CPI slowed to 3.5% in July, increasing the probability of interest rate hikes. Government bond rates have seen a reduced decline due to the Bank of Korea's caution, with the 3-year rate reaching 3.816% annually.\n- Other Economic News: Naver Finance is conducting loan reviews for medium- and low-credit borrowers using non-financial data. The Ministry of Economy and Finance has conveyed news related to personnel matters. The business community is welcoming the industrial regional electricity rate plan and is demanding its prompt implementation. NH Bank has resumed its loan transfer service three months after suspending it. Banks are moving in the direction of lowering loan barriers."
     },
     "highlights": [],
     "categories": [
       {
-        "key": "other",
-        "name": "기타 경제 소식",
-        "nameEn": "Other Economic News",
-        "lineKo": "재정경제부에서 인사 관련 소식이 전해졌다. 경제계는 산업용 지역 전기요금제를 환영하며 조속한 시행을 촉구했다. 농협은행은 주택담보대출 갈아타기 서비스를 석달만에 재개했다. 동탄 지역의 집값은 올해 16% 상승했으며, 삼성전자와 관련된 저리 대출이 발표되며 추가 상승 가능성에 주목받고 있다. 미국은 경제적 디데이 본격화에 따라 금과 암호화폐까지 조인하는 움직임을 보이고 있다.",
-        "lineEn": "The Ministry of Finance and Economy reported news related to personnel matters. The business community welcomed the industrial electricity rate plan and urged its prompt implementation. The Rural Credit Cooperative Bank has resumed its housing collateral loan transfer service three months after suspending it. Housing prices in the Dongtan area have risen 16% this year, and there is growing attention on the possibility of further increases due to the announcement of a low-interest loan related to Samsung Electronics. The United States is showing a movement toward joining gold and cryptocurrencies as the economic D-Day intensifies.",
+        "key": "realestate",
+        "name": "부동산",
+        "nameEn": "Real Estate",
+        "lineKo": "미국이 전 세계 비자 면접 일시 중단을 발표했다. PF 사업장이 멈춰선 가운데 임대주택으로 전환하는 움직임이 나타났다. 현대건설이 2.6조 원 규모의 목동10단지 재건축사업 시공사 우선협상대상자로 선정됐다. 지역주택조합 사업승인률은 80%에 달하며 서울 9곳 개발에 청신호가 켜졌다. 잠실, 역삼, 필동 등 지역에서 기업들이 부동산 전략을 새로 짜고 있다.",
+        "lineEn": "The United States announced a temporary suspension of visa interviews worldwide. Amid the halt of PF projects, there is a movement to convert them into rental housing. Hyundai Engineering and Construction was selected as the preferred negotiation partner for the construction of the Muldong 10th Complex redevelopment project, with a budget of 2,600,000,000,000 won. The approval rate for local housing cooperatives has reached 80%, and green lights have been given for development in nine locations in Seoul. Companies are revising their real estate strategies in areas such as Jamshil, Iksan, and Pil Dong.",
         "isFallback": false,
         "fallbackReason": null,
         "degraded": false,
         "items": [
+          {
+            "title": "美, 전세계 비자 면접 일시 중단",
+            "link": "https://www.hankyung.com/article/2026082650701",
+            "source": "한국경제 경제"
+          },
+          {
+            "title": "멈춰선 PF 사업장, 임대주택으로 바꾼다",
+            "link": "https://www.hankyung.com/article/2026082648421",
+            "source": "한국경제 부동산"
+          },
+          {
+            "title": "현대건설 '2.6조' 목동10단지 재건축사업 시공사 우선협상대상 선정",
+            "link": "https://www.newsis.com/view/NISX20260826_0003764026",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "지역주택조합 사업승인 80%…서울 9곳 개발 '청신호'",
+            "link": "https://www.hankyung.com/article/2026082646401",
+            "source": "한국경제 부동산"
+          },
+          {
+            "title": "잠실·역삼·필동…기업, 부동산 전략 새로 짠다",
+            "link": "https://www.hankyung.com/article/2026082646331",
+            "source": "한국경제 부동산"
+          }
+        ]
+      },
+      {
+        "key": "stocks",
+        "name": "증시·환율",
+        "nameEn": "Stocks & FX",
+        "lineKo": "홍콩 증시는 기술주 매수로 사흘 만에 반등하며 1.05% 상승 마감했다. 중국 증시는 정책지원 기대에 따라 상승 마감했으며, 창업판은 0.51% 올랐다. 일본 닛케이 지수는 엔비디아 실적 발표를 앞두고 0.62% 상승했다. 원/달러 환율은 한은 금통위 앞두고 1,380원대 중반에서 횡보하고 있다. 각 시장은 서로 다른 요인에 따라 움직였다.",
+        "lineEn": "The Hong Kong stock market rebounded after three days, closing up 1.05% due to buying in technology stocks. The Chinese stock market closed higher, driven by expectations of policy support, with the Star Market rising 0.51%. The Nikkei index in Japan rose 0.62% ahead of NVIDIA's earnings announcement. The won/dollar exchange rate is hovering in the mid-1,380s ahead of the Bank of Korea's monetary policy meeting. Each market moved based on different factors.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": false,
+        "items": [
+          {
+            "title": "[올댓차이나] 홍콩 증시, 기술주 매수로 사흘 만에 반등 마감… H주 1.05%↑",
+            "link": "https://www.newsis.com/view/NISX20260826_0003764198",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "[올댓차이나] 中 증시, 정책지원 기대에 상승 마감…창업판 0.51%↑",
+            "link": "https://www.newsis.com/view/NISX20260826_0003764167",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "日증시, 엔비디아 실적 발표 앞두고 상승 마감…닛케이 0.62%↑",
+            "link": "https://www.newsis.com/view/NISX20260826_0003763735",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "원/달러 환율, 한은 금통위 앞두고 1,380원대 중반 횡보",
+            "link": "https://www.yna.co.kr/view/AKR20260826138800002",
+            "source": "연합뉴스 경제"
+          }
+        ]
+      },
+      {
+        "key": "rates",
+        "name": "금리·예금·투자상품",
+        "nameEn": "Rates, Deposits & Investment Products",
+        "lineKo": "신한가 고금리 대출 금리를 인하하고 1년 연장했으며, 고정형 주담대는 변동형보다 금리가 높아 외면받고 있으며, 신용이 높을수록 대출 금리가 더 높아지는 현상이 나타나고 있고, 호주 CPI가 7월에 3.5%로 둔화하면서 금리인상 확률이 상승했으며, 국고채 금리는 금통위 경계로 인해 하락폭이 축소되어 3년물은 연 3.816%를 기록했다.",
+        "lineEn": "Shinhan Bank has lowered the high-interest loan rate and extended the term by one year. Fixed-rate housing loans are being avoided because their interest rates are higher than those of variable-rate loans. A phenomenon is occurring where the higher the credit rating, the higher the loan interest rate. Australia's CPI slowed to 3.5% in July, increasing the probability of interest rate hikes. Government bond rates have seen a reduced decline due to the Bank of Korea's caution, with the 3-year rate reaching 3.816% annually.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": true,
+        "items": [
+          {
+            "title": "신한銀 고금리 대출, 금리 인하 '1년 연장'",
+            "link": "https://www.hankyung.com/article/2026082649201",
+            "source": "한국경제 경제"
+          },
+          {
+            "title": "\"변동형보다 금리 너무 높아\"…외면받는 고정형 주담대",
+            "link": "https://www.hankyung.com/article/2026082649191",
+            "source": "한국경제 경제"
+          },
+          {
+            "title": "[단독] 신용 높을수록 이자 더 낸다…거꾸로 대출 금리에 '울상'",
+            "link": "https://www.hankyung.com/article/2026082649181",
+            "source": "한국경제 경제"
+          },
+          {
+            "title": "7월 호주 CPI 3.5%로 '둔화'…\"금리인상 확률 상승\"",
+            "link": "https://www.newsis.com/view/NISX20260826_0003764050",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "'금통위 경계' 국고채 금리 하락폭 축소…3년물 연 3.816%(종합)",
+            "link": "https://www.yna.co.kr/view/AKR20260826151251008",
+            "source": "연합뉴스 경제"
+          }
+        ]
+      },
+      {
+        "key": "other",
+        "name": "기타 경제 소식",
+        "nameEn": "Other Economic News",
+        "lineKo": "네이버파이낸셜이 비금융데이터를 활용해 중저신용자 대출심사를 진행한다. 재정경제부에서 인사 관련 소식이 전해졌다. 경제계는 산업용 지역 전기요금제를 환영하며 조속한 시행을 요구하고 있다. 농협은행이 주담대 갈아타기 서비스를 석달만에 재개했다. 은행이 대출 문턱을 낮추는 방향으로 움직이고 있다.",
+        "lineEn": "Naver Finance is conducting loan reviews for medium- and low-credit borrowers using non-financial data. The Ministry of Economy and Finance has conveyed news related to personnel matters. The business community is welcoming the industrial regional electricity rate plan and is demanding its prompt implementation. NH Bank has resumed its loan transfer service three months after suspending it. Banks are moving in the direction of lowering loan barriers.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": false,
+        "items": [
+          {
+            "title": "네이버파이낸셜, 비금융데이터로 중저신용자 대출심사한다",
+            "link": "https://www.yna.co.kr/view/AKR20260826153900002",
+            "source": "연합뉴스 경제"
+          },
           {
             "title": "[인사]재정경제부",
             "link": "https://www.newsis.com/view/NISX20260826_0003763950",
@@ -1779,122 +1890,6 @@
             "title": "은행 대출 문턱 낮춘다…농협銀, 주담대 갈아타기 석달만에 재개",
             "link": "https://www.yna.co.kr/view/AKR20260826142200002",
             "source": "연합뉴스 경제"
-          },
-          {
-            "title": "올해 16% 뛴 동탄 집값…삼성전자 5억 저리대출에 더 오르나",
-            "link": "https://www.yna.co.kr/view/AKR20260826137600003",
-            "source": "연합뉴스 경제"
-          },
-          {
-            "title": "美 '경제적 디데이' 본격화…이란 원유 넘어 금·암호화폐까지 조인다",
-            "link": "https://www.newsis.com/view/NISX20260826_0003763205",
-            "source": "뉴시스 경제"
-          }
-        ]
-      },
-      {
-        "key": "rates",
-        "name": "금리·예금·투자상품",
-        "nameEn": "Rates, Deposits & Investment Products",
-        "lineKo": "국고채 금리가 3년물 기준 연 3.816%로 하락했다. 미국의 7월 신축 단독주택 판매량은 60만채로 전월 대비 10.5% 감소했다. 미국 연준은 9월 금리 인상 여부에 대해 의견 분란을 보이고 있다. 고금리 영향으로 재생에너지 투자는 9.5% 감소하며 처음으로 역성장을 기록했다. LH는 향동 고금리 대출영업과 관련해 법무법인의 계도를 강화했다.",
-        "lineEn": "The government bond rate fell to 3.816% annually for the three-year term. The number of new single-family home sales in the U.S. dropped 10.5% from the previous month to 600,000 units. The U.S. Federal Reserve is showing divided opinions on whether to raise interest rates in September. Renewable energy investment decreased by 9.5% due to the high interest rate impact, recording its first negative growth. LH has strengthened the guidance from a law firm regarding its high-interest rate lending operations in Hyangdong.",
-        "isFallback": false,
-        "fallbackReason": null,
-        "degraded": false,
-        "items": [
-          {
-            "title": "국고채 금리 대체로 하락…3년물 연 3.816%",
-            "link": "https://www.yna.co.kr/view/AKR20260826151200008",
-            "source": "연합뉴스 경제"
-          },
-          {
-            "title": "7월 美 신축 단독주택 판매 60만채·10.5%↓…\"고금리로 6개월 만에 최저\"",
-            "link": "https://www.newsis.com/view/NISX20260826_0003763811",
-            "source": "뉴시스 경제"
-          },
-          {
-            "title": "美연준 9월 금리 '동결 vs 인상' 팽팽…\"물가냐 경기냐\"",
-            "link": "https://www.newsis.com/view/NISX20260826_0003763455",
-            "source": "뉴시스 경제"
-          },
-          {
-            "title": "고금리에 재생e투자 9.5%↓…에너지전환 준비 첫 역성장",
-            "link": "https://www.newsis.com/view/NISX20260826_0003762868",
-            "source": "뉴시스 경제"
-          },
-          {
-            "title": "“위탁·보증 사실무근”…LH, 향동 고금리 대출영업 법무법인 계도 강화",
-            "link": "https://www.mk.co.kr/news/realestate/12136621",
-            "source": "매일경제 부동산"
-          }
-        ]
-      },
-      {
-        "key": "realestate",
-        "name": "부동산",
-        "nameEn": "Real Estate",
-        "lineKo": "한국부동산원은 공공건축 설계공모 실무자 역량 강화 교육을 실시하고 있다. 7월 이동자 수는 4년 만에 최저 수준으로 나타났다. 청주 민간임대아파트 주민들은 20% 할인 분양 약속 이행을 요구하고 있다. 비거주 1주택자에 대한 종부세 기본공제는 개편 전 수준인 12억원으로 유지될 것으로 보인다. 부동산원은 공공건축 발주기관의 설계 공모 실무역량을 향상시키기 위한 교육을 진행 중이다.",
-        "lineEn": "The Korea Real Estate Agency is conducting training to enhance the capabilities of professionals involved in public architecture design competitions. The number of mobile residents in July has reached its lowest level in four years. Residents of a private rental apartment complex in Cheongju are demanding the fulfillment of a promise to offer a 20% discount on sales. The basic exemption for non-residential single-homeowners for property tax is expected to remain at the pre-revision level of 1,200,000,000 won. The Real Estate Agency is conducting training to improve the design competition capabilities of public architecture commissioning agencies.",
-        "isFallback": false,
-        "fallbackReason": null,
-        "degraded": false,
-        "items": [
-          {
-            "title": "부동산원, 공공건축 발주기관 설계 공모 실무역량 키운다",
-            "link": "https://www.yna.co.kr/view/AKR20260826145500003",
-            "source": "연합뉴스 경제"
-          },
-          {
-            "title": "주택거래 꺾이자 이사도 줄었다…7월 이동자 4년 만에 최저",
-            "link": "https://www.hankyung.com/article/202608264444i",
-            "source": "한국경제 경제"
-          },
-          {
-            "title": "청주 민간임대아파트 주민들 \"약속한 20% 할인 분양 이행하라\"",
-            "link": "https://www.yna.co.kr/view/AKR20260826131400064",
-            "source": "연합뉴스 경제"
-          },
-          {
-            "title": "“개편 전 수준으로”…비거주 1주택자 종부세 기본공제 12억원 유력",
-            "link": "https://www.mk.co.kr/news/realestate/12136801",
-            "source": "매일경제 부동산"
-          },
-          {
-            "title": "한국부동산원, 공공건축 설계공모 실무자 역량 강화 교육 실시",
-            "link": "https://www.mk.co.kr/news/realestate/12136677",
-            "source": "매일경제 부동산"
-          }
-        ]
-      },
-      {
-        "key": "stocks",
-        "name": "증시·환율",
-        "nameEn": "Stocks & FX",
-        "lineKo": "일본 증시는 엔비디아 실적 발표를 앞두고 닛케이가 0.62% 상승하며 마감했다. 원/달러 환율은 한은 금통위 앞두고 1,380원대 중반에서 횡보했다. 코스피는 '전약후강' 양상으로 0.97% 상승했으나 거래량은 올해 평균의 절반을 밑돌았다. 홍콩 증시는 기술주 매수로 사흘 만에 반등하며 H주가 1.42% 올랐다. 각 시장은 서로 다른 요인에 따라 움직였다.",
-        "lineEn": "The Japanese stock market closed with the Nikkei rising 0.62% ahead of NVIDIA's earnings announcement. The won/dollar exchange rate hovered around the mid-1,380 level ahead of the Bank of Korea's monetary policy meeting. The KOSPI rose 0.97% showing a \"weak before strong\" pattern, but trading volume fell below half of the annual average. The Hong Kong stock market rebounded for the first time in three days due to buying in technology stocks, with H-shares rising 1.42%. Each market moved according to different factors.",
-        "isFallback": false,
-        "fallbackReason": null,
-        "degraded": false,
-        "items": [
-          {
-            "title": "日증시, 엔비디아 실적 발표 앞두고 상승 마감…닛케이 0.62%↑",
-            "link": "https://www.newsis.com/view/NISX20260826_0003763735",
-            "source": "뉴시스 경제"
-          },
-          {
-            "title": "원/달러 환율, 한은 금통위 앞두고 1,380원대 중반 횡보",
-            "link": "https://www.yna.co.kr/view/AKR20260826138800002",
-            "source": "연합뉴스 경제"
-          },
-          {
-            "title": "또 '전약후강' 코스피 0.97%↑…거래량, 올해평균의 절반 밑으로(종합)",
-            "link": "https://www.yna.co.kr/view/AKR20260826132051008",
-            "source": "연합뉴스 경제"
-          },
-          {
-            "title": "[올댓차이나] 홍콩 증시, 기술주 매수로 사흘 만에 반등… H주 1.42%↑",
-            "link": "https://www.newsis.com/view/NISX20260826_0003763315",
-            "source": "뉴시스 경제"
           }
         ]
       }
