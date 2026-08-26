@@ -1,6 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
+  RETENTION_MONTHS,
+  WINDOW_MONTHS,
   planFetch,
   planSummary,
   refreshMonths,
@@ -31,6 +33,9 @@ const filled = (months, meta = okSlot()) => {
 
 const monthsOf = (slots) => [...new Set(slots.map((slot) => slot.yearMonth))];
 
+// 수집이 도는 창은 화면이 세는 창보다 넓다. 계획을 검사할 때 채워야 하는 것은 넓은 쪽이다.
+const kept = (now = NOW) => windowMonths(now, RETENTION_MONTHS);
+
 test("KST 기준으로 년월을 뽑는다", () => {
   assert.equal(yearMonthOf(NOW), "202608");
   assert.equal(yearMonthOf(new Date("2026-08-31T15:00:00Z")), "202609");
@@ -44,8 +49,18 @@ test("월 산술이 연 경계를 넘는다", () => {
   assert.equal(shiftMonth("", -1), null);
 });
 
-test("보관 창은 최신 달부터 6개월이다", () => {
+test("화면이 세는 창은 최신 달부터 6개월이다", () => {
+  assert.equal(WINDOW_MONTHS, 6);
   assert.deepEqual(windowMonths(NOW), ["202608", "202607", "202606", "202605", "202604", "202603"]);
+});
+
+test("원본을 들고 있는 창은 그보다 넓다", () => {
+  // 같은 물건이 두 번 팔린 것을 견주려면 두 거래 사이가 벌어져 있어야 한다.
+  // 둘을 한 상수로 묶어 두면 저장 기간을 늘린 날 추이 그래프까지 같이 늘어난다.
+  assert.ok(RETENTION_MONTHS > WINDOW_MONTHS);
+  assert.equal(kept().length, RETENTION_MONTHS);
+  assert.equal(kept()[0], "202608");
+  assert.equal(kept().at(-1), "202409");
 });
 
 test("매일 갱신하는 달은 당월과 전월이다", () => {
@@ -58,7 +73,7 @@ test("월초 사흘은 전전월까지 넓혀 받는다", () => {
 });
 
 test("파일이 멀쩡해도 당월·전월은 매일 다시 받는다", () => {
-  const { fetch } = plan({ slots: filled(windowMonths(NOW)) });
+  const { fetch } = plan({ slots: filled(kept()) });
 
   assert.deepEqual(monthsOf(fetch), ["202608", "202607"]);
   assert.ok(fetch.every((slot) => slot.reason === "stale"));
@@ -66,7 +81,7 @@ test("파일이 멀쩡해도 당월·전월은 매일 다시 받는다", () => {
 });
 
 test("확정된 과거 달은 건드리지 않는다", () => {
-  const { fetch, pending } = plan({ slots: filled(windowMonths(NOW)) });
+  const { fetch, pending } = plan({ slots: filled(kept()) });
 
   assert.ok(!monthsOf(fetch).includes("202606"));
   assert.equal(pending, 0);
@@ -75,12 +90,12 @@ test("확정된 과거 달은 건드리지 않는다", () => {
 test("빈 저장소는 창 전체를 신규로 잡는다", () => {
   const { fetch } = plan();
 
-  assert.equal(fetch.length, 6 * KINDS.length * DISTRICTS.length);
-  assert.deepEqual(monthsOf(fetch), windowMonths(NOW));
+  assert.equal(fetch.length, RETENTION_MONTHS * KINDS.length * DISTRICTS.length);
+  assert.deepEqual(monthsOf(fetch), kept());
 });
 
 test("한 구만 빠져도 그 구만 채운다", () => {
-  const slots = filled(windowMonths(NOW));
+  const slots = filled(kept());
   delete slots[slotKey("sale", "11680", "202605")];
 
   const { fetch } = plan({ slots });
@@ -90,7 +105,7 @@ test("한 구만 빠져도 그 구만 채운다", () => {
 });
 
 test("조회 실패로 남은 슬롯은 다시 받는다", () => {
-  const slots = filled(windowMonths(NOW));
+  const slots = filled(kept());
   slots[slotKey("rent", "11110", "202604")] = { ok: false };
 
   const { fetch } = plan({ slots });
@@ -101,7 +116,7 @@ test("조회 실패로 남은 슬롯은 다시 받는다", () => {
 });
 
 test("성공한 0건은 확정으로 둔다", () => {
-  const slots = filled(windowMonths(NOW), { ok: true, count: 0, totalCount: 0 });
+  const slots = filled(kept(), { ok: true, count: 0, totalCount: 0 });
   const { fetch } = plan({ slots });
 
   assert.ok(fetch.every((slot) => slot.reason === "stale"), "0건인 달을 매일 다시 받고 있다");
@@ -119,13 +134,14 @@ test("갱신 대상은 상한과 무관하게 전부 받는다", () => {
   const refresh = fetch.filter((slot) => slot.reason === "stale");
   const backfill = fetch.filter((slot) => slot.reason !== "stale");
 
+  // 당월·전월은 상한 밖에서 늘 받고, 나머지 달은 상한만큼만 메운다.
   assert.equal(refresh.length, 2 * KINDS.length * DISTRICTS.length);
   assert.equal(backfill.length, 3);
-  assert.equal(pending, 4 * KINDS.length * DISTRICTS.length - 3);
+  assert.equal(pending, (RETENTION_MONTHS - 2) * KINDS.length * DISTRICTS.length - 3);
 });
 
 test("백필은 최신 달부터, 재조회가 신규보다 먼저다", () => {
-  const slots = filled(windowMonths(NOW));
+  const slots = filled(kept());
   delete slots[slotKey("sale", "11110", "202608")];
   delete slots[slotKey("sale", "11110", "202605")];
   delete slots[slotKey("sale", "11110", "202603")];
@@ -140,11 +156,12 @@ test("백필은 최신 달부터, 재조회가 신규보다 먼저다", () => {
 });
 
 test("창을 벗어난 슬롯은 만료로 알린다", () => {
-  const slots = { ...filled(["202608"]), [slotKey("sale", "11110", "202602")]: okSlot() };
+  const older = shiftMonth(kept().at(-1), -1);
+  const slots = { ...filled(["202608"]), [slotKey("sale", "11110", older)]: okSlot() };
   const { expired, fetch } = plan({ slots });
 
-  assert.deepEqual(expired, [{ kind: "sale", code: "11110", yearMonth: "202602" }]);
-  assert.ok(!monthsOf(fetch).includes("202602"));
+  assert.deepEqual(expired, [{ kind: "sale", code: "11110", yearMonth: older }]);
+  assert.ok(!monthsOf(fetch).includes(older));
 });
 
 test("키가 없는 종류는 계획에서 빠진다", () => {
@@ -153,9 +170,10 @@ test("키가 없는 종류는 계획에서 빠진다", () => {
 });
 
 test("계획을 한 줄로 요약한다", () => {
-  const slots = filled(windowMonths(NOW));
+  const slots = filled(kept());
   delete slots[slotKey("sale", "11680", "202605")];
 
   assert.equal(planSummary(plan({ slots })), "갱신 8 · 재조회 0 · 신규 1");
-  assert.match(planSummary(plan({ backfillLimit: 2 })), /대기 14$/);
+  const waiting = (RETENTION_MONTHS - 2) * KINDS.length * DISTRICTS.length - 2;
+  assert.match(planSummary(plan({ backfillLimit: 2 })), new RegExp(`대기 ${waiting}$`));
 });

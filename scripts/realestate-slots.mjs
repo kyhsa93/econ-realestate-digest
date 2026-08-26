@@ -1,4 +1,20 @@
+/**
+ * 화면이 세는 창. 시세도 추이 그래프도 이만큼만 본다.
+ *
+ * 보관 창(RETENTION_MONTHS)과 일부러 갈라 둔다. 원본을 더 오래 들고 있는 것과
+ * 화면이 그만큼을 세는 것은 다른 결정이다 - 둘을 한 상수로 묶으면 저장 기간을
+ * 늘린 날 추이 그래프가 조용히 몇 년짜리로 바뀐다.
+ */
 export const WINDOW_MONTHS = 6;
+
+/**
+ * 원본을 들고 있는 기간.
+ *
+ * 같은 물건이 두 번 팔린 것을 견주려면(반복거래) 두 거래 사이가 벌어져 있어야 하는데,
+ * 여섯 달 안에서는 그런 쌍이 거의 없다. 국토부는 지난 달도 조회할 수 있고 planFetch가
+ * 빈 슬롯을 하루에 조금씩 메우므로, 창만 넓혀 두면 나머지는 시간이 채운다.
+ */
+export const RETENTION_MONTHS = 24;
 
 export const MONTH_START_GRACE_DAYS = 3;
 
@@ -64,7 +80,7 @@ export function planFetch({
   kinds,
   slots = {},
   backfillLimit = Infinity,
-  windowSize = WINDOW_MONTHS,
+  windowSize = RETENTION_MONTHS,
 }) {
   const months = windowMonths(now, windowSize);
   const within = new Set(months);
