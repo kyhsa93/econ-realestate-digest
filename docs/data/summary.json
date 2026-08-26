@@ -1,45 +1,45 @@
 {
-  "updatedAt": "2026-08-26T04:02:36.273Z",
+  "updatedAt": "2026-08-26T07:55:19.465Z",
   "model": "qwen3:14b",
   "summary": {
-    "ko": "- 부동산: 부동산: 용산공원 대신 탄천물재생센터?…1.3만호 청년주택 띄운 오세훈, 吳 만난 김윤덕 국토장관 “용산공원 여전히 이견… 탄천 주택 공급 검토”, [지방세제 개편안 Q&A] 정부 \"고급주택 취득세 중과 회피 개선\" +10\n- 금리·예금·투자상품: 고금리로 인한 재생e투자 감소, 가계대출 금리 상승, 국고채 금리 하락, LH의 고금리 대출영업 관련 법무법인 계도 강화, 노무라의 한은 금리 인상 확률 전망 등 다양한 금리·예금·투자상품 관련 동향이 보도되었다.\n- 증시·환율: 홍콩 증시는 기술주 매수로 사흘 만에 반등하며 H주가 1.42% 상승했다. 중국 증시는 혼조 개장 후 정책 기대에 따라 상승세를 보이며 창업판이 1.39% 올랐다. 코스피는 엔비디아 실적발표에 대한 경계감으로 장중 보합권을 유지하고 있다. 홍콩과 중국 증시 모두 기술주에 대한 관심이 높아진 것으로 나타났다. 각 시장은 서로 다른 요인에 따라 움직였으며, 구체적인 수치는 각각의 기사에서 명시되었다.\n- 기타 경제 소식: 캐나다가 미국의 200억불 상품에 대해 보복 관세를 부과했다. 미국은 이란에 대한 경제적 제재를 추진하고 있으나 중국의 반응으로 어려움을 겪고 있다. 연말 첫 '평화경제특구' 지정이 발표되며 기존 인센티브 방식의 한계가 드러났다. 각 기사는 서로 다른 주제로, 경제적 갈등과 정책 변화를 보여준다. 오늘의 뉴스는 국제 경제 관계와 국내 정책 방향을 동시에 다루고 있다.",
-    "en": "- Real Estate: Real Estate: 용산공원 대신 탄천물재생센터?…1.3만호 청년주택 띄운 오세훈, 吳 만난 김윤덕 국토장관 “용산공원 여전히 이견… 탄천 주택 공급 검토”, [지방세제 개편안 Q&A] 정부 \"고급주택 취득세 중과 회피 개선\" +10\n- Rates, Deposits & Investment Products: Decreased reinvestment due to high interest rates, rising household loan rates, falling government bond rates, intensified legal firm guidance related to high-interest lending operations by LH, Nomura's forecast of the likelihood of a Bank of Korea interest rate hike, and various other trends related to interest rates, deposits, and investment products were reported.\n- Stocks & FX: The Hong Kong stock market rebounded after three days of trading, with H-shares rising 1.42% due to buying in technology stocks. The Chinese stock market rose after a mixed opening, with the Star Market increasing 1.39% amid policy expectations. The KOSPI has remained flat during the day due to caution over NVIDIA's earnings announcement. Both the Hong Kong and Chinese stock markets have shown increased interest in technology stocks. Each market moved due to different factors, and specific figures are stated in their respective articles.\n- Other Economic News: Canada imposed retaliatory tariffs on $20,000,000,000 worth of U.S. goods. The U.S. is advancing economic sanctions against Iran but is facing difficulties due to China's response. The announcement of the first \"Peace Economic Special Zone\" at year-end revealed the limitations of the existing incentive approach. Each article covers different topics, illustrating economic conflicts and policy changes. Today's news addresses both international economic relations and domestic policy directions."
+    "ko": "- 기타 경제 소식: 재정경제부에서 인사 관련 소식이 전해졌다. 경제계는 산업용 지역 전기요금제를 환영하며 조속한 시행을 촉구했다. 농협은행은 주택담보대출 갈아타기 서비스를 석달만에 재개했다. 동탄 지역의 집값은 올해 16% 상승했으며, 삼성전자와 관련된 저리 대출이 발표되며 추가 상승 가능성에 주목받고 있다. 미국은 경제적 디데이 본격화에 따라 금과 암호화폐까지 조인하는 움직임을 보이고 있다.\n- 금리·예금·투자상품: 국고채 금리가 3년물 기준 연 3.816%로 하락했다. 미국의 7월 신축 단독주택 판매량은 60만채로 전월 대비 10.5% 감소했다. 미국 연준은 9월 금리 인상 여부에 대해 의견 분란을 보이고 있다. 고금리 영향으로 재생에너지 투자는 9.5% 감소하며 처음으로 역성장을 기록했다. LH는 향동 고금리 대출영업과 관련해 법무법인의 계도를 강화했다.\n- 부동산: 한국부동산원은 공공건축 설계공모 실무자 역량 강화 교육을 실시하고 있다. 7월 이동자 수는 4년 만에 최저 수준으로 나타났다. 청주 민간임대아파트 주민들은 20% 할인 분양 약속 이행을 요구하고 있다. 비거주 1주택자에 대한 종부세 기본공제는 개편 전 수준인 12억원으로 유지될 것으로 보인다. 부동산원은 공공건축 발주기관의 설계 공모 실무역량을 향상시키기 위한 교육을 진행 중이다.\n- 증시·환율: 일본 증시는 엔비디아 실적 발표를 앞두고 닛케이가 0.62% 상승하며 마감했다. 원/달러 환율은 한은 금통위 앞두고 1,380원대 중반에서 횡보했다. 코스피는 '전약후강' 양상으로 0.97% 상승했으나 거래량은 올해 평균의 절반을 밑돌았다. 홍콩 증시는 기술주 매수로 사흘 만에 반등하며 H주가 1.42% 올랐다. 각 시장은 서로 다른 요인에 따라 움직였다.",
+    "en": "- Other Economic News: The Ministry of Finance and Economy reported news related to personnel matters. The business community welcomed the industrial electricity rate plan and urged its prompt implementation. The Rural Credit Cooperative Bank has resumed its housing collateral loan transfer service three months after suspending it. Housing prices in the Dongtan area have risen 16% this year, and there is growing attention on the possibility of further increases due to the announcement of a low-interest loan related to Samsung Electronics. The United States is showing a movement toward joining gold and cryptocurrencies as the economic D-Day intensifies.\n- Rates, Deposits & Investment Products: The government bond rate fell to 3.816% annually for the three-year term. The number of new single-family home sales in the U.S. dropped 10.5% from the previous month to 600,000 units. The U.S. Federal Reserve is showing divided opinions on whether to raise interest rates in September. Renewable energy investment decreased by 9.5% due to the high interest rate impact, recording its first negative growth. LH has strengthened the guidance from a law firm regarding its high-interest rate lending operations in Hyangdong.\n- Real Estate: The Korea Real Estate Agency is conducting training to enhance the capabilities of professionals involved in public architecture design competitions. The number of mobile residents in July has reached its lowest level in four years. Residents of a private rental apartment complex in Cheongju are demanding the fulfillment of a promise to offer a 20% discount on sales. The basic exemption for non-residential single-homeowners for property tax is expected to remain at the pre-revision level of 1,200,000,000 won. The Real Estate Agency is conducting training to improve the design competition capabilities of public architecture commissioning agencies.\n- Stocks & FX: The Japanese stock market closed with the Nikkei rising 0.62% ahead of NVIDIA's earnings announcement. The won/dollar exchange rate hovered around the mid-1,380 level ahead of the Bank of Korea's monetary policy meeting. The KOSPI rose 0.97% showing a \"weak before strong\" pattern, but trading volume fell below half of the annual average. The Hong Kong stock market rebounded for the first time in three days due to buying in technology stocks, with H-shares rising 1.42%. Each market moved according to different factors."
   },
   "highlights": [],
   "categories": [
     {
-      "key": "realestate",
-      "name": "부동산",
-      "nameEn": "Real Estate",
-      "lineKo": "부동산: 용산공원 대신 탄천물재생센터?…1.3만호 청년주택 띄운 오세훈, 吳 만난 김윤덕 국토장관 “용산공원 여전히 이견… 탄천 주택 공급 검토”, [지방세제 개편안 Q&A] 정부 \"고급주택 취득세 중과 회피 개선\" +10",
-      "lineEn": "Real Estate: 용산공원 대신 탄천물재생센터?…1.3만호 청년주택 띄운 오세훈, 吳 만난 김윤덕 국토장관 “용산공원 여전히 이견… 탄천 주택 공급 검토”, [지방세제 개편안 Q&A] 정부 \"고급주택 취득세 중과 회피 개선\" +10",
-      "isFallback": true,
-      "fallbackReason": "unverified-entity",
+      "key": "other",
+      "name": "기타 경제 소식",
+      "nameEn": "Other Economic News",
+      "lineKo": "재정경제부에서 인사 관련 소식이 전해졌다. 경제계는 산업용 지역 전기요금제를 환영하며 조속한 시행을 촉구했다. 농협은행은 주택담보대출 갈아타기 서비스를 석달만에 재개했다. 동탄 지역의 집값은 올해 16% 상승했으며, 삼성전자와 관련된 저리 대출이 발표되며 추가 상승 가능성에 주목받고 있다. 미국은 경제적 디데이 본격화에 따라 금과 암호화폐까지 조인하는 움직임을 보이고 있다.",
+      "lineEn": "The Ministry of Finance and Economy reported news related to personnel matters. The business community welcomed the industrial electricity rate plan and urged its prompt implementation. The Rural Credit Cooperative Bank has resumed its housing collateral loan transfer service three months after suspending it. Housing prices in the Dongtan area have risen 16% this year, and there is growing attention on the possibility of further increases due to the announcement of a low-interest loan related to Samsung Electronics. The United States is showing a movement toward joining gold and cryptocurrencies as the economic D-Day intensifies.",
+      "isFallback": false,
+      "fallbackReason": null,
       "degraded": false,
       "items": [
         {
-          "title": "용산공원 대신 탄천물재생센터?…1.3만호 청년주택 띄운 오세훈",
-          "link": "https://www.yna.co.kr/view/AKR20260826092800004",
+          "title": "[인사]재정경제부",
+          "link": "https://www.newsis.com/view/NISX20260826_0003763950",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "경제계 \"산업용 지역 전기요금제 환영…조속히 시행돼야\"",
+          "link": "https://www.yna.co.kr/view/AKR20260826142400003",
           "source": "연합뉴스 경제"
         },
         {
-          "title": "吳 만난 김윤덕 국토장관 “용산공원 여전히 이견… 탄천 주택 공급 검토”",
-          "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/26/FQWZQFKGPVEMLFVLML5Y2PJEUM/",
-          "source": "조선비즈 부동산"
-        },
-        {
-          "title": "[지방세제 개편안 Q&A] 정부 \"고급주택 취득세 중과 회피 개선\"",
-          "link": "https://www.yna.co.kr/view/AKR20260826083500530",
+          "title": "은행 대출 문턱 낮춘다…농협銀, 주담대 갈아타기 석달만에 재개",
+          "link": "https://www.yna.co.kr/view/AKR20260826142200002",
           "source": "연합뉴스 경제"
         },
         {
-          "title": "7월 국내 인구 이동, 4년 만에 최소…\"주택 매매량 등 줄어\"",
-          "link": "https://www.yna.co.kr/view/AKR20260826062900002",
+          "title": "올해 16% 뛴 동탄 집값…삼성전자 5억 저리대출에 더 오르나",
+          "link": "https://www.yna.co.kr/view/AKR20260826137600003",
           "source": "연합뉴스 경제"
         },
         {
-          "title": "인구이동 4년 만에 최저…주택거래 감소하자 15.5%↓",
-          "link": "https://www.newsis.com/view/NISX20260826_0003763008",
+          "title": "美 '경제적 디데이' 본격화…이란 원유 넘어 금·암호화폐까지 조인다",
+          "link": "https://www.newsis.com/view/NISX20260826_0003763205",
           "source": "뉴시스 경제"
         }
       ]
@@ -48,36 +48,73 @@
       "key": "rates",
       "name": "금리·예금·투자상품",
       "nameEn": "Rates, Deposits & Investment Products",
-      "lineKo": "고금리로 인한 재생e투자 감소, 가계대출 금리 상승, 국고채 금리 하락, LH의 고금리 대출영업 관련 법무법인 계도 강화, 노무라의 한은 금리 인상 확률 전망 등 다양한 금리·예금·투자상품 관련 동향이 보도되었다.",
-      "lineEn": "Decreased reinvestment due to high interest rates, rising household loan rates, falling government bond rates, intensified legal firm guidance related to high-interest lending operations by LH, Nomura's forecast of the likelihood of a Bank of Korea interest rate hike, and various other trends related to interest rates, deposits, and investment products were reported.",
+      "lineKo": "국고채 금리가 3년물 기준 연 3.816%로 하락했다. 미국의 7월 신축 단독주택 판매량은 60만채로 전월 대비 10.5% 감소했다. 미국 연준은 9월 금리 인상 여부에 대해 의견 분란을 보이고 있다. 고금리 영향으로 재생에너지 투자는 9.5% 감소하며 처음으로 역성장을 기록했다. LH는 향동 고금리 대출영업과 관련해 법무법인의 계도를 강화했다.",
+      "lineEn": "The government bond rate fell to 3.816% annually for the three-year term. The number of new single-family home sales in the U.S. dropped 10.5% from the previous month to 600,000 units. The U.S. Federal Reserve is showing divided opinions on whether to raise interest rates in September. Renewable energy investment decreased by 9.5% due to the high interest rate impact, recording its first negative growth. LH has strengthened the guidance from a law firm regarding its high-interest rate lending operations in Hyangdong.",
       "isFallback": false,
       "fallbackReason": null,
-      "degraded": true,
+      "degraded": false,
       "items": [
+        {
+          "title": "국고채 금리 대체로 하락…3년물 연 3.816%",
+          "link": "https://www.yna.co.kr/view/AKR20260826151200008",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "7월 美 신축 단독주택 판매 60만채·10.5%↓…\"고금리로 6개월 만에 최저\"",
+          "link": "https://www.newsis.com/view/NISX20260826_0003763811",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "美연준 9월 금리 '동결 vs 인상' 팽팽…\"물가냐 경기냐\"",
+          "link": "https://www.newsis.com/view/NISX20260826_0003763455",
+          "source": "뉴시스 경제"
+        },
         {
           "title": "고금리에 재생e투자 9.5%↓…에너지전환 준비 첫 역성장",
           "link": "https://www.newsis.com/view/NISX20260826_0003762868",
           "source": "뉴시스 경제"
         },
         {
-          "title": "가계대출 금리 석 달째 상승…주담대 2년 8개월 만에 최고",
-          "link": "https://www.yna.co.kr/view/AKR20260826076000002",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "국고채 금리 일제히 하락…3년물 장중 연 3.790%",
-          "link": "https://www.yna.co.kr/view/AKR20260826085800008",
-          "source": "연합뉴스 경제"
-        },
-        {
           "title": "“위탁·보증 사실무근”…LH, 향동 고금리 대출영업 법무법인 계도 강화",
           "link": "https://www.mk.co.kr/news/realestate/12136621",
           "source": "매일경제 부동산"
+        }
+      ]
+    },
+    {
+      "key": "realestate",
+      "name": "부동산",
+      "nameEn": "Real Estate",
+      "lineKo": "한국부동산원은 공공건축 설계공모 실무자 역량 강화 교육을 실시하고 있다. 7월 이동자 수는 4년 만에 최저 수준으로 나타났다. 청주 민간임대아파트 주민들은 20% 할인 분양 약속 이행을 요구하고 있다. 비거주 1주택자에 대한 종부세 기본공제는 개편 전 수준인 12억원으로 유지될 것으로 보인다. 부동산원은 공공건축 발주기관의 설계 공모 실무역량을 향상시키기 위한 교육을 진행 중이다.",
+      "lineEn": "The Korea Real Estate Agency is conducting training to enhance the capabilities of professionals involved in public architecture design competitions. The number of mobile residents in July has reached its lowest level in four years. Residents of a private rental apartment complex in Cheongju are demanding the fulfillment of a promise to offer a 20% discount on sales. The basic exemption for non-residential single-homeowners for property tax is expected to remain at the pre-revision level of 1,200,000,000 won. The Real Estate Agency is conducting training to improve the design competition capabilities of public architecture commissioning agencies.",
+      "isFallback": false,
+      "fallbackReason": null,
+      "degraded": false,
+      "items": [
+        {
+          "title": "부동산원, 공공건축 발주기관 설계 공모 실무역량 키운다",
+          "link": "https://www.yna.co.kr/view/AKR20260826145500003",
+          "source": "연합뉴스 경제"
         },
         {
-          "title": "노무라 \"한은 8월 금통위서 금리 인상 확률 최고 수준\"",
-          "link": "https://www.yna.co.kr/view/AKR20260826071000008",
+          "title": "주택거래 꺾이자 이사도 줄었다…7월 이동자 4년 만에 최저",
+          "link": "https://www.hankyung.com/article/202608264444i",
+          "source": "한국경제 경제"
+        },
+        {
+          "title": "청주 민간임대아파트 주민들 \"약속한 20% 할인 분양 이행하라\"",
+          "link": "https://www.yna.co.kr/view/AKR20260826131400064",
           "source": "연합뉴스 경제"
+        },
+        {
+          "title": "“개편 전 수준으로”…비거주 1주택자 종부세 기본공제 12억원 유력",
+          "link": "https://www.mk.co.kr/news/realestate/12136801",
+          "source": "매일경제 부동산"
+        },
+        {
+          "title": "한국부동산원, 공공건축 설계공모 실무자 역량 강화 교육 실시",
+          "link": "https://www.mk.co.kr/news/realestate/12136677",
+          "source": "매일경제 부동산"
         }
       ]
     },
@@ -85,52 +122,30 @@
       "key": "stocks",
       "name": "증시·환율",
       "nameEn": "Stocks & FX",
-      "lineKo": "홍콩 증시는 기술주 매수로 사흘 만에 반등하며 H주가 1.42% 상승했다. 중국 증시는 혼조 개장 후 정책 기대에 따라 상승세를 보이며 창업판이 1.39% 올랐다. 코스피는 엔비디아 실적발표에 대한 경계감으로 장중 보합권을 유지하고 있다. 홍콩과 중국 증시 모두 기술주에 대한 관심이 높아진 것으로 나타났다. 각 시장은 서로 다른 요인에 따라 움직였으며, 구체적인 수치는 각각의 기사에서 명시되었다.",
-      "lineEn": "The Hong Kong stock market rebounded after three days of trading, with H-shares rising 1.42% due to buying in technology stocks. The Chinese stock market rose after a mixed opening, with the Star Market increasing 1.39% amid policy expectations. The KOSPI has remained flat during the day due to caution over NVIDIA's earnings announcement. Both the Hong Kong and Chinese stock markets have shown increased interest in technology stocks. Each market moved due to different factors, and specific figures are stated in their respective articles.",
+      "lineKo": "일본 증시는 엔비디아 실적 발표를 앞두고 닛케이가 0.62% 상승하며 마감했다. 원/달러 환율은 한은 금통위 앞두고 1,380원대 중반에서 횡보했다. 코스피는 '전약후강' 양상으로 0.97% 상승했으나 거래량은 올해 평균의 절반을 밑돌았다. 홍콩 증시는 기술주 매수로 사흘 만에 반등하며 H주가 1.42% 올랐다. 각 시장은 서로 다른 요인에 따라 움직였다.",
+      "lineEn": "The Japanese stock market closed with the Nikkei rising 0.62% ahead of NVIDIA's earnings announcement. The won/dollar exchange rate hovered around the mid-1,380 level ahead of the Bank of Korea's monetary policy meeting. The KOSPI rose 0.97% showing a \"weak before strong\" pattern, but trading volume fell below half of the annual average. The Hong Kong stock market rebounded for the first time in three days due to buying in technology stocks, with H-shares rising 1.42%. Each market moved according to different factors.",
       "isFallback": false,
       "fallbackReason": null,
       "degraded": false,
       "items": [
+        {
+          "title": "日증시, 엔비디아 실적 발표 앞두고 상승 마감…닛케이 0.62%↑",
+          "link": "https://www.newsis.com/view/NISX20260826_0003763735",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "원/달러 환율, 한은 금통위 앞두고 1,380원대 중반 횡보",
+          "link": "https://www.yna.co.kr/view/AKR20260826138800002",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "또 '전약후강' 코스피 0.97%↑…거래량, 올해평균의 절반 밑으로(종합)",
+          "link": "https://www.yna.co.kr/view/AKR20260826132051008",
+          "source": "연합뉴스 경제"
+        },
         {
           "title": "[올댓차이나] 홍콩 증시, 기술주 매수로 사흘 만에 반등… H주 1.42%↑",
           "link": "https://www.newsis.com/view/NISX20260826_0003763315",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "[올댓차이나] 中 증시, 혼조 개장 후 정책 기대에 상승세…창업판 1.39%↑",
-          "link": "https://www.newsis.com/view/NISX20260826_0003763291",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "코스피, 엔비디아 실적발표 경계감에 장중 보합권 유지",
-          "link": "https://www.yna.co.kr/view/AKR20260826075300008",
-          "source": "연합뉴스 경제"
-        }
-      ]
-    },
-    {
-      "key": "other",
-      "name": "기타 경제 소식",
-      "nameEn": "Other Economic News",
-      "lineKo": "캐나다가 미국의 200억불 상품에 대해 보복 관세를 부과했다. 미국은 이란에 대한 경제적 제재를 추진하고 있으나 중국의 반응으로 어려움을 겪고 있다. 연말 첫 '평화경제특구' 지정이 발표되며 기존 인센티브 방식의 한계가 드러났다. 각 기사는 서로 다른 주제로, 경제적 갈등과 정책 변화를 보여준다. 오늘의 뉴스는 국제 경제 관계와 국내 정책 방향을 동시에 다루고 있다.",
-      "lineEn": "Canada imposed retaliatory tariffs on $20,000,000,000 worth of U.S. goods. The U.S. is advancing economic sanctions against Iran but is facing difficulties due to China's response. The announcement of the first \"Peace Economic Special Zone\" at year-end revealed the limitations of the existing incentive approach. Each article covers different topics, illustrating economic conflicts and policy changes. Today's news addresses both international economic relations and domestic policy directions.",
-      "isFallback": false,
-      "fallbackReason": null,
-      "degraded": false,
-      "items": [
-        {
-          "title": "캐나다, 美 200억불 상품에 보복 관세…미국 경제 영향은?",
-          "link": "https://www.newsis.com/view/NISX20260826_0003762984",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "美 '이란 경제적 왕따 작전', 중국에 막히나…제재 딜레마",
-          "link": "https://www.newsis.com/view/NISX20260826_0003762740",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "연말 첫 '평화경제특구' 지정…\"기존 인센티브론 안돼\"",
-          "link": "https://www.newsis.com/view/NISX20260826_0003762581",
           "source": "뉴시스 경제"
         }
       ]
