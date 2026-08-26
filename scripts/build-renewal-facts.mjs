@@ -14,20 +14,22 @@ const outFile = process.env.RENEWAL_FACTS_FILE
   ? path.resolve(process.env.RENEWAL_FACTS_FILE)
   : path.join(root, "docs/data/renewal-facts.json");
 
-export async function readRawRents(months) {
-  const byDistrict = {};
-
-  await Promise.all(
-    months.flatMap((yearMonth) =>
-      DISTRICTS.map(async ({ code, name }) => {
-        const file = await readSlotFile("rent", code, yearMonth);
-        if (file?.ok === false || !Array.isArray(file?.items)) return;
-        (byDistrict[name] ??= []).push(...file.items);
-      })
-    )
+/**
+ * 자치구를 DISTRICTS 순서로 담는다 - 완료되는 대로 담으면 출력 순서가 그날그날
+ * 달라져 뜻 없는 변경이 매일 커밋된다.
+ */
+export async function readRawRents(months, dir) {
+  const perDistrict = await Promise.all(
+    DISTRICTS.map(async ({ code, name }) => {
+      const files = await Promise.all(months.map((yearMonth) => readSlotFile("rent", code, yearMonth, dir)));
+      const items = files
+        .filter((file) => file?.ok !== false && Array.isArray(file?.items))
+        .flatMap((file) => file.items);
+      return [name, items];
+    })
   );
 
-  return byDistrict;
+  return Object.fromEntries(perDistrict.filter(([, items]) => items.length));
 }
 
 export function buildPayload({ byDistrict, now }) {

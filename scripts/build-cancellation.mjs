@@ -27,21 +27,23 @@ const outFile = process.env.CANCELLATION_FILE
 /**
  * 시세용 읽기(readDealSource)는 해제 거래를 이미 버린 뒤에 넘겨준다.
  * 여기서는 버려진 쪽이 관심사라 원본을 그대로 읽는다.
+ *
+ * 자치구를 DISTRICTS 순서로 담는 것이 중요하다. 완료되는 대로 담으면 그날 디스크가
+ * 어느 파일을 먼저 내주었는지가 그대로 출력 순서가 되고, 자치구 링크 줄이 빌드할
+ * 때마다 뒤바뀌어 매일 뜻 없는 변경이 커밋된다.
  */
-export async function readRawSales(months) {
-  const byDistrict = {};
-
-  await Promise.all(
-    months.flatMap((yearMonth) =>
-      DISTRICTS.map(async ({ code, name }) => {
-        const file = await readSlotFile("sale", code, yearMonth);
-        if (file?.ok === false || !Array.isArray(file?.items)) return;
-        (byDistrict[name] ??= []).push(...file.items);
-      })
-    )
+export async function readRawSales(months, dir) {
+  const perDistrict = await Promise.all(
+    DISTRICTS.map(async ({ code, name }) => {
+      const files = await Promise.all(months.map((yearMonth) => readSlotFile("sale", code, yearMonth, dir)));
+      const items = files
+        .filter((file) => file?.ok !== false && Array.isArray(file?.items))
+        .flatMap((file) => file.items);
+      return [name, items];
+    })
   );
 
-  return byDistrict;
+  return Object.fromEntries(perDistrict.filter(([, items]) => items.length));
 }
 
 export function buildPayload({ byDistrict, months, now }) {

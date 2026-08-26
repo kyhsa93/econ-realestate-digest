@@ -230,3 +230,27 @@ test("빌드 결과에 서울 요약과 자치구 표와 월별 곡선이 함께
 test("거래가 하나도 없으면 화면을 만들지 않는다", () => {
   assert.equal(buildPayload({ byDistrict: {}, months: ["202603"], now: NOW }), null);
 });
+
+test("자치구는 늘 같은 순서로 담긴다", async () => {
+  // 완료되는 대로 담으면 그날 디스크가 어느 파일을 먼저 내주었는지가 출력 순서가 되고,
+  // 자치구 링크 줄이 빌드할 때마다 뒤바뀌어 뜻 없는 변경이 매일 커밋된다.
+  const { mkdtemp, mkdir, writeFile } = await import("node:fs/promises");
+  const { tmpdir } = await import("node:os");
+  const nodePath = await import("node:path");
+  const { readRawSales } = await import("../scripts/build-cancellation.mjs");
+  const { DISTRICTS } = await import("../scripts/realestate-districts.mjs");
+
+  const dir = await mkdtemp(nodePath.join(tmpdir(), "raw-order-"));
+  await mkdir(nodePath.join(dir, "sale"), { recursive: true });
+
+  // 일부러 DISTRICTS의 역순으로 써 둔다.
+  for (const { code } of [...DISTRICTS].reverse()) {
+    await writeFile(
+      nodePath.join(dir, "sale", `${code}-202603.json`),
+      JSON.stringify({ ok: true, items: [sale({ sggCd: Number(code) })] })
+    );
+  }
+
+  const byDistrict = await readRawSales(["202603"], dir);
+  assert.deepEqual(Object.keys(byDistrict), DISTRICTS.map((d) => d.name));
+});
