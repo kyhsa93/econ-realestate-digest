@@ -5,6 +5,7 @@ import { BUDGET_PAGES } from "./budget-pages.mjs";
 import { DISTRICT_PAGES, DISTRICT_SLUGS, districtFile } from "./district-slugs.mjs";
 import { districtSentences } from "./district-summary.mjs";
 import { factSentences } from "./district-facts.mjs";
+import { renewalSentences } from "./renewal-facts.mjs";
 import { rateFacts, factSentences as rateSentences } from "./rate-facts.mjs";
 import {
   KIND_FIELDS,
@@ -24,6 +25,8 @@ const INDEX_PATH = path.join(root, "docs/index.html");
 const RATES_PATH = path.join(root, "docs/rates.html");
 const NEWS_PATH = path.join(root, "docs/news.html");
 const REALESTATE_PATH = path.join(root, "docs/realestate.html");
+const CONVERSION_PATH = path.join(root, "docs/jeonse-vs-wolse.html");
+const CANCELLATION_PATH = path.join(root, "docs/cancelled-deals.html");
 const DATA_DIR = path.join(root, "docs/data");
 
 export const MIN_SAMPLE = 5;
@@ -547,6 +550,16 @@ export function districtSummaryHtml(realestate, district, locale = "ko") {
  * 구마다 눈에 띄는 것만 골라 말하므로 문장의 개수도 종류도 구마다 다르고, 말할 것이
  * 없는 구에서는 통째로 비어 있다. 어느 쪽인지는 `district-facts.mjs`가 정한다.
  */
+/**
+ * 재계약에서 나온 관찰. 매매 거래에서 뽑은 관찰과 문단을 나눈다 - 앞 문단은 매매
+ * 신고분 이야기이고 이쪽은 전월세 갱신 이야기라, 한 문단에 이어 붙이면 같은 표본을
+ * 두고 하는 말처럼 읽힌다.
+ */
+export function districtRenewalHtml(facts, locale = "ko") {
+  const sentences = renewalSentences(facts, locale);
+  return sentences.length ? escapeHtml(sentences.join(" ")) : "";
+}
+
 export function districtFactsHtml(facts, locale = "ko") {
   const sentences = factSentences(facts, locale);
   return sentences.length ? escapeHtml(sentences.join(" ")) : "";
@@ -684,6 +697,109 @@ export function applyPrerender(html, blocks) {
   return out;
 }
 
+/**
+ * 전세·월세 화면의 첫 문단과 표. 문장은 빌드가 이미 만들어 두었으므로 여기서는
+ * 고르기만 한다. 표는 화면이 고른 자치구를 굵게 하려고 다시 그리지만, 조건을
+ * 넣기 전에 보이는 첫 벌은 여기서 구워 나가야 검색에 걸린다.
+ */
+export const CONVERSION_BAND = "60to85";
+
+export function conversionLeadHtml(conversion) {
+  return conversion?.seoul?.leadKo ? escapeHtml(conversion.seoul.leadKo) : null;
+}
+
+export function conversionTableHtml(conversion, band = CONVERSION_BAND) {
+  const rows = (conversion?.cells ?? []).filter((cell) => cell.band === band);
+  if (!rows.length) return null;
+
+  const label = conversion.bands?.find((b) => b.key === band)?.label ?? band;
+  const eok = (value10k) => `${(Math.round((value10k / 10000) * 100) / 100).toLocaleString("ko-KR", { maximumFractionDigits: 2 })}억`;
+  const man = (value10k) => `${Math.round(value10k).toLocaleString("ko-KR")}만원`;
+
+  const body = [...rows]
+    .sort((a, b) => b.rate - a.rate)
+    .map(
+      (cell) =>
+        `<tr><td>${escapeHtml(cell.district)}</td><td>${cell.rate}%</td>` +
+        `<td>${escapeHtml(eok(cell.jeonse10k))}</td>` +
+        `<td>${escapeHtml(`${eok(cell.deposit10k)} / ${man(cell.monthly10k)}`)}</td>` +
+        `<td>${cell.pairs.toLocaleString("ko-KR")}</td></tr>`
+    )
+    .join("");
+
+  return (
+    `<caption class="cost-label" style="caption-side:top;text-align:left;padding-bottom:8px;">${escapeHtml(`${label} 기준`)}</caption>` +
+    `<thead><tr><th>자치구</th><th>전환율</th><th>전세</th><th>월세</th><th>단지</th></tr></thead>` +
+    `<tbody>${body}</tbody>`
+  );
+}
+
+export function conversionDistrictLinksHtml(conversion) {
+  const slugs = conversion?.slugs ?? {};
+  const links = Object.entries(slugs)
+    .map(([name, slug]) => `<a href="./district-${escapeHtml(slug)}.html">${escapeHtml(name)}</a>`)
+    .join("");
+  return links || null;
+}
+
+/** 해제·등기 화면. 조건을 넣을 것이 없는 읽는 화면이라 첫 벌이 곧 본문이다. */
+export function cancelLeadHtml(cancellation) {
+  return cancellation?.seoul?.leadKo ? escapeHtml(cancellation.seoul.leadKo) : null;
+}
+
+export function cancelMonthLeadHtml(cancellation) {
+  const reg = cancellation?.seoul?.registration;
+  if (!reg?.medianDays) return null;
+  return escapeHtml(
+    `등기까지 걸린 날은 중앙값 ${reg.medianDays}일입니다. 익은 달의 계약 ${reg.matured.toLocaleString("ko-KR")}건 가운데` +
+      ` ${reg.stale.toLocaleString("ko-KR")}건(${reg.staleShare}%)이 아직 등기를 마치지 않았습니다.`
+  );
+}
+
+export function cancelDistrictsHtml(cancellation) {
+  const rows = cancellation?.districts ?? [];
+  if (!rows.length) return null;
+
+  const pct = (value) => (value === null || value === undefined ? "-" : `${value}%`);
+  const body = rows
+    .map(
+      (row) =>
+        `<tr><td>${escapeHtml(row.district)}</td><td>${row.deals.toLocaleString("ko-KR")}</td>` +
+        `<td>${row.cancelled.toLocaleString("ko-KR")}</td><td>${escapeHtml(pct(row.cancelledShare))}</td>` +
+        `<td>${row.stale.toLocaleString("ko-KR")}</td><td>${escapeHtml(pct(row.staleShare))}</td></tr>`
+    )
+    .join("");
+
+  return (
+    `<thead><tr><th>자치구</th><th>신고</th><th>해제</th><th>해제율</th><th>미등기</th><th>미등기율</th></tr></thead>` +
+    `<tbody>${body}</tbody>`
+  );
+}
+
+export function cancelMonthsHtml(cancellation) {
+  const rows = cancellation?.registrationByMonth ?? [];
+  if (!rows.length) return null;
+
+  const mature = new Set(cancellation?.seoul?.registration?.matureMonths ?? []);
+  const body = rows
+    .map(
+      (row) =>
+        `<tr${mature.has(row.month) ? ' class="spot"' : ""}><td>${escapeHtml(row.month)}</td>` +
+        `<td>${row.filed.toLocaleString("ko-KR")}</td><td>${row.registered.toLocaleString("ko-KR")}</td><td>${row.share}%</td></tr>`
+    )
+    .join("");
+
+  return `<thead><tr><th>계약월</th><th>계약</th><th>등기 완료</th><th>완료율</th></tr></thead><tbody>${body}</tbody>`;
+}
+
+export function cancelDistrictLinksHtml(cancellation) {
+  const slugs = cancellation?.slugs ?? {};
+  const links = Object.entries(slugs)
+    .map(([name, slug]) => `<a href="./district-${escapeHtml(slug)}.html">${escapeHtml(name)}</a>`)
+    .join("");
+  return links || null;
+}
+
 async function readJson(name) {
   try {
     return JSON.parse(await readFile(path.join(DATA_DIR, `${name}.json`), "utf8"));
@@ -705,6 +821,8 @@ async function main() {
   };
 
   const rates = await readJson("rates");
+  const conversion = await readJson("conversion");
+  const cancellation = await readJson("cancellation");
 
   for (const [file, path_, fileBlocks] of [
     ["docs/index.html", INDEX_PATH, blocks],
@@ -726,6 +844,28 @@ async function main() {
         districtSummaryEn: "",
         districtFactsKo: "",
         districtFactsEn: "",
+        districtRenewalKo: "",
+        districtRenewalEn: "",
+      },
+    ],
+    [
+      "docs/jeonse-vs-wolse.html",
+      CONVERSION_PATH,
+      {
+        conversionLead: conversionLeadHtml(conversion),
+        conversionTable: conversionTableHtml(conversion),
+        conversionDistrictLinks: conversionDistrictLinksHtml(conversion),
+      },
+    ],
+    [
+      "docs/cancelled-deals.html",
+      CANCELLATION_PATH,
+      {
+        cancelLead: cancelLeadHtml(cancellation),
+        cancelDistricts: cancelDistrictsHtml(cancellation),
+        cancelMonthLead: cancelMonthLeadHtml(cancellation),
+        cancelMonths: cancelMonthsHtml(cancellation),
+        cancelDistrictLinks: cancelDistrictLinksHtml(cancellation),
       },
     ],
   ]) {

@@ -241,6 +241,8 @@
     <a href="./apartment-jeonse.html" data-re-page="jeonse">전세</a>
     <a href="./apartment-rent.html" data-re-page="wolse">월세</a>
     <a href="./deal-search.html" data-re-page="search" aria-current="page">거래내역 검색</a>
+    <a href="./jeonse-vs-wolse.html" data-re-page="conversion">전세 vs 월세</a>
+    <a href="./cancelled-deals.html" data-re-page="cancelled">해제·등기</a>
   </nav>
 
   <section id="search-section">
@@ -312,6 +314,8 @@ const T = {
     navJeonse: "전세",
     navWolse: "월세",
     navDealSearch: "거래내역 검색",
+    navConversion: "전세 vs 월세",
+    navCancelled: "해제·등기",
     kindLabel: "거래 유형",
     kindSale: "매매",
     kindJeonse: "전세",
@@ -396,6 +400,8 @@ const T = {
     navJeonse: "Jeonse",
     navWolse: "Monthly rent",
     navDealSearch: "Deal search",
+    navConversion: "Jeonse vs rent",
+    navCancelled: "Cancelled & registered",
     kindLabel: "Deal type",
     kindSale: "Sale",
     kindJeonse: "Jeonse",
@@ -1031,7 +1037,15 @@ function renderUpdated() {
   );
 }
 
-const NAV_KEYS = { all: "navAll", sale: "navSale", jeonse: "navJeonse", wolse: "navWolse", search: "navDealSearch" };
+const NAV_KEYS = {
+  all: "navAll",
+  sale: "navSale",
+  jeonse: "navJeonse",
+  wolse: "navWolse",
+  search: "navDealSearch",
+  conversion: "navConversion",
+  cancelled: "navCancelled",
+};
 
 function applyLocale() {
   document.title = t("title");

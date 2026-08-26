@@ -401,6 +401,8 @@
     <a href="./apartment-jeonse.html" data-re-page="jeonse">전세</a>
     <a href="./apartment-rent.html" data-re-page="wolse">월세</a>
     <a href="./deal-search.html" data-re-page="search">거래내역 검색</a>
+    <a href="./jeonse-vs-wolse.html" data-re-page="conversion">전세 vs 월세</a>
+    <a href="./cancelled-deals.html" data-re-page="cancelled">해제·등기</a>
   </nav>
 
   <section id="overall-section">
@@ -413,6 +415,8 @@
     <p class="district-summary" data-summary-lang="en" hidden><!--prerender:districtSummaryEn-->Apartments in 송파구 trade at ₩103M per pyeong, 2× the Seoul average of ₩51.8M. That is 2nd among the 25 districts with enough reported transactions. For an 84m² unit that works out to about ₩2,616M. The closest district by price is 서초구 at ₩101.8M per pyeong. The jeonse ratio is 36.1%, below the Seoul average of 59.3%. Monthly rentals average a ₩431.7M deposit with ₩1.6M per month. These figures are based on 57 sales, 88 jeonse, 74 rentals reported to the government.<!--/prerender:districtSummaryEn--></p>
     <p class="district-summary district-facts" data-summary-lang="ko"><!--prerender:districtFactsKo-->위 시세표의 최근 네 주가 아니라, 최근 3개월 동안 신고된 602건을 전부 놓고 보면 이렇습니다. 한 단지가 유독 많이 팔렸습니다 — 잠실동 리센츠 31건으로 전체의 5%입니다. 기간 중 가장 비싸게 팔린 것은 잠실동 아시아선수촌아파트 178㎡로 65억원입니다.<!--/prerender:districtFactsKo--></p>
     <p class="district-summary district-facts" data-summary-lang="en" hidden><!--prerender:districtFactsEn-->Looking at all 602 transactions reported over the past 3 months rather than the four-week average above: A single complex, 리센츠 in 잠실동, accounts for 31 of them (5%). The highest price in the period was ₩6500M for a 178㎡ unit at 아시아선수촌아파트 in 잠실동.<!--/prerender:districtFactsEn--></p>
+    <p class="district-summary district-facts" data-summary-lang="ko"><!--prerender:districtRenewalKo-->계약갱신요구권을 쓴 재계약 가운데 상한 5%에 못 미친 것은 37.6%뿐입니다. 서울 전체는 44.8%입니다 — 이 동네에서는 대체로 상한까지 올라갑니다.<!--/prerender:districtRenewalKo--></p>
+    <p class="district-summary district-facts" data-summary-lang="en" hidden><!--prerender:districtRenewalEn-->Among renewals where the tenant invoked the statutory right, only 37.6% ended below the 5% cap, against 44.8% across Seoul — here the ceiling is usually reached.<!--/prerender:districtRenewalEn--></p>
   </section>
 
   <section id="trend-section" hidden>
@@ -514,6 +518,8 @@ const T = {
     navJeonse: "전세",
     navWolse: "월세",
     navDealSearch: "거래내역 검색",
+    navConversion: "전세 vs 월세",
+    navCancelled: "해제·등기",
     navNews: "뉴스",
     navRates: "금리 비교",
     overallHeading: "서울 전체 평균",
@@ -593,6 +599,8 @@ const T = {
     navJeonse: "Jeonse",
     navWolse: "Monthly rent",
     navDealSearch: "Deal search",
+    navConversion: "Jeonse vs rent",
+    navCancelled: "Cancelled & registered",
     navNews: "News",
     navRates: "Rates",
     overallHeading: "Seoul average",
@@ -1492,7 +1500,15 @@ function budgetBodyHtml(band, periodList) {
   );
 }
 
-const NAV_KEYS = { all: "navAll", sale: "navSale", jeonse: "navJeonse", wolse: "navWolse", search: "navDealSearch" };
+const NAV_KEYS = {
+  all: "navAll",
+  sale: "navSale",
+  jeonse: "navJeonse",
+  wolse: "navWolse",
+  search: "navDealSearch",
+  conversion: "navConversion",
+  cancelled: "navCancelled",
+};
 
 function applyLocale() {
   const suffix = kind === "sale" ? "titleSale" : kind === "jeonse" ? "titleJeonse" : kind === "wolse" ? "titleWolse" : "title";

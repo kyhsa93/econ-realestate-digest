@@ -401,6 +401,8 @@
     <a href="./apartment-jeonse.html" data-re-page="jeonse">전세</a>
     <a href="./apartment-rent.html" data-re-page="wolse">월세</a>
     <a href="./deal-search.html" data-re-page="search">거래내역 검색</a>
+    <a href="./jeonse-vs-wolse.html" data-re-page="conversion">전세 vs 월세</a>
+    <a href="./cancelled-deals.html" data-re-page="cancelled">해제·등기</a>
   </nav>
 
   <section id="overall-section">
@@ -413,6 +415,8 @@
     <p class="district-summary" data-summary-lang="en" hidden><!--prerender:districtSummaryEn-->Apartments in 노원구 trade at ₩37.3M per pyeong, 0.7× the Seoul average of ₩51.8M. That is 18th among the 25 districts with enough reported transactions. For an 84m² unit that works out to about ₩947M. The closest district by price is 관악구 at ₩35.2M per pyeong. The jeonse ratio is 54.0%, below the Seoul average of 59.3%. Monthly rentals average a ₩104.6M deposit with ₩0.9M per month. These figures are based on 190 sales, 54 jeonse, 109 rentals reported to the government.<!--/prerender:districtSummaryEn--></p>
     <p class="district-summary district-facts" data-summary-lang="ko"><!--prerender:districtFactsKo-->위 시세표의 최근 네 주가 아니라, 최근 3개월 동안 신고된 1,514건을 전부 놓고 보면 이렇습니다. 그 가운데 44%가 상계동 한 곳에서 나왔습니다. 거래가 잡힌 동이 5곳인데도 그렇습니다 — 이 구의 평균은 사실상 상계동 평균에 가깝습니다. 전용 60㎡ 미만이 61%입니다. 이 동네에서 팔리는 것은 대부분 소형입니다. 준공 30년을 넘긴 단지가 64%입니다. 이 정도면 이 구의 시세는 집 자체보다 재건축 기대가 만드는 값에 가깝습니다. 기간 중 가장 비싸게 팔린 것은 중계동 롯데우성 115㎡로 15억원입니다.<!--/prerender:districtFactsKo--></p>
     <p class="district-summary district-facts" data-summary-lang="en" hidden><!--prerender:districtFactsEn-->Looking at all 1,514 transactions reported over the past 3 months rather than the four-week average above: 44% of them are in 상계동 alone, out of 5 neighbourhoods with any sales at all — the district average is largely that one neighbourhood's average. 61% are under 60m², so what trades here is mostly small units. 64% are in buildings at least 30 years old — at that share the price here is being set by redevelopment expectations as much as by the flats themselves. The highest price in the period was ₩1500M for a 115㎡ unit at 롯데우성 in 중계동.<!--/prerender:districtFactsEn--></p>
+    <p class="district-summary district-facts" data-summary-lang="ko"><!--prerender:districtRenewalKo--><!--/prerender:districtRenewalKo--></p>
+    <p class="district-summary district-facts" data-summary-lang="en" hidden><!--prerender:districtRenewalEn--><!--/prerender:districtRenewalEn--></p>
   </section>
 
   <section id="trend-section" hidden>
@@ -514,6 +518,8 @@ const T = {
     navJeonse: "전세",
     navWolse: "월세",
     navDealSearch: "거래내역 검색",
+    navConversion: "전세 vs 월세",
+    navCancelled: "해제·등기",
     navNews: "뉴스",
     navRates: "금리 비교",
     overallHeading: "서울 전체 평균",
@@ -593,6 +599,8 @@ const T = {
     navJeonse: "Jeonse",
     navWolse: "Monthly rent",
     navDealSearch: "Deal search",
+    navConversion: "Jeonse vs rent",
+    navCancelled: "Cancelled & registered",
     navNews: "News",
     navRates: "Rates",
     overallHeading: "Seoul average",
@@ -1492,7 +1500,15 @@ function budgetBodyHtml(band, periodList) {
   );
 }
 
-const NAV_KEYS = { all: "navAll", sale: "navSale", jeonse: "navJeonse", wolse: "navWolse", search: "navDealSearch" };
+const NAV_KEYS = {
+  all: "navAll",
+  sale: "navSale",
+  jeonse: "navJeonse",
+  wolse: "navWolse",
+  search: "navDealSearch",
+  conversion: "navConversion",
+  cancelled: "navCancelled",
+};
 
 function applyLocale() {
   const suffix = kind === "sale" ? "titleSale" : kind === "jeonse" ? "titleJeonse" : kind === "wolse" ? "titleWolse" : "title";

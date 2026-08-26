@@ -401,6 +401,8 @@
     <a href="./apartment-jeonse.html" data-re-page="jeonse">전세</a>
     <a href="./apartment-rent.html" data-re-page="wolse">월세</a>
     <a href="./deal-search.html" data-re-page="search">거래내역 검색</a>
+    <a href="./jeonse-vs-wolse.html" data-re-page="conversion">전세 vs 월세</a>
+    <a href="./cancelled-deals.html" data-re-page="cancelled">해제·등기</a>
   </nav>
 
   <section id="overall-section">
@@ -413,6 +415,8 @@
     <p class="district-summary" data-summary-lang="en" hidden><!--prerender:districtSummaryEn-->Apartments in 강남구 trade at ₩107.7M per pyeong, 2.1× the Seoul average of ₩51.8M. That is the highest among the 25 districts with enough reported transactions. For an 84m² unit that works out to about ₩2,736M. The closest district by price is 송파구 at ₩103M per pyeong. The jeonse ratio is 36.8%, below the Seoul average of 59.3%. Monthly rentals average a ₩378.5M deposit with ₩2.2M per month. These figures are based on 31 sales, 60 jeonse, 104 rentals reported to the government.<!--/prerender:districtSummaryEn--></p>
     <p class="district-summary district-facts" data-summary-lang="ko"><!--prerender:districtFactsKo-->위 시세표의 최근 네 주가 아니라, 최근 3개월 동안 신고된 395건을 전부 놓고 보면 이렇습니다. 14개 동에 흩어져 있고 한 동이 17%를 넘지 않습니다. 이 구의 평균은 서로 다른 동네를 실제로 평균 낸 값입니다. 전용 85㎡ 초과가 34%입니다. 대형 비중이 이만큼 높은 구는 많지 않습니다. 준공 30년을 넘긴 단지가 37%입니다. 이 정도면 이 구의 시세는 집 자체보다 재건축 기대가 만드는 값에 가깝습니다. 기간 중 가장 비싸게 팔린 것은 압구정동 신현대12차 183㎡로 113억원입니다.<!--/prerender:districtFactsKo--></p>
     <p class="district-summary district-facts" data-summary-lang="en" hidden><!--prerender:districtFactsEn-->Looking at all 395 transactions reported over the past 3 months rather than the four-week average above: They are spread across 14 neighbourhoods with no single one above 17%, so the district average is an average of genuinely different places. 34% are over 85m², a large-unit share few districts match. 37% are in buildings at least 30 years old — at that share the price here is being set by redevelopment expectations as much as by the flats themselves. The highest price in the period was ₩11300M for a 183㎡ unit at 신현대12차 in 압구정동.<!--/prerender:districtFactsEn--></p>
+    <p class="district-summary district-facts" data-summary-lang="ko"><!--prerender:districtRenewalKo--><!--/prerender:districtRenewalKo--></p>
+    <p class="district-summary district-facts" data-summary-lang="en" hidden><!--prerender:districtRenewalEn--><!--/prerender:districtRenewalEn--></p>
   </section>
 
   <section id="trend-section" hidden>
@@ -514,6 +518,8 @@ const T = {
     navJeonse: "전세",
     navWolse: "월세",
     navDealSearch: "거래내역 검색",
+    navConversion: "전세 vs 월세",
+    navCancelled: "해제·등기",
     navNews: "뉴스",
     navRates: "금리 비교",
     overallHeading: "서울 전체 평균",
@@ -593,6 +599,8 @@ const T = {
     navJeonse: "Jeonse",
     navWolse: "Monthly rent",
     navDealSearch: "Deal search",
+    navConversion: "Jeonse vs rent",
+    navCancelled: "Cancelled & registered",
     navNews: "News",
     navRates: "Rates",
     overallHeading: "Seoul average",
@@ -1492,7 +1500,15 @@ function budgetBodyHtml(band, periodList) {
   );
 }
 
-const NAV_KEYS = { all: "navAll", sale: "navSale", jeonse: "navJeonse", wolse: "navWolse", search: "navDealSearch" };
+const NAV_KEYS = {
+  all: "navAll",
+  sale: "navSale",
+  jeonse: "navJeonse",
+  wolse: "navWolse",
+  search: "navDealSearch",
+  conversion: "navConversion",
+  cancelled: "navCancelled",
+};
 
 function applyLocale() {
   const suffix = kind === "sale" ? "titleSale" : kind === "jeonse" ? "titleJeonse" : kind === "wolse" ? "titleWolse" : "title";

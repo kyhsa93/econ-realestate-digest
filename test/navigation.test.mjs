@@ -78,6 +78,8 @@ test("세부 분류가 있는 페이지는 2층에서 자기 위치를 표시한
     "apartment-jeonse.html": "전세",
     "apartment-rent.html": "월세",
     "deal-search.html": "거래내역 검색",
+    "jeonse-vs-wolse.html": "전세 vs 월세",
+    "cancelled-deals.html": "해제·등기",
   };
 
   for (const [file, label] of Object.entries(expected)) {
@@ -94,8 +96,15 @@ test("시세 계열 페이지의 2층 항목이 서로 같다", async () => {
   const items = async (file) =>
     links(navBlock(await readFile(path.join(docs, file), "utf8"), "sub-nav")).map((i) => i.text);
 
-  const expected = ["전체", "매매", "전세", "월세", "거래내역 검색"];
-  for (const file of ["realestate.html", "apartment-sale.html", "district-gangnam.html", "deal-search.html"]) {
+  const expected = ["전체", "매매", "전세", "월세", "거래내역 검색", "전세 vs 월세", "해제·등기"];
+  for (const file of [
+    "realestate.html",
+    "apartment-sale.html",
+    "district-gangnam.html",
+    "deal-search.html",
+    "jeonse-vs-wolse.html",
+    "cancelled-deals.html",
+  ]) {
     assert.deepEqual(await items(file), expected, `${file}: 2층 항목이 다르다`);
   }
 });

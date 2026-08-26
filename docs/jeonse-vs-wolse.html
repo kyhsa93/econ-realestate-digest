@@ -1,0 +1,798 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#253e81">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<meta name="google-adsense-account" content="ca-pub-1195159445218373">
+<title>전세 vs 월세 - 서울 자치구별 전월세전환율과 실제 월 비용</title>
+<meta name="description" content="같은 단지에서 전세와 월세가 함께 신고된 실거래로 서울 25개 자치구의 전월세전환율을 내고, 전세자금대출·예금 금리를 넣어 어느 쪽이 월에 얼마나 싼지 계산합니다. 매일 갱신합니다.">
+<meta name="site-group" content="digest">
+<link rel="canonical" href="https://kyhsa93.github.io/econ-realestate-digest/jeonse-vs-wolse.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="경제·부동산 데일리 다이제스트">
+<meta property="og:url" content="https://kyhsa93.github.io/econ-realestate-digest/jeonse-vs-wolse.html">
+<meta property="og:title" content="전세 vs 월세 - 서울 자치구별 전월세전환율과 실제 월 비용">
+<meta property="og:description" content="같은 단지에서 전세와 월세가 함께 신고된 실거래로 서울 25개 자치구의 전월세전환율을 내고, 전세자금대출·예금 금리를 넣어 어느 쪽이 월에 얼마나 싼지 계산합니다.">
+<meta property="og:image" content="https://kyhsa93.github.io/econ-realestate-digest/icons/icon-512.png">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="전세 vs 월세 - 서울 자치구별 전월세전환율과 실제 월 비용">
+<meta name="twitter:description" content="같은 단지에서 전세와 월세가 함께 신고된 실거래로 낸 서울 25개 자치구의 전월세전환율.">
+<meta name="twitter:image" content="https://kyhsa93.github.io/econ-realestate-digest/icons/icon-512.png">
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #666;
+    --card: #f5f5f7;
+    --border: #e2e2e5;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1115;
+      --fg: #eaeaea;
+      --muted: #9a9a9a;
+      --card: #1a1d24;
+      --border: #2a2d35;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #0f1115;
+    --fg: #eaeaea;
+    --muted: #9a9a9a;
+    --card: #1a1d24;
+    --border: #2a2d35;
+  }
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #666;
+    --card: #f5f5f7;
+    --border: #e2e2e5;
+  }
+  [hidden] { display: none !important; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.5;
+  }
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 24px 16px 64px;
+  }
+  header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .header-actions { display: flex; gap: 8px; flex-shrink: 0; }
+  .icon-toggle {
+    flex-shrink: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--fg);
+  }
+  h1 { font-size: 1.4rem; margin: 0 0 4px; }
+  h2 {
+    font-size: 1.05rem;
+    margin: 0 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .updated { color: var(--muted); font-size: 0.85rem; }
+  .page-nav {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .page-nav a {
+    flex-shrink: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    color: var(--fg);
+    text-decoration: none;
+  }
+  .page-nav a.active {
+    background: var(--fg);
+    color: var(--bg);
+    border-color: var(--fg);
+    font-weight: 600;
+  }
+  .sub-nav {
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    margin: -10px 0 20px;
+    padding-bottom: 2px;
+  }
+  .sub-nav a {
+    flex-shrink: 0;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .sub-nav a[aria-current="page"] {
+    background: var(--card);
+    color: var(--fg);
+    font-weight: 600;
+  }
+  section { margin-bottom: 32px; }
+  .site-footer {
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+  .site-footer a { color: var(--muted); }
+  .search-controls { display: flex; flex-wrap: wrap; gap: 10px 16px; margin-bottom: 16px; }
+  .search-field { display: flex; align-items: center; gap: 8px; }
+  .search-field label { font-size: 0.82rem; color: var(--muted); }
+  .search-field select,
+  .search-field input[type="number"] {
+    background: var(--bg);
+    color: var(--fg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 0.88rem;
+    font-family: inherit;
+    max-width: 12rem;
+  }
+  .search-field input[type="number"] { width: 6rem; }
+  .verdict {
+    font-size: 1rem;
+    line-height: 1.6;
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--card);
+    margin-bottom: 16px;
+  }
+  .verdict strong { font-size: 1.15rem; }
+  .verdict .sub { display: block; color: var(--muted); font-size: 0.85rem; margin-top: 6px; }
+  .options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 520px) { .options { grid-template-columns: 1fr; } }
+  .option {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    background: var(--card);
+  }
+  .option.win { border-color: var(--fg); }
+  .option .name { font-weight: 600; margin-bottom: 2px; }
+  .option .terms { color: var(--muted); font-size: 0.82rem; margin-bottom: 10px; }
+  .option .cost { font-size: 1.3rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .option .cost-label { color: var(--muted); font-size: 0.8rem; }
+  .option .rows { list-style: none; padding: 0; margin: 10px 0 0; font-size: 0.82rem; color: var(--muted); }
+  .option .rows li { display: flex; justify-content: space-between; gap: 8px; padding: 1px 0; }
+  .option .rows span { font-variant-numeric: tabular-nums; }
+  .option .infeasible { color: var(--fg); font-size: 0.82rem; margin-top: 10px; }
+  .rate-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  .rate-table th, .rate-table td { padding: 6px 8px; border-bottom: 1px solid var(--border); text-align: right; }
+  .rate-table th:first-child, .rate-table td:first-child { text-align: left; }
+  .rate-table thead th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  .rate-table td { font-variant-numeric: tabular-nums; }
+  .rate-table tbody tr.spot td { font-weight: 700; }
+  .table-scroll { overflow-x: auto; }
+  .content-notice { color: var(--muted); font-size: 0.8rem; margin-top: 14px; line-height: 1.5; }
+  .lead { font-size: 0.95rem; line-height: 1.65; margin: 0 0 16px; }
+  .empty { color: var(--muted); font-size: 0.9rem; }
+  .empty button {
+    font: inherit;
+    background: var(--fg);
+    color: var(--bg);
+    border: 0;
+    border-radius: 8px;
+    padding: 4px 12px;
+    margin-left: 8px;
+    cursor: pointer;
+  }
+  .district-links-heading { font-size: 0.85rem; color: var(--muted); margin: 18px 0 8px; font-weight: 600; }
+  .district-links { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 0.82rem; }
+  .district-links a { color: var(--muted); text-decoration: none; }
+  .district-links a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div>
+      <h1 id="page-title">전세 vs 월세, 어느 쪽이 쌀까</h1>
+      <div class="updated" id="updated">불러오는 중...</div>
+    </div>
+    <div class="header-actions">
+      <button class="icon-toggle" type="button" id="theme-toggle" aria-label="테마 전환"><span aria-hidden="true">🌓</span></button>
+      <button class="icon-toggle" type="button" id="lang-toggle" aria-label="Switch language"><span aria-hidden="true">🌐</span></button>
+    </div>
+  </header>
+
+  <nav class="page-nav" aria-label="섹션">
+    <a href="./index.html" id="nav-digest">데일리 다이제스트</a>
+    <a href="./news.html" id="nav-news">뉴스</a>
+    <a href="./realestate.html" id="nav-realestate" class="active">아파트 시세</a>
+    <a href="./rates.html" id="nav-rates">금리 비교</a>
+  </nav>
+
+  <nav class="sub-nav" aria-label="거래 유형">
+    <a href="./realestate.html" data-re-page="all">전체</a>
+    <a href="./apartment-sale.html" data-re-page="sale">매매</a>
+    <a href="./apartment-jeonse.html" data-re-page="jeonse">전세</a>
+    <a href="./apartment-rent.html" data-re-page="wolse">월세</a>
+    <a href="./deal-search.html" data-re-page="search">거래내역 검색</a>
+    <a href="./jeonse-vs-wolse.html" data-re-page="conversion" aria-current="page">전세 vs 월세</a>
+    <a href="./cancelled-deals.html" data-re-page="cancelled">해제·등기</a>
+  </nav>
+
+  <section id="calc-section">
+    <h2 id="calc-heading">가진 돈을 넣고 견줘 보기</h2>
+    <p class="lead" id="lead"><!--prerender:conversionLead-->같은 단지에서 전세와 월세가 함께 신고된 3,631개 조합으로 낸 서울의 전월세전환율은 4.73%입니다. 지금 전세자금대출 평균 금리는 4.38%입니다. 전환율이 대출금리보다 0.35%p 높으니, 보증금을 빌려 전세로 가는 쪽이 평균적으로 쌉니다. 2026.03~2026.08 신규 계약 기준입니다.<!--/prerender:conversionLead--></p>
+    <div class="search-controls" id="calc-controls">
+      <div class="search-field">
+        <label for="district-select" id="district-label">지역</label>
+        <select id="district-select"></select>
+      </div>
+      <div class="search-field">
+        <label for="band-select" id="band-label">면적</label>
+        <select id="band-select"></select>
+      </div>
+      <div class="search-field">
+        <label for="cash-input" id="cash-label">가진 돈</label>
+        <input type="number" id="cash-input" min="0" max="500" step="0.5" inputmode="decimal">
+        <span class="updated" id="cash-unit">억</span>
+      </div>
+    </div>
+    <div id="calc-result"></div>
+    <div class="content-notice" id="calc-note"></div>
+  </section>
+
+  <section id="rate-section">
+    <h2 id="rate-heading">자치구별 전월세전환율</h2>
+    <div class="table-scroll">
+      <table class="rate-table" id="rate-table"><!--prerender:conversionTable--><caption class="cost-label" style="caption-side:top;text-align:left;padding-bottom:8px;">60~85㎡ 기준</caption><thead><tr><th>자치구</th><th>전환율</th><th>전세</th><th>월세</th><th>단지</th></tr></thead><tbody><tr><td>금천구</td><td>5%</td><td>4.3억</td><td>1억 / 123만원</td><td>23</td></tr><tr><td>노원구</td><td>4.96%</td><td>4.95억</td><td>2억 / 120만원</td><td>86</td></tr><tr><td>은평구</td><td>4.93%</td><td>5.8억</td><td>2억 / 140만원</td><td>61</td></tr><tr><td>성동구</td><td>4.92%</td><td>8억</td><td>2억 / 228만원</td><td>75</td></tr><tr><td>광진구</td><td>4.86%</td><td>8억</td><td>3.6억 / 165만원</td><td>48</td></tr><tr><td>구로구</td><td>4.85%</td><td>5억</td><td>1.65억 / 129만원</td><td>70</td></tr><tr><td>강남구</td><td>4.83%</td><td>9.5억</td><td>4억 / 220만원</td><td>117</td></tr><tr><td>마포구</td><td>4.8%</td><td>8억</td><td>3억 / 200만원</td><td>83</td></tr><tr><td>성북구</td><td>4.8%</td><td>6.1억</td><td>2억 / 150만원</td><td>63</td></tr><tr><td>용산구</td><td>4.8%</td><td>7.8억</td><td>2억 / 225만원</td><td>43</td></tr><tr><td>중구</td><td>4.8%</td><td>7.6억</td><td>1억 / 250만원</td><td>17</td></tr><tr><td>송파구</td><td>4.75%</td><td>7.95억</td><td>3.5억 / 155만원</td><td>89</td></tr><tr><td>강서구</td><td>4.73%</td><td>6.25억</td><td>3억 / 140만원</td><td>73</td></tr><tr><td>도봉구</td><td>4.68%</td><td>4.19억</td><td>1억 / 115만원</td><td>48</td></tr><tr><td>서초구</td><td>4.68%</td><td>10억</td><td>4억 / 240만원</td><td>91</td></tr><tr><td>종로구</td><td>4.66%</td><td>6.85억</td><td>1.25억 / 220만원</td><td>14</td></tr><tr><td>서대문구</td><td>4.65%</td><td>6.5억</td><td>2.5억 / 150만원</td><td>53</td></tr><tr><td>동대문구</td><td>4.64%</td><td>6.55억</td><td>2.2억 / 160만원</td><td>50</td></tr><tr><td>양천구</td><td>4.63%</td><td>6.5억</td><td>3억 / 120만원</td><td>76</td></tr><tr><td>강동구</td><td>4.62%</td><td>6.88억</td><td>3억 / 140만원</td><td>70</td></tr><tr><td>중랑구</td><td>4.51%</td><td>5.35억</td><td>1.75억 / 125만원</td><td>37</td></tr><tr><td>관악구</td><td>4.5%</td><td>5.63억</td><td>1.78억 / 126만원</td><td>40</td></tr><tr><td>동작구</td><td>4.46%</td><td>7.28억</td><td>3억 / 136만원</td><td>74</td></tr><tr><td>강북구</td><td>4.35%</td><td>5.44억</td><td>1.4억 / 130만원</td><td>22</td></tr><tr><td>영등포구</td><td>4.31%</td><td>7억</td><td>2.5억 / 140만원</td><td>82</td></tr></tbody><!--/prerender:conversionTable--></table>
+    </div>
+    <div class="content-notice" id="rate-note"></div>
+    <div class="district-links-heading" id="district-links-heading">자치구별 시세</div>
+    <div class="district-links" id="district-links"><!--prerender:conversionDistrictLinks--><a href="./district-gangnam.html">강남구</a><a href="./district-gangdong.html">강동구</a><a href="./district-gangbuk.html">강북구</a><a href="./district-gangseo.html">강서구</a><a href="./district-gwanak.html">관악구</a><a href="./district-gwangjin.html">광진구</a><a href="./district-guro.html">구로구</a><a href="./district-geumcheon.html">금천구</a><a href="./district-nowon.html">노원구</a><a href="./district-dobong.html">도봉구</a><a href="./district-dongdaemun.html">동대문구</a><a href="./district-dongjak.html">동작구</a><a href="./district-mapo.html">마포구</a><a href="./district-seodaemun.html">서대문구</a><a href="./district-seocho.html">서초구</a><a href="./district-seongdong.html">성동구</a><a href="./district-seongbuk.html">성북구</a><a href="./district-songpa.html">송파구</a><a href="./district-yangcheon.html">양천구</a><a href="./district-yeongdeungpo.html">영등포구</a><a href="./district-yongsan.html">용산구</a><a href="./district-eunpyeong.html">은평구</a><a href="./district-jongno.html">종로구</a><a href="./district-jung.html">중구</a><a href="./district-jungnang.html">중랑구</a><!--/prerender:conversionDistrictLinks--></div>
+  </section>
+
+  <footer class="site-footer">
+    <div id="footer-source">출처: 국토교통부 아파트 전월세 실거래가, 금융감독원 금융상품통합비교공시. 신고된 거래만 집계되며 신고 기한(계약 후 30일)이 있어 최근 계약은 나중에 반영됩니다.</div>
+    <div style="margin-top:6px;">
+      <a href="./about.html" id="footer-about">소개</a>
+      <span aria-hidden="true"> · </span>
+      <a href="./method.html" id="footer-method">숫자를 만드는 방법</a>
+      <span aria-hidden="true"> · </span>
+      <a href="https://kyhsa93.github.io/privacy-policy" id="footer-privacy" target="_blank" rel="noopener">개인정보처리방침</a>
+    </div>
+  </footer>
+</main>
+<script src="./analytics.js"></script>
+<script>
+const T = {
+  ko: {
+    title: "전세 vs 월세, 어느 쪽이 쌀까",
+    navDigest: "데일리 다이제스트",
+    navNews: "뉴스",
+    navRealestatePrices: "아파트 시세",
+    navRates: "금리 비교",
+    navAll: "전체",
+    navSale: "매매",
+    navJeonse: "전세",
+    navWolse: "월세",
+    navDealSearch: "거래내역 검색",
+    navConversion: "전세 vs 월세",
+    navCancelled: "해제·등기",
+    calcHeading: "가진 돈을 넣고 견줘 보기",
+    rateHeading: "자치구별 전월세전환율",
+    districtLabel: "지역",
+    bandLabel: "면적",
+    cashLabel: "가진 돈",
+    cashUnit: "억",
+    jeonse: "전세",
+    wolse: "월세",
+    jeonseTerms: (deposit) => `보증금 ${deposit}`,
+    wolseTerms: (deposit, rent) => `보증금 ${deposit} · 월세 ${rent}`,
+    costLabel: "월 실부담",
+    rowLoan: "빌리는 돈",
+    rowInterest: "대출이자",
+    rowSpare: "남는 돈",
+    rowEarned: "예금이자(세후)",
+    rowRent: "월세",
+    infeasible: (short) => `보증금의 80%까지 빌려도 ${short}이 모자랍니다.`,
+    verdictJeonse: (gap) => `전세가 월에 ${gap} 싸다`,
+    verdictWolse: (gap) => `월세가 월에 ${gap} 싸다`,
+    verdictEven: "두 쪽이 거의 같다",
+    verdictNone: "가진 돈으로는 한쪽을 고를 수 없다",
+    verdictNoneSub: "보증금의 80%까지 빌려도 한쪽은 보증금을 채우지 못합니다. 가진 돈을 늘리거나 다른 면적을 골라 보세요.",
+    thDistrict: "자치구",
+    thRate: "전환율",
+    thJeonse: "전세",
+    thWolse: "월세",
+    thPairs: "단지",
+    tableCaption: (band) => `${band} 기준`,
+    calcNote:
+      "두 쪽 다 (보증금에 모자란 만큼 빌린 이자) − (쓰고 남은 돈을 예금에 넣어 받는 세후 이자)로 재고, 월세는 거기에 월세를 더합니다. " +
+      "전세자금대출은 보증금의 80%까지 빌릴 수 있다고 봤습니다 — 상품마다 한도가 다르고 보증기관 심사에 달렸습니다. " +
+      "중도상환수수료·보증료·이사비용과 대출이자 소득공제는 넣지 않았습니다. 실제 조건은 상품과 사람마다 다릅니다.",
+    rateNote:
+      "전월세전환율은 월세 × 12개월 ÷ (전세보증금 − 월세보증금)입니다. 같은 자치구·같은 면적대에서 전세와 월세가 둘 다 신고된 단지만 골라 단지별로 먼저 중앙값을 내고, 그 값들의 중앙값을 자치구 대표로 씁니다. " +
+      "단지가 세 곳이 안 되는 칸은 내보내지 않습니다. 갱신계약은 이전 조건을 잇는 것이라 빼고 신규 계약만 셉니다.",
+    updatedPrefix: "기준",
+    footerSource: "출처: 국토교통부 아파트 전월세 실거래가, 금융감독원 금융상품통합비교공시. 신고된 거래만 집계되며 신고 기한(계약 후 30일)이 있어 최근 계약은 나중에 반영됩니다.",
+    footerPrivacy: "개인정보처리방침",
+    footerMethod: "숫자를 만드는 방법",
+    footerAbout: "소개",
+    districtLinksHeading: "자치구별 시세",
+    notReady: "아직 전환율을 낼 자료가 없습니다. 국토교통부 신고분을 받는 대로 채워집니다.",
+    loadError: "전환율을 불러오지 못했습니다.",
+    retry: "다시 시도",
+    eok: (v) => `${v}억`,
+    man: (v) => `${v}만원`,
+  },
+  en: {
+    title: "Jeonse vs Monthly Rent",
+    navDigest: "Daily Digest",
+    navNews: "News",
+    navRealestatePrices: "Apartment Prices",
+    navRates: "Rates",
+    navAll: "All",
+    navSale: "Sale",
+    navJeonse: "Jeonse",
+    navWolse: "Monthly rent",
+    navDealSearch: "Deal search",
+    navConversion: "Jeonse vs rent",
+    navCancelled: "Cancelled & registered",
+    calcHeading: "Compare with what you have",
+    rateHeading: "Conversion rate by district",
+    districtLabel: "District",
+    bandLabel: "Size",
+    cashLabel: "Cash on hand",
+    cashUnit: "×100M",
+    jeonse: "Jeonse",
+    wolse: "Monthly rent",
+    jeonseTerms: (deposit) => `Deposit ${deposit}`,
+    wolseTerms: (deposit, rent) => `Deposit ${deposit} · ${rent} a month`,
+    costLabel: "Real monthly cost",
+    rowLoan: "Borrowed",
+    rowInterest: "Loan interest",
+    rowSpare: "Left over",
+    rowEarned: "Deposit interest (after tax)",
+    rowRent: "Rent",
+    infeasible: (short) => `Even borrowing 80% of the deposit leaves ${short} short.`,
+    verdictJeonse: (gap) => `Jeonse costs ${gap} less a month`,
+    verdictWolse: (gap) => `Monthly rent costs ${gap} less a month`,
+    verdictEven: "The two are about the same",
+    verdictNone: "Your cash cannot cover either option",
+    verdictNoneSub: "Even borrowing 80% of the deposit leaves one side short. Try more cash or a different size.",
+    thDistrict: "District",
+    thRate: "Rate",
+    thJeonse: "Jeonse",
+    thWolse: "Monthly",
+    thPairs: "Complexes",
+    tableCaption: (band) => `${band}`,
+    calcNote:
+      "Both sides are measured as (interest on what you must borrow to cover the deposit) − (after-tax interest on what is left in a deposit account), with rent added on the monthly-rent side. " +
+      "The jeonse loan is assumed to cover up to 80% of the deposit; limits differ by product and guarantor. " +
+      "Early-repayment fees, guarantee fees, moving costs and the income-tax deduction on loan interest are not included.",
+    rateNote:
+      "The conversion rate is monthly rent × 12 ÷ (jeonse deposit − monthly-rent deposit). Only complexes where both jeonse and monthly rent were filed in the same district and size band are used: a median per complex first, then the median of those as the district figure. " +
+      "Cells with fewer than three complexes are not published. Renewals carry forward old terms, so only new contracts are counted.",
+    updatedPrefix: "As of",
+    footerSource: "Source: MOLIT apartment rent filings, FSS financial product disclosure. Only filed contracts are counted, and the 30-day filing window means recent contracts arrive later.",
+    footerPrivacy: "Privacy policy",
+    footerMethod: "How the numbers are made",
+    footerAbout: "About",
+    districtLinksHeading: "Prices by district",
+    notReady: "No conversion data yet. It fills in as MOLIT filings arrive.",
+    loadError: "Could not load the conversion data.",
+    retry: "Retry",
+    eok: (v) => `₩${v}00M`,
+    man: (v) => `₩${v}0K`,
+  },
+};
+
+let locale = (() => {
+  const saved = window.localStorage.getItem("lang");
+  return saved === "en" || saved === "ko" ? saved : "ko";
+})();
+const t = (key) => T[locale][key];
+
+const THEME_ICONS = { auto: "🌓", light: "☀️", dark: "🌙" };
+let theme = (() => {
+  const saved = window.localStorage.getItem("theme");
+  return saved === "light" || saved === "dark" ? saved : "auto";
+})();
+
+function applyTheme(next) {
+  theme = next;
+  window.localStorage.setItem("theme", theme);
+  if (theme === "auto") document.documentElement.removeAttribute("data-theme");
+  else document.documentElement.setAttribute("data-theme", theme);
+  document.querySelector("#theme-toggle span").textContent = THEME_ICONS[theme];
+}
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
+
+function setText(id, text) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = text;
+}
+
+const localeTag = () => (locale === "en" ? "en-US" : "ko-KR");
+
+// 계산은 scripts/conversion.mjs와 같은 식이다. 사용자가 가진 돈을 바꿀 때마다 다시
+// 재야 해서 브라우저에도 한 벌 있어야 하고, 두 벌이 갈라지지 않는지는
+// test/conversion-page.test.mjs가 같은 입력에 같은 답이 나오는지로 지킨다.
+const TAX_RATE = 0.154;
+const EOK = 10000;
+
+function monthlyCost({ deposit10k, monthlyRent10k = 0, cash10k, loanRate, depositRate, ltv }) {
+  const shortfall = Math.max(0, deposit10k - cash10k);
+  const limit = deposit10k * ltv;
+  const loan10k = Math.min(shortfall, limit);
+  const short10k = Math.round(shortfall - loan10k);
+  const spare10k = Math.max(0, cash10k - deposit10k);
+  const interest = (loan10k * loanRate) / 100 / 12;
+  const earned = ((spare10k * depositRate) / 100 / 12) * (1 - TAX_RATE);
+  const rent = monthlyRent10k || 0;
+
+  return {
+    loan10k: Math.round(loan10k),
+    short10k,
+    feasible: short10k <= 0,
+    spare10k: Math.round(spare10k),
+    interest10k: Math.round(interest * 10) / 10,
+    earned10k: Math.round(earned * 10) / 10,
+    rent10k: rent,
+    cost10k: Math.round((rent + interest - earned) * 10) / 10,
+  };
+}
+
+function compare({ jeonse10k, deposit10k, monthly10k, cash10k, loanRate, depositRate, ltv }) {
+  const jeonse = monthlyCost({ deposit10k: jeonse10k, cash10k, loanRate, depositRate, ltv });
+  const wolse = monthlyCost({ deposit10k, monthlyRent10k: monthly10k, cash10k, loanRate, depositRate, ltv });
+  const comparable = jeonse.feasible && wolse.feasible;
+  const gap10k = Math.round((wolse.cost10k - jeonse.cost10k) * 10) / 10;
+
+  return {
+    jeonse,
+    wolse,
+    comparable,
+    gap10k: comparable ? gap10k : null,
+    cheaper: comparable ? (gap10k === 0 ? null : gap10k > 0 ? "jeonse" : "wolse") : null,
+  };
+}
+
+const cache = { conversion: null };
+
+const params = new URLSearchParams(location.search);
+let district = params.get("district") ?? null;
+let bandKey = params.get("band") ?? null;
+let cash10k = (() => {
+  const raw = Number(params.get("cash"));
+  return Number.isFinite(raw) && raw > 0 ? Math.round(raw * EOK) : 3 * EOK;
+})();
+
+const cells = () => cache.conversion?.cells ?? [];
+const districtNames = () => [...new Set(cells().map((c) => c.district))];
+const bandsOf = (name) => cells().filter((c) => c.district === name).map((c) => c.band);
+const bandLabel = (key) =>
+  cache.conversion?.bands?.find((b) => b.key === key)?.label ??
+  (locale === "en" ? { under60: "Under 60m2", "60to85": "60-85m2", over85: "85m2 and up" }[key] : key);
+
+const currentCell = () => cells().find((c) => c.district === district && c.band === bandKey) ?? null;
+
+const eok = (value10k) => {
+  const eokPart = value10k / EOK;
+  const rounded = Math.round(eokPart * 100) / 100;
+  return t("eok")(rounded.toLocaleString(localeTag(), { maximumFractionDigits: 2 }));
+};
+const man = (value10k) => t("man")(Math.round(value10k).toLocaleString(localeTag()));
+
+function optionHtml(kind, cell, side, win) {
+  const name = kind === "jeonse" ? t("jeonse") : t("wolse");
+  const terms =
+    kind === "jeonse"
+      ? t("jeonseTerms")(eok(cell.jeonse10k))
+      : t("wolseTerms")(eok(cell.deposit10k), man(cell.monthly10k));
+
+  const rows = [];
+  if (side.loan10k > 0) {
+    rows.push([t("rowLoan"), eok(side.loan10k)]);
+    rows.push([t("rowInterest"), man(side.interest10k)]);
+  }
+  if (kind === "wolse") rows.push([t("rowRent"), man(side.rent10k)]);
+  if (side.spare10k > 0) {
+    rows.push([t("rowSpare"), eok(side.spare10k)]);
+    rows.push([t("rowEarned"), `-${man(side.earned10k)}`]);
+  }
+
+  return (
+    `<div class="option${win ? " win" : ""}">` +
+    `<div class="name">${escapeHtml(name)}</div>` +
+    `<div class="terms">${escapeHtml(terms)}</div>` +
+    (side.feasible
+      ? `<div class="cost">${escapeHtml(man(side.cost10k))}</div><div class="cost-label">${escapeHtml(t("costLabel"))}</div>` +
+        `<ul class="rows">${rows.map(([k, v]) => `<li>${escapeHtml(k)}<span>${escapeHtml(v)}</span></li>`).join("")}</ul>`
+      : `<div class="infeasible">${escapeHtml(t("infeasible")(eok(side.short10k)))}</div>`) +
+    `</div>`
+  );
+}
+
+function renderResult() {
+  const box = document.getElementById("calc-result");
+  const cell = currentCell();
+  if (!cell) {
+    box.innerHTML = `<p class="empty">${escapeHtml(t("notReady"))}</p>`;
+    return;
+  }
+
+  const { loan, deposit, ltv } = cache.conversion;
+  const result = compare({
+    jeonse10k: cell.jeonse10k,
+    deposit10k: cell.deposit10k,
+    monthly10k: cell.monthly10k,
+    cash10k,
+    loanRate: loan.rate,
+    depositRate: deposit.rate,
+    ltv,
+  });
+
+  const headline = !result.comparable
+    ? t("verdictNone")
+    : result.cheaper === "jeonse"
+      ? t("verdictJeonse")(man(Math.abs(result.gap10k)))
+      : result.cheaper === "wolse"
+        ? t("verdictWolse")(man(Math.abs(result.gap10k)))
+        : t("verdictEven");
+
+  const sub = result.comparable ? (locale === "en" ? cell.noteEn : cell.noteKo) : t("verdictNoneSub");
+
+  box.innerHTML =
+    `<div class="verdict"><strong>${escapeHtml(headline)}</strong><span class="sub">${escapeHtml(sub)}</span></div>` +
+    `<div class="options">` +
+    optionHtml("jeonse", cell, result.jeonse, result.cheaper === "jeonse") +
+    optionHtml("wolse", cell, result.wolse, result.cheaper === "wolse") +
+    `</div>`;
+}
+
+function renderControls() {
+  const districtSelect = document.getElementById("district-select");
+  districtSelect.innerHTML = districtNames()
+    .map((name) => `<option value="${escapeHtml(name)}"${name === district ? " selected" : ""}>${escapeHtml(name)}</option>`)
+    .join("");
+
+  const bandSelect = document.getElementById("band-select");
+  bandSelect.innerHTML = bandsOf(district)
+    .map((key) => `<option value="${escapeHtml(key)}"${key === bandKey ? " selected" : ""}>${escapeHtml(bandLabel(key))}</option>`)
+    .join("");
+
+  const cashInput = document.getElementById("cash-input");
+  const asEok = Math.round((cash10k / EOK) * 100) / 100;
+  if (Number(cashInput.value) !== asEok) cashInput.value = String(asEok);
+}
+
+function renderTable() {
+  const table = document.getElementById("rate-table");
+  const rows = cells().filter((c) => c.band === bandKey);
+  if (!rows.length) {
+    table.innerHTML = "";
+    return;
+  }
+
+  const head =
+    `<caption class="cost-label" style="caption-side:top;text-align:left;padding-bottom:8px;">${escapeHtml(t("tableCaption")(bandLabel(bandKey)))}</caption>` +
+    `<thead><tr><th>${escapeHtml(t("thDistrict"))}</th><th>${escapeHtml(t("thRate"))}</th>` +
+    `<th>${escapeHtml(t("thJeonse"))}</th><th>${escapeHtml(t("thWolse"))}</th><th>${escapeHtml(t("thPairs"))}</th></tr></thead>`;
+
+  const body = [...rows]
+    .sort((a, b) => b.rate - a.rate)
+    .map(
+      (c) =>
+        `<tr${c.district === district ? ' class="spot"' : ""}>` +
+        `<td>${escapeHtml(c.district)}</td><td>${c.rate}%</td>` +
+        `<td>${escapeHtml(eok(c.jeonse10k))}</td>` +
+        `<td>${escapeHtml(`${eok(c.deposit10k)} / ${man(c.monthly10k)}`)}</td>` +
+        `<td>${c.pairs.toLocaleString(localeTag())}</td></tr>`
+    )
+    .join("");
+
+  table.innerHTML = `${head}<tbody>${body}</tbody>`;
+}
+
+function renderLead() {
+  const seoul = cache.conversion?.seoul;
+  if (!seoul) return;
+  setText("lead", locale === "en" ? seoul.leadEn : seoul.leadKo);
+}
+
+function renderDistrictLinks() {
+  const slugs = cache.conversion?.slugs ?? {};
+  document.getElementById("district-links").innerHTML = Object.entries(slugs)
+    .map(([name, slug]) => `<a href="./district-${escapeHtml(slug)}.html">${escapeHtml(name)}</a>`)
+    .join("");
+}
+
+function renderUpdated() {
+  const updatedAt = cache.conversion?.updatedAt;
+  if (!updatedAt) {
+    setText("updated", "-");
+    return;
+  }
+  setText(
+    "updated",
+    `${t("updatedPrefix")}: ${new Date(updatedAt).toLocaleDateString(localeTag(), { timeZone: "Asia/Seoul", dateStyle: "medium" })}`
+  );
+}
+
+function syncUrl() {
+  const next = new URLSearchParams(location.search);
+  next.set("district", district);
+  next.set("band", bandKey);
+  next.set("cash", String(Math.round((cash10k / EOK) * 100) / 100));
+
+  const url = `${location.pathname}?${next.toString()}`;
+  if (url !== `${location.pathname}${location.search}`) history.replaceState(null, "", url);
+}
+
+const NAV_KEYS = {
+  all: "navAll",
+  sale: "navSale",
+  jeonse: "navJeonse",
+  wolse: "navWolse",
+  search: "navDealSearch",
+  conversion: "navConversion",
+  cancelled: "navCancelled",
+};
+
+function applyLocale() {
+  document.title = t("title");
+  setText("page-title", t("title"));
+  setText("calc-heading", t("calcHeading"));
+  setText("rate-heading", t("rateHeading"));
+  setText("district-label", t("districtLabel"));
+  setText("band-label", t("bandLabel"));
+  setText("cash-label", t("cashLabel"));
+  setText("cash-unit", t("cashUnit"));
+  setText("calc-note", t("calcNote"));
+  setText("rate-note", t("rateNote"));
+  setText("district-links-heading", t("districtLinksHeading"));
+  setText("nav-digest", t("navDigest"));
+  setText("nav-news", t("navNews"));
+  setText("nav-realestate", t("navRealestatePrices"));
+  setText("nav-rates", t("navRates"));
+  setText("footer-source", t("footerSource"));
+  setText("footer-privacy", t("footerPrivacy"));
+  setText("footer-method", t("footerMethod"));
+  setText("footer-about", t("footerAbout"));
+  for (const link of document.querySelectorAll("[data-re-page]")) {
+    link.textContent = t(NAV_KEYS[link.getAttribute("data-re-page")]);
+  }
+  document.documentElement.setAttribute("lang", locale);
+}
+
+function renderAll() {
+  applyLocale();
+  renderLead();
+  renderControls();
+  renderResult();
+  renderTable();
+  renderDistrictLinks();
+  renderUpdated();
+}
+
+async function loadJson(name) {
+  const res = await fetch(`./data/${name}.json?_=${Date.now()}`);
+  if (res.status === 404) return null;
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
+
+async function main() {
+  applyTheme(theme);
+  applyLocale();
+
+  try {
+    const conversion = await loadJson("conversion");
+    if (!conversion?.cells?.length) {
+      document.getElementById("calc-controls").hidden = true;
+      document.getElementById("calc-result").innerHTML = `<p class="empty">${escapeHtml(t("notReady"))}</p>`;
+      setText("updated", "-");
+      return;
+    }
+
+    cache.conversion = conversion;
+
+    if (!districtNames().includes(district)) district = districtNames()[0];
+    if (!bandsOf(district).includes(bandKey)) bandKey = bandsOf(district)[0];
+
+    syncUrl();
+    renderAll();
+  } catch (error) {
+    window.analytics?.event("exception", {
+      description: `load conversion: ${error?.message ?? error}`.slice(0, 100),
+      fatal: true,
+    });
+    document.getElementById("calc-result").innerHTML =
+      `<p class="empty">${escapeHtml(t("loadError"))} <button type="button" id="load-retry">${escapeHtml(t("retry"))}</button></p>`;
+    document.getElementById("load-retry")?.addEventListener("click", (e) => {
+      e.currentTarget.disabled = true;
+      main();
+    });
+  }
+}
+
+function onControlChange(e) {
+  const id = e.target?.id;
+  if (id === "district-select") {
+    district = e.target.value;
+    if (!bandsOf(district).includes(bandKey)) bandKey = bandsOf(district)[0];
+  } else if (id === "band-select") bandKey = e.target.value;
+  else if (id === "cash-input") {
+    const raw = Number(e.target.value);
+    cash10k = Number.isFinite(raw) && raw >= 0 ? Math.round(raw * EOK) : 0;
+  } else return;
+
+  syncUrl();
+  renderControls();
+  renderResult();
+  renderTable();
+  window.analytics?.event("jeonse_vs_wolse", {
+    conversion_district: district,
+    conversion_band: bandKey,
+    conversion_cash_eok: String(Math.round((cash10k / EOK) * 100) / 100),
+  });
+}
+
+const controls = document.getElementById("calc-controls");
+controls.addEventListener("change", onControlChange);
+controls.addEventListener("input", (e) => {
+  if (e.target?.id === "cash-input") onControlChange(e);
+});
+
+document.getElementById("theme-toggle").addEventListener("click", () => {
+  const order = ["auto", "light", "dark"];
+  applyTheme(order[(order.indexOf(theme) + 1) % order.length]);
+});
+
+document.getElementById("lang-toggle").addEventListener("click", () => {
+  locale = locale === "ko" ? "en" : "ko";
+  window.localStorage.setItem("lang", locale);
+  renderAll();
+  window.analytics?.event("language_switch", { site_language: locale });
+});
+
+main();
+</script>
+</body>
+</html>

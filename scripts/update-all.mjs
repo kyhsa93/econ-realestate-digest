@@ -17,6 +17,9 @@ async function main() {
   run("node scripts/fetch-market.mjs");
   run("node scripts/build-realestate.mjs");
   run("node scripts/build-budget-deals.mjs");
+  run("node scripts/build-conversion.mjs");
+  run("node scripts/build-cancellation.mjs");
+  run("node scripts/build-renewal-facts.mjs");
   run("node scripts/news-context.mjs");
   run("node scripts/prerender.mjs");
   run("node scripts/build-rate-pages.mjs");

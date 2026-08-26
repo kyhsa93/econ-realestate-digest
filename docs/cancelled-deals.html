@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#253e81">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<meta name="google-adsense-account" content="ca-pub-1195159445218373">
+<title>서울 아파트 거래 해제와 등기 - 신고 뒤에 일어나는 일</title>
+<meta name="description" content="국토교통부에 신고된 서울 아파트 매매 가운데 나중에 해제된 거래와, 계약 후 등기가 끝나지 않은 거래를 자치구별로 셉니다. 해제 거래가 정말 그 단지 최고가인지도 세어 봅니다.">
+<meta name="site-group" content="digest">
+<link rel="canonical" href="https://kyhsa93.github.io/econ-realestate-digest/cancelled-deals.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="경제·부동산 데일리 다이제스트">
+<meta property="og:url" content="https://kyhsa93.github.io/econ-realestate-digest/cancelled-deals.html">
+<meta property="og:title" content="서울 아파트 거래 해제와 등기 - 신고 뒤에 일어나는 일">
+<meta property="og:description" content="국토교통부에 신고된 서울 아파트 매매 가운데 나중에 해제된 거래와, 계약 후 등기가 끝나지 않은 거래를 자치구별로 셉니다. 해제 거래가 정말 그 단지 최고가인지도 세어 봅니다.">
+<meta property="og:image" content="https://kyhsa93.github.io/econ-realestate-digest/icons/icon-512.png">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="서울 아파트 거래 해제와 등기 - 신고 뒤에 일어나는 일">
+<meta name="twitter:description" content="해제된 거래와 등기가 끝나지 않은 거래를 자치구별로 셉니다.">
+<meta name="twitter:image" content="https://kyhsa93.github.io/econ-realestate-digest/icons/icon-512.png">
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #666;
+    --card: #f5f5f7;
+    --border: #e2e2e5;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1115;
+      --fg: #eaeaea;
+      --muted: #9a9a9a;
+      --card: #1a1d24;
+      --border: #2a2d35;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #0f1115;
+    --fg: #eaeaea;
+    --muted: #9a9a9a;
+    --card: #1a1d24;
+    --border: #2a2d35;
+  }
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #666;
+    --card: #f5f5f7;
+    --border: #e2e2e5;
+  }
+  [hidden] { display: none !important; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.5;
+  }
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 24px 16px 64px;
+  }
+  header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .header-actions { display: flex; gap: 8px; flex-shrink: 0; }
+  .icon-toggle {
+    flex-shrink: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--fg);
+  }
+  h1 { font-size: 1.4rem; margin: 0 0 4px; }
+  h2 {
+    font-size: 1.05rem;
+    margin: 0 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .updated { color: var(--muted); font-size: 0.85rem; }
+  .page-nav {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  .page-nav a {
+    flex-shrink: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    color: var(--fg);
+    text-decoration: none;
+  }
+  .page-nav a.active {
+    background: var(--fg);
+    color: var(--bg);
+    border-color: var(--fg);
+    font-weight: 600;
+  }
+  .sub-nav {
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    margin: -10px 0 20px;
+    padding-bottom: 2px;
+  }
+  .sub-nav a {
+    flex-shrink: 0;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .sub-nav a[aria-current="page"] {
+    background: var(--card);
+    color: var(--fg);
+    font-weight: 600;
+  }
+  section { margin-bottom: 32px; }
+  .site-footer {
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+  .site-footer a { color: var(--muted); }
+  .search-controls { display: flex; flex-wrap: wrap; gap: 10px 16px; margin-bottom: 16px; }
+  .search-field { display: flex; align-items: center; gap: 8px; }
+  .search-field label { font-size: 0.82rem; color: var(--muted); }
+  .search-field select,
+  .search-field input[type="number"] {
+    background: var(--bg);
+    color: var(--fg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 0.88rem;
+    font-family: inherit;
+    max-width: 12rem;
+  }
+  .search-field input[type="number"] { width: 6rem; }
+  .verdict {
+    font-size: 1rem;
+    line-height: 1.6;
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--card);
+    margin-bottom: 16px;
+  }
+  .verdict strong { font-size: 1.15rem; }
+  .verdict .sub { display: block; color: var(--muted); font-size: 0.85rem; margin-top: 6px; }
+  .options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 520px) { .options { grid-template-columns: 1fr; } }
+  .option {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    background: var(--card);
+  }
+  .option.win { border-color: var(--fg); }
+  .option .name { font-weight: 600; margin-bottom: 2px; }
+  .option .terms { color: var(--muted); font-size: 0.82rem; margin-bottom: 10px; }
+  .option .cost { font-size: 1.3rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .option .cost-label { color: var(--muted); font-size: 0.8rem; }
+  .option .rows { list-style: none; padding: 0; margin: 10px 0 0; font-size: 0.82rem; color: var(--muted); }
+  .option .rows li { display: flex; justify-content: space-between; gap: 8px; padding: 1px 0; }
+  .option .rows span { font-variant-numeric: tabular-nums; }
+  .option .infeasible { color: var(--fg); font-size: 0.82rem; margin-top: 10px; }
+  .rate-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  .rate-table th, .rate-table td { padding: 6px 8px; border-bottom: 1px solid var(--border); text-align: right; }
+  .rate-table th:first-child, .rate-table td:first-child { text-align: left; }
+  .rate-table thead th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  .rate-table td { font-variant-numeric: tabular-nums; }
+  .rate-table tbody tr.spot td { font-weight: 700; }
+  .table-scroll { overflow-x: auto; }
+  .content-notice { color: var(--muted); font-size: 0.8rem; margin-top: 14px; line-height: 1.5; }
+  .lead { font-size: 0.95rem; line-height: 1.65; margin: 0 0 16px; }
+  .empty { color: var(--muted); font-size: 0.9rem; }
+  .empty button {
+    font: inherit;
+    background: var(--fg);
+    color: var(--bg);
+    border: 0;
+    border-radius: 8px;
+    padding: 4px 12px;
+    margin-left: 8px;
+    cursor: pointer;
+  }
+  .district-links-heading { font-size: 0.85rem; color: var(--muted); margin: 18px 0 8px; font-weight: 600; }
+  .district-links { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 0.82rem; }
+  .district-links a { color: var(--muted); text-decoration: none; }
+  .district-links a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div>
+      <h1 id="page-title">신고 뒤에 일어나는 일</h1>
+      <div class="updated" id="updated">불러오는 중...</div>
+    </div>
+    <div class="header-actions">
+      <button class="icon-toggle" type="button" id="theme-toggle" aria-label="테마 전환"><span aria-hidden="true">🌓</span></button>
+      <button class="icon-toggle" type="button" id="lang-toggle" aria-label="Switch language"><span aria-hidden="true">🌐</span></button>
+    </div>
+  </header>
+
+  <nav class="page-nav" aria-label="섹션">
+    <a href="./index.html" id="nav-digest">데일리 다이제스트</a>
+    <a href="./news.html" id="nav-news">뉴스</a>
+    <a href="./realestate.html" id="nav-realestate" class="active">아파트 시세</a>
+    <a href="./rates.html" id="nav-rates">금리 비교</a>
+  </nav>
+
+  <nav class="sub-nav" aria-label="거래 유형">
+    <a href="./realestate.html" data-re-page="all">전체</a>
+    <a href="./apartment-sale.html" data-re-page="sale">매매</a>
+    <a href="./apartment-jeonse.html" data-re-page="jeonse">전세</a>
+    <a href="./apartment-rent.html" data-re-page="wolse">월세</a>
+    <a href="./deal-search.html" data-re-page="search">거래내역 검색</a>
+    <a href="./jeonse-vs-wolse.html" data-re-page="conversion">전세 vs 월세</a>
+    <a href="./cancelled-deals.html" data-re-page="cancelled" aria-current="page">해제·등기</a>
+  </nav>
+
+  <section id="lead-section">
+    <h2 id="lead-heading">해제된 거래</h2>
+    <p class="lead" id="lead"><!--prerender:cancelLead-->2026.03~2026.08 신고된 매매 36,166건 가운데 895건이 나중에 해제됐다. 2.5%다. 절반은 29일 안에 지워졌는데, 신고 기한 30일 안이다. 흔히 말하는 것과 달리 해제 거래가 그 단지 최고가인 것은 아니다 — 같은 단지에 남은 거래의 중앙값보다 높았던 것이 21%인 반면, 낮았던 것이 29.9%로 오히려 더 많다.<!--/prerender:cancelLead--></p>
+    <div class="content-notice" id="lead-note"></div>
+  </section>
+
+  <section id="district-section">
+    <h2 id="district-heading">자치구별 해제율과 미등기율</h2>
+    <div class="table-scroll">
+      <table class="rate-table" id="district-table"><!--prerender:cancelDistricts--><thead><tr><th>자치구</th><th>신고</th><th>해제</th><th>해제율</th><th>미등기</th><th>미등기율</th></tr></thead><tbody><tr><td>중구</td><td>513</td><td>36</td><td>7%</td><td>25</td><td>11.6%</td></tr><tr><td>강남구</td><td>1,477</td><td>64</td><td>4.3%</td><td>71</td><td>12.3%</td></tr><tr><td>광진구</td><td>568</td><td>22</td><td>3.9%</td><td>26</td><td>14.4%</td></tr><tr><td>마포구</td><td>984</td><td>37</td><td>3.8%</td><td>71</td><td>19.1%</td></tr><tr><td>관악구</td><td>1,315</td><td>49</td><td>3.7%</td><td>55</td><td>10.9%</td></tr><tr><td>종로구</td><td>308</td><td>11</td><td>3.6%</td><td>20</td><td>14.2%</td></tr><tr><td>양천구</td><td>1,287</td><td>42</td><td>3.3%</td><td>59</td><td>12.5%</td></tr><tr><td>동대문구</td><td>1,508</td><td>48</td><td>3.2%</td><td>85</td><td>14%</td></tr><tr><td>성동구</td><td>809</td><td>22</td><td>2.7%</td><td>67</td><td>20.6%</td></tr><tr><td>서대문구</td><td>1,393</td><td>35</td><td>2.5%</td><td>73</td><td>13.3%</td></tr><tr><td>영등포구</td><td>1,547</td><td>39</td><td>2.5%</td><td>82</td><td>12.5%</td></tr><tr><td>은평구</td><td>1,709</td><td>43</td><td>2.5%</td><td>78</td><td>12%</td></tr><tr><td>금천구</td><td>715</td><td>17</td><td>2.4%</td><td>25</td><td>9.3%</td></tr><tr><td>송파구</td><td>2,130</td><td>49</td><td>2.3%</td><td>100</td><td>11.4%</td></tr><tr><td>용산구</td><td>525</td><td>12</td><td>2.3%</td><td>35</td><td>16.2%</td></tr><tr><td>중랑구</td><td>1,745</td><td>41</td><td>2.3%</td><td>56</td><td>9.2%</td></tr><tr><td>강서구</td><td>2,427</td><td>53</td><td>2.2%</td><td>97</td><td>10.1%</td></tr><tr><td>도봉구</td><td>1,649</td><td>37</td><td>2.2%</td><td>57</td><td>9%</td></tr><tr><td>서초구</td><td>1,177</td><td>26</td><td>2.2%</td><td>57</td><td>12.9%</td></tr><tr><td>노원구</td><td>4,232</td><td>82</td><td>1.9%</td><td>153</td><td>8.7%</td></tr><tr><td>성북구</td><td>2,064</td><td>40</td><td>1.9%</td><td>107</td><td>12.8%</td></tr><tr><td>동작구</td><td>1,266</td><td>23</td><td>1.8%</td><td>88</td><td>18.3%</td></tr><tr><td>강동구</td><td>1,714</td><td>29</td><td>1.7%</td><td>134</td><td>20.6%</td></tr><tr><td>구로구</td><td>2,295</td><td>31</td><td>1.4%</td><td>75</td><td>8.9%</td></tr><tr><td>강북구</td><td>809</td><td>7</td><td>0.9%</td><td>31</td><td>9.1%</td></tr></tbody><!--/prerender:cancelDistricts--></table>
+    </div>
+    <div class="content-notice" id="district-note"></div>
+  </section>
+
+  <section id="month-section">
+    <h2 id="month-heading">등기는 시간이 지나야 끝난다</h2>
+    <p class="lead" id="month-lead"><!--prerender:cancelMonthLead-->등기까지 걸린 날은 중앙값 66일입니다. 익은 달의 계약 14,170건 가운데 1,727건(12.2%)이 아직 등기를 마치지 않았습니다.<!--/prerender:cancelMonthLead--></p>
+    <div class="table-scroll">
+      <table class="rate-table" id="month-table"><!--prerender:cancelMonths--><thead><tr><th>계약월</th><th>계약</th><th>등기 완료</th><th>완료율</th></tr></thead><tbody><tr class="spot"><td>2026-03</td><td>5,516</td><td>5,341</td><td>96.8%</td></tr><tr class="spot"><td>2026-04</td><td>8,654</td><td>7,102</td><td>82.1%</td></tr><tr><td>2026-05</td><td>8,953</td><td>4,015</td><td>44.8%</td></tr><tr><td>2026-06</td><td>5,265</td><td>956</td><td>18.2%</td></tr><tr><td>2026-07</td><td>5,645</td><td>683</td><td>12.1%</td></tr><tr><td>2026-08</td><td>1,238</td><td>46</td><td>3.7%</td></tr></tbody><!--/prerender:cancelMonths--></table>
+    </div>
+    <div class="content-notice" id="month-note"></div>
+    <div class="district-links-heading" id="district-links-heading">자치구별 시세</div>
+    <div class="district-links" id="district-links"><!--prerender:cancelDistrictLinks--><a href="./district-seongdong.html">성동구</a><a href="./district-yongsan.html">용산구</a><a href="./district-jung.html">중구</a><a href="./district-jongno.html">종로구</a><a href="./district-gwangjin.html">광진구</a><a href="./district-jungnang.html">중랑구</a><a href="./district-dongdaemun.html">동대문구</a><a href="./district-seongbuk.html">성북구</a><a href="./district-dobong.html">도봉구</a><a href="./district-gangbuk.html">강북구</a><a href="./district-eunpyeong.html">은평구</a><a href="./district-yangcheon.html">양천구</a><a href="./district-mapo.html">마포구</a><a href="./district-seodaemun.html">서대문구</a><a href="./district-gangseo.html">강서구</a><a href="./district-geumcheon.html">금천구</a><a href="./district-dongjak.html">동작구</a><a href="./district-guro.html">구로구</a><a href="./district-gwanak.html">관악구</a><a href="./district-seocho.html">서초구</a><a href="./district-gangnam.html">강남구</a><a href="./district-yeongdeungpo.html">영등포구</a><a href="./district-songpa.html">송파구</a><a href="./district-nowon.html">노원구</a><a href="./district-gangdong.html">강동구</a><!--/prerender:cancelDistrictLinks--></div>
+  </section>
+
+  <footer class="site-footer">
+    <div id="footer-source">출처: 국토교통부 아파트 매매 실거래가 공개시스템. 신고된 거래만 집계되며 신고 기한(계약 후 30일)이 있어 최근 거래는 나중에 반영됩니다.</div>
+    <div style="margin-top:6px;">
+      <a href="./about.html" id="footer-about">소개</a>
+      <span aria-hidden="true"> · </span>
+      <a href="./method.html" id="footer-method">숫자를 만드는 방법</a>
+      <span aria-hidden="true"> · </span>
+      <a href="https://kyhsa93.github.io/privacy-policy" id="footer-privacy" target="_blank" rel="noopener">개인정보처리방침</a>
+    </div>
+  </footer>
+</main>
+<script src="./analytics.js"></script>
+<script>
+const T = {
+  ko: {
+    title: "신고 뒤에 일어나는 일",
+    navDigest: "데일리 다이제스트",
+    navNews: "뉴스",
+    navRealestatePrices: "아파트 시세",
+    navRates: "금리 비교",
+    navAll: "전체",
+    navSale: "매매",
+    navJeonse: "전세",
+    navWolse: "월세",
+    navDealSearch: "거래내역 검색",
+    navConversion: "전세 vs 월세",
+    navCancelled: "해제·등기",
+    leadHeading: "해제된 거래",
+    districtHeading: "자치구별 해제율과 미등기율",
+    monthHeading: "등기는 시간이 지나야 끝난다",
+    thDistrict: "자치구",
+    thDeals: "신고",
+    thCancelled: "해제",
+    thCancelledShare: "해제율",
+    thStale: "미등기",
+    thStaleShare: "미등기율",
+    thMonth: "계약월",
+    thFiled: "계약",
+    thRegistered: "등기 완료",
+    thShare: "완료율",
+    leadNote:
+      "해제는 신고된 거래가 나중에 취소된 것입니다. 시세 화면은 이 거래들을 빼고 세지만, 뺀 것이 무엇이었는지는 시세표에 남지 않아 여기에 따로 둡니다. " +
+      "해제 사유는 공개되지 않습니다 — 매수인의 잔금 미납, 대출 부결, 조건 변경, 신고 착오가 모두 같은 표시로 들어옵니다.",
+    districtNote:
+      "해제율은 여섯 달 신고분 전체에서 셉니다. 미등기율은 그 가운데 '익은 달'의 계약만 셉니다 — 그 달 계약의 열에 여덟이 이미 등기를 마친 달을 익었다고 봅니다. " +
+      "이번 달 계약이 등기 전인 것은 시간이 모자라서지 늦어서가 아니라, 익지 않은 달을 같이 세면 최근 계약이 많은 구가 무조건 나빠 보입니다. " +
+      "신고가 100건에 못 미치는 구는 비율을 내지 않습니다.",
+    monthNote:
+      "이 곡선이 미등기율을 왜 익은 달로만 재는지 보여줍니다. 계약이 최근일수록 등기 완료율이 낮은 것은 당연한 일이고, 그것을 지연이라고 부르면 아무 뜻이 없습니다. " +
+      "등기일자는 2023년부터 실거래 자료에 함께 공개됩니다.",
+    districtLinksHeading: "자치구별 시세",
+    updatedPrefix: "기준",
+    footerSource: "출처: 국토교통부 아파트 매매 실거래가 공개시스템. 신고된 거래만 집계되며 신고 기한(계약 후 30일)이 있어 최근 거래는 나중에 반영됩니다.",
+    footerPrivacy: "개인정보처리방침",
+    footerMethod: "숫자를 만드는 방법",
+    footerAbout: "소개",
+    monthLead: (median, matured, stale, share) =>
+      `등기까지 걸린 날은 중앙값 ${median}일입니다. 익은 달의 계약 ${matured}건 가운데 ${stale}건(${share}%)이 아직 등기를 마치지 않았습니다.`,
+    notReady: "아직 해제·등기 자료가 없습니다. 국토교통부 신고분을 받는 대로 채워집니다.",
+    loadError: "해제·등기 자료를 불러오지 못했습니다.",
+    retry: "다시 시도",
+  },
+  en: {
+    title: "What happens after filing",
+    navDigest: "Daily Digest",
+    navNews: "News",
+    navRealestatePrices: "Apartment Prices",
+    navRates: "Rates",
+    navAll: "All",
+    navSale: "Sale",
+    navJeonse: "Jeonse",
+    navWolse: "Monthly rent",
+    navDealSearch: "Deal search",
+    navConversion: "Jeonse vs rent",
+    navCancelled: "Cancelled & registered",
+    leadHeading: "Cancelled deals",
+    districtHeading: "Cancellation and unregistered rates by district",
+    monthHeading: "Registration takes time",
+    thDistrict: "District",
+    thDeals: "Filed",
+    thCancelled: "Cancelled",
+    thCancelledShare: "Rate",
+    thStale: "Unregistered",
+    thStaleShare: "Rate",
+    thMonth: "Contract month",
+    thFiled: "Contracts",
+    thRegistered: "Registered",
+    thShare: "Share",
+    leadNote:
+      "A cancellation is a filed transaction later undone. The price screens drop these deals, but nothing on those screens says what was dropped, so it is kept here. " +
+      "The reason is never published — a buyer failing to pay the balance, a rejected loan, changed terms and a filing error all arrive as the same mark.",
+    districtNote:
+      "Cancellation rates count all six months of filings. Unregistered rates count only contracts from a 'matured' month — one where eight in ten contracts have already completed registration. " +
+      "A contract signed this month has simply not had time, and counting unmatured months would make districts with recent activity look worse for no reason. " +
+      "Districts with fewer than 100 filings get no percentage.",
+    monthNote:
+      "This curve is why unregistered rates are measured only on matured months. Recent contracts naturally show low completion, and calling that a delay would mean nothing. " +
+      "Registration dates have been published alongside transaction data since 2023.",
+    districtLinksHeading: "Prices by district",
+    updatedPrefix: "As of",
+    footerSource: "Source: MOLIT apartment sale filings. Only filed transactions are counted, and the 30-day filing window means recent deals arrive later.",
+    footerPrivacy: "Privacy policy",
+    footerMethod: "How the numbers are made",
+    footerAbout: "About",
+    monthLead: (median, matured, stale, share) =>
+      `Registration takes a median of ${median} days. Of ${matured} contracts in matured months, ${stale} (${share}%) have not completed it.`,
+    notReady: "No cancellation data yet. It fills in as MOLIT filings arrive.",
+    loadError: "Could not load the cancellation data.",
+    retry: "Retry",
+  },
+};
+
+let locale = (() => {
+  const saved = window.localStorage.getItem("lang");
+  return saved === "en" || saved === "ko" ? saved : "ko";
+})();
+const t = (key) => T[locale][key];
+
+const THEME_ICONS = { auto: "🌓", light: "☀️", dark: "🌙" };
+let theme = (() => {
+  const saved = window.localStorage.getItem("theme");
+  return saved === "light" || saved === "dark" ? saved : "auto";
+})();
+
+function applyTheme(next) {
+  theme = next;
+  window.localStorage.setItem("theme", theme);
+  if (theme === "auto") document.documentElement.removeAttribute("data-theme");
+  else document.documentElement.setAttribute("data-theme", theme);
+  document.querySelector("#theme-toggle span").textContent = THEME_ICONS[theme];
+}
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
+
+function setText(id, text) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = text;
+}
+
+const localeTag = () => (locale === "en" ? "en-US" : "ko-KR");
+const num = (value) => Number(value ?? 0).toLocaleString(localeTag());
+const pct = (value) => (value === null || value === undefined ? "-" : `${value}%`);
+
+const cache = { data: null };
+
+function renderDistrictTable() {
+  const rows = cache.data?.districts ?? [];
+  const table = document.getElementById("district-table");
+  if (!rows.length) {
+    table.innerHTML = "";
+    return;
+  }
+
+  const head =
+    `<thead><tr><th>${escapeHtml(t("thDistrict"))}</th><th>${escapeHtml(t("thDeals"))}</th>` +
+    `<th>${escapeHtml(t("thCancelled"))}</th><th>${escapeHtml(t("thCancelledShare"))}</th>` +
+    `<th>${escapeHtml(t("thStale"))}</th><th>${escapeHtml(t("thStaleShare"))}</th></tr></thead>`;
+
+  const body = rows
+    .map(
+      (row) =>
+        `<tr><td>${escapeHtml(row.district)}</td><td>${num(row.deals)}</td>` +
+        `<td>${num(row.cancelled)}</td><td>${escapeHtml(pct(row.cancelledShare))}</td>` +
+        `<td>${num(row.stale)}</td><td>${escapeHtml(pct(row.staleShare))}</td></tr>`
+    )
+    .join("");
+
+  table.innerHTML = `${head}<tbody>${body}</tbody>`;
+}
+
+function renderMonthTable() {
+  const rows = cache.data?.registrationByMonth ?? [];
+  const table = document.getElementById("month-table");
+  if (!rows.length) {
+    table.innerHTML = "";
+    return;
+  }
+
+  const mature = new Set(cache.data?.seoul?.registration?.matureMonths ?? []);
+  const head =
+    `<thead><tr><th>${escapeHtml(t("thMonth"))}</th><th>${escapeHtml(t("thFiled"))}</th>` +
+    `<th>${escapeHtml(t("thRegistered"))}</th><th>${escapeHtml(t("thShare"))}</th></tr></thead>`;
+
+  const body = rows
+    .map(
+      (row) =>
+        `<tr${mature.has(row.month) ? ' class="spot"' : ""}><td>${escapeHtml(row.month)}</td>` +
+        `<td>${num(row.filed)}</td><td>${num(row.registered)}</td><td>${row.share}%</td></tr>`
+    )
+    .join("");
+
+  table.innerHTML = `${head}<tbody>${body}</tbody>`;
+}
+
+function renderMonthLead() {
+  const reg = cache.data?.seoul?.registration;
+  if (!reg) return;
+  setText("month-lead", t("monthLead")(reg.medianDays, num(reg.matured), num(reg.stale), reg.staleShare));
+}
+
+function renderDistrictLinks() {
+  const slugs = cache.data?.slugs ?? {};
+  document.getElementById("district-links").innerHTML = Object.entries(slugs)
+    .map(([name, slug]) => `<a href="./district-${escapeHtml(slug)}.html">${escapeHtml(name)}</a>`)
+    .join("");
+}
+
+function renderUpdated() {
+  const updatedAt = cache.data?.updatedAt;
+  if (!updatedAt) {
+    setText("updated", "-");
+    return;
+  }
+  setText(
+    "updated",
+    `${t("updatedPrefix")}: ${new Date(updatedAt).toLocaleDateString(localeTag(), { timeZone: "Asia/Seoul", dateStyle: "medium" })}`
+  );
+}
+
+const NAV_KEYS = {
+  all: "navAll",
+  sale: "navSale",
+  jeonse: "navJeonse",
+  wolse: "navWolse",
+  search: "navDealSearch",
+  conversion: "navConversion",
+  cancelled: "navCancelled",
+};
+
+function applyLocale() {
+  document.title = t("title");
+  setText("page-title", t("title"));
+  setText("lead-heading", t("leadHeading"));
+  setText("district-heading", t("districtHeading"));
+  setText("month-heading", t("monthHeading"));
+  setText("lead-note", t("leadNote"));
+  setText("district-note", t("districtNote"));
+  setText("month-note", t("monthNote"));
+  setText("district-links-heading", t("districtLinksHeading"));
+  setText("nav-digest", t("navDigest"));
+  setText("nav-news", t("navNews"));
+  setText("nav-realestate", t("navRealestatePrices"));
+  setText("nav-rates", t("navRates"));
+  setText("footer-source", t("footerSource"));
+  setText("footer-privacy", t("footerPrivacy"));
+  setText("footer-method", t("footerMethod"));
+  setText("footer-about", t("footerAbout"));
+  for (const link of document.querySelectorAll("[data-re-page]")) {
+    link.textContent = t(NAV_KEYS[link.getAttribute("data-re-page")]);
+  }
+  document.documentElement.setAttribute("lang", locale);
+}
+
+function renderAll() {
+  applyLocale();
+  const seoul = cache.data?.seoul;
+  if (seoul) setText("lead", locale === "en" ? seoul.leadEn : seoul.leadKo);
+  renderMonthLead();
+  renderDistrictTable();
+  renderMonthTable();
+  renderDistrictLinks();
+  renderUpdated();
+}
+
+async function loadJson(name) {
+  const res = await fetch(`./data/${name}.json?_=${Date.now()}`);
+  if (res.status === 404) return null;
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
+
+async function main() {
+  applyTheme(theme);
+  applyLocale();
+
+  try {
+    const data = await loadJson("cancellation");
+    if (!data?.districts?.length) {
+      setText("lead", t("notReady"));
+      setText("updated", "-");
+      return;
+    }
+
+    cache.data = data;
+    renderAll();
+  } catch (error) {
+    window.analytics?.event("exception", {
+      description: `load cancellation: ${error?.message ?? error}`.slice(0, 100),
+      fatal: true,
+    });
+    document.getElementById("lead").innerHTML =
+      `${escapeHtml(t("loadError"))} <button type="button" id="load-retry">${escapeHtml(t("retry"))}</button>`;
+    document.getElementById("load-retry")?.addEventListener("click", (e) => {
+      e.currentTarget.disabled = true;
+      main();
+    });
+  }
+}
+
+document.getElementById("theme-toggle").addEventListener("click", () => {
+  const order = ["auto", "light", "dark"];
+  applyTheme(order[(order.indexOf(theme) + 1) % order.length]);
+});
+
+document.getElementById("lang-toggle").addEventListener("click", () => {
+  locale = locale === "ko" ? "en" : "ko";
+  window.localStorage.setItem("lang", locale);
+  renderAll();
+  window.analytics?.event("language_switch", { site_language: locale });
+});
+
+main();
+</script>
+</body>
+</html>

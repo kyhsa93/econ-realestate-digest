@@ -401,6 +401,8 @@
     <a href="./apartment-jeonse.html" data-re-page="jeonse">전세</a>
     <a href="./apartment-rent.html" data-re-page="wolse">월세</a>
     <a href="./deal-search.html" data-re-page="search">거래내역 검색</a>
+    <a href="./jeonse-vs-wolse.html" data-re-page="conversion">전세 vs 월세</a>
+    <a href="./cancelled-deals.html" data-re-page="cancelled">해제·등기</a>
   </nav>
 
   <section id="overall-section">
@@ -413,6 +415,8 @@
     <p class="district-summary" data-summary-lang="en" hidden><!--prerender:districtSummaryEn--><!--/prerender:districtSummaryEn--></p>
     <p class="district-summary district-facts" data-summary-lang="ko"><!--prerender:districtFactsKo--><!--/prerender:districtFactsKo--></p>
     <p class="district-summary district-facts" data-summary-lang="en" hidden><!--prerender:districtFactsEn--><!--/prerender:districtFactsEn--></p>
+    <p class="district-summary district-facts" data-summary-lang="ko"><!--prerender:districtRenewalKo--><!--/prerender:districtRenewalKo--></p>
+    <p class="district-summary district-facts" data-summary-lang="en" hidden><!--prerender:districtRenewalEn--><!--/prerender:districtRenewalEn--></p>
   </section>
 
   <section id="trend-section" hidden>
@@ -514,6 +518,8 @@ const T = {
     navJeonse: "전세",
     navWolse: "월세",
     navDealSearch: "거래내역 검색",
+    navConversion: "전세 vs 월세",
+    navCancelled: "해제·등기",
     navNews: "뉴스",
     navRates: "금리 비교",
     overallHeading: "서울 전체 평균",
@@ -593,6 +599,8 @@ const T = {
     navJeonse: "Jeonse",
     navWolse: "Monthly rent",
     navDealSearch: "Deal search",
+    navConversion: "Jeonse vs rent",
+    navCancelled: "Cancelled & registered",
     navNews: "News",
     navRates: "Rates",
     overallHeading: "Seoul average",
@@ -1492,7 +1500,15 @@ function budgetBodyHtml(band, periodList) {
   );
 }
 
-const NAV_KEYS = { all: "navAll", sale: "navSale", jeonse: "navJeonse", wolse: "navWolse", search: "navDealSearch" };
+const NAV_KEYS = {
+  all: "navAll",
+  sale: "navSale",
+  jeonse: "navJeonse",
+  wolse: "navWolse",
+  search: "navDealSearch",
+  conversion: "navConversion",
+  cancelled: "navCancelled",
+};
 
 function applyLocale() {
   const suffix = kind === "sale" ? "titleSale" : kind === "jeonse" ? "titleJeonse" : kind === "wolse" ? "titleWolse" : "title";

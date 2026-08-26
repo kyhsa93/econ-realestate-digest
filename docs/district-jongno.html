@@ -401,6 +401,8 @@
     <a href="./apartment-jeonse.html" data-re-page="jeonse">전세</a>
     <a href="./apartment-rent.html" data-re-page="wolse">월세</a>
     <a href="./deal-search.html" data-re-page="search">거래내역 검색</a>
+    <a href="./jeonse-vs-wolse.html" data-re-page="conversion">전세 vs 월세</a>
+    <a href="./cancelled-deals.html" data-re-page="cancelled">해제·등기</a>
   </nav>
 
   <section id="overall-section">
@@ -413,6 +415,8 @@
     <p class="district-summary" data-summary-lang="en" hidden><!--prerender:districtSummaryEn-->Apartments in 종로구 trade at ₩34.8M per pyeong, 0.7× the Seoul average of ₩51.8M. That is 20th among the 25 districts with enough reported transactions. For an 84m² unit that works out to about ₩883M. The closest district by price is 중랑구 at ₩34.3M per pyeong. The jeonse ratio is 111.1%, above the Seoul average of 59.3%. Monthly rentals average a ₩158.6M deposit with ₩1.1M per month. These figures are based on 5 sales, 5 jeonse, 15 rentals reported to the government.<!--/prerender:districtSummaryEn--></p>
     <p class="district-summary district-facts" data-summary-lang="ko"><!--prerender:districtFactsKo-->기간 중 가장 비싸게 팔린 것은 신문로2가 디팰리스 148㎡로 50억원입니다.<!--/prerender:districtFactsKo--></p>
     <p class="district-summary district-facts" data-summary-lang="en" hidden><!--prerender:districtFactsEn-->The highest price in the period was ₩5000M for a 148㎡ unit at 디팰리스 in 신문로2가.<!--/prerender:districtFactsEn--></p>
+    <p class="district-summary district-facts" data-summary-lang="ko"><!--prerender:districtRenewalKo--><!--/prerender:districtRenewalKo--></p>
+    <p class="district-summary district-facts" data-summary-lang="en" hidden><!--prerender:districtRenewalEn--><!--/prerender:districtRenewalEn--></p>
   </section>
 
   <section id="trend-section" hidden>
@@ -514,6 +518,8 @@ const T = {
     navJeonse: "전세",
     navWolse: "월세",
     navDealSearch: "거래내역 검색",
+    navConversion: "전세 vs 월세",
+    navCancelled: "해제·등기",
     navNews: "뉴스",
     navRates: "금리 비교",
     overallHeading: "서울 전체 평균",
@@ -593,6 +599,8 @@ const T = {
     navJeonse: "Jeonse",
     navWolse: "Monthly rent",
     navDealSearch: "Deal search",
+    navConversion: "Jeonse vs rent",
+    navCancelled: "Cancelled & registered",
     navNews: "News",
     navRates: "Rates",
     overallHeading: "Seoul average",
@@ -1492,7 +1500,15 @@ function budgetBodyHtml(band, periodList) {
   );
 }
 
-const NAV_KEYS = { all: "navAll", sale: "navSale", jeonse: "navJeonse", wolse: "navWolse", search: "navDealSearch" };
+const NAV_KEYS = {
+  all: "navAll",
+  sale: "navSale",
+  jeonse: "navJeonse",
+  wolse: "navWolse",
+  search: "navDealSearch",
+  conversion: "navConversion",
+  cancelled: "navCancelled",
+};
 
 function applyLocale() {
   const suffix = kind === "sale" ? "titleSale" : kind === "jeonse" ? "titleJeonse" : kind === "wolse" ? "titleWolse" : "title";

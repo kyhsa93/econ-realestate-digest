@@ -401,6 +401,8 @@
     <a href="./apartment-jeonse.html" data-re-page="jeonse">전세</a>
     <a href="./apartment-rent.html" data-re-page="wolse">월세</a>
     <a href="./deal-search.html" data-re-page="search">거래내역 검색</a>
+    <a href="./jeonse-vs-wolse.html" data-re-page="conversion">전세 vs 월세</a>
+    <a href="./cancelled-deals.html" data-re-page="cancelled">해제·등기</a>
   </nav>
 
   <section id="overall-section">
@@ -413,6 +415,8 @@
     <p class="district-summary" data-summary-lang="en" hidden><!--prerender:districtSummaryEn-->Apartments in 강북구 trade at ₩30.3M per pyeong, 0.6× the Seoul average of ₩51.8M. That is 23th among the 25 districts with enough reported transactions. For an 84m² unit that works out to about ₩771M. The closest district by price is 금천구 at ₩28.3M per pyeong. The jeonse ratio is 76.9%, above the Seoul average of 59.3%. Monthly rentals average a ₩100.3M deposit with ₩1.1M per month. These figures are based on 29 sales, 15 jeonse, 20 rentals reported to the government.<!--/prerender:districtSummaryEn--></p>
     <p class="district-summary district-facts" data-summary-lang="ko"><!--prerender:districtFactsKo-->위 시세표의 최근 네 주가 아니라, 최근 3개월 동안 신고된 266건을 전부 놓고 보면 이렇습니다. 그 가운데 54%가 미아동 한 곳에서 나왔습니다. 거래가 잡힌 동이 4곳인데도 그렇습니다 — 이 구의 평균은 사실상 미아동 평균에 가깝습니다. 한 단지가 유독 많이 팔렸습니다 — 미아동 에스케이북한산시티 30건으로 전체의 11%입니다. 기간 중 가장 비싸게 팔린 것은 미아동 미아동부센트레빌 85㎡로 13억원입니다.<!--/prerender:districtFactsKo--></p>
     <p class="district-summary district-facts" data-summary-lang="en" hidden><!--prerender:districtFactsEn-->Looking at all 266 transactions reported over the past 3 months rather than the four-week average above: 54% of them are in 미아동 alone, out of 4 neighbourhoods with any sales at all — the district average is largely that one neighbourhood's average. A single complex, 에스케이북한산시티 in 미아동, accounts for 30 of them (11%). The highest price in the period was ₩1300M for a 85㎡ unit at 미아동부센트레빌 in 미아동.<!--/prerender:districtFactsEn--></p>
+    <p class="district-summary district-facts" data-summary-lang="ko"><!--prerender:districtRenewalKo--><!--/prerender:districtRenewalKo--></p>
+    <p class="district-summary district-facts" data-summary-lang="en" hidden><!--prerender:districtRenewalEn--><!--/prerender:districtRenewalEn--></p>
   </section>
 
   <section id="trend-section" hidden>
@@ -514,6 +518,8 @@ const T = {
     navJeonse: "전세",
     navWolse: "월세",
     navDealSearch: "거래내역 검색",
+    navConversion: "전세 vs 월세",
+    navCancelled: "해제·등기",
     navNews: "뉴스",
     navRates: "금리 비교",
     overallHeading: "서울 전체 평균",
@@ -593,6 +599,8 @@ const T = {
     navJeonse: "Jeonse",
     navWolse: "Monthly rent",
     navDealSearch: "Deal search",
+    navConversion: "Jeonse vs rent",
+    navCancelled: "Cancelled & registered",
     navNews: "News",
     navRates: "Rates",
     overallHeading: "Seoul average",
@@ -1492,7 +1500,15 @@ function budgetBodyHtml(band, periodList) {
   );
 }
 
-const NAV_KEYS = { all: "navAll", sale: "navSale", jeonse: "navJeonse", wolse: "navWolse", search: "navDealSearch" };
+const NAV_KEYS = {
+  all: "navAll",
+  sale: "navSale",
+  jeonse: "navJeonse",
+  wolse: "navWolse",
+  search: "navDealSearch",
+  conversion: "navConversion",
+  cancelled: "navCancelled",
+};
 
 function applyLocale() {
   const suffix = kind === "sale" ? "titleSale" : kind === "jeonse" ? "titleJeonse" : kind === "wolse" ? "titleWolse" : "title";

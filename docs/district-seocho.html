@@ -401,6 +401,8 @@
     <a href="./apartment-jeonse.html" data-re-page="jeonse">전세</a>
     <a href="./apartment-rent.html" data-re-page="wolse">월세</a>
     <a href="./deal-search.html" data-re-page="search">거래내역 검색</a>
+    <a href="./jeonse-vs-wolse.html" data-re-page="conversion">전세 vs 월세</a>
+    <a href="./cancelled-deals.html" data-re-page="cancelled">해제·등기</a>
   </nav>
 
   <section id="overall-section">
@@ -413,6 +415,8 @@
     <p class="district-summary" data-summary-lang="en" hidden><!--prerender:districtSummaryEn-->Apartments in 서초구 trade at ₩101.8M per pyeong, 2× the Seoul average of ₩51.8M. That is 3rd among the 25 districts with enough reported transactions. For an 84m² unit that works out to about ₩2,587M. The closest district by price is 송파구 at ₩103M per pyeong. The jeonse ratio is 38.2%, below the Seoul average of 59.3%. Monthly rentals average a ₩403.1M deposit with ₩2.2M per month. These figures are based on 33 sales, 45 jeonse, 62 rentals reported to the government.<!--/prerender:districtSummaryEn--></p>
     <p class="district-summary district-facts" data-summary-lang="ko"><!--prerender:districtFactsKo-->위 시세표의 최근 네 주가 아니라, 최근 3개월 동안 신고된 319건을 전부 놓고 보면 이렇습니다. 전용 85㎡ 초과가 32%입니다. 대형 비중이 이만큼 높은 구는 많지 않습니다. 한 단지가 유독 많이 팔렸습니다 — 양재동 호반써밋양재 20건으로 전체의 6%입니다. 중개를 끼지 않은 직거래가 13%입니다. 직거래에는 가족 간 증여성 거래와 시행사 정산이 섞이는데 둘 다 시장에서 붙은 값이 아니라, 이 구의 평균은 &quot;지금 사면 이 값&quot;과 거리가 있을 수 있습니다. 기간 중 가장 비싸게 팔린 것은 반포동 래미안원베일리 169㎡로 130억원입니다.<!--/prerender:districtFactsKo--></p>
     <p class="district-summary district-facts" data-summary-lang="en" hidden><!--prerender:districtFactsEn-->Looking at all 319 transactions reported over the past 3 months rather than the four-week average above: 32% are over 85m², a large-unit share few districts match. A single complex, 호반써밋양재 in 양재동, accounts for 20 of them (6%). 13% were direct deals with no agent involved — those include family transfers and developer settlements, which are not prices the open market set, so read the district average with that in mind. The highest price in the period was ₩13000M for a 169㎡ unit at 래미안원베일리 in 반포동.<!--/prerender:districtFactsEn--></p>
+    <p class="district-summary district-facts" data-summary-lang="ko"><!--prerender:districtRenewalKo--><!--/prerender:districtRenewalKo--></p>
+    <p class="district-summary district-facts" data-summary-lang="en" hidden><!--prerender:districtRenewalEn--><!--/prerender:districtRenewalEn--></p>
   </section>
 
   <section id="trend-section" hidden>
@@ -514,6 +518,8 @@ const T = {
     navJeonse: "전세",
     navWolse: "월세",
     navDealSearch: "거래내역 검색",
+    navConversion: "전세 vs 월세",
+    navCancelled: "해제·등기",
     navNews: "뉴스",
     navRates: "금리 비교",
     overallHeading: "서울 전체 평균",
@@ -593,6 +599,8 @@ const T = {
     navJeonse: "Jeonse",
     navWolse: "Monthly rent",
     navDealSearch: "Deal search",
+    navConversion: "Jeonse vs rent",
+    navCancelled: "Cancelled & registered",
     navNews: "News",
     navRates: "Rates",
     overallHeading: "Seoul average",
@@ -1492,7 +1500,15 @@ function budgetBodyHtml(band, periodList) {
   );
 }
 
-const NAV_KEYS = { all: "navAll", sale: "navSale", jeonse: "navJeonse", wolse: "navWolse", search: "navDealSearch" };
+const NAV_KEYS = {
+  all: "navAll",
+  sale: "navSale",
+  jeonse: "navJeonse",
+  wolse: "navWolse",
+  search: "navDealSearch",
+  conversion: "navConversion",
+  cancelled: "navCancelled",
+};
 
 function applyLocale() {
   const suffix = kind === "sale" ? "titleSale" : kind === "jeonse" ? "titleJeonse" : kind === "wolse" ? "titleWolse" : "title";
