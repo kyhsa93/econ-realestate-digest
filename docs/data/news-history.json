@@ -5407,7 +5407,8 @@
         "source": "뉴시스 경제",
         "category": "stocks",
         "preview": "[서울=뉴시스] 이재은 기자 = ◎공감언론 뉴시스 lje@newsis.com",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "[Breaking News] NVIDIA's Strong Earnings Push NY Stock Market Higher, Nasdaq Rises 1.57%"
       },
       {
         "title": "[속보]엔비디아 호실적에 뉴욕증시 상승 출발…나스닥 0.8%↑",
@@ -5416,7 +5417,8 @@
         "source": "뉴시스 경제",
         "category": "stocks",
         "preview": "[서울=뉴시스] 이재은 기자 = ◎공감언론 뉴시스 lje@newsis.com",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "[Breaking News] NYSE Rises on Nvidia's Strong Earnings... Nasdaq Up 0.8%"
       },
       {
         "title": "[단독] 日·호주까지 기웃…빅테크, 전세계서 자금 긁어모은다",
@@ -5425,7 +5427,8 @@
         "source": "한국경제 경제",
         "category": "realestate",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "[Exclusive] Big Tech Scours Japan, Australia, and Worldwide to Raise Funds"
       },
       {
         "title": "[올댓차이나] 대만 증시, 엔비디아 실적호조에 사흘째 상승 마감…0.31%↑",
@@ -5434,7 +5437,8 @@
         "source": "뉴시스 경제",
         "category": "stocks",
         "preview": "[서울=뉴시스]이재준 기자 = 대만 타이베이 증시는 27일 미국 반도체사 엔비디아 실적 호조 영향으로 인공지능(AI) 서버 관련주에 매수가 선행하면서 3거래일 연속 상승 마감했다. 자취안(加權) 지수는 전일 대비 1…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "[TechChina] Taiwan's stock market closes three days in a row higher on NVIDIA's strong earnings...0.31%↑"
       },
       {
         "title": "수원시, '경제자유구역 지정·정조능행차 국가사업화' 정부 건의",
@@ -5443,7 +5447,8 @@
         "source": "연합뉴스 경제",
         "category": "other",
         "preview": "(수원=연합뉴스) 이영주 기자 = 경기 수원시는 경제자유구역 지정을 통한 K-실리콘밸리 완성과 정조대왕 능 행차 K-컬처로드 국가 사업화를 정부...",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Suwon City urges government to designate 'economic free zone' and nationalize Jeongjo's tomb procession as national project"
       },
       {
         "title": "새마을금고 집단대출 취급 재개…중단 6개월만(종합)",
@@ -5452,7 +5457,18 @@
         "source": "연합뉴스 경제",
         "category": "other",
         "preview": "(서울=연합뉴스) 김지연 기자 = 새마을금고가 정부의 가계대출 규제로 약 반년간 막아놨던 집단대출을 27일 재개했다.",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "rates",
+            "label": "주택담보대출 최저금리",
+            "labelEn": "Lowest mortgage rate",
+            "value": "연 3.62%",
+            "valueEn": "3.62% p.a.",
+            "href": "./mortgage-rates.html"
+          }
+        ],
+        "titleEn": "Saemaul Undong Credit Union Resumes Group Loans After 6-Month Hiatus (Comprehensive)"
       },
       {
         "title": "신현송 총재 \"환율 추가 하락 여지…물가 안정 기여할 것\"",
@@ -5461,7 +5477,8 @@
         "source": "한국경제 경제",
         "category": "stocks",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "President Shin Hyeong-sung \"Possibility of Further Exchange Rate Decline... Will Contribute to Price Stability"
       },
       {
         "title": "[올댓차이나] 홍콩 증시, 상승 개장 후 차익매물로 반락 마감… H주 0.51%↓",
@@ -5470,7 +5487,8 @@
         "source": "뉴시스 경제",
         "category": "realestate",
         "preview": "[서울=뉴시스]이재준 기자 = 홍콩 증시는 27일 엔디비아 실적 호조 여파로 상승 개장했다가 차익 실현 매물이 출회하면서 하락 마감했다. 항셍지수는 이날 전일 대비 87.23 포인트, 0.34% 내려간 2만5565.…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "[Olleh China] Hong Kong Market Closes Lower After Rising Open Amid Profit-Taking... H-Shares Down 0.51%"
       },
       {
         "title": "정부는 슈퍼예산 800조+α…금리인상 효과 반감되나",
@@ -5479,7 +5497,8 @@
         "source": "한국경제 경제",
         "category": "rates",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Government's super budget 800,000,000,000,000+α... concerns over diminished effects of interest rate hikes"
       },
       {
         "title": "김윤덕 \"탄천부지, 고급 아파트 말고 청년주택 짓자\"",
@@ -5488,7 +5507,8 @@
         "source": "한국경제 부동산",
         "category": "realestate",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Kim Yoon-deok: \"Tancheon Site, Build Youth Housing Instead of Luxury Apartments"
       },
       {
         "title": "서울 '모아주택 1호' 착수 4년만에 준공",
@@ -5497,7 +5517,20 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "2022년 모아주택 사업이 시작되고 처음으로 준공한 단지가 나왔다. 서울시는 광진구 한양연립 모아주택(가로주택정비사업·사진)이 지난 25일 준공돼 다음달부터 입주를 시작한다고 2..",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-gwangjin.html",
+            "label": "광진구 아파트 84㎡ 매매",
+            "labelEn": "광진구 apartment 84㎡ sale",
+            "value": "15억 147만원",
+            "valueEn": "₩1,501M",
+            "note": "최근 1주 계약 23건 · 8/20 대비 -22.8%",
+            "noteEn": "23 deals in the last 1 weeks · -22.8% vs Aug 20"
+          }
+        ],
+        "titleEn": "Seoul's 'Moahousing 1' Project Completes Construction Four Years After Start"
       },
       {
         "title": "더 뜨거워진 노도강·셔세권 집값 … 강남은 찬바람",
@@ -5506,7 +5539,20 @@
         "source": "매일경제 부동산",
         "category": "other",
         "preview": "고가주택이 몰린 강남·서초구 아파트값이 3주 연속 하락했지만 서울 집값 상승폭은 정부의 세제개편안 발표 직전보다 더 커졌다. 15억원 이하 중저가 아파트가 밀집한 노도강(노원·도봉..",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-dobong.html",
+            "label": "도봉구 아파트 84㎡ 매매",
+            "labelEn": "도봉구 apartment 84㎡ sale",
+            "value": "6억 9,344만원",
+            "valueEn": "₩693M",
+            "note": "최근 1주 계약 81건 · 8/20 대비 +0.6%",
+            "noteEn": "81 deals in the last 1 weeks · +0.6% vs Aug 20"
+          }
+        ],
+        "titleEn": "Hotter than ever for Nodokang and Cheoyeokwon real estate prices ... Gangnam experiences a cold breeze"
       },
       {
         "title": "\"가래로 막느니 호미로 막겠다\"…금리 올려 고물가 장기화 선제 차단",
@@ -5515,7 +5561,8 @@
         "source": "한국경제 경제",
         "category": "rates",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Better to Block with a Hoe Than with a Reed\"… Raise Interest Rates to Preemptively Halt Prolonged High Inflation"
       },
       {
         "title": "기준금리 2연속 인상…다시 '3% 시대'",
@@ -5524,7 +5571,8 @@
         "source": "한국경제 경제",
         "category": "rates",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Base rate raised for second consecutive time... back to the '3% era"
       },
       {
         "title": "\"공실 관리부터 매각까지\"…부동산플래닛, SaaS '통합관리센터' 오픈",
@@ -5533,7 +5581,8 @@
         "source": "뉴시스 경제",
         "category": "realestate",
         "preview": "[서울=뉴시스]이종성 기자 = 건물주가 보유 자산의 공실부터 매물 광고와 거래, 매각까지 한 곳에서 관리할 수 있는 서비스가 등장했다. 인공지능(AI) 기반 부동산 플랫폼 부동산플래닛은 서비스형 소프트웨어(SaaS)…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "From Vacant Space Management to Sales\"… Real Estate Planet Launches SaaS 'Integrated Management Center"
       },
       {
         "title": "\"30조 대어 잡아라\"…목동 재건축 뜨거운 수주 경쟁",
@@ -5542,7 +5591,8 @@
         "source": "한국경제 부동산",
         "category": "realestate",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Catch 30,000,000,000,000 won fish... hot bidding competition for Muldong redevelopment"
       },
       {
         "title": "서울 비아파트 매매 65%는 '4억 이하'",
@@ -5551,7 +5601,20 @@
         "source": "한국경제 부동산",
         "category": "realestate",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./apartment-sale.html",
+            "label": "서울 전체 아파트 84㎡ 매매",
+            "labelEn": "Seoul apartment 84㎡ sale",
+            "value": "13억 5,181만원",
+            "valueEn": "₩1,352M",
+            "note": "최근 1주 계약 603건 · 8/20 대비 +5.2%",
+            "noteEn": "603 deals in the last 1 weeks · +5.2% vs Aug 20"
+          }
+        ],
+        "titleEn": "Seoul non-apartment sales 65% are '400,000,000 or less"
       },
       {
         "title": "서울 집값 들썩…성북구 상승률 역대 최고",
@@ -5560,7 +5623,20 @@
         "source": "한국경제 부동산",
         "category": "other",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-seongbuk.html",
+            "label": "성북구 아파트 84㎡ 매매",
+            "labelEn": "성북구 apartment 84㎡ sale",
+            "value": "11억 5,717만원",
+            "valueEn": "₩1,157M",
+            "note": "최근 1주 계약 67건 · 8/20 대비 -10.7%",
+            "noteEn": "67 deals in the last 1 weeks · -10.7% vs Aug 20"
+          }
+        ],
+        "titleEn": "Seoul home prices surge... Seongbuk-gu's rise rate hits all-time high"
       },
       {
         "title": "광진구 모아주택 첫 준공…왕십리에 숙박시설 588실",
@@ -5569,7 +5645,20 @@
         "source": "한국경제 부동산",
         "category": "realestate",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-gwangjin.html",
+            "label": "광진구 아파트 84㎡ 매매",
+            "labelEn": "광진구 apartment 84㎡ sale",
+            "value": "15억 147만원",
+            "valueEn": "₩1,501M",
+            "note": "최근 1주 계약 23건 · 8/20 대비 -22.8%",
+            "noteEn": "23 deals in the last 1 weeks · -22.8% vs Aug 20"
+          }
+        ],
+        "titleEn": "Gwangjin-gu Moa Housing First Completion... 588 Hotel Rooms in Wangsimni"
       },
       {
         "title": "[올댓차이나] 中 증시, 혼조 개장 후 반도체 매수로 상승 마감…창업판 1.71%↑",
@@ -5578,7 +5667,8 @@
         "source": "뉴시스 경제",
         "category": "stocks",
         "preview": "[서울=뉴시스]이재준 기자 = 중국 증시는 27일 전날 뉴욕 증시 약세에 혼조 개장했다가 엔비디아 실적 호조 여파로 반도체에 매수가 몰리면서 상승 마감했다. 상하이 종합지수는 이날 전일 대비 44.05 포인트, 1.…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "[AllChina] China's stock market closes higher after mixed opening on semiconductor buying... Start-up board rises 1.71%"
       },
       {
         "title": "LH “2028년부터 연간 10만가구 착공… 주택공급 속도”",
@@ -5587,7 +5677,8 @@
         "source": "조선비즈 부동산",
         "category": "realestate",
         "preview": "한국토지주택공사(LH)가 정부의 8·13 주택공급 대책 후속 조치로 오는 2028년부터 2030년까지 매년 10만가구 이상의 주택을 착공한다. 올해 5만가구를 시작으로 내년 7만6000가구까지 착공 물량을 단계적으로…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "LH \"Start annual construction of 100,000 housing units from 2028... Housing supply pace"
       },
       {
         "title": "국고채 금리 상승 후 하락 마감…\"예상보다 '비둘기파적' 평가\" (종합)",
@@ -5596,7 +5687,8 @@
         "source": "연합뉴스 경제",
         "category": "rates",
         "preview": "(서울=연합뉴스) 김태종 기자 = 한국은행 금융통화위원회가 27일 기준금리를 '백투백'(2개월 연속) 인상했지만, 국고채 금리는 일제히 하락 마...",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Korean government bond rates rise then fall, ending with \"more dovish\" than expected evaluation (comprehensive)"
       },
       {
         "title": "[일문일답] 한은총재 \"연속 인상, 경제안정 선제대응…향후 6개월은 완만히\"",
@@ -5605,7 +5697,8 @@
         "source": "연합뉴스 경제",
         "category": "other",
         "preview": "(서울=연합뉴스) 이도흔 기자 = 신현송 한국은행 총재는 27일 물가 등 거시경제 안정을 도모하기 위해 선제적 대응이 필요하다고 판단해서 연속 ...",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "[Q&A] Bank of Korea Governor: \"Continued hikes are preemptive response to economic stability... next 6 months will be gradual"
       },
       {
         "title": "정부, 외국인주택투기 감시 강화…사업자대출 추가점검",
@@ -5614,7 +5707,8 @@
         "source": "연합뉴스 경제",
         "category": "realestate",
         "preview": "(서울=연합뉴스) 황윤기 기자 = 국무조정실 부동산감독추진단은 27일 제19차 부동산 불법행위 대응협의회를 열고 불법 부동산 투기 근절 의지를 ...",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Government to strengthen monitoring of foreign home buying speculation... additional inspection of business loan disbursements"
       }
     ]
   }
