@@ -2043,5 +2043,154 @@
         ]
       }
     ]
+  },
+  {
+    "date": "2026-08-28",
+    "model": "qwen3:14b",
+    "summary": {
+      "ko": "- 증시·환율: 엔비디아의 호실적이 영향을 미쳐 뉴욕증시가 상승 출발했다. 나스닥 지수는 0.8% 상승했다. 대만 증시도 엔비디아 실적 호조로 인해 사흘째 상승 마감하며 0.31% 올랐다. 중국 증시는 혼조 개장 후 반도체 매수로 상승 마감했고, 창업판은 1.71% 상승했다. 환율 추가 하락 가능성에 대해 물가 안정에 기여할 것이라는 분석이 제기됐다.\n- 부동산: 빅테크 기업들이 일본과 호주 등 전 세계에서 자금을 모으는 움직임을 보이고 있다. 홍콩 증시는 상승 개장 후 차익매물로 인해 0.51% 하락하며 반락 마감했다. 김윤덕은 탄천부지에 고급 아파트가 아닌 청년주택을 건설해야 한다고 제안했다. 서울의 '모아주택 1호'는 착수 후 4년 만에 준공을 완료했다. 부동산플래닛은 공실 관리부터 매각까지 가능한 SaaS '통합관리센터'를 오픈했다.\n- 기타 경제 소식: 수원시가 경제자유구역 지정과 정조능행차 국가사업화를 정부에 건의했다. 새마을금고가 6개월 만에 집단대출 취급을 재개했다. 노도강과 셔세권 주변 집값이 상승세를 보이고 있다. 강남 지역은 반대로 집값 상승이 둔화되고 있다. 서울 성북구 집값은 상승률이 역대 최고를 기록했다.\n- 금리·예금·투자상품: 정부가 슈퍼예산 800조+α를 발표한 가운데 금리인상 효과가 반감될 수 있다는 분석이 나오고 있으며, \"가래로 막느니 호미로 막겠다\"는 입장에서 금리를 올려 고물가 장기화를 선제적으로 차단하려는 움직임이 나타나고 있고, 기준금리가 2연속 인상되며 다시 '3% 시대'가 열리고 있으며, 국고채 금리는 상승 후 하락 마감되며 \"예상보다 '비둘기파적' 평가\"를 받았다.",
+      "en": "- Stocks & FX: NVIDIA's strong performance influenced the New York stock market to open higher. The Nasdaq index rose 0.8%. The Taiwan stock market also closed higher for the third consecutive day, rising 0.31%, due to NVIDIA's strong performance. The Chinese stock market closed higher after mixed opening, driven by semiconductor buying, with the Star Market rising 1.71%. Analysis was raised that the possibility of further depreciation of the exchange rate could contribute to price stability.\n- Real Estate: Big tech companies are showing movements to raise funds worldwide, including Japan and Australia. The Hong Kong stock market closed lower by 0.51% due to profit-taking after rising at the opening. Kim Yoon-deok proposed that instead of building high-end apartments, youth housing should be constructed in Tanchon Basin. Seoul's 'Moahousing 1' completed construction four years after starting. Real Estate Planet opened a SaaS called 'Integrated Management Center,' which is capable of managing vacancies and sales.\n- Other Economic News: Suwon City has requested the government to designate an economic free zone and to nationalize the Jeongjo Tomb Procession. Shinmaeul Savings and Loan has resumed group lending operations after six months. Housing prices around Nodokang and Sheosseokwon are rising. In contrast, housing prices in the Gangnam area are slowing in their upward trend. Housing prices in Seoul's Seongbuk District have recorded the highest-ever increase rate.\n- Rates, Deposits & Investment Products: As the government announced its super budget of 800,000,000,000,000+α, analyses are emerging suggesting that the effects of interest rate hikes may be dampened. Taking the stance of \"better to block with a hoe than with a bamboo pole,\" there is a move to raise interest rates in an attempt to preemptively prevent prolonged inflation. The benchmark interest rate has been increased for two consecutive times, reopening the \"3% era.\" The government bond rate rose and then fell, receiving an evaluation described as \"more dovish than expected."
+    },
+    "highlights": [],
+    "categories": [
+      {
+        "key": "stocks",
+        "name": "증시·환율",
+        "nameEn": "Stocks & FX",
+        "lineKo": "엔비디아의 호실적이 영향을 미쳐 뉴욕증시가 상승 출발했다. 나스닥 지수는 0.8% 상승했다. 대만 증시도 엔비디아 실적 호조로 인해 사흘째 상승 마감하며 0.31% 올랐다. 중국 증시는 혼조 개장 후 반도체 매수로 상승 마감했고, 창업판은 1.71% 상승했다. 환율 추가 하락 가능성에 대해 물가 안정에 기여할 것이라는 분석이 제기됐다.",
+        "lineEn": "NVIDIA's strong performance influenced the New York stock market to open higher. The Nasdaq index rose 0.8%. The Taiwan stock market also closed higher for the third consecutive day, rising 0.31%, due to NVIDIA's strong performance. The Chinese stock market closed higher after mixed opening, driven by semiconductor buying, with the Star Market rising 1.71%. Analysis was raised that the possibility of further depreciation of the exchange rate could contribute to price stability.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": false,
+        "items": [
+          {
+            "title": "[속보]엔비디아 호실적에 뉴욕증시 상승 출발…나스닥 0.8%↑",
+            "link": "https://www.newsis.com/view/NISX20260827_0003766103",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "[올댓차이나] 대만 증시, 엔비디아 실적호조에 사흘째 상승 마감…0.31%↑",
+            "link": "https://www.newsis.com/view/NISX20260827_0003766052",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "\"환율 추가 하락 여지…물가 안정 기여할 것\"",
+            "link": "https://www.hankyung.com/article/2026082776581",
+            "source": "한국경제 경제"
+          },
+          {
+            "title": "[올댓차이나] 中 증시, 혼조 개장 후 반도체 매수로 상승 마감…창업판 1.71%↑",
+            "link": "https://www.newsis.com/view/NISX20260827_0003765917",
+            "source": "뉴시스 경제"
+          }
+        ]
+      },
+      {
+        "key": "realestate",
+        "name": "부동산",
+        "nameEn": "Real Estate",
+        "lineKo": "빅테크 기업들이 일본과 호주 등 전 세계에서 자금을 모으는 움직임을 보이고 있다. 홍콩 증시는 상승 개장 후 차익매물로 인해 0.51% 하락하며 반락 마감했다. 김윤덕은 탄천부지에 고급 아파트가 아닌 청년주택을 건설해야 한다고 제안했다. 서울의 '모아주택 1호'는 착수 후 4년 만에 준공을 완료했다. 부동산플래닛은 공실 관리부터 매각까지 가능한 SaaS '통합관리센터'를 오픈했다.",
+        "lineEn": "Big tech companies are showing movements to raise funds worldwide, including Japan and Australia. The Hong Kong stock market closed lower by 0.51% due to profit-taking after rising at the opening. Kim Yoon-deok proposed that instead of building high-end apartments, youth housing should be constructed in Tanchon Basin. Seoul's 'Moahousing 1' completed construction four years after starting. Real Estate Planet opened a SaaS called 'Integrated Management Center,' which is capable of managing vacancies and sales.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": false,
+        "items": [
+          {
+            "title": "[단독] 日·호주까지 기웃…빅테크, 전세계서 자금 긁어모은다",
+            "link": "https://www.hankyung.com/article/2026082776641",
+            "source": "한국경제 경제"
+          },
+          {
+            "title": "[올댓차이나] 홍콩 증시, 상승 개장 후 차익매물로 반락 마감… H주 0.51%↓",
+            "link": "https://www.newsis.com/view/NISX20260827_0003765996",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "김윤덕 \"탄천부지, 고급 아파트 말고 청년주택 짓자\"",
+            "link": "https://www.hankyung.com/article/2026082776711",
+            "source": "한국경제 부동산"
+          },
+          {
+            "title": "서울 '모아주택 1호' 착수 4년만에 준공",
+            "link": "https://www.mk.co.kr/news/realestate/12138138",
+            "source": "매일경제 부동산"
+          },
+          {
+            "title": "\"공실 관리부터 매각까지\"…부동산플래닛, SaaS '통합관리센터' 오픈",
+            "link": "https://www.newsis.com/view/NISX20260827_0003765860",
+            "source": "뉴시스 경제"
+          }
+        ]
+      },
+      {
+        "key": "other",
+        "name": "기타 경제 소식",
+        "nameEn": "Other Economic News",
+        "lineKo": "수원시가 경제자유구역 지정과 정조능행차 국가사업화를 정부에 건의했다. 새마을금고가 6개월 만에 집단대출 취급을 재개했다. 노도강과 셔세권 주변 집값이 상승세를 보이고 있다. 강남 지역은 반대로 집값 상승이 둔화되고 있다. 서울 성북구 집값은 상승률이 역대 최고를 기록했다.",
+        "lineEn": "Suwon City has requested the government to designate an economic free zone and to nationalize the Jeongjo Tomb Procession. Shinmaeul Savings and Loan has resumed group lending operations after six months. Housing prices around Nodokang and Sheosseokwon are rising. In contrast, housing prices in the Gangnam area are slowing in their upward trend. Housing prices in Seoul's Seongbuk District have recorded the highest-ever increase rate.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": false,
+        "items": [
+          {
+            "title": "수원시, '경제자유구역 지정·정조능행차 국가사업화' 정부 건의",
+            "link": "https://www.yna.co.kr/view/AKR20260827183200061",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "새마을금고 집단대출 취급 재개…중단 6개월만(종합)",
+            "link": "https://www.yna.co.kr/view/AKR20260827101551002",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "더 뜨거워진 노도강·셔세권 집값 … 강남은 찬바람",
+            "link": "https://www.mk.co.kr/news/realestate/12138134",
+            "source": "매일경제 부동산"
+          },
+          {
+            "title": "서울 집값 들썩…성북구 상승률 역대 최고",
+            "link": "https://www.hankyung.com/article/2026082775041",
+            "source": "한국경제 부동산"
+          },
+          {
+            "title": "[일문일답] 한은총재 \"연속 인상, 경제안정 선제대응…향후 6개월은 완만히\"",
+            "link": "https://www.yna.co.kr/view/AKR20260827114300002",
+            "source": "연합뉴스 경제"
+          }
+        ]
+      },
+      {
+        "key": "rates",
+        "name": "금리·예금·투자상품",
+        "nameEn": "Rates, Deposits & Investment Products",
+        "lineKo": "정부가 슈퍼예산 800조+α를 발표한 가운데 금리인상 효과가 반감될 수 있다는 분석이 나오고 있으며, \"가래로 막느니 호미로 막겠다\"는 입장에서 금리를 올려 고물가 장기화를 선제적으로 차단하려는 움직임이 나타나고 있고, 기준금리가 2연속 인상되며 다시 '3% 시대'가 열리고 있으며, 국고채 금리는 상승 후 하락 마감되며 \"예상보다 '비둘기파적' 평가\"를 받았다.",
+        "lineEn": "As the government announced its super budget of 800,000,000,000,000+α, analyses are emerging suggesting that the effects of interest rate hikes may be dampened. Taking the stance of \"better to block with a hoe than with a bamboo pole,\" there is a move to raise interest rates in an attempt to preemptively prevent prolonged inflation. The benchmark interest rate has been increased for two consecutive times, reopening the \"3% era.\" The government bond rate rose and then fell, receiving an evaluation described as \"more dovish than expected.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": true,
+        "items": [
+          {
+            "title": "정부는 슈퍼예산 800조+α…금리인상 효과 반감되나",
+            "link": "https://www.hankyung.com/article/2026082776571",
+            "source": "한국경제 경제"
+          },
+          {
+            "title": "\"가래로 막느니 호미로 막겠다\"…금리 올려 고물가 장기화 선제 차단",
+            "link": "https://www.hankyung.com/article/2026082776591",
+            "source": "한국경제 경제"
+          },
+          {
+            "title": "기준금리 2연속 인상…다시 '3% 시대'",
+            "link": "https://www.hankyung.com/article/2026082776961",
+            "source": "한국경제 경제"
+          },
+          {
+            "title": "국고채 금리 상승 후 하락 마감…\"예상보다 '비둘기파적' 평가\" (종합)",
+            "link": "https://www.yna.co.kr/view/AKR20260827161251008",
+            "source": "연합뉴스 경제"
+          }
+        ]
+      }
+    ]
   }
 ]
