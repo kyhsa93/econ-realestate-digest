@@ -10,6 +10,7 @@
       "category": "other",
       "preview": "(서울=연합뉴스) 김지연 기자 = 새마을금고가 정부의 가계대출 규제로 약 반년간 막아놨던 집단대출을 27일 재개했다.",
       "dupes": [],
+      "titleEn": "Saemaul Undong Credit Union Resumes Group Loans… 6 Months After Suspension",
       "context": [
         {
           "kind": "rates",
@@ -28,7 +29,8 @@
       "source": "뉴시스 경제",
       "category": "realestate",
       "preview": "[서울=뉴시스]이재준 기자 = 홍콩 증시는 27일 엔디비아 실적 호조 여파로 상승 개장했다가 차익 실현 매물이 출회하면서 출렁이고 있다. 항셍지수는 이날 전일 대비 121.90 포인트, 0.47% 오른 2만5774.…",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "[AllChina] Hong Kong Market Rises and Falls Amid Profit-Taking After Opening Up; H-Shares Down 0.79%"
     },
     {
       "title": "기준금리 연속 인상에 주택 거래 더 위축…\"집값 하락은 제한적\"",
@@ -37,7 +39,8 @@
       "source": "연합뉴스 경제",
       "category": "rates",
       "preview": "(서울·세종=연합뉴스) 임기창 오진송 기자 = 한국은행이 두 달 연속 기준금리를 인상해 연 3.00%까지 끌어올리면서 주택 매수자들의 관망세가 ...",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Continued Interest Rate Hikes Further Suppress Housing Transactions...\"Price Drops Are Limited"
     },
     {
       "title": "오세훈 \"민주당과 가까운 전문가들도 용산공원 주택 공급 반대\"",
@@ -47,6 +50,7 @@
       "category": "realestate",
       "preview": "[서울=뉴시스] 박대로 기자 = 오세훈 서울시장은 더불어민주당과 가까운 전문가들도 용산공원 주택 공급에 반대한다며 정부 정책을 재차 비판했다. 오 시장은 27일 서울시의회 본회의 시정 질문에서 국민의힘 차인영 의원(…",
       "dupes": [],
+      "titleEn": "Oh Sehun says even experts close to the Democratic Party oppose housing supply in Yongsan Park",
       "context": [
         {
           "kind": "realestate",
@@ -73,7 +77,8 @@
           "link": "https://www.hankyung.com/article/2026082765707",
           "source": "한국경제 경제"
         }
-      ]
+      ],
+      "titleEn": "BOK Governor says exchange rate still high... won should be stronger for the better"
     },
     {
       "title": "[속보] 한은 총재 \"명목GDP·물가·기업심리지수 보고 10월 금리 결정\"",
@@ -82,7 +87,8 @@
       "source": "연합뉴스 경제",
       "category": "rates",
       "preview": null,
-      "dupes": []
+      "dupes": [],
+      "titleEn": "[Breaking News] Bank of Korea Governor to Report on Nominal GDP, Inflation, and Business Sentiment Index for October Interest Rate Decision"
     },
     {
       "title": "[올댓차이나] 中 증시, 혼조 개장 후 반도체 매수로 상승세…창업판 1.03%↑",
@@ -91,7 +97,8 @@
       "source": "뉴시스 경제",
       "category": "stocks",
       "preview": "[서울=뉴시스]이재준 기자 = 중국 증시는 27일 전날 뉴욕 증시 약세에 혼조 개장했다가 엔비디아 실적 호조 여파로 반도체에 매수가 유입하면서 상승하고 있다. 상하이 종합지수는 이날 전일 대비 0.63 포인트, 0.…",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "[AllChina] China's stock market rises after mixed opening as semiconductor buying drives up, Start-up Board up 1.03%"
     },
     {
       "title": "日은행 부총재 \"계속 정책금리 금리 인상해 금융완화 수준 조정\"",
@@ -100,7 +107,8 @@
       "source": "연합뉴스 경제",
       "category": "rates",
       "preview": "(서울=연합뉴스) 김병규 기자 = 일본 중앙은행인 일본은행의 히미노 료조 부총재가 계속 정책금리를 인상할 방침을 강조했다.",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Japan's Deputy Governor of the Bank of Japan Says \"Continue Raising Policy Interest Rates to Adjust the Level of Monetary Easing"
     },
     {
       "title": "한은 총재 \"금리 특효약 아냐…거시건전성 정책과 상호보완적\"",
@@ -109,7 +117,8 @@
       "source": "연합뉴스 경제",
       "category": "rates",
       "preview": "(서울=연합뉴스) 박수현 이도흔 기자 = 신현송 한국은행 총재는 27일 기준금리 인상 결정을 두고 \"통화정책과 거시건전성 정책은 상호보완적\"이라...",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "BOK Governor: \"Interest rates aren't a magic pill... complementary to macroprudential policies"
     },
     {
       "title": "한은 총재 \"향후 6개월, 완만한 금리 인상 예상\"",
@@ -124,7 +133,8 @@
           "link": "https://www.hankyung.com/article/2026082765377",
           "source": "한국경제 경제"
         }
-      ]
+      ],
+      "titleEn": "BOK Governor expects gradual rate hikes over next 6 months"
     },
     {
       "title": "국고채 금리 대체로 상승…3년물 장중 연 3.810%",
@@ -133,7 +143,8 @@
       "source": "연합뉴스 경제",
       "category": "rates",
       "preview": "(서울=연합뉴스) 27일 국고채 금리가 대체로 상승하고 있다.",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Government bond rates rise overall...3-year bond hits 3.810% annually during trading"
     },
     {
       "title": "[속보] 한은 총재 \"국고채 금리 '백투백'에도 내려…시장의 긍정 평가\"",
@@ -148,7 +159,8 @@
           "link": "https://www.yna.co.kr/view/AKR20260827087900002",
           "source": "연합뉴스 경제"
         }
-      ]
+      ],
+      "titleEn": "[Yonhap] Bank of Korea Governor: \"Government bond rates fall despite 'back-to-back' hikes, market shows positive evaluation"
     },
     {
       "title": "경기광주역세권2 토지주 “정부 공공주택지구 지정 반대” …6500장 의견서 광주시 제출",
@@ -157,7 +169,8 @@
       "source": "매일경제 부동산",
       "category": "realestate",
       "preview": "토지주 도시개발 원안 추진 요구 양벌동 등 추가 편입지역도 반발정부의 8·13 주택 신속공급 대책에 포함된 경기 광주역세권2 토지주들이 공공주택지구 지정 철회와 기존 도시개발사업 ..",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Gyeonggi Gwangju Station Area 2 Landowners Oppose Government Designation of Public Housing Zone... Submit 6,500 Petitions to Gwangju City"
     },
     {
       "title": "[속보] 한은 총재 \"선제 대응, 수도권 집값 상승세 완화에도 도움\"",
@@ -172,7 +185,8 @@
           "link": "https://www.yna.co.kr/view/AKR20260827082700002",
           "source": "연합뉴스 경제"
         }
-      ]
+      ],
+      "titleEn": "[Breaking News] Bank of Korea Governor: Proactive Measures Help Ease Housing Price Rise in Seoul Area"
     },
     {
       "title": "[속보] 한은 총재 \"거시경제 안정 도모 위해 선제 대응 필요\"",
@@ -187,7 +201,8 @@
           "link": "https://www.yna.co.kr/view/AKR20260827082100002",
           "source": "연합뉴스 경제"
         }
-      ]
+      ],
+      "titleEn": "[Breaking News] Bank of Korea Governor \"Proactive Measures Needed to Promote Macroeconomic Stability"
     },
     {
       "title": "韓, 아태 주거투자 선호 4위…'전세의 월세화'에 기관자금 쏠려",
@@ -196,7 +211,8 @@
       "source": "뉴시스 경제",
       "category": "realestate",
       "preview": "[서울=뉴시스]이종성 기자 = 한국이 아시아·태평양 지역의 주거 부동산 투자 선호도에서 4위에 올랐다. 전세에서 월세로 임대차 시장이 빠르게 재편되고 1인 가구가 늘어나면서 기관투자형 임대주택과 코리빙 시장이 주목받…",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "South Korea, 4th in Asia-Pacific for residential investment preference... institutional funds flocking to 'rental-like lease' system"
     },
     {
       "title": "4년 만에 모아주택 1호 준공…“2031년까지 4만가구 착공 목표”",
@@ -206,6 +222,7 @@
       "category": "realestate",
       "preview": "2022년 모아주택 사업이 시작되고 처음으로 준공한 단지가 나왔다. 서울시는 2031년까지 모아주택을 통해 4만가구 착공을 목표로 하고 있다. 서울시는 광진구 한양연립 모아주택(가..",
       "dupes": [],
+      "titleEn": "First Housing Unit of Moejae Housing Completed After 4 Years... \"Aim to Start Construction on 40,000 Units by 2031",
       "context": [
         {
           "kind": "realestate",
@@ -227,6 +244,7 @@
       "category": "realestate",
       "preview": "[서울=뉴시스] 변해정 기자 = 현대건설은 힐스테이트 송파더그리드의 견본주택을 개관하고 다음달 본격적인 분양에 돌입한다고 27일 밝혔다. 힐스테이트 송파더그리드는 서울시 송파구 장지동 일원에 지하 4층~지상 16층,…",
       "dupes": [],
+      "titleEn": "Hyundai Engineering & Construction opens sample house for Hillstate Songpa The Grid…sales to start next month",
       "context": [
         {
           "kind": "realestate",
@@ -248,6 +266,7 @@
       "category": "realestate",
       "preview": "[서울=뉴시스] 박대로 기자 = 서울시는 2022년 출범한 '모아주택' 1호 사업인 광진구 한양연립 모아주택(가로주택정비사업)이 지난 25일 준공돼 다음 달부터 입주를 시작한다고 27일 밝혔다. 모아주택은 대규모 재…",
       "dupes": [],
+      "titleEn": "Moaha House 1st Unit in Gwangjin-gu HanYang Apartment Complex Completed... Transformed into 15-Story, 4-Building Complex",
       "context": [
         {
           "kind": "realestate",
@@ -268,7 +287,8 @@
       "source": "매일경제 부동산",
       "category": "rates",
       "preview": "삼성전자, 5억·연 1.5% 대출 시행 동탄 올해 아파트 매매가 16.32%↑ 거래 10건 중 6건 이상 최고가 경신 중소형·역세권 중심 추가 수요 기대경기 화성시 동탄구 아파트 ..",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Up to 500,000,000 won at an annual rate of 1.5%\"... Era of 3% benchmark rate, companies block employees' 'yingklick' spending"
     },
     {
       "title": "조국 “오세훈의 탄천 개발, ‘강남 부동산 띄우기’ 포장지일 뿐”",
@@ -277,7 +297,8 @@
       "source": "매일경제 부동산",
       "category": "realestate",
       "preview": "“용산 대신 탄천이 빠르다는 주장은 선택적 계산법…조기 이전 불가능” “민간 수익 편향·비강남 차별 우려…정부, 강남 중심 정책에 끌려가지 말아야”조국 조국혁신당 혁신정책연구원장이..",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Cho Kuk says \"O Se-hoon's Tanchon development is just packaging for 'boosting Gangnam real estate"
     },
     {
       "title": "[속보] 황건일 금통위원 금리 동결 소수의견…6명은 인상 찬성",
@@ -292,7 +313,8 @@
           "link": "https://www.yna.co.kr/view/AKR20260827066400002",
           "source": "연합뉴스 경제"
         }
-      ]
+      ],
+      "titleEn": "[Breaking News] Huang Geon-il, Monetary Policy Committee Member, Opposes Interest Rate Freeze; 6 Others Support Hike"
     },
     {
       "title": "김윤덕 “吳 시장과 대화 잘되면 10만가구 공급…탄천센터, 공공주택으로”",
@@ -302,6 +324,7 @@
       "category": "realestate",
       "preview": "김윤덕 국토교통부 장관이 27일 오세훈 서울시장과의 협의를 통해 수도권에서 10만 가구 이상을 공급할 수 있다고 밝혔다. 국토부는 이르면 다음 달 7만3000가구 이상의 신규 택지 공급 방안을 발표할 예정인데, 서울…",
       "dupes": [],
+      "titleEn": "Kim Yoon-deok: \"If dialogue with Mayor Oh goes well, 100,000 households to be supplied... Tanchon Center to be public housing",
       "context": [
         {
           "kind": "realestate",
@@ -323,6 +346,7 @@
       "category": "rates",
       "preview": null,
       "dupes": [],
+      "titleEn": "Top 9% High-interest Savings Account Attracts 100,000 People Within Two Weeks of Launch",
       "context": [
         {
           "kind": "rates",

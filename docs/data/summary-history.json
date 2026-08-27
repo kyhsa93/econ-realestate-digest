@@ -1894,5 +1894,139 @@
         ]
       }
     ]
+  },
+  {
+    "date": "2026-08-27",
+    "model": "qwen3:14b",
+    "summary": {
+      "ko": "- 기타 경제 소식: 새마을금고가 6개월 만에 집단대출 취급을 재개했다. 한은 총재는 수도권 집값 상승세 완화에 선제 대응이 도움이 될 것이라고 밝혔다. 한은 총재는 거시경제 안정을 위해 선제 대응이 필요하다고 강조했다. 각 기사는 서로 다른 주제로, 인과관계는 없었다. 오늘 경제 관련 주요 소식은 이 세 가지로 요약할 수 있다.\n- 부동산: 오세훈은 민주당과 가까운 전문가들도 용산공원 주택 공급에 반대한다고 밝혔다. 경기광주역세권2 토지주는 정부의 공공주택지구 지정에 반대하며 6500장의 의견서를 광주시에 제출했다. 한국은 아태 지역에서 주거투자 선호도 4위를 기록했다. 홍콩 증시는 상승 개장 후 차익매물로 인해 등락했으며 H주는 0.79% 하락했다. 모아주택은 4년 만에 첫 번째 주택을 준공하며 2031년까지 4만가구 착공 목표를 세웠다.\n- 금리·예금·투자상품: 한국은행 총재는 10월 금리 결정을 위해 명목GDP, 물가, 기업심리지수를 보고했다. 한은 총재는 금리 인상이 경제에 특효약이 아니며, 거시건전성 정책과 상호보완적으로 추진될 것이라고 밝혔다. 향후 6개월간 완만한 금리 인상이 예상된다고 전망했다. 일본은행 부총재는 정책금리 인상으로 금융완화 수준을 조정할 계획이라고 밝혔다. 기준금리 연속 인상으로 주택 거래가 더 위축되었으나, 집값 하락은 제한적일 것으로 보인다.\n- 증시·환율: 한국은행 총재는 환율이 아직 높은 수준이라며 원화가 좀 더 강해져야 바람직하다고 밝혔다. 중국 증시는 혼조 개장 후 반도체 매수로 상승세를 보였다. 중국 창업판 지수는 1.03% 상승했다. 한은 총재의 발언은 환율에 대한 우려를 드러낸 것으로 해석된다. 중국 증시 상승은 반도체 업종의 강세에 기반한 것이다.",
+      "en": "- Other Economic News: Saemaul Undong Credit Union has resumed group lending operations for the first time in six months. The Bank of Korea Governor stated that preemptive measures would help ease the rising housing prices in the Seoul area. The Bank of Korea Governor emphasized the need for preemptive actions to ensure macroeconomic stability. Each news story covered different topics, and there was no causal relationship between them. Today's major economic news can be summarized into these three points.\n- Real Estate: Oh Sehun stated that even experts close to the Democratic Party oppose the housing supply at Yongsan Park. The landowner of Gyeonggi Gwangju Station Area 2 opposed the government's designation of the area as a public housing zone and submitted 6,500 letters of opinion to Gwangju City. South Korea ranked fourth in the Asia-Pacific region in terms of residential investment preference. The Hong Kong stock market fluctuated after rising at the opening due to profit-taking, with H shares falling 0.79%. Moa Housing completed its first housing unit in four years and set a goal to start construction on 40,000 units by 2031.\n- Rates, Deposits & Investment Products: The Bank of Korea Governor reported on nominal GDP, inflation, and the business sentiment index for the October interest rate decision. The Bank of Korea Governor stated that interest rate hikes are not a panacea for the economy and will be pursued in a complementary manner with macroprudential policies. He forecast a gradual interest rate increase over the next six months. The Bank of Japan Deputy Governor announced plans to adjust the level of monetary easing through policy rate hikes. Continued increases in the benchmark interest rate have further restrained housing transactions, but a significant decline in house prices is not expected.\n- Stocks & FX: The Bank of Korea Governor stated that the exchange rate is still high and that it would be preferable for the won to be stronger. The Chinese stock market rose after a mixed opening, driven by buying in the semiconductor sector. The Chinese Star Market index rose 1.03%. The Governor's remarks are interpreted as revealing concerns about the exchange rate. The rise in the Chinese stock market is based on the strong performance of the semiconductor sector."
+    },
+    "highlights": [],
+    "categories": [
+      {
+        "key": "other",
+        "name": "기타 경제 소식",
+        "nameEn": "Other Economic News",
+        "lineKo": "새마을금고가 6개월 만에 집단대출 취급을 재개했다. 한은 총재는 수도권 집값 상승세 완화에 선제 대응이 도움이 될 것이라고 밝혔다. 한은 총재는 거시경제 안정을 위해 선제 대응이 필요하다고 강조했다. 각 기사는 서로 다른 주제로, 인과관계는 없었다. 오늘 경제 관련 주요 소식은 이 세 가지로 요약할 수 있다.",
+        "lineEn": "Saemaul Undong Credit Union has resumed group lending operations for the first time in six months. The Bank of Korea Governor stated that preemptive measures would help ease the rising housing prices in the Seoul area. The Bank of Korea Governor emphasized the need for preemptive actions to ensure macroeconomic stability. Each news story covered different topics, and there was no causal relationship between them. Today's major economic news can be summarized into these three points.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": false,
+        "items": [
+          {
+            "title": "새마을금고 집단대출 취급 재개…중단 6개월만",
+            "link": "https://www.yna.co.kr/view/AKR20260827101500002",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "[속보] 한은 총재 \"선제 대응, 수도권 집값 상승세 완화에도 도움\"",
+            "link": "https://www.hankyung.com/article/2026082764627",
+            "source": "한국경제 경제"
+          },
+          {
+            "title": "[속보] 한은 총재 \"거시경제 안정 도모 위해 선제 대응 필요\"",
+            "link": "https://www.hankyung.com/article/2026082764587",
+            "source": "한국경제 경제"
+          }
+        ]
+      },
+      {
+        "key": "realestate",
+        "name": "부동산",
+        "nameEn": "Real Estate",
+        "lineKo": "오세훈은 민주당과 가까운 전문가들도 용산공원 주택 공급에 반대한다고 밝혔다. 경기광주역세권2 토지주는 정부의 공공주택지구 지정에 반대하며 6500장의 의견서를 광주시에 제출했다. 한국은 아태 지역에서 주거투자 선호도 4위를 기록했다. 홍콩 증시는 상승 개장 후 차익매물로 인해 등락했으며 H주는 0.79% 하락했다. 모아주택은 4년 만에 첫 번째 주택을 준공하며 2031년까지 4만가구 착공 목표를 세웠다.",
+        "lineEn": "Oh Sehun stated that even experts close to the Democratic Party oppose the housing supply at Yongsan Park. The landowner of Gyeonggi Gwangju Station Area 2 opposed the government's designation of the area as a public housing zone and submitted 6,500 letters of opinion to Gwangju City. South Korea ranked fourth in the Asia-Pacific region in terms of residential investment preference. The Hong Kong stock market fluctuated after rising at the opening due to profit-taking, with H shares falling 0.79%. Moa Housing completed its first housing unit in four years and set a goal to start construction on 40,000 units by 2031.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": false,
+        "items": [
+          {
+            "title": "[올댓차이나] 홍콩 증시, 상승 개장 후 차익매물에 등락… H주 0.79%↓",
+            "link": "https://www.newsis.com/view/NISX20260827_0003765194",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "오세훈 \"민주당과 가까운 전문가들도 용산공원 주택 공급 반대\"",
+            "link": "https://www.newsis.com/view/NISX20260827_0003765178",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "경기광주역세권2 토지주 “정부 공공주택지구 지정 반대” …6500장 의견서 광주시 제출",
+            "link": "https://www.mk.co.kr/news/realestate/12137629",
+            "source": "매일경제 부동산"
+          },
+          {
+            "title": "韓, 아태 주거투자 선호 4위…'전세의 월세화'에 기관자금 쏠려",
+            "link": "https://www.newsis.com/view/NISX20260827_0003765080",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "4년 만에 모아주택 1호 준공…“2031년까지 4만가구 착공 목표”",
+            "link": "https://www.mk.co.kr/news/realestate/12137612",
+            "source": "매일경제 부동산"
+          }
+        ]
+      },
+      {
+        "key": "rates",
+        "name": "금리·예금·투자상품",
+        "nameEn": "Rates, Deposits & Investment Products",
+        "lineKo": "한국은행 총재는 10월 금리 결정을 위해 명목GDP, 물가, 기업심리지수를 보고했다. 한은 총재는 금리 인상이 경제에 특효약이 아니며, 거시건전성 정책과 상호보완적으로 추진될 것이라고 밝혔다. 향후 6개월간 완만한 금리 인상이 예상된다고 전망했다. 일본은행 부총재는 정책금리 인상으로 금융완화 수준을 조정할 계획이라고 밝혔다. 기준금리 연속 인상으로 주택 거래가 더 위축되었으나, 집값 하락은 제한적일 것으로 보인다.",
+        "lineEn": "The Bank of Korea Governor reported on nominal GDP, inflation, and the business sentiment index for the October interest rate decision. The Bank of Korea Governor stated that interest rate hikes are not a panacea for the economy and will be pursued in a complementary manner with macroprudential policies. He forecast a gradual interest rate increase over the next six months. The Bank of Japan Deputy Governor announced plans to adjust the level of monetary easing through policy rate hikes. Continued increases in the benchmark interest rate have further restrained housing transactions, but a significant decline in house prices is not expected.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": false,
+        "items": [
+          {
+            "title": "기준금리 연속 인상에 주택 거래 더 위축…\"집값 하락은 제한적\"",
+            "link": "https://www.yna.co.kr/view/AKR20260827094000003",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "[속보] 한은 총재 \"명목GDP·물가·기업심리지수 보고 10월 금리 결정\"",
+            "link": "https://www.yna.co.kr/view/AKR20260827094500002",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "日은행 부총재 \"계속 정책금리 금리 인상해 금융완화 수준 조정\"",
+            "link": "https://www.yna.co.kr/view/AKR20260827092700009",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "한은 총재 \"금리 특효약 아냐…거시건전성 정책과 상호보완적\"",
+            "link": "https://www.yna.co.kr/view/AKR20260827093400002",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "한은 총재 \"향후 6개월, 완만한 금리 인상 예상\"",
+            "link": "https://www.yna.co.kr/view/AKR20260827093200002",
+            "source": "연합뉴스 경제"
+          }
+        ]
+      },
+      {
+        "key": "stocks",
+        "name": "증시·환율",
+        "nameEn": "Stocks & FX",
+        "lineKo": "한국은행 총재는 환율이 아직 높은 수준이라며 원화가 좀 더 강해져야 바람직하다고 밝혔다. 중국 증시는 혼조 개장 후 반도체 매수로 상승세를 보였다. 중국 창업판 지수는 1.03% 상승했다. 한은 총재의 발언은 환율에 대한 우려를 드러낸 것으로 해석된다. 중국 증시 상승은 반도체 업종의 강세에 기반한 것이다.",
+        "lineEn": "The Bank of Korea Governor stated that the exchange rate is still high and that it would be preferable for the won to be stronger. The Chinese stock market rose after a mixed opening, driven by buying in the semiconductor sector. The Chinese Star Market index rose 1.03%. The Governor's remarks are interpreted as revealing concerns about the exchange rate. The rise in the Chinese stock market is based on the strong performance of the semiconductor sector.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": false,
+        "items": [
+          {
+            "title": "한은 총재 \"환율 아직 높아…원화 좀 더 강해져야 바람직\"",
+            "link": "https://www.yna.co.kr/view/AKR20260827094900002",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "[올댓차이나] 中 증시, 혼조 개장 후 반도체 매수로 상승세…창업판 1.03%↑",
+            "link": "https://www.newsis.com/view/NISX20260827_0003765165",
+            "source": "뉴시스 경제"
+          }
+        ]
+      }
+    ]
   }
 ]
