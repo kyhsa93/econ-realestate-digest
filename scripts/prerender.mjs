@@ -30,7 +30,11 @@ const CANCELLATION_PATH = path.join(root, "docs/cancelled-deals.html");
 const DATA_DIR = path.join(root, "docs/data");
 
 export const MIN_SAMPLE = 5;
-const MAX_DISTRICTS = 10;
+// 첫 화면에 그리는 자치구 수. 모바일에서 표는 행마다 카드로 펼쳐지므로
+// 열한 행이면 요약까지 1,500px을 내려야 한다. 나머지는 표 밑 '더 보기'로 편다.
+// index.html의 MAX_VISIBLE_DISTRICTS와 같아야 한다 - 다르면 자바스크립트가
+// 붙는 순간 표 길이가 튀고, 그걸 index-realestate-rows 검사가 잡는다.
+const MAX_DISTRICTS = 4;
 
 export function escapeHtml(value) {
   return String(value ?? "")

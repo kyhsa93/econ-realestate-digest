@@ -26,13 +26,15 @@ async function page() {
   });
 }
 
+// scripts/prerender.mjs의 MAX_DISTRICTS, index.html의 MAX_VISIBLE_DISTRICTS와 같은 수.
+const VISIBLE = 4;
 const districtCount = () => loaded.districts.length;
-const shownCount = () => Math.min(districtCount(), 10);
+const shownCount = () => Math.min(districtCount(), VISIBLE);
 
 const districtRows = (p) => p.app.document.querySelectorAll("#realestate-grid tr[data-district-name]");
 const visible = (p) => districtRows(p).filter((r) => !r.hidden);
 
-test("처음에는 상위 10개 구만 보인다", async () => {
+test("처음에는 상위 네 개 구만 보인다", async () => {
   const p = await page();
   assert.equal(districtRows(p).length, districtCount(), "받은 구가 DOM에 다 있어야 검색이 된다");
   assert.equal(visible(p).length, shownCount());
@@ -62,7 +64,7 @@ test("감춘 구도 검색하면 나온다", async () => {
   assert.ok(shown.includes(target), `${target}를 검색했는데 안 나온다: ${shown.join(", ")}`);
 });
 
-test("검색어를 지우면 다시 10개로 돌아간다", async () => {
+test("검색어를 지우면 다시 접힌다", async () => {
   const p = await page();
   const input = p.byId("realestate-search-input");
   input.value = "구";
@@ -72,6 +74,38 @@ test("검색어를 지우면 다시 10개로 돌아간다", async () => {
   input.value = "";
   input.dispatch("input");
   assert.equal(visible(p).length, shownCount());
+});
+
+const showMore = (p) => p.byId("realestate-show-more");
+const clickShowMore = (p) => showMore(p).dispatch("click", { target: { id: "realestate-show-more-button" } });
+
+test("더 보기를 누르면 나머지 구가 펼쳐진다", async () => {
+  const p = await page();
+  assert.equal(showMore(p).hidden, false, "접어 놓고 펼 방법을 주지 않았다");
+  assert.match(showMore(p).innerHTML, /realestate-show-more-button/, "펼치기 버튼이 없다");
+  assert.match(
+    showMore(p).innerHTML,
+    new RegExp(`${districtCount() - shownCount()}`),
+    "몇 개가 남았는지 말하지 않는다"
+  );
+
+  clickShowMore(p);
+  assert.equal(visible(p).length, districtCount(), "펼쳤는데 전부 보이지 않는다");
+
+  clickShowMore(p);
+  assert.equal(visible(p).length, shownCount(), "접기가 되지 않는다");
+});
+
+test("검색 중에는 접었다는 말을 하지 않는다", async () => {
+  const p = await page();
+  const input = p.byId("realestate-search-input");
+  input.value = "강남";
+  input.dispatch("input");
+  assert.equal(showMore(p).hidden, true, "검색 결과 밑에 '몇 개 더 보기'가 남았다");
+
+  input.value = "";
+  input.dispatch("input");
+  assert.equal(showMore(p).hidden, false);
 });
 
 test("감춘 구가 있으면 전체 보기로 안내한다", async () => {
