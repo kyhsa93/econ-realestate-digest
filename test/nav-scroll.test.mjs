@@ -23,12 +23,17 @@ function fakeNav({ scrollWidth, clientWidth, scrollLeft = 0, current = null }) {
   };
 }
 
-async function run(navs) {
+async function run(navs, lang = "ko") {
   const source = await readFile(path.join(root, "docs/nav.js"), "utf8");
   const list = navs;
   list.length = navs.length;
+  const skip = { textContent: "", getAttribute: () => "Skip to content" };
   vm.runInNewContext(source, {
-    document: { querySelectorAll: () => list },
+    document: {
+      querySelectorAll: () => list,
+      querySelector: () => skip,
+      documentElement: { getAttribute: () => lang },
+    },
     window: { addEventListener() {} },
   });
   return navs;
@@ -88,5 +93,33 @@ test("2층이 누를 수 있는 것으로 보인다", async () => {
 
   for (const cls of ["scroll-start", "scroll-end"]) {
     assert.ok(css.includes(`.sub-nav.${cls}`), `${cls} 페이드 규칙이 없다`);
+  }
+});
+
+test("영어 화면에서는 건너뛰기 링크도 영어다", async () => {
+  const source = await readFile(path.join(root, "docs/nav.js"), "utf8");
+  const make = (lang) => {
+    const skip = { textContent: "본문 바로가기", getAttribute: (n) => (n === "data-skip-en" ? "Skip to content" : null) };
+    const list = [];
+    vm.runInNewContext(source, {
+      document: {
+        querySelectorAll: () => list,
+        querySelector: () => skip,
+        documentElement: { getAttribute: () => lang },
+      },
+      window: { addEventListener() {} },
+    });
+    return skip.textContent;
+  };
+  assert.equal(make("ko"), "본문 바로가기");
+  assert.equal(make("en"), "Skip to content");
+});
+
+test("모든 페이지에 본문으로 건너뛰는 길이 있다", async () => {
+  const docs = path.join(root, "docs");
+  for (const file of (await readdir(docs)).filter((f) => f.endsWith(".html"))) {
+    const html = await readFile(path.join(docs, file), "utf8");
+    assert.match(html, /<a class="skip-link" href="#main"/, `docs/${file}에 건너뛰기 링크가 없다`);
+    assert.match(html, /<main id="main">/, `docs/${file}의 본문에 닿을 곳이 없다`);
   }
 });

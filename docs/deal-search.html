@@ -31,7 +31,8 @@
 <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-<main>
+<a class="skip-link" href="#main" data-skip-en="Skip to content">본문 바로가기</a>
+<main id="main">
   <header>
     <div>
       <h1 id="page-title">서울 아파트 실거래 검색</h1>
@@ -100,6 +101,7 @@
         <label for="direct-check" id="direct-label">직거래 제외</label>
       </div>
     </div>
+    <p class="sr-only" role="status" id="search-status"></p>
     <div id="search-result"></div>
     <div class="content-notice" id="search-note"></div>
   </section>
@@ -791,7 +793,21 @@ function renderFromBands(box) {
   box.innerHTML = resultHtml(scopeLabel(band), count, rows, top, band);
 }
 
+// 결과 첫 줄은 이미 "N건" 같은 말을 하고 있다. 소리로도 그 한 줄만 읽힌다 -
+// 결과 전체를 live 영역으로 두면 조건을 하나 바꿀 때마다 목록을 통째로 읽는다.
+function announceResult() {
+  const status = document.getElementById("search-status");
+  if (!status) return;
+  const line = document.querySelector("#search-result .budget-summary, #search-result .budget-empty, #search-result .empty");
+  status.textContent = line ? line.textContent.trim() : "";
+}
+
 function renderResult() {
+  renderResultBody();
+  announceResult();
+}
+
+function renderResultBody() {
   const box = document.getElementById("search-result");
 
   if (isRent()) {

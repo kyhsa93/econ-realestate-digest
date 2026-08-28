@@ -108,6 +108,18 @@ test("검색 중에는 접었다는 말을 하지 않는다", async () => {
   assert.equal(showMore(p).hidden, false);
 });
 
+test("몇 개가 남았는지 소리로도 알린다", async () => {
+  const p = await page();
+  assert.match(p.byId("realestate-status").textContent, new RegExp(`${shownCount()}`), "접힌 뒤 건수를 안 알린다");
+
+  const input = p.byId("realestate-search-input");
+  input.value = "강남";
+  input.dispatch("input");
+  assert.match(p.byId("realestate-status").textContent, /1/, "검색 결과 건수를 안 알린다");
+
+  assert.ok(p.byId("news-status").textContent.length > 0, "뉴스 건수를 안 알린다");
+});
+
 test("감춘 구가 있으면 전체 보기로 안내한다", async () => {
   const p = await page();
   const link = p.byId("realestate-more");

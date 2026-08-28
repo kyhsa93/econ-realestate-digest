@@ -36,3 +36,13 @@
     for (const nav of navs) markEdges(nav);
   });
 })();
+
+// 건너뛰기 링크는 스크립트 없이도 있어야 하므로 HTML에 한국어로 박아 두었다.
+// 화면 언어가 영어면 여기서 바꾼다 - 이 파일이 페이지 스크립트보다 뒤에 돌아
+// documentElement.lang은 이미 정해져 있다.
+(function () {
+  const link = document.querySelector(".skip-link[data-skip-en]");
+  if (link && document.documentElement.getAttribute("lang") === "en") {
+    link.textContent = link.getAttribute("data-skip-en");
+  }
+})();

@@ -76,3 +76,49 @@ test("숫자 열은 오른쪽, 이름 열은 왼쪽에 붙인다", async () => {
   assert.match(cells.body, /text-align: right/, "숫자 열이 오른쪽에 붙지 않는다");
   assert.match(first.body, /text-align: left/, "지역·지표 이름까지 오른쪽으로 밀렸다");
 });
+
+test("누르는 것은 손가락이 닿는 크기다", async () => {
+  const text = await css();
+  const tap = Number(text.match(/--tap:\s*(\d+)px;/)[1]);
+  // 알약 탭 30px, 아이콘 버튼 36px, 뉴스 칩 26px이었다. 셋 다 엄지 끝보다 작다.
+  assert.ok(tap >= 44, `--tap이 ${tap}px다`);
+
+  const uses = (sel) => {
+    const rule = rules(text).find((r) => parts(r.sel) === parts(sel));
+    assert.ok(rule, `${sel} 규칙이 없다`);
+    assert.match(rule.body, /(min-height|height): var\(--tap\)/, `${sel}이 --tap을 안 쓴다`);
+  };
+  for (const sel of [".page-nav a", ".sub-nav a", ".news-chip", ".lang-toggle", ".icon-toggle"]) uses(sel);
+});
+
+test("키보드로 훑을 때 지금 어디인지 보인다", async () => {
+  const text = await css();
+  const focus = rules(text).filter((r) => r.sel.includes(":focus-visible") && /outline:/.test(r.body));
+  assert.ok(focus.length, "초점 테두리 규칙이 없다");
+
+  const covered = new Set(focus.flatMap((r) => r.sel.split(",").map((x) => x.trim())));
+  for (const sel of ["a:focus-visible", "button:focus-visible", "input:focus-visible", "select:focus-visible"]) {
+    assert.ok(covered.has(sel), `${sel}에 초점 테두리가 없다`);
+  }
+});
+
+test("스크린리더만 읽는 자리가 화면에서는 안 보인다", async () => {
+  const rule = rules(await css()).find((r) => r.sel === ".sr-only");
+  assert.ok(rule, ".sr-only가 없다");
+  // display:none이면 스크린리더도 안 읽는다. 잘라내되 살려 둬야 한다.
+  assert.ok(!/display:\s*none/.test(rule.body), ".sr-only를 display:none으로 감췄다");
+  assert.match(rule.body, /clip-path|clip:/, ".sr-only가 화면에서 안 잘렸다");
+});
+
+test("걸러낸 결과를 소리로도 알린다", async () => {
+  const { readFile } = await import("node:fs/promises");
+  const has = async (file, id) => {
+    const html = await readFile(path.join(root, "docs", file), "utf8");
+    const tag = new RegExp(`<[^>]*id="${id}"[^>]*>`).exec(html)?.[0] ?? "";
+    assert.match(tag, /role="status"/, `docs/${file}의 #${id}가 알림 영역이 아니다`);
+  };
+  await has("index.html", "realestate-status");
+  await has("index.html", "news-status");
+  await has("deal-search.html", "search-status");
+  await has("rates.html", "show-more");
+});
