@@ -17,6 +17,20 @@
   --border: #e2e2e5;
   --up: #d64545;
   --down: #2f6fed;
+
+  /* 글자 크기 축척. 전에는 0.65rem부터 1.4rem까지 스물두 단계가 섞여 있었다.
+   * 열 살짜리 계단은 계층이 아니라 우연이라, 여덟 단으로 줄이고 바닥을 올렸다.
+   * 0.78rem(12.5px)이 하한이다 - 한글은 그 아래로 내려가면 획이 뭉갠다.
+   * --fs-field는 16px 미만이면 iOS Safari가 입력칸에 초점이 갈 때 화면을 확대한다. */
+  --fs-xs: 0.78rem;
+  --fs-sm: 0.85rem;
+  --fs-md: 0.92rem;
+  --fs-lg: 1rem;
+  --fs-h2: 1.1rem;
+  --fs-xl: 1.2rem;
+  --fs-2xl: 1.35rem;
+  --fs-h1: 1.45rem;
+  --fs-field: 1rem;
 }
 
 :root[data-theme="dark"] {
@@ -45,6 +59,13 @@
   box-sizing: border-box;
 }
 
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: var(--fs-field);
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
@@ -68,18 +89,18 @@ header {
 }
 
 h1 {
-  font-size: 1.4rem;
+  font-size: var(--fs-h1);
   margin: 0 0 4px;
 }
 
 .updated {
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
 }
 
 .update-schedule {
   color: var(--muted);
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
   margin-top: 2px;
 }
 
@@ -87,7 +108,7 @@ h1 {
   display: inline-block;
   margin-top: 4px;
   color: var(--muted);
-  font-size: 0.82rem;
+  font-size: var(--fs-sm);
   text-decoration: none;
 }
 
@@ -108,7 +129,7 @@ h1 {
   border: 1px solid var(--border);
   border-radius: 999px;
   padding: 6px 14px;
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
   color: var(--fg);
   text-decoration: none;
 }
@@ -125,7 +146,7 @@ h1 {
   flex-shrink: 0;
   padding: 4px 10px;
   border-radius: 8px;
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
   color: var(--muted);
   text-decoration: none;
 }
@@ -163,7 +184,7 @@ h1 {
   border-radius: 8px;
   width: 36px;
   height: 36px;
-  font-size: 1.1rem;
+  font-size: var(--fs-h2);
   line-height: 1;
   cursor: pointer;
   color: var(--fg);
@@ -171,7 +192,7 @@ h1 {
 
 .content-notice {
   color: var(--muted);
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
   line-height: 1.5;
   margin-top: 12px;
 }
@@ -181,7 +202,7 @@ section {
 }
 
 h2 {
-  font-size: 1.05rem;
+  font-size: var(--fs-h2);
   margin: 0 0 12px;
   padding-bottom: 6px;
   border-bottom: 1px solid var(--border);
@@ -197,7 +218,7 @@ h2 {
 
 .live-badge {
   display: inline-block;
-  font-size: 0.65rem;
+  font-size: var(--fs-xs);
   font-weight: 600;
   color: var(--up);
   border: 1px solid currentColor;
@@ -216,7 +237,7 @@ h2 {
 .data-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
   white-space: nowrap;
 }
 
@@ -230,7 +251,7 @@ h2 {
 .data-table th {
   color: var(--muted);
   font-weight: 600;
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
 }
 
 .data-table tbody tr:hover {
@@ -243,19 +264,19 @@ h2 {
 }
 
 .data-table .change {
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
   margin-left: 4px;
 }
 
 .data-table .tx-count {
   color: var(--muted);
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
   margin-left: 4px;
 }
 
 .data-table .low-sample {
   color: var(--muted);
-  font-size: 0.82rem;
+  font-size: var(--fs-sm);
   font-style: italic;
 }
 
@@ -280,7 +301,7 @@ h2 {
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 8px 10px;
-  font-size: 0.9rem;
+  font-size: var(--fs-field);
 }
 
 ul.news-list {
@@ -301,7 +322,7 @@ ul.news-list {
 .news-item a {
   color: var(--fg);
   text-decoration: none;
-  font-size: 0.95rem;
+  font-size: var(--fs-lg);
 }
 
 .news-item a:hover {
@@ -310,7 +331,7 @@ ul.news-list {
 
 .news-meta {
   color: var(--muted);
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
   margin-top: 2px;
 }
 
@@ -327,7 +348,7 @@ ul.news-list {
   border: 1px solid var(--border);
   border-radius: 999px;
   padding: 4px 10px;
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
   font-family: inherit;
   cursor: pointer;
 }
@@ -345,7 +366,7 @@ ul.news-list {
 
 .news-preview {
   color: var(--muted);
-  font-size: 0.82rem;
+  font-size: var(--fs-sm);
   line-height: 1.45;
   margin-top: 3px;
 }
@@ -367,7 +388,7 @@ ul.news-list {
   border: 1px solid var(--border);
   border-radius: 999px;
   background: var(--card);
-  font-size: 0.76rem;
+  font-size: var(--fs-xs);
   text-decoration: none;
 }
 
@@ -388,7 +409,7 @@ ul.news-list {
 
 .context-note {
   color: var(--muted);
-  font-size: 0.71rem;
+  font-size: var(--fs-xs);
   font-variant-numeric: tabular-nums;
 }
 
@@ -398,7 +419,7 @@ ul.news-list {
 
 .news-dupes {
   margin-top: 4px;
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
 }
 
 .news-dupes summary {
@@ -440,7 +461,7 @@ ul.news-list {
 
 .news-empty {
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
   padding: 10px 0;
 }
 
@@ -448,7 +469,7 @@ ul.news-list {
   display: inline-block;
   margin-top: 10px;
   color: var(--muted);
-  font-size: 0.82rem;
+  font-size: var(--fs-sm);
   text-decoration: none;
 }
 
@@ -458,7 +479,7 @@ ul.news-list {
 
 .placeholder {
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: var(--fs-md);
   background: var(--card);
   border: 1px dashed var(--border);
   border-radius: 10px;
@@ -467,7 +488,7 @@ ul.news-list {
 
 #summary-box {
   color: var(--fg);
-  font-size: 0.95rem;
+  font-size: var(--fs-lg);
 }
 
 .realestate-table th.sortable {
@@ -515,7 +536,7 @@ ul.news-list {
   border-radius: 10px;
   padding: 12px 14px;
   margin-bottom: 20px;
-  font-size: 0.88rem;
+  font-size: var(--fs-md);
 }
 
 .load-error button {
@@ -530,7 +551,7 @@ ul.news-list {
 
 .summary-fallback-note {
   color: var(--muted);
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
   margin-top: 10px;
 }
 
@@ -542,7 +563,7 @@ ul.news-list {
 
 .summary-section-label {
   font-weight: 600;
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
   color: var(--muted);
   letter-spacing: 0.02em;
   margin-bottom: 8px;
@@ -558,7 +579,7 @@ ul.news-list {
 
 .summary-highlight a {
   font-weight: 600;
-  font-size: 0.92rem;
+  font-size: var(--fs-md);
   color: var(--fg);
   text-decoration: none;
 }
@@ -568,7 +589,7 @@ ul.news-list {
 }
 
 .summary-highlight-text {
-  font-size: 0.95rem;
+  font-size: var(--fs-lg);
   line-height: 1.65;
   margin-top: 3px;
 }
@@ -583,12 +604,12 @@ ul.news-list {
 
 .summary-category-label {
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
   margin-bottom: 2px;
 }
 
 .summary-category-line {
-  font-size: 0.95rem;
+  font-size: var(--fs-lg);
   line-height: 1.65;
 }
 
@@ -599,7 +620,7 @@ ul.news-list {
 }
 
 .summary-links li {
-  font-size: 0.82rem;
+  font-size: var(--fs-sm);
   margin-top: 4px;
 }
 
@@ -623,13 +644,13 @@ ul.news-list {
 .summary-meta {
   display: block;
   color: var(--muted);
-  font-size: 0.75rem;
+  font-size: var(--fs-xs);
   margin-top: 10px;
 }
 
 .error {
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: var(--fs-md);
 }
 
 .history-grid {
@@ -646,7 +667,7 @@ ul.news-list {
 .history-more summary {
   cursor: pointer;
   color: var(--muted);
-  font-size: 0.82rem;
+  font-size: var(--fs-sm);
   padding: 6px 0;
   list-style: none;
 }
@@ -672,7 +693,7 @@ ul.news-list {
   align-items: center;
   gap: 8px;
   margin-top: 14px;
-  font-size: 0.82rem;
+  font-size: var(--fs-sm);
   color: var(--muted);
 }
 
@@ -682,7 +703,7 @@ ul.news-list {
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 6px 8px;
-  font-size: 0.85rem;
+  font-size: var(--fs-field);
 }
 
 .history-card {
@@ -694,7 +715,7 @@ ul.news-list {
 
 .history-card .label {
   color: var(--muted);
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
   margin-bottom: 6px;
 }
 
@@ -707,13 +728,13 @@ ul.news-list {
 }
 
 .history-current {
-  font-size: 1.05rem;
+  font-size: var(--fs-h2);
   font-weight: 600;
 }
 
 .history-minmax {
   color: var(--muted);
-  font-size: 0.72rem;
+  font-size: var(--fs-xs);
   white-space: nowrap;
 }
 
@@ -734,7 +755,7 @@ ul.news-list {
 
 .history-card .axis {
   fill: var(--muted);
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
 }
 
 .history-card .axis.y {
@@ -763,7 +784,7 @@ ul.news-list {
   border: 1px solid var(--border);
   background: var(--card);
   color: var(--fg);
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
   line-height: 1.4;
   white-space: nowrap;
   pointer-events: none;
@@ -807,7 +828,7 @@ ul.news-list {
   align-items: center;
   gap: 8px;
   margin: 4px 0 16px;
-  font-size: 0.82rem;
+  font-size: var(--fs-sm);
   color: var(--muted);
 }
 
@@ -818,7 +839,7 @@ ul.news-list {
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 6px 10px;
-  font-size: 0.85rem;
+  font-size: var(--fs-field);
 }
 
 .archive-date-jump button {
@@ -830,12 +851,12 @@ ul.news-list {
   padding-top: 16px;
   border-top: 1px solid var(--border);
   color: var(--muted);
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
 }
 
 .site-footer a {
   color: var(--muted);
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
   text-decoration: none;
 }
 
@@ -850,7 +871,7 @@ ul.news-list {
   border-radius: 8px;
   width: 36px;
   height: 36px;
-  font-size: 1.1rem;
+  font-size: var(--fs-h2);
   line-height: 1;
   cursor: pointer;
   color: var(--fg);
@@ -861,7 +882,7 @@ ul.news-list {
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 14px 16px;
-  font-size: 0.92rem;
+  font-size: var(--fs-md);
 }
 
 .summary-box p {
@@ -874,13 +895,13 @@ ul.news-list {
 
 .summary-note {
   color: var(--muted);
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
   margin-top: 10px;
 }
 
 .empty {
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: var(--fs-md);
 }
 
 .empty button {
@@ -909,11 +930,11 @@ ul.news-list {
 
 .overall-card .label {
   color: var(--muted);
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
 }
 
 .overall-card .value {
-  font-size: 1.15rem;
+  font-size: var(--fs-xl);
   font-weight: 700;
   margin-top: 2px;
   font-variant-numeric: tabular-nums;
@@ -921,7 +942,7 @@ ul.news-list {
 
 .overall-card .sub {
   color: var(--muted);
-  font-size: 0.76rem;
+  font-size: var(--fs-xs);
   margin-top: 2px;
 }
 
@@ -934,7 +955,7 @@ ul.news-list {
 }
 
 .controls label {
-  font-size: 0.82rem;
+  font-size: var(--fs-sm);
   color: var(--muted);
 }
 
@@ -944,7 +965,7 @@ ul.news-list {
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 5px 9px;
-  font-size: 0.85rem;
+  font-size: var(--fs-field);
   font-family: inherit;
 }
 
@@ -954,7 +975,7 @@ ul.news-list {
   border-radius: 10px;
   padding: 12px 14px;
   margin: 0;
-  font-size: 0.9rem;
+  font-size: var(--fs-md);
   line-height: 1.65;
 }
 
@@ -974,12 +995,12 @@ ul.news-list {
 
 .trend-meta {
   color: var(--muted);
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
   margin-top: 10px;
 }
 
 .district-links-heading {
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
   color: var(--muted);
   margin: 18px 0 8px;
   font-weight: 600;
@@ -989,7 +1010,7 @@ ul.news-list {
   display: flex;
   flex-wrap: wrap;
   gap: 6px 12px;
-  font-size: 0.82rem;
+  font-size: var(--fs-sm);
 }
 
 .district-links a {
@@ -1018,11 +1039,11 @@ ul.news-list {
 
 .count {
   color: var(--muted);
-  font-size: 0.76rem;
+  font-size: var(--fs-xs);
 }
 
 .change {
-  font-size: 0.76rem;
+  font-size: var(--fs-xs);
 }
 
 .ratio {
@@ -1032,7 +1053,7 @@ ul.news-list {
 
 .low-sample {
   color: var(--muted);
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
 }
 
 .data-table td a {
@@ -1051,12 +1072,12 @@ ul.news-list {
   border: 1px solid var(--border);
   border-radius: 6px;
   color: var(--muted);
-  font-size: 0.7rem;
+  font-size: var(--fs-xs);
   vertical-align: middle;
 }
 
 .budget-summary {
-  font-size: 0.95rem;
+  font-size: var(--fs-lg);
   line-height: 1.6;
 }
 
@@ -1066,7 +1087,7 @@ ul.news-list {
 
 .budget-districts {
   color: var(--muted);
-  font-size: 0.82rem;
+  font-size: var(--fs-sm);
   margin-top: 4px;
 }
 
@@ -1096,7 +1117,7 @@ ul.news-list {
 .budget-deal .spec,
 .budget-deal .when {
   color: var(--muted);
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
 }
 
 .budget-deal .price {
@@ -1107,7 +1128,7 @@ ul.news-list {
 
 .budget-empty {
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: var(--fs-md);
 }
 
 .budget-nav {
@@ -1123,7 +1144,7 @@ ul.news-list {
   border-radius: 10px;
   padding: 12px 14px;
   margin: 0 0 12px;
-  font-size: 0.9rem;
+  font-size: var(--fs-md);
   line-height: 1.65;
 }
 
@@ -1145,7 +1166,7 @@ ul.news-list {
   border: 1px solid var(--border);
   border-radius: 999px;
   padding: 6px 14px;
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
   cursor: pointer;
   color: var(--fg);
 }
@@ -1165,7 +1186,7 @@ ul.news-list {
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 6px 10px;
-  font-size: 0.85rem;
+  font-size: var(--fs-field);
   font-family: inherit;
 }
 
@@ -1192,7 +1213,7 @@ ul.news-list {
 }
 
 .amount-unit {
-  font-size: 0.82rem;
+  font-size: var(--fs-sm);
   color: var(--muted);
 }
 
@@ -1228,7 +1249,7 @@ ul.news-list {
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 6px 14px;
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
   cursor: pointer;
 }
 
@@ -1238,7 +1259,7 @@ ul.news-list {
 
 .shown-count {
   color: var(--muted);
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
 }
 
 .rate-links {
@@ -1246,7 +1267,7 @@ ul.news-list {
   flex-wrap: wrap;
   gap: 6px 14px;
   margin-top: 14px;
-  font-size: 0.82rem;
+  font-size: var(--fs-sm);
 }
 
 .rate-links a {
@@ -1309,13 +1330,13 @@ ul.news-list {
 }
 
 .product-company {
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
   color: var(--muted);
 }
 
 .sector-tag {
   display: inline-block;
-  font-size: 0.65rem;
+  font-size: var(--fs-xs);
   border: 1px solid var(--border);
   border-radius: 4px;
   padding: 0 4px;
@@ -1330,7 +1351,7 @@ ul.news-list {
   padding: 0;
   margin-top: 2px;
   color: var(--muted);
-  font-size: 0.72rem;
+  font-size: var(--fs-xs);
   cursor: pointer;
   text-decoration: underline;
   font-family: inherit;
@@ -1340,7 +1361,7 @@ ul.news-list {
   white-space: normal;
   text-align: left;
   background: var(--card);
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
   color: var(--muted);
   word-break: keep-all;
 }
@@ -1359,13 +1380,13 @@ ul.news-list {
 }
 
 .history-card .value {
-  font-size: 1.05rem;
+  font-size: var(--fs-h2);
   font-weight: 600;
   margin-top: 2px;
 }
 
 .history-card .sub {
-  font-size: 0.72rem;
+  font-size: var(--fs-xs);
   color: var(--muted);
   margin-top: 2px;
   white-space: normal;
@@ -1375,7 +1396,7 @@ ul.news-list {
 .placeholder,
 .error {
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
 }
 
 .empty-row td {
@@ -1407,25 +1428,25 @@ ul.news-list {
 
 .stat-label {
   color: var(--muted);
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
 }
 
 .stat-value {
   color: var(--fg);
   font-weight: 700;
-  font-size: 1.02rem;
+  font-size: var(--fs-h2);
   font-variant-numeric: tabular-nums;
 }
 
 .stat-sub {
   color: var(--muted);
-  font-size: 0.72rem;
+  font-size: var(--fs-xs);
   font-variant-numeric: tabular-nums;
 }
 
 .stat-note {
   color: var(--muted);
-  font-size: 0.75rem;
+  font-size: var(--fs-xs);
   margin-top: 8px;
 }
 
@@ -1443,7 +1464,7 @@ ul.news-list {
 }
 
 .search-field label {
-  font-size: 0.82rem;
+  font-size: var(--fs-sm);
   color: var(--muted);
 }
 
@@ -1454,7 +1475,7 @@ ul.news-list {
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 6px 10px;
-  font-size: 0.88rem;
+  font-size: var(--fs-field);
   font-family: inherit;
   max-width: 12rem;
 }
@@ -1472,7 +1493,7 @@ ul.news-list {
 }
 
 .budget-deal .tag {
-  font-size: 0.72rem;
+  font-size: var(--fs-xs);
   color: var(--muted);
   border: 1px solid var(--border);
   border-radius: 999px;
@@ -1481,12 +1502,12 @@ ul.news-list {
 
 .search-loading {
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: var(--fs-md);
 }
 
 .budget-more {
   margin-top: 12px;
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
 }
 
 .budget-more a {
@@ -1500,7 +1521,7 @@ ul.news-list {
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 6px 10px;
-  font-size: 0.88rem;
+  font-size: var(--fs-field);
   font-family: inherit;
   max-width: 12rem;
 }
@@ -1510,7 +1531,7 @@ ul.news-list {
 }
 
 .verdict {
-  font-size: 1rem;
+  font-size: var(--fs-lg);
   line-height: 1.6;
   padding: 14px 16px;
   border: 1px solid var(--border);
@@ -1520,13 +1541,13 @@ ul.news-list {
 }
 
 .verdict strong {
-  font-size: 1.15rem;
+  font-size: var(--fs-xl);
 }
 
 .verdict .sub {
   display: block;
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
   margin-top: 6px;
 }
 
@@ -1554,26 +1575,26 @@ ul.news-list {
 
 .option .terms {
   color: var(--muted);
-  font-size: 0.82rem;
+  font-size: var(--fs-sm);
   margin-bottom: 10px;
 }
 
 .option .cost {
-  font-size: 1.3rem;
+  font-size: var(--fs-2xl);
   font-weight: 700;
   font-variant-numeric: tabular-nums;
 }
 
 .option .cost-label {
   color: var(--muted);
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
 }
 
 .option .rows {
   list-style: none;
   padding: 0;
   margin: 10px 0 0;
-  font-size: 0.82rem;
+  font-size: var(--fs-sm);
   color: var(--muted);
 }
 
@@ -1590,14 +1611,14 @@ ul.news-list {
 
 .option .infeasible {
   color: var(--fg);
-  font-size: 0.82rem;
+  font-size: var(--fs-sm);
   margin-top: 10px;
 }
 
 .rate-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
 }
 
 .rate-table th,
@@ -1631,7 +1652,7 @@ ul.news-list {
 }
 
 .lead {
-  font-size: 0.95rem;
+  font-size: var(--fs-lg);
   line-height: 1.65;
   margin: 0 0 16px;
 }
@@ -1643,7 +1664,7 @@ ul.news-list {
 
 .method-body h2 {
   margin: 28px 0 8px;
-  font-size: 1.05rem;
+  font-size: var(--fs-h2);
 }
 
 .method-body h2:first-of-type {
@@ -1704,6 +1725,23 @@ ul.news-list {
   display: block;
 }
 
+/* 표와 카드의 숫자는 자릿수를 세로로 맞춘다. 비례폭 숫자로는 5,211만원과
+ * 11,227만원의 만 자리가 어긋나 눈이 열을 못 따라간다. 이 사이트는 그 비교가
+ * 전부라, 숫자가 나오는 자리에는 전부 고정폭 숫자를 쓴다. */
+.data-table td,
+.data-table .change,
+.data-table .tx-count,
+.change,
+.count,
+.history-current,
+.history-minmax,
+.history-card .value,
+.history-card .sub,
+.overall-card .sub,
+.summary-meta {
+  font-variant-numeric: tabular-nums;
+}
+
 .history-card svg[role="img"] { height: auto; touch-action: none; margin-top: 0; }
 .content-notice.page-notice { margin: -12px 0 20px; }
 
@@ -1750,14 +1788,14 @@ ul.news-list {
 
   .data-table td:first-child {
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: var(--fs-lg);
     padding-bottom: 6px;
   }
 
   .data-table td[data-label]::before {
     content: attr(data-label);
     color: var(--muted);
-    font-size: 0.78rem;
+    font-size: var(--fs-xs);
     text-align: left;
     flex-shrink: 0;
   }

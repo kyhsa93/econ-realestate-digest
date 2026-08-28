@@ -712,8 +712,8 @@ test("가로 위치에서 가장 가까운 지점을 고른다", async () => {
 
 test("축 글자를 시세 표 글자와 같은 크기로 적는다", async () => {
   const css = await readFile(path.join(root, "docs/style.css"), "utf8");
-  const table = css.match(/\.data-table \{[^}]*font-size: ([\d.]+rem)/)?.[1];
-  const axis = css.match(/\.history-card \.axis \{[^}]*font-size: ([\d.]+rem)/)?.[1];
+  const table = css.match(/\.data-table \{[^}]*font-size: ([^;]+);/)?.[1];
+  const axis = css.match(/\.history-card \.axis \{[^}]*font-size: ([^;]+);/)?.[1];
 
   assert.ok(table, "시세 표 글자 크기를 읽지 못했다");
   assert.equal(axis, table, "그래프 축 글자가 시세 표 글자와 다른 크기다");
