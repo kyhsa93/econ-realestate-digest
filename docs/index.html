@@ -101,7 +101,11 @@
       </table>
     </div>
     <div class="show-more" id="realestate-show-more" hidden></div>
-    <a class="back-link" id="realestate-more" href="./realestate.html">자치구 25개 전체 보기 →</a>
+    <nav class="section-links" aria-label="부동산 화면">
+      <a class="back-link" id="realestate-more" href="./realestate.html">자치구 25개 전체 보기 →</a>
+      <a id="realestate-deal-search-link" href="./deal-search.html">실거래 검색 →</a>
+      <a id="realestate-conversion-link" href="./jeonse-vs-wolse.html">전세 vs 월세 계산 →</a>
+    </nav>
 
     <div class="realestate-history-controls">
       <label for="realestate-district-select" id="realestate-district-select-label">지역 선택</label>
@@ -149,6 +153,7 @@
 <div class="chart-tip" id="chart-tip" hidden></div>
 </main>
 
+<script src="./nav.js" defer></script>
 <script src="./analytics.js"></script>
 <script>
   function withObjectParticle(word) {
@@ -206,6 +211,8 @@
       realestateError: "데이터를 불러오지 못했습니다.",
       realestateOverallLabel: "서울 25개구 평균",
       realestateMoreLink: (n) => `자치구 ${n}개 전체 보기 →`,
+      realestateDealSearchLink: "실거래 검색 →",
+      realestateConversionLink: "전세 vs 월세 계산 →",
       realestateShowMore: (n) => `자치구 ${n}개 더 보기`,
       realestateShowLess: "접기",
       realestateShownCount: (shown, total) => `${total}개 중 ${shown}개`,
@@ -299,6 +306,8 @@
       realestateError: "Failed to load data.",
       realestateOverallLabel: "Seoul 25-district average",
       realestateMoreLink: (n) => `See all ${n} districts →`,
+      realestateDealSearchLink: "Search transactions →",
+      realestateConversionLink: "Jeonse vs monthly rent →",
       realestateShowMore: (n) => `Show ${n} more districts`,
       realestateShowLess: "Show less",
       realestateShownCount: (shown, total) => `${shown} of ${total}`,
@@ -1498,6 +1507,8 @@
     document.getElementById("nav-rates").textContent = t("navRates");
     document.getElementById("realestate-heading").textContent = t("realestateHeading");
     document.getElementById("realestate-unit-caption").textContent = t("realestateUnitCaption");
+    document.getElementById("realestate-deal-search-link").textContent = t("realestateDealSearchLink");
+    document.getElementById("realestate-conversion-link").textContent = t("realestateConversionLink");
     document.getElementById("re-th-district").textContent = t("realestateTagDistrict");
     document.getElementById("re-th-sale").textContent = t("realestateTagSale");
     document.getElementById("re-th-jeonse").textContent = t("realestateTagJeonse");

@@ -136,23 +136,35 @@ h1 {
 
 .sub-nav {
   display: flex;
-  gap: 4px;
+  gap: 6px;
   overflow-x: auto;
-  margin: -10px 0 20px;
+  margin: -8px 0 20px;
   padding-bottom: 2px;
 }
 
+/* 1층은 채운 알약, 2층은 테두리만. 전에는 2층이 그냥 회색 글씨라 누를 수 있는
+ * 것으로 안 보였고, 그래서 오른쪽 끝의 검색·계산기가 아무도 안 가는 자리였다. */
 .sub-nav a {
   flex-shrink: 0;
-  padding: 4px 10px;
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 12px;
+  border: 1px solid var(--border);
   border-radius: 8px;
+  background: var(--bg);
   font-size: var(--fs-sm);
   color: var(--muted);
   text-decoration: none;
 }
 
+.sub-nav a:hover {
+  color: var(--fg);
+  border-color: var(--muted);
+}
+
 .sub-nav a[aria-current="page"] {
   background: var(--card);
+  border-color: var(--muted);
   color: var(--fg);
   font-weight: 600;
 }
@@ -1740,6 +1752,62 @@ ul.news-list {
 .overall-card .sub,
 .summary-meta {
   font-variant-numeric: tabular-nums;
+}
+
+/* 가로로 넘치는 내비게이션의 양 끝 페이드. docs/nav.js가 넘칠 때만, 그리고 그
+ * 방향에 남은 것이 있을 때만 클래스를 붙인다 - 늘 켜 두면 끝까지 민 뒤에도
+ * 더 있다고 거짓말을 한다. 스크립트가 없으면 페이드가 없을 뿐 잘리지는 않는다. */
+.page-nav,
+.sub-nav {
+  scrollbar-width: none;
+}
+
+.page-nav::-webkit-scrollbar,
+.sub-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.page-nav.scroll-end:not(.scroll-start),
+.sub-nav.scroll-end:not(.scroll-start) {
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 36px), transparent);
+  mask-image: linear-gradient(to right, #000 calc(100% - 36px), transparent);
+}
+
+.page-nav.scroll-start:not(.scroll-end),
+.sub-nav.scroll-start:not(.scroll-end) {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 36px);
+  mask-image: linear-gradient(to right, transparent, #000 36px);
+}
+
+.page-nav.scroll-start.scroll-end,
+.sub-nav.scroll-start.scroll-end {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 36px, #000 calc(100% - 36px), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 36px, #000 calc(100% - 36px), transparent);
+}
+
+/* 섹션 안에서 다른 화면으로 보내는 줄. 1층을 넷으로 묶어 둔 대신, 그 섹션을
+ * 보고 있는 사람에게 이어지는 도구를 여기서 준다. */
+.section-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin-top: 10px;
+  font-size: var(--fs-sm);
+}
+
+.section-links a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+/* .back-link이 혼자 4px 내려가 있어 같은 줄의 다른 링크와 밑줄이 어긋난다. */
+.section-links .back-link {
+  margin-top: 0;
+}
+
+.section-links a:hover {
+  color: var(--fg);
+  text-decoration: underline;
 }
 
 .history-card svg[role="img"] { height: auto; touch-action: none; margin-top: 0; }
