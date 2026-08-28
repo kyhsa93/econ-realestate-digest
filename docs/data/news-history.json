@@ -5407,7 +5407,8 @@
         "source": "연합뉴스 경제",
         "category": "other",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "South Korean Prime Minister Urges Quick Resolution of Regulations That Can Be Solved Promptly (Comprehensive)"
       },
       {
         "title": "삼전·닉스 내리자 코스피 1.79% 하락 마감…코스닥은 강보합",
@@ -5416,7 +5417,8 @@
         "source": "연합뉴스 경제",
         "category": "stocks",
         "preview": "(서울=연합뉴스) 김유향 기자 = 28일 반도체 '투톱'인 삼성전자[005930]와 SK하이닉스[000660] 주가가 동반 급락하면서 코스피가 ...",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Kospi closes 1.79% lower as Samsung and Nexon drop, Kosdaq holds firm"
       },
       {
         "title": "[외환] 원/달러 환율 8.4원 내린 1,372.5원(15:30 기준가)",
@@ -5425,7 +5427,8 @@
         "source": "연합뉴스 경제",
         "category": "stocks",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Won/Dollar Exchange Rate Falls 8.4 Won to 1,372.5 Won (As of 15:30)"
       },
       {
         "title": "증시 널뛰고 금리 오르자…고금리 단기상품 들어볼까",
@@ -5434,7 +5437,8 @@
         "source": "한국경제 경제",
         "category": "rates",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Stocks Jump, Rates Rise... Considering High-Yield Short-Term Products?"
       },
       {
         "title": "우리금융저축은행·토스, 대안평가로 소상공인 대출 문턱 낮춰",
@@ -5443,7 +5447,18 @@
         "source": "한국경제 경제",
         "category": "rates",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "rates",
+            "label": "적금 최고금리(12개월)",
+            "labelEn": "Top 12-month savings rate",
+            "value": "연 14.00%",
+            "valueEn": "14.00% p.a.",
+            "href": "./saving-rates.html"
+          }
+        ],
+        "titleEn": "Ourifin Savings Bank and Toss Lower Barriers for Small Business Loans with Alternative Evaluation"
       },
       {
         "title": "[게시판] 공정위·계량경제학회, '디지털시대 경쟁정책' 학술대회",
@@ -5458,7 +5473,8 @@
             "link": "https://www.newsis.com/view/NISX20260828_0003766954",
             "source": "뉴시스 경제"
           }
-        ]
+        ],
+        "titleEn": "[Board] Fair Trade Commission, Korean Econometric Society Hold Academic Conference on 'Competition Policy in the Digital Age"
       },
       {
         "title": "SH, 두산위브더프레스티지 등 행복주택 1천484세대 입주자 모집",
@@ -5467,7 +5483,20 @@
         "source": "연합뉴스 경제",
         "category": "realestate",
         "preview": "(서울=연합뉴스) 김준태 기자 = 서울주택도시개발공사(SH)는 두산위브더프레스티지 등 1천484세대의 행복주택 입주자를 모집한다고 28일 밝혔다...",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./apartment-sale.html",
+            "label": "서울 전체 아파트 84㎡ 매매",
+            "labelEn": "Seoul apartment 84㎡ sale",
+            "value": "13억 2,411만원",
+            "valueEn": "₩1,324M",
+            "note": "최근 1주 계약 794건 · 8/21 대비 +3.1%",
+            "noteEn": "794 deals in the last 1 weeks · +3.1% vs Aug 21"
+          }
+        ],
+        "titleEn": "SH, Doosan Weibro Prestige, etc., recruit 1,484 residents for Happy Housing"
       },
       {
         "title": "\"이민 단속에 유령 도시 됐다\"… 美 강경 이민정책에 경제 '역풍'",
@@ -5476,7 +5505,8 @@
         "source": "뉴시스 경제",
         "category": "other",
         "preview": "[서울=뉴시스]고재은 기자 = 최근 도널드 트럼프 미국 행정부가 비자 심사강화, 이민자 체포 등 국경 문턱을 한층 높이는 가운데 미국 경제에 미칠 영향에 관심이 모이고 있다. 국가 안보와 자국 노동자 보호를 명목으로…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Turned into a Ghost City Due to Immigration Crackdown\"… U.S. Tough Immigration Policy Sparks Economic Backlash"
       },
       {
         "title": "\"사전청약 구제한다더니\"…'뉴홈' 40년 초저리대출 어디까지",
@@ -5485,7 +5515,8 @@
         "source": "한국경제 부동산",
         "category": "realestate",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Promised to rescue presale buyers\"… 'New Home' 40-year ultra-low interest loan how far has it gone"
       },
       {
         "title": "오세훈 “서울시 힘 빼기보다 주택 공급 봐야…정비사업 규제 풀어라”",
@@ -5494,7 +5525,20 @@
         "source": "조선비즈 부동산",
         "category": "realestate",
         "preview": "오세훈 서울시장이 정부의 주택 공급 정책을 두고 “서울시를 패싱하고 서울시장의 권한을 약화시키겠다는 정치적 목적 외에는 달리 설명하기 어렵다”며 정비사업 규제 완화를 촉구했다. 서울시가 대안으로 제시한 탄천물재생센터…",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./apartment-sale.html",
+            "label": "서울 전체 아파트 84㎡ 매매",
+            "labelEn": "Seoul apartment 84㎡ sale",
+            "value": "13억 2,411만원",
+            "valueEn": "₩1,324M",
+            "note": "최근 1주 계약 794건 · 8/21 대비 +3.1%",
+            "noteEn": "794 deals in the last 1 weeks · +3.1% vs Aug 21"
+          }
+        ],
+        "titleEn": "Oh Sehun says \"Instead of weakening Seoul, we need to increase housing supply... Lift regulations on redevelopment projects"
       },
       {
         "title": "교통 호재에 양산 부동산 시장 온기…첫 힐스테이트 등판",
@@ -5503,7 +5547,8 @@
         "source": "한국경제 부동산",
         "category": "realestate",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Transportation boon warms Yangsan real estate market... First Hillstate makes debut"
       },
       {
         "title": "“반도체 메가벨트 품었다”…이지건설, ‘아산테크노밸리 the1 7차’ 29일 견본주택 개관",
@@ -5512,7 +5557,8 @@
         "source": "매일경제 부동산",
         "category": "realestate",
         "preview": "지하 2층~지상 최고 25층 10개동 전용 77·84㎡ 총 622가구 규모 평택·동탄에 이은 차세대 성장축 K-반도체 산업벨트 중심 입지 공공택지 분양가상한제 적용이지건설이 오는 ..",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Ejiz Construction to Open Model House for 'Aasan Techno Valley the1 7th' on 29th"
       },
       {
         "title": "반도체 특수에 경기 아파트값 양극화 심화…남부↑·서북부↓",
@@ -5521,7 +5567,8 @@
         "source": "뉴시스 경제",
         "category": "realestate",
         "preview": "[서울=뉴시스] 변해정 기자 = 경기 지역 간 집값 격차가 역대 최고 수준으로 벌어지며 양극화가 심화하는 양상이다. 28일 한국부동산원에 따르면 올해 들어 이달 24일까지 경기 지역 아파트 매매가격은 4.36% 올랐…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Semiconductor boom deepens apartment price polarization in Gyeonggi: southern areas up, northwest down"
       },
       {
         "title": "국채금리 잡으려는 베선트, 인플레 잡으려는 워시…美재무·연준 '엇박자'",
@@ -5530,7 +5577,8 @@
         "source": "뉴시스 경제",
         "category": "rates",
         "preview": "[서울=뉴시스]박미선 기자 = 미국 재무부가 장기 국채금리를 낮추기 위해 국채 바이백(재매입)을 확대하면서 연방준비제도(Fed·연준)와의 정책 충돌 우려가 커지고 있다. 인플레이션을 잡기 위해 금리 인상 가능성을 검…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Bullard Tries to Control Bond Rates, Powell Tries to Control Inflation... U.S. Treasury and Fed Out of Sync"
       },
       {
         "title": "[올댓차이나] 홍콩 증시, 속락 개장 후 저가 매수세로 반등 시도… H주 0.12%↑",
@@ -5539,7 +5587,8 @@
         "source": "뉴시스 경제",
         "category": "stocks",
         "preview": "[서울=뉴시스]이재준 기자 = 홍콩 증시는 28일 중동 정세를 둘러싼 불확실성이 커진 가운데 국제 유가와 미국 장기금리가 오르면서 리스크 회피 심리를 자극, 매도가 선행해 속락 출발했다. 다만 매도가 일단락 하고서…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "[AllChina] Hong Kong stock market attempts rebound with low-price buying after resumption of trading... H shares up 0.12%"
       },
       {
         "title": "오세훈 시장 \"정부 부동산 정책 목적이 '오세훈 힘빼기'인가\"",
@@ -5554,7 +5603,20 @@
             "link": "https://www.newsis.com/view/NISX20260828_0003766861",
             "source": "뉴시스 경제"
           }
-        ]
+        ],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./apartment-sale.html",
+            "label": "서울 전체 아파트 84㎡ 매매",
+            "labelEn": "Seoul apartment 84㎡ sale",
+            "value": "13억 2,411만원",
+            "valueEn": "₩1,324M",
+            "note": "최근 1주 계약 794건 · 8/21 대비 +3.1%",
+            "noteEn": "794 deals in the last 1 weeks · +3.1% vs Aug 21"
+          }
+        ],
+        "titleEn": "O Se-hoon says government real estate policy aims to \"weaken O Se-hoon"
       },
       {
         "title": "국고채 금리 일제히 상승…3년물 장중 연 3.787%",
@@ -5563,7 +5625,8 @@
         "source": "연합뉴스 경제",
         "category": "rates",
         "preview": "(서울=연합뉴스) 28일 국고채 금리가 일제히 상승하고 있다.",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "South Korea's government bond yields rise uniformly...3-year bonds trade at 3.787% annually"
       },
       {
         "title": "39억 아파트 사들이더니…'30세' 나연, 95억 건물주 됐다 [집코노미-핫!부동산]",
@@ -5572,7 +5635,8 @@
         "source": "한국경제 부동산",
         "category": "realestate",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "3,900,000,000 Apartment Buyers, Then... '30-Year-Old' Na Yeon Becomes 9,500,000,000 Building Owner [Zikkonomi- Hot! Real Estate]"
       },
       {
         "title": "구의동·성북동 노후 저층주거지 정비…모아주택 643세대 공급",
@@ -5581,7 +5645,20 @@
         "source": "연합뉴스 경제",
         "category": "realestate",
         "preview": "(서울=연합뉴스) 김준태 기자 = 서울시는 전날 제10차 소규모주택정비 통합심의소위원회를 열고 광진구 구의동과 성북구 성북동의 노후 저층주거지 ...",
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-gwangjin.html",
+            "label": "광진구 아파트 84㎡ 매매",
+            "labelEn": "광진구 apartment 84㎡ sale",
+            "value": "14억 5,319만원",
+            "valueEn": "₩1,453M",
+            "note": "최근 1주 계약 24건 · 8/21 대비 -25.3%",
+            "noteEn": "24 deals in the last 1 weeks · -25.3% vs Aug 21"
+          }
+        ],
+        "titleEn": "Rehabilitation of aging low-rise residential areas in Gudeokdong and Seongbukdong to supply 643 Moahousing units"
       },
       {
         "title": "용산구, 이촌동 강촌아파트 1113가구 리모델링 승인",
@@ -5590,7 +5667,20 @@
         "source": "한국경제 부동산",
         "category": "realestate",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "context": [
+          {
+            "kind": "realestate",
+            "href": "./district-yongsan.html",
+            "label": "용산구 아파트 84㎡ 매매",
+            "labelEn": "용산구 apartment 84㎡ sale",
+            "value": "27억 6,434만원",
+            "valueEn": "₩2,764M",
+            "note": "최근 1주 계약 14건",
+            "noteEn": "14 deals in the last 1 weeks"
+          }
+        ],
+        "titleEn": "Yongsan District approves remodeling of 1,113 units at Gangchon Apartment in Icheon-dong"
       },
       {
         "title": "\"주택 수요에 비해 공급 부족해 성장 제약\"…IMF의 진단",
@@ -5599,7 +5689,8 @@
         "source": "한국경제 부동산",
         "category": "realestate",
         "preview": null,
-        "dupes": []
+        "dupes": [],
+        "titleEn": "Shortage of housing supply compared to demand constrains growth…IMF's diagnosis"
       },
       {
         "title": "[올댓차이나] 중국 증시 하락 출발…상하이지수 0.16%↓",
@@ -5608,7 +5699,8 @@
         "source": "뉴시스 경제",
         "category": "stocks",
         "preview": "[서울=뉴시스] 문예성 기자 = 중국 증시가 28일 하락 출발했다. 이날 상하이종합지수는 전날보다 0.16% 하락한 3950.24로 장을 시작했다. 선전성분지수는 전장 대비 0.21% 떨어진 1만4019.28로, 중…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "[AllChina] Chinese stock market drops at start... Shanghai index down 0.16%"
       },
       {
         "title": "시티오씨엘 9단지 오션파크뷰, 견본주택 개관…31일 특별공급",
@@ -5617,7 +5709,8 @@
         "source": "뉴시스 경제",
         "category": "realestate",
         "preview": "[서울=뉴시스]이종성 기자 = 인천 미추홀구 용현·학익 1블록 도시개발사업지에 들어서는 '시티오씨엘 9단지 오션파크뷰'가 견본주택을 열고 본격적인 분양 일정에 들어갔다. 28일 분양업계에 따르면 시티오씨엘 9단지 오…",
-        "dupes": []
+        "dupes": [],
+        "titleEn": "City OCI 9th Phase Ocean Park View Model House Opens… Special Supply on 31st"
       },
       {
         "title": "산하에코종합건설, 인천 부평구 십정동 ‘희망공원 서측A3구역 가로주택정비사업’ 시공사 선정",
@@ -5632,7 +5725,8 @@
             "link": "https://www.hankyung.com/article/202608288747i",
             "source": "한국경제 부동산"
           }
-        ]
+        ],
+        "titleEn": "Samha EK Jonghap Construction Selected as Contractor for \"Hope Park West Side A3 Area Street Housing Improvement Project\" in Incheon Bupyeong-gu, Sipjeong-dong"
       }
     ]
   }
