@@ -9,7 +9,8 @@
       "source": "뉴시스 경제",
       "category": "stocks",
       "preview": "후속기사가 이어집니다 ◎공감언론 뉴시스 ksk@newsis.com",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "[Breaking News] NY Stock Market Opens Mixed Ahead of Wash's Jackson Hole Speech"
     },
     {
       "title": "[올댓차이나] 홍콩 증시, 저가 매수세로 소폭 반등 마감… 항셍 0.08%↑",
@@ -18,7 +19,8 @@
       "source": "뉴시스 경제",
       "category": "stocks",
       "preview": "[서울=뉴시스]이재준 기자 = 홍콩 증시는 28일 중동 정세를 둘러싼 불확실성으로 속락 개장했다가 실적 호조 종목에 매수가 들어오고 저가 매수세도 유입하면서 소폭 반등 마감했다. 항셍지수는 이날 전일 대비 19.05…",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "[AllChina] Hong Kong market closes with slight rebound on bargain hunting... Hang Seng 0.08%↑"
     },
     {
       "title": "3기신도시 공공임대 절반, 무주택 청년에 공급",
@@ -27,7 +29,8 @@
       "source": "매일경제 부동산",
       "category": "realestate",
       "preview": "전월세를 더 확실히 지원해 주거 부담을 덜고 과도한 대출이 필요 없는 분양 모델을 도입하는 등 청년 주거 사다리 구축 방안이 추진된다. 정부는 28일 '청년 성장 단계별 추진전략..",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Half of the public rental housing in the Third New City to be supplied to young people without homes"
     },
     {
       "title": "[단독] 재초환 부과 재건축 단지서 7억 부담금 얹은 매물 등장",
@@ -37,6 +40,7 @@
       "category": "realestate",
       "preview": "재건축초과이익환수제(재초환) 부담금이 서울 강남권 집값을 밀어올리는 현상이 나타나기 시작했다. 사상 최대 재초환 부담금이 부과될 것으로 예상된 단지인 서울 서초구 '래미안 트리니원..",
       "dupes": [],
+      "titleEn": "[Exclusive] 700,000,000 Won Additional Burden on Reconstruction Complex with Reassessment of Rebuilding Fees",
       "context": [
         {
           "kind": "realestate",
@@ -58,6 +62,7 @@
       "category": "realestate",
       "preview": "\"재건축초과이익환수제 부담금은 아직 확정되지 않았지만 7억~8억원 정도로 예상합니다. 이 매물은 그 금액이 포함된 가격이에요.\" 이달 입주를 시작한 서울 서초구 래미안 트리니원(옛..",
       "dupes": [],
+      "titleEn": "Each reconstruction site bears a burden of 300,000,000 to 700,000,000 won ... concerns rise over rising home prices if special agreements spread",
       "context": [
         {
           "kind": "realestate",
@@ -79,6 +84,7 @@
       "category": "realestate",
       "preview": "서울 고가 아파트와 저가 아파트 간 가격 격차가 7개월 연속 좁혀졌다. 고가 아파트 가격이 주춤한 새 대출 규제에 밀려난 수요가 중저가 아파트로 이동하면서 상대적으로 저렴한 아파트..",
       "dupes": [],
+      "titleEn": "Seoul's housing price gap narrows, but mid-to-low priced apartments surge in \"upward equalization",
       "context": [
         {
           "kind": "realestate",
@@ -107,7 +113,8 @@
       "source": "한국경제 경제",
       "category": "rates",
       "preview": null,
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Raising interest rates worsens finances, lowering them burdens prices... central bank dilemma"
     },
     {
       "title": "인터넷은행 3사, 2분기 중·저신용 대출비중 목표치 30% 넘겨",
@@ -116,7 +123,8 @@
       "source": "연합뉴스 경제",
       "category": "other",
       "preview": "(서울=연합뉴스) 이도흔 기자 = 올해 2분기 인터넷전문은행 3사의 중·저신용 대출 비중이 모두 목표 수준인 30%를 넘었다.",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Three internet banks exceed 30% target for mid- and low-credit loan ratio in Q2"
     },
     {
       "title": "9월 아파트 입주 예정물량 올해 월간 최저치",
@@ -125,7 +133,8 @@
       "source": "한국경제 부동산",
       "category": "realestate",
       "preview": null,
-      "dupes": []
+      "dupes": [],
+      "titleEn": "September apartment supply to be lowest monthly level this year"
     },
     {
       "title": "환율 1,370원선 접근, 13개월 만에 최저…원/엔 850엔대로",
@@ -134,7 +143,8 @@
       "source": "연합뉴스 경제",
       "category": "stocks",
       "preview": "(서울=연합뉴스) 김지연 기자 = 원/달러 환율이 1,371원대로 내려가며 13개월 만에 최저치를 기록했다.",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Exchange rate approaches 1,370 won, lowest in 13 months… won/yen hits 850 yen level"
     },
     {
       "title": "[올댓차이나] 대만 증시, 엔비디아 호실적에 나흘째 상승…2개월 만에 최고치",
@@ -143,7 +153,8 @@
       "source": "뉴시스 경제",
       "category": "stocks",
       "preview": "[서울=뉴시스]이재준 기자 = 대만 타이베이 증시는 28일 미국 반도체사 엔비디아 실적 호조 영향으로 인공지능(AI) 서버 관련주에 매수가 선행하면서 4거래일째 상승 마감했다. 자취안(加權) 지수는 전일 대비 356…",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "[TechChina] Taiwan's stock market rises for four consecutive days on NVIDIA's strong earnings...reaching a two-month high"
     },
     {
       "title": "청년 주거지원 확 넓힌다… 월세 지원 중위소득 60→100%로 완화",
@@ -152,7 +163,8 @@
       "source": "조선비즈 부동산",
       "category": "realestate",
       "preview": "정부가 청년 월세 지원 대상을 기준중위소득 60% 이하에서 100% 이하로 대폭 확대한다. 주거 안정을 위해 소득 기준 탓에 월세 지원을 받지 못한 청년층도 지원 대상에 포함하기로 한 것이다. 저소득 청년은 월세 지…",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Broadening Support for Young People's Housing... Monthly Rent Support for Middle-Income Earners Raised from 60% to 100%"
     },
     {
       "title": "외인 선물 매도에 국고채 금리 상승…3년물 연 3.788%(종합)",
@@ -161,7 +173,8 @@
       "source": "연합뉴스 경제",
       "category": "rates",
       "preview": "(서울=연합뉴스) 강수지 기자 = 28일 국고채 금리는 일제히 상승했다. 외국인이 국채선물을 대량으로 순매도하면서 전일 한국은행의 금융통화위원회...",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Foreigners' bond sales push up government bond rates... 3-year rate at 3.788% (comprehensive)"
     },
     {
       "title": "[올댓차이나] 중국 증시 하락 마감…상하이지수 0.11%↓",
@@ -170,7 +183,8 @@
       "source": "뉴시스 경제",
       "category": "stocks",
       "preview": "[서울=뉴시스] 문예성 기자 = 중국 증시가 28일 하락 마감했다. 이날 상하이종합지수는 전날보다 0.11% 하락한 3952.18로 거래를 마쳤다. 반면 선전성분지수는 전장 대비 0.68% 하락한 1만3953.07로…",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "[AllChina] China's stock market closes lower… Shanghai index down 0.11%"
     },
     {
       "title": "국고채 금리 일제히 상승…3년물 연 3.788%",
@@ -179,7 +193,8 @@
       "source": "연합뉴스 경제",
       "category": "rates",
       "preview": "(서울=연합뉴스) 28일 국고채 금리가 일제히 상승했다.",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "South Korea's government bond rates rise uniformly...3-year rate at annual 3.788%"
     },
     {
       "title": "日증시, 美소프트웨어주 훈풍에 상승 마감…닛케이 0.41%↑",
@@ -188,7 +203,8 @@
       "source": "뉴시스 경제",
       "category": "stocks",
       "preview": "[서울=뉴시스] 신효령 기자 = 28일 일본 도쿄증시에서 닛케이225지수(닛케이평균주가)가 상승 마감했다. 니혼게이자이신문에 따르면 이날 닛케이지수는 전 거래일보다 273.58포인트(0.41%) 오른 6만6405.5…",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Tokyo Stock Exchange closes higher on strong winds from U.S. software stocks... Nikkei up 0.41%"
     },
     {
       "title": "삼전·닉스 내리자 코스피 1.79% 하락 마감…코스닥은 강보합(종합)",
@@ -197,7 +213,8 @@
       "source": "연합뉴스 경제",
       "category": "stocks",
       "preview": "(서울=연합뉴스) 김유향 기자 = 28일 반도체 '투톱'인 삼성전자[005930]와 SK하이닉스[000660] 주가가 동반 급락하면서 코스피가 ...",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "KOSPI Closes 1.79% Lower as Samsung and Nexon Drop; KOSDAQ Holds Firm"
     },
     {
       "title": "9월 전국 입주 예정 아파트 1만4000여 가구…5년5개월來 최저",
@@ -207,6 +224,7 @@
       "category": "realestate",
       "preview": "[서울=뉴시스] 변해정 기자 = 가을 이사철인 9월 전국 아파트 입주 예정 물량이 5년 5개월만에 가장 적은 수준을 기록할 전망이다. 28일 부동산114에 따르면 9월 전국 아파트 입주 예정 물량은 1만4174가구로…",
       "dupes": [],
+      "titleEn": "September Apartments to be Completed Nationwide: 10,0004000 Units... Lowest in 5 Years 5 Months",
       "context": [
         {
           "kind": "realestate",
@@ -227,7 +245,8 @@
       "source": "연합뉴스 경제",
       "category": "other",
       "preview": null,
-      "dupes": []
+      "dupes": [],
+      "titleEn": "South Korean Prime Minister Urges Economic Group Leaders to \"Immediately Resolve Regulations That Can Be Quickly Addressed\"(Comprehensive)"
     },
     {
       "title": "[외환] 원/달러 환율 8.4원 내린 1,372.5원(15:30 기준가)",
@@ -236,7 +255,8 @@
       "source": "연합뉴스 경제",
       "category": "stocks",
       "preview": null,
-      "dupes": []
+      "dupes": [],
+      "titleEn": "[Yen/USD Exchange Rate Falls 8.4 Won to 1,372.5 Won (As of 15:30)]"
     },
     {
       "title": "증시 널뛰고 금리 오르자…고금리 단기상품 들어볼까",
@@ -245,7 +265,8 @@
       "source": "한국경제 경제",
       "category": "rates",
       "preview": null,
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Stocks Jump, Rates Rise... Considering High-Yield Short-Term Products?"
     },
     {
       "title": "우리금융저축은행·토스, 대안평가로 소상공인 대출 문턱 낮춰",
@@ -255,6 +276,7 @@
       "category": "rates",
       "preview": null,
       "dupes": [],
+      "titleEn": "Urinong Financial Savings Bank and Toss Lower Barriers for Small Business Loans with Alternative Evaluation",
       "context": [
         {
           "kind": "rates",
@@ -279,7 +301,8 @@
           "link": "https://www.newsis.com/view/NISX20260828_0003766954",
           "source": "뉴시스 경제"
         }
-      ]
+      ],
+      "titleEn": "[Board] Fair Trade Commission, Korean Econometric Society Hold Academic Conference on 'Competition Policy in the Digital Age"
     },
     {
       "title": "\"이민 단속에 유령 도시 됐다\"… 美 강경 이민정책에 경제 '역풍'",
@@ -288,7 +311,8 @@
       "source": "뉴시스 경제",
       "category": "other",
       "preview": "[서울=뉴시스]고재은 기자 = 최근 도널드 트럼프 미국 행정부가 비자 심사강화, 이민자 체포 등 국경 문턱을 한층 높이는 가운데 미국 경제에 미칠 영향에 관심이 모이고 있다. 국가 안보와 자국 노동자 보호를 명목으로…",
-      "dupes": []
+      "dupes": [],
+      "titleEn": "Turned into a Ghost City Due to Immigration Crackdown\"… U.S. Hardline Immigration Policy Sparks Economic Backlash"
     }
   ],
   "realestateStats": [
