@@ -18,6 +18,14 @@
   --up: #d64545;
   --down: #2f6fed;
 
+  /* 브랜드색. manifest와 theme-color가 이 값인데 화면에는 한 번도 안 나왔다.
+   * 데이터 안에는 절대 쓰지 않는다 - 표 안의 파랑은 이미 '하락'이라는 뜻을
+   * 갖고 있어서, 같은 자리에 다른 뜻의 파랑을 놓으면 둘 다 못 읽는다.
+   * 지금 어디에 있고 무엇을 골랐는지를 말하는 자리(1층·2층 탭, 칩, 초점,
+   * 섹션 제목 밑줄)에만 쓴다. */
+  --accent: #253e81;
+  --accent-on: #ffffff;
+
   /* 글자 크기 축척. 전에는 0.65rem부터 1.4rem까지 스물두 단계가 섞여 있었다.
    * 열 살짜리 계단은 계층이 아니라 우연이라, 여덟 단으로 줄이고 바닥을 올렸다.
    * 0.78rem(12.5px)이 하한이다 - 한글은 그 아래로 내려가면 획이 뭉갠다.
@@ -35,8 +43,7 @@
   /* 손가락이 닿아야 하는 최소 크기. 알약 탭 30px, 아이콘 버튼 36px,
    * 뉴스 칩 26px이었다 - 셋 다 엄지 끝보다 작다. */
   --tap: 44px;
-  /* 초점 테두리. 6단계에서 액센트가 생기면 여기만 바꾸면 된다. */
-  --focus: var(--fg);
+  --focus: var(--accent);
 }
 
 :root[data-theme="dark"] {
@@ -46,6 +53,8 @@
   --muted: #9a9a9a;
   --card: #1a1d24;
   --border: #2a2d35;
+  --accent: #8aa9f0;
+  --accent-on: #0f1115;
 }
 
 :root[data-theme="light"] {
@@ -55,6 +64,8 @@
   --muted: #666;
   --card: #f5f5f7;
   --border: #e2e2e5;
+  --accent: #253e81;
+  --accent-on: #ffffff;
 }
 
 [hidden] {
@@ -168,28 +179,23 @@ h1 {
 }
 
 .sub-nav a:hover {
-  color: var(--fg);
-  border-color: var(--muted);
+  color: var(--accent);
+  border-color: var(--accent);
 }
 
 .sub-nav a[aria-current="page"] {
   background: var(--card);
-  border-color: var(--muted);
-  color: var(--fg);
+  border-color: var(--accent);
+  color: var(--accent);
   font-weight: 600;
 }
 
-.page-nav a.active {
-  background: var(--fg);
-  color: var(--bg);
-  border-color: var(--fg);
-  font-weight: 600;
-}
-
+/* 1층은 액센트로 채우고, 2층은 액센트 테두리만. 층이 색으로도 갈린다. */
+.page-nav a.active,
 .page-nav a[aria-current="page"] {
-  background: var(--fg);
-  color: var(--bg);
-  border-color: var(--fg);
+  background: var(--accent);
+  color: var(--accent-on);
+  border-color: var(--accent);
   font-weight: 600;
 }
 
@@ -224,10 +230,23 @@ section {
 }
 
 h2 {
+  position: relative;
   font-size: var(--fs-h2);
   margin: 0 0 12px;
   padding-bottom: 6px;
   border-bottom: 1px solid var(--border);
+}
+
+/* 밑줄 왼쪽 끝만 액센트로 바꾼다. 예순두 장이 전부 흰 바탕에 회색 표라
+ * 어디가 어디인지 구분이 안 됐는데, 섹션 머리가 눈에 걸리면 훑을 수 있다. */
+h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 28px;
+  height: 2px;
+  background: var(--accent);
 }
 
 .change.up {
@@ -379,9 +398,9 @@ ul.news-list {
 }
 
 .news-chip[aria-pressed="true"] {
-  background: var(--fg);
-  border-color: var(--fg);
-  color: var(--bg);
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-on);
 }
 
 .news-chip-count {
@@ -1437,7 +1456,7 @@ ul.news-list {
 }
 
 .stat-card:hover {
-  border-color: var(--muted);
+  border-color: var(--accent);
   text-decoration: none;
 }
 
@@ -1902,6 +1921,8 @@ summary:focus-visible,
     --muted: #9a9a9a;
     --card: #1a1d24;
     --border: #2a2d35;
+    --accent: #8aa9f0;
+    --accent-on: #0f1115;
   }
 }
 

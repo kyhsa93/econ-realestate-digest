@@ -122,3 +122,62 @@ test("걸러낸 결과를 소리로도 알린다", async () => {
   await has("deal-search.html", "search-status");
   await has("rates.html", "show-more");
 });
+
+// --- 액센트 -----------------------------------------------------------------
+
+const HEX = /^#([0-9a-f]{6})$/i;
+
+function luminance(hex) {
+  const [r, g, b] = HEX.exec(hex)[1].match(/../g).map((h) => {
+    const c = parseInt(h, 16) / 255;
+    return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+  });
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+}
+
+const contrast = (a, b) => {
+  const [hi, lo] = [luminance(a), luminance(b)].sort((x, y) => y - x);
+  return (hi + 0.05) / (lo + 0.05);
+};
+
+// :root, 다크 미디어쿼리, data-theme 둘 - 네 갈래 모두에서 색이 맞아야 한다.
+function palettes(text) {
+  const blocks = [...text.matchAll(/(:root(?:\[data-theme="[a-z]+"\])?)\s*\{([^}]*)\}/g)];
+  return blocks.map(([, sel, body]) => {
+    const vars = Object.fromEntries(
+      [...body.matchAll(/(--[a-z-]+):\s*(#[0-9a-f]{6});/gi)].map((m) => [m[1], m[2]])
+    );
+    return { sel, vars };
+  });
+}
+
+test("네 갈래 팔레트가 모두 액센트를 갖는다", async () => {
+  const text = await css();
+  const found = palettes(text).filter((p) => p.vars["--accent"]);
+  // :root · @media dark의 :root · [data-theme="dark"] · [data-theme="light"]
+  assert.equal(found.length, 4, `액센트를 정의한 팔레트가 ${found.length}개다`);
+});
+
+test("액센트 위의 글자가 읽힌다", async () => {
+  for (const { sel, vars } of palettes(await css())) {
+    if (!vars["--accent"]) continue;
+    const onAccent = contrast(vars["--accent"], vars["--accent-on"]);
+    assert.ok(onAccent >= 4.5, `${sel}: 채운 탭의 글자 대비가 ${onAccent.toFixed(1)}:1이다`);
+
+    // 2층 현재 항목은 카드 위에 액센트 글씨로 앉는다.
+    if (vars["--card"]) {
+      const onCard = contrast(vars["--accent"], vars["--card"]);
+      assert.ok(onCard >= 4.5, `${sel}: 카드 위 액센트 대비가 ${onCard.toFixed(1)}:1이다`);
+    }
+  }
+});
+
+test("액센트를 데이터 안에는 쓰지 않는다", async () => {
+  // 표 안의 파랑은 이미 '하락'이라는 뜻이다. 같은 자리에 다른 뜻의 파랑을
+  // 놓으면 둘 다 못 읽는다. 액센트는 어디에 있고 무엇을 골랐는지만 말한다.
+  const inData = rules(await css())
+    .filter((r) => r.body.includes("var(--accent)"))
+    .filter((r) => /\.(data-table|rate-table|change|count|price-strong|rate-strong|history-current)\b/.test(r.sel));
+
+  assert.deepEqual(inData.map((r) => r.sel), [], "액센트가 데이터 안까지 들어왔다");
+});
