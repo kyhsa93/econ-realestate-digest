@@ -144,10 +144,10 @@ test("다른 도메인 요청에는 끼어들지 않는다", async () => {
 
 test("새 페이지들이 설치 시 미리 받는 목록에 들어 있다", async () => {
   const source = await readFile(path.join(root, "docs/sw.js"), "utf8");
-  for (const asset of ["./index.html", "./rates.html", "./news.html", "./analytics.js"]) {
+  for (const asset of ["./index.html", "./rates.html", "./news.html", "./style.css", "./analytics.js"]) {
     assert.ok(source.includes(`"${asset}"`), `${asset}이 셸 목록에 없다`);
   }
-  assert.ok(/CACHE_NAME = "econ-digest-v9"/.test(source), "캐시 버전을 올리지 않았다");
+  assert.ok(/CACHE_NAME = "econ-digest-v10"/.test(source), "캐시 버전을 올리지 않았다");
 });
 
 test("페이지 코드는 브라우저 캐시를 건너뛰고 받는다", async () => {
@@ -155,9 +155,11 @@ test("페이지 코드는 브라우저 캐시를 건너뛰고 받는다", async 
 
   await sw.respond(`${ORIGIN}/econ-realestate-digest/index.html`, { mode: "navigate" });
   await sw.respond(`${ORIGIN}/econ-realestate-digest/analytics.js`);
+  // 62장이 같은 style.css를 본다. 캐시부터 주면 한 번 낡을 때 사이트 전체가 낡는다.
+  await sw.respond(`${ORIGIN}/econ-realestate-digest/style.css`);
   await sw.respond(`${ORIGIN}/econ-realestate-digest/data/news.json?_=1`);
 
-  assert.equal(sw.calls.length, 3, "가로채지 못한 요청이 있다");
+  assert.equal(sw.calls.length, 4, "가로채지 못한 요청이 있다");
   for (const call of sw.calls) {
     assert.equal(call.init?.cache, "reload", `${call.url}: 브라우저 캐시가 끼어들 수 있다`);
   }

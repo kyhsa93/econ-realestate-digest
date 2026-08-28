@@ -711,37 +711,47 @@ test("가로 위치에서 가장 가까운 지점을 고른다", async () => {
 });
 
 test("축 글자를 시세 표 글자와 같은 크기로 적는다", async () => {
-  const html = await readFile(path.join(root, "docs/realestate.html"), "utf8");
-  const table = html.match(/\.data-table \{[^}]*font-size: ([\d.]+rem)/)?.[1];
-  const axis = html.match(/\.history-card \.axis \{[^}]*font-size: ([\d.]+rem)/)?.[1];
+  const css = await readFile(path.join(root, "docs/style.css"), "utf8");
+  const table = css.match(/\.data-table \{[^}]*font-size: ([\d.]+rem)/)?.[1];
+  const axis = css.match(/\.history-card \.axis \{[^}]*font-size: ([\d.]+rem)/)?.[1];
 
   assert.ok(table, "시세 표 글자 크기를 읽지 못했다");
   assert.equal(axis, table, "그래프 축 글자가 시세 표 글자와 다른 크기다");
 });
 
+// 전에는 두 화면의 카드 CSS를 한 줄씩 맞대어 갈라졌는지 봤다. 스타일시트가 한 장이
+// 된 지금 그 비교는 늘 참이라 아무것도 못 잡는다. 대신 갈라짐 자체를 막는다 -
+// 페이지 안에 <style>이 다시 생기는 순간 예순두 갈래로 가는 길이 열린다.
+test("페이지가 스타일을 따로 품지 않는다", async () => {
+  const { readdir } = await import("node:fs/promises");
+  const pages = (await readdir(path.join(root, "docs"))).filter((f) => f.endsWith(".html"));
+  assert.ok(pages.length >= 60, `HTML을 ${pages.length}장밖에 못 찾았다`);
+
+  for (const page of pages) {
+    const html = await readFile(path.join(root, "docs", page), "utf8");
+    assert.ok(!html.includes("<style>"), `docs/${page}에 <style>이 다시 생겼다`);
+    assert.ok(html.includes('href="./style.css"'), `docs/${page}이 스타일시트를 부르지 않는다`);
+  }
+});
+
 test("시세 페이지 추이 카드가 데일리 다이제스트와 같은 짜임이다", async () => {
+  const css = await readFile(path.join(root, "docs/style.css"), "utf8");
+  for (const selector of [
+    ".history-grid",
+    ".history-card",
+    ".history-card .label",
+    ".history-stats",
+    ".history-current",
+    ".history-minmax",
+    ".history-card .axis",
+  ]) {
+    assert.ok(css.includes(`${selector} {`), `${selector} 규칙이 없다`);
+  }
+
   const [realestate, index] = await Promise.all([
     readFile(path.join(root, "docs/realestate.html"), "utf8"),
     readFile(path.join(root, "docs/index.html"), "utf8"),
   ]);
-
-  const rules = (html) =>
-    [
-      ".history-grid",
-      ".history-card",
-      ".history-card .label",
-      ".history-stats",
-      ".history-current",
-      ".history-minmax",
-      ".history-card .axis",
-    ].map((selector) => {
-      const at = html.indexOf(`  ${selector} {`);
-      assert.notEqual(at, -1, `${selector} 규칙이 없다`);
-      return html.slice(at, html.indexOf("}", at)).replace(/\s+/g, " ").trim();
-    });
-
-  assert.deepEqual(rules(realestate), rules(index), "두 화면의 카드 스타일이 갈라졌다");
-
   for (const [what, html] of [["시세", realestate], ["다이제스트", index]]) {
     assert.match(html, /class="history-card"/, `${what}: 카드 짜임이 다르다`);
     assert.match(html, /class="history-stats"/, `${what}: 값 줄이 없다`);

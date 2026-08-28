@@ -1,9 +1,10 @@
-const CACHE_NAME = "econ-digest-v9";
+const CACHE_NAME = "econ-digest-v10";
 const SHELL_ASSETS = [
   "./",
   "./index.html",
   "./rates.html",
   "./news.html",
+  "./style.css",
   "./analytics.js",
   "./manifest.webmanifest",
   "./icons/icon-192.png",
@@ -40,10 +41,11 @@ function isHtmlRequest(request, url) {
   );
 }
 
-// 페이지를 움직이는 코드는 HTML 안에도 있고 따로 받는 스크립트에도 있다. 둘 다
-// 네트워크를 먼저 본다 - 캐시부터 주면 새로 올린 코드가 다음 실행에나 걸린다.
+// 페이지를 움직이는 코드는 HTML 안에도 있고 따로 받는 스크립트·스타일시트에도 있다.
+// 셋 다 네트워크를 먼저 본다 - 캐시부터 주면 새로 올린 코드가 다음 실행에나 걸린다.
+// style.css는 62장이 같은 파일을 보므로, 한 번 낡으면 사이트 전체가 낡는다.
 function isPageCode(request, url) {
-  return isHtmlRequest(request, url) || url.pathname.endsWith(".js");
+  return isHtmlRequest(request, url) || url.pathname.endsWith(".js") || url.pathname.endsWith(".css");
 }
 
 self.addEventListener("install", (event) => {

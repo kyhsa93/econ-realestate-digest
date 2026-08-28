@@ -153,3 +153,14 @@ npm run update        # 수집 → 빌드 → 커밋·푸시
 - `FSS_FINLIFE_API_KEY` — 금융상품 공시
 
 AI 요약은 로컬에 Ollama가 있어야 한다(`OLLAMA_THINK=false` 필요).
+
+### 화면
+
+62장 HTML이 전부 `docs/style.css` 한 장을 본다. 손으로 고치는 것은 아홉 장뿐이고
+(`index` `news` `realestate` `rates` `deal-search` `jeonse-vs-wolse` `cancelled-deals`
+`about` `method`) 나머지 53장은 이 아홉 장을 틀로 삼아 `scripts/build-*-pages.mjs`가
+찍어낸다. 그러니 **생성된 페이지를 직접 고치지 말고 틀과 스타일시트를 고친다.**
+
+전에는 62장이 각자 `<style>`을 품고 있었고 그 사이에 일곱 갈래로 갈라져 있었다.
+`.data-table`이 한 장에서는 왼쪽 정렬, 나머지 61장에서는 오른쪽 정렬인 식이었다.
+페이지 안에 `<style>`을 다시 넣으면 그 길이 다시 열리므로 테스트가 이를 막는다.
