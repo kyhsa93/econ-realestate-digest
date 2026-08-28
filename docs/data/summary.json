@@ -1,22 +1,101 @@
 {
-  "updatedAt": "2026-08-28T19:25:14.762Z",
+  "updatedAt": "2026-08-28T21:23:42.003Z",
   "model": "qwen3:14b",
   "summary": {
-    "ko": "- 증시·환율: 뉴욕증시는 워시 의장의 잭슨홀 연설 전에 혼조 출발했고, 홍콩 증시는 저가 매수세로 소폭 반등 마감하며 항셍 0.08% 상승했으며, 원/엔 환율은 1,370원선에 접근하며 13개월 만에 최저인 850엔대를 기록했고, 대만 증시는 엔비디아 호실적에 나흘째 상승하며 2개월 만에 최고치를 기록했으나, 중국 증시는 하락 마감하며 상하이지수 0.11% 하락했다.\n- 부동산: 3기신도시에서 공공임대 아파트의 절반은 무주택 청년에게 공급된다. 재건축 단지에서는 재초환 부과로 인해 7억 원의 부담금이 발생하는 매물이 등장했다. 재건축 단지마다 3억~7억 원의 부담금이 발생하며 특약거래 확산에 따른 집값 상승 우려가 제기되고 있다. 서울의 집값 격차는 줄었지만 중저가 아파트가 급등하며 상향 평준화가 진행되고 있다. 9월 아파트 입주 예정물량은 올해 월간 최저치인 수준이다.\n- 금리·예금·투자상품: 중앙은행은 금리 인상으로 재정 악화와 물가 상승 사이에서 딜레마에 빠져 있다. 외인의 국고채 선물 매도로 인해 3년물 국고채 금리가 연 3.788%로 상승했다. 이는 국고채 금리가 일제히 오르는 상황을 반영하는 수치이다. 증시가 변동성 있는 가운데 고금리 단기상품에 대한 관심이 높아지고 있다. 우리금융저축은행과 토스는 대안평가를 통해 소상공인 대출 문턱을 낮추는 방안을 마련했다.\n- 기타 경제 소식: 인터넷은행 3사는 2분기 중·저신용 대출비중 목표치 30%를 넘겼다. 한국 총리는 경제단체장들에게 신속 해결 가능한 규제는 즉시 해소하라고 주문했다. 공정위와 계량경제학회는 '디지털시대 경쟁정책' 학술대회를 개최했다. 미국의 강경 이민정책으로 인해 유령 도시 현상이 나타나고 있다. 이로 인해 경제에 역풍이 불고 있는 것으로 보인다.",
-    "en": "- Stocks & FX: The New York stock market opened mixed before Chairwoman Yellen's Jackson Hole speech, while the Hong Kong stock market closed slightly higher with a small rebound from low prices, with the Hang Seng index rising 0.08%. The won/yen exchange rate approached the 1,370 won level, reaching a 13-month low of the 850 yen range. The Taiwan stock market rose for the fourth consecutive day due to NVIDIA's strong earnings, hitting a two-month high, but the Chinese stock market closed lower, with the Shanghai index falling 0.11%.\n- Real Estate: In the third phase new city, half of the public rental apartments are supplied to young people without housing. In reconstruction complexes, listings have appeared with a burden of 700,000,000 won due to the imposition of rehousing fees. Burdens of 300,000,000 to 700,000,000 won are occurring in each reconstruction complex, and concerns are being raised about rising housing prices due to the spread of special agreements. Although the price gap in Seoul has decreased, the prices of mid-to-low priced apartments have surged rapidly, leading to upward standardization. The planned apartment completions for September are at the lowest level this year on a monthly basis.\n- Rates, Deposits & Investment Products: The central bank is caught in a dilemma between worsening finances and rising prices due to interest rate hikes. The 3-year government bond rate rose to 3.788% annually due to foreign investors selling government bond futures. This figure reflects the situation where government bond rates are universally rising. Amidst market volatility, interest in high-interest short-term products is increasing. Woongjin Savings Bank and Toss have prepared measures to lower the barriers for small business loans through alternative evaluations.\n- Other Economic News: The three internet banks exceeded their second-quarter target of 30% for medium- and low-credit loan ratios. The South Korean Prime Minister ordered economic organization leaders to immediately resolve regulations that can be swiftly addressed. The Fair Trade Commission and the Korean Econometric Society held an academic conference on \"Competition Policy in the Digital Age.\" Ghost cities are emerging due to the United States' stringent immigration policies. This appears to be causing a headwind for the economy."
+    "ko": "- 부동산: 내주 인천 시티오씨엘9단지오션파크뷰 등 3천713가구가 분양에 들어간다. 서울 빌라값은 두 달째 아파트보다 더 오르며 거래액이 5조원에 근접했다. 강남 지역은 세제 개편으로 인해 가격 상승이 둔화되고 있는 반면 강북은 가격이 상승 중이다. 3기신도시에서는 공공임대 물량의 절반을 무주택 청년에게 공급한다. 재초환 부과로 인해 재건축 단지에서 7억 원의 부담금을 추가로 부담해야 하는 매물이 등장했다.\n- 금리·예금·투자상품: 모기지 차주들은 집값과 금리 상승으로 인해 집을 팔 의향이 커지고 있으며, 서울에서는 이 현상이 더 두드러진다. 굴즈비 시카고연은 총재는 미국 국채금리가 높지 않다고 밝혔다. 뉴욕증시는 워시의 금리 인상 경고에 따라 일제히 하락 마감했다. 금리가 오르면 재정이 악화되고, 내리면 물가 부담이 커지는 중앙은행의 딜레마가 지속되고 있다. 외인의 선물 매도로 인해 국고채 금리가 상승했으며, 3년물 금리는 연 3.788%를 기록했다.\n- 증시·환율: 뉴욕증시는 워시 매파 발언으로 일제히 하락했고, 홍콩 증시는 저가 매수세로 소폭 반등 마감했으며, 대만 증시는 엔비디아 호실적에 나흘째 상승했고, 환율은 1,370원선에 접근하며 13개월 만에 최저를 기록했으며, 원/엔 환율은 850엔대에 머물렀다.\n- 기타 경제 소식: 인터넷은행 3사는 2분기 중·저신용 대출비중 목표치를 30%를 넘겼다. 한국 총리는 경제단체장들에게 신속하게 해결 가능한 규제는 즉시 해소할 것을 주문했다. 인터넷은행 3사의 대출비중 증가는 금융시장에 주목받고 있다. 총리의 발언은 규제 개혁에 대한 강한 의지를 보여주는 것으로 해석된다. 두 소식은 각각 다른 분야에서 주요한 경제 동향을 보여준다.",
+    "en": "- Real Estate: Next week, 3,713 units, including Incheon City OC9 Complex Ocean Park View, will begin sales. Villa prices in Seoul have risen more than apartment prices for the second consecutive month, with transaction value approaching 5,000,000,000,000 won. While prices in the Gangnam area have slowed due to tax reform, prices in the Gangbuk area are still rising. In the third phase new city, half of the public rental supply will be allocated to young people without homes. Due to the imposition of revaluation tax, properties in redevelopment areas now require an additional burden of 700,000,000 won.\n- Rates, Deposits & Investment Products: Mortgage borrowers are increasingly willing to sell their homes due to rising house prices and interest rates, with this trend being more pronounced in Seoul. Goolsbee, the Chicago Fed president, stated that U.S. Treasury bond rates are not high. The New York stock market closed sharply lower following warnings from Washi about interest rate hikes. The central bank's dilemma continues, as rising interest rates worsen fiscal conditions, while falling rates increase inflationary pressures. The government bond rates rose due to foreign investors' futures selling, with the 3-year rate reaching 3.788% annually.\n- Stocks & FX: The New York stock market fell sharply due to hawkish remarks by Powell, the Hong Kong stock market closed slightly higher due to bargain buying, the Taiwan stock market rose for the fourth consecutive day due to NVIDIA's strong earnings, the exchange rate approached the 1,370 won level, recording its lowest level in 13 months, and the won/yen exchange rate remained in the 850 yen range.\n- Other Economic News: The three internet banks exceeded their second-quarter target of 30% for medium- and low-credit loan ratios. The Prime Minister ordered economic organization leaders to immediately eliminate regulations that can be quickly resolved. The increase in the loan ratios of the three internet banks has drawn attention in the financial market. The Prime Minister's remarks are interpreted as showing a strong will for regulatory reform. The two pieces of news show major economic trends in different fields."
   },
   "highlights": [],
   "categories": [
     {
+      "key": "realestate",
+      "name": "부동산",
+      "nameEn": "Real Estate",
+      "lineKo": "내주 인천 시티오씨엘9단지오션파크뷰 등 3천713가구가 분양에 들어간다. 서울 빌라값은 두 달째 아파트보다 더 오르며 거래액이 5조원에 근접했다. 강남 지역은 세제 개편으로 인해 가격 상승이 둔화되고 있는 반면 강북은 가격이 상승 중이다. 3기신도시에서는 공공임대 물량의 절반을 무주택 청년에게 공급한다. 재초환 부과로 인해 재건축 단지에서 7억 원의 부담금을 추가로 부담해야 하는 매물이 등장했다.",
+      "lineEn": "Next week, 3,713 units, including Incheon City OC9 Complex Ocean Park View, will begin sales. Villa prices in Seoul have risen more than apartment prices for the second consecutive month, with transaction value approaching 5,000,000,000,000 won. While prices in the Gangnam area have slowed due to tax reform, prices in the Gangbuk area are still rising. In the third phase new city, half of the public rental supply will be allocated to young people without homes. Due to the imposition of revaluation tax, properties in redevelopment areas now require an additional burden of 700,000,000 won.",
+      "isFallback": false,
+      "fallbackReason": null,
+      "degraded": false,
+      "items": [
+        {
+          "title": "[부동산캘린더] 내주 인천 시티오씨엘9단지오션파크뷰 등 3천713가구 분양",
+          "link": "https://www.yna.co.kr/view/AKR20260828132100003",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "서울 빌라값, 두 달째 아파트보다 더 뛰었다… 거래액도 5조원 육박",
+          "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/29/DXTF7Y2J7BEWLJSW2WG5IXQIQM/",
+          "source": "조선비즈 부동산"
+        },
+        {
+          "title": "세제 개편 후 흔들린 '강남 불패'…강북은 '불장'[서울 부동산, 지금①]",
+          "link": "https://www.newsis.com/view/NISX20260828_0003766674",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "3기신도시 공공임대 절반, 무주택 청년에 공급",
+          "link": "https://www.mk.co.kr/news/realestate/12139108",
+          "source": "매일경제 부동산"
+        },
+        {
+          "title": "[단독] 재초환 부과 재건축 단지서 7억 부담금 얹은 매물 등장",
+          "link": "https://www.mk.co.kr/news/realestate/12139072",
+          "source": "매일경제 부동산"
+        }
+      ]
+    },
+    {
+      "key": "rates",
+      "name": "금리·예금·투자상품",
+      "nameEn": "Rates, Deposits & Investment Products",
+      "lineKo": "모기지 차주들은 집값과 금리 상승으로 인해 집을 팔 의향이 커지고 있으며, 서울에서는 이 현상이 더 두드러진다. 굴즈비 시카고연은 총재는 미국 국채금리가 높지 않다고 밝혔다. 뉴욕증시는 워시의 금리 인상 경고에 따라 일제히 하락 마감했다. 금리가 오르면 재정이 악화되고, 내리면 물가 부담이 커지는 중앙은행의 딜레마가 지속되고 있다. 외인의 선물 매도로 인해 국고채 금리가 상승했으며, 3년물 금리는 연 3.788%를 기록했다.",
+      "lineEn": "Mortgage borrowers are increasingly willing to sell their homes due to rising house prices and interest rates, with this trend being more pronounced in Seoul. Goolsbee, the Chicago Fed president, stated that U.S. Treasury bond rates are not high. The New York stock market closed sharply lower following warnings from Washi about interest rate hikes. The central bank's dilemma continues, as rising interest rates worsen fiscal conditions, while falling rates increase inflationary pressures. The government bond rates rose due to foreign investors' futures selling, with the 3-year rate reaching 3.788% annually.",
+      "isFallback": false,
+      "fallbackReason": null,
+      "degraded": false,
+      "items": [
+        {
+          "title": "\"모기지 차주, 집값·금리 상승기 집 팔 의향 커진다…서울 더 높아\"",
+          "link": "https://www.newsis.com/view/NISX20260825_0003761018",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "굴즈비 시카고연은 총재 \"美 국채금리 높지 않다\"",
+          "link": "https://www.hankyung.com/article/2026082904451",
+          "source": "한국경제 경제"
+        },
+        {
+          "title": "[속보]뉴욕증시, 워시 '금리 인상' 경고에 일제히 하락 마감",
+          "link": "https://www.newsis.com/view/NISX20260829_0003767695",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "금리 올리면 재정 악화, 내리면 물가 부담…중앙은행 딜레마",
+          "link": "https://www.hankyung.com/article/2026082801361",
+          "source": "한국경제 경제"
+        },
+        {
+          "title": "외인 선물 매도에 국고채 금리 상승…3년물 연 3.788%(종합)",
+          "link": "https://www.yna.co.kr/view/AKR20260828142351008",
+          "source": "연합뉴스 경제"
+        }
+      ]
+    },
+    {
       "key": "stocks",
       "name": "증시·환율",
       "nameEn": "Stocks & FX",
-      "lineKo": "뉴욕증시는 워시 의장의 잭슨홀 연설 전에 혼조 출발했고, 홍콩 증시는 저가 매수세로 소폭 반등 마감하며 항셍 0.08% 상승했으며, 원/엔 환율은 1,370원선에 접근하며 13개월 만에 최저인 850엔대를 기록했고, 대만 증시는 엔비디아 호실적에 나흘째 상승하며 2개월 만에 최고치를 기록했으나, 중국 증시는 하락 마감하며 상하이지수 0.11% 하락했다.",
-      "lineEn": "The New York stock market opened mixed before Chairwoman Yellen's Jackson Hole speech, while the Hong Kong stock market closed slightly higher with a small rebound from low prices, with the Hang Seng index rising 0.08%. The won/yen exchange rate approached the 1,370 won level, reaching a 13-month low of the 850 yen range. The Taiwan stock market rose for the fourth consecutive day due to NVIDIA's strong earnings, hitting a two-month high, but the Chinese stock market closed lower, with the Shanghai index falling 0.11%.",
+      "lineKo": "뉴욕증시는 워시 매파 발언으로 일제히 하락했고, 홍콩 증시는 저가 매수세로 소폭 반등 마감했으며, 대만 증시는 엔비디아 호실적에 나흘째 상승했고, 환율은 1,370원선에 접근하며 13개월 만에 최저를 기록했으며, 원/엔 환율은 850엔대에 머물렀다.",
+      "lineEn": "The New York stock market fell sharply due to hawkish remarks by Powell, the Hong Kong stock market closed slightly higher due to bargain buying, the Taiwan stock market rose for the fourth consecutive day due to NVIDIA's strong earnings, the exchange rate approached the 1,370 won level, recording its lowest level in 13 months, and the won/yen exchange rate remained in the 850 yen range.",
       "isFallback": false,
       "fallbackReason": null,
       "degraded": true,
       "items": [
+        {
+          "title": "뉴욕증시, 워시 매파 발언에 일제히 하락…S&amp;P 0.25%↓",
+          "link": "https://www.newsis.com/view/NISX20260829_0003767696",
+          "source": "뉴시스 경제"
+        },
         {
           "title": "[속보]뉴욕증시, 워시 의장 잭슨홀 연설 앞두고 혼조 출발",
           "link": "https://www.newsis.com/view/NISX20260828_0003767669",
@@ -36,85 +115,6 @@
           "title": "[올댓차이나] 대만 증시, 엔비디아 호실적에 나흘째 상승…2개월 만에 최고치",
           "link": "https://www.newsis.com/view/NISX20260828_0003767457",
           "source": "뉴시스 경제"
-        },
-        {
-          "title": "[올댓차이나] 중국 증시 하락 마감…상하이지수 0.11%↓",
-          "link": "https://www.newsis.com/view/NISX20260828_0003767408",
-          "source": "뉴시스 경제"
-        }
-      ]
-    },
-    {
-      "key": "realestate",
-      "name": "부동산",
-      "nameEn": "Real Estate",
-      "lineKo": "3기신도시에서 공공임대 아파트의 절반은 무주택 청년에게 공급된다. 재건축 단지에서는 재초환 부과로 인해 7억 원의 부담금이 발생하는 매물이 등장했다. 재건축 단지마다 3억~7억 원의 부담금이 발생하며 특약거래 확산에 따른 집값 상승 우려가 제기되고 있다. 서울의 집값 격차는 줄었지만 중저가 아파트가 급등하며 상향 평준화가 진행되고 있다. 9월 아파트 입주 예정물량은 올해 월간 최저치인 수준이다.",
-      "lineEn": "In the third phase new city, half of the public rental apartments are supplied to young people without housing. In reconstruction complexes, listings have appeared with a burden of 700,000,000 won due to the imposition of rehousing fees. Burdens of 300,000,000 to 700,000,000 won are occurring in each reconstruction complex, and concerns are being raised about rising housing prices due to the spread of special agreements. Although the price gap in Seoul has decreased, the prices of mid-to-low priced apartments have surged rapidly, leading to upward standardization. The planned apartment completions for September are at the lowest level this year on a monthly basis.",
-      "isFallback": false,
-      "fallbackReason": null,
-      "degraded": false,
-      "items": [
-        {
-          "title": "3기신도시 공공임대 절반, 무주택 청년에 공급",
-          "link": "https://www.mk.co.kr/news/realestate/12139108",
-          "source": "매일경제 부동산"
-        },
-        {
-          "title": "[단독] 재초환 부과 재건축 단지서 7억 부담금 얹은 매물 등장",
-          "link": "https://www.mk.co.kr/news/realestate/12139072",
-          "source": "매일경제 부동산"
-        },
-        {
-          "title": "재건축 단지마다 3억~7억 부담 … 특약거래 확산땐 집값 자극 우려",
-          "link": "https://www.mk.co.kr/news/realestate/12139051",
-          "source": "매일경제 부동산"
-        },
-        {
-          "title": "서울 집값 격차 줄었다지만 … 중저가 아파트 급등하며 '상향 평준화'",
-          "link": "https://www.mk.co.kr/news/realestate/12139050",
-          "source": "매일경제 부동산"
-        },
-        {
-          "title": "9월 아파트 입주 예정물량 올해 월간 최저치",
-          "link": "https://www.hankyung.com/article/202608289036i",
-          "source": "한국경제 부동산"
-        }
-      ]
-    },
-    {
-      "key": "rates",
-      "name": "금리·예금·투자상품",
-      "nameEn": "Rates, Deposits & Investment Products",
-      "lineKo": "중앙은행은 금리 인상으로 재정 악화와 물가 상승 사이에서 딜레마에 빠져 있다. 외인의 국고채 선물 매도로 인해 3년물 국고채 금리가 연 3.788%로 상승했다. 이는 국고채 금리가 일제히 오르는 상황을 반영하는 수치이다. 증시가 변동성 있는 가운데 고금리 단기상품에 대한 관심이 높아지고 있다. 우리금융저축은행과 토스는 대안평가를 통해 소상공인 대출 문턱을 낮추는 방안을 마련했다.",
-      "lineEn": "The central bank is caught in a dilemma between worsening finances and rising prices due to interest rate hikes. The 3-year government bond rate rose to 3.788% annually due to foreign investors selling government bond futures. This figure reflects the situation where government bond rates are universally rising. Amidst market volatility, interest in high-interest short-term products is increasing. Woongjin Savings Bank and Toss have prepared measures to lower the barriers for small business loans through alternative evaluations.",
-      "isFallback": false,
-      "fallbackReason": null,
-      "degraded": false,
-      "items": [
-        {
-          "title": "금리 올리면 재정 악화, 내리면 물가 부담…중앙은행 딜레마",
-          "link": "https://www.hankyung.com/article/2026082801361",
-          "source": "한국경제 경제"
-        },
-        {
-          "title": "외인 선물 매도에 국고채 금리 상승…3년물 연 3.788%(종합)",
-          "link": "https://www.yna.co.kr/view/AKR20260828142351008",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "국고채 금리 일제히 상승…3년물 연 3.788%",
-          "link": "https://www.yna.co.kr/view/AKR20260828142300008",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "증시 널뛰고 금리 오르자…고금리 단기상품 들어볼까",
-          "link": "https://www.hankyung.com/article/202608289543i",
-          "source": "한국경제 경제"
-        },
-        {
-          "title": "우리금융저축은행·토스, 대안평가로 소상공인 대출 문턱 낮춰",
-          "link": "https://www.hankyung.com/article/202608289530i",
-          "source": "한국경제 경제"
         }
       ]
     },
@@ -122,8 +122,8 @@
       "key": "other",
       "name": "기타 경제 소식",
       "nameEn": "Other Economic News",
-      "lineKo": "인터넷은행 3사는 2분기 중·저신용 대출비중 목표치 30%를 넘겼다. 한국 총리는 경제단체장들에게 신속 해결 가능한 규제는 즉시 해소하라고 주문했다. 공정위와 계량경제학회는 '디지털시대 경쟁정책' 학술대회를 개최했다. 미국의 강경 이민정책으로 인해 유령 도시 현상이 나타나고 있다. 이로 인해 경제에 역풍이 불고 있는 것으로 보인다.",
-      "lineEn": "The three internet banks exceeded their second-quarter target of 30% for medium- and low-credit loan ratios. The South Korean Prime Minister ordered economic organization leaders to immediately resolve regulations that can be swiftly addressed. The Fair Trade Commission and the Korean Econometric Society held an academic conference on \"Competition Policy in the Digital Age.\" Ghost cities are emerging due to the United States' stringent immigration policies. This appears to be causing a headwind for the economy.",
+      "lineKo": "인터넷은행 3사는 2분기 중·저신용 대출비중 목표치를 30%를 넘겼다. 한국 총리는 경제단체장들에게 신속하게 해결 가능한 규제는 즉시 해소할 것을 주문했다. 인터넷은행 3사의 대출비중 증가는 금융시장에 주목받고 있다. 총리의 발언은 규제 개혁에 대한 강한 의지를 보여주는 것으로 해석된다. 두 소식은 각각 다른 분야에서 주요한 경제 동향을 보여준다.",
+      "lineEn": "The three internet banks exceeded their second-quarter target of 30% for medium- and low-credit loan ratios. The Prime Minister ordered economic organization leaders to immediately eliminate regulations that can be quickly resolved. The increase in the loan ratios of the three internet banks has drawn attention in the financial market. The Prime Minister's remarks are interpreted as showing a strong will for regulatory reform. The two pieces of news show major economic trends in different fields.",
       "isFallback": false,
       "fallbackReason": null,
       "degraded": false,
@@ -137,16 +137,6 @@
           "title": "韓총리, 경제단체장들에 \"신속 해결 가능한 규제는 즉시 해소\"(종합)",
           "link": "https://www.yna.co.kr/view/AKR20260828061251001",
           "source": "연합뉴스 경제"
-        },
-        {
-          "title": "[게시판] 공정위·계량경제학회, '디지털시대 경쟁정책' 학술대회",
-          "link": "https://www.yna.co.kr/view/AKR20260828035100002",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "\"이민 단속에 유령 도시 됐다\"… 美 강경 이민정책에 경제 '역풍'",
-          "link": "https://www.newsis.com/view/NISX20260828_0003766894",
-          "source": "뉴시스 경제"
         }
       ]
     }
