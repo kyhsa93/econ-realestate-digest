@@ -308,11 +308,15 @@
     "kospi": {
       "value": "6,788.88",
       "change": "-123.49",
-      "direction": "FALLING"
+      "direction": "FALLING",
+      "asOf": "8/28"
     },
     "usdKrw": {
       "value": 1377.942221,
-      "asOf": "Sat, 29 Aug 2026 00:02:31 +0000"
+      "asOf": "Sat, 29 Aug 2026 00:02:31 +0000",
+      "prevValue": 1381.567326,
+      "change": "-3.63",
+      "direction": "FALLING"
     },
     "baseRate": {
       "value": "3.00",

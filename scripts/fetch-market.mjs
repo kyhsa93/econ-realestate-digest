@@ -1,6 +1,6 @@
 import { writeFile, mkdir, readFile } from "node:fs/promises";
 import path from "node:path";
-import { BASE_RATE, changedOn, clampRows, ecosKey, statisticSearch } from "./ecos.mjs";
+import { BASE_RATE, KOSPI, changedOn, clampRows, ecosKey, statisticSearch } from "./ecos.mjs";
 
 const dataDir = path.resolve(import.meta.dirname, "../docs/data");
 const outFile = path.join(dataDir, "market.json");
@@ -32,19 +32,62 @@ export function rateLabel(value) {
   return Number(text).toFixed(2);
 }
 
-async function fetchKospi() {
-  const res = await fetch("https://polling.finance.naver.com/api/realtime/domestic/index/KOSPI", {
-    headers: { "User-Agent": "Mozilla/5.0", Referer: "https://finance.naver.com/" },
-  });
-  if (!res.ok) throw new Error(`kospi http ${res.status}`);
-  const json = await res.json();
-  const item = json.datas?.[0];
-  if (!item) throw new Error("kospi 응답 형식 이상");
+/** ECOS의 20260828을 화면이 쓰는 "8/28"로. */
+export function shortYmd(time) {
+  const text = String(time ?? "");
+  if (!/^\d{8}$/.test(text)) return null;
+  return `${Number(text.slice(4, 6))}/${Number(text.slice(6, 8))}`;
+}
+
+/**
+ * 마감된 종가 둘로 값과 등락을 낸다.
+ *
+ * 등락을 계열 안에서 직접 빼는 것이 요점이다. 전에는 값은 이쪽에서, 등락은 저쪽에서
+ * 받아 와 둘이 서로를 설명하지 못했다 - 저장된 값끼리 빼면 45.87이 움직였는데 등락은
+ * 0.00이라고 적혀 있는 날이 사흘 연속 나왔다(이슈 #1).
+ *
+ * 앞 종가가 없으면 등락을 지어내지 않고 비운다. 0.00은 "안 움직였다"는 뜻이라
+ * "모른다"의 자리에 놓으면 안 된다 - 그게 바로 이 오류가 났던 방식이다.
+ */
+export function kospiFrom(rows) {
+  if (!rows.length) throw new Error("ecos 코스피 응답 없음");
+
+  const last = rows.at(-1);
+  const value = Number(last.DATA_VALUE);
+  if (!Number.isFinite(value)) throw new Error("ecos 코스피 값 형식 이상");
+
+  const format = (n) => n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const asOf = shortYmd(last.TIME);
+
+  const prev = rows.at(-2);
+  const prevValue = prev ? Number(prev.DATA_VALUE) : NaN;
+  if (!Number.isFinite(prevValue)) {
+    return { value: format(value), change: null, direction: null, asOf };
+  }
+
+  const diff = value - prevValue;
   return {
-    value: item.closePrice,
-    change: item.compareToPreviousClosePrice,
-    direction: item.compareToPreviousPrice?.name ?? null,
+    value: format(value),
+    change: format(diff),
+    direction: diff > 0 ? "RISING" : diff < 0 ? "FALLING" : "UNCHANGED",
+    asOf,
   };
+}
+
+/** 종가 둘을 잡으려면 주말과 연휴를 건너뛸 만큼은 봐야 한다. */
+export const KOSPI_WINDOW_DAYS = { sample: 9, keyed: 30 };
+
+async function fetchKospi(now = new Date()) {
+  const key = ecosKey();
+  const span = key === "sample" ? KOSPI_WINDOW_DAYS.sample : KOSPI_WINDOW_DAYS.keyed;
+  const rows = await statisticSearch({
+    key,
+    ...KOSPI,
+    from: kstYmd(new Date(now.getTime() - span * 86400000)),
+    to: kstYmd(now),
+    rows: clampRows(key, span + 1),
+  });
+  return kospiFrom(rows);
 }
 
 async function fetchUsdKrw() {
@@ -55,6 +98,37 @@ async function fetchUsdKrw() {
   if (!krw) throw new Error("fx 응답 형식 이상");
   return { value: krw, asOf: json.time_last_update_utc };
 }
+
+/**
+ * 환율의 전일 대비. 매일 값을 쌓아 두고도 증감 칸이 늘 비어 있었다(이슈 #2).
+ *
+ * 견주는 상대는 <strong>어제 수집분</strong>이지 어제 종가가 아니다. 이 값은 하루 한 번
+ * 받아 두는 스냅숏이라 종가라고 부를 것이 없고, 그래서 화면도 "전일 수집분 대비"라고
+ * 적는다. 기준을 안 적으면 코스피 종가 등락과 같은 것으로 읽힌다.
+ */
+export function usdKrwWithChange(current, history = []) {
+  if (!current?.value) return current;
+
+  const today = String(current.date ?? "");
+  const prev = [...history].reverse().find((entry) => entry.date !== today && Number.isFinite(Number(entry?.usdKrw?.value)));
+  const prevValue = Number(prev?.usdKrw?.value);
+  if (!Number.isFinite(prevValue)) return { ...current, change: null, direction: null, prevValue: null };
+
+  const diff = Number(current.value) - prevValue;
+  return {
+    ...current,
+    prevValue,
+    change: diff.toFixed(2),
+    direction: diff > 0 ? "RISING" : diff < 0 ? "FALLING" : "UNCHANGED",
+  };
+}
+
+/** 견줄 때만 쓰는 날짜는 저장하지 않는다. 화면이 안 보는 값이 파일에 남으면 뜻이 생긴다. */
+const withoutDate = (usdKrw) => {
+  if (!usdKrw) return usdKrw;
+  const { date, ...rest } = usdKrw;
+  return rest;
+};
 
 /**
  * 기준금리를 포털 HTML에서 긁던 옛 경로. 이제는 ECOS가 시행일을 못 줄 때만 부른다 -
@@ -133,24 +207,32 @@ async function main() {
   ]);
 
   const now = new Date();
+  const history = await readHistory();
+  const usdKrwWithPrev = withoutDate(
+    usdKrwWithChange(usdKrw ? { ...usdKrw, date: kstDateString(now) } : usdKrw, history)
+  );
+
   await mkdir(dataDir, { recursive: true });
   await writeFile(
     outFile,
-    JSON.stringify({ updatedAt: now.toISOString(), kospi, usdKrw, baseRate }, null, 2)
+    JSON.stringify({ updatedAt: now.toISOString(), kospi, usdKrw: usdKrwWithPrev, baseRate }, null, 2)
   );
 
-  await appendHistory(now, { kospi, usdKrw, baseRate });
+  await appendHistory(now, { kospi, usdKrw: usdKrwWithPrev, baseRate }, history);
 
   console.log("[fetch-market] 저장 완료");
 }
 
-async function appendHistory(now, snapshot) {
-  let history = [];
+async function readHistory() {
   try {
-    history = JSON.parse(await readFile(historyFile, "utf-8"));
+    const parsed = JSON.parse(await readFile(historyFile, "utf-8"));
+    return Array.isArray(parsed) ? parsed : [];
   } catch {
+    return [];
   }
+}
 
+async function appendHistory(now, snapshot, history = []) {
   const today = kstDateString(now);
   const entry = { date: today, ...snapshot };
 

@@ -20,6 +20,16 @@ export const KEYED_MAX_ROWS = 1000;
 /** 1.3.1. 한국은행 기준금리 및 여수신금리 → 한국은행 기준금리, 일별. */
 export const BASE_RATE = { stat: "722Y001", item: "0101000", cycle: "D" };
 
+/**
+ * 8.2.1. 주식시장 → KOSPI지수, 일별.
+ *
+ * 네이버 비공식 폴링에서 옮겨 왔다. 그쪽은 장중 스냅숏을 주므로 언제 부르느냐에 따라
+ * 뜻이 달라진다 - 개장 전에 부르면 전일 종가에 등락 0.00이 붙어 오고, 장중에 부르면
+ * 그 순간 값이 온다. 하루 한 번 받아 "그날 값"으로 저장하면 두 뜻이 한 계열에 섞인다.
+ * ECOS는 마감된 종가를 거래일에 맞춰 주므로 그 문제가 없다. 대신 하루 늦다.
+ */
+export const KOSPI = { stat: "802Y001", item: "0001000", cycle: "D" };
+
 export function ecosKey(env = process.env) {
   const key = String(env?.ECOS_API_KEY ?? "").trim();
   return key || SAMPLE_KEY;

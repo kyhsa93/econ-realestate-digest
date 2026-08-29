@@ -135,7 +135,7 @@
             <th id="market-th-change">증감</th>
           </tr>
         </thead>
-        <tbody id="market-grid"><!--prerender:market--><tr><td>코스피</td><td data-label="값">6,788.88</td><td data-label="증감">-123.49</td></tr><tr><td>원/달러 환율</td><td data-label="값">1377.94원</td><td data-label="증감">-</td></tr><tr><td>기준금리</td><td data-label="값">3.00%</td><td data-label="증감">2026년 08월 27일</td></tr><!--/prerender:market--></tbody>
+        <tbody id="market-grid"><!--prerender:market--><tr><td>코스피 <span class="count">8/28 종가</span></td><td data-label="값">6,788.88</td><td data-label="증감">-123.49</td></tr><tr><td>원/달러 환율</td><td data-label="값">1377.94원</td><td data-label="증감"><span title="전일 수집분 대비">-3.63</span></td></tr><tr><td>기준금리</td><td data-label="값">3.00%</td><td data-label="증감">2026년 08월 27일</td></tr><!--/prerender:market--></tbody>
       </table>
     </div>
     <div class="history-grid" id="history-grid"></div>
@@ -221,6 +221,8 @@
       marketThValue: "값",
       marketThChange: "증감",
       kospiLabel: "코스피",
+      kospiAsOf: (d) => `${d} 종가`,
+      fxChangeBasis: "전일 수집분 대비",
       usdKrwLabel: "원/달러 환율",
       liveFxBadge: "실시간",
       liveFxTitle: (s) => `${s} 기준 (exchangerate.fun)`,
@@ -331,6 +333,8 @@
       marketThValue: "Value",
       marketThChange: "Change",
       kospiLabel: "KOSPI",
+      kospiAsOf: (d) => `${d} close`,
+      fxChangeBasis: "vs. yesterday\u2019s reading",
       usdKrwLabel: "USD/KRW",
       liveFxBadge: "live",
       liveFxTitle: (s) => `as of ${s} (exchangerate.fun)`,
@@ -593,9 +597,11 @@
     }
     const rows = [];
     if (market.kospi) {
+      // 하루 늦은 종가다. 어느 장의 값인지 안 적으면 "오늘 코스피"로 읽힌다.
+      const asOf = market.kospi.asOf ? ` <span class="count">${t("kospiAsOf")(market.kospi.asOf)}</span>` : "";
       rows.push(`
         <tr>
-          <td>${t("kospiLabel")}</td>
+          <td>${t("kospiLabel")}${asOf}</td>
           <td data-label="${t("marketThValue")}">${market.kospi.value}</td>
           <td class="change ${directionClass(market.kospi.direction)}" data-label="${t("marketThChange")}">${market.kospi.change ?? ""}</td>
         </tr>`);
@@ -605,11 +611,24 @@
       const liveBadge = liveUsdKrw
         ? ` <span class="live-badge" title="${t("liveFxTitle")(fmtUpdated(new Date(liveUsdKrw.timestamp * 1000).toISOString()))}">${t("liveFxBadge")}</span>`
         : "";
+      // 견주는 상대는 어제 수집분이다. 실시간 값을 보여줄 때도 같은 자리에서 재야
+      // 화면의 값과 그 옆의 증감이 서로를 설명한다. 기준은 title에 적는다.
+      const prevValue = Number(market.usdKrw?.prevValue);
+      let fxChange = market.usdKrw?.change ?? null;
+      let fxDirection = market.usdKrw?.direction ?? null;
+      if (liveUsdKrw && Number.isFinite(prevValue)) {
+        const diff = liveUsdKrw.value - prevValue;
+        fxChange = diff.toFixed(2);
+        fxDirection = diff > 0 ? "RISING" : diff < 0 ? "FALLING" : "UNCHANGED";
+      }
+      const fxCell = fxChange === null
+        ? ""
+        : `<span title="${t("fxChangeBasis")}">${fxChange}</span>`;
       rows.push(`
         <tr>
           <td>${t("usdKrwLabel")}</td>
           <td data-label="${t("marketThValue")}">${displayValue.toFixed(2)}${liveBadge}</td>
-          <td></td>
+          <td class="change ${directionClass(fxDirection)}" data-label="${t("marketThChange")}">${fxCell}</td>
         </tr>`);
     }
     if (market.baseRate) {

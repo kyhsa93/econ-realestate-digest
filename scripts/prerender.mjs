@@ -61,11 +61,16 @@ export function marketHtml(market) {
   const rows = [];
 
   if (market.kospi?.value) {
+    // 하루 늦은 종가다. 어느 장의 값인지 화면 쪽 renderMarket과 같이 적는다.
+    const asOf = market.kospi.asOf ? ` <span class="count">${escapeHtml(market.kospi.asOf)} 종가</span>` : "";
     const change = market.kospi.change ? `${escapeHtml(market.kospi.change)}` : "-";
-    rows.push(["코스피", escapeHtml(market.kospi.value), change]);
+    rows.push([`코스피${asOf}`, escapeHtml(market.kospi.value), change]);
   }
   if (typeof market.usdKrw?.value === "number") {
-    rows.push(["원/달러 환율", `${market.usdKrw.value.toFixed(2)}원`, "-"]);
+    const change = market.usdKrw.change
+      ? `<span title="전일 수집분 대비">${escapeHtml(market.usdKrw.change)}</span>`
+      : "-";
+    rows.push(["원/달러 환율", `${market.usdKrw.value.toFixed(2)}원`, change]);
   }
   if (market.baseRate?.value) {
     rows.push(["기준금리", `${escapeHtml(market.baseRate.value)}%`, escapeHtml(market.baseRate.effectiveFrom ?? "-")]);
