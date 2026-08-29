@@ -1171,6 +1171,19 @@ ul.news-list {
   vertical-align: middle;
 }
 
+/* "그래서 매달 얼마". 거래 목록 뒤에 오지만 목록의 일부는 아니라 자기 바닥을 갖는다. */
+.budget-loan {
+  margin: 14px 0 0;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 10px 10px 0;
+  background: var(--accent-weak);
+  color: var(--fg);
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+}
+
 .budget-summary {
   font-size: var(--fs-lg);
   line-height: 1.6;

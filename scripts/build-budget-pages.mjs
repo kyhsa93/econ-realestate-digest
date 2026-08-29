@@ -30,9 +30,9 @@ function navHtml(page) {
   return links.join("");
 }
 
-export function buildBudgetPage(baseHtml, page, budget) {
+export function buildBudgetPage(baseHtml, page, budget, rates = null) {
   const band = (budget?.bands ?? []).find((b) => b.min10k === page.min10k) ?? null;
-  const body = budgetBodyHtml(band, budget?.periods);
+  const body = budgetBodyHtml(band, budget?.periods, rates);
   if (!body) return null;
 
   let html = baseHtml;
@@ -73,6 +73,8 @@ async function readJson(file) {
 
 async function main() {
   const budget = await readJson(path.join(root, "docs/data/budget-deals.json"));
+  // 금리가 아직 없는 날에도 예산 페이지는 나와야 한다. 월 상환액 문단만 빠진다.
+  const rates = await readJson(path.join(root, "docs/data/rates.json"));
   if (!budget?.bands?.length) {
     console.log("  예산 데이터가 없습니다 - 예산 페이지를 만들지 않습니다");
     return;
@@ -86,7 +88,7 @@ async function main() {
   const skipped = [];
 
   for (const page of BUDGET_PAGES) {
-    const html = buildBudgetPage(baseHtml, page, budget);
+    const html = buildBudgetPage(baseHtml, page, budget, rates);
     if (!html) {
       skipped.push(`${page.eok}억대`);
       continue;

@@ -6,6 +6,7 @@ import { DISTRICT_PAGES, DISTRICT_SLUGS, districtFile } from "./district-slugs.m
 import { districtSentences } from "./district-summary.mjs";
 import { factSentences } from "./district-facts.mjs";
 import { renewalSentences } from "./renewal-facts.mjs";
+import { apartmentOptions, loanSentence, rateSpread } from "./mortgage.mjs";
 import { rateFacts, factSentences as rateSentences } from "./rate-facts.mjs";
 import {
   KIND_FIELDS,
@@ -235,7 +236,7 @@ function budgetWhereHtml(band) {
   return text ? `<p class="budget-where">${escapeHtml(text)}</p>` : "";
 }
 
-export function budgetBodyHtml(band, periodList) {
+export function budgetBodyHtml(band, periodList, rates = null) {
   if (!band) return null;
 
   const periods = (periodList ?? []).map((p) => monthLabel(p)).filter(Boolean).join(", ");
@@ -249,8 +250,21 @@ export function budgetBodyHtml(band, periodList) {
     `</p>` +
     budgetWhereHtml(band) +
     (districts ? `<div class="budget-districts">거래가 많은 지역: ${districts}</div>` : "") +
-    `<ul class="budget-deals">${band.deals.map(budgetDealHtml).join("")}</ul>`
+    `<ul class="budget-deals">${band.deals.map(budgetDealHtml).join("")}</ul>` +
+    budgetLoanHtml(band, rates)
   );
+}
+
+/**
+ * "그래서 매달 얼마"를 붙인다. 이 화면은 예산에 답하면서 정작 그 예산이 매달 얼마가
+ * 되는지는 말하지 않고 있었다 - 실거래와 금리를 같이 받는 곳이라야 자동으로 물릴 수 있다.
+ */
+export function budgetLoanHtml(band, rates) {
+  const spread = rateSpread(apartmentOptions(rates));
+  const eok = Number.isFinite(band?.min10k) ? band.min10k / 10_000 : null;
+  const sentence = loanSentence(spread, { eok });
+  if (!sentence) return "";
+  return `<p class="budget-loan">${sentence}</p>`;
 }
 
 export { budgetBandLabel };
