@@ -1,6 +1,7 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { renewalFacts, seoulTally, tally } from "./renewal-facts.mjs";
+import { capLead, districtRow, renewalFacts, seoulLead, seoulTally, sortRows, tally } from "./renewal-facts.mjs";
+import { DISTRICT_SLUGS } from "./district-slugs.mjs";
 import { DISTRICTS } from "./realestate-districts.mjs";
 import { readSlotFile } from "./realestate-raw.mjs";
 import { recentMonths } from "./realestate-source.mjs";
@@ -36,13 +37,33 @@ export function buildPayload({ byDistrict, now }) {
   const seoul = seoulTally(byDistrict, now);
   if (!seoul.renewals) return null;
 
+  // 자치구 페이지가 쓰는 쪽(문턱을 넘은 관찰만)과 재계약 화면이 쓰는 쪽(스물다섯 구
+  // 전부, 문턱을 못 넘었으면 못 넘었다고 적을 수 있게 건수까지)을 같이 담는다.
+  // 한 번 센 것을 두 모양으로 내보내는 것이라 세는 일은 여전히 한 곳에서만 한다.
   const districts = {};
+  const table = [];
+
   for (const [name, items] of Object.entries(byDistrict ?? {})) {
-    const facts = renewalFacts(tally(items, now), seoul);
+    const districtTally = tally(items, now);
+    const facts = renewalFacts(districtTally, seoul);
     if (facts) districts[name] = facts;
+    table.push(districtRow(name, districtTally));
   }
 
-  return { updatedAt: now.toISOString(), seoul, districts };
+  const slugs = {};
+  for (const row of table) {
+    if (DISTRICT_SLUGS[row.district]) slugs[row.district] = DISTRICT_SLUGS[row.district];
+  }
+
+  return {
+    updatedAt: now.toISOString(),
+    seoul,
+    districts,
+    table: sortRows(table),
+    slugs,
+    lead: { ko: seoulLead(seoul, "ko"), en: seoulLead(seoul, "en") },
+    capLead: { ko: capLead(seoul, "ko"), en: capLead(seoul, "en") },
+  };
 }
 
 async function main() {

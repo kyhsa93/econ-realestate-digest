@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#253e81">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<meta name="google-adsense-account" content="ca-pub-1195159445218373">
+<title>전세 재계약 vs 새로 구하기 - 서울 아파트 갱신 보증금 비교</title>
+<meta name="description" content="같은 단지 같은 평형에 그달 새로 맺어진 전세와 견주어, 재계약 보증금이 얼마나 싼지를 서울 25개 자치구별로 셉니다. 계약갱신요구권을 쓴 계약이 5% 상한에 닿았는지도 함께 봅니다.">
+<meta name="site-group" content="digest">
+<link rel="canonical" href="https://kyhsa93.github.io/jipgye/renewal-vs-new.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="집계">
+<meta property="og:url" content="https://kyhsa93.github.io/jipgye/renewal-vs-new.html">
+<meta property="og:title" content="전세 재계약 vs 새로 구하기 - 서울 아파트 갱신 보증금 비교">
+<meta property="og:description" content="같은 단지 같은 평형에 그달 새로 맺어진 전세와 견주어, 재계약 보증금이 얼마나 싼지를 서울 25개 자치구별로 셉니다.">
+<meta property="og:image" content="https://kyhsa93.github.io/jipgye/icons/icon-512.png">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="전세 재계약 vs 새로 구하기 - 서울 아파트 갱신 보증금 비교">
+<meta name="twitter:description" content="재계약 보증금이 같은 단지 같은 평형의 새 계약보다 얼마나 싼지를 자치구별로 셉니다.">
+<meta name="twitter:image" content="https://kyhsa93.github.io/jipgye/icons/icon-512.png">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<a class="skip-link" href="#main" data-skip-en="Skip to content">본문 바로가기</a>
+<main id="main">
+  <header>
+    <div>
+      <a class="brand" id="site-brand" href="./index.html" data-brand-en="Jipgye">집계</a>
+      <h1 id="page-title">재계약이 시세보다 싼가</h1>
+      <div class="updated" id="updated">불러오는 중...</div>
+    </div>
+    <div class="header-actions">
+      <button class="icon-toggle" type="button" id="theme-toggle" aria-label="테마 전환"><span aria-hidden="true">🌓</span></button>
+      <button class="icon-toggle" type="button" id="lang-toggle" aria-label="Switch language"><span aria-hidden="true">🌐</span></button>
+    </div>
+  </header>
+
+  <nav class="page-nav" aria-label="섹션">
+    <a href="./index.html" id="nav-digest">오늘</a>
+    <a href="./realestate.html" id="nav-realestate" class="active">아파트 시세</a>
+    <a href="./rates.html" id="nav-rates">금리 비교</a>
+    <a href="./news.html" id="nav-news">뉴스</a>
+  </nav>
+
+  <nav class="sub-nav" aria-label="거래 유형">
+    <a href="./realestate.html" data-re-page="all">전체</a>
+    <a href="./apartment-sale.html" data-re-page="sale">매매</a>
+    <a href="./apartment-jeonse.html" data-re-page="jeonse">전세</a>
+    <a href="./apartment-rent.html" data-re-page="wolse">월세</a>
+    <a href="./deal-search.html" data-re-page="search">거래내역 검색</a>
+    <a href="./jeonse-vs-wolse.html" data-re-page="conversion">전세 vs 월세</a>
+    <a href="./renewal-vs-new.html" data-re-page="renewal" aria-current="page">재계약</a>
+    <a href="./cancelled-deals.html" data-re-page="cancelled">해제·등기</a>
+  </nav>
+
+  <aside class="method-callout">
+    <p id="method-callout-text">시세표는 신규 계약만 셉니다. 갱신은 이전 조건을 잇는 것이라 지금 시세가 아니어서인데, 그렇게 빠지는 것이 서울 전월세 신고의 절반입니다. 이 화면은 그 빠진 쪽을 봅니다.</p>
+    <a href="./method.html" id="method-callout-link">숫자를 만드는 방법 →</a>
+  </aside>
+
+  <section id="lead-section">
+    <h2 id="lead-heading">갱신과 신규의 차이</h2>
+    <p class="lead" id="lead"><!--prerender:renewalLead-->서울에서 재계약하는 세입자는 같은 단지 같은 평형에 그달 새로 맺어진 전세보다 보증금을 9.7% 적게 냅니다. 맞물린 계약 2,356건 가운데 77.6%가 시세보다 싸게 맺어졌습니다 — 나가서 다시 구하면 그 차이만큼을 더 내야 한다는 뜻입니다.<!--/prerender:renewalLead--></p>
+    <div class="content-notice" id="lead-note"></div>
+  </section>
+
+  <section id="district-section">
+    <h2 id="district-heading">자치구별 갱신 vs 신규</h2>
+    <div class="table-scroll">
+      <table class="rate-table" id="district-table"><!--prerender:renewalDistricts--><thead><tr><th>자치구</th><th>갱신 − 신규</th><th>시세보다 싼 비율</th><th>맞물린 계약</th><th>상한 미달</th><th>요구권 행사</th></tr></thead><tbody><tr><td>강동구</td><td>-16.7%</td><td>86.5%</td><td>156</td><td>33.6%</td><td>873</td></tr><tr><td>도봉구</td><td>-11.9%</td><td>82.1%</td><td>67</td><td>44.2%</td><td>339</td></tr><tr><td>노원구</td><td>-11.2%</td><td>79.1%</td><td>364</td><td>43%</td><td>1,111</td></tr><tr><td>양천구</td><td>-11.2%</td><td>80.1%</td><td>161</td><td>41.8%</td><td>720</td></tr><tr><td>강남구</td><td>-10.2%</td><td>80.1%</td><td>166</td><td>47%</td><td>1,211</td></tr><tr><td>성동구</td><td>-9.8%</td><td>86.9%</td><td>99</td><td>48.8%</td><td>664</td></tr><tr><td>강서구</td><td>-9.6%</td><td>73.4%</td><td>143</td><td>47.9%</td><td>751</td></tr><tr><td>송파구</td><td>-9.5%</td><td>82.8%</td><td>395</td><td>37.6%</td><td>1,196</td></tr><tr><td>동작구</td><td>-8.9%</td><td>88.2%</td><td>85</td><td>41.5%</td><td>564</td></tr><tr><td>마포구</td><td>-6.7%</td><td>71.8%</td><td>117</td><td>58.9%</td><td>824</td></tr><tr><td>중랑구</td><td>0%</td><td>22.1%</td><td>95</td><td>47.8%</td><td>276</td></tr><tr><td>종로구</td><td><span class="low-sample">표본 부족</span></td><td>-</td><td>2</td><td>-</td><td>94</td></tr><tr><td>중구</td><td><span class="low-sample">표본 부족</span></td><td>-</td><td>32</td><td>50%</td><td>204</td></tr><tr><td>용산구</td><td><span class="low-sample">표본 부족</span></td><td>-</td><td>37</td><td>48.5%</td><td>369</td></tr><tr><td>광진구</td><td><span class="low-sample">표본 부족</span></td><td>-</td><td>28</td><td>40.2%</td><td>244</td></tr><tr><td>동대문구</td><td><span class="low-sample">표본 부족</span></td><td>-</td><td>29</td><td>43%</td><td>386</td></tr><tr><td>성북구</td><td><span class="low-sample">표본 부족</span></td><td>-</td><td>59</td><td>41.9%</td><td>627</td></tr><tr><td>강북구</td><td><span class="low-sample">표본 부족</span></td><td>-</td><td>14</td><td>-</td><td>169</td></tr><tr><td>은평구</td><td><span class="low-sample">표본 부족</span></td><td>-</td><td>57</td><td>46.9%</td><td>556</td></tr><tr><td>서대문구</td><td><span class="low-sample">표본 부족</span></td><td>-</td><td>38</td><td>41.5%</td><td>405</td></tr><tr><td>구로구</td><td><span class="low-sample">표본 부족</span></td><td>-</td><td>53</td><td>54.8%</td><td>394</td></tr><tr><td>금천구</td><td><span class="low-sample">표본 부족</span></td><td>-</td><td>15</td><td>-</td><td>128</td></tr><tr><td>영등포구</td><td><span class="low-sample">표본 부족</span></td><td>-</td><td>51</td><td>41.1%</td><td>581</td></tr><tr><td>관악구</td><td><span class="low-sample">표본 부족</span></td><td>-</td><td>59</td><td>51.1%</td><td>325</td></tr><tr><td>서초구</td><td><span class="low-sample">표본 부족</span></td><td>-</td><td>34</td><td>43.9%</td><td>745</td></tr></tbody><!--/prerender:renewalDistricts--></table>
+    </div>
+    <div class="content-notice" id="district-note"></div>
+  </section>
+
+  <section id="cap-section">
+    <h2 id="cap-heading">천장에 닿았나</h2>
+    <p class="lead" id="cap-lead"><!--prerender:renewalCapLead-->계약갱신요구권을 쓴 재계약 13,756건 가운데 44.8%가 상한 5%에 못 미친 선에서 맺어졌습니다. 여기서 재는 것이 인상률의 평균이 아니라 천장에 닿았는지인 이유는, 상한이 걸린 시장에서 평균을 내면 시장이 아니라 법조문을 다시 읽게 되기 때문입니다.<!--/prerender:renewalCapLead--></p>
+    <div class="content-notice" id="cap-note"></div>
+    <div class="district-links-heading" id="district-links-heading">자치구별 시세</div>
+    <div class="district-links" id="district-links"><!--prerender:renewalDistrictLinks--><a href="./district-jongno.html">종로구</a><a href="./district-jung.html">중구</a><a href="./district-yongsan.html">용산구</a><a href="./district-seongdong.html">성동구</a><a href="./district-gwangjin.html">광진구</a><a href="./district-dongdaemun.html">동대문구</a><a href="./district-jungnang.html">중랑구</a><a href="./district-seongbuk.html">성북구</a><a href="./district-gangbuk.html">강북구</a><a href="./district-dobong.html">도봉구</a><a href="./district-nowon.html">노원구</a><a href="./district-eunpyeong.html">은평구</a><a href="./district-seodaemun.html">서대문구</a><a href="./district-mapo.html">마포구</a><a href="./district-yangcheon.html">양천구</a><a href="./district-gangseo.html">강서구</a><a href="./district-guro.html">구로구</a><a href="./district-geumcheon.html">금천구</a><a href="./district-yeongdeungpo.html">영등포구</a><a href="./district-dongjak.html">동작구</a><a href="./district-gwanak.html">관악구</a><a href="./district-seocho.html">서초구</a><a href="./district-gangnam.html">강남구</a><a href="./district-songpa.html">송파구</a><a href="./district-gangdong.html">강동구</a><!--/prerender:renewalDistrictLinks--></div>
+  </section>
+
+  <footer class="site-footer">
+    <div id="footer-source">출처: 국토교통부 아파트 전월세 실거래가 공개시스템. 신고된 계약만 집계되며 신고 기한(계약 후 30일)이 지나 마감된 달만 셉니다.</div>
+    <div style="margin-top:6px;">
+      <a href="./about.html" id="footer-about">소개</a>
+      <span aria-hidden="true"> · </span>
+      <a href="./method.html" id="footer-method">숫자를 만드는 방법</a>
+      <span aria-hidden="true"> · </span>
+      <a href="https://kyhsa93.github.io/privacy-policy" id="footer-privacy" target="_blank" rel="noopener">개인정보처리방침</a>
+    </div>
+  </footer>
+</main>
+<script src="./nav.js" defer></script>
+<script src="./analytics.js"></script>
+<script>
+const T = {
+  ko: {
+    title: "재계약이 시세보다 싼가",
+    navDigest: "오늘",
+    navNews: "뉴스",
+    navRealestatePrices: "아파트 시세",
+    navRates: "금리 비교",
+    navAll: "전체",
+    navSale: "매매",
+    navJeonse: "전세",
+    navWolse: "월세",
+    navDealSearch: "거래내역 검색",
+    navConversion: "전세 vs 월세",
+    navRenewal: "재계약",
+    navCancelled: "해제·등기",
+    methodCallout:
+      "시세표는 신규 계약만 셉니다. 갱신은 이전 조건을 잇는 것이라 지금 시세가 아니어서인데, 그렇게 빠지는 것이 서울 전월세 신고의 절반입니다. 이 화면은 그 빠진 쪽을 봅니다.",
+    methodCalloutLink: "숫자를 만드는 방법 →",
+    leadHeading: "갱신과 신규의 차이",
+    districtHeading: "자치구별 갱신 vs 신규",
+    capHeading: "천장에 닿았나",
+    thDistrict: "자치구",
+    thGap: "갱신 − 신규",
+    thCheaper: "시세보다 싼 비율",
+    thMatched: "맞물린 계약",
+    thCapMiss: "상한 미달",
+    thRightUsed: "요구권 행사",
+    lowSample: "표본 부족",
+    leadNote:
+      "견주는 상대는 같은 단지, 같은 전용면적, 같은 달에 새로 맺어진 전세의 중앙값입니다. 면적을 구간으로 묶지 않는 것은 같은 단지라도 평형이 다르면 값이 다르기 때문이고(묶으면 표본은 늘지만 59㎡ 갱신을 63㎡ 신규와 견주게 됩니다), " +
+      "순수 전세끼리만 견주는 것은 반전세를 한 값으로 묶는 배수가 곧 전월세전환율이라 답해야 할 것을 먼저 가정하게 되기 때문입니다. " +
+      "맞물리려면 같은 칸에 신규가 세 건은 있어야 하므로 거래가 도는 큰 단지 쪽으로 기웁니다.",
+    districtNote:
+      "값을 내는 문턱은 맞물린 계약 60건입니다. 서울 표본을 크기별로 400번 다시 뽑아 보면 60건에서 서울과 똑같은 구도 −12.5% ~ −5.0%에 떨어지는데, 그보다 적으면 폭이 9%p를 넘어 아무 차이 없는 구가 양쪽으로 다 찍힙니다. " +
+      "문턱을 못 넘은 구는 값을 비우되 맞물린 건수는 그대로 둡니다 — 왜 값이 없는지가 표 안에서 읽혀야 합니다. " +
+      "상한 미달은 계약갱신요구권을 쓴 계약이 200건 넘는 구만 냅니다.",
+    capNote:
+      "계약갱신요구권을 쓰면 인상률 상한이 5%입니다. 그래서 인상률의 평균은 지표가 되지 못합니다 — 요구권을 쓴 계약의 절반 이상이 5% 언저리에 붙어 있고, 상한이 안 걸리는 합의 갱신조차 중앙값이 5.0%에서 움직이지 않습니다. 5%가 법을 떠나 관행의 기준점이 된 것입니다. " +
+      "상한까지 못 올린 계약이 많다는 것은 집주인이 부르는 값을 그 동네가 다 받아 주지 않았다는 뜻이고, 이건 상한이 있어서 오히려 읽히는 신호입니다.",
+    districtLinksHeading: "자치구별 시세",
+    updatedPrefix: "기준",
+    footerSource: "출처: 국토교통부 아파트 전월세 실거래가 공개시스템. 신고된 계약만 집계되며 신고 기한(계약 후 30일)이 지나 마감된 달만 셉니다.",
+    footerPrivacy: "개인정보처리방침",
+    footerMethod: "숫자를 만드는 방법",
+    footerAbout: "소개",
+    notReady: "아직 재계약 자료가 없습니다. 국토교통부 신고분을 받는 대로 채워집니다.",
+    loadError: "재계약 자료를 불러오지 못했습니다.",
+    retry: "다시 시도",
+  },
+  en: {
+    title: "Is renewing cheaper than moving?",
+    navDigest: "Today",
+    navNews: "News",
+    navRealestatePrices: "Apartment Prices",
+    navRates: "Rates",
+    navAll: "All",
+    navSale: "Sale",
+    navJeonse: "Jeonse",
+    navWolse: "Monthly rent",
+    navDealSearch: "Deal search",
+    navConversion: "Jeonse vs rent",
+    navRenewal: "Renewals",
+    navCancelled: "Cancelled & registered",
+    methodCallout:
+      "Price tables count new leases only. A renewal carries the old terms forward, so it is not today's market — but that is half of everything filed in Seoul. This screen looks at the half that gets dropped.",
+    methodCalloutLink: "How these numbers are made →",
+    leadHeading: "Renewal against new",
+    districtHeading: "Renewal against new, by district",
+    capHeading: "Did it reach the ceiling?",
+    thDistrict: "District",
+    thGap: "Renewal − new",
+    thCheaper: "Under market",
+    thMatched: "Matched",
+    thCapMiss: "Below cap",
+    thRightUsed: "Right invoked",
+    lowSample: "Too few",
+    leadNote:
+      "The comparison is the median new jeonse signed in the same complex, for the same exclusive floor area, in the same month. Areas are not bucketed, because two unit types in one complex are two different prices (bucketing raises the sample but compares a 59m² renewal against a 63m² new lease), " +
+      "and only pure jeonse is compared, because the multiplier that folds a semi-jeonse into one number is the conversion rate itself — assuming the very thing the site is meant to measure. " +
+      "A match needs at least three new leases in the same cell, so the figure leans toward larger complexes where deals turn over.",
+    districtNote:
+      "A district gets a figure at 60 matched leases. Resampling the Seoul pool 400 times by sample size puts a district identical to Seoul anywhere between −12.5% and −5.0% at n=60; below that the spread passes 9pp and a district with no real difference can land on either story. " +
+      "Districts under the threshold keep their match count instead of going blank — the reason a figure is missing should be readable in the table. " +
+      "The below-cap column is only shown for districts with more than 200 renewals where the statutory right was invoked.",
+    capNote:
+      "Invoking the statutory renewal right caps the increase at 5%. That is why the average increase is not a measure — over half of those renewals sit at about 5%, and even negotiated renewals with no cap have a median that does not move off 5.0%. The cap has become the customary reference point, law aside. " +
+      "A high share of renewals below the cap means landlords in that district did not get what they asked for, and that is a signal readable precisely because the ceiling exists.",
+    districtLinksHeading: "Prices by district",
+    updatedPrefix: "As of",
+    footerSource: "Source: MOLIT apartment jeonse and monthly rent filings. Only filed contracts are counted, and only months whose 30-day filing window has closed.",
+    footerPrivacy: "Privacy policy",
+    footerMethod: "How the numbers are made",
+    footerAbout: "About",
+    notReady: "No renewal data yet. It fills in as MOLIT filings arrive.",
+    loadError: "Could not load the renewal data.",
+    retry: "Retry",
+  },
+};
+
+let locale = (() => {
+  const saved = window.localStorage.getItem("lang");
+  return saved === "en" || saved === "ko" ? saved : "ko";
+})();
+const t = (key) => T[locale][key];
+
+const THEME_ICONS = { auto: "🌓", light: "☀️", dark: "🌙" };
+let theme = (() => {
+  const saved = window.localStorage.getItem("theme");
+  return saved === "light" || saved === "dark" ? saved : "auto";
+})();
+
+function applyTheme(next) {
+  theme = next;
+  window.localStorage.setItem("theme", theme);
+  if (theme === "auto") document.documentElement.removeAttribute("data-theme");
+  else document.documentElement.setAttribute("data-theme", theme);
+  document.querySelector("#theme-toggle span").textContent = THEME_ICONS[theme];
+}
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
+
+function setText(id, text) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = text;
+}
+
+const localeTag = () => (locale === "en" ? "en-US" : "ko-KR");
+const num = (value) => Number(value ?? 0).toLocaleString(localeTag());
+const pct = (value) => (value === null || value === undefined ? "-" : `${value}%`);
+
+const cache = { data: null };
+
+function renderDistrictTable() {
+  const rows = cache.data?.table ?? [];
+  const table = document.getElementById("district-table");
+  if (!rows.length) {
+    table.innerHTML = "";
+    return;
+  }
+
+  const head =
+    `<thead><tr><th>${escapeHtml(t("thDistrict"))}</th><th>${escapeHtml(t("thGap"))}</th>` +
+    `<th>${escapeHtml(t("thCheaper"))}</th><th>${escapeHtml(t("thMatched"))}</th>` +
+    `<th>${escapeHtml(t("thCapMiss"))}</th><th>${escapeHtml(t("thRightUsed"))}</th></tr></thead>`;
+
+  // 문턱을 못 넘은 칸은 비우지 않고 못 넘었다고 적는다. 빈칸은 자료가 없는 것인지
+  // 우리가 안 낸 것인지 구별되지 않고, 그 구별이 이 사이트가 파는 것이다.
+  const body = rows
+    .map((row) => {
+      const gap =
+        row.gapMedian === null
+          ? `<span class="low-sample">${escapeHtml(t("lowSample"))}</span>`
+          : escapeHtml(pct(row.gapMedian));
+      return (
+        `<tr><td>${escapeHtml(row.district)}</td><td>${gap}</td>` +
+        `<td>${escapeHtml(pct(row.gapCheaperShare))}</td><td>${num(row.gapMatched)}</td>` +
+        `<td>${escapeHtml(pct(row.capMissShare))}</td><td>${num(row.rightUsed)}</td></tr>`
+      );
+    })
+    .join("");
+
+  table.innerHTML = `${head}<tbody>${body}</tbody>`;
+}
+
+function renderDistrictLinks() {
+  const slugs = cache.data?.slugs ?? {};
+  document.getElementById("district-links").innerHTML = Object.entries(slugs)
+    .map(([name, slug]) => `<a href="./district-${escapeHtml(slug)}.html">${escapeHtml(name)}</a>`)
+    .join("");
+}
+
+function renderUpdated() {
+  const updatedAt = cache.data?.updatedAt;
+  if (!updatedAt) {
+    setText("updated", "-");
+    return;
+  }
+  setText(
+    "updated",
+    `${t("updatedPrefix")}: ${new Date(updatedAt).toLocaleDateString(localeTag(), { timeZone: "Asia/Seoul", dateStyle: "medium" })}`
+  );
+}
+
+const NAV_KEYS = {
+  all: "navAll",
+  sale: "navSale",
+  jeonse: "navJeonse",
+  wolse: "navWolse",
+  search: "navDealSearch",
+  conversion: "navConversion",
+  renewal: "navRenewal",
+  cancelled: "navCancelled",
+};
+
+function applyLocale() {
+  document.title = t("title");
+  setText("page-title", t("title"));
+  setText("method-callout-text", t("methodCallout"));
+  setText("method-callout-link", t("methodCalloutLink"));
+  setText("lead-heading", t("leadHeading"));
+  setText("district-heading", t("districtHeading"));
+  setText("cap-heading", t("capHeading"));
+  setText("lead-note", t("leadNote"));
+  setText("district-note", t("districtNote"));
+  setText("cap-note", t("capNote"));
+  setText("district-links-heading", t("districtLinksHeading"));
+  setText("nav-digest", t("navDigest"));
+  setText("nav-news", t("navNews"));
+  setText("nav-realestate", t("navRealestatePrices"));
+  setText("nav-rates", t("navRates"));
+  setText("footer-source", t("footerSource"));
+  setText("footer-privacy", t("footerPrivacy"));
+  setText("footer-method", t("footerMethod"));
+  setText("footer-about", t("footerAbout"));
+  for (const link of document.querySelectorAll("[data-re-page]")) {
+    link.textContent = t(NAV_KEYS[link.getAttribute("data-re-page")]);
+  }
+  document.documentElement.setAttribute("lang", locale);
+}
+
+function renderAll() {
+  applyLocale();
+  const lead = cache.data?.lead;
+  if (lead) setText("lead", locale === "en" ? lead.en : lead.ko);
+  const capText = cache.data?.capLead;
+  if (capText) setText("cap-lead", locale === "en" ? capText.en : capText.ko);
+  renderDistrictTable();
+  renderDistrictLinks();
+  renderUpdated();
+}
+
+async function loadJson(name) {
+  const res = await fetch(`./data/${name}.json?_=${Date.now()}`);
+  if (res.status === 404) return null;
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
+
+async function main() {
+  applyTheme(theme);
+  applyLocale();
+
+  try {
+    const data = await loadJson("renewal-facts");
+    if (!data?.table?.length) {
+      setText("lead", t("notReady"));
+      setText("updated", "-");
+      return;
+    }
+
+    cache.data = data;
+    renderAll();
+  } catch (error) {
+    window.analytics?.event("exception", {
+      description: `load renewal: ${error?.message ?? error}`.slice(0, 100),
+      fatal: true,
+    });
+    document.getElementById("lead").innerHTML =
+      `${escapeHtml(t("loadError"))} <button type="button" id="load-retry">${escapeHtml(t("retry"))}</button>`;
+    document.getElementById("load-retry")?.addEventListener("click", (e) => {
+      e.currentTarget.disabled = true;
+      main();
+    });
+  }
+}
+
+document.getElementById("theme-toggle").addEventListener("click", () => {
+  const order = ["auto", "light", "dark"];
+  applyTheme(order[(order.indexOf(theme) + 1) % order.length]);
+});
+
+document.getElementById("lang-toggle").addEventListener("click", () => {
+  locale = locale === "ko" ? "en" : "ko";
+  window.localStorage.setItem("lang", locale);
+  renderAll();
+  window.analytics?.event("language_switch", { site_language: locale });
+});
+
+main();
+</script>
+</body>
+</html>

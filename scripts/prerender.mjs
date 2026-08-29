@@ -27,6 +27,7 @@ const NEWS_PATH = path.join(root, "docs/news.html");
 const REALESTATE_PATH = path.join(root, "docs/realestate.html");
 const CONVERSION_PATH = path.join(root, "docs/jeonse-vs-wolse.html");
 const CANCELLATION_PATH = path.join(root, "docs/cancelled-deals.html");
+const RENEWAL_PATH = path.join(root, "docs/renewal-vs-new.html");
 const DATA_DIR = path.join(root, "docs/data");
 
 export const MIN_SAMPLE = 5;
@@ -819,6 +820,49 @@ export function cancelDistrictLinksHtml(cancellation) {
   return links || null;
 }
 
+/** 재계약 화면. 문턱은 빌더가 이미 적용했으므로 여기서는 형식만 입힌다. */
+export function renewalLeadHtml(renewal) {
+  return renewal?.lead?.ko ? escapeHtml(renewal.lead.ko) : null;
+}
+
+export function renewalCapLeadHtml(renewal) {
+  return renewal?.capLead?.ko ? escapeHtml(renewal.capLead.ko) : null;
+}
+
+export function renewalDistrictsHtml(renewal) {
+  const rows = renewal?.table ?? [];
+  if (!rows.length) return null;
+
+  const pct = (value) => (value === null || value === undefined ? "-" : `${value}%`);
+  const body = rows
+    .map((row) => {
+      // 문턱을 못 넘은 칸은 비우지 않는다. 화면 쪽 renderDistrictTable과 같은 규칙이다.
+      const gap =
+        row.gapMedian === null
+          ? '<span class="low-sample">표본 부족</span>'
+          : escapeHtml(pct(row.gapMedian));
+      return (
+        `<tr><td>${escapeHtml(row.district)}</td><td>${gap}</td>` +
+        `<td>${escapeHtml(pct(row.gapCheaperShare))}</td><td>${row.gapMatched.toLocaleString("ko-KR")}</td>` +
+        `<td>${escapeHtml(pct(row.capMissShare))}</td><td>${row.rightUsed.toLocaleString("ko-KR")}</td></tr>`
+      );
+    })
+    .join("");
+
+  return (
+    `<thead><tr><th>자치구</th><th>갱신 − 신규</th><th>시세보다 싼 비율</th>` +
+    `<th>맞물린 계약</th><th>상한 미달</th><th>요구권 행사</th></tr></thead><tbody>${body}</tbody>`
+  );
+}
+
+export function renewalDistrictLinksHtml(renewal) {
+  const slugs = renewal?.slugs ?? {};
+  const links = Object.entries(slugs)
+    .map(([name, slug]) => `<a href="./district-${escapeHtml(slug)}.html">${escapeHtml(name)}</a>`)
+    .join("");
+  return links || null;
+}
+
 async function readJson(name) {
   try {
     return JSON.parse(await readFile(path.join(DATA_DIR, `${name}.json`), "utf8"));
@@ -842,6 +886,7 @@ async function main() {
   const rates = await readJson("rates");
   const conversion = await readJson("conversion");
   const cancellation = await readJson("cancellation");
+  const renewal = await readJson("renewal-facts");
 
   for (const [file, path_, fileBlocks] of [
     ["docs/index.html", INDEX_PATH, blocks],
@@ -874,6 +919,16 @@ async function main() {
         conversionLead: conversionLeadHtml(conversion),
         conversionTable: conversionTableHtml(conversion),
         conversionDistrictLinks: conversionDistrictLinksHtml(conversion),
+      },
+    ],
+    [
+      "docs/renewal-vs-new.html",
+      RENEWAL_PATH,
+      {
+        renewalLead: renewalLeadHtml(renewal),
+        renewalCapLead: renewalCapLeadHtml(renewal),
+        renewalDistricts: renewalDistrictsHtml(renewal),
+        renewalDistrictLinks: renewalDistrictLinksHtml(renewal),
       },
     ],
     [

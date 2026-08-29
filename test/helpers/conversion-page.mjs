@@ -1,6 +1,6 @@
 import { loadPage, settle } from "./digest-page.mjs";
 
-const SUB_NAV = ["all", "sale", "jeonse", "wolse", "search", "conversion", "cancelled"];
+const SUB_NAV = ["all", "sale", "jeonse", "wolse", "search", "conversion", "renewal", "cancelled"];
 
 export async function loadConversionPage({ conversion, ...rest } = {}) {
   const page = await loadPage({ file: "jeonse-vs-wolse.html", data: { conversion }, subNav: SUB_NAV, ...rest });

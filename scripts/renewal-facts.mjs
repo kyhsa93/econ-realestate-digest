@@ -268,6 +268,88 @@ export function renewalFacts(districtTally, seoul) {
   return Object.keys(facts).length ? facts : null;
 }
 
+/**
+ * 재계약 화면이 그대로 그리는 한 줄.
+ *
+ * 문턱은 여기서 한 번만 적용한다 - 빌드와 브라우저 양쪽에서 각자 자르면 언젠가 갈라지고,
+ * 갈라져도 어느 쪽이 틀렸는지 아무도 말해 주지 않는다. 화면은 이 값을 형식만 입혀 쓴다.
+ *
+ * 문턱을 못 넘은 칸은 <strong>비우지 않는다.</strong> 값 자리는 비되 맞물린 건수는 그대로
+ * 남겨, 왜 값이 없는지가 표 안에서 읽히게 한다. 이 사이트가 파는 것이 그것이다.
+ */
+export function districtRow(district, districtTally) {
+  const gapEnough = districtTally.gapMatched >= MIN_GAP_SAMPLE;
+  const capEnough = districtTally.rightUsed >= MIN_RENEWALS;
+
+  return {
+    district,
+    renewals: districtTally.renewals,
+    gapMatched: districtTally.gapMatched,
+    gapMedian: gapEnough ? districtTally.gapMedian : null,
+    gapCheaperShare: gapEnough ? districtTally.gapCheaperShare : null,
+    rightUsed: districtTally.rightUsed,
+    capMissShare: capEnough ? districtTally.capMissShare : null,
+  };
+}
+
+/**
+ * 값이 있는 구를 갱신이 유리한 순으로, 값이 없는 구를 그 뒤에 둔다.
+ *
+ * 같은 값이면 DISTRICTS가 준 순서를 지킨다 - 정렬이 안정적이지 않으면 값이 하나도
+ * 안 변한 날에도 표 순서가 뒤바뀌어 매일 뜻 없는 diff가 커밋된다.
+ */
+export function sortRows(rows) {
+  return [...rows].sort((a, b) => {
+    if ((a.gapMedian === null) !== (b.gapMedian === null)) return a.gapMedian === null ? 1 : -1;
+    if (a.gapMedian === null) return 0;
+    return a.gapMedian - b.gapMedian;
+  });
+}
+
+/**
+ * 서울 전체를 한 문단으로. 이 화면에 온 사람이 묻는 것은 "재계약이 이득인가" 하나다.
+ */
+export function seoulLead(seoul, locale = "ko") {
+  if (!seoul || !seoul.gapMatched || seoul.gapMedian === null) return null;
+  const en = locale === "en";
+  const tag = en ? "en-US" : "ko-KR";
+  const size = Math.abs(seoul.gapMedian).toFixed(1);
+  const matched = seoul.gapMatched.toLocaleString(tag);
+  const cheaper = seoul.gapCheaperShare;
+
+  // 갱신이 더 비쌀 수도 있다. 서울 전체가 그렇게 뒤집힌 적은 없지만, 뒤집힌 날
+  // "-0.0% 싸다"고 적는 화면이 되지 않게 세 갈래를 다 적어 둔다.
+  if (Math.abs(seoul.gapMedian) < 0.05) {
+    return en
+      ? `Across Seoul, renewal deposits sit essentially level with new leases signed the same month for the same unit type in the same complex (${matched} matched leases). Staying put saves nothing right now.`
+      : `서울 전체로 보면 재계약 보증금은 같은 단지 같은 평형에 그달 새로 맺어진 전세와 사실상 차이가 없습니다(맞물린 계약 ${matched}건). 지금은 눌러앉아 아끼는 것이 없습니다.`;
+  }
+
+  if (seoul.gapMedian > 0) {
+    return en
+      ? `Across Seoul, renewing tenants pay ${size}% more than the median new lease signed the same month for the same unit type in the same complex (${matched} matched leases); only ${cheaper}% of renewals came in under the market. Right now moving costs less than staying.`
+      : `서울에서 재계약하는 세입자는 같은 단지 같은 평형에 그달 새로 맺어진 전세보다 보증금을 ${size}% 더 냅니다(맞물린 계약 ${matched}건). 시세보다 싸게 맺어진 재계약은 ${cheaper}%뿐입니다 — 지금은 눌러앉는 쪽이 더 비쌉니다.`;
+  }
+
+  return en
+    ? `Across Seoul, renewing tenants pay ${size}% less than the median new lease signed the same month for the same unit type in the same complex, and ${cheaper}% of renewals came in under the market (${matched} matched leases). Moving out means paying that difference.`
+    : `서울에서 재계약하는 세입자는 같은 단지 같은 평형에 그달 새로 맺어진 전세보다 보증금을 ${size}% 적게 냅니다. 맞물린 계약 ${matched}건 가운데 ${cheaper}%가 시세보다 싸게 맺어졌습니다 — 나가서 다시 구하면 그 차이만큼을 더 내야 한다는 뜻입니다.`;
+}
+
+/**
+ * 천장 이야기. 인상률의 평균을 내지 않는 이유까지 한 문장에 넣는다.
+ */
+export function capLead(seoul, locale = "ko") {
+  if (!seoul?.rightUsed || seoul.capMissShare === null) return null;
+  const en = locale === "en";
+  const tag = en ? "en-US" : "ko-KR";
+  const used = seoul.rightUsed.toLocaleString(tag);
+
+  return en
+    ? `Of the ${used} renewals where the tenant invoked the statutory right, ${seoul.capMissShare}% settled below the 5% cap. The measure here is whether the ceiling was reached, not the average increase — where a cap binds, the average reads the statute back to you rather than the market.`
+    : `계약갱신요구권을 쓴 재계약 ${used}건 가운데 ${seoul.capMissShare}%가 상한 5%에 못 미친 선에서 맺어졌습니다. 여기서 재는 것이 인상률의 평균이 아니라 천장에 닿았는지인 이유는, 상한이 걸린 시장에서 평균을 내면 시장이 아니라 법조문을 다시 읽게 되기 때문입니다.`;
+}
+
 /** 자치구 페이지가 쓰는 문장. 갯수가 아니라 그 값이 무엇을 뜻하는지까지 적는다. */
 export function renewalSentences(facts, locale = "ko") {
   if (!facts) return [];
