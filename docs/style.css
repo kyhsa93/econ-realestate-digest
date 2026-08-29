@@ -1911,6 +1911,42 @@ summary:focus-visible,
   top: 8px;
 }
 
+/* 첫 화면에서 "이 숫자를 왜 믿어도 되는가"를 말하는 자리. 전에는 이 내용이
+ * 푸터 링크 한 줄로만 있었는데, 이 사이트가 대형 부동산 앱과 다른 점이
+ * 사실상 이것 하나뿐이라 아무도 안 보는 자리에 둘 것이 아니었다.
+ *
+ * 데이터 앞을 막지 않도록 두 문장으로 묶는다. 왼쪽 액센트 막대는 데이터가
+ * 아니라 사이트가 자기 자신에 대해 말하는 자리라는 표시다 - 표 안에는
+ * 여전히 액센트를 쓰지 않는다. */
+.method-callout {
+  margin: 0 0 24px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 10px 10px 0;
+  background: var(--card);
+}
+
+.method-callout p {
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+}
+
+.method-callout a {
+  display: inline-block;
+  margin-top: 6px;
+  color: var(--accent);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.method-callout a:hover {
+  text-decoration: underline;
+}
+
 .history-card svg[role="img"] { height: auto; touch-action: none; margin-top: 0; }
 .content-notice.page-notice { margin: -12px 0 20px; }
 

@@ -63,6 +63,10 @@
     <button type="button" id="load-error-retry"></button>
   </div>
 
+  <aside class="method-callout">
+    <p id="method-callout-text">여기 숫자는 매물 호가가 아니라 국토교통부에 신고된 실거래입니다. 신고 기한이 30일이라 최근 주는 늘 덜 차 있고, 표본이 모자란 자치구는 평균을 내지 않습니다.</p>
+    <a href="./method.html" id="method-callout-link">숫자를 만드는 방법 →</a>
+  </aside>
 
   <section id="market-section">
     <h2 id="market-heading">자산 시장 지표</h2>
@@ -262,6 +266,9 @@
       archiveViewing: (d) => `지난 기록 보는 중: ${d}`,
       footerPrivacyLink: "개인정보처리방침",
       footerMethod: "숫자를 만드는 방법",
+      methodCalloutText:
+        "여기 숫자는 매물 호가가 아니라 국토교통부에 신고된 실거래입니다. 신고 기한이 30일이라 최근 주는 늘 덜 차 있고, 표본이 모자란 자치구는 평균을 내지 않습니다.",
+      methodCalloutLink: "숫자를 만드는 방법 →",
       footerAbout: "소개",
     },
     en: {
@@ -357,6 +364,9 @@
       archiveViewing: (d) => `Viewing archive: ${d}`,
       footerPrivacyLink: "Privacy Policy",
       footerMethod: "How these numbers are made",
+      methodCalloutText:
+        "These are transactions reported to the Ministry of Land, not asking prices. Reporting runs on a 30-day window, so the most recent weeks are always still filling in, and districts with too few transactions are left blank rather than averaged.",
+      methodCalloutLink: "How these numbers are made →",
       footerAbout: "About",
     },
   };
@@ -1541,6 +1551,8 @@
     document.getElementById("archive-date-go").textContent = t("archiveDateGo");
     document.getElementById("footer-privacy-link").textContent = t("footerPrivacyLink");
     document.getElementById("footer-method").textContent = t("footerMethod");
+    document.getElementById("method-callout-text").textContent = t("methodCalloutText");
+    document.getElementById("method-callout-link").textContent = t("methodCalloutLink");
     document.getElementById("footer-about").textContent = t("footerAbout");
     const missing = isArchiveView
       ? []
