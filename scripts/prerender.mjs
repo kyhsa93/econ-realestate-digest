@@ -540,10 +540,10 @@ export function realestateOverallHtml(realestate, kind = null, district = null) 
   );
 }
 
-export function districtSummaryHtml(realestate, district, locale = "ko") {
+export function districtSummaryHtml(realestate, district, locale = "ko", spread = null) {
   if (!district) return "";
   const entry = (realestate?.districts ?? []).find((d) => d.name === district);
-  const sentences = districtSentences(entry, realestate, locale);
+  const sentences = districtSentences(entry, realestate, locale, spread);
   return sentences.length ? escapeHtml(sentences.join(" ")) : "";
 }
 

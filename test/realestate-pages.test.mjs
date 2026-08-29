@@ -392,10 +392,11 @@ test("자치구 페이지에는 평형 선택이 뜬다", async () => {
 });
 
 test("커밋된 자치구 페이지 25개가 지금 원본·데이터로 찍은 결과와 같다", async () => {
-  const [baseHtml, realestate, renewal] = await Promise.all([
+  const [baseHtml, realestate, renewal, complexRatio] = await Promise.all([
     read("docs/realestate.html"),
     readJson("realestate"),
     readJson("renewal-facts").catch(() => null),
+    readJson("complex-ratio").catch(() => null),
   ]);
 
   assert.equal(DISTRICT_PAGES.length, 25);
@@ -405,7 +406,14 @@ test("커밋된 자치구 페이지 25개가 지금 원본·데이터로 찍은 
     const deals = await readJson(`deals-${DISTRICT_SLUGS[district.name]}`).catch(() => null);
     assert.equal(
       await read(`docs/${district.file}`),
-      buildDistrictPage(baseHtml, district, realestate, deals, renewal?.districts?.[district.name] ?? null),
+      buildDistrictPage(
+        baseHtml,
+        district,
+        realestate,
+        deals,
+        renewal?.districts?.[district.name] ?? null,
+        complexRatio?.districts?.[district.name] ?? null
+      ),
       `docs/${district.file}이 원본과 어긋납니다. node scripts/build-realestate-pages.mjs를 실행하세요.`
     );
   }

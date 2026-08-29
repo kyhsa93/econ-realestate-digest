@@ -111,7 +111,7 @@ export function buildRealestatePage(baseHtml, page, realestate) {
   });
 }
 
-export function buildDistrictPage(baseHtml, district, realestate, deals = null, renewal = null) {
+export function buildDistrictPage(baseHtml, district, realestate, deals = null, renewal = null, spread = null) {
   const title = `${district.name} 아파트 시세 - 매매·전세·월세 실거래가`;
   const description =
     `${district.name} 아파트 매매·전세·월세 실거래가를 평당가와 84㎡ 환산가로 보여줍니다. ` +
@@ -144,8 +144,8 @@ export function buildDistrictPage(baseHtml, district, realestate, deals = null, 
     realestateHead: realestateHeadHtml(null, district.name),
     realestateTable: realestateTableHtml(realestate, null, district.name),
     districtLinks: districtLinksHtml(district.name),
-    districtSummaryKo: districtSummaryHtml(realestate, district.name, "ko"),
-    districtSummaryEn: districtSummaryHtml(realestate, district.name, "en"),
+    districtSummaryKo: districtSummaryHtml(realestate, district.name, "ko", spread),
+    districtSummaryEn: districtSummaryHtml(realestate, district.name, "en", spread),
     // 시세 문장은 realestate.json 하나로 스물다섯 구가 같은 틀을 쓴다. 이쪽은 그 구의
     // 전수 거래 파일을 따로 읽어, 그 구에서만 눈에 띄는 것을 말한다.
     districtFactsKo: districtFactsHtml(districtFacts(deals), "ko"),
@@ -156,11 +156,15 @@ export function buildDistrictPage(baseHtml, district, realestate, deals = null, 
 }
 
 async function main() {
-  const [baseHtml, realestate, renewalFacts] = await Promise.all([
+  const [baseHtml, realestate, renewalFacts, complexRatio] = await Promise.all([
     readFile(SOURCE_PATH, "utf8"),
     readFile(path.join(root, "docs/data/realestate.json"), "utf8").then(JSON.parse),
     // 재계약 관찰은 없을 수 있다 - 그러면 그 문단만 비고 나머지는 그대로 나간다.
     readFile(path.join(root, "docs/data/renewal-facts.json"), "utf8")
+      .then(JSON.parse)
+      .catch(() => null),
+    // 단지별 전세가율 분포도 마찬가지다. 칸이 모자라는 구는 이 문장을 갖지 않는다.
+    readFile(path.join(root, "docs/data/complex-ratio.json"), "utf8")
       .then(JSON.parse)
       .catch(() => null),
   ]);
@@ -182,7 +186,14 @@ async function main() {
       .catch(() => null);
     const result = await write(
       district.file,
-      buildDistrictPage(baseHtml, district, realestate, deals, renewalFacts?.districts?.[district.name] ?? null),
+      buildDistrictPage(
+        baseHtml,
+        district,
+        realestate,
+        deals,
+        renewalFacts?.districts?.[district.name] ?? null,
+        complexRatio?.districts?.[district.name] ?? null
+      ),
       true
     );
     if (result === "생성") created += 1;

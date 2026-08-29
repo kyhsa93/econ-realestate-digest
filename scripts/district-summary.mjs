@@ -1,3 +1,4 @@
+import { spreadSentence } from "./complex-ratio.mjs";
 import {
   areaPrice,
   formatEok,
@@ -44,7 +45,7 @@ function nearestDistrict(entry, districts) {
   return best;
 }
 
-export function districtSentences(entry, realestate, locale = "ko") {
+export function districtSentences(entry, realestate, locale = "ko", spread = null) {
   if (!entry) return [];
 
   const districts = realestate?.districts ?? [];
@@ -146,6 +147,11 @@ export function districtSentences(entry, realestate, locale = "ko") {
       sentence += side;
     }
     out.push(`${sentence}.`);
+
+    // 자치구 값은 구 전체 평균 둘을 나눈 것이라 어느 단지의 전세가율도 아닐 수 있다.
+    // 칸 하나하나에서 낸 값의 분포를 바로 뒤에 붙여, 그 하나를 얼마나 믿을지 알린다.
+    const spreadLine = spreadSentence(spread, ratio.ratio, locale);
+    if (spreadLine) out.push(spreadLine);
   }
 
   const wolse = resolveMetric(entry, "wolse");
