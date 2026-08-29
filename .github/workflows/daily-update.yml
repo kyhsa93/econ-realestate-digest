@@ -53,6 +53,9 @@ jobs:
       - name: 시장 지표 수집
         if: env.MODE == 'full'
         run: node scripts/fetch-market.mjs
+        env:
+          # 없으면 공개 sample 키로 돈다. 시크릿을 넣으면 열 건 제한이 풀린다.
+          ECOS_API_KEY: ${{ secrets.ECOS_API_KEY }}
 
       - name: 실거래 수집
         if: env.MODE == 'full'

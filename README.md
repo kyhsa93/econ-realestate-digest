@@ -38,7 +38,7 @@ GitHub Actions로 갱신하고 GitHub Pages로 배포한다.
 | 뉴스 | 경제지 RSS | 하루 4회 |
 | 아파트 실거래 | 국토교통부 매매·전월세 실거래가 (서울 25개 자치구) | 하루 1회 |
 | 예적금·대출 금리 | 금융감독원 금융상품통합비교공시 | 하루 1회 |
-| 시장 지표 | 코스피·원달러 환율·한국은행 기준금리 | 하루 1회 |
+| 시장 지표 | 코스피·원달러 환율, 한국은행 기준금리(ECOS) | 하루 1회 |
 | AI 요약 | 위 뉴스를 Ollama(qwen3:14b)로 요약 | 하루 1회 |
 
 뉴스 네 장과 실거래 검색은 `noindex`다. 남의 기사 제목과 그 요약, 그리고 조건을
@@ -166,6 +166,11 @@ npm run update        # 수집 → 빌드 → 커밋·푸시
 - `MOLIT_API_KEY` / `MOLIT_API_ENDPOINT` — 아파트 매매 실거래
 - `MOLIT_RENT_API_KEY` / `MOLIT_RENT_API_ENDPOINT` — 아파트 전월세 실거래
 - `FSS_FINLIFE_API_KEY` — 금융상품 공시
+- `ECOS_API_KEY` — 한국은행 기준금리 (**없어도 된다**)
+
+기준금리는 한국은행 ECOS Open API에서 받는다. 인증키가 없으면 공개된 `sample` 키로
+도는데 한 번에 열 건까지만 주므로, 오늘 값은 읽히고 시계열은 못 읽는다. 키는
+[ecos.bok.or.kr/api](https://ecos.bok.or.kr/api)에서 가입 즉시 무료로 나온다.
 
 AI 요약은 로컬에 Ollama가 있어야 한다(`OLLAMA_THINK=false` 필요).
 

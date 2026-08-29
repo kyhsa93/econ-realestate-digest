@@ -79,7 +79,7 @@
             <th id="market-th-change">증감</th>
           </tr>
         </thead>
-        <tbody id="market-grid"><!--prerender:market--><tr><td>코스피</td><td data-label="값">6,788.88</td><td data-label="증감">-123.49</td></tr><tr><td>원/달러 환율</td><td data-label="값">1381.57원</td><td data-label="증감">-</td></tr><tr><td>기준금리</td><td data-label="값">3.00%</td><td data-label="증감">2026년 08월 27일</td></tr><!--/prerender:market--></tbody>
+        <tbody id="market-grid"><!--prerender:market--><tr><td>코스피</td><td data-label="값">6,788.88</td><td data-label="증감">-123.49</td></tr><tr><td>원/달러 환율</td><td data-label="값">1377.94원</td><td data-label="증감">-</td></tr><tr><td>기준금리</td><td data-label="값">3.00%</td><td data-label="증감">2026년 08월 27일</td></tr><!--/prerender:market--></tbody>
       </table>
     </div>
     <div class="history-grid" id="history-grid"></div>
@@ -575,7 +575,7 @@
         <tr>
           <td>${t("baseRateLabel")}</td>
           <td data-label="${t("marketThValue")}">${market.baseRate.value}%</td>
-          <td class="change" data-label="${t("marketThChange")}">${t("baseRateSince")(market.baseRate.effectiveFrom)}</td>
+          <td class="change" data-label="${t("marketThChange")}">${market.baseRate.effectiveFrom ? t("baseRateSince")(market.baseRate.effectiveFrom) : ""}</td>
         </tr>`);
     }
     tbody.innerHTML = rows.join("") || `<tr><td colspan="3" class="error">${t("marketEmpty")}</td></tr>`;

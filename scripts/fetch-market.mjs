@@ -1,5 +1,6 @@
 import { writeFile, mkdir, readFile } from "node:fs/promises";
 import path from "node:path";
+import { BASE_RATE, changedOn, clampRows, ecosKey, statisticSearch } from "./ecos.mjs";
 
 const dataDir = path.resolve(import.meta.dirname, "../docs/data");
 const outFile = path.join(dataDir, "market.json");
@@ -8,6 +9,27 @@ const HISTORY_MAX_DAYS = 180;
 
 function kstDateString(date) {
   return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(date);
+}
+
+const kstYmd = (date) => kstDateString(date).replaceAll("-", "");
+
+/** ECOS의 20260827을 화면이 쓰는 "2026년 08월 27일"로. */
+export function ymdLabel(time) {
+  const text = String(time ?? "");
+  if (!/^\d{8}$/.test(text)) return null;
+  return `${text.slice(0, 4)}년 ${text.slice(4, 6)}월 ${text.slice(6, 8)}일`;
+}
+
+/**
+ * ECOS는 3.00을 "3"으로 준다. 화면은 늘 소수 둘째 자리까지 적어 왔다.
+ *
+ * 숫자로 바꿔 보고 판단하면 안 된다 - Number("")는 0이라, 값이 비어 온 날
+ * 기준금리가 0.00%로 둔갑한다. 생긴 것부터 본다.
+ */
+export function rateLabel(value) {
+  const text = String(value ?? "").trim();
+  if (!/^-?\d+(\.\d+)?$/.test(text)) return null;
+  return Number(text).toFixed(2);
 }
 
 async function fetchKospi() {
@@ -34,7 +56,12 @@ async function fetchUsdKrw() {
   return { value: krw, asOf: json.time_last_update_utc };
 }
 
-async function fetchBaseRate() {
+/**
+ * 기준금리를 포털 HTML에서 긁던 옛 경로. 이제는 ECOS가 시행일을 못 줄 때만 부른다 -
+ * sample 키는 열흘치만 주므로, 금리가 그보다 오래전에 바뀌었고 이전 기록도 없는
+ * 첫 실행에서 그렇다.
+ */
+async function fetchBaseRateFromBok() {
   const res = await fetch("https://www.bok.or.kr/portal/singl/baseRate/list.do?menuNo=200643", {
     headers: { "User-Agent": "Mozilla/5.0" },
   });
@@ -46,6 +73,41 @@ async function fetchBaseRate() {
   if (!match) throw new Error("기준금리 표 형식 이상");
   const [, year, dateLabel, rate] = match;
   return { value: rate, effectiveFrom: `${year}년 ${dateLabel}` };
+}
+
+/** sample 키로 한 번에 받을 수 있는 열 건에 맞춘 창. 키가 있으면 넓게 본다. */
+export const BASE_RATE_WINDOW_DAYS = { sample: 9, keyed: 400 };
+
+export async function baseRateFrom(rows, previous, { bok = fetchBaseRateFromBok } = {}) {
+  if (!rows.length) throw new Error("ecos 기준금리 응답 없음");
+
+  const value = rateLabel(rows.at(-1).DATA_VALUE);
+  if (!value) throw new Error("ecos 기준금리 값 형식 이상");
+
+  const changed = changedOn(rows);
+  if (changed) return { value, effectiveFrom: ymdLabel(changed) };
+
+  // 받아 온 창이 통째로 같은 값이면 시행일은 그 전이다. 값이 그대로면 지난번에
+  // 적어 둔 시행일이 여전히 맞다.
+  if (previous?.value === value && previous?.effectiveFrom) {
+    return { value, effectiveFrom: previous.effectiveFrom };
+  }
+
+  const scraped = await bok().catch(() => null);
+  return { value, effectiveFrom: scraped?.effectiveFrom ?? null };
+}
+
+async function fetchBaseRate(previous, now = new Date()) {
+  const key = ecosKey();
+  const span = key === "sample" ? BASE_RATE_WINDOW_DAYS.sample : BASE_RATE_WINDOW_DAYS.keyed;
+  const rows = await statisticSearch({
+    key,
+    ...BASE_RATE,
+    from: kstYmd(new Date(now.getTime() - span * 86400000)),
+    to: kstYmd(now),
+    rows: clampRows(key, span + 1),
+  });
+  return baseRateFrom(rows, previous);
 }
 
 async function fetchWithFallback(label, fn, previous) {
@@ -67,7 +129,7 @@ async function main() {
   const [kospi, usdKrw, baseRate] = await Promise.all([
     fetchWithFallback("코스피", fetchKospi, previous.kospi),
     fetchWithFallback("원달러환율", fetchUsdKrw, previous.usdKrw),
-    fetchWithFallback("기준금리", fetchBaseRate, previous.baseRate),
+    fetchWithFallback("기준금리", () => fetchBaseRate(previous.baseRate), previous.baseRate),
   ]);
 
   const now = new Date();
@@ -107,4 +169,6 @@ async function appendHistory(now, snapshot) {
   await writeFile(historyFile, JSON.stringify(history, null, 2));
 }
 
-main();
+if (process.argv[1] && path.resolve(process.argv[1]) === path.resolve(import.meta.filename)) {
+  main();
+}
