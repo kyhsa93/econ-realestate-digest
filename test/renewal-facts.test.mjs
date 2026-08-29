@@ -180,3 +180,121 @@ test("갱신 신고가 하나도 없으면 만들지 않는다", () => {
   assert.equal(buildPayload({ byDistrict: { 마포구: [renewal({ contractType: "신규" })] }, now: NOW }), null);
   assert.equal(seoulTally({}, NOW).renewals, 0);
 });
+
+// --- 갱신 vs 신규 전세 격차 -------------------------------------------------
+
+const jeonse = (extra = {}) => ({
+  sggCd: 11350,
+  aptNm: "가상아파트",
+  excluUseAr: 59.94,
+  dealYear: 2026,
+  dealMonth: 5,
+  dealDay: 10,
+  contractType: "신규",
+  deposit: "50,000",
+  monthlyRent: 0,
+  ...extra,
+});
+
+const market = (n, amount) =>
+  Array.from({ length: n }, (_, i) => jeonse({ deposit: String(amount), dealDay: 1 + i }));
+
+test("갱신 보증금을 같은 칸의 신규 중앙값과 견준다", async () => {
+  const { renewalGap } = await import("../scripts/renewal-facts.mjs");
+  const items = [
+    ...market(3, 50000),
+    jeonse({ contractType: "갱신", deposit: "45,000" }), // 10% 싸다
+  ];
+  const gap = renewalGap(items, NOW);
+
+  assert.equal(gap.gapMatched, 1);
+  assert.equal(gap.gapMedian, -10);
+  assert.equal(gap.gapCheaperShare, 100);
+});
+
+test("신규가 세 건에 못 미치는 칸은 견줄 시세로 쓰지 않는다", async () => {
+  const { renewalGap, MIN_MARKET_DEALS } = await import("../scripts/renewal-facts.mjs");
+  assert.equal(MIN_MARKET_DEALS, 3, "두 건으로 낸 중앙값은 그냥 두 값의 평균이다");
+
+  const thin = [...market(2, 50000), jeonse({ contractType: "갱신", deposit: "45,000" })];
+  assert.equal(renewalGap(thin, NOW).gapMatched, 0);
+});
+
+test("평형이 다르면 같은 단지라도 견주지 않는다", async () => {
+  const { renewalGap } = await import("../scripts/renewal-facts.mjs");
+  const items = [
+    ...market(3, 50000),
+    jeonse({ contractType: "갱신", deposit: "45,000", excluUseAr: 84.97 }),
+  ];
+  assert.equal(renewalGap(items, NOW).gapMatched, 0, "59㎡ 시세로 84㎡ 갱신을 쟀다");
+});
+
+test("반전세는 순수 전세와 견주지 않는다", async () => {
+  const { renewalGap } = await import("../scripts/renewal-facts.mjs");
+  // 보증금과 월세를 한 값으로 묶으려면 전환율을 먼저 가정해야 한다.
+  const items = [
+    ...market(3, 50000),
+    jeonse({ contractType: "갱신", deposit: "30,000", monthlyRent: 60 }),
+  ];
+  assert.equal(renewalGap(items, NOW).gapMatched, 0);
+});
+
+test("기한이 남은 달은 격차에서도 뺀다", async () => {
+  const { renewalGap } = await import("../scripts/renewal-facts.mjs");
+  const open = { dealYear: 2026, dealMonth: 8 };
+  const items = [
+    ...market(3, 50000).map((r) => ({ ...r, ...open })),
+    jeonse({ contractType: "갱신", deposit: "45,000", ...open }),
+  ];
+  assert.equal(renewalGap(items, NOW).gapMatched, 0);
+});
+
+test("견줄 값이 잘못 붙은 것은 버린다", async () => {
+  const { renewalGap, GAP_OUTLIER } = await import("../scripts/renewal-facts.mjs");
+  assert.equal(GAP_OUTLIER, 90);
+  const items = [...market(3, 50000), jeonse({ contractType: "갱신", deposit: "1,000" })];
+  assert.equal(renewalGap(items, NOW).gapMatched, 0, "98% 어긋난 것을 격차로 셌다");
+});
+
+test("말하는 문턱이 표본 잡음 바깥에 있다", async () => {
+  const { MIN_GAP_SAMPLE, GAP_WIDE_RATIO, GAP_NARROW_RATIO } = await import(
+    "../scripts/renewal-facts.mjs"
+  );
+  // 서울 표본을 60건씩 다시 뽑으면 서울과 똑같은 구도 -12.5% ~ -5.0%에 떨어진다.
+  // 두 문턱은 그 바깥이어야 한다 - 안쪽이면 우연이 문장을 만든다.
+  const SEOUL = -8.9;
+  const NOISE_LOW = -12.5;
+  const NOISE_HIGH = -5.0;
+
+  assert.equal(MIN_GAP_SAMPLE, 60);
+  assert.ok(SEOUL * GAP_WIDE_RATIO < NOISE_LOW, `유독 싸다 문턱 ${(SEOUL * GAP_WIDE_RATIO).toFixed(1)}%가 잡음 안에 있다`);
+  assert.ok(SEOUL * GAP_NARROW_RATIO > NOISE_HIGH, `차이 없다 문턱 ${(SEOUL * GAP_NARROW_RATIO).toFixed(1)}%가 잡음 안에 있다`);
+});
+
+test("격차가 0이면 0% 싸다고 쓰지 않는다", async () => {
+  const { renewalSentences } = await import("../scripts/renewal-facts.mjs");
+  const flat = renewalSentences({ renewGapNarrow: { gap: 0, seoul: -9.7, cheaper: 22.1, counted: 95 } })[0];
+  assert.match(flat, /사실상 차이가 없습니다/);
+  assert.ok(!/0\.0% /.test(flat), `"0.0% 싸다"는 문장이 아니다: ${flat}`);
+
+  const higher = renewalSentences({ renewGapNarrow: { gap: 1.4, seoul: -9.7, cheaper: 31, counted: 120 } })[0];
+  assert.match(higher, /오히려 1\.4% 높습니다/, "갱신이 더 비싼 경우를 싸다고 적었다");
+});
+
+test("문턱을 넘은 구만 격차를 말한다", async () => {
+  const { renewalFacts } = await import("../scripts/renewal-facts.mjs");
+  const seoul = { gapMedian: -9.7, capMissShare: 44.8, toWolseShare: 7.5 };
+  const base = { rightUsed: 0, fromJeonse: 0, capMissShare: null, toWolseShare: null, gapCheaperShare: 80 };
+
+  const thin = renewalFacts({ ...base, gapMatched: 59, gapMedian: -20 }, seoul);
+  assert.equal(thin, null, "표본 59건으로 격차를 말했다");
+
+  const ordinary = renewalFacts({ ...base, gapMatched: 300, gapMedian: -9.5 }, seoul);
+  assert.equal(ordinary, null, "서울과 다를 것 없는 구가 말을 했다");
+
+  const wide = renewalFacts({ ...base, gapMatched: 156, gapMedian: -16.7 }, seoul);
+  assert.ok(wide?.renewGapWide, "유독 싼 구가 말을 안 했다");
+
+  const narrow = renewalFacts({ ...base, gapMatched: 95, gapMedian: 0 }, seoul);
+  assert.ok(narrow?.renewGapNarrow, "차이 없는 구가 말을 안 했다");
+});

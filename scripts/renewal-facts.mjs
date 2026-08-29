@@ -30,6 +30,43 @@ export const CAP_MISS_HIGH = 53;
 export const TO_WOLSE_LOW_RATIO = 0.7;
 export const TO_WOLSE_HIGH_RATIO = 1.5;
 
+/**
+ * 갱신 보증금을 견줄 "지금 새로 구하면 얼마"를 만들려면 같은 칸에 신규 계약이
+ * 최소 몇 건 있어야 하는가. 둘로 낸 중앙값은 그냥 두 값의 평균이라 중앙값이라고
+ * 부를 것이 못 된다.
+ */
+export const MIN_MARKET_DEALS = 3;
+
+/**
+ * 자치구가 이 격차를 말하려면 맞물린 표본이 얼마나 있어야 하는가.
+ *
+ * 서울 표본 4,176건을 부트스트랩(400회)해 표본 크기별로 중앙값이 얼마나 흔들리는지
+ * 재 보고 정했다. 서울과 같은 동네인데도 우연히 나올 수 있는 범위다:
+ *
+ *   n= 20  -15.8% ~ -2.6%   n= 60  -12.5% ~ -5.0%
+ *   n= 40  -13.1% ~ -4.1%   n=100  -11.5% ~ -5.5%
+ *
+ * 60건 아래로 내려가면 폭이 9%p를 넘어, 서울과 똑같은 구가 "유독 싸다"로도
+ * "차이가 없다"로도 찍힐 수 있다.
+ */
+export const MIN_GAP_SAMPLE = 60;
+
+/**
+ * 한쪽이 90%를 넘게 벗어난 것은 견줄 값이 잘못 붙은 것으로 본다. 같은 단지명에
+ * 다른 단지가 섞였거나 신고가 잘못 들어온 경우다.
+ */
+export const GAP_OUTLIER = 90;
+
+/**
+ * 서울 격차 대비 이만큼 벗어나야 말할 거리가 된다.
+ *
+ * 위 부트스트랩의 n=60 구간(-12.5% ~ -5.0%) 바깥에 두 문턱을 놓는다. 서울이
+ * -9.7%일 때 1.5배는 -14.6%, 0.45배는 -4.4%로 둘 다 그 구간 밖이다 - 우연만으로는
+ * 어느 쪽 문장도 나오지 않는다는 뜻이다.
+ */
+export const GAP_WIDE_RATIO = 1.5;
+export const GAP_NARROW_RATIO = 0.45;
+
 const number = (value) => {
   const text = String(value ?? "").replace(/,/g, "").trim();
   if (!text || !/^-?\d+$/.test(text)) return 0;
@@ -79,6 +116,76 @@ export function classify(item) {
   return { wasJeonse, changePct: ((after - before) / before) * 100, right: usedRight(item) };
 }
 
+const median = (values) => {
+  const sorted = [...values].sort((a, b) => a - b);
+  const mid = sorted.length >> 1;
+  return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+};
+
+const pureJeonse = (item) => number(item?.monthlyRent) === 0 && number(item?.deposit) > 0;
+
+/**
+ * 같은 단지 · 같은 전용면적 · 같은 달.
+ *
+ * 면적을 구간으로 묶지 않는 것은 같은 단지라도 평형이 다르면 값이 다르기 때문이다.
+ * 묶으면 표본은 늘지만(마감월 기준 4,176 -> 6,118건) 59㎡ 갱신을 63㎡ 신규와
+ * 견주게 된다. 늘어난 표본이 그 값을 하지 않는다.
+ */
+const marketKey = (item) =>
+  `${item?.sggCd}|${item?.aptNm}|${item?.excluUseAr}|${item?.dealYear}-${item?.dealMonth}`;
+
+/**
+ * 갱신 보증금이 "지금 새로 구하면 얼마"보다 얼마나 싼가.
+ *
+ * 시세표는 신규 계약만 세고 갱신은 버린다. 그래서 화면 어디에도 세입자가 실제로
+ * 묻는 것에 대한 답이 없었다 - 갱신하는 게 나은가, 옮기는 게 나은가. 같은 단지
+ * 같은 평형에서 같은 달에 맺어진 신규 계약의 중앙값을 그 사람이 지금 새로 구할 때의
+ * 값으로 보고, 갱신 보증금이 거기서 얼마나 떨어져 있는지를 잰다.
+ *
+ * 순수 전세끼리만 견준다. 반전세는 보증금과 월세를 묶어야 하는데, 묶는 배수가
+ * 곧 전월세전환율이라 이 화면이 답해야 할 것을 먼저 가정해 버린다.
+ *
+ * 맞물리려면 같은 칸에 신규가 세 건 있어야 하므로, 거래가 도는 큰 단지 쪽으로
+ * 기운다. 화면에 그렇게 적는다.
+ */
+export function renewalGap(items, now) {
+  const rows = (items ?? []).filter((item) => {
+    const year = Number(item?.dealYear);
+    const month = Number(item?.dealMonth);
+    if (!Number.isInteger(year) || !Number.isInteger(month)) return false;
+    if (!isClosedMonth(year, month, now)) return false;
+    return Boolean(String(item?.aptNm ?? "").trim()) && pureJeonse(item);
+  });
+
+  const market = new Map();
+  for (const item of rows) {
+    if (String(item?.contractType ?? "").trim() !== "신규") continue;
+    const key = marketKey(item);
+    if (!market.has(key)) market.set(key, []);
+    market.get(key).push(number(item.deposit));
+  }
+
+  const gaps = [];
+  for (const item of rows) {
+    if (String(item?.contractType ?? "").trim() !== "갱신") continue;
+    const pool = market.get(marketKey(item));
+    if (!pool || pool.length < MIN_MARKET_DEALS) continue;
+    const asking = median(pool);
+    if (asking <= 0) continue;
+    const gap = ((number(item.deposit) - asking) / asking) * 100;
+    if (!Number.isFinite(gap) || Math.abs(gap) > GAP_OUTLIER) continue;
+    gaps.push(gap);
+  }
+
+  if (!gaps.length) return { gapMatched: 0, gapMedian: null, gapCheaperShare: null };
+
+  return {
+    gapMatched: gaps.length,
+    gapMedian: Math.round(median(gaps) * 10) / 10,
+    gapCheaperShare: Math.round((gaps.filter((g) => g < 0).length / gaps.length) * 1000) / 10,
+  };
+}
+
 /** 자치구 하나의 갱신 신고들을 세어 정리한다. */
 export function tally(items, now) {
   const counts = { renewals: 0, rightUsed: 0, capMissed: 0, fromJeonse: 0, toWolse: 0 };
@@ -108,6 +215,7 @@ export function tally(items, now) {
     ...counts,
     capMissShare: counts.rightUsed ? Math.round((counts.capMissed / counts.rightUsed) * 1000) / 10 : null,
     toWolseShare: counts.fromJeonse ? Math.round((counts.toWolse / counts.fromJeonse) * 1000) / 10 : null,
+    ...renewalGap(items, now),
   };
 }
 
@@ -128,6 +236,24 @@ export function renewalFacts(districtTally, seoul) {
     const share = districtTally.capMissShare;
     if (share <= CAP_MISS_LOW) facts.capReached = { share, seoul: seoul?.capMissShare ?? null, counted: districtTally.rightUsed };
     else if (share >= CAP_MISS_HIGH) facts.capMissed = { share, seoul: seoul?.capMissShare ?? null, counted: districtTally.rightUsed };
+  }
+
+  // 격차는 음수다(갱신이 싸다). 서울보다 더 벌어졌으면 곱하기 1.4보다 작고,
+  // 덜 벌어졌으면 곱하기 0.5보다 크다.
+  if (
+    districtTally.gapMatched >= MIN_GAP_SAMPLE &&
+    districtTally.gapMedian !== null &&
+    typeof seoul?.gapMedian === "number" &&
+    seoul.gapMedian < 0
+  ) {
+    const shared = {
+      gap: districtTally.gapMedian,
+      seoul: seoul.gapMedian,
+      cheaper: districtTally.gapCheaperShare,
+      counted: districtTally.gapMatched,
+    };
+    if (districtTally.gapMedian <= seoul.gapMedian * GAP_WIDE_RATIO) facts.renewGapWide = shared;
+    else if (districtTally.gapMedian >= seoul.gapMedian * GAP_NARROW_RATIO) facts.renewGapNarrow = shared;
   }
 
   if (districtTally.fromJeonse >= MIN_RENEWALS && districtTally.toWolseShare !== null && seoul?.toWolseShare) {
@@ -161,6 +287,37 @@ export function renewalSentences(facts, locale = "ko") {
       en
         ? `Among renewals where the tenant invoked the statutory right, only ${share}% ended below the 5% cap, against ${seoul}% across Seoul — here the ceiling is usually reached.`
         : `계약갱신요구권을 쓴 재계약 가운데 상한 5%에 못 미친 것은 ${share}%뿐입니다. 서울 전체는 ${seoul}%입니다 — 이 동네에서는 대체로 상한까지 올라갑니다.`
+    );
+  }
+
+  const cheaper = (value) => Math.abs(value).toFixed(1);
+
+  if (facts.renewGapWide) {
+    const { gap, seoul, counted } = facts.renewGapWide;
+    out.push(
+      en
+        ? `Renewing tenants here pay ${cheaper(gap)}% less than the median new lease signed the same month for the same unit type in the same complex, against ${cheaper(seoul)}% across Seoul (${counted.toLocaleString("en-US")} matched leases). Moving out costs more here than it does elsewhere.`
+        : `이 동네에서 재계약하는 세입자는 같은 단지 같은 평형에 그달 새로 맺어진 계약보다 ${cheaper(gap)}% 싼 보증금을 냅니다. 서울 전체는 ${cheaper(seoul)}%입니다(맞물린 계약 ${counted.toLocaleString("ko-KR")}건) — 나가서 다시 구하면 그만큼을 더 내야 한다는 뜻입니다.`
+    );
+  } else if (facts.renewGapNarrow) {
+    const { gap, seoul, cheaper: cheaperShare, counted } = facts.renewGapNarrow;
+    // 0.0%를 "0.0% 싸다"로 적으면 문장이 아니다. 그리고 갱신이 더 비쌀 수도 있다.
+    const flat = Math.abs(gap) < 0.05;
+    const higher = gap >= 0.05;
+    const headKo = flat
+      ? "이 동네의 재계약 보증금은 같은 단지 같은 평형의 새 계약과 사실상 차이가 없습니다"
+      : higher
+        ? `이 동네의 재계약 보증금은 같은 단지 같은 평형의 새 계약보다 오히려 ${cheaper(gap)}% 높습니다`
+        : `이 동네의 재계약 보증금은 같은 단지 같은 평형의 새 계약보다 ${cheaper(gap)}% 낮은 데 그칩니다`;
+    const headEn = flat
+      ? "Renewal deposits here sit essentially level with new leases for the same unit type in the same complex"
+      : higher
+        ? `Renewal deposits here run ${cheaper(gap)}% above new leases for the same unit type in the same complex`
+        : `Renewing tenants here pay only ${cheaper(gap)}% less than the median new lease for the same unit type`;
+    out.push(
+      en
+        ? `${headEn}, against ${cheaper(seoul)}% below across Seoul, and only ${cheaperShare}% of renewals came in under the market at all (${counted.toLocaleString("en-US")} matched leases). Staying put saves little here.`
+        : `${headKo}. 서울 전체는 ${cheaper(seoul)}% 낮고, 여기서는 재계약 가운데 시세보다 싸게 맺어진 것이 ${cheaperShare}%뿐입니다(맞물린 계약 ${counted.toLocaleString("ko-KR")}건) — 눌러앉아 아끼는 것이 별로 없습니다.`
     );
   }
 

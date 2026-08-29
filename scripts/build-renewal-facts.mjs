@@ -63,6 +63,12 @@ async function main() {
     `  재계약 ${seoul.renewals.toLocaleString("ko-KR")}건 · 요구권 행사 ${seoul.rightUsed.toLocaleString("ko-KR")}건 중` +
       ` 상한 미달 ${seoul.capMissShare}% · 전세→월세 전환 ${seoul.toWolseShare}%`
   );
+  if (seoul.gapMatched) {
+    console.log(
+      `  갱신 vs 신규 전세: 맞물린 ${seoul.gapMatched.toLocaleString("ko-KR")}건 중앙값 ${seoul.gapMedian}% ·` +
+        ` 시세보다 싸게 맺어진 재계약 ${seoul.gapCheaperShare}%`
+    );
+  }
   console.log(`  문턱을 넘은 자치구 ${Object.keys(districts).length}곳: ${Object.keys(districts).join(", ") || "없음"}`);
 }
 
