@@ -44,6 +44,8 @@
 
   /* 손가락이 닿아야 하는 최소 크기. 알약 탭 30px, 아이콘 버튼 36px,
    * 뉴스 칩 26px이었다 - 셋 다 엄지 끝보다 작다. */
+  /* 한 줄이 한글 마흔 자 안팎에서 끊기는 폭. 글은 여기까지만 늘어난다. */
+  --prose: 46rem;
   --tap: 44px;
   --focus: var(--accent);
 }
@@ -95,10 +97,33 @@ body {
   line-height: 1.5;
 }
 
+/* 껍데기 폭.
+ *
+ * 오래도록 760px 하나였고 미디어쿼리는 560·520·480 셋뿐이었다 - 전부 아래쪽이다.
+ * 모바일에서 좁아지는 규칙만 있고 넓어지는 규칙이 없어서, 1920px 모니터에서 화면의
+ * 40%만 쓰고 나머지는 빈 칸이었다. 네이버 메인이 1280px, 다음이 1168px, 통계표를
+ * 다루는 KOSIS가 1600px대를 쓴다.
+ *
+ * 넓히면서 <strong>글까지 같이 넓히지는 않는다.</strong> 728px에서 이미 한 줄이 한글
+ * 46~54자로 편한 범위의 위쪽 끝인데, 껍데기를 따라 늘리면 80자가 되어 지금보다 나빠진다.
+ * 폭을 쓰는 것은 표와 격자고, 산문은 --prose에 묶는다(아래 .prose 규칙). */
 main {
   max-width: 760px;
   margin: 0 auto;
   padding: 24px 16px 64px;
+}
+
+@media (min-width: 1024px) {
+  main {
+    max-width: 1120px;
+    padding: 28px 24px 72px;
+  }
+}
+
+@media (min-width: 1440px) {
+  main {
+    max-width: 1280px;
+  }
 }
 
 header {
@@ -285,6 +310,24 @@ section {
   margin-bottom: 32px;
 }
 
+/* 읽는 것은 글이지 폭이 아니다.
+ *
+ * method.html이 오래전부터 .method-body에 같은 값을 쓰고 있었다 - "여기 실리는 것은
+ * 표가 아니라 글이라 읽는 폭이 데이터 페이지와 달라야 한다". 껍데기가 넓어진 지금은
+ * 그 규칙이 데이터 페이지의 문단에도 필요하다. 상자째 묶는 것은, 글만 좁히고 상자를
+ * 늘리면 오른쪽이 통째로 빈 상자가 되기 때문이다. */
+.lead,
+.content-notice,
+.district-summary,
+.method-callout,
+.budget-loan,
+.budget-summary,
+.budget-where,
+.summary-meta,
+#summary-box {
+  max-width: var(--prose);
+}
+
 h2 {
   position: relative;
   font-size: var(--fs-h2);
@@ -402,6 +445,7 @@ h2::after {
 }
 
 ul.news-list {
+  max-width: var(--prose);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -1207,6 +1251,12 @@ ul.news-list {
   gap: 6px;
 }
 
+@media (min-width: 1024px) {
+  .budget-deals {
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  }
+}
+
 .budget-deal {
   display: flex;
   flex-wrap: wrap;
@@ -1762,7 +1812,7 @@ ul.news-list {
 
 /* 이 페이지에만 있는 것. 여기 실리는 것은 표가 아니라 글이라,
 읽는 폭과 줄 간격이 데이터 페이지와 달라야 한다. */ .method-body {
-  max-width: 46rem;
+  max-width: var(--prose);
 }
 
 .method-body h2 {
@@ -2041,6 +2091,12 @@ summary:focus-visible,
 @media (min-width: 560px) {
   .question-nav {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .question-nav {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 

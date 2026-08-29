@@ -123,6 +123,36 @@ test("걸러낸 결과를 소리로도 알린다", async () => {
   await has("rates.html", "show-more");
 });
 
+test("데스크톱에서 넓어지는 규칙이 있다", async () => {
+  // 오래도록 미디어쿼리가 560·520·480 셋뿐이었다 - 전부 아래쪽이라, 넓은 화면에서는
+  // 760px 칸 하나에 갇혀 1920px 모니터의 40%만 썼다.
+  const text = await css();
+  const up = [...text.matchAll(/@media \(min-width: (\d+)px\)/g)].map((m) => Number(m[1]));
+  assert.ok(up.some((w) => w >= 1024), `위로 열리는 분기점이 없다(${up.join(", ")})`);
+
+  const shell = /main \{[^}]*max-width: (\d+)px/.exec(text)?.[1];
+  assert.equal(shell, "760", "기본 폭은 좁은 화면 것이라 그대로여야 한다");
+  const wide = [...text.matchAll(/main \{\s*max-width: (\d+)px/g)].map((m) => Number(m[1]));
+  assert.ok(Math.max(...wide) >= 1100, `넓은 화면 폭이 ${Math.max(...wide)}px뿐이다`);
+});
+
+test("글은 껍데기를 따라 넓어지지 않는다", async () => {
+  // 728px에서 이미 한 줄이 한글 46~54자다. 껍데기를 1280px로 늘리면서 문단까지
+  // 같이 늘리면 여든 자가 되어 넓히기 전보다 나빠진다.
+  const text = await css();
+  const prose = /--prose:\s*([\d.]+)rem;/.exec(text)?.[1];
+  assert.ok(prose, "산문 폭 토큰이 없다");
+  assert.ok(Number(prose) <= 48, `${prose}rem은 한 줄이 너무 길다`);
+
+  // 글이 실리는 블록은 그 토큰에 묶여 있어야 한다.
+  const capped = rules(text)
+    .filter((r) => r.body.includes("max-width: var(--prose)"))
+    .flatMap((r) => r.sel.split(",").map((x) => x.trim()));
+  for (const sel of [".lead", ".content-notice", ".district-summary", ".method-callout", "#summary-box"]) {
+    assert.ok(capped.includes(sel), `${sel}이 산문 폭에 묶여 있지 않다`);
+  }
+});
+
 // --- 액센트 -----------------------------------------------------------------
 
 const HEX = /^#([0-9a-f]{6})$/i;
