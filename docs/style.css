@@ -2008,6 +2008,73 @@ summary:focus-visible,
   mask-image: linear-gradient(to right, transparent, #000 36px, #000 calc(100% - 36px), transparent);
 }
 
+/* 무엇을 넣어도 받는 검색창.
+ *
+ * 자치구·단지·예산·화면을 한 입구로 모은다. 전에는 첫 화면의 지역 검색과 금리
+ * 화면의 상품 검색이 따로 있었고, '실거래 검색' 화면에는 정작 검색창이 없었다. */
+.site-search {
+  position: relative;
+  margin: 0 0 12px;
+}
+
+.site-search input {
+  width: 100%;
+  min-height: var(--tap);
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--fg);
+  font-size: var(--fs-field);
+}
+
+.site-search input:focus {
+  border-color: var(--accent);
+}
+
+/* 목록은 아래 내용 위로 떠야 한다. 자리를 차지하면 글자를 칠 때마다 화면이 밀린다. */
+.site-search-results {
+  position: absolute;
+  z-index: 25;
+  left: 0;
+  right: 0;
+  top: calc(100% + 4px);
+  max-height: 60vh;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 12%);
+}
+
+.site-search-results a {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: var(--tap);
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--fg);
+  font-size: var(--fs-sm);
+  text-decoration: none;
+}
+
+.site-search-results a:last-child {
+  border-bottom: 0;
+}
+
+.site-search-results a:hover,
+.site-search-results a[aria-selected="true"] {
+  background: var(--card);
+}
+
+.site-search-results .where {
+  flex-shrink: 0;
+  color: var(--muted);
+  font-size: var(--fs-xs);
+}
+
 .history-card svg[role="img"] { height: auto; touch-action: none; margin-top: 0; }
 .content-notice.page-notice { margin: -12px 0 20px; }
 
