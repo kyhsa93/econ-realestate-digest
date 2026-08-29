@@ -80,7 +80,6 @@ test("세부 분류가 있는 페이지는 2층에서 자기 위치를 표시한
     "deal-search.html": "거래내역 검색",
     "jeonse-vs-wolse.html": "전세 vs 월세",
     "renewal-vs-new.html": "재계약",
-    "floor-gap.html": "층",
     "cancelled-deals.html": "해제·등기",
   };
 
@@ -98,7 +97,7 @@ test("시세 계열 페이지의 2층 항목이 서로 같다", async () => {
   const items = async (file) =>
     links(navBlock(await readFile(path.join(docs, file), "utf8"), "sub-nav")).map((i) => i.text);
 
-  const expected = ["전체", "매매", "전세", "월세", "거래내역 검색", "전세 vs 월세", "재계약", "층", "해제·등기"];
+  const expected = ["전체", "매매", "전세", "월세", "거래내역 검색", "전세 vs 월세", "재계약", "해제·등기"];
   for (const file of [
     "realestate.html",
     "apartment-sale.html",

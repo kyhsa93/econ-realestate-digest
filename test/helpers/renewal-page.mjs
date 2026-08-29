@@ -1,6 +1,6 @@
 import { loadPage } from "./digest-page.mjs";
 
-const SUB_NAV = ["all", "sale", "jeonse", "wolse", "search", "conversion", "renewal", "floor", "cancelled"];
+const SUB_NAV = ["all", "sale", "jeonse", "wolse", "search", "conversion", "renewal", "cancelled"];
 
 export async function loadRenewalPage({ renewal, ...rest } = {}) {
   const page = await loadPage({

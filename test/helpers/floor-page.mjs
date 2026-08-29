@@ -1,13 +1,10 @@
 import { loadPage } from "./digest-page.mjs";
 
-const SUB_NAV = ["all", "sale", "jeonse", "wolse", "search", "conversion", "renewal", "floor", "cancelled"];
-
 export async function loadFloorPage({ floor, ...rest } = {}) {
   const page = await loadPage({
     file: "floor-gap.html",
     // fetch 스텁은 파일 이름에서 키를 뽑는다 - floor-gap.json이라 키도 그대로다.
     data: { "floor-gap": floor },
-    subNav: SUB_NAV,
     ...rest,
   });
 

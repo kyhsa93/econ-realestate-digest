@@ -47,17 +47,6 @@
     <a href="./news.html" id="nav-news">뉴스</a>
   </nav>
 
-  <nav class="sub-nav" aria-label="거래 유형">
-    <a href="./realestate.html" data-re-page="all">전체</a>
-    <a href="./apartment-sale.html" data-re-page="sale">매매</a>
-    <a href="./apartment-jeonse.html" data-re-page="jeonse">전세</a>
-    <a href="./apartment-rent.html" data-re-page="wolse">월세</a>
-    <a href="./deal-search.html" data-re-page="search">거래내역 검색</a>
-    <a href="./jeonse-vs-wolse.html" data-re-page="conversion">전세 vs 월세</a>
-    <a href="./renewal-vs-new.html" data-re-page="renewal">재계약</a>
-    <a href="./floor-gap.html" data-re-page="floor" aria-current="page">층</a>
-    <a href="./cancelled-deals.html" data-re-page="cancelled">해제·등기</a>
-  </nav>
 
   <aside class="method-callout">
     <p id="method-callout-text">견주는 자리는 같은 단지, 같은 전용면적입니다. 그렇게 묶으면 단지가 낡았는지 역에서 먼지가 통제되고, 남는 차이가 층입니다.</p>
@@ -108,15 +97,6 @@ const T = {
     navNews: "뉴스",
     navRealestatePrices: "아파트 시세",
     navRates: "금리 비교",
-    navAll: "전체",
-    navSale: "매매",
-    navJeonse: "전세",
-    navWolse: "월세",
-    navDealSearch: "거래내역 검색",
-    navConversion: "전세 vs 월세",
-    navRenewal: "재계약",
-    navFloor: "층",
-    navCancelled: "해제·등기",
     methodCallout:
       "견주는 자리는 같은 단지, 같은 전용면적입니다. 그렇게 묶으면 단지가 낡았는지 역에서 먼지가 통제되고, 남는 차이가 층입니다.",
     methodCalloutLink: "숫자를 만드는 방법 →",
@@ -156,15 +136,6 @@ const T = {
     navNews: "News",
     navRealestatePrices: "Apartment Prices",
     navRates: "Rates",
-    navAll: "All",
-    navSale: "Sale",
-    navJeonse: "Jeonse",
-    navWolse: "Monthly rent",
-    navDealSearch: "Deal search",
-    navConversion: "Jeonse vs rent",
-    navRenewal: "Renewals",
-    navFloor: "Floor",
-    navCancelled: "Cancelled & registered",
     methodCallout:
       "The comparison is made inside one complex and one exclusive floor area. That holds age and location fixed, and what is left to differ is the floor.",
     methodCalloutLink: "How these numbers are made →",
@@ -286,18 +257,6 @@ function renderUpdated() {
   );
 }
 
-const NAV_KEYS = {
-  all: "navAll",
-  sale: "navSale",
-  jeonse: "navJeonse",
-  wolse: "navWolse",
-  search: "navDealSearch",
-  conversion: "navConversion",
-  renewal: "navRenewal",
-  floor: "navFloor",
-  cancelled: "navCancelled",
-};
-
 function applyLocale() {
   document.title = t("title");
   setText("page-title", t("title"));
@@ -318,9 +277,6 @@ function applyLocale() {
   setText("footer-privacy", t("footerPrivacy"));
   setText("footer-method", t("footerMethod"));
   setText("footer-about", t("footerAbout"));
-  for (const link of document.querySelectorAll("[data-re-page]")) {
-    link.textContent = t(NAV_KEYS[link.getAttribute("data-re-page")]);
-  }
   document.documentElement.setAttribute("lang", locale);
 }
 
