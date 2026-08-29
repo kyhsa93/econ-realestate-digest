@@ -80,7 +80,7 @@
    - `docs/data/realestate.json`에서 표본이 얇아 값을 비운 자치구가 몇이나 되나
    - `docs/data/realestate-trend.json`에서 주간 변동이 비정상적으로 큰 자치구
    - 예산대별 거래 건수(`docs/data/budget-deals.json`)가 0에 가까운 밴드
-6. 필요하면 실제 페이지를 열어 본다 (WebFetch로 `https://kyhsa93.github.io/econ-realestate-digest/`)
+6. 필요하면 실제 페이지를 열어 본다 (WebFetch로 `https://kyhsa93.github.io/jipgye/`)
 7. 위에서 나온 것 중 **올릴 값이 있는 것만** 이슈로 만든다
 
 ## 이슈 형식

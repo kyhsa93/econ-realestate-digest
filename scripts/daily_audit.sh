@@ -8,7 +8,7 @@
 # 그 시각에 PC가 꺼져 있는 날은 그냥 건너뛴다. 데스크톱 cron은 폴링으로 짜고 실행
 # 여부는 게이트가 정하는 것이 맞다 — 켜는 순간 놓친 날을 따라잡는다.
 #
-#   crontab:  5 * * * *  /home/young/workspace/econ-realestate-digest/scripts/daily_audit.sh
+#   crontab:  5 * * * *  /home/young/workspace/jipgye/scripts/daily_audit.sh
 #
 # 수동 실행:  daily_audit.sh now    (오늘 몫을 이미 했어도 강제로 한 번 더)
 # 로그: ~/.local/state/econ-digest-audit/YYYY-MM.log

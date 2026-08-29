@@ -28,7 +28,7 @@ test("각 페이지가 자기 분야를 정규 URL·제목·필터로 선언한�
     const html = await read(`docs/${page.file}`);
     assert.ok(html.includes(`<title>${page.title}</title>`), `${page.file} 제목이 다르다`);
     assert.ok(
-      html.includes(`<link rel="canonical" href="https://kyhsa93.github.io/econ-realestate-digest/${page.file}">`),
+      html.includes(`<link rel="canonical" href="https://kyhsa93.github.io/jipgye/${page.file}">`),
       `${page.file} 정규 URL이 자기 자신을 가리키지 않는다`
     );
     assert.ok(html.includes(`<meta name="news-category" content="${page.category}">`), `${page.file} 분야 지정이 없다`);

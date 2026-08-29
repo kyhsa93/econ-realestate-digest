@@ -30,7 +30,7 @@ test("각 페이지가 자기 상품군을 정규 URL·제목·첫 탭으로 선
     const html = await read(`docs/${page.file}`);
     assert.ok(html.includes(`<title>${page.title}</title>`), `${page.file} 제목이 다르다`);
     assert.ok(
-      html.includes(`<link rel="canonical" href="https://kyhsa93.github.io/econ-realestate-digest/${page.file}">`),
+      html.includes(`<link rel="canonical" href="https://kyhsa93.github.io/jipgye/${page.file}">`),
       `${page.file} 정규 URL이 자기 자신을 가리키지 않는다`
     );
     assert.ok(

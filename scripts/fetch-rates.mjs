@@ -13,7 +13,7 @@ const API_KEY = process.env.FSS_FINLIFE_API_KEY;
 
 const API_BASE = process.env.FSS_API_BASE ?? "https://finlife.fss.or.kr/finlifeapi";
 
-const USER_AGENT = "Mozilla/5.0 (compatible; econ-realestate-digest/1.0)";
+const USER_AGENT = "Mozilla/5.0 (compatible; jipgye/1.0)";
 
 const BANK = "020000";
 const SAVINGS_BANK = "030300";

@@ -4,7 +4,7 @@
 전세와 월세 중 어느 쪽이 싼지·지금 갱신하는 것이 나가서 새로 구하는 것보다 싼지까지
 계산해 두는 정적 사이트. GitHub Actions로 갱신하고 GitHub Pages로 배포한다.
 
-사이트: https://kyhsa93.github.io/econ-realestate-digest/
+사이트: https://kyhsa93.github.io/jipgye/
 
 이름은 '집계'다 — 살 집과 세는 일을 한 낱말로 읽는다. 세는 데까지가 이 사이트가 하는
 일이라는 뜻이기도 하다. **주소는 그대로 둔다.** 색인이 이 경로에 붙어 있고, 도메인을

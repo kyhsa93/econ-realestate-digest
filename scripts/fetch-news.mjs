@@ -26,7 +26,7 @@ const MAX_BODY_LENGTH = 1200;
 const MIN_BODY_LENGTH = 200;
 const SCRAPE_CONCURRENCY = 3;
 const SCRAPE_TIMEOUT_MS = 8000;
-const USER_AGENT = "Mozilla/5.0 (compatible; econ-realestate-digest/1.0; +https://kyhsa93.github.io/econ-realestate-digest/)";
+const USER_AGENT = "Mozilla/5.0 (compatible; jipgye/1.0; +https://kyhsa93.github.io/jipgye/)";
 
 const dataDir = path.resolve(import.meta.dirname, "../docs/data");
 const outFile = path.join(dataDir, "news.json");

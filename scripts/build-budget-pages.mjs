@@ -5,7 +5,7 @@ import { applyPrerender, budgetBodyHtml } from "./prerender.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
 const REALESTATE_PATH = path.join(root, "docs/realestate.html");
-const BASE_URL = "https://kyhsa93.github.io/econ-realestate-digest/";
+const BASE_URL = "https://kyhsa93.github.io/jipgye/";
 
 const BASE_TITLE = "서울 아파트 시세 - 25개 자치구 실거래가";
 const BASE_DESCRIPTION =

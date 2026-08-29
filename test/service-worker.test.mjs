@@ -82,10 +82,10 @@ async function loadServiceWorker({ network } = {}) {
 test("데이터는 쿼리를 뗀 주소로 캐시해서 다음에 찾을 수 있게 한다", async () => {
   const sw = await loadServiceWorker();
 
-  await sw.respond(`${ORIGIN}/econ-realestate-digest/data/news.json?_=1755200000000`);
+  await sw.respond(`${ORIGIN}/jipgye/data/news.json?_=1755200000000`);
   await new Promise((r) => setTimeout(r, 0));
 
-  assert.deepEqual([...sw.store.keys()], [`${ORIGIN}/econ-realestate-digest/data/news.json`]);
+  assert.deepEqual([...sw.store.keys()], [`${ORIGIN}/jipgye/data/news.json`]);
 });
 
 test("네트워크가 끊겨도 캐시해둔 데이터로 답한다", async () => {
@@ -97,11 +97,11 @@ test("네트워크가 끊겨도 캐시해둔 데이터로 답한다", async () =
     },
   });
 
-  await sw.respond(`${ORIGIN}/econ-realestate-digest/data/news.json?_=1`);
+  await sw.respond(`${ORIGIN}/jipgye/data/news.json?_=1`);
   await new Promise((r) => setTimeout(r, 0));
 
   online = false;
-  const cached = await sw.respond(`${ORIGIN}/econ-realestate-digest/data/news.json?_=2`);
+  const cached = await sw.respond(`${ORIGIN}/jipgye/data/news.json?_=2`);
   assert.equal(cached.body, "fresh", "다른 타임스탬프로 요청하면 캐시를 못 찾는다");
 });
 
@@ -112,7 +112,7 @@ test("오프라인인데 캐시도 없으면 실패를 분명히 알린다", asy
     },
   });
 
-  const res = await sw.respond(`${ORIGIN}/econ-realestate-digest/data/news.json?_=1`);
+  const res = await sw.respond(`${ORIGIN}/jipgye/data/news.json?_=1`);
   assert.ok(res, "응답을 아예 안 준다");
   assert.equal(res.ok, false);
   assert.equal(res.status, 503);
@@ -127,12 +127,12 @@ test("페이지는 네트워크를 먼저 보고, 안 되면 캐시로 떨어진
     },
   });
 
-  const fresh = await sw.respond(`${ORIGIN}/econ-realestate-digest/index.html`, { mode: "navigate" });
+  const fresh = await sw.respond(`${ORIGIN}/jipgye/index.html`, { mode: "navigate" });
   assert.equal(fresh.body, "new-page");
   await new Promise((r) => setTimeout(r, 0));
 
   online = false;
-  const offline = await sw.respond(`${ORIGIN}/econ-realestate-digest/index.html`, { mode: "navigate" });
+  const offline = await sw.respond(`${ORIGIN}/jipgye/index.html`, { mode: "navigate" });
   assert.equal(offline.body, "new-page", "오프라인에서 캐시로 못 떨어진다");
 });
 
@@ -154,11 +154,11 @@ test("새 페이지들이 설치 시 미리 받는 목록에 들어 있다", asy
 test("페이지 코드는 브라우저 캐시를 건너뛰고 받는다", async () => {
   const sw = await loadServiceWorker();
 
-  await sw.respond(`${ORIGIN}/econ-realestate-digest/index.html`, { mode: "navigate" });
-  await sw.respond(`${ORIGIN}/econ-realestate-digest/analytics.js`);
+  await sw.respond(`${ORIGIN}/jipgye/index.html`, { mode: "navigate" });
+  await sw.respond(`${ORIGIN}/jipgye/analytics.js`);
   // 62장이 같은 style.css를 본다. 캐시부터 주면 한 번 낡을 때 사이트 전체가 낡는다.
-  await sw.respond(`${ORIGIN}/econ-realestate-digest/style.css`);
-  await sw.respond(`${ORIGIN}/econ-realestate-digest/data/news.json?_=1`);
+  await sw.respond(`${ORIGIN}/jipgye/style.css`);
+  await sw.respond(`${ORIGIN}/jipgye/data/news.json?_=1`);
 
   assert.equal(sw.calls.length, 4, "가로채지 못한 요청이 있다");
   for (const call of sw.calls) {
@@ -169,7 +169,7 @@ test("페이지 코드는 브라우저 캐시를 건너뛰고 받는다", async 
 test("스크립트도 네트워크를 먼저 본다", async () => {
   let body = "old";
   const sw = await loadServiceWorker({ network: async () => new FakeResponse(body, { status: 200 }) });
-  const url = `${ORIGIN}/econ-realestate-digest/analytics.js`;
+  const url = `${ORIGIN}/jipgye/analytics.js`;
 
   await sw.respond(url);
   await new Promise((r) => setTimeout(r, 0));
@@ -187,7 +187,7 @@ test("스크립트가 안 받아지면 받아둔 것으로 버틴다", async () 
       return new FakeResponse("script", { status: 200 });
     },
   });
-  const url = `${ORIGIN}/econ-realestate-digest/analytics.js`;
+  const url = `${ORIGIN}/jipgye/analytics.js`;
 
   await sw.respond(url);
   await new Promise((r) => setTimeout(r, 0));

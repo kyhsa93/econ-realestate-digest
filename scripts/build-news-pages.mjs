@@ -4,7 +4,7 @@ import { applyPrerender, newsListHtml, newsRealestateStatsHtml, newsSummaryHtml 
 
 const root = path.resolve(import.meta.dirname, "..");
 const NEWS_PATH = path.join(root, "docs/news.html");
-const BASE_URL = "https://kyhsa93.github.io/econ-realestate-digest/";
+const BASE_URL = "https://kyhsa93.github.io/jipgye/";
 
 const BASE_TITLE = "오늘의 경제·부동산 뉴스";
 const BASE_DESCRIPTION =
