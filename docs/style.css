@@ -2075,6 +2075,38 @@ summary:focus-visible,
   font-size: var(--fs-xs);
 }
 
+/* 검색에서 고른 단지의 평형별 값.
+ *
+ * 목록은 "얼마에 팔렸나"에는 답하지만 "이 단지 전세가율이 얼마냐"에는 답하지 않는다.
+ * 이 카드의 값어치는 숫자가 아니라 그 숫자를 낼 수 있었는지까지 보이는 데 있다 -
+ * 한쪽 신고가 세 건이 안 되는 평형은 값 대신 "신고 1건"이라고 적힌다. */
+.complex-card {
+  margin: 0 0 20px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 10px 10px 0;
+  background: var(--card);
+}
+
+.complex-card h2 {
+  margin: 0 0 10px;
+  padding-bottom: 6px;
+  font-size: var(--fs-h2);
+}
+
+.complex-card .table-wrap {
+  margin-top: 0;
+}
+
+.complex-card .data-table {
+  background: transparent;
+}
+
+.complex-card .content-notice {
+  margin-top: 10px;
+}
+
 .history-card svg[role="img"] { height: auto; touch-action: none; margin-top: 0; }
 .content-notice.page-notice { margin: -12px 0 20px; }
 

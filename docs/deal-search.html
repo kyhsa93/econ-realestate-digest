@@ -102,6 +102,7 @@
       </div>
     </div>
     <p class="sr-only" role="status" id="search-status"></p>
+    <div id="complex-card"></div>
     <div id="search-result"></div>
     <div class="content-notice" id="search-note"></div>
   </section>
@@ -169,6 +170,13 @@ const T = {
     aptLabel: "단지명",
     directLabel: "직거래 제외",
     allDistricts: "서울 전체",
+    complexHeading: (apt) => `${apt} 평형별`,
+    complexArea: "전용면적",
+    complexRatio: "전세가율",
+    complexThin: (n) => `신고 ${n}건`,
+    complexCount: (n) => `${n}건`,
+    complexNote:
+      "평형마다 매매와 전세를 따로 모아 중앙값을 낸 값입니다. 한쪽이라도 신고가 3건에 못 미치면 값을 내지 않습니다 - 두 건으로 낸 중앙값은 그냥 두 값의 평균입니다. 전세가율은 양쪽이 다 있을 때만 냅니다. 갱신계약과 반전세는 빼고 셉니다.",
     allBudgets: "예산 전체",
     allAreas: "면적 전체",
     allAges: "연식 전체",
@@ -257,6 +265,13 @@ const T = {
     aptLabel: "Complex",
     directLabel: "Exclude direct deals",
     allDistricts: "All of Seoul",
+    complexHeading: (apt) => `${apt} by unit type`,
+    complexArea: "Exclusive area",
+    complexRatio: "Jeonse ratio",
+    complexThin: (n) => `${n} filed`,
+    complexCount: (n) => `${n} deals`,
+    complexNote:
+      "Each unit type is averaged separately on each side. Nothing is stated where either side has fewer than three filings — a median of two is just the average of two. The ratio appears only when both sides are there. Renewals and deposit-plus-rent contracts are excluded.",
     allBudgets: "Any budget",
     allAreas: "Any size",
     allAges: "Any age",
@@ -808,6 +823,8 @@ function announceResult() {
 
 function renderResult() {
   renderResultBody();
+  const card = document.getElementById("complex-card");
+  if (card) card.innerHTML = complexCardHtml();
   announceResult();
 }
 
@@ -837,6 +854,118 @@ function renderRentPreview(box) {
     `<div class="budget-districts">${escapeHtml(t("shown")(preview.deals.length))}</div>` +
     `<ul class="budget-deals">${preview.deals.map((deal) => rentHtml(deal, ALL)).join("")}</ul>` +
     `<p class="budget-empty">${escapeHtml(t("rentNarrowHint"))}</p>`;
+}
+
+// --- 단지 카드 --------------------------------------------------------------
+//
+// 검색에서 단지를 고르면 거래 목록만 나왔다. 목록은 "얼마에 팔렸나"에는 답하지만
+// "이 단지 전세가율이 얼마냐"에는 답하지 않는다 - 그건 평형별로 매매와 전세를
+// 각각 모아 봐야 나온다.
+//
+// 규칙은 scripts/complex-ratio.mjs와 같다. 한쪽이라도 세 건이 안 되면 값을 내지
+// 않고 "표본 부족"이라고 적는다. 두 건으로 낸 중앙값은 그냥 두 값의 평균이다.
+// 이 화면의 값어치는 숫자가 아니라 그 숫자를 낼 수 있었는지까지 보여주는 데 있다.
+
+const COMPLEX_MIN_DEALS = 3;
+const COMPLEX_RATIO_FLOOR = 5;
+const COMPLEX_RATIO_CEILING = 130;
+
+function medianOf(values) {
+  const sorted = [...values].sort((a, b) => a - b);
+  const mid = sorted.length >> 1;
+  return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+}
+
+/** 고른 단지의 평형별 매매·전세 중앙값과 전세가율. 넓은 평형부터. */
+function complexAreas(apt, sales, rents) {
+  const term = squash(apt);
+  if (!term) return [];
+  const byArea = new Map();
+  const slot = (area) => {
+    if (!byArea.has(area)) byArea.set(area, { area, sale: [], jeonse: [] });
+    return byArea.get(area);
+  };
+
+  for (const deal of sales ?? []) {
+    if (squash(deal?.apt) !== term) continue;
+    const amount = Number(deal?.amount10k);
+    if (amount > 0) slot(deal.area).sale.push(amount);
+  }
+  for (const deal of rents ?? []) {
+    if (squash(deal?.apt) !== term) continue;
+    // 갱신은 이전 조건을 잇는 것이라 지금 값이 아니고, 반전세는 한 값으로 못 묶는다.
+    if (deal?.renewal === true || Number(deal?.monthlyRent10k ?? 0) > 0) continue;
+    const deposit = Number(deal?.deposit10k);
+    if (deposit > 0) slot(deal.area).jeonse.push(deposit);
+  }
+
+  return [...byArea.values()]
+    .map((row) => {
+      const sale = row.sale.length >= COMPLEX_MIN_DEALS ? medianOf(row.sale) : null;
+      const jeonse = row.jeonse.length >= COMPLEX_MIN_DEALS ? medianOf(row.jeonse) : null;
+      let ratio = null;
+      if (sale && jeonse) {
+        const value = (jeonse / sale) * 100;
+        if (value > COMPLEX_RATIO_FLOOR && value < COMPLEX_RATIO_CEILING) ratio = value;
+      }
+      return { ...row, saleMedian: sale, jeonseMedian: jeonse, ratio };
+    })
+    .sort((a, b) => b.area - a.area);
+}
+
+/**
+ * 친 글자로 단지를 하나로 좁힌다.
+ *
+ * 검색에서 고르면 이름이 그대로 넘어오지만, 단지명 칸에 손으로 칠 때는 "상계주공"처럼
+ * 여러 단지에 걸리는 글자를 친다. 그때 카드를 그리면 상계주공4와 7을 한 단지처럼
+ * 묶어 버리므로, 딱 하나로 좁혀질 때만 그린다.
+ */
+function resolveComplex(term, sales) {
+  const q = squash(term);
+  if (!q) return null;
+  const names = new Set();
+  for (const deal of sales ?? []) {
+    const name = String(deal?.apt ?? "").trim();
+    if (!name) continue;
+    if (squash(name) === q) return name;
+    if (squash(name).includes(q)) names.add(name);
+  }
+  return names.size === 1 ? [...names][0] : null;
+}
+
+function complexCardHtml() {
+  if (!aptTerm() || district === ALL) return "";
+  const sales = fullDeals.get(district);
+  const apt = resolveComplex(aptTerm(), sales);
+  if (!apt) return "";
+  const rows = complexAreas(apt, sales, fullRents.get(district));
+  if (!rows.length) return "";
+
+  const cell = (value, count) =>
+    value === null
+      ? `<span class="low-sample">${escapeHtml(t("complexThin")(count))}</span>`
+      : `${escapeHtml(formatEok(value))} <span class="count">${escapeHtml(t("complexCount")(count))}</span>`;
+
+  return (
+    `<section class="complex-card">` +
+    `<h2>${escapeHtml(t("complexHeading")(apt))}</h2>` +
+    `<div class="table-wrap"><table class="data-table"><thead><tr>` +
+    `<th>${escapeHtml(t("complexArea"))}</th><th>${escapeHtml(t("kindSale"))}</th>` +
+    `<th>${escapeHtml(t("kindJeonse"))}</th><th>${escapeHtml(t("complexRatio"))}</th>` +
+    `</tr></thead><tbody>` +
+    rows
+      .map(
+        (row) =>
+          `<tr><td>${escapeHtml(`${row.area}\u33a1`)}</td>` +
+          `<td data-label="${escapeHtml(t("kindSale"))}">${cell(row.saleMedian, row.sale.length)}</td>` +
+          `<td data-label="${escapeHtml(t("kindJeonse"))}">${cell(row.jeonseMedian, row.jeonse.length)}</td>` +
+          `<td data-label="${escapeHtml(t("complexRatio"))}">${row.ratio === null ? "-" : `${row.ratio.toFixed(1)}%`}</td></tr>`
+      )
+      .join("") +
+    `</tbody></table></div>` +
+    `<p class="content-notice">${escapeHtml(t("complexNote"))}</p>` +
+    `</section>`
+  );
 }
 
 function renderResultBody() {
@@ -967,6 +1096,13 @@ async function refresh() {
       await Promise.all(missing.map(loadDistrictDeals));
       if (token !== refreshToken) return;
     }
+  }
+
+  // 단지 카드는 매매와 전세를 나란히 놓아야 전세가율이 나온다. 매매 화면에서는
+  // 전월세 파일을 안 받으므로, 단지를 고른 때에만 그 구의 것을 하나 더 받는다.
+  if (aptTerm() && district !== ALL && !fullRents.has(district)) {
+    await loadDistrictRents(district);
+    if (token !== refreshToken) return;
   }
 
   renderResult();
