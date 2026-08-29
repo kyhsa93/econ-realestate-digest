@@ -57,6 +57,11 @@
     <a href="./cancelled-deals.html" data-re-page="cancelled">해제·등기</a>
   </nav>
 
+  <aside class="method-callout">
+    <p id="method-callout-text">매물 호가가 아니라 국토교통부에 신고된 실거래입니다. 자치구는 한 주 표본이 얇아 최근 4주를 겹쳐 세고, 신고가 5건 미만인 구는 평균을 내지 않고 비워 둡니다.</p>
+    <a href="./method.html" id="method-callout-link">숫자를 만드는 방법 →</a>
+  </aside>
+
   <section id="overall-section">
     <h2 id="overall-heading">서울 전체 평균</h2>
     <div class="overall-cards" id="overall-cards"><!--prerender:realestateOverall--><div class="overall-card"><div class="label">평당가</div><div class="value">3,501만원</div></div><div class="overall-card"><div class="label">84㎡ 환산</div><div class="value">8억 8,960만원</div></div><div class="overall-card"><div class="label">거래건수</div><div class="value">101건</div></div><div class="overall-card"><div class="label">전세가율</div><div class="value">61.1%</div></div><!--/prerender:realestateOverall--></div>
@@ -225,6 +230,9 @@ const T = {
     footerSource: "출처: 국토교통부 아파트 매매·전월세 실거래가 공개시스템. 신고된 거래만 집계되며 신고 기한(계약 후 30일)이 있어 최근 거래는 나중에 반영됩니다.",
     footerPrivacy: "개인정보처리방침",
     footerMethod: "숫자를 만드는 방법",
+    methodCalloutText:
+      "매물 호가가 아니라 국토교통부에 신고된 실거래입니다. 자치구는 한 주 표본이 얇아 최근 4주를 겹쳐 세고, 신고가 5건 미만인 구는 평균을 내지 않고 비워 둡니다.",
+    methodCalloutLink: "숫자를 만드는 방법 →",
     footerAbout: "소개",
     loadError: "실거래가를 불러오지 못했습니다.",
     retry: "다시 시도",
@@ -306,6 +314,9 @@ const T = {
     footerSource: "Source: MOLIT real transaction price disclosure. Only reported deals are counted, and reporting can lag up to 30 days after contract.",
     footerPrivacy: "Privacy Policy",
     footerMethod: "How these numbers are made",
+    methodCalloutText:
+      "These are transactions reported to Korea's Ministry of Land, not asking prices. Each district averages four overlapping weeks because a single week is too thin, and districts with fewer than five reported deals are left blank rather than averaged.",
+    methodCalloutLink: "How these numbers are made →",
     footerAbout: "About",
     loadError: "Could not load transaction data.",
     retry: "Retry",
@@ -1171,6 +1182,8 @@ function applyLocale() {
   document.getElementById("overall-heading").textContent = t("overallHeading");
   document.getElementById("district-heading").textContent = t("districtHeading");
   document.getElementById("table-note").textContent = t("note");
+  document.getElementById("method-callout-text").textContent = t("methodCalloutText");
+  document.getElementById("method-callout-link").textContent = t("methodCalloutLink");
   setText("district-links-heading", t("otherDistricts"));
   document.getElementById("footer-source").textContent = t("footerSource");
   document.getElementById("footer-privacy").textContent = t("footerPrivacy");
