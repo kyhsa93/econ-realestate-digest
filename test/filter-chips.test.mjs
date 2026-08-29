@@ -87,3 +87,16 @@ test("지우기를 누르면 조건이 전부 풀린다", async () => {
   assert.equal(p.fieldHidden("reset-field"), true, "다 풀렸는데 지우기가 남아 있다");
   assert.ok(!/area=|age=|apt=/.test(p.sandbox.location.search ?? ""), "주소에 조건이 남았다");
 });
+
+test("동 조건이 결과를 좁히고 주소에 남는다", async () => {
+  const p = await page("?district=노원구&dong=상계동");
+  const count = () => Number((/([\d,]+)건이 거래됐습니다/.exec(p.resultHtml())?.[1] ?? "0").replace(/,/g, ""));
+  const withDong = count();
+
+  assert.ok(withDong > 0, "동으로 걸렀더니 결과가 없다");
+  assert.match(p.resultHtml(), /노원구 상계동에서/, "어디를 세었는지 안 적는다");
+
+  await p.resetFilters();
+  assert.ok(count() > withDong, "동을 지웠는데 건수가 안 늘었다");
+  assert.ok(!/dong=/.test(p.sandbox.location.search ?? ""), "주소에 동이 남았다");
+});

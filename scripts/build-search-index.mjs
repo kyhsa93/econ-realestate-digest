@@ -96,10 +96,34 @@ export function complexesByDistrict(byDistrict) {
   return out;
 }
 
+/**
+ * 법정동도 자치구별로 묶는다.
+ *
+ * 사람은 "강남구"보다 "역삼동"으로 동네를 부른다. 전수 파일에 동이 이미 들어
+ * 있는데 색인에 없어서, "상계동"을 치면 아무것도 안 나왔다. 285쌍에 4KB다.
+ */
+export function dongsByDistrict(byDistrict) {
+  const out = {};
+
+  for (const district of DISTRICT_PAGES) {
+    const deals = byDistrict?.[district.name];
+    if (!deals?.length) continue;
+    const names = new Set();
+    for (const deal of deals) {
+      const name = String(deal?.dong ?? "").trim();
+      if (name) names.add(name);
+    }
+    if (names.size) out[district.name] = [...names].sort((a, b) => a.localeCompare(b, "ko"));
+  }
+
+  return out;
+}
+
 export function buildPayload({ byDistrict, now }) {
   return {
     updatedAt: now.toISOString(),
     entries: staticEntries(),
+    dongs: dongsByDistrict(byDistrict),
     complexes: complexesByDistrict(byDistrict),
   };
 }
@@ -121,10 +145,11 @@ async function main() {
 
   const counts = payload.entries.reduce((acc, e) => ((acc[e.kind] = (acc[e.kind] ?? 0) + 1), acc), {});
   const complexes = Object.values(payload.complexes).reduce((sum, names) => sum + names.length, 0);
+  const dongs = Object.values(payload.dongs).reduce((sum, names) => sum + names.length, 0);
   const size = JSON.stringify(payload).length;
   console.log(
     `  검색 색인 자치구 ${counts.district ?? 0} · 예산대 ${counts.budget ?? 0} · 화면 ${counts.screen ?? 0} · ` +
-      `단지 ${complexes.toLocaleString("ko-KR")} · ${(size / 1024).toFixed(0)}KB`
+      `동 ${dongs.toLocaleString("ko-KR")} · 단지 ${complexes.toLocaleString("ko-KR")} · ${(size / 1024).toFixed(0)}KB`
   );
 }
 

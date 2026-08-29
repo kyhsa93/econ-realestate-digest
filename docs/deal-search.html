@@ -423,6 +423,7 @@ const knownKey = (buckets, raw) => (buckets.some((b) => b.key === raw) ? raw : A
 let areaKey = knownKey(AREA_BUCKETS, params.get("area"));
 let ageKey = knownKey(AGE_BUCKETS, params.get("age"));
 let aptQuery = params.get("apt") ?? "";
+let dongQuery = params.get("dong") ?? "";
 let excludeDirect = params.get("direct") === "exclude";
 let depositKey = knownKey(DEPOSIT_BUCKETS, params.get("deposit"));
 let rentKey = knownKey(RENT_BUCKETS, params.get("rent"));
@@ -430,7 +431,9 @@ let rentKey = knownKey(RENT_BUCKETS, params.get("rent"));
 const isRent = () => kind !== "sale";
 
 const aptTerm = () => aptQuery.trim();
-const detailActive = () => areaKey !== ALL || ageKey !== ALL || aptTerm() !== "" || excludeDirect;
+const dongTerm = () => dongQuery.trim();
+const detailActive = () =>
+  areaKey !== ALL || ageKey !== ALL || aptTerm() !== "" || dongTerm() !== "" || excludeDirect;
 
 const MONTHS_EN = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
@@ -492,6 +495,9 @@ function matchesDetail(deal) {
 
   const term = aptTerm();
   if (term && !squash(deal?.apt).includes(squash(term))) return false;
+
+  const dong = dongTerm();
+  if (dong && !squash(deal?.dong).includes(squash(dong))) return false;
 
   if (excludeDirect && deal?.direct === true) return false;
 
@@ -702,6 +708,7 @@ function rentScopeLabel() {
   if (kind === "wolse" && rentKey !== ALL) parts.push(t("rentOption")(bucketOf(RENT_BUCKETS, rentKey)));
   if (areaKey !== ALL) parts.push(t("areaOption")(bucketOf(AREA_BUCKETS, areaKey)));
   if (ageKey !== ALL) parts.push(t("ageOption")(bucketOf(AGE_BUCKETS, ageKey)));
+  if (dongTerm()) parts.push(dongTerm());
   if (aptTerm()) parts.push(t("aptScope")(aptTerm()));
   return t("scopeOf")(parts);
 }
@@ -757,6 +764,7 @@ function scopeLabel(band) {
   if (band) parts.push(bandLabel(band));
   if (areaKey !== ALL) parts.push(t("areaOption")(bucketOf(AREA_BUCKETS, areaKey)));
   if (ageKey !== ALL) parts.push(t("ageOption")(bucketOf(AGE_BUCKETS, ageKey)));
+  if (dongTerm()) parts.push(dongTerm());
   if (aptTerm()) parts.push(t("aptScope")(aptTerm()));
   if (excludeDirect) parts.push(t("directScope"));
   return t("scopeOf")(parts);
@@ -1020,6 +1028,7 @@ function syncUrl() {
   put("area", areaKey === ALL ? null : areaKey);
   put("age", ageKey === ALL ? null : ageKey);
   put("apt", aptTerm() || null);
+  put("dong", dongTerm() || null);
   put("direct", excludeDirect ? "exclude" : null);
   put("kind", kind === "sale" ? null : kind);
   put("deposit", isRent() && depositKey !== ALL ? depositKey : null);
@@ -1209,6 +1218,7 @@ function anyFilterOn() {
     areaKey !== ALL ||
     ageKey !== ALL ||
     aptTerm() !== "" ||
+    dongTerm() !== "" ||
     excludeDirect
   );
 }
@@ -1221,6 +1231,7 @@ function clearFilters() {
   areaKey = ALL;
   ageKey = ALL;
   aptQuery = "";
+  dongQuery = "";
   excludeDirect = false;
 }
 
