@@ -67,6 +67,7 @@ jobs:
           node scripts/build-cancellation.mjs
           node scripts/build-renewal-facts.mjs
           node scripts/build-complex-ratio.mjs
+          node scripts/build-rent-preview.mjs
           node scripts/build-search-index.mjs
         env:
           MOLIT_API_KEY: ${{ secrets.MOLIT_API_KEY }}

@@ -42,6 +42,7 @@ export async function loadDealSearchPage({
   search,
   deals,
   rents,
+  rentPreview,
   status = 404,
   locale = "ko",
   query = "",
@@ -52,7 +53,7 @@ export async function loadDealSearchPage({
 
   const store = { lang: locale };
   const byId = new Map();
-  const data = { "budget-deals": budget, "deal-search": search };
+  const data = { "budget-deals": budget, "deal-search": search, "rent-preview": rentPreview };
 
   for (const [name, file] of Object.entries(deals ?? {})) {
     data[`deals-${DISTRICT_SLUGS[name] ?? name}`] = file;

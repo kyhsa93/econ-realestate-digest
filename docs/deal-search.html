@@ -155,7 +155,7 @@ const T = {
           ? `${bucket.min}만원 이상`
           : `${bucket.min}~${bucket.max}만원`,
     renewalTag: "갱신",
-    rentPrice: (deposit, rent) => `${deposit} / 월 ${rent}만원`,
+    rentPrice: (deposit, rent) => `${deposit} / 월 ${rent}`,
     pickDistrict:
       "전월세는 지역을 하나 골라야 찾을 수 있습니다. 서울 전체는 거래가 너무 많아 한 번에 받지 않습니다.",
     rentNotReady: "이 지역의 전월세 자료가 아직 없습니다. 국토부 신고분이 들어오는 대로 채워집니다.",
@@ -194,6 +194,8 @@ const T = {
     topDistricts: "거래가 많은 지역",
     floor: (floor) => `${floor}층`,
     shown: (n) => `최근 ${n}건`,
+    allDistricts: "서울 전체",
+    rentNarrowHint: "조건을 걸어 세려면 자치구를 고르세요. 여기 목록은 최근 몇 건이라, 그 위에서 세면 실제 건수와 달라집니다.",
     more: (band) => `${band} 실거래 더 보기`,
     empty: "조건에 맞는 신고 거래가 없습니다. 예산 구간을 넓히거나 다른 지역을 골라 보세요.",
     notReady: "아직 검색할 실거래 자료가 없습니다. 국토교통부 신고분을 받는 대로 채워집니다.",
@@ -284,6 +286,8 @@ const T = {
     topDistricts: "Most deals in",
     floor: (floor) => `${floor}F`,
     shown: (n) => `${n} most recent`,
+    allDistricts: "All of Seoul",
+    rentNarrowHint: "Pick a district to filter. This list holds only the most recent filings, so counting on top of it would not be the real count.",
     more: (band) => `See more deals around ${band}`,
     empty: "No filed deals match these conditions. Try a wider budget or another district.",
     notReady: "No transaction data to search yet. It fills in as MOLIT filings come through.",
@@ -807,10 +811,42 @@ function renderResult() {
   announceResult();
 }
 
+/**
+ * 자치구를 안 골랐을 때 맛보기를 쓸 수 있는가.
+ *
+ * 맛보기에는 서울 전체 건수와 최근 서른 건만 들어 있다. 그 위에 "60㎡ 미만"을
+ * 얹으면 나오는 건수는 서울에서 그 조건에 맞는 거래 수가 아니라 이 목록 안의
+ * 수인데, 화면에서는 구별되지 않는다. 조건이 하나라도 걸리면 자치구를 고르게
+ * 해서 전수 파일을 읽는다.
+ */
+function rentPreviewUsable() {
+  return (
+    district === ALL &&
+    !detailActive() &&
+    depositKey === ALL &&
+    rentKey === ALL &&
+    Boolean(cache.rentPreview?.[kind]?.deals?.length)
+  );
+}
+
+function renderRentPreview(box) {
+  const preview = cache.rentPreview[kind];
+  const scope = t("scopeOf")([t("allDistricts"), t(kind === "wolse" ? "kindWolse" : "kindJeonse")]);
+  box.innerHTML =
+    `<p class="budget-summary">${escapeHtml(t("summary")(scope, preview.total))}${periodsHtml()}</p>` +
+    `<div class="budget-districts">${escapeHtml(t("shown")(preview.deals.length))}</div>` +
+    `<ul class="budget-deals">${preview.deals.map((deal) => rentHtml(deal, ALL)).join("")}</ul>` +
+    `<p class="budget-empty">${escapeHtml(t("rentNarrowHint"))}</p>`;
+}
+
 function renderResultBody() {
   const box = document.getElementById("search-result");
 
   if (isRent()) {
+    if (rentPreviewUsable()) {
+      renderRentPreview(box);
+      return;
+    }
     if (district === ALL) {
       box.innerHTML = `<p class="budget-empty">${escapeHtml(t("pickDistrict"))}</p>`;
       return;
@@ -955,7 +991,12 @@ async function main() {
   applyLocale();
 
   try {
-    const [budget, search] = await Promise.all([loadJson("budget-deals"), loadJson("deal-search")]);
+    const [budget, search, rentPreview] = await Promise.all([
+      loadJson("budget-deals"),
+      loadJson("deal-search"),
+      // 없으면 전과 똑같이 "자치구를 고르세요"로 돈다.
+      loadJson("rent-preview").catch(() => null),
+    ]);
     if (!budget || !search) {
       document.getElementById("search-controls").hidden = true;
       document.getElementById("search-result").innerHTML =
@@ -966,6 +1007,7 @@ async function main() {
 
     cache.budget = budget;
     cache.search = search;
+    cache.rentPreview = rentPreview;
 
     if (district !== ALL && !districtNames().includes(district)) district = ALL;
     syncUrl();
