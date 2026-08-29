@@ -94,7 +94,7 @@ test("색인에 내보내는 페이지가 목록과 같다", async () => {
     found,
     INDEXABLE,
     "색인 대상이 바뀌었습니다. 이 배열과 함께 kyhsa93.github.io/scripts/postbuild.ts의 " +
-      "digestSubPages도 고쳐야 사이트맵에 반영됩니다 — 한쪽만 고치면 페이지가 검색에서 사라집니다."
+      "JIPGYE_PAGES도 고쳐야 사이트맵에 반영됩니다 — 한쪽만 고치면 페이지가 검색에서 사라집니다."
   );
 });
 
