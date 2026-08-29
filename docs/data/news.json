@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-08-29T13:08:16.165Z",
-  "date": "2026-08-29",
+  "updatedAt": "2026-08-29T15:35:48.845Z",
+  "date": "2026-08-30",
   "items": [
     {
       "title": "청주시, 베트남 북부 경제도시 꽝닌시와 우호도시 협약",
@@ -9,8 +9,7 @@
       "source": "연합뉴스 경제",
       "category": "other",
       "preview": "(청주=연합뉴스) 천경환 기자 = 충북 청주시는 29일 베트남 꽝닌시와 우호 도시 협약을 했다.",
-      "dupes": [],
-      "titleEn": "Cheongju City Signs Friendship Agreement with Giong City, Northern Vietnam Economic City"
+      "dupes": []
     },
     {
       "title": "한 총리 \"민간 활성화 없이 주택 공급 한계…사업지연 신속 해결\"(종합)",
@@ -20,7 +19,6 @@
       "category": "realestate",
       "preview": "[서울=뉴시스]이인준 기자 = 한성숙 국무총리는 29일 8·13 대책 후속조치로 서울 성북구 장위14구역 민간재개발 현장을 방문해 재개발사업 추진 현황 및 정비사업 속도제고 방안 추진 상황 등을 점검했다. 이번 점검…",
       "dupes": [],
-      "titleEn": "Prime Minister Han: \"Without private sector activation, housing supply has limits... Prompt resolution of project delays needed\" (Comprehensive)",
       "context": [
         {
           "kind": "realestate",
@@ -41,8 +39,7 @@
       "source": "연합뉴스 경제",
       "category": "rates",
       "preview": "(뉴욕·도쿄=연합뉴스) 임수정 조성미 특파원 = 스콧 베선트 미국 재무장관이 지난달 미국의 이례적인 엔화 매수 개입과 관련해 엔화 시장의 급격한...",
-      "dupes": [],
-      "titleEn": "Bentsen Warns of Yen Instability Amid Rising U.S. Interest Rates... Reveals Intention to Intervene in Yen (Comprehensive)"
+      "dupes": []
     },
     {
       "title": "강남 찬 바람 부는데…매물 없어 못 사는 이 동네 아파트",
@@ -52,7 +49,6 @@
       "category": "realestate",
       "preview": "8월 4주 전국 아파트 동향 경기 남부·서울 강북권 가격 쑥 강남권 세제개편 여파에 하락세서울 아파트 매매시장이 외곽 지역의 가파른 상승세에 힘입어 전주 대비 오름폭을 확대했다. ..",
       "dupes": [],
-      "titleEn": "Strong winds blow in Gangnam, but apartments in this neighborhood can't be bought due to lack of listings",
       "context": [
         {
           "kind": "realestate",
@@ -73,8 +69,7 @@
       "source": "연합뉴스 경제",
       "category": "other",
       "preview": "(서울=연합뉴스) 이세원 배영경 한지훈 기자 = 다음 주(8월 31일∼9월 4일)에는 정부가 내년도 '800조+α' 규모의 슈퍼예산을 공개한다....",
-      "dupes": [],
-      "titleEn": "[Next Week's Economy] Government Reveals Next Year's Budget Plan... July International Debt Map to Be Released"
+      "dupes": []
     },
     {
       "title": "美 엔화 매수 개입 옹호한 베선트…미국 금리 상승 위험 거론",
@@ -83,8 +78,7 @@
       "source": "한국경제 경제",
       "category": "rates",
       "preview": null,
-      "dupes": [],
-      "titleEn": "Bears Defend U.S. Intervention in Yen Buying Amid Risks of Rising U.S. Interest Rates"
+      "dupes": []
     },
     {
       "title": "\"한국서 먹히면 전세계 통한다\"…강남 한복판 644평 매장 정체 [장서우의 하입:hype]",
@@ -94,7 +88,6 @@
       "category": "realestate",
       "preview": null,
       "dupes": [],
-      "titleEn": "If it works in Korea, it works worldwide\"... the identity of a 644-ping store in the heart of Gangnam [Jang Seo-woo's hype]",
       "context": [
         {
           "kind": "realestate",
@@ -115,8 +108,7 @@
       "source": "연합뉴스 경제",
       "category": "realestate",
       "preview": "(서울=연합뉴스) 임기창 기자 = 내주 전국에서 3천700여가구가 분양을 시작한다.",
-      "dupes": [],
-      "titleEn": "Real Estate Calendar: Next Week's Incheon City O-Ciel 9th Phase Ocean Park View and Others, 3,713 Units for Sale"
+      "dupes": []
     },
     {
       "title": "서울 빌라값, 두 달째 아파트보다 더 뛰었다… 거래액도 5조원 육박",
@@ -126,7 +118,6 @@
       "category": "realestate",
       "preview": "서울 빌라 매매 실거래가격 상승률이 두 달 연속 아파트를 웃돈 것으로 나타났다. 아파트 매매가격이 급등하고 전세 매물이 줄면서 상대적으로 가격이 낮은 빌라로 실수요와 정비사업 투자 수요가 함께 유입된 것으로 분석된다…",
       "dupes": [],
-      "titleEn": "Seoul villa prices rise more than apartments for second consecutive month... transaction value nears 5,000,000,000,000 won",
       "context": [
         {
           "kind": "realestate",
@@ -148,7 +139,6 @@
       "category": "rates",
       "preview": "[서울=뉴시스] 변해정 기자 = 집값과 금리 상승기 정책 모기지(주택담보대출)를 활용해 집을 산 차주들의 매각 의향이 높아진다는 분석이 나왔다. 다만 주택 매각 확률은 상대적으로 집값이 더 비싼 서울이 더 높게 나타…",
       "dupes": [],
-      "titleEn": "Mortgage Borrowers More Likely to Sell Homes as Prices and Rates Rise... Higher in Seoul",
       "context": [
         {
           "kind": "realestate",
@@ -178,7 +168,6 @@
       "category": "realestate",
       "preview": "[서울=뉴시스] 박성환 기자 = 정부의 고가주택·비거주 1주택자에 대한 세 부담 강화 방침이 발표되면서 서울 아파트 시장의 온도차가 뚜렷해지고 있다. 고가 주택이 많은 강남권에서는 기존 호가보다 수억원 낮춘 매물이…",
       "dupes": [],
-      "titleEn": "Tax Reform Shakes 'Gangnam Invincibility'... Gangbuk Turns to 'Fire Market'[Seoul Real Estate, Now①]",
       "context": [
         {
           "kind": "realestate",
@@ -199,8 +188,7 @@
       "source": "뉴시스 경제",
       "category": "stocks",
       "preview": "[서울=뉴시스] 권성근 기자 = 뉴욕증시의 3대 주가지수가 케빈 워시 미 연방준비제도(Fed·연준) 의장의 '금리 인상' 시사 발언에 일제히 하락세로 장을 마감했다. 28일(현지 시간) 마켓워치, CNBC 등에 따르…",
-      "dupes": [],
-      "titleEn": "New York Stock Market Falls Across the Board Amid Waugh's Hard-Line Remarks... S&P 0.25%↓"
+      "dupes": []
     },
     {
       "title": "굴즈비 시카고연은 총재 \"美 국채금리 높지 않다\"",
@@ -209,8 +197,7 @@
       "source": "한국경제 경제",
       "category": "rates",
       "preview": null,
-      "dupes": [],
-      "titleEn": "Gulzabi Chicago Fed President Says U.S. Treasury Rates Not Too High"
+      "dupes": []
     },
     {
       "title": "[속보]뉴욕증시, 워시 '금리 인상' 경고에 일제히 하락 마감",
@@ -219,28 +206,7 @@
       "source": "뉴시스 경제",
       "category": "rates",
       "preview": "후속기사가 이어집니다 ◎공감언론 뉴시스 ksk@newsis.com",
-      "dupes": [],
-      "titleEn": "[Breaking News] NY Stock Market Closes Lower Amid Wall Street's 'Rate Hike' Warning"
-    },
-    {
-      "title": "[속보]뉴욕증시, 워시 의장 잭슨홀 연설 앞두고 혼조 출발",
-      "link": "https://www.newsis.com/view/NISX20260828_0003767669",
-      "publishedAt": "2026-08-28T13:34:19.000Z",
-      "source": "뉴시스 경제",
-      "category": "stocks",
-      "preview": "후속기사가 이어집니다 ◎공감언론 뉴시스 ksk@newsis.com",
-      "dupes": [],
-      "titleEn": "[Breaking News] NY Stock Market Opens Mixed Ahead of Powell's Jackson Hole Speech"
-    },
-    {
-      "title": "[올댓차이나] 홍콩 증시, 저가 매수세로 소폭 반등 마감… 항셍 0.08%↑",
-      "link": "https://www.newsis.com/view/NISX20260828_0003767570",
-      "publishedAt": "2026-08-28T09:23:50.000Z",
-      "source": "뉴시스 경제",
-      "category": "stocks",
-      "preview": "[서울=뉴시스]이재준 기자 = 홍콩 증시는 28일 중동 정세를 둘러싼 불확실성으로 속락 개장했다가 실적 호조 종목에 매수가 들어오고 저가 매수세도 유입하면서 소폭 반등 마감했다. 항셍지수는 이날 전일 대비 19.05…",
-      "dupes": [],
-      "titleEn": "[AllChina] Hong Kong Market Closes Slightly Higher on Low-price Buying... Hang Seng 0.08%↑"
+      "dupes": []
     },
     {
       "title": "3기신도시 공공임대 절반, 무주택 청년에 공급",
@@ -249,8 +215,7 @@
       "source": "매일경제 부동산",
       "category": "realestate",
       "preview": "전월세를 더 확실히 지원해 주거 부담을 덜고 과도한 대출이 필요 없는 분양 모델을 도입하는 등 청년 주거 사다리 구축 방안이 추진된다. 정부는 28일 '청년 성장 단계별 추진전략..",
-      "dupes": [],
-      "titleEn": "Half of the public rental housing in the Third New City to be supplied to young people without homes"
+      "dupes": []
     },
     {
       "title": "[단독] 재초환 부과 재건축 단지서 7억 부담금 얹은 매물 등장",
@@ -260,7 +225,6 @@
       "category": "realestate",
       "preview": "재건축초과이익환수제(재초환) 부담금이 서울 강남권 집값을 밀어올리는 현상이 나타나기 시작했다. 사상 최대 재초환 부담금이 부과될 것으로 예상된 단지인 서울 서초구 '래미안 트리니원..",
       "dupes": [],
-      "titleEn": "[Exclusive] 700,000,000 Won Additional Burden Fee Imposed on Reconstruction Complex, Property with Added Burden Emerges",
       "context": [
         {
           "kind": "realestate",
@@ -282,7 +246,6 @@
       "category": "realestate",
       "preview": "서울 고가 아파트와 저가 아파트 간 가격 격차가 7개월 연속 좁혀졌다. 고가 아파트 가격이 주춤한 새 대출 규제에 밀려난 수요가 중저가 아파트로 이동하면서 상대적으로 저렴한 아파트..",
       "dupes": [],
-      "titleEn": "Seoul's housing price gap narrows, but mid-to-low priced apartments surge in \"upward equalization",
       "context": [
         {
           "kind": "realestate",
@@ -312,7 +275,6 @@
       "category": "realestate",
       "preview": "\"재건축초과이익환수제 부담금은 아직 확정되지 않았지만 7억~8억원 정도로 예상합니다. 이 매물은 그 금액이 포함된 가격이에요.\" 이달 입주를 시작한 서울 서초구 래미안 트리니원(옛..",
       "dupes": [],
-      "titleEn": "Each reconstruction site faces burdens of 300,000,000 to 700,000,000 won; concerns rise over rising home prices if special agreements spread",
       "context": [
         {
           "kind": "realestate",
@@ -333,8 +295,7 @@
       "source": "한국경제 경제",
       "category": "rates",
       "preview": null,
-      "dupes": [],
-      "titleEn": "Raising interest rates worsens finances, lowering them burdens prices... Central Bank's dilemma"
+      "dupes": []
     },
     {
       "title": "인터넷은행 3사, 2분기 중·저신용 대출비중 목표치 30% 넘겨",
@@ -343,8 +304,7 @@
       "source": "연합뉴스 경제",
       "category": "other",
       "preview": "(서울=연합뉴스) 이도흔 기자 = 올해 2분기 인터넷전문은행 3사의 중·저신용 대출 비중이 모두 목표 수준인 30%를 넘었다.",
-      "dupes": [],
-      "titleEn": "Three internet banks exceed 30% target for mid- and low-credit loan ratio in Q2"
+      "dupes": []
     },
     {
       "title": "9월 아파트 입주 예정물량 올해 월간 최저치",
@@ -353,8 +313,7 @@
       "source": "한국경제 부동산",
       "category": "realestate",
       "preview": null,
-      "dupes": [],
-      "titleEn": "September apartment units to be delivered hit lowest monthly level this year"
+      "dupes": []
     },
     {
       "title": "환율 1,370원선 접근, 13개월 만에 최저…원/엔 850엔대로",
@@ -363,8 +322,25 @@
       "source": "연합뉴스 경제",
       "category": "stocks",
       "preview": "(서울=연합뉴스) 김지연 기자 = 원/달러 환율이 1,371원대로 내려가며 13개월 만에 최저치를 기록했다.",
-      "dupes": [],
-      "titleEn": "Exchange rate approaches 1,370 won, lowest in 13 months… won/yen hits 850 yen level"
+      "dupes": []
+    },
+    {
+      "title": "청년 주거지원 확 넓힌다… 월세 지원 중위소득 60→100%로 완화",
+      "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/28/P2JON7YRFNHB5DVBUGAL7PTG4M/",
+      "publishedAt": "2026-08-28T08:00:44.000Z",
+      "source": "조선비즈 부동산",
+      "category": "realestate",
+      "preview": "정부가 청년 월세 지원 대상을 기준중위소득 60% 이하에서 100% 이하로 대폭 확대한다. 주거 안정을 위해 소득 기준 탓에 월세 지원을 받지 못한 청년층도 지원 대상에 포함하기로 한 것이다. 저소득 청년은 월세 지…",
+      "dupes": []
+    },
+    {
+      "title": "외인 선물 매도에 국고채 금리 상승…3년물 연 3.788%(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20260828142351008",
+      "publishedAt": "2026-08-28T07:49:20.000Z",
+      "source": "연합뉴스 경제",
+      "category": "rates",
+      "preview": "(서울=연합뉴스) 강수지 기자 = 28일 국고채 금리는 일제히 상승했다. 외국인이 국채선물을 대량으로 순매도하면서 전일 한국은행의 금융통화위원회...",
+      "dupes": []
     }
   ],
   "realestateStats": [
