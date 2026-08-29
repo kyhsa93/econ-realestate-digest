@@ -57,7 +57,7 @@ function replaceOnce(html, needle, replacement, what) {
   return html.replace(needle, replacement);
 }
 
-export function buildRealestatePage(baseHtml, page, realestate) {
+export function buildRealestatePage(baseHtml, page, realestate, spread = null) {
   let html = baseHtml;
 
   html = html.replaceAll(BASE_TITLE, page.title);
@@ -98,7 +98,7 @@ export function buildRealestatePage(baseHtml, page, realestate) {
   }
 
   return applyPrerender(html, {
-    realestateOverall: realestateOverallHtml(realestate, page.kind),
+    realestateOverall: realestateOverallHtml(realestate, page.kind, null, spread),
     realestateHead: realestateHeadHtml(page.kind),
     realestateTable: realestateTableHtml(realestate, page.kind),
     districtLinks: "",
@@ -140,7 +140,7 @@ export function buildDistrictPage(baseHtml, district, realestate, deals = null, 
   );
 
   return applyPrerender(html, {
-    realestateOverall: realestateOverallHtml(realestate, null, district.name),
+    realestateOverall: realestateOverallHtml(realestate, null, district.name, spread),
     realestateHead: realestateHeadHtml(null, district.name),
     realestateTable: realestateTableHtml(realestate, null, district.name),
     districtLinks: districtLinksHtml(district.name),
@@ -170,7 +170,7 @@ async function main() {
   ]);
 
   for (const page of REALESTATE_PAGES) {
-    await write(page.file, buildRealestatePage(baseHtml, page, realestate));
+    await write(page.file, buildRealestatePage(baseHtml, page, realestate, complexRatio?.seoul ?? null));
   }
 
   let created = 0;

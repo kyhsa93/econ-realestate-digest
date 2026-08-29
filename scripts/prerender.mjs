@@ -309,6 +309,7 @@ const RE_LABELS = {
   monthly: "평균 월세",
   count: "거래건수",
   ratio: "전세가율",
+  ratioByComplex: "단지별 중앙값",
   overall: "서울 전체",
 };
 
@@ -474,7 +475,7 @@ export function realestateTableHtml(realestate, kind = null, district = null) {
   );
 }
 
-export function realestateOverallHtml(realestate, kind = null, district = null) {
+export function realestateOverallHtml(realestate, kind = null, district = null, spread = null) {
   const overall = district
     ? (realestate?.districts ?? []).find((d) => d.name === district)
     : realestate?.overall;
@@ -486,6 +487,18 @@ export function realestateOverallHtml(realestate, kind = null, district = null) 
     (sub ? `<div class="sub">${sub}</div>` : "") +
     `</div>`;
 
+  // 전세가율 카드 옆에 칸 하나하나에서 낸 값의 중앙값을 나란히 둔다.
+  // 표의 값은 이 표의 두 열을 나눈 것이라 표와는 맞고, 이 값은 실제 단지와 맞는다.
+  // 하나를 다른 하나로 갈아 끼우면 같은 행의 숫자들과 어긋나므로 둘을 같이 둔다.
+  const complexCard = () =>
+    spread
+      ? card(
+          RE_LABELS.ratioByComplex,
+          formatPercent(spread.median),
+          escapeHtml(`단지·평형 ${spread.cells.toLocaleString("ko-KR")}칸`)
+        )
+      : "";
+
   if (district) {
     const sale = resolveMetric(overall, "sale")?.metric;
     const ratio = jeonseRatio(overall);
@@ -495,7 +508,8 @@ export function realestateOverallHtml(realestate, kind = null, district = null) 
           card(RE_LABELS.area, reEok(areaPrice(valueOf(sale, "sale"))), "") +
           card(RE_LABELS.count, escapeHtml(reCount(sale.transactionCount)), "")
         : card(RE_LABELS.sale, "-", "")) +
-      (ratio ? card(RE_LABELS.ratio, formatPercent(ratio.ratio), "") : "")
+      (ratio ? card(RE_LABELS.ratio, formatPercent(ratio.ratio), "") : "") +
+      complexCard()
     );
   }
 
@@ -536,6 +550,7 @@ export function realestateOverallHtml(realestate, kind = null, district = null) 
     card(kind === "jeonse" ? RE_LABELS.perPyeongDeposit : RE_LABELS.perPyeong, reMan(perPyeong), "") +
     card(RE_LABELS.area, reEok(areaPrice(perPyeong)), "") +
     (ratio ? card(RE_LABELS.ratio, formatPercent(ratio.ratio), "") : "") +
+    (kind === "jeonse" ? complexCard() : "") +
     card(RE_LABELS.count, escapeHtml(reCount(metric.transactionCount)), "")
   );
 }

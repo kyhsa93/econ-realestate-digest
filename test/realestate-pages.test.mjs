@@ -158,12 +158,16 @@ test("정적 HTML의 표가 실제 화면과 같다", async () => {
 });
 
 test("커밋된 거래 유형별 페이지가 지금 원본·데이터로 찍은 결과와 같다", async () => {
-  const [baseHtml, realestate] = await Promise.all([read("docs/realestate.html"), readJson("realestate")]);
+  const [baseHtml, realestate, complexRatio] = await Promise.all([
+    read("docs/realestate.html"),
+    readJson("realestate"),
+    readJson("complex-ratio").catch(() => null),
+  ]);
 
   for (const page of REALESTATE_PAGES) {
     assert.equal(
       await read(`docs/${page.file}`),
-      buildRealestatePage(baseHtml, page, realestate),
+      buildRealestatePage(baseHtml, page, realestate, complexRatio?.seoul ?? null),
       `docs/${page.file}이 원본과 어긋납니다. node scripts/build-realestate-pages.mjs를 실행하세요.`
     );
   }

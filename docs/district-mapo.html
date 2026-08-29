@@ -64,7 +64,7 @@
 
   <section id="overall-section">
     <h2 id="overall-heading">서울 전체 평균</h2>
-    <div class="overall-cards" id="overall-cards"><!--prerender:realestateOverall--><div class="overall-card"><div class="label">평당가</div><div class="value">6,215만원</div></div><div class="overall-card"><div class="label">84㎡ 환산</div><div class="value">15억 7,922만원</div></div><div class="overall-card"><div class="label">거래건수</div><div class="value">52건</div></div><div class="overall-card"><div class="label">전세가율</div><div class="value">54.0%</div></div><!--/prerender:realestateOverall--></div>
+    <div class="overall-cards" id="overall-cards"><!--prerender:realestateOverall--><div class="overall-card"><div class="label">평당가</div><div class="value">6,215만원</div></div><div class="overall-card"><div class="label">84㎡ 환산</div><div class="value">15억 7,922만원</div></div><div class="overall-card"><div class="label">거래건수</div><div class="value">52건</div></div><div class="overall-card"><div class="label">전세가율</div><div class="value">54.0%</div></div><div class="overall-card"><div class="label">단지별 중앙값</div><div class="value">43.3%</div><div class="sub">단지·평형 71칸</div></div><!--/prerender:realestateOverall--></div>
   </section>
 
   <section id="district-summary-section" hidden>
@@ -218,6 +218,8 @@ const T = {
     thMonthly: "평균 월세",
     thCount: "거래건수",
     thRatio: "전세가율",
+    thRatioByComplex: "단지별 중앙값",
+    ratioCells: (n) => `단지·평형 ${n.toLocaleString("ko-KR")}칸`,
     overall: "서울 전체",
     countUnit: (n) => `${n.toLocaleString("ko-KR")}건`,
     lowSample: (n) => `신고 ${n}건`,
@@ -302,6 +304,8 @@ const T = {
     thMonthly: "Avg monthly",
     thCount: "Transactions",
     thRatio: "Jeonse ratio",
+    thRatioByComplex: "Median by unit type",
+    ratioCells: (n) => `${n.toLocaleString("en-US")} unit types`,
     overall: "Seoul total",
     countUnit: (n) => `${n.toLocaleString("en-US")}`,
     lowSample: (n) => `${n} reported`,
@@ -631,6 +635,12 @@ function renderOverall(realestate) {
     (sub ? `<div class="sub">${sub}</div>` : "") +
     `</div>`;
 
+  // 표의 전세가율은 이 표의 두 열을 나눈 값이라 표와는 맞지만 어느 단지의 것도
+  // 아닐 수 있다. 갈아 끼우면 같은 행의 숫자들과 어긋나므로 옆에 나란히 둔다.
+  const spread = complexSpread();
+  const complexCard = () =>
+    spread ? card(t("thRatioByComplex"), formatPercent(spread.median), escapeHtml(t("ratioCells")(spread.cells))) : "";
+
   if (districtName) {
     const sale = resolveMetric(overall, "sale")?.metric;
     const ratio = jeonseRatio(overall);
@@ -640,7 +650,8 @@ function renderOverall(realestate) {
           card(t("thArea")(areaM2), formatEok(areaPrice(valueOf(sale, "sale"))), "") +
           card(t("thCount"), escapeHtml(t("countUnit")(sale.transactionCount)), "")
         : card(t("thSale"), "-", "")) +
-      (ratio ? card(t("thRatio"), formatPercent(ratio.ratio), "") : "");
+      (ratio ? card(t("thRatio"), formatPercent(ratio.ratio), "") : "") +
+      complexCard();
     return;
   }
 
@@ -685,7 +696,15 @@ function renderOverall(realestate) {
     card(kind === "jeonse" ? t("thPerPyeongDeposit") : t("thPerPyeong"), formatMan(perPyeong), "") +
     card(t("thArea")(areaM2), formatEok(areaPrice(perPyeong)), "") +
     (ratio ? card(t("thRatio"), formatPercent(ratio.ratio), "") : "") +
+    (kind === "jeonse" ? complexCard() : "") +
     card(t("thCount"), escapeHtml(t("countUnit")(metric.transactionCount)), "");
+}
+
+/** 자치구 화면이면 그 구, 거래 유형 화면이면 서울 전체. 파일이 없으면 카드가 없다. */
+function complexSpread() {
+  const data = cache.complexRatio;
+  if (!data) return null;
+  return districtName ? (data.districts?.[districtName] ?? null) : (data.seoul ?? null);
 }
 
 const hasAreaColumn = Boolean(districtName) || kind === "sale" || kind === "jeonse";
@@ -1245,6 +1264,15 @@ async function main() {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     cache.realestate = await res.json();
     renderAll();
+
+    try {
+      const ratioRes = await fetch(`./data/complex-ratio.json?_=${Date.now()}`);
+      if (ratioRes.ok) {
+        cache.complexRatio = await ratioRes.json();
+        renderAll();
+      }
+    } catch {
+    }
 
     try {
       const trendRes = await fetch(`./data/realestate-trend.json?_=${Date.now()}`);

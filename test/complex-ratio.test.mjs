@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import path from "node:path";
 import {
   GAP_EXPLAIN,
   MIN_CELLS,
@@ -110,4 +111,46 @@ test("빌드 결과에는 칸이 찬 자치구만 들어간다", () => {
 
 test("거래가 하나도 없으면 파일을 만들지 않는다", () => {
   assert.equal(buildPayload({ now: NOW, byDistrict: { 빈구: { sales: [], rents: [] } } }), null);
+});
+
+// --- 화면에 실제로 어떻게 붙는가 --------------------------------------------
+
+test("정적 HTML과 자바스크립트가 같은 카드를 그린다", async () => {
+  const { readFile } = await import("node:fs/promises");
+  const { loadRealestatePage } = await import("./helpers/realestate-page.mjs");
+  const root = path.resolve(import.meta.dirname, "..");
+  const readJson = (name) => readFile(path.join(root, `docs/data/${name}.json`), "utf8").then(JSON.parse);
+
+  const [realestate, complexRatio] = await Promise.all([readJson("realestate"), readJson("complex-ratio")]);
+  const district = "노원구";
+  const spread = complexRatio.districts[district];
+  assert.ok(spread, `${district}에 분포가 없다 - 다른 구로 검사를 바꿔야 한다`);
+
+  // 정적 HTML에 들어 있는 값
+  const html = await readFile(path.join(root, "docs/district-nowon.html"), "utf8");
+  assert.match(html, new RegExp(`단지별 중앙값</div><div class="value">${spread.median}%`));
+
+  // 자바스크립트가 붙은 뒤의 값. 다르면 화면이 한 번 튄다.
+  const page = await loadRealestatePage({ realestate, complexRatio, district });
+  for (let i = 0; i < 200 && !String(page.byId("overall-cards").innerHTML).includes("단지별"); i += 1) {
+    await new Promise((r) => setTimeout(r, 5));
+  }
+  const rendered = String(page.byId("overall-cards").innerHTML);
+  assert.match(rendered, new RegExp(`단지별 중앙값</div><div class="value">${spread.median}%`));
+  assert.match(rendered, new RegExp(`단지·평형 ${spread.cells.toLocaleString("ko-KR")}칸`));
+});
+
+test("분포 파일이 없으면 카드 없이 그대로 돈다", async () => {
+  const { readFile } = await import("node:fs/promises");
+  const { loadRealestatePage } = await import("./helpers/realestate-page.mjs");
+  const root = path.resolve(import.meta.dirname, "..");
+  const realestate = JSON.parse(await readFile(path.join(root, "docs/data/realestate.json"), "utf8"));
+
+  const page = await loadRealestatePage({ realestate, district: "노원구" });
+  for (let i = 0; i < 200 && !String(page.byId("overall-cards").innerHTML).includes("전세가율"); i += 1) {
+    await new Promise((r) => setTimeout(r, 5));
+  }
+  const rendered = String(page.byId("overall-cards").innerHTML);
+  assert.match(rendered, /전세가율/, "카드가 통째로 안 그려졌다");
+  assert.ok(!rendered.includes("단지별 중앙값"), "없는 데이터로 카드를 그렸다");
 });
