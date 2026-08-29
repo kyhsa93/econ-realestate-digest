@@ -746,7 +746,7 @@ test("페이지가 스타일을 따로 품지 않는다", async () => {
   }
 });
 
-test("시세 페이지 추이 카드가 데일리 다이제스트와 같은 짜임이다", async () => {
+test("시세 페이지 추이 카드가 첫 화면과 같은 짜임이다", async () => {
   const css = await readFile(path.join(root, "docs/style.css"), "utf8");
   for (const selector of [
     ".history-grid",
@@ -764,7 +764,7 @@ test("시세 페이지 추이 카드가 데일리 다이제스트와 같은 짜�
     readFile(path.join(root, "docs/realestate.html"), "utf8"),
     readFile(path.join(root, "docs/index.html"), "utf8"),
   ]);
-  for (const [what, html] of [["시세", realestate], ["다이제스트", index]]) {
+  for (const [what, html] of [["시세", realestate], ["첫 화면", index]]) {
     assert.match(html, /class="history-card"/, `${what}: 카드 짜임이 다르다`);
     assert.match(html, /class="history-stats"/, `${what}: 값 줄이 없다`);
     assert.match(html, /class="history-chart"/, `${what}: 그래프 자리가 없다`);

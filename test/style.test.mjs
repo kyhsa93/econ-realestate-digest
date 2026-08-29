@@ -172,6 +172,19 @@ test("액센트 위의 글자가 읽힌다", async () => {
   }
 });
 
+test("네 갈래 모두 액센트의 옅은 판을 갖는다", async () => {
+  // 질문 입구와 집계 기준 안내가 여기 앉는다. 한 갈래에 빠뜨리면 그 갈래에서만
+  // 흰 바탕에 흰 글씨가 된다 - 시스템 다크(미디어쿼리)에서 실제로 그랬다.
+  for (const { sel, vars } of palettes(await css())) {
+    if (!vars["--accent"]) continue;
+    assert.ok(vars["--accent-weak"], `${sel}: --accent-weak이 없다`);
+    const onWeak = contrast(vars["--accent-weak"], vars["--fg"]);
+    assert.ok(onWeak >= 4.5, `${sel}: 옅은 판 위의 글자 대비가 ${onWeak.toFixed(1)}:1이다`);
+    const accentOnWeak = contrast(vars["--accent-weak"], vars["--accent"]);
+    assert.ok(accentOnWeak >= 4.5, `${sel}: 옅은 판 위의 액센트 대비가 ${accentOnWeak.toFixed(1)}:1이다`);
+  }
+});
+
 test("액센트를 데이터 안에는 쓰지 않는다", async () => {
   // 표 안의 파랑은 이미 '하락'이라는 뜻이다. 같은 자리에 다른 뜻의 파랑을
   // 놓으면 둘 다 못 읽는다. 액센트는 어디에 있고 무엇을 골랐는지만 말한다.

@@ -46,22 +46,20 @@ test("질문은 조건을 넣지 않아도 답이 보이는 화면으로 보낸�
 test("데이터 섹션보다 앞에 있다", async () => {
   const html = await indexHtml();
   assert.ok(
-    html.indexOf('class="question-nav"') < html.indexOf('<section id="market-section">'),
+    html.indexOf('class="question-nav"') < html.search(/<section id="/),
     "질문 입구가 표 밑에 있다"
   );
 });
 
-test("한 줄로 접히고 잘린 쪽에 페이드가 붙는다", async () => {
-  const [css, nav] = await Promise.all([
-    readFile(path.join(root, "docs/style.css"), "utf8"),
-    readFile(path.join(root, "docs/nav.js"), "utf8"),
-  ]);
-  // 질문 여섯 개를 세로로 쌓으면 3단계에서 시세표를 접어 번 자리를 도로 까먹는다.
-  assert.match(css, /\.question-nav \{[^}]*overflow-x: auto/);
-  assert.match(nav, /querySelectorAll\([^)]*question-nav/, "nav.js가 이 줄을 안 본다");
-  for (const cls of ["scroll-start", "scroll-end"]) {
-    assert.ok(css.includes(`.question-nav.${cls}`), `${cls} 페이드 규칙이 없다`);
-  }
+test("여섯 개가 스크롤 없이 한눈에 보인다", async () => {
+  const css = await readFile(path.join(root, "docs/style.css"), "utf8");
+  const block = /\.question-nav \{([^}]*)\}/.exec(css)?.[1] ?? "";
+
+  // 전에는 한 줄로 접어 가로로 밀게 했다. 사이트에서 제일 눌려야 하는 자리를
+  // 스크롤 뒤에 감춰 두면 뒤의 셋은 없는 것이나 같다.
+  assert.match(block, /display: grid/, "질문 입구가 격자가 아니다");
+  assert.doesNotMatch(block, /overflow-x: auto/, "질문 입구가 아직 가로로 잘린다");
+  assert.ok(!css.includes(".question-nav.scroll-"), "가로 페이드 규칙이 남아 있다");
 });
 
 test("영어 화면에서는 질문도 영어다", async () => {

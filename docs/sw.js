@@ -1,4 +1,4 @@
-const CACHE_NAME = "econ-digest-v12";
+const CACHE_NAME = "jipgye-v13";
 const SHELL_ASSETS = [
   "./",
   "./index.html",

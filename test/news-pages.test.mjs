@@ -144,7 +144,11 @@ test("뉴스 페이지는 색인에서 빠지고, 데이터 페이지는 빠지�
 
 test("첫 화면에 먼저 오는 것은 우리가 만든 데이터다", async () => {
   // AI 요약이 맨 위에 있었다. 심사자가 사이트에서 처음 보는 것이 AI가 쓴 문단이면
-  // 그 사이트가 무엇으로 만들어졌는지에 대한 첫 인상이 그것으로 정해진다.
+  // 그 사이트가 무엇으로 만들어졌는지에 대한 첫 인상이 그것으로 정해진다(53d9c9a).
+  //
+  // 그때는 시장 지표를 맨 위에 뒀는데, 코스피·환율·기준금리는 받아서 그대로 옮기는
+  // 숫자지 우리가 만든 것이 아니다. 우리 계산이 들어간 것은 실거래 쪽이므로
+  // 원칙("처음 보는 것이 우리가 만든 데이터")을 그대로 적용하면 실거래가 맨 위다.
   const html = await read("docs/index.html");
   const at = (id) => html.indexOf(`<section id="${id}">`);
   assert.ok(at("market-section") > 0 && at("realestate-section") > 0 && at("summary-section") > 0);
@@ -152,5 +156,8 @@ test("첫 화면에 먼저 오는 것은 우리가 만든 데이터다", async (
     at("summary-section") > at("realestate-section"),
     "AI 요약이 실거래 시세보다 위에 있습니다"
   );
-  assert.ok(at("realestate-section") > at("market-section"), "시장 지표가 맨 위여야 합니다");
+  assert.ok(
+    at("market-section") > at("realestate-section"),
+    "받아 옮기기만 하는 코스피·환율이 우리가 계산한 실거래보다 위에 있습니다"
+  );
 });

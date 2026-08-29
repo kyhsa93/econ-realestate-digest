@@ -8,21 +8,21 @@
 <link rel="icon" href="./icons/icon-192.png">
 <link rel="apple-touch-icon" href="./icons/icon-192.png">
 <meta name="google-adsense-account" content="ca-pub-1195159445218373">
-<title>경제·부동산 데일리 다이제스트</title>
-<meta name="description" content="매일 아침 경제·부동산 뉴스, 코스피·환율·기준금리, 서울 25개구 아파트 실거래가, AI 요약을 자동으로 갱신해 보여주는 무료 데일리 다이제스트.">
+<title>집계 — 계약 전에 확인하는 서울 아파트 실거래·금리</title>
+<meta name="description" content="서울 아파트 실거래와 예적금·대출 금리를 매일 모아, 전세와 월세 중 어느 쪽이 싼지·지금 갱신이 새로 구하는 것보다 싼지까지 계산합니다. 표본이 모자란 자치구는 평균을 내지 않습니다.">
 <meta name="site-group" content="digest">
 <link rel="canonical" href="https://kyhsa93.github.io/econ-realestate-digest/">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="경제·부동산 데일리 다이제스트">
+<meta property="og:site_name" content="집계">
 <meta property="og:url" content="https://kyhsa93.github.io/econ-realestate-digest/">
-<meta property="og:title" content="경제·부동산 데일리 다이제스트">
-<meta property="og:description" content="매일 아침 경제·부동산 뉴스, 코스피·환율·기준금리, 서울 25개구 아파트 실거래가, AI 요약을 자동으로 갱신해 보여주는 무료 데일리 다이제스트.">
+<meta property="og:title" content="집계 — 계약 전에 확인하는 서울 아파트 실거래·금리">
+<meta property="og:description" content="서울 아파트 실거래와 예적금·대출 금리를 매일 모아, 전세와 월세 중 어느 쪽이 싼지·지금 갱신이 새로 구하는 것보다 싼지까지 계산합니다. 표본이 모자란 자치구는 평균을 내지 않습니다.">
 <meta property="og:image" content="https://kyhsa93.github.io/econ-realestate-digest/icons/icon-512.png">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:locale:alternate" content="en_US">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="경제·부동산 데일리 다이제스트">
-<meta name="twitter:description" content="매일 아침 경제·부동산 뉴스, 코스피·환율·기준금리, 서울 25개구 아파트 실거래가, AI 요약을 자동으로 갱신해 보여주는 무료 데일리 다이제스트.">
+<meta name="twitter:title" content="집계 — 계약 전에 확인하는 서울 아파트 실거래·금리">
+<meta name="twitter:description" content="서울 아파트 실거래와 예적금·대출 금리를 매일 모아, 전세와 월세 중 어느 쪽이 싼지·지금 갱신이 새로 구하는 것보다 싼지까지 계산합니다. 표본이 모자란 자치구는 평균을 내지 않습니다.">
 <meta name="twitter:image" content="https://kyhsa93.github.io/econ-realestate-digest/icons/icon-512.png">
 <link rel="stylesheet" href="./style.css">
 </head>
@@ -31,7 +31,8 @@
 <main id="main">
   <header>
     <div>
-      <h1 id="page-title">경제·부동산 데일리 다이제스트</h1>
+      <h1 class="wordmark" id="page-title">집계</h1>
+      <p class="tagline" id="tagline">서울 아파트, 신고된 거래만 세어서 말합니다</p>
       <div class="updated" id="updated">불러오는 중...</div>
       <div class="update-schedule" id="update-schedule"></div>
       <a class="back-link" id="archive-back-link" href="./index.html" hidden></a>
@@ -50,10 +51,10 @@
   </header>
 
   <nav class="page-nav">
-    <a id="nav-digest" class="active" href="./index.html" aria-current="page">데일리 다이제스트</a>
-    <a id="nav-news" href="./news.html">뉴스</a>
+    <a id="nav-digest" class="active" href="./index.html" aria-current="page">오늘</a>
     <a id="nav-realestate" href="./realestate.html">아파트 시세</a>
     <a id="nav-rates" href="./rates.html">금리 비교</a>
+    <a id="nav-news" href="./news.html">뉴스</a>
   </nav>
 
   <form class="site-search" role="search">
@@ -77,7 +78,8 @@
     <a href="./method.html" id="method-callout-link">숫자를 만드는 방법 →</a>
   </aside>
 
-  <nav class="question-nav" id="question-nav" aria-label="무엇을 알고 싶으세요">
+  <h2 class="question-heading" id="question-heading">무엇을 알아보러 오셨나요</h2>
+  <nav class="question-nav" id="question-nav" aria-labelledby="question-heading">
     <a id="q-realestate" href="./realestate.html">우리 동네는 얼마에 팔렸나</a>
     <a id="q-conversion" href="./jeonse-vs-wolse.html">전세가 쌀까, 월세가 쌀까</a>
     <a id="q-budget" href="./budget-10eok.html">10억이면 서울 어디까지</a>
@@ -86,26 +88,8 @@
     <a id="q-search" href="./deal-search.html">조건을 걸어 실거래 찾기</a>
   </nav>
 
-  <section id="market-section">
-    <h2 id="market-heading">자산 시장 지표</h2>
-    <div class="table-wrap">
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th id="market-th-indicator">지표</th>
-            <th id="market-th-value">값</th>
-            <th id="market-th-change">증감</th>
-          </tr>
-        </thead>
-        <tbody id="market-grid"><!--prerender:market--><tr><td>코스피</td><td data-label="값">6,788.88</td><td data-label="증감">-123.49</td></tr><tr><td>원/달러 환율</td><td data-label="값">1377.94원</td><td data-label="증감">-</td></tr><tr><td>기준금리</td><td data-label="값">3.00%</td><td data-label="증감">2026년 08월 27일</td></tr><!--/prerender:market--></tbody>
-      </table>
-    </div>
-    <div class="history-grid" id="history-grid"></div>
-    <a class="back-link" id="rates-link" href="./rates.html">예금·적금·대출 금리 비교 →</a>
-  </section>
-
   <section id="realestate-section">
-    <h2 id="realestate-heading">한국 부동산 가격 추이</h2>
+    <h2 id="realestate-heading">서울 아파트, 이번 주 신고된 값</h2>
     <div class="content-notice" id="realestate-unit-caption" style="margin-top: -8px;"></div>
     <div class="realestate-search">
       <input type="search" id="realestate-search-input" placeholder="지역 검색 (예: 강남)">
@@ -139,6 +123,24 @@
     <div class="summary-meta" id="realestate-history-note"></div>
     <div class="summary-meta" id="realestate-meta"></div>
   </section>
+  <section id="market-section">
+    <h2 id="market-heading">돈의 값 — 기준금리·환율·코스피</h2>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th id="market-th-indicator">지표</th>
+            <th id="market-th-value">값</th>
+            <th id="market-th-change">증감</th>
+          </tr>
+        </thead>
+        <tbody id="market-grid"><!--prerender:market--><tr><td>코스피</td><td data-label="값">6,788.88</td><td data-label="증감">-123.49</td></tr><tr><td>원/달러 환율</td><td data-label="값">1377.94원</td><td data-label="증감">-</td></tr><tr><td>기준금리</td><td data-label="값">3.00%</td><td data-label="증감">2026년 08월 27일</td></tr><!--/prerender:market--></tbody>
+      </table>
+    </div>
+    <div class="history-grid" id="history-grid"></div>
+    <a class="back-link" id="rates-link" href="./rates.html">예금·적금·대출 금리 비교 →</a>
+  </section>
+
   <section id="summary-section">
     <h2 id="summary-heading">오늘의 AI 요약</h2>
     <div class="placeholder" id="summary-box"><!--prerender:summary--><p><strong>금리·예금·투자상품</strong> 미국 금리 상승에 따라 엔화 불안이 커지자 베선트가 엔화 개입 의도를 밝혔다. 베선트는 미국 금리 상승이 엔화에 부정적 영향을 줄 수 있다고 경고했다. 미국 모기지 차주 중 일부는 집값과 금리 상승으로 인해 집을 팔 의향이 커졌으며, 서울의 경우 더 높은 비율로 나타났다. 굴즈비 시카고연은 총재는 미국 국채금리가 높지 않다고 밝혔다. 뉴욕증시는 워시의 금리 인상 경고에 따라 일제히 하락 마감했다.</p><p><strong>부동산</strong> 강남 지역에서는 매물 부족으로 아파트 매매가 어려운 상황이다. 강남 한복판에 위치한 644평 규모의 매장이 주목받고 있다. 내주에는 인천 시티오씨엘9단지오션파크뷰 등 3천713가구가 분양에 들어간다. 서울의 빌라 가격은 두 달째 아파트보다 더 크게 상승했으며, 거래액은 5조원에 근접했다. 세제 개편 이후 강남의 부동산 시장은 흔들리고 있으며, 강북 지역에서는 부동산 가격이 상승하는 '불장' 현상이 나타나고 있다.</p><p><strong>기타 경제 소식</strong> 내년도 정부 예산안이 공개되고 7월에 국제수지도 발표될 예정이며, 인터넷은행 3사는 2분기 중·저신용 대출비중 목표치 30%를 넘겼다.</p><p><strong>증시·환율</strong> 뉴욕증시는 워시 매파 발언으로 일제히 하락했고, 홍콩 증시는 저가 매수세로 소폭 반등 마감했으며, 대만 증시는 엔비디아 호실적에 나흘째 상승했고, 환율은 1,370원선에 접근하며 13개월 만에 최저를 기록했으며, 원/엔 환율은 850엔대를 기록했다.</p><!--/prerender:summary--></div>
@@ -191,8 +193,10 @@
 
   const T = {
     ko: {
-      title: "경제·부동산 데일리 다이제스트",
-      description: "매일 아침 경제·부동산 뉴스, 코스피·환율·기준금리, 서울 25개구 아파트 실거래가, AI 요약을 자동으로 갱신해 보여주는 무료 데일리 다이제스트.",
+      title: "집계",
+      docTitle: "집계 — 계약 전에 확인하는 서울 아파트 실거래·금리",
+      tagline: "서울 아파트, 신고된 거래만 세어서 말합니다",
+      description: "서울 아파트 실거래와 예적금·대출 금리를 매일 모아, 전세와 월세 중 어느 쪽이 싼지·지금 갱신이 새로 구하는 것보다 싼지까지 계산합니다. 표본이 모자란 자치구는 평균을 내지 않습니다.",
       lastUpdated: (s) => `마지막 갱신: ${s}`,
       lastUpdatedUnknown: "갱신 정보를 불러오지 못했습니다.",
       updateSchedule: "뉴스·AI 요약은 하루 4회(08·12·16·20시경), 시장지표·부동산은 아침에 갱신됩니다.",
@@ -209,7 +213,7 @@
       summaryHighlightsLabel: "오늘의 핵심",
       summaryCategoriesLabel: "분야별 요약",
       summaryMeta: (model, date) => `${model} 생성 · ${date}`,
-      marketHeading: "자산 시장 지표",
+      marketHeading: "돈의 값 — 기준금리·환율·코스피",
       marketError: "데이터를 불러오지 못했습니다.",
       marketEmpty: "데이터 없음",
       marketThIndicator: "지표",
@@ -222,7 +226,7 @@
       baseRateLabel: "한국은행 기준금리",
       baseRateSince: (s) => `${s} 부터`,
       ratesLink: "예금·적금·대출 금리 비교 →",
-      navDigest: "데일리 다이제스트",
+      navDigest: "오늘",
       navNews: "뉴스",
       navRealestate: "아파트 시세",
       navRates: "금리 비교",
@@ -233,7 +237,7 @@
       historyPendingNote: "점선은 신고 기한(계약 후 30일)이 남아 아직 덜 찬 주입니다. 실선까지가 확정치입니다",
       historyPendingTag: "(잠정)",
       historyMoreToggle: (n) => `그 외 지표 ${n}개 더보기`,
-      realestateHeading: "한국 부동산 가격 추이",
+      realestateHeading: "서울 아파트, 이번 주 신고된 값",
       realestateError: "데이터를 불러오지 못했습니다.",
       realestateOverallLabel: "서울 25개구 평균",
       realestateMoreLink: (n) => `자치구 ${n}개 전체 보기 →`,
@@ -288,6 +292,7 @@
       methodCalloutText:
         "여기 숫자는 매물 호가가 아니라 국토교통부에 신고된 실거래입니다. 신고 기한이 30일이라 최근 주는 늘 덜 차 있고, 표본이 모자란 자치구는 평균을 내지 않습니다.",
       methodCalloutLink: "숫자를 만드는 방법 →",
+      questionHeading: "무엇을 알아보러 오셨나요",
       q_realestate: "우리 동네는 얼마에 팔렸나",
       q_conversion: "전세가 쌀까, 월세가 쌀까",
       q_budget: "10억이면 서울 어디까지",
@@ -297,8 +302,10 @@
       footerAbout: "소개",
     },
     en: {
-      title: "Econ & Real Estate Digest",
-      description: "A free daily digest of Korean economy & real estate news, KOSPI/USD-KRW/BOK rate, Seoul apartment transaction prices, and AI-generated summaries — auto-updated every morning.",
+      title: "Jipgye",
+      docTitle: "Jipgye — Seoul apartment deals and rates, before you sign",
+      tagline: "Seoul apartment deals — counted, not quoted",
+      description: "Seoul apartment transactions and Korean deposit and loan rates, collected daily and worked out for you: whether jeonse or monthly rent costs less, and whether renewing beats signing anew. Districts with too few deals get no average.",
       lastUpdated: (s) => `Last updated: ${s}`,
       lastUpdatedUnknown: "Could not load update info.",
       updateSchedule: "News and the AI summary refresh 4×/day (08:00, 12:00, 16:00, 20:00 KST); market and real estate each morning.",
@@ -315,7 +322,7 @@
       summaryHighlightsLabel: "Today's Top Stories",
       summaryCategoriesLabel: "By Topic",
       summaryMeta: (model, date) => `Generated by ${model} · ${date}`,
-      marketHeading: "Market Indicators",
+      marketHeading: "The price of money — policy rate, FX, KOSPI",
       marketError: "Failed to load data.",
       marketEmpty: "No data",
       marketThIndicator: "Indicator",
@@ -328,7 +335,7 @@
       baseRateLabel: "BOK Base Rate",
       baseRateSince: (s) => `since ${s}`,
       ratesLink: "Compare deposit, savings & loan rates →",
-      navDigest: "Daily digest",
+      navDigest: "Today",
       navNews: "News",
       navRealestate: "Apartment prices",
       navRates: "Rates",
@@ -339,7 +346,7 @@
       historyPendingNote: "Dashed: weeks still inside the 30-day filing window",
       historyPendingTag: "(provisional)",
       historyMoreToggle: (n) => `Show ${n} more indicator${n === 1 ? "" : "s"}`,
-      realestateHeading: "Korean Real Estate Price Trend",
+      realestateHeading: "Seoul apartments, reported this week",
       realestateError: "Failed to load data.",
       realestateOverallLabel: "Seoul 25-district average",
       realestateMoreLink: (n) => `See all ${n} districts →`,
@@ -392,6 +399,7 @@
       methodCalloutText:
         "These are transactions reported to the Ministry of Land, not asking prices. Reporting runs on a 30-day window, so the most recent weeks are always still filling in, and districts with too few transactions are left blank rather than averaged.",
       methodCalloutLink: "How these numbers are made →",
+      questionHeading: "What brought you here?",
       q_realestate: "What did homes near me sell for?",
       q_conversion: "Is jeonse or monthly rent cheaper?",
       q_budget: "What does ₩1B buy in Seoul?",
@@ -1545,13 +1553,15 @@
     locale = next;
     window.localStorage.setItem("lang", locale);
     document.documentElement.setAttribute("lang", locale);
-    document.title = t("title");
+    document.title = t("docTitle");
     setMetaContent('meta[name="description"]', t("description"));
-    setMetaContent('meta[property="og:title"]', t("title"));
+    setMetaContent('meta[property="og:title"]', t("docTitle"));
     setMetaContent('meta[property="og:description"]', t("description"));
-    setMetaContent('meta[name="twitter:title"]', t("title"));
+    setMetaContent('meta[name="twitter:title"]', t("docTitle"));
     setMetaContent('meta[name="twitter:description"]', t("description"));
     document.getElementById("page-title").textContent = t("title");
+    document.getElementById("tagline").textContent = t("tagline");
+    document.getElementById("question-heading").textContent = t("questionHeading");
     document.getElementById("summary-heading").textContent = t("summaryHeading");
     document.getElementById("market-heading").textContent = t("marketHeading");
     document.getElementById("market-th-indicator").textContent = t("marketThIndicator");

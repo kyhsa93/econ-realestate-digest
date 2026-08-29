@@ -28,7 +28,7 @@ const CALLOUT_PAGES = async () => {
 test("첫 화면에서 집계 기준으로 가는 길이 데이터보다 앞에 있다", async () => {
   const html = await indexHtml();
   const callout = html.indexOf('class="method-callout"');
-  const firstData = html.indexOf('<section id="market-section">');
+  const firstData = html.search(/<section id="/);
 
   assert.notEqual(callout, -1, "집계 기준 안내가 첫 화면에 없다");
   assert.ok(callout < firstData, "집계 기준 안내가 첫 데이터 섹션보다 뒤에 있다");

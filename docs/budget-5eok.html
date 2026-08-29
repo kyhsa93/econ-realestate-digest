@@ -14,7 +14,7 @@
 <meta name="budget-band" content="50000">
 <link rel="canonical" href="https://kyhsa93.github.io/econ-realestate-digest/budget-5eok.html">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="경제·부동산 데일리 다이제스트">
+<meta property="og:site_name" content="집계">
 <meta property="og:url" content="https://kyhsa93.github.io/econ-realestate-digest/budget-5eok.html">
 <meta property="og:title" content="5억대로 살 수 있는 서울 아파트 - 최근 실거래">
 <meta property="og:description" content="예산 5억대(5억~6억)로 서울에서 실제 거래된 아파트를 모았습니다. 국토교통부에 신고된 실거래 자료이며, 단지·전용면적·층·거래일과 거래가 많은 지역을 함께 보여줍니다.">
@@ -31,6 +31,7 @@
 <main id="main">
   <header>
     <div>
+      <a class="brand" id="site-brand" href="./index.html" data-brand-en="Jipgye">집계</a>
       <h1 id="page-title">서울 아파트 시세</h1>
       <div class="updated" id="updated">불러오는 중...</div>
     </div>
@@ -41,10 +42,10 @@
   </header>
 
   <nav class="page-nav" aria-label="섹션">
-    <a href="./index.html" id="nav-digest">데일리 다이제스트</a>
-    <a href="./news.html" id="nav-news">뉴스</a>
+    <a href="./index.html" id="nav-digest">오늘</a>
     <a href="./realestate.html" id="nav-realestate" class="active">아파트 시세</a>
     <a href="./rates.html" id="nav-rates">금리 비교</a>
+    <a href="./news.html" id="nav-news">뉴스</a>
   </nav>
 
   <nav class="sub-nav" aria-label="거래 유형">
@@ -179,7 +180,7 @@ const T = {
     titleSale: "서울 아파트 매매 시세",
     titleJeonse: "서울 아파트 전세 시세",
     titleWolse: "서울 아파트 월세 시세",
-    navDigest: "데일리 다이제스트",
+    navDigest: "오늘",
     navRealestatePrices: "아파트 시세",
     navAll: "전체",
     navSale: "매매",
@@ -265,7 +266,7 @@ const T = {
     titleSale: "Seoul Apartment Sale Prices",
     titleJeonse: "Seoul Apartment Jeonse Prices",
     titleWolse: "Seoul Apartment Monthly Rent",
-    navDigest: "Daily digest",
+    navDigest: "Today",
     navRealestatePrices: "Apartment prices",
     navAll: "All",
     navSale: "Sale",
@@ -909,7 +910,7 @@ function drawChart(chartId, series, format, label) {
   return true;
 }
 
-// 카드 한 장은 데일리 다이제스트와 같은 짜임이다 - 라벨, 마지막 주 값과 최고·최저,
+// 카드 한 장은 첫 화면과 같은 짜임이다 - 라벨, 마지막 주 값과 최고·최저,
 // 그리고 그래프.
 function fillCard(prefix, series, label, format) {
   const chart = document.getElementById(`${prefix}-chart`);

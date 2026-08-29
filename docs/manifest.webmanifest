@@ -1,7 +1,7 @@
 {
-  "name": "경제·부동산 데일리 다이제스트",
-  "short_name": "경제다이제스트",
-  "description": "매일 아침 한국 경제/부동산 뉴스, 자산 시장 지표, AI 요약을 자동으로 갱신하는 다이제스트",
+  "name": "집계 — 서울 아파트 실거래와 금리",
+  "short_name": "집계",
+  "description": "서울 아파트 실거래와 예적금·대출 금리를 매일 모아, 계약 전에 필요한 숫자를 계산해 보여줍니다",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

@@ -148,7 +148,7 @@ test("새 페이지들이 설치 시 미리 받는 목록에 들어 있다", asy
   for (const asset of shell) {
     assert.ok(source.includes(`"${asset}"`), `${asset}이 셸 목록에 없다`);
   }
-  assert.ok(/CACHE_NAME = "econ-digest-v12"/.test(source), "캐시 버전을 올리지 않았다");
+  assert.ok(/CACHE_NAME = "jipgye-v13"/.test(source), "캐시 버전을 올리지 않았다");
 });
 
 test("페이지 코드는 브라우저 캐시를 건너뛰고 받는다", async () => {

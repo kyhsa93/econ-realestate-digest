@@ -8,19 +8,19 @@
 <link rel="icon" href="./icons/icon-192.png">
 <link rel="apple-touch-icon" href="./icons/icon-192.png">
 <meta name="google-adsense-account" content="ca-pub-1195159445218373">
-<title>소개와 연락처 - 경제·부동산 데일리 다이제스트</title>
+<title>소개와 연락처 · 집계</title>
 <meta name="description" content="서울 아파트 실거래와 예적금·대출 금리를 매일 모아 보여주는 사이트입니다. 누가 무엇으로 어떻게 만들었는지, 무엇을 하지 않는지, 틀린 것을 찾았을 때 어디로 알리면 되는지 적어 두었습니다.">
 <meta name="site-group" content="digest">
 <link rel="canonical" href="https://kyhsa93.github.io/econ-realestate-digest/about.html">
 <meta property="og:type" content="article">
-<meta property="og:site_name" content="경제·부동산 데일리 다이제스트">
+<meta property="og:site_name" content="집계">
 <meta property="og:url" content="https://kyhsa93.github.io/econ-realestate-digest/about.html">
-<meta property="og:title" content="소개와 연락처 - 경제·부동산 데일리 다이제스트">
+<meta property="og:title" content="소개와 연락처 · 집계">
 <meta property="og:description" content="서울 아파트 실거래와 예적금·대출 금리를 매일 모아 보여주는 사이트입니다. 누가 무엇으로 어떻게 만들었는지, 무엇을 하지 않는지, 틀린 것을 찾았을 때 어디로 알리면 되는지 적어 두었습니다.">
 <meta property="og:image" content="https://kyhsa93.github.io/econ-realestate-digest/icons/icon-512.png">
 <meta property="og:locale" content="ko_KR">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="소개와 연락처 - 경제·부동산 데일리 다이제스트">
+<meta name="twitter:title" content="소개와 연락처 · 집계">
 <meta name="twitter:description" content="서울 아파트 실거래와 예적금·대출 금리를 매일 모아 보여주는 사이트입니다. 누가 무엇으로 어떻게 만들었는지, 무엇을 하지 않는지, 틀린 것을 찾았을 때 어디로 알리면 되는지 적어 두었습니다.">
 <meta name="twitter:image" content="https://kyhsa93.github.io/econ-realestate-digest/icons/icon-512.png">
 <link rel="stylesheet" href="./style.css">
@@ -30,6 +30,7 @@
 <main id="main">
   <header>
     <div>
+      <a class="brand" id="site-brand" href="./index.html" data-brand-en="Jipgye">집계</a>
       <h1 id="page-title">소개와 연락처</h1>
       <div class="updated" id="updated">무엇을, 누가, 어떻게</div>
     </div>
@@ -40,27 +41,30 @@
   </header>
 
   <nav class="page-nav" aria-label="섹션">
-    <a href="./index.html" id="nav-digest">데일리 다이제스트</a>
-    <a href="./news.html" id="nav-news">뉴스</a>
+    <a href="./index.html" id="nav-digest">오늘</a>
     <a href="./realestate.html" id="nav-realestate">아파트 시세</a>
     <a href="./rates.html" id="nav-rates">금리 비교</a>
+    <a href="./news.html" id="nav-news">뉴스</a>
   </nav>
 
   <section class="method-body">
   <div data-lang="ko" class="on">
-    <p class="lead">서울 아파트 실거래와 예적금·대출 금리를 매일 모아 한 화면에 보여주는 사이트입니다. 정부가 공개한 원본만 쓰고, 광고비를 받고 무언가를 올리지 않습니다.</p>
+    <p class="lead">계약을 앞둔 사람이 숫자를 확인하는 곳입니다. 서울 아파트 실거래와 예적금·대출 금리를 매일 모아, 전세와 월세 중 어느 쪽이 싼지·지금 갱신하는 것이 나가서 새로 구하는 것보다 싼지까지 계산해 둡니다. 정부가 공개한 원본만 쓰고, 광고비를 받고 무언가를 올리지 않습니다.</p>
 
     <h2>왜 만들었나</h2>
     <p>부동산 시세를 확인하려면 국토교통부 사이트에서 지역과 월을 골라 조회하고, 금리는 금융감독원 비교공시에서 따로 찾아야 합니다. 매주 같은 일을 반복하다가, 그 과정을 자동으로 돌려 한 페이지에 놓으면 될 일이라고 생각해서 만들었습니다.</p>
+    <p>모아 놓고 보니 정작 답이 없는 질문이 남았습니다. 시세표는 "얼마에 팔렸나"에는 답하지만 "전세로 갈까 월세로 갈까", "재계약을 할까 나갈까"에는 답하지 않습니다. 그 둘은 실거래 하나로는 못 내고 전월세전환율·전세자금대출 금리·예금 금리를 같이 물려야 나오는데, 그 값들이 마침 이 사이트가 매일 받는 것이었습니다. 그래서 사용자에게 금리를 입력하라고 하는 대신 우리가 물려서 계산합니다.</p>
     <p>만들다 보니 원본을 그대로 옮기면 틀린 그림이 나오는 대목이 여럿 있었습니다. 신고 기한 30일 때문에 최근 몇 주가 늘 꺼져 보이는 것, 자치구 하나의 한 주 표본으로는 평균이 출렁이는 것, 추려 놓은 목록 위에 조건을 얹으면 건수가 실제 건수가 아니게 되는 것. 그것을 어떻게 처리했는지는 <a href="./method.html">숫자를 만드는 방법</a>에 전부 적어 두었습니다.</p>
 
     <h2>무엇이 있나</h2>
     <ul>
-      <li><strong>데일리 다이제스트</strong> — 그날의 시장 지표와 부동산 시세, 경제 뉴스를 한 화면에.</li>
-      <li><strong>아파트 시세</strong> — 서울 25개 자치구의 매매·전세·월세 평당가와 84㎡ 환산가, 전주 대비 증감과 여섯 달 추이.</li>
-      <li><strong>실거래 검색</strong> — 신고된 거래를 지역·금액·면적·연식·단지명으로 찾기.</li>
+      <li><strong>전세 vs 월세</strong> — 자치구·면적대별 전월세전환율에 실제 대출·예금 금리를 물려, 가진 돈으로 양쪽 월 실부담을 잰다.</li>
+      <li><strong>아파트 시세</strong> — 서울 25개 자치구의 매매·전세·월세 평당가와 84㎡ 환산가, 전주 대비 증감과 여섯 달 추이. 갱신 계약이 시세보다 싼지도 함께.</li>
+      <li><strong>실거래 검색</strong> — 신고된 거래를 지역·금액·면적·연식·단지명으로 찾고, 단지를 고르면 평형별 전세가율까지.</li>
+      <li><strong>해제·등기</strong> — 신고한 뒤 해제된 거래와 등기가 끝나지 않은 거래. 계약 상대를 재는 자료다.</li>
       <li><strong>예산대별 목록</strong> — 3억대부터 20억대까지, 그 예산으로 실제 거래된 아파트.</li>
       <li><strong>금리 비교</strong> — 정기예금·적금·주택담보대출·전세자금대출 금리와 세후 이자.</li>
+      <li><strong>오늘</strong> — 그날 신고된 시세와 기준금리·환율, 그리고 경제·부동산 뉴스.</li>
     </ul>
 
     <h2>어떻게 굴러가나</h2>
@@ -74,22 +78,25 @@
     <p>숫자가 틀렸거나, 계산이 이상하거나, 있으면 좋겠는 화면이 있으면 알려 주세요. 소스와 이슈 게시판은 <a href="https://github.com/kyhsa93/econ-realestate-digest" target="_blank" rel="noopener">GitHub 저장소</a>에 열려 있습니다. 국토부 응답 원본을 여섯 달치 보관하고 있어서, 특정 시점의 숫자를 다시 만들어 확인해 드릴 수 있습니다.</p>
 
     <h2>알아 두실 것</h2>
-    <p>여기 있는 것은 이미 신고된 거래를 집계한 자료입니다. 투자 권유가 아니고, 앞으로의 가격을 예측하지 않습니다. 실제 계약 전에는 반드시 원 출처와 현장을 확인하시기 바랍니다.</p>
+    <p>여기 있는 것은 이미 신고된 거래를 집계한 자료입니다. 이름이 '집계'인 것도 그래서입니다 — 세는 데까지가 이 사이트가 하는 일입니다. 투자 권유가 아니고, 앞으로의 가격을 예측하지 않습니다. 실제 계약 전에는 반드시 원 출처와 현장을 확인하시기 바랍니다.</p>
   </div>
   <div data-lang="en">
-    <p class="lead">A site that collects Seoul apartment transactions and Korean deposit and loan rates every day and puts them on one screen. It uses only data the government publishes, and takes no money to list anything.</p>
+    <p class="lead">A place to check the numbers before you sign. It collects Seoul apartment transactions and Korean deposit and loan rates every day, and works out the parts a price table cannot answer on its own — whether jeonse or monthly rent costs less, and whether renewing beats moving out and signing anew. It uses only data the government publishes, and takes no money to list anything.</p>
 
     <h2>Why it exists</h2>
     <p>Checking apartment prices means picking a district and a month on the ministry's site; checking rates means a separate trip to the Financial Supervisory Service comparison service. After repeating that every week it seemed clear the whole thing could run itself and land on one page.</p>
+    <p>Once it was all in one place the questions that still had no answer became obvious. A price table says what sold and for how much; it does not say whether to take jeonse or monthly rent, or whether to renew or move. Neither follows from transactions alone — you need the jeonse-to-rent conversion rate, the jeonse loan rate and the deposit rate held together, and those happened to be exactly what this site already collects every day. So instead of asking you to type in a rate, it does the joining.</p>
     <p>Building it turned up several places where copying the source verbatim produces a wrong picture: the 30-day reporting window that makes recent weeks always sag, the single district whose weekly average swings on one sale, the filter over a trimmed list that returns a count which is not the real count. How each of those is handled is written down in <a href="./method.html">how these numbers are made</a>.</p>
 
     <h2>What is here</h2>
     <ul>
-      <li><strong>Daily digest</strong> — the day's market indicators, apartment prices and economic news on one screen.</li>
-      <li><strong>Apartment prices</strong> — sale, jeonse and monthly rent per pyeong for all 25 Seoul districts, with the 84m² equivalent, week-on-week change and a six-month trend.</li>
-      <li><strong>Transaction search</strong> — reported transactions by area, price, size, building age or complex name.</li>
+      <li><strong>Jeonse vs monthly rent</strong> — the measured conversion rate for your district and unit size, joined to real loan and deposit rates, so both options are priced as one monthly figure.</li>
+      <li><strong>Apartment prices</strong> — sale, jeonse and monthly rent per pyeong for all 25 Seoul districts, with the 84m² equivalent, week-on-week change and a six-month trend — plus whether renewals are signing below the going rate.</li>
+      <li><strong>Transaction search</strong> — reported transactions by area, price, size, building age or complex name, with per-unit-type jeonse ratios once you pick a complex.</li>
+      <li><strong>Cancellations and registration</strong> — deals reported and then withdrawn, and deals still not registered. This is what the other side of a contract looks like.</li>
       <li><strong>By budget</strong> — what actually traded, from ₩300M up to ₩2B.</li>
       <li><strong>Rates</strong> — term deposits, instalment savings, mortgages and jeonse loans, with after-tax interest.</li>
+      <li><strong>Today</strong> — prices reported that day, the policy rate and FX, and the day's economic and property news.</li>
     </ul>
 
     <h2>How it runs</h2>
@@ -141,7 +148,7 @@
 
   const NAV = {
     ko: {
-      digest: "데일리 다이제스트",
+      digest: "오늘",
       news: "뉴스",
       realestate: "아파트 시세",
       rates: "금리 비교",
@@ -153,7 +160,7 @@
       source: "출처: 국토교통부 아파트 매매·전월세 실거래가 공개시스템, 금융감독원 금융상품통합비교공시, 한국은행.",
     },
     en: {
-      digest: "Daily digest",
+      digest: "Today",
       news: "News",
       realestate: "Apartment prices",
       rates: "Rates",
