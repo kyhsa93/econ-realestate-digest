@@ -1,13 +1,13 @@
 // 가로로 넘치는 내비게이션을 다룬다. 예순두 장이 같은 파일을 쓴다.
 //
-// 1층(page-nav)과 2층(sub-nav)은 좁은 화면에서 가로로 잘린다. 잘렸다는 신호가
+// 1층(page-nav)·2층(sub-nav)·질문 입구(question-nav)는 좁은 화면에서 가로로 잘린다. 잘렸다는 신호가
 // 없으면 사용자는 보이는 데까지가 전부인 줄 안다 - 2층 오른쪽 끝에 있는
 // '거래내역 검색'과 '전세 vs 월세'가 그래서 아무도 안 누르는 자리에 있었다.
 //
 // 이 파일이 없어도 페이지는 그대로 돈다. 페이드가 안 보이고 현재 항목이
 // 스크롤 밖에 남을 뿐이다.
 (function () {
-  const navs = document.querySelectorAll(".page-nav, .sub-nav");
+  const navs = document.querySelectorAll(".page-nav, .sub-nav, .question-nav");
   if (!navs.length) return;
 
   // 양 끝 페이드는 넘칠 때만, 그리고 그 방향에 남은 것이 있을 때만 켠다.

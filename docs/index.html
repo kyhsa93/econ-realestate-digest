@@ -68,6 +68,15 @@
     <a href="./method.html" id="method-callout-link">숫자를 만드는 방법 →</a>
   </aside>
 
+  <nav class="question-nav" id="question-nav" aria-label="무엇을 알고 싶으세요">
+    <a id="q-realestate" href="./realestate.html">우리 동네는 얼마에 팔렸나</a>
+    <a id="q-conversion" href="./jeonse-vs-wolse.html">전세가 쌀까, 월세가 쌀까</a>
+    <a id="q-budget" href="./budget-10eok.html">10억이면 서울 어디까지</a>
+    <a id="q-cancelled" href="./cancelled-deals.html">계약이 취소되는 일이 흔한가</a>
+    <a id="q-rates" href="./deposit-rates.html">예금에 넣으면 세후로 얼마</a>
+    <a id="q-search" href="./deal-search.html">조건을 걸어 실거래 찾기</a>
+  </nav>
+
   <section id="market-section">
     <h2 id="market-heading">자산 시장 지표</h2>
     <div class="table-wrap">
@@ -269,6 +278,12 @@
       methodCalloutText:
         "여기 숫자는 매물 호가가 아니라 국토교통부에 신고된 실거래입니다. 신고 기한이 30일이라 최근 주는 늘 덜 차 있고, 표본이 모자란 자치구는 평균을 내지 않습니다.",
       methodCalloutLink: "숫자를 만드는 방법 →",
+      q_realestate: "우리 동네는 얼마에 팔렸나",
+      q_conversion: "전세가 쌀까, 월세가 쌀까",
+      q_budget: "10억이면 서울 어디까지",
+      q_cancelled: "계약이 취소되는 일이 흔한가",
+      q_rates: "예금에 넣으면 세후로 얼마",
+      q_search: "조건을 걸어 실거래 찾기",
       footerAbout: "소개",
     },
     en: {
@@ -367,6 +382,12 @@
       methodCalloutText:
         "These are transactions reported to the Ministry of Land, not asking prices. Reporting runs on a 30-day window, so the most recent weeks are always still filling in, and districts with too few transactions are left blank rather than averaged.",
       methodCalloutLink: "How these numbers are made →",
+      q_realestate: "What did homes near me sell for?",
+      q_conversion: "Is jeonse or monthly rent cheaper?",
+      q_budget: "What does ₩1B buy in Seoul?",
+      q_cancelled: "How often do deals fall through?",
+      q_rates: "What does a deposit pay after tax?",
+      q_search: "Search transactions by condition",
       footerAbout: "About",
     },
   };
@@ -1553,6 +1574,12 @@
     document.getElementById("footer-method").textContent = t("footerMethod");
     document.getElementById("method-callout-text").textContent = t("methodCalloutText");
     document.getElementById("method-callout-link").textContent = t("methodCalloutLink");
+    document.getElementById("q-realestate").textContent = t("q_realestate");
+    document.getElementById("q-conversion").textContent = t("q_conversion");
+    document.getElementById("q-budget").textContent = t("q_budget");
+    document.getElementById("q-cancelled").textContent = t("q_cancelled");
+    document.getElementById("q-rates").textContent = t("q_rates");
+    document.getElementById("q-search").textContent = t("q_search");
     document.getElementById("footer-about").textContent = t("footerAbout");
     const missing = isArchiveView
       ? []

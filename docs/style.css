@@ -1947,6 +1947,67 @@ summary:focus-visible,
   text-decoration: underline;
 }
 
+/* 무엇을 알고 싶은지로 들어가는 입구.
+ *
+ * 1층 탭 넷은 우리가 데이터를 어디서 받는지의 목록이다 - 다이제스트·뉴스·시세·금리.
+ * 사용자의 질문은 그렇게 생기지 않았다. 이미 계산해 둔 답이 여럿인데(전환율, 갱신
+ * 격차, 해제율, 세후 이자) 그게 어느 페이지에 있는지 알 방법이 없었다.
+ *
+ * 1층과 헷갈리지 않게 채우지도 테두리를 두르지도 않는다 - 물음표가 달린 글줄이다. */
+.question-nav {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin: -8px 0 20px;
+  padding-bottom: 2px;
+  scrollbar-width: none;
+}
+
+.question-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.question-nav a {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  padding: 6px 14px;
+  border: 1px dashed var(--border);
+  border-radius: 999px;
+  background: var(--bg);
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.question-nav a::after {
+  content: " ?";
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.question-nav a:hover {
+  border-style: solid;
+  border-color: var(--accent);
+  color: var(--fg);
+}
+
+.question-nav.scroll-end:not(.scroll-start) {
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 36px), transparent);
+  mask-image: linear-gradient(to right, #000 calc(100% - 36px), transparent);
+}
+
+.question-nav.scroll-start:not(.scroll-end) {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 36px);
+  mask-image: linear-gradient(to right, transparent, #000 36px);
+}
+
+.question-nav.scroll-start.scroll-end {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 36px, #000 calc(100% - 36px), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 36px, #000 calc(100% - 36px), transparent);
+}
+
 .history-card svg[role="img"] { height: auto; touch-action: none; margin-top: 0; }
 .content-notice.page-notice { margin: -12px 0 20px; }
 
