@@ -68,6 +68,7 @@ const INDEXABLE = [
   "district-yangcheon.html",
   "district-yeongdeungpo.html",
   "district-yongsan.html",
+  "floor-gap.html",
   "index.html",
   "jeonse-vs-wolse.html",
   "method.html",

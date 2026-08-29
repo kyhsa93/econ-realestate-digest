@@ -107,6 +107,13 @@
     <p>자치구가 이 격차를 말하려면 맞물린 계약이 60건은 있어야 합니다. 서울 표본을 표본 크기별로 다시 뽑아 보면(부트스트랩 400회), 서울과 똑같은 동네인데도 우연히 나올 수 있는 범위가 60건에서 &minus;12.5%&thinsp;~&thinsp;&minus;5.0%입니다. 그보다 적으면 폭이 9%p를 넘어, 아무 차이가 없는 구가 &ldquo;유독 싸다&rdquo;로도 &ldquo;차이가 없다&rdquo;로도 찍힙니다. 말하는 문턱도 그 범위 바깥에 두었습니다.</p>
     <p>두 숫자 모두 신고 기한이 지나 닫힌 달만 셉니다. 아직 기한이 남은 달은 표본이 늘 얇고, 얇은 표본이 비율을 흔듭니다. 그리고 다른 관찰과 같이 문턱을 넘은 구만 말합니다 &mdash; 서울 언저리에 있는 구는 이 문장을 아예 갖지 않습니다.</p>
 
+    <h2>층은 같은 칸 안에서만 견줍니다</h2>
+    <p>1층이 얼마나 싼지는 자치구 평균으로는 나오지 않습니다. 그 평균에는 낡은 단지와 새 단지가, 역세권과 아닌 곳이 함께 들어 있어서 층 말고 다른 것이 먼저 값을 가릅니다. 그래서 견주는 자리를 <strong>같은 자치구, 같은 단지, 같은 전용면적</strong>으로 좁힙니다. 한 칸 안에서는 층 말고 거의 모든 것이 같습니다.</p>
+    <p>1층만 셉니다. 2층도 저층으로 값이 깎이는 자리라, 대조군(3층 이상)에 넣으면 1층 할인이 실제보다 작아 보입니다. 한 칸에 3층 이상 거래가 세 건은 있어야 견줍니다 &mdash; 둘로 낸 중앙값은 그냥 두 값의 평균입니다. 한쪽이 50%를 넘게 벗어난 칸은 같은 이름의 다른 단지가 섞였거나 신고가 잘못 들어온 것으로 보고 버립니다.</p>
+    <p>여섯 달을 한 칸에 담으므로 <strong>시점 차이는 통제되지 않습니다.</strong> 값이 오르는 국면에 1층 거래가 우연히 앞쪽에 몰리면 할인이 부풀 수 있어서, 만들 때 그것부터 확인했습니다 &mdash; 저층 거래의 중앙 계약월과 나머지의 중앙 계약월 차이가 칸별로 중앙값 0.00개월이었습니다. 몰려 있지 않습니다.</p>
+    <p>최상층은 그 칸에서 <strong>관측된</strong> 가장 높은 층으로 봅니다. 건물이 몇 층인지는 실거래 자료에 없습니다. 그래서 거래가 적은 칸에서는 실제 최상층이 아닌 층이 최상층으로 잡힐 수 있고, 그만큼 이 값은 1층 값보다 무딥니다. 다섯 층을 안 넘는 칸은 세지 않습니다.</p>
+    <p>자치구 값은 맞물린 칸이 20개는 있어야 냅니다. 그리고 <strong>값을 낸다고 해서 서울과 다르다고 말하지는 않습니다.</strong> 서울 칸을 그 구의 칸 수만큼 400번 넘게 다시 뽑아 보면 서울과 똑같은 구에서도 중앙값이 얼마까지 흔들리는지가 나오는데, 그 범위 바깥일 때만 다르다고 적습니다. 지금 스물다섯 구 가운데 넷입니다. 나머지는 표에 값이 적혀 있어도 서울과 갈라 볼 수 없다는 뜻이고, 표를 순위로 읽으면 안 되는 이유가 그것입니다.</p>
+
     <h2>출처와 갱신</h2>
     <ul>
       <li><strong>아파트 실거래</strong> — 국토교통부 아파트 매매·전월세 실거래가 공개시스템. 하루 1회 갱신. 국토부 응답 원본을 스물네 달치 그대로 보관하고, 실거래 관련 파일은 전부 그 원본에서 다시 만듭니다. 화면이 세는 것은 그 가운데 최근 여섯 달입니다.</li>
@@ -179,6 +186,13 @@
     <p>So this figure <strong>leans toward large complexes with active turnover.</strong> A building that files a handful of leases a year has nothing to match against and is never counted.</p>
     <p>A district needs 60 matched leases before it says anything about this gap. Resampling the Seoul figures by sample size (400 bootstrap draws) shows that a district identical to Seoul could still land anywhere from &minus;12.5% to &minus;5.0% at 60. Below that the band exceeds 9 percentage points, wide enough for an ordinary district to read as either unusually cheap or no different at all. The thresholds for speaking sit outside that band.</p>
     <p>Both figures count only months closed past the filing deadline; months still open are always thin, and thin samples swing percentages. As with the other observations, only districts past a threshold get a sentence &mdash; those near the Seoul figure get none.</p>
+
+    <h2>Floors are compared only inside the same cell</h2>
+    <p>A district average cannot say what a first floor costs. That average mixes old buildings with new ones and stations with none, and those decide the price before the floor does. So the comparison narrows to <strong>one district, one complex, one exclusive floor area</strong>. Inside such a cell almost nothing differs but the floor.</p>
+    <p>Only the first floor is counted. The second is also discounted as a low floor, so putting it in the comparison group would understate the first-floor gap. A cell needs at least three deals on the third floor or above &mdash; a median of two is the average of two numbers. Cells more than 50% apart are treated as a mis-joined name or a bad filing and dropped.</p>
+    <p>Six months sit in one cell, so <strong>timing is not controlled.</strong> In a rising market, first-floor deals landing early would inflate the discount, so that was the first thing checked: the median gap between the low-floor deals' median contract month and the rest was 0.00 months across cells. They are not clustered.</p>
+    <p>The top floor is the highest floor <strong>observed</strong> in that cell; building height is not in the filings. In thin cells that may not be the real top floor, which makes this figure blunter than the first-floor one. Cells topping out below five floors are skipped.</p>
+    <p>A district figure needs 20 matched cells. And <strong>having a figure is not the same as differing from Seoul.</strong> Resampling the Seoul pool at that district's cell count, several hundred times, shows how far the median can wander for a district identical to Seoul; only a figure outside that range is called different. Four of the 25 districts are, at present. For the rest, a number in the table means it cannot be told apart from Seoul — which is why the table is not a ranking.</p>
 
     <h2>Sources and update cadence</h2>
     <ul>

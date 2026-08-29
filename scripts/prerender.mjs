@@ -28,6 +28,7 @@ const REALESTATE_PATH = path.join(root, "docs/realestate.html");
 const CONVERSION_PATH = path.join(root, "docs/jeonse-vs-wolse.html");
 const CANCELLATION_PATH = path.join(root, "docs/cancelled-deals.html");
 const RENEWAL_PATH = path.join(root, "docs/renewal-vs-new.html");
+const FLOOR_PATH = path.join(root, "docs/floor-gap.html");
 const DATA_DIR = path.join(root, "docs/data");
 
 export const MIN_SAMPLE = 5;
@@ -868,6 +869,38 @@ export function renewalDistrictLinksHtml(renewal) {
   return links || null;
 }
 
+/** 층 격차 화면. 문턱과 문장은 빌더가 이미 정했으므로 여기서는 표만 만든다. */
+export function floorDistrictsHtml(floor) {
+  const rows = floor?.districts ?? [];
+  if (!rows.length) return null;
+
+  // 갈라 볼 수 없는 구도 빼지 않는다 - 화면 쪽 renderDistrictTable과 같은 규칙이다.
+  const body = rows
+    .map((row) => {
+      const verdict = row.distinct
+        ? "다르다"
+        : `<span class="low-sample">${row.band ? "갈라 볼 수 없음" : "칸이 모자람"}</span>`;
+      return (
+        `<tr><td>${escapeHtml(row.district)}</td><td>${row.median}%</td>` +
+        `<td>${row.cells.toLocaleString("ko-KR")}</td><td>${verdict}</td></tr>`
+      );
+    })
+    .join("");
+
+  return (
+    `<thead><tr><th>자치구</th><th>1층 − 3층 이상</th><th>맞물린 칸</th>` +
+    `<th>서울과 다른가</th></tr></thead><tbody>${body}</tbody>`
+  );
+}
+
+export function floorDistrictLinksHtml(floor) {
+  const slugs = floor?.slugs ?? {};
+  const links = Object.entries(slugs)
+    .map(([name, slug]) => `<a href="./district-${escapeHtml(slug)}.html">${escapeHtml(name)}</a>`)
+    .join("");
+  return links || null;
+}
+
 async function readJson(name) {
   try {
     return JSON.parse(await readFile(path.join(DATA_DIR, `${name}.json`), "utf8"));
@@ -892,6 +925,7 @@ async function main() {
   const conversion = await readJson("conversion");
   const cancellation = await readJson("cancellation");
   const renewal = await readJson("renewal-facts");
+  const floor = await readJson("floor-gap");
 
   for (const [file, path_, fileBlocks] of [
     ["docs/index.html", INDEX_PATH, blocks],
@@ -934,6 +968,17 @@ async function main() {
         renewalCapLead: renewalCapLeadHtml(renewal),
         renewalDistricts: renewalDistrictsHtml(renewal),
         renewalDistrictLinks: renewalDistrictLinksHtml(renewal),
+      },
+    ],
+    [
+      "docs/floor-gap.html",
+      FLOOR_PATH,
+      {
+        floorLead: floor?.lead?.ko ? escapeHtml(floor.lead.ko) : null,
+        floorTopLead: floor?.topLead?.ko ? escapeHtml(floor.topLead.ko) : null,
+        floorDistrictLead: floor?.districtLead?.ko ? escapeHtml(floor.districtLead.ko) : null,
+        floorDistricts: floorDistrictsHtml(floor),
+        floorDistrictLinks: floorDistrictLinksHtml(floor),
       },
     ],
     [

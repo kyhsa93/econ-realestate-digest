@@ -2,11 +2,11 @@ import { loadPage } from "./digest-page.mjs";
 
 const SUB_NAV = ["all", "sale", "jeonse", "wolse", "search", "conversion", "renewal", "floor", "cancelled"];
 
-export async function loadRenewalPage({ renewal, ...rest } = {}) {
+export async function loadFloorPage({ floor, ...rest } = {}) {
   const page = await loadPage({
-    file: "renewal-vs-new.html",
-    // fetch 스텁은 파일 이름에서 키를 뽑는다 - renewal-facts.json이라 키도 그대로다.
-    data: { "renewal-facts": renewal },
+    file: "floor-gap.html",
+    // fetch 스텁은 파일 이름에서 키를 뽑는다 - floor-gap.json이라 키도 그대로다.
+    data: { "floor-gap": floor },
     subNav: SUB_NAV,
     ...rest,
   });
@@ -14,10 +14,9 @@ export async function loadRenewalPage({ renewal, ...rest } = {}) {
   return {
     ...page,
     leadText: () => page.text("lead"),
-    leadHtml: () => page.html("lead"),
-    capLeadText: () => page.text("cap-lead"),
+    topLeadText: () => page.text("top-lead"),
+    districtLeadText: () => page.text("district-lead"),
     districtTable: () => page.html("district-table"),
-    districtLinks: () => page.html("district-links"),
     districtNote: () => page.text("district-note"),
     toggleLang: () => page.click("lang-toggle"),
   };

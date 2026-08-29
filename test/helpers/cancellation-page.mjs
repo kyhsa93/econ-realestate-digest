@@ -1,6 +1,6 @@
 import { loadPage } from "./digest-page.mjs";
 
-const SUB_NAV = ["all", "sale", "jeonse", "wolse", "search", "conversion", "renewal", "cancelled"];
+const SUB_NAV = ["all", "sale", "jeonse", "wolse", "search", "conversion", "renewal", "floor", "cancelled"];
 
 export async function loadCancellationPage({ cancellation, ...rest } = {}) {
   const page = await loadPage({ file: "cancelled-deals.html", data: { cancellation }, subNav: SUB_NAV, ...rest });

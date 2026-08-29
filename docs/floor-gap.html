@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#253e81">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<meta name="google-adsense-account" content="ca-pub-1195159445218373">
+<title>아파트 1층은 얼마나 싼가 - 서울 실거래로 잰 층별 가격 차이</title>
+<meta name="description" content="같은 단지 같은 평형에서 1층이 3층 이상보다 얼마나 싸게 거래되는지를 서울 실거래로 셉니다. 매매와 전세를 따로 재고, 최상층에 웃돈이 붙는지도 함께 봅니다.">
+<meta name="site-group" content="digest">
+<link rel="canonical" href="https://kyhsa93.github.io/jipgye/floor-gap.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="집계">
+<meta property="og:url" content="https://kyhsa93.github.io/jipgye/floor-gap.html">
+<meta property="og:title" content="아파트 1층은 얼마나 싼가 - 서울 실거래로 잰 층별 가격 차이">
+<meta property="og:description" content="같은 단지 같은 평형에서 1층이 3층 이상보다 얼마나 싸게 거래되는지를 서울 실거래로 셉니다.">
+<meta property="og:image" content="https://kyhsa93.github.io/jipgye/icons/icon-512.png">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="아파트 1층은 얼마나 싼가 - 서울 실거래로 잰 층별 가격 차이">
+<meta name="twitter:description" content="같은 단지 같은 평형에서 1층이 얼마나 싸게 거래되는지를 실거래로 셉니다.">
+<meta name="twitter:image" content="https://kyhsa93.github.io/jipgye/icons/icon-512.png">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<a class="skip-link" href="#main" data-skip-en="Skip to content">본문 바로가기</a>
+<main id="main">
+  <header>
+    <div>
+      <a class="brand" id="site-brand" href="./index.html" data-brand-en="Jipgye">집계</a>
+      <h1 id="page-title">1층은 얼마나 싼가</h1>
+      <div class="updated" id="updated">불러오는 중...</div>
+    </div>
+    <div class="header-actions">
+      <button class="icon-toggle" type="button" id="theme-toggle" aria-label="테마 전환"><span aria-hidden="true">🌓</span></button>
+      <button class="icon-toggle" type="button" id="lang-toggle" aria-label="Switch language"><span aria-hidden="true">🌐</span></button>
+    </div>
+  </header>
+
+  <nav class="page-nav" aria-label="섹션">
+    <a href="./index.html" id="nav-digest">오늘</a>
+    <a href="./realestate.html" id="nav-realestate" class="active">아파트 시세</a>
+    <a href="./rates.html" id="nav-rates">금리 비교</a>
+    <a href="./news.html" id="nav-news">뉴스</a>
+  </nav>
+
+  <nav class="sub-nav" aria-label="거래 유형">
+    <a href="./realestate.html" data-re-page="all">전체</a>
+    <a href="./apartment-sale.html" data-re-page="sale">매매</a>
+    <a href="./apartment-jeonse.html" data-re-page="jeonse">전세</a>
+    <a href="./apartment-rent.html" data-re-page="wolse">월세</a>
+    <a href="./deal-search.html" data-re-page="search">거래내역 검색</a>
+    <a href="./jeonse-vs-wolse.html" data-re-page="conversion">전세 vs 월세</a>
+    <a href="./renewal-vs-new.html" data-re-page="renewal">재계약</a>
+    <a href="./floor-gap.html" data-re-page="floor" aria-current="page">층</a>
+    <a href="./cancelled-deals.html" data-re-page="cancelled">해제·등기</a>
+  </nav>
+
+  <aside class="method-callout">
+    <p id="method-callout-text">견주는 자리는 같은 단지, 같은 전용면적입니다. 그렇게 묶으면 단지가 낡았는지 역에서 먼지가 통제되고, 남는 차이가 층입니다.</p>
+    <a href="./method.html" id="method-callout-link">숫자를 만드는 방법 →</a>
+  </aside>
+
+  <section id="lead-section">
+    <h2 id="lead-heading">1층과 3층 이상</h2>
+    <p class="lead" id="lead"><!--prerender:floorLead-->같은 단지 같은 평형에서 1층은 3층 이상보다 7.1% 싸게 팔립니다. 맞물린 826칸의 중앙값이고, 그 가운데 89.6%에서 1층이 더 쌌습니다. 전세는 같은 1층을 4.8%만 깎습니다 — 1층의 불리함은 사는 것보다 되파는 데 더 크게 얹힙니다.<!--/prerender:floorLead--></p>
+    <div class="content-notice" id="lead-note"></div>
+  </section>
+
+  <section id="top-section">
+    <h2 id="top-heading">최상층에는 웃돈이 붙나</h2>
+    <p class="lead" id="top-lead"><!--prerender:floorTopLead-->최상층에는 웃돈이 붙지 않습니다. 같은 평형의 아래층들과 견주면 최상층은 중앙값 +0.5% 차이입니다. 맞물린 2,366칸이고, 그 가운데 41.9%는 오히려 더 쌌습니다. 최상층에 값어치가 있든 없든 신고된 가격에는 그것이 더 비싼 값으로 나타나지 않습니다 — 1층은 나타나는데 말입니다.<!--/prerender:floorTopLead--></p>
+    <div class="content-notice" id="top-note"></div>
+  </section>
+
+  <section id="district-section">
+    <h2 id="district-heading">자치구별</h2>
+    <p class="lead" id="district-lead"><!--prerender:floorDistrictLead-->자치구 25곳 가운데 4곳만 서울(7.1%)과 다르다고 말할 수 있습니다 — 강서구 10.1%, 노원구 7.9%는 더 크게 깎이고, 동작구 4.6%, 송파구 4.3%는 덜 깎입니다. 나머지는 서울과 갈라 볼 수 없습니다. 이 화면이 스물다섯 줄을 순위로 적지 않는 것은 그래서입니다.<!--/prerender:floorDistrictLead--></p>
+    <div class="table-scroll">
+      <table class="rate-table" id="district-table"><!--prerender:floorDistricts--><thead><tr><th>자치구</th><th>1층 − 3층 이상</th><th>맞물린 칸</th><th>서울과 다른가</th></tr></thead><tbody><tr><td>강서구</td><td>-10.1%</td><td>66</td><td>다르다</td></tr><tr><td>종로구</td><td>-9.7%</td><td>6</td><td><span class="low-sample">칸이 모자람</span></td></tr><tr><td>마포구</td><td>-9.1%</td><td>11</td><td><span class="low-sample">칸이 모자람</span></td></tr><tr><td>노원구</td><td>-7.9%</td><td>148</td><td>다르다</td></tr><tr><td>서대문구</td><td>-7.9%</td><td>36</td><td><span class="low-sample">갈라 볼 수 없음</span></td></tr><tr><td>양천구</td><td>-7.9%</td><td>30</td><td><span class="low-sample">갈라 볼 수 없음</span></td></tr><tr><td>강북구</td><td>-7.7%</td><td>26</td><td><span class="low-sample">갈라 볼 수 없음</span></td></tr><tr><td>도봉구</td><td>-7.5%</td><td>50</td><td><span class="low-sample">갈라 볼 수 없음</span></td></tr><tr><td>관악구</td><td>-7.4%</td><td>25</td><td><span class="low-sample">갈라 볼 수 없음</span></td></tr><tr><td>구로구</td><td>-7.3%</td><td>71</td><td><span class="low-sample">갈라 볼 수 없음</span></td></tr><tr><td>영등포구</td><td>-7.1%</td><td>24</td><td><span class="low-sample">갈라 볼 수 없음</span></td></tr><tr><td>중구</td><td>-7.1%</td><td>9</td><td><span class="low-sample">칸이 모자람</span></td></tr><tr><td>용산구</td><td>-6.7%</td><td>5</td><td><span class="low-sample">칸이 모자람</span></td></tr><tr><td>성동구</td><td>-6.6%</td><td>20</td><td><span class="low-sample">갈라 볼 수 없음</span></td></tr><tr><td>강동구</td><td>-6.4%</td><td>19</td><td><span class="low-sample">칸이 모자람</span></td></tr><tr><td>중랑구</td><td>-6.3%</td><td>36</td><td><span class="low-sample">갈라 볼 수 없음</span></td></tr><tr><td>금천구</td><td>-5.9%</td><td>18</td><td><span class="low-sample">칸이 모자람</span></td></tr><tr><td>성북구</td><td>-5.9%</td><td>59</td><td><span class="low-sample">갈라 볼 수 없음</span></td></tr><tr><td>동대문구</td><td>-5.6%</td><td>29</td><td><span class="low-sample">갈라 볼 수 없음</span></td></tr><tr><td>은평구</td><td>-5.1%</td><td>39</td><td><span class="low-sample">갈라 볼 수 없음</span></td></tr><tr><td>강남구</td><td>-4.8%</td><td>17</td><td><span class="low-sample">칸이 모자람</span></td></tr><tr><td>동작구</td><td>-4.6%</td><td>28</td><td>다르다</td></tr><tr><td>송파구</td><td>-4.3%</td><td>37</td><td>다르다</td></tr><tr><td>서초구</td><td>-3.2%</td><td>10</td><td><span class="low-sample">칸이 모자람</span></td></tr><tr><td>광진구</td><td>-0.8%</td><td>7</td><td><span class="low-sample">칸이 모자람</span></td></tr></tbody><!--/prerender:floorDistricts--></table>
+    </div>
+    <div class="content-notice" id="district-note"></div>
+    <div class="district-links-heading" id="district-links-heading">자치구별 시세</div>
+    <div class="district-links" id="district-links"><!--prerender:floorDistrictLinks--><a href="./district-jongno.html">종로구</a><a href="./district-jung.html">중구</a><a href="./district-yongsan.html">용산구</a><a href="./district-seongdong.html">성동구</a><a href="./district-gwangjin.html">광진구</a><a href="./district-dongdaemun.html">동대문구</a><a href="./district-jungnang.html">중랑구</a><a href="./district-seongbuk.html">성북구</a><a href="./district-gangbuk.html">강북구</a><a href="./district-dobong.html">도봉구</a><a href="./district-nowon.html">노원구</a><a href="./district-eunpyeong.html">은평구</a><a href="./district-seodaemun.html">서대문구</a><a href="./district-mapo.html">마포구</a><a href="./district-yangcheon.html">양천구</a><a href="./district-gangseo.html">강서구</a><a href="./district-guro.html">구로구</a><a href="./district-geumcheon.html">금천구</a><a href="./district-yeongdeungpo.html">영등포구</a><a href="./district-dongjak.html">동작구</a><a href="./district-gwanak.html">관악구</a><a href="./district-seocho.html">서초구</a><a href="./district-gangnam.html">강남구</a><a href="./district-songpa.html">송파구</a><a href="./district-gangdong.html">강동구</a><!--/prerender:floorDistrictLinks--></div>
+  </section>
+
+  <footer class="site-footer">
+    <div id="footer-source">출처: 국토교통부 아파트 매매·전월세 실거래가 공개시스템. 신고된 거래만 집계되며 해제된 거래는 뺍니다.</div>
+    <div style="margin-top:6px;">
+      <a href="./about.html" id="footer-about">소개</a>
+      <span aria-hidden="true"> · </span>
+      <a href="./method.html" id="footer-method">숫자를 만드는 방법</a>
+      <span aria-hidden="true"> · </span>
+      <a href="https://kyhsa93.github.io/privacy-policy" id="footer-privacy" target="_blank" rel="noopener">개인정보처리방침</a>
+    </div>
+  </footer>
+</main>
+<script src="./nav.js" defer></script>
+<script src="./analytics.js"></script>
+<script>
+const T = {
+  ko: {
+    title: "1층은 얼마나 싼가",
+    navDigest: "오늘",
+    navNews: "뉴스",
+    navRealestatePrices: "아파트 시세",
+    navRates: "금리 비교",
+    navAll: "전체",
+    navSale: "매매",
+    navJeonse: "전세",
+    navWolse: "월세",
+    navDealSearch: "거래내역 검색",
+    navConversion: "전세 vs 월세",
+    navRenewal: "재계약",
+    navFloor: "층",
+    navCancelled: "해제·등기",
+    methodCallout:
+      "견주는 자리는 같은 단지, 같은 전용면적입니다. 그렇게 묶으면 단지가 낡았는지 역에서 먼지가 통제되고, 남는 차이가 층입니다.",
+    methodCalloutLink: "숫자를 만드는 방법 →",
+    leadHeading: "1층과 3층 이상",
+    topHeading: "최상층에는 웃돈이 붙나",
+    districtHeading: "자치구별",
+    thDistrict: "자치구",
+    thGap: "1층 − 3층 이상",
+    thCells: "맞물린 칸",
+    thVerdict: "서울과 다른가",
+    verdictDistinct: "다르다",
+    verdictSame: "갈라 볼 수 없음",
+    verdictThin: "칸이 모자람",
+    leadNote:
+      "1층만 셉니다. 2층도 저층으로 값이 깎이는 자리라 대조군(3층 이상)에서 빼 두었습니다. 한 칸에 3층 이상 거래가 세 건은 있어야 견줍니다 — 둘로 낸 중앙값은 그냥 두 값의 평균이라 중앙값이라고 부를 것이 못 됩니다. " +
+      "여섯 달을 한 칸에 담으므로 시점 차이는 통제되지 않습니다. 만들 때 확인했습니다 — 저층 거래의 중앙 계약월과 나머지의 중앙 계약월 차이가 칸별로 중앙값 0.00개월이었습니다. 저층이 유독 앞이나 뒤에 몰려 생긴 착시가 아닙니다.",
+    topNote:
+      "최상층은 그 칸에서 관측된 가장 높은 층으로 봅니다. 건물이 몇 층인지는 실거래 자료에 없습니다. 다섯 층은 넘어야 '최상층'이라는 말이 뜻을 가지므로 그 아래는 세지 않습니다. " +
+      "웃돈이 없다고 말하려면 중앙값 차이가 1%p 안에 들고, 더 싼 칸과 더 비싼 칸이 반반에 가까워야 합니다. 둘 중 하나만 보면 작지만 한쪽으로 쏠린 차이를 없다고 말하게 됩니다.",
+    districtNote:
+      "값을 내는 문턱은 맞물린 칸 20개입니다. 서울 칸을 크기별로 다시 뽑아 보면 20개에서 흔들림 폭이 5%p인데, 자치구 사이의 실제 차이가 그와 비슷한 크기라 그보다 적으면 아무 차이 없는 구가 양쪽으로 다 찍힙니다. " +
+      "문턱을 넘은 구도 '서울과 다르다'고 적으려면 자기 칸 수에서 우연히 나올 수 있는 구간 바깥이어야 합니다. 그 구간은 서울 표본을 다시 뽑아 만듭니다. " +
+      "표는 스물다섯 줄을 다 싣지만 순위가 아닙니다 — 대부분의 줄 사이 간격은 표본이 만든 흔들림 안에 있습니다.",
+    districtLinksHeading: "자치구별 시세",
+    updatedPrefix: "기준",
+    footerSource: "출처: 국토교통부 아파트 매매·전월세 실거래가 공개시스템. 신고된 거래만 집계되며 해제된 거래는 뺍니다.",
+    footerPrivacy: "개인정보처리방침",
+    footerMethod: "숫자를 만드는 방법",
+    footerAbout: "소개",
+    notReady: "아직 층 격차 자료가 없습니다. 국토교통부 신고분을 받는 대로 채워집니다.",
+    loadError: "층 격차 자료를 불러오지 못했습니다.",
+    retry: "다시 시도",
+  },
+  en: {
+    title: "How much less is a first floor?",
+    navDigest: "Today",
+    navNews: "News",
+    navRealestatePrices: "Apartment Prices",
+    navRates: "Rates",
+    navAll: "All",
+    navSale: "Sale",
+    navJeonse: "Jeonse",
+    navWolse: "Monthly rent",
+    navDealSearch: "Deal search",
+    navConversion: "Jeonse vs rent",
+    navRenewal: "Renewals",
+    navFloor: "Floor",
+    navCancelled: "Cancelled & registered",
+    methodCallout:
+      "The comparison is made inside one complex and one exclusive floor area. That holds age and location fixed, and what is left to differ is the floor.",
+    methodCalloutLink: "How these numbers are made →",
+    leadHeading: "First floor against the third and up",
+    topHeading: "Does the top floor carry a premium?",
+    districtHeading: "By district",
+    thDistrict: "District",
+    thGap: "First floor − upper",
+    thCells: "Matched",
+    thVerdict: "Different from Seoul?",
+    verdictDistinct: "yes",
+    verdictSame: "cannot tell",
+    verdictThin: "too few cells",
+    leadNote:
+      "Only the first floor is counted. The second is also discounted as a low floor, so it is excluded from the comparison group rather than lumped into it. A cell needs at least three upper-floor deals — a median of two is just the average of two numbers. " +
+      "Six months sit in one cell, so timing is not controlled. It was checked when this was built: the median gap between the low-floor deals' median contract month and the rest was 0.00 months. This is not an artefact of low-floor deals clustering early or late.",
+    topNote:
+      "The top floor is the highest floor observed in that cell; building height is not in the filings. Below five floors the phrase means little, so those cells are skipped. " +
+      "Calling it 'no premium' requires both a median inside 1pp and a near-even split between cheaper and dearer cells. Either test alone would call a small one-sided difference nothing.",
+    districtNote:
+      "A district gets a figure at 20 matched cells. Resampling the Seoul pool by size puts the spread at 5pp around n=20, which is about the size of the real differences between districts — below that a district with no difference lands on either story. " +
+      "Even above the threshold, saying a district differs from Seoul requires its figure to fall outside the range a district identical to Seoul could produce at that sample size, drawn by resampling the Seoul pool. " +
+      "All 25 rows are listed, but the table is not a ranking — most of the gaps between rows sit inside the noise.",
+    districtLinksHeading: "Prices by district",
+    updatedPrefix: "As of",
+    footerSource: "Source: MOLIT apartment sale and lease filings. Only filed transactions are counted, and cancelled deals are removed.",
+    footerPrivacy: "Privacy policy",
+    footerMethod: "How the numbers are made",
+    footerAbout: "About",
+    notReady: "No floor data yet. It fills in as MOLIT filings arrive.",
+    loadError: "Could not load the floor data.",
+    retry: "Retry",
+  },
+};
+
+let locale = (() => {
+  const saved = window.localStorage.getItem("lang");
+  return saved === "en" || saved === "ko" ? saved : "ko";
+})();
+const t = (key) => T[locale][key];
+
+const THEME_ICONS = { auto: "🌓", light: "☀️", dark: "🌙" };
+let theme = (() => {
+  const saved = window.localStorage.getItem("theme");
+  return saved === "light" || saved === "dark" ? saved : "auto";
+})();
+
+function applyTheme(next) {
+  theme = next;
+  window.localStorage.setItem("theme", theme);
+  if (theme === "auto") document.documentElement.removeAttribute("data-theme");
+  else document.documentElement.setAttribute("data-theme", theme);
+  document.querySelector("#theme-toggle span").textContent = THEME_ICONS[theme];
+}
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
+
+function setText(id, text) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = text;
+}
+
+const localeTag = () => (locale === "en" ? "en-US" : "ko-KR");
+const num = (value) => Number(value ?? 0).toLocaleString(localeTag());
+
+const cache = { data: null };
+
+function renderDistrictTable() {
+  const rows = cache.data?.districts ?? [];
+  const table = document.getElementById("district-table");
+  if (!rows.length) {
+    table.innerHTML = "";
+    return;
+  }
+
+  const head =
+    `<thead><tr><th>${escapeHtml(t("thDistrict"))}</th><th>${escapeHtml(t("thGap"))}</th>` +
+    `<th>${escapeHtml(t("thCells"))}</th><th>${escapeHtml(t("thVerdict"))}</th></tr></thead>`;
+
+  // 갈라 볼 수 없는 구도 빼지 않는다. 목록에서 빼면 "우리가 못 가른 것"과
+  // "자료가 없는 것"이 화면에서 구별되지 않는다.
+  const body = rows
+    .map((row) => {
+      const verdict = row.distinct
+        ? escapeHtml(t("verdictDistinct"))
+        : `<span class="low-sample">${escapeHtml(t(row.band ? "verdictSame" : "verdictThin"))}</span>`;
+      return (
+        `<tr><td>${escapeHtml(row.district)}</td><td>${row.median}%</td>` +
+        `<td>${num(row.cells)}</td><td>${verdict}</td></tr>`
+      );
+    })
+    .join("");
+
+  table.innerHTML = `${head}<tbody>${body}</tbody>`;
+}
+
+function renderDistrictLinks() {
+  const slugs = cache.data?.slugs ?? {};
+  document.getElementById("district-links").innerHTML = Object.entries(slugs)
+    .map(([name, slug]) => `<a href="./district-${escapeHtml(slug)}.html">${escapeHtml(name)}</a>`)
+    .join("");
+}
+
+function renderUpdated() {
+  const updatedAt = cache.data?.updatedAt;
+  if (!updatedAt) {
+    setText("updated", "-");
+    return;
+  }
+  setText(
+    "updated",
+    `${t("updatedPrefix")}: ${new Date(updatedAt).toLocaleDateString(localeTag(), { timeZone: "Asia/Seoul", dateStyle: "medium" })}`
+  );
+}
+
+const NAV_KEYS = {
+  all: "navAll",
+  sale: "navSale",
+  jeonse: "navJeonse",
+  wolse: "navWolse",
+  search: "navDealSearch",
+  conversion: "navConversion",
+  renewal: "navRenewal",
+  floor: "navFloor",
+  cancelled: "navCancelled",
+};
+
+function applyLocale() {
+  document.title = t("title");
+  setText("page-title", t("title"));
+  setText("method-callout-text", t("methodCallout"));
+  setText("method-callout-link", t("methodCalloutLink"));
+  setText("lead-heading", t("leadHeading"));
+  setText("top-heading", t("topHeading"));
+  setText("district-heading", t("districtHeading"));
+  setText("lead-note", t("leadNote"));
+  setText("top-note", t("topNote"));
+  setText("district-note", t("districtNote"));
+  setText("district-links-heading", t("districtLinksHeading"));
+  setText("nav-digest", t("navDigest"));
+  setText("nav-news", t("navNews"));
+  setText("nav-realestate", t("navRealestatePrices"));
+  setText("nav-rates", t("navRates"));
+  setText("footer-source", t("footerSource"));
+  setText("footer-privacy", t("footerPrivacy"));
+  setText("footer-method", t("footerMethod"));
+  setText("footer-about", t("footerAbout"));
+  for (const link of document.querySelectorAll("[data-re-page]")) {
+    link.textContent = t(NAV_KEYS[link.getAttribute("data-re-page")]);
+  }
+  document.documentElement.setAttribute("lang", locale);
+}
+
+function renderAll() {
+  applyLocale();
+  for (const [id, key] of [["lead", "lead"], ["top-lead", "topLead"], ["district-lead", "districtLead"]]) {
+    const block = cache.data?.[key];
+    if (block) setText(id, locale === "en" ? block.en : block.ko);
+  }
+  renderDistrictTable();
+  renderDistrictLinks();
+  renderUpdated();
+}
+
+async function loadJson(name) {
+  const res = await fetch(`./data/${name}.json?_=${Date.now()}`);
+  if (res.status === 404) return null;
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
+
+async function main() {
+  applyTheme(theme);
+  applyLocale();
+
+  try {
+    const data = await loadJson("floor-gap");
+    if (!data?.districts?.length) {
+      setText("lead", t("notReady"));
+      setText("updated", "-");
+      return;
+    }
+
+    cache.data = data;
+    renderAll();
+  } catch (error) {
+    window.analytics?.event("exception", {
+      description: `load floor-gap: ${error?.message ?? error}`.slice(0, 100),
+      fatal: true,
+    });
+    document.getElementById("lead").innerHTML =
+      `${escapeHtml(t("loadError"))} <button type="button" id="load-retry">${escapeHtml(t("retry"))}</button>`;
+    document.getElementById("load-retry")?.addEventListener("click", (e) => {
+      e.currentTarget.disabled = true;
+      main();
+    });
+  }
+}
+
+document.getElementById("theme-toggle").addEventListener("click", () => {
+  const order = ["auto", "light", "dark"];
+  applyTheme(order[(order.indexOf(theme) + 1) % order.length]);
+});
+
+document.getElementById("lang-toggle").addEventListener("click", () => {
+  locale = locale === "ko" ? "en" : "ko";
+  window.localStorage.setItem("lang", locale);
+  renderAll();
+  window.analytics?.event("language_switch", { site_language: locale });
+});
+
+main();
+</script>
+</body>
+</html>

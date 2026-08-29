@@ -20,6 +20,7 @@ async function main() {
   run("node scripts/build-conversion.mjs");
   run("node scripts/build-cancellation.mjs");
   run("node scripts/build-renewal-facts.mjs");
+  run("node scripts/build-floor-gap.mjs");
   run("node scripts/build-complex-ratio.mjs");
   run("node scripts/build-rent-preview.mjs");
   run("node scripts/build-search-index.mjs");

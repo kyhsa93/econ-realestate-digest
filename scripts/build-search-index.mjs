@@ -29,6 +29,7 @@ export const SCREENS = [
   { text: "전세 시세", href: "./apartment-jeonse.html", also: ["전세", "전세가율"] },
   { text: "월세 시세", href: "./apartment-rent.html", also: ["월세"] },
   { text: "전세 vs 월세", href: "./jeonse-vs-wolse.html", also: ["전환율", "전월세전환율", "월 실부담"] },
+  { text: "층별 가격 차이", href: "./floor-gap.html", also: ["층", "1층", "저층", "최상층", "탑층", "로열층"] },
   { text: "재계약 vs 새로 구하기", href: "./renewal-vs-new.html", also: ["재계약", "갱신", "연장", "갱신요구권"] },
   { text: "해제·등기", href: "./cancelled-deals.html", also: ["해제", "취소", "등기", "미등기"] },
   { text: "실거래 검색", href: "./deal-search.html", also: ["조건", "검색"] },
