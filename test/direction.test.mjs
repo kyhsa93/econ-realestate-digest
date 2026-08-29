@@ -9,8 +9,10 @@ const read = (file) => readFile(path.join(root, file), "utf8");
 // 방향 문서가 있는데 아무도 안 가리키면 없는 것과 같다. 이 저장소에서 문서가 낡는
 // 방식은 늘 같았다 - 같은 말이 두 곳에 적히고 한쪽만 고쳐진다. 그래서 README와
 // 봇 사양서는 요약과 링크만 두고 본문은 DIRECTION.md 한 곳에만 있다.
-test("방향 문서로 가는 길이 README와 봇 사양서 양쪽에 있다", async () => {
-  for (const file of ["README.md", "audit/HOWTO.md"]) {
+test("방향 문서로 가는 길이 README와 봇 사양서에 있다", async () => {
+  // 주간 조사 봇은 이 문서의 집행자다 - 사양서가 방향을 안 가리키면
+  // 봇은 무엇이 값이 되는지를 스스로 지어내게 된다.
+  for (const file of ["README.md", "audit/HOWTO.md", "research/HOWTO.md"]) {
     assert.match(await read(file), /DIRECTION\.md/, `${file}이 방향 문서를 안 가리킨다`);
   }
 });
