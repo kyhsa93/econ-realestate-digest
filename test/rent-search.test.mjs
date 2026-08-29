@@ -171,7 +171,7 @@ test("주소에 적힌 유형과 조건으로 시작한다", async () => {
   const page = await open({ query: "?kind=jeonse&district=노원구&deposit=10" });
 
   assert.deepEqual(names(page.resultHtml()).map((row) => row.split(" ").pop()), ["노원전세열둘"]);
-  assert.match(page.depositOptions(), /value="10" selected/);
+  assert.match(page.depositOptions(), /data-value="10"[^>]*aria-checked="true"/);
 });
 
 test("전월세 자료가 없는 지역은 그렇다고 말한다", async () => {

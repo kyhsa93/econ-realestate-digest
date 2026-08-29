@@ -138,6 +138,14 @@ export async function loadDealSearchPage({
 
   const select = (id, value) => dispatch(id, "change", (el) => (el.value = value));
 
+  // 칩은 셀렉트가 아니다. 눌린 칩을 흉내 내 클릭을 흘려보낸다.
+  const chip = (field, value) => {
+    const target = { dataset: { filter: field, value: String(value) }, closest: () => target };
+    sandbox.document.getElementById("search-controls").dispatch("click", { target });
+    return settle();
+  };
+  const chipHtml = (field) => sandbox.document.getElementById(`${field}-chips`).innerHTML;
+
   return {
     sandbox,
     navLinks,
@@ -146,20 +154,25 @@ export async function loadDealSearchPage({
     resultHtml: () => sandbox.document.getElementById("search-result").innerHTML,
     districtOptions: () => sandbox.document.getElementById("district-select").innerHTML,
     budgetOptions: () => sandbox.document.getElementById("budget-select").innerHTML,
-    areaOptions: () => sandbox.document.getElementById("area-select").innerHTML,
-    ageOptions: () => sandbox.document.getElementById("age-select").innerHTML,
+    areaOptions: () => chipHtml("area"),
+    ageOptions: () => chipHtml("age"),
     chooseDistrict: (value) => select("district-select", value),
     chooseBudget: (value) => select("budget-select", value),
-    chooseArea: (value) => select("area-select", value),
-    chooseAge: (value) => select("age-select", value),
+    chooseArea: (value) => chip("area", value),
+    chooseAge: (value) => chip("age", value),
     typeApt: (value) => dispatch("apt-input", "input", (el) => (el.value = value)),
     toggleDirect: (checked) => dispatch("direct-check", "change", (el) => (el.checked = checked)),
-    kindOptions: () => sandbox.document.getElementById("kind-select").innerHTML,
-    depositOptions: () => sandbox.document.getElementById("deposit-select").innerHTML,
-    rentOptions: () => sandbox.document.getElementById("rent-select").innerHTML,
-    chooseKind: (value) => select("kind-select", value),
-    chooseDeposit: (value) => select("deposit-select", value),
-    chooseRent: (value) => select("rent-select", value),
+    resetFilters: () => {
+      const target = { id: "reset-filters" };
+      sandbox.document.getElementById("search-controls").dispatch("click", { target });
+      return settle();
+    },
+    kindOptions: () => chipHtml("kind"),
+    depositOptions: () => chipHtml("deposit"),
+    rentOptions: () => chipHtml("rent"),
+    chooseKind: (value) => chip("kind", value),
+    chooseDeposit: (value) => chip("deposit", value),
+    chooseRent: (value) => chip("rent", value),
     fieldHidden: (id) => sandbox.document.getElementById(id).hidden,
   };
 }

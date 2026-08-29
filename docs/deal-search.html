@@ -65,8 +65,8 @@
     <h2 id="search-heading">지역과 예산으로 찾기</h2>
     <div class="search-controls" id="search-controls">
       <div class="search-field">
-        <label for="kind-select" id="kind-label">거래 유형</label>
-        <select id="kind-select"></select>
+        <span class="field-label" id="kind-label">거래 유형</span>
+        <div class="chip-group" id="kind-chips" role="radiogroup" aria-labelledby="kind-label"></div>
       </div>
       <div class="search-field">
         <label for="district-select" id="district-label">지역</label>
@@ -77,24 +77,27 @@
         <select id="budget-select"></select>
       </div>
       <div class="search-field" id="deposit-field" hidden>
-        <label for="deposit-select" id="deposit-label">보증금</label>
-        <select id="deposit-select"></select>
+        <span class="field-label" id="deposit-label">보증금</span>
+        <div class="chip-group" id="deposit-chips" role="radiogroup" aria-labelledby="deposit-label"></div>
       </div>
       <div class="search-field" id="rent-field" hidden>
-        <label for="rent-select" id="rent-label">월세</label>
-        <select id="rent-select"></select>
+        <span class="field-label" id="rent-label">월세</span>
+        <div class="chip-group" id="rent-chips" role="radiogroup" aria-labelledby="rent-label"></div>
       </div>
       <div class="search-field">
-        <label for="area-select" id="area-label">면적</label>
-        <select id="area-select"></select>
+        <span class="field-label" id="area-label">면적</span>
+        <div class="chip-group" id="area-chips" role="radiogroup" aria-labelledby="area-label"></div>
       </div>
       <div class="search-field">
-        <label for="age-select" id="age-label">연식</label>
-        <select id="age-select"></select>
+        <span class="field-label" id="age-label">연식</span>
+        <div class="chip-group" id="age-chips" role="radiogroup" aria-labelledby="age-label"></div>
       </div>
       <div class="search-field">
         <label for="apt-input" id="apt-label">단지명</label>
         <input type="text" id="apt-input" autocomplete="off" spellcheck="false">
+      </div>
+      <div class="search-field" id="reset-field" hidden>
+        <button type="button" id="reset-filters"></button>
       </div>
       <div class="search-field toggle" id="direct-field">
         <input type="checkbox" id="direct-check">
@@ -170,6 +173,7 @@ const T = {
     aptLabel: "단지명",
     directLabel: "직거래 제외",
     allDistricts: "서울 전체",
+    resetFilters: "조건 지우기",
     complexHeading: (apt) => `${apt} 평형별`,
     complexArea: "전용면적",
     complexRatio: "전세가율",
@@ -265,6 +269,7 @@ const T = {
     aptLabel: "Complex",
     directLabel: "Exclude direct deals",
     allDistricts: "All of Seoul",
+    resetFilters: "Clear filters",
     complexHeading: (apt) => `${apt} by unit type`,
     complexArea: "Exclusive area",
     complexRatio: "Jeonse ratio",
@@ -591,24 +596,30 @@ function showField(id, visible) {
 function renderControls() {
   const names = districtNames();
 
-  document.getElementById("kind-select").innerHTML = KINDS.map((value) =>
-    optionHtml(value, t(value === "sale" ? "kindSale" : value === "jeonse" ? "kindJeonse" : "kindWolse"), value === kind)
-  ).join("");
+  chips("kind", KINDS.map((value) => ({
+    value,
+    label: t(value === "sale" ? "kindSale" : value === "jeonse" ? "kindJeonse" : "kindWolse"),
+    on: value === kind,
+  })));
 
   showField("budget-field", !isRent());
   showField("deposit-field", isRent());
   showField("rent-field", kind === "wolse");
   showField("direct-field", !isRent());
 
-  document.getElementById("deposit-select").innerHTML =
-    optionHtml(ALL, t("allDeposits"), depositKey === ALL) +
-    DEPOSIT_BUCKETS.map((bucket) =>
-      optionHtml(bucket.key, t("depositOption")(bucket), bucket.key === depositKey)
-    ).join("");
+  chips("deposit", [
+    { value: ALL, label: t("allDeposits"), on: depositKey === ALL },
+    ...DEPOSIT_BUCKETS.map((bucket) => ({
+      value: bucket.key,
+      label: t("depositOption")(bucket),
+      on: bucket.key === depositKey,
+    })),
+  ]);
 
-  document.getElementById("rent-select").innerHTML =
-    optionHtml(ALL, t("allRents"), rentKey === ALL) +
-    RENT_BUCKETS.map((bucket) => optionHtml(bucket.key, t("rentOption")(bucket), bucket.key === rentKey)).join("");
+  chips("rent", [
+    { value: ALL, label: t("allRents"), on: rentKey === ALL },
+    ...RENT_BUCKETS.map((bucket) => ({ value: bucket.key, label: t("rentOption")(bucket), on: bucket.key === rentKey })),
+  ]);
 
   document.getElementById("district-select").innerHTML =
     optionHtml(ALL, t("allDistricts"), district === ALL) +
@@ -622,23 +633,25 @@ function renderControls() {
       )
       .join("");
 
-  document.getElementById("area-select").innerHTML =
-    optionHtml(ALL, t("allAreas"), areaKey === ALL) +
-    AREA_BUCKETS.map((bucket) =>
-      optionHtml(bucket.key, t("areaOption")(bucket), bucket.key === areaKey)
-    ).join("");
+  chips("area", [
+    { value: ALL, label: t("allAreas"), on: areaKey === ALL },
+    ...AREA_BUCKETS.map((bucket) => ({ value: bucket.key, label: t("areaOption")(bucket), on: bucket.key === areaKey })),
+  ]);
 
-  document.getElementById("age-select").innerHTML =
-    optionHtml(ALL, t("allAges"), ageKey === ALL) +
-    AGE_BUCKETS.map((bucket) =>
-      optionHtml(bucket.key, t("ageOption")(bucket), bucket.key === ageKey)
-    ).join("");
+  chips("age", [
+    { value: ALL, label: t("allAges"), on: ageKey === ALL },
+    ...AGE_BUCKETS.map((bucket) => ({ value: bucket.key, label: t("ageOption")(bucket), on: bucket.key === ageKey })),
+  ]);
 
   const aptInput = document.getElementById("apt-input");
   if (aptInput.value !== aptQuery) aptInput.value = aptQuery;
   aptInput.setAttribute("placeholder", t("aptPlaceholder"));
 
   document.getElementById("direct-check").checked = excludeDirect;
+
+  const reset = document.getElementById("reset-filters");
+  reset.textContent = t("resetFilters");
+  document.getElementById("reset-field").hidden = !anyFilterOn();
 }
 
 function rentPriceHtml(deal) {
@@ -1162,21 +1175,73 @@ async function main() {
   }
 }
 
-function onControlChange(e) {
-  const id = e.target?.id;
-  if (id === "kind-select") kind = KINDS.includes(e.target.value) ? e.target.value : "sale";
-  else if (id === "deposit-select") depositKey = e.target.value || ALL;
-  else if (id === "rent-select") rentKey = e.target.value || ALL;
-  else if (id === "district-select") district = e.target.value || ALL;
-  else if (id === "budget-select") {
-    const raw = e.target.value;
-    band10k = raw === ALL ? null : Number(raw) * EOK;
-  } else if (id === "area-select") areaKey = e.target.value || ALL;
-  else if (id === "age-select") ageKey = e.target.value || ALL;
-  else if (id === "apt-input") aptQuery = String(e.target.value ?? "");
-  else if (id === "direct-check") excludeDirect = Boolean(e.target.checked);
+/**
+ * 셀렉트를 칩으로 바꾼 갈래들.
+ *
+ * 선택지가 서넛뿐인 조건을 셀렉트로 두면 고르는 데 세 번을 눌러야 하고, 무엇이
+ * 켜져 있는지 보려면 일곱 칸을 하나씩 읽어야 했다. 칩은 한 번에 눌리고 켜진 것이
+ * 그대로 보인다.
+ *
+ * 지역(25개)과 예산(29개)은 셀렉트로 남겼다. 칩 스물다섯 개를 가로로 훑어 은평구를
+ * 찾는 것은 목록에서 고르는 것보다 나쁘다 - 칩이 언제나 나은 것이 아니라 선택지가
+ * 적을 때 낫다.
+ */
+function chips(field, options) {
+  const box = document.getElementById(`${field}-chips`);
+  if (!box) return;
+  box.innerHTML = options
+    .map(
+      (option) =>
+        `<button type="button" class="chip" role="radio" data-filter="${escapeHtml(field)}"` +
+        ` data-value="${escapeHtml(String(option.value))}" aria-checked="${option.on ? "true" : "false"}">` +
+        `${escapeHtml(option.label)}</button>`
+    )
+    .join("");
+}
+
+/** 하나라도 걸려 있으면 '조건 지우기'가 뜬다. */
+function anyFilterOn() {
+  return (
+    district !== ALL ||
+    band10k !== null ||
+    depositKey !== ALL ||
+    rentKey !== ALL ||
+    areaKey !== ALL ||
+    ageKey !== ALL ||
+    aptTerm() !== "" ||
+    excludeDirect
+  );
+}
+
+function clearFilters() {
+  district = ALL;
+  band10k = null;
+  depositKey = ALL;
+  rentKey = ALL;
+  areaKey = ALL;
+  ageKey = ALL;
+  aptQuery = "";
+  excludeDirect = false;
+}
+
+/** 칩 하나가 눌렸을 때. 셀렉트의 change와 같은 자리로 모은다. */
+function onChipClick(event) {
+  const chip = event.target?.closest?.("[data-filter]");
+  if (!chip) return;
+  const field = chip.dataset.filter;
+  const value = chip.dataset.value;
+
+  if (field === "kind") kind = KINDS.includes(value) ? value : "sale";
+  else if (field === "deposit") depositKey = value || ALL;
+  else if (field === "rent") rentKey = value || ALL;
+  else if (field === "area") areaKey = value || ALL;
+  else if (field === "age") ageKey = value || ALL;
   else return;
 
+  afterControlChange();
+}
+
+function afterControlChange() {
   syncUrl();
   applyLocale();
   renderControls();
@@ -1192,8 +1257,34 @@ function onControlChange(e) {
   });
 }
 
+function onControlChange(e) {
+  const id = e.target?.id;
+  if (id === "kind-select") kind = KINDS.includes(e.target.value) ? e.target.value : "sale";
+  else if (id === "deposit-select") depositKey = e.target.value || ALL;
+  else if (id === "rent-select") rentKey = e.target.value || ALL;
+  else if (id === "district-select") district = e.target.value || ALL;
+  else if (id === "budget-select") {
+    const raw = e.target.value;
+    band10k = raw === ALL ? null : Number(raw) * EOK;
+  } else if (id === "area-select") areaKey = e.target.value || ALL;
+  else if (id === "age-select") ageKey = e.target.value || ALL;
+  else if (id === "apt-input") aptQuery = String(e.target.value ?? "");
+  else if (id === "direct-check") excludeDirect = Boolean(e.target.checked);
+  else return;
+
+  afterControlChange();
+}
+
 const controls = document.getElementById("search-controls");
 controls.addEventListener("change", onControlChange);
+controls.addEventListener("click", (event) => {
+  if (event.target?.id === "reset-filters") {
+    clearFilters();
+    afterControlChange();
+    return;
+  }
+  onChipClick(event);
+});
 controls.addEventListener("input", (e) => {
   if (e.target?.id === "apt-input") onControlChange(e);
 });

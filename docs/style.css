@@ -2107,6 +2107,68 @@ summary:focus-visible,
   margin-top: 10px;
 }
 
+/* 선택지가 서넛뿐인 조건은 칩으로 고른다.
+ *
+ * 셀렉트로 두면 고르는 데 세 번을 눌러야 하고, 무엇이 켜져 있는지 보려면 칸을
+ * 하나씩 읽어야 한다. 칩은 한 번에 눌리고 켜진 것이 그대로 보인다. 지역(25개)과
+ * 예산(29개)은 셀렉트로 남겼다 - 칩이 언제나 나은 것이 아니라 선택지가 적을 때 낫다. */
+.chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  padding: 4px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--muted);
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  cursor: pointer;
+}
+
+.chip:hover {
+  border-color: var(--accent);
+  color: var(--fg);
+}
+
+.chip[aria-checked="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-on);
+  font-weight: 600;
+}
+
+.field-label {
+  display: block;
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  margin-bottom: 4px;
+}
+
+#reset-filters {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  padding: 4px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--fg);
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  cursor: pointer;
+}
+
+#reset-filters:hover {
+  border-color: var(--accent);
+}
+
 .history-card svg[role="img"] { height: auto; touch-action: none; margin-top: 0; }
 .content-notice.page-notice { margin: -12px 0 20px; }
 
