@@ -2326,5 +2326,139 @@
         ]
       }
     ]
+  },
+  {
+    "date": "2026-08-30",
+    "model": "qwen3:14b",
+    "summary": {
+      "ko": "- 기타 경제 소식: 청주시가 베트남 북부 경제도시 꽝닌시와 우호도시 협약을 체결했다. 내년도 정부 예산안이 다음주 공개될 예정이다. 7월에는 국제수지도 발표될 것으로 보인다. 인터넷은행 3사는 2분기 중·저신용 대출비중 목표치 30%를 넘기고 있다. 각 기사는 서로 다른 주제로, 별개의 사건으로 분리된다.\n- 부동산: 한국 경제 뉴스에서 한 총리가 주택 공급 한계를 해결하기 위해 민간 활성화를 강조했다. 강남 지역에서는 매물 부족으로 아파트 거래가 어려운 상황이다. 강남 한복판에 위치한 644평 규모의 매장이 주목받고 있다. 내주에는 인천 시티오씨엘9단지오션파크뷰 등 3천713가구가 분양에 들어간다. 서울 빌라값은 두 달째 아파트보다 높은 수준을 유지하며 거래액이 5조원에 근접했다.\n- 금리·예금·투자상품: 베선트가 엔화 불안과 미국 금리 상승을 우려하며 개입 의도를 밝혔고, 미국 금리 상승 위험을 거론했으며, 모기지 차주가 집값과 금리 상승기 동안 집을 팔 의향이 커졌고, 굴즈비 시카고연은 총재는 미국 국채금리가 높지 않다고 했으며, 뉴욕증시는 워시의 '금리 인상' 경고에 일제히 하락 마감했다.\n- 증시·환율: 증시·환율: 뉴욕증시, 워시 매파 발언에 일제히 하락…S&amp;P 0.25%↓, 환율 1,370원선 접근, 13개월 만에 최저…원/엔 850엔대로",
+      "en": "- Other Economic News: Cheongju City has signed a sister city agreement with Giong City, a northern economic city in Vietnam. The government's budget for next year is expected to be announced next week. An international map is expected to be released in July. The three internet banks have exceeded their target of 30% for mid- and low-credit loan ratios in the second quarter. Each report covers different topics and should be considered separate events.\n- Real Estate: In Korean economic news, the Prime Minister emphasized the need to activate the private sector to address the limits of housing supply. In the Gangnam area, apartment transactions are difficult due to a shortage of listings. A store covering 644 pyeong, located in the heart of Gangnam, is receiving attention. Next week, 3,713 units, including Incheon City O-Ciel 9-danji Ocean Park View, will begin sales. Villa prices in Seoul have remained higher than apartment prices for two consecutive months, with transaction amounts approaching 5,000,000,000,000 won.\n- Rates, Deposits & Investment Products: Bentsen expressed concerns over yen instability and rising U.S. interest rates, indicating an intention to intervene and highlighting the risk of rising U.S. interest rates. Mortgage borrowers are more likely to sell their homes during periods of rising house prices and interest rates. Gultzebich, the Chicago Fed president, stated that U.S. Treasury interest rates are not high. The New York stock market closed sharply lower in response to Wash's warning about interest rate hikes.\n- Stocks & FX: Stocks & FX: 뉴욕증시, 워시 매파 발언에 일제히 하락…S&amp;P 0.25%↓, 환율 1,370원선 접근, 13개월 만에 최저…원/엔 850엔대로"
+    },
+    "highlights": [],
+    "categories": [
+      {
+        "key": "other",
+        "name": "기타 경제 소식",
+        "nameEn": "Other Economic News",
+        "lineKo": "청주시가 베트남 북부 경제도시 꽝닌시와 우호도시 협약을 체결했다. 내년도 정부 예산안이 다음주 공개될 예정이다. 7월에는 국제수지도 발표될 것으로 보인다. 인터넷은행 3사는 2분기 중·저신용 대출비중 목표치 30%를 넘기고 있다. 각 기사는 서로 다른 주제로, 별개의 사건으로 분리된다.",
+        "lineEn": "Cheongju City has signed a sister city agreement with Giong City, a northern economic city in Vietnam. The government's budget for next year is expected to be announced next week. An international map is expected to be released in July. The three internet banks have exceeded their target of 30% for mid- and low-credit loan ratios in the second quarter. Each report covers different topics and should be considered separate events.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": false,
+        "items": [
+          {
+            "title": "청주시, 베트남 북부 경제도시 꽝닌시와 우호도시 협약",
+            "link": "https://www.yna.co.kr/view/AKR20260829035200064",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "[다음주 경제] 내년도 정부 예산안 공개…7월 국제수지도 발표",
+            "link": "https://www.yna.co.kr/view/AKR20260829014100002",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "인터넷은행 3사, 2분기 중·저신용 대출비중 목표치 30% 넘겨",
+            "link": "https://www.yna.co.kr/view/AKR20260828149300002",
+            "source": "연합뉴스 경제"
+          }
+        ]
+      },
+      {
+        "key": "realestate",
+        "name": "부동산",
+        "nameEn": "Real Estate",
+        "lineKo": "한국 경제 뉴스에서 한 총리가 주택 공급 한계를 해결하기 위해 민간 활성화를 강조했다. 강남 지역에서는 매물 부족으로 아파트 거래가 어려운 상황이다. 강남 한복판에 위치한 644평 규모의 매장이 주목받고 있다. 내주에는 인천 시티오씨엘9단지오션파크뷰 등 3천713가구가 분양에 들어간다. 서울 빌라값은 두 달째 아파트보다 높은 수준을 유지하며 거래액이 5조원에 근접했다.",
+        "lineEn": "In Korean economic news, the Prime Minister emphasized the need to activate the private sector to address the limits of housing supply. In the Gangnam area, apartment transactions are difficult due to a shortage of listings. A store covering 644 pyeong, located in the heart of Gangnam, is receiving attention. Next week, 3,713 units, including Incheon City O-Ciel 9-danji Ocean Park View, will begin sales. Villa prices in Seoul have remained higher than apartment prices for two consecutive months, with transaction amounts approaching 5,000,000,000,000 won.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": false,
+        "items": [
+          {
+            "title": "한 총리 \"민간 활성화 없이 주택 공급 한계…사업지연 신속 해결\"(종합)",
+            "link": "https://www.newsis.com/view/NISX20260829_0003767878",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "강남 찬 바람 부는데…매물 없어 못 사는 이 동네 아파트",
+            "link": "https://www.mk.co.kr/news/realestate/12139314",
+            "source": "매일경제 부동산"
+          },
+          {
+            "title": "\"한국서 먹히면 전세계 통한다\"…강남 한복판 644평 매장 정체 [장서우의 하입:hype]",
+            "link": "https://www.hankyung.com/article/202608280382i",
+            "source": "한국경제 경제"
+          },
+          {
+            "title": "[부동산캘린더] 내주 인천 시티오씨엘9단지오션파크뷰 등 3천713가구 분양",
+            "link": "https://www.yna.co.kr/view/AKR20260828132100003",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "서울 빌라값, 두 달째 아파트보다 더 뛰었다… 거래액도 5조원 육박",
+            "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/29/DXTF7Y2J7BEWLJSW2WG5IXQIQM/",
+            "source": "조선비즈 부동산"
+          }
+        ]
+      },
+      {
+        "key": "rates",
+        "name": "금리·예금·투자상품",
+        "nameEn": "Rates, Deposits & Investment Products",
+        "lineKo": "베선트가 엔화 불안과 미국 금리 상승을 우려하며 개입 의도를 밝혔고, 미국 금리 상승 위험을 거론했으며, 모기지 차주가 집값과 금리 상승기 동안 집을 팔 의향이 커졌고, 굴즈비 시카고연은 총재는 미국 국채금리가 높지 않다고 했으며, 뉴욕증시는 워시의 '금리 인상' 경고에 일제히 하락 마감했다.",
+        "lineEn": "Bentsen expressed concerns over yen instability and rising U.S. interest rates, indicating an intention to intervene and highlighting the risk of rising U.S. interest rates. Mortgage borrowers are more likely to sell their homes during periods of rising house prices and interest rates. Gultzebich, the Chicago Fed president, stated that U.S. Treasury interest rates are not high. The New York stock market closed sharply lower in response to Wash's warning about interest rate hikes.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": true,
+        "items": [
+          {
+            "title": "베선트 \"엔화 불안시 美 금리상승\"…엔화 개입 의도 밝혀(종합)",
+            "link": "https://www.yna.co.kr/view/AKR20260829011451072",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "美 엔화 매수 개입 옹호한 베선트…미국 금리 상승 위험 거론",
+            "link": "https://www.hankyung.com/article/2026082905917",
+            "source": "한국경제 경제"
+          },
+          {
+            "title": "\"모기지 차주, 집값·금리 상승기 집 팔 의향 커진다…서울 더 높아\"",
+            "link": "https://www.newsis.com/view/NISX20260825_0003761018",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "굴즈비 시카고연은 총재 \"美 국채금리 높지 않다\"",
+            "link": "https://www.hankyung.com/article/2026082904451",
+            "source": "한국경제 경제"
+          },
+          {
+            "title": "[속보]뉴욕증시, 워시 '금리 인상' 경고에 일제히 하락 마감",
+            "link": "https://www.newsis.com/view/NISX20260829_0003767695",
+            "source": "뉴시스 경제"
+          }
+        ]
+      },
+      {
+        "key": "stocks",
+        "name": "증시·환율",
+        "nameEn": "Stocks & FX",
+        "lineKo": "증시·환율: 뉴욕증시, 워시 매파 발언에 일제히 하락…S&amp;P 0.25%↓, 환율 1,370원선 접근, 13개월 만에 최저…원/엔 850엔대로",
+        "lineEn": "Stocks & FX: 뉴욕증시, 워시 매파 발언에 일제히 하락…S&amp;P 0.25%↓, 환율 1,370원선 접근, 13개월 만에 최저…원/엔 850엔대로",
+        "isFallback": true,
+        "fallbackReason": "unverified-number",
+        "degraded": false,
+        "items": [
+          {
+            "title": "뉴욕증시, 워시 매파 발언에 일제히 하락…S&amp;P 0.25%↓",
+            "link": "https://www.newsis.com/view/NISX20260829_0003767696",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "환율 1,370원선 접근, 13개월 만에 최저…원/엔 850엔대로",
+            "link": "https://www.yna.co.kr/view/AKR20260828135000002",
+            "source": "연합뉴스 경제"
+          }
+        ]
+      }
+    ]
   }
 ]
