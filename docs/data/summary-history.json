@@ -2455,82 +2455,40 @@
     "date": "2026-08-31",
     "model": "qwen3:14b",
     "summary": {
-      "ko": "- 부동산: 새 경제사령탑 이형일은 잠재성장률, 민생, 부동산 등 주요 과제를 앞두고 있다. 서울시는 20년 장기전세 만기 연장 요청에 대해 \"어림도 없는 소리\"라고 반응했다. 홍지선 국토장관 후보자는 '현장형 관료'로서 주택공급 속도를 높일 것으로 기대된다. K컬처와 아파트를 융복합한 '융복합 시티'가 수출 모델로 주목받고 있다. 재건축 불가능한 시대가 도래했다는 전망이 제기되고 있다.\n- 기타 경제 소식: 이형일 차관이 경제부총리로 승진하며 정책기조를 이어갈 예정이다. 경기 남부 지역에서 집값이 상승세를 보이며 수원 영통이 1주일 만에 0.75% 올랐다. 국민의힘은 이번 개각과 관련해 경제정책 기조가 변하지 않을 것이라고 밝혔다. 한국 청년 중 81%가 결혼 의향을 가지고 있으며, 일본 청년은 58%로 나타났다. 이형일은 차관에서 부총리로 첫 직행하는 것으로 기록된다.\n- 금리·예금·투자상품: 이 대통령은 내년 기준금리가 3.5%에 달할 것으로 전망하며 부동산 시장에 경고를 발령했다. 이와 관련해 한은의 금리가 3.5%에 도달할 가능성이 제기되면서 시장의 주목을 받고 있다. 대통령은 집값 상승 기대에 대해 주의를 요구하며 경제 안정을 강조했다. 한은의 금리 전망은 부동산 시장의 냉각을 유도할 수 있는 요인으로 작용할 것으로 보인다. 이에 따라 향후 금리 동향에 대한 관심이 높아지고 있다.\n- 증시·환율: 이번주 미국 증시는 고용보고서와 브로드컴의 발표에 주목받고 있다. 고용보고서는 미국의 고용 상황을 보여주는 중요한 지표로 주목받고 있다. 브로드컴은 반도체 업계의 주요 기업으로 최근 발표에 투자자들의 관심이 집중되고 있다. 미국 증시는 이러한 요인들로 인해 주목받는 주간이 될 것으로 보인다. 관련 시장에서는 향후 움직임에 대한 기대감이 높아지고 있다.",
-      "en": "- Real Estate: New economic leader Lee Hyung-il faces major challenges including potential growth rate, livelihood issues, and real estate. Seoul responded to the request for extending the 20-year long-term rental contract by saying it was \"nonsense.\" Hong Ji-seon, the candidate for Minister of Land, is expected to accelerate housing supply as a \"field-type bureaucrat.\" A \"converged city\" combining K-culture and apartments is gaining attention as an export model. Predictions are being made that the era of impossible reconstruction has arrived.\n- Other Economic News: Lee Hyung-Il will be promoted to Deputy Prime Minister and is expected to continue the policy direction. Housing prices in the southern part of the country are on the rise, with Yongsong in Suwon increasing by 0.75% in one week. The People Power Party stated that the economic policy direction will not change with this reshuffle. 81% of South Korean youth have a desire to marry, while the figure for Japanese youth is 58%. Lee Hyung-Il is recorded as the first person to go directly from a vice minister to a deputy prime minister.\n- Rates, Deposits & Investment Products: The president predicted that the benchmark interest rate next year will reach 3.5%, and issued a warning to the real estate market. In relation to this, the Bank of Korea's interest rate reaching 3.5% has drawn attention from the market. The president called for caution regarding expectations of rising housing prices and emphasized economic stability. The Bank of Korea's interest rate forecast is expected to act as a factor that could lead to a cooling of the real estate market. As a result, interest in future interest rate trends is increasing.\n- Stocks & FX: This week, the U.S. stock market is drawing attention due to the employment report and Broadcom's announcement. The employment report is a key indicator showing the U.S. employment situation and is receiving attention. Broadcom is a major company in the semiconductor industry, and investor interest has been focused on its recent announcement. The U.S. stock market is expected to be a week of attention due to these factors. In related markets, expectations for future movements are rising."
+      "ko": "- 증시·환율: 주간 뉴욕증시는 8월 고용보고서와 미국의 이란 공습에 주목받고 있다. 일본 닛케이 증권시장은 미국 반도체주 약세로 인해 1.11% 하락 출발했다. LS증권은 원/달러 환율이 연말 최저 1천340원대까지 하락할 수 있다고 전망했다. 미국의 제지공장이 닫히면서 산림경제가 휘청이는 것으로 나타났다. 이 공장은 16달러가 0달러로 떨어지면서 운영을 중단했다.\n- 금리·예금·투자상품: 미국 금리 인상 가능성에 따라 증권주가 장 초반 하락했다. 엔화는 미국의 조기 금리인상 관측으로 1달러=160엔대에 전반 하락 출발했다. 하나증권은 금리 모멘텀을 받은 은행주가 9월에는 조정 양상에서 벗어날 것으로 전망했다. 미국 금리 인상 가능성은 금융시장에 영향을 미치고 있다. 하나증권의 분석은 은행주의 향후 움직임에 대한 기대감을 반영하고 있다.\n- 기타 경제 소식: 이형일 경제부총리 후보자가 첫 출근길을 걷는 모습이 포토 기사로 보도되었다. 재경부는 2026년 경제교육대상 공모를 진행 중이다. 해당 상은 경제교육 활성화에 기여한 주역을 선정하는 데 목적이 있다. 경제교육대상의 최고 상금은 300만원이다. 공모는 경제교육 분야의 다양한 활동을 장려하기 위한 것이다.\n- 부동산: 광명·오산에 행복주택과 어울림센터가 착공되며 LH는 하반기 주택매입 설명회를 개최하고, 홍지선 국토장관 후보자는 주택 공급을 신속히 추진하고 서울시와 협의할 것이라고 밝혔으며, 부동산 3단계 하락 전이 메커니즘에 대한 분석이 이루어졌다.",
+      "en": "- Stocks & FX: The weekly New York stock market is drawing attention to the August employment report and the US attack on Iran. The Japanese Nikkei securities market opened 1.11% lower due to weakness in US semiconductor stocks. LS Securities predicted that the won/dollar exchange rate could fall as low as 1,340 won by year-end. It has been revealed that the forest economy is swaying due to the closure of a paper mill in the US. The factory stopped operations after the price dropped from 16 dollars to 0 dollars.\n- Rates, Deposits & Investment Products: Due to the possibility of interest rate hikes in the U.S., securities stocks fell sharply at the opening of the session. The yen fell to the 160 yen per dollar level at the opening, due to expectations of an early interest rate hike in the U.S. Hana Securities expects that bank stocks, which have received momentum from interest rates, will move out of a correction pattern in September. The possibility of a U.S. interest rate hike is affecting financial markets. Hana Securities' analysis reflects expectations regarding the future movements of bank stocks.\n- Other Economic News: Lee Hyung-il, the candidate for vice premier of economic affairs, was reported in a photo article showing him on his first day of work. The Ministry of Economy and Finance is currently conducting a call for nominations for the Economic Education Award for 2026. The purpose of the award is to select the main contributors who have contributed to the promotion of economic education. The highest prize money for the Economic Education Award is 3,000,000 won. The call for nominations aims to encourage various activities in the field of economic education.\n- Real Estate: Construction of Happy Housing and Community Centers has started in Gwangmyeong and Osan, and LH will hold a housing purchase explanation meeting in the second half of the year. Hong Jisun, the candidate for Minister of Land, Infrastructure and Transport, stated that housing supply will be rapidly advanced and that discussions with Seoul will take place. An analysis of the three-stage real estate price decline transfer mechanism was conducted."
     },
     "highlights": [],
     "categories": [
       {
-        "key": "realestate",
-        "name": "부동산",
-        "nameEn": "Real Estate",
-        "lineKo": "새 경제사령탑 이형일은 잠재성장률, 민생, 부동산 등 주요 과제를 앞두고 있다. 서울시는 20년 장기전세 만기 연장 요청에 대해 \"어림도 없는 소리\"라고 반응했다. 홍지선 국토장관 후보자는 '현장형 관료'로서 주택공급 속도를 높일 것으로 기대된다. K컬처와 아파트를 융복합한 '융복합 시티'가 수출 모델로 주목받고 있다. 재건축 불가능한 시대가 도래했다는 전망이 제기되고 있다.",
-        "lineEn": "New economic leader Lee Hyung-il faces major challenges including potential growth rate, livelihood issues, and real estate. Seoul responded to the request for extending the 20-year long-term rental contract by saying it was \"nonsense.\" Hong Ji-seon, the candidate for Minister of Land, is expected to accelerate housing supply as a \"field-type bureaucrat.\" A \"converged city\" combining K-culture and apartments is gaining attention as an export model. Predictions are being made that the era of impossible reconstruction has arrived.",
+        "key": "stocks",
+        "name": "증시·환율",
+        "nameEn": "Stocks & FX",
+        "lineKo": "주간 뉴욕증시는 8월 고용보고서와 미국의 이란 공습에 주목받고 있다. 일본 닛케이 증권시장은 미국 반도체주 약세로 인해 1.11% 하락 출발했다. LS증권은 원/달러 환율이 연말 최저 1천340원대까지 하락할 수 있다고 전망했다. 미국의 제지공장이 닫히면서 산림경제가 휘청이는 것으로 나타났다. 이 공장은 16달러가 0달러로 떨어지면서 운영을 중단했다.",
+        "lineEn": "The weekly New York stock market is drawing attention to the August employment report and the US attack on Iran. The Japanese Nikkei securities market opened 1.11% lower due to weakness in US semiconductor stocks. LS Securities predicted that the won/dollar exchange rate could fall as low as 1,340 won by year-end. It has been revealed that the forest economy is swaying due to the closure of a paper mill in the US. The factory stopped operations after the price dropped from 16 dollars to 0 dollars.",
         "isFallback": false,
         "fallbackReason": null,
         "degraded": false,
         "items": [
           {
-            "title": "새 경제사령탑 이형일의 과제…잠재성장률·민생·부동산",
-            "link": "https://www.yna.co.kr/view/AKR20260830058900002",
+            "title": "[주간 뉴욕증시] 8월 고용보고서 주목…美, 한 달만 이란 공습",
+            "link": "https://www.newsis.com/view/NISX20260831_0003768833",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "日증시, 美반도체주 약세에 하락 출발…닛케이 1.11%↓",
+            "link": "https://www.newsis.com/view/NISX20260831_0003768893",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "LS증권 \"원/달러 환율, 연말 최저 1천340원대까지 하락 가능\"",
+            "link": "https://www.yna.co.kr/view/AKR20260831025500008",
             "source": "연합뉴스 경제"
           },
           {
-            "title": "20년 장기전세 만기 앞두고 “더 살게 해줘”…서울시는 “어림도 없는 소리”",
-            "link": "https://www.mk.co.kr/news/realestate/12139979",
-            "source": "매일경제 부동산"
-          },
-          {
-            "title": "'현장형 관료' 홍지선 국토장관 후보자…주택공급 속도내나",
-            "link": "https://www.yna.co.kr/view/AKR20260830056800003",
-            "source": "연합뉴스 경제"
-          },
-          {
-            "title": "K컬처에 아파트 접목…'융복합 시티'를 수출 모델로",
-            "link": "https://www.hankyung.com/article/2026083019851",
-            "source": "한국경제 부동산"
-          },
-          {
-            "title": "재건축 불가능한 시대 온다고?",
-            "link": "https://www.mk.co.kr/news/realestate/12139910",
-            "source": "매일경제 부동산"
-          }
-        ]
-      },
-      {
-        "key": "other",
-        "name": "기타 경제 소식",
-        "nameEn": "Other Economic News",
-        "lineKo": "이형일 차관이 경제부총리로 승진하며 정책기조를 이어갈 예정이다. 경기 남부 지역에서 집값이 상승세를 보이며 수원 영통이 1주일 만에 0.75% 올랐다. 국민의힘은 이번 개각과 관련해 경제정책 기조가 변하지 않을 것이라고 밝혔다. 한국 청년 중 81%가 결혼 의향을 가지고 있으며, 일본 청년은 58%로 나타났다. 이형일은 차관에서 부총리로 첫 직행하는 것으로 기록된다.",
-        "lineEn": "Lee Hyung-Il will be promoted to Deputy Prime Minister and is expected to continue the policy direction. Housing prices in the southern part of the country are on the rise, with Yongsong in Suwon increasing by 0.75% in one week. The People Power Party stated that the economic policy direction will not change with this reshuffle. 81% of South Korean youth have a desire to marry, while the figure for Japanese youth is 58%. Lee Hyung-Il is recorded as the first person to go directly from a vice minister to a deputy prime minister.",
-        "isFallback": false,
-        "fallbackReason": null,
-        "degraded": false,
-        "items": [
-          {
-            "title": "차관서 경제부총리 직행…정책기조 이어간다",
-            "link": "https://www.hankyung.com/article/2026083020191",
+            "title": "16달러가 0달러로…제지공장 닫고 美 산림경제 휘청",
+            "link": "https://www.hankyung.com/article/202608312618i",
             "source": "한국경제 경제"
-          },
-          {
-            "title": "[프로필] 거시경제통 이형일…차관서 부총리로 첫 직행(종합)",
-            "link": "https://www.yna.co.kr/view/AKR20260830029651002",
-            "source": "연합뉴스 경제"
-          },
-          {
-            "title": "경기 남부 집값 '껑충'…수원 영통 1주새 0.75% 올라",
-            "link": "https://www.hankyung.com/article/2026083019151",
-            "source": "한국경제 부동산"
-          },
-          {
-            "title": "국힘 \"李정부 개각, 공소취소 전격전·경제정책 기조 불변 선언\"(종합)",
-            "link": "https://www.yna.co.kr/view/AKR20260830033851001",
-            "source": "연합뉴스 경제"
-          },
-          {
-            "title": "한국 81%·일본 58% 청년 \"결혼 의향 있다\"…경제적 안정 중시",
-            "link": "https://www.yna.co.kr/view/AKR20260830018400003",
-            "source": "연합뉴스 경제"
           }
         ]
       },
@@ -2538,38 +2496,90 @@
         "key": "rates",
         "name": "금리·예금·투자상품",
         "nameEn": "Rates, Deposits & Investment Products",
-        "lineKo": "이 대통령은 내년 기준금리가 3.5%에 달할 것으로 전망하며 부동산 시장에 경고를 발령했다. 이와 관련해 한은의 금리가 3.5%에 도달할 가능성이 제기되면서 시장의 주목을 받고 있다. 대통령은 집값 상승 기대에 대해 주의를 요구하며 경제 안정을 강조했다. 한은의 금리 전망은 부동산 시장의 냉각을 유도할 수 있는 요인으로 작용할 것으로 보인다. 이에 따라 향후 금리 동향에 대한 관심이 높아지고 있다.",
-        "lineEn": "The president predicted that the benchmark interest rate next year will reach 3.5%, and issued a warning to the real estate market. In relation to this, the Bank of Korea's interest rate reaching 3.5% has drawn attention from the market. The president called for caution regarding expectations of rising housing prices and emphasized economic stability. The Bank of Korea's interest rate forecast is expected to act as a factor that could lead to a cooling of the real estate market. As a result, interest in future interest rate trends is increasing.",
+        "lineKo": "미국 금리 인상 가능성에 따라 증권주가 장 초반 하락했다. 엔화는 미국의 조기 금리인상 관측으로 1달러=160엔대에 전반 하락 출발했다. 하나증권은 금리 모멘텀을 받은 은행주가 9월에는 조정 양상에서 벗어날 것으로 전망했다. 미국 금리 인상 가능성은 금융시장에 영향을 미치고 있다. 하나증권의 분석은 은행주의 향후 움직임에 대한 기대감을 반영하고 있다.",
+        "lineEn": "Due to the possibility of interest rate hikes in the U.S., securities stocks fell sharply at the opening of the session. The yen fell to the 160 yen per dollar level at the opening, due to expectations of an early interest rate hike in the U.S. Hana Securities expects that bank stocks, which have received momentum from interest rates, will move out of a correction pattern in September. The possibility of a U.S. interest rate hike is affecting financial markets. Hana Securities' analysis reflects expectations regarding the future movements of bank stocks.",
         "isFallback": false,
         "fallbackReason": null,
         "degraded": false,
         "items": [
           {
-            "title": "\"내년 한은 금리 3.5%에 유의\" 부동산 시장 냉각 경고한 李",
-            "link": "https://www.mk.co.kr/news/realestate/12139933",
-            "source": "매일경제 부동산"
+            "title": "[특징주] 증권주, 美 금리 인상 가능성에 장 초반 하락",
+            "link": "https://www.yna.co.kr/view/AKR20260831057800008",
+            "source": "연합뉴스 경제"
           },
           {
-            "title": "“내년 기준금리 3.5% 전망 특히 유의하라”…이 대통령, 집값 상승 기대에 ‘경고장’",
-            "link": "https://www.mk.co.kr/news/realestate/12139764",
-            "source": "매일경제 부동산"
+            "title": "엔화, 美 조기 금리인상 관측에 1달러=160엔대 전반 하락 출발",
+            "link": "https://www.newsis.com/view/NISX20260831_0003769083",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "하나증권 \"금리모멘텀 받는 은행주, 9월엔 조정양상 벗어날 듯\"",
+            "link": "https://www.yna.co.kr/view/AKR20260831021800008",
+            "source": "연합뉴스 경제"
           }
         ]
       },
       {
-        "key": "stocks",
-        "name": "증시·환율",
-        "nameEn": "Stocks & FX",
-        "lineKo": "이번주 미국 증시는 고용보고서와 브로드컴의 발표에 주목받고 있다. 고용보고서는 미국의 고용 상황을 보여주는 중요한 지표로 주목받고 있다. 브로드컴은 반도체 업계의 주요 기업으로 최근 발표에 투자자들의 관심이 집중되고 있다. 미국 증시는 이러한 요인들로 인해 주목받는 주간이 될 것으로 보인다. 관련 시장에서는 향후 움직임에 대한 기대감이 높아지고 있다.",
-        "lineEn": "This week, the U.S. stock market is drawing attention due to the employment report and Broadcom's announcement. The employment report is a key indicator showing the U.S. employment situation and is receiving attention. Broadcom is a major company in the semiconductor industry, and investor interest has been focused on its recent announcement. The U.S. stock market is expected to be a week of attention due to these factors. In related markets, expectations for future movements are rising.",
+        "key": "other",
+        "name": "기타 경제 소식",
+        "nameEn": "Other Economic News",
+        "lineKo": "이형일 경제부총리 후보자가 첫 출근길을 걷는 모습이 포토 기사로 보도되었다. 재경부는 2026년 경제교육대상 공모를 진행 중이다. 해당 상은 경제교육 활성화에 기여한 주역을 선정하는 데 목적이 있다. 경제교육대상의 최고 상금은 300만원이다. 공모는 경제교육 분야의 다양한 활동을 장려하기 위한 것이다.",
+        "lineEn": "Lee Hyung-il, the candidate for vice premier of economic affairs, was reported in a photo article showing him on his first day of work. The Ministry of Economy and Finance is currently conducting a call for nominations for the Economic Education Award for 2026. The purpose of the award is to select the main contributors who have contributed to the promotion of economic education. The highest prize money for the Economic Education Award is 3,000,000 won. The call for nominations aims to encourage various activities in the field of economic education.",
         "isFallback": false,
         "fallbackReason": null,
         "degraded": false,
         "items": [
           {
-            "title": "고용보고서·브로드컴에 쏠린 눈…이번주 美 증시 '빅위크'",
-            "link": "https://www.hankyung.com/article/202608301734i",
+            "title": "[포토] 이형일 경제부총리 후보자 첫 출근길",
+            "link": "https://www.hankyung.com/article/202608313079i",
             "source": "한국경제 경제"
+          },
+          {
+            "title": "[게시판] 2026년 대한민국 경제교육대상 공모…최고 상금 300만원",
+            "link": "https://www.yna.co.kr/view/AKR20260831048400002",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "경제교육 활성화 주역 찾는다…재경부, '경제교육대상' 공모",
+            "link": "https://www.newsis.com/view/NISX20260831_0003768901",
+            "source": "뉴시스 경제"
+          }
+        ]
+      },
+      {
+        "key": "realestate",
+        "name": "부동산",
+        "nameEn": "Real Estate",
+        "lineKo": "광명·오산에 행복주택과 어울림센터가 착공되며 LH는 하반기 주택매입 설명회를 개최하고, 홍지선 국토장관 후보자는 주택 공급을 신속히 추진하고 서울시와 협의할 것이라고 밝혔으며, 부동산 3단계 하락 전이 메커니즘에 대한 분석이 이루어졌다.",
+        "lineEn": "Construction of Happy Housing and Community Centers has started in Gwangmyeong and Osan, and LH will hold a housing purchase explanation meeting in the second half of the year. Hong Jisun, the candidate for Minister of Land, Infrastructure and Transport, stated that housing supply will be rapidly advanced and that discussions with Seoul will take place. An analysis of the three-stage real estate price decline transfer mechanism was conducted.",
+        "isFallback": false,
+        "fallbackReason": null,
+        "degraded": true,
+        "items": [
+          {
+            "title": "광명·오산에 행복주택·어울림센터 나란히 착공",
+            "link": "https://www.yna.co.kr/view/AKR20260831054800061",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "LH, 내달 1일 하반기 주택매입 설명회…8·13 대책 안내",
+            "link": "https://www.yna.co.kr/view/AKR20260831050400003",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "홍지선 국토장관 후보자 \"주택 공급 신속히…서울시와 충분히 협의할 것\"",
+            "link": "https://www.newsis.com/view/NISX20260831_0003769008",
+            "source": "뉴시스 경제"
+          },
+          {
+            "title": "[머니톡스] 부동산 3단계 하락 전이 메커니즘…3년 전과 다른 점은",
+            "link": "https://www.yna.co.kr/view/AKR20260831040600546",
+            "source": "연합뉴스 경제"
+          },
+          {
+            "title": "홍지선 국토장관 후보자 “수도권 주택 공급 속도전… 서울시와 협의할 것”",
+            "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/31/HB3JWDM3DNBWHDNXMYT4BQKEKY/",
+            "source": "조선비즈 부동산"
           }
         ]
       }
