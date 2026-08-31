@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-30T01:14:00.327Z",
+  "updatedAt": "2026-08-31T01:21:59.304Z",
   "periods": [
     "202606",
     "202607",
@@ -1941,7 +1941,7 @@
     {
       "min10k": 140000,
       "max10k": 150000,
-      "count": 463,
+      "count": 464,
       "districts": [
         {
           "name": "영등포구",
@@ -1965,6 +1965,17 @@
         }
       ],
       "deals": [
+        {
+          "district": "용산구",
+          "dong": "이태원동",
+          "apt": "메이(124-12)",
+          "area": 104.4,
+          "floor": 5,
+          "amount10k": 140000,
+          "date": "2026-08-25",
+          "buildYear": 2002,
+          "direct": false
+        },
         {
           "district": "송파구",
           "dong": "마천동",
@@ -2084,17 +2095,6 @@
           "amount10k": 141500,
           "date": "2026-08-13",
           "buildYear": 2008,
-          "direct": false
-        },
-        {
-          "district": "강서구",
-          "dong": "염창동",
-          "apt": "동아",
-          "area": 114.84,
-          "floor": 11,
-          "amount10k": 147500,
-          "date": "2026-08-12",
-          "buildYear": 1998,
           "direct": false
         }
       ]
@@ -3229,7 +3229,7 @@
     {
       "min10k": 220000,
       "max10k": 230000,
-      "count": 107,
+      "count": 108,
       "districts": [
         {
           "name": "송파구",
@@ -3253,6 +3253,17 @@
         }
       ],
       "deals": [
+        {
+          "district": "용산구",
+          "dong": "이촌동",
+          "apt": "이촌코오롱(A)",
+          "area": 59.82,
+          "floor": 3,
+          "amount10k": 224500,
+          "date": "2026-08-22",
+          "buildYear": 1999,
+          "direct": false
+        },
         {
           "district": "송파구",
           "dong": "문정동",
@@ -3372,17 +3383,6 @@
           "amount10k": 224000,
           "date": "2026-07-30",
           "buildYear": 1991,
-          "direct": false
-        },
-        {
-          "district": "동작구",
-          "dong": "사당동",
-          "apt": "이수푸르지오더프레티움",
-          "area": 84.92,
-          "floor": 5,
-          "amount10k": 226000,
-          "date": "2026-07-28",
-          "buildYear": 2021,
           "direct": false
         }
       ]
@@ -3551,7 +3551,7 @@
     {
       "min10k": 240000,
       "max10k": 250000,
-      "count": 81,
+      "count": 83,
       "districts": [
         {
           "name": "송파구",
@@ -3562,15 +3562,15 @@
           "count": 18
         },
         {
+          "name": "용산구",
+          "count": 18
+        },
+        {
           "name": "강남구",
           "count": 14
         },
         {
           "name": "성동구",
-          "count": 14
-        },
-        {
-          "name": "용산구",
           "count": 14
         }
       ],
@@ -3873,7 +3873,7 @@
     {
       "min10k": 260000,
       "max10k": 270000,
-      "count": 52,
+      "count": 53,
       "districts": [
         {
           "name": "송파구",
@@ -3975,6 +3975,17 @@
           "direct": false
         },
         {
+          "district": "용산구",
+          "dong": "이촌동",
+          "apt": "이촌코오롱(A)",
+          "area": 84.78,
+          "floor": 4,
+          "amount10k": 267000,
+          "date": "2026-08-05",
+          "buildYear": 1999,
+          "direct": false
+        },
+        {
           "district": "양천구",
           "dong": "목동",
           "apt": "목동신시가지5",
@@ -4016,17 +4027,6 @@
           "amount10k": 261000,
           "date": "2026-07-25",
           "buildYear": 1984,
-          "direct": false
-        },
-        {
-          "district": "서초구",
-          "dong": "잠원동",
-          "apt": "중앙하이츠",
-          "area": 59.93,
-          "floor": 2,
-          "amount10k": 260000,
-          "date": "2026-07-25",
-          "buildYear": 1998,
           "direct": false
         }
       ]

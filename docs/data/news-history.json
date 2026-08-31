@@ -6468,364 +6468,220 @@
     "date": "2026-08-31",
     "items": [
       {
-        "title": "새 경제사령탑 이형일의 과제…잠재성장률·민생·부동산",
-        "link": "https://www.yna.co.kr/view/AKR20260830058900002",
-        "publishedAt": "2026-08-30T10:12:32.000Z",
+        "title": "[주간 뉴욕증시] 8월 고용보고서 주목…美, 한 달만 이란 공습",
+        "link": "https://www.newsis.com/view/NISX20260831_0003768833",
+        "publishedAt": "2026-08-31T01:08:25.000Z",
+        "source": "뉴시스 경제",
+        "category": "stocks",
+        "preview": "[서울=뉴시스]고재은 기자 = 실적 발표 시즌이 막바지에 접어든 가운데, 뉴욕증시에서는 미 연방준비제도(Fed·연준)의 통화정책과 채권시장 움직임, 인공지능(AI) 열풍의 지속 여부 등이 주요 관심사로 떠오르고 있다…",
+        "dupes": []
+      },
+      {
+        "title": "[특징주] 증권주, 美 금리 인상 가능성에 장 초반 하락",
+        "link": "https://www.yna.co.kr/view/AKR20260831057800008",
+        "publishedAt": "2026-08-31T01:04:32.000Z",
         "source": "연합뉴스 경제",
-        "category": "realestate",
-        "preview": "(세종=연합뉴스) 이세원 안채원 기자 = 30일 지명된 이형일 부총리 겸 재정경제부 장관 후보자는 이재명 정부의 두 번째 경제사령탑으로서 한국 ...",
-        "dupes": [],
-        "titleEn": "New Economic Chief Lee Hyung-il's Challenges: Potential Growth Rate, Livelihood, and Real Estate"
+        "category": "rates",
+        "preview": "(서울=연합뉴스) 임은진 기자 = 미국의 금리 인상 가능성에 국내 주가지수가 약세를 보이자 증권주도 31일 장 초반 내리고 있다.",
+        "dupes": []
       },
       {
-        "title": "20년 장기전세 만기 앞두고 “더 살게 해줘”…서울시는 “어림도 없는 소리”",
-        "link": "https://www.mk.co.kr/news/realestate/12139979",
-        "publishedAt": "2026-08-30T09:46:14.000Z",
-        "source": "매일경제 부동산",
-        "category": "realestate",
-        "preview": "20년 서울 공공전세 연장 논란 내년부터 5년간 9천가구 만기 현재 입주민 “연장·분양전환” 무주택 대기 청약자들 수두룩 “떼법에 임대자산 독점 안돼”서울시가 무주택 시민에게 최장..",
-        "dupes": [],
-        "context": [
-          {
-            "kind": "realestate",
-            "href": "./apartment-jeonse.html",
-            "label": "서울 전체 아파트 84㎡ 전세",
-            "labelEn": "Seoul apartment 84㎡ jeonse",
-            "value": "7억 6,306만원",
-            "valueEn": "₩763M",
-            "note": "최근 1주 계약 794건 · 8/23 대비 +2.6%",
-            "noteEn": "794 deals in the last 1 weeks · +2.6% vs Aug 23"
-          }
-        ],
-        "titleEn": "As long-term rental contracts near their 20-year expiration, tenants beg, \"Let us stay longer\"… Seoul says, \"That's an absurd request"
-      },
-      {
-        "title": "'현장형 관료' 홍지선 국토장관 후보자…주택공급 속도내나",
-        "link": "https://www.yna.co.kr/view/AKR20260830056800003",
-        "publishedAt": "2026-08-30T09:44:01.000Z",
-        "source": "연합뉴스 경제",
-        "category": "realestate",
-        "preview": "(세종=연합뉴스) 오진송 기자 = 홍지선 국토교통부 장관 후보자는 취임 시 수도권 주택 공급에 속도를 내고 서울시와 얽힌 주택 공급 현안을 풀어...",
-        "dupes": [],
-        "context": [
-          {
-            "kind": "realestate",
-            "href": "./apartment-sale.html",
-            "label": "서울 전체 아파트 84㎡ 매매",
-            "labelEn": "Seoul apartment 84㎡ sale",
-            "value": "13억 2,233만원",
-            "valueEn": "₩1,322M",
-            "note": "최근 1주 계약 996건 · 8/23 대비 +1.8%",
-            "noteEn": "996 deals in the last 1 weeks · +1.8% vs Aug 23"
-          }
-        ],
-        "titleEn": "Field-type bureaucrat\" Hong Jisun, candidate for Minister of Land, Transport and Housing... Will accelerate housing supply?"
-      },
-      {
-        "title": "K컬처에 아파트 접목…'융복합 시티'를 수출 모델로",
-        "link": "https://www.hankyung.com/article/2026083019851",
-        "publishedAt": "2026-08-30T09:02:59.000Z",
-        "source": "한국경제 부동산",
-        "category": "realestate",
-        "preview": null,
-        "dupes": [],
-        "titleEn": "Exporting 'Convergent City' Model: Merging K-Culture with Apartments"
-      },
-      {
-        "title": "차관서 경제부총리 직행…정책기조 이어간다",
-        "link": "https://www.hankyung.com/article/2026083020191",
-        "publishedAt": "2026-08-30T08:54:29.000Z",
+        "title": "[포토] 이형일 경제부총리 후보자 첫 출근길",
+        "link": "https://www.hankyung.com/article/202608313079i",
+        "publishedAt": "2026-08-31T01:02:13.000Z",
         "source": "한국경제 경제",
         "category": "other",
         "preview": null,
-        "dupes": [],
-        "titleEn": "Deputy Prime Minister Heads to Economic Vice Minister's Office... Continuing Policy Stance"
+        "dupes": []
       },
       {
-        "title": "\"내년 한은 금리 3.5%에 유의\" 부동산 시장 냉각 경고한 李",
-        "link": "https://www.mk.co.kr/news/realestate/12139933",
-        "publishedAt": "2026-08-30T08:47:31.000Z",
-        "source": "매일경제 부동산",
-        "category": "rates",
-        "preview": "이재명 대통령이 30일 한국은행의 기준금리 추가 인상 가능성을 거론하며 집값 상승을 기대하지 말라는 공개 경고장을 다시 던졌다. 이 대통령은 이날 엑스(X·옛 트위터)에 투자은행 ..",
-        "dupes": [],
-        "titleEn": "Lee Warns of Cooled Real Estate Market as BOK Rates at 3.5% Next Year"
+        "title": "광명·오산에 행복주택·어울림센터 나란히 착공",
+        "link": "https://www.yna.co.kr/view/AKR20260831054800061",
+        "publishedAt": "2026-08-31T01:00:58.000Z",
+        "source": "연합뉴스 경제",
+        "category": "realestate",
+        "preview": "(수원=연합뉴스) 최종호 기자 = 경기도는 도시재생사업의 일환으로 추진 중인 광명시 너부대 마을 '행복주택 및 어울림센터'와 오산시 궐동 '어울...",
+        "dupes": []
       },
       {
-        "title": "[프로필] 거시경제통 이형일…차관서 부총리로 첫 직행(종합)",
-        "link": "https://www.yna.co.kr/view/AKR20260830029651002",
-        "publishedAt": "2026-08-30T08:46:29.000Z",
+        "title": "[게시판] 2026년 대한민국 경제교육대상 공모…최고 상금 300만원",
+        "link": "https://www.yna.co.kr/view/AKR20260831048400002",
+        "publishedAt": "2026-08-31T01:00:00.000Z",
         "source": "연합뉴스 경제",
         "category": "other",
-        "preview": "(세종=연합뉴스) 이대희 기자 = 이재명 정부의 두 번째 경제부총리 겸 재정경제부 장관 후보자로 30일 지명된 이형일(55) 재경부 1차관은 잠...",
-        "dupes": [],
-        "titleEn": "[Profile] Macroeconomist Lee Young-ill goes straight from Deputy Minister to Vice Premier (Comprehensive)"
+        "preview": "▲ 재정경제부는 경제교육단체협의회와 함께 경제교육 활성화에 공헌한 학교와 교사, 경제교육 관련 기관 및 종사자를 시상하는 '2026 대한민국 경...",
+        "dupes": []
       },
       {
-        "title": "재건축 불가능한 시대 온다고?",
-        "link": "https://www.mk.co.kr/news/realestate/12139910",
-        "publishedAt": "2026-08-30T08:40:36.000Z",
-        "source": "매일경제 부동산",
-        "category": "realestate",
-        "preview": "공사비 상승과 용적률의 한계로 재건축 불능 시대가 다가오고 있습니다. 매부리TV '부동산 인사이트'에서는 대형 건설사에서 일하며 주택 건설 현장에 약 30년간 몸담았던 최도영 교수..",
-        "dupes": [],
-        "titleEn": "Is the era of impossible reconstruction here?"
-      },
-      {
-        "title": "장기전세 20년 채우고 \"더 살래\"…대기자는 어쩌라고",
-        "link": "https://www.mk.co.kr/news/realestate/12139906",
-        "publishedAt": "2026-08-30T08:40:34.000Z",
-        "source": "매일경제 부동산",
-        "category": "realestate",
-        "preview": "서울시가 무주택 시민에게 최장 20년간 안정적인 주거를 제공하기 위해 도입한 장기전세주택의 첫 만기를 앞두고 입주민들의 계약 연장·분양 전환 요구와 당초 계약대로 다음 무주택자에게..",
-        "dupes": [],
-        "context": [
-          {
-            "kind": "realestate",
-            "href": "./apartment-jeonse.html",
-            "label": "서울 전체 아파트 84㎡ 전세",
-            "labelEn": "Seoul apartment 84㎡ jeonse",
-            "value": "7억 6,306만원",
-            "valueEn": "₩763M",
-            "note": "최근 1주 계약 794건 · 8/23 대비 +2.6%",
-            "noteEn": "794 deals in the last 1 weeks · +2.6% vs Aug 23"
-          }
-        ],
-        "titleEn": "Long-term rental reaches 20 years and \"will live longer\"… what about those on the waiting list?"
-      },
-      {
-        "title": "경기 남부 집값 '껑충'…수원 영통 1주새 0.75% 올라",
-        "link": "https://www.hankyung.com/article/2026083019151",
-        "publishedAt": "2026-08-30T08:32:59.000Z",
-        "source": "한국경제 부동산",
+        "title": "경제교육 활성화 주역 찾는다…재경부, '경제교육대상' 공모",
+        "link": "https://www.newsis.com/view/NISX20260831_0003768901",
+        "publishedAt": "2026-08-31T01:00:00.000Z",
+        "source": "뉴시스 경제",
         "category": "other",
+        "preview": "[세종=뉴시스]여동준 기자 = 재정경제부가 경제교육 활성화에 기여한 학교와 교사, 경제교육 관련 기관·종사자를 발굴해 시상한다. 재경부는 경제교육단체협의회와 함께 '2026 대한민국 경제교육대상' 신청·접수를 다음…",
+        "dupes": []
+      },
+      {
+        "title": "LH, 내달 1일 하반기 주택매입 설명회…8·13 대책 안내",
+        "link": "https://www.yna.co.kr/view/AKR20260831050400003",
+        "publishedAt": "2026-08-31T00:59:11.000Z",
+        "source": "연합뉴스 경제",
+        "category": "realestate",
+        "preview": "(세종=연합뉴스) 오진송 기자 = 한국토지주택공사(LH)는 다음 달 1일 LH 경기남부지역본부에서 '2026년 하반기 주택매입 사업설명회'를 연...",
+        "dupes": []
+      },
+      {
+        "title": "엔화, 美 조기 금리인상 관측에 1달러=160엔대 전반 하락 출발",
+        "link": "https://www.newsis.com/view/NISX20260831_0003769083",
+        "publishedAt": "2026-08-31T00:58:12.000Z",
+        "source": "뉴시스 경제",
+        "category": "rates",
+        "preview": "[서울=뉴시스]이재준 기자 = 엔화 환율은 31일 미국이 조기에 기준금리를 인상한다는 관측이 확산하면서 미일 금리차 확대를 의식한 엔 매도, 달러 매수가 유입해 1달러=160엔대 전반으로 내려 시작했다. 도쿄 외환시…",
+        "dupes": []
+      },
+      {
+        "title": "홍지선 국토장관 후보자 \"주택 공급 신속히…서울시와 충분히 협의할 것\"",
+        "link": "https://www.newsis.com/view/NISX20260831_0003769008",
+        "publishedAt": "2026-08-31T00:44:34.000Z",
+        "source": "뉴시스 경제",
+        "category": "realestate",
+        "preview": "[세종=뉴시스]정유선 기자 = 홍지선 국토교통부 장관 후보자는 31일 \"선호 입지에 양질의 주택을 신속히 공급하겠다\"며 용산공원 주택 공급 등에 대해서도 서울시와 충분한 협의를 통해 정책 효과를 내겠다고 밝혔다. 홍…",
+        "dupes": []
+      },
+      {
+        "title": "[머니톡스] 부동산 3단계 하락 전이 메커니즘…3년 전과 다른 점은",
+        "link": "https://www.yna.co.kr/view/AKR20260831040600546",
+        "publishedAt": "2026-08-31T00:42:05.000Z",
+        "source": "연합뉴스 경제",
+        "category": "realestate",
+        "preview": "(서울=연합뉴스) 윤선희 선임기자 = ＃ 2022년 4월 윤석열 정부가 출범하기 한 달 전이었다. 한국은행이 기준금리를 연 1.25%에서 1.5...",
+        "dupes": []
+      },
+      {
+        "title": "홍지선 국토장관 후보자 “수도권 주택 공급 속도전… 서울시와 협의할 것”",
+        "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/31/HB3JWDM3DNBWHDNXMYT4BQKEKY/",
+        "publishedAt": "2026-08-31T00:37:44.000Z",
+        "source": "조선비즈 부동산",
+        "category": "realestate",
+        "preview": "차기 국토교통부 장관 후보자로 지명된 홍지선 국토부 제2차관이 후보자 지명 후 첫 출근길에서 “선호 입지에 양질의 주택을 신속하게 공급하고, 시장의 예측가능성과 정책 일관성을 높이겠다”고 강조했다. 홍 후보자는 31…",
+        "dupes": []
+      },
+      {
+        "title": "‘더 좋은 아파트’ 넘어 ‘더 깊은 삶’…삼성물산 ‘래미안’ 브랜드 재구성",
+        "link": "https://www.mk.co.kr/news/realestate/12140099",
+        "publishedAt": "2026-08-31T00:37:13.000Z",
+        "source": "매일경제 부동산",
+        "category": "realestate",
+        "preview": "브랜드 핵심 가치 ‘고유성·품격·정제’ 반영 신규 BI 블랙·화이트 중심 리뉴얼 “향후 100년 이끌어갈 새로운 기준 정립”삼성물산 건설부문이 주거 패러다임과 개개인의 라이프스타일..",
+        "dupes": []
+      },
+      {
+        "title": "LH, 내달 1일 주택매입 사업설명회 개최…사업 활성화 박차",
+        "link": "https://www.newsis.com/view/NISX20260831_0003768858",
+        "publishedAt": "2026-08-31T00:33:51.000Z",
+        "source": "뉴시스 경제",
+        "category": "realestate",
+        "preview": "[서울=뉴시스] 변해정 기자 = 한국토지주택공사(LH)는 다음달 1일 LH 경기남부지역본부 대강당에서 주택매입 사업설명회를 개최한다고 31일 밝혔다. 이번 설명회는 정부의 8·13 대책에 따라 새롭게 도입된 매입임대…",
+        "dupes": []
+      },
+      {
+        "title": "日증시, 美반도체주 약세에 하락 출발…닛케이 1.11%↓",
+        "link": "https://www.newsis.com/view/NISX20260831_0003768893",
+        "publishedAt": "2026-08-31T00:33:21.000Z",
+        "source": "뉴시스 경제",
+        "category": "stocks",
+        "preview": "[서울=뉴시스] 신효령 기자 = 31일 일본 도쿄증시에서 닛케이225지수(닛케이평균주가)가 하락 출발했다. 미국의 금리 인상 우려와 반도체주 약세가 투자심리를 위축시켰다. 니혼게이자이신문에 따르면 이날 닛케이지수는…",
+        "dupes": []
+      },
+      {
+        "title": "[속보]홍지선 \"주택 정책, 국민 생활에 큰 영향…일관성 있어야\"",
+        "link": "https://www.newsis.com/view/NISX20260831_0003768925",
+        "publishedAt": "2026-08-31T00:13:35.000Z",
+        "source": "뉴시스 경제",
+        "category": "realestate",
         "preview": null,
-        "dupes": [],
-        "titleEn": "Southern Gyeonggi home prices jump…Yongtong, Suwon up 0.75% in a week"
+        "dupes": []
       },
       {
-        "title": "국힘 \"李정부 개각, 공소취소 전격전·경제정책 기조 불변 선언\"(종합)",
-        "link": "https://www.yna.co.kr/view/AKR20260830033851001",
-        "publishedAt": "2026-08-30T08:26:49.000Z",
+        "title": "9월 전국 아파트 분양 늘었지만…서울 일반분양 '29세대'",
+        "link": "https://www.hankyung.com/article/2026083126816",
+        "publishedAt": "2026-08-31T00:05:06.000Z",
+        "source": "한국경제 부동산",
+        "category": "realestate",
+        "preview": null,
+        "dupes": []
+      },
+      {
+        "title": "9월 전국 아파트 2만2천704가구 분양…작년 대비 15%↑",
+        "link": "https://www.yna.co.kr/view/AKR20260831029200003",
+        "publishedAt": "2026-08-31T00:00:46.000Z",
         "source": "연합뉴스 경제",
-        "category": "other",
-        "preview": "(서울=연합뉴스) 김연정 조다운 기자 = 국민의힘 등 보수 야권은 30일 이재명 대통령이 6개 부처 장관직을 비롯한 개각을 단행한 데 대해 \"이...",
-        "dupes": [],
-        "titleEn": "KDP: \"Government reshuffle, sudden move to drop charges, declaration of unchanged economic policy stance\" (Comprehensive)"
+        "category": "realestate",
+        "preview": "(서울=연합뉴스) 임기창 기자 = 내달 전국 아파트 분양 물량이 2만2천가구 수준으로 예상된다. 전체 물량의 60%가량이 수도권에 공급된다.",
+        "dupes": []
       },
       {
-        "title": "[부동산 손품노트] 승계 조합원은 취득세 두번 낸다고? 재개발·재건축때 알아야할 세금지식",
-        "link": "https://www.mk.co.kr/news/realestate/12139829",
-        "publishedAt": "2026-08-30T07:59:29.000Z",
+        "title": "“전세도 없고 매매는 힘들고”…전년 대비 서울 아파트 입주물량 ‘반토막’",
+        "link": "https://www.mk.co.kr/news/economy/12140070",
+        "publishedAt": "2026-08-30T23:57:09.000Z",
         "source": "매일경제 부동산",
         "category": "realestate",
-        "preview": "최근 재개발 구역이 몰린 빌라(연립·다세대주택) 거래가 부쩍 활발해진 모양새다. KB부동산에 따르면 서울 연립주택 매매가격지수는 올해 1~7월 1.96% 올라 지난해 같은 기간 상..",
-        "dupes": [],
-        "context": [
-          {
-            "kind": "realestate",
-            "href": "./apartment-sale.html",
-            "label": "서울 전체 아파트 84㎡ 매매",
-            "labelEn": "Seoul apartment 84㎡ sale",
-            "value": "13억 2,233만원",
-            "valueEn": "₩1,322M",
-            "note": "최근 1주 계약 996건 · 8/23 대비 +1.8%",
-            "noteEn": "996 deals in the last 1 weeks · +1.8% vs Aug 23"
-          }
-        ],
-        "titleEn": "Real Estate Tax Tips: Succession Cooperative Members Pay Acquisition Tax Twice? Tax Knowledge to Know During Redevelopment and Reconstruction"
+        "preview": "국토부 7월 주택통계 매매, 전달보다 15% 감소 전세거래 전년比 22% 줄어 서울 월세 거래 비율 70% ‘악성 미분양’ 85% 지방에올해 들어 7월까지 서울 아파트 준공 물량이..",
+        "dupes": []
       },
       {
-        "title": "[부동산 손자병법] 재건축 속도전 돌입한 상계…6억대 소액 매물 투자해볼까",
-        "link": "https://www.mk.co.kr/news/realestate/12139828",
-        "publishedAt": "2026-08-30T07:59:28.000Z",
-        "source": "매일경제 부동산",
-        "category": "realestate",
-        "preview": "서울 노원구 상계동은 상계주공 단지들이 잇달아 사업에 시동을 걸었고 민영 대단지들까지 심의 문턱을 넘으며 재건축에 가세했다. 상계동의 매력은 낮은 투자 진입가격이다. 일부 평형은 ..",
-        "dupes": [],
-        "context": [
-          {
-            "kind": "realestate",
-            "href": "./district-nowon.html",
-            "label": "노원구 아파트 84㎡ 매매",
-            "labelEn": "노원구 apartment 84㎡ sale",
-            "value": "9억 3,915만원",
-            "valueEn": "₩939M",
-            "note": "최근 1주 계약 317건 · 8/23 대비 -2.7%",
-            "noteEn": "317 deals in the last 1 weeks · -2.7% vs Aug 23"
-          }
-        ],
-        "titleEn": "Real Estate Sun Tzu: Sanggye Enters Reconstruction Speed Battle... Consider Investing in 600,000,000-Won Small-Scale Properties"
+        "title": "LS증권 \"원/달러 환율, 연말 최저 1천340원대까지 하락 가능\"",
+        "link": "https://www.yna.co.kr/view/AKR20260831025500008",
+        "publishedAt": "2026-08-30T23:47:01.000Z",
+        "source": "연합뉴스 경제",
+        "category": "stocks",
+        "preview": "(서울=연합뉴스) 정회인 기자 = LS증권은 31일 원/달러 환율이 앞으로 수급보다 국내 경기와 금리 등 펀더멘털(기초체력)의 영향을 더 크게 ...",
+        "dupes": []
       },
       {
-        "title": "“내년 기준금리 3.5% 전망 특히 유의하라”…이 대통령, 집값 상승 기대에 ‘경고장’",
-        "link": "https://www.mk.co.kr/news/realestate/12139764",
-        "publishedAt": "2026-08-30T06:36:59.000Z",
-        "source": "매일경제 부동산",
+        "title": "하나증권 \"금리모멘텀 받는 은행주, 9월엔 조정양상 벗어날 듯\"",
+        "link": "https://www.yna.co.kr/view/AKR20260831021800008",
+        "publishedAt": "2026-08-30T23:46:39.000Z",
+        "source": "연합뉴스 경제",
         "category": "rates",
-        "preview": "이재명 대통령이 부동산 투기를 “무슨 수를 써서라도 반드시 타파하겠다”며 금융·세제 개혁과 주택 공급 확대에 국가 역량을 총동원하겠다고 밝혔다. 특히 내년 한국은행 기준금리가 3...",
-        "dupes": [],
-        "titleEn": "Expect 3.5% benchmark interest rate next year\"…President Lee Issues Warning Amid Rising Housing Prices"
+        "preview": "(서울=연합뉴스) 김유아 기자 = 하나증권은 이달 들어 조정 양상을 보이던 은행주가 9월에는 금리 모멘텀에 힘입어 긍정적 주가 흐름을 보일 것으...",
+        "dupes": []
       },
       {
-        "title": "고용보고서·브로드컴에 쏠린 눈…이번주 美 증시 '빅위크'",
-        "link": "https://www.hankyung.com/article/202608301734i",
-        "publishedAt": "2026-08-30T06:17:08.000Z",
+        "title": "16달러가 0달러로…제지공장 닫고 美 산림경제 휘청",
+        "link": "https://www.hankyung.com/article/202608312618i",
+        "publishedAt": "2026-08-30T23:40:18.000Z",
         "source": "한국경제 경제",
         "category": "stocks",
         "preview": null,
-        "dupes": [],
-        "titleEn": "Jobs Report, Broadcom in Focus... U.S. Markets Face 'Big Week' This Week"
+        "dupes": []
       },
       {
-        "title": "“서울 외곽 아파트 골목골목 후끈, 이러다 전고점 뚫겠네”…중하위권 5곳 어디까지 오를까",
-        "link": "https://www.mk.co.kr/news/realestate/12139741",
-        "publishedAt": "2026-08-30T05:53:51.000Z",
+        "title": "장관 건너뛰고 70년대생 경제수장 파격 발탁…부동산·양극화 해결 중책",
+        "link": "https://www.newsis.com/view/NISX20260830_0003768308",
+        "publishedAt": "2026-08-30T22:00:00.000Z",
+        "source": "뉴시스 경제",
+        "category": "realestate",
+        "preview": "[세종=뉴시스]여동준 기자 = 이재명 대통령이 새 경제수장으로 이형일 재정경제부 1차관을 낙점하면서 경제정책의 무게중심이 경기 회복에 이어 국민이 체감하는 성과 창출로 이어질 수 있을지 관심이 모인다. 1971년생인…",
+        "dupes": []
+      },
+      {
+        "title": "재건축 확정된 단지 6억대 매물이?...진짜 따져야 할 건 ‘분담금’ 입니다",
+        "link": "https://www.mk.co.kr/news/realestate/12140020",
+        "publishedAt": "2026-08-30T20:49:49.000Z",
         "source": "매일경제 부동산",
         "category": "realestate",
-        "preview": "노도강·은평·금천 등 전고점 육박 중랑구는 가격지수 최고치 돌파 거래 회전 활발...정책 환경도 우호적서울 아파트 시장에서 중하위권 지역의 강세가 이어지는 가운데 일부 지역은 아직..",
-        "dupes": [],
-        "context": [
-          {
-            "kind": "realestate",
-            "href": "./district-jungnang.html",
-            "label": "중랑구 아파트 84㎡ 매매",
-            "labelEn": "중랑구 apartment 84㎡ sale",
-            "value": "8억 7,512만원",
-            "valueEn": "₩875M",
-            "note": "최근 1주 계약 68건 · 8/23 대비 -1.8%",
-            "noteEn": "68 deals in the last 1 weeks · -1.8% vs Aug 23"
-          }
-        ],
-        "titleEn": "Apartment Prices in Seoul's Suburbs Are Heating Up, Will They Break Previous Highs?\"... How Far Will the Mid- to Lower-Tier 5 Locations Rise?"
+        "preview": "부동산 손자병법 -탐방편 상계동 14개 단지가 재건축 대상 주공 5·6단지는 추진속도 빨라 3천가구 넘는 상계보람 기대주 전용면적 31㎡ 가격 6~7억원선 분담금까지 고려해 투..",
+        "dupes": []
       },
       {
-        "title": "집주인 잠적해도 수리 가능… 서울시, 전세사기 피해주택 수선비 최대 500만원 지원",
-        "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/30/6OKTVY4HQRGBXAI72AHQJYMJL4/",
-        "publishedAt": "2026-08-30T05:40:07.000Z",
-        "source": "조선비즈 부동산",
+        "title": "월세집을 전세로 바꿔준다 … 9월에 뜨는 이 제도는",
+        "link": "https://www.mk.co.kr/news/economy/12139840",
+        "publishedAt": "2026-08-30T20:00:00.000Z",
+        "source": "매일경제 부동산",
         "category": "realestate",
-        "preview": "임대인이 잠적해 누수나 보일러 고장 등을 제때 수리하지 못하는 전세사기 피해 임차인은 앞으로 서울시로부터 최대 500만원의 수선비를 지원받을 수 있다. 서울시는 전세사기 피해주택 안전관리 지원 대상을 기존 건물 공용…",
-        "dupes": [],
-        "context": [
-          {
-            "kind": "realestate",
-            "href": "./apartment-jeonse.html",
-            "label": "서울 전체 아파트 84㎡ 전세",
-            "labelEn": "Seoul apartment 84㎡ jeonse",
-            "value": "7억 6,306만원",
-            "valueEn": "₩763M",
-            "note": "최근 1주 계약 794건 · 8/23 대비 +2.6%",
-            "noteEn": "794 deals in the last 1 weeks · +2.6% vs Aug 23"
-          }
-        ],
-        "titleEn": "Even if the landlord disappears, repairs are possible... Seoul supports up to 5,000,000 won for renovation of rental fraud victim housing"
-      },
-      {
-        "title": "한국 81%·일본 58% 청년 \"결혼 의향 있다\"…경제적 안정 중시",
-        "link": "https://www.yna.co.kr/view/AKR20260830018400003",
-        "publishedAt": "2026-08-30T05:00:36.000Z",
-        "source": "연합뉴스 경제",
-        "category": "other",
-        "preview": "(서울=연합뉴스) 김민지 기자 = 대한상공회의소(이하 대한상의)는 30일 일본 센다이 웨스틴호텔에서 '한일 저출산 대응 교류위원회(이하 교류위원...",
-        "dupes": [],
-        "titleEn": "South Korea 81%·Japan 58% Youth \"Willing to Marry\"...Prioritize Economic Stability"
-      },
-      {
-        "title": "세제 개편에 공급 속도전…홍지선號 주택시장 안정 과제 '산적'",
-        "link": "https://www.newsis.com/view/NISX20260830_0003768333",
-        "publishedAt": "2026-08-30T04:44:30.000Z",
-        "source": "뉴시스 경제",
-        "category": "realestate",
-        "preview": "[서울=뉴시스]이연희 기자 = 이재명 대통령이 1년여 만에 국토교통부 수장 교체 결정을 내렸다. 정치인 출신 장관의 후임으로 국토·교통 분야 전문성과 현장성을 갖춘 정통 관료를 지명하면서 주거안정 정책 실행이라는 큰…",
-        "dupes": [],
-        "titleEn": "Tax Reform Intensifies Supply Race... Hong Jisun's Housing Market Stabilization Challenges Pile Up"
-      },
-      {
-        "title": "이 대통령 \"서울 주택 조기대량 공급 반드시 시행…금융·세제 개혁도\"",
-        "link": "https://www.newsis.com/view/NISX20260830_0003768343",
-        "publishedAt": "2026-08-30T04:36:45.000Z",
-        "source": "뉴시스 경제",
-        "category": "realestate",
-        "preview": "[서울=뉴시스]조재완 기자 = 이재명 대통령은 30일 \"서울 수도권의 주택 조기 대량 공급은 양수겸장 정책이라 반드시 시행한다\"고 말했다. 이 대통령은 이날 오후 엑스(X·옛 트위터)에서 \"단기적으로 보면 주택건설의…",
-        "dupes": [],
-        "context": [
-          {
-            "kind": "realestate",
-            "href": "./apartment-sale.html",
-            "label": "서울 전체 아파트 84㎡ 매매",
-            "labelEn": "Seoul apartment 84㎡ sale",
-            "value": "13억 2,233만원",
-            "valueEn": "₩1,322M",
-            "note": "최근 1주 계약 996건 · 8/23 대비 +1.8%",
-            "noteEn": "996 deals in the last 1 weeks · +1.8% vs Aug 23"
-          }
-        ],
-        "titleEn": "President Lee vows early mass supply of Seoul housing... financial and tax reforms also needed"
-      },
-      {
-        "title": "[프로필] 거시경제통 이형일…'3·4·5 대도약' 이끌 정통 경제관료",
-        "link": "https://www.yna.co.kr/view/AKR20260830029600002",
-        "publishedAt": "2026-08-30T03:41:13.000Z",
-        "source": "연합뉴스 경제",
-        "category": "other",
-        "preview": "(세종=연합뉴스) 이대희 기자 = 이재명 정부의 두 번째 경제부총리 겸 재정경제부 장관 후보자로 30일 지명된 이형일(55) 재경부 1차관은 잠...",
-        "dupes": [],
-        "titleEn": "[Profile] Macroeconomist Lee Hyung-il... Leading the '3·4·5 Great Leap Forward' with orthodox economic bureaucracy"
-      },
-      {
-        "title": "서울 상일동 빌라단지, 천지개벽 예고…1492가구 아파트로",
-        "link": "https://www.hankyung.com/article/2026083015267",
-        "publishedAt": "2026-08-30T02:54:39.000Z",
-        "source": "한국경제 부동산",
-        "category": "realestate",
-        "preview": null,
-        "dupes": [],
-        "context": [
-          {
-            "kind": "realestate",
-            "href": "./apartment-sale.html",
-            "label": "서울 전체 아파트 84㎡ 매매",
-            "labelEn": "Seoul apartment 84㎡ sale",
-            "value": "13억 2,233만원",
-            "valueEn": "₩1,322M",
-            "note": "최근 1주 계약 996건 · 8/23 대비 +1.8%",
-            "noteEn": "996 deals in the last 1 weeks · +1.8% vs Aug 23"
-          }
-        ],
-        "titleEn": "Seoul Sangil-dong villa complex heralds a new era... 1492-unit apartment complex"
-      },
-      {
-        "title": "[프로필]홍지선 국토부 장관 후보자…경기도 주택실장·국토부 2차관 역임",
-        "link": "https://www.newsis.com/view/NISX20260830_0003768282",
-        "publishedAt": "2026-08-30T02:51:33.000Z",
-        "source": "뉴시스 경제",
-        "category": "realestate",
-        "preview": "[서울=뉴시스]이연희 기자 = 이재명 대통령이 30일 국토교통부 장관 후보자로 홍지선 2차관을 지명했다. 홍 장관 후보자는 강원도 동해 출신으로 서울 성남고를 나와 한양대에서 토목공학 학사와 석사학위를 취득했다. 지…",
-        "dupes": [],
-        "context": [
-          {
-            "kind": "realestate",
-            "href": "./apartment-sale.html",
-            "label": "서울 전체 아파트 84㎡ 매매",
-            "labelEn": "Seoul apartment 84㎡ sale",
-            "value": "13억 2,233만원",
-            "valueEn": "₩1,322M",
-            "note": "최근 1주 계약 996건 · 8/23 대비 +1.8%",
-            "noteEn": "996 deals in the last 1 weeks · +1.8% vs Aug 23"
-          }
-        ],
-        "titleEn": "[Profile] Hong Jisun, Nominee for Minister of Land, Infrastructure and Transport... Former Director of Housing in Gyeonggi Province and Deputy Minister of Land, Infrastructure and Transport"
-      },
-      {
-        "title": "[프로필]이형일 경제부총리 후보자…글로벌 감각 갖춘 거시정책통",
-        "link": "https://www.newsis.com/view/NISX20260830_0003768277",
-        "publishedAt": "2026-08-30T02:43:40.000Z",
-        "source": "뉴시스 경제",
-        "category": "other",
-        "preview": "[세종=뉴시스]여동준 기자 = 이형일(55) 경제부총리 겸 재정경제부 장관 후보자는 경제 부처 내에서 글로벌 감각을 갖춘 거시정책 전문가로 통한다. 대구 출신인 이 후보자는 서울대 경제학과를 졸업하고 미국 텍사스A&…",
-        "dupes": [],
-        "titleEn": "[Profile] Lee Hyung-il, Candidate for Vice Prime Minister of Economy... Macro Policy Expert with Global Sensibility"
+        "preview": "전월세 안심신탁 제도 톺아보기최근 몇 년 사이 ‘전세의 월세화’가 빠른 속도로 이뤄지고 있습니다. 전세사기가 워낙 큰 사회적 문제였기도 하고 정부가 전세 관련 대출과 보증을 축소하..",
+        "dupes": []
       }
     ]
   }
