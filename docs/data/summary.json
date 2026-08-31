@@ -1,68 +1,46 @@
 {
-  "updatedAt": "2026-08-31T01:25:04.543Z",
+  "updatedAt": "2026-08-31T09:41:40.382Z",
   "model": "qwen3:14b",
   "summary": {
-    "ko": "- 증시·환율: 주간 뉴욕증시는 8월 고용보고서와 미국의 이란 공습에 주목받고 있다. 일본 닛케이 증권시장은 미국 반도체주 약세로 인해 1.11% 하락 출발했다. LS증권은 원/달러 환율이 연말 최저 1천340원대까지 하락할 수 있다고 전망했다. 미국의 제지공장이 닫히면서 산림경제가 휘청이는 것으로 나타났다. 이 공장은 16달러가 0달러로 떨어지면서 운영을 중단했다.\n- 금리·예금·투자상품: 미국 금리 인상 가능성에 따라 증권주가 장 초반 하락했다. 엔화는 미국의 조기 금리인상 관측으로 1달러=160엔대에 전반 하락 출발했다. 하나증권은 금리 모멘텀을 받은 은행주가 9월에는 조정 양상에서 벗어날 것으로 전망했다. 미국 금리 인상 가능성은 금융시장에 영향을 미치고 있다. 하나증권의 분석은 은행주의 향후 움직임에 대한 기대감을 반영하고 있다.\n- 기타 경제 소식: 이형일 경제부총리 후보자가 첫 출근길을 걷는 모습이 포토 기사로 보도되었다. 재경부는 2026년 경제교육대상 공모를 진행 중이다. 해당 상은 경제교육 활성화에 기여한 주역을 선정하는 데 목적이 있다. 경제교육대상의 최고 상금은 300만원이다. 공모는 경제교육 분야의 다양한 활동을 장려하기 위한 것이다.\n- 부동산: 광명·오산에 행복주택과 어울림센터가 착공되며 LH는 하반기 주택매입 설명회를 개최하고, 홍지선 국토장관 후보자는 주택 공급을 신속히 추진하고 서울시와 협의할 것이라고 밝혔으며, 부동산 3단계 하락 전이 메커니즘에 대한 분석이 이루어졌다.",
-    "en": "- Stocks & FX: The weekly New York stock market is drawing attention to the August employment report and the US attack on Iran. The Japanese Nikkei securities market opened 1.11% lower due to weakness in US semiconductor stocks. LS Securities predicted that the won/dollar exchange rate could fall as low as 1,340 won by year-end. It has been revealed that the forest economy is swaying due to the closure of a paper mill in the US. The factory stopped operations after the price dropped from 16 dollars to 0 dollars.\n- Rates, Deposits & Investment Products: Due to the possibility of interest rate hikes in the U.S., securities stocks fell sharply at the opening of the session. The yen fell to the 160 yen per dollar level at the opening, due to expectations of an early interest rate hike in the U.S. Hana Securities expects that bank stocks, which have received momentum from interest rates, will move out of a correction pattern in September. The possibility of a U.S. interest rate hike is affecting financial markets. Hana Securities' analysis reflects expectations regarding the future movements of bank stocks.\n- Other Economic News: Lee Hyung-il, the candidate for vice premier of economic affairs, was reported in a photo article showing him on his first day of work. The Ministry of Economy and Finance is currently conducting a call for nominations for the Economic Education Award for 2026. The purpose of the award is to select the main contributors who have contributed to the promotion of economic education. The highest prize money for the Economic Education Award is 3,000,000 won. The call for nominations aims to encourage various activities in the field of economic education.\n- Real Estate: Construction of Happy Housing and Community Centers has started in Gwangmyeong and Osan, and LH will hold a housing purchase explanation meeting in the second half of the year. Hong Jisun, the candidate for Minister of Land, Infrastructure and Transport, stated that housing supply will be rapidly advanced and that discussions with Seoul will take place. An analysis of the three-stage real estate price decline transfer mechanism was conducted."
+    "ko": "- 부동산: 홍지선은 주택공급 속도전을 위해 서울시와 용산공원 협의에 나섰다. 강남 아파트값은 세 부담으로 하락세를 보이며 일부 호가는 8억 원 낮아졌다. 부동산 관련 세무 노트는 집을 소유한 순간부터 시작되는 세금의 부담을 설명하고 있다. 서울시는 역세권 범위를 확대해 청년안심주택 수를 늘릴 계획이다. 9월에는 월세집을 전세로 전환해주는 제도가 시행될 예정이다.\n- 기타 경제 소식: 은행권이 대출사기로 인해 손해를 입는 사건이 발생했다. 한국농업경제학회장에 경상국립대 김윤식 교수가 선출됐다. 베선트는 G20에서 경제외교 관련 이슈에 직면했다. KDI와 국민경제자문회의는 창의적 인재 양성의 필요성을 강조하는 정책포럼을 열었다. 각 기사는 서로 다른 주제로, 별개의 사건들이다.\n- 증시·환율: 증시·환율: [올댓차이나] 中 증시, 실적호조 종목 매수로 반등 마감…창업판 0.42%↑, 美연준발 삭풍에 불확실성↑…코스피는 반등해 6,800선 마감(종합), 환율 13개월 만에 1,360원대로 하락…달러 매도 몰려(종합) +2\n- 금리·예금·투자상품: 미국의 기준금리 인상 가능성에 따라 국고채 금리가 상승했다. 3년물 국고채 금리는 연 3.838%를 기록했다. 상반기 금리인하 요구는 77%로 급증하며 마이데이터가 불을 지폈다. 일본 증시는 미국 금리 인상 경계감으로 0.14% 하락했다. 각 기사는 서로 다른 경제 현상에 대한 보도로 연결되지 않는다.",
+    "en": "- Real Estate: Hong Jisun has initiated negotiations with the Seoul Metropolitan Government and Yongsan Park to accelerate housing supply. Apartment prices in Gangnam have been declining due to tax burdens, with some units dropping by 800,000,000 won. Tax notes related to real estate explain the burden of taxes that begin the moment a person owns a property. Seoul Metropolitan Government plans to increase the number of youth housing by expanding the scope of station area benefits. In September, a system to convert monthly rental housing into a deposit-based lease will be implemented.\n- Other Economic News: A case occurred in which the banking sector suffered losses due to loan fraud. Kim Yun-sik, a professor at Gyeongsang National University, was elected as the president of the Korean Agricultural Economics Association. Beximco faced issues related to economic diplomacy at the G20. KDI and the National Economic Advisory Council held a policy forum emphasizing the necessity of cultivating creative talent. Each article covers different topics and refers to separate events.\n- Stocks & FX: Stocks & FX: [올댓차이나] 中 증시, 실적호조 종목 매수로 반등 마감…창업판 0.42%↑, 美연준발 삭풍에 불확실성↑…코스피는 반등해 6,800선 마감(종합), 환율 13개월 만에 1,360원대로 하락…달러 매도 몰려(종합) +2\n- Rates, Deposits & Investment Products: Due to the possibility of an increase in the U.S. benchmark interest rate, the government bond rate has risen. The 3-year government bond rate reached 3.838% annually. The demand for interest rate cuts in the first half of the year surged to 77%, with MyData acting as a catalyst. The Japanese stock market fell by 0.14% due to concerns over U.S. interest rate hikes. Each article is not connected to reports on different economic phenomena."
   },
   "highlights": [],
   "categories": [
     {
-      "key": "stocks",
-      "name": "증시·환율",
-      "nameEn": "Stocks & FX",
-      "lineKo": "주간 뉴욕증시는 8월 고용보고서와 미국의 이란 공습에 주목받고 있다. 일본 닛케이 증권시장은 미국 반도체주 약세로 인해 1.11% 하락 출발했다. LS증권은 원/달러 환율이 연말 최저 1천340원대까지 하락할 수 있다고 전망했다. 미국의 제지공장이 닫히면서 산림경제가 휘청이는 것으로 나타났다. 이 공장은 16달러가 0달러로 떨어지면서 운영을 중단했다.",
-      "lineEn": "The weekly New York stock market is drawing attention to the August employment report and the US attack on Iran. The Japanese Nikkei securities market opened 1.11% lower due to weakness in US semiconductor stocks. LS Securities predicted that the won/dollar exchange rate could fall as low as 1,340 won by year-end. It has been revealed that the forest economy is swaying due to the closure of a paper mill in the US. The factory stopped operations after the price dropped from 16 dollars to 0 dollars.",
+      "key": "realestate",
+      "name": "부동산",
+      "nameEn": "Real Estate",
+      "lineKo": "홍지선은 주택공급 속도전을 위해 서울시와 용산공원 협의에 나섰다. 강남 아파트값은 세 부담으로 하락세를 보이며 일부 호가는 8억 원 낮아졌다. 부동산 관련 세무 노트는 집을 소유한 순간부터 시작되는 세금의 부담을 설명하고 있다. 서울시는 역세권 범위를 확대해 청년안심주택 수를 늘릴 계획이다. 9월에는 월세집을 전세로 전환해주는 제도가 시행될 예정이다.",
+      "lineEn": "Hong Jisun has initiated negotiations with the Seoul Metropolitan Government and Yongsan Park to accelerate housing supply. Apartment prices in Gangnam have been declining due to tax burdens, with some units dropping by 800,000,000 won. Tax notes related to real estate explain the burden of taxes that begin the moment a person owns a property. Seoul Metropolitan Government plans to increase the number of youth housing by expanding the scope of station area benefits. In September, a system to convert monthly rental housing into a deposit-based lease will be implemented.",
       "isFallback": false,
       "fallbackReason": null,
       "degraded": false,
       "items": [
         {
-          "title": "[주간 뉴욕증시] 8월 고용보고서 주목…美, 한 달만 이란 공습",
-          "link": "https://www.newsis.com/view/NISX20260831_0003768833",
-          "source": "뉴시스 경제"
+          "title": "홍지선 \"주택공급 속도전…서울시와 용산공원 협의\"",
+          "link": "https://www.hankyung.com/article/2026083146051",
+          "source": "한국경제 부동산"
         },
         {
-          "title": "日증시, 美반도체주 약세에 하락 출발…닛케이 1.11%↓",
-          "link": "https://www.newsis.com/view/NISX20260831_0003768893",
-          "source": "뉴시스 경제"
+          "title": "강남 아파트값은 稅부담에 하락세…호가 8억 낮추기도",
+          "link": "https://www.hankyung.com/article/2026083146001",
+          "source": "한국경제 부동산"
         },
         {
-          "title": "LS증권 \"원/달러 환율, 연말 최저 1천340원대까지 하락 가능\"",
-          "link": "https://www.yna.co.kr/view/AKR20260831025500008",
-          "source": "연합뉴스 경제"
+          "title": "“집 가진 순간 시작되는 세금의 굴레”…내 손 안에 펼치는 세무 노트 [부동산 손폼노트]",
+          "link": "https://www.mk.co.kr/news/realestate/12140631",
+          "source": "매일경제 부동산"
         },
         {
-          "title": "16달러가 0달러로…제지공장 닫고 美 산림경제 휘청",
-          "link": "https://www.hankyung.com/article/202608312618i",
-          "source": "한국경제 경제"
-        }
-      ]
-    },
-    {
-      "key": "rates",
-      "name": "금리·예금·투자상품",
-      "nameEn": "Rates, Deposits & Investment Products",
-      "lineKo": "미국 금리 인상 가능성에 따라 증권주가 장 초반 하락했다. 엔화는 미국의 조기 금리인상 관측으로 1달러=160엔대에 전반 하락 출발했다. 하나증권은 금리 모멘텀을 받은 은행주가 9월에는 조정 양상에서 벗어날 것으로 전망했다. 미국 금리 인상 가능성은 금융시장에 영향을 미치고 있다. 하나증권의 분석은 은행주의 향후 움직임에 대한 기대감을 반영하고 있다.",
-      "lineEn": "Due to the possibility of interest rate hikes in the U.S., securities stocks fell sharply at the opening of the session. The yen fell to the 160 yen per dollar level at the opening, due to expectations of an early interest rate hike in the U.S. Hana Securities expects that bank stocks, which have received momentum from interest rates, will move out of a correction pattern in September. The possibility of a U.S. interest rate hike is affecting financial markets. Hana Securities' analysis reflects expectations regarding the future movements of bank stocks.",
-      "isFallback": false,
-      "fallbackReason": null,
-      "degraded": false,
-      "items": [
-        {
-          "title": "[특징주] 증권주, 美 금리 인상 가능성에 장 초반 하락",
-          "link": "https://www.yna.co.kr/view/AKR20260831057800008",
-          "source": "연합뉴스 경제"
+          "title": "서울시, 역세권 범위 더 확대해 청년안심주택 늘린다",
+          "link": "https://www.hankyung.com/article/202608276172i",
+          "source": "한국경제 부동산"
         },
         {
-          "title": "엔화, 美 조기 금리인상 관측에 1달러=160엔대 전반 하락 출발",
-          "link": "https://www.newsis.com/view/NISX20260831_0003769083",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "하나증권 \"금리모멘텀 받는 은행주, 9월엔 조정양상 벗어날 듯\"",
-          "link": "https://www.yna.co.kr/view/AKR20260831021800008",
-          "source": "연합뉴스 경제"
+          "title": "월세집을 전세로 바꿔준다…9월에 뜨는 이 제도는 [머니 이기자]",
+          "link": "https://www.mk.co.kr/news/economy/12140592",
+          "source": "매일경제 부동산"
         }
       ]
     },
@@ -70,63 +48,100 @@
       "key": "other",
       "name": "기타 경제 소식",
       "nameEn": "Other Economic News",
-      "lineKo": "이형일 경제부총리 후보자가 첫 출근길을 걷는 모습이 포토 기사로 보도되었다. 재경부는 2026년 경제교육대상 공모를 진행 중이다. 해당 상은 경제교육 활성화에 기여한 주역을 선정하는 데 목적이 있다. 경제교육대상의 최고 상금은 300만원이다. 공모는 경제교육 분야의 다양한 활동을 장려하기 위한 것이다.",
-      "lineEn": "Lee Hyung-il, the candidate for vice premier of economic affairs, was reported in a photo article showing him on his first day of work. The Ministry of Economy and Finance is currently conducting a call for nominations for the Economic Education Award for 2026. The purpose of the award is to select the main contributors who have contributed to the promotion of economic education. The highest prize money for the Economic Education Award is 3,000,000 won. The call for nominations aims to encourage various activities in the field of economic education.",
+      "lineKo": "은행권이 대출사기로 인해 손해를 입는 사건이 발생했다. 한국농업경제학회장에 경상국립대 김윤식 교수가 선출됐다. 베선트는 G20에서 경제외교 관련 이슈에 직면했다. KDI와 국민경제자문회의는 창의적 인재 양성의 필요성을 강조하는 정책포럼을 열었다. 각 기사는 서로 다른 주제로, 별개의 사건들이다.",
+      "lineEn": "A case occurred in which the banking sector suffered losses due to loan fraud. Kim Yun-sik, a professor at Gyeongsang National University, was elected as the president of the Korean Agricultural Economics Association. Beximco faced issues related to economic diplomacy at the G20. KDI and the National Economic Advisory Council held a policy forum emphasizing the necessity of cultivating creative talent. Each article covers different topics and refers to separate events.",
       "isFallback": false,
       "fallbackReason": null,
       "degraded": false,
       "items": [
         {
-          "title": "[포토] 이형일 경제부총리 후보자 첫 출근길",
-          "link": "https://www.hankyung.com/article/202608313079i",
+          "title": "[단독] 이면계약에 속수무책…대출사기에 혼쭐 난 은행권",
+          "link": "https://www.hankyung.com/article/2026083146381",
           "source": "한국경제 경제"
         },
         {
-          "title": "[게시판] 2026년 대한민국 경제교육대상 공모…최고 상금 300만원",
-          "link": "https://www.yna.co.kr/view/AKR20260831048400002",
+          "title": "한국농업경제학회장에 경상국립대 김윤식 교수",
+          "link": "https://www.yna.co.kr/view/AKR20260831147100030",
           "source": "연합뉴스 경제"
         },
         {
-          "title": "경제교육 활성화 주역 찾는다…재경부, '경제교육대상' 공모",
-          "link": "https://www.newsis.com/view/NISX20260831_0003768901",
+          "title": "베선트, G20서 '경제외교 시험대'…이란전·관세·국채 불안 등",
+          "link": "https://www.newsis.com/view/NISX20260831_0003769732",
           "source": "뉴시스 경제"
+        },
+        {
+          "title": "KDI-국민경제자문회의 정책포럼…\"창의적 인재 키워야\"",
+          "link": "https://www.yna.co.kr/view/AKR20260831064300002",
+          "source": "연합뉴스 경제"
         }
       ]
     },
     {
-      "key": "realestate",
-      "name": "부동산",
-      "nameEn": "Real Estate",
-      "lineKo": "광명·오산에 행복주택과 어울림센터가 착공되며 LH는 하반기 주택매입 설명회를 개최하고, 홍지선 국토장관 후보자는 주택 공급을 신속히 추진하고 서울시와 협의할 것이라고 밝혔으며, 부동산 3단계 하락 전이 메커니즘에 대한 분석이 이루어졌다.",
-      "lineEn": "Construction of Happy Housing and Community Centers has started in Gwangmyeong and Osan, and LH will hold a housing purchase explanation meeting in the second half of the year. Hong Jisun, the candidate for Minister of Land, Infrastructure and Transport, stated that housing supply will be rapidly advanced and that discussions with Seoul will take place. An analysis of the three-stage real estate price decline transfer mechanism was conducted.",
-      "isFallback": false,
-      "fallbackReason": null,
-      "degraded": true,
+      "key": "stocks",
+      "name": "증시·환율",
+      "nameEn": "Stocks & FX",
+      "lineKo": "증시·환율: [올댓차이나] 中 증시, 실적호조 종목 매수로 반등 마감…창업판 0.42%↑, 美연준발 삭풍에 불확실성↑…코스피는 반등해 6,800선 마감(종합), 환율 13개월 만에 1,360원대로 하락…달러 매도 몰려(종합) +2",
+      "lineEn": "Stocks & FX: [올댓차이나] 中 증시, 실적호조 종목 매수로 반등 마감…창업판 0.42%↑, 美연준발 삭풍에 불확실성↑…코스피는 반등해 6,800선 마감(종합), 환율 13개월 만에 1,360원대로 하락…달러 매도 몰려(종합) +2",
+      "isFallback": true,
+      "fallbackReason": "unverified-entity",
+      "degraded": false,
       "items": [
         {
-          "title": "광명·오산에 행복주택·어울림센터 나란히 착공",
-          "link": "https://www.yna.co.kr/view/AKR20260831054800061",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "LH, 내달 1일 하반기 주택매입 설명회…8·13 대책 안내",
-          "link": "https://www.yna.co.kr/view/AKR20260831050400003",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "홍지선 국토장관 후보자 \"주택 공급 신속히…서울시와 충분히 협의할 것\"",
-          "link": "https://www.newsis.com/view/NISX20260831_0003769008",
+          "title": "[올댓차이나] 中 증시, 실적호조 종목 매수로 반등 마감…창업판 0.42%↑",
+          "link": "https://www.newsis.com/view/NISX20260831_0003770233",
           "source": "뉴시스 경제"
         },
         {
-          "title": "[머니톡스] 부동산 3단계 하락 전이 메커니즘…3년 전과 다른 점은",
-          "link": "https://www.yna.co.kr/view/AKR20260831040600546",
+          "title": "美연준발 삭풍에 불확실성↑…코스피는 반등해 6,800선 마감(종합)",
+          "link": "https://www.yna.co.kr/view/AKR20260831083051008",
           "source": "연합뉴스 경제"
         },
         {
-          "title": "홍지선 국토장관 후보자 “수도권 주택 공급 속도전… 서울시와 협의할 것”",
-          "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/08/31/HB3JWDM3DNBWHDNXMYT4BQKEKY/",
-          "source": "조선비즈 부동산"
+          "title": "환율 13개월 만에 1,360원대로 하락…달러 매도 몰려(종합)",
+          "link": "https://www.yna.co.kr/view/AKR20260831138251002",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "'삼전·닉스' 자사주 매입에 코스피 상승 전환…6,820 마감(종합)",
+          "link": "https://www.yna.co.kr/view/AKR20260831140000008",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "원/달러 환율, 13개월 만에 장중 1,360원대로 하락",
+          "link": "https://www.yna.co.kr/view/AKR20260831138200002",
+          "source": "연합뉴스 경제"
+        }
+      ]
+    },
+    {
+      "key": "rates",
+      "name": "금리·예금·투자상품",
+      "nameEn": "Rates, Deposits & Investment Products",
+      "lineKo": "미국의 기준금리 인상 가능성에 따라 국고채 금리가 상승했다. 3년물 국고채 금리는 연 3.838%를 기록했다. 상반기 금리인하 요구는 77%로 급증하며 마이데이터가 불을 지폈다. 일본 증시는 미국 금리 인상 경계감으로 0.14% 하락했다. 각 기사는 서로 다른 경제 현상에 대한 보도로 연결되지 않는다.",
+      "lineEn": "Due to the possibility of an increase in the U.S. benchmark interest rate, the government bond rate has risen. The 3-year government bond rate reached 3.838% annually. The demand for interest rate cuts in the first half of the year surged to 77%, with MyData acting as a catalyst. The Japanese stock market fell by 0.14% due to concerns over U.S. interest rate hikes. Each article is not connected to reports on different economic phenomena.",
+      "isFallback": false,
+      "fallbackReason": null,
+      "degraded": false,
+      "items": [
+        {
+          "title": "美 기준금리 인상 가능성에 국고채 금리↑…상승폭은 줄어(종합)",
+          "link": "https://www.yna.co.kr/view/AKR20260831150251008",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "국고채 금리 대체로 상승…3년물 연 3.838%",
+          "link": "https://www.yna.co.kr/view/AKR20260831150200008",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "상반기 금리인하요구 77% 급증…마이데이터가 불 지펴",
+          "link": "https://www.hankyung.com/article/202608314282i",
+          "source": "한국경제 경제"
+        },
+        {
+          "title": "日증시 혼조 마감…美금리인상 경계감에 0.14%↓",
+          "link": "https://www.newsis.com/view/NISX20260831_0003769926",
+          "source": "뉴시스 경제"
         }
       ]
     }
