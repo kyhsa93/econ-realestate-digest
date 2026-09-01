@@ -1,7 +1,46 @@
 {
-  "updatedAt": "2026-09-01T14:00:09.306Z",
-  "date": "2026-09-01",
+  "updatedAt": "2026-09-01T15:27:32.339Z",
+  "date": "2026-09-02",
   "items": [
+    {
+      "title": "\"서울 집값 밀려온다\"…5억~10억원대 수도권 아파트 선택지는",
+      "link": "https://www.newsis.com/view/NISX20260901_0003771601",
+      "publishedAt": "2026-09-01T15:00:00.000Z",
+      "source": "뉴시스 경제",
+      "category": "realestate",
+      "preview": "[서울=뉴시스] 김종민 기자 = 서울의 아파트 공급 가뭄이 경기와 인천으로 확산하면서 내년부터 수도권 전역의 주택 수급 불안이 심화할 것이라는 전망이 나왔다. 서울에서 밀려난 매수 수요가 경기도와 인천으로 이어지는…",
+      "dupes": [],
+      "context": [
+        {
+          "kind": "realestate",
+          "href": "./apartment-sale.html",
+          "label": "서울 전체 아파트 84㎡ 매매",
+          "labelEn": "Seoul apartment 84㎡ sale",
+          "value": "12억 4,254만원",
+          "valueEn": "₩1,243M",
+          "note": "최근 1주 계약 286건 · 8/25 대비 -5.7%",
+          "noteEn": "286 deals in the last 1 weeks · -5.7% vs Aug 25"
+        }
+      ]
+    },
+    {
+      "title": "[포토] e편한세상, '2026 올해의 브랜드 대상' 아파트 부문 수상",
+      "link": "https://www.hankyung.com/article/202609017857H",
+      "publishedAt": "2026-09-01T14:35:35.000Z",
+      "source": "한국경제 경제",
+      "category": "realestate",
+      "preview": null,
+      "dupes": []
+    },
+    {
+      "title": "유가·국채금리 상승에 뉴욕증시 하락…나스닥 0.9%↓",
+      "link": "https://www.hankyung.com/article/202609017842i",
+      "publishedAt": "2026-09-01T14:19:21.000Z",
+      "source": "한국경제 경제",
+      "category": "rates",
+      "preview": null,
+      "dupes": []
+    },
     {
       "title": "뉴욕증시, 美·이란 충돌·유가 상승에 하락 출발…나스닥 1.29%↓",
       "link": "https://www.newsis.com/view/NISX20260901_0003772280",
@@ -9,8 +48,7 @@
       "source": "뉴시스 경제",
       "category": "stocks",
       "preview": "[서울=뉴시스] 신효령 기자 = 미국 뉴욕증시가 1일(현지시간) 미국과 이란의 무력 충돌과 국제유가 상승 여파로 일제히 하락 출발했다. 야후파이낸스 등에 따르면 스탠더드앤드푸어스(S&P)500지수는 한국시간 오후 1…",
-      "dupes": [],
-      "titleEn": "New York Stock Market Falls on U.S.-Iran Tensions and Rising Oil Prices... Nasdaq Down 1.29%"
+      "dupes": []
     },
     {
       "title": "오세훈, 국힘 국토위 의원들과 만찬…부동산정책 의견 공유(종합)",
@@ -19,8 +57,16 @@
       "source": "연합뉴스 경제",
       "category": "realestate",
       "preview": "(서울=연합뉴스) 노선웅 김준태 기자 = 오세훈 서울시장과 국회 국토교통위원회 소속 국민의힘 의원들은 1일 만찬 회동을 하며 부동산 정책 현안에...",
-      "dupes": [],
-      "titleEn": "Oh Sehun Dines with GOP National Land Committee Members to Share Views on Real Estate Policy (Comprehensive)"
+      "dupes": []
+    },
+    {
+      "title": "8월, 전세계 공장활동 활발…아시아·유럽 PMI 일제 상승",
+      "link": "https://www.hankyung.com/article/202609017820i",
+      "publishedAt": "2026-09-01T13:40:21.000Z",
+      "source": "한국경제 경제",
+      "category": "realestate",
+      "preview": null,
+      "dupes": []
     },
     {
       "title": "“5억에 주택 1+1 드립니다” 하더니…15억 더 내라는 노량진 재개발",
@@ -29,8 +75,7 @@
       "source": "매일경제 부동산",
       "category": "realestate",
       "preview": "노량진4구역 관리처분 당시엔 추가주택 59m2 5억원대 제시 분양 앞두고 “일반분양가 연동” 조합측 “원자재·공사비 상승 분상제 해제 등 여건 달라져”현대건설의 하이엔드 브랜드 ‘..",
-      "dupes": [],
-      "titleEn": "No-Yangjin Redevelopment Demands 1,500,000,000 More After Promising \"500,000,000 for 1+1 Housing"
+      "dupes": []
     },
     {
       "title": "[올댓차이나] 대만 증시, 美 수요 기대에 매수세로 반등 마감…1.78%↑",
@@ -39,8 +84,7 @@
       "source": "뉴시스 경제",
       "category": "stocks",
       "preview": "[서울=뉴시스]이재준 기자 = 대만 타이베이 증시는 1일 미국 기업의 발주 확대에 대한 기대와 함께 엔비디아가 대만 기업에 대규모 투자 소식에 기술주를 중심으로 매수 선행하면서 반등 마감했다. 자취안(加權) 지수는…",
-      "dupes": [],
-      "titleEn": "[Taiwan's stock market closes higher on U.S. demand expectations... up 1.78%]"
+      "dupes": []
     },
     {
       "title": "국토차관 \"탄천 주택공급 사업성 검토…현실성 있게 공급되길 희망\"",
@@ -50,7 +94,6 @@
       "category": "realestate",
       "preview": "[서울=뉴시스] 변해정 기자 = 김이탁 국토교통부 1차관은 1일 용산공원의 대안으로 제시된 탄천물재생센터가 합리적인 주택 공급 방안이 될 수 있는지를 따져보고 있다고 밝혔다. 김 차관은 이날 오후 MBC 라디오 '조…",
       "dupes": [],
-      "titleEn": "Land Minister's Deputy: \"Reviewing the Tanchon housing supply project... hope it will be realistically supplied",
       "context": [
         {
           "kind": "realestate",
@@ -71,18 +114,7 @@
       "source": "뉴시스 경제",
       "category": "stocks",
       "preview": "[서울=뉴시스]이재준 기자 = 홍콩 증시는 1일 중동 정세 악화에 투자심리가 위축하면서 하락 마감했다. 미국 조기 금리인상에 대한 경계감과 국제 유가 상승도 장에 부담을 주었다. 항셍지수는 이날 전일 대비 237.2…",
-      "dupes": [],
-      "titleEn": "[AllChina] Hong Kong stock market closes lower amid worsening Middle East situation... H shares down 0.59%"
-    },
-    {
-      "title": "신한·하나銀, 대출모집인 접수 재개",
-      "link": "https://www.hankyung.com/article/2026090176651",
-      "publishedAt": "2026-09-01T10:48:24.000Z",
-      "source": "한국경제 경제",
-      "category": "other",
-      "preview": null,
-      "dupes": [],
-      "titleEn": "Shinhan, Hana Banks Resume Accepting Loan Brokers"
+      "dupes": []
     },
     {
       "title": "상호금융 가계대출 목표치 배분 완료…새마을금고·신협도 늘어(종합)",
@@ -92,7 +124,6 @@
       "category": "other",
       "preview": "(서울=연합뉴스) 강수련 김지연 강류나 기자 = 금융당국이 새마을금고 등 상호금융업권에도 가계대출 총량 관리 목표치 배분이 마무리됐다.",
       "dupes": [],
-      "titleEn": "Interbank Household Loan Target Allocation Completed... New Village Credit Union and Shinhan Federation Also Increase (Comprehensive)",
       "context": [
         {
           "kind": "rates",
@@ -111,18 +142,7 @@
       "source": "뉴시스 경제",
       "category": "stocks",
       "preview": "[서울=뉴시스]이재준 기자 = 중국 증시는 1일 미국과 이란 간 공방전 재개로 투자심리가 흔들리면서 하락 마감했다. 상하이 종합지수는 이날 전일 대비 6.41 포인트, 0.16% 내려간 3979.89로 폐장했다. 선…",
-      "dupes": [],
-      "titleEn": "[AllChina] China's stock market closes lower amid heightened Middle East tensions... Start-up board down 1.32%"
-    },
-    {
-      "title": "한경협, 日간사이 경제동우회 간담회",
-      "link": "https://www.hankyung.com/article/2026090174921",
-      "publishedAt": "2026-09-01T09:50:35.000Z",
-      "source": "한국경제 경제",
-      "category": "other",
-      "preview": null,
-      "dupes": [],
-      "titleEn": "Hanjin, Japan-Korea Economic Cooperation Meeting"
+      "dupes": []
     },
     {
       "title": "한일 경제안보대화 도쿄서 개최…\"AI·반도체 육성 협력 모색\"",
@@ -131,78 +151,7 @@
       "source": "연합뉴스 경제",
       "category": "other",
       "preview": "(서울=연합뉴스) 설승은 기자 = 한일 양국은 1일 일본 도쿄에서 제5차 한일 경제안보대화를 열고 경제 안보 협력 방안을 논의했다고 청와대가 보...",
-      "dupes": [],
-      "titleEn": "Korea-Japan Economic Security Talks Held in Tokyo...\"Explore Cooperation in Cultivating AI, Semiconductors"
-    },
-    {
-      "title": "경제뉴스로 심리 포착…한은 '新 NSI' 나왔다",
-      "link": "https://www.hankyung.com/article/2026090174681",
-      "publishedAt": "2026-09-01T08:53:44.000Z",
-      "source": "한국경제 경제",
-      "category": "other",
-      "preview": null,
-      "dupes": [],
-      "titleEn": "Economic news captures sentiment... Bank of Korea unveils new NSI"
-    },
-    {
-      "title": "주담대 빗장 풀린다…하나·신한 대출모집인 접수 재개",
-      "link": "https://www.hankyung.com/article/202609017442i",
-      "publishedAt": "2026-09-01T08:53:02.000Z",
-      "source": "한국경제 경제",
-      "category": "other",
-      "preview": null,
-      "dupes": [],
-      "titleEn": "Mortgage lending to resume…Hana, Shinhan restart loan agent applications",
-      "context": [
-        {
-          "kind": "rates",
-          "label": "주택담보대출 최저금리",
-          "labelEn": "Lowest mortgage rate",
-          "value": "연 3.62%",
-          "valueEn": "3.62% p.a.",
-          "href": "./mortgage-rates.html"
-        }
-      ]
-    },
-    {
-      "title": "'비거주 1주택 차별' 반발에 물러선 정부…국회선 더 손볼 듯",
-      "link": "https://www.hankyung.com/article/2026090174531",
-      "publishedAt": "2026-09-01T08:47:01.000Z",
-      "source": "한국경제 경제",
-      "category": "realestate",
-      "preview": null,
-      "dupes": [],
-      "titleEn": "Government Steps Back from 'Non-Resident Single-Homeowner Discrimination' Amid Outcry, Likely to Address Further in Congress"
-    },
-    {
-      "title": "비거주 1주택 종부세 공제 12억 유지",
-      "link": "https://www.hankyung.com/article/2026090175131",
-      "publishedAt": "2026-09-01T08:45:14.000Z",
-      "source": "한국경제 경제",
-      "category": "realestate",
-      "preview": null,
-      "dupes": [],
-      "titleEn": "Non-resident single-home property tax deduction remains at 1,200,000,000"
-    },
-    {
-      "title": "100조 넘었던 증권사 기업어음, 증시 식자 두 달새 23조 감소",
-      "link": "https://www.hankyung.com/article/2026090174181",
-      "publishedAt": "2026-09-01T08:44:52.000Z",
-      "source": "한국경제 경제",
-      "category": "rates",
-      "preview": null,
-      "dupes": [],
-      "titleEn": "Securities firms' corporate bonds exceeding 100,000,000,000,000 won drop 23,000,000,000,000 won in two months on stock market appetite"
-    },
-    {
-      "title": "소상공인, 보험금 받아 대출 갚는다",
-      "link": "https://www.hankyung.com/article/2026090174241",
-      "publishedAt": "2026-09-01T08:42:52.000Z",
-      "source": "한국경제 경제",
-      "category": "other",
-      "preview": null,
-      "dupes": [],
-      "titleEn": "Small business owners use insurance payouts to repay loans"
+      "dupes": []
     },
     {
       "title": "비거주 1주택 종부세 공제 9억→12억… 급매 압력 줄고 거래 관망 길어진다",
@@ -211,8 +160,7 @@
       "source": "조선비즈 부동산",
       "category": "realestate",
       "preview": "정부가 집을 소유하고도 실제 거주하지 않는 1가구 1주택자의 종합부동산세 기본공제를 현행 12억원으로 유지하기로 했다. 종부세 세 부담 상한을 150%에서 200%로 높이려던 방안도 철회했다. 정부가 지난달 세제개편…",
-      "dupes": [],
-      "titleEn": "Non-resident single-home capital gains tax deduction rises from 900,000,000 to 1,200,000,000... pressure to sell quickly eases, transactions turn cautious"
+      "dupes": []
     },
     {
       "title": "\"아파트처럼 넓네\"… 하이엔드 오피스텔의 진화",
@@ -222,7 +170,6 @@
       "category": "realestate",
       "preview": "1일 서울 서남권 대표 주거지인 양천구 목동에 마련된 목동윤슬자이 견본주택. 오는 3일 견본주택 공식 오픈 및 분양을 앞두고 1일 프레스 행사에서 본 견본주택은 오피스텔보다 아파트..",
       "dupes": [],
-      "titleEn": "Like an apartment… spacious\"… the evolution of high-end office hotels",
       "context": [
         {
           "kind": "realestate",
@@ -243,8 +190,7 @@
       "source": "뉴시스 경제",
       "category": "realestate",
       "preview": "[서울=뉴시스]이연희 이종성 기자 = 정부가 종합부동산세(종부세) 비거주 1주택에 대한 기본공제 금액을 축소하는 대신 현행 12억원으로 유지하는 등 당초 세제개편안 원안에서 한 발 물러섰다. 비거주 1주택자의 세부담…",
-      "dupes": [],
-      "titleEn": "Non-resident single-home capital gains tax burden to return to original level...\"Perceived impact not likely to be significant"
+      "dupes": []
     },
     {
       "title": "목동8단지 재건축 수주위해…대우, '어반에이전시' 협업",
@@ -253,8 +199,7 @@
       "source": "한국경제 부동산",
       "category": "realestate",
       "preview": null,
-      "dupes": [],
-      "titleEn": "Dae Woo Collaborates with 'Urban Agency' to Secure Reconstruction Contract for Muldong 8th Site"
+      "dupes": []
     },
     {
       "title": "재건축 대어들 '조합원 양도' 매물 나온다",
@@ -263,8 +208,7 @@
       "source": "한국경제 부동산",
       "category": "realestate",
       "preview": null,
-      "dupes": [],
-      "titleEn": "Rebuilding giants' 'member transfer' assets come on the market"
+      "dupes": []
     },
     {
       "title": "국내 최대 부동산 축제 '집코노미 박람회'",
@@ -273,8 +217,7 @@
       "source": "한국경제 부동산",
       "category": "realestate",
       "preview": null,
-      "dupes": [],
-      "titleEn": "Largest Domestic Real Estate Festival 'Jikkonomi Expo"
+      "dupes": []
     },
     {
       "title": "국고채 금리 상승…美 장기채 상승·30년물 입찰 부진 등 영향(종합)",
@@ -283,8 +226,65 @@
       "source": "연합뉴스 경제",
       "category": "rates",
       "preview": "(서울=연합뉴스) 강수지 기자 = 1일 국고채 금리는 일제히 약세로 마감했다.",
+      "dupes": []
+    },
+    {
+      "title": "'용산공원 주택공급 말라' 국회로…청원 5만명 동의",
+      "link": "https://www.newsis.com/view/NISX20260901_0003771843",
+      "publishedAt": "2026-09-01T07:50:38.000Z",
+      "source": "뉴시스 경제",
+      "category": "realestate",
+      "preview": "[서울=뉴시스]이종성 기자 = 정부가 용산공원 일부를 활용한 주택 공급을 검토하는 가운데 이를 중단해달라는 국민동의청원이 5만명 이상의 동의를 얻으면서 용산공원 개발 논쟁이 국회로 옮겨붙고 있다. 1일 국회 국민동의…",
       "dupes": [],
-      "titleEn": "Rise in Korean government bond yields influenced by U.S. long-term bond rise, weak 30-year bond auction, etc. (Comprehensive)"
+      "context": [
+        {
+          "kind": "realestate",
+          "href": "./district-yongsan.html",
+          "label": "용산구 아파트 84㎡ 매매",
+          "labelEn": "용산구 apartment 84㎡ sale",
+          "value": "26억 2,967만원",
+          "valueEn": "₩2,630M",
+          "note": "최근 1주 계약 21건 · 8/25 대비 +12.3%",
+          "noteEn": "21 deals in the last 1 weeks · +12.3% vs Aug 25"
+        }
+      ]
+    },
+    {
+      "title": "국고채 금리 일제히 상승…3년물 연 3.878%",
+      "link": "https://www.yna.co.kr/view/AKR20260901166000008",
+      "publishedAt": "2026-09-01T07:49:01.000Z",
+      "source": "연합뉴스 경제",
+      "category": "rates",
+      "preview": "(서울=연합뉴스) 1일 국고채 금리가 일제히 상승했다.",
+      "dupes": []
+    },
+    {
+      "title": "하나은행, 11월 실행분 주담대·전세대출 모집인 접수 재개",
+      "link": "https://www.yna.co.kr/view/AKR20260901164500002",
+      "publishedAt": "2026-09-01T07:47:55.000Z",
+      "source": "연합뉴스 경제",
+      "category": "realestate",
+      "preview": "(서울=연합뉴스) 이도흔 기자 = 하나은행이 주택담보대출과 전세대출의 대출모집인 채널 접수를 재개했다.",
+      "dupes": [],
+      "context": [
+        {
+          "kind": "rates",
+          "label": "전세자금대출 최저금리",
+          "labelEn": "Lowest jeonse loan rate",
+          "value": "연 3.30%",
+          "valueEn": "3.30% p.a.",
+          "href": "./rent-loan-rates.html"
+        }
+      ]
+    },
+    {
+      "title": "비거주 1주택 세부담 일부 완화…정부안 수준에선 \"영향 제한적\"",
+      "link": "https://www.yna.co.kr/view/AKR20260901157500003",
+      "publishedAt": "2026-09-01T07:40:41.000Z",
+      "source": "연합뉴스 경제",
+      "category": "realestate",
+      "preview": "(서울=연합뉴스) 임기창 기자 = 정부가 1일 비거주 1주택자의 종합부동산세 기본공제액을 현행대로 유지하는 등 지난 8월 발표한 세제개편안 일부...",
+      "dupes": []
     }
   ],
   "realestateStats": [
