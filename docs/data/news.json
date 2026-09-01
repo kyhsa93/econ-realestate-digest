@@ -1,16 +1,51 @@
 {
-  "updatedAt": "2026-08-31T09:39:04.027Z",
-  "date": "2026-08-31",
+  "updatedAt": "2026-09-01T14:00:09.306Z",
+  "date": "2026-09-01",
   "items": [
     {
-      "title": "홍지선 \"주택공급 속도전…서울시와 용산공원 협의\"",
-      "link": "https://www.hankyung.com/article/2026083146051",
-      "publishedAt": "2026-08-31T09:26:09.000Z",
-      "source": "한국경제 부동산",
+      "title": "뉴욕증시, 美·이란 충돌·유가 상승에 하락 출발…나스닥 1.29%↓",
+      "link": "https://www.newsis.com/view/NISX20260901_0003772280",
+      "publishedAt": "2026-09-01T13:52:10.000Z",
+      "source": "뉴시스 경제",
+      "category": "stocks",
+      "preview": "[서울=뉴시스] 신효령 기자 = 미국 뉴욕증시가 1일(현지시간) 미국과 이란의 무력 충돌과 국제유가 상승 여파로 일제히 하락 출발했다. 야후파이낸스 등에 따르면 스탠더드앤드푸어스(S&P)500지수는 한국시간 오후 1…",
+      "dupes": []
+    },
+    {
+      "title": "오세훈, 국힘 국토위 의원들과 만찬…부동산정책 의견 공유(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20260901157751004",
+      "publishedAt": "2026-09-01T13:43:36.000Z",
+      "source": "연합뉴스 경제",
       "category": "realestate",
-      "preview": null,
+      "preview": "(서울=연합뉴스) 노선웅 김준태 기자 = 오세훈 서울시장과 국회 국토교통위원회 소속 국민의힘 의원들은 1일 만찬 회동을 하며 부동산 정책 현안에...",
+      "dupes": []
+    },
+    {
+      "title": "“5억에 주택 1+1 드립니다” 하더니…15억 더 내라는 노량진 재개발",
+      "link": "https://www.mk.co.kr/news/realestate/12141765",
+      "publishedAt": "2026-09-01T12:15:19.000Z",
+      "source": "매일경제 부동산",
+      "category": "realestate",
+      "preview": "노량진4구역 관리처분 당시엔 추가주택 59m2 5억원대 제시 분양 앞두고 “일반분양가 연동” 조합측 “원자재·공사비 상승 분상제 해제 등 여건 달라져”현대건설의 하이엔드 브랜드 ‘..",
+      "dupes": []
+    },
+    {
+      "title": "[올댓차이나] 대만 증시, 美 수요 기대에 매수세로 반등 마감…1.78%↑",
+      "link": "https://www.newsis.com/view/NISX20260901_0003772241",
+      "publishedAt": "2026-09-01T11:59:40.000Z",
+      "source": "뉴시스 경제",
+      "category": "stocks",
+      "preview": "[서울=뉴시스]이재준 기자 = 대만 타이베이 증시는 1일 미국 기업의 발주 확대에 대한 기대와 함께 엔비디아가 대만 기업에 대규모 투자 소식에 기술주를 중심으로 매수 선행하면서 반등 마감했다. 자취안(加權) 지수는…",
+      "dupes": []
+    },
+    {
+      "title": "국토차관 \"탄천 주택공급 사업성 검토…현실성 있게 공급되길 희망\"",
+      "link": "https://www.newsis.com/view/NISX20260901_0003772195",
+      "publishedAt": "2026-09-01T11:42:07.000Z",
+      "source": "뉴시스 경제",
+      "category": "realestate",
+      "preview": "[서울=뉴시스] 변해정 기자 = 김이탁 국토교통부 1차관은 1일 용산공원의 대안으로 제시된 탄천물재생센터가 합리적인 주택 공급 방안이 될 수 있는지를 따져보고 있다고 밝혔다. 김 차관은 이날 오후 MBC 라디오 '조…",
       "dupes": [],
-      "titleEn": "Hong Jisun \"Housing Supply Sprint... Negotiating with Seoul City and Yongsan Park",
       "context": [
         {
           "kind": "realestate",
@@ -19,312 +54,213 @@
           "labelEn": "용산구 apartment 84㎡ sale",
           "value": "26억 2,967만원",
           "valueEn": "₩2,630M",
-          "note": "최근 1주 계약 21건 · 8/24 대비 +18.4%",
-          "noteEn": "21 deals in the last 1 weeks · +18.4% vs Aug 24"
+          "note": "최근 1주 계약 21건 · 8/25 대비 +12.3%",
+          "noteEn": "21 deals in the last 1 weeks · +12.3% vs Aug 25"
         }
       ]
     },
     {
-      "title": "강남 아파트값은 稅부담에 하락세…호가 8억 낮추기도",
-      "link": "https://www.hankyung.com/article/2026083146001",
-      "publishedAt": "2026-08-31T09:24:47.000Z",
-      "source": "한국경제 부동산",
-      "category": "realestate",
+      "title": "[올댓차이나] 홍콩 증시, 중동 정세 악화에 하락 마감… H주 0.59%↓",
+      "link": "https://www.newsis.com/view/NISX20260901_0003772207",
+      "publishedAt": "2026-09-01T11:01:49.000Z",
+      "source": "뉴시스 경제",
+      "category": "stocks",
+      "preview": "[서울=뉴시스]이재준 기자 = 홍콩 증시는 1일 중동 정세 악화에 투자심리가 위축하면서 하락 마감했다. 미국 조기 금리인상에 대한 경계감과 국제 유가 상승도 장에 부담을 주었다. 항셍지수는 이날 전일 대비 237.2…",
+      "dupes": []
+    },
+    {
+      "title": "신한·하나銀, 대출모집인 접수 재개",
+      "link": "https://www.hankyung.com/article/2026090176651",
+      "publishedAt": "2026-09-01T10:48:24.000Z",
+      "source": "한국경제 경제",
+      "category": "other",
       "preview": null,
+      "dupes": []
+    },
+    {
+      "title": "상호금융 가계대출 목표치 배분 완료…새마을금고·신협도 늘어(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20260901185051002",
+      "publishedAt": "2026-09-01T10:15:11.000Z",
+      "source": "연합뉴스 경제",
+      "category": "other",
+      "preview": "(서울=연합뉴스) 강수련 김지연 강류나 기자 = 금융당국이 새마을금고 등 상호금융업권에도 가계대출 총량 관리 목표치 배분이 마무리됐다.",
       "dupes": [],
-      "titleEn": "Gangnam apartment prices fall due to tax burden, some listings drop to 800,000,000 won",
       "context": [
         {
-          "kind": "realestate",
-          "href": "./district-gangnam.html",
-          "label": "강남구 아파트 84㎡ 매매",
-          "labelEn": "강남구 apartment 84㎡ sale",
-          "value": "27억 8,899만원",
-          "valueEn": "₩2,789M",
-          "note": "최근 1주 계약 57건 · 8/24 대비 -1.9%",
-          "noteEn": "57 deals in the last 1 weeks · -1.9% vs Aug 24"
+          "kind": "rates",
+          "label": "주택담보대출 최저금리",
+          "labelEn": "Lowest mortgage rate",
+          "value": "연 3.62%",
+          "valueEn": "3.62% p.a.",
+          "href": "./mortgage-rates.html"
         }
       ]
     },
     {
-      "title": "“집 가진 순간 시작되는 세금의 굴레”…내 손 안에 펼치는 세무 노트 [부동산 손폼노트]",
-      "link": "https://www.mk.co.kr/news/realestate/12140631",
-      "publishedAt": "2026-08-31T08:54:27.000Z",
-      "source": "매일경제 부동산",
-      "category": "realestate",
-      "preview": "‘부동산 세금 100’ 연재 PDF로 보세요세상에서 확실한 것은 죽음과 세금, 두 가지뿐이라는 말이 있다. 사람은 누구나 죽고, 살아 있는 동안에는 누구나 세금을 낸다. 그리고 세..",
-      "dupes": [],
-      "titleEn": "The Moment You Get a Home, the Tax Burden Begins\"... A Tax Notebook in Your Hands [Real Estate Tax Notebook]"
+      "title": "[올댓차이나] 中 증시, 중동 긴장고조에 하락 마감…창업판 1.32%↓",
+      "link": "https://www.newsis.com/view/NISX20260901_0003772180",
+      "publishedAt": "2026-09-01T10:14:40.000Z",
+      "source": "뉴시스 경제",
+      "category": "stocks",
+      "preview": "[서울=뉴시스]이재준 기자 = 중국 증시는 1일 미국과 이란 간 공방전 재개로 투자심리가 흔들리면서 하락 마감했다. 상하이 종합지수는 이날 전일 대비 6.41 포인트, 0.16% 내려간 3979.89로 폐장했다. 선…",
+      "dupes": []
     },
     {
-      "title": "서울시, 역세권 범위 더 확대해 청년안심주택 늘린다",
-      "link": "https://www.hankyung.com/article/202608276172i",
-      "publishedAt": "2026-08-31T08:52:44.000Z",
-      "source": "한국경제 부동산",
-      "category": "realestate",
+      "title": "한경협, 日간사이 경제동우회 간담회",
+      "link": "https://www.hankyung.com/article/2026090174921",
+      "publishedAt": "2026-09-01T09:50:35.000Z",
+      "source": "한국경제 경제",
+      "category": "other",
       "preview": null,
-      "dupes": [],
-      "titleEn": "Seoul to Expand Transit-Oriented Development Areas to Increase Youth Housing",
-      "context": [
-        {
-          "kind": "realestate",
-          "href": "./apartment-sale.html",
-          "label": "서울 전체 아파트 84㎡ 매매",
-          "labelEn": "Seoul apartment 84㎡ sale",
-          "value": "10억 9,415만원",
-          "valueEn": "₩1,094M",
-          "note": "최근 1주 계약 25건 · 8/24 대비 -32.1%",
-          "noteEn": "25 deals in the last 1 weeks · -32.1% vs Aug 24"
-        }
-      ]
+      "dupes": []
     },
     {
-      "title": "[단독] 이면계약에 속수무책…대출사기에 혼쭐 난 은행권",
-      "link": "https://www.hankyung.com/article/2026083146381",
-      "publishedAt": "2026-08-31T08:50:28.000Z",
+      "title": "한일 경제안보대화 도쿄서 개최…\"AI·반도체 육성 협력 모색\"",
+      "link": "https://www.yna.co.kr/view/AKR20260901165100001",
+      "publishedAt": "2026-09-01T09:26:05.000Z",
+      "source": "연합뉴스 경제",
+      "category": "other",
+      "preview": "(서울=연합뉴스) 설승은 기자 = 한일 양국은 1일 일본 도쿄에서 제5차 한일 경제안보대화를 열고 경제 안보 협력 방안을 논의했다고 청와대가 보...",
+      "dupes": []
+    },
+    {
+      "title": "경제뉴스로 심리 포착…한은 '新 NSI' 나왔다",
+      "link": "https://www.hankyung.com/article/2026090174681",
+      "publishedAt": "2026-09-01T08:53:44.000Z",
+      "source": "한국경제 경제",
+      "category": "other",
+      "preview": null,
+      "dupes": []
+    },
+    {
+      "title": "주담대 빗장 풀린다…하나·신한 대출모집인 접수 재개",
+      "link": "https://www.hankyung.com/article/202609017442i",
+      "publishedAt": "2026-09-01T08:53:02.000Z",
       "source": "한국경제 경제",
       "category": "other",
       "preview": null,
       "dupes": [],
-      "titleEn": "[Exclusive] Banks helplessly caught in backdoor deals, embarrassed by loan scams"
-    },
-    {
-      "title": "[올댓차이나] 中 증시, 실적호조 종목 매수로 반등 마감…창업판 0.42%↑",
-      "link": "https://www.newsis.com/view/NISX20260831_0003770233",
-      "publishedAt": "2026-08-31T08:44:04.000Z",
-      "source": "뉴시스 경제",
-      "category": "stocks",
-      "preview": "[서울=뉴시스]이재준 기자 = 중국 증시는 31일 속락 개장했다가 장 막판에 실적호조 종목을 중심으로 매수세가 유입하면서 반등 마감했다. 상하이 종합지수는 이날 지난 28일 대비 34.12 포인트, 0.86% 올라간…",
-      "dupes": [],
-      "titleEn": "[AllChina] China's stock market closes higher as investors buy shares in well-performing stocks... Start-up board up 0.42%"
-    },
-    {
-      "title": "월세집을 전세로 바꿔준다…9월에 뜨는 이 제도는 [머니 이기자]",
-      "link": "https://www.mk.co.kr/news/economy/12140592",
-      "publishedAt": "2026-08-31T08:40:59.000Z",
-      "source": "매일경제 부동산",
-      "category": "realestate",
-      "preview": "전월세 안심신탁 제도 톺아보기최근 몇 년 사이 ‘전세의 월세화’가 빠른 속도로 이뤄지고 있습니다. 전세사기가 워낙 큰 사회적 문제였기도 하고 정부가 전세 관련 대출과 보증을 축소하..",
-      "dupes": [],
-      "titleEn": "Rent-to-lease conversion program to launch in September [Money Eegija]"
-    },
-    {
-      "title": "올해 1~7월 서울 아파트 입주 '반토막'",
-      "link": "https://www.mk.co.kr/news/realestate/12140560",
-      "publishedAt": "2026-08-31T08:22:36.000Z",
-      "source": "매일경제 부동산",
-      "category": "realestate",
-      "preview": "올 초부터 7월까지 서울 아파트 입주 물량이 작년 동기 대비 반 토막 난 것으로 나타났다. 같은 기간 서울 아파트 착공 물량은 36% 늘면서 공급 동력이 되살아나는 흐름을 보였다...",
-      "dupes": [],
-      "titleEn": "Apartment Move-ins in Seoul Drop by Half in First 7 Months of This Year",
       "context": [
         {
-          "kind": "realestate",
-          "href": "./apartment-sale.html",
-          "label": "서울 전체 아파트 84㎡ 매매",
-          "labelEn": "Seoul apartment 84㎡ sale",
-          "value": "10억 9,415만원",
-          "valueEn": "₩1,094M",
-          "note": "최근 1주 계약 25건 · 8/24 대비 -32.1%",
-          "noteEn": "25 deals in the last 1 weeks · -32.1% vs Aug 24"
+          "kind": "rates",
+          "label": "주택담보대출 최저금리",
+          "labelEn": "Lowest mortgage rate",
+          "value": "연 3.62%",
+          "valueEn": "3.62% p.a.",
+          "href": "./mortgage-rates.html"
         }
       ]
     },
     {
-      "title": "한국농업경제학회장에 경상국립대 김윤식 교수",
-      "link": "https://www.yna.co.kr/view/AKR20260831147100030",
-      "publishedAt": "2026-08-31T08:08:38.000Z",
-      "source": "연합뉴스 경제",
-      "category": "other",
-      "preview": "(서울=연합뉴스) 홍국기 기자 = 한국농업경제학회는 다음 달 1일 경상국립대 김윤식 교수가 47대 학회장으로 취임한다고 31일 밝혔다.",
-      "dupes": [],
-      "titleEn": "Professor Kim Yun-sik of Gyeongsang National University Elected as President of the Korean Agricultural Economics Association"
-    },
-    {
-      "title": "美 기준금리 인상 가능성에 국고채 금리↑…상승폭은 줄어(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260831150251008",
-      "publishedAt": "2026-08-31T08:02:21.000Z",
-      "source": "연합뉴스 경제",
-      "category": "rates",
-      "preview": "(서울=연합뉴스) 김태종 기자 = 미국의 기준금리 인상 가능성이 부각되며 31일 국고채 금리가 상승 마감했다. 다만, 상승폭은 오후 들어 줄어들...",
-      "dupes": [],
-      "titleEn": "Rise in U.S. benchmark interest rate possibility pushes up government bond yields… but increase narrows (comprehensive)"
-    },
-    {
-      "title": "[올댓차이나] 中 부동산주, 자금 규제 조치로 급락…\"업계 재편 가속 전망\"",
-      "link": "https://www.newsis.com/view/NISX20260831_0003770131",
-      "publishedAt": "2026-08-31T07:58:37.000Z",
-      "source": "뉴시스 경제",
+      "title": "'비거주 1주택 차별' 반발에 물러선 정부…국회선 더 손볼 듯",
+      "link": "https://www.hankyung.com/article/2026090174531",
+      "publishedAt": "2026-09-01T08:47:01.000Z",
+      "source": "한국경제 경제",
       "category": "realestate",
-      "preview": "[서울=뉴시스]이재준 기자 = 중국 당국이 위기에 빠진 부동산 업계를 대상으로 ‘선분양 자금 의존’을 줄이고 자금 조달 구조를 바꾸려는 규제를 내놓으면서 부동산주가 급락했다. 신랑재경과 재신망, 경제통은 31일 중국…",
-      "dupes": [],
-      "titleEn": "[AllChina] China's real estate stocks plunge sharply due to capital control measures...\"Industry restructuring expected to accelerate"
+      "preview": null,
+      "dupes": []
     },
     {
-      "title": "美연준발 삭풍에 불확실성↑…코스피는 반등해 6,800선 마감(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260831083051008",
-      "publishedAt": "2026-08-31T07:50:29.000Z",
-      "source": "연합뉴스 경제",
-      "category": "stocks",
-      "preview": "(서울=연합뉴스) 김유아 기자 = 미국 중앙은행인 연방준비제도(Fed·연준) 수장이 지난주 기준금리 인상 가능성을 다시금 시사한 충격이 국내외 ...",
-      "dupes": [],
-      "titleEn": "Uncertainty Rises from Fed's Rate Hike, but Kospi Rebounds to Close at 6,800 Line (Comprehensive)"
-    },
-    {
-      "title": "환율 13개월 만에 1,360원대로 하락…달러 매도 몰려(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260831138251002",
-      "publishedAt": "2026-08-31T07:44:00.000Z",
-      "source": "연합뉴스 경제",
-      "category": "stocks",
-      "preview": "(서울=연합뉴스) 이도흔 기자 = 원/달러 환율이 13개월만에 장중 1,360원대로 하락했다.",
-      "dupes": [],
-      "titleEn": "Exchange rate falls to 1,360 won level for the first time in 13 months…surge in dollar selling (comprehensive)"
-    },
-    {
-      "title": "국고채 금리 대체로 상승…3년물 연 3.838%",
-      "link": "https://www.yna.co.kr/view/AKR20260831150200008",
-      "publishedAt": "2026-08-31T07:40:32.000Z",
-      "source": "연합뉴스 경제",
-      "category": "rates",
-      "preview": "(서울=연합뉴스) 31일 국고채 금리가 대체로 상승했다.",
-      "dupes": [],
-      "titleEn": "Government bond rates rise overall...3-year rate at 3.838% annually"
-    },
-    {
-      "title": "관악구, 건영아파트 재건축 정비계획 변경 추진",
-      "link": "https://www.newsis.com/view/NISX20260831_0003770033",
-      "publishedAt": "2026-08-31T07:38:28.000Z",
-      "source": "뉴시스 경제",
+      "title": "비거주 1주택 종부세 공제 12억 유지",
+      "link": "https://www.hankyung.com/article/2026090175131",
+      "publishedAt": "2026-09-01T08:45:14.000Z",
+      "source": "한국경제 경제",
       "category": "realestate",
-      "preview": "[서울=뉴시스] 박대로 기자 = 서울 관악구(구청장 박준희)가 신림동 746-43 일대 건영아파트 재건축 사업 추진을 위해 '건영아파트 정비 계획 변경(안)' 주민 의견 수렴에 나섰다고 31일 밝혔다. 구는 지난 2…",
-      "dupes": [],
-      "titleEn": "Gwanak District Pushes Forward with Revised Redevelopment Plan for Geonyeong Apartment Complex",
-      "context": [
-        {
-          "kind": "realestate",
-          "href": "./district-gwanak.html",
-          "label": "관악구 아파트 84㎡ 매매",
-          "labelEn": "관악구 apartment 84㎡ sale",
-          "value": "9억 6,024만원",
-          "valueEn": "₩960M",
-          "note": "최근 1주 계약 60건 · 8/24 대비 +12.1%",
-          "noteEn": "60 deals in the last 1 weeks · +12.1% vs Aug 24"
-        }
-      ]
+      "preview": null,
+      "dupes": []
     },
     {
-      "title": "베선트, G20서 '경제외교 시험대'…이란전·관세·국채 불안 등",
-      "link": "https://www.newsis.com/view/NISX20260831_0003769732",
-      "publishedAt": "2026-08-31T07:31:57.000Z",
-      "source": "뉴시스 경제",
-      "category": "other",
-      "preview": "[서울=뉴시스]고재은 기자 = 스콧 베선트 미국 재무장관이 이날부터 열리는 주요 20개국(G20) 재무장관·중앙은행 총재 회의에 참석하는 가운데 경제·외교적 시험대에 올랐다는 분석이 나왔다. 각국에 이란과의 경제적…",
-      "dupes": [],
-      "titleEn": "Benson Faces 'Economic Diplomacy Test' at G20... Iran, Tariffs, Debt Worries"
-    },
-    {
-      "title": "상반기 금리인하요구 77% 급증…마이데이터가 불 지펴",
-      "link": "https://www.hankyung.com/article/202608314282i",
-      "publishedAt": "2026-08-31T07:13:43.000Z",
+      "title": "100조 넘었던 증권사 기업어음, 증시 식자 두 달새 23조 감소",
+      "link": "https://www.hankyung.com/article/2026090174181",
+      "publishedAt": "2026-09-01T08:44:52.000Z",
       "source": "한국경제 경제",
       "category": "rates",
       "preview": null,
-      "dupes": [],
-      "titleEn": "First-half interest rate cut demands surge 77%…MyData igniting the fire"
+      "dupes": []
     },
     {
-      "title": "日증시 혼조 마감…美금리인상 경계감에 0.14%↓",
-      "link": "https://www.newsis.com/view/NISX20260831_0003769926",
-      "publishedAt": "2026-08-31T07:04:37.000Z",
-      "source": "뉴시스 경제",
-      "category": "rates",
-      "preview": "[서울=뉴시스] 신효령 기자 = 31일 일본 도쿄증시 주요 지수가 혼조세로 마감했다. 미국의 기준금리 인상 가능성이 다시 부각되면서 반도체주를 중심으로 매도세가 나타났지만, 장 후반 저가 매수세가 유입되며 낙폭을 줄…",
-      "dupes": [],
-      "titleEn": "Japan's Nikkei Ends Mixed… Down 0.14% Amid Concerns Over U.S. Interest Rate Hikes"
-    },
-    {
-      "title": "'삼전·닉스' 자사주 매입에 코스피 상승 전환…6,820 마감(종합)",
-      "link": "https://www.yna.co.kr/view/AKR20260831140000008",
-      "publishedAt": "2026-08-31T07:03:00.000Z",
-      "source": "연합뉴스 경제",
-      "category": "stocks",
-      "preview": "(서울=연합뉴스) 이민영 기자 = 미국 금리 인상 우려에 개장 직후 한때 급락했던 코스피가 31일 상승 전환에 성공, 6,800대를 회복한 채 ...",
-      "dupes": [],
-      "titleEn": "Samsunghsd, Nexon's share buybacks drive KOSPI up to close at 6,820 (Comprehensive)"
-    },
-    {
-      "title": "원/달러 환율, 13개월 만에 장중 1,360원대로 하락",
-      "link": "https://www.yna.co.kr/view/AKR20260831138200002",
-      "publishedAt": "2026-08-31T07:01:31.000Z",
-      "source": "연합뉴스 경제",
-      "category": "stocks",
-      "preview": "(서울=연합뉴스) 이도흔 기자 = 원/달러 환율이 31일 13개월만에 장중 1,360원대로 하락했다.",
-      "dupes": [],
-      "titleEn": "Won/dollar exchange rate falls to 1,360 won level during intraday trading for the first time in 13 months"
-    },
-    {
-      "title": "KDI-국민경제자문회의 정책포럼…\"창의적 인재 키워야\"",
-      "link": "https://www.yna.co.kr/view/AKR20260831064300002",
-      "publishedAt": "2026-08-31T07:00:34.000Z",
-      "source": "연합뉴스 경제",
+      "title": "소상공인, 보험금 받아 대출 갚는다",
+      "link": "https://www.hankyung.com/article/2026090174241",
+      "publishedAt": "2026-09-01T08:42:52.000Z",
+      "source": "한국경제 경제",
       "category": "other",
-      "preview": "(세종=연합뉴스) 송정은 기자 = 한국개발연구원(KDI)과 국민경제자문회의는 31일 서울 은행회관에서 '인공지능(AI) 시대, 진짜 성장을 위한...",
-      "dupes": [],
-      "titleEn": "KDI-National Economic Advisory Council Policy Forum...\"Need to Cultivate Creative Talent"
+      "preview": null,
+      "dupes": []
     },
     {
-      "title": "중견 주택업체, 9월 전국 9951가구 분양…수도권 77%",
-      "link": "https://www.newsis.com/view/NISX20260831_0003769957",
-      "publishedAt": "2026-08-31T06:55:58.000Z",
-      "source": "뉴시스 경제",
+      "title": "비거주 1주택 종부세 공제 9억→12억… 급매 압력 줄고 거래 관망 길어진다",
+      "link": "https://biz.chosun.com/real_estate/real_estate_general/2026/09/01/II23SWDWTZCLVNYRO4U4LVW7WQ/",
+      "publishedAt": "2026-09-01T08:25:52.000Z",
+      "source": "조선비즈 부동산",
       "category": "realestate",
-      "preview": "[서울=뉴시스]이연희 기자 = 중견 주택업계가 다음 달 전국에서 아파트, 다세대, 연립 등 공동주택 9951가구를 분양한다. 31일 대한주택건설협회가 회원사를 대상으로 9월 주택 분양 계획을 집계한 결과에 따르면 1…",
-      "dupes": [],
-      "titleEn": "Mid-sized housing company sells 9,951 units nationwide in September... 77% in Seoul and Gyeonggi provinces"
+      "preview": "정부가 집을 소유하고도 실제 거주하지 않는 1가구 1주택자의 종합부동산세 기본공제를 현행 12억원으로 유지하기로 했다. 종부세 세 부담 상한을 150%에서 200%로 높이려던 방안도 철회했다. 정부가 지난달 세제개편…",
+      "dupes": []
     },
     {
-      "title": "“탐 나지만, 출혈경쟁 못해”…‘30조’ 목동 재건축 3개 단지 연속 수의계약 밟나",
-      "link": "https://www.mk.co.kr/news/realestate/12140393",
-      "publishedAt": "2026-08-31T06:21:54.000Z",
+      "title": "\"아파트처럼 넓네\"… 하이엔드 오피스텔의 진화",
+      "link": "https://www.mk.co.kr/news/realestate/12141506",
+      "publishedAt": "2026-09-01T08:23:24.000Z",
       "source": "매일경제 부동산",
       "category": "realestate",
-      "preview": "목동 재건축 경쟁입찰 무산 2회 6단지 DL이앤씨만 입찰 참여 10단지도 현대건설 단독 입찰 수주전 투입 비용 부담 조합원에겐 불리할 수 있어서울 양천구 목동 6단지에 이어 10..",
+      "preview": "1일 서울 서남권 대표 주거지인 양천구 목동에 마련된 목동윤슬자이 견본주택. 오는 3일 견본주택 공식 오픈 및 분양을 앞두고 1일 프레스 행사에서 본 견본주택은 오피스텔보다 아파트..",
       "dupes": [],
-      "titleEn": "Venturing but unable to compete in a bleeding battle\"... Midoong redevelopment's three sites with '30,000,000,000,000' heading toward consecutive private deals",
       "context": [
         {
           "kind": "realestate",
           "href": "./district-yangcheon.html",
           "label": "양천구 아파트 84㎡ 매매",
           "labelEn": "양천구 apartment 84㎡ sale",
-          "value": "13억 7,188만원",
-          "valueEn": "₩1,372M",
-          "note": "최근 1주 계약 53건 · 8/24 대비 +14.4%",
-          "noteEn": "53 deals in the last 1 weeks · +14.4% vs Aug 24"
+          "value": "14억 364만원",
+          "valueEn": "₩1,404M",
+          "note": "최근 1주 계약 67건 · 8/25 대비 +20.7%",
+          "noteEn": "67 deals in the last 1 weeks · +20.7% vs Aug 25"
         }
       ]
     },
     {
-      "title": "2028년 6월까지 수도권 입주 예정 아파트 24.1만호…서울 5만호",
-      "link": "https://www.newsis.com/view/NISX20260831_0003769735",
-      "publishedAt": "2026-08-31T06:00:42.000Z",
+      "title": "비거주 1주택 종부세 부담 원상복귀…\"체감 크지 않을 것\"",
+      "link": "https://www.newsis.com/view/NISX20260901_0003771978",
+      "publishedAt": "2026-09-01T08:16:58.000Z",
       "source": "뉴시스 경제",
       "category": "realestate",
-      "preview": "[서울=뉴시스] 변해정 기자 = 오는 2028년 6월까지 2년간 수도권 입주 예정 아파트 물량이 24만 초반대로 추정됐다. 한국부동산원과 부동산114가 31일 공동 생산·발표한 '공동주택 입주예정물량 정보'에 따르면…",
-      "dupes": [],
-      "titleEn": "241,000 apartments to be completed in the Seoul metropolitan area by June 2028... 50,000 in Seoul",
-      "context": [
-        {
-          "kind": "realestate",
-          "href": "./apartment-sale.html",
-          "label": "서울 전체 아파트 84㎡ 매매",
-          "labelEn": "Seoul apartment 84㎡ sale",
-          "value": "10억 9,415만원",
-          "valueEn": "₩1,094M",
-          "note": "최근 1주 계약 25건 · 8/24 대비 -32.1%",
-          "noteEn": "25 deals in the last 1 weeks · -32.1% vs Aug 24"
-        }
-      ]
+      "preview": "[서울=뉴시스]이연희 이종성 기자 = 정부가 종합부동산세(종부세) 비거주 1주택에 대한 기본공제 금액을 축소하는 대신 현행 12억원으로 유지하는 등 당초 세제개편안 원안에서 한 발 물러섰다. 비거주 1주택자의 세부담…",
+      "dupes": []
+    },
+    {
+      "title": "목동8단지 재건축 수주위해…대우, '어반에이전시' 협업",
+      "link": "https://www.hankyung.com/article/2026090173031",
+      "publishedAt": "2026-09-01T08:13:59.000Z",
+      "source": "한국경제 부동산",
+      "category": "realestate",
+      "preview": null,
+      "dupes": []
+    },
+    {
+      "title": "재건축 대어들 '조합원 양도' 매물 나온다",
+      "link": "https://www.hankyung.com/article/2026090173041",
+      "publishedAt": "2026-09-01T08:13:42.000Z",
+      "source": "한국경제 부동산",
+      "category": "realestate",
+      "preview": null,
+      "dupes": []
+    },
+    {
+      "title": "국내 최대 부동산 축제 '집코노미 박람회'",
+      "link": "https://www.hankyung.com/article/2026090173021",
+      "publishedAt": "2026-09-01T08:13:07.000Z",
+      "source": "한국경제 부동산",
+      "category": "realestate",
+      "preview": null,
+      "dupes": []
+    },
+    {
+      "title": "국고채 금리 상승…美 장기채 상승·30년물 입찰 부진 등 영향(종합)",
+      "link": "https://www.yna.co.kr/view/AKR20260901166051008",
+      "publishedAt": "2026-09-01T07:59:41.000Z",
+      "source": "연합뉴스 경제",
+      "category": "rates",
+      "preview": "(서울=연합뉴스) 강수지 기자 = 1일 국고채 금리는 일제히 약세로 마감했다.",
+      "dupes": []
     }
   ],
   "realestateStats": [
@@ -333,30 +269,30 @@
       "href": "./apartment-sale.html",
       "label": "서울 아파트 84㎡ 매매",
       "labelEn": "Seoul apartment 84㎡ sale",
-      "value": "10억 9,415만원",
-      "valueEn": "₩1,094M",
-      "note": "최근 1주 계약 25건 · 8/24 대비 -32.1%",
-      "noteEn": "25 deals in the last 1 weeks · -32.1% vs Aug 24"
+      "value": "12억 4,254만원",
+      "valueEn": "₩1,243M",
+      "note": "최근 1주 계약 286건 · 8/25 대비 -5.7%",
+      "noteEn": "286 deals in the last 1 weeks · -5.7% vs Aug 25"
     },
     {
       "kind": "realestate",
       "href": "./apartment-jeonse.html",
       "label": "서울 아파트 84㎡ 전세",
       "labelEn": "Seoul apartment 84㎡ jeonse",
-      "value": "6억 4,490만원",
-      "valueEn": "₩645M",
-      "note": "최근 1주 계약 7건",
-      "noteEn": "7 deals in the last 1 weeks"
+      "value": "7억 8,669만원",
+      "valueEn": "₩787M",
+      "note": "최근 1주 계약 229건 · 8/25 대비 +0.7%",
+      "noteEn": "229 deals in the last 1 weeks · +0.7% vs Aug 25"
     },
     {
       "kind": "realestate",
       "href": "./apartment-rent.html",
       "label": "서울 아파트 월세",
       "labelEn": "Seoul apartment rent",
-      "value": "보증금 13,777만원 / 월 64만원",
-      "valueEn": "₩137.8M + ₩0.64M/mo",
-      "note": "최근 1주 계약 7건",
-      "noteEn": "7 deals in the last 1 weeks"
+      "value": "보증금 21,617만원 / 월 143만원",
+      "valueEn": "₩216.2M + ₩1.43M/mo",
+      "note": "최근 1주 계약 385건 · 8/25 대비 -1.0%",
+      "noteEn": "385 deals in the last 1 weeks · -1.0% vs Aug 25"
     }
   ]
 }
