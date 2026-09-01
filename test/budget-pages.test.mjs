@@ -223,7 +223,7 @@ test("접은 표는 HTML에서도 빠진다", async () => {
   // 접기 전과 같은 값이 나오고, 크롤러가 받는 바이트도 줄지 않는다.
   for (const page of BUDGET_PAGES) {
     const html = await readFile(path.join(root, "docs", page.file), "utf8");
-    const body = html.split('id="district-grid"')[1]?.split("</tbody>")[0] ?? "";
+    const body = /<tbody id="district-grid">([\s\S]*?)<\/tbody>/.exec(html)?.[1] ?? "";
     assert.equal(
       body.replace(/<!--[\s\S]*?-->/g, "").replace(/<[^>]+>/g, "").trim(),
       "",
