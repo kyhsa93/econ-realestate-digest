@@ -138,7 +138,7 @@ test("메인 화면 추이 카드에도 양 축 눈금과 짚을 자리를 둔�
 
   assert.ok(grid.includes("polyline"), "추이 카드가 그려지지 않았다");
   assert.match(grid, /class="axis y"/, "세로 눈금이 없다");
-  assert.match(grid, /class="axis x"/, "가로 눈금이 없다");
+  assert.match(grid, /class="axis x[^"]*"/, "가로 눈금이 없다");
   assert.match(grid, /class="marker" hidden/, "짚어줄 표시가 없다");
   assert.match(grid, /class="history-chart" id="chart-\d+"/, "차트마다 식별자가 없다");
   assert.ok(!grid.includes('preserveAspectRatio="none"'), "가로로 늘어나 글자가 찌그러진다");
@@ -150,11 +150,11 @@ test("메인 화면도 덜 찬 주를 점선으로 잇는다", async () => {
   const trend = await readJson("realestate-trend");
 
   if (!(trend.pendingWeeks ?? []).length) {
-    assert.ok(!grid.includes('class="pending"'), "잠정 주가 없는데 점선을 그었다");
+    assert.ok(!grid.includes('spark pending'), "잠정 주가 없는데 점선을 그었다");
     return;
   }
 
-  assert.match(grid, /class="pending"[^>]*stroke-dasharray/, "잠정 구간이 점선이 아니다");
+  assert.match(grid, /class="[^"]*\bpending\b[^"]*"[^>]*stroke-dasharray/, "잠정 구간이 점선이 아니다");
   assert.match(
     p.byId("realestate-history-note").textContent,
     /점선/,
@@ -166,7 +166,7 @@ test("시장 지표에는 잠정 구간이 없다", async () => {
   const p = await page();
   const grid = p.byId("history-grid").innerHTML;
 
-  assert.ok(!grid.includes('class="pending"'), "신고 기한과 무관한 지표에 점선을 그었다");
+  assert.ok(!grid.includes('spark pending'), "신고 기한과 무관한 지표에 점선을 그었다");
 });
 
 test("시장 지표 추이도 같은 모양으로 그린다", async () => {
@@ -175,5 +175,5 @@ test("시장 지표 추이도 같은 모양으로 그린다", async () => {
 
   assert.ok(grid.includes("polyline"), "시장 지표 추이가 그려지지 않았다");
   assert.match(grid, /class="axis y"/);
-  assert.match(grid, /class="axis x"/);
+  assert.match(grid, /class="axis x[^"]*"/);
 });

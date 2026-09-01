@@ -623,7 +623,7 @@ test("매매나 전세 값이 없는 주는 전세가율에서 뺀다", async ()
   };
   const page = await loadRealestatePage({ realestate, trend, kind: "sale" });
 
-  const weeks = [...page.ratioHtml().matchAll(/class="axis x">([^<]+)</g)].map((m) => m[1]);
+  const weeks = [...page.ratioHtml().matchAll(/class="axis x[^"]*">([^<]+)</g)].map((m) => m[1]);
   assert.deepEqual(weeks, ["8/3", "8/10"], `값 없는 주가 남았다: ${weeks.join(" ")}`);
   assert.match(page.cardCurrent("ratio"), /50\.0%/);
 });
@@ -639,10 +639,10 @@ test("신고가 덜 찬 주는 점선으로 이어 그린다", async () => {
   const lines = [...svg.matchAll(/<polyline([^>]*)>/g)].map((m) => m[1]);
   assert.equal(lines.length, 2, `실선과 점선 두 줄이어야 한다: ${lines.length}줄`);
   assert.ok(!lines[0].includes("stroke-dasharray"), "확정 구간까지 점선으로 그렸다");
-  assert.match(lines[1], /class="pending"/, "잠정 구간에 표시가 없다");
+  assert.match(lines[1], /class="[^"]*\bpending\b/, "잠정 구간에 표시가 없다");
   assert.match(lines[1], /stroke-dasharray/, "잠정 구간이 실선이다");
 
-  const weeks = [...svg.matchAll(/class="axis x">([^<]+)</g)].map((m) => m[1]);
+  const weeks = [...svg.matchAll(/class="axis x[^"]*">([^<]+)</g)].map((m) => m[1]);
   assert.equal(weeks.at(-1), "8/24", `잠정 주까지 가로축에 담기지 않았다: ${weeks.join(" ")}`);
 });
 
@@ -691,8 +691,8 @@ test("추이 그래프에 양 축 눈금을 적는다", async () => {
   const page = await loadRealestatePage({ realestate: trendRealestate(), trend: trendData(), kind: "sale" });
   const svg = page.trendHtml();
 
-  const yLabels = [...svg.matchAll(/class="axis y">([^<]+)</g)].map((m) => m[1]);
-  const xLabels = [...svg.matchAll(/class="axis x">([^<]+)</g)].map((m) => m[1]);
+  const yLabels = [...svg.matchAll(/class="axis y[^"]*">([^<]+)</g)].map((m) => m[1]);
+  const xLabels = [...svg.matchAll(/class="axis x[^"]*">([^<]+)</g)].map((m) => m[1]);
 
   assert.equal(yLabels.length, 3, `세로 눈금이 없다: ${svg}`);
   assert.ok(yLabels[0].includes("만원"), `세로 눈금에 단위가 없다: ${yLabels[0]}`);
@@ -702,7 +702,7 @@ test("추이 그래프에 양 축 눈금을 적는다", async () => {
 
 test("눈금 위아래로 값의 범위를 담는다", async () => {
   const page = await loadRealestatePage({ realestate: trendRealestate(), trend: trendData(), kind: "sale" });
-  const yLabels = [...page.trendHtml().matchAll(/class="axis y">([^<]+)</g)].map((m) => m[1]);
+  const yLabels = [...page.trendHtml().matchAll(/class="axis y[^"]*">([^<]+)</g)].map((m) => m[1]);
 
   const nums = yLabels.map((s) => Number(s.replace(/[^\d]/g, "")));
   assert.ok(nums[0] > nums[2], `위쪽이 더 큰 값이어야 한다: ${yLabels.join(" / ")}`);
@@ -803,7 +803,7 @@ test("거래량·전세가율 눈금에는 마지막 주 문구를 붙이지 않
   const page = await loadRealestatePage({ realestate: trendRealestate(), trend: trendData(), kind: "sale" });
 
   for (const [what, svg] of [["거래량", page.volumeHtml()], ["전세가율", page.ratioHtml()]]) {
-    const labels = [...svg.matchAll(/class="axis y">([^<]+)</g)].map((m) => m[1]);
+    const labels = [...svg.matchAll(/class="axis y[^"]*">([^<]+)</g)].map((m) => m[1]);
     assert.equal(labels.length, 3, `${what} 세로 눈금이 없다`);
     for (const label of labels) {
       assert.ok(!label.includes("마지막 주"), `${what} 눈금에 설명 문구가 들어가 잘린다: ${label}`);

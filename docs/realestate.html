@@ -826,7 +826,9 @@ function sparklineSvg(series, format, box) {
   const pending = firmCount < series.length ? points.slice(Math.max(0, firmCount - 1)).join(" ") : "";
   const last = series[Math.max(0, firmCount - 1)];
   const rising = firmCount > 1 && last.value >= values[0];
-  const color = rising ? "#d64545" : "#2f6fed";
+  // 오르내림 색은 팔레트가 갖고 있다. 값을 여기 박아 두면 다크 테마에서 라이트용
+  // 색이 그대로 나와 어두운 바탕에서 대비가 무너진다. 스타일시트가 칠하게 클래스만 준다.
+  const dir = rising ? "up" : "down";
 
   const yTicks = yTickValues(values).map((v, i) => {
     const y = box.top + (i * (box.h - box.top - box.bottom)) / 2;
@@ -837,15 +839,19 @@ function sparklineSvg(series, format, box) {
   }).join("");
 
   const xAt = [0, Math.floor((series.length - 1) / 2), series.length - 1];
-  const xTicks = [...new Set(xAt)].map((i) =>
-    `<text x="${scale.x(i).toFixed(1)}" y="${box.h - 9}" class="axis x">${escapeHtml(shortDate(series[i].date))}</text>`
-  ).join("");
+  // 양 끝 눈금은 그림의 왼쪽·오른쪽 경계에 찍힌다. 가운데 정렬로 두면 글자 절반이
+  // 밖으로 나가 잘리므로(오른쪽 끝에서 4~5px), 끝의 둘만 안쪽으로 붙인다.
+  const xIdx = [...new Set(xAt)];
+  const xTicks = xIdx.map((i, n) => {
+    const edge = n === 0 ? " first" : n === xIdx.length - 1 ? " last" : "";
+    return `<text x="${scale.x(i).toFixed(1)}" y="${box.h - 9}" class="axis x${edge}">${escapeHtml(shortDate(series[i].date))}</text>`;
+  }).join("");
 
   return `<svg viewBox="0 0 ${box.w} ${box.h}" role="img">
       ${yTicks}${xTicks}
-      ${firmCount > 1 ? `<polyline points="${firm}" fill="none" stroke="${color}" stroke-width="2" />` : ""}
-      ${pending ? `<polyline class="pending" points="${pending}" fill="none" stroke="${color}" stroke-width="2" stroke-dasharray="4 4" opacity="0.55" />` : ""}
-      ${firmCount ? `<circle cx="${scale.x(firmCount - 1).toFixed(1)}" cy="${scale.y(last.value).toFixed(1)}" r="3" fill="${color}" />` : ""}
+      ${firmCount > 1 ? `<polyline class="spark ${dir}" points="${firm}" fill="none" stroke-width="2" />` : ""}
+      ${pending ? `<polyline class="spark pending ${dir}" points="${pending}" fill="none" stroke-width="2" stroke-dasharray="4 4" opacity="0.55" />` : ""}
+      ${firmCount ? `<circle class="spark-dot ${dir}" cx="${scale.x(firmCount - 1).toFixed(1)}" cy="${scale.y(last.value).toFixed(1)}" r="3" />` : ""}
       <g class="marker" hidden><line class="marker-line" y1="${box.top}" y2="${box.h - box.bottom}" /><circle class="marker-dot" r="4" /></g>
     </svg>`;
 }

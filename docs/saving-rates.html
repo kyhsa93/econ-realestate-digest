@@ -482,15 +482,25 @@
     if (points.length < 2) return "";
     const width = 200;
     const height = 36;
+    // 위아래를 조금 비워 둔다. 안 비우면 선이 카드 테두리에 닿아 그래프가 아니라
+    // 밑줄처럼 보인다 - 값이 내내 같은 상품(적금 1위처럼)은 특히 그랬다.
+    const pad = 4;
     const min = Math.min(...points);
     const max = Math.max(...points);
-    const span = max - min || 1;
+    const span = max - min;
+    // 한 번도 안 움직인 계열은 min에 붙어 바닥에 그려졌다. 움직임이 없다는 것은
+    // 바닥에 있다는 뜻이 아니므로 가운데에 눕힌다.
+    const y = (v) => (span === 0 ? height / 2 : pad + (height - pad * 2) * (1 - (v - min) / span));
     const step = width / (points.length - 1);
     const path = points
-      .map((v, i) => `${i === 0 ? "M" : "L"}${(i * step).toFixed(1)},${(height - ((v - min) / span) * height).toFixed(1)}`)
+      .map((v, i) => `${i === 0 ? "M" : "L"}${(i * step).toFixed(1)},${y(v).toFixed(1)}`)
       .join(" ");
+    // 색은 스타일시트가 칠한다(팔레트가 테마마다 다른 값을 갖고 있다). 한 번도 안
+    // 움직인 계열까지 "올랐다"로 칠하지 않도록 제자리는 따로 둔다.
+    const last = points[points.length - 1];
+    const dir = last === points[0] ? "flat" : last > points[0] ? "up" : "down";
     return `<svg viewBox="0 0 ${width} ${height}" width="100%" height="${height}" preserveAspectRatio="none" aria-hidden="true">
-      <path d="${path}" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.7" />
+      <path class="spark ${dir}" d="${path}" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
     </svg>`;
   }
 

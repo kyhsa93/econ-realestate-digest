@@ -15,8 +15,14 @@
   --muted: #666;
   --card: #f5f5f7;
   --border: #e2e2e5;
-  --up: #d64545;
-  --down: #2f6fed;
+  /* 오르내림. 이 사이트에서 가장 많이 읽히는 색인데(+18.4% 같은 작은 글씨가 전부
+   * 이 색이다), 오래도록 흰 바탕에서 고른 값 하나를 카드 위에서도 다크에서도
+   * 그대로 썼다. 재어 보니 카드 배경 위에서 라이트 4.02:1 · 다크 3.85:1로 둘 다
+   * 본문 대비 기준(4.5:1)에 못 미쳤고, 다크에는 아예 재정의가 없었다.
+   * 이제 테마마다 따로 고르고, 이 색이 놓이는 가장 어두운 바탕(--card,
+   * --accent-weak) 위에서 4.5:1을 넘는 값으로 맞춘다. test/style.test.mjs가 잰다. */
+  --up: #bd2f2f;
+  --down: #1d4ed8;
 
   /* 브랜드색. manifest와 theme-color가 이 값인데 화면에는 한 번도 안 나왔다.
    * 데이터 안에는 절대 쓰지 않는다 - 표 안의 파랑은 이미 '하락'이라는 뜻을
@@ -39,7 +45,10 @@
   --fs-xl: 1.2rem;
   --fs-2xl: 1.35rem;
   --fs-h1: 1.45rem;
-  --fs-brand: 1.7rem;
+  /* 사다리 맨 윗단. 사이트 이름에만 쓰던 자리인데, 화면이 내놓는 '답'
+   * 하나(전세 vs 월세의 월 실부담)도 같은 크기를 쓸 자격이 있어 이름을 일반화했다.
+   * 단을 새로 만들지는 않았다 - 열 살짜리 계단으로 되돌아가는 길이 그것이다. */
+  --fs-3xl: 1.7rem;
   --fs-field: 1rem;
 
   /* 손가락이 닿아야 하는 최소 크기. 알약 탭 30px, 아이콘 버튼 36px,
@@ -60,6 +69,10 @@
   --accent: #8aa9f0;
   --accent-on: #0f1115;
   --accent-weak: #191f2c;
+  --up: #f98b84;
+  /* 액센트(#8aa9f0)와 같은 파랑 계열이면 "지금 어디에 있나"와 "내렸다"가 한 화면에서
+   * 섞인다. 하늘색 쪽으로 밀어 두 파랑이 서로 다른 색으로 읽히게 했다. */
+  --down: #62b8ff;
 }
 
 :root[data-theme="light"] {
@@ -72,6 +85,8 @@
   --accent: #253e81;
   --accent-on: #ffffff;
   --accent-weak: #eef1f8;
+  --up: #bd2f2f;
+  --down: #1d4ed8;
 }
 
 [hidden] {
@@ -134,6 +149,38 @@ header {
   gap: 12px;
 }
 
+/* 폰에서는 단추 석 장이 머리글 전체의 폭을 가져가고 있었다. 단추는 위쪽 44px만
+ * 쓰는데 flex 한 줄이라 그 아래 안내까지 반쪽 폭(약 200px)에 갇혔고, 세 줄이면
+ * 될 것이 일곱 줄이 되어 390px 화면의 3분의 1을 먹었다. 단추를 띄워 두고 제목에만
+ * 자리를 비켜 주면, 갱신 시각과 갱신 주기는 폭을 다 쓴다.
+ * (float이 아니라 absolute인 것은 단추가 글 다음에 오기 때문이다 - 띄운 상자는
+ * 앞선 블록보다 위로 못 올라가서 안내 아래로 내려가 버린다.) */
+@media (max-width: 560px) {
+  header {
+    display: block;
+    position: relative;
+  }
+
+  .header-actions {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  /* 첫 화면은 제목이 곧 사이트 이름("집계")이라 짧다 - 단추 옆에 그대로 둔다. */
+  header .wordmark {
+    min-height: var(--tap);
+    padding-right: 156px;
+  }
+
+  /* 나머지 예순한 장은 이름 줄이 따로 있고 제목이 길다("예금·적금·대출 금리 비교").
+   * 이름 줄이 단추 높이를 대신 받아 주면 제목은 아래에서 폭을 다 쓴다. */
+  header .brand {
+    min-height: var(--tap);
+    padding-right: 156px;
+  }
+}
+
 h1 {
   font-size: var(--fs-h1);
   margin: 0 0 4px;
@@ -166,7 +213,7 @@ h1 {
 }
 
 .wordmark {
-  font-size: var(--fs-brand);
+  font-size: var(--fs-3xl);
   letter-spacing: -0.01em;
   margin: 0 0 2px;
 }
@@ -328,6 +375,25 @@ section {
   max-width: var(--prose);
 }
 
+/* 글을 --prose로 묶고 나면 넓은 화면에서 그 옆이 통째로 빈다. 1440px에서 재 보면
+ * 껍데기 1280px 가운데 520px(41%)이 아무것도 아닌 여백이었다 - 폭을 넓힌 이유가
+ * 사라진 셈이다. 자치구 문단은 원래 서로 다른 이야기 두셋("얼마인가" / "무엇이
+ * 팔리는가" / "갱신은 어떤가")이라 위아래로 쌓을 이유가 없다. 한 단이 --prose보다
+ * 좁아지지 않는 선(30rem)에서만 갈라 놓는다 - 더 좁히면 한 줄이 스물몇 자가 되어
+ * 읽는 폭을 지키려고 한 것이 도로아미타불이 된다. */
+@media (min-width: 1024px) {
+  #district-summary-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 30rem), 1fr));
+    align-items: start;
+    gap: 12px 20px;
+  }
+
+  #district-summary-section .district-facts {
+    margin-top: 0;
+  }
+}
+
 h2 {
   position: relative;
   font-size: var(--fs-h2);
@@ -415,9 +481,7 @@ h2::after {
 }
 
 .data-table .low-sample {
-  color: var(--muted);
   font-size: var(--fs-sm);
-  font-style: italic;
 }
 
 .realestate-table {
@@ -846,11 +910,14 @@ ul.news-list {
 }
 
 .history-card {
+  display: flex;
+  flex-direction: column;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 12px 14px;
 }
+
 
 .history-card .label {
   color: var(--muted);
@@ -867,8 +934,8 @@ ul.news-list {
 }
 
 .history-current {
-  font-size: var(--fs-h2);
-  font-weight: 600;
+  font-size: var(--fs-xl);
+  font-weight: 700;
 }
 
 .history-minmax {
@@ -885,6 +952,15 @@ ul.news-list {
   display: block;
   width: 100%;
   margin-top: 6px;
+}
+
+/* 금리 화면의 카드는 글 아래에 추이선 한 줄이 붙는 꼴이다. 상품명 길이에 따라 카드
+ * 높이가 제각각이라 선이 카드마다 다른 높이에 떠 있었다 - 바닥에 붙여 넉 장의 선을
+ * 같은 줄에서 견줄 수 있게 한다. 추이 화면의 그래프는 .history-chart 안에 있어
+ * 여기 걸리지 않는다. */
+.history-card > svg {
+  margin-top: auto;
+  padding-top: 8px;
 }
 
 .history-card .grid {
@@ -1070,13 +1146,17 @@ ul.news-list {
 .overall-card .label {
   color: var(--muted);
   font-size: var(--fs-xs);
+  letter-spacing: 0.03em;
 }
 
 .overall-card .value {
-  font-size: var(--fs-xl);
+  font-size: var(--fs-2xl);
   font-weight: 700;
   margin-top: 2px;
   font-variant-numeric: tabular-nums;
+  /* "13,777만원 / 월 64만원"처럼 두 사실이 한 값에 들어 있는 칸이 있다. 좁은 화면에서
+   * 그냥 흘리면 마지막 줄에 "64만원"만 남아 고아가 된다. */
+  text-wrap: balance;
 }
 
 .overall-card .sub {
@@ -1190,9 +1270,29 @@ ul.news-list {
   font-variant-numeric: tabular-nums;
 }
 
+/* "표본이 모자라면 모자란다고 적는다"가 이 사이트가 파는 것인데(DIRECTION.md 1부),
+ * 정작 화면에서는 가장 작고 흐린 각주로 적혀 있었다 - 기울임 한 겹이 전부였고,
+ * 한글 기울임은 합성 이탤릭이라 읽기만 나빠진다. 빈 칸이 상품이므로 빈 칸처럼
+ * 보이게 한다: 빗금 친 작은 칸 하나를 앞에 세워 "빠뜨린 값"이 아니라 "세어 봤고
+ * 모자랐다"로 읽히게 했다. 이 사이트에서 액센트 말고 강조를 쓰는 유일한 자리다. */
 .low-sample {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   color: var(--muted);
   font-size: var(--fs-xs);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.low-sample::before {
+  content: "";
+  flex-shrink: 0;
+  width: 13px;
+  height: 0.9em;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  background-image: repeating-linear-gradient(-45deg, var(--border) 0 1px, transparent 1px 4px);
 }
 
 .data-table td a {
@@ -1330,9 +1430,11 @@ ul.news-list {
 }
 
 .tab[aria-selected="true"] {
-  background: var(--fg);
-  color: var(--bg);
-  border-color: var(--fg);
+  /* 1층 내비의 '지금 여기'는 액센트인데 상품군 탭만 검정이었다. 같은 뜻을 가진
+   * 자리가 화면마다 다른 색이면 그건 두 가지 뜻으로 읽힌다. */
+  background: var(--accent);
+  color: var(--accent-on);
+  border-color: var(--accent);
   font-weight: 600;
 }
 
@@ -1587,7 +1689,7 @@ ul.news-list {
 .stat-value {
   color: var(--fg);
   font-weight: 700;
-  font-size: var(--fs-h2);
+  font-size: var(--fs-xl);
   font-variant-numeric: tabular-nums;
 }
 
@@ -1683,18 +1785,30 @@ ul.news-list {
   width: 6rem;
 }
 
+/* 이 화면은 집계가 계산으로 답을 내놓는 유일한 자리다(DIRECTION.md의 해자 1 - 실거래에
+ * 금리를 자동으로 물리는 교차점). 그런데 판정도, 이긴 쪽도, 진 쪽도 전부 같은 회색
+ * 상자였다: 답이 어느 것인지 화면이 말해 주지 않았다. 강조는 여기 한 곳에만 쓴다.
+ *
+ * 폭도 묶는다. 1280px에서 두 카드가 각각 830px이 되면 237만원과 268만원이 화면
+ * 양 끝에 떨어져, 나란히 놓고 견주라고 만든 화면에서 견줄 수가 없다. */
+.verdict,
+.options {
+  max-width: 64rem;
+}
+
 .verdict {
   font-size: var(--fs-lg);
   line-height: 1.6;
-  padding: 14px 16px;
+  padding: 14px 16px 14px 18px;
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-left: 4px solid var(--accent);
+  border-radius: 0 12px 12px 0;
   background: var(--card);
   margin-bottom: 16px;
 }
 
 .verdict strong {
-  font-size: var(--fs-xl);
+  font-size: var(--fs-2xl);
 }
 
 .verdict .sub {
@@ -1718,7 +1832,13 @@ ul.news-list {
 }
 
 .option.win {
-  border-color: var(--fg);
+  border-color: var(--accent);
+  background: var(--accent-weak);
+}
+
+/* 이긴 쪽의 값만 액센트로. 두 값의 크기는 같아야 견줄 수 있으므로 색만 바꾼다. */
+.option.win .cost {
+  color: var(--accent);
 }
 
 .option .name {
@@ -1733,7 +1853,7 @@ ul.news-list {
 }
 
 .option .cost {
-  font-size: var(--fs-2xl);
+  font-size: var(--fs-3xl);
   font-weight: 700;
   font-variant-numeric: tabular-nums;
 }
@@ -1893,6 +2013,51 @@ ul.news-list {
 .overall-card .sub,
 .summary-meta {
   font-variant-numeric: tabular-nums;
+}
+
+/* 크게 적히는 값은 이 화면들의 주어다. 라벨과 같은 얼굴·같은 자간으로 두면 둘이
+ * 한 덩어리로 읽혀서, 정작 보러 온 숫자가 설명문에 묻힌다. 큰 자리에서만 자간을
+ * 좁혀(한글 제목이 아니라 숫자가 뭉치도록) 값이 먼저 눈에 걸리게 한다. */
+.overall-card .value,
+.stat-value,
+.history-current,
+.history-card .value,
+.option .cost,
+.verdict strong,
+.price-strong {
+  letter-spacing: -0.015em;
+}
+
+/* 추이선. 마지막 확정값이 첫 값보다 높으면 --up, 아니면 --down. 색을 그리는 쪽이
+ * 아니라 팔레트가 갖고 있어야 테마를 바꿀 때 같이 따라온다. */
+.history-card .spark.up {
+  stroke: var(--up);
+}
+
+.history-card .spark.down {
+  stroke: var(--down);
+}
+
+.history-card .spark.flat {
+  stroke: var(--muted);
+}
+
+.history-card .spark-dot.up {
+  fill: var(--up);
+}
+
+.history-card .spark-dot.down {
+  fill: var(--down);
+}
+
+/* 그래프 양 끝의 날짜. 가운데 정렬이라 마지막 눈금이 그림 밖으로 4~5px 나가
+ * 잘려 있었다("8/24"의 오른쪽 획이 사라진다). 끝의 둘만 안쪽으로 붙인다. */
+.history-card .axis.x.first {
+  text-anchor: start;
+}
+
+.history-card .axis.x.last {
+  text-anchor: end;
 }
 
 /* 가로로 넘치는 내비게이션의 양 끝 페이드. docs/nav.js가 넘칠 때만, 그리고 그
@@ -2081,9 +2246,12 @@ summary:focus-visible,
  * 사이트에서 제일 눌려야 하는 자리를 스크롤 뒤에 감춰 두고 있었다. 격자로
  * 펴면 여섯이 두 줄에 다 들어오고, 세로로 먹는 자리는 시세표를 다섯 행으로
  * 접어 번 자리 안이다. */
+/* 질문 한 줄에 한 칸. 폰에서 두 칸으로 놓으면 "재계약이 새로 구하는 것보다 싼가"
+ * 같은 줄이 반으로 접혀, 여덟 개가 전부 두 줄짜리 누더기가 된다. 여기는 화면으로
+ * 가는 입구 목록이라 한 줄에 한 질문이 그대로 읽히는 편이 낫다. */
 .question-nav {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 8px;
   margin: 0 0 24px;
 }
@@ -2340,6 +2508,8 @@ summary:focus-visible,
     --accent: #8aa9f0;
     --accent-on: #0f1115;
     --accent-weak: #191f2c;
+    --up: #f98b84;
+    --down: #62b8ff;
   }
 }
 

@@ -224,3 +224,25 @@ test("액센트를 데이터 안에는 쓰지 않는다", async () => {
 
   assert.deepEqual(inData.map((r) => r.sel), [], "액센트가 데이터 안까지 들어왔다");
 });
+
+test("네 갈래 팔레트가 모두 오르내림 색을 갖는다", async () => {
+  // 오래도록 :root 한 군데에만 있었다. 다크에서는 흰 바탕에서 고른 빨강·파랑이
+  // 그대로 근검정 위에 놓였고, 아무도 그것을 재 보지 않았다.
+  const found = palettes(await css()).filter((p) => p.vars["--up"] && p.vars["--down"]);
+  assert.equal(found.length, 4, `오르내림 색을 정의한 팔레트가 ${found.length}개다`);
+});
+
+test("오르내림 색이 놓이는 자리마다 읽힌다", async () => {
+  // "+18.4%"는 이 사이트에서 가장 자주 읽히는 숫자이면서 가장 작은 글씨(--fs-xs)다.
+  // 표는 흰 바탕, 카드는 --card, 질문 입구와 안내는 --accent-weak 위에 앉는다.
+  for (const { sel, vars } of palettes(await css())) {
+    if (!vars["--up"]) continue;
+    for (const ink of ["--up", "--down"]) {
+      for (const paper of ["--bg", "--card", "--accent-weak"]) {
+        if (!vars[paper]) continue;
+        const ratio = contrast(vars[ink], vars[paper]);
+        assert.ok(ratio >= 4.5, `${sel}: ${paper} 위의 ${ink} 대비가 ${ratio.toFixed(2)}:1이다`);
+      }
+    }
+  }
+});

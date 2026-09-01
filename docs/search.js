@@ -18,6 +18,20 @@
   const MAX = 8;
   const squash = (text) => String(text ?? "").toLowerCase().replace(/\s+/g, "");
 
+  // 안내문에 예시가 붙어 있는데("...로 찾기 (예: 강남구, 래미안, 10억)"), 폰에서는
+  // 그 괄호가 입력칸 밖으로 나가 "(예: 강남구, 래미"에서 잘린다. 잘린 안내문은
+  // 없는 것만 못하므로 좁은 화면에서는 예시를 떼고 할 일만 남긴다.
+  const FULL_HINT = input.placeholder || "";
+  const SHORT_HINT = FULL_HINT.replace(/\s*[(（].*$/, "");
+  if (SHORT_HINT && SHORT_HINT !== FULL_HINT && typeof window.matchMedia === "function") {
+    const narrow = window.matchMedia("(max-width: 560px)");
+    const fitHint = () => {
+      input.placeholder = narrow.matches ? SHORT_HINT : FULL_HINT;
+    };
+    fitHint();
+    narrow.addEventListener("change", fitHint);
+  }
+
   let index = null;
   let loading = null;
   let items = [];
