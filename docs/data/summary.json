@@ -1,46 +1,78 @@
 {
-  "updatedAt": "2026-08-31T09:41:40.382Z",
+  "updatedAt": "2026-09-01T14:03:47.964Z",
   "model": "qwen3:14b",
   "summary": {
-    "ko": "- 부동산: 홍지선은 주택공급 속도전을 위해 서울시와 용산공원 협의에 나섰다. 강남 아파트값은 세 부담으로 하락세를 보이며 일부 호가는 8억 원 낮아졌다. 부동산 관련 세무 노트는 집을 소유한 순간부터 시작되는 세금의 부담을 설명하고 있다. 서울시는 역세권 범위를 확대해 청년안심주택 수를 늘릴 계획이다. 9월에는 월세집을 전세로 전환해주는 제도가 시행될 예정이다.\n- 기타 경제 소식: 은행권이 대출사기로 인해 손해를 입는 사건이 발생했다. 한국농업경제학회장에 경상국립대 김윤식 교수가 선출됐다. 베선트는 G20에서 경제외교 관련 이슈에 직면했다. KDI와 국민경제자문회의는 창의적 인재 양성의 필요성을 강조하는 정책포럼을 열었다. 각 기사는 서로 다른 주제로, 별개의 사건들이다.\n- 증시·환율: 증시·환율: [올댓차이나] 中 증시, 실적호조 종목 매수로 반등 마감…창업판 0.42%↑, 美연준발 삭풍에 불확실성↑…코스피는 반등해 6,800선 마감(종합), 환율 13개월 만에 1,360원대로 하락…달러 매도 몰려(종합) +2\n- 금리·예금·투자상품: 미국의 기준금리 인상 가능성에 따라 국고채 금리가 상승했다. 3년물 국고채 금리는 연 3.838%를 기록했다. 상반기 금리인하 요구는 77%로 급증하며 마이데이터가 불을 지폈다. 일본 증시는 미국 금리 인상 경계감으로 0.14% 하락했다. 각 기사는 서로 다른 경제 현상에 대한 보도로 연결되지 않는다.",
-    "en": "- Real Estate: Hong Jisun has initiated negotiations with the Seoul Metropolitan Government and Yongsan Park to accelerate housing supply. Apartment prices in Gangnam have been declining due to tax burdens, with some units dropping by 800,000,000 won. Tax notes related to real estate explain the burden of taxes that begin the moment a person owns a property. Seoul Metropolitan Government plans to increase the number of youth housing by expanding the scope of station area benefits. In September, a system to convert monthly rental housing into a deposit-based lease will be implemented.\n- Other Economic News: A case occurred in which the banking sector suffered losses due to loan fraud. Kim Yun-sik, a professor at Gyeongsang National University, was elected as the president of the Korean Agricultural Economics Association. Beximco faced issues related to economic diplomacy at the G20. KDI and the National Economic Advisory Council held a policy forum emphasizing the necessity of cultivating creative talent. Each article covers different topics and refers to separate events.\n- Stocks & FX: Stocks & FX: [올댓차이나] 中 증시, 실적호조 종목 매수로 반등 마감…창업판 0.42%↑, 美연준발 삭풍에 불확실성↑…코스피는 반등해 6,800선 마감(종합), 환율 13개월 만에 1,360원대로 하락…달러 매도 몰려(종합) +2\n- Rates, Deposits & Investment Products: Due to the possibility of an increase in the U.S. benchmark interest rate, the government bond rate has risen. The 3-year government bond rate reached 3.838% annually. The demand for interest rate cuts in the first half of the year surged to 77%, with MyData acting as a catalyst. The Japanese stock market fell by 0.14% due to concerns over U.S. interest rate hikes. Each article is not connected to reports on different economic phenomena."
+    "ko": "- 증시·환율: 뉴욕증시는 미국과 이란의 충돌과 유가 상승으로 인해 하락 출발했으며, 나스닥은 1.29% 하락했다. 대만 증시는 미국 수요 기대에 따라 매수세가 유입되며 1.78% 상승했다. 홍콩 증시는 중동 정세 악화로 인해 하락 마감했고, H주는 0.59% 내렸다. 중국 증시는 중동 긴장 고조로 인해 하락 마감했으며, 창업판은 1.32% 하락했다. 각 증시는 서로 다른 요인에 따라 상승하거나 하락하는 모습을 보였다.\n- 부동산: 오세훈과 국힘 국토위 의원들이 만찬을 통해 부동산정책 의견을 공유했고, 노량진 재개발에서는 5억에 주택 1+1을 약속했으나 15억 추가금이 요구되며 논란이 되고 있으며, 국토차관은 탄천 주택공급 사업성 검토를 진행 중이라고 밝혔고, 비거주 1주택에 대한 종부세 공제는 12억으로 유지되며, 정부는 비거주 1주택 차별에 대한 반발에 물러선 상태이다.\n- 기타 경제 소식: 신한·하나가 대출모집인 접수를 재개했고, 상호금융 가계대출 목표치 배분이 완료되며 새마을금고·신협도 증가했으며, 한경협은 간사이 경제동우회 간담회를 진행했고, 한일 경제안보대화가 도쿄에서 개최되어 AI·반도체 육성 협력 모색에 나섰으며, 한은은 경제뉴스로 심리 포착을 위한 ' NSI'를 발표했다.\n- 금리·예금·투자상품: 증권사 기업어음 규모가 두 달 만에 23조 원 감소했고, 국고채 금리가 상승하며 미국 장기채 금리 상승과 30년물 입찰 부진 등에 영향을 받았다.",
+    "en": "- Stocks & FX: The New York stock market opened lower due to the clash between the U.S. and Iran and rising oil prices, with the Nasdaq falling 1.29%. The Taiwan stock market rose 1.78% as buying interest flowed in due to expectations of U.S. demand. The Hong Kong stock market closed lower due to worsening Middle East tensions, with the Hang Seng Index falling 0.59%. The Chinese stock market closed lower due to heightened Middle East tensions, with the Star Market falling 1.32%. Each stock market showed rising or falling trends due to different factors.\n- Real Estate: Oh Sehun and the National Security Party's National Land Committee members shared opinions on real estate policies during a dinner. In the Noryangjin redevelopment project, they promised 1+1 housing for 500,000,000, but controversy arose as an additional 1,500,000,000 was requested. The Deputy Minister of Land, Infrastructure and Transport stated that the feasibility review of the Tanchon housing supply project is ongoing. The exemption of property tax for non-residential single homes remains at 1,200,000,000, and the government has retreated in the face of backlash against the discrimination against non-residential single homes.\n- Other Economic News: Shinhan and Hana have resumed accepting applications from loan underwriters, Shinhan Financial and NH Farm have also increased their household loan targets after the allocation of the target was completed, the Korea-Japan Economic Security Dialogue was held in Tokyo, where both sides sought cooperation in fostering AI and semiconductors, and the Korea Economic Association held a meeting with the Kansai Economic Fellowship, while the Bank of Korea announced the 'NSI' to capture economic sentiment through economic news.\n- Rates, Deposits & Investment Products: The scale of securities company corporate bonds decreased by 23,000,000,000,000 won after two months, affected by rising government bond yields, the rise in U.S. long-term bond yields, and poor performance in the 30-year auction."
   },
   "highlights": [],
   "categories": [
     {
-      "key": "realestate",
-      "name": "부동산",
-      "nameEn": "Real Estate",
-      "lineKo": "홍지선은 주택공급 속도전을 위해 서울시와 용산공원 협의에 나섰다. 강남 아파트값은 세 부담으로 하락세를 보이며 일부 호가는 8억 원 낮아졌다. 부동산 관련 세무 노트는 집을 소유한 순간부터 시작되는 세금의 부담을 설명하고 있다. 서울시는 역세권 범위를 확대해 청년안심주택 수를 늘릴 계획이다. 9월에는 월세집을 전세로 전환해주는 제도가 시행될 예정이다.",
-      "lineEn": "Hong Jisun has initiated negotiations with the Seoul Metropolitan Government and Yongsan Park to accelerate housing supply. Apartment prices in Gangnam have been declining due to tax burdens, with some units dropping by 800,000,000 won. Tax notes related to real estate explain the burden of taxes that begin the moment a person owns a property. Seoul Metropolitan Government plans to increase the number of youth housing by expanding the scope of station area benefits. In September, a system to convert monthly rental housing into a deposit-based lease will be implemented.",
+      "key": "stocks",
+      "name": "증시·환율",
+      "nameEn": "Stocks & FX",
+      "lineKo": "뉴욕증시는 미국과 이란의 충돌과 유가 상승으로 인해 하락 출발했으며, 나스닥은 1.29% 하락했다. 대만 증시는 미국 수요 기대에 따라 매수세가 유입되며 1.78% 상승했다. 홍콩 증시는 중동 정세 악화로 인해 하락 마감했고, H주는 0.59% 내렸다. 중국 증시는 중동 긴장 고조로 인해 하락 마감했으며, 창업판은 1.32% 하락했다. 각 증시는 서로 다른 요인에 따라 상승하거나 하락하는 모습을 보였다.",
+      "lineEn": "The New York stock market opened lower due to the clash between the U.S. and Iran and rising oil prices, with the Nasdaq falling 1.29%. The Taiwan stock market rose 1.78% as buying interest flowed in due to expectations of U.S. demand. The Hong Kong stock market closed lower due to worsening Middle East tensions, with the Hang Seng Index falling 0.59%. The Chinese stock market closed lower due to heightened Middle East tensions, with the Star Market falling 1.32%. Each stock market showed rising or falling trends due to different factors.",
       "isFallback": false,
       "fallbackReason": null,
       "degraded": false,
       "items": [
         {
-          "title": "홍지선 \"주택공급 속도전…서울시와 용산공원 협의\"",
-          "link": "https://www.hankyung.com/article/2026083146051",
-          "source": "한국경제 부동산"
+          "title": "뉴욕증시, 美·이란 충돌·유가 상승에 하락 출발…나스닥 1.29%↓",
+          "link": "https://www.newsis.com/view/NISX20260901_0003772280",
+          "source": "뉴시스 경제"
         },
         {
-          "title": "강남 아파트값은 稅부담에 하락세…호가 8억 낮추기도",
-          "link": "https://www.hankyung.com/article/2026083146001",
-          "source": "한국경제 부동산"
+          "title": "[올댓차이나] 대만 증시, 美 수요 기대에 매수세로 반등 마감…1.78%↑",
+          "link": "https://www.newsis.com/view/NISX20260901_0003772241",
+          "source": "뉴시스 경제"
         },
         {
-          "title": "“집 가진 순간 시작되는 세금의 굴레”…내 손 안에 펼치는 세무 노트 [부동산 손폼노트]",
-          "link": "https://www.mk.co.kr/news/realestate/12140631",
+          "title": "[올댓차이나] 홍콩 증시, 중동 정세 악화에 하락 마감… H주 0.59%↓",
+          "link": "https://www.newsis.com/view/NISX20260901_0003772207",
+          "source": "뉴시스 경제"
+        },
+        {
+          "title": "[올댓차이나] 中 증시, 중동 긴장고조에 하락 마감…창업판 1.32%↓",
+          "link": "https://www.newsis.com/view/NISX20260901_0003772180",
+          "source": "뉴시스 경제"
+        }
+      ]
+    },
+    {
+      "key": "realestate",
+      "name": "부동산",
+      "nameEn": "Real Estate",
+      "lineKo": "오세훈과 국힘 국토위 의원들이 만찬을 통해 부동산정책 의견을 공유했고, 노량진 재개발에서는 5억에 주택 1+1을 약속했으나 15억 추가금이 요구되며 논란이 되고 있으며, 국토차관은 탄천 주택공급 사업성 검토를 진행 중이라고 밝혔고, 비거주 1주택에 대한 종부세 공제는 12억으로 유지되며, 정부는 비거주 1주택 차별에 대한 반발에 물러선 상태이다.",
+      "lineEn": "Oh Sehun and the National Security Party's National Land Committee members shared opinions on real estate policies during a dinner. In the Noryangjin redevelopment project, they promised 1+1 housing for 500,000,000, but controversy arose as an additional 1,500,000,000 was requested. The Deputy Minister of Land, Infrastructure and Transport stated that the feasibility review of the Tanchon housing supply project is ongoing. The exemption of property tax for non-residential single homes remains at 1,200,000,000, and the government has retreated in the face of backlash against the discrimination against non-residential single homes.",
+      "isFallback": false,
+      "fallbackReason": null,
+      "degraded": true,
+      "items": [
+        {
+          "title": "오세훈, 국힘 국토위 의원들과 만찬…부동산정책 의견 공유(종합)",
+          "link": "https://www.yna.co.kr/view/AKR20260901157751004",
+          "source": "연합뉴스 경제"
+        },
+        {
+          "title": "“5억에 주택 1+1 드립니다” 하더니…15억 더 내라는 노량진 재개발",
+          "link": "https://www.mk.co.kr/news/realestate/12141765",
           "source": "매일경제 부동산"
         },
         {
-          "title": "서울시, 역세권 범위 더 확대해 청년안심주택 늘린다",
-          "link": "https://www.hankyung.com/article/202608276172i",
-          "source": "한국경제 부동산"
+          "title": "국토차관 \"탄천 주택공급 사업성 검토…현실성 있게 공급되길 희망\"",
+          "link": "https://www.newsis.com/view/NISX20260901_0003772195",
+          "source": "뉴시스 경제"
         },
         {
-          "title": "월세집을 전세로 바꿔준다…9월에 뜨는 이 제도는 [머니 이기자]",
-          "link": "https://www.mk.co.kr/news/economy/12140592",
-          "source": "매일경제 부동산"
+          "title": "'비거주 1주택 차별' 반발에 물러선 정부…국회선 더 손볼 듯",
+          "link": "https://www.hankyung.com/article/2026090174531",
+          "source": "한국경제 경제"
+        },
+        {
+          "title": "비거주 1주택 종부세 공제 12억 유지",
+          "link": "https://www.hankyung.com/article/2026090175131",
+          "source": "한국경제 경제"
         }
       ]
     },
@@ -48,68 +80,36 @@
       "key": "other",
       "name": "기타 경제 소식",
       "nameEn": "Other Economic News",
-      "lineKo": "은행권이 대출사기로 인해 손해를 입는 사건이 발생했다. 한국농업경제학회장에 경상국립대 김윤식 교수가 선출됐다. 베선트는 G20에서 경제외교 관련 이슈에 직면했다. KDI와 국민경제자문회의는 창의적 인재 양성의 필요성을 강조하는 정책포럼을 열었다. 각 기사는 서로 다른 주제로, 별개의 사건들이다.",
-      "lineEn": "A case occurred in which the banking sector suffered losses due to loan fraud. Kim Yun-sik, a professor at Gyeongsang National University, was elected as the president of the Korean Agricultural Economics Association. Beximco faced issues related to economic diplomacy at the G20. KDI and the National Economic Advisory Council held a policy forum emphasizing the necessity of cultivating creative talent. Each article covers different topics and refers to separate events.",
+      "lineKo": "신한·하나가 대출모집인 접수를 재개했고, 상호금융 가계대출 목표치 배분이 완료되며 새마을금고·신협도 증가했으며, 한경협은 간사이 경제동우회 간담회를 진행했고, 한일 경제안보대화가 도쿄에서 개최되어 AI·반도체 육성 협력 모색에 나섰으며, 한은은 경제뉴스로 심리 포착을 위한 ' NSI'를 발표했다.",
+      "lineEn": "Shinhan and Hana have resumed accepting applications from loan underwriters, Shinhan Financial and NH Farm have also increased their household loan targets after the allocation of the target was completed, the Korea-Japan Economic Security Dialogue was held in Tokyo, where both sides sought cooperation in fostering AI and semiconductors, and the Korea Economic Association held a meeting with the Kansai Economic Fellowship, while the Bank of Korea announced the 'NSI' to capture economic sentiment through economic news.",
       "isFallback": false,
       "fallbackReason": null,
-      "degraded": false,
+      "degraded": true,
       "items": [
         {
-          "title": "[단독] 이면계약에 속수무책…대출사기에 혼쭐 난 은행권",
-          "link": "https://www.hankyung.com/article/2026083146381",
+          "title": "신한·하나銀, 대출모집인 접수 재개",
+          "link": "https://www.hankyung.com/article/2026090176651",
           "source": "한국경제 경제"
         },
         {
-          "title": "한국농업경제학회장에 경상국립대 김윤식 교수",
-          "link": "https://www.yna.co.kr/view/AKR20260831147100030",
+          "title": "상호금융 가계대출 목표치 배분 완료…새마을금고·신협도 늘어(종합)",
+          "link": "https://www.yna.co.kr/view/AKR20260901185051002",
           "source": "연합뉴스 경제"
         },
         {
-          "title": "베선트, G20서 '경제외교 시험대'…이란전·관세·국채 불안 등",
-          "link": "https://www.newsis.com/view/NISX20260831_0003769732",
-          "source": "뉴시스 경제"
+          "title": "한경협, 日간사이 경제동우회 간담회",
+          "link": "https://www.hankyung.com/article/2026090174921",
+          "source": "한국경제 경제"
         },
         {
-          "title": "KDI-국민경제자문회의 정책포럼…\"창의적 인재 키워야\"",
-          "link": "https://www.yna.co.kr/view/AKR20260831064300002",
-          "source": "연합뉴스 경제"
-        }
-      ]
-    },
-    {
-      "key": "stocks",
-      "name": "증시·환율",
-      "nameEn": "Stocks & FX",
-      "lineKo": "증시·환율: [올댓차이나] 中 증시, 실적호조 종목 매수로 반등 마감…창업판 0.42%↑, 美연준발 삭풍에 불확실성↑…코스피는 반등해 6,800선 마감(종합), 환율 13개월 만에 1,360원대로 하락…달러 매도 몰려(종합) +2",
-      "lineEn": "Stocks & FX: [올댓차이나] 中 증시, 실적호조 종목 매수로 반등 마감…창업판 0.42%↑, 美연준발 삭풍에 불확실성↑…코스피는 반등해 6,800선 마감(종합), 환율 13개월 만에 1,360원대로 하락…달러 매도 몰려(종합) +2",
-      "isFallback": true,
-      "fallbackReason": "unverified-entity",
-      "degraded": false,
-      "items": [
-        {
-          "title": "[올댓차이나] 中 증시, 실적호조 종목 매수로 반등 마감…창업판 0.42%↑",
-          "link": "https://www.newsis.com/view/NISX20260831_0003770233",
-          "source": "뉴시스 경제"
-        },
-        {
-          "title": "美연준발 삭풍에 불확실성↑…코스피는 반등해 6,800선 마감(종합)",
-          "link": "https://www.yna.co.kr/view/AKR20260831083051008",
+          "title": "한일 경제안보대화 도쿄서 개최…\"AI·반도체 육성 협력 모색\"",
+          "link": "https://www.yna.co.kr/view/AKR20260901165100001",
           "source": "연합뉴스 경제"
         },
         {
-          "title": "환율 13개월 만에 1,360원대로 하락…달러 매도 몰려(종합)",
-          "link": "https://www.yna.co.kr/view/AKR20260831138251002",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "'삼전·닉스' 자사주 매입에 코스피 상승 전환…6,820 마감(종합)",
-          "link": "https://www.yna.co.kr/view/AKR20260831140000008",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "원/달러 환율, 13개월 만에 장중 1,360원대로 하락",
-          "link": "https://www.yna.co.kr/view/AKR20260831138200002",
-          "source": "연합뉴스 경제"
+          "title": "경제뉴스로 심리 포착…한은 '新 NSI' 나왔다",
+          "link": "https://www.hankyung.com/article/2026090174681",
+          "source": "한국경제 경제"
         }
       ]
     },
@@ -117,31 +117,21 @@
       "key": "rates",
       "name": "금리·예금·투자상품",
       "nameEn": "Rates, Deposits & Investment Products",
-      "lineKo": "미국의 기준금리 인상 가능성에 따라 국고채 금리가 상승했다. 3년물 국고채 금리는 연 3.838%를 기록했다. 상반기 금리인하 요구는 77%로 급증하며 마이데이터가 불을 지폈다. 일본 증시는 미국 금리 인상 경계감으로 0.14% 하락했다. 각 기사는 서로 다른 경제 현상에 대한 보도로 연결되지 않는다.",
-      "lineEn": "Due to the possibility of an increase in the U.S. benchmark interest rate, the government bond rate has risen. The 3-year government bond rate reached 3.838% annually. The demand for interest rate cuts in the first half of the year surged to 77%, with MyData acting as a catalyst. The Japanese stock market fell by 0.14% due to concerns over U.S. interest rate hikes. Each article is not connected to reports on different economic phenomena.",
+      "lineKo": "증권사 기업어음 규모가 두 달 만에 23조 원 감소했고, 국고채 금리가 상승하며 미국 장기채 금리 상승과 30년물 입찰 부진 등에 영향을 받았다.",
+      "lineEn": "The scale of securities company corporate bonds decreased by 23,000,000,000,000 won after two months, affected by rising government bond yields, the rise in U.S. long-term bond yields, and poor performance in the 30-year auction.",
       "isFallback": false,
       "fallbackReason": null,
-      "degraded": false,
+      "degraded": true,
       "items": [
         {
-          "title": "美 기준금리 인상 가능성에 국고채 금리↑…상승폭은 줄어(종합)",
-          "link": "https://www.yna.co.kr/view/AKR20260831150251008",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "국고채 금리 대체로 상승…3년물 연 3.838%",
-          "link": "https://www.yna.co.kr/view/AKR20260831150200008",
-          "source": "연합뉴스 경제"
-        },
-        {
-          "title": "상반기 금리인하요구 77% 급증…마이데이터가 불 지펴",
-          "link": "https://www.hankyung.com/article/202608314282i",
+          "title": "100조 넘었던 증권사 기업어음, 증시 식자 두 달새 23조 감소",
+          "link": "https://www.hankyung.com/article/2026090174181",
           "source": "한국경제 경제"
         },
         {
-          "title": "日증시 혼조 마감…美금리인상 경계감에 0.14%↓",
-          "link": "https://www.newsis.com/view/NISX20260831_0003769926",
-          "source": "뉴시스 경제"
+          "title": "국고채 금리 상승…美 장기채 상승·30년물 입찰 부진 등 영향(종합)",
+          "link": "https://www.yna.co.kr/view/AKR20260901166051008",
+          "source": "연합뉴스 경제"
         }
       ]
     }
