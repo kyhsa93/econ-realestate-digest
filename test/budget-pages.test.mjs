@@ -136,15 +136,29 @@ test("예산 페이지는 시세 페이지에서 찍어내는 것들보다 먼�
 test("예산대마다 그 돈이 서울에서 어디로 가는지 다르게 말한다", async () => {
   // 지역 순위는 아래 줄에 숫자로도 있다. 그래도 문장을 두는 것은, 심사자든 사람이든
   // 페이지에서 읽는 것은 문장이고 숫자 목록이 아니기 때문이다 — 그리고 예산대마다
-  // 답이 실제로 다르다. 4억대는 서울 동북권이고 20억대는 성동·송파·서초다.
+  // 답이 실제로 다르다.
+  //
+  // 여기서 재는 것은 **서로 다르게 말하는가**뿐이다. 몇 장이 이 문장을 갖는지는
+  // 그날 분포가 정한다 — 문턱을 넘은 예산대가 몇 개인지에 달렸고, 달이 바뀌어 창이
+  // 앞으로 밀리면 표본이 삼분의 일로 줄었다가 한 달에 걸쳐 회복한다. 그 수를 12로
+  // 박아 두었더니 매달 1일에 깨졌고, 이 저장소에서 수집 후 테스트가 깨지는 값은
+  // 그날 수집분이다. "문턱을 넘으면 말한다"는 동작 자체는 이 파일 아래쪽과
+  // budget-facts.test.mjs가 표본을 직접 만들어 확인한다.
   const said = new Map();
   for (const page of BUDGET_PAGES) {
     const html = await readFile(path.join(root, "docs", page.file), "utf8");
-    const match = /<p class="budget-where">([\s\S]*?)<\/p>/.exec(html);
-    if (match) said.set(page.file, match[1]);
+    const prose = [
+      /<p class="budget-where">([\s\S]*?)<\/p>/.exec(html)?.[1],
+      /<p class="district-summary budget-facts" data-summary-lang="ko">([\s\S]*?)<\/p>/.exec(html)?.[1],
+    ]
+      // 자리표시 주석은 내용이 아니다. 안 걷어내면 아직 문장이 없는 페이지끼리
+      // "같은 말을 한다"고 잡힌다.
+      .map((text) => (text ?? "").replace(/<!--[\s\S]*?-->/g, "").trim())
+      .filter(Boolean)
+      .join(" ");
+    if (prose) said.set(page.file, prose);
   }
 
-  assert.ok(said.size >= 12, `${said.size}개 예산대만 이 문장을 갖습니다`);
   assert.equal(new Set(said.values()).size, said.size, "예산대가 서로 같은 말을 합니다");
 });
 

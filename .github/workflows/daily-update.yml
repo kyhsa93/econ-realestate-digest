@@ -94,9 +94,12 @@ jobs:
           node scripts/build-budget-pages.mjs
           node scripts/build-realestate-pages.mjs
 
-      - name: 테스트 (수집 후)
-        run: npm test
-
+      # 커밋이 테스트보다 먼저다.
+      #
+      # 수집 후 테스트가 깨지면 그날 받은 데이터가 통째로 사라진다 — 국토부·금감원에서
+      # 하루치를 다시 받을 방법이 없고, 실제로 수집이 사흘 연속 유실된 적이 있다.
+      # 커밋을 먼저 하면 자료는 남고, 아래 테스트가 실패하면 배포는 멈춘 채로 빨갛게
+      # 뜬다. 잃는 것(그날 배포가 밀림)이 잃지 않는 것(그날 자료)보다 싸다.
       - name: 변경사항 커밋 및 푸시
         run: |
           if [ "$MODE" = "full" ]; then
@@ -104,6 +107,9 @@ jobs:
           else
             ./scripts/push-docs.sh "chore: 뉴스 갱신 $(TZ=Asia/Seoul date +'%Y-%m-%d %H:%M') KST"
           fi
+
+      - name: 테스트 (수집 후)
+        run: npm test
 
       - name: Pages 배포
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b
