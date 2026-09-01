@@ -2,6 +2,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { DEFAULT_AMOUNT, formatWon, netInterestOf } from "./interest.mjs";
 import { BUDGET_PAGES } from "./budget-pages.mjs";
+import { budgetFactSentences } from "./budget-facts.mjs";
 import { DISTRICT_PAGES, DISTRICT_SLUGS, districtFile } from "./district-slugs.mjs";
 import { districtSentences } from "./district-summary.mjs";
 import { factSentences } from "./district-facts.mjs";
@@ -253,6 +254,17 @@ export function budgetBodyHtml(band, periodList, rates = null) {
     `<ul class="budget-deals">${band.deals.map(budgetDealHtml).join("")}</ul>` +
     budgetLoanHtml(band, rates)
   );
+}
+
+/**
+ * 예산대 페이지가 자기 이야기를 하는 문단.
+ *
+ * 자치구 페이지의 `districtFactsHtml`과 같은 자리에 같은 방식으로 들어간다 — 두 언어를
+ * 빌드에서 미리 만들어 두 벌 다 굽고, 화면은 `data-summary-lang`으로 고르기만 한다.
+ */
+export function budgetFactsHtml(band, locale = "ko") {
+  const sentences = budgetFactSentences(band?.facts, locale);
+  return sentences.length ? escapeHtml(sentences.join(" ")) : "";
 }
 
 /**
@@ -605,13 +617,13 @@ export function districtFactsHtml(facts, locale = "ko") {
   return sentences.length ? escapeHtml(sentences.join(" ")) : "";
 }
 
-export function districtLinksHtml(current = null) {
+export function districtLinksHtml(current = null, heading = "다른 지역") {
   const links = DISTRICT_PAGES.map(({ name, file }) =>
     name === current
       ? `<a href="./${file}" aria-current="page">${escapeHtml(name)}</a>`
       : `<a href="./${file}">${escapeHtml(name)}</a>`
   ).join("");
-  return linksBlockHtml("district-links", "다른 지역", links);
+  return linksBlockHtml("district-links", heading, links);
 }
 
 const RATES_TERM = 12;

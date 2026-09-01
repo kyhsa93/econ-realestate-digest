@@ -127,7 +127,10 @@ test("뉴스 페이지는 색인에서 빠지고, 데이터 페이지는 빠지�
   //
   // 이 검사가 지키는 것은 두 방향이다. 뉴스가 다시 색인에 들어오는 것과, 색인에서
   // 빼는 손이 미끄러져 돈이 되는 페이지까지 가져가는 것.
-  for (const file of ["news.html", "deal-search.html", ...NEWS_PAGES.map((p) => p.file)]) {
+  // rates.html이 여기 섞여 있는 것은 다른 이유다. 가치가 없어서가 아니라
+  // deposit-rates.html과 본문이 글자까지 같아서다 — 같은 페이지 두 장 중 한 장을
+  // 접은 것이고, 금리 표 자체는 상품군 페이지 넷으로 그대로 색인에 남는다.
+  for (const file of ["news.html", "deal-search.html", "rates.html", ...NEWS_PAGES.map((p) => p.file)]) {
     const html = await read(`docs/${file}`);
     assert.match(
       html,
@@ -136,9 +139,9 @@ test("뉴스 페이지는 색인에서 빠지고, 데이터 페이지는 빠지�
     );
   }
 
-  for (const file of ["index.html", "realestate.html", "rates.html", "district-gangnam.html", "budget-10eok.html"]) {
+  for (const file of ["index.html", "realestate.html", "deposit-rates.html", "district-gangnam.html", "budget-10eok.html"]) {
     const html = await read(`docs/${file}`);
-    assert.doesNotMatch(html, /noindex/, `docs/${file}은 색인에서 빠지면 안 됩니다`);
+    assert.doesNotMatch(html, /content="noindex/, `docs/${file}은 색인에서 빠지면 안 됩니다`);
   }
 });
 

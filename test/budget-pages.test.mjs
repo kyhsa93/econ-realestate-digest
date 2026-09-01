@@ -165,3 +165,41 @@ test("몰려 있지도 흩어지지도 않은 예산대에서는 지어내지 �
   );
   assert.doesNotMatch(even, /budget-where/, "상위 셋이 절반도 안 되는데 몰렸다고 말합니다");
 });
+
+test("예산 페이지는 자치구 시세표를 다시 싣지 않는다", async () => {
+  // 스물다섯 줄짜리 시세표가 realestate.html에서 예산 페이지 열여덟 장으로 그대로
+  // 복사돼 나가면서, 페이지 본문의 절반이 옆 페이지와 글자까지 같아졌다. 표는 원본
+  // 한 곳에 두고 여기서는 접는다 — "10억대로 뭘 살 수 있나"에 답하지도 않는 표다.
+  for (const page of BUDGET_PAGES) {
+    const html = await readFile(path.join(root, "docs", page.file), "utf8");
+    assert.match(
+      html,
+      /<section id="district-section" hidden>/,
+      `docs/${page.file}이 자치구 시세표를 다시 싣습니다`
+    );
+  }
+
+  const source = await readFile(path.join(root, "docs/realestate.html"), "utf8");
+  assert.match(source, /<section id="district-section">/, "원본에서까지 표를 접었습니다");
+});
+
+test("표를 접어도 자치구로 가는 길은 남는다", async () => {
+  // 표에는 스물다섯 개 자치구 링크가 같이 들어 있었다. 표만 접고 끝내면 예산 페이지
+  // 열여덟 장에서 자치구 페이지로 흘러가는 링크가 통째로 사라진다.
+  for (const page of BUDGET_PAGES) {
+    const html = await readFile(path.join(root, "docs", page.file), "utf8");
+    const block = html.split("<!--prerender:districtLinks-->")[1]?.split("<!--/prerender")[0] ?? "";
+    const links = [...block.matchAll(/href="\.\/(district-[a-z]+\.html)"/g)].map((m) => m[1]);
+    assert.equal(links.length, 25, `docs/${page.file}: 자치구 링크가 ${links.length}개입니다`);
+  }
+});
+
+test("자치구 링크는 시세표 바깥에 있다", async () => {
+  // 링크가 표와 같은 섹션 안에 있으면 예산 페이지에서 표를 접을 때 같이 접힌다.
+  const source = await readFile(path.join(root, "docs/realestate.html"), "utf8");
+  const section = source.split('<section id="district-section">')[1].split("</section>")[0];
+  assert.ok(
+    !section.includes("<!--prerender:districtLinks-->"),
+    "자치구 링크가 시세표 섹션 안으로 들어왔습니다"
+  );
+});

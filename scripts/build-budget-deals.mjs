@@ -6,6 +6,7 @@ import {
   mergeBands,
   mergeDistrictMonths,
 } from "./budget-bands.mjs";
+import { budgetFacts } from "./budget-facts.mjs";
 import { buildDealFiles, dealFileName, periodOf } from "./deal-files.mjs";
 import { DISTRICT_SLUGS } from "./district-slugs.mjs";
 import { readDealSource } from "./realestate-source.mjs";
@@ -67,11 +68,29 @@ export function buildPayload(source, now) {
   const updatedAt = now.toISOString();
   const byDistrict = mergeDistrictMonths(months);
 
+  // 관찰은 대표 거래가 아니라 전수 위에서 낸다. 화면에 실리는 band.deals는 열두 건으로
+  // 잘려 나가므로, 그 위에서 비중을 세면 건수는 전수인데 분포는 열두 건인 화면이 된다.
+  const bands = withFacts(mergeBands(flattenDistrictMonths(months)), deals, now);
+
   return {
-    screen: { updatedAt, periods, bands: mergeBands(flattenDistrictMonths(months)) },
+    screen: { updatedAt, periods, bands },
     search: { updatedAt, periods, slugs: slugsFor(byDistrict), districts: trimForSearch(byDistrict) },
     months: { updatedAt, months },
   };
+}
+
+function withFacts(bands, deals, now) {
+  const year = now.getUTCFullYear();
+  return bands.map((band) => {
+    const inBand = deals.filter(
+      (deal) =>
+        Number.isFinite(deal?.amount10k) &&
+        deal.amount10k >= band.min10k &&
+        (band.max10k === null || deal.amount10k < band.max10k)
+    );
+    const facts = budgetFacts(inBand, { year });
+    return facts ? { ...band, facts } : band;
+  });
 }
 
 async function writeDealFiles(source, now) {

@@ -129,6 +129,8 @@
   <section id="budget-section" hidden>
     <h2 id="budget-heading">예산으로 찾기</h2>
     <div id="budget-result"><!--prerender:budgetResult--><!--/prerender:budgetResult--></div>
+    <p class="district-summary budget-facts" data-summary-lang="ko"><!--prerender:budgetFactsKo--><!--/prerender:budgetFactsKo--></p>
+    <p class="district-summary budget-facts" data-summary-lang="en" hidden><!--prerender:budgetFactsEn--><!--/prerender:budgetFactsEn--></p>
     <div class="budget-nav" id="budget-page-nav"><!--prerender:budgetPageNav--><!--/prerender:budgetPageNav--></div>
     <div class="content-notice" id="budget-note"></div>
   </section>
@@ -146,8 +148,11 @@
       </table>
     </div>
     <div class="content-notice" id="table-note"></div>
-    <!--prerender:districtLinks--><!--/prerender:districtLinks-->
   </section>
+
+  <!-- 자치구 링크는 시세표 바깥에 둔다. 예산대 페이지는 표를 접고 링크만 남기므로,
+       링크가 표와 같은 섹션 안에 있으면 같이 접힌다. -->
+  <!--prerender:districtLinks--><!--/prerender:districtLinks-->
 
   <footer class="site-footer">
     <div id="footer-source">출처: 국토교통부 아파트 매매·전월세 실거래가 공개시스템. 신고된 거래만 집계되며 신고 기한(계약 후 30일)이 있어 최근 거래는 나중에 반영됩니다.</div>

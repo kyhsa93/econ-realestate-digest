@@ -130,6 +130,8 @@
   <section id="budget-section" hidden>
     <h2 id="budget-heading">예산으로 찾기</h2>
     <div id="budget-result"><!--prerender:budgetResult--><!--/prerender:budgetResult--></div>
+    <p class="district-summary budget-facts" data-summary-lang="ko"><!--prerender:budgetFactsKo--><!--/prerender:budgetFactsKo--></p>
+    <p class="district-summary budget-facts" data-summary-lang="en" hidden><!--prerender:budgetFactsEn--><!--/prerender:budgetFactsEn--></p>
     <div class="budget-nav" id="budget-page-nav"><!--prerender:budgetPageNav--><!--/prerender:budgetPageNav--></div>
     <div class="content-notice" id="budget-note"></div>
   </section>
@@ -147,8 +149,11 @@
       </table>
     </div>
     <div class="content-notice" id="table-note"></div>
-    <!--prerender:districtLinks--><h3 class="district-links-heading" id="district-links-heading">다른 지역</h3><div class="district-links" id="district-links"><a href="./district-jongno.html">종로구</a><a href="./district-jung.html">중구</a><a href="./district-yongsan.html">용산구</a><a href="./district-seongdong.html">성동구</a><a href="./district-gwangjin.html">광진구</a><a href="./district-dongdaemun.html">동대문구</a><a href="./district-jungnang.html" aria-current="page">중랑구</a><a href="./district-seongbuk.html">성북구</a><a href="./district-gangbuk.html">강북구</a><a href="./district-dobong.html">도봉구</a><a href="./district-nowon.html">노원구</a><a href="./district-eunpyeong.html">은평구</a><a href="./district-seodaemun.html">서대문구</a><a href="./district-mapo.html">마포구</a><a href="./district-yangcheon.html">양천구</a><a href="./district-gangseo.html">강서구</a><a href="./district-guro.html">구로구</a><a href="./district-geumcheon.html">금천구</a><a href="./district-yeongdeungpo.html">영등포구</a><a href="./district-dongjak.html">동작구</a><a href="./district-gwanak.html">관악구</a><a href="./district-seocho.html">서초구</a><a href="./district-gangnam.html">강남구</a><a href="./district-songpa.html">송파구</a><a href="./district-gangdong.html">강동구</a></div><!--/prerender:districtLinks-->
   </section>
+
+  <!-- 자치구 링크는 시세표 바깥에 둔다. 예산대 페이지는 표를 접고 링크만 남기므로,
+       링크가 표와 같은 섹션 안에 있으면 같이 접힌다. -->
+  <!--prerender:districtLinks--><h3 class="district-links-heading" id="district-links-heading">다른 지역</h3><div class="district-links" id="district-links"><a href="./district-jongno.html">종로구</a><a href="./district-jung.html">중구</a><a href="./district-yongsan.html">용산구</a><a href="./district-seongdong.html">성동구</a><a href="./district-gwangjin.html">광진구</a><a href="./district-dongdaemun.html">동대문구</a><a href="./district-jungnang.html" aria-current="page">중랑구</a><a href="./district-seongbuk.html">성북구</a><a href="./district-gangbuk.html">강북구</a><a href="./district-dobong.html">도봉구</a><a href="./district-nowon.html">노원구</a><a href="./district-eunpyeong.html">은평구</a><a href="./district-seodaemun.html">서대문구</a><a href="./district-mapo.html">마포구</a><a href="./district-yangcheon.html">양천구</a><a href="./district-gangseo.html">강서구</a><a href="./district-guro.html">구로구</a><a href="./district-geumcheon.html">금천구</a><a href="./district-yeongdeungpo.html">영등포구</a><a href="./district-dongjak.html">동작구</a><a href="./district-gwanak.html">관악구</a><a href="./district-seocho.html">서초구</a><a href="./district-gangnam.html">강남구</a><a href="./district-songpa.html">송파구</a><a href="./district-gangdong.html">강동구</a></div><!--/prerender:districtLinks-->
 
   <footer class="site-footer">
     <div id="footer-source">출처: 국토교통부 아파트 매매·전월세 실거래가 공개시스템. 신고된 거래만 집계되며 신고 기한(계약 후 30일)이 있어 최근 거래는 나중에 반영됩니다.</div>

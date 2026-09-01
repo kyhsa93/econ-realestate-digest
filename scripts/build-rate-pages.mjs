@@ -54,6 +54,15 @@ export function buildRatePage(baseHtml, page, rates) {
 
   html = html.replaceAll(`${BASE_URL}rates.html`, `${BASE_URL}${page.file}`);
 
+  // 원본(rates.html)은 deposit-rates.html과 같은 페이지라 색인에서 빼 두었다. 여기서
+  // 찍어내는 상품군 페이지 넷은 각자 다른 표를 그리므로 색인 대상으로 되돌린다.
+  html = replaceOnce(
+    html,
+    '<meta name="robots" content="noindex, follow">',
+    '<meta name="robots" content="index, follow">',
+    "색인 지시"
+  );
+
   html = replaceOnce(
     html,
     '<link rel="canonical"',

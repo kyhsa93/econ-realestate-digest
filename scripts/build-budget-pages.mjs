@@ -1,7 +1,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { BUDGET_PAGES, BUDGET_PAGE_EOK, budgetPageFile } from "./budget-pages.mjs";
-import { applyPrerender, budgetBodyHtml } from "./prerender.mjs";
+import { applyPrerender, budgetBodyHtml, budgetFactsHtml, districtLinksHtml } from "./prerender.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
 const REALESTATE_PATH = path.join(root, "docs/realestate.html");
@@ -57,9 +57,25 @@ export function buildBudgetPage(baseHtml, page, budget, rates = null) {
     "예산 섹션"
   );
 
+  // 스물다섯 줄짜리 자치구 시세표는 여기 있을 것이 아니다.
+  //
+  // 이 표는 realestate.html이 원본인데 예산 페이지 열여덟 장에 그대로 복사돼 나갔다.
+  // 페이지 본문의 절반이 옆 페이지와 글자까지 같아지는 가장 큰 원인이었고, "10억대로
+  // 뭘 살 수 있나"에 답하지도 않는다. 표는 접고 자치구 링크만 남긴다 — 링크가 있어야
+  // 자치구 페이지로 가는 길이 끊기지 않는다.
+  html = replaceOnce(
+    html,
+    '<section id="district-section">',
+    '<section id="district-section" hidden>',
+    "자치구 시세 섹션"
+  );
+
   return applyPrerender(html, {
     budgetResult: body,
+    budgetFactsKo: budgetFactsHtml(band, "ko"),
+    budgetFactsEn: budgetFactsHtml(band, "en"),
     budgetPageNav: navHtml(page),
+    districtLinks: districtLinksHtml(null, "자치구별 시세 보기"),
   });
 }
 

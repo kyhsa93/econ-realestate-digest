@@ -73,7 +73,6 @@ const INDEXABLE = [
   "jeonse-vs-wolse.html",
   "method.html",
   "mortgage-rates.html",
-  "rates.html",
   "realestate.html",
   "renewal-vs-new.html",
   "rent-loan-rates.html",

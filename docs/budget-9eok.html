@@ -130,11 +130,13 @@
   <section id="budget-section">
     <h2 id="budget-heading">예산으로 찾기</h2>
     <div id="budget-result"><!--prerender:budgetResult--><p class="budget-summary">9억대에서 837건이 거래됐습니다. <span class="when">6월, 7월, 8월 신고분 기준</span></p><p class="budget-where">9억대 거래의 61%가 노원구·은평구·성북구 세 곳에서 나왔습니다. 이 예산으로 서울에서 고를 수 있는 곳은 사실상 여기입니다.</p><div class="budget-districts">거래가 많은 지역: 노원구 199 · 은평구 162 · 성북구 147 · 동대문구 96 · 강서구 94</div><ul class="budget-deals"><li class="budget-deal"><span class="place">도봉구 창동 창동신도브래뉴1차</span><span class="spec">84.99㎡ · 9층</span><span class="when">8/25</span><span class="price">9억 4,300만원</span></li><li class="budget-deal"><span class="place">은평구 진관동 상림마을7단지아이파크(706~708동)BL1-3</span><span class="spec">134.91㎡ · 7층</span><span class="when">8/25</span><span class="price">9억원</span></li><li class="budget-deal"><span class="place">강남구 논현동 월드쉐르빌</span><span class="spec">84.06㎡ · 1층</span><span class="when">8/24</span><span class="price">9억 8,500만원</span></li><li class="budget-deal"><span class="place">동대문구 장안동 장안현대</span><span class="spec">95.45㎡ · 8층</span><span class="when">8/24</span><span class="price">9억 2,000만원</span></li><li class="budget-deal"><span class="place">서대문구 홍은동 홍은센트레빌</span><span class="spec">84.84㎡ · 9층</span><span class="when">8/24</span><span class="price">9억 2,000만원</span></li><li class="budget-deal"><span class="place">도봉구 창동 삼성래미안</span><span class="spec">84.87㎡ · 9층</span><span class="when">8/24</span><span class="price">9억 1,500만원</span></li><li class="budget-deal"><span class="place">구로구 구로동 구일우성</span><span class="spec">114.47㎡ · 19층</span><span class="when">8/22</span><span class="price">9억 9,000만원</span></li><li class="budget-deal"><span class="place">강북구 미아동 두산위브트레지움</span><span class="spec">84.99㎡ · 5층</span><span class="when">8/22</span><span class="price">9억 7,000만원</span></li><li class="budget-deal"><span class="place">은평구 진관동 구파발10단지어울림(1011~1019동)BL3-1</span><span class="spec">84.8㎡ · 2층</span><span class="when">8/22</span><span class="price">9억 5,000만원</span></li><li class="budget-deal"><span class="place">은평구 불광동 라이프미성</span><span class="spec">66.7㎡ · 5층</span><span class="when">8/22</span><span class="price">9억 4,000만원</span></li><li class="budget-deal"><span class="place">송파구 가락동 우정에쉐르</span><span class="spec">84.91㎡ · 7층</span><span class="when">8/18</span><span class="price">9억 2,000만원</span></li><li class="budget-deal"><span class="place">노원구 상계동 상계주공14(고층)</span><span class="spec">90.94㎡ · 8층</span><span class="when">8/17</span><span class="price">9억 5,000만원</span></li></ul><p class="budget-loan">1억을 30년 원리금균등으로 빌리면 매달 54만원입니다. 아파트 담보대출 최저금리의 중앙값 연 5.11% 기준이고, 상품 45개가 연 4.11%에서 6.21%까지 벌어져 있어 같은 1억이 매달 48만원에서 61만원 사이가 됩니다. 이 예산에서 절반인 4.5억을 빌린다면 매달 245만원입니다 — 얼마를 빌릴 수 있는지는 규제지역인지와 소득에 따라 갈리므로 여기서는 정하지 않고, 1억당 값을 곱하시면 됩니다.</p><!--/prerender:budgetResult--></div>
+    <p class="district-summary budget-facts" data-summary-lang="ko"><!--prerender:budgetFactsKo--><!--/prerender:budgetFactsKo--></p>
+    <p class="district-summary budget-facts" data-summary-lang="en" hidden><!--prerender:budgetFactsEn--><!--/prerender:budgetFactsEn--></p>
     <div class="budget-nav" id="budget-page-nav"><!--prerender:budgetPageNav--><a href="./budget-8eok.html">8억대</a><a href="./budget-10eok.html">10억대</a><a href="./deal-search.html?budget=9">조건을 더해 찾기</a><!--/prerender:budgetPageNav--></div>
     <div class="content-notice" id="budget-note"></div>
   </section>
 
-  <section id="district-section">
+  <section id="district-section" hidden>
     <h2 id="district-heading">자치구별 시세</h2>
     <div class="controls" id="area-controls" hidden>
       <label for="area-select" id="area-label">평형</label>
@@ -147,8 +149,11 @@
       </table>
     </div>
     <div class="content-notice" id="table-note"></div>
-    <!--prerender:districtLinks--><!--/prerender:districtLinks-->
   </section>
+
+  <!-- 자치구 링크는 시세표 바깥에 둔다. 예산대 페이지는 표를 접고 링크만 남기므로,
+       링크가 표와 같은 섹션 안에 있으면 같이 접힌다. -->
+  <!--prerender:districtLinks--><h3 class="district-links-heading" id="district-links-heading">자치구별 시세 보기</h3><div class="district-links" id="district-links"><a href="./district-jongno.html">종로구</a><a href="./district-jung.html">중구</a><a href="./district-yongsan.html">용산구</a><a href="./district-seongdong.html">성동구</a><a href="./district-gwangjin.html">광진구</a><a href="./district-dongdaemun.html">동대문구</a><a href="./district-jungnang.html">중랑구</a><a href="./district-seongbuk.html">성북구</a><a href="./district-gangbuk.html">강북구</a><a href="./district-dobong.html">도봉구</a><a href="./district-nowon.html">노원구</a><a href="./district-eunpyeong.html">은평구</a><a href="./district-seodaemun.html">서대문구</a><a href="./district-mapo.html">마포구</a><a href="./district-yangcheon.html">양천구</a><a href="./district-gangseo.html">강서구</a><a href="./district-guro.html">구로구</a><a href="./district-geumcheon.html">금천구</a><a href="./district-yeongdeungpo.html">영등포구</a><a href="./district-dongjak.html">동작구</a><a href="./district-gwanak.html">관악구</a><a href="./district-seocho.html">서초구</a><a href="./district-gangnam.html">강남구</a><a href="./district-songpa.html">송파구</a><a href="./district-gangdong.html">강동구</a></div><!--/prerender:districtLinks-->
 
   <footer class="site-footer">
     <div id="footer-source">출처: 국토교통부 아파트 매매·전월세 실거래가 공개시스템. 신고된 거래만 집계되며 신고 기한(계약 후 30일)이 있어 최근 거래는 나중에 반영됩니다.</div>
