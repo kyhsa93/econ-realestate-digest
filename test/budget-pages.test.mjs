@@ -217,3 +217,17 @@ test("자치구 링크는 시세표 바깥에 있다", async () => {
     "자치구 링크가 시세표 섹션 안으로 들어왔습니다"
   );
 });
+
+test("접은 표는 HTML에서도 빠진다", async () => {
+  // hidden은 눈에만 안 보이게 한다. 스물다섯 줄이 마크업에 그대로 남으면 중복을 재도
+  // 접기 전과 같은 값이 나오고, 크롤러가 받는 바이트도 줄지 않는다.
+  for (const page of BUDGET_PAGES) {
+    const html = await readFile(path.join(root, "docs", page.file), "utf8");
+    const body = html.split('id="district-grid"')[1]?.split("</tbody>")[0] ?? "";
+    assert.equal(
+      body.replace(/<!--[\s\S]*?-->/g, "").replace(/<[^>]+>/g, "").trim(),
+      "",
+      `docs/${page.file}: 접은 표의 내용이 HTML에 남아 있습니다`
+    );
+  }
+});

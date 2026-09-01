@@ -75,6 +75,10 @@ export function buildBudgetPage(baseHtml, page, budget, rates = null) {
     budgetFactsKo: budgetFactsHtml(band, "ko"),
     budgetFactsEn: budgetFactsHtml(band, "en"),
     budgetPageNav: navHtml(page),
+    // 섹션을 접는 것만으로는 부족하다. hidden은 눈에만 안 보일 뿐 스물다섯 줄이
+    // HTML에는 그대로 실려 나가고, 중복을 재면 접기 전과 같은 값이 나온다.
+    realestateHead: "",
+    realestateTable: "",
     districtLinks: districtLinksHtml(null, "자치구별 시세 보기"),
   });
 }
