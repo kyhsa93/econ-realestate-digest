@@ -13,6 +13,20 @@ const root = path.resolve(import.meta.dirname, "..");
 const NOW = new Date();
 const PERIOD = windowMonths(NOW)[0];
 const DISTRICT_COUNT = 25;
+
+/**
+ * 한 번 실행에 다시 받는 달.
+ *
+ * 보통은 당월과 전월 둘이지만, 달이 바뀐 직후 사흘(MONTH_START_GRACE_DAYS) 동안은
+ * 전전월까지 셋을 받는다 - 신고 기한이 30일이라 그 시기에 지지난달로 늦게 들어오는
+ * 신고가 있기 때문이다.
+ *
+ * 이 값을 둘로 박아 두면 매달 1~3일에만 검사가 깨진다. 코드가 바뀌지 않았는데
+ * 달력 때문에 깨지는 단언이고, 이 저장소에서는 그 사흘 동안 수집 워크플로가
+ * 통째로 멈춘다 - 수집 전에 도는 테스트 단계가 막기 때문이다.
+ */
+const REFRESH_MONTHS = refreshMonths(NOW);
+const REFRESH_SLOTS = DISTRICT_COUNT * REFRESH_MONTHS.length;
 const STEPS = ["scripts/fetch-realestate.mjs", "scripts/build-realestate.mjs"];
 
 const spread = (kind, yearMonth, extra = {}) =>
@@ -52,19 +66,18 @@ async function workspace() {
 const readJson = async (file) => JSON.parse(await readFile(file, "utf-8"));
 const rawNames = async (dir, kind) => (await readdir(path.join(dir, kind))).sort();
 
-test("당월과 전월 원본을 25개구씩 받아 남긴다", async (t) => {
+test("갱신 대상인 달의 원본을 25개구씩 받아 남긴다", async (t) => {
   const server = await startFakeMolit((kind) => successXml([kind === "sale" ? saleItem() : rentItem()]));
   t.after(() => server.close());
   const space = await workspace();
 
   await collect(server, space);
 
-  const [current, previous] = refreshMonths(NOW);
-  const expected = [current, previous].sort();
+  const expected = [...REFRESH_MONTHS].sort();
 
   for (const kind of ["sale", "rent"]) {
     const names = await rawNames(space.rawDir, kind);
-    assert.equal(names.length, DISTRICT_COUNT * 2, `${kind} 슬롯 수가 다르다`);
+    assert.equal(names.length, REFRESH_SLOTS, `${kind} 슬롯 수가 다르다`);
     assert.deepEqual([...new Set(names.map((name) => name.slice(6, 12)))].sort(), expected);
   }
 });
@@ -133,7 +146,7 @@ test("새로 신고된 거래만 유입으로 센다", async (t) => {
   const file = await readJson(path.join(space.rawDir, "sale", `11110-${PERIOD}.json`));
   assert.equal(file.count, 2);
   assert.ok(file.previousObservedAt, "직전 관측 시각을 남기지 않았다");
-  assert.match(stdout, new RegExp(`새 거래 ${DISTRICT_COUNT * 2}건`), stdout);
+  assert.match(stdout, new RegExp(`새 거래 ${REFRESH_SLOTS}건`), stdout);
 });
 
 test("조회에 실패한 슬롯은 남기지 않아 다음 실행이 다시 받는다", async (t) => {
@@ -164,7 +177,7 @@ test("백필은 상한만큼만, 남은 몫은 다음 실행이 이어받는다"
   assert.match(stdout, /대기 \d+/, stdout);
 
   const total = (await rawNames(space.rawDir, "sale")).length + (await rawNames(space.rawDir, "rent")).length;
-  assert.equal(total, DISTRICT_COUNT * 2 * 2 + 10, "갱신분 외에 상한만큼만 받아야 한다");
+  assert.equal(total, REFRESH_SLOTS * 2 + 10, "갱신분 외에 상한만큼만 받아야 한다");
 });
 
 test("잘린 응답은 확정으로 굳히지 않고 다음 실행에 다시 받는다", async (t) => {
