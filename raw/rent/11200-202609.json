@@ -1,1 +1,3 @@
-{"kind":"rent","district":"11200","yearMonth":"202609","ok":true,"resultCode":0,"count":0,"totalCount":0,"observedAt":"2026-09-01T14:00:10.072Z","previousObservedAt":null,"arrivals":{},"items":[]}
+{"kind":"rent","district":"11200","yearMonth":"202609","ok":true,"resultCode":0,"count":1,"totalCount":1,"observedAt":"2026-09-02T00:59:57.389Z","previousObservedAt":"2026-09-01T14:00:10.072Z","arrivals":{"d8bb6b4ffca9":"2026-09-02"},"items":[
+{"aptNm":"한진타운","aptSeq":"11200-60","buildYear":1994,"contractTerm":"26.10~28.10","contractType":"갱신","dealDay":1,"dealMonth":9,"dealYear":2026,"deposit":"53,500","excluUseAr":59.4,"floor":1,"jibun":704,"monthlyRent":0,"preDeposit":"51,000","preMonthlyRent":"","roadnm":"뚝섬로 310","roadnmbcd":0,"roadnmbonbun":310,"roadnmbubun":0,"roadnmcd":3103010,"roadnmseq":2,"roadnmsggcd":11200,"sggCd":11200,"umdNm":"성수동1가","useRRRight":"사용"}
+]}

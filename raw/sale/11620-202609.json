@@ -1,1 +1,3 @@
-{"kind":"sale","district":"11620","yearMonth":"202609","ok":true,"resultCode":0,"count":0,"totalCount":0,"observedAt":"2026-09-01T14:00:10.072Z","previousObservedAt":null,"arrivals":{},"items":[]}
+{"kind":"sale","district":"11620","yearMonth":"202609","ok":true,"resultCode":0,"count":1,"totalCount":1,"observedAt":"2026-09-02T00:59:57.389Z","previousObservedAt":"2026-09-01T14:00:10.072Z","arrivals":{"accb1ee2bf1f":"2026-09-02"},"items":[
+{"aptDong":"","aptNm":"동아타운21","buildYear":2003,"buyerGbn":"개인","cdealDay":"26.09.01","cdealType":"O","dealAmount":"90,000","dealDay":1,"dealMonth":9,"dealYear":2026,"dealingGbn":"중개거래","estateAgentSggNm":"서울 관악구, 서울 동작구","excluUseAr":125.42,"floor":5,"jibun":"7-312","landLeaseholdGbn":"N","rgstDate":"","sggCd":11620,"slerGbn":"개인","umdNm":"봉천동"}
+]}
